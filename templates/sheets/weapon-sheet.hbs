@@ -1,0 +1,48 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+    </header>
+    <div class="sheet-content">
+        <table>
+            <tr>
+                <th>{{localize "age-system.item.attackAtt"}}</th>
+                <th>{{localize "age-system.focus.focus"}}</th>
+                <th>{{localize "age-system.item.damage"}}</th>
+                <th>{{localize "age-system.item.damageType"}}</th>
+                <th>{{localize "age-system.item.weight"}}</th>
+            </tr>
+            <tr>
+                <td>
+                    <select name="data.attackAtt">
+                        {{#select data.attackAtt}}
+                        {{#each config.attributes as |name type|}}
+                        <option value="{{type}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </td>
+                <td>
+                    {{!-- <input type="text" name="data.useFocus" value="{{data.useFocus}}" /> --}}
+                    <select name="data.useFocus">
+                        {{#select data.useFocus}}
+                        {{#each config.focus as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="data.dice" value="{{data.dice}}" />
+                </td>
+                <td>
+                    Não sei...
+                </td>
+                <td>
+                    <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                </td>
+            </tr>
+        </table>
+        {{editor content=data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+    </div>
+</form>

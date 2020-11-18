@@ -1,0 +1,228 @@
+{
+    "Actor": {
+        "types": ["char"],
+        "templates": {},
+        "char": {
+            "level": 1,
+            "xp": {
+                "value": 0,
+                "next": 0,
+                "advPoints": 0
+            },
+            "labels": {
+                "background": "",
+                "socialClass": "",
+                "profession": "",
+                "age": "",
+                "height": "",
+                "weight": ""
+            },
+            "features": "",
+            "drive": {
+                "name": "",
+                "quality": "",
+                "downfall": ""
+            },
+            "speed": {
+                "base": 10,
+                "mod": 0,
+                "total": 10
+            },
+            "defense": {
+                "base": 10,
+                "mod": 0,
+                "gameModeBonus": 0,
+                "total": 10
+            },
+            "armor": {
+                "toughness": {
+                    "total": 0,
+                    "mod": 0,
+                    "gameModeBonus": 0
+                },
+                "impact": 0,
+                "ballistic": 0,
+                "penaulty": 0
+            },
+            "resources": 4,
+            "goals": "",
+            "fear": 0,
+            "horror": {
+                "level": 0,
+                "effect": ""
+            },
+            "attributes": {
+                "acc": {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
+                },
+                "comm": {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
+                },
+                "cons":  {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
+                },
+                "dex":  {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
+                },
+                "fight":  {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
+                },
+                "int":  {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
+                },
+                "per":  {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
+                },
+                "str":  {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
+                },
+                "will":  {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
+                }
+            },
+            "health": {
+                "min": 0,
+                "value": 15,
+                "max": 35
+            },
+            "powerPoints": {
+                "min": 0,
+                "value": 1,
+                "max": 3
+            },
+            "fatigue": {
+                "min": 0,
+                "value": 1,
+                "max": 4
+            },
+            "conviction": {
+                "min": 0,
+                "value": 3,
+                "max": 3
+            }
+        }
+    },
+    "Item": {
+        "types": [
+            "power",
+            "weapon",
+            "shield",
+            "armor",
+            "generalEquip",
+            "talent",
+            "stunts",
+            "focus",
+            "relationship",
+            "honorifics",
+            "membership"
+        ],
+        "templates": {
+            "itemReq": {
+                "minStr": 0,
+                "useFocus": ""
+            },
+            "damage": {
+                "stunDmg": false,
+                "woundDmg": false,
+                "impactDmg": false,
+                "penetrantDmg": false,
+                "ballisticDmg": false,
+                "dice": "1d6",
+                "dmgAtt": "str"
+            },
+            "hardItem": {
+                "weight": 0,
+                "cost": 0,
+                "quantity": 1
+            },
+            "penaulty": {
+                "armor": 0,
+                "speed": 0
+            },
+            "activation": {
+                "targetNumber": 10,
+                "cost": 1,
+                "fatigueTN": 10
+            },
+            "description": {
+                "shortDesc": "",
+                "longDesc": ""
+            },
+            "bonuses": {
+                "focusMod": [],
+                "attMod": [],
+                "defMod": [],
+                "armorMod": [],
+                "dmgMod": [],
+                "attackMod": []
+            }
+        },
+        "weapon": {
+            "templates": ["damage", "itemReq", "hardItem", "description", "bonuses"],
+            "reload": "",
+            "capacity": 1,
+            "range": 1,
+            "rof": "",
+            "attackAtt": ""
+        },
+        "armor": {
+            "templates": ["hardItem", "description", "penaulty", "bonuses"],
+            "ballisticArmor": 0,
+            "impactArmor": 0,
+            "equiped": false
+        },
+        "power": {
+            "templates": ["damage", "itemReq", "description", "activation"],
+            "powerLevel": 0
+        },
+        "talents": {
+            "templates": ["description"]
+        },
+        "stunts": {
+            "templates": ["description"],
+            "stuntPoints": 1
+        },
+        "shield": {
+            "templates": ["description", "hardItem", "bonuses"],
+            "equiped": false
+        },
+        "generalEquip": {
+            "templates": ["description", "hardItem", "bonuses"],
+            "equiped": false
+        },
+        "focus": {
+            "templates": ["description"],
+            "keyAtt": "per",
+            "improved": false
+        },
+        "relationship": {
+            "templates": ["description"],
+            "intensity": 1
+        },
+        "honorifics": {
+            "templates": ["description"]
+        },
+        "membership": {
+            "templates": ["description"],
+            "rank": 1
+        }
+    }
+}

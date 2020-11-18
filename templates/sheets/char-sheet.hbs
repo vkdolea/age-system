@@ -1,0 +1,236 @@
+<form class="actor-sheet {{cssClass}}" autocomplete="off">
+
+    {{!-- Sheet's 1st Column --}}
+    <div class="col-1">
+
+        {{!-- General Character Information --}}
+        <header class="sheet-header">
+            <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64" width="64"/>
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>        
+        </header>
+        <div class="inline-elements">
+            <div class="inline-elements">
+                <label for="">{{localize "age-system.age"}}</label>
+                <input type="text" name="data.age" value="{{data.age}}">
+            </div>
+
+            <div class="inline-elements">
+                <label for="">{{localize "age-system.height"}}</label>
+                <input type="text" name="data.height" value="{{data.height}}">
+            </div>
+
+            <div class="inline-elements">
+                <label for="">{{localize "age-system.weight"}}</label>
+                <input type="text" name="data.weight" value="{{data.weight}}">  
+            </div>
+        </div>
+
+        <div class="inline-elements">
+            <label for="">{{localize "age-system.background"}}</label>
+            <input type="text" name="data.background" value="{{data.background}}">
+        </div>
+
+        <div class="inline-elements">
+            <label for="">{{localize "age-system.socialClass"}}</label>
+            <input type="text" name="data.socialClass" value="{{data.socialClass}}">
+        </div>
+
+        <div class="inline-elements">
+            <label for="">{{localize "age-system.profession"}}</label>
+            <input type="text" name="data.profession" value="{{data.profession}}">          
+        </div>
+
+        <div class="inline-elements">
+            <label for="">{{localize "age-system.drive.drive"}}</label>
+            <input type="text" name="data.drive.name" value="{{data.drive.name}}">          
+        </div>
+
+        <div class="inline-elements">
+            <label for="">{{localize "age-system.drive.quality"}}</label>
+            <input type="text" name="data.drive.quality" value="{{data.drive.quality}}">          
+ 
+            <label for="">{{localize "age-system.drive.downfall"}}</label>
+            <input type="text" name="data.drive.downfall" value="{{data.drive.downfall}}">          
+        </div>
+
+        {{!-- Attributes' Blocks --}}
+        {{#each data.attributes as |name type|}}
+        <div class="attribute-box att-{{type}}">
+            <div class="att-header">
+                <label class="att-name" for="data.attributes.{{type}}.value">{{localize (concat "age-system." type)}}</label>
+                <input type="checkbox" name="data.attributes.{{type}}.lastUp" {{checked name.lastUp}} class="last-up" />
+            </div>
+            <input type="text" class="att-value" name="data.attributes.{{type}}.value" value="{{name.value}}" data-dtype="Number" />
+            <div class="attribute-focus">
+                <p>List of Applicable Focus</p>
+            </div>
+        </div>
+        {{/each}}
+
+    </div>
+
+    {{!-- Sheet's 2nd Column --}}
+    <div class="col-2">
+        <div class="inline-elements">
+            
+            <div>
+                <label for="char-features">{{localize "age-system.features"}}</label>
+                <textarea name="data.features" id="char-features">{{data.features}}</textarea>
+            </div>
+
+            <div class="resource-box">
+                <label for="">{{localize "age-system.level"}}</label>
+                <input type="text" class="circle-main" name="data.level" value="{{data.level}}" data-dtype="Number" />
+                <input type="text" name="data.xp.value" value="{{data.xp.value}}" data-dtype="Number" />
+                <input type="text" name="data.xp.next" value="{{data.xp.next}}" data-dtype="Number" />
+            </div>
+
+            <div>
+                <label for="">{{localize "age-system.move"}}</label>
+                <input type="text" name="data.speed.total" value="{{data.speed.total}}" data-dtype="Number" />
+            </div>
+           
+        </div>
+
+        <div class="grid-resp">
+
+            {{!-- Conviction block --}}
+            <div class="flexcol stats-block">
+                <div class="top-row">{{localize "age-system.conviction"}}</div>
+                <div class="circle-main-container">
+                    <input type="text" class="circle-main" name="data.conviction.value" value="{{data.conviction.value}}" data-dtype="Number" />
+                    <input type="text" class="circle-small circle-small-bottom" name="data.conviction.max" value="{{data.conviction.max}}" data-dtype="Number" />
+                    <label class="small-circle-label bottom-label">{{localize "age-system.maximum"}}</label>
+                </div>
+                <div class="bottom-row"></div>
+            </div>
+
+            {{!-- Fatigue block --}}
+            <div class="flexcol stats-block">
+                <div class="top-row">{{localize "age-system.fatigue"}}</div>
+                <div class="circle-main-container">
+                    <input type="text" class="circle-main" name="data.fatigue.value" value="{{data.fatigue.value}}" data-dtype="Number" />
+                    <div class="circle-small circle-small-bottom">{{data.fatigue.max}}</div>
+                    <label class="small-circle-label bottom-label">{{localize "age-system.maximum"}}</label>
+                </div>
+                <div class="bottom-row">
+                    <span>Condition</span>
+                </div>
+            </div>
+
+            {{!-- Speed block --}}
+            <div class="flexcol stats-block">
+                <div class="top-row">{{localize "age-system.speed"}}</div>
+                <div class="circle-main-container">
+                    <div class="circle-main">{{data.speed.total}}</div>
+                    <input type="text" class="circle-small circle-small-mid" name="data.speed.mod" value="{{data.speed.mod}}" data-dtype="Number" />
+                    <label class="small-circle-label mid-label">{{localize "age-system.mod"}}</label>
+                    <input type="text" class="circle-small circle-small-bottom" name="data.speed.base" value="{{data.speed.base}}" data-dtype="Number" />
+                    <label class="small-circle-label bottom-label">{{localize "age-system.base"}}</label>
+                </div>
+                <div class="bottom-row"></div>
+            </div>
+                
+            {{!-- Defense block --}}
+            <div class="flexcol stats-block">
+                <div class="top-row">{{localize "age-system.defense"}}</div>
+                <div class="circle-main-container">
+                    <div class="circle-main">{{data.defense.total}}</div>
+                    <input type="text" class="circle-small circle-small-top" name="data.defense.mod" value="{{data.defense.mod}}" data-dtype="Number" />
+                    <label class="small-circle-label top-label">{{localize "age-system.mod"}}</label>
+                    <input type="text" class="circle-small circle-small-mid" name="data.defense.gameModeBonus" value="{{data.defense.gameModeBonus}}" data-dtype="Number" />
+                    <label class="small-circle-label mid-label">{{localize "age-system.gameModeBonus"}}</label>
+                    <input type="text" class="circle-small circle-small-bottom"  name="data.defense.base" value="{{data.defense.base}}" data-dtype="Number" />
+                    <label class="small-circle-label bottom-label">{{localize "age-system.base"}}</label>
+                </div>
+                <div class="bottom-row"> </div>
+            </div>
+
+            {{!-- Toughness block --}}
+            <div class="flexcol stats-block">
+                <div class="top-row">{{localize "age-system.toughness"}}</div>
+                <div class="circle-main-container">
+                    <div class="circle-main">{{data.armor.toughness.total}}</div>
+                    <input type="text" class="circle-small circle-small-mid" name="data.armor.toughness.mod" value="{{data.armor.toughness.mod}}" data-dtype="Number" />
+                    <label class="small-circle-label mid-label">{{localize "age-system.mod"}}</label>
+                    <input type="text" class="circle-small circle-small-bottom" name="data.armor.toughness.gameModeBonus" value="{{data.armor.toughness.gameModeBonus}}" data-dtype="Number" />
+                    <label class="small-circle-label bottom-label">{{localize "age-system.gameModeBonus"}}</label>
+                </div>
+                <div class="bottom-row"> </div>
+            </div>
+    
+            {{!-- Armor block --}}
+            <div class="flexcol stats-block">
+                <div class="top-row">{{localize "age-system.armor"}}</div>
+                <div class="circle-main-container">
+                    <div class="circle-main flexcol">
+                        <span>{{data.armor.impact}}{{localize "age-system.impactIndex"}}</span>
+                        <span>{{data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</span>
+                    </div>
+                </div>
+                <div class="bottom-row">
+                    <span>{{localize "age-system.armorPenalty"}}</span>
+                    <div class="circle-small">{{data.armor.penalty}}</div>
+                </div>
+            </div>
+
+            {{!-- Health block --}}
+            <div class="flexcol stats-block">
+                <div class="top-row">{{localize "age-system.health"}}</div>
+                <div class="circle-main-container">
+                    <input type="text" class="circle-main" name="data.health.value" value="{{data.health.value}}" data-dtype="Number" />
+                </div>
+                <div class="bottom-row">
+                    <span>{{localize "age-system.maximum"}}</span>
+                    <input class="bottom-input" type="text" name="data.health.max" value="{{data.health.max}}" data-dtype="Number" />
+                </div>
+            </div>
+                    
+        </div>
+
+    </div>
+
+    {{!-- Talent Block --}}
+    <div class="talent-container">
+        <label for="">{{localize "age-system.talentContainer"}}</label>
+        <div>
+            <textarea name="" id="" cols="30" rows="10">Talent Itens here</textarea>
+        </div>
+    </div>
+
+    {{!-- Powers Block --}}
+    <div class="extraordinary-powers-container">
+        <label for="">{{localize "age-system.extraordinaryPowers"}}</label>
+        <div>
+            <textarea>Extraordinary powers here</textarea>
+        </div>
+    </div>
+
+    {{!-- Weapon Block --}}
+    <div class="weapon-container">
+        <label for="">{{localize "age-system.weaponContainer"}}</label>
+        <div>
+            <textarea>Weapons here</textarea>
+        </div>
+    </div>
+
+    {{!-- This is a Test Area for Items --}}
+    <section class="items">
+        <h3>Owned Items</h3>
+        <ol class="actor-items">
+        {{#each actor.items as |item id|}}
+            <li class="actor-item" data-item-id="{{id}}">
+                <div class="item-name">
+                  <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                    <h4>{{item.name}}</h4>
+                </div>
+                <div class="item-controls">
+                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+            </li>
+        {{/each}}
+        </ol>
+    </section>
+
+</form>

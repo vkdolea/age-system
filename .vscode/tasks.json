@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "gulp",
+			"task": "default",
+			"problemMatcher": [],
+			"label": "gulp: default"
+		},
+		{
+			"type": "gulp",
+			"task": "less",
+			"problemMatcher": [],
+			"label": "gulp: less"
+		}
+	]
+}

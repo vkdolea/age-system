@@ -1,0 +1,208 @@
+.age-system.sheet.item form {
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet.item .sheet-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet.item .sheet-content .editor {
+  height: 100%;
+}
+.age-system.sheet.char body {
+  background-color: #e8dfce;
+}
+.age-system.sheet.char .window-app {
+  width: 600px;
+  height: 400px;
+}
+.age-system.sheet.char .resource-box {
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet.char .inline-elements {
+  display: flex;
+}
+.age-system.sheet.char .grid-resp {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 140px));
+  row-gap: 5px;
+}
+.age-system.sheet.char .flexcol {
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet.char form {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+.age-system.sheet.char .col-1 .attribute-box {
+  display: grid;
+  grid-template-columns: 3fr 3em;
+  grid-template-rows: auto auto;
+  border: solid black 1px;
+}
+.age-system.sheet.char .col-1 .attribute-box .att-header {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  background-color: #007DAD;
+}
+.age-system.sheet.char .col-1 .attribute-box .att-header .att-name {
+  grid-column: 1 / span 1;
+  min-width: fit-content;
+  height: max-content;
+  color: white;
+}
+.age-system.sheet.char .col-1 .attribute-box .att-header .last-up {
+  grid-column: 2 / span 1;
+  height: 1em;
+  justify-self: end;
+}
+.age-system.sheet.char .col-1 .attribute-box .att-value {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 2;
+  border: solid green 1px;
+  height: 100%;
+  text-align: center;
+}
+.age-system.sheet.char .col-1 .attribute-box .attribute-focus {
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+  height: 2em;
+  width: 100%;
+}
+.age-system.sheet.char .stats-block {
+  border: 0;
+  border-spacing: 0;
+}
+.age-system.sheet.char .stats-block .top-row {
+  height: 20px;
+  max-height: 20px;
+  text-align: center;
+  background-color: #007dad;
+  color: white;
+  margin: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.age-system.sheet.char .stats-block .circle-main-container {
+  position: relative;
+  width: 66px;
+  padding: 4px;
+  text-align: center;
+  place-self: center;
+}
+.age-system.sheet.char .stats-block .circle-main-container .small-circle-label {
+  font-size: 10px;
+  width: 40px;
+  text-align: left;
+}
+.age-system.sheet.char .stats-block .circle-main.flexcol {
+  font-size: 20px;
+  line-height: 30px;
+}
+.age-system.sheet.char .stats-block .circle-main {
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 64px;
+  font-size: 28px;
+  background-color: whitesmoke;
+  border: solid black 1px;
+  margin: 0;
+  padding: 0;
+}
+.age-system.sheet.char .stats-block .circle-small {
+  height: 16px;
+  width: 16px;
+  min-width: 16px;
+  border-radius: 50%;
+  font-size: 11px;
+  color: black;
+  padding: 0;
+  border: solid black 1px;
+  background-color: #e8dfce;
+}
+.age-system.sheet.char .stats-block .circle-small-bottom {
+  position: absolute;
+  top: 52px;
+  left: 52px;
+}
+.age-system.sheet.char .stats-block .bottom-label {
+  position: absolute;
+  top: 53.5px;
+  left: 72px;
+}
+.age-system.sheet.char .stats-block .circle-small-mid {
+  position: absolute;
+  top: 28px;
+  left: 59px;
+}
+.age-system.sheet.char .stats-block .mid-label {
+  position: absolute;
+  top: 31px;
+  left: 80px;
+}
+.age-system.sheet.char .stats-block .circle-small-top {
+  position: absolute;
+  top: 4px;
+  left: 52px;
+}
+.age-system.sheet.char .stats-block .top-label {
+  position: absolute;
+  top: 7px;
+  left: 72px;
+}
+.age-system.sheet.char .stats-block .bottom-row {
+  display: flex;
+  place-content: center;
+  height: 20px;
+  min-height: 20px;
+  text-align: center;
+  background-color: #007dad;
+  color: white;
+  margin: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.age-system.sheet.char .stats-block .bottom-row span {
+  width: min-content;
+  padding-right: 4px;
+}
+.age-system.sheet.char .stats-block .bottom-input {
+  height: 18px;
+  width: 40px;
+  font-size: 11px;
+  color: black;
+  padding: 0;
+  border: solid black 1px;
+  background-color: #e8dfce;
+}
+.age-system.sheet.item form {
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet.item .sheet-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet.item .sheet-content .editor {
+  height: 100%;
+}
+.age-system.sheet.item .flexcol {
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet.item .grid-resp {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 200px));
+  row-gap: 5px;
+  column-gap: 5px;
+}
+.age-system.sheet.item .grid-resp > div {
+  width: min-content;
+}
