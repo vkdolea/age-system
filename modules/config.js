@@ -17,8 +17,10 @@ ageSystem.focus = {
     teste2: "dois"
 };
 
-Hooks.on("renderageSystemItemSheet", async function() {
-    ageSystem.focus.teste2 = focusList()[0];
+Hooks.on("renderageSystemItemSheet", function() {
+    setTimeout(function () {
+        ageSystem.focus.teste2 = focusList()[0];
+    }, 2000)
 });
 
 function focusList() {
