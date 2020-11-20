@@ -13,9 +13,9 @@
                 <p>{{localize "age-system.focus.keyAtt"}}</p>
                 <select name="data.keyAtt">
                     {{#select data.keyAtt}}
-                        {{#each config.attributes as |name type|}}
-                            <option value="{{type}}">{{localize name}}</option>
-                        {{/each}}
+                    {{#each config.attributes as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
                     {{/select}}
                 </select>
             </div>
