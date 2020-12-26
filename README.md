@@ -1,4 +1,4 @@
-# AGE System for FVTT
+# Unofficial AGE System for FVTT
 Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
 
 ## Intro
