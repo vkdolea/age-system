@@ -1,0 +1,37 @@
+<form class="{{cssClass}} age-system item equipment colorset-selection colorset-modern-blue" autocomplete="off">
+
+    <div class="sheet-content item-stats equipment">
+        <div class="flexcol">
+            {{#if inChat}}
+            <div class="item-card-title colorset-first-tier" type="text">{{name}}</div>
+            {{else}}
+            <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
+            {{/if}}
+            <div class="flexrow item-card-stats">
+                {{!-- Resource TL --}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.item.resourceTN"}}</label>
+                    <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number" />
+                </div>
+                {{!-- Quantity --}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.item.quantity"}}</label>
+                    <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+                </div>                
+                {{!-- Weight --}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.item.weight"}}</label>
+                    <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                </div>
+            </div>
+                
+            {{!-- Active Bonuses --}}
+            {{> "systems/age-system/templates/partials/active-bonuses.hbs"}}
+            
+        </div>
+
+        {{> "systems/age-system/templates/partials/bonus-desc-sheet.hbs"}}
+        
+    </div>
+    
+</form>

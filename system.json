@@ -2,7 +2,7 @@
     "name": "age-system",
     "title": "AGE System",
     "description": "AGE System generic, meant for all AGE subsystems.",
-    "version": "0.01",
+    "version": "0.02",
     "templateVersion": 1,
     "author": "VK Dolea",
     "scripts": [],
@@ -54,11 +54,11 @@
         }
     ],
     "socket": false,
-    "initiative": "3d6",
+    "initiative": "3d6 + @initiative",
     "gridDistance": 2,
     "gridUnits": "m",
-    "primaryTokenAttribute": "resources.health",
-    "secondaryTokenAttribute": "resources.powerPoints",
+    "primaryTokenAttribute": "health",
+    "secondaryTokenAttribute": "powerPoints",
     "url": "TBI",
     "manifest": "TBI",
     "download": "TBI"

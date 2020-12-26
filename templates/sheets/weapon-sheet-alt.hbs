@@ -1,0 +1,136 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+    </header>
+    <div class="sheet-content item-stats weapon">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>{{localize "age-system.abl"}}</th>
+                    <th>{{localize "age-system.focus.focus"}}</th>
+                    <th>{{localize "age-system.item.damage"}}</th>
+                    <th>{{localize "age-system.item.damageType"}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="data.useAbl">
+                            {{#select data.useAbl}}
+                            {{#each config.abilities as |name type|}}
+                            <option value="{{type}}">{{localize name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </td>
+                    <td>
+                        <input name="data.useFocus" type="text" value="{{data.useFocus}}" placeholder="Focus Name" list="{{item.type}}-{{item._id}}-list"/>
+                        <datalist id="{{item.type}}-{{item._id}}-list">
+                            <option value=""></option>
+                            {{#each config.focus as |focus|}}
+                            <option value="{{focus.name}}"></option>
+                            {{/each}}
+                        </datalist>
+                    </td>
+                    <td>
+                        <div class="flexrow damage-dice-field">
+                            <input type="text" name="data.nrDice" value="{{data.nrDice}}" data-dtype="Number" />
+                            <select name="data.diceType" class="dice-size">
+                                {{#select data.diceType}}
+                                <option value="6">{{localize "age-system.settings.d6"}}</option>
+                                <option value="3">{{localize "age-system.settings.d3"}}</option>
+                                {{/select}}
+                            </select>
+                            <span>{{localize "age-system.settings.plusSign"}}</span>
+                            <input type="text" name="data.extraValue" value="{{data.extraValue}}" data-dtype="Number" />
+                            <span>{{localize "age-system.settings.plusSign"}}</span>
+                            <select name="data.dmgAbl">
+                                {{#select data.dmgAbl}}
+                                {{#each config.abilities as |name type|}}
+                                <option value="{{type}}">{{localize name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flexcol">
+                            <select name="data.woundDmg">
+                            {{#select data.woundDmg}}
+                                <option value="false">{{localize "age-system.stun"}}</option>
+                                <option value="true">{{localize "age-system.wound"}}</option>
+                            {{/select}}
+                            </select>
+                            <select name="data.dmgType">
+                                {{#select data.dmgType}}
+                                <option value="1">{{localize "age-system.impact"}}</option>
+                                <option value="2">{{localize "age-system.ballistic"}}</option>
+                                <option value="3">{{localize "age-system.penetrating"}}</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </td>
+                  
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>{{localize "age-system.item.minStr"}}</th>                    
+                    <th>{{localize "age-system.item.resourceTN"}}</th>
+                    <th>{{localize "age-system.item.weight"}}</th>
+                    <th>{{localize "age-system.item.rof"}}</th>
+                    <th>{{localize "age-system.item.range"}}</th>
+                    <th>{{localize "age-system.item.capacity"}}</th>
+                    <th>{{localize "age-system.item.reload"}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input name="data.minStr" type="text" value="{{data.minStr}}" placeholder="{{localize "age-system.item.reqStr"}}" data-dtype="Number"/>
+                    </td>                    
+                    <td>
+                        <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number" />
+                    </td>
+                    <td style="max-width: 50px;">
+                        <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                    </td>
+                    <td>
+                        <select name="data.rof">
+                            {{#select data.rof}}
+                            <option value="0"><span>-</span></option>
+                            <option value="1">{{localize "age-system.item.ss"}}</option>
+                            <option value="2">{{localize "age-system.item.sa"}}</option>
+                            <option value="3">{{localize "age-system.item.aa"}}</option>
+                            {{/select}}
+                        </select>
+                    </td>
+                    <td class="flexrow range-row">
+                        <input type="text" name="data.range" value="{{data.range}}" data-dtype="Number" />
+                        <span>{{localize "age-system.item.yards"}}</span>
+                    </td>
+                    <td>
+                        <input type="text" name="data.capacity" value="{{data.capacity}}" data-dtype="Number" />
+                    </td>
+                    <td>
+                        <select name="data.reload">
+                            {{#select data.reload}}
+                            <option value="0"><span>-</span></option>
+                            <option value="1">{{localize "age-system.minorAction"}}</option>
+                            <option value="2">{{localize "age-system.majorAction"}}</option>
+                            <option value="3">{{localize "age-system.d6minor"}}</option>
+                            {{/select}}
+                        </select>                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        {{editor content=data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+    </div>
+</form>

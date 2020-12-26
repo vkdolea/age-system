@@ -1,0 +1,47 @@
+{{#if inChat}}
+<div class="flexrow">
+    <label>{{localize "age-system.item.damage"}}</label>
+    {{concat data.nrDice "d" data.diceType "+" data.extraValue "+" data.ablDamageValue}}
+</div>
+{{else}}
+<div class="flexcol cause-damage">
+    <label>{{localize "age-system.item.damage"}}</label>
+    <div class="flexrow">
+        <div class="flexrow damage-dice-field">
+            <input type="number" name="data.nrDice" value="{{data.nrDice}}" data-dtype="Number" />
+            <select name="data.diceType" class="dice-size">
+                {{#select data.diceType}}
+                <option value="6">{{localize "age-system.settings.d6"}}</option>
+                <option value="3">{{localize "age-system.settings.d3"}}</option>
+                {{/select}}
+            </select>
+            <span>{{localize "age-system.settings.plusSign"}}</span>
+            <input type="number" name="data.extraValue" value="{{data.extraValue}}" data-dtype="Number" />
+            <span>{{localize "age-system.settings.plusSign"}}</span>
+            <select name="data.dmgAbl">
+                {{#select data.dmgAbl}}
+                {{#each config.abilities as |name type|}}
+                <option value="{{type}}">{{localize name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+    <div class="flexrow">
+        <select name="data.dmgType">
+            {{#select data.dmgType}}
+            {{#each config.damageType as |name type|}}
+            <option value="{{type}}">{{localize name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <select name="data.dmgSource">
+            {{#select data.dmgSource}}
+            {{#each config.damageSource as |name source|}}
+            <option value="{{source}}">{{localize name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>                
+{{/if}}

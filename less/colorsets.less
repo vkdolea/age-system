@@ -1,0 +1,114 @@
+@modern-blue: #007DAD;
+@modern-blue-high: #35A5CA;
+@modern-blue-mid: #B9DBEB;
+@modern-blue-font: #ffffff;
+
+@modern-blue-light: #DBECF4;
+@modern-blue-light-font: #231F20;
+@card-background: #5f94a8;
+
+@gritty-color: #DA9E89;
+@pulp-color: #FBE1AD;
+@cinematic-color: #A3CCAF;
+@mode-font-color:#231F20;
+
+@circle-main: #e8dfce;
+@circle-small: #e8dfce;
+
+@highlight: #eb9e0f;
+@container-background: #ffffff;
+
+// TODO color schemes: Modern AGE, Fantasy AGE, The Expanse, Threefold, Green Ronin, Dragon AGE
+// Identify combinations of colors to add modificators
+
+// Modern AGE Colorset
+/*-------------------------------------------------------*/
+.colorset-modern-blue {
+    .colorset-first-tier {
+        background-color: @modern-blue;
+        color: @modern-blue-font;
+    };    
+    
+    .colorset-second-tier {
+        background-color: @modern-blue-mid;
+        color: @modern-blue;
+    };
+    
+    .colorset-third-tier {
+        background-color: @modern-blue-high;
+        color: @modern-blue-light-font;
+    };
+
+    input.colorset-first-tier {
+        background-color: @modern-blue;
+        color: @modern-blue-font;
+    };
+
+    //Base Age Roll
+    .dice-show.trait-test {
+        // Stunt Die Color on ChatMessage
+        i:last-of-type {
+            color: @modern-blue;
+        };
+    };
+    //Base Age Roll
+    .roll-mod {
+        border-bottom: 1px solid @modern-blue;
+    };
+    .roll-mod.stunted {
+        background-color: @modern-blue;
+        color: @modern-blue-font;
+    };        
+
+    // Styling Character Ability with total value
+    .char-sheet {
+        input {
+            background-color: #ffffff;
+        };
+        
+        input.colorset-second-tier {
+            background-color: @modern-blue-mid !important;
+            color: @modern-blue !important;
+        };
+
+    };
+
+    .focus,
+    .power,
+    .talent,
+    .weapon,
+    .equipment,
+    .stunts,
+    .honorifics,
+    .membership,
+    .relationship {
+        label {
+            color: @modern-blue;
+        };
+        .item-card-stats {
+            background-color: @modern-blue-mid;
+            input.data-entry {
+                color: @modern-blue-light-font;
+            };
+        };
+        .item-card-desc {
+            background-color: #ffffff;
+        };
+        // Tabs Nav Control  
+        nav {
+            .item {
+                background-color: @modern-blue-mid;
+                color: @modern-blue;
+            }
+            .item.active {
+                background-color: #ffffff;
+            }
+        }
+        // Modificator Cards
+        .mod-card {
+            border: solid @modern-blue-mid 1px;
+        }
+
+    };
+};
+/*-------------------------------------------------------*/

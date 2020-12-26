@@ -1,0 +1,19 @@
+<div class="flexrow modificators-table">
+    {{#each data.itemMods as | modType |}}
+    {{#when @key 'noteq' 'focus'}}
+    {{#when @key 'noteq' 'powerForce'}}
+    
+    <div class="flexrow {{@key}}-mod mod-card colorset-second-tier flex-align-center">
+        <div class="flexcol flex-align-center">
+            {{localize (concat "age-system.bonus." @key)}}
+            <div class="flexrow">
+                <input type="checkbox" name="data.itemMods.{{@key}}.isActive" {{checked modType.isActive}}/>
+                <input type="number" name="data.itemMods.{{@key}}.value" value="{{modType.value}}" data-dtype="Number" />
+            </div>
+        </div>
+    </div>
+
+    {{/when}}
+    {{/when}}
+    {{/each}}
+</div>

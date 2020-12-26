@@ -1,0 +1,30 @@
+<form class="{{cssClass}} age-system item colorset-selection colorset-modern-blue" autocomplete="off">
+
+    <div class="sheet-content item-stats talent">
+        <div class="flexcol">
+            {{#if inChat}}
+            <div class="item-card-title colorset-first-tier" type="text">{{name}}</div>
+            {{else}}
+            <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
+            {{/if}}
+            <div class="item-card-stats flexrow">
+                {{!-- Degree Level --}}
+                <div class="flexrow">
+                    <label>{{localize "age-system.talentDegree"}}</label>
+                    {{#if inChat}}
+                    <div class="data-input">{{data.shortDesc}}</div>
+                    {{else}}
+                    <input type="text" name="data.shortDesc" value="{{data.shortDesc}}" placeholder="{{localize "age-system.talentDegree"}}" />
+                    {{/if}}
+                </div>
+            </div>
+            
+            {{!-- Active Bonuses --}}
+            {{> "systems/age-system/templates/partials/active-bonuses.hbs"}}
+            
+        </div>
+
+        {{> "systems/age-system/templates/partials/bonus-desc-sheet.hbs"}}
+
+    </div>
+</form>

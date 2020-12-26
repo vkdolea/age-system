@@ -1,6 +1,6 @@
 export const ageSystem = {};
 
-ageSystem.attributes = {
+ageSystem.abilities = {
     acc: "age-system.acc",
     comm: "age-system.comm",
     cons: "age-system.cons",
@@ -10,6 +10,68 @@ ageSystem.attributes = {
     per: "age-system.per",
     str: "age-system.str",
     will: "age-system.will",
+};
+
+ageSystem.actionsToCast = {
+    noAction: "age-system.noAction",
+    minorAction: "age-system.minorAction",
+    majorAction: "age-system.majorAction",
+    oneMinute: "age-system.oneMinute"
+};
+
+ageSystem.reloadDuration = {
+    noAction: "age-system.noAction",
+    minorAction: "age-system.minorAction",
+    majorAction: "age-system.majorAction",
+    d6minor: "age-system.d6minor"
+};
+
+ageSystem.fatigueConditions = {
+    noFatigue: "age-system.noFatigue",
+    winded: "age-system.winded",
+    fatigued: "age-system.fatigued",
+    exhausted: "age-system.exhausted",
+    dying: "age-system.dying"
+};
+
+ageSystem.damageType = {
+    stun: "age-system.stun",
+    wound: "age-system.wound"
+};
+ageSystem.damageSource = {
+    impact: "age-system.impact",
+    ballistic: "age-system.ballistic",
+    penetrating: "age-system.penetrating"
+};
+
+ageSystem.bonusTypes = {
+    itemDamage: "age-system.bonus.itemAtkBns",
+    actorDamage: "age-system.bonus.itemDmgBns",
+    itemActivation: "age-system.bonus.generalDmgBns",
+    acc: "age-system.bonus.charAblBns",
+    comm: "age-system.bonus.charAblBns",
+    cons: "age-system.bonus.charAblBns",
+    cun: "age-system.bonus.charAblBns",
+    dex: "age-system.bonus.charAblBns",
+    fight: "age-system.bonus.charAblBns",
+    int: "age-system.bonus.charAblBns",
+    magic: "age-system.bonus.charAblBns",
+    per: "age-system.bonus.charAblBns",
+    str: "age-system.bonus.charAblBns",
+    will: "age-system.bonus.charAblBns",
+    focus: "age-system.bonus.focusValueBns",
+    defense: "age-system.bonus.totalDefenseBns",
+    impactArmor: "age-system.bonus.impactArmorBns",
+    ballisticArmor: "age-system.bonus.ballisticArmorBns",
+    defendMnv: "age-system.bonus.defendMnvBns",
+    guardupMnv: "age-system.bonus.guardupMnvBns",
+    allOutAtk: "age-system.bonus.allOutAtkBns",
+    maxHealth: "age-system.bonus.maxHealthBns",
+    maxConviction: "age-system.bonus.maxConvictionBns",
+    maxPowerPoints: "age-system.bonus.maxPowerPointsBns",
+    powerForce: "age-system.bonus.powerForceBns",
+    aimMnv: "age-system.bonus.aimMnvBns",
+    armorPenalty: "age-system.bonus.armorPenaltyBns"
 };
 
 // Initializing variable

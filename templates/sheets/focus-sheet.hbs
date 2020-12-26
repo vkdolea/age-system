@@ -1,32 +1,56 @@
-<form class="{{cssClass}}" autocomplete="off">
- 
-    <header class="sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-    </header>
+<form class="{{cssClass}} age-system item focus colorset-selection colorset-modern-blue" autocomplete="off">
 
-    <div class="sheet-content">
+    <div class="sheet-content item-stats focus">
+        <div class="flexcol">
+            {{#if inChat}}
+            <div class="item-card-title colorset-first-tier" type="text">{{name}}</div>
+            {{else}}
+            <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
+            {{/if}}
+            <div class="item-card-stats flexrow">
+                
+                {{!-- Ability key to Focus --}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.abl"}}</label>
+                    {{#if inChat}}
+                    <div name="data.useAbl" class="data-input">{{localize (concat "age-system." data.useAbl)}}</div>
+                    {{else}}
+                    <select name="data.useAbl" class="data-input">
+                        {{#select data.useAbl}}
+                        {{#each config.abilities as |name type|}}
+                        <option value="{{type}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    {{/if}}
+                </div>
 
-        <div class="grid-resp">
+                {{!-- Improved Focus --}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.improvedFocus"}}</label>
+                    <input type="checkbox" {{#if inChat}}disabled{{/if}} name="data.improved" {{checked data.improved}} class="checkbox"/>
+                </div>
 
-            <div>
-                <p>{{localize "age-system.focus.keyAtt"}}</p>
-                <select name="data.keyAtt">
-                    {{#select data.keyAtt}}
-                    {{#each config.attributes as |name type|}}
-                    <option value="{{type}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
+                {{!-- Focus Initial Value --}}
+                {{#if inChat}}
+                {{else}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.focusInput"}}</label>
+                    <input type="number" name="data.initialValue" value="{{data.initialValue}}" class="checkbox"/>
+                </div>
+                {{/if}}
+
+                {{!-- Focus Modificator --}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.total"}}</label>
+                    <div>{{data.focusValue}}</div>
+                </div>
             </div>
-
-            <div>
-                <p>{{localize "age-system.focus.improved"}}</p>
-                <input type="checkbox" name="data.improved" {{checked data.improved}} class="checkbox" />
-            </div>
-
         </div>
-
-        {{editor content=data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+        <div class="item-card-desc">
+            <label>{{localize "age-system.item.desc"}}</label>
+            {{editor content=data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+        </div>
     </div>
+    
 </form>

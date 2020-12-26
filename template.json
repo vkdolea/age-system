@@ -3,19 +3,13 @@
         "types": ["char"],
         "templates": {},
         "char": {
+            "statBlockView": false,
+            "rollType": "open",
             "level": 1,
             "xp": {
                 "value": 0,
                 "next": 0,
                 "advPoints": 0
-            },
-            "labels": {
-                "background": "",
-                "socialClass": "",
-                "profession": "",
-                "age": "",
-                "height": "",
-                "weight": ""
             },
             "features": "",
             "drive": {
@@ -42,7 +36,7 @@
                 },
                 "impact": 0,
                 "ballistic": 0,
-                "penaulty": 0
+                "penalty": 0
             },
             "resources": 4,
             "goals": "",
@@ -51,7 +45,30 @@
                 "level": 0,
                 "effect": ""
             },
-            "attributes": {
+            "aim": {
+                "value": 1,
+                "active": false,
+                "mod": 0
+            },
+            "defend": {
+                "defenseBonus": 2,
+                "active": false,
+                "mod": 0
+            },
+            "guardUp": {
+                "defenseBonus": 1,
+                "testPenalty": 1,
+                "active": false,
+                "mod": 0
+            },
+            "allOutAttack": {
+                "dmgBonus": 1,
+                "defensePenalty": 1,
+                "active": false,
+                "mod": 0
+            },
+            "initiativeMod": 0,
+            "abilities": {
                 "acc": {
                     "value": 0,
                     "primary": false,
@@ -100,36 +117,34 @@
             },
             "health": {
                 "min": 0,
-                "value": 15,
-                "max": 35
+                "value": 35,
+                "set": 35
             },
             "powerPoints": {
                 "min": 0,
-                "value": 1,
-                "max": 3
+                "value": 10,
+                "set": 10
             },
             "fatigue": {
                 "min": 0,
-                "value": 1,
+                "entered": 0,
                 "max": 4
             },
             "conviction": {
                 "min": 0,
                 "value": 3,
-                "max": 3
+                "set": 3
             }
         }
     },
     "Item": {
         "types": [
-            "power",
+            "focus",
+            "equipment",
             "weapon",
-            "shield",
-            "armor",
-            "generalEquip",
+            "power",
             "talent",
             "stunts",
-            "focus",
             "relationship",
             "honorifics",
             "membership"
@@ -140,26 +155,27 @@
                 "useFocus": ""
             },
             "damage": {
-                "stunDmg": false,
-                "woundDmg": false,
-                "impactDmg": false,
-                "penetrantDmg": false,
-                "ballisticDmg": false,
-                "dice": "1d6",
-                "dmgAtt": "str"
+                "dmgType": "stun",
+                "dmgSource": "impact",
+                "nrDice": "1",
+                "diceType": "6",
+                "extraValue": 0,
+                "dmgAbl": "str"
             },
             "hardItem": {
                 "weight": 0,
                 "cost": 0,
-                "quantity": 1
+                "quantity": 1,
+                "equiped": false
             },
-            "penaulty": {
+            "penalty": {
                 "armor": 0,
                 "speed": 0
             },
             "activation": {
+                "useAbl": "acc",
                 "targetNumber": 10,
-                "cost": 1,
+                "manaCost": 1,
                 "fatigueTN": 10
             },
             "description": {
@@ -167,51 +183,152 @@
                 "longDesc": ""
             },
             "bonuses": {
-                "focusMod": [],
-                "attMod": [],
-                "defMod": [],
-                "armorMod": [],
-                "dmgMod": [],
-                "attackMod": []
+                "itemMods": {
+                    "itemDamage": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "actorDamage": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "itemActivation": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "acc": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "comm": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "cons": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "cun": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "dex": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "fight": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "int": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "magic": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "per": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "str": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "will": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "focus": {
+                        "name": "",
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "defense":  {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "impactArmor":  {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "ballisticArmor":  {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "toughness":  {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "defendMnv":  {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "guardupMnv":  {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "allOutAtkMnv":  {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "maxHealth":  {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "maxConviction": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "maxPowerPoints": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "powerForce": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "aimMnv": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "armorPenalty": {
+                        "value": 0,
+                        "isActive": false
+                    }
+                }
             }
         },
+        "equipment": {
+            "templates": ["description", "hardItem", "bonuses"]
+        },
+        "focus": {
+            "templates": ["description", "activation"],
+            "improved": false,
+            "initialValue": 2
+        },
         "weapon": {
-            "templates": ["damage", "itemReq", "hardItem", "description", "bonuses"],
-            "reload": "",
+            "templates": ["activation", "damage", "itemReq", "hardItem", "description", "bonuses"],
+            "reload": "minor",
             "capacity": 1,
             "range": 1,
-            "rof": "",
-            "attackAtt": ""
-        },
-        "armor": {
-            "templates": ["hardItem", "description", "penaulty", "bonuses"],
-            "ballisticArmor": 0,
-            "impactArmor": 0,
-            "equiped": false
+            "rof": "SS"
         },
         "power": {
-            "templates": ["damage", "itemReq", "description", "activation"],
-            "powerLevel": 0
+            "templates": ["damage", "itemReq", "description", "activation", "bonuses"],
+            "powerLevel": 0,
+            "castTime": "minor",
+            "causeDamage": false,
+            "useFatigue": false,
+            "inputFatigueTN": false
         },
         "talents": {
-            "templates": ["description"]
+            "templates": ["description", "bonuses"]
         },
         "stunts": {
             "templates": ["description"],
             "stuntPoints": 1
-        },
-        "shield": {
-            "templates": ["description", "hardItem", "bonuses"],
-            "equiped": false
-        },
-        "generalEquip": {
-            "templates": ["description", "hardItem", "bonuses"],
-            "equiped": false
-        },
-        "focus": {
-            "templates": ["description"],
-            "keyAtt": "per",
-            "improved": false
         },
         "relationship": {
             "templates": ["description"],

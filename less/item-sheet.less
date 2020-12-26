@@ -1,0 +1,171 @@
+.age-system.item {
+    font-variant: small-caps;
+
+    body {
+        input {
+            text-align: center;
+        };
+    };
+
+    .damage-dice-field {
+        flex-wrap: nowrap;
+        margin: auto;
+        vertical-align: middle;
+
+        .dice-size {
+            max-width: 50px;
+            height: 26px;
+        };
+
+        input {
+            max-width: 30px;
+        };
+
+        span {
+            height: 26px;
+            padding-top: 4px;
+        };
+    };
+
+    .sheet-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        .editor {
+            height: 100%;
+        };
+    };
+
+    .fill-card {
+        text-align: left;
+        width: fit-content;
+        i.fas {
+            margin-left: 2px;
+        };
+    };
+
+    .focus,
+    .power,
+    .talent,
+    .weapon,
+    .equipment,
+    .stunts,
+    .honorifics,
+    .relationship,
+    .membership {
+
+        input[name="data.shortDesc"].long-text {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        section.sheet-tab-section {
+            height: 100%;
+            border-radius: 0px 0px 10px 10px;
+        }
+
+        .item-card-title {           
+            border-radius: 10px 10px 0px 0px;
+            text-transform: uppercase;
+            border: none;
+            padding: 4px;
+
+        };
+
+        input[name="name"] {
+            padding-left: 10px;
+        };
+
+        label {
+            font-variant-caps: small-caps;
+            font-weight: 500;
+            border: none;
+            margin-right: 4px;
+            max-width: fit-content;
+        };
+
+        .item-card-stats {
+            flex-wrap: wrap;
+            padding: 10px;
+            padding-bottom: 6px;
+
+            > * {
+                margin-bottom: 4px;
+                margin-left: 1px;
+                margin-right: 1px;
+            };
+
+            input[name="data.useFocus"] {
+                min-width: 140px;
+                text-align: center;
+            };
+
+            input[name="data.targetNumber"],
+            input[name="data.manaCost"],
+            input[name="data.minStr"],
+            input[name="data.cost"],
+            input[name="data.weight"],
+            input[name="data.range"],
+            input[name="data.capacity"],
+            input[name="data.quantity"],
+            input[name="data.stuntPoints"],
+            input[name="data.initialValue"],
+            input[name="data.extraValue"],
+            input[name="data.nrDice"],
+            input[name="data.intensity"] {
+                max-width: 30px;
+                min-width: 30px;
+                text-align: center;
+            };
+
+            span:last-of-type {
+                max-width: 25px;
+                text-align: center;
+            };
+
+            div.flexrow {
+                margin-right: 4px;
+                // max-width: fit-content;
+            };
+
+            div {
+                flex-wrap: nowrap;
+                align-items: center;
+            };
+            
+            input.data-entry {
+                font-variant-caps: small-caps;
+            };
+
+        };
+
+        .item-card-desc {
+            height: 100%;
+            padding: 4px 10px;
+            border-radius: 0px 0px 10px 10px;
+
+            .editor {
+                height: 100%;
+            };
+
+            label:last-of-type {
+                margin-top: 4px;
+            };
+
+            .mod-card {
+                border-radius: 10px;
+                max-width: 150px;
+                min-width: 150px;
+                height: 70px;
+                margin: 4px;
+                padding: 4px;
+
+                input[type="number"] {
+                    max-width: 40px;
+                    min-width: 40px;
+                    text-align: center;
+                }
+            };
+        };
+    };
+};

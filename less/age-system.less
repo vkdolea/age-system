@@ -1,3 +1,54 @@
-@import "./weapon-sheet.less";
+@import "./item-sheet.less";
 @import "./char-sheet.less";
-@import "./focus-sheet.less";
+@import "./age-roll-sheet.less";
+@import "./colorsets.less";
+
+// Avoid text on context-menu from wrapping
+#context-menu {
+    li {
+        white-space: nowrap;
+        text-align: left;
+    };
+}
+
+/*---------Flexbox assisting classes------*/
+.age-system {
+    .flexcol {
+        display: flex;
+        flex-direction: column;
+    };
+
+    .flexrow {
+        display: flex;
+        flex-direction: row;
+    };
+
+    .no-flexwrap {
+        flex-wrap: nowrap;
+    };
+
+    .flex-align-center {
+        align-items: center;
+    };
+
+    .flex-justify-center {
+        justify-content: center;
+    };
+
+    .flex-justify-start {
+        justify-content: flex-start;
+    };
+
+    .flex-justify-between {
+        justify-content: space-between;
+    };
+
+    .flex-justify-around {
+        justify-content: space-around;
+    };
+
+    .flex-justify-evenly {
+        justify-content: space-evenly;
+    };
+};
+/*---------------------------------*/
