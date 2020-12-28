@@ -69,6 +69,7 @@
             "stuntPoints": "Stunt Points",
             "stuntPointsIndex": "SP",
             "attack": "Attack",
+            "equip": "Equip",
             "edit": "Edit",
             "delete": "Delete",
             "changeRollContext": "Use Other Ability",
