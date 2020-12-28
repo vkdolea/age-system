@@ -215,9 +215,6 @@ export function itemDamage(event, item) {
     if (constDmg !== 0) {damageFormula = `${damageFormula} + @damageMod`}
 
     const dmgAbl = item.data.data.dmgAbl;
-    // let ablMod = null;
-    // let allOutAttackMod = null;
-    // let actorDmgMod = null;
     let rollData = {
         diceQtd: nrDice,
         diceSize: diceSize,
@@ -269,15 +266,6 @@ export function itemDamage(event, item) {
             };
         };
     };
-
-    // let rollData = {
-    //     diceQtd: nrDice,
-    //     diceSize: diceSize,
-    //     damageMod: constDmg,
-    //     abilityMod: ablMod,
-    //     generalDmgMod: actorDmgMod,
-    //     allOutAttack: allOutAttackMod
-    // };
 
     let dmgRoll = new Roll(damageFormula, rollData).roll();
 
