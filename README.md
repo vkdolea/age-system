@@ -23,7 +23,7 @@ This is a work in progress, not meant to be actualy used during normal play. Rev
 10. When attacking a token, indicate Hit or Miss by comparing the roll against token's/enemy's Defense score.
 11. Add code on Roll Fatigue button when a Power activation is rolled.
 12. Hide Roll Damage and Roll Fatigue buttons for players without permission to control the Actor originating the roll.
-13. Add setup to select any Compendium to create the `datalist` with Focus options. Currently the system only looks at the Focus Compendium created with the world.
+13. ~~Add setup to select any Compendium to create the `datalist` with Focus options. Currently the system only looks at the Focus Compendium created with the world.~~
 14. Add Alt + Click on test/damage rolls to add modifiers (constants or extra die).
 15. Add Dynamic Effects support to Actors.
 16. ~~Initiative roll implemented as `3d6 + Dexterity - Armor Penalty + Initiative Mod` (the later accessed by character sheet).~~
@@ -37,6 +37,10 @@ This is a work in progress, not meant to be actualy used during normal play. Rev
 5. Shift + Click on Focus context menu to roll with another Ability won't trigger GM roll.
 
 ## Change log
+
+### 2020.12.28
+- Added damage type (stun, wound, impact, ballistic, penetrating) on damage roll char card.
+
 ### 2020.12.27
 - Added Settings menu to swap setting specific data (Fatigue, Power Points, Fatigue, Conviction, Currency, Income, Resources, Toughness).
 - Dragon AGE and Core AGE abilities are now supported, only select the desired at Settings.

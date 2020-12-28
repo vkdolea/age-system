@@ -49,6 +49,9 @@
     "SETTINGS.gameModePulp": "Pulp",
     "SETTINGS.gameModeCinematic": "Cinematic",
 
+    "SETTINGS.masterFocusCompendium": "Select Compendium with Focus options",
+    "SETTINGS.masterFocusCompendiumHint": "Item names inside this Compendium will show as Focus suggestion on sheets",
+
     "age-system": {
 
         "power": "Power",

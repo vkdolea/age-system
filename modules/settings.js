@@ -29,24 +29,6 @@ export const registerSystemSettings = function() {
   }); 
 
   /**
-   * Register if world will use Game Mode and which one
-   */
-  game.settings.register("age-system", "gameMode", {
-    name: "SETTINGS.gameMode",
-    hint: "SETTINGS.gameModeHint",
-    scope: "world",
-    config: true,
-    default: "pulp",
-    type: String,
-    choices: {
-        "none": "SETTINGS.gameModeNone",
-        "gritty": "SETTINGS.gameModeGritty",
-        "pulp": "SETTINGS.gameModePulp",
-        "cinematic": "SETTINGS.gameModeCinematic",
-    },  
-  });  
-
-  /**
    * Register if world will use Fatigue
    */
   game.settings.register("age-system", "useFatigue", {
@@ -72,7 +54,25 @@ export const registerSystemSettings = function() {
       type: Boolean,
       onChange:()=>{
         window.location.reload(!1)}
-    });
+  });
+
+    /**
+   * Register if world will use Game Mode and which one
+   */
+  game.settings.register("age-system", "gameMode", {
+    name: "SETTINGS.gameMode",
+    hint: "SETTINGS.gameModeHint",
+    scope: "world",
+    config: true,
+    default: "pulp",
+    type: String,
+    choices: {
+        "none": "SETTINGS.gameModeNone",
+        "gritty": "SETTINGS.gameModeGritty",
+        "pulp": "SETTINGS.gameModePulp",
+        "cinematic": "SETTINGS.gameModeCinematic",
+    },  
+  });  
 
   /**
    * Register currency type
@@ -142,6 +142,7 @@ export const registerSystemSettings = function() {
   });
 };
 
+// Adds game setting to select focus compendium after loading world's compendia!
 export const loadCompendiaSettings = function() {
   /**
    * Select compendium to list focus
