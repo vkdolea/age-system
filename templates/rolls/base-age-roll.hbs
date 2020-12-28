@@ -49,6 +49,12 @@
                     <div class="line-value">{{rollInput.aim}}</div>
                 </div>
                 {{/if}}
+                {{#if rollInput.activationMod}}
+                <div class="flexrow roll-mod">
+                    <div class="line-header">{{localize "age-system.activationMod"}}</div>
+                    <div class="line-value">{{rollInput.activationMod}}</div>
+                </div>
+                {{/if}}
                 {{#if rollInput.armorPenalty}}
                 <div class="flexrow roll-mod">
                     <div class="line-header">{{localize "age-system.armorPenalty"}}</div>

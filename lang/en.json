@@ -1,4 +1,54 @@
 {
+    "ACTOR.TypeChar": "Player Character",
+    "ITEM.TypeStunts": "Stunts",
+    "ITEM.TypeEquipment": "General Equipment",
+    "ITEM.TypePower": "Power & Arcana",
+    "ITEM.TypeTalent": "Talent",
+    "ITEM.TypeFocus": "Focus",
+    "ITEM.TypeWeapon": "Weapon",
+    "ITEM.TypeRelationship": "Relationship",
+    "ITEM.TypeHonorifics": "Honorifics",
+    "ITEM.TypeMembership": "Membership",
+
+    "SETTINGS.useConviction": "Use Conviction",
+    "SETTINGS.useConvictionHint": "Enable Conviction block for tracking",
+
+    "SETTINGS.useFatigue": "Use Fatigue",
+    "SETTINGS.useFatigueHint": "Enable Fatigue block and support for Power & Arcana Fatigue settings",
+
+    "SETTINGS.usePowerPoints": "Use Power Points",
+    "SETTINGS.usePowerPointsHint": "Enable Power Points block and support for Power & Arcana Power Points settings",
+
+    "SETTINGS.useToughness": "Use Toughness",
+    "SETTINGS.useToughnessHint": "Check if the game will use Toughness statistics",
+
+    "SETTINGS.wealthType": "Wealth system in use",
+    "SETTINGS.wealthTypeHint": "Income and Resource are test based wealth system, while Currency is the usual buying system",
+    "SETTINGS.wealthTypeResources": "Resources",
+    "SETTINGS.wealthTypeIncome": "Income",
+    "SETTINGS.wealthTypeCurrency": "Currency",
+
+    "SETTINGS.abilitySelection": "Ability settings",
+    "SETTINGS.abilitySelectionHint": "Use core AGE or Dragon Age abilities",
+    "SETTINGS.abilitySelectionMain": "Core AGE",
+    "SETTINGS.abilitySelectionDage": "Dragon Age",
+
+    "SETTINGS.colorScheme": "Select client side color scheme",
+    "SETTINGS.colorSchemeHint": "Color settings affect character and item schemes",
+    "SETTINGS.colorModernBlue": "Modern AGE",
+    "SETTINGS.colorFantasyGreen": "Fantasy AGE",
+    "SETTINGS.colorDragonRed": "Dragon AGE",
+    "SETTINGS.colorRoninGreen": "Ronin Green",
+    "SETTINGS.colorExpandedBlue": "The Expanse",
+    "SETTINGS.colorFoldedPurple": "Threefold Purple",
+
+    "SETTINGS.gameMode": "Select game mode, if any",
+    "SETTINGS.gameModeHint": "Select game mode (as explained on Modern AGE) or none if the setting doesn't state any",
+    "SETTINGS.gameModeNone": "None",
+    "SETTINGS.gameModeGritty": "Gritty",
+    "SETTINGS.gameModePulp": "Pulp",
+    "SETTINGS.gameModeCinematic": "Cinematic",
+
     "age-system": {
 
         "power": "Power",
@@ -39,7 +89,13 @@
         "dex": "Dexterity",
         "comm": "Communication",
         "cons": "Constitution",
+        "cunn": "Cunning",
+        "magic": "Magic",
         "abl": "Ability",
+
+        "income": "Income",
+        "resources": "Resources",
+        "currency": "Currency",
 
         "improvedFocus": "Improved",
         "abilitySelect": "Select an Ability to roll with this Focus",
@@ -137,7 +193,7 @@
             "acc": "Accuracy",
             "comm":"Communication",
             "cons":"Constitution",
-            "cun": "Cunning",
+            "cunn": "Cunning",
             "dex": "Dexterity",
             "fight": "Fighting",
             "int": "Intelligence",
@@ -194,8 +250,10 @@
             "force": "Force"
         },
         "rollDamage": "Roll Damage",
-        "itemDmgMod": "General Damage Bonus",
+        "itemDmgMod": "General Bonus",
+        "thisItemDmgBns": "Item Bonus",
         "rollFatigue": "Roll Fatigue",
-        "blindRollSomeone": "You blindly roll to GM"
+        "blindRollSomeone": "You blindly roll to GM",
+        "activationMod": "Roll Bonus"
     }
 }

@@ -51,6 +51,10 @@ export default class ageSystemItemSheet extends ItemSheet {
         data.data = data.entity.data;
 
         data.config = CONFIG.ageSystem;
+        
+        // Setting which ability settings will be used
+        const ablSelect = game.settings.get("age-system", "abilitySelection");
+        data.config.abilities = data.config.abilitiesSettings[ablSelect];
 
         return data;
     };

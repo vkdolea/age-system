@@ -1,9 +1,11 @@
+import {registerSystemSettings} from "./modules/settings.js";
 import {ageSystem} from "./modules/config.js"
 import ageSystemItemSheet from "./modules/sheets/ageSystemItemSheet.js"
 import ageSystemCharacterSheet from "./modules/sheets/ageSystemCharacterSheet.js"
 import {ageSystemActor} from "./modules/ageSystemActor.js"
 import {ageSystemItem} from "./modules/ageSystemItem.js"
 import * as AgeChat from "./modules/age-chat.js"
+import * as Setup from "./modules/setup.js"
 
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
@@ -17,7 +19,16 @@ async function preloadHandlebarsTemplates() {
 };
 
 Hooks.once("init", async function() {
+    const ageSystemText = `
+     ___   ____________   _____            __               
+    /   | / ____/ ____/  / ___/__  _______/ /____  ____ ___ 
+   / /| |/ / __/ __/     \\__ \\/ / / / ___/ __/ _ \\/ __ \`__ \\
+  / ___ / /_/ / /___    ___/ / /_/ (__  ) /_/  __/ / / / / /
+ /_/  |_\\____/_____/   /____/\\__, /____/\\__/\\___/_/ /_/ /_/ 
+                            /____/                          `;
+
     console.log("age-system | Entering a new AGE...");
+    console.log(ageSystemText);
 
     CONFIG.ageSystem = ageSystem;
 
@@ -35,6 +46,9 @@ Hooks.once("init", async function() {
 
     // Load partials for Handlebars
     preloadHandlebarsTemplates();
+
+    // Register System Settings
+    registerSystemSettings();
 
     // Useful concat Helper from Boilerplate system!
     Handlebars.registerHelper('concat', function() {
@@ -78,7 +92,6 @@ Hooks.on("renderageSystemItemSheet", function(ageSystemItemSheet) {
     windowHeader.textContent += ` [${game.i18n.localize("age-system." + itemType)}]`;
 });
 
+Hooks.on("renderageSystemCharacterSheet", (app, html, data) => Setup.charSheetSetup(app, html, data));
 Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
-Hooks.on("renderChatMessage", (app, html, data) => {
-    AgeChat.selectBlindAgeRoll(app, html, data);
-});
+Hooks.on("renderChatMessage", (app, html, data) => {AgeChat.selectBlindAgeRoll(app, html, data)});

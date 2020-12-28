@@ -38,7 +38,11 @@
                 "ballistic": 0,
                 "penalty": 0
             },
-            "resources": 4,
+            "resources": {
+                "base": 4,
+                "mod": 0
+            },
+            "currency": 0,
             "goals": "",
             "fear": 0,
             "horror": {
@@ -113,6 +117,16 @@
                     "value": 0,
                     "primary": false,
                     "lastUp": false
+                },
+                "magic":  {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
+                },
+                "cunn":  {
+                    "value": 0,
+                    "primary": false,
+                    "lastUp": false
                 }
             },
             "health": {
@@ -139,8 +153,8 @@
     },
     "Item": {
         "types": [
-            "focus",
             "equipment",
+            "focus",
             "weapon",
             "power",
             "talent",
@@ -193,50 +207,6 @@
                         "isActive": false
                     },
                     "itemActivation": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "acc": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "comm": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "cons": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "cun": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "dex": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "fight": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "int": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "magic": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "per": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "str": {
-                        "value": 0,
-                        "isActive": false
-                    },
-                    "will": {
                         "value": 0,
                         "isActive": false
                     },
@@ -296,6 +266,50 @@
                     "armorPenalty": {
                         "value": 0,
                         "isActive": false
+                    },
+                    "acc": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "comm": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "cons": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "cunn": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "dex": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "fight": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "int": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "magic": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "per": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "str": {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "will": {
+                        "value": 0,
+                        "isActive": false
                     }
                 }
             }
@@ -321,7 +335,8 @@
             "castTime": "minor",
             "causeDamage": false,
             "useFatigue": false,
-            "inputFatigueTN": false
+            "inputFatigueTN": false,
+            "activated": false
         },
         "talents": {
             "templates": ["description", "bonuses"]

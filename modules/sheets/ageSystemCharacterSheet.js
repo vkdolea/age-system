@@ -4,7 +4,8 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            width: 583,
+            // resizable: false,
+            width: 680,
             height: 800,
             classes: ["age-system", "sheet", "char"]
         });
@@ -52,6 +53,24 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     getData() {
         const data = super.getData();
         data.config = CONFIG.ageSystem;
+
+        // Set variable to show only relevant abilities on character sheet
+        data.config.abilities = {};
+        const ablSettings = data.config.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
+        for (const key in ablSettings) {
+            if (Object.hasOwnProperty.call(ablSettings, key)) {
+                for (const a in data.data.abilities) {
+                    if (Object.hasOwnProperty.call(data.data.abilities, a)) {
+                        if (key === a) {
+                            data.config.abilities[a] = data.data.abilities[a]
+                        };
+                    };
+                };
+            };
+        };
+        
+
+
         data.weapon = data.items.filter(i => i.type === "weapon");
         data.talent = data.items.filter(i => i.type === "talent");
         data.power = data.items.filter(i => i.type === "power");

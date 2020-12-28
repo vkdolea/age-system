@@ -32,19 +32,17 @@
                 </div>
 
                 {{!-- Focus Initial Value --}}
-                {{#if inChat}}
-                {{else}}
                 <div class="flexcol">
                     <label>{{localize "age-system.focusInput"}}</label>
-                    <input type="number" name="data.initialValue" value="{{data.initialValue}}" class="checkbox"/>
+                    <input type="number" name="data.initialValue" {{#if inChat}}disabled{{/if}} value="{{data.initialValue}}" class="checkbox"/>
                 </div>
-                {{/if}}
 
                 {{!-- Focus Modificator --}}
-                <div class="flexcol">
+                {{!-- FocusValue not in use - only initialValue --}}
+                {{!-- <div class="flexcol">
                     <label>{{localize "age-system.total"}}</label>
                     <div>{{data.focusValue}}</div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="item-card-desc">

@@ -1,58 +1,53 @@
 {{!-- Colorset defined in the highest section of the template --}}
 <form class="actor-sheet {{cssClass}} colorset-selection colorset-modern-blue" autocomplete="off">
     <div class="char-sheet">
-        <header class="sheet-header flexcol">
-
-            {{!-- <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="400" width="200"/> --}}
-            <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
-            <div>
-                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder={{localize "age-system.name"}}/></h1>        
-
-                {{!-- General Character Information --}}
-                <div class="age-header">  
-                    <div class="flexrow">
-                        <label for="">{{localize "age-system.age"}}</label>
-                        <input type="text" name="data.age" value="{{data.age}}">
-
-                        <label for="">{{localize "age-system.height"}}</label>
-                        <input type="text" name="data.height" value="{{data.height}}">
-                        
-                        <label for="">{{localize "age-system.weight"}}</label>
-                        <input type="text" name="data.weight" value="{{data.weight}}">  
-                    </div>
-
-                    <div class="flexrow">
-                        <label for="">{{localize "age-system.background"}}</label>
-                        <input type="text" name="data.background" value="{{data.background}}">
-
-                        <label for="">{{localize "age-system.socialClass"}}</label>
-                        <input type="text" name="data.socialClass" value="{{data.socialClass}}">
-
-                        <label for="">{{localize "age-system.profession"}}</label>
-                        <input type="text" name="data.profession" value="{{data.profession}}">          
-                    </div>
-
-                    <div class="flexrow">
-                        <label for="">{{localize "age-system.drive.drive"}}</label>
-                        <input type="text" name="data.drive.name" value="{{data.drive.name}}">          
-
-                        <label for="">{{localize "age-system.drive.quality"}}</label>
-                        <input type="text" name="data.drive.quality" value="{{data.drive.quality}}">          
-
-                        <label for="">{{localize "age-system.drive.downfall"}}</label>
-                        <input type="text" name="data.drive.downfall" value="{{data.drive.downfall}}">          
-                    </div>
-
-                    <div class="flexcol">
-                        {{!-- <label>{{localize "age-system.features"}}</label> --}}
-                        {{!-- I decided to remove this label to allow more space for notes :-) --}}
-                        {{editor content=data.features target="data.features" button=true owner=owner editable=editable}}
-                    </div>
-                </div>
-            </div>
-
+        <header class="sheet-header">
+            <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="400" width="200"/>
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>        
         </header>
 
+        {{!-- General Character Information --}}
+        <div class="age-header">  
+            <div class="flexrow">
+                <label for="">{{localize "age-system.age"}}</label>
+                <input type="text" name="data.age" value="{{data.age}}">
+
+                <label for="">{{localize "age-system.height"}}</label>
+                <input type="text" name="data.height" value="{{data.height}}">
+                
+                <label for="">{{localize "age-system.weight"}}</label>
+                <input type="text" name="data.weight" value="{{data.weight}}">  
+            </div>
+
+            <div class="flexrow">
+                <label for="">{{localize "age-system.background"}}</label>
+                <input type="text" name="data.background" value="{{data.background}}">
+
+                <label for="">{{localize "age-system.socialClass"}}</label>
+                <input type="text" name="data.socialClass" value="{{data.socialClass}}">
+
+                <label for="">{{localize "age-system.profession"}}</label>
+                <input type="text" name="data.profession" value="{{data.profession}}">          
+            </div>
+
+            <div class="flexrow">
+                <label for="">{{localize "age-system.drive.drive"}}</label>
+                <input type="text" name="data.drive.name" value="{{data.drive.name}}">          
+
+                <label for="">{{localize "age-system.drive.quality"}}</label>
+                <input type="text" name="data.drive.quality" value="{{data.drive.quality}}">          
+
+                <label for="">{{localize "age-system.drive.downfall"}}</label>
+                <input type="text" name="data.drive.downfall" value="{{data.drive.downfall}}">          
+            </div>
+
+            <div class="flexcol">
+                <div class="flexrow">
+                    <label for="char-features">{{localize "age-system.features"}}</label>
+                </div>
+                <textarea name="data.features" id="char-features">{{data.features}}</textarea>
+            </div>
+        </div>
 
         {{!-- Stats Block --}}
         <div class="flexrow">
@@ -77,7 +72,6 @@
             </div>
 
             {{!-- Conviction block --}}
-            {{#if data.useConviction}}
             <div class="flexcol general-stats">
                 <div class="top-row colorset-first-tier">{{localize "age-system.conviction"}}</div>
                 <div class="main-value">
@@ -89,10 +83,8 @@
                 </div>
                 <div class="bottom-row"></div>
             </div>
-            {{/if}}
 
             {{!-- Fatigue block --}}
-            {{#if data.useFatigue}}
             <div class="flexcol general-stats">
                 <div class="top-row colorset-first-tier">{{localize "age-system.fatigue"}}</div>
                 <div class="main-value">
@@ -106,7 +98,6 @@
                     <input type="text" disabled name="data.fatigue.status" value="{{data.fatigue.status}}" data-dtype="Number" />
                 </div>
             </div>
-            {{/if}}
 
             {{!-- Speed block --}}
             <div class="flexcol general-stats">
@@ -150,7 +141,6 @@
             </div>
 
             {{!-- Toughness block --}}
-            {{#if data.useToughness}}
             <div class="flexcol general-stats">
                 <div class="top-row colorset-first-tier">{{localize "age-system.toughness"}}</div>
                 <input type="number" disabled class="main-value" name="data.armor.toughness.total" value="{{data.armor.toughness.total}}" data-dtype="Number" />
@@ -166,36 +156,6 @@
                 </div>
                 <div class="bottom-row"></div>
             </div>
-            {{/if}}
-
-            {{!-- Currency/Resource/Income block --}}
-            {{#if data.useCurrency}}
-            <div class="flexcol general-stats">
-                <div class="top-row colorset-first-tier">{{localize "SETTINGS.wealthTypeCurrency"}}</div>
-                <div class="main-value flexcol">
-                    <input type="number" disabled class="main-value" name="data.resources.base" value="{{data.resources.base}}" data-dtype="Number" />
-                </div>
-                <div class="stat-modifiers flexrow no-flexwrap">
-                </div>
-                <div class="bottom-row"></div>
-            </div>
-            {{else}}
-            <div class="flexcol general-stats">
-                <div class="top-row colorset-first-tier">{{#if data.useResources}}{{localize "SETTINGS.wealthTypeResources"}}{{/if}}{{#if data.useIncome}}{{localize "SETTINGS.wealthTypeIncome"}}{{/if}}</div>
-                <input type="number" disabled class="main-value" name="data.resources.total" value="{{data.resources.total}}" data-dtype="Number" />
-                <div class="stat-modifiers flexcol">
-                    <div class="flexrow no-flexwrap">
-                        <input type="number" class="" name="data.resources.base" value="{{data.resources.base}}" data-dtype="Number" />
-                        <label class="">{{localize "age-system.base"}}</label>
-                    </div>
-                    <div class="flexrow no-flexwrap">
-                        <input type="number" class="" name="data.resources.mod" value="{{data.resources.mod}}" data-dtype="Number" />
-                        <label class="">{{localize "age-system.mod"}}</label>
-                    </div>
-                </div>
-                <div class="bottom-row"></div>
-            </div>
-            {{/if}}
 
             {{!-- Armor block --}}
             <div class="flexcol general-stats">
@@ -217,36 +177,16 @@
                 <div class="main-value">
                     <input type="number" name="data.health.value" value="{{data.health.value}}" data-dtype="Number" />
                 </div>
-                <div class="flexcol stat-modifiers flex-align-center no-flexwrap">
+                <div class="flexrow flex-align-center no-flexwrap">
                     <div class="flexcol no-flexwrap">
+                        <input type="number" number-type="five-digits" name="data.health.set" value="{{data.health.set}}" data-dtype="Number" />
                         {{#when data.health.set 'noteq' data.health.max}}
                         <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="data.health.max" value="{{data.health.max}}" data-dtype="Number" />
                         {{/when}}
-                        <input type="number" number-type="five-digits" name="data.health.set" value="{{data.health.set}}" data-dtype="Number" />
                     </div>
                     <label>{{localize "age-system.maximum"}}</label>
                 </div>
-            </div>
-
-            {{!-- Power Points block --}}
-            {{#if data.usePowerPoints}}
-            <div class="flexcol general-stats">
-                <div class="top-row colorset-first-tier">{{localize "age-system.powerPoints"}}</div>
-                <div class="main-value">
-                    <input type="number" name="data.powerPoints.value" value="{{data.powerPoints.value}}" data-dtype="Number" />
-                </div>
-                <div class="flexcol stat-modifiers flex-align-center no-flexwrap">
-                    <div class="flexcol no-flexwrap">
-                        {{#when data.powerPoints.set 'noteq' data.powerPoints.max}}
-                        <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="data.powerPoints.max" value="{{data.health.max}}" data-dtype="Number" />
-                        {{/when}}
-                        <input type="number" number-type="five-digits" name="data.powerPoints.set" value="{{data.powerPoints.set}}" data-dtype="Number" />
-                    </div>
-                    <label>{{localize "age-system.maximum"}}</label>
-                </div>
-            </div> 
-            {{/if}}
-
+            </div>          
         </div>
 
         {{!-- Gaming Assist Bar --}}
@@ -324,8 +264,8 @@
             <div class="col-1">
 
                 {{!-- Attributes' Blocks --}}
-                {{#each config.abilities as |name type|}}
-                <div class="ability-box flexcol">
+                {{#each data.abilities as |name type|}}
+                <div class="ability-box flexcol {{type}}">
                     <div class="flexrow abl-header colorset-first-tier feature-controls" data-abl-id="{{type}}">
                         <div class="abl-name">
                             <a class="roll-ability feature-controls" data-abl-id="{{type}}"><i class="fas fa-dice"></i></a>

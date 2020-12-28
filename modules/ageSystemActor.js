@@ -6,6 +6,37 @@ export class ageSystemActor extends Actor {
         const actorData = this.data;
         const data = actorData.data;
         
+        // Check if Conviction is in use
+        data.useConviction = game.settings.get("age-system", "useConviction");
+
+        // Check if Toughness is in use
+        data.useToughness = game.settings.get("age-system", "useToughness");
+
+        // Check if Fatigue is in use
+        data.useFatigue = game.settings.get("age-system", "useFatigue");
+
+        // Check if Toughness is in use
+        data.useToughness = game.settings.get("age-system", "useToughness");
+
+        // Check if Power Points is in use
+        data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
+
+        // Retrieve wealth mode
+        data.useResource = data.useIncome = data.useCurrency = false;
+        const wealthMode = game.settings.get("age-system", "wealthType");
+        switch (wealthMode) {
+            case "income":
+                data.useIncome = true;
+                break;
+            case "resources":
+                data.useResources = true;
+                break;
+            case "currency":
+                data.useCurrency = true;
+            default:
+                break;
+        };
+
         if (actorData.type === "char") {
             data.ownedBonus = this.ownedItemsBonus();
             const bonuses = data.ownedBonus;
@@ -79,7 +110,7 @@ export class ageSystemActor extends Actor {
 
             /*--- Calculate Max Power Points ---------------------*/
             if (bonuses != null && bonuses.maxPowerPoints) {
-                data.powerPoints.mod = Number(bonuses.maxHealth.totalMod);
+                data.powerPoints.mod = Number(bonuses.maxPowerPoints.totalMod);
             } else {
                 data.powerPoints.mod = 0;
             };
@@ -140,12 +171,25 @@ export class ageSystemActor extends Actor {
         //     };
         // };
 
+        /*--- Add bonuses to Abilities -----------------------*/
+        // Also create abl.total parameters
+        this.setAbilitiesWithMod(data, actorData);
+        /*----------------------------------------------------*/
+
         // Calcualtes total Initiative
         data.initiative = data.initiativeMod + data.abilities.dex.total - data.armor.penalty;
-    }
+
+        // Calculate resources/currency
+        if (data.useCurrency) {
+            data.resources.mod = 0;
+        };
+        data.resources.total = data.resources.base + Number(data.resources.mod);
+    };
 
     setAbilitiesWithMod(data) {
-        const settingAbls = CONFIG.ageSystem.abilities;
+        // const ablChoice = game.settings.get("age-system", "abilitySelection");
+        // const settingAbls = CONFIG.ageSystem.abilitiesSettings[ablChoice];
+        const settingAbls = this.data.data.abilities;
         for (const ablKey in settingAbls) {
             if (settingAbls.hasOwnProperty(ablKey)) {
                 data.abilities[ablKey].total = Number(data.abilities[ablKey].value);

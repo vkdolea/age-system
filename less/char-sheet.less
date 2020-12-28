@@ -6,25 +6,47 @@
 .age-system.sheet.char {
     font-variant: small-caps;
 
-    .resource-box {
-        display: flex;
-        flex-direction: column;
-    }
+    .sheet-header {
+        height: 100%;
 
-    .age-header {
-        margin-bottom: 4px;
-        label {
-            background-color: @modern-blue;
-            color: white;
-            white-space: nowrap;
-            max-width: fit-content;
-            padding: 4px;
-            flex: 1 min-content fit-content;
+        h1.charname {
+            margin-bottom: 4px;
+            >input[name="name"] {
+                margin: 0px;
+                padding: 10px 5px;
+                width: 100%;
+            }
+        }
+        img {
+            height: 235px;
+            width: 150px;
+            object-fit: contain;
+            border: 0px;
+            margin-bottom: 4px;
+        }
+
+        .age-header {
+            margin-bottom: 4px;
+            label {
+                background-color: @modern-blue;
+                color: white;
+                white-space: nowrap;
+                max-width: fit-content;
+                padding: 4px;
+                flex: 1 min-content fit-content;
+            }
+            .editor {
+                height: 105px;
+                padding: 4px;
+                border: 1px solid grey;
+                border-radius: 4px;
+            };
         }
     }
 
-    #char-features {
-        resize: none;
+    .resource-box {
+        display: flex;
+        flex-direction: column;
     }
 
     .grid-resp {
@@ -73,7 +95,11 @@
                 height: 16px;
             }
 
-            input[number-type="five-digits"] {
+            input[type="number"][number-type="five-digits"],
+            input[name="data.powerPoints.set"],
+            input[name="data.powerPoints.max"],
+            input[name="data.health.set"],
+            input[name="data.health.max"] {
                 max-width: 50px;
                 min-width: 50px;
                 height: 16px;
@@ -116,10 +142,10 @@
     .col-1 {
         max-width: 200px;
         .ability-box:last-of-type {
-            border-bottom: solid black 1px;
+            border-bottom: solid grey 1px;
         }
         .ability-box {
-            border: solid black 1px;
+            border: solid grey 1px;
             border-bottom: none;
             .abl-header {
                 align-items: center;
@@ -138,8 +164,8 @@
             input[type="number"].abl-value {
                 border-radius: 0%;
                 border: none;
-                border-left: 1px solid black;
-                border-bottom: 1px solid black;
+                border-left: 1px solid grey;
+                border-bottom: 1px solid grey;
                 height: max-content;
                 width: 23px;
                 max-width: 23px;

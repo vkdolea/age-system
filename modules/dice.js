@@ -1,5 +1,6 @@
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
 export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor) {
+
     // Set roll mode
     const rMode = setBlind(event);
     
@@ -22,7 +23,8 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor) {
         if (typeof focusRolled === "object") {
             rollData = {
                 ...rollData,
-                focus: focusRolled.data.data.focusValue,
+                // data.focusValue not in use anymore, using only data.initialValue
+                focus: focusRolled.data.data.initialValue,
                 focusName: focusRolled.name,
                 focusId: focusRolled._id
             };
@@ -39,8 +41,13 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor) {
     };
 
     // Transfer rolled item (if any) to chat message
+    // Also checks if Item has Activation Mod
     if (itemRolled !== null) {
         rollData.itemId = itemRolled._id;
+        if (itemRolled.data.data.itemMods.itemActivation.isActive) {
+            rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
+            rollFormula += " + @activationMod"
+        }
     } else {
         rollData.itemId = null;
     };
@@ -59,12 +66,19 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor) {
         rollFormula = `${rollFormula} + @armorPenalty`;
     };   
 
+    // Check if Fatigue is configured
+    const usingFatigue = game.settings.get("age-system", "useFatigue");
+
     // Check for Fatigue penalties
     const fatigue = actor.data.data.fatigue;
-    if (aim.value > 0) {
-        rollData.fatigue = -fatigue.value;
-        rollFormula = `${rollFormula} + @fatigue`;
-    };
+    
+    // Apply Fatigue penalties, if in use
+    if (usingFatigue) {
+        if (aim.value > 0) {
+            rollData.fatigue = -fatigue.value;
+            rollFormula = `${rollFormula} + @fatigue`;
+        };
+    }
 
     // Check Guard Up penalties
     // Here it checks if Guard Up and Defend are checked - when both are checked, the rule is use none
@@ -197,32 +211,54 @@ export function itemDamage(event, item) {
         speaker: ChatMessage.getSpeaker()
     };
 
-
+    // Check if damage source has a non 0 portion on its parameters
     if (constDmg !== 0) {damageFormula = `${damageFormula} + @damageMod`}
 
     const dmgAbl = item.data.data.dmgAbl;
-    let ablMod = null;
-    let allOutAttackMod = null;
-    let actorDmgMod = null;
+    // let ablMod = null;
+    // let allOutAttackMod = null;
+    // let actorDmgMod = null;
+    let rollData = {
+        diceQtd: nrDice,
+        diceSize: diceSize,
+        damageMod: constDmg
+    };
+
 
     if (item.isOwned) {
-        ablMod = item.actor.data.data.abilities[dmgAbl].total;
+
+        // Adds owner's Ability to damage
+        const ablMod = item.actor.data.data.abilities[dmgAbl].total;
         damageFormula = `${damageFormula} + @abilityMod`;
+        rollData.abilityMod = ablMod;
         messageData.flavor += ` | ${damageToString(ablMod)}, ${game.i18n.localize("age-system." + dmgAbl)}`
 
+        // Check if Item has Mod to add to its own Damage
+        if (item.data.data.itemMods.itemDamage.isActive) {
+            const itemDmg = item.data.data.itemMods.itemDamage.value;
+            damageFormula = `${damageFormula} + @itemBonus`;
+            rollData.itemBonus = itemDmg;
+            messageData.flavor += ` | ${damageToString(itemDmg)}, ${game.i18n.localize("age-system.itemDmgMod")}`;
+        };
+       
+
         // Check if item onwer has items which adds up to general damage
-        if (item.actor.data.ownedBonus != null && item.actor.data.ownedBonus.actorDamage) {
-            actorDmgMod = item.actor.data.ownedBonus.actorDamage.totalMod;
-            damageFormula = `${damageFormula} + @generalDmgMod`
+        if (item.actor.data.data.ownedBonus != null && item.actor.data.data.ownedBonus.actorDamage) {
+            const actorDmgMod = item.actor.data.data.ownedBonus.actorDamage.totalMod;
+            damageFormula = `${damageFormula} + @generalDmgMod`;
+            rollData.generalDmgMod = actorDmgMod;
             messageData.flavor += ` | ${damageToString(actorDmgMod)}, ${game.i18n.localize("age-system.itemDmgMod")}`;
         };
 
+        // Adds extra damage for All-Out Attack maneuver
         if (item.actor.data.data.allOutAttack.active) {
-            allOutAttackMod = item.actor.data.data.allOutAttack.dmgBonus;
-            damageFormula = `${damageFormula} + @allOutAttack`
+            const allOutAttackMod = item.actor.data.data.allOutAttack.dmgBonus;
+            damageFormula = `${damageFormula} + @allOutAttack`;
+            rollData.allOutAttack = allOutAttackMod;
             messageData.flavor += ` | ${damageToString(allOutAttackMod)}, ${game.i18n.localize("age-system.allOutAttack")}`;                
         };
 
+        // Adds extra damage for CTRL + click (+1D6) or CTRL + ALT + click (+2D6)
         if (event.ctrlKey) {
             if (event.altKey) {
                 damageFormula = `${damageFormula} + 2d6`
@@ -234,14 +270,14 @@ export function itemDamage(event, item) {
         };
     };
 
-    let rollData = {
-        diceQtd: nrDice,
-        diceSize: diceSize,
-        damageMod: constDmg,
-        abilityMod: ablMod,
-        generalDmgMod: actorDmgMod,
-        allOutAttack: allOutAttackMod
-    };
+    // let rollData = {
+    //     diceQtd: nrDice,
+    //     diceSize: diceSize,
+    //     damageMod: constDmg,
+    //     abilityMod: ablMod,
+    //     generalDmgMod: actorDmgMod,
+    //     allOutAttack: allOutAttackMod
+    // };
 
     let dmgRoll = new Roll(damageFormula, rollData).roll();
 
