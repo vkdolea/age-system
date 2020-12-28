@@ -224,6 +224,9 @@ export function itemDamage(event, item) {
 
     if (item.isOwned) {
 
+        // Adds up Flavor text for item damage type
+        messageData.flavor += ` [${game.i18n.localize(`age-system.${item.data.data.dmgType}`)}] [${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}]`;
+
         // Adds owner's Ability to damage
         const ablMod = item.actor.data.data.abilities[dmgAbl].total;
         damageFormula = `${damageFormula} + @abilityMod`;
