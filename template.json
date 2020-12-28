@@ -338,7 +338,7 @@
             "inputFatigueTN": false,
             "activated": false
         },
-        "talents": {
+        "talent": {
             "templates": ["description", "bonuses"]
         },
         "stunts": {
