@@ -91,31 +91,37 @@ ageSystem.bonusTypes = {
     armorPenalty: "age-system.bonus.armorPenaltyBns"
 };
 
-// Initializing variable
+// Initializing variable to load focus Compendiaum
 ageSystem.focus = [];
 
-// Hook to update compendium list when Foundry VTT is 'ready'
-Hooks.on("ready", function() {
-    ageSystem.focus = compendiumList("age-system.focus");
-});
+// // Hook to update compendium list when Foundry VTT is 'ready'
+// Hooks.once("ready", function() {
+//     let setCompendium = game.settings.get("age-system", "masterFocusCompendium");
+//     ageSystem.focus = compendiumList(setCompendium);
+//     // ageSystem.focus = compendiumList("age-system.focus");
+// });
 
 // If Compendia are updated, then compendiumList is gathered once again
 Hooks.on("renderCompendium", function() {
-    ageSystem.focus = compendiumList("age-system.focus");
+    let setCompendium = game.settings.get("age-system", "masterFocusCompendium");
+    ageSystem.focus = compendiumList(setCompendium);
+    // ageSystem.focus = compendiumList("age-system.focus");
 });
 
 // This function looks at given Compendium and returns an array with object containing id and name for all entries
-function compendiumList(compendiumName) {
-    let dataPack = game.packs.get(compendiumName);
-    let dataList = [];
-    dataPack.getIndex().then(function(){
-        for (let i = 0; i < dataPack.index.length; i++) {
-            const entry = dataPack.index[i]; // It is necessary to store entry's name and id, to avoid messing up with existing Focus when Compendium is updated! Create array of objectes array = [{id: "xxx", name: "yyy"} {...}] - check if my implementation is correct
-            dataList[i] = {
-                _id: entry._id,
-                name: entry.name
-            };   
-        }
-    });
-    return dataList;
-}
+// export function compendiumList(compendiumName) {
+//     let dataPack = game.packs.get(compendiumName);
+//     let dataList = [];
+//     let i = 0;
+//     dataPack.getIndex().then(function(){
+//         for (let i = 0; i < dataPack.index.length; i++) {
+//             const entry = dataPack.index[i]; // It is necessary to store entry's name and id, to avoid messing up with existing Focus when Compendium is updated! Create array of objectes array = [{id: "xxx", name: "yyy"} {...}] - check if my implementation is correct
+//             if(entry)
+//                 dataList[i] = {
+//                     _id: entry._id,
+//                     name: entry.name
+//                 };   
+//         }
+//     });
+//     return dataList;
+// }

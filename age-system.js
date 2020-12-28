@@ -1,4 +1,4 @@
-import {registerSystemSettings} from "./modules/settings.js";
+import * as Settings from "./modules/settings.js";
 import {ageSystem} from "./modules/config.js"
 import ageSystemItemSheet from "./modules/sheets/ageSystemItemSheet.js"
 import ageSystemCharacterSheet from "./modules/sheets/ageSystemCharacterSheet.js"
@@ -48,7 +48,7 @@ Hooks.once("init", async function() {
     preloadHandlebarsTemplates();
 
     // Register System Settings
-    registerSystemSettings();
+    Settings.registerSystemSettings();
 
     // Useful concat Helper from Boilerplate system!
     Handlebars.registerHelper('concat', function() {
@@ -79,8 +79,21 @@ Hooks.once("init", async function() {
 
 });
 
+Hooks.once("ready", function() {
+    // Register System Settings related do Focus Compendium
+    Settings.loadCompendiaSettings();
+    const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
+    ageSystem.focus = Settings.compendiumList(setCompendium);
+});
+
+// If Compendia are updated, then compendiumList is gathered once again
+Hooks.on("renderCompendium", function() {
+    const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
+    ageSystem.focus = Settings.compendiumList(setCompendium);
+    // ageSystem.focus = compendiumList("age-system.focus");
+});
+
 Hooks.on("renderageSystemItemSheet", function(ageSystemItemSheet) {
-    
     // Add item type in the title bar within brackets
     const itemType = ageSystemItemSheet.item.type;
     let itemWindowId = `item-${ageSystemItemSheet.item._id}`;

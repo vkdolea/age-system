@@ -140,4 +140,61 @@ export const registerSystemSettings = function() {
     onChange:()=>{
       window.location.reload(!1)}
   });
-};  
+};
+
+export const loadCompendiaSettings = function() {
+  /**
+   * Select compendium to list focus
+   */
+  game.settings.register("age-system", "masterFocusCompendium", {
+    name: "SETTINGS.masterFocusCompendium",
+    hint: "SETTINGS.masterFocusCompendiumHint",
+    scope: "global",
+    config: true,
+    default: "age-system.focus",
+    type: String,
+    choices: allCompendia(),
+    onChange:()=>{
+      window.location.reload(!1)}
+  });
+};
+
+// Creates the Options object with all compendia in alphabetic order
+function allCompendia() {
+  let list = {};
+  let compendia = game.packs.map(e => e);
+  compendia = compendia.sort(function(a, b) {
+    const nameA = a.title.toLowerCase();
+    const nameB = b.title.toLowerCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  for (let c = 0; c < compendia.length; c++) {
+    const comp = compendia[c];
+    list[comp.collection] = comp.title;
+  };
+  return list
+};
+
+// Creates a list of entries in the Compendium (name and _id)
+export function compendiumList(compendiumName) {
+  let dataPack = game.packs.get(compendiumName);
+  let dataList = [];
+  let i = 0;
+  dataPack.getIndex().then(function(){
+  for (let i = 0; i < dataPack.index.length; i++) {
+    const entry = dataPack.index[i];
+    if(entry)
+      dataList[i] = {
+        _id: entry._id,
+        name: entry.name
+      };   
+    }
+  });
+  return dataList;
+};
