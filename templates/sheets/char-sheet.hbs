@@ -324,19 +324,19 @@
             <div class="col-1">
 
                 {{!-- Attributes' Blocks --}}
-                {{#each config.abilities as |name type|}}
-                <div class="ability-box flexcol">
+                {{#each data.abilities as |name type|}}
+                <div class="ability-box flexcol {{type}}">
                     <div class="flexrow abl-header colorset-first-tier feature-controls" data-abl-id="{{type}}">
                         <div class="abl-name">
                             <a class="roll-ability feature-controls" data-abl-id="{{type}}"><i class="fas fa-dice"></i></a>
                             <label for="data.abilities.{{type}}.value">{{localize (concat "age-system." type)}}</label>
                         </div>                    
                         <input type="checkbox" name="data.abilities.{{type}}.lastUp" {{checked name.lastUp}} class="last-up" />
-                        <input type="number" class="abl-value" name="data.abilities.{{type}}.value" value="{{name.value}}" data-dtype="Number" />
                         {{!-- Value with modifiers applied --}}
                         {{#when name.value 'noteq' name.total}}
                         <input type="number" class="abl-value colorset-second-tier" disabled name="data.abilities.{{type}}.total" value="{{name.total}}" data-dtype="Number" />
                         {{/when}}
+                        <input type="number" class="abl-value" name="data.abilities.{{type}}.value" value="{{name.value}}" data-dtype="Number" />
                     </div>
                     <div class="owned-focus flexrow">
                         {{#each ../focus as |item|}}

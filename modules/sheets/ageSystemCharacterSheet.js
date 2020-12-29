@@ -68,8 +68,6 @@ export default class ageSystemCharacterSheet extends ActorSheet {
                 };
             };
         };
-        
-
 
         data.weapon = data.items.filter(i => i.type === "weapon");
         data.talent = data.items.filter(i => i.type === "talent");

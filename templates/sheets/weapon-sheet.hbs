@@ -96,9 +96,22 @@
             {{!-- Active Bonuses --}}
             {{> "systems/age-system/templates/partials/active-bonuses.hbs"}}        
 
+
+            {{#if inChat}}
+            {{!-- Description --}}
+            <div class="item-card-desc">
+                <label>{{localize "age-system.item.desc"}}</label>
+                {{editor content=data.longDesc target="data.longDesc" button=false owner=owner editable=editable}}
+            </div>
+            {{/if}}
+
         </div>
 
+        {{#if inChat}}
+        {{else}}
+        {{!-- Tab Control --}}
         {{> "systems/age-system/templates/partials/bonus-desc-sheet.hbs"}}
+        {{/if}}
 
     </div>
 </form>

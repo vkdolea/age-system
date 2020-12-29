@@ -98,6 +98,7 @@
   border: none;
   margin-right: 4px;
   max-width: fit-content;
+  white-space: nowrap;
 }
 .age-system.item .focus .item-card-stats,
 .age-system.item .power .item-card-stats,

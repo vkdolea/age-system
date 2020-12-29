@@ -55,14 +55,20 @@
                 <div class="flexrow">
                     {{#if inChat}}
                     {{else}}
-                    <label>{{localize "age-system.useFatigue"}}</label>
-                    <input type="checkbox" name="data.useFatigue" {{checked data.useFatigue}} class="checkbox"/>
+                    <div class="flexcol">
+                        <label>{{localize "age-system.useFatigue"}}</label>
+                        <input type="checkbox" name="data.useFatigue" {{checked data.useFatigue}} class="checkbox"/>
+                    </div>
                     {{/if}}
                     {{#if data.useFatigue}}
-                    <label class="use-fatigue">{{localize "age-system.inputFatigueTN"}}:</label>
-                    <input class="use-fatigue" type="checkbox" name="data.inputFatigueTN" {{checked data.inputFatigueTN}} class="checkbox"/>
-                    <label class="use-fatigue">{{localize "age-system.fatigueTN"}}:</label>
-                    <input class="use-fatigue" type="number" name="data.fatigueTN" value="{{data.fatigueTN}}" data-dtype="Number" />                   
+                    <div class="flexcol">
+                        <label class="use-fatigue">{{localize "age-system.inputFatigueTN"}}:</label>
+                        <input class="use-fatigue" type="checkbox" name="data.inputFatigueTN" {{checked data.inputFatigueTN}} class="checkbox"/>
+                    </div>
+                    <div class="flexcol">
+                        <label class="use-fatigue">{{localize "age-system.fatigueTN"}}:</label>
+                        <input class="use-fatigue" type="number" name="data.fatigueTN" value="{{data.fatigueTN}}" data-dtype="Number" />                   
+                    </div>
                     {{/if}}
                 </div>
 
@@ -110,22 +116,25 @@
                 {{> "systems/age-system/templates/partials/dmg-block-sheet.hbs"}}
                 {{/if}}
             </div>
-                        
+
             {{!-- Active Bonuses --}}
-            <div class="flexrow item-card-stats">
-                {{!-- Active Bonuses --}}
-                {{#each data.itemMods as |item|}}
-                {{#if item.isActive}}
-                    <div class="item-box flexcol">
-                        <label>{{localize (concat "age-system.bonus." @key)}}</label>
-                        <span>{{item.value}}</span>
-                    </div>
-                {{/if}}
-                {{/each}}
+            {{> "systems/age-system/templates/partials/active-bonuses.hbs"}}
+
+            {{#if inChat}}
+            {{!-- Description --}}
+            <div class="item-card-desc">
+                <label>{{localize "age-system.item.desc"}}</label>
+                {{editor content=data.longDesc target="data.longDesc" button=false owner=owner editable=editable}}
             </div>
+            {{/if}}
+
         </div>
- 
+
+        {{#if inChat}}
+        {{else}}
+        {{!-- Tab Control --}}
         {{> "systems/age-system/templates/partials/bonus-desc-sheet.hbs"}}
+        {{/if}}
 
     </div>
 </form>
