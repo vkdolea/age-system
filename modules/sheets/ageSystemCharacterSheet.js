@@ -54,30 +54,39 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         const data = super.getData();
         data.config = CONFIG.ageSystem;
 
-        // Set variable to show only relevant abilities on character sheet
-        data.config.abilities = {};
-        const ablSettings = data.config.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
-        for (const key in ablSettings) {
-            if (Object.hasOwnProperty.call(ablSettings, key)) {
-                for (const a in data.data.abilities) {
-                    if (Object.hasOwnProperty.call(data.data.abilities, a)) {
-                        if (key === a) {
-                            data.config.abilities[a] = data.data.abilities[a]
-                        };
-                    };
-                };
-            };
-        };
+        // Order itens into alphabetic order
+        const itemSorted = data.items.sort(function(a, b) {
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+        });
 
-        data.weapon = data.items.filter(i => i.type === "weapon");
-        data.talent = data.items.filter(i => i.type === "talent");
-        data.power = data.items.filter(i => i.type === "power");
-        data.focus = data.items.filter(i => i.type === "focus");
-        data.stunts = data.items.filter(i => i.type === "stunts");
-        data.equipment = data.items.filter(i => i.type === "equipment");
-        data.honorifics = data.items.filter(i => i.type === "honorifics");
-        data.relationship = data.items.filter(i => i.type === "relationship");
-        data.membership = data.items.filter(i => i.type === "membership");
+        data.weapon = itemSorted.filter(i => i.type === "weapon");
+        data.talent = itemSorted.filter(i => i.type === "talent");
+        data.power = itemSorted.filter(i => i.type === "power");
+        data.focus = itemSorted.filter(i => i.type === "focus");
+        data.stunts = itemSorted.filter(i => i.type === "stunts");
+        data.equipment = itemSorted.filter(i => i.type === "equipment");
+        data.honorifics = itemSorted.filter(i => i.type === "honorifics");
+        data.relationship = itemSorted.filter(i => i.type === "relationship");
+        data.membership = itemSorted.filter(i => i.type === "membership");
+
+        // data.weapon = data.items.filter(i => i.type === "weapon");
+        // data.talent = data.items.filter(i => i.type === "talent");
+        // data.power = data.items.filter(i => i.type === "power");
+        // data.focus = data.items.filter(i => i.type === "focus");
+        // data.stunts = data.items.filter(i => i.type === "stunts");
+        // data.equipment = data.items.filter(i => i.type === "equipment");
+        // data.honorifics = data.items.filter(i => i.type === "honorifics");
+        // data.relationship = data.items.filter(i => i.type === "relationship");
+        // data.membership = data.items.filter(i => i.type === "membership");
+
 
         // Return data to the sheet
         return data;
