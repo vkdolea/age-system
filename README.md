@@ -27,16 +27,22 @@ This is a work in progress, not meant to be actualy used during normal play. Rev
 14. Add Alt + Click on test/damage rolls to add modifiers (constants or extra die).
 15. Add Dynamic Effects support to Actors.
 16. ~~Initiative roll implemented as `3d6 + Dexterity - Armor Penalty + Initiative Mod` (the later accessed by character sheet).~~
-17. *Add support to Organizations (as Actors).*
+17. Add support to Organizations (as Actors).
+18. Add option for weapons and powers to cause damage without taking Ability into consideration
 
 ### Known bugs
-1. Fix Item rolls on Chat (fix the Description/Modificators visualization).
+1. ~~Fix Item rolls on Chat (fix the Description/Modificators visualization).~~
 2. When adding `<button></button>` on Chat Message, clicking it causes Foundry client to refresh (currently, buttons a made out of div/span).
 3. ~~Dice so Nice is causing error when other player roll the dice - Dice so Nice can not find the `user.color`. It seems `user` data is incomplete.~~
 4. When selecting and Focus on the list instead of typing, 2 error messages appear on console - it seems FoundryVTT expects `<input type="text"/>` to be filled in by typing only. No code breaking outcomes, tho.
 5. Shift + Click on Focus context menu to roll with another Ability won't trigger GM roll.
 
 ## Change log
+
+### 2020.12.29
+- Added functional color schemes for Modern AGE, Fantasy AGE, Threefold and Dragon AGE books.
+- Fixed bug causing Talent item to be reset when dragging it to character sheet.
+- Fixed bug causing Ability values disappearing from character sheet.
 
 ### 2020.12.28
 - Added damage type (stun, wound, impact, ballistic, penetrating) on damage roll char card.
