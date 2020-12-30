@@ -90,28 +90,27 @@ Hooks.once("ready", function() {
 Hooks.on("renderCompendium", function() {
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.compendiumList(setCompendium);
-    // ageSystem.focus = compendiumList("age-system.focus");
 });
 
 Hooks.on("renderageSystemItemSheet", (app, html, data) => {
-    // Add color scheme to item sheet
-    Setup.addColorScheme(html);
 
     // Add item type on title bar
     Setup.nameItemSheetWindow(app);
 });
 
 Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
+
     // Hide non used Abilities and order Ability Boxes in alphabeticaly
     Setup.charSheetSetup(app, html, data);
-    
-    // Add color scheme to charactersheet
-    Setup.addColorScheme(html);
 });
+
 Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
+
 Hooks.on("renderChatMessage", (app, html, data) => {
+
     // Hide chat message when rolling to GM
     AgeChat.selectBlindAgeRoll(app, html, data);
+
     // Add color scheme to chat message
     Setup.addColorScheme(html);
 });

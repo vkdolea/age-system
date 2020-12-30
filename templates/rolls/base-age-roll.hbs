@@ -5,7 +5,7 @@
 
             <div>
                 <h3 class="action-details colorset-first-tier">
-                    {{owner.name}} {{localize "age-system.settings.flavorTextRoll"}} {{localize (concat "age-system." rollInput.ablCode)}}
+                    {{owner.name}} {{localize "age-system.settings.flavorTextRoll"}} {{#if rollInput.resourcesRoll}}{{rollInput.resourcesName}}{{else}} {{localize (concat "age-system." rollInput.ablCode)}}{{/if}}
                     {{#if rollInput.focusName}} ({{rollInput.focusName}}){{/if}}
                 </h3>
                 <div class="dice-show trait-test flexrow">
@@ -33,10 +33,18 @@
                     <div class="line-header">{{localize "age-system.settings.stuntPoints"}}</div>
                     <div class="line-value">{{#if ageRollSummary.stunt}}{{ageRollSummary.dice.d3}}{{else}}-{{/if}}</div>
                 </div>
+                {{#if rollInput.resourcesRoll}}
+                <div class="flexrow roll-mod">
+                    <div class="line-header">{{rollInput.resourcesName}}</div>
+                    <div class="line-value">{{rollInput.resources}}</div>
+                </div>            
+                {{/if}}
+                {{#if rollInput.ablCode}}
                 <div class="flexrow roll-mod">
                     <div class="line-header">{{localize (concat "age-system." rollInput.ablCode)}}</div>
                     <div class="line-value">{{rollInput.ability}}</div>
                 </div>
+                {{/if}}
                 {{#if rollInput.focusName}}
                 <div class="flexrow roll-mod">
                     <div class="line-header">{{rollInput.focusName}}</div>
@@ -75,25 +83,30 @@
                 {{/if}}               
             </div>
 
-            {{#if rollInput.itemId}}
             <div class="age-chat-buttons flexrow flex-justify-center flex-align-center">
+                {{#if rollInput.itemEntity.data.data.hasDamage}}
                 <a class="age-button roll-damage" title="{{localize "age-system.rollDamage"}}">
                     <div class="flexrow flex-justify-center flex-align-center">
                         <div>{{localize "age-system.rollDamage"}}</div>
                         <i class="fas fa-fist-raised"></i>
                     </div>
                 </a>
+                {{/if}}
+
+                {{#if rollInput.usingFatigue}}
+                {{#if rollInput.itemEntity.data.data.hasFatigue}}
                 <a class="age-button roll-fatigue flexrow" title="{{localize "age-system.rollFatigue"}}">
                     <div class="flexrow flex-justify-center flex-align-center">
                         <div>{{localize "age-system.rollFatigue"}} </div>
                         <i class="fas fa-head-side-cough"></i>
                     </div>
                 </a>
+                {{/if}}
+                {{/if}}
                 {{!-- <button class="roll-damage">{{localize "age-system.rollDamage"}}</button> --}}
                 {{!-- <button class="roll-fatigue">{{localize "age-system.rollFatigue"}}</button> --}}
                 {{!-- <button>teste</button> --}}
             </div>
-            {{/if}}
             
         </div>
         <div class="blind-roll-card flexcol roll-card">

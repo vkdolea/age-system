@@ -65,6 +65,7 @@ export class ageSystemItem extends Item {
         }
 
         data.hasDamage = this.hasDamage();
+        data.hasFatigue = this.hasFatigue();
 
         /** Damage Type table:
          *  damageType
@@ -99,9 +100,22 @@ export class ageSystemItem extends Item {
         return false;
     };
 
+    // Check if Item requires Fatigue roll to be used
+    hasFatigue() {
+        const type = this.type;
+        if (type === "power") {return this.data.data.useFatigue};
+        return false;
+    };
+
     rollDamage(event) {
         if (!this.hasDamage()) {return false};
         return Dice.itemDamage(event, this);
+    };
+
+    rollFatigue(event) {
+        if (!this.hasFatigue()) {return false};
+        const data = this.data.data;
+        return Dice.ageRollCheck(event, data.useAbl, this.ownerFocusEntity(), this, this.actor);
     };
 
     /** Returns owner's Focus value, base on Item's useFocus property
@@ -140,6 +154,30 @@ export class ageSystemItem extends Item {
         "relationship": "systems/age-system/templates/sheets/relationship-sheet.hbs",
         "honorifics": "systems/age-system/templates/sheets/honorifics-sheet.hbs",
         "membership": "systems/age-system/templates/sheets/membership-sheet.hbs"
+    };
+
+    // Returns owned Focus Item entity used to activate this item - false otherwise
+    ownerFocusEntity() {
+        const itemData = this.data;
+        const data = itemData.data;
+        const owner = this.actor;
+
+        if (data.useFocus === null || data.useFocus === "" || this.isOwned === false || owner === null) {
+            return null;
+        };
+
+        const ownerFoci = owner.data.items.filter(a => a.type === "focus");
+        const expectedFocus = data.useFocus.toLowerCase();
+        const validFocus = ownerFoci.filter(c => c.name.toLowerCase() === expectedFocus);
+        // Orignalmente:
+        // const validFocus = ownerFoci.filter(c => c.data.nameLowerCase === expectedFocus);
+
+        if (validFocus.length < 1) {
+            return data.useFocus;
+        } else {
+            const id = validFocus[0]._id;
+            return this.actor.getOwnedItem(id);
+        };    
     };
 
     async showItem() {

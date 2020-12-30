@@ -7,7 +7,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             // resizable: false,
             width: 680,
             height: 800,
-            classes: ["age-system", "sheet", "char"]
+            classes: ["age-system", "sheet", "char", `colorset-${game.settings.get("age-system", "colorScheme")}`]
         });
     }
 
@@ -77,17 +77,6 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
 
-        // data.weapon = data.items.filter(i => i.type === "weapon");
-        // data.talent = data.items.filter(i => i.type === "talent");
-        // data.power = data.items.filter(i => i.type === "power");
-        // data.focus = data.items.filter(i => i.type === "focus");
-        // data.stunts = data.items.filter(i => i.type === "stunts");
-        // data.equipment = data.items.filter(i => i.type === "equipment");
-        // data.honorifics = data.items.filter(i => i.type === "honorifics");
-        // data.relationship = data.items.filter(i => i.type === "relationship");
-        // data.membership = data.items.filter(i => i.type === "membership");
-
-
         // Return data to the sheet
         return data;
     };
@@ -140,9 +129,14 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
+            html.find(".roll-resources").click(this._onRollResources.bind(this));
         };
 
         super.activateListeners(html);
+    };
+
+    _onRollResources(event) {
+        Dice.ageRollCheck(event, null, null, null, this.actor, true);
     };
 
     _onLastUpSelect(ev) {

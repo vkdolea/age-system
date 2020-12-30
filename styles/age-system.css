@@ -422,6 +422,12 @@
   text-align: center;
   margin-bottom: 4px;
 }
+.age-system.sheet.char .general-stats .resources a {
+  max-width: fit-content;
+}
+.age-system.sheet.char .general-stats .resources i {
+  margin-right: 4px;
+}
 .age-system.sheet.char .general-stats input[type="number"] {
   max-height: 26px;
 }

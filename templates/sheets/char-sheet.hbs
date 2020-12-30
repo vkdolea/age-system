@@ -172,7 +172,12 @@
             {{!-- Currency/Resource/Income block --}}
             {{#if data.useCurrency}}
             <div class="flexcol general-stats">
-                <div class="top-row colorset-first-tier">{{localize "SETTINGS.wealthTypeCurrency"}}</div>
+                <div class="top-row colorset-first-tier">
+                    <div class = "flexrow no" >
+                        <a class="roll-resources feature-controls"><i class="fas fa-dice"></i></a>
+                        {{localize "SETTINGS.wealthTypeCurrency"}}
+                    </div>
+                </div>
                 <div class="main-value flexcol">
                     <input type="number" disabled class="main-value" name="data.resources.base" value="{{data.resources.base}}" data-dtype="Number" />
                 </div>
@@ -182,7 +187,10 @@
             </div>
             {{else}}
             <div class="flexcol general-stats">
-                <div class="top-row colorset-first-tier">{{#if data.useResources}}{{localize "SETTINGS.wealthTypeResources"}}{{/if}}{{#if data.useIncome}}{{localize "SETTINGS.wealthTypeIncome"}}{{/if}}</div>
+                <div class="top-row colorset-first-tier flexrow no-flexwrap resources flex-justify-center">
+                    <a class="roll-resources feature-controls"><i class="fas fa-dice"></i></a>
+                    {{#if data.useResources}}{{localize "SETTINGS.wealthTypeResources"}}{{/if}}{{#if data.useIncome}}{{localize "SETTINGS.wealthTypeIncome"}}{{/if}}
+                </div>
                 <input type="number" disabled class="main-value" name="data.resources.total" value="{{data.resources.total}}" data-dtype="Number" />
                 <div class="stat-modifiers flexcol">
                     <div class="flexrow no-flexwrap">

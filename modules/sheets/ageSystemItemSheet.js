@@ -32,7 +32,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         return mergeObject(super.defaultOptions, {
             height: 340,
             width: 516,
-            classes: ["age-system", "sheet", "item"],
+            classes: ["age-system", "sheet", "item", `colorset-${game.settings.get("age-system", "colorScheme")}`],
             tabs: [{
                 navSelector: ".add-sheet-tabs",
                 contentSelector: ".sheet-tab-section",
