@@ -93,18 +93,25 @@ Hooks.on("renderCompendium", function() {
     // ageSystem.focus = compendiumList("age-system.focus");
 });
 
-Hooks.on("renderageSystemItemSheet", function(ageSystemItemSheet) {
-    // Add item type in the title bar within brackets
-    const itemType = ageSystemItemSheet.item.type;
-    let itemWindowId = `item-${ageSystemItemSheet.item._id}`;
-    if (ageSystemItemSheet.actor !== null) {
-        itemWindowId = `actor-${ageSystemItemSheet.actor.id}-${itemWindowId}`;
-    };
-    let itemWindow = document.getElementById(itemWindowId);
-    let windowHeader = itemWindow.children[0].firstElementChild;
-    windowHeader.textContent += ` [${game.i18n.localize("age-system." + itemType)}]`;
+Hooks.on("renderageSystemItemSheet", (app, html, data) => {
+    // Add color scheme to item sheet
+    Setup.addColorScheme(html);
+
+    // Add item type on title bar
+    Setup.nameItemSheetWindow(app);
 });
 
-Hooks.on("renderageSystemCharacterSheet", (app, html, data) => Setup.charSheetSetup(app, html, data));
+Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
+    // Hide non used Abilities and order Ability Boxes in alphabeticaly
+    Setup.charSheetSetup(app, html, data);
+    
+    // Add color scheme to charactersheet
+    Setup.addColorScheme(html);
+});
 Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
-Hooks.on("renderChatMessage", (app, html, data) => {AgeChat.selectBlindAgeRoll(app, html, data)});
+Hooks.on("renderChatMessage", (app, html, data) => {
+    // Hide chat message when rolling to GM
+    AgeChat.selectBlindAgeRoll(app, html, data);
+    // Add color scheme to chat message
+    Setup.addColorScheme(html);
+});

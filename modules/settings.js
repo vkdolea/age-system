@@ -127,18 +127,16 @@ export const registerSystemSettings = function() {
     hint: "SETTINGS.colorSchemeHint",
     scope: "client",
     config: true,
-    default: "modernBlue",
+    default: "modern-blue",
     type: String,
     choices: {
-      "modernBlue": "SETTINGS.colorModernBlue",
-      "fantasyGreen": "SETTINGS.colorFantasyGreen",
-      "dragonRed": "SETTINGS.colorDragonRed",
-      "roninGreen": "SETTINGS.colorRoninGreen",
-      "expandedBlue": "SETTINGS.colorExpandedBlue",
-      "foldedPurple": "SETTINGS.colorFoldedPurple",
-    },
-    onChange:()=>{
-      window.location.reload(!1)}
+      "modern-blue": "SETTINGS.colorModernBlue",
+      "fantasy-blue": "SETTINGS.colorFantasyGreen",
+      "dragon-red": "SETTINGS.colorDragonRed",
+      // "ronin-green": "SETTINGS.colorRoninGreen",
+      // "expanded-blue": "SETTINGS.colorExpandedBlue",
+      "folded-purple": "SETTINGS.colorFoldedPurple",
+    }
   });
 };
 

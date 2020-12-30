@@ -49,3 +49,22 @@ export function charSheetSetup(app, html, data) {
     ablColumn.append(ablBoxesArr);
     
 };
+
+export function addColorScheme(html) {
+    const selectedScheme = game.settings.get("age-system", "colorScheme");
+    const colorClass = `colorset-${selectedScheme}`;
+    html.find(".colorset-selection").addClass(colorClass)
+}
+
+export function nameItemSheetWindow(ageSystemItemSheet) {
+
+    // Add item type in the title bar within brackets
+    const itemType = ageSystemItemSheet.item.type;
+    let itemWindowId = `item-${ageSystemItemSheet.item._id}`;
+    if (ageSystemItemSheet.actor !== null) {
+        itemWindowId = `actor-${ageSystemItemSheet.actor.id}-${itemWindowId}`;
+    };
+    let itemWindow = document.getElementById(itemWindowId);
+    let windowHeader = itemWindow.children[0].firstElementChild;
+    windowHeader.textContent += ` [${game.i18n.localize("age-system." + itemType)}]`;
+};

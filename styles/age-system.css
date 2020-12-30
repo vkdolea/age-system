@@ -397,8 +397,6 @@
   margin-bottom: 4px;
 }
 .age-system.sheet.char .sheet-header .age-header label {
-  background-color: #007DAD;
-  color: white;
   white-space: nowrap;
   max-width: fit-content;
   padding: 4px;
@@ -670,6 +668,11 @@
 #chat-log .chat-message .message-content .age-system.base-age-roll .blind-value {
   text-align: center;
 }
+/** Modern Blue Colors **/
+/** Fantasy Blue Colors **/
+/** Dragon Red Colors **/
+/** Threefold Purple Colors **/
+/** Game Mode Colors **/
 /*-------------------------------------------------------*/
 .colorset-modern-blue .colorset-first-tier {
   background-color: #007DAD;
@@ -684,6 +687,10 @@
   color: #231F20;
 }
 .colorset-modern-blue input.colorset-first-tier {
+  background-color: #007DAD;
+  color: #ffffff;
+}
+.colorset-modern-blue .char-sheet .age-header label {
   background-color: #007DAD;
   color: #ffffff;
 }
@@ -784,6 +791,366 @@
 .colorset-modern-blue .membership .mod-card,
 .colorset-modern-blue .relationship .mod-card {
   border: solid #B9DBEB 1px;
+}
+/*-------------------------------------------------------*/
+/*-------------------------------------------------------*/
+.colorset-fantasy-blue .colorset-first-tier {
+  background-color: #0f4f5b;
+  color: #ffffff;
+}
+.colorset-fantasy-blue .colorset-second-tier {
+  background-color: #c1cbd3;
+  color: #0f4f5b;
+}
+.colorset-fantasy-blue .colorset-third-tier {
+  background-color: #000000;
+  color: #dbdada;
+}
+.colorset-fantasy-blue input.colorset-first-tier {
+  background-color: #0f4f5b;
+  color: #ffffff;
+}
+.colorset-fantasy-blue .char-sheet .age-header label {
+  background-color: #0f4f5b;
+  color: #ffffff;
+}
+.colorset-fantasy-blue .char-sheet .age-header .editor {
+  background-color: #ffffff;
+}
+.colorset-fantasy-blue .dice-show.trait-test i:last-of-type {
+  color: #0f4f5b;
+}
+.colorset-fantasy-blue .roll-mod {
+  border-bottom: 1px solid #0f4f5b;
+}
+.colorset-fantasy-blue .roll-mod.stunted {
+  background-color: #0f4f5b;
+  color: #ffffff;
+}
+.colorset-fantasy-blue .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-fantasy-blue .char-sheet input.colorset-second-tier {
+  background-color: #c1cbd3 !important;
+  color: #0f4f5b !important;
+}
+.colorset-fantasy-blue .focus label,
+.colorset-fantasy-blue .power label,
+.colorset-fantasy-blue .talent label,
+.colorset-fantasy-blue .weapon label,
+.colorset-fantasy-blue .equipment label,
+.colorset-fantasy-blue .stunts label,
+.colorset-fantasy-blue .honorifics label,
+.colorset-fantasy-blue .membership label,
+.colorset-fantasy-blue .relationship label {
+  color: #0f4f5b;
+}
+.colorset-fantasy-blue .focus .item-card-stats,
+.colorset-fantasy-blue .power .item-card-stats,
+.colorset-fantasy-blue .talent .item-card-stats,
+.colorset-fantasy-blue .weapon .item-card-stats,
+.colorset-fantasy-blue .equipment .item-card-stats,
+.colorset-fantasy-blue .stunts .item-card-stats,
+.colorset-fantasy-blue .honorifics .item-card-stats,
+.colorset-fantasy-blue .membership .item-card-stats,
+.colorset-fantasy-blue .relationship .item-card-stats {
+  background-color: #c1cbd3;
+}
+.colorset-fantasy-blue .focus .item-card-stats input.data-entry,
+.colorset-fantasy-blue .power .item-card-stats input.data-entry,
+.colorset-fantasy-blue .talent .item-card-stats input.data-entry,
+.colorset-fantasy-blue .weapon .item-card-stats input.data-entry,
+.colorset-fantasy-blue .equipment .item-card-stats input.data-entry,
+.colorset-fantasy-blue .stunts .item-card-stats input.data-entry,
+.colorset-fantasy-blue .honorifics .item-card-stats input.data-entry,
+.colorset-fantasy-blue .membership .item-card-stats input.data-entry,
+.colorset-fantasy-blue .relationship .item-card-stats input.data-entry {
+  color: #dbdada;
+}
+.colorset-fantasy-blue .focus .item-card-desc,
+.colorset-fantasy-blue .power .item-card-desc,
+.colorset-fantasy-blue .talent .item-card-desc,
+.colorset-fantasy-blue .weapon .item-card-desc,
+.colorset-fantasy-blue .equipment .item-card-desc,
+.colorset-fantasy-blue .stunts .item-card-desc,
+.colorset-fantasy-blue .honorifics .item-card-desc,
+.colorset-fantasy-blue .membership .item-card-desc,
+.colorset-fantasy-blue .relationship .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-fantasy-blue .focus nav .item,
+.colorset-fantasy-blue .power nav .item,
+.colorset-fantasy-blue .talent nav .item,
+.colorset-fantasy-blue .weapon nav .item,
+.colorset-fantasy-blue .equipment nav .item,
+.colorset-fantasy-blue .stunts nav .item,
+.colorset-fantasy-blue .honorifics nav .item,
+.colorset-fantasy-blue .membership nav .item,
+.colorset-fantasy-blue .relationship nav .item {
+  background-color: #c1cbd3;
+  color: #0f4f5b;
+}
+.colorset-fantasy-blue .focus nav .item.active,
+.colorset-fantasy-blue .power nav .item.active,
+.colorset-fantasy-blue .talent nav .item.active,
+.colorset-fantasy-blue .weapon nav .item.active,
+.colorset-fantasy-blue .equipment nav .item.active,
+.colorset-fantasy-blue .stunts nav .item.active,
+.colorset-fantasy-blue .honorifics nav .item.active,
+.colorset-fantasy-blue .membership nav .item.active,
+.colorset-fantasy-blue .relationship nav .item.active {
+  background-color: #ffffff;
+}
+.colorset-fantasy-blue .focus .mod-card,
+.colorset-fantasy-blue .power .mod-card,
+.colorset-fantasy-blue .talent .mod-card,
+.colorset-fantasy-blue .weapon .mod-card,
+.colorset-fantasy-blue .equipment .mod-card,
+.colorset-fantasy-blue .stunts .mod-card,
+.colorset-fantasy-blue .honorifics .mod-card,
+.colorset-fantasy-blue .membership .mod-card,
+.colorset-fantasy-blue .relationship .mod-card {
+  border: solid #c1cbd3 1px;
+}
+/*-------------------------------------------------------*/
+/*-------------------------------------------------------*/
+.colorset-dragon-red .colorset-first-tier {
+  background-color: #810207;
+  color: #ffffff;
+}
+.colorset-dragon-red .colorset-second-tier {
+  background-color: #e0beb1;
+  color: #810207;
+}
+.colorset-dragon-red .colorset-third-tier {
+  background-color: #979899;
+  color: #000000;
+}
+.colorset-dragon-red input.colorset-first-tier {
+  background-color: #810207;
+  color: #ffffff;
+}
+.colorset-dragon-red .char-sheet .age-header label {
+  background-color: #810207;
+  color: #ffffff;
+}
+.colorset-dragon-red .char-sheet .age-header .editor {
+  background-color: #ffffff;
+}
+.colorset-dragon-red .dice-show.trait-test i:last-of-type {
+  color: #810207;
+}
+.colorset-dragon-red .roll-mod {
+  border-bottom: 1px solid #810207;
+}
+.colorset-dragon-red .roll-mod.stunted {
+  background-color: #810207;
+  color: #ffffff;
+}
+.colorset-dragon-red .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-dragon-red .char-sheet input.colorset-second-tier {
+  background-color: #e0beb1 !important;
+  color: #810207 !important;
+}
+.colorset-dragon-red .focus label,
+.colorset-dragon-red .power label,
+.colorset-dragon-red .talent label,
+.colorset-dragon-red .weapon label,
+.colorset-dragon-red .equipment label,
+.colorset-dragon-red .stunts label,
+.colorset-dragon-red .honorifics label,
+.colorset-dragon-red .membership label,
+.colorset-dragon-red .relationship label {
+  color: #810207;
+}
+.colorset-dragon-red .focus .item-card-stats,
+.colorset-dragon-red .power .item-card-stats,
+.colorset-dragon-red .talent .item-card-stats,
+.colorset-dragon-red .weapon .item-card-stats,
+.colorset-dragon-red .equipment .item-card-stats,
+.colorset-dragon-red .stunts .item-card-stats,
+.colorset-dragon-red .honorifics .item-card-stats,
+.colorset-dragon-red .membership .item-card-stats,
+.colorset-dragon-red .relationship .item-card-stats {
+  background-color: #e0beb1;
+}
+.colorset-dragon-red .focus .item-card-stats input.data-entry,
+.colorset-dragon-red .power .item-card-stats input.data-entry,
+.colorset-dragon-red .talent .item-card-stats input.data-entry,
+.colorset-dragon-red .weapon .item-card-stats input.data-entry,
+.colorset-dragon-red .equipment .item-card-stats input.data-entry,
+.colorset-dragon-red .stunts .item-card-stats input.data-entry,
+.colorset-dragon-red .honorifics .item-card-stats input.data-entry,
+.colorset-dragon-red .membership .item-card-stats input.data-entry,
+.colorset-dragon-red .relationship .item-card-stats input.data-entry {
+  color: #000000;
+}
+.colorset-dragon-red .focus .item-card-desc,
+.colorset-dragon-red .power .item-card-desc,
+.colorset-dragon-red .talent .item-card-desc,
+.colorset-dragon-red .weapon .item-card-desc,
+.colorset-dragon-red .equipment .item-card-desc,
+.colorset-dragon-red .stunts .item-card-desc,
+.colorset-dragon-red .honorifics .item-card-desc,
+.colorset-dragon-red .membership .item-card-desc,
+.colorset-dragon-red .relationship .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-dragon-red .focus nav .item,
+.colorset-dragon-red .power nav .item,
+.colorset-dragon-red .talent nav .item,
+.colorset-dragon-red .weapon nav .item,
+.colorset-dragon-red .equipment nav .item,
+.colorset-dragon-red .stunts nav .item,
+.colorset-dragon-red .honorifics nav .item,
+.colorset-dragon-red .membership nav .item,
+.colorset-dragon-red .relationship nav .item {
+  background-color: #e0beb1;
+  color: #810207;
+}
+.colorset-dragon-red .focus nav .item.active,
+.colorset-dragon-red .power nav .item.active,
+.colorset-dragon-red .talent nav .item.active,
+.colorset-dragon-red .weapon nav .item.active,
+.colorset-dragon-red .equipment nav .item.active,
+.colorset-dragon-red .stunts nav .item.active,
+.colorset-dragon-red .honorifics nav .item.active,
+.colorset-dragon-red .membership nav .item.active,
+.colorset-dragon-red .relationship nav .item.active {
+  background-color: #ffffff;
+}
+.colorset-dragon-red .focus .mod-card,
+.colorset-dragon-red .power .mod-card,
+.colorset-dragon-red .talent .mod-card,
+.colorset-dragon-red .weapon .mod-card,
+.colorset-dragon-red .equipment .mod-card,
+.colorset-dragon-red .stunts .mod-card,
+.colorset-dragon-red .honorifics .mod-card,
+.colorset-dragon-red .membership .mod-card,
+.colorset-dragon-red .relationship .mod-card {
+  border: solid #e0beb1 1px;
+}
+/*-------------------------------------------------------*/
+/*-------------------------------------------------------*/
+.colorset-folded-purple .colorset-first-tier {
+  background-color: #565183;
+  color: #ffffff;
+}
+.colorset-folded-purple .colorset-second-tier {
+  background-color: #cfccde;
+  color: #565183;
+}
+.colorset-folded-purple .colorset-third-tier {
+  background-color: #625b68;
+  color: #000000;
+}
+.colorset-folded-purple input.colorset-first-tier {
+  background-color: #565183;
+  color: #ffffff;
+}
+.colorset-folded-purple .char-sheet .age-header label {
+  background-color: #565183;
+  color: #ffffff;
+}
+.colorset-folded-purple .char-sheet .age-header .editor {
+  background-color: #ffffff;
+}
+.colorset-folded-purple .dice-show.trait-test i:last-of-type {
+  color: #565183;
+}
+.colorset-folded-purple .roll-mod {
+  border-bottom: 1px solid #565183;
+}
+.colorset-folded-purple .roll-mod.stunted {
+  background-color: #565183;
+  color: #ffffff;
+}
+.colorset-folded-purple .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-folded-purple .char-sheet input.colorset-second-tier {
+  background-color: #cfccde !important;
+  color: #565183 !important;
+}
+.colorset-folded-purple .focus label,
+.colorset-folded-purple .power label,
+.colorset-folded-purple .talent label,
+.colorset-folded-purple .weapon label,
+.colorset-folded-purple .equipment label,
+.colorset-folded-purple .stunts label,
+.colorset-folded-purple .honorifics label,
+.colorset-folded-purple .membership label,
+.colorset-folded-purple .relationship label {
+  color: #565183;
+}
+.colorset-folded-purple .focus .item-card-stats,
+.colorset-folded-purple .power .item-card-stats,
+.colorset-folded-purple .talent .item-card-stats,
+.colorset-folded-purple .weapon .item-card-stats,
+.colorset-folded-purple .equipment .item-card-stats,
+.colorset-folded-purple .stunts .item-card-stats,
+.colorset-folded-purple .honorifics .item-card-stats,
+.colorset-folded-purple .membership .item-card-stats,
+.colorset-folded-purple .relationship .item-card-stats {
+  background-color: #cfccde;
+}
+.colorset-folded-purple .focus .item-card-stats input.data-entry,
+.colorset-folded-purple .power .item-card-stats input.data-entry,
+.colorset-folded-purple .talent .item-card-stats input.data-entry,
+.colorset-folded-purple .weapon .item-card-stats input.data-entry,
+.colorset-folded-purple .equipment .item-card-stats input.data-entry,
+.colorset-folded-purple .stunts .item-card-stats input.data-entry,
+.colorset-folded-purple .honorifics .item-card-stats input.data-entry,
+.colorset-folded-purple .membership .item-card-stats input.data-entry,
+.colorset-folded-purple .relationship .item-card-stats input.data-entry {
+  color: #000000;
+}
+.colorset-folded-purple .focus .item-card-desc,
+.colorset-folded-purple .power .item-card-desc,
+.colorset-folded-purple .talent .item-card-desc,
+.colorset-folded-purple .weapon .item-card-desc,
+.colorset-folded-purple .equipment .item-card-desc,
+.colorset-folded-purple .stunts .item-card-desc,
+.colorset-folded-purple .honorifics .item-card-desc,
+.colorset-folded-purple .membership .item-card-desc,
+.colorset-folded-purple .relationship .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-folded-purple .focus nav .item,
+.colorset-folded-purple .power nav .item,
+.colorset-folded-purple .talent nav .item,
+.colorset-folded-purple .weapon nav .item,
+.colorset-folded-purple .equipment nav .item,
+.colorset-folded-purple .stunts nav .item,
+.colorset-folded-purple .honorifics nav .item,
+.colorset-folded-purple .membership nav .item,
+.colorset-folded-purple .relationship nav .item {
+  background-color: #cfccde;
+  color: #565183;
+}
+.colorset-folded-purple .focus nav .item.active,
+.colorset-folded-purple .power nav .item.active,
+.colorset-folded-purple .talent nav .item.active,
+.colorset-folded-purple .weapon nav .item.active,
+.colorset-folded-purple .equipment nav .item.active,
+.colorset-folded-purple .stunts nav .item.active,
+.colorset-folded-purple .honorifics nav .item.active,
+.colorset-folded-purple .membership nav .item.active,
+.colorset-folded-purple .relationship nav .item.active {
+  background-color: #ffffff;
+}
+.colorset-folded-purple .focus .mod-card,
+.colorset-folded-purple .power .mod-card,
+.colorset-folded-purple .talent .mod-card,
+.colorset-folded-purple .weapon .mod-card,
+.colorset-folded-purple .equipment .mod-card,
+.colorset-folded-purple .stunts .mod-card,
+.colorset-folded-purple .honorifics .mod-card,
+.colorset-folded-purple .membership .mod-card,
+.colorset-folded-purple .relationship .mod-card {
+  border: solid #cfccde 1px;
 }
 /*-------------------------------------------------------*/
 #context-menu li {
