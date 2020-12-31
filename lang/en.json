@@ -55,7 +55,7 @@
     "age-system": {
 
         "WARNING": {
-            "duplicatedFocus": "This actor already has a Focus named "
+            "duplicatedFocus": "Focus is not added to character - it already owns a Focus named "
         },
 
         "power": "Power",
