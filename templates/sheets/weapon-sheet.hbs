@@ -8,35 +8,9 @@
             <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
             {{/if}}
             <div class="item-card-stats flexrow">
-                {{!-- Ability and Focus to Attack --}}
-                <div class="flexcol">
-                    <label>{{localize "age-system.abl"}}</label>
-                    <label>({{localize "age-system.focus"}})</label>
-                    {{#if inChat}}
-                    <div class="data-input">{{localize (concat "age-system." data.useAbl)}}</div>
-                    {{else}}
-                    <select name="data.useAbl" class="data-input">
-                        {{#select data.useAbl}}
-                        {{#each config.abilities as |name type|}}
-                        <option value="{{type}}">{{localize name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                    {{/if}}
-                    {{#if inChat}}
-                    <div name="data.useFocus" class="data-input">{{data.useFocus}}</div>
-                    {{else}}
-                    <div class="flexrow">
-                        (<input name="data.useFocus" class="data-input" type="text" value="{{data.useFocus}}" placeholder="Focus Name" list="{{item.type}}-{{item._id}}-list"/>)
-                        <datalist id="{{item.type}}-{{item._id}}-list">
-                            <option value=""></option>
-                            {{#each config.focus as |focus|}}
-                            <option value="{{focus.name}}"></option>
-                            {{/each}}
-                        </datalist>
-                    </div>                    
-                    {{/if}}
-                </div>
+
+                {{!-- Ability/Focus to activate item --}}
+                {{> "systems/age-system/templates/partials/ability-focus-select.hbs"}}
 
                 {{!-- Damage Composition and Damage Type --}}
                 {{> "systems/age-system/templates/partials/dmg-block-sheet.hbs"}}
@@ -58,15 +32,18 @@
                 </div>
                 {{!-- ROF --}}
                 <div class="flexcol">
-                    <label>{{localize "age-system.item.rof"}}</label>
-                    <select name="data.rof" {{#if inChat}}disabled{{/if}}>
+                    <label>{{localize "age-system.rof.rof"}}</label>
+                    {{#if inChat}}
+                    <div>{{localize (concat "age-system.rof." data.rof)}}</div>
+                    {{else}}
+                    <select name="data.rof">
                         {{#select data.rof}}
-                        <option value="0"><span>-</span></option>
-                        <option value="1">{{localize "age-system.item.ss"}}</option>
-                        <option value="2">{{localize "age-system.item.sa"}}</option>
-                        <option value="3">{{localize "age-system.item.aa"}}</option>
+                        {{#each config.rof as |rof|}}
+                        <option value="{{@key}}">{{localize rof}}</option>
+                        {{/each}}
                         {{/select}}
-                    </select>                    
+                    </select>  
+                    {{/if}}                  
                 </div>
                 {{!-- Range --}}
                 <div class="flexcol">

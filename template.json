@@ -327,7 +327,7 @@
             "reload": "minor",
             "capacity": 1,
             "range": 1,
-            "rof": "SS"
+            "rof": "none"
         },
         "power": {
             "templates": ["damage", "itemReq", "description", "activation", "bonuses"],

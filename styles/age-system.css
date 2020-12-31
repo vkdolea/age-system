@@ -1198,11 +1198,11 @@
 .age-system .flex-align-center {
   align-items: center;
 }
+.age-system .flex-align-start {
+  align-items: flex-start;
+}
 .age-system .flex-justify-center {
   justify-content: center;
-}
-.age-system .flex-justify-start {
-  justify-content: flex-start;
 }
 .age-system .flex-justify-between {
   justify-content: space-between;

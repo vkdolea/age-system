@@ -20,7 +20,6 @@ export class ageSystemItem extends Item {
         /*
         * Focus value set as manual input - Improved checkbox used to indicate improved focus on Character Sheet
         */
-
         // Data initialization for Focus
         // if (itemType === "focus") {
         //     if (data.improved) {
@@ -76,34 +75,23 @@ export class ageSystemItem extends Item {
 
         data.hasDamage = this.hasDamage();
         data.hasFatigue = this.hasFatigue();
+        data.hasModificators = this.hasModificators();
 
         // Adds reference to in-use color scheme
         data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
 
-        /** Damage Type table:
-         *  damageType
-         *  0: Impact
-         *  1: Balistic
-         *  2: Penetrating
-         */
-
-        /** Weapon Reload table:
-         *  reload
-         *  0: -
-         *  1: Minor Action
-         *  2: Major Action
-         *  3: 1d6 Minor
-         */
-
-        /** Casting Time table:
-         *  castingTime
-         *  0: -
-         *  1: Minor Action
-         *  2: Major Action
-         *  3: 1 Minute
-         */
         this.prepareEmbeddedEntities();        
     };
+
+    hasModificators() {
+        const inCheckMods = this.data.data.itemMods;
+        for (const key in inCheckMods) {
+            if (inCheckMods.hasOwnProperty(key) && inCheckMods[key].isActive) {
+                return true;
+            };
+        };
+        return false;
+    };    
 
     // Check if Item can cause damage
     hasDamage() {

@@ -13,6 +13,7 @@ async function preloadHandlebarsTemplates() {
         "systems/age-system/templates/partials/dmg-block-sheet.hbs",
         "systems/age-system/templates/partials/bonuses-sheet.hbs",
         "systems/age-system/templates/partials/active-bonuses.hbs",
+        "systems/age-system/templates/partials/ability-focus-select.hbs",
     ];
 
     return loadTemplates(templatePaths);

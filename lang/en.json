@@ -176,7 +176,15 @@
         "majorAction": "Major Action",
         "d6minor": "1d6 Minor",
         "oneMinute": "1 Minute",
-        
+
+        "rof": {
+            "rof": "ROF",
+            "none": "—",
+            "singleShot": "SS",
+            "semiAuto": "SA",
+            "fullAuto": "AA"
+        },
+
         "move": "Move",
         "level": "Level",
         "xp": "XP",
@@ -235,10 +243,6 @@
             "damageType": "Damage Type",
             "minRange": "Minimum Range",
             "maxRange": "Maximum Range",
-            "rof": "ROF",
-            "ss": "SS",
-            "sa": "SA",
-            "aa": "A",
             "range": "Range",
             "yards": "yards",
             "name": "Name",

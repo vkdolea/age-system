@@ -60,6 +60,12 @@ ageSystem.damageSource = {
     ballistic: "age-system.ballistic",
     penetrating: "age-system.penetrating"
 };
+ageSystem.rof = {
+    none: "age-system.rof.none",
+    singleShot: "age-system.rof.singleShot",
+    semiAuto: "age-system.rof.semiAuto",
+    fullAuto: "age-system.rof.fullAuto"
+};
 
 ageSystem.bonusTypes = {
     itemDamage: "age-system.bonus.itemAtkBns",

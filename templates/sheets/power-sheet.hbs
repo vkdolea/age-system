@@ -7,63 +7,33 @@
             {{else}}
             <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
             {{/if}}
-            <div class="item-card-stats flex-justify-center flexrow">
+            <div class="item-card-stats flex-justify-center flex-align-start flexrow">
 
-                {{!-- Ability to activate the power --}}
-                <div class="flexrow">
+                {{#if inChat}}
+                {{else}}
+                {{!-- Select Damage and Fatigue Options --}}
+                <div class="flexrow" style="max-width: fit-content;">
+                    <a class="toggle-damage" title="{{localize "age-system.rollDamage"}}">
+                        <div class="flexrow flex-justify-center flex-align-center">
+                            <i class="fas fa-fist-raised"></i>
+                        </div>
+                    </a>
 
-                    {{#if inChat}}
-                    {{else}}
-                    {{!-- Select Damage and Fatigue Options --}}
-                    <div class="flexrow" style="max-width: fit-content;">
-                        <a class="toggle-damage" title="{{localize "age-system.rollDamage"}}">
-                            <div class="flexrow flex-justify-center flex-align-center">
-                                <i class="fas fa-fist-raised"></i>
-                            </div>
-                        </a>
-
-                        <a class="toggle-fatigue flexrow use-fatigue-true" title="{{localize "age-system.rollFatigue"}}">
-                            <div class="flexrow flex-justify-center flex-align-center">
-                                <i class="fas fa-head-side-cough"></i>
-                            </div>
-                        </a>
-                    </div>
-                    {{/if}}
-
-                    <label>{{localize "age-system.abl"}}:</label>
-                    {{#if inChat}}
-                    <div class="data-input">{{localize (concat "age-system." data.useAbl)}}</div>
-                    {{else}}
-                    <select name="data.useAbl" class="data-input">
-                        {{#select data.useAbl}}
-                        {{#each config.abilities as |name type|}}
-                        <option value="{{type}}">{{localize name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                    {{/if}}
+                    <a class="toggle-fatigue flexrow use-fatigue-true" title="{{localize "age-system.rollFatigue"}}">
+                        <div class="flexrow flex-justify-center flex-align-center">
+                            <i class="fas fa-head-side-cough"></i>
+                        </div>
+                    </a>
                 </div>
+                {{/if}}
+                
+                {{!-- Ability/Focus to activate the power --}}
+                {{> "systems/age-system/templates/partials/ability-focus-select.hbs"}}
 
-                {{!-- Focus used to activate the power --}}
-                <div class="flexrow">
-                    <label>{{localize "age-system.focus"}}:</label>
-                    {{#if inChat}}
-                    <div name="data.useFocus" class="data-input">{{data.useFocus}}</div>
-                    {{else}}                    
-                    <input name="data.useFocus" class="data-input" type="text" value="{{data.useFocus}}" placeholder="Focus Name" list="{{item.type}}-{{item._id}}-list"/>
-                    <datalist id="{{item.type}}-{{item._id}}-list">
-                        <option value=""></option>
-                        {{#each config.focus as |focus|}}
-                        <option value="{{focus.name}}"></option>
-                        {{/each}}
-                    </datalist>
-                    {{/if}}
-                </div>
-
-                {{#unless data.inputFatigueTN}}
                 {{!-- Power Point Cost --}}
-                <div class="flexrow">
-                    <label>{{localize "age-system.powerPointsIndex"}} </label>
+                {{#unless data.inputFatigueTN}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.powerPointsIndex"}}</label>
                     {{#if inChat}}
                     <div>{{data.powerPointCost}}</div>
                     {{else}}
@@ -78,19 +48,19 @@
                     {{#if inChat}}
                     {{else}}
                     <div class="flexcol">
-                        <label class="use-fatigue">{{localize "age-system.inputFatigueTN"}} </label>
+                        <label class="use-fatigue">{{localize "age-system.inputFatigueTN"}}</label>
                         <input class="use-fatigue" type="checkbox" name="data.inputFatigueTN" {{checked data.inputFatigueTN}} class="checkbox"/>
                     </div>
                     {{/if}}
                     <div class="flexcol">
-                        <label class="use-fatigue">{{localize "age-system.fatigueTN"}}:</label>
+                        <label class="use-fatigue">{{localize "age-system.fatigueTN"}}</label>
                         <input class="use-fatigue" type="number" {{#unless data.inputFatigueTN}}disabled{{/unless}} name="data.fatigueTN" value="{{data.fatigueTN}}" data-dtype="Number" />                   
                     </div>
                     {{/if}}
                 </div>
 
                 {{!-- Casting Time --}}
-                <div class="flexrow">
+                <div class="flexcol">
                     <label>{{localize "age-system.item.cast"}} </label>
                     {{#if inChat}}
                     <div>{{localize (concat "age-system." data.castTime)}}</div>
@@ -106,7 +76,7 @@
                 </div>
 
                 {{!-- Power Target Number --}}
-                <div class="flexrow">
+                <div class="flexcol">
                     <label>{{localize "age-system.targetNumber"}} </label>
                     {{#if inChat}}
                     <div class="data-input">{{data.targetNumber}}</div>
@@ -116,7 +86,7 @@
                 </div>
 
                 {{!-- Power Force --}}
-                <div class="flexrow">
+                <div class="flexcol">
                     <label>{{localize "age-system.item.force"}}</label>
                     <span class="data-input">{{data.itemForce}}</span>
                 </div>
