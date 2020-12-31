@@ -85,9 +85,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     async _onDropItem(event, data) {
         if ( !this.actor.owner ) return false;
         const item = await Item.fromDropData(data);
-        const itemData = duplicate(item.data);
-
-        
+        /*-----------Beginning of added code--------------*/
         // Check if droped item is a Focus and then confirm if Actor already has a Focus with the same name
         // If positive, then returns FALSE
         if (item.data.type === "focus") {
@@ -97,10 +95,15 @@ export default class ageSystemCharacterSheet extends ActorSheet {
                 const e = ownedFoci[i];
                 const eName = e.data.data.nameLowerCase;
                 if (eName === itemNameLowerCase) {
+                    let warning = game.i18n.localize("age-system.WARNING.duplicatedFocus");
+                    warning += `"${eName.toUpperCase()}"`;
+                    ui.notifications.warn(warning);
                     return false;
                 };            
             };
-        };        
+        };
+        /*-------------End of added code------------------*/
+        const itemData = duplicate(item.data);
         
         const actor = this.actor;
         // Handle item sorting within the same Actor

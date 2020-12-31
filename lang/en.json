@@ -54,6 +54,10 @@
 
     "age-system": {
 
+        "WARNING": {
+            "duplicatedFocus": "This actor already has a Focus named "
+        },
+
         "power": "Power",
         "weapon": "Weapon",
         "equipment": "Equipment",
