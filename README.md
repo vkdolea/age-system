@@ -40,6 +40,12 @@ This is a work in progress, not meant to be actualy used during normal play.
 
 ## Change log
 
+### 2020.12.31
+- Included Ancestry/Race/Origin field with selection on Settings
+- Added option to change label between Profession/Class
+- Damage formula for items know support no Ability selected
+- Added a horizontal line to
+
 ### 2020.12.29
 - Added functional color schemes for Modern AGE, Fantasy AGE, Threefold and Dragon AGE books.
 - Fixed bug causing Talent item to be reset when dragging it to character sheet.
