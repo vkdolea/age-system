@@ -2,7 +2,7 @@
     "name": "age-system",
     "title": "Unofficial AGE System",
     "description": "Unofficial AGE System implementation, meant for all AGE subsystems.",
-    "version": "0.02",
+    "version": "0.03",
     "templateVersion": 1,
     "author": "VK Dolea",
     "scripts": [],

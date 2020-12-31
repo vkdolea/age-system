@@ -189,7 +189,7 @@
             "activation": {
                 "useAbl": "acc",
                 "targetNumber": 10,
-                "manaCost": 1,
+                "powerPointCost": 1,
                 "fatigueTN": 10
             },
             "description": {

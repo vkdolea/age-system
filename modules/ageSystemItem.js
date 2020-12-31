@@ -32,7 +32,7 @@ export class ageSystemItem extends Item {
 
         // Adds value to represent portion added to dice on damage roll
         if (this.isOwned && this.hasDamage()) {
-            data.ablDamageValue = this.actor.data.data.abilities[data.useAbl].total;
+            data.ablDamageValue = this.actor.data.data.abilities[data.dmgAbl].total;
         };
 
         // Identify related Weapon/Power Focus ID owned by Actor
@@ -49,8 +49,12 @@ export class ageSystemItem extends Item {
 
         };
 
-        // Identify specific flags for the Power item type
+        // Data preparation for Power item type
         if (itemType === "power") {
+
+            const useFatigue = game.settings.get("age-system", "useFatigue");
+            if (!useFatigue) {data.useFatigue = false};
+
             data.itemForce = 10;
             if (data.itemMods.powerForce.isActive) {
                 data.itemForce += data.itemMods.powerForce.value;
@@ -61,6 +65,12 @@ export class ageSystemItem extends Item {
                 data.itemForce += this.actor.data.data.abilities[data.useAbl].total;
                 data.itemForce += this.ownerFocusValue();
             };
+
+
+
+            if (data.inputFatigueTN === false) {
+                data.fatigueTN = 9 + Math.floor(Number(data.powerPointCost)/2);
+            }
             
         }
 

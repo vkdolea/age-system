@@ -50,6 +50,20 @@ export function charSheetSetup(app, html, data) {
     
 };
 
+export function hideFatigueEntry(html) {
+    // Capture what is the ability set to be used
+    const useFatigue = game.settings.get("age-system", "useFatigue");
+
+    // Hide HTML elements with use-fatigue-true class
+    if (!useFatigue) {
+        const fatigueUsers = html.find(".use-fatigue-true");
+        for (let k = 0; k < fatigueUsers.length; k++) {
+            const e = fatigueUsers[k];
+            e.style.display = "none";
+        };
+    };
+};
+
 export function addColorScheme(html) {
     const selectedScheme = game.settings.get("age-system", "colorScheme");
     const colorClass = `colorset-${selectedScheme}`;

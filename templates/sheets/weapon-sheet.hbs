@@ -44,22 +44,22 @@
                 {{!-- Minimum Strenght --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.minStr"}}</label>
-                    <input name="data.minStr" type="text" value="{{data.minStr}}" placeholder="{{localize "age-system.item.reqStr"}}" data-dtype="Number"/>
+                    <input name="data.minStr" type="text" {{#if inChat}}disabled{{/if}} value="{{data.minStr}}" placeholder="{{localize "age-system.item.reqStr"}}" data-dtype="Number"/>
                 </div>
                 {{!-- Resource TL --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.resourceTN"}}</label>
-                    <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number" />
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.cost" value="{{data.cost}}" data-dtype="Number" />
                 </div>
                 {{!-- Weight --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.weight"}}</label>
-                    <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.weight}}" data-dtype="Number" />
                 </div>
                 {{!-- ROF --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.rof"}}</label>
-                    <select name="data.rof">
+                    <select name="data.rof" {{#if inChat}}disabled{{/if}}>
                         {{#select data.rof}}
                         <option value="0"><span>-</span></option>
                         <option value="1">{{localize "age-system.item.ss"}}</option>
@@ -71,18 +71,18 @@
                 {{!-- Range --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.range"}}</label>                    
-                    <input type="text" name="data.range" value="{{data.range}}" data-dtype="Number" />
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.range" value="{{data.range}}" data-dtype="Number" />
                     <span>{{localize "age-system.item.yards"}}</span>                    
                 </div>
                 {{!-- Capacity --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.capacity"}}</label>
-                    <input type="text" name="data.capacity" value="{{data.capacity}}" data-dtype="Number" />                    
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.capacity" value="{{data.capacity}}" data-dtype="Number" />                    
                 </div>
                 {{!-- Reload --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.reload"}}</label>
-                    <select name="data.reload">
+                    <select name="data.reload" {{#if inChat}}disabled{{/if}}>
                         {{#select data.reload}}
                         <option value="0"><span>-</span></option>
                         <option value="1">{{localize "age-system.minorAction"}}</option>

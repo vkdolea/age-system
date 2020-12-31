@@ -69,6 +69,11 @@ export default class ageSystemItemSheet extends ItemSheet {
                 };
             };
 
+            if (this.item.data.type === "power") {
+                html.find(".toggle-damage").click(this._onToggleDamage.bind(this))
+                html.find(".toggle-fatigue").click(this._onToggleFatigue.bind(this))
+            };
+
         };
 
         // Actions by sheet owner only
@@ -78,6 +83,16 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         super.activateListeners(html);
     };
+
+    _onToggleDamage(event) {
+        this.item.data.data.causeDamage = !this.item.data.data.causeDamage;
+        this.item.update(this.item.data)
+    };
+
+    _onToggleFatigue(event) {
+        this.item.data.data.useFatigue = !this.item.data.data.useFatigue;
+        this.item.update(this.item.data)
+    };    
     
     // Adds an * in front of the owned Focus name whenever the user types a name of another owned Focus
     // => Actors are not allowed to have more than 1 Focus with the same name

@@ -93,9 +93,10 @@ Hooks.on("renderCompendium", function() {
 });
 
 Hooks.on("renderageSystemItemSheet", (app, html, data) => {
-
     // Add item type on title bar
     Setup.nameItemSheetWindow(app);
+    // Hide fatigue entries if Fatigue is not in use
+    Setup.hideFatigueEntry(html);
 });
 
 Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {

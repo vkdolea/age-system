@@ -1,7 +1,9 @@
 {{#if inChat}}
-<div class="flexrow">
+<div class="flexcol flex-justify-center">
     <label>{{localize "age-system.item.damage"}}</label>
-    {{concat data.nrDice "d" data.diceType "+" data.extraValue "+" data.ablDamageValue}}
+    <p class="in-chat-text">{{concat data.nrDice "d" data.diceType "+" data.extraValue "+" data.ablDamageValue}}</p>
+    <p class="in-chat-text">{{localize (concat "age-system." data.dmgType)}} | {{localize (concat "age-system."data.dmgSource)}}</p>
+    
 </div>
 {{else}}
 <div class="flexcol cause-damage">
