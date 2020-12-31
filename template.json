@@ -4,7 +4,6 @@
         "templates": {},
         "char": {
             "statBlockView": false,
-            "rollType": "open",
             "level": 1,
             "xp": {
                 "value": 0,
@@ -12,6 +11,11 @@
                 "advPoints": 0
             },
             "features": "",
+            "age": "",
+            "background": "",
+            "socialClass": "",
+            "ancestry": "",
+            "profession": "",
             "drive": {
                 "name": "",
                 "quality": "",

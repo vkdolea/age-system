@@ -20,10 +20,9 @@
                     <label>{{localize "age-system.item.minStr"}}</label>
                     <input name="data.minStr" type="text" {{#if inChat}}disabled{{/if}} value="{{data.minStr}}" placeholder="{{localize "age-system.item.reqStr"}}" data-dtype="Number"/>
                 </div>
-                {{!-- Resource TL --}}
+                {{!-- Purchase Block --}}
                 <div class="flexcol">
-                    <label>{{localize "age-system.item.resourceTN"}}</label>
-                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.cost" value="{{data.cost}}" data-dtype="Number" />
+                    {{> "systems/age-system/templates/partials/cost-resource-block.hbs"}}
                 </div>
                 {{!-- Weight --}}
                 <div class="flexcol">

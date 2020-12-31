@@ -77,6 +77,10 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
 
+        // Retrieve Prefession/Ancestry settings
+        data.ancestry = game.settings.get("age-system", "ancestryOpt");
+        data.occupation = game.settings.get("age-system", "occupation");
+
         // Return data to the sheet
         return data;
     };

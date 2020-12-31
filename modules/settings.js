@@ -131,7 +131,7 @@ export const registerSystemSettings = function() {
     type: String,
     choices: {
       "modern-blue": "SETTINGS.colorModernBlue",
-      "fantasy-blue": "SETTINGS.colorFantasyGreen",
+      "fantasy-blue": "SETTINGS.colorFantasyBlue",
       "dragon-red": "SETTINGS.colorDragonRed",
       // "ronin-green": "SETTINGS.colorRoninGreen",
       // "expanded-blue": "SETTINGS.colorExpandedBlue",
@@ -139,6 +139,42 @@ export const registerSystemSettings = function() {
     },
     onChange:()=>{window.location.reload(!1)}
   });
+
+/**
+ * Select occupation label to best fit world's setting
+ */
+game.settings.register("age-system", "occupation", {
+  name: "SETTINGS.occupation",
+  hint: "SETTINGS.occupationHint",
+  scope: "world",
+  config: true,
+  default: "profession",
+  type: String,
+  choices: {
+    "profession": "SETTINGS.occprofession",
+    "class": "SETTINGS.occclass",
+  },
+  onChange:()=>{window.location.reload(!1)}
+});
+
+/**
+ * Select ancestry flavor
+ */
+game.settings.register("age-system", "ancestryOpt", {
+  name: "SETTINGS.ancestryOpt",
+  hint: "SETTINGS.ancestryOptHint",
+  scope: "world",
+  config: true,
+  default: "ancestry",
+  type: String,
+  choices: {
+    "ancestry": "SETTINGS.ancestryOptancestry",
+    "origin": "SETTINGS.ancestryOptorigin",
+    "species": "SETTINGS.ancestryOptspecies",
+    "race": "SETTINGS.ancestryOptrace",
+  },
+  onChange:()=>{window.location.reload(!1)}
+});
 };
 
 // Adds game setting to select focus compendium after loading world's compendia!

@@ -14,6 +14,7 @@ async function preloadHandlebarsTemplates() {
         "systems/age-system/templates/partials/bonuses-sheet.hbs",
         "systems/age-system/templates/partials/active-bonuses.hbs",
         "systems/age-system/templates/partials/ability-focus-select.hbs",
+        "systems/age-system/templates/partials/cost-resource-block.hbs",
     ];
 
     return loadTemplates(templatePaths);

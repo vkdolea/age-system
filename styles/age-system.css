@@ -149,6 +149,18 @@
   min-width: 140px;
   text-align: center;
 }
+.age-system.item .focus .item-card-stats input[name="data.cost"],
+.age-system.item .power .item-card-stats input[name="data.cost"],
+.age-system.item .talent .item-card-stats input[name="data.cost"],
+.age-system.item .weapon .item-card-stats input[name="data.cost"],
+.age-system.item .equipment .item-card-stats input[name="data.cost"],
+.age-system.item .stunts .item-card-stats input[name="data.cost"],
+.age-system.item .honorifics .item-card-stats input[name="data.cost"],
+.age-system.item .relationship .item-card-stats input[name="data.cost"],
+.age-system.item .membership .item-card-stats input[name="data.cost"] {
+  max-width: 60px;
+  min-width: 60px;
+}
 .age-system.item .focus .item-card-stats input[name="data.targetNumber"],
 .age-system.item .power .item-card-stats input[name="data.targetNumber"],
 .age-system.item .talent .item-card-stats input[name="data.targetNumber"],
@@ -185,15 +197,6 @@
 .age-system.item .honorifics .item-card-stats input[name="data.minStr"],
 .age-system.item .relationship .item-card-stats input[name="data.minStr"],
 .age-system.item .membership .item-card-stats input[name="data.minStr"],
-.age-system.item .focus .item-card-stats input[name="data.cost"],
-.age-system.item .power .item-card-stats input[name="data.cost"],
-.age-system.item .talent .item-card-stats input[name="data.cost"],
-.age-system.item .weapon .item-card-stats input[name="data.cost"],
-.age-system.item .equipment .item-card-stats input[name="data.cost"],
-.age-system.item .stunts .item-card-stats input[name="data.cost"],
-.age-system.item .honorifics .item-card-stats input[name="data.cost"],
-.age-system.item .relationship .item-card-stats input[name="data.cost"],
-.age-system.item .membership .item-card-stats input[name="data.cost"],
 .age-system.item .focus .item-card-stats input[name="data.weight"],
 .age-system.item .power .item-card-stats input[name="data.weight"],
 .age-system.item .talent .item-card-stats input[name="data.weight"],
@@ -407,7 +410,7 @@
   width: 100%;
 }
 .age-system.sheet.char .sheet-header img {
-  height: 235px;
+  height: 251px;
   width: 150px;
   object-fit: contain;
   border: 0px;
@@ -415,6 +418,14 @@
 }
 .age-system.sheet.char .sheet-header .age-header {
   margin-bottom: 4px;
+}
+.age-system.sheet.char .sheet-header .age-header > div {
+  margin-bottom: 4px;
+}
+.age-system.sheet.char .sheet-header .age-header input[name="data.age"],
+.age-system.sheet.char .sheet-header .age-header input[name="data.height"],
+.age-system.sheet.char .sheet-header .age-header input[name="data.weight"] {
+  max-width: 40px;
 }
 .age-system.sheet.char .sheet-header .age-header label {
   white-space: nowrap;
@@ -441,6 +452,13 @@
 .age-system.sheet.char .general-stats {
   text-align: center;
   margin-bottom: 4px;
+}
+.age-system.sheet.char .general-stats input[name="data.fatigue.status"] {
+  font-size: 12px;
+}
+.age-system.sheet.char .general-stats > div.armor {
+  border-radius: 4px;
+  background-color: white;
 }
 .age-system.sheet.char .general-stats .resources a {
   max-width: fit-content;
@@ -1194,6 +1212,9 @@
 }
 .age-system .no-flexwrap {
   flex-wrap: nowrap;
+}
+.age-system .flexwrap {
+  flex-wrap: wrap;
 }
 .age-system .flex-align-center {
   align-items: center;

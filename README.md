@@ -1,8 +1,9 @@
 # Unofficial AGE System for FVTT
 Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
+#### Version 0.0.3
 
 ## Intro
-This is a work in progress, not meant to be actualy used during normal play. Revision stuck at 0.0.1 until first publi
+This is a work in progress, not meant to be actualy used during normal play.
 
 ### Shortcuts
 1. Shift + Click on Attack or Damage rolls trigger GM roll (only GM can see).

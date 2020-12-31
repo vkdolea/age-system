@@ -18,7 +18,7 @@
             }
         }
         img {
-            height: 235px;
+            height: 251px;
             width: 150px;
             object-fit: contain;
             border: 0px;
@@ -27,9 +27,18 @@
 
         .age-header {
             margin-bottom: 4px;
+
+            >div {
+                margin-bottom: 4px
+            }
+
+            input[name="data.age"],
+            input[name="data.height"],
+            input[name="data.weight"] {
+                max-width: 40px;
+            }
+
             label {
-                // background-color: @modern-blue;
-                // color: white;
                 white-space: nowrap;
                 max-width: fit-content;
                 padding: 4px;
@@ -59,6 +68,15 @@
     .general-stats {
         text-align: center;
         margin-bottom: 4px;
+
+        input[name="data.fatigue.status"] {
+            font-size: 12px;
+        }
+        
+        >div.armor {
+            border-radius: 4px;
+            background-color: white;
+        }
 
         .resources {
             a {

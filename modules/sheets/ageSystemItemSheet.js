@@ -55,6 +55,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Setting which ability settings will be used
         const ablSelect = game.settings.get("age-system", "abilitySelection");
         data.config.abilities = data.config.abilitiesSettings[ablSelect];
+        data.config.wealthMode = game.settings.get("age-system", "wealthType");
 
         return data;
     };

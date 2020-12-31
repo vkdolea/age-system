@@ -1,0 +1,7 @@
+{{#when config.wealthMode 'noteq' 'currency'}}
+<label>{{localize "age-system.item.purchaseTN"}}</label>
+{{/when}}
+{{#when config.wealthMode 'eq' 'currency'}}
+<label>{{localize "age-system.item.cost"}}</label>
+{{/when}}
+<input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number" />
