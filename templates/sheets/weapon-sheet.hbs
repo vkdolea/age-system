@@ -82,14 +82,17 @@
                 {{!-- Reload --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.reload"}}</label>
+                    {{#if inChat}}
+                    <div>{{localize (concat "age-system." data.reload)}}</div>
+                    {{else}}
                     <select name="data.reload" {{#if inChat}}disabled{{/if}}>
                         {{#select data.reload}}
-                        <option value="0"><span>-</span></option>
-                        <option value="1">{{localize "age-system.minorAction"}}</option>
-                        <option value="2">{{localize "age-system.majorAction"}}</option>
-                        <option value="3">{{localize "age-system.d6minor"}}</option>
+                        {{#each config.reloadDuration as |reloadDuration|}}
+                        <option value="{{@key}}">{{localize reloadDuration}}</option>
+                        {{/each}}
                         {{/select}}
-                    </select>                       
+                    </select>    
+                    {{/if}}                   
                 </div>
             </div>
 

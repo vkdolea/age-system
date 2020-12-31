@@ -97,8 +97,8 @@
                     {{else}}
                     <select name="data.castTime" class="data-input">
                     {{#select data.castTime}}
-                        {{#each config.actionsToCast as |name type|}}
-                        <option value="{{type}}">{{localize name}}</option>
+                        {{#each config.actionsToCast as |actionsToCast|}}
+                        <option value="{{@key}}">{{localize actionsToCast}}</option>
                         {{/each}}
                     {{/select}}
                     </select>
