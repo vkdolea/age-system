@@ -1,5 +1,4 @@
-{{!-- Colorset defined in the highest section of the template --}}
-{{!-- <form class="actor-sheet {{cssClass}} colorset-selection colorset-modern-blue" autocomplete="off"></form> --}}
+{{!-- Colorset defined in the Actor Sheet Class --}}
 <form class="actor-sheet {{cssClass}} colorset-selection" autocomplete="off">
     <div class="char-sheet">
         <header class="sheet-header flexcol">
@@ -11,7 +10,7 @@
 
                 {{!-- General Character Information --}}
                 <div class="age-header">  
-                    <div class="flexrow">
+                    <div class="flexrow flexwrap">
                         <label for="">{{localize "age-system.age"}}</label>
                         <input type="text" name="data.age" value="{{data.age}}">
 
@@ -20,16 +19,19 @@
                         
                         <label for="">{{localize "age-system.weight"}}</label>
                         <input type="text" name="data.weight" value="{{data.weight}}">  
+
+                        <label for="">{{localize "age-system.background"}}</label>
+                        <input type="text" name="data.background" value="{{data.background}}">
                     </div>
 
                     <div class="flexrow">
-                        <label for="">{{localize "age-system.background"}}</label>
-                        <input type="text" name="data.background" value="{{data.background}}">
+                        <label for="">{{localize (concat "SETTINGS.ancestryOpt" ancestry)}}</label>
+                        <input type="text" name="data.ancestry" value="{{data.ancestry}}"> 
 
                         <label for="">{{localize "age-system.socialClass"}}</label>
                         <input type="text" name="data.socialClass" value="{{data.socialClass}}">
 
-                        <label for="">{{localize "age-system.profession"}}</label>
+                        <label for="">{{localize (concat "SETTINGS.occ" occupation)}}</label>
                         <input type="text" name="data.profession" value="{{data.profession}}">          
                     </div>
 
@@ -172,7 +174,9 @@
             {{!-- Currency/Resource/Income block --}}
             {{#if data.useCurrency}}
             <div class="flexcol general-stats">
-                <div class="top-row colorset-first-tier">{{localize "SETTINGS.wealthTypeCurrency"}}</div>
+                <div class="top-row colorset-first-tier flex-justify-center">
+                    {{localize "SETTINGS.wealthTypeCurrency"}}    
+                </div>
                 <div class="main-value flexcol">
                     <input type="number" disabled class="main-value" name="data.resources.base" value="{{data.resources.base}}" data-dtype="Number" />
                 </div>
@@ -182,7 +186,10 @@
             </div>
             {{else}}
             <div class="flexcol general-stats">
-                <div class="top-row colorset-first-tier">{{#if data.useResources}}{{localize "SETTINGS.wealthTypeResources"}}{{/if}}{{#if data.useIncome}}{{localize "SETTINGS.wealthTypeIncome"}}{{/if}}</div>
+                <div class="top-row colorset-first-tier flexrow no-flexwrap resources flex-justify-center">
+                    <a class="roll-resources feature-controls"><i class="fas fa-dice"></i></a>
+                    {{#if data.useResources}}{{localize "SETTINGS.wealthTypeResources"}}{{/if}}{{#if data.useIncome}}{{localize "SETTINGS.wealthTypeIncome"}}{{/if}}
+                </div>
                 <input type="number" disabled class="main-value" name="data.resources.total" value="{{data.resources.total}}" data-dtype="Number" />
                 <div class="stat-modifiers flexcol">
                     <div class="flexrow no-flexwrap">
@@ -201,7 +208,7 @@
             {{!-- Armor block --}}
             <div class="flexcol general-stats">
                 <div class="top-row colorset-first-tier">{{localize "age-system.armor"}}</div>
-                <div class="main-value flexcol">
+                <div class="main-value flexcol armor">
                     <div>{{data.armor.impact}}{{localize "age-system.impactIndex"}}</div>
                     <div>{{data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
                 </div>
@@ -232,7 +239,7 @@
             {{!-- Power Points block --}}
             {{#if data.usePowerPoints}}
             <div class="flexcol general-stats">
-                <div class="top-row colorset-first-tier">{{localize "age-system.powerPoints"}}</div>
+                <div class="top-row colorset-first-tier">{{localize "age-system.powerPointsIndex"}}</div>
                 <div class="main-value">
                     <input type="number" name="data.powerPoints.value" value="{{data.powerPoints.value}}" data-dtype="Number" />
                 </div>

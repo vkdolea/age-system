@@ -13,6 +13,8 @@ async function preloadHandlebarsTemplates() {
         "systems/age-system/templates/partials/dmg-block-sheet.hbs",
         "systems/age-system/templates/partials/bonuses-sheet.hbs",
         "systems/age-system/templates/partials/active-bonuses.hbs",
+        "systems/age-system/templates/partials/ability-focus-select.hbs",
+        "systems/age-system/templates/partials/cost-resource-block.hbs",
     ];
 
     return loadTemplates(templatePaths);
@@ -90,28 +92,26 @@ Hooks.once("ready", function() {
 Hooks.on("renderCompendium", function() {
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.compendiumList(setCompendium);
-    // ageSystem.focus = compendiumList("age-system.focus");
 });
 
 Hooks.on("renderageSystemItemSheet", (app, html, data) => {
-    // Add color scheme to item sheet
-    Setup.addColorScheme(html);
-
     // Add item type on title bar
     Setup.nameItemSheetWindow(app);
+    // Hide fatigue entries if Fatigue is not in use
+    Setup.hideFatigueEntry(html);
 });
 
 Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
     // Hide non used Abilities and order Ability Boxes in alphabeticaly
     Setup.charSheetSetup(app, html, data);
-    
-    // Add color scheme to charactersheet
-    Setup.addColorScheme(html);
 });
+
 Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
+
 Hooks.on("renderChatMessage", (app, html, data) => {
     // Hide chat message when rolling to GM
     AgeChat.selectBlindAgeRoll(app, html, data);
-    // Add color scheme to chat message
-    Setup.addColorScheme(html);
+
+    // Add color scheme to chat message // Not in use anymore - chat rolls keep the color from the scheme used originally
+    // Setup.addColorScheme(html);
 });

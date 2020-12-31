@@ -1,22 +1,26 @@
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
-export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor) {
+export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor, resourceRoll = false) {
 
     // Set roll mode
     const rMode = setBlind(event);
+    let rollData = {};
     
-    // All rolls are based on an Abilities
-    const ablValue = actor.data.data.abilities[abl].total;
-
     // Basic formula created spliting Stunt Die from the others
-    let rollFormula = "2d6 + 1d6 + @ability";
-    let rollData = {
-        ability: ablValue,
-        ablCode: abl,
-        focusId: null
-    };
+    let rollFormula = "2d6 + 1d6";
+
+    // Check if Ability is used
+    if (abl !== null && abl !== "no-abl") {
+        const ablValue = actor.data.data.abilities[abl].total;
+        rollFormula += " + @ability";
+        rollData = {
+            ability: ablValue,
+            ablCode: abl,
+            focusId: null
+        };
+    }
 
     // Check with Focus is involed in this roll and what is the applicable value for the Actor
-    if (focusRolled !== null) {
+    if (focusRolled !== null && focusRolled !== "") {
         rollFormula = `${rollFormula} + @focus`;
 
         // if focusRolled has an Object, the Actor has focus, then Focus Value is retrieved
@@ -44,6 +48,7 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor) {
     // Also checks if Item has Activation Mod
     if (itemRolled !== null) {
         rollData.itemId = itemRolled._id;
+        rollData.itemEntity = itemRolled;
         if (itemRolled.data.data.itemMods.itemActivation.isActive) {
             rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
             rollFormula += " + @activationMod"
@@ -68,13 +73,14 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor) {
 
     // Check if Fatigue is configured
     const usingFatigue = game.settings.get("age-system", "useFatigue");
+    rollData.usingFatigue = usingFatigue;
 
     // Check for Fatigue penalties
     const fatigue = actor.data.data.fatigue;
     
     // Apply Fatigue penalties, if in use
     if (usingFatigue) {
-        if (aim.value > 0) {
+        if (fatigue.value > 0) {
             rollData.fatigue = -fatigue.value;
             rollFormula = `${rollFormula} + @fatigue`;
         };
@@ -87,6 +93,17 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor) {
         rollData.guardUp = -guardUp.testPenalty;
         rollFormula = `${rollFormula} + @guardUp`;
     };
+
+    if (resourceRoll === true) {
+        rollFormula += " + @resources"
+        rollData.resources = actor.data.data.resources.total;
+        rollData.resourcesRoll = resourceRoll;
+        const resSelected = game.settings.get("age-system", "wealthType");
+        rollData.resourcesName = game.i18n.localize(`age-system.${resSelected}`);
+    };
+
+    // Informs roll card the current color scheme in use buy the user
+    rollData.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
 
     const ageRoll = new Roll(rollFormula, rollData).roll();
     const rollSummary = ageRollChecker(ageRoll)
@@ -228,10 +245,13 @@ export function itemDamage(event, item) {
         messageData.flavor += ` [${game.i18n.localize(`age-system.${item.data.data.dmgType}`)}] [${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}]`;
 
         // Adds owner's Ability to damage
-        const ablMod = item.actor.data.data.abilities[dmgAbl].total;
-        damageFormula = `${damageFormula} + @abilityMod`;
-        rollData.abilityMod = ablMod;
-        messageData.flavor += ` | ${damageToString(ablMod)}, ${game.i18n.localize("age-system." + dmgAbl)}`
+        if (dmgAbl !== null && dmgAbl !== "no-abl")
+        {
+            const ablMod = item.actor.data.data.abilities[dmgAbl].total;
+            damageFormula = `${damageFormula} + @abilityMod`;
+            rollData.abilityMod = ablMod;
+            messageData.flavor += ` | ${damageToString(ablMod)}, ${game.i18n.localize("age-system." + dmgAbl)}`
+        }
 
         // Check if Item has Mod to add to its own Damage
         if (item.data.data.itemMods.itemDamage.isActive) {

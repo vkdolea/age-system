@@ -59,6 +59,10 @@
             width: 100%;
         }
 
+        p.in-chat-text {
+            margin: 0px;
+        }
+
         section.sheet-tab-section {
             height: 100%;
             border-radius: 0px 0px 10px 10px;
@@ -100,11 +104,16 @@
                 min-width: 140px;
                 text-align: center;
             };
+            
+            input[name="data.cost"] {
+                max-width: 60px;
+                min-width: 60px;
+            }
 
             input[name="data.targetNumber"],
-            input[name="data.manaCost"],
+            input[name="data.powerPointCost"],
+            input[name="data.fatigueTN"],
             input[name="data.minStr"],
-            input[name="data.cost"],
             input[name="data.weight"],
             input[name="data.range"],
             input[name="data.capacity"],

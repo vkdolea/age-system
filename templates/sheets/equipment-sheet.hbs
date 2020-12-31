@@ -1,4 +1,4 @@
-<form class="{{cssClass}} age-system item equipment colorset-selection colorset-modern-blue" autocomplete="off">
+<form class="{{cssClass}} age-system item equipment colorset-selection {{data.colorScheme}}" autocomplete="off">
 
     <div class="sheet-content item-stats equipment">
         <div class="flexcol">
@@ -8,10 +8,9 @@
             <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
             {{/if}}
             <div class="flexrow item-card-stats">
-                {{!-- Resource TL --}}
+                {{!-- Purchase Test / Cost --}}
                 <div class="flexcol">
-                    <label>{{localize "age-system.item.resourceTN"}}</label>
-                    <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number" />
+                    {{> "systems/age-system/templates/partials/cost-resource-block.hbs"}}
                 </div>
                 {{!-- Quantity --}}
                 <div class="flexcol">

@@ -9,7 +9,7 @@ export default class ageSystemItemSheet extends ItemSheet {
                 this.options.width = this.position.width = "350";
                 break;
             case "weapon":
-                this.options.width = this.position.width = "478";
+                this.options.width = this.position.width = "530";
                 this.options.height = this.position.height = "430";
                 break;
             case "talent":
@@ -32,7 +32,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         return mergeObject(super.defaultOptions, {
             height: 340,
             width: 516,
-            classes: ["age-system", "sheet", "item"],
+            classes: ["age-system", "sheet", "item", `colorset-${game.settings.get("age-system", "colorScheme")}`],
             tabs: [{
                 navSelector: ".add-sheet-tabs",
                 contentSelector: ".sheet-tab-section",
@@ -55,6 +55,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Setting which ability settings will be used
         const ablSelect = game.settings.get("age-system", "abilitySelection");
         data.config.abilities = data.config.abilitiesSettings[ablSelect];
+        data.config.wealthMode = game.settings.get("age-system", "wealthType");
 
         return data;
     };
@@ -69,6 +70,11 @@ export default class ageSystemItemSheet extends ItemSheet {
                 };
             };
 
+            if (this.item.data.type === "power") {
+                html.find(".toggle-damage").click(this._onToggleDamage.bind(this))
+                html.find(".toggle-fatigue").click(this._onToggleFatigue.bind(this))
+            };
+
         };
 
         // Actions by sheet owner only
@@ -78,6 +84,16 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         super.activateListeners(html);
     };
+
+    _onToggleDamage(event) {
+        this.item.data.data.causeDamage = !this.item.data.data.causeDamage;
+        this.item.update(this.item.data)
+    };
+
+    _onToggleFatigue(event) {
+        this.item.data.data.useFatigue = !this.item.data.data.useFatigue;
+        this.item.update(this.item.data)
+    };    
     
     // Adds an * in front of the owned Focus name whenever the user types a name of another owned Focus
     // => Actors are not allowed to have more than 1 Focus with the same name

@@ -47,6 +47,17 @@
   max-width: 100%;
   width: 100%;
 }
+.age-system.item .focus p.in-chat-text,
+.age-system.item .power p.in-chat-text,
+.age-system.item .talent p.in-chat-text,
+.age-system.item .weapon p.in-chat-text,
+.age-system.item .equipment p.in-chat-text,
+.age-system.item .stunts p.in-chat-text,
+.age-system.item .honorifics p.in-chat-text,
+.age-system.item .relationship p.in-chat-text,
+.age-system.item .membership p.in-chat-text {
+  margin: 0px;
+}
 .age-system.item .focus section.sheet-tab-section,
 .age-system.item .power section.sheet-tab-section,
 .age-system.item .talent section.sheet-tab-section,
@@ -138,6 +149,18 @@
   min-width: 140px;
   text-align: center;
 }
+.age-system.item .focus .item-card-stats input[name="data.cost"],
+.age-system.item .power .item-card-stats input[name="data.cost"],
+.age-system.item .talent .item-card-stats input[name="data.cost"],
+.age-system.item .weapon .item-card-stats input[name="data.cost"],
+.age-system.item .equipment .item-card-stats input[name="data.cost"],
+.age-system.item .stunts .item-card-stats input[name="data.cost"],
+.age-system.item .honorifics .item-card-stats input[name="data.cost"],
+.age-system.item .relationship .item-card-stats input[name="data.cost"],
+.age-system.item .membership .item-card-stats input[name="data.cost"] {
+  max-width: 60px;
+  min-width: 60px;
+}
 .age-system.item .focus .item-card-stats input[name="data.targetNumber"],
 .age-system.item .power .item-card-stats input[name="data.targetNumber"],
 .age-system.item .talent .item-card-stats input[name="data.targetNumber"],
@@ -147,15 +170,24 @@
 .age-system.item .honorifics .item-card-stats input[name="data.targetNumber"],
 .age-system.item .relationship .item-card-stats input[name="data.targetNumber"],
 .age-system.item .membership .item-card-stats input[name="data.targetNumber"],
-.age-system.item .focus .item-card-stats input[name="data.manaCost"],
-.age-system.item .power .item-card-stats input[name="data.manaCost"],
-.age-system.item .talent .item-card-stats input[name="data.manaCost"],
-.age-system.item .weapon .item-card-stats input[name="data.manaCost"],
-.age-system.item .equipment .item-card-stats input[name="data.manaCost"],
-.age-system.item .stunts .item-card-stats input[name="data.manaCost"],
-.age-system.item .honorifics .item-card-stats input[name="data.manaCost"],
-.age-system.item .relationship .item-card-stats input[name="data.manaCost"],
-.age-system.item .membership .item-card-stats input[name="data.manaCost"],
+.age-system.item .focus .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .power .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .talent .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .weapon .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .equipment .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .stunts .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .honorifics .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .relationship .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .membership .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .focus .item-card-stats input[name="data.fatigueTN"],
+.age-system.item .power .item-card-stats input[name="data.fatigueTN"],
+.age-system.item .talent .item-card-stats input[name="data.fatigueTN"],
+.age-system.item .weapon .item-card-stats input[name="data.fatigueTN"],
+.age-system.item .equipment .item-card-stats input[name="data.fatigueTN"],
+.age-system.item .stunts .item-card-stats input[name="data.fatigueTN"],
+.age-system.item .honorifics .item-card-stats input[name="data.fatigueTN"],
+.age-system.item .relationship .item-card-stats input[name="data.fatigueTN"],
+.age-system.item .membership .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .focus .item-card-stats input[name="data.minStr"],
 .age-system.item .power .item-card-stats input[name="data.minStr"],
 .age-system.item .talent .item-card-stats input[name="data.minStr"],
@@ -165,15 +197,6 @@
 .age-system.item .honorifics .item-card-stats input[name="data.minStr"],
 .age-system.item .relationship .item-card-stats input[name="data.minStr"],
 .age-system.item .membership .item-card-stats input[name="data.minStr"],
-.age-system.item .focus .item-card-stats input[name="data.cost"],
-.age-system.item .power .item-card-stats input[name="data.cost"],
-.age-system.item .talent .item-card-stats input[name="data.cost"],
-.age-system.item .weapon .item-card-stats input[name="data.cost"],
-.age-system.item .equipment .item-card-stats input[name="data.cost"],
-.age-system.item .stunts .item-card-stats input[name="data.cost"],
-.age-system.item .honorifics .item-card-stats input[name="data.cost"],
-.age-system.item .relationship .item-card-stats input[name="data.cost"],
-.age-system.item .membership .item-card-stats input[name="data.cost"],
 .age-system.item .focus .item-card-stats input[name="data.weight"],
 .age-system.item .power .item-card-stats input[name="data.weight"],
 .age-system.item .talent .item-card-stats input[name="data.weight"],
@@ -387,7 +410,7 @@
   width: 100%;
 }
 .age-system.sheet.char .sheet-header img {
-  height: 235px;
+  height: 251px;
   width: 150px;
   object-fit: contain;
   border: 0px;
@@ -395,6 +418,14 @@
 }
 .age-system.sheet.char .sheet-header .age-header {
   margin-bottom: 4px;
+}
+.age-system.sheet.char .sheet-header .age-header > div {
+  margin-bottom: 4px;
+}
+.age-system.sheet.char .sheet-header .age-header input[name="data.age"],
+.age-system.sheet.char .sheet-header .age-header input[name="data.height"],
+.age-system.sheet.char .sheet-header .age-header input[name="data.weight"] {
+  max-width: 40px;
 }
 .age-system.sheet.char .sheet-header .age-header label {
   white-space: nowrap;
@@ -421,6 +452,19 @@
 .age-system.sheet.char .general-stats {
   text-align: center;
   margin-bottom: 4px;
+}
+.age-system.sheet.char .general-stats input[name="data.fatigue.status"] {
+  font-size: 12px;
+}
+.age-system.sheet.char .general-stats > div.armor {
+  border-radius: 4px;
+  background-color: white;
+}
+.age-system.sheet.char .general-stats .resources a {
+  max-width: fit-content;
+}
+.age-system.sheet.char .general-stats .resources i {
+  margin-right: 4px;
 }
 .age-system.sheet.char .general-stats input[type="number"] {
   max-height: 26px;
@@ -1169,14 +1213,17 @@
 .age-system .no-flexwrap {
   flex-wrap: nowrap;
 }
+.age-system .flexwrap {
+  flex-wrap: wrap;
+}
 .age-system .flex-align-center {
   align-items: center;
 }
+.age-system .flex-align-start {
+  align-items: flex-start;
+}
 .age-system .flex-justify-center {
   justify-content: center;
-}
-.age-system .flex-justify-start {
-  justify-content: flex-start;
 }
 .age-system .flex-justify-between {
   justify-content: space-between;

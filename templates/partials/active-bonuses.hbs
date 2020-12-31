@@ -1,11 +1,16 @@
-<div class="flexrow item-card-stats">
-    {{!-- Active Bonuses --}}
-    {{#each data.itemMods as |item|}}
-    {{#if item.isActive}}
-        <div class="flexcol">
-            <label>{{localize (concat "age-system.bonus." @key)}}</label>
-            <span>{{item.value}}</span>
-        </div>
+{{!-- Active Bonuses --}}
+<div class="flexrol flex-align-center item-card-stats">
+    {{#if data.hasModificators}}
+    <hr>
     {{/if}}
-    {{/each}}
+    <div class="flexrow">
+        {{#each data.itemMods as |item|}}
+        {{#if item.isActive}}
+            <div class="flexcol">
+                <label>{{localize (concat "age-system.bonus." @key)}}</label>
+                <span>{{item.value}}</span>
+            </div>
+        {{/if}}
+        {{/each}}
+    </div>
 </div>

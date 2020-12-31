@@ -20,7 +20,6 @@ export class ageSystemItem extends Item {
         /*
         * Focus value set as manual input - Improved checkbox used to indicate improved focus on Character Sheet
         */
-
         // Data initialization for Focus
         // if (itemType === "focus") {
         //     if (data.improved) {
@@ -32,7 +31,9 @@ export class ageSystemItem extends Item {
 
         // Adds value to represent portion added to dice on damage roll
         if (this.isOwned && this.hasDamage()) {
-            data.ablDamageValue = this.actor.data.data.abilities[data.useAbl].total;
+            if (data.dmgAbl !== "no-abl") {
+                data.ablDamageValue = this.actor.data.data.abilities[data.dmgAbl].total;
+            }
         };
 
         // Identify related Weapon/Power Focus ID owned by Actor
@@ -49,8 +50,12 @@ export class ageSystemItem extends Item {
 
         };
 
-        // Identify specific flags for the Power item type
+        // Data preparation for Power item type
         if (itemType === "power") {
+
+            const useFatigue = game.settings.get("age-system", "useFatigue");
+            if (!useFatigue) {data.useFatigue = false};
+
             data.itemForce = 10;
             if (data.itemMods.powerForce.isActive) {
                 data.itemForce += data.itemMods.powerForce.value;
@@ -61,35 +66,34 @@ export class ageSystemItem extends Item {
                 data.itemForce += this.actor.data.data.abilities[data.useAbl].total;
                 data.itemForce += this.ownerFocusValue();
             };
+
+
+
+            if (data.inputFatigueTN === false) {
+                data.fatigueTN = 9 + Math.floor(Number(data.powerPointCost)/2);
+            }
             
         }
 
         data.hasDamage = this.hasDamage();
+        data.hasFatigue = this.hasFatigue();
+        data.hasModificators = this.hasModificators();
 
-        /** Damage Type table:
-         *  damageType
-         *  0: Impact
-         *  1: Balistic
-         *  2: Penetrating
-         */
+        // Adds reference to in-use color scheme
+        data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
 
-        /** Weapon Reload table:
-         *  reload
-         *  0: -
-         *  1: Minor Action
-         *  2: Major Action
-         *  3: 1d6 Minor
-         */
-
-        /** Casting Time table:
-         *  castingTime
-         *  0: -
-         *  1: Minor Action
-         *  2: Major Action
-         *  3: 1 Minute
-         */
         this.prepareEmbeddedEntities();        
     };
+
+    hasModificators() {
+        const inCheckMods = this.data.data.itemMods;
+        for (const key in inCheckMods) {
+            if (inCheckMods.hasOwnProperty(key) && inCheckMods[key].isActive) {
+                return true;
+            };
+        };
+        return false;
+    };    
 
     // Check if Item can cause damage
     hasDamage() {
@@ -99,13 +103,28 @@ export class ageSystemItem extends Item {
         return false;
     };
 
+    // Check if Item requires Fatigue roll to be used
+    hasFatigue() {
+        const type = this.type;
+        if (type === "power") {return this.data.data.useFatigue};
+        return false;
+    };
+
+    // Rolls damage for the item
     rollDamage(event) {
         if (!this.hasDamage()) {return false};
         return Dice.itemDamage(event, this);
     };
 
+    // Rolls fatigue for the Item
+    rollFatigue(event) {
+        if (!this.hasFatigue()) {return false};
+        const data = this.data.data;
+        return Dice.ageRollCheck(event, data.useAbl, this.ownerFocusEntity(), this, this.actor);
+    };
+
     /** Returns owner's Focus value, base on Item's useFocus property
-     * TODO = figure out how to add FocusValue on Power's Force
+     * TODO = figure out how if derived data can be input to another Item
      */
     ownerFocusValue() {
         const itemData = this.data;
@@ -140,6 +159,30 @@ export class ageSystemItem extends Item {
         "relationship": "systems/age-system/templates/sheets/relationship-sheet.hbs",
         "honorifics": "systems/age-system/templates/sheets/honorifics-sheet.hbs",
         "membership": "systems/age-system/templates/sheets/membership-sheet.hbs"
+    };
+
+    // Returns owned Focus Item entity used to activate this item - false otherwise
+    ownerFocusEntity() {
+        const itemData = this.data;
+        const data = itemData.data;
+        const owner = this.actor;
+
+        if (data.useFocus === null || data.useFocus === "" || this.isOwned === false || owner === null) {
+            return null;
+        };
+
+        const ownerFoci = owner.data.items.filter(a => a.type === "focus");
+        const expectedFocus = data.useFocus.toLowerCase();
+        const validFocus = ownerFoci.filter(c => c.name.toLowerCase() === expectedFocus);
+        // Orignalmente:
+        // const validFocus = ownerFoci.filter(c => c.data.nameLowerCase === expectedFocus);
+
+        if (validFocus.length < 1) {
+            return data.useFocus;
+        } else {
+            const id = validFocus[0]._id;
+            return this.actor.getOwnedItem(id);
+        };    
     };
 
     async showItem() {

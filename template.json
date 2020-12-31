@@ -4,7 +4,6 @@
         "templates": {},
         "char": {
             "statBlockView": false,
-            "rollType": "open",
             "level": 1,
             "xp": {
                 "value": 0,
@@ -12,6 +11,11 @@
                 "advPoints": 0
             },
             "features": "",
+            "age": "",
+            "background": "",
+            "socialClass": "",
+            "ancestry": "",
+            "profession": "",
             "drive": {
                 "name": "",
                 "quality": "",
@@ -189,7 +193,7 @@
             "activation": {
                 "useAbl": "acc",
                 "targetNumber": 10,
-                "manaCost": 1,
+                "powerPointCost": 1,
                 "fatigueTN": 10
             },
             "description": {
@@ -327,7 +331,7 @@
             "reload": "minor",
             "capacity": 1,
             "range": 1,
-            "rof": "SS"
+            "rof": "none"
         },
         "power": {
             "templates": ["damage", "itemReq", "description", "activation", "bonuses"],

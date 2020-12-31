@@ -1,5 +1,6 @@
 export function addChatListeners(html) {
     html.on('click', '.roll-damage', chatDamageRoll);
+    html.on('click', '.roll-fatigue', chatFatigueRoll);
 };
 
 export function chatDamageRoll(event) {
@@ -7,6 +8,13 @@ export function chatDamageRoll(event) {
     const owner = game.actors.get(card.dataset.actorId);
     const damageSource = owner.getOwnedItem(card.dataset.itemId);
     damageSource.rollDamage(event);
+};
+
+export function chatFatigueRoll(event) {
+    const card = event.currentTarget.closest(".feature-controls");
+    const owner = game.actors.get(card.dataset.actorId);
+    const damageSource = owner.getOwnedItem(card.dataset.itemId);
+    damageSource.rollFatigue(event);
 };
 
 export function selectBlindAgeRoll(chatCard, html, data) {

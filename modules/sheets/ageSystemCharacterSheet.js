@@ -7,7 +7,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             // resizable: false,
             width: 680,
             height: 800,
-            classes: ["age-system", "sheet", "char"]
+            classes: ["age-system", "sheet", "char", `colorset-${game.settings.get("age-system", "colorScheme")}`]
         });
     }
 
@@ -77,16 +77,9 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
 
-        // data.weapon = data.items.filter(i => i.type === "weapon");
-        // data.talent = data.items.filter(i => i.type === "talent");
-        // data.power = data.items.filter(i => i.type === "power");
-        // data.focus = data.items.filter(i => i.type === "focus");
-        // data.stunts = data.items.filter(i => i.type === "stunts");
-        // data.equipment = data.items.filter(i => i.type === "equipment");
-        // data.honorifics = data.items.filter(i => i.type === "honorifics");
-        // data.relationship = data.items.filter(i => i.type === "relationship");
-        // data.membership = data.items.filter(i => i.type === "membership");
-
+        // Retrieve Prefession/Ancestry settings
+        data.ancestry = game.settings.get("age-system", "ancestryOpt");
+        data.occupation = game.settings.get("age-system", "occupation");
 
         // Return data to the sheet
         return data;
@@ -96,9 +89,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     async _onDropItem(event, data) {
         if ( !this.actor.owner ) return false;
         const item = await Item.fromDropData(data);
-        const itemData = duplicate(item.data);
-
-        
+        /*-----------Beginning of added code--------------*/
         // Check if droped item is a Focus and then confirm if Actor already has a Focus with the same name
         // If positive, then returns FALSE
         if (item.data.type === "focus") {
@@ -108,10 +99,15 @@ export default class ageSystemCharacterSheet extends ActorSheet {
                 const e = ownedFoci[i];
                 const eName = e.data.data.nameLowerCase;
                 if (eName === itemNameLowerCase) {
+                    let warning = game.i18n.localize("age-system.WARNING.duplicatedFocus");
+                    warning += `"${eName.toUpperCase()}"`;
+                    ui.notifications.warn(warning);
                     return false;
                 };            
             };
-        };        
+        };
+        /*-------------End of added code------------------*/
+        const itemData = duplicate(item.data);
         
         const actor = this.actor;
         // Handle item sorting within the same Actor
@@ -140,9 +136,14 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
+            html.find(".roll-resources").click(this._onRollResources.bind(this));
         };
 
         super.activateListeners(html);
+    };
+
+    _onRollResources(event) {
+        Dice.ageRollCheck(event, null, null, null, this.actor, true);
     };
 
     _onLastUpSelect(ev) {
