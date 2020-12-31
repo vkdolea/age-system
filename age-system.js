@@ -99,7 +99,6 @@ Hooks.on("renderageSystemItemSheet", (app, html, data) => {
 });
 
 Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
-
     // Hide non used Abilities and order Ability Boxes in alphabeticaly
     Setup.charSheetSetup(app, html, data);
 });
@@ -107,10 +106,9 @@ Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
 Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
 
 Hooks.on("renderChatMessage", (app, html, data) => {
-
     // Hide chat message when rolling to GM
     AgeChat.selectBlindAgeRoll(app, html, data);
 
-    // Add color scheme to chat message
-    Setup.addColorScheme(html);
+    // Add color scheme to chat message // Not in use anymore - chat rolls keep the color from the scheme used originally
+    // Setup.addColorScheme(html);
 });

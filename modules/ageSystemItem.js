@@ -67,6 +67,9 @@ export class ageSystemItem extends Item {
         data.hasDamage = this.hasDamage();
         data.hasFatigue = this.hasFatigue();
 
+        // Adds reference to in-use color scheme
+        data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
+
         /** Damage Type table:
          *  damageType
          *  0: Impact
@@ -107,11 +110,13 @@ export class ageSystemItem extends Item {
         return false;
     };
 
+    // Rolls damage for the item
     rollDamage(event) {
         if (!this.hasDamage()) {return false};
         return Dice.itemDamage(event, this);
     };
 
+    // Rolls fatigue for the Item
     rollFatigue(event) {
         if (!this.hasFatigue()) {return false};
         const data = this.data.data;
@@ -119,7 +124,7 @@ export class ageSystemItem extends Item {
     };
 
     /** Returns owner's Focus value, base on Item's useFocus property
-     * TODO = figure out how to add FocusValue on Power's Force
+     * TODO = figure out how if derived data can be input to another Item
      */
     ownerFocusValue() {
         const itemData = this.data;

@@ -136,7 +136,8 @@ export const registerSystemSettings = function() {
       // "ronin-green": "SETTINGS.colorRoninGreen",
       // "expanded-blue": "SETTINGS.colorExpandedBlue",
       "folded-purple": "SETTINGS.colorFoldedPurple",
-    }
+    },
+    onChange:()=>{window.location.reload(!1)}
   });
 };
 

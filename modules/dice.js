@@ -102,6 +102,9 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor, r
         rollData.resourcesName = game.i18n.localize(`age-system.${resSelected}`);
     };
 
+    // Informs roll card the current color scheme in use buy the user
+    rollData.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
+
     const ageRoll = new Roll(rollFormula, rollData).roll();
     const rollSummary = ageRollChecker(ageRoll)
     let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
