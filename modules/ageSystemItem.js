@@ -31,7 +31,9 @@ export class ageSystemItem extends Item {
 
         // Adds value to represent portion added to dice on damage roll
         if (this.isOwned && this.hasDamage()) {
-            data.ablDamageValue = this.actor.data.data.abilities[data.dmgAbl].total;
+            if (data.dmgAbl !== "no-abl") {
+                data.ablDamageValue = this.actor.data.data.abilities[data.dmgAbl].total;
+            }
         };
 
         // Identify related Weapon/Power Focus ID owned by Actor

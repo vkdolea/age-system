@@ -22,6 +22,7 @@
             <span>{{localize "age-system.settings.plusSign"}}</span>
             <select name="data.dmgAbl">
                 {{#select data.dmgAbl}}
+                <option value="no-abl"></option>
                 {{#each config.abilities as |name type|}}
                 <option value="{{type}}">{{localize name}}</option>
                 {{/each}}

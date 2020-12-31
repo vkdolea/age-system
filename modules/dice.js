@@ -9,7 +9,7 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor, r
     let rollFormula = "2d6 + 1d6";
 
     // Check if Ability is used
-    if (abl !== null) {
+    if (abl !== null && abl !== "no-abl") {
         const ablValue = actor.data.data.abilities[abl].total;
         rollFormula += " + @ability";
         rollData = {
@@ -245,10 +245,13 @@ export function itemDamage(event, item) {
         messageData.flavor += ` [${game.i18n.localize(`age-system.${item.data.data.dmgType}`)}] [${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}]`;
 
         // Adds owner's Ability to damage
-        const ablMod = item.actor.data.data.abilities[dmgAbl].total;
-        damageFormula = `${damageFormula} + @abilityMod`;
-        rollData.abilityMod = ablMod;
-        messageData.flavor += ` | ${damageToString(ablMod)}, ${game.i18n.localize("age-system." + dmgAbl)}`
+        if (dmgAbl !== null && dmgAbl !== "no-abl")
+        {
+            const ablMod = item.actor.data.data.abilities[dmgAbl].total;
+            damageFormula = `${damageFormula} + @abilityMod`;
+            rollData.abilityMod = ablMod;
+            messageData.flavor += ` | ${damageToString(ablMod)}, ${game.i18n.localize("age-system." + dmgAbl)}`
+        }
 
         // Check if Item has Mod to add to its own Damage
         if (item.data.data.itemMods.itemDamage.isActive) {

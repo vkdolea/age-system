@@ -21,14 +21,14 @@ This is a work in progress, not meant to be actualy used during normal play. Rev
 8. Add The Expanse spaceship sheet (set as Actor).
 9. ~~Automatically add Focus value to Power Force - currently Power Force is only affected by key Ability. To allow Focus modificator, use the Modificator "This Item Force".~~
 10. When attacking a token, indicate Hit or Miss by comparing the roll against token's/enemy's Defense score.
-11. Add code on Roll Fatigue button when a Power activation is rolled.
-12. Hide Roll Damage and Roll Fatigue buttons for players without permission to control the Actor originating the roll.
+11. ~~Add code on Roll Fatigue button when a Power activation is rolled.~~
+12. ~~Hide Roll Damage and Roll Fatigue buttons for players without permission to control the Actor originating the roll.~~
 13. ~~Add setup to select any Compendium to create the `datalist` with Focus options. Currently the system only looks at the Focus Compendium created with the world.~~
 14. Add Alt + Click on test/damage rolls to add modifiers (constants or extra die).
 15. Add Dynamic Effects support to Actors.
 16. ~~Initiative roll implemented as `3d6 + Dexterity - Armor Penalty + Initiative Mod` (the later accessed by character sheet).~~
 17. Add support to Organizations (as Actors).
-18. Add option for weapons and powers to cause damage without taking Ability into consideration
+18. ~~Add option for weapons and powers to cause damage without taking Ability into consideration~~
 
 ### Known bugs
 1. ~~Fix Item rolls on Chat (fix the Description/Modificators visualization).~~
