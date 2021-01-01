@@ -14,7 +14,7 @@ This is a work in progress, not meant to be actualy used during normal play.
 
 ### v0.0.4
 #### Added
-- Checkbox to indicate primary/secondary Abilities.
+- Checkbox to indicate select Abilities.
 
 #### Fixed
 - Fixed an error causing Currency input to be disabled.
