@@ -29,6 +29,19 @@ export const registerSystemSettings = function() {
   }); 
 
   /**
+   * Option to use split armor
+   */
+  game.settings.register("age-system", "useBallisticArmor", {
+    name: "SETTINGS.useBallisticArmor",
+    hint: "SETTINGS.useBallisticArmorHint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean,
+    onChange:()=>{window.location.reload(!1)}
+  });
+
+  /**
    * Register if world will use Fatigue
    */
   game.settings.register("age-system", "useFatigue", {

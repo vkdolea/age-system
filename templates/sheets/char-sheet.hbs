@@ -209,8 +209,10 @@
             <div class="flexcol general-stats">
                 <div class="top-row colorset-first-tier">{{localize "age-system.armor"}}</div>
                 <div class="main-value flexcol armor">
-                    <div>{{data.armor.impact}}{{localize "age-system.impactIndex"}}</div>
+                    <div>{{data.armor.impact}}{{#if data.useBallisticArmor}}{{localize "age-system.impactIndex"}}{{/if}}</div>
+                    {{#if data.useBallisticArmor}}
                     <div>{{data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
+                    {{/if}}
                 </div>
                 <div class="stat-modifiers flexrow no-flexwrap">
                     <input type="number" disabled name="data.armor.penalty" value="{{data.armor.penalty}}" data-dtype="Number" />                

@@ -21,6 +21,9 @@ export class ageSystemActor extends Actor {
         // Check if Power Points is in use
         data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
 
+        // Check if split Armor is in use
+        data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
+
         // Retrieve wealth mode
         data.useResource = data.useIncome = data.useCurrency = false;
         const wealthMode = game.settings.get("age-system", "wealthType");

@@ -12,10 +12,12 @@ This is a work in progress, not meant to be actualy used during normal play.
 
 ## Change log
 
-### v0.0.4
+### v0.1.0
 #### Added
 - Checkbox to indicate select Abilities.
 - Added option to hide primary Abilities checkbox if not used.
+- Added option to use Impact and Ballistic armor or generic Armor.
+- Added field in character sheet to track Threshold during Advanced Tests.
 
 #### Fixed
 - Fixed an error causing Currency input to be disabled.

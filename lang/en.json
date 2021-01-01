@@ -22,6 +22,9 @@
     "SETTINGS.useToughness": "Use Toughness",
     "SETTINGS.useToughnessHint": "Check if the game will use Toughness statistics",
 
+    "SETTINGS.useBallisticArmor": "Use Impact and Ballistic armor",
+    "SETTINGS.useBallisticArmorHint": "Select if armor is divided into Impact and Ballistic",
+
     "SETTINGS.wealthType": "Wealth system in use",
     "SETTINGS.wealthTypeHint": "Income and Resource are test based wealth system, while Currency is the usual buying system",
     "SETTINGS.wealthTypeResources": "Resources",
