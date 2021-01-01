@@ -152,7 +152,8 @@
                 "min": 0,
                 "value": 3,
                 "set": 3
-            }
+            },
+            "advTestThreshold": 0
         }
     },
     "Item": {

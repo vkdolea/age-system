@@ -27,13 +27,15 @@ ageSystem.abilitiesSettings.dage = {
     will: "age-system.will",
 };
 
-
-
 ageSystem.actionsToCast = {
     noAction: "age-system.noAction",
     minorAction: "age-system.minorAction",
     majorAction: "age-system.majorAction",
-    oneMinute: "age-system.oneMinute"
+    oneMinute: "age-system.oneMinute",
+    fiveMinutes: "age-system.fiveMinutes",
+    tenMinutes: "age-system.tenMinutes",
+    twentyMinutes: "age-system.tenMinutes",
+    onHouer: "age-system.tenMinutes",
 };
 
 ageSystem.reloadDuration = {
