@@ -212,19 +212,21 @@ export class ageSystemActor extends Actor {
             const itemInCheck = ownedItems[it];
             const inCheckMods = itemInCheck.data.itemMods;
 
-            for (const key in inCheckMods) {
-                if (inCheckMods.hasOwnProperty(key) && inCheckMods[key].isActive && inCheckMods[key].value !== 0) {
-                    if (!ownedMods[key]) {
-                        ownedMods[key] = {
-                            modList: [],
-                            totalMod: 0
+            if (itemInCheck.data.equiped === true || itemInCheck.data.activate === true) {
+                for (const key in inCheckMods) {
+                    if (inCheckMods.hasOwnProperty(key) && inCheckMods[key].isActive && inCheckMods[key].value !== 0) {
+                        if (!ownedMods[key]) {
+                            ownedMods[key] = {
+                                modList: [],
+                                totalMod: 0
+                            };
                         };
+                        ownedMods[key].modList.push({
+                            carrierId: itemInCheck._id,
+                            carrierName: itemInCheck.name,
+                            mod: inCheckMods[key].value
+                        });
                     };
-                    ownedMods[key].modList.push({
-                        carrierId: itemInCheck._id,
-                        carrierName: itemInCheck.name,
-                        mod: inCheckMods[key].value
-                    });
                 };
             };
         };

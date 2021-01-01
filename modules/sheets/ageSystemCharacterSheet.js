@@ -139,9 +139,22 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
             html.find(".roll-resources").click(this._onRollResources.bind(this));
+            html.find(".item-equip").click(this._onItemActivate.bind(this));
         };
 
         super.activateListeners(html);
+    };
+
+    _onItemActivate(event) {
+        const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
+        const itemToToggle = this.actor.getOwnedItem(itemId);
+        const itemType = itemToToggle.type;
+        if (itemType === "power") {
+            itemToToggle.data.data.activate = !itemToToggle.data.data.activate;
+        } else {
+            itemToToggle.data.data.equiped = !itemToToggle.data.data.equiped;
+        };
+        itemToToggle.update(itemToToggle.data);
     };
 
     _onRollResources(event) {
