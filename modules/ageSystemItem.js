@@ -195,8 +195,11 @@ export class ageSystemItem extends Item {
             inChat: true,
             name: this.data.name,
             data: this.data.data,
-            owner: this.actor
+            owner: this.actor,
+            config: {}
         };
+        cardData.config.wealthMode = game.settings.get("age-system", "wealthType");
+
         
         chatData.content = await renderTemplate(this.chatTemplate[this.type], cardData);
         chatData.roll = false;

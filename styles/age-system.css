@@ -47,6 +47,17 @@
   max-width: 100%;
   width: 100%;
 }
+.age-system.item .focus .damage-formula p.in-chat-text,
+.age-system.item .power .damage-formula p.in-chat-text,
+.age-system.item .talent .damage-formula p.in-chat-text,
+.age-system.item .weapon .damage-formula p.in-chat-text,
+.age-system.item .equipment .damage-formula p.in-chat-text,
+.age-system.item .stunts .damage-formula p.in-chat-text,
+.age-system.item .honorifics .damage-formula p.in-chat-text,
+.age-system.item .relationship .damage-formula p.in-chat-text,
+.age-system.item .membership .damage-formula p.in-chat-text {
+  white-space: nowrap;
+}
 .age-system.item .focus p.in-chat-text,
 .age-system.item .power p.in-chat-text,
 .age-system.item .talent p.in-chat-text,
@@ -160,6 +171,7 @@
 .age-system.item .membership .item-card-stats input[name="data.cost"] {
   max-width: 60px;
   min-width: 60px;
+  text-align: center;
 }
 .age-system.item .focus .item-card-stats input[name="data.targetNumber"],
 .age-system.item .power .item-card-stats input[name="data.targetNumber"],

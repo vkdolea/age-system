@@ -276,7 +276,7 @@
             "reload": "Reload Time",
             "capacity": "Capacity",
             "equiped": "Equiped",
-            "minStr": "Minimum Strength",
+            "minStr": "Min STR",
             "cast": "Cast",
             "force": "Force"
         },
