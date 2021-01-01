@@ -338,7 +338,8 @@
                         <div class="abl-name">
                             <a class="roll-ability feature-controls" data-abl-id="{{type}}"><i class="fas fa-dice"></i></a>
                             <label for="data.abilities.{{type}}.value">{{localize (concat "age-system." type)}}</label>
-                        </div>                    
+                        </div>
+                        <input type="checkbox" name="data.abilities.{{type}}.primary" {{checked name.primary}} class="primary-secondary" />
                         <input type="checkbox" name="data.abilities.{{type}}.lastUp" {{checked name.lastUp}} class="last-up" />
                         {{!-- Value with modifiers applied --}}
                         {{#when name.value 'noteq' name.total}}

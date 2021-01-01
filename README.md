@@ -13,9 +13,12 @@ This is a work in progress, not meant to be actualy used during normal play.
 ## Change log
 
 ### v0.0.4
+#### Added
+- Checkbox to indicate primary/secondary Abilities.
+
 #### Fixed
 - Fixed an error causing Currency input to be disabled.
-- Equip icon (shield icon) hidden until equip/unequip functionality is implemented
+- Equip icon (shield icon) hidden until equip/unequip functionality is implemented.
 
 ### 2020.12.31
 - Included Ancestry/Race/Origin field with selection on Settings

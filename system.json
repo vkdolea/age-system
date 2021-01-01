@@ -1,8 +1,8 @@
 {
     "name": "age-system",
-    "title": "Unofficial AGE System",
+    "title": "AGE System (unofficial)",
     "description": "Unofficial AGE System implementation, meant for all AGE subsystems.",
-    "version": "0.03",
+    "version": "0.0.4",
     "templateVersion": 1,
     "author": "VK Dolea",
     "scripts": [],
