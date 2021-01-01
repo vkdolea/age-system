@@ -30,7 +30,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         {
             name: game.i18n.localize("age-system.settings.changeRollContext"),
             icon: '<i class="fas fa-exchange-alt"></i>',
-            // Estou devendo esse callback -> chama uma janela de diálogo e perguntar qual Habilidade usar para rolar
+            // TODO - try to add the Shift + Click rolling to GM inside this callback
             callback: e => {
                 const focus = this.actor.getOwnedItem(e.data("focus-id"));
                 let d = Dice.dialogBoxAbilityFocus(focus, this.actor)
@@ -72,11 +72,13 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.power = itemSorted.filter(i => i.type === "power");
         data.focus = itemSorted.filter(i => i.type === "focus");
         data.stunts = itemSorted.filter(i => i.type === "stunts");
+        // Order Stunts by stunt points, lowest to highest
+        data.stunts = data.stunts.sort((a, b) => a.data.stuntPoints - b.data.stuntPoints);
         data.equipment = itemSorted.filter(i => i.type === "equipment");
         data.honorifics = itemSorted.filter(i => i.type === "honorifics");
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
-
+    
         // Retrieve Prefession/Ancestry settings
         data.ancestry = game.settings.get("age-system", "ancestryOpt");
         data.occupation = game.settings.get("age-system", "occupation");
