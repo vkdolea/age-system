@@ -3,4 +3,4 @@
 
 # Node Modules
 node_modules/
-/less/package-lock.json
+less/package-lock.json
