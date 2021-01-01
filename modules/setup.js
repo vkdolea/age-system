@@ -50,6 +50,18 @@ export function charSheetSetup(app, html, data) {
     
 };
 
+// Hide checkboxes to select Primary Abilities
+export function hidePrimaryAblCheckbox(html) {
+    const primaryAblShow = game.settings.get("age-system", "primaryAbl");
+    const boxes = html.find(".ability-box .primary-secondary");
+    if (!primaryAblShow) {
+        for (let k = 0; k < boxes.length; k++) {
+            const e = boxes[k];
+            e.style.display = "none";
+        };
+    }
+};
+
 export function hideFatigueEntry(html) {
     // Capture what is the ability set to be used
     const useFatigue = game.settings.get("age-system", "useFatigue");

@@ -28,6 +28,9 @@
     "SETTINGS.wealthTypeIncome": "Income",
     "SETTINGS.wealthTypeCurrency": "Currency",
 
+    "SETTINGS.primaryAbl": "Select primary abilities",
+    "SETTINGS.primaryAblHint": "Adds extra checkbox to identiry which Ability is primary",
+
     "SETTINGS.abilitySelection": "Ability settings",
     "SETTINGS.abilitySelectionHint": "Use core AGE or Dragon Age abilities",
     "SETTINGS.abilitySelectionMain": "Core AGE",

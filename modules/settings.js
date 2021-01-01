@@ -56,7 +56,20 @@ export const registerSystemSettings = function() {
         window.location.reload(!1)}
   });
 
-    /**
+  /**
+   * Option to use Primary and Secondary Abilities
+   */
+  game.settings.register("age-system", "primaryAbl", {
+    name: "SETTINGS.primaryAbl",
+    hint: "SETTINGS.primaryAblHint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange:()=>{window.location.reload(!1)}
+  });
+
+  /**
    * Register if world will use Game Mode and which one
    */
   game.settings.register("age-system", "gameMode", {
@@ -78,20 +91,19 @@ export const registerSystemSettings = function() {
    * Register currency type
    */
   game.settings.register("age-system", "wealthType", {
-      name: "SETTINGS.wealthType",
-      hint: "SETTINGS.wealthTypeHint",
-      scope: "world",
-      config: true,
-      default: "resources",
-      type: String,
-      choices: {
-          "resources": "SETTINGS.wealthTypeResources",
-          "income": "SETTINGS.wealthTypeIncome",
-          "currency": "SETTINGS.wealthTypeCurrency",
-      },
-      onChange:()=>{
-        window.location.reload(!1)}
-    });
+    name: "SETTINGS.wealthType",
+    hint: "SETTINGS.wealthTypeHint",
+    scope: "world",
+    config: true,
+    default: "resources",
+    type: String,
+    choices: {
+      "resources": "SETTINGS.wealthTypeResources",
+      "income": "SETTINGS.wealthTypeIncome",
+      "currency": "SETTINGS.wealthTypeCurrency",
+    },
+    onChange:()=>{window.location.reload(!1)}
+  });
 
   /**
    * Register Ability selection

@@ -105,6 +105,8 @@ Hooks.on("renderageSystemItemSheet", (app, html, data) => {
 Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
     // Hide non used Abilities and order Ability Boxes in alphabeticaly
     Setup.charSheetSetup(app, html, data);
+    // Hide primary Abilities checkbox
+    Setup.hidePrimaryAblCheckbox(html);
 });
 
 Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
