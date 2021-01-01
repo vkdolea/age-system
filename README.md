@@ -40,6 +40,10 @@ This is a work in progress, not meant to be actualy used during normal play.
 
 ## Change log
 
+### v0.0.4
+- Fixed an error causing Currency input to be disabled.
+
+
 ### 2020.12.31
 - Included Ancestry/Race/Origin field with selection on Settings
 - Added option to change label between Profession/Class
