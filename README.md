@@ -18,10 +18,10 @@ This is a work in progress, not meant to be actualy used during normal play.
 - Added option to hide primary Abilities checkbox if not used.
 - Added option to use Impact and Ballistic armor or generic Armor.
 - Added field in character sheet to track Threshold during Advanced Tests.
+- Shield icon working to equip/activate items. Unequiped/unactive items do not add bonuses do character.
 
 #### Fixed
 - Fixed an error causing Currency input to be disabled.
-- Equip icon (shield icon) hidden until equip/unequip functionality is implemented.
 
 ### 2020.12.31
 - Included Ancestry/Race/Origin field with selection on Settings
