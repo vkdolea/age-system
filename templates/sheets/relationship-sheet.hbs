@@ -7,22 +7,26 @@
             {{else}}
             <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
             {{/if}}
-            <div class="item-card-stats flexcol">
+            <div class="item-card-stats flexrow">
+                {{!-- Item Image --}}
+                {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}} 
                 
-                {{!-- Bond --}}
-                <div class="flexrow long-text">
-                    <label>{{localize "age-system.relationshipBond"}}: </label>
-                    {{#if inChat}}
-                    <p>{{data.shortDesc}}</p>
-                    {{else}}
-                    <input name="data.shortDesc" class="long-text" type="text" text-type="long" value="{{data.shortDesc}}" placeholder="{{localize "age-system.relationshipBond"}}"/>
-                    {{/if}}
-                </div>
+                <div class="flexrow" style="flex-wrap: wrap;">
+                    {{!-- Bond --}}
+                    <div class="flexrow long-text flex-align-start" style="min-width: 100%;">
+                        <label>{{localize "age-system.relationshipBond"}}</label>
+                        {{#if inChat}}
+                        <p>{{data.shortDesc}}</p>
+                        {{else}}
+                        <input name="data.shortDesc" class="long-text" type="text" text-type="long" value="{{data.shortDesc}}" placeholder="{{localize "age-system.relationshipBond"}}"/>
+                        {{/if}}
+                    </div>
 
-                {{!-- Intensity --}}
-                <div class="flexrow">
-                    <label>{{localize "age-system.relationshipIntensity"}}: </label>
-                    <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensity" value="{{data.intensity}}"/>
+                    {{!-- Intensity --}}
+                    <div class="flexrow flex-align-start">
+                        <label>{{localize "age-system.relationshipIntensity"}}</label>
+                        <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensity" value="{{data.intensity}}"/>
+                    </div>
                 </div>
 
             </div>

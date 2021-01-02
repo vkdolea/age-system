@@ -16,6 +16,7 @@ async function preloadHandlebarsTemplates() {
         "systems/age-system/templates/partials/ability-focus-select.hbs",
         "systems/age-system/templates/partials/cost-resource-block.hbs",
         "systems/age-system/templates/partials/play-aid-bar.hbs",
+        "systems/age-system/templates/partials/item-image-sheet-card.hbs",
     ];
 
     return loadTemplates(templatePaths);
@@ -83,8 +84,6 @@ Hooks.once("init", async function() {
 });
 
 Hooks.once("ready", function() {
-    // Change default Actor Icon
-    CONST.DEFAULT_TOKEN = "systems/age-system/resources/imgs/actor-icon/sensousness.svg";
     // Register System Settings related do Focus Compendium
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");

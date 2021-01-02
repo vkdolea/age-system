@@ -112,6 +112,9 @@ ageSystem.itemIcons = {
     "focus": `${itemIconPath}gift-of-knowledge.svg`
 };
 
+// Change default Actor Icon
+CONST.DEFAULT_TOKEN = "systems/age-system/resources/imgs/actor-icon/sensousness.svg";
+
 // Initializing variable to load focus Compendiaum
 ageSystem.focus = [];
 

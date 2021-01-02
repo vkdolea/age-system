@@ -14,12 +14,12 @@ This is a work in progress, not meant to be actualy used during normal play.
 
 ### v0.1.0
 #### Added
-- Checkbox to indicate select Abilities.
-- Added option to hide primary Abilities checkbox if not used.
-- Added option to use Impact and Ballistic armor or generic Armor.
+- Checkbox to indicate primary Abilities.
+- Option to hide primary Abilities checkbox if not used.
+- Option to use Impact and Ballistic armor or generic Armor.
 - Added field in character sheet to track Threshold during Advanced Tests.
 - Shield icon working to equip/activate items. Unequiped/unactive items do not add bonuses do character.
-- Added custom icons for each item type and character.
+- Added custom icons for each item type and character, and users are allowed to change them as they please
 
 #### Fixed
 - Fixed an error causing Currency input to be disabled.

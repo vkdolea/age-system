@@ -54,6 +54,13 @@
     .relationship,
     .membership {
 
+        img {
+            min-height: 60px;
+            max-width: 60px;
+            object-fit: contain;
+            margin-right: 4px;
+        }
+
         input[name="data.shortDesc"].long-text {
             max-width: 100%;
             width: 100%;
@@ -78,7 +85,6 @@
             text-transform: uppercase;
             border: none;
             padding: 4px;
-
         };
 
         input[name="name"] {
@@ -98,6 +104,9 @@
         .flexcol {
             >label {
                 margin-right: 0px;
+            }
+            >input {
+                text-align: center;
             }
         }
 
@@ -147,9 +156,16 @@
                 text-align: center;
             };
 
+            div.power-type-control {
+                a {
+                    margin-top: 30%;
+                    margin-bottom: 50%;
+                }
+                max-width: fit-content;
+            }
+
             div.flexrow {
                 margin-right: 4px;
-                // max-width: fit-content;
             };
 
             div {

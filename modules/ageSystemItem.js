@@ -197,6 +197,7 @@ export class ageSystemItem extends Item {
             inChat: true,
             name: this.data.name,
             data: this.data.data,
+            item: this,
             owner: this.actor,
             config: {}
         };

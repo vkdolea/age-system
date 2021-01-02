@@ -2,8 +2,7 @@
 <form class="actor-sheet {{cssClass}} colorset-selection" autocomplete="off">
     <div class="char-sheet">
         <header class="sheet-header flexcol">
-
-            {{!-- <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="400" width="200"/> --}}
+            
             <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
             <div>
                 <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder={{localize "age-system.name"}}/></h1>        
@@ -304,6 +303,7 @@
                     {{#each talent as |item id|}}
                         <div class="item-box flexrow feature-controls colorset-third-tier" data-item-id="{{item._id}}">
                             <div class="item-name flexrow">
+                                <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                                 <a class="item-show">{{item.name}}{{#if item.data.shortDescd}} ({{item.data.shortDesc}}){{/if}}</a>
                             </div>
                             <div class="flexrow fill-card" >
