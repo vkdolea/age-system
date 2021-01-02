@@ -1,8 +1,34 @@
 # Unofficial AGE System for FVTT
 Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
 
+<img src="https://imgur.com/3rJNe40.png"/>
+
 ## Intro
-This is a work in progress, not meant to be actualy used during normal play.
+Character sheet designed to serve all AGE System versions. Not all AGE installments are fully implemented. New features are expected to be added over time.
+
+## Features
+- Different color schemes
+- Possibility to use a few optional rules (Fatigue, Conviction)
+- Checkboxes to identify primary and secondary abilities
+- Checkbox to select last ability leveled up
+- Option to use the Dragon AGE specific ability set
+- Support to Toughness, Impact/Ballistic Armor, and Stun/Wound damage
+- Dice so Nice compatible
+- Support to Income, Resources and Currency wealth systems
+- Shift, Alt, Ctrl keys support to change certain types of roll
+
+## Credits
+Icons were used from [game-icons.net](https://game-icons.net). This icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
+- [Sensuousness](https://game-icons.net/1x1/lorc/sensuousness.html) (Character icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Split Cross](https://game-icons.net/1x1/lorc/split-cross.html) (Stunt icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Embrace Energy](https://game-icons.net/1x1/lorc/embrassed-energy.html) (Power & Arcana icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Gift of Knowledge](https://game-icons.net/1x1/lorc/gift-of-knowledge.html) (Focus icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Backup](https://game-icons.net/1x1/lorc/backup.html) (Membership icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Skills](https://game-icons.net/1x1/delapouite/skills.html) (Talent icon), by [Delapouite](https://delapouite.com/).
+- [Player Next](https://game-icons.net/1x1/delapouite/player-next.html) (Relationship icon), by [Delapouite](https://delapouite.com/).
+- [Briefcase](https://game-icons.net/1x1/delapouite/briefcase.html) (General Equipment icon), by [Delapouite](https://delapouite.com/).
+- [Rank 3](https://game-icons.net/1x1/skoll/rank-3.html) (Honorifics icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
+- [Fist](https://game-icons.net/1x1/skoll/fist.html) (Weapon icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
 
 ### Shortcuts
 1. Shift + Click on Attack or Damage rolls trigger GM roll (only GM can see).
