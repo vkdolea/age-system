@@ -25,7 +25,11 @@ export default class ageSystemItemSheet extends ItemSheet {
             case "membership":
                 this.options.width = this.position.width = "295";
                 this.options.height = this.position.height = "360";
-                break;   
+                break;
+            case "power":
+                this.options.width = this.position.width = "468";
+                this.options.height = this.position.height = "600";
+                break;  
             default:
                 break;
         };
