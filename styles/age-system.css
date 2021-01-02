@@ -105,6 +105,7 @@
 .age-system.item .relationship input[name="name"],
 .age-system.item .membership input[name="name"] {
   padding-left: 10px;
+  min-width: 100%;
 }
 .age-system.item .focus label,
 .age-system.item .power label,
@@ -121,6 +122,17 @@
   margin-right: 4px;
   max-width: fit-content;
   white-space: nowrap;
+}
+.age-system.item .focus .flexcol > label,
+.age-system.item .power .flexcol > label,
+.age-system.item .talent .flexcol > label,
+.age-system.item .weapon .flexcol > label,
+.age-system.item .equipment .flexcol > label,
+.age-system.item .stunts .flexcol > label,
+.age-system.item .honorifics .flexcol > label,
+.age-system.item .relationship .flexcol > label,
+.age-system.item .membership .flexcol > label {
+  margin-right: 0px;
 }
 .age-system.item .focus .item-card-stats,
 .age-system.item .power .item-card-stats,
@@ -289,7 +301,16 @@
 .age-system.item .stunts .item-card-stats input[name="data.intensity"],
 .age-system.item .honorifics .item-card-stats input[name="data.intensity"],
 .age-system.item .relationship .item-card-stats input[name="data.intensity"],
-.age-system.item .membership .item-card-stats input[name="data.intensity"] {
+.age-system.item .membership .item-card-stats input[name="data.intensity"],
+.age-system.item .focus .item-card-stats input[name="data.rank"],
+.age-system.item .power .item-card-stats input[name="data.rank"],
+.age-system.item .talent .item-card-stats input[name="data.rank"],
+.age-system.item .weapon .item-card-stats input[name="data.rank"],
+.age-system.item .equipment .item-card-stats input[name="data.rank"],
+.age-system.item .stunts .item-card-stats input[name="data.rank"],
+.age-system.item .honorifics .item-card-stats input[name="data.rank"],
+.age-system.item .relationship .item-card-stats input[name="data.rank"],
+.age-system.item .membership .item-card-stats input[name="data.rank"] {
   max-width: 30px;
   min-width: 30px;
   text-align: center;

@@ -5,11 +5,13 @@ export class ageSystemItem extends Item {
     /** @override */
     prepareData() {
         
-        if (!this.data.img) this.data.img = CONST.DEFAULT_TOKEN;
+        if (!this.data.img) {
+            if (!CONFIG.ageSystem.itemIcons[this.type]) this.data.img = CONST.DEFAULT_TOKEN;
+            this.data.img = CONFIG.ageSystem.itemIcons[this.type];
+        };
         if (!this.data.name) this.data.name = "New " + this.entity;       
         this.data = duplicate(this._data);
 
-        if (!this.data.img) this.data.img = CONST.DEFAULT_TOKEN;
 
         const itemData = this.data;
         const data = itemData.data;

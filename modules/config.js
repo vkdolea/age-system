@@ -99,6 +99,19 @@ ageSystem.bonusTypes = {
     armorPenalty: "age-system.bonus.armorPenaltyBns"
 };
 
+const itemIconPath = "systems/age-system/resources/imgs/item-icon/";
+ageSystem.itemIcons = {
+    "equipment": `${itemIconPath}briefcase.svg`,
+    "stunts": `${itemIconPath}split-cross.svg`,
+    "talent": `${itemIconPath}skills.svg`,
+    "power": `${itemIconPath}embrassed-energy.svg`,
+    "honorifics": `${itemIconPath}rank-3.svg`,
+    "relationship": `${itemIconPath}player-next.svg`,
+    "membership": `${itemIconPath}backup.svg`,
+    "weapon": `${itemIconPath}fist.svg`,
+    "focus": `${itemIconPath}gift-of-knowledge.svg`
+};
+
 // Initializing variable to load focus Compendiaum
 ageSystem.focus = [];
 

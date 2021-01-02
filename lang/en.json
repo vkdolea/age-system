@@ -185,6 +185,7 @@
         "honorificsContainer": "Honorifics",
         "membershipContainer": "Membership",
         "rank": "Rank",
+        "membershipPosition": "Position",
 
         "relationshipContainer": "Relationship",
         "relationshipBond": "Bond",

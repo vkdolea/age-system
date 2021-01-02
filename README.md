@@ -19,9 +19,12 @@ This is a work in progress, not meant to be actualy used during normal play.
 - Added option to use Impact and Ballistic armor or generic Armor.
 - Added field in character sheet to track Threshold during Advanced Tests.
 - Shield icon working to equip/activate items. Unequiped/unactive items do not add bonuses do character.
+- Added custom icons for each item type and character.
 
 #### Fixed
 - Fixed an error causing Currency input to be disabled.
+- Added missing Membership sheet template.
+- Fixed styling issue causing all item name container to be slightly shorter than other sheet rows.
 
 ### 2020.12.31
 - Included Ancestry/Race/Origin field with selection on Settings

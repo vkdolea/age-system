@@ -83,6 +83,8 @@ Hooks.once("init", async function() {
 });
 
 Hooks.once("ready", function() {
+    // Change default Actor Icon
+    CONST.DEFAULT_TOKEN = "systems/age-system/resources/imgs/actor-icon/sensousness.svg";
     // Register System Settings related do Focus Compendium
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");

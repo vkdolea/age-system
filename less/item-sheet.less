@@ -83,6 +83,7 @@
 
         input[name="name"] {
             padding-left: 10px;
+            min-width: 100%;
         };
 
         label {
@@ -93,6 +94,12 @@
             max-width: fit-content;
             white-space: nowrap;
         };
+
+        .flexcol {
+            >label {
+                margin-right: 0px;
+            }
+        }
 
         .item-card-stats {
             flex-wrap: wrap;
@@ -128,7 +135,8 @@
             input[name="data.initialValue"],
             input[name="data.extraValue"],
             input[name="data.nrDice"],
-            input[name="data.intensity"] {
+            input[name="data.intensity"],
+            input[name="data.rank"] {
                 max-width: 30px;
                 min-width: 30px;
                 text-align: center;
