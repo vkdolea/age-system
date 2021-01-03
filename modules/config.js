@@ -34,8 +34,8 @@ ageSystem.actionsToCast = {
     oneMinute: "age-system.oneMinute",
     fiveMinutes: "age-system.fiveMinutes",
     tenMinutes: "age-system.tenMinutes",
-    twentyMinutes: "age-system.tenMinutes",
-    onHouer: "age-system.tenMinutes",
+    twentyMinutes: "age-system.twentyMinutes",
+    onHouer: "age-system.oneHour",
 };
 
 ageSystem.reloadDuration = {
@@ -126,11 +126,11 @@ ageSystem.focus = [];
 // });
 
 // If Compendia are updated, then compendiumList is gathered once again
-Hooks.on("renderCompendium", function() {
-    let setCompendium = game.settings.get("age-system", "masterFocusCompendium");
-    ageSystem.focus = compendiumList(setCompendium);
-    // ageSystem.focus = compendiumList("age-system.focus");
-});
+// Hooks.on("renderCompendium", function() {
+//     let setCompendium = game.settings.get("age-system", "masterFocusCompendium");
+//     ageSystem.focus = compendiumList(setCompendium);
+//     // ageSystem.focus = compendiumList("age-system.focus");
+// });
 
 // This function looks at given Compendium and returns an array with object containing id and name for all entries
 // export function compendiumList(compendiumName) {
