@@ -66,7 +66,7 @@ Here the description of each one of the Modificators:
 - Option to hide primary Abilities checkbox if not used.
 - Option to use Impact and Ballistic armor or generic Armor.
 - Added field in character sheet to track Threshold during Advanced Tests.
-- Shield icon working to equip/activate items. Unequiped/unactive items do not add bonuses do character.
+- Shield icon working to equip/activate items. Unequiped/unactive items do not add bonuses to character.
 - Added custom icons for each item type and character, and users are allowed to change them as they please
 
 #### Fixed
