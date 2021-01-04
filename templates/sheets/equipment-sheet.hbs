@@ -19,12 +19,12 @@
                 {{!-- Quantity --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.quantity"}}</label>
-                    <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
                 </div>                
                 {{!-- Weight --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.weight"}}</label>
-                    <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.weight}}" data-dtype="Number" />
                 </div>
             </div>
                 

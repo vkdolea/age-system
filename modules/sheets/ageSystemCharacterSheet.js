@@ -149,7 +149,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const itemToToggle = this.actor.getOwnedItem(itemId);
         const itemType = itemToToggle.type;
-        if (itemType === "power") {
+        if (itemType === "power" || itemType === "talent") {
             itemToToggle.data.data.activate = !itemToToggle.data.data.activate;
         } else {
             itemToToggle.data.data.equiped = !itemToToggle.data.data.equiped;

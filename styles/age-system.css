@@ -159,6 +159,17 @@
 .age-system.item .membership .flexcol > input {
   text-align: center;
 }
+.age-system.item .focus .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .power .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .talent .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .weapon .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .equipment .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .stunts .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .honorifics .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .relationship .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .membership .flexcol div.item-card-stats.active-mod-container {
+  padding-top: 0px;
+}
 .age-system.item .focus .item-card-stats,
 .age-system.item .power .item-card-stats,
 .age-system.item .talent .item-card-stats,
@@ -171,6 +182,17 @@
   flex-wrap: wrap;
   padding: 10px;
   padding-bottom: 6px;
+}
+.age-system.item .focus .item-card-stats a.not-equiped,
+.age-system.item .power .item-card-stats a.not-equiped,
+.age-system.item .talent .item-card-stats a.not-equiped,
+.age-system.item .weapon .item-card-stats a.not-equiped,
+.age-system.item .equipment .item-card-stats a.not-equiped,
+.age-system.item .stunts .item-card-stats a.not-equiped,
+.age-system.item .honorifics .item-card-stats a.not-equiped,
+.age-system.item .relationship .item-card-stats a.not-equiped,
+.age-system.item .membership .item-card-stats a.not-equiped {
+  opacity: 0.3;
 }
 .age-system.item .focus .item-card-stats > *,
 .age-system.item .power .item-card-stats > *,

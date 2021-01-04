@@ -344,7 +344,8 @@
             "activated": false
         },
         "talent": {
-            "templates": ["description", "bonuses"]
+            "templates": ["description", "bonuses"],
+            "activated": false
         },
         "stunts": {
             "templates": ["description"],

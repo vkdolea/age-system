@@ -15,13 +15,13 @@
                 {{else}}
                 {{!-- Select Damage and Fatigue Options --}}
                 <div class="flexcol power-type-control flex-justify-between">
-                    <a class="toggle-damage" title="{{localize "age-system.rollDamage"}}">
+                    <a class="toggle-damage colorset-second-tier {{#unless data.hasDamage}}not-equiped{{/unless}}" title="{{localize "age-system.rollDamage"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="fas fa-fist-raised"></i>
                         </div>
                     </a>
 
-                    <a class="toggle-fatigue flexrow use-fatigue-true" title="{{localize "age-system.rollFatigue"}}">
+                    <a class="toggle-fatigue flexrow use-fatigue-true colorset-second-tier {{#unless data.hasFatigue}}not-equiped{{/unless}}" title="{{localize "age-system.rollFatigue"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="fas fa-head-side-cough"></i>
                         </div>
