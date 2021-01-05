@@ -4,7 +4,7 @@ Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
 <img src="https://imgur.com/3rJNe40.png"/>
 
 ## Intro
-Character sheet designed to serve all AGE System versions. Not all AGE installments are fully implemented. New features are expected to be added over time.
+Character sheet designed to serve most of AGE System versions. Not all AGE installments are fully implemented. New features are expected to be added over time.
 
 ## Features
 - Different color schemes
@@ -59,6 +59,10 @@ Here the description of each one of the Modificators:
 15. **Ability Names:** these are play bonuses to the specific Ability.
 
 ## Change log
+
+### v0.1.1 - 2021-01-05
+#### Fixed
+- Minimum and compatible versions updated on system.json.
 
 ### v0.1.0
 #### Added
