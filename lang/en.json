@@ -22,11 +22,17 @@
     "SETTINGS.useToughness": "Use Toughness",
     "SETTINGS.useToughnessHint": "Check if the game will use Toughness statistics",
 
+    "SETTINGS.useBallisticArmor": "Use Impact and Ballistic armor",
+    "SETTINGS.useBallisticArmorHint": "Select if armor is divided into Impact and Ballistic",
+
     "SETTINGS.wealthType": "Wealth system in use",
     "SETTINGS.wealthTypeHint": "Income and Resource are test based wealth system, while Currency is the usual buying system",
     "SETTINGS.wealthTypeResources": "Resources",
     "SETTINGS.wealthTypeIncome": "Income",
     "SETTINGS.wealthTypeCurrency": "Currency",
+
+    "SETTINGS.primaryAbl": "Select primary abilities",
+    "SETTINGS.primaryAblHint": "Adds extra checkbox to identiry which Ability is primary",
 
     "SETTINGS.abilitySelection": "Ability settings",
     "SETTINGS.abilitySelectionHint": "Use core AGE or Dragon Age abilities",
@@ -69,6 +75,8 @@
         "WARNING": {
             "duplicatedFocus": "Focus is not added to character - it already owns a Focus named "
         },
+        
+        "testThreshold": "Threshold",
 
         "power": "Power",
         "weapon": "Weapon",
@@ -150,10 +158,12 @@
         "socialClass": "Social Class",
         "profession": "Profession",
         "age": "Age",
+        "height": "Height",
+        "weight": "Weight",
 
         "fatigue": "Fatigue",
         "useFatigue": "Use Fatigue",
-        "inputFatigueTN": "Manual Fatigue TN",
+        "inputFatigueTN": "Input TN",
         "fatigueTN": "Fatigue TN",
         "noFatigue": "—",
         "winded": "Winded",
@@ -161,8 +171,6 @@
         "exhausted": "Exhausted",
         "dying": "Dying",
 
-        "height": "Height",
-        "weight": "Weight",
         "powerPoints": "Power Points",
         "powerPointsIndex": "PP",
         "name": "Name",
@@ -177,6 +185,7 @@
         "honorificsContainer": "Honorifics",
         "membershipContainer": "Membership",
         "rank": "Rank",
+        "membershipPosition": "Position",
 
         "relationshipContainer": "Relationship",
         "relationshipBond": "Bond",
@@ -192,6 +201,10 @@
         "majorAction": "Major Action",
         "d6minor": "1d6 Minor",
         "oneMinute": "1 Minute",
+        "fiveMinutes": "5 Minutes",
+        "tenMinutes": "10 Minutes",
+        "twentyMinutes": "20 Minutes",
+        "oneHour": "1 Hour",
 
         "rof": {
             "rof": "ROF",
@@ -270,7 +283,7 @@
             "reload": "Reload Time",
             "capacity": "Capacity",
             "equiped": "Equiped",
-            "minStr": "Minimum Strength",
+            "minStr": "Min STR",
             "cast": "Cast",
             "force": "Force"
         },

@@ -8,14 +8,19 @@
             <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
             {{/if}}
             
-            {{!-- Cost --}}
-            <div class="item-card-stats flexrow flex-justify-start flex-align-center">    
-                <label>{{localize "age-system.settings.stuntPoints"}}</label>
-                {{#if inChat}}
-                <input name="data.stuntPoints" disabled type="number" value="{{data.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
-                {{else}}
-                <input name="data.stuntPoints" type="number" value="{{data.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
-                {{/if}}
+            <div class="item-card-stats flexrow flex-justify-start flex-align-center">
+                {{!-- Item Image --}}
+                {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}} 
+
+                {{!-- Cost --}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.settings.stuntPoints"}}</label>
+                    {{#if inChat}}
+                    <input name="data.stuntPoints" disabled type="number" value="{{data.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
+                    {{else}}
+                    <input name="data.stuntPoints" type="number" value="{{data.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
+                    {{/if}}
+                </div>
             </div>
         </div>
         <div class="item-card-desc">

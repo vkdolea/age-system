@@ -1,8 +1,7 @@
 {{!-- Active Bonuses --}}
-<div class="flexrol flex-align-center item-card-stats">
-    {{#if data.hasModificators}}
+{{#if data.hasModificators}}
+<div class="flexrol flex-align-center item-card-stats active-mod-container">
     <hr>
-    {{/if}}
     <div class="flexrow">
         {{#each data.itemMods as |item|}}
         {{#if item.isActive}}
@@ -14,3 +13,4 @@
         {{/each}}
     </div>
 </div>
+{{/if}}

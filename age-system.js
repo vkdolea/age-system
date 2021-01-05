@@ -15,6 +15,8 @@ async function preloadHandlebarsTemplates() {
         "systems/age-system/templates/partials/active-bonuses.hbs",
         "systems/age-system/templates/partials/ability-focus-select.hbs",
         "systems/age-system/templates/partials/cost-resource-block.hbs",
+        "systems/age-system/templates/partials/play-aid-bar.hbs",
+        "systems/age-system/templates/partials/item-image-sheet-card.hbs",
     ];
 
     return loadTemplates(templatePaths);
@@ -104,6 +106,8 @@ Hooks.on("renderageSystemItemSheet", (app, html, data) => {
 Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
     // Hide non used Abilities and order Ability Boxes in alphabeticaly
     Setup.charSheetSetup(app, html, data);
+    // Hide primary Abilities checkbox
+    Setup.hidePrimaryAblCheckbox(html);
 });
 
 Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));

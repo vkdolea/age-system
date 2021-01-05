@@ -1,7 +1,7 @@
 {{#if inChat}}
-<div class="flexcol flex-justify-center">
+<div class="flexcol flex-justify-center damage-formula">
     <label>{{localize "age-system.item.damage"}}</label>
-    <p class="in-chat-text">{{concat data.nrDice "d" data.diceType "+" data.extraValue "+" data.ablDamageValue}}</p>
+    <p class="in-chat-text">{{concat data.nrDice "d" data.diceType "+" data.extraValue}}{{#when data.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.ablDamageValue}}{{/when}}</p>
     <p class="in-chat-text">{{localize (concat "age-system." data.dmgType)}} | {{localize (concat "age-system."data.dmgSource)}}</p>
     
 </div>
@@ -22,7 +22,7 @@
             <span>{{localize "age-system.settings.plusSign"}}</span>
             <select name="data.dmgAbl">
                 {{#select data.dmgAbl}}
-                <option value="no-abl"></option>
+                <option value="no-abl">—</option>
                 {{#each config.abilities as |name type|}}
                 <option value="{{type}}">{{localize name}}</option>
                 {{/each}}

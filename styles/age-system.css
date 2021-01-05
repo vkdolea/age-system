@@ -35,6 +35,20 @@
 .age-system.item .fill-card i.fas {
   margin-left: 2px;
 }
+.age-system.item .focus img,
+.age-system.item .power img,
+.age-system.item .talent img,
+.age-system.item .weapon img,
+.age-system.item .equipment img,
+.age-system.item .stunts img,
+.age-system.item .honorifics img,
+.age-system.item .relationship img,
+.age-system.item .membership img {
+  min-height: 60px;
+  max-width: 60px;
+  object-fit: contain;
+  margin-right: 4px;
+}
 .age-system.item .focus input[name="data.shortDesc"].long-text,
 .age-system.item .power input[name="data.shortDesc"].long-text,
 .age-system.item .talent input[name="data.shortDesc"].long-text,
@@ -46,6 +60,17 @@
 .age-system.item .membership input[name="data.shortDesc"].long-text {
   max-width: 100%;
   width: 100%;
+}
+.age-system.item .focus .damage-formula p.in-chat-text,
+.age-system.item .power .damage-formula p.in-chat-text,
+.age-system.item .talent .damage-formula p.in-chat-text,
+.age-system.item .weapon .damage-formula p.in-chat-text,
+.age-system.item .equipment .damage-formula p.in-chat-text,
+.age-system.item .stunts .damage-formula p.in-chat-text,
+.age-system.item .honorifics .damage-formula p.in-chat-text,
+.age-system.item .relationship .damage-formula p.in-chat-text,
+.age-system.item .membership .damage-formula p.in-chat-text {
+  white-space: nowrap;
 }
 .age-system.item .focus p.in-chat-text,
 .age-system.item .power p.in-chat-text,
@@ -94,6 +119,7 @@
 .age-system.item .relationship input[name="name"],
 .age-system.item .membership input[name="name"] {
   padding-left: 10px;
+  min-width: 100%;
 }
 .age-system.item .focus label,
 .age-system.item .power label,
@@ -111,6 +137,39 @@
   max-width: fit-content;
   white-space: nowrap;
 }
+.age-system.item .focus .flexcol > label,
+.age-system.item .power .flexcol > label,
+.age-system.item .talent .flexcol > label,
+.age-system.item .weapon .flexcol > label,
+.age-system.item .equipment .flexcol > label,
+.age-system.item .stunts .flexcol > label,
+.age-system.item .honorifics .flexcol > label,
+.age-system.item .relationship .flexcol > label,
+.age-system.item .membership .flexcol > label {
+  margin-right: 0px;
+}
+.age-system.item .focus .flexcol > input,
+.age-system.item .power .flexcol > input,
+.age-system.item .talent .flexcol > input,
+.age-system.item .weapon .flexcol > input,
+.age-system.item .equipment .flexcol > input,
+.age-system.item .stunts .flexcol > input,
+.age-system.item .honorifics .flexcol > input,
+.age-system.item .relationship .flexcol > input,
+.age-system.item .membership .flexcol > input {
+  text-align: center;
+}
+.age-system.item .focus .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .power .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .talent .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .weapon .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .equipment .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .stunts .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .honorifics .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .relationship .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .membership .flexcol div.item-card-stats.active-mod-container {
+  padding-top: 0px;
+}
 .age-system.item .focus .item-card-stats,
 .age-system.item .power .item-card-stats,
 .age-system.item .talent .item-card-stats,
@@ -123,6 +182,17 @@
   flex-wrap: wrap;
   padding: 10px;
   padding-bottom: 6px;
+}
+.age-system.item .focus .item-card-stats a.not-equiped,
+.age-system.item .power .item-card-stats a.not-equiped,
+.age-system.item .talent .item-card-stats a.not-equiped,
+.age-system.item .weapon .item-card-stats a.not-equiped,
+.age-system.item .equipment .item-card-stats a.not-equiped,
+.age-system.item .stunts .item-card-stats a.not-equiped,
+.age-system.item .honorifics .item-card-stats a.not-equiped,
+.age-system.item .relationship .item-card-stats a.not-equiped,
+.age-system.item .membership .item-card-stats a.not-equiped {
+  opacity: 0.3;
 }
 .age-system.item .focus .item-card-stats > *,
 .age-system.item .power .item-card-stats > *,
@@ -160,6 +230,21 @@
 .age-system.item .membership .item-card-stats input[name="data.cost"] {
   max-width: 60px;
   min-width: 60px;
+  text-align: center;
+}
+.age-system.item .focus .item-card-stats input[type="checkbox"],
+.age-system.item .power .item-card-stats input[type="checkbox"],
+.age-system.item .talent .item-card-stats input[type="checkbox"],
+.age-system.item .weapon .item-card-stats input[type="checkbox"],
+.age-system.item .equipment .item-card-stats input[type="checkbox"],
+.age-system.item .stunts .item-card-stats input[type="checkbox"],
+.age-system.item .honorifics .item-card-stats input[type="checkbox"],
+.age-system.item .relationship .item-card-stats input[type="checkbox"],
+.age-system.item .membership .item-card-stats input[type="checkbox"] {
+  margin: 0px;
+  margin-top: 1px;
+  width: 16px;
+  height: 16px;
 }
 .age-system.item .focus .item-card-stats input[name="data.targetNumber"],
 .age-system.item .power .item-card-stats input[name="data.targetNumber"],
@@ -277,7 +362,16 @@
 .age-system.item .stunts .item-card-stats input[name="data.intensity"],
 .age-system.item .honorifics .item-card-stats input[name="data.intensity"],
 .age-system.item .relationship .item-card-stats input[name="data.intensity"],
-.age-system.item .membership .item-card-stats input[name="data.intensity"] {
+.age-system.item .membership .item-card-stats input[name="data.intensity"],
+.age-system.item .focus .item-card-stats input[name="data.rank"],
+.age-system.item .power .item-card-stats input[name="data.rank"],
+.age-system.item .talent .item-card-stats input[name="data.rank"],
+.age-system.item .weapon .item-card-stats input[name="data.rank"],
+.age-system.item .equipment .item-card-stats input[name="data.rank"],
+.age-system.item .stunts .item-card-stats input[name="data.rank"],
+.age-system.item .honorifics .item-card-stats input[name="data.rank"],
+.age-system.item .relationship .item-card-stats input[name="data.rank"],
+.age-system.item .membership .item-card-stats input[name="data.rank"] {
   max-width: 30px;
   min-width: 30px;
   text-align: center;
@@ -293,6 +387,29 @@
 .age-system.item .membership .item-card-stats span:last-of-type {
   max-width: 25px;
   text-align: center;
+}
+.age-system.item .focus .item-card-stats div.power-type-control,
+.age-system.item .power .item-card-stats div.power-type-control,
+.age-system.item .talent .item-card-stats div.power-type-control,
+.age-system.item .weapon .item-card-stats div.power-type-control,
+.age-system.item .equipment .item-card-stats div.power-type-control,
+.age-system.item .stunts .item-card-stats div.power-type-control,
+.age-system.item .honorifics .item-card-stats div.power-type-control,
+.age-system.item .relationship .item-card-stats div.power-type-control,
+.age-system.item .membership .item-card-stats div.power-type-control {
+  max-width: fit-content;
+}
+.age-system.item .focus .item-card-stats div.power-type-control a,
+.age-system.item .power .item-card-stats div.power-type-control a,
+.age-system.item .talent .item-card-stats div.power-type-control a,
+.age-system.item .weapon .item-card-stats div.power-type-control a,
+.age-system.item .equipment .item-card-stats div.power-type-control a,
+.age-system.item .stunts .item-card-stats div.power-type-control a,
+.age-system.item .honorifics .item-card-stats div.power-type-control a,
+.age-system.item .relationship .item-card-stats div.power-type-control a,
+.age-system.item .membership .item-card-stats div.power-type-control a {
+  margin-top: 30%;
+  margin-bottom: 50%;
 }
 .age-system.item .focus .item-card-stats div.flexrow,
 .age-system.item .power .item-card-stats div.flexrow,
@@ -549,9 +666,11 @@
   height: max-content;
   flex-grow: 3;
 }
+.age-system.sheet.char .col-1 .ability-box .abl-header .primary-secondary,
 .age-system.sheet.char .col-1 .ability-box .abl-header .last-up {
   height: 1em;
   justify-self: end;
+  margin: 0px;
 }
 .age-system.sheet.char .col-1 .ability-box input[type="number"].abl-value {
   border-radius: 0%;
@@ -611,6 +730,9 @@
   padding: 4px;
   margin: 2px 4px 2px 4px;
   align-items: center;
+}
+.age-system.sheet.char .item-container .item-box a.item-equip.not-equiped {
+  opacity: 0.3;
 }
 .age-system.sheet.char .item-container .item-box a {
   margin-left: 2px;
@@ -751,12 +873,26 @@
   background-color: #007DAD;
   color: #ffffff;
 }
+.colorset-modern-blue .char-sheet .item-container img {
+  border: 1px solid #007DAD;
+}
 .colorset-modern-blue .char-sheet input {
   background-color: #ffffff;
 }
 .colorset-modern-blue .char-sheet input.colorset-second-tier {
   background-color: #B9DBEB !important;
   color: #007DAD !important;
+}
+.colorset-modern-blue .focus img,
+.colorset-modern-blue .power img,
+.colorset-modern-blue .talent img,
+.colorset-modern-blue .weapon img,
+.colorset-modern-blue .equipment img,
+.colorset-modern-blue .stunts img,
+.colorset-modern-blue .honorifics img,
+.colorset-modern-blue .membership img,
+.colorset-modern-blue .relationship img {
+  border: 1px solid #007DAD;
 }
 .colorset-modern-blue .focus label,
 .colorset-modern-blue .power label,
@@ -871,12 +1007,26 @@
   background-color: #0f4f5b;
   color: #ffffff;
 }
+.colorset-fantasy-blue .char-sheet .item-container img {
+  border: 1px solid #0f4f5b;
+}
 .colorset-fantasy-blue .char-sheet input {
   background-color: #ffffff;
 }
 .colorset-fantasy-blue .char-sheet input.colorset-second-tier {
   background-color: #c1cbd3 !important;
   color: #0f4f5b !important;
+}
+.colorset-fantasy-blue .focus img,
+.colorset-fantasy-blue .power img,
+.colorset-fantasy-blue .talent img,
+.colorset-fantasy-blue .weapon img,
+.colorset-fantasy-blue .equipment img,
+.colorset-fantasy-blue .stunts img,
+.colorset-fantasy-blue .honorifics img,
+.colorset-fantasy-blue .membership img,
+.colorset-fantasy-blue .relationship img {
+  border: 1px solid #0f4f5b;
 }
 .colorset-fantasy-blue .focus label,
 .colorset-fantasy-blue .power label,
@@ -991,12 +1141,26 @@
   background-color: #810207;
   color: #ffffff;
 }
+.colorset-dragon-red .char-sheet .item-container img {
+  border: 1px solid #810207;
+}
 .colorset-dragon-red .char-sheet input {
   background-color: #ffffff;
 }
 .colorset-dragon-red .char-sheet input.colorset-second-tier {
   background-color: #e0beb1 !important;
   color: #810207 !important;
+}
+.colorset-dragon-red .focus img,
+.colorset-dragon-red .power img,
+.colorset-dragon-red .talent img,
+.colorset-dragon-red .weapon img,
+.colorset-dragon-red .equipment img,
+.colorset-dragon-red .stunts img,
+.colorset-dragon-red .honorifics img,
+.colorset-dragon-red .membership img,
+.colorset-dragon-red .relationship img {
+  border: 1px solid #810207;
 }
 .colorset-dragon-red .focus label,
 .colorset-dragon-red .power label,
@@ -1111,12 +1275,26 @@
   background-color: #565183;
   color: #ffffff;
 }
+.colorset-folded-purple .char-sheet .item-container img {
+  border: 1px solid #565183;
+}
 .colorset-folded-purple .char-sheet input {
   background-color: #ffffff;
 }
 .colorset-folded-purple .char-sheet input.colorset-second-tier {
   background-color: #cfccde !important;
   color: #565183 !important;
+}
+.colorset-folded-purple .focus img,
+.colorset-folded-purple .power img,
+.colorset-folded-purple .talent img,
+.colorset-folded-purple .weapon img,
+.colorset-folded-purple .equipment img,
+.colorset-folded-purple .stunts img,
+.colorset-folded-purple .honorifics img,
+.colorset-folded-purple .membership img,
+.colorset-folded-purple .relationship img {
+  border: 1px solid #565183;
 }
 .colorset-folded-purple .focus label,
 .colorset-folded-purple .power label,

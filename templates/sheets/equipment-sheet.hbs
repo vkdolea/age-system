@@ -8,6 +8,10 @@
             <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
             {{/if}}
             <div class="flexrow item-card-stats">
+                
+                {{!-- Item Image --}}
+                {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}} 
+                
                 {{!-- Purchase Test / Cost --}}
                 <div class="flexcol">
                     {{> "systems/age-system/templates/partials/cost-resource-block.hbs"}}
@@ -15,12 +19,12 @@
                 {{!-- Quantity --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.quantity"}}</label>
-                    <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
                 </div>                
                 {{!-- Weight --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.weight"}}</label>
-                    <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.weight}}" data-dtype="Number" />
                 </div>
             </div>
                 

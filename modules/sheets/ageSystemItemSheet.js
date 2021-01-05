@@ -13,7 +13,8 @@ export default class ageSystemItemSheet extends ItemSheet {
                 this.options.height = this.position.height = "430";
                 break;
             case "talent":
-                this.options.width = this.position.width = "300";
+                this.options.width = this.position.width = "400";
+                this.options.height = this.position.height = "500";
                 break;          
             case "stunts":
                 this.options.width = this.position.width = "300";
@@ -21,7 +22,15 @@ export default class ageSystemItemSheet extends ItemSheet {
             case "relationship":
                 this.options.width = this.position.width = "600";
                 this.options.height = this.position.height = "300";
-                break;             
+                break;  
+            case "membership":
+                this.options.width = this.position.width = "295";
+                this.options.height = this.position.height = "360";
+                break;
+            case "power":
+                this.options.width = this.position.width = "468";
+                this.options.height = this.position.height = "600";
+                break;  
             default:
                 break;
         };

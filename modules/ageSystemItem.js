@@ -5,11 +5,13 @@ export class ageSystemItem extends Item {
     /** @override */
     prepareData() {
         
-        if (!this.data.img) this.data.img = CONST.DEFAULT_TOKEN;
+        if (!this.data.img) {
+            if (!CONFIG.ageSystem.itemIcons[this.type]) this.data.img = CONST.DEFAULT_TOKEN;
+            this.data.img = CONFIG.ageSystem.itemIcons[this.type];
+        };
         if (!this.data.name) this.data.name = "New " + this.entity;       
         this.data = duplicate(this._data);
 
-        if (!this.data.img) this.data.img = CONST.DEFAULT_TOKEN;
 
         const itemData = this.data;
         const data = itemData.data;
@@ -195,8 +197,12 @@ export class ageSystemItem extends Item {
             inChat: true,
             name: this.data.name,
             data: this.data.data,
-            owner: this.actor
+            item: this,
+            owner: this.actor,
+            config: {}
         };
+        cardData.config.wealthMode = game.settings.get("age-system", "wealthType");
+
         
         chatData.content = await renderTemplate(this.chatTemplate[this.type], cardData);
         chatData.roll = false;

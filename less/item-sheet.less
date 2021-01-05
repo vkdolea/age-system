@@ -54,11 +54,23 @@
     .relationship,
     .membership {
 
+        img {
+            min-height: 60px;
+            max-width: 60px;
+            object-fit: contain;
+            margin-right: 4px;
+        }
+
         input[name="data.shortDesc"].long-text {
             max-width: 100%;
             width: 100%;
         }
 
+        .damage-formula {
+            p.in-chat-text {
+                white-space: nowrap;
+            }
+        }
         p.in-chat-text {
             margin: 0px;
         }
@@ -73,11 +85,11 @@
             text-transform: uppercase;
             border: none;
             padding: 4px;
-
         };
 
         input[name="name"] {
             padding-left: 10px;
+            min-width: 100%;
         };
 
         label {
@@ -89,10 +101,26 @@
             white-space: nowrap;
         };
 
+        .flexcol {
+            >label {
+                margin-right: 0px;
+            }
+            >input {
+                text-align: center;
+            }
+            div.item-card-stats.active-mod-container {
+                padding-top: 0px;
+            }
+        }
+
         .item-card-stats {
             flex-wrap: wrap;
             padding: 10px;
             padding-bottom: 6px;
+
+            a.not-equiped {
+                opacity: 0.3;
+            }
 
             > * {
                 margin-bottom: 4px;
@@ -108,6 +136,14 @@
             input[name="data.cost"] {
                 max-width: 60px;
                 min-width: 60px;
+                text-align: center;
+            }
+
+            input[type="checkbox"] {
+                margin: 0px;
+                margin-top: 1px;
+                width: 16px;
+                height: 16px;
             }
 
             input[name="data.targetNumber"],
@@ -122,7 +158,8 @@
             input[name="data.initialValue"],
             input[name="data.extraValue"],
             input[name="data.nrDice"],
-            input[name="data.intensity"] {
+            input[name="data.intensity"],
+            input[name="data.rank"] {
                 max-width: 30px;
                 min-width: 30px;
                 text-align: center;
@@ -133,9 +170,16 @@
                 text-align: center;
             };
 
+            div.power-type-control {
+                a {
+                    margin-top: 30%;
+                    margin-bottom: 50%;
+                }
+                max-width: fit-content;
+            }
+
             div.flexrow {
                 margin-right: 4px;
-                // max-width: fit-content;
             };
 
             div {

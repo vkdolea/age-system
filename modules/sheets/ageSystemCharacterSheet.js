@@ -30,7 +30,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         {
             name: game.i18n.localize("age-system.settings.changeRollContext"),
             icon: '<i class="fas fa-exchange-alt"></i>',
-            // Estou devendo esse callback -> chama uma janela de diálogo e perguntar qual Habilidade usar para rolar
+            // TODO - try to add the Shift + Click rolling to GM inside this callback
             callback: e => {
                 const focus = this.actor.getOwnedItem(e.data("focus-id"));
                 let d = Dice.dialogBoxAbilityFocus(focus, this.actor)
@@ -72,11 +72,13 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.power = itemSorted.filter(i => i.type === "power");
         data.focus = itemSorted.filter(i => i.type === "focus");
         data.stunts = itemSorted.filter(i => i.type === "stunts");
+        // Order Stunts by stunt points, lowest to highest
+        data.stunts = data.stunts.sort((a, b) => a.data.stuntPoints - b.data.stuntPoints);
         data.equipment = itemSorted.filter(i => i.type === "equipment");
         data.honorifics = itemSorted.filter(i => i.type === "honorifics");
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
-
+    
         // Retrieve Prefession/Ancestry settings
         data.ancestry = game.settings.get("age-system", "ancestryOpt");
         data.occupation = game.settings.get("age-system", "occupation");
@@ -137,9 +139,22 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
             html.find(".roll-resources").click(this._onRollResources.bind(this));
+            html.find(".item-equip").click(this._onItemActivate.bind(this));
         };
 
         super.activateListeners(html);
+    };
+
+    _onItemActivate(event) {
+        const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
+        const itemToToggle = this.actor.getOwnedItem(itemId);
+        const itemType = itemToToggle.type;
+        if (itemType === "power" || itemType === "talent") {
+            itemToToggle.data.data.activate = !itemToToggle.data.data.activate;
+        } else {
+            itemToToggle.data.data.equiped = !itemToToggle.data.data.equiped;
+        };
+        itemToToggle.update(itemToToggle.data);
     };
 
     _onRollResources(event) {

@@ -27,13 +27,15 @@ ageSystem.abilitiesSettings.dage = {
     will: "age-system.will",
 };
 
-
-
 ageSystem.actionsToCast = {
     noAction: "age-system.noAction",
     minorAction: "age-system.minorAction",
     majorAction: "age-system.majorAction",
-    oneMinute: "age-system.oneMinute"
+    oneMinute: "age-system.oneMinute",
+    fiveMinutes: "age-system.fiveMinutes",
+    tenMinutes: "age-system.tenMinutes",
+    twentyMinutes: "age-system.twentyMinutes",
+    onHouer: "age-system.oneHour",
 };
 
 ageSystem.reloadDuration = {
@@ -97,6 +99,22 @@ ageSystem.bonusTypes = {
     armorPenalty: "age-system.bonus.armorPenaltyBns"
 };
 
+const itemIconPath = "systems/age-system/resources/imgs/item-icon/";
+ageSystem.itemIcons = {
+    "equipment": `${itemIconPath}briefcase.svg`,
+    "stunts": `${itemIconPath}split-cross.svg`,
+    "talent": `${itemIconPath}skills.svg`,
+    "power": `${itemIconPath}embrassed-energy.svg`,
+    "honorifics": `${itemIconPath}rank-3.svg`,
+    "relationship": `${itemIconPath}player-next.svg`,
+    "membership": `${itemIconPath}backup.svg`,
+    "weapon": `${itemIconPath}fist.svg`,
+    "focus": `${itemIconPath}gift-of-knowledge.svg`
+};
+
+// Change default Actor Icon
+CONST.DEFAULT_TOKEN = "systems/age-system/resources/imgs/actor-icon/sensousness.svg";
+
 // Initializing variable to load focus Compendiaum
 ageSystem.focus = [];
 
@@ -108,11 +126,11 @@ ageSystem.focus = [];
 // });
 
 // If Compendia are updated, then compendiumList is gathered once again
-Hooks.on("renderCompendium", function() {
-    let setCompendium = game.settings.get("age-system", "masterFocusCompendium");
-    ageSystem.focus = compendiumList(setCompendium);
-    // ageSystem.focus = compendiumList("age-system.focus");
-});
+// Hooks.on("renderCompendium", function() {
+//     let setCompendium = game.settings.get("age-system", "masterFocusCompendium");
+//     ageSystem.focus = compendiumList(setCompendium);
+//     // ageSystem.focus = compendiumList("age-system.focus");
+// });
 
 // This function looks at given Compendium and returns an array with object containing id and name for all entries
 // export function compendiumList(compendiumName) {

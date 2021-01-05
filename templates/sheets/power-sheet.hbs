@@ -8,18 +8,20 @@
             <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
             {{/if}}
             <div class="item-card-stats flex-justify-center flex-align-start flexrow">
+                {{!-- Item Image --}}
+                {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}} 
 
                 {{#if inChat}}
                 {{else}}
                 {{!-- Select Damage and Fatigue Options --}}
-                <div class="flexrow" style="max-width: fit-content;">
-                    <a class="toggle-damage" title="{{localize "age-system.rollDamage"}}">
+                <div class="flexcol power-type-control flex-justify-between">
+                    <a class="toggle-damage colorset-second-tier {{#unless data.hasDamage}}not-equiped{{/unless}}" title="{{localize "age-system.rollDamage"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="fas fa-fist-raised"></i>
                         </div>
                     </a>
 
-                    <a class="toggle-fatigue flexrow use-fatigue-true" title="{{localize "age-system.rollFatigue"}}">
+                    <a class="toggle-fatigue flexrow use-fatigue-true colorset-second-tier {{#unless data.hasFatigue}}not-equiped{{/unless}}" title="{{localize "age-system.rollFatigue"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="fas fa-head-side-cough"></i>
                         </div>
