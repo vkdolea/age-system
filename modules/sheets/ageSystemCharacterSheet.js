@@ -132,7 +132,6 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         if (this.actor.owner) {
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
             html.find(".roll-ability").click(this._onRollAbility.bind(this));
-            html.find(".roll-focus").click(this._onRollFocus.bind(this));
             html.find(".roll-item").click(this._onRollItem.bind(this));
             html.find(".roll-damage").click(this._onRollDamage.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
@@ -150,11 +149,12 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         const itemToToggle = this.actor.getOwnedItem(itemId);
         const itemType = itemToToggle.type;
         if (itemType === "power" || itemType === "talent") {
-            itemToToggle.data.data.activate = !itemToToggle.data.data.activate;
+            const toggleAct = !itemToToggle.data.data.activate;
+            itemToToggle.update({"data.activate": toggleAct});
         } else {
-            itemToToggle.data.data.equiped = !itemToToggle.data.data.equiped;
+            const toggleEqp = !itemToToggle.data.data.equiped;
+            itemToToggle.update({"data.equiped": toggleEqp});
         };
-        itemToToggle.update(itemToToggle.data);
     };
 
     _onRollResources(event) {
@@ -195,28 +195,14 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
     _onRollAbility(event) {
         const ablCode = event.currentTarget.closest(".feature-controls").dataset.ablId;
-        Dice.ageRollCheck(event, ablCode, null, null, this.actor);
-    };
-
-    _onRollFocus(event) {
-        const focusId = event.currentTarget.closest(".feature-controls").dataset.focusId;
-        const focusRolled = this.actor.getOwnedItem(focusId);
-        const ablCode = focusRolled.data.data.useAbl;
-        Dice.ageRollCheck(event, ablCode, focusRolled, null, this.actor);
+        Dice.ageRollCheck(event, this.actor, ablCode);
     };
 
     _onRollItem(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const itemRolled = this.actor.getOwnedItem(itemId);
         const ablCode = itemRolled.data.data.useAbl;
-        const focusName = itemRolled.data.data.useFocus;
-
-        let focusRolled = this.actor.getOwnedItem(itemRolled.data.data.useFocusActorId);
-        if (!focusRolled) {
-            focusRolled = focusName;
-        };
-
-        Dice.ageRollCheck(event, ablCode, focusRolled, itemRolled, this.actor);
+        Dice.ageRollCheck(event, this.actor, ablCode, itemRolled);
     };
 
     _onItemShow(event) {

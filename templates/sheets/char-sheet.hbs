@@ -284,8 +284,8 @@
                     <div class="owned-focus flexrow">
                         {{#each ../focus as |item|}}
                         {{#when item.data.useAbl 'eq' type}}
-                        <div class="item-name item-box focus-options feature-controls colorset-third-tier" data-focus-id="{{item._id}}">
-                            <a class="item-name roll-focus{{#if item.data.improved}} improved-focus{{/if}}">{{item.name}}</a>
+                        <div class="item-name item-box focus-options feature-controls colorset-third-tier" data-item-id="{{item._id}}">
+                            <a class="item-name roll-item{{#if item.data.improved}} improved-focus{{/if}}">{{item.name}}</a>
                         </div>
                         {{/when}}
                         {{/each}}

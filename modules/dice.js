@@ -1,5 +1,5 @@
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
-export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor, resourceRoll = false) {
+export async function ageRollCheck(event, actor, abl, itemRolled = null, resourceRoll = false) {
 
     // Set roll mode
     const rMode = setBlind(event);
@@ -17,41 +17,28 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor, r
             ablCode: abl,
             focusId: null
         };
-    }
-
-    // Check with Focus is involed in this roll and what is the applicable value for the Actor
-    if (focusRolled !== null && focusRolled !== "") {
-        rollFormula = `${rollFormula} + @focus`;
-
-        // if focusRolled has an Object, the Actor has focus, then Focus Value is retrieved
-        if (typeof focusRolled === "object") {
-            rollData = {
-                ...rollData,
-                // data.focusValue not in use anymore, using only data.initialValue
-                focus: focusRolled.data.data.initialValue,
-                focusName: focusRolled.name,
-                focusId: focusRolled._id
-            };
-        };
-
-        // If focusRolled is a String, it means the Actor do not have the necessary Focus, then value 0 is sent
-        if (typeof focusRolled === "string") {
-            rollData = {
-                ...rollData,
-                focus: 0,
-                focusName: focusRolled
-            };
-        };
     };
+
+
+    // Attempt to remover an argument from ageRollCheck
+    const focusRolled = getFocus(itemRolled);
+
+    if (focusRolled) {
+        rollFormula = `${rollFormula} + @focus`;
+        rollData.focusName = focusRolled[0];
+        rollData.focus = focusRolled[1];
+    }
 
     // Transfer rolled item (if any) to chat message
     // Also checks if Item has Activation Mod
     if (itemRolled !== null) {
         rollData.itemId = itemRolled._id;
         rollData.itemEntity = itemRolled;
-        if (itemRolled.data.data.itemMods.itemActivation.isActive) {
-            rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
-            rollFormula += " + @activationMod"
+        if (itemRolled.data.data.itemMods) {
+            if (itemRolled.data.data.itemMods.itemActivation.isActive) {
+                rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
+                rollFormula += " + @activationMod"
+            }
         }
     } else {
         rollData.itemId = null;
@@ -137,6 +124,20 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor, r
     return ChatMessage.create(chatData, {rollMode: rMode});
 };
 
+export function getFocus(item) {
+    if (item === null) {return false}
+    if (item.type === "focus") {
+        return [item.name, item.data.data.initialValue]
+    } else {
+        if (item.data.data.useFocusActorId) {
+            const inUseFocus = item.actor.getOwnedItem(item.data.data.useFocusActorId);
+            return [inUseFocus.name, inUseFocus.data.data.initialValue];
+        } else {
+            return [item.data.data.useFocus, 0]
+        }
+    }
+}
+
 // Capture GM ID to whisper
 export function isGMroll(event) {
     if (!event.shiftKey) {return false};
@@ -211,6 +212,20 @@ export function dialogBoxAbilityFocus(focus, actor) {
         buttons
     });
 };
+
+export function rollOwnedItem(event, actorId, itemId) {
+    const actor = game.actors.get(actorId);
+    const itemRolled = actor.getOwnedItem(itemId);
+    const ablCode = itemRolled.data.data.useAbl;
+    const focusName = itemRolled.data.data.useFocus;
+    
+    let focusRolled = actor.getOwnedItem(itemRolled.data.data.useFocusActorId);
+    if (!focusRolled) {
+        focusRolled = focusName;
+    };
+
+    ageRollCheck(event, ablCode, focusRolled, itemRolled, actor);
+}
 
 // Item damage
 export function itemDamage(event, item) {

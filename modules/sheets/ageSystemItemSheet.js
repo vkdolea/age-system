@@ -95,13 +95,13 @@ export default class ageSystemItemSheet extends ItemSheet {
     };
 
     _onToggleDamage(event) {
-        this.item.data.data.causeDamage = !this.item.data.data.causeDamage;
-        this.item.update(this.item.data)
+        const toggleDmg = !this.item.data.data.causeDamage;
+        this.item.update({"data.causeDamage": toggleDmg});
     };
 
     _onToggleFatigue(event) {
-        this.item.data.data.useFatigue = !this.item.data.data.useFatigue;
-        this.item.update(this.item.data)
+        const toggleFtg = !this.item.data.data.useFatigue;
+        this.item.update({"data.useFatigue": toggleFtg});
     };    
     
     // Adds an * in front of the owned Focus name whenever the user types a name of another owned Focus
