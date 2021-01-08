@@ -60,6 +60,11 @@ Here the description of each one of the Modificators:
 
 ## Change log
 
+### v0.2.0 - 2021-mm-dd
+#### Fixed
+- Removed unnecessary arguments from ageRollCheck.
+- When equip/activate icon is clicked on character sheet, only this element is updated on Item object and not the whole entity.
+
 ### v0.1.1 - 2021-01-05
 #### Fixed
 - Minimum and compatible versions updated on system.json.
