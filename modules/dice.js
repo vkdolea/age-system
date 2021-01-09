@@ -4,6 +4,7 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
     // Set roll mode
     const rMode = setBlind(event);
     let rollData = {};
+    rollData.abilityName = "...";
     
     // Basic formula created spliting Stunt Die from the others
     let rollFormula = "2d6 + 1d6";
@@ -15,7 +16,8 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
         rollData = {
             ability: ablValue,
             ablCode: abl,
-            focusId: null
+            focusId: null,
+            abilityName: game.i18n.localize(`age-system.${abl}`)
         };
     };
 

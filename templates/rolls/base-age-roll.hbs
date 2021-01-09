@@ -5,8 +5,25 @@
 
             <div>
                 <h3 class="action-details colorset-first-tier">
-                    {{owner.name}} {{localize "age-system.settings.flavorTextRoll"}} {{#if rollInput.resourcesRoll}}{{rollInput.resourcesName}}{{else}} {{localize (concat "age-system." rollInput.ablCode)}}{{/if}}
-                    {{#if rollInput.focusName}} ({{rollInput.focusName}}){{/if}}
+                    {{#if rollInput.itemEntity}}
+                        {{#if (and (ne rollInput.itemEntity.type "weapon") (ne rollInput.itemEntity.type "power"))}}
+                        {{localize "age-system.chatCard.rollGeneral" actor=owner.name item=rollInput.itemEntity.name}}
+                        {{/if}}
+
+                        {{#if (eq rollInput.itemEntity.type "weapon")}}
+                        {{localize "age-system.chatCard.rollAttack" actor=owner.name item=rollInput.itemEntity.name}}
+                        {{/if}}
+                        
+                        {{#if (eq rollInput.itemEntity.type "power")}}
+                        {{localize "age-system.chatCard.rollPower" actor=owner.name item=rollInput.itemEntity.name}}
+                        {{/if}}
+                    {{else}}
+                        {{#if rollInput.resourcesRoll}}
+                        {{localize "age-system.chatCard.rollGeneral" actor=owner.name item=rollInput.resourcesName}}
+                        {{else}}
+                        {{localize "age-system.chatCard.rollGeneral" actor=owner.name item=rollInput.abilityName}}
+                        {{/if}}
+                    {{/if}}
                 </h3>
                 <div class="dice-show trait-test flexrow">
                     {{#each ageRollSummary.dice as |diceFace|}}
@@ -41,7 +58,7 @@
                 {{/if}}
                 {{#if rollInput.ablCode}}
                 <div class="flexrow roll-mod">
-                    <div class="line-header">{{localize (concat "age-system." rollInput.ablCode)}}</div>
+                    <div class="line-header">{{rollInput.abilityName}}</div>
                     <div class="line-value">{{rollInput.ability}}</div>
                 </div>
                 {{/if}}

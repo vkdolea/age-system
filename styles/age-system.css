@@ -812,6 +812,8 @@
 #chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card div.total-roll h3,
 #chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card div.total-roll h3 {
   margin-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card > div div.stunted,
 #chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card > div div.stunted,

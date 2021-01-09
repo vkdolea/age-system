@@ -79,6 +79,12 @@
             "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro."
         },
         
+        "chatCard": {
+            "rollGeneral": "{actor} rolls {item}",
+            "rollAttack": "{actor} attacks with {item}",
+            "rollPower": "{actor} uses {item}"
+        },
+
         "testThreshold": "Threshold",
 
         "power": "Power",
