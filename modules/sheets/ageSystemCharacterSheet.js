@@ -158,7 +158,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     };
 
     _onRollResources(event) {
-        Dice.ageRollCheck(event, null, null, null, this.actor, true);
+        Dice.ageRollCheck(event, this.actor, null, null, true);
     };
 
     _onLastUpSelect(ev) {

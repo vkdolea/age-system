@@ -20,7 +20,7 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
     };
 
 
-    // Attempt to remover an argument from ageRollCheck
+    // Check if item rolled is Focus and prepare its data
     const focusRolled = getFocus(itemRolled);
 
     if (focusRolled) {
