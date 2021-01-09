@@ -113,9 +113,9 @@ export class ageSystemItem extends Item {
     };
 
     // Rolls damage for the item
-    rollDamage(event) {
+    rollDamage(event, stuntDie = null) {
         if (!this.hasDamage()) {return false};
-        return Dice.itemDamage(event, this);
+        return Dice.itemDamage(event, this, stuntDie);
     };
 
     // Rolls fatigue for the Item

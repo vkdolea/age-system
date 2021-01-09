@@ -228,7 +228,7 @@ export function rollOwnedItem(event, actorId, itemId) {
 }
 
 // Item damage
-export function itemDamage(event, item) {
+export function itemDamage(event, item, stuntDie = null) {
 
     const nrDice = item.data.data.nrDice;
     const diceSize = item.data.data.diceType;
@@ -268,6 +268,13 @@ export function itemDamage(event, item) {
             messageData.flavor += ` | ${damageToString(ablMod)}, ${game.i18n.localize("age-system." + dmgAbl)}`
         }
 
+        // Check if extra Stunt Die is to be added (normally rolling damage after chat card roll)
+        if (stuntDie !== null) {
+            damageFormula = `${damageFormula} + @stuntDieDmg`;
+            rollData.stuntDieDmg = stuntDie;
+            messageData.flavor += ` | ${damageToString(stuntDie)}, ${game.i18n.localize("age-system.stuntDie")}`; 
+        }
+
         // Check if Item has Mod to add to its own Damage
         if (item.data.data.itemMods.itemDamage.isActive) {
             const itemDmg = item.data.data.itemMods.itemDamage.value;
@@ -275,8 +282,7 @@ export function itemDamage(event, item) {
             rollData.itemBonus = itemDmg;
             messageData.flavor += ` | ${damageToString(itemDmg)}, ${game.i18n.localize("age-system.itemDmgMod")}`;
         };
-       
-
+        
         // Check if item onwer has items which adds up to general damage
         if (item.actor.data.data.ownedBonus != null && item.actor.data.data.ownedBonus.actorDamage) {
             const actorDmgMod = item.actor.data.data.ownedBonus.actorDamage.totalMod;
@@ -303,6 +309,7 @@ export function itemDamage(event, item) {
                 messageData.flavor += ` | +1D6`;
             };
         };
+
     };
 
     let dmgRoll = new Roll(damageFormula, rollData).roll();

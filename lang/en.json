@@ -139,6 +139,8 @@
         "defendManeuver": "Defend",
         "guardUp": "Guard Up",
         "initiative": "Initiative",
+        "stuntDie": "Stunt Die",
+        "stuntDieIndex": "SD",
 
         "talentDegree": "Degree",
         "health": "Health",
