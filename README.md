@@ -14,8 +14,9 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Option to use the Dragon AGE specific ability set
 - Support to Toughness, Impact/Ballistic Armor, and Stun/Wound damage
 - Dice so Nice compatible
-- Support to Income, Resources and Currency wealth systems
+- Support to Income, Resources, Currency and GP/SP/CP wealth systems
 - Shift, Alt, Ctrl keys support to change certain types of roll
+- Drag and drop owned weapons and power to macro bar to create attack shortcuts
 
 ## Credits
 Icons were used from [game-icons.net](https://game-icons.net). This icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
@@ -35,6 +36,7 @@ Icons were used from [game-icons.net](https://game-icons.net). This icons were p
 2. *CTRL + Click* on Damage rolls adds +1D6 to the total.
 3. *CTRL + ALT + Click* on Damage rolls adds +2D6 to the total.
 4. *Right Click* on Focus in the character sheet opens a context menu with options to roll it with another Ability, show on Chat, edit and delete.
+5. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
 
 ### Modificators
 A few items have a "Modificators" section. Modificatores will only apply when the item is equiped/activated (i.e., shield icon in character sheet without opacity).
@@ -61,6 +63,12 @@ Here the description of each one of the Modificators:
 ## Change log
 
 ### v0.2.0 - 2021-mm-dd
+#### Added
+- Header from chat cards when rolling items shows different text.
+- Option to use GP / SP / CP as a wealth type.
+- Support to drag Weapons and Powers to marcobar.
+- Cost and Minimum STR fields now accepts text input.
+- Extra field on weapon chards to input max/long range.
 #### Fixed
 - Removed unnecessary arguments from ageRollCheck.
 - When equip/activate icon is clicked on character sheet, only this element is updated on Item object and not the whole entity.
