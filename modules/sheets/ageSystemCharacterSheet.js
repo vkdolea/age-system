@@ -124,13 +124,13 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         if (this.isEditable) {
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
-            html.find(".item-show").click(this._onItemShow.bind(this));
-
+            
         };
         
         // Actions by sheet owner only
         if (this.actor.owner) {
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
+            html.find(".item-show").click(this._onItemShow.bind(this));
             html.find(".roll-ability").click(this._onRollAbility.bind(this));
             html.find(".roll-item").click(this._onRollItem.bind(this));
             html.find(".roll-damage").click(this._onRollDamage.bind(this));

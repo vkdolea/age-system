@@ -30,6 +30,7 @@
     "SETTINGS.wealthTypeResources": "Resources",
     "SETTINGS.wealthTypeIncome": "Income",
     "SETTINGS.wealthTypeCurrency": "Currency",
+    "SETTINGS.wealthTypeCoins": "GP / SP / CP",
 
     "SETTINGS.primaryAbl": "Select primary abilities",
     "SETTINGS.primaryAblHint": "Adds extra checkbox to identiry which Ability is primary",
@@ -124,6 +125,10 @@
         "income": "Income",
         "resources": "Resources",
         "currency": "Currency",
+        "coins": "Coins",
+        "gp": "GP",
+        "sp": "SP",
+        "cp": "CP",
 
         "improvedFocus": "Improved",
         "abilitySelect": "Select an Ability to roll with this Focus",

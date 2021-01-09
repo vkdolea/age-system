@@ -25,7 +25,7 @@ export class ageSystemActor extends Actor {
         data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
 
         // Retrieve wealth mode
-        data.useResource = data.useIncome = data.useCurrency = false;
+        data.useResource = data.useIncome = data.useCurrency = data.useCoins = false;
         const wealthMode = game.settings.get("age-system", "wealthType");
         switch (wealthMode) {
             case "income":
@@ -36,6 +36,10 @@ export class ageSystemActor extends Actor {
                 break;
             case "currency":
                 data.useCurrency = true;
+                break;
+            case "coins":
+                data.useCoins = true;
+                break;
             default:
                 break;
         };
@@ -162,21 +166,9 @@ export class ageSystemActor extends Actor {
         const actorData = this.data;
         const data = actorData.data;
 
-        // if (actorData.type === "char") {
-        //     data.ownedFoci = [];
-        //     const focusList = this.items.filter(e => e.type === "focus");
-        //     for (let f = 0; f < focusList.length; f++) {
-        //         const focus = focusList[f];
-        //         data.ownedFoci.push({
-        //             name: focus.name.toLowerCase(),
-        //             value: focus.data.data.focusValue
-        //         });
-        //     };
-        // };
-
         /*--- Add bonuses to Abilities -----------------------*/
         // Also create abl.total parameters
-        this.setAbilitiesWithMod(data, actorData);
+        // this.setAbilitiesWithMod(data, actorData);
         /*----------------------------------------------------*/
 
         // Calcualtes total Initiative

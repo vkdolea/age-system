@@ -173,17 +173,39 @@
             {{!-- Currency/Resource/Income block --}}
             {{#if data.useCurrency}}
             <div class="flexcol general-stats">
-                <div class="top-row colorset-first-tier flex-justify-center">
-                    {{localize "SETTINGS.wealthTypeCurrency"}}    
-                </div>
+                <div class="top-row colorset-first-tier flex-justify-center">{{localize "SETTINGS.wealthTypeCurrency"}}</div>
                 <div class="main-value flexcol">
                     <input type="number" class="main-value" name="data.resources.base" value="{{data.resources.base}}" data-dtype="Number" />
                 </div>
-                <div class="stat-modifiers flexrow no-flexwrap">
+                {{!-- <div class="stat-modifiers flexrow no-flexwrap">
+                </div>
+                <div class="bottom-row"></div> --}}
+            </div>
+            {{/if}}
+            {{#if data.useCoins}}
+            <div class="flexcol general-stats">
+                <div class="top-row colorset-first-tier flexrow no-flexwrap resources flex-justify-center">
+                    {{localize "age-system.coins"}}
+                </div>
+                <div class="flexcol stats-modifiers coins">
+                    {{!-- <input type="number" disabled class="main-value" name="data.resources.total" value="{{data.resources.total}}" data-dtype="Number" /> --}}
+                    <div class="flexrow no-flexwrap flex-align-center">
+                        <input type="number" class="" name="data.gp" value="{{data.gp}}" data-dtype="Number" />
+                        <label class="">{{localize "age-system.gp"}}</label>
+                    </div>
+                    <div class="flexrow no-flexwrap flex-align-center">
+                        <input type="number" class="" name="data.sp" value="{{data.sp}}" data-dtype="Number" />
+                        <label class="">{{localize "age-system.sp"}}</label>
+                    </div>
+                    <div class="flexrow no-flexwrap flex-align-center">
+                        <input type="number" class="" name="data.cp" value="{{data.cp}}" data-dtype="Number" />
+                        <label class="">{{localize "age-system.cp"}}</label>
+                    </div>
                 </div>
                 <div class="bottom-row"></div>
-            </div>
-            {{else}}
+            </div>            
+            {{/if}}
+            {{#if (or data.useIncome data.useResources)}}
             <div class="flexcol general-stats">
                 <div class="top-row colorset-first-tier flexrow no-flexwrap resources flex-justify-center">
                     <a class="roll-resources feature-controls"><i class="fas fa-dice"></i></a>

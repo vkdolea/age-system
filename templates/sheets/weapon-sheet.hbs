@@ -21,7 +21,7 @@
                 {{!-- Minimum Strenght --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.minStr"}}</label>
-                    <input name="data.minStr" type="text" {{#if inChat}}disabled{{/if}} value="{{data.minStr}}" placeholder="{{localize "age-system.item.reqStr"}}" data-dtype="Number"/>
+                    <input name="data.minStr" type="text" {{#if inChat}}disabled{{/if}} value="{{data.minStr}}" placeholder="-" data-dtype="String"/>
                 </div>
                 {{!-- Purchase Block --}}
                 <div class="flexcol">
@@ -30,7 +30,7 @@
                 {{!-- Weight --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.weight"}}</label>
-                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                    <input type="number" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.weight}}" data-dtype="Number" />
                 </div>
                 {{!-- ROF --}}
                 <div class="flexcol">
@@ -49,9 +49,12 @@
                 </div>
                 {{!-- Range --}}
                 <div class="flexcol">
-                    <label>{{localize "age-system.item.range"}}</label>                    
-                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.range" value="{{data.range}}" data-dtype="Number" />
-                    <span>{{localize "age-system.item.yards"}}</span>                    
+                    <label>{{localize "age-system.item.range"}} ({{localize "age-system.item.yards"}})</label>                    
+                    <div class="flexrow">
+                        <input type="number" {{#if inChat}}disabled{{/if}} name="data.range" value="{{data.range}}" data-dtype="Number" />
+                        /
+                        <input type="number" {{#if inChat}}disabled{{/if}} name="data.rangeMax" value="{{data.rangeMax}}" data-dtype="Number" />
+                    </div>        
                 </div>
                 {{!-- Capacity --}}
                 <div class="flexcol">
