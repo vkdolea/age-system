@@ -74,7 +74,9 @@
     "age-system": {
 
         "WARNING": {
-            "duplicatedFocus": "Focus is not added to character - it already owns a Focus named "
+            "duplicatedFocus": "Focus is not added to character - it already owns a Focus named ",
+            "selectTokenMacro": "Select a token to run the macro.",
+            "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro."
         },
         
         "testThreshold": "Threshold",

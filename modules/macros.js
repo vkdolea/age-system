@@ -1,14 +1,20 @@
 import {ageRollCheck} from "./dice.js";
 
-export function rollOwnedItem(actorId, itemName) {
-    const owner = game.actors.get(actorId);
-    // const itemRolled = owner.getOwnedItem(itemId);
-    const itemRolled = owner ? owner.items.find(i => i.name === itemName) : null;
-    if (!itemRolled) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
+export function rollOwnedItem(itemName) {
+
+    // Identify if token is selected, otherwise select user's actor
+    const speaker = ChatMessage.getSpeaker();
+    let actor;
+    if (speaker.token) actor = game.actors.tokens[speaker.token];
+    if (!actor) actor = game.actors.get(speaker.actor);
+    if (!actor) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.selectTokenMacro"));
+
+    const itemRolled = actor ? actor.items.find(i => i.name === itemName) : null;
+    if (!itemRolled) {return ui.notifications.warn(game.i18n.localize("age-system.WARNING.actorDontHaveValidItem"));}
     const ablCode = itemRolled.data.data.useAbl;
     const event = new MouseEvent('click', {});
 
-    ageRollCheck(event, owner, ablCode, itemRolled);
+    ageRollCheck(event, actor, ablCode, itemRolled);
 };
 
 /* -------------------------------------------- */
@@ -28,7 +34,7 @@ export async function createAgeMacro(data, slot) {
     const item = data.data;
   
     // Create the macro command
-    const command = `game.ageSystem.rollOwnedItem("${data.actorId}", "${item.name}");`;
+    const command = `game.ageSystem.rollOwnedItem("${item.name}");`;
     let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
       macro = await Macro.create({
