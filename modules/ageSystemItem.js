@@ -121,9 +121,17 @@ export class ageSystemItem extends Item {
     // Rolls fatigue for the Item
     rollFatigue(event) {
         if (!this.hasFatigue()) {return false};
-        const data = this.data.data;
-        return Dice.ageRollCheck(event, data.useAbl, this.ownerFocusEntity(), this, this.actor);
+        const targetNumber = this.data.data.fatigueTN;
+        const rollType = "fatigue";
+        return this.roll(event, rollType, targetNumber);
     };
+
+    roll(event, rollType = null, targetNumber = null) {
+        const owner = this.actor;
+        if (!owner) {return false;}
+        const ablCode = this.data.data.useAbl;
+        Dice.ageRollCheck(event, owner, ablCode, this);
+    }
 
     /** Returns owner's Focus value, base on Item's useFocus property
      * TODO = figure out how if derived data can be input to another Item

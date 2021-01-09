@@ -139,6 +139,16 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
             html.find(".roll-resources").click(this._onRollResources.bind(this));
             html.find(".item-equip").click(this._onItemActivate.bind(this));
+
+            let handler = ev => this._onDragStart(ev);
+            // Find all rollable items on the character sheet.
+            let items = html.find(".item-box");
+            for (let i = 0; i < items.length; i++) {
+                const el = items[i];
+                if (el.draggable) {
+                    el.addEventListener("dragstart", handler, false);
+                }   
+            }
         };
 
         super.activateListeners(html);
@@ -201,8 +211,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     _onRollItem(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const itemRolled = this.actor.getOwnedItem(itemId);
-        const ablCode = itemRolled.data.data.useAbl;
-        Dice.ageRollCheck(event, this.actor, ablCode, itemRolled);
+        itemRolled.roll(event);
     };
 
     _onItemShow(event) {

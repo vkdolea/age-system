@@ -343,7 +343,7 @@
                     <div class="top-row colorset-first-tier">{{localize "age-system.extraordinaryPowers"}}</div>
                     <div class="actor-items flexrow">
                     {{#each power as |item id|}}
-                        <div class="item-box flexrow feature-controls colorset-third-tier" data-item-id="{{item._id}}">
+                        <div class="item-box flexrow feature-controls colorset-third-tier" draggable="true" data-item-id="{{item._id}}">
                             <div class="item-name flexrow">
                                 <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                                 <a class="clickable item-show">{{item.name}}</a>
@@ -367,7 +367,7 @@
                     <div class="top-row colorset-first-tier">{{localize "age-system.weaponContainer"}}</div>
                     <div class="actor-items flexrow">
                     {{#each weapon as |item id|}}
-                        <div class="item-box flexrow feature-controls colorset-third-tier" data-item-id="{{item._id}}">
+                        <div class="item-box flexrow feature-controls colorset-third-tier" draggable="true" data-item-id="{{item._id}}">
                             <div class="item-name flexrow">
                                 <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                                 <a class="item-show">{{item.name}}</a>
