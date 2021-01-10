@@ -4,4 +4,4 @@
 {{#when config.wealthMode 'eq' 'currency'}}
 <label>{{localize "age-system.item.cost"}}</label>
 {{/when}}
-<input type="number" {{#if inChat}}disabled{{/if}} name="data.cost" value="{{data.cost}}" data-dtype="Number" />
+<input type="text" {{#if inChat}}disabled{{/if}} name="data.cost" value="{{data.cost}}" data-dtype="String" />

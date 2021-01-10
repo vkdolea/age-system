@@ -114,6 +114,7 @@ export const registerSystemSettings = function() {
       "resources": "SETTINGS.wealthTypeResources",
       "income": "SETTINGS.wealthTypeIncome",
       "currency": "SETTINGS.wealthTypeCurrency",
+      "coins": "SETTINGS.wealthTypeCoins",
     },
     onChange:()=>{window.location.reload(!1)}
   });

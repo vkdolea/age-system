@@ -46,6 +46,9 @@
                 "base": 4,
                 "mod": 0
             },
+            "gp": 0,
+            "sp": 0,
+            "cp": 0,
             "currency": 0,
             "goals": "",
             "fear": 0,
@@ -330,8 +333,9 @@
         "weapon": {
             "templates": ["activation", "damage", "itemReq", "hardItem", "description", "bonuses"],
             "reload": "minor",
-            "capacity": 1,
-            "range": 1,
+            "capacity": 5,
+            "range": 2,
+            "rangeMax": "-",
             "rof": "none"
         },
         "power": {

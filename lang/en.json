@@ -30,6 +30,7 @@
     "SETTINGS.wealthTypeResources": "Resources",
     "SETTINGS.wealthTypeIncome": "Income",
     "SETTINGS.wealthTypeCurrency": "Currency",
+    "SETTINGS.wealthTypeCoins": "GP / SP / CP",
 
     "SETTINGS.primaryAbl": "Select primary abilities",
     "SETTINGS.primaryAblHint": "Adds extra checkbox to identiry which Ability is primary",
@@ -73,9 +74,17 @@
     "age-system": {
 
         "WARNING": {
-            "duplicatedFocus": "Focus is not added to character - it already owns a Focus named "
+            "duplicatedFocus": "Focus is not added to character - it already owns a Focus named ",
+            "selectTokenMacro": "Select a token to run the macro.",
+            "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro."
         },
         
+        "chatCard": {
+            "rollGeneral": "{actor} rolls {item}",
+            "rollAttack": "{actor} attacks with {item}",
+            "rollPower": "{actor} uses {item}"
+        },
+
         "testThreshold": "Threshold",
 
         "power": "Power",
@@ -124,6 +133,10 @@
         "income": "Income",
         "resources": "Resources",
         "currency": "Currency",
+        "coins": "Coins",
+        "gp": "GP",
+        "sp": "SP",
+        "cp": "CP",
 
         "improvedFocus": "Improved",
         "abilitySelect": "Select an Ability to roll with this Focus",
@@ -134,6 +147,8 @@
         "defendManeuver": "Defend",
         "guardUp": "Guard Up",
         "initiative": "Initiative",
+        "stuntDie": "Stunt Die",
+        "stuntDieIndex": "SD",
 
         "talentDegree": "Degree",
         "health": "Health",

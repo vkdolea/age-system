@@ -1,9 +1,10 @@
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
-export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor, resourceRoll = false) {
+export async function ageRollCheck(event, actor, abl, itemRolled = null, resourceRoll = false) {
 
     // Set roll mode
     const rMode = setBlind(event);
     let rollData = {};
+    rollData.abilityName = "...";
     
     // Basic formula created spliting Stunt Die from the others
     let rollFormula = "2d6 + 1d6";
@@ -15,43 +16,31 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor, r
         rollData = {
             ability: ablValue,
             ablCode: abl,
-            focusId: null
-        };
-    }
-
-    // Check with Focus is involed in this roll and what is the applicable value for the Actor
-    if (focusRolled !== null && focusRolled !== "") {
-        rollFormula = `${rollFormula} + @focus`;
-
-        // if focusRolled has an Object, the Actor has focus, then Focus Value is retrieved
-        if (typeof focusRolled === "object") {
-            rollData = {
-                ...rollData,
-                // data.focusValue not in use anymore, using only data.initialValue
-                focus: focusRolled.data.data.initialValue,
-                focusName: focusRolled.name,
-                focusId: focusRolled._id
-            };
-        };
-
-        // If focusRolled is a String, it means the Actor do not have the necessary Focus, then value 0 is sent
-        if (typeof focusRolled === "string") {
-            rollData = {
-                ...rollData,
-                focus: 0,
-                focusName: focusRolled
-            };
+            focusId: null,
+            abilityName: game.i18n.localize(`age-system.${abl}`)
         };
     };
+
+
+    // Check if item rolled is Focus and prepare its data
+    const focusRolled = getFocus(itemRolled);
+
+    if (focusRolled) {
+        rollFormula = `${rollFormula} + @focus`;
+        rollData.focusName = focusRolled[0];
+        rollData.focus = focusRolled[1];
+    }
 
     // Transfer rolled item (if any) to chat message
     // Also checks if Item has Activation Mod
     if (itemRolled !== null) {
         rollData.itemId = itemRolled._id;
         rollData.itemEntity = itemRolled;
-        if (itemRolled.data.data.itemMods.itemActivation.isActive) {
-            rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
-            rollFormula += " + @activationMod"
+        if (itemRolled.data.data.itemMods) {
+            if (itemRolled.data.data.itemMods.itemActivation.isActive) {
+                rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
+                rollFormula += " + @activationMod"
+            }
         }
     } else {
         rollData.itemId = null;
@@ -137,6 +126,20 @@ export async function ageRollCheck(event, abl, focusRolled, itemRolled, actor, r
     return ChatMessage.create(chatData, {rollMode: rMode});
 };
 
+export function getFocus(item) {
+    if (item === null) {return false}
+    if (item.type === "focus") {
+        return [item.name, item.data.data.initialValue]
+    } else {
+        if (item.data.data.useFocusActorId) {
+            const inUseFocus = item.actor.getOwnedItem(item.data.data.useFocusActorId);
+            return [inUseFocus.name, inUseFocus.data.data.initialValue];
+        } else {
+            return [item.data.data.useFocus, 0]
+        }
+    }
+}
+
 // Capture GM ID to whisper
 export function isGMroll(event) {
     if (!event.shiftKey) {return false};
@@ -212,8 +215,22 @@ export function dialogBoxAbilityFocus(focus, actor) {
     });
 };
 
+export function rollOwnedItem(event, actorId, itemId) {
+    const actor = game.actors.get(actorId);
+    const itemRolled = actor.getOwnedItem(itemId);
+    const ablCode = itemRolled.data.data.useAbl;
+    const focusName = itemRolled.data.data.useFocus;
+    
+    let focusRolled = actor.getOwnedItem(itemRolled.data.data.useFocusActorId);
+    if (!focusRolled) {
+        focusRolled = focusName;
+    };
+
+    ageRollCheck(event, ablCode, focusRolled, itemRolled, actor);
+}
+
 // Item damage
-export function itemDamage(event, item) {
+export function itemDamage(event, item, stuntDie = null) {
 
     const nrDice = item.data.data.nrDice;
     const diceSize = item.data.data.diceType;
@@ -253,6 +270,13 @@ export function itemDamage(event, item) {
             messageData.flavor += ` | ${damageToString(ablMod)}, ${game.i18n.localize("age-system." + dmgAbl)}`
         }
 
+        // Check if extra Stunt Die is to be added (normally rolling damage after chat card roll)
+        if (stuntDie !== null) {
+            damageFormula = `${damageFormula} + @stuntDieDmg`;
+            rollData.stuntDieDmg = stuntDie;
+            messageData.flavor += ` | ${damageToString(stuntDie)}, ${game.i18n.localize("age-system.stuntDie")}`; 
+        }
+
         // Check if Item has Mod to add to its own Damage
         if (item.data.data.itemMods.itemDamage.isActive) {
             const itemDmg = item.data.data.itemMods.itemDamage.value;
@@ -260,8 +284,7 @@ export function itemDamage(event, item) {
             rollData.itemBonus = itemDmg;
             messageData.flavor += ` | ${damageToString(itemDmg)}, ${game.i18n.localize("age-system.itemDmgMod")}`;
         };
-       
-
+        
         // Check if item onwer has items which adds up to general damage
         if (item.actor.data.data.ownedBonus != null && item.actor.data.data.ownedBonus.actorDamage) {
             const actorDmgMod = item.actor.data.data.ownedBonus.actorDamage.totalMod;
@@ -288,6 +311,7 @@ export function itemDamage(event, item) {
                 messageData.flavor += ` | +1D6`;
             };
         };
+
     };
 
     let dmgRoll = new Roll(damageFormula, rollData).roll();

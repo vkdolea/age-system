@@ -1,4 +1,5 @@
 import * as Settings from "./modules/settings.js";
+// import * as Macros from "./modules/macros.js";
 import {ageSystem} from "./modules/config.js"
 import ageSystemItemSheet from "./modules/sheets/ageSystemItemSheet.js"
 import ageSystemCharacterSheet from "./modules/sheets/ageSystemCharacterSheet.js"
@@ -6,6 +7,8 @@ import {ageSystemActor} from "./modules/ageSystemActor.js"
 import {ageSystemItem} from "./modules/ageSystemItem.js"
 import * as AgeChat from "./modules/age-chat.js"
 import * as Setup from "./modules/setup.js"
+import { createAgeMacro } from "./modules/macros.js";
+import { rollOwnedItem } from "./modules/macros.js";
 
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
@@ -81,6 +84,10 @@ Hooks.once("init", async function() {
         else return options.inverse(this);
     });
 
+        game.ageSystem = {
+            rollOwnedItem,
+        };
+
 });
 
 Hooks.once("ready", function() {
@@ -88,6 +95,9 @@ Hooks.once("ready", function() {
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.compendiumList(setCompendium);
+
+    // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
+    Hooks.on("hotbarDrop", (bar, data, slot) => createAgeMacro(data, slot));
 });
 
 // If Compendia are updated, then compendiumList is gathered once again
@@ -115,7 +125,4 @@ Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
 Hooks.on("renderChatMessage", (app, html, data) => {
     // Hide chat message when rolling to GM
     AgeChat.selectBlindAgeRoll(app, html, data);
-
-    // Add color scheme to chat message // Not in use anymore - chat rolls keep the color from the scheme used originally
-    // Setup.addColorScheme(html);
 });
