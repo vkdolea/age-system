@@ -16,7 +16,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             name: game.i18n.localize("age-system.settings.edit"),
             icon: '<i class="fas fa-edit"></i>',
             callback: e => {
-                const item = this.actor.getOwnedItem(e.data("focus-id"));
+                const item = this.actor.getOwnedItem(e.data("item-id"));
                 item.sheet.render(true);
             }
         },
@@ -24,7 +24,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             name: game.i18n.localize("age-system.settings.delete"),
             icon: '<i class="fas fa-trash"></i>',
             callback: e => {
-                const i = this.actor.deleteOwnedItem(e.data("focus-id"));
+                const i = this.actor.deleteOwnedItem(e.data("item-id"));
             }
         },
         {
@@ -32,7 +32,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             icon: '<i class="fas fa-exchange-alt"></i>',
             // TODO - try to add the Shift + Click rolling to GM inside this callback
             callback: e => {
-                const focus = this.actor.getOwnedItem(e.data("focus-id"));
+                const focus = this.actor.getOwnedItem(e.data("item-id"));
                 let d = Dice.dialogBoxAbilityFocus(focus, this.actor)
                 d.render(true);
             }
@@ -41,7 +41,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             name: "Show Item",
             icon: '<i class="far fa-eye"></i>',
             callback: e => {
-                const i = this.actor.getOwnedItem(e.data("focus-id")).showItem();
+                const i = this.actor.getOwnedItem(e.data("item-id")).showItem();
             }
         }
     ];

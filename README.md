@@ -62,6 +62,10 @@ Here the description of each one of the Modificators:
 
 ## Change log
 
+### v0.2.1 - 20121-01-10
+#### Fixed
+- Focus context menu (to edit, remove, show and roll with another Ability) is working again.
+
 ### v0.2.0 - 2021-01-09
 #### Added
 - Header from chat cards when rolling items shows different text.
