@@ -62,7 +62,7 @@ Here the description of each one of the Modificators:
 
 ## Change log
 
-### v0.2.0 - 2021-mm-dd
+### v0.2.0 - 2021-01-09
 #### Added
 - Header from chat cards when rolling items shows different text.
 - Option to use GP / SP / CP as a wealth type.
