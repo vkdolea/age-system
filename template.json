@@ -156,61 +156,7 @@
                 "value": 3,
                 "set": 3
             },
-            "advTestThreshold": 0,
-            "conditions": {
-                "blinded": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "deafened": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "exhausted": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "fatigued": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "freefalling": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "helpless": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "hindred": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "prone": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "restrained": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "injured": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "wounded": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "unconscious": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "dying": {
-                    "isActive": false,
-                    "desc": ""
-                }
-            }
+            "advTestThreshold": 0
         }
     },
     "Item": {
