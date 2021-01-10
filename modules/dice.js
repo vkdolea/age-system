@@ -201,7 +201,7 @@ export function dialogBoxAbilityFocus(focus, actor) {
             buttons[abl] ={
                 label: game.i18n.localize(ablLocalString),
                 callback: ev => {
-                    ageRollCheck(ev, abl, focus, null, actor)
+                    ageRollCheck(ev, actor, abl, focus)
                 }
             }
         };
