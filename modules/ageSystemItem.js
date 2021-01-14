@@ -65,7 +65,7 @@ export class ageSystemItem extends Item {
 
             // Adds ability to itemForce
             if (this.actor) {
-                data.itemForce += this.actor.data.data.abilities[data.useAbl].total;
+                data.itemForce += this.actor.data.data.abilities.will.total;
                 data.itemForce += this.ownerFocusValue();
             };
 
