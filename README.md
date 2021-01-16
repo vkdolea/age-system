@@ -64,10 +64,11 @@ Here the description of each one of the Modificators:
 ## Change log
 ### v0.2.2 - 2021-xx-xx
 ### Added
-- Added Speed Modificator
+- Added Speed Modificator.
 
 #### Fixed
-- Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower
+- Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower.
+- Fixed "yards" abbreviation to "yd" on grid map.
 
 ### v0.2.1 - 2021-01-10
 #### Fixed

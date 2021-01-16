@@ -40,7 +40,7 @@
     "socket": false,
     "initiative": "3d6 + @initiative",
     "gridDistance": 2,
-    "gridUnits": "yr",
+    "gridUnits": "yd",
     "primaryTokenAttribute": "health",
     "secondaryTokenAttribute": "powerPoints",
     "minimumCoreVersion": "0.7.9",
