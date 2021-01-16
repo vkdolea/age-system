@@ -129,9 +129,15 @@ export class ageSystemItem extends Item {
     roll(event, rollType = null, targetNumber = null) {
         const owner = this.actor;
         if (!owner) {return false;}
-        const ablCode = this.data.data.useAbl;
+        
+        let ablCode = "no-abl";
+        if (rollType === "fatigue") {
+            ablCode = "will";
+        } else {
+            ablCode = this.data.data.useAbl;
+        }
         Dice.ageRollCheck(event, owner, ablCode, this);
-    }
+    };
 
     /** Returns owner's Focus value, base on Item's useFocus property
      * TODO = figure out how if derived data can be input to another Item
