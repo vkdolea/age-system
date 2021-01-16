@@ -61,8 +61,11 @@ Here the description of each one of the Modificators:
 15. **Ability Names:** these are play bonuses to the specific Ability.
 
 ## Change log
+### v0.2.2 - 2012-xx-xx
+#### Fixed
+- Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower
 
-### v0.2.1 - 20121-01-10
+### v0.2.1 - 2021-01-10
 #### Fixed
 - Focus context menu (to edit, remove, show and roll with another Ability) is working again.
 
