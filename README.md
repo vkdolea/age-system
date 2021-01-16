@@ -62,7 +62,7 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
-### v0.2.2 - 2012-xx-xx
+### v0.2.2 - 2021-xx-xx
 ### Added
 - Added Speed Modificator
 
