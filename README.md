@@ -59,9 +59,13 @@ Here the description of each one of the Modificators:
 13. **Power Force:** added to item's Power Force. Only useful for Power & Arcana.
 14. **Aim:** extra bonus added to attack rolls when Aim maneuver is used, besides the standard value.
 15. **Ability Names:** these are play bonuses to the specific Ability.
+16. **Speed:** adds to Speed Mod field.
 
 ## Change log
 ### v0.2.2 - 2012-xx-xx
+### Added
+- Added Speed Modificator
+
 #### Fixed
 - Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower
 

@@ -293,6 +293,10 @@
                         "value": 0,
                         "isActive": false
                     },
+                    "speed": {
+                        "value": 0,
+                        "isActive": false
+                    },
                     "defendMnv":  {
                         "value": 0,
                         "isActive": false

@@ -305,7 +305,8 @@
             "maxPowerPoints": "Max PP",
             "powerForce": "Power Force",
             "aimMnv": "Aim",
-            "armorPenalty": "Armor Penalty"
+            "armorPenalty": "Armor Penalty",
+            "speed": "Speed"
         },
 
         "stuntsContainer": "Stunts",

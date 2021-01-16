@@ -103,6 +103,11 @@ export class ageSystemActor extends Actor {
             /*----------------------------------------------------*/
 
             /*--- Calculate Speed --------------------------------*/
+            if (bonuses != null && bonuses.speed) {
+                data.speed.mod = Number(bonuses.speed.totalMod);
+            } else {
+                data.speed.mod = 0;
+            };
             data.speed.total =  Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
             /*----------------------------------------------------*/
             
