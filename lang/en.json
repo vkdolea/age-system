@@ -90,6 +90,7 @@
 
         "testThreshold": "Threshold",
 
+        "conditionsName": "Conditions",
         "conditions": {
             "blinded": "Blinded",
             "blindedDesc": "The character cannot see and automatically fails ability tests reliant on sight, such as Perception (Seeing).",
