@@ -67,6 +67,7 @@ Here the description of each one of the Modificators:
 ### Added
 - Added Speed Modificator.
 - Added Settings option to include Conditions (actual rolls and characteristics modificators not included).
+- When rolling damage from chat, added options to add Focus, Stunt Die or both to damage.
 
 #### Fixed
 - Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower.

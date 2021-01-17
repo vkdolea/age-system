@@ -230,7 +230,7 @@ export function rollOwnedItem(event, actorId, itemId) {
 }
 
 // Item damage
-export function itemDamage(event, item, stuntDie = null) {
+export function itemDamage(event, item, stuntDie = null, addFocus = false) {
 
     const nrDice = item.data.data.nrDice;
     const diceSize = item.data.data.diceType;
@@ -262,12 +262,19 @@ export function itemDamage(event, item, stuntDie = null) {
         messageData.flavor += ` | ${game.i18n.localize(`age-system.${item.data.data.dmgType}`)} | ${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}`;
 
         // Adds owner's Ability to damage
-        if (dmgAbl !== null && dmgAbl !== "no-abl")
-        {
+        if (dmgAbl !== null && dmgAbl !== "no-abl") {
             const ablMod = item.actor.data.data.abilities[dmgAbl].total;
             damageFormula = `${damageFormula} + @abilityMod`;
             rollData.abilityMod = ablMod;
             messageData.flavor += ` | ${damageToString(ablMod)} ${game.i18n.localize("age-system." + dmgAbl)}`
+        }
+
+        // Check if Focus adds to damage and adds it
+        if (addFocus === true) {
+            const focusData = getFocus(item);
+            damageFormula = `${damageFormula} + @focus`;
+            rollData.focus = focusData[1];
+            messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
         }
 
         // Check if extra Stunt Die is to be added (normally rolling damage after chat card roll)
