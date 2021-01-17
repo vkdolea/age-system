@@ -17,6 +17,7 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Support to Income, Resources, Currency and GP/SP/CP wealth systems
 - Shift, Alt, Ctrl keys support to change certain types of roll
 - Drag and drop owned weapons and power to macro bar to create attack shortcuts
+- Possibility to add Conditions on characters (effects must be set manually)
 
 ## Credits
 Icons were used from [game-icons.net](https://game-icons.net). This icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
