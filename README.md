@@ -18,6 +18,7 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Shift, Alt, Ctrl keys support to change certain types of roll
 - Drag and drop owned weapons and power to macro bar to create attack shortcuts
 - Possibility to add Conditions on characters (effects must be set manually)
+- Add Stunt Die or Focus (or both) to damage roll when rolling from chart
 
 ## Credits
 Icons were used from [game-icons.net](https://game-icons.net). This icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
@@ -63,7 +64,7 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
-### v0.2.2 - 2021-xx-xx
+### v0.2.2 - 2021-01-17
 ### Added
 - Added Speed Modificator.
 - Added Settings option to include Conditions (actual rolls and characteristics modificators not included).
