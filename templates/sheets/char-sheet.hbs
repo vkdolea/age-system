@@ -278,6 +278,11 @@
 
         </div>
 
+        {{#if data.useConditions}}
+        {{!-- Conditions Block --}}
+        {{> "systems/age-system/templates/partials/conditions-block.hbs"}}
+        {{/if}}
+
         {{!-- Gaming Assist Bar --}}
         {{> "systems/age-system/templates/partials/play-aid-bar.hbs"}}
 
@@ -411,7 +416,7 @@
                         <div class="item-box flexrow feature-controls colorset-third-tier" data-item-id="{{item._id}}">
                             <div class="item-name flexrow">
                                 <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                                <a class="item-show">{{item.name}} [{{item.data.stuntPoints}} {{localize "age-system.settings.stuntPointsIndex"}}]</a>
+                                <a class="item-show">[{{item.data.stuntPoints}} {{localize "age-system.settings.stuntPointsIndex"}}] {{item.name}}</a>
                             </div>
                             <div class="flexrow fill-card">
                                 <a class="item-control item-edit" title="{{localize "age-system.settings.edit"}}"><i class="fas fa-edit"></i></a>

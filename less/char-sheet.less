@@ -53,6 +53,13 @@
         }
     }
 
+    input[type="checkbox"] {
+        margin: 0px;
+        margin-top: 1px;
+        width: 16px;
+        height: 16px;
+    }
+
     .resource-box {
         display: flex;
         flex-direction: column;
@@ -174,13 +181,6 @@
             max-height: 16px;
             text-align: center;
         }
-
-        input[type="checkbox"] {
-            margin: 0px;
-            margin-top: 1px;
-            width: 16px;
-            height: 16px;
-        }
     }
 
     .col-1 {
@@ -272,6 +272,35 @@
             padding: 4px;
             margin: 2px 4px 2px 4px;
             align-items: center;
+            
+            p {
+                margin: 0px;
+                font-size: 12px;
+            }
+
+            .tooltip-container {
+                position: relative;
+                display: inline-block;
+            }
+              
+            .container-tooltip-text {
+                visibility: hidden;
+                width: 300px;
+                text-align: left;
+                border-radius: 5px;
+                padding: 4px;
+                
+                /* Position the tooltip */
+                // TODO - create listener to position tooltips close to mouse pointer
+                position: fixed;
+                z-index: 10;
+                top: 50px;
+                left: 50px;
+                
+            }
+            .tooltip-container:hover .container-tooltip-text {
+                visibility: visible;
+            }
 
             a.item-equip.not-equiped {
                 opacity: 0.3;
@@ -279,6 +308,10 @@
             a {
                 margin-left: 2px;
             }
+        }
+        .item-box.conditions {
+            min-width: 100px;
+            max-width: 100px;
         }
 
         .actor-items {

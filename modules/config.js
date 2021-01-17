@@ -54,77 +54,90 @@ ageSystem.fatigueConditions = {
 };
 
 // Conditions
-ageSystem.conditions = {
-    blinded: {
+ageSystem.conditions = [
+    {
         name: "age-system.conditions.blinded",
         desc: "age-system.conditions.blindedDesc",
+        id: "blinded"
     },
-    deafened: {
+    {
         name: "age-system.conditions.deafened",
         desc: "age-system.conditions.deafenedDesc",
+        id: "deafened"
     },
-    exhausted:{
+    {
         name: "age-system.conditions.exhausted",
         desc: "age-system.conditions.exhaustedDesc",
+        id: "exhausted"
     },
-    fatigued: {
+    {
         name: "age-system.conditions.fatigued",
         desc: "age-system.conditions.fatiguedDesc",
+        id: "fatigued"
     },
-    freefalling: {
+    {
         name: "age-system.conditions.freefalling",
-        desc: "age-system.conditions.freefallingDesc"
+        desc: "age-system.conditions.freefallingDesc",
+        id: "freefalling"
     },
-    helpless: {
+    {
         name: "age-system.conditions.helpless",
-        desc: "age-system.conditions.helplessDesc"
+        desc: "age-system.conditions.helplessDesc",
+        id: "helpless"
     },
-    hindred: {
+    {
         name: "age-system.conditions.hindred",
-        desc: "age-system.conditions.hindredDesc"
+        desc: "age-system.conditions.hindredDesc",
+        id: "hindred"
     },
-    prone: {
+    {
         name: "age-system.conditions.prone",
-        desc: "age-system.conditions.proneDesc"
+        desc: "age-system.conditions.proneDesc",
+        id: "prone"
     },
-    restrained: {
+    {
         name: "age-system.conditions.restrained",
-        desc: "age-system.conditions.restrainedDesc"
+        desc: "age-system.conditions.restrainedDesc",
+        id: "restrained"
     },
-    injured: {
-        name: "age-system.conditions.injuried",
-        desc: "age-system.conditions.injuriedDesc"
+    {
+        name: "age-system.conditions.injured",
+        desc: "age-system.conditions.injuredDesc",
+        id: "injured",
     },
-    wounded: {
+    {
         name: "age-system.conditions.wounded",
-        desc: "age-system.conditions.injuriedDesc",
+        desc: "age-system.conditions.woundedDesc",
+        id: "wounded"
     },
-    unconscious: {
-        name: "age-system.conditions.dying",
-        desc: "age-system.conditions.dyingDesc"
+    {
+        name: "age-system.conditions.unconscious",
+        desc: "age-system.conditions.unconsciousDesc",
+        id: "unconscious"
     },
-    dying: {
+    {
         name: "age-system.conditions.dying",
-        desc: "age-system.conditions.dyingDesc"
+        desc: "age-system.conditions.dyingDesc",
+        id: "dying"
     }
-};
+];
 
 // Conditions - Description
-ageSystem.conditionsDesc = {
-    blinded: "age-system.conditions.blindedDesc",
-    deafened: "age-system.conditions.deafenedDesc",
-    exhausted: "age-system.conditions.exhaustedDesc",
-    fatigued: "age-system.conditions.fatiguedDesc",
-    freefalling: "age-system.conditions.freefallingDesc",
-    helpless: "age-system.conditions.helplessDesc",
-    hindred: "age-system.conditions.hindredDesc",
-    prone: "age-system.conditions.proneDesc",
-    restrained: "age-system.conditions.restrainedDesc",
-    injured: "age-system.conditions.injuriedDesc",
-    wounded: "age-system.conditions.woundedDesc",
-    unconscious: "age-system.conditions.dyingDesc",
-    dying: "age-system.conditions.dyingDesc"
-};
+// ageSystem.conditionsDesc = {
+//     blinded: "age-system.conditions.blindedDesc",
+//     deafened: "age-system.conditions.deafenedDesc",
+//     exhausted: "age-system.conditions.exhaustedDesc",
+//     fatigued: "age-system.conditions.fatiguedDesc",
+//     freefalling: "age-system.conditions.freefallingDesc",
+//     helpless: "age-system.conditions.helplessDesc",
+//     hindred: "age-system.conditions.hindredDesc",
+//     prone: "age-system.conditions.proneDesc",
+//     restrained: "age-system.conditions.restrainedDesc",
+//     injured: "age-system.conditions.injuriedDesc",
+//     wounded: "age-system.conditions.woundedDesc",
+//     unconscious: "age-system.conditions.dyingDesc",
+//     dying: "age-system.conditions.dyingDesc"
+// };
 
 ageSystem.damageType = {
     stun: "age-system.stun",

@@ -48,10 +48,24 @@ export class ageSystemActor extends Actor {
             data.ownedBonus = this.ownedItemsBonus();
             const bonuses = data.ownedBonus;
 
+            /*--- Conditions in Use ------------------------------*/
+            data.useConditions =  game.settings.get("age-system", "useConditions");
+            /*----------------------------------------------------*/
+
             /*--- Add bonuses to Abilities -----------------------*/
             // Also create abl.total parameters
             this.setAbilitiesWithMod(data, actorData);
             /*----------------------------------------------------*/
+
+            // /*--- Prepare Conditions -----------------------------*/
+            // // Add localization to conditions
+            // for (let c = 0; c < CONFIG.ageSystem.conditions.length; c++) {
+            //     const cond = CONFIG.ageSystem.conditions[c];
+            //     data.conditions[cond.id].name = cond.name;
+            //     data.conditions[cond.id].desc = cond.desc;
+            //     data.conditions[cond.id].id = cond.id;
+            // };
+            // /*----------------------------------------------------*/
 
             /*--- Calculate Armor Penalty ------------------------*/
             if (bonuses != null && bonuses.armorPenalty) {

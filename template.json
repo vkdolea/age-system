@@ -158,58 +158,19 @@
             },
             "advTestThreshold": 0,
             "conditions": {
-                "blinded": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "deafened": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "exhausted": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "fatigued": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "freefalling": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "helpless": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "hindred": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "prone": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "restrained": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "injured": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "wounded": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "unconscious": {
-                    "isActive": false,
-                    "desc": ""
-                },
-                "dying": {
-                    "isActive": false,
-                    "desc": ""
-                }
+                "blinded": false,
+                "deafened": false,
+                "exhausted": false,
+                "fatigued": false,
+                "freefalling": false,
+                "helpless": false,
+                "hindred": false,
+                "prone": false,
+                "restrained": false,
+                "injured": false,
+                "wounded": false,
+                "unconscious": false,
+                "dying": false
             }
         }
     },

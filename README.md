@@ -65,6 +65,7 @@ Here the description of each one of the Modificators:
 ### v0.2.2 - 2021-xx-xx
 ### Added
 - Added Speed Modificator.
+- Added Settings option to include Conditions (actual rolls and characteristics modificators not included).
 
 #### Fixed
 - Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower.

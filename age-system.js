@@ -20,6 +20,7 @@ async function preloadHandlebarsTemplates() {
         "systems/age-system/templates/partials/cost-resource-block.hbs",
         "systems/age-system/templates/partials/play-aid-bar.hbs",
         "systems/age-system/templates/partials/item-image-sheet-card.hbs",
+        "systems/age-system/templates/partials/conditions-block.hbs",
     ];
 
     return loadTemplates(templatePaths);
@@ -98,6 +99,13 @@ Hooks.once("ready", function() {
 
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on("hotbarDrop", (bar, data, slot) => createAgeMacro(data, slot));
+
+    // Localize conditions
+    for (let c = 0; c < ageSystem.conditions.length; c++) {
+        const cond = ageSystem.conditions[c];
+        ageSystem.conditions[c].name = game.i18n.localize(ageSystem.conditions[c].name);
+        ageSystem.conditions[c].desc = game.i18n.localize(ageSystem.conditions[c].desc);
+    }
 });
 
 // If Compendia are updated, then compendiumList is gathered once again

@@ -1,0 +1,16 @@
+<div class="item-container">
+    <div class="top-row colorset-first-tier">Conditions</div>
+    <div class="actor-items flexrow">
+    {{#each config.conditions as |condition|}}
+        <div class="item-box conditions flexrow feature-controls colorset-third-tier">
+            <div class="item-name flexrow">
+                <input type="checkbox" name="data.conditions.{{condition.id}}" {{checked condition.active}} class="checkbox condition"/>
+                <div class="tooltip-container">
+                    <p>{{condition.name}}</p>
+                    <span class="container-tooltip-text colorset-second-tier">{{condition.desc}}</span>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+    </div>
+</div>

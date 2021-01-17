@@ -78,6 +78,23 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.honorifics = itemSorted.filter(i => i.type === "honorifics");
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
+
+        // Sort Conditions alphabetically
+        data.conditions = data.config.conditions.sort(function(a, b) {
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+        });
+        for (let c = 0; c < data.conditions.length; c++) {
+            const element = data.conditions[c];
+            element.active = this.actor.data.data.conditions[element.id];           
+        };
     
         // Retrieve Prefession/Ancestry settings
         data.ancestry = game.settings.get("age-system", "ancestryOpt");
