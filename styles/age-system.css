@@ -565,6 +565,12 @@
   border: 1px solid grey;
   border-radius: 4px;
 }
+.age-system.sheet.char input[type="checkbox"] {
+  margin: 0px;
+  margin-top: 1px;
+  width: 16px;
+  height: 16px;
+}
 .age-system.sheet.char .resource-box {
   display: flex;
   flex-direction: column;
@@ -664,12 +670,6 @@
   max-height: 16px;
   text-align: center;
 }
-.age-system.sheet.char .general-aid-bar input[type="checkbox"] {
-  margin: 0px;
-  margin-top: 1px;
-  width: 16px;
-  height: 16px;
-}
 .age-system.sheet.char .col-1 {
   max-width: 200px;
 }
@@ -754,11 +754,38 @@
   margin: 2px 4px 2px 4px;
   align-items: center;
 }
+.age-system.sheet.char .item-container .item-box p {
+  margin: 0px;
+  font-size: 12px;
+}
+.age-system.sheet.char .item-container .item-box .tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+.age-system.sheet.char .item-container .item-box .container-tooltip-text {
+  visibility: hidden;
+  width: 300px;
+  text-align: left;
+  border-radius: 5px;
+  padding: 4px;
+  /* Position the tooltip */
+  position: fixed;
+  z-index: 10;
+  top: 50px;
+  left: 50px;
+}
+.age-system.sheet.char .item-container .item-box .tooltip-container:hover .container-tooltip-text {
+  visibility: visible;
+}
 .age-system.sheet.char .item-container .item-box a.item-equip.not-equiped {
   opacity: 0.3;
 }
 .age-system.sheet.char .item-container .item-box a {
   margin-left: 2px;
+}
+.age-system.sheet.char .item-container .item-box.conditions {
+  min-width: 100px;
+  max-width: 100px;
 }
 .age-system.sheet.char .item-container .actor-items {
   justify-content: stretch;

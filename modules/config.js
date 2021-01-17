@@ -53,6 +53,92 @@ ageSystem.fatigueConditions = {
     dying: "age-system.dying"
 };
 
+// Conditions
+ageSystem.conditions = [
+    {
+        name: "age-system.conditions.blinded",
+        desc: "age-system.conditions.blindedDesc",
+        id: "blinded"
+    },
+    {
+        name: "age-system.conditions.deafened",
+        desc: "age-system.conditions.deafenedDesc",
+        id: "deafened"
+    },
+    {
+        name: "age-system.conditions.exhausted",
+        desc: "age-system.conditions.exhaustedDesc",
+        id: "exhausted"
+    },
+    {
+        name: "age-system.conditions.fatigued",
+        desc: "age-system.conditions.fatiguedDesc",
+        id: "fatigued"
+    },
+    {
+        name: "age-system.conditions.freefalling",
+        desc: "age-system.conditions.freefallingDesc",
+        id: "freefalling"
+    },
+    {
+        name: "age-system.conditions.helpless",
+        desc: "age-system.conditions.helplessDesc",
+        id: "helpless"
+    },
+    {
+        name: "age-system.conditions.hindred",
+        desc: "age-system.conditions.hindredDesc",
+        id: "hindred"
+    },
+    {
+        name: "age-system.conditions.prone",
+        desc: "age-system.conditions.proneDesc",
+        id: "prone"
+    },
+    {
+        name: "age-system.conditions.restrained",
+        desc: "age-system.conditions.restrainedDesc",
+        id: "restrained"
+    },
+    {
+        name: "age-system.conditions.injured",
+        desc: "age-system.conditions.injuredDesc",
+        id: "injured",
+    },
+    {
+        name: "age-system.conditions.wounded",
+        desc: "age-system.conditions.woundedDesc",
+        id: "wounded"
+    },
+    {
+        name: "age-system.conditions.unconscious",
+        desc: "age-system.conditions.unconsciousDesc",
+        id: "unconscious"
+    },
+    {
+        name: "age-system.conditions.dying",
+        desc: "age-system.conditions.dyingDesc",
+        id: "dying"
+    }
+];
+
+// Conditions - Description
+// ageSystem.conditionsDesc = {
+//     blinded: "age-system.conditions.blindedDesc",
+//     deafened: "age-system.conditions.deafenedDesc",
+//     exhausted: "age-system.conditions.exhaustedDesc",
+//     fatigued: "age-system.conditions.fatiguedDesc",
+//     freefalling: "age-system.conditions.freefallingDesc",
+//     helpless: "age-system.conditions.helplessDesc",
+//     hindred: "age-system.conditions.hindredDesc",
+//     prone: "age-system.conditions.proneDesc",
+//     restrained: "age-system.conditions.restrainedDesc",
+//     injured: "age-system.conditions.injuriedDesc",
+//     wounded: "age-system.conditions.woundedDesc",
+//     unconscious: "age-system.conditions.dyingDesc",
+//     dying: "age-system.conditions.dyingDesc"
+// };
+
 ageSystem.damageType = {
     stun: "age-system.stun",
     wound: "age-system.wound"
@@ -117,35 +203,3 @@ CONST.DEFAULT_TOKEN = "systems/age-system/resources/imgs/actor-icon/sensousness.
 
 // Initializing variable to load focus Compendiaum
 ageSystem.focus = [];
-
-// // Hook to update compendium list when Foundry VTT is 'ready'
-// Hooks.once("ready", function() {
-//     let setCompendium = game.settings.get("age-system", "masterFocusCompendium");
-//     ageSystem.focus = compendiumList(setCompendium);
-//     // ageSystem.focus = compendiumList("age-system.focus");
-// });
-
-// If Compendia are updated, then compendiumList is gathered once again
-// Hooks.on("renderCompendium", function() {
-//     let setCompendium = game.settings.get("age-system", "masterFocusCompendium");
-//     ageSystem.focus = compendiumList(setCompendium);
-//     // ageSystem.focus = compendiumList("age-system.focus");
-// });
-
-// This function looks at given Compendium and returns an array with object containing id and name for all entries
-// export function compendiumList(compendiumName) {
-//     let dataPack = game.packs.get(compendiumName);
-//     let dataList = [];
-//     let i = 0;
-//     dataPack.getIndex().then(function(){
-//         for (let i = 0; i < dataPack.index.length; i++) {
-//             const entry = dataPack.index[i]; // It is necessary to store entry's name and id, to avoid messing up with existing Focus when Compendium is updated! Create array of objectes array = [{id: "xxx", name: "yyy"} {...}] - check if my implementation is correct
-//             if(entry)
-//                 dataList[i] = {
-//                     _id: entry._id,
-//                     name: entry.name
-//                 };   
-//         }
-//     });
-//     return dataList;
-// }

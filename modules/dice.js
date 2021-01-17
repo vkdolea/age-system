@@ -230,7 +230,7 @@ export function rollOwnedItem(event, actorId, itemId) {
 }
 
 // Item damage
-export function itemDamage(event, item, stuntDie = null) {
+export function itemDamage(event, item, stuntDie = null, addFocus = false) {
 
     const nrDice = item.data.data.nrDice;
     const diceSize = item.data.data.diceType;
@@ -259,22 +259,29 @@ export function itemDamage(event, item, stuntDie = null) {
     if (item.isOwned) {
 
         // Adds up Flavor text for item damage type
-        messageData.flavor += ` [${game.i18n.localize(`age-system.${item.data.data.dmgType}`)}] [${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}]`;
+        messageData.flavor += ` | ${game.i18n.localize(`age-system.${item.data.data.dmgType}`)} | ${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}`;
 
         // Adds owner's Ability to damage
-        if (dmgAbl !== null && dmgAbl !== "no-abl")
-        {
+        if (dmgAbl !== null && dmgAbl !== "no-abl") {
             const ablMod = item.actor.data.data.abilities[dmgAbl].total;
             damageFormula = `${damageFormula} + @abilityMod`;
             rollData.abilityMod = ablMod;
-            messageData.flavor += ` | ${damageToString(ablMod)}, ${game.i18n.localize("age-system." + dmgAbl)}`
+            messageData.flavor += ` | ${damageToString(ablMod)} ${game.i18n.localize("age-system." + dmgAbl)}`
+        }
+
+        // Check if Focus adds to damage and adds it
+        if (addFocus === true) {
+            const focusData = getFocus(item);
+            damageFormula = `${damageFormula} + @focus`;
+            rollData.focus = focusData[1];
+            messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
         }
 
         // Check if extra Stunt Die is to be added (normally rolling damage after chat card roll)
         if (stuntDie !== null) {
             damageFormula = `${damageFormula} + @stuntDieDmg`;
             rollData.stuntDieDmg = stuntDie;
-            messageData.flavor += ` | ${damageToString(stuntDie)}, ${game.i18n.localize("age-system.stuntDie")}`; 
+            messageData.flavor += ` | ${damageToString(stuntDie)} ${game.i18n.localize("age-system.stuntDie")}`; 
         }
 
         // Check if Item has Mod to add to its own Damage
@@ -282,7 +289,7 @@ export function itemDamage(event, item, stuntDie = null) {
             const itemDmg = item.data.data.itemMods.itemDamage.value;
             damageFormula = `${damageFormula} + @itemBonus`;
             rollData.itemBonus = itemDmg;
-            messageData.flavor += ` | ${damageToString(itemDmg)}, ${game.i18n.localize("age-system.itemDmgMod")}`;
+            messageData.flavor += ` | ${damageToString(itemDmg)} ${game.i18n.localize("age-system.itemDmgMod")}`;
         };
         
         // Check if item onwer has items which adds up to general damage
@@ -290,7 +297,7 @@ export function itemDamage(event, item, stuntDie = null) {
             const actorDmgMod = item.actor.data.data.ownedBonus.actorDamage.totalMod;
             damageFormula = `${damageFormula} + @generalDmgMod`;
             rollData.generalDmgMod = actorDmgMod;
-            messageData.flavor += ` | ${damageToString(actorDmgMod)}, ${game.i18n.localize("age-system.itemDmgMod")}`;
+            messageData.flavor += ` | ${damageToString(actorDmgMod)} ${game.i18n.localize("age-system.itemDmgMod")}`;
         };
 
         // Adds extra damage for All-Out Attack maneuver
@@ -298,7 +305,7 @@ export function itemDamage(event, item, stuntDie = null) {
             const allOutAttackMod = item.actor.data.data.allOutAttack.dmgBonus;
             damageFormula = `${damageFormula} + @allOutAttack`;
             rollData.allOutAttack = allOutAttackMod;
-            messageData.flavor += ` | ${damageToString(allOutAttackMod)}, ${game.i18n.localize("age-system.allOutAttack")}`;                
+            messageData.flavor += ` | ${damageToString(allOutAttackMod)} ${game.i18n.localize("age-system.allOutAttack")}`;                
         };
 
         // Adds extra damage for CTRL + click (+1D6) or CTRL + ALT + click (+2D6)

@@ -100,21 +100,38 @@
                 {{/if}}               
             </div>
 
-            <div class="age-chat-buttons flexrow flex-justify-center flex-align-center">
+            <div class="age-chat-buttons flexcol">
                 {{#if rollInput.itemEntity.data.data.hasDamage}}
-                <a class="age-button roll-damage" title="{{localize "age-system.rollDamage"}}">
-                    <div class="flexrow flex-justify-center flex-align-center">
-                        <div>{{localize "age-system.rollDamage"}}</div>
-                        <i class="fas fa-fist-raised"></i>
-                    </div>
-                </a>
+                <div class="flexcol">
+                    <a class="age-button roll-damage" title="{{localize "age-system.rollDamage"}}">
+                        <div class="flexrow flex-justify-center flex-align-center">
+                            <div>{{localize "age-system.rollDamage"}}</div>
+                            <i class="fas fa-fist-raised"></i>
+                        </div>
+                    </a>
 
-                <a class="age-button roll-damage add-stunt-damage" title="{{localize "age-system.rollDamage"}}">
-                    <div class="flexrow flex-justify-center flex-align-center">
-                        <div>{{localize "age-system.rollDamage"}} + {{localize "age-system.stuntDieIndex"}}</div>
-                        <i class="fas fa-fist-raised"></i>
+                    <div class="flexrow">
+                        <a class="age-button roll-damage add-stunt-damage" title="{{localize "age-system.rollDamage"}}">
+                            <div class="flexrow flex-justify-center flex-align-center">
+                                <div>+{{localize "age-system.stuntDieIndex"}}</div>
+                            </div>
+                        </a>
+
+                        <a class="age-button roll-damage add-focus-damage" title="{{localize "age-system.rollDamage"}}">
+                            <div class="flexrow flex-justify-center flex-align-center">
+                                <div>+{{localize "age-system.focus"}}</div>
+                            </div>
+                        </a>
+
+                        <a class="age-button roll-damage add-stunt-damage add-focus-damage" title="{{localize "age-system.rollDamage"}}">
+                            <div class="flexrow flex-justify-center flex-align-center">
+                                <div>+{{localize "age-system.focus"}} +{{localize "age-system.stuntDieIndex"}}</div>
+                            </div>
+                        </a>
+
                     </div>
-                </a>
+
+                </div>
                 {{/if}}
 
                 {{#if rollInput.usingFatigue}}

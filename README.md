@@ -17,6 +17,8 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Support to Income, Resources, Currency and GP/SP/CP wealth systems
 - Shift, Alt, Ctrl keys support to change certain types of roll
 - Drag and drop owned weapons and power to macro bar to create attack shortcuts
+- Possibility to add Conditions on characters (effects must be set manually)
+- Add Stunt Die or Focus (or both) to damage roll when rolling from chart
 
 ## Credits
 Icons were used from [game-icons.net](https://game-icons.net). This icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
@@ -59,10 +61,20 @@ Here the description of each one of the Modificators:
 13. **Power Force:** added to item's Power Force. Only useful for Power & Arcana.
 14. **Aim:** extra bonus added to attack rolls when Aim maneuver is used, besides the standard value.
 15. **Ability Names:** these are play bonuses to the specific Ability.
+16. **Speed:** adds to Speed Mod field.
 
 ## Change log
+### v0.2.2 - 2021-01-17
+### Added
+- Added Speed Modificator.
+- Added Settings option to include Conditions (actual rolls and characteristics modificators not included).
+- When rolling damage from chat, added options to add Focus, Stunt Die or both to damage.
 
-### v0.2.1 - 20121-01-10
+#### Fixed
+- Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower.
+- Fixed "yards" abbreviation to "yd" on grid map.
+
+### v0.2.1 - 2021-01-10
 #### Fixed
 - Focus context menu (to edit, remove, show and roll with another Ability) is working again.
 

@@ -65,7 +65,7 @@ export class ageSystemItem extends Item {
 
             // Adds ability to itemForce
             if (this.actor) {
-                data.itemForce += this.actor.data.data.abilities[data.useAbl].total;
+                data.itemForce += this.actor.data.data.abilities.will.total;
                 data.itemForce += this.ownerFocusValue();
             };
 
@@ -113,9 +113,9 @@ export class ageSystemItem extends Item {
     };
 
     // Rolls damage for the item
-    rollDamage(event, stuntDie = null) {
+    rollDamage(event, stuntDie = null, addFocus = false) {
         if (!this.hasDamage()) {return false};
-        return Dice.itemDamage(event, this, stuntDie);
+        return Dice.itemDamage(event, this, stuntDie, addFocus);
     };
 
     // Rolls fatigue for the Item
@@ -129,9 +129,15 @@ export class ageSystemItem extends Item {
     roll(event, rollType = null, targetNumber = null) {
         const owner = this.actor;
         if (!owner) {return false;}
-        const ablCode = this.data.data.useAbl;
+        
+        let ablCode = "no-abl";
+        if (rollType === "fatigue") {
+            ablCode = "will";
+        } else {
+            ablCode = this.data.data.useAbl;
+        }
         Dice.ageRollCheck(event, owner, ablCode, this);
-    }
+    };
 
     /** Returns owner's Focus value, base on Item's useFocus property
      * TODO = figure out how if derived data can be input to another Item

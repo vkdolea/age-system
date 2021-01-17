@@ -156,7 +156,22 @@
                 "value": 3,
                 "set": 3
             },
-            "advTestThreshold": 0
+            "advTestThreshold": 0,
+            "conditions": {
+                "blinded": false,
+                "deafened": false,
+                "exhausted": false,
+                "fatigued": false,
+                "freefalling": false,
+                "helpless": false,
+                "hindred": false,
+                "prone": false,
+                "restrained": false,
+                "injured": false,
+                "wounded": false,
+                "unconscious": false,
+                "dying": false
+            }
         }
     },
     "Item": {
@@ -236,6 +251,10 @@
                         "isActive": false
                     },
                     "toughness":  {
+                        "value": 0,
+                        "isActive": false
+                    },
+                    "speed": {
                         "value": 0,
                         "isActive": false
                     },
