@@ -84,6 +84,10 @@ export default class ageSystemItemSheet extends ItemSheet {
                 html.find(".toggle-fatigue").click(this._onToggleFatigue.bind(this))
             };
 
+            // Enable field to be focused when selecting it
+            const inputs = html.find("input");
+            inputs.focus(ev => ev.currentTarget.select());
+
         };
 
         // Actions by sheet owner only

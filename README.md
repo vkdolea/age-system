@@ -64,8 +64,12 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
+### v0.2.3 - 2021-xx-yy
+#### Added
+- When selecting a input field, the text will be focused for quick edit
+
 ### v0.2.2 - 2021-01-17
-### Added
+#### Added
 - Added Speed Modificator.
 - Added Settings option to include Conditions (actual rolls and characteristics modificators not included).
 - When rolling damage from chat, added options to add Focus, Stunt Die or both to damage.
