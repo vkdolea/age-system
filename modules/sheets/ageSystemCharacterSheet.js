@@ -141,7 +141,10 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         if (this.isEditable) {
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
-            
+
+            // Enable field to be focused when selecting it
+            const inputs = html.find("input");
+            inputs.focus(ev => ev.currentTarget.select());
         };
         
         // Actions by sheet owner only
