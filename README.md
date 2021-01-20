@@ -64,9 +64,12 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
-### v0.2.3 - 2021-xx-yy
+### v0.2.3 - 2021-01-20
 #### Added
 - When selecting a input field, the text will be focused for quick edit
+
+#### Fixed
+- Issue causing worlds created on versions 0.2.1 and earlier not compatible to version 0.2.2.
 
 ### v0.2.2 - 2021-01-17
 #### Added
