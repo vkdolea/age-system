@@ -1,14 +1,16 @@
-import * as Settings from "./modules/settings.js";
 // import * as Macros from "./modules/macros.js";
-import {ageSystem} from "./modules/config.js"
-import ageSystemItemSheet from "./modules/sheets/ageSystemItemSheet.js"
-import ageSystemCharacterSheet from "./modules/sheets/ageSystemCharacterSheet.js"
-import {ageSystemActor} from "./modules/ageSystemActor.js"
-import {ageSystemItem} from "./modules/ageSystemItem.js"
-import * as AgeChat from "./modules/age-chat.js"
-import * as Setup from "./modules/setup.js"
+import {ageSystem} from "./modules/config.js";
+import ageSystemItemSheet from "./modules/sheets/ageSystemItemSheet.js";
+import ageSystemCharacterSheet from "./modules/sheets/ageSystemCharacterSheet.js";
+import {ageSystemActor} from "./modules/ageSystemActor.js";
+import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
 import { rollOwnedItem } from "./modules/macros.js";
+
+import * as Settings from "./modules/settings.js";
+import * as AgeChat from "./modules/age-chat.js";
+import * as Setup from "./modules/setup.js";
+import * as migrations from "./modules/migration.js";
 
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
@@ -37,6 +39,12 @@ Hooks.once("init", async function() {
 
     console.log("age-system | Entering a new AGE...");
     console.log(ageSystemText);
+
+    // Create a namespace within the game global
+    game.ageSystem = {
+        migrations: migrations,
+        rollOwnedItem
+    };
 
     CONFIG.ageSystem = ageSystem;
 
@@ -85,10 +93,19 @@ Hooks.once("init", async function() {
         else return options.inverse(this);
     });
 
-        game.ageSystem = {
-            rollOwnedItem,
-        };
+    // game.ageSystem = {
+    //     rollOwnedItem,
+    // };
 
+});
+
+Hooks.once("setup", function() {
+    // Localize conditions
+    for (let c = 0; c < ageSystem.conditions.length; c++) {
+        const cond = ageSystem.conditions[c];
+        ageSystem.conditions[c].name = game.i18n.localize(ageSystem.conditions[c].name);
+        ageSystem.conditions[c].desc = game.i18n.localize(ageSystem.conditions[c].desc);
+    }
 });
 
 Hooks.once("ready", function() {
@@ -100,12 +117,21 @@ Hooks.once("ready", function() {
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on("hotbarDrop", (bar, data, slot) => createAgeMacro(data, slot));
 
-    // Localize conditions
-    for (let c = 0; c < ageSystem.conditions.length; c++) {
-        const cond = ageSystem.conditions[c];
-        ageSystem.conditions[c].name = game.i18n.localize(ageSystem.conditions[c].name);
-        ageSystem.conditions[c].desc = game.i18n.localize(ageSystem.conditions[c].desc);
-    }
+    // // Determine whether a system migration is required and feasible
+    if ( !game.user.isGM ) return;
+    const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
+    const NEEDS_MIGRATION_VERSION = "0.2.2";
+    // const COMPATIBLE_MIGRATION_VERSION = "0.7.9";
+    const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+    if ( !needsMigration ) return;
+
+    // Perform the migration
+    // if ( currentVersion && isNewerVersion(COMPATIBLE_MIGRATION_VERSION, currentVersion) ) {
+    //     const warning = `Your AGE System data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.`;
+    //     ui.notifications.error(warning, {permanent: true});
+    // }
+    migrations.migrateWorld();
+
 });
 
 // If Compendia are updated, then compendiumList is gathered once again

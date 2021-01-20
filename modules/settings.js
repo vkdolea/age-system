@@ -1,6 +1,17 @@
 export const registerSystemSettings = function() {
 
   /**
+   * Track the system version upon which point a migration was last applied
+   */
+  game.settings.register("age-system", "systemMigrationVersion", {
+    name: "System Migration Version",
+    scope: "world",
+    config: false,
+    type: String,
+    default: 0
+  });
+
+  /**
    * Register if world will use Conviction
    */
   game.settings.register("age-system", "useConviction", {
