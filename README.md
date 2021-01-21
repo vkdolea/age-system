@@ -21,6 +21,7 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Add Stunt Die or Focus (or both) to damage roll when rolling from chart
 
 ## Credits
+### Icons
 Icons were used from [game-icons.net](https://game-icons.net). This icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
 - [Sensuousness](https://game-icons.net/1x1/lorc/sensuousness.html) (Character icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Split Cross](https://game-icons.net/1x1/lorc/split-cross.html) (Stunt icon), by [Lorc](https://lorcblog.blogspot.com/).
@@ -32,6 +33,8 @@ Icons were used from [game-icons.net](https://game-icons.net). This icons were p
 - [Briefcase](https://game-icons.net/1x1/delapouite/briefcase.html) (General Equipment icon), by [Delapouite](https://delapouite.com/).
 - [Rank 3](https://game-icons.net/1x1/skoll/rank-3.html) (Honorifics icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
 - [Fist](https://game-icons.net/1x1/skoll/fist.html) (Weapon icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
+### Localization
+- **French**: by Discord user *Imposator#8090*.
 
 ### Shortcuts
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
@@ -64,10 +67,15 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
+### v0.2.4 - 2021-01-21
+#### Added
+- French localization by Discord user *Imposator#8090*.
+#### Fixed
+- Version issue on 0.2.3 causing it to behave as 0.2.2.
+
 ### v0.2.3 - 2021-01-20
 #### Added
-- When selecting a input field, the text will be focused for quick edit
-
+- When selecting a input field, the text will be focused for quick edit.
 #### Fixed
 - Issue causing worlds created on versions 0.2.1 and earlier not compatible to version 0.2.2.
 
@@ -76,11 +84,9 @@ Here the description of each one of the Modificators:
 - Added Speed Modificator.
 - Added Settings option to include Conditions (actual rolls and characteristics modificators not included).
 - When rolling damage from chat, added options to add Focus, Stunt Die or both to damage.
-
 #### Fixed
 - Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower.
 - Fixed "yards" abbreviation to "yd" on grid map.
-
 ### v0.2.1 - 2021-01-10
 #### Fixed
 - Focus context menu (to edit, remove, show and roll with another Ability) is working again.
@@ -107,8 +113,7 @@ Here the description of each one of the Modificators:
 - Option to use Impact and Ballistic armor or generic Armor.
 - Added field in character sheet to track Threshold during Advanced Tests.
 - Shield icon working to equip/activate items. Unequiped/unactive items do not add bonuses to character.
-- Added custom icons for each item type and character, and users are allowed to change them as they please
-
+- Added custom icons for each item type and character, and users are allowed to change them as they please.
 #### Fixed
 - Fixed an error causing Currency input to be disabled.
 - Added missing Membership sheet template.
