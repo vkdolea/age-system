@@ -12,7 +12,7 @@ export function rollOwnedItem(itemName) {
   const itemRolled = actor ? actor.items.find(i => i.name === itemName) : null;
   if (!itemRolled) {return ui.notifications.warn(game.i18n.localize("age-system.WARNING.actorDontHaveValidItem"));}
   const ablCode = itemRolled.data.data.useAbl;
-  const event = new MouseEvent('click', {altKey: true});
+  const event = new MouseEvent('click', {});
 
   ageRollCheck(event, actor, ablCode, itemRolled);
 };
