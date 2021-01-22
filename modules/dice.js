@@ -1,6 +1,14 @@
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
 export async function ageRollCheck(event, actor, abl, itemRolled = null, resourceRoll = false) {
 
+    let extraOptions = null;
+
+    if (!event.ctrlKey && event.altKey) {
+        extraOptions = await getAgeRollOptions(itemRolled);
+
+        if (extraOptions.cancelled) return;
+    }
+
     // Set roll mode
     const rMode = setBlind(event);
     let rollData = {};
@@ -20,7 +28,6 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
             abilityName: game.i18n.localize(`age-system.${abl}`)
         };
     };
-
 
     // Check if item rolled is Focus and prepare its data
     const focusRolled = getFocus(itemRolled);
@@ -83,6 +90,7 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
         rollFormula = `${rollFormula} + @guardUp`;
     };
 
+    // Check if it is a Resource/Income roll
     if (resourceRoll === true) {
         rollFormula += " + @resources"
         rollData.resources = actor.data.data.resources.total;
@@ -91,7 +99,7 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
         rollData.resourcesName = game.i18n.localize(`age-system.${resSelected}`);
     };
 
-    // Informs roll card the current color scheme in use buy the user
+    // Informs roll card the current color scheme in use by the user
     rollData.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
 
     const ageRoll = new Roll(rollFormula, rollData).roll();
@@ -125,6 +133,44 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
     chatData.sound = CONFIG.sounds.dice;
     return ChatMessage.create(chatData, {rollMode: rMode});
 };
+
+async function getAgeRollOptions(itemRolled) {
+    // Ve se item rolado e arma, poder ou null/outro, 
+    const templateOptions = {
+        "weapon": "/systems/age-system/templates/rolls/age-roll-settings.hbs",
+        "power": "/systems/age-system/templates/rolls/age-roll-settings.hbs",
+    };
+    const template = "/systems/age-system/templates/rolls/age-roll-settings.hbs"
+    const html = await renderTemplate(template, {});
+
+    return new Promise(resolve => {
+        const data = {
+            title: game.i18n.localize("age-system.ageRollOptions"),
+            content: html,
+            buttons: {
+                normal: {
+                    label: game.i18n.localize("age-system.roll"),
+                    callback: html => resolve(_processAgeRollOptions(html[0].querySelector("form")))
+                },
+                cancel: {
+                    label: game.i18n.localize("age-system.cancel"),
+                    callback: html => resolve({cancelled: true}),
+                }
+            },
+            default: "normal",
+            close: () => resolve({cancelled: true}),
+        }
+        new Dialog(data, null).render(true);
+    });
+};
+
+function _processAgeRollOptions(form) {
+    return {
+        ageRollMod: parseInt(form.ageRollMod.value),
+        atkDmgTradeOff: parseInt(form.atkDmgTradeOff.value),
+        rollTN: parseInt(form.rollTN.value)
+    }
+}
 
 export function getFocus(item) {
     if (item === null) {return false}
@@ -215,6 +261,7 @@ export function dialogBoxAbilityFocus(focus, actor) {
     });
 };
 
+// Macro Function
 export function rollOwnedItem(event, actorId, itemId) {
     const actor = game.actors.get(actorId);
     const itemRolled = actor.getOwnedItem(itemId);

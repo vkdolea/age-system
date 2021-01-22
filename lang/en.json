@@ -341,6 +341,17 @@
         "thisItemDmgBns": "Item Bonus",
         "rollFatigue": "Roll Fatigue",
         "blindRollSomeone": "You blindly roll to GM",
-        "activationMod": "Roll Bonus"
+        "activationMod": "Roll Bonus",
+
+        "ageRollOptions": "Options",
+        "roll": "Roll Dice",
+        "cancel": "Cancel",
+
+        "setAgeRollMod": "Roll Modifier",
+        "setAgeRollAtkDmgTradeOff": "Attack to Damage Trade Off",
+        "setAgeRollTN": "Roll TN",
+
+        "setRollExtraDice": "Extra Dice",
+        "setRollGeneralMod": "Damage Modifier"
     }
 }
