@@ -254,6 +254,8 @@
         "tenMinutes": "10 Minutes",
         "twentyMinutes": "20 Minutes",
         "oneHour": "1 Hour",
+        "fourHours": "4 Hours",
+        "twelveHours": "12 Hours",
 
         "rof": {
             "rof": "ROF",

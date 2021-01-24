@@ -1,7 +1,6 @@
-{{#when config.wealthMode 'noteq' 'currency'}}
-<label>{{localize "age-system.item.purchaseTN"}}</label>
-{{/when}}
-{{#when config.wealthMode 'eq' 'currency'}}
+{{#if (or (eq config.wealthMode 'currency') (eq config.wealthMode 'coins'))}}
 <label>{{localize "age-system.item.cost"}}</label>
-{{/when}}
+{{else}}
+<label>{{localize "age-system.item.purchaseTN"}}</label>
+{{/if}}
 <input type="text" {{#if inChat}}disabled{{/if}} name="data.cost" value="{{data.cost}}" data-dtype="String" />
