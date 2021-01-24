@@ -77,6 +77,12 @@
                     <div class="line-value">{{rollInput.focus}}</div>
                 </div>
                 {{/if}}
+                {{#if rollInput.rollMod}}
+                <div class="flexrow roll-mod">
+                    <div class="line-header">{{localize "age-system.setAgeRollMod"}}</div>
+                    <div class="line-value">{{rollInput.rollMod}}</div>
+                </div>
+                {{/if}}
                 {{#if rollInput.aim}}
                 <div class="flexrow roll-mod">
                     <div class="line-header">{{localize "age-system.aim"}}</div>

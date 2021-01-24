@@ -70,7 +70,7 @@ Here the description of each one of the Modificators:
 ### v0.3.0
 #### Added
 - Press Alt key when rolling a roll check to bring menu with options to set TN, add modifier and Attack to Damage trade off (this one only when rolling weapon attacks).
-- When targeting a token and rolling an weapon attack, roll will be check versus target's Defense (attack selecting multiple tokens prompts to select only one token to attack).
+- When targeting a token and rolling an weapon attack, roll will be check versus target's Defense (attack selecting multiple tokens warns user to select only one token to attack).
 - When attacking a token or when rolling versus a TN, chat card will show "Success" or "Miss" - if the check is a "Miss", stunt points will not be generated.
 - Default macro (when dragging Power or Weapon to macro bar) behaviour is rolling the Item without prompting for a dialog box. Adding the argument "true" after item name in the macro script will prompt for roll options (i.e., it will simulate the Click + Alt on character sheet roll).
 

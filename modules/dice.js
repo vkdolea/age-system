@@ -63,6 +63,12 @@ export async function ageRollCheck(
         rollData.itemId = null;
     };
 
+    // Adds user input roll mod
+    if (rollUserMod) {
+        rollData.rollMod = rollUserMod;
+        rollFormula += " + @rollMod";
+    }
+
     // Adds penalty for Attack which is converted to damage Bonus and pass info to chat Message
     if (atkDmgTradeOff) {
         rollData.atkDmgTradeOff = atkDmgTradeOff;
