@@ -332,8 +332,20 @@ export function rollOwnedItem(event, actorId, itemId) {
 }
 
 // Item damage
-export function itemDamage(event, item, stuntDie = null, addFocus = false, atkDmgTradeOff = 0) {
+export function itemDamage(
+    event,
+    item,
+    stuntDie = null,
+    addFocus = false,
+    atkDmgTradeOff = 0) {
 
+    /**Options to Roll Damage:
+     * - Add Focus *** Pickup list from item Owner ***
+     * - Add Stunt Die multiple times *** How? ***
+     * - Add straight bonus
+     * - Add multiple d6 (divide per Stunt and per Other Sources)
+     */
+    
     const nrDice = item.data.data.nrDice;
     const diceSize = item.data.data.diceType;
     const constDmg = item.data.data.extraValue;
@@ -341,7 +353,7 @@ export function itemDamage(event, item, stuntDie = null, addFocus = false, atkDm
     const isBlind = setBlind(event);
     const audience = isGMroll(event);
 
-    let damageFormula = "(@diceQtd)d(@diceSize)";
+    let damageFormula = nrDice > 0 ? "(@diceQtd)d(@diceSize)" : "";
     let messageData = {
         flavor: `${item.name}`,
         speaker: ChatMessage.getSpeaker()
