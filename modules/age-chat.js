@@ -22,8 +22,8 @@ export function chatDamageRoll(event) {
 export function chatFatigueRoll(event) {
     const card = event.currentTarget.closest(".feature-controls");
     const owner = game.actors.get(card.dataset.actorId);
-    const damageSource = owner.getOwnedItem(card.dataset.itemId);
-    damageSource.rollFatigue(event);
+    const itemSource = owner.getOwnedItem(card.dataset.itemId);
+    itemSource.roll(event, "fatigue");
 };
 
 export function selectBlindAgeRoll(chatCard, html, data) {

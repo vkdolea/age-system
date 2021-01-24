@@ -364,7 +364,18 @@
             "causeDamage": false,
             "useFatigue": false,
             "inputFatigueTN": false,
-            "activated": false
+            "activated": false,
+            "causeHealing": false,
+            "ablFatigue": "will",
+            "hasTest": false,
+            "testAbl": "will",
+            "testFocus": "",
+            "damageResisted": {
+                "nrDice": "1",
+                "diceType": "6",
+                "extraValue": 0,
+                "dmgAbl": "int"
+            }
         },
         "talent": {
             "templates": ["description", "bonuses"],

@@ -12,24 +12,11 @@ export class ageSystemItem extends Item {
         if (!this.data.name) this.data.name = "New " + this.entity;       
         this.data = duplicate(this._data);
 
-
         const itemData = this.data;
         const data = itemData.data;
         const itemType = itemData.type;
         data.nameLowerCase = itemData.name.toLowerCase();
         data.useFocusActorId = null;
-
-        /*
-        * Focus value set as manual input - Improved checkbox used to indicate improved focus on Character Sheet
-        */
-        // Data initialization for Focus
-        // if (itemType === "focus") {
-        //     if (data.improved) {
-        //         data.focusValue = data.initialValue + 1;
-        //     } else {
-        //         data.focusValue = data.initialValue;
-        //     }
-        // }
 
         // Adds value to represent portion added to dice on damage roll
         if (this.isOwned && this.hasDamage()) {
@@ -118,14 +105,6 @@ export class ageSystemItem extends Item {
         return Dice.itemDamage(event, this, stuntDie, addFocus, atkDmgTradeOff);
     };
 
-    // Rolls fatigue for the Item
-    rollFatigue(event) {
-        if (!this.hasFatigue()) {return false};
-        const targetNumber = this.data.data.fatigueTN;
-        const rollType = "fatigue";
-        return this.roll(event, rollType, targetNumber);
-    };
-
     // Roll item and check targetNumbers
     roll(event, rollType = null, targetNumber = null) {
         /**Roll Type Possibilities
@@ -153,7 +132,7 @@ export class ageSystemItem extends Item {
             switch (rollType) {
                 case "fatigue":
                     ablCode = "will";
-                    targetNumber = this.fatigueTN ? this.fatigueTN : null;
+                    targetNumber = this.data.data.fatigueTN ? this.data.data.fatigueTN : null;
                     break;
                 
                 case "powerActivation":
@@ -172,7 +151,6 @@ export class ageSystemItem extends Item {
                         const targetId = targets.ids[0];
                         const targetToken = canvas.tokens.placeables.find(t => t.data._id === targetId);
                         targetNumber = targetToken.actor.data.data.defense.total;
-                        // console.log(targetToken.actor.name + ": " + targetNumber)
                     }
                     break;
         
@@ -181,19 +159,11 @@ export class ageSystemItem extends Item {
             }
         }
 
-        // Check if roll is a Fatigue Test and set TN
-        // if (rollType === "fatigue") {
-        //     ablCode = "will";
-        //     if (this.fatigueTN && targetNumber === null) {targetNumber = this.fatigueTN;}
-        // } else {
-        //     ablCode = this.data.data.useAbl;
-        // }
-
         Dice.ageRollCheck(event, owner, ablCode, this, false, targetNumber);
     };
 
     /** Returns owner's Focus value, base on Item's useFocus property
-     * TODO = figure out how if derived data can be input to another Item
+     * TODO = figure out how/if derived data can be input to another Item
      */
     ownerFocusValue() {
         const itemData = this.data;
@@ -207,8 +177,6 @@ export class ageSystemItem extends Item {
         const ownerFoci = owner.data.items.filter(a => a.type === "focus");
         const expectedFocus = data.useFocus.toLowerCase();
         const validFocus = ownerFoci.filter(c => c.name.toLowerCase() === expectedFocus);
-        // Orignalmente:
-        // const validFocus = ownerFoci.filter(c => c.data.nameLowerCase === expectedFocus);
 
         if (validFocus.length < 1) {
             return 0;
@@ -243,8 +211,6 @@ export class ageSystemItem extends Item {
         const ownerFoci = owner.data.items.filter(a => a.type === "focus");
         const expectedFocus = data.useFocus.toLowerCase();
         const validFocus = ownerFoci.filter(c => c.name.toLowerCase() === expectedFocus);
-        // Orignalmente:
-        // const validFocus = ownerFoci.filter(c => c.data.nameLowerCase === expectedFocus);
 
         if (validFocus.length < 1) {
             return data.useFocus;

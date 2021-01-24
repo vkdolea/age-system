@@ -156,6 +156,7 @@ export const migrateActorData = function(actor) {
 export const migrateItemData = function(item) {
   const updateData = {};
   _addItemModSpeed(item, updateData);
+  _addExtraPowerData(item, updateData);
   return updateData;
 };
 
@@ -230,3 +231,27 @@ function _addItemModSpeed(item, updateData) {
   return updateData
 }
 /* -------------------------------------------- */
+
+/* -------------------------------------------- */
+/**
+ * Add extra Power elements to address resist Test
+ * and half damage when spell is resisted
+ * @private
+ */
+function _addExtraPowerData(item, updateData) {
+  if (item.type !== "power") return updateData;
+  if (item.data.ablFatigue) return updateData;
+
+  updateData["data.causeHealing"] = false;
+  updateData["data.ablFatigue"] = "will";
+  updateData["data.hasTest"] = false;
+  updateData["data.testAbl"] = "will";
+  updateData["data.testFocus"] = "";
+  updateData["data.damageResisted"] = null;
+  updateData["data.damageResisted.nrDice"] = 1;
+  updateData["data.damageResisted.diceType"] = 6;
+  updateData["data.damageResisted.extraValue"] = 0;
+  updateData["data.damageResisted.dmgAbl"] = "";
+
+  return updateData;
+}
