@@ -168,9 +168,11 @@ async function getAgeRollOptions(itemRolled, data = {}) {
     // Ve se item rolado e arma, poder ou null/outro, 
 
     const template = "/systems/age-system/templates/rolls/age-roll-settings.hbs"
+    const type = itemRolled ? itemRolled.type : null;
+
     const html = await renderTemplate(template, {
         ...data,
-        itemType: itemRolled.type
+        itemType: type
     });
 
     return new Promise(resolve => {
