@@ -1,3 +1,5 @@
+import { sortObjArrayByName } from "./setup.js";
+
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
 export async function ageRollCheck(
     event,
@@ -9,8 +11,8 @@ export async function ageRollCheck(
     rollUserMod = null,
     atkDmgTradeOff = null) {
 
+    // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
-
     if (!event.ctrlKey && event.altKey) {
         extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN});
         if (extraOptions.cancelled) return;
@@ -43,7 +45,7 @@ export async function ageRollCheck(
     const focusRolled = getFocus(itemRolled);
 
     if (focusRolled) {
-        rollFormula = `${rollFormula} + @focus`;
+        rollFormula += " + @focus";
         rollData.focusName = focusRolled[0];
         rollData.focus = focusRolled[1];
     }
@@ -72,21 +74,21 @@ export async function ageRollCheck(
     // Adds penalty for Attack which is converted to damage Bonus and pass info to chat Message
     if (atkDmgTradeOff) {
         rollData.atkDmgTradeOff = atkDmgTradeOff;
-        rollFormula = `${rollFormula} + @atkDmgTradeOff`;
+        rollFormula += " + @atkDmgTradeOff";
     }
 
     // Check if AIM is active - this bonus will apply to all rolls when it is active
     const aim = actor.data.data.aim;
     if (aim.active) {
         rollData.aim = aim.value;
-        rollFormula = `${rollFormula} + @aim`;
+        rollFormula += " + @aim";
     };
 
     // Adds Armor Penalty if it is a Dexterity Check
     const armor = actor.data.data.armor;
     if (armor.penalty > 0 && abl === "dex") {
         rollData.armorPenalty = -armor.penalty;
-        rollFormula = `${rollFormula} + @armorPenalty`;
+        rollFormula += " + @armorPenalty";
     };   
 
     // Check if Fatigue is configured
@@ -100,7 +102,7 @@ export async function ageRollCheck(
     if (usingFatigue) {
         if (fatigue.value > 0) {
             rollData.fatigue = -fatigue.value;
-            rollFormula = `${rollFormula} + @fatigue`;
+            rollFormula += " + @fatigue";
         };
     }
 
@@ -109,7 +111,7 @@ export async function ageRollCheck(
     const guardUp = actor.data.data.guardUp;
     if (guardUp.active) {
         rollData.guardUp = -guardUp.testPenalty;
-        rollFormula = `${rollFormula} + @guardUp`;
+        rollFormula += " + @guardUp";
     };
 
     // Check if it is a Resource/Income roll
@@ -285,20 +287,26 @@ export function dialogBoxAbilityFocus(focus, actor) {
         content: `<p>${game.i18n.localize("age-system.abilitySelect")}</p>`,
     };
     
-    let buttons = {};
-    const abilitiesPool = CONFIG.ageSystem.abilities;
-
+    const abilitiesPool = CONFIG.ageSystem.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
+    let abilitiesArray = []
     for (const abl in abilitiesPool) {
         if (Object.hasOwnProperty.call(abilitiesPool, abl)) {
-            const ablLocalString = abilitiesPool[abl];
-            buttons[abl] ={
-                label: game.i18n.localize(ablLocalString),
-                callback: ev => {
-                    ageRollCheck(ev, actor, abl, focus)
-                }
-            }
+            const ablLocal = game.i18n.localize(abilitiesPool[abl]);
+            abilitiesArray.push({ability: abl, name: ablLocal});
         };
     };
+    abilitiesArray = sortObjArrayByName(abilitiesArray, "name");
+    
+    let buttons = {};
+    for (let a = 0; a < abilitiesArray.length; a++) {
+        const obj = abilitiesArray[a];
+        buttons[obj.ability] = {
+            label: obj.name,
+            callback: ev => {
+                ageRollCheck(ev, actor, obj.ability, focus)
+            }
+        }
+    }
     
     // In future versions of FoundryVTT (after 0.7.9), Dialog will pass HMTL data and not jQuery
     // Check this if/when code breaks
