@@ -512,7 +512,7 @@ export async function itemDamage(
 
         // Adds specific Stunt Damage dice
         if (stuntDamage && stuntDamage !== 0) {
-            const stuntDmgDice = `${stuntDamage}d6`;
+            const stuntDmgDice = `${stuntDamage}D6`;
             damageFormula += " + @stuntDmg";
             rollData.stuntDmg = stuntDmgDice;
             messageData.flavor += ` | +${stuntDmgDice} ${game.i18n.localize("age-system.stunts")}`;             
@@ -520,7 +520,7 @@ export async function itemDamage(
 
         // Adds Extra Damage dice
         if (dmgExtraDice && dmgExtraDice !== 0) {
-            const extraDice = `${dmgExtraDice}d6`;
+            const extraDice = `${dmgExtraDice}D6`;
             damageFormula += " + @extraDice";
             rollData.extraDice = extraDice;
             messageData.flavor += ` | +${extraDice}`;             
