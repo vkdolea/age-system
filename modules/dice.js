@@ -317,27 +317,80 @@ export function dialogBoxAbilityFocus(focus, actor) {
 };
 
 // Macro Function
-export function rollOwnedItem(event, actorId, itemId) {
-    const actor = game.actors.get(actorId);
-    const itemRolled = actor.getOwnedItem(itemId);
-    const ablCode = itemRolled.data.data.useAbl;
-    const focusName = itemRolled.data.data.useFocus;
+// export function rollOwnedItem(event, actorId, itemId) {
+//     const actor = game.actors.get(actorId);
+//     const itemRolled = actor.getOwnedItem(itemId);
+//     const ablCode = itemRolled.data.data.useAbl;
+//     const focusName = itemRolled.data.data.useFocus;
     
-    let focusRolled = actor.getOwnedItem(itemRolled.data.data.useFocusActorId);
-    if (!focusRolled) {
-        focusRolled = focusName;
-    };
+//     let focusRolled = actor.getOwnedItem(itemRolled.data.data.useFocusActorId);
+//     if (!focusRolled) {
+//         focusRolled = focusName;
+//     };
 
-    ageRollCheck(event, ablCode, focusRolled, itemRolled, actor);
+//     ageRollCheck(event, ablCode, focusRolled, itemRolled, actor);
+// }
+
+async function getDamageRollOptions() {
+    // Ve se item rolado e arma, poder ou null/outro, 
+
+    const template = "/systems/age-system/templates/rolls/dmg-roll-settings.hbs"
+    // const type = itemRolled ? itemRolled.type : null;
+
+    const html = await renderTemplate(template, {
+        // ...data,
+        // itemType: type
+    });
+
+    return new Promise(resolve => {
+        const data = {
+            title: game.i18n.localize("age-system.damageOptions"),
+            content: html,
+            buttons: {
+                normal: {
+                    label: game.i18n.localize("age-system.roll"),
+                    callback: html => resolve(_processDamageRollOptions(html[0].querySelector("form")))
+                },
+                cancel: {
+                    label: game.i18n.localize("age-system.cancel"),
+                    callback: html => resolve({cancelled: true}),
+                }
+            },
+            default: "normal",
+            close: () => resolve({cancelled: true}),
+        }
+        new Dialog(data, null).render(true);
+    });
+};
+
+function _processDamageRollOptions(form) {
+
+    const modifiers = ["setDmgExtraDice", "setDmgGeneralMod", "setStuntDamage"];
+    let rollOptions = {}
+
+    for (let o = 0; o < modifiers.length; o++) {
+        const mod = modifiers[o];
+        if (form[mod]) {
+            rollOptions[mod] = parseInt(form[mod].value)
+            if (!Number.isInteger(rollOptions[mod])) rollOptions[mod] = null;
+        }
+    }
+
+    // console.log(rollOptions)
+    return rollOptions
 }
 
 // Item damage
-export function itemDamage(
+export async function itemDamage(
     event,
     item,
     stuntDie = null,
     addFocus = false,
-    atkDmgTradeOff = 0) {
+    atkDmgTradeOff = 0,
+    stuntDamage = null,
+    dmgExtraDice = null,
+    dmgGeneralMod = null,
+    ) {
 
     /**Options to Roll Damage:
      * - Add Focus *** Pickup list from item Owner ***
@@ -345,6 +398,16 @@ export function itemDamage(
      * - Add straight bonus
      * - Add multiple d6 (divide per Stunt and per Other Sources)
      */
+
+    // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
+    let damageOptions = null;
+    if (!event.ctrlKey && event.altKey) {
+        damageOptions = await getDamageRollOptions();
+        if (damageOptions.cancelled) return;
+        dmgExtraDice = damageOptions.setDmgExtraDice;
+        dmgGeneralMod = damageOptions.setDmgGeneralMod;
+        stuntDamage = damageOptions.setStuntDamage;
+    };
     
     const nrDice = item.data.data.nrDice;
     const diceSize = item.data.data.diceType;
@@ -412,6 +475,13 @@ export function itemDamage(
             rollData.itemBonus = itemDmg;
             messageData.flavor += ` | ${damageToString(itemDmg)} ${game.i18n.localize("age-system.itemDmgMod")}`;
         };
+
+        // Adds user Damage input
+        if (dmgGeneralMod && dmgGeneralMod !== 0) {
+            damageFormula += " + @optMod";
+            rollData.optMod = dmgGeneralMod;
+            messageData.flavor += ` | ${damageToString(dmgGeneralMod)}`;             
+        };
         
         // Check if item onwer has items which adds up to general damage
         if (item.actor.data.data.ownedBonus != null && item.actor.data.data.ownedBonus.actorDamage) {
@@ -438,6 +508,22 @@ export function itemDamage(
                 damageFormula = `${damageFormula} + 1d6`
                 messageData.flavor += ` | +1D6`;
             };
+        };
+
+        // Adds specific Stunt Damage dice
+        if (stuntDamage && stuntDamage !== 0) {
+            const stuntDmgDice = `${stuntDamage}d6`;
+            damageFormula += " + @stuntDmg";
+            rollData.stuntDmg = stuntDmgDice;
+            messageData.flavor += ` | +${stuntDmgDice} ${game.i18n.localize("age-system.stunts")}`;             
+        };
+
+        // Adds Extra Damage dice
+        if (dmgExtraDice && dmgExtraDice !== 0) {
+            const extraDice = `${dmgExtraDice}d6`;
+            damageFormula += " + @extraDice";
+            rollData.extraDice = extraDice;
+            messageData.flavor += ` | +${extraDice}`;             
         };
 
     };

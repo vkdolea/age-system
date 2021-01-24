@@ -73,6 +73,7 @@ Here the description of each one of the Modificators:
 - When targeting a token and rolling an weapon attack, roll will be check versus target's Defense (attack selecting multiple tokens warns user to select only one token to attack).
 - When attacking a token or when rolling versus a TN, chat card will show "Success" or "Miss" - if the check is a "Miss", stunt points will not be generated.
 - Default macro (when dragging Power or Weapon to macro bar) behaviour is rolling the Item without prompting for a dialog box. Adding the argument "true" after item name in the macro script will prompt for roll options (i.e., it will simulate the Click + Alt on character sheet roll).
+- When rolling damage, use Alt + Click to open menu to input extra damage options (extra dice and flat bonus/penality).
 #### Fixed
 - Rolling Focus with another Ability from Focus' context menu now functional.
 

@@ -354,7 +354,8 @@
         "setAgeRollAtkDmgTradeOff": "Attack to Damage Trade Off",
         "setAgeRollTN": "Roll TN",
 
-        "setRollExtraDice": "Extra Dice",
+        "setDmgExtraDice": "Extra Dice",
+        "setStuntDmg": "Stunt Damage",
         "setRollGeneralMod": "Damage Modifier",
         "penaltyToDamage": "Penalty Converted to Damage"
     }
