@@ -79,7 +79,8 @@
         "WARNING": {
             "duplicatedFocus": "Focus is not added to character - it already owns a Focus named ",
             "selectTokenMacro": "Select a token to run the macro.",
-            "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro."
+            "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro.",
+            "selectOnlyOneTarget": "Select only one target to attack."
         },
         
         "chatCard": {
@@ -342,6 +343,8 @@
         "rollFatigue": "Roll Fatigue",
         "blindRollSomeone": "You blindly roll to GM",
         "activationMod": "Roll Bonus",
+        "success": "Success",
+        "miss": "Miss",
 
         "ageRollOptions": "Options",
         "roll": "Roll Dice",
@@ -352,6 +355,7 @@
         "setAgeRollTN": "Roll TN",
 
         "setRollExtraDice": "Extra Dice",
-        "setRollGeneralMod": "Damage Modifier"
+        "setRollGeneralMod": "Damage Modifier",
+        "penaltyToDamage": "Penalty Converted to Damage"
     }
 }

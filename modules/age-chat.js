@@ -5,6 +5,7 @@ export function addChatListeners(html) {
 
 export function chatDamageRoll(event) {
     const card = event.currentTarget.closest(".feature-controls");
+    const atkDmgTradeOff = card.dataset.atkdmgTrade;
     let stuntDie = null;
     let addFocus = false;
     if (event.currentTarget.classList.contains('add-stunt-damage')) {
@@ -15,7 +16,7 @@ export function chatDamageRoll(event) {
     };
     const owner = game.actors.get(card.dataset.actorId);
     const damageSource = owner.getOwnedItem(card.dataset.itemId);
-    damageSource.rollDamage(event, stuntDie, addFocus);
+    damageSource.rollDamage(event, stuntDie, addFocus, atkDmgTradeOff);
 };
 
 export function chatFatigueRoll(event) {

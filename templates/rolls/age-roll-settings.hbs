@@ -1,14 +1,22 @@
 <form>
+    
     <div class="form-group">
         <label>{{localize "age-system.setAgeRollMod"}}</label>
-        <input type="number" name="ageRollMod"/>
+        <input type="number" name="ageRollMod" placeholder="{{localize "age-system.setAgeRollMod"}}" value=""/>
     </div>
+
+    {{#if (eq itemType 'weapon')}}
     <div class="form-group">
         <label>{{localize "age-system.setAgeRollAtkDmgTradeOff"}}</label>
-        <input type="number" name="atkDmgTradeOff"/>
+        <input type="number" name="atkDmgTradeOff" placeholder="{{localize "age-system.penaltyToDamage"}}" value=""/>
     </div>
+    {{/if}}
+
+    {{#if (or (ne itemType 'weapon') (and (eq itemType 'weapon') (eq targetNumber null)))}}
     <div class="form-group">
         <label>{{localize "age-system.setAgeRollTN"}}</label>
-        <input type="number" name="rollTN" value=""/>
+        <input type="number" name="rollTN" value="{{targetNumber}}" placeholder="{{localize "age-system.setAgeRollTN"}}"/>
     </div>
+    {{/if}}
+
 </form>

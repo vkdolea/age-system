@@ -1,6 +1,6 @@
-import {ageRollCheck} from "./dice.js";
+// import {ageRollCheck} from "./dice.js";
 
-export function rollOwnedItem(itemName) {
+export function rollOwnedItem(itemName, rollOptions = false) {
 
   // Identify if token is selected, otherwise select user's actor
   const speaker = ChatMessage.getSpeaker();
@@ -11,10 +11,17 @@ export function rollOwnedItem(itemName) {
 
   const itemRolled = actor ? actor.items.find(i => i.name === itemName) : null;
   if (!itemRolled) {return ui.notifications.warn(game.i18n.localize("age-system.WARNING.actorDontHaveValidItem"));}
-  const ablCode = itemRolled.data.data.useAbl;
-  const event = new MouseEvent('click', {});
+  // const ablCode = itemRolled.data.data.useAbl;
 
-  ageRollCheck(event, actor, ablCode, itemRolled);
+  let event;
+  if (rollOptions) {
+    event = new MouseEvent('click', {altKey: true});
+  } else {
+    event = new MouseEvent('click', {});
+  };
+
+  itemRolled.roll(event);
+  // ageRollCheck(event, actor, ablCode, itemRolled);
 };
 
 /* -------------------------------------------- */

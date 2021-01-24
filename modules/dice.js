@@ -1,13 +1,23 @@
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
-export async function ageRollCheck(event, actor, abl, itemRolled = null, resourceRoll = false) {
+export async function ageRollCheck(
+    event,
+    actor,
+    abl,
+    itemRolled = null,
+    resourceRoll = false,
+    rollTN = null,
+    rollUserMod = null,
+    atkDmgTradeOff = null) {
 
     let extraOptions = null;
 
     if (!event.ctrlKey && event.altKey) {
-        extraOptions = await getAgeRollOptions(itemRolled);
-
+        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN});
         if (extraOptions.cancelled) return;
-    }
+        if (extraOptions.rollTN) rollTN = extraOptions.rollTN;
+        rollUserMod = extraOptions.ageRollMod;
+        atkDmgTradeOff = -Math.abs(Number(extraOptions.atkDmgTradeOff));
+    };
 
     // Set roll mode
     const rMode = setBlind(event);
@@ -52,6 +62,12 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
     } else {
         rollData.itemId = null;
     };
+
+    // Adds penalty for Attack which is converted to damage Bonus and pass info to chat Message
+    if (atkDmgTradeOff) {
+        rollData.atkDmgTradeOff = atkDmgTradeOff;
+        rollFormula = `${rollFormula} + @atkDmgTradeOff`;
+    }
 
     // Check if AIM is active - this bonus will apply to all rolls when it is active
     const aim = actor.data.data.aim;
@@ -101,9 +117,22 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
 
     // Informs roll card the current color scheme in use by the user
     rollData.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
-
     const ageRoll = new Roll(rollFormula, rollData).roll();
-    const rollSummary = ageRollChecker(ageRoll)
+
+
+    // If rollTN is used, check if roll fails or succeed
+    if (rollTN) {
+        const rollMargin = ageRoll.total - rollTN;
+        if (rollMargin > -1) {
+            rollData.success = true;
+        } else {
+            rollData.success = false;
+        };
+    };
+
+    // Generate Stunt Points if doubles are rolled and: total rolled is higher than TN or there is no TN set
+    const generateSP = (rollTN && rollData.success) || !rollTN;
+    const rollSummary = ageRollChecker(ageRoll, generateSP)
     let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
 
     let cardData = {
@@ -111,8 +140,9 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
         roll: ageRoll,
         ageRollSummary: rollSummary,
         owner: actor,
-        guardUpActive: guardUp.active
+        guardUpActive: guardUp.active,
     };
+    cardData.rollInput.rollTN = rollTN;
 
     let chatData = {
         user: game.user._id,
@@ -134,14 +164,14 @@ export async function ageRollCheck(event, actor, abl, itemRolled = null, resourc
     return ChatMessage.create(chatData, {rollMode: rMode});
 };
 
-async function getAgeRollOptions(itemRolled) {
+async function getAgeRollOptions(itemRolled, data = {}) {
     // Ve se item rolado e arma, poder ou null/outro, 
-    const templateOptions = {
-        "weapon": "/systems/age-system/templates/rolls/age-roll-settings.hbs",
-        "power": "/systems/age-system/templates/rolls/age-roll-settings.hbs",
-    };
+
     const template = "/systems/age-system/templates/rolls/age-roll-settings.hbs"
-    const html = await renderTemplate(template, {});
+    const html = await renderTemplate(template, {
+        ...data,
+        itemType: itemRolled.type
+    });
 
     return new Promise(resolve => {
         const data = {
@@ -165,11 +195,20 @@ async function getAgeRollOptions(itemRolled) {
 };
 
 function _processAgeRollOptions(form) {
-    return {
-        ageRollMod: parseInt(form.ageRollMod.value),
-        atkDmgTradeOff: parseInt(form.atkDmgTradeOff.value),
-        rollTN: parseInt(form.rollTN.value)
+
+    const modifiers = ["ageRollMod", "atkDmgTradeOff", "rollTN"];
+    let rollOptions = {}
+
+    for (let o = 0; o < modifiers.length; o++) {
+        const mod = modifiers[o];
+        if (form[mod]) {
+            rollOptions[mod] = parseInt(form[mod].value)
+            if (!Number.isInteger(rollOptions[mod])) rollOptions[mod] = null;
+        }
     }
+
+    // console.log(rollOptions)
+    return rollOptions
 }
 
 export function getFocus(item) {
@@ -208,7 +247,7 @@ export function diceSoNiceRoller(roll, chatData) {
 
 
 // Code to identify Doubles and pass on dice summary     
-export function ageRollChecker(ageRoll) {
+export function ageRollChecker(ageRoll, generateSP) {
     const die1 = ageRoll.dice[0].results[0].result;
     const die2 = ageRoll.dice[0].results[1].result;
     const die3 = ageRoll.dice[1].results[0].result;
@@ -221,7 +260,7 @@ export function ageRollChecker(ageRoll) {
         },
         stunt: false
     };
-    if (diffFaces < 3) {rollSummary.stunt = true};    
+    if (diffFaces < 3 && generateSP) rollSummary.stunt = true;   
     return rollSummary
 };
 
@@ -277,7 +316,7 @@ export function rollOwnedItem(event, actorId, itemId) {
 }
 
 // Item damage
-export function itemDamage(event, item, stuntDie = null, addFocus = false) {
+export function itemDamage(event, item, stuntDie = null, addFocus = false, atkDmgTradeOff = 0) {
 
     const nrDice = item.data.data.nrDice;
     const diceSize = item.data.data.diceType;
@@ -314,6 +353,13 @@ export function itemDamage(event, item, stuntDie = null, addFocus = false) {
             damageFormula = `${damageFormula} + @abilityMod`;
             rollData.abilityMod = ablMod;
             messageData.flavor += ` | ${damageToString(ablMod)} ${game.i18n.localize("age-system." + dmgAbl)}`
+        }
+
+        // Check if Attack to Damage Trade Off is applied
+        if (atkDmgTradeOff) {
+            damageFormula = `${damageFormula} + @atkDmgTradeOff`;
+            rollData.atkDmgTradeOff = Math.abs(atkDmgTradeOff);
+            messageData.flavor += ` | ${damageToString(Math.abs(atkDmgTradeOff))} ${game.i18n.localize("age-system.penaltyToDamage")}`;
         }
 
         // Check if Focus adds to damage and adds it

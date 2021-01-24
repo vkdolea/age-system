@@ -113,9 +113,9 @@ export class ageSystemItem extends Item {
     };
 
     // Rolls damage for the item
-    rollDamage(event, stuntDie = null, addFocus = false) {
+    rollDamage(event, stuntDie = null, addFocus = false, atkDmgTradeOff = 0) {
         if (!this.hasDamage()) {return false};
-        return Dice.itemDamage(event, this, stuntDie, addFocus);
+        return Dice.itemDamage(event, this, stuntDie, addFocus, atkDmgTradeOff);
     };
 
     // Rolls fatigue for the Item
@@ -126,17 +126,70 @@ export class ageSystemItem extends Item {
         return this.roll(event, rollType, targetNumber);
     };
 
+    // Roll item and check targetNumbers
     roll(event, rollType = null, targetNumber = null) {
+        /**Roll Type Possibilities
+         * - fatigue
+         * - attack
+         * - powerActivation
+         */
         const owner = this.actor;
         if (!owner) {return false;}
-        
-        let ablCode = "no-abl";
-        if (rollType === "fatigue") {
-            ablCode = "will";
-        } else {
-            ablCode = this.data.data.useAbl;
+        let ablCode = (rollType === "fatigue") ? "will" : "no-abl";
+
+        if (rollType === null) {
+            switch (this.type) {
+                case "weapon":
+                    rollType = "attack"
+                    break;
+                case "power":
+                    rollType = "powerActivation"
+                default:
+                    break;
+            }
         }
-        Dice.ageRollCheck(event, owner, ablCode, this);
+        
+        if (targetNumber === null) {
+            switch (rollType) {
+                case "fatigue":
+                    ablCode = "will";
+                    targetNumber = this.fatigueTN ? this.fatigueTN : null;
+                    break;
+                
+                case "powerActivation":
+                    targetNumber = this.data.data.targetNumber ? this.data.data.targetNumber : null;
+                    break;
+    
+                case "attack":
+                    const targets = game.user.targets;
+                    if (targets.size === 0) break;
+                    if (targets.size > 1) {
+                        // TODO - add case for multiple targets attacked
+                        let warning = game.i18n.localize("age-system.WARNING.selectOnlyOneTarget");
+                        ui.notifications.warn(warning);
+                        return;
+                    } else {
+                        const targetId = targets.ids[0];
+                        const targetToken = canvas.tokens.placeables.find(t => t.data._id === targetId);
+                        targetNumber = targetToken.actor.data.data.defense.total;
+                        // console.log(targetToken.actor.name + ": " + targetNumber)
+                    }
+                    break;
+        
+                default:
+                    break;
+            }
+        }
+
+        // Check if roll is a Fatigue Test and set TN
+        // if (rollType === "fatigue") {
+        //     ablCode = "will";
+        //     if (this.fatigueTN && targetNumber === null) {targetNumber = this.fatigueTN;}
+        // } else {
+        //     ablCode = this.data.data.useAbl;
+        // }
+
+        Dice.ageRollCheck(event, owner, ablCode, this, false, targetNumber);
     };
 
     /** Returns owner's Focus value, base on Item's useFocus property
