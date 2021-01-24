@@ -255,7 +255,6 @@ export function diceSoNiceRoller(roll, chatData) {
     game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind).then(displayed => ChatMessage.create(chatData));
 };
 
-
 // Code to identify Doubles and pass on dice summary     
 export function ageRollChecker(ageRoll, generateSP) {
     const die1 = ageRoll.dice[0].results[0].result;
@@ -316,21 +315,6 @@ export function dialogBoxAbilityFocus(focus, actor) {
     });
 };
 
-// Macro Function
-// export function rollOwnedItem(event, actorId, itemId) {
-//     const actor = game.actors.get(actorId);
-//     const itemRolled = actor.getOwnedItem(itemId);
-//     const ablCode = itemRolled.data.data.useAbl;
-//     const focusName = itemRolled.data.data.useFocus;
-    
-//     let focusRolled = actor.getOwnedItem(itemRolled.data.data.useFocusActorId);
-//     if (!focusRolled) {
-//         focusRolled = focusName;
-//     };
-
-//     ageRollCheck(event, ablCode, focusRolled, itemRolled, actor);
-// }
-
 async function getDamageRollOptions() {
     // Ve se item rolado e arma, poder ou null/outro, 
 
@@ -376,7 +360,6 @@ function _processDamageRollOptions(form) {
         }
     }
 
-    // console.log(rollOptions)
     return rollOptions
 }
 
@@ -391,13 +374,6 @@ export async function itemDamage(
     dmgExtraDice = null,
     dmgGeneralMod = null,
     ) {
-
-    /**Options to Roll Damage:
-     * - Add Focus *** Pickup list from item Owner ***
-     * - Add Stunt Die multiple times *** How? ***
-     * - Add straight bonus
-     * - Add multiple d6 (divide per Stunt and per Other Sources)
-     */
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
@@ -431,7 +407,6 @@ export async function itemDamage(
         diceSize: diceSize,
         damageMod: constDmg
     };
-
 
     if (item.isOwned) {
 
