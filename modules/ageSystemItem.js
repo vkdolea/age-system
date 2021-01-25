@@ -12,24 +12,11 @@ export class ageSystemItem extends Item {
         if (!this.data.name) this.data.name = "New " + this.entity;       
         this.data = duplicate(this._data);
 
-
         const itemData = this.data;
         const data = itemData.data;
         const itemType = itemData.type;
         data.nameLowerCase = itemData.name.toLowerCase();
         data.useFocusActorId = null;
-
-        /*
-        * Focus value set as manual input - Improved checkbox used to indicate improved focus on Character Sheet
-        */
-        // Data initialization for Focus
-        // if (itemType === "focus") {
-        //     if (data.improved) {
-        //         data.focusValue = data.initialValue + 1;
-        //     } else {
-        //         data.focusValue = data.initialValue;
-        //     }
-        // }
 
         // Adds value to represent portion added to dice on damage roll
         if (this.isOwned && this.hasDamage()) {
@@ -113,34 +100,70 @@ export class ageSystemItem extends Item {
     };
 
     // Rolls damage for the item
-    rollDamage(event, stuntDie = null, addFocus = false) {
+    rollDamage(event, stuntDie = null, addFocus = false, atkDmgTradeOff = 0) {
         if (!this.hasDamage()) {return false};
-        return Dice.itemDamage(event, this, stuntDie, addFocus);
+        return Dice.itemDamage(event, this, stuntDie, addFocus, atkDmgTradeOff);
     };
 
-    // Rolls fatigue for the Item
-    rollFatigue(event) {
-        if (!this.hasFatigue()) {return false};
-        const targetNumber = this.data.data.fatigueTN;
-        const rollType = "fatigue";
-        return this.roll(event, rollType, targetNumber);
-    };
-
+    // Roll item and check targetNumbers
     roll(event, rollType = null, targetNumber = null) {
+        /**Roll Type Possibilities
+         * - fatigue
+         * - attack
+         * - powerActivation
+         */
         const owner = this.actor;
         if (!owner) {return false;}
-        
-        let ablCode = "no-abl";
-        if (rollType === "fatigue") {
-            ablCode = "will";
-        } else {
-            ablCode = this.data.data.useAbl;
+        let ablCode = (rollType === "fatigue") ? "will" : this.data.data.useAbl;
+
+        if (rollType === null) {
+            switch (this.type) {
+                case "weapon":
+                    rollType = "attack"
+                    break;
+                case "power":
+                    rollType = "powerActivation"
+                default:
+                    break;
+            }
         }
-        Dice.ageRollCheck(event, owner, ablCode, this);
+        
+        if (targetNumber === null) {
+            switch (rollType) {
+                case "fatigue":
+                    ablCode = "will";
+                    targetNumber = this.data.data.fatigueTN ? this.data.data.fatigueTN : null;
+                    break;
+                
+                case "powerActivation":
+                    targetNumber = this.data.data.targetNumber ? this.data.data.targetNumber : null;
+                    break;
+    
+                case "attack":
+                    const targets = game.user.targets;
+                    if (targets.size === 0) break;
+                    if (targets.size > 1) {
+                        // TODO - add case for multiple targets attacked
+                        let warning = game.i18n.localize("age-system.WARNING.selectOnlyOneTarget");
+                        ui.notifications.warn(warning);
+                        return;
+                    } else {
+                        const targetId = targets.ids[0];
+                        const targetToken = canvas.tokens.placeables.find(t => t.data._id === targetId);
+                        targetNumber = targetToken.actor.data.data.defense.total;
+                    }
+                    break;
+        
+                default:
+                    break;
+            }
+        }
+
+        Dice.ageRollCheck(event, owner, ablCode, this, false, targetNumber);
     };
 
     /** Returns owner's Focus value, base on Item's useFocus property
-     * TODO = figure out how if derived data can be input to another Item
+     * TODO = figure out how/if derived data can be input to another Item
      */
     ownerFocusValue() {
         const itemData = this.data;
@@ -154,8 +177,6 @@ export class ageSystemItem extends Item {
         const ownerFoci = owner.data.items.filter(a => a.type === "focus");
         const expectedFocus = data.useFocus.toLowerCase();
         const validFocus = ownerFoci.filter(c => c.name.toLowerCase() === expectedFocus);
-        // Orignalmente:
-        // const validFocus = ownerFoci.filter(c => c.data.nameLowerCase === expectedFocus);
 
         if (validFocus.length < 1) {
             return 0;
@@ -190,8 +211,6 @@ export class ageSystemItem extends Item {
         const ownerFoci = owner.data.items.filter(a => a.type === "focus");
         const expectedFocus = data.useFocus.toLowerCase();
         const validFocus = ownerFoci.filter(c => c.name.toLowerCase() === expectedFocus);
-        // Orignalmente:
-        // const validFocus = ownerFoci.filter(c => c.data.nameLowerCase === expectedFocus);
 
         if (validFocus.length < 1) {
             return data.useFocus;

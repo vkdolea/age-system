@@ -15,10 +15,10 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Support to Toughness, Impact/Ballistic Armor, and Stun/Wound damage
 - Dice so Nice compatible
 - Support to Income, Resources, Currency and GP/SP/CP wealth systems
-- Shift, Alt, Ctrl keys support to change certain types of roll
+- Shift, Alt, Ctrl keys support to change check and damage rolls
 - Drag and drop owned weapons and power to macro bar to create attack shortcuts
 - Possibility to add Conditions on characters (effects must be set manually)
-- Add Stunt Die or Focus (or both) to damage roll when rolling from chart
+- Add Stunt Die or Focus (or both) to damage roll when rolling damage from chat
 
 ## Credits
 ### Icons
@@ -40,8 +40,9 @@ Icons were used from [game-icons.net](https://game-icons.net). This icons were p
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
 2. *CTRL + Click* on Damage rolls adds +1D6 to the total.
 3. *CTRL + ALT + Click* on Damage rolls adds +2D6 to the total.
-4. *Right Click* on Focus in the character sheet opens a context menu with options to roll it with another Ability, show on Chat, edit and delete.
-5. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
+4. *ALT + Click* on Attack, Focus, Ability or Damage rolls to add Roll Options.
+5. *Right Click* on Focus in the character sheet opens a context menu with options to roll it with another Ability, show on Chat, edit and delete.
+6. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
 
 ### Modificators
 A few items have a "Modificators" section. Modificatores will only apply when the item is equiped/activated (i.e., shield icon in character sheet without opacity).
@@ -67,6 +68,20 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
+### v0.3.0
+#### Added
+- Press Alt key when rolling a roll check to bring menu with options to set TN, add modifier and Attack to Damage trade off (this one only when rolling weapon attacks).
+- When targeting a token and rolling an weapon attack, roll will be check versus target's Defense (attack selecting multiple tokens warns user to select only one token to attack).
+- When attacking a token or when rolling versus a TN, chat card will show "Success" or "Miss" - if the check is a "Miss", stunt points will not be generated.
+- Default macro (when dragging Power or Weapon to macro bar) behaviour is rolling the Item without prompting for a dialog box. Setting second argument to "true" after in the macro script it will prompt user for roll options (i.e., it will simulate the Click + Alt on character sheet roll).
+- When rolling damage, use Alt + Click to open menu to input extra damage options (extra dice and flat bonus/penality).
+- Added 4 and 12 hours option for casting time.
+#### Fixed
+- Rolling Focus with another Ability from Focus' context menu now functional.
+- Fixed labeling on Cost field of equipment should "Purchase TN" instead of "Cost".
+- Styling on Power sheet causing PP cost field to disapear.
+- Data migration issues when preventing Speed mod to be include to some items.
+
 ### v0.2.4 - 2021-01-21
 #### Added
 - French localization by Discord user *Imposator#8090*.

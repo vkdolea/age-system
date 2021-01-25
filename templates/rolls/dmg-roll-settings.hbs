@@ -1,0 +1,34 @@
+<form>
+    <div class="form-group">
+        <label>{{localize "age-system.setStuntDmg"}}</label>
+        <select name="setStuntDamage">
+            {{#select data.diceType}}
+            <option value="0">-</option>
+            <option value="1">1{{localize "age-system.settings.d6"}}</option>
+            <option value="2">2{{localize "age-system.settings.d6"}}</option>
+            {{/select}}
+        </select>
+    </div>
+        <div class="form-group">
+        <label>{{localize "age-system.setDmgExtraDice"}}</label>
+        <select name="setDmgExtraDice">
+            {{#select data.diceType}}
+            <option value="0">-</option>
+            <option value="1">1{{localize "age-system.settings.d6"}}</option>
+            <option value="2">2{{localize "age-system.settings.d6"}}</option>
+            <option value="3">3{{localize "age-system.settings.d6"}}</option>
+            <option value="4">4{{localize "age-system.settings.d6"}}</option>
+            <option value="5">5{{localize "age-system.settings.d6"}}</option>
+            <option value="6">6{{localize "age-system.settings.d6"}}</option>
+            <option value="7">7{{localize "age-system.settings.d6"}}</option>
+            <option value="8">8{{localize "age-system.settings.d6"}}</option>
+            <option value="9">9{{localize "age-system.settings.d6"}}</option>
+            <option value="10">10{{localize "age-system.settings.d6"}}</option>
+            {{/select}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "age-system.setRollGeneralMod"}}</label>
+        <input type="number" name="setDmgGeneralMod"/>
+    </div>
+</form>

@@ -33,7 +33,9 @@
                 {{> "systems/age-system/templates/partials/ability-focus-select.hbs"}}
 
                 {{!-- Power Point Cost --}}
-                {{#unless data.inputFatigueTN}}
+
+                {{#unless (and data.inputFatigueTN data.hasFatigue)}}
+                {{#unless (and inChat data.hasFatigue)}}
                 <div class="flexcol">
                     <label>{{localize "age-system.powerPointsIndex"}}</label>
                     {{#if inChat}}
@@ -43,23 +45,22 @@
                     {{/if}}
                 </div>
                 {{/unless}}
+                {{/unless}}
 
                 {{!-- Fatigue Setup --}}
-                <div class="flexrow use-fatigue-true">
-                    {{#if data.useFatigue}}
-                    {{#if inChat}}
-                    {{else}}
-                    <div class="flexcol">
-                        <label class="use-fatigue">{{localize "age-system.inputFatigueTN"}}</label>
-                        <input class="use-fatigue" type="checkbox" name="data.inputFatigueTN" {{checked data.inputFatigueTN}} class="checkbox"/>
-                    </div>
-                    {{/if}}
-                    <div class="flexcol">
-                        <label class="use-fatigue">{{localize "age-system.fatigueTN"}}</label>
-                        <input class="use-fatigue" type="number" {{#unless data.inputFatigueTN}}disabled{{/unless}} name="data.fatigueTN" value="{{data.fatigueTN}}" data-dtype="Number" />                   
-                    </div>
-                    {{/if}}
+                {{#if data.useFatigue}}
+                {{#if inChat}}
+                {{else}}
+                <div class="flexcol use-fatigue-true">
+                    <label class="use-fatigue">{{localize "age-system.inputFatigueTN"}}</label>
+                    <input class="use-fatigue" type="checkbox" name="data.inputFatigueTN" {{checked data.inputFatigueTN}} class="checkbox"/>
                 </div>
+                {{/if}}
+                <div class="flexcol use-fatigue-true">
+                    <label class="use-fatigue">{{localize "age-system.fatigueTN"}}</label>
+                    <input class="use-fatigue" type="number" {{#unless data.inputFatigueTN}}disabled{{/unless}} name="data.fatigueTN" value="{{data.fatigueTN}}" data-dtype="Number" />                   
+                </div>
+                {{/if}}
 
                 {{!-- Casting Time --}}
                 <div class="flexcol">

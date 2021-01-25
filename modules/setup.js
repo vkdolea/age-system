@@ -94,3 +94,17 @@ export function nameItemSheetWindow(ageSystemItemSheet) {
     let windowHeader = itemWindow.children[0].firstElementChild;
     windowHeader.textContent += ` [${game.i18n.localize("age-system." + itemType)}]`;
 };
+
+export function sortObjArrayByName(nameArray, nameKey) {
+    return nameArray.sort(function(a, b) {
+        const nameA = a[nameKey].toLowerCase();
+        const nameB = b[nameKey].toLowerCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+    });
+}

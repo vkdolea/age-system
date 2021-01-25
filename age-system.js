@@ -120,7 +120,7 @@ Hooks.once("ready", function() {
     // // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.2.2";
+    const NEEDS_MIGRATION_VERSION = "0.3.0";
     // const COMPATIBLE_MIGRATION_VERSION = "0.7.9";
     const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;

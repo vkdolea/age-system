@@ -156,6 +156,7 @@ export const migrateActorData = function(actor) {
 export const migrateItemData = function(item) {
   const updateData = {};
   _addItemModSpeed(item, updateData);
+  _addExtraPowerData(item, updateData);
   return updateData;
 };
 
@@ -204,6 +205,7 @@ function _addActorConditions(actor, updateData) {
     const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindred",
     "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
     
+    updateData["data.conditions"] = {};
     for (let c = 0; c < conditions.length; c++) {
       const cond = contidions[c];
       const condString = `data.conditions.${cond}`;
@@ -223,10 +225,34 @@ function _addItemModSpeed(item, updateData) {
   if (item.type === "focus" || item.type === "honorifics" || item.type === "relationship" || item.type === "membership" || item.type === "stunts") return updateData;
   if (item.data.itemMods.speed) return updateData;
 
-  updateData["data.itemMods.speed"] = null;
+  updateData["data.itemMods.speed"] = {};
   updateData["data.itemMods.speed.isActive"] = false;
   updateData["data.itemMods.speed.value"] = 0;
 
   return updateData
 }
 /* -------------------------------------------- */
+
+/* -------------------------------------------- */
+/**
+ * Add extra Power elements to address resist Test
+ * and half damage when spell is resisted
+ * @private
+ */
+function _addExtraPowerData(item, updateData) {
+  if (item.type !== "power") return updateData;
+  if (item.data.ablFatigue) return updateData;
+
+  updateData["data.causeHealing"] = false;
+  updateData["data.ablFatigue"] = "will";
+  updateData["data.hasTest"] = false;
+  updateData["data.testAbl"] = "will";
+  updateData["data.testFocus"] = "";
+  updateData["data.damageResisted"] = {};
+  updateData["data.damageResisted.nrDice"] = 1;
+  updateData["data.damageResisted.diceType"] = 6;
+  updateData["data.damageResisted.extraValue"] = 0;
+  updateData["data.damageResisted.dmgAbl"] = "";
+
+  return updateData;
+}

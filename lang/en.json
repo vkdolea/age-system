@@ -79,7 +79,8 @@
         "WARNING": {
             "duplicatedFocus": "Focus is not added to character - it already owns a Focus named ",
             "selectTokenMacro": "Select a token to run the macro.",
-            "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro."
+            "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro.",
+            "selectOnlyOneTarget": "Select only one target to attack."
         },
         
         "chatCard": {
@@ -253,6 +254,8 @@
         "tenMinutes": "10 Minutes",
         "twentyMinutes": "20 Minutes",
         "oneHour": "1 Hour",
+        "fourHours": "4 Hours",
+        "twelveHours": "12 Hours",
 
         "rof": {
             "rof": "ROF",
@@ -341,6 +344,21 @@
         "thisItemDmgBns": "Item Bonus",
         "rollFatigue": "Roll Fatigue",
         "blindRollSomeone": "You blindly roll to GM",
-        "activationMod": "Roll Bonus"
+        "activationMod": "Roll Bonus",
+        "success": "Success",
+        "miss": "Miss",
+
+        "ageRollOptions": "Options",
+        "roll": "Roll Dice",
+        "cancel": "Cancel",
+
+        "setAgeRollMod": "Roll Modifier",
+        "setAgeRollAtkDmgTradeOff": "Attack to Damage Trade Off",
+        "setAgeRollTN": "Roll TN",
+
+        "setDmgExtraDice": "Extra Dice",
+        "setStuntDmg": "Stunt Damage",
+        "setRollGeneralMod": "Damage Modifier",
+        "penaltyToDamage": "Penalty Converted to Damage"
     }
 }

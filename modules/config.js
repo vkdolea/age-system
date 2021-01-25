@@ -35,7 +35,9 @@ ageSystem.actionsToCast = {
     fiveMinutes: "age-system.fiveMinutes",
     tenMinutes: "age-system.tenMinutes",
     twentyMinutes: "age-system.twentyMinutes",
-    onHouer: "age-system.oneHour",
+    oneHour: "age-system.oneHour",
+    fourHours: "age-system.fourHours",
+    twelveHours: "age-system.twelveHours"
 };
 
 ageSystem.reloadDuration = {
