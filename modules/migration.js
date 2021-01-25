@@ -224,7 +224,7 @@ function _addItemModSpeed(item, updateData) {
   if (item.type === "focus" || item.type === "honorifics" || item.type === "relationship" || item.type === "membership" || item.type === "stunts") return updateData;
   if (item.data.itemMods.speed) return updateData;
 
-  updateData["data.itemMods.speed"] = null;
+  updateData["data.itemMods.speed"] = {};
   updateData["data.itemMods.speed.isActive"] = false;
   updateData["data.itemMods.speed.value"] = 0;
 
