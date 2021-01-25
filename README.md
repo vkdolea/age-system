@@ -15,10 +15,10 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Support to Toughness, Impact/Ballistic Armor, and Stun/Wound damage
 - Dice so Nice compatible
 - Support to Income, Resources, Currency and GP/SP/CP wealth systems
-- Shift, Alt, Ctrl keys support to change certain types of roll
+- Shift, Alt, Ctrl keys support to change check and damage rolls
 - Drag and drop owned weapons and power to macro bar to create attack shortcuts
 - Possibility to add Conditions on characters (effects must be set manually)
-- Add Stunt Die or Focus (or both) to damage roll when rolling from chart
+- Add Stunt Die or Focus (or both) to damage roll when rolling damage from chat
 
 ## Credits
 ### Icons
@@ -40,8 +40,9 @@ Icons were used from [game-icons.net](https://game-icons.net). This icons were p
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
 2. *CTRL + Click* on Damage rolls adds +1D6 to the total.
 3. *CTRL + ALT + Click* on Damage rolls adds +2D6 to the total.
-4. *Right Click* on Focus in the character sheet opens a context menu with options to roll it with another Ability, show on Chat, edit and delete.
-5. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
+4. *ALT + Click* on Attack, Focus, Ability or Damage rolls to add Roll Options.
+5. *Right Click* on Focus in the character sheet opens a context menu with options to roll it with another Ability, show on Chat, edit and delete.
+6. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
 
 ### Modificators
 A few items have a "Modificators" section. Modificatores will only apply when the item is equiped/activated (i.e., shield icon in character sheet without opacity).
@@ -79,6 +80,7 @@ Here the description of each one of the Modificators:
 - Rolling Focus with another Ability from Focus' context menu now functional.
 - Fixed labeling on Cost field of equipment should "Purchase TN" instead of "Cost".
 - Styling on Power sheet causing PP cost field to disapear.
+- Data migration issues when preventing Speed mod to be include to some items.
 
 ### v0.2.4 - 2021-01-21
 #### Added
