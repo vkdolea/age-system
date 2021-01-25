@@ -205,6 +205,7 @@ function _addActorConditions(actor, updateData) {
     const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindred",
     "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
     
+    updateData["data.conditions"] = {};
     for (let c = 0; c < conditions.length; c++) {
       const cond = contidions[c];
       const condString = `data.conditions.${cond}`;
@@ -247,7 +248,7 @@ function _addExtraPowerData(item, updateData) {
   updateData["data.hasTest"] = false;
   updateData["data.testAbl"] = "will";
   updateData["data.testFocus"] = "";
-  updateData["data.damageResisted"] = null;
+  updateData["data.damageResisted"] = {};
   updateData["data.damageResisted.nrDice"] = 1;
   updateData["data.damageResisted.diceType"] = 6;
   updateData["data.damageResisted.extraValue"] = 0;
