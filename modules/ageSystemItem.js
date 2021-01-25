@@ -114,7 +114,7 @@ export class ageSystemItem extends Item {
          */
         const owner = this.actor;
         if (!owner) {return false;}
-        let ablCode = (rollType === "fatigue") ? "will" : "no-abl";
+        let ablCode = (rollType === "fatigue") ? "will" : this.data.data.useAbl;
 
         if (rollType === null) {
             switch (this.type) {
