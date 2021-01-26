@@ -15,6 +15,9 @@
 
     "SETTINGS.useFatigue": "Utiliser Fatigue",
     "SETTINGS.useFatigueHint": "Afficher le bloc Fatigue pour le suivi et l'option pour la fatigue des Pouvoirs et Sorts",
+	
+	"SETTINGS.useConditions": "Utiliser Affections",
+    "SETTINGS.useConditionsHint": "Afficher une section Affections - les modificateurs de jets de dés ne sont pas implémentés",
 
     "SETTINGS.usePowerPoints": "Utiliser la Mana",
     "SETTINGS.usePowerPointsHint": "Afficher le bloc Mana pour le suivi et l'option pour la mana des Pouvoirs et Sorts",
@@ -76,7 +79,8 @@
         "WARNING": {
             "duplicatedFocus": "Ajout de compétence refusé - le joueur dispose déjà de cette compétence",
 			"selectTokenMacro": "Sélectionner un token pour lancer la macro",
-            "actorDontHaveValidItem": "Le personnage sélectionné n'a pas d'objet correspondant dans la macro."
+            "actorDontHaveValidItem": "Le personnage sélectionné n'a pas d'objet correspondant dans la macro.",
+			"selectOnlyOneTarget": "Choisissez une seule cible pour l'attaque."
 		},
         
 		"chatCard": {
@@ -86,6 +90,36 @@
         },
 		
         "testThreshold": "Seuil de réussite",
+		
+		"conditionsName": "Affections",
+        "conditions": {
+            "blinded": "Aveuglé",
+            "blindedDesc": "Le personnage ne peut pas voir et échoue automatiquement les jets de compétences basés sur la vision tels que Percpetion (Vue)",
+            "deafened": "Sourd",
+            "deafenedDesc": "Le personnage ne peut pas entendre et échoue automatiquement les jets de compétences basés sur l'ouïe tels que Percpetion (Ouïe)",
+            "exhausted": "Epuisé",
+            "exhaustedDesc": "Le personnage est très fatigué. Sa vitesse est réduite de moitié et il nepeut pas utiliser les actions Courir et Charger. S'il reçoit une nouvelle altération Fatigué ou Epuisé, il est alors impuissant.",
+            "fatigued": "Fatigué",
+            "fatiguedDesc": "Le personnage est fatigué et ne peut pas utiliser l'action Courir ou Charger. S'il reçoit une autre affection Fatigué il devient Epuisé.",
+            "freefalling": "Chute Libre",
+            "freefallingDesc": "Le personnage est effectivement en apesanteur dans un environnement de microgravité ou de chute libre. Il peut seulement se déplacer à l’aide de poignées, d’une surface à pousser, ou d’un certain type de poussée. Une fois qu’il se déplace, il continue de se déplacer avec la même vitesse et la même trajectoire, à moins qu’il ne prenne des mesures pour s'arrêter ou modifier son mouvement.",
+            "helpless": "Impuissant",
+            "helplessDesc": "Le personnage ne peut rien faire. Il ne peut utiliser aucune action",
+            "hindred": "Entravé",
+            "hindredDesc": "La vitesse du personnage est réduite de moitié (arrondi à l'inférieur). Il ne peut pas utiliser les actions Courir et Charger",
+            "prone": "Position couchée",
+            "proneDesc": "Le personnage est couché sur le sol. Il ne peut pas utiliser l'action Courir ou Charger puisqu'il ne peut se déplacer qu'en rampant. Se relever requiert une action Se déplacer et consomme la moitié de la vitesse du personnage. Contre les personnages en position couchée, les attaques de mêlée ont un bonus de +1 et les attaques à distance un malus de -1.",
+            "restrained": "Immobilisé",
+            "restrainedDesc": "Le personnage voit sa vitesse réduite à 0 et il ne peut plus bouger. L'affection Immobilisé peut induire une perte d'autres actions en fonction de la cause de l'affection",
+            "injured": "Blessé",
+            "injuredDesc": "Le personnage est touché. Il a une pénalité de -1 à tous ses tests et devient Fatigué, ne pouvant plus utiliser les actions Charger et Courir. Un personnage blessé qui reçoit une nouvelle blessure devient invalide.",
+            "wounded": "Invalide",
+            "woundedDesc": "Le personnage est sévèrement blessé. Il a une pénalité de -2 à tous ses tests et devient Epuisé, sa vitesse est réduite de moitié ne pouvant plus utiliser les actions Charger et Courir. Un personnage invalide qui reçoit une nouvelle affection Blessé ou Invalide devient mourrant.",
+            "unconscious": "Inconscient",
+            "unconsciousDesc": "Le personnage n’est pas conscient de son environnement ou du passage du temps. Le personnage tombe à terre (couché au sol) et est impuissant, incapable d'utiliser la moindre action.",
+            "dying": "Mourant",
+            "dyingDesc": "Le personnage est en danger de mort. Il perd 1 point de Constitution à chaque tour au début de son tour. Quand sa Constitution atteint -3, le personnage meurt. Une réussite de premiers soins appliqués à un personnage mourant stabilise son état, le rendant impuissant, inconscient et invalide à la place."
+        },
 
         "power": "Pouvoir",
         "weapon": "Arme",
@@ -186,14 +220,14 @@
         "exhausted": "Epuisé",
         "dying": "Mourant",
 
-        "powerPoints": "Pionts de Mana",
+        "powerPoints": "Points de Mana",
         "powerPointsIndex": "PM",
         "name": "Nom",
         "features": "Capacité Spéciale",
         "toughness": "Résistance",
         "maximum": "Max",
         "minimum": "Min",
-        "extraordinaryPowers": "Pouvoirs Extraordinaires",
+        "extraordinaryPowers": "Sorts & Pouvoirs Spéciaux",
         "talentContainer": "Talents & Specialisation",
         "weaponContainer": "Armes",
         "focusContainer": "Compétences",
@@ -220,6 +254,8 @@
         "tenMinutes": "10 Minutes",
         "twentyMinutes": "20 Minutes",
         "oneHour": "1 Heure",
+		"fourHours": "4 Heures",
+        "twelveHours": "12 Heures",
 
         "rof": {
             "rof": "ROF",
@@ -276,7 +312,8 @@
             "maxPowerPoints": "PM Max",
             "powerForce": "Puissance magique",
             "aimMnv": "Viser",
-            "armorPenalty": "Pénalité d'armure"
+            "armorPenalty": "Pénalité d'armure",
+			"speed": "Vitesse"
         },
 
         "stuntsContainer": "Prouesses",
@@ -307,6 +344,21 @@
         "thisItemDmgBns": "Bonus Objets",
         "rollFatigue": "Jet de fatigue",
         "blindRollSomeone": "Vous avez fait un jet caché vers le MJ",
-        "activationMod": "Bonus Jets"
+        "activationMod": "Bonus Jets",
+		"success": "Réussite",
+        "miss": "Echec",
+
+        "ageRollOptions": "Options",
+        "roll": "Jet de dés",
+        "cancel": "Annule",
+
+        "setAgeRollMod": "Modificateur de jet",
+        "setAgeRollAtkDmgTradeOff": "Echange Attaque Dommage Off",
+        "setAgeRollTN": "ND Jet",
+
+        "setDmgExtraDice": "Dé bonus",
+        "setStuntDmg": "Dégats étourdissement",
+        "setRollGeneralMod": "Modificateur de dégats",
+        "penaltyToDamage": "Pénalité convertie en dégats"
     }
 }
