@@ -356,6 +356,7 @@
         "setAgeRollAtkDmgTradeOff": "Echange Attaque Dommage Off",
         "setAgeRollTN": "ND Jet",
 
+        "damageOptions": "Options de Dégats",
         "setDmgExtraDice": "Dé bonus",
         "setStuntDmg": "Dégats étourdissement",
         "setRollGeneralMod": "Modificateur de dégats",
