@@ -46,6 +46,6 @@
     "minimumCoreVersion": "0.7.9",
     "compatibleCoreVersion": "0.7.9",
     "url": "https://github.com/vkdolea/age-system",
-    "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/v0.2.0/system.json",
+    "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",
     "download": "https://github.com/vkdolea/age-system/archive/v0.2.0.zip"
 }
