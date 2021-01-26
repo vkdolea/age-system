@@ -1,6 +1,0 @@
-{{#if (or (eq config.wealthMode 'currency') (eq config.wealthMode 'coins'))}}
-<label>{{localize "age-system.item.cost"}}</label>
-{{else}}
-<label>{{localize "age-system.item.purchaseTN"}}</label>
-{{/if}}
-<input type="text" {{#if inChat}}disabled{{/if}} name="data.cost" value="{{data.cost}}" data-dtype="String" />
