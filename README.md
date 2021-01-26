@@ -68,11 +68,11 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
-### v0.3.1
+### v0.3.1 [2021-01-26]
 #### Fixed
 - Incorrect link on system.json preventing system to update automatically using FoundryVTT software.
 
-### v0.3.0
+### v0.3.0 [2021-01-25]
 #### Added
 - Press Alt key when rolling a roll check to bring menu with options to set TN, add modifier and Attack to Damage trade off (this one only when rolling weapon attacks).
 - When targeting a token and rolling an weapon attack, roll will be check versus target's Defense (attack selecting multiple tokens warns user to select only one token to attack).
@@ -86,19 +86,19 @@ Here the description of each one of the Modificators:
 - Styling on Power sheet causing PP cost field to disapear.
 - Data migration issues when preventing Speed mod to be include to some items.
 
-### v0.2.4 - 2021-01-21
+### v0.2.4 [2021-01-21]
 #### Added
 - French localization by Discord user *Imposator#8090*.
 #### Fixed
 - Version issue on 0.2.3 causing it to behave as 0.2.2.
 
-### v0.2.3 - 2021-01-20
+### v0.2.3 [2021-01-20]
 #### Added
 - When selecting a input field, the text will be focused for quick edit.
 #### Fixed
 - Issue causing worlds created on versions 0.2.1 and earlier not compatible to version 0.2.2.
 
-### v0.2.2 - 2021-01-17
+### v0.2.2 [2021-01-17]
 #### Added
 - Added Speed Modificator.
 - Added Settings option to include Conditions (actual rolls and characteristics modificators not included).
@@ -106,11 +106,11 @@ Here the description of each one of the Modificators:
 #### Fixed
 - Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower.
 - Fixed "yards" abbreviation to "yd" on grid map.
-### v0.2.1 - 2021-01-10
+### v0.2.1 [2021-01-10]
 #### Fixed
 - Focus context menu (to edit, remove, show and roll with another Ability) is working again.
 
-### v0.2.0 - 2021-01-09
+### v0.2.0 [2021-01-09]
 #### Added
 - Header from chat cards when rolling items shows different text.
 - Option to use GP / SP / CP as a wealth type.
@@ -121,7 +121,7 @@ Here the description of each one of the Modificators:
 - Removed unnecessary arguments from ageRollCheck.
 - When equip/activate icon is clicked on character sheet, only this element is updated on Item object and not the whole entity.
 
-### v0.1.1 - 2021-01-05
+### v0.1.1 [2021-01-05]
 #### Fixed
 - Minimum and compatible versions updated on system.json.
 
