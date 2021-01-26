@@ -68,6 +68,10 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
+### v0.3.1
+#### Fixed
+- Incorrect link on system.json preventing system to update automatically using FoundryVTT software.
+
 ### v0.3.0
 #### Added
 - Press Alt key when rolling a roll check to bring menu with options to set TN, add modifier and Attack to Damage trade off (this one only when rolling weapon attacks).
