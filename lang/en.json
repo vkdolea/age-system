@@ -321,6 +321,7 @@
         "item": {
             "newItem": "New Item",
             "damage": "Damage",
+            "healing": "Healing",
             "damageType": "Damage Type",
             "minRange": "Minimum Range",
             "maxRange": "Maximum Range",
@@ -340,6 +341,7 @@
             "force": "Force"
         },
         "rollDamage": "Roll Damage",
+        "rollHealing": "Roll Healing",
         "itemDmgMod": "General Bonus",
         "thisItemDmgBns": "Item Bonus",
         "rollFatigue": "Roll Fatigue",

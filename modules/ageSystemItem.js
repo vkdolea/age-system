@@ -1,7 +1,7 @@
 import * as Dice from "./dice.js";
 
 export class ageSystemItem extends Item {
-
+    
     /** @override */
     prepareData() {
         
@@ -11,33 +11,42 @@ export class ageSystemItem extends Item {
         };
         if (!this.data.name) this.data.name = "New " + this.entity;       
         this.data = duplicate(this._data);
-
+        
         const itemData = this.data;
         const data = itemData.data;
         const itemType = itemData.type;
+
         data.nameLowerCase = itemData.name.toLowerCase();
-        data.useFocusActorId = null;
+        data.useFocusActorId = this._idFocusToUse(itemType, data.useFocus);
+        data.hasDamage = this._hasDamage(itemType);
+        data.hasHealing = this._hasHealing(itemType);
+        data.hasFatigue = this._hasFatigue();
+        data.hasModificators = this._hasModificators();
+    
+        // Adds reference to in-use color scheme
+        data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
 
         // Adds value to represent portion added to dice on damage roll
-        if (this.isOwned && this.hasDamage()) {
+        if (this.isOwned && this.hasDamage) {
             if (data.dmgAbl !== "no-abl") {
                 data.ablDamageValue = this.actor.data.data.abilities[data.dmgAbl].total;
             }
         };
 
+        // This was transformed into the method _idFocusTouse()
+        //
         // Identify related Weapon/Power Focus ID owned by Actor
-        if (this.isOwned && (itemType === "weapon" || itemType === "power")) {
-            const owner = this.actor;
-            const focusOwned = owner.data.items.filter(i => i.type === "focus");
-            const focusArr = focusOwned.filter(i => i.name.toLowerCase() === data.useFocus.toLowerCase());
-            // Originalmente:
-            // const focusArr = focusOwned.filter(i => i.data.nameLowerCase === data.useFocus.toLowerCase());
+        // if (this.isOwned && (itemType === "weapon" || itemType === "power")) {
+        //     const owner = this.actor;
+        //     const focusOwned = owner.data.items.filter(i => i.type === "focus");
+        //     const focusArr = focusOwned.filter(i => i.name.toLowerCase() === data.useFocus.toLowerCase());
+        //     // Originalmente:
+        //     // const focusArr = focusOwned.filter(i => i.data.nameLowerCase === data.useFocus.toLowerCase());
 
-            if (focusArr.length === 1) {
-                data.useFocusActorId = focusArr[0]._id;
-            };
-
-        };
+        //     if (focusArr.length === 1) {
+        //         data.useFocusActorId = focusArr[0]._id;
+        //     };
+        // };
 
         // Data preparation for Power item type
         if (itemType === "power") {
@@ -45,36 +54,39 @@ export class ageSystemItem extends Item {
             const useFatigue = game.settings.get("age-system", "useFatigue");
             if (!useFatigue) {data.useFatigue = false};
 
+            // Calculate Item Force
             data.itemForce = 10;
-            if (data.itemMods.powerForce.isActive) {
-                data.itemForce += data.itemMods.powerForce.value;
-            };
-
+            if (data.itemMods.powerForce.isActive) {data.itemForce += data.itemMods.powerForce.value};
             // Adds ability to itemForce
             if (this.actor) {
-                data.itemForce += this.actor.data.data.abilities.will.total;
-                data.itemForce += this.ownerFocusValue();
+                if (data.itemForceAbl !== "no-abl") {data.itemForce += this.actor.data.data.abilities[data.itemForceAbl].total};
+                data.itemForce += this._ownerFocusValue();
             };
 
-
-
-            if (data.inputFatigueTN === false) {
-                data.fatigueTN = 9 + Math.floor(Number(data.powerPointCost)/2);
-            }
+            // Calculate Fatigue TN if it is not a manual input
+            if (data.inputFatigueTN === false) {data.fatigueTN = 9 + Math.floor(Number(data.powerPointCost)/2)};
             
         }
-
-        data.hasDamage = this.hasDamage();
-        data.hasFatigue = this.hasFatigue();
-        data.hasModificators = this.hasModificators();
-
-        // Adds reference to in-use color scheme
-        data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
 
         this.prepareEmbeddedEntities();        
     };
 
-    hasModificators() {
+    _idFocusToUse(itemType, useFocus) {
+        if (this.isOwned && (itemType === "weapon" || itemType === "power")) {
+            const owner = this.actor;
+            const focusOwned = owner.data.items.filter(i => i.type === "focus");
+            const focusArr = focusOwned.filter(i => i.name.toLowerCase() === useFocus.toLowerCase());
+            // Originalmente:
+            // const focusArr = focusOwned.filter(i => i.data.nameLowerCase === data.useFocus.toLowerCase());
+
+            if (focusArr.length === 1) {
+                return focusArr[0]._id;
+            } else return null;
+
+        } else return null;
+    }
+
+    _hasModificators() {
         const inCheckMods = this.data.data.itemMods;
         for (const key in inCheckMods) {
             if (inCheckMods.hasOwnProperty(key) && inCheckMods[key].isActive) {
@@ -85,15 +97,22 @@ export class ageSystemItem extends Item {
     };    
 
     // Check if Item can cause damage
-    hasDamage() {
-        const type = this.type;
+    _hasDamage(type) {
         if (type === "weapon") {return true};
+        // if (!this.data.data.causeDamage) {return false};
         if (type === "power" && this.data.data.causeDamage === true) {return true};
         return false;
     };
 
+    // Check if Item heals
+    _hasHealing(type) {
+        // if (!this.data.data.causeHealing) return false
+        if (type === "power" && this.data.data.causeHealing === true) {return true};
+        return false;
+    }
+
     // Check if Item requires Fatigue roll to be used
-    hasFatigue() {
+    _hasFatigue() {
         const type = this.type;
         if (type === "power") {return this.data.data.useFatigue};
         return false;
@@ -101,7 +120,7 @@ export class ageSystemItem extends Item {
 
     // Rolls damage for the item
     rollDamage(event, stuntDie = null, addFocus = false, atkDmgTradeOff = 0) {
-        if (!this.hasDamage()) {return false};
+        if (!this.data.data.hasDamage && !this.data.data.hasHealing) {return false};
         return Dice.itemDamage(event, this, stuntDie, addFocus, atkDmgTradeOff);
     };
 
@@ -165,7 +184,7 @@ export class ageSystemItem extends Item {
     /** Returns owner's Focus value, base on Item's useFocus property
      * TODO = figure out how/if derived data can be input to another Item
      */
-    ownerFocusValue() {
+    _ownerFocusValue() {
         const itemData = this.data;
         const data = itemData.data;
         const owner = this.actor;
@@ -199,7 +218,7 @@ export class ageSystemItem extends Item {
     };
 
     // Returns owned Focus Item entity used to activate this item - false otherwise
-    ownerFocusEntity() {
+    _ownerFocusEntity() {
         const itemData = this.data;
         const data = itemData.data;
         const owner = this.actor;
@@ -243,7 +262,7 @@ export class ageSystemItem extends Item {
         return ChatMessage.create(chatData);
     };
 
-    hasBonus() {
+    _hasBonus() {
         if (this.data.data.bonuses.length < 1) {return false};
         return true;
     };

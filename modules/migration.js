@@ -157,6 +157,7 @@ export const migrateItemData = function(item) {
   const updateData = {};
   _addItemModSpeed(item, updateData);
   _addExtraPowerData(item, updateData);
+  _addItemForceAbl(item, updateData)
   return updateData;
 };
 
@@ -233,7 +234,6 @@ function _addItemModSpeed(item, updateData) {
 }
 /* -------------------------------------------- */
 
-/* -------------------------------------------- */
 /**
  * Add extra Power elements to address resist Test
  * and half damage when spell is resisted
@@ -256,3 +256,17 @@ function _addExtraPowerData(item, updateData) {
 
   return updateData;
 }
+
+/**
+ * Add itemForceAbl field for powers
+ * @private
+ */
+function _addItemForceAbl(item, updateData) {
+  if (item.type !== "power") return updateData;
+  if (item.data.itemForceAbl) return updateData;
+
+  updateData["data.itemForceAbl"] = "will";
+
+  return updateData
+}
+/* -------------------------------------------- */

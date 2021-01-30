@@ -6,45 +6,79 @@
     
 </div>
 {{else}}
-<div class="flexcol cause-damage">
-    <label>{{localize "age-system.item.damage"}}</label>
-    <div class="flexrow">
-        <div class="flexrow damage-dice-field">
-            <input type="number" name="data.nrDice" value="{{data.nrDice}}" data-dtype="Number" />
-            <select name="data.diceType" class="dice-size">
-                {{#select data.diceType}}
-                <option value="6">{{localize "age-system.settings.d6"}}</option>
-                <option value="3">{{localize "age-system.settings.d3"}}</option>
+<div class="flexrow">
+    <div class="flexcol cause-damage">
+        {{#if data.hasDamage}}
+        <label>{{localize "age-system.item.damage"}}</label>
+        {{/if}}
+        {{#if data.hasHealing}}
+        <label>{{localize "age-system.item.healing"}}</label>
+        {{/if}}
+        <div class="flexrow">
+            <div class="flexrow damage-dice-field">
+                <input type="number" name="data.nrDice" value="{{data.nrDice}}" data-dtype="Number" />
+                <select name="data.diceType" class="dice-size">
+                    {{#select data.diceType}}
+                    <option value="6">{{localize "age-system.settings.d6"}}</option>
+                    <option value="3">{{localize "age-system.settings.d3"}}</option>
+                    {{/select}}
+                </select>
+                <span>{{localize "age-system.settings.plusSign"}}</span>
+                <input type="number" name="data.extraValue" value="{{data.extraValue}}" data-dtype="Number" />
+                <span>{{localize "age-system.settings.plusSign"}}</span>
+                <select name="data.dmgAbl">
+                    {{#select data.dmgAbl}}
+                    <option value="no-abl">—</option>
+                    {{#each config.abilities as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+        <div class="flexrow">
+            <select name="data.dmgType">
+                {{#select data.dmgType}}
+                {{#each config.damageType as |name type|}}
+                <option value="{{type}}">{{localize name}}</option>
+                {{/each}}
                 {{/select}}
             </select>
-            <span>{{localize "age-system.settings.plusSign"}}</span>
-            <input type="number" name="data.extraValue" value="{{data.extraValue}}" data-dtype="Number" />
-            <span>{{localize "age-system.settings.plusSign"}}</span>
-            <select name="data.dmgAbl">
-                {{#select data.dmgAbl}}
-                <option value="no-abl">—</option>
-                {{#each config.abilities as |name type|}}
-                <option value="{{type}}">{{localize name}}</option>
+            <select name="data.dmgSource">
+                {{#select data.dmgSource}}
+                {{#each config.damageSource as |name source|}}
+                <option value="{{source}}">{{localize name}}</option>
                 {{/each}}
                 {{/select}}
             </select>
         </div>
     </div>
-    <div class="flexrow">
-        <select name="data.dmgType">
-            {{#select data.dmgType}}
-            {{#each config.damageType as |name type|}}
-            <option value="{{type}}">{{localize name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-        <select name="data.dmgSource">
-            {{#select data.dmgSource}}
-            {{#each config.damageSource as |name source|}}
-            <option value="{{source}}">{{localize name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
+    {{#if (and (eq itemType "power") data.hasTest)}}
+    <div class="flexcol cause-damage">
+        <label>{{localize "age-system.item.damageResisted"}}</label>
+        <div class="flexrow">
+            <div class="flexrow damage-dice-field">
+                <input type="number" name="data.damageResisted.nrDice" value="{{data.damageResisted.nrDice}}" data-dtype="Number" />
+                <select name="data.damageResisted.diceType" class="dice-size">
+                    {{#select data.damageResisted.diceType}}
+                    <option value="6">{{localize "age-system.settings.d6"}}</option>
+                    <option value="3">{{localize "age-system.settings.d3"}}</option>
+                    {{/select}}
+                </select>
+                <span>{{localize "age-system.settings.plusSign"}}</span>
+                <input type="number" name="data.damageResisted.extraValue" value="{{data.damageResisted.extraValue}}" data-dtype="Number" />
+                <span>{{localize "age-system.settings.plusSign"}}</span>
+                <select name="data.damageResisted.dmgAbl">
+                    {{#select data.damageResisted.dmgAbl}}
+                    <option value="no-abl">—</option>
+                    {{#each config.abilities as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
     </div>
-</div>                
+    {{/if}}      
+</div>
 {{/if}}

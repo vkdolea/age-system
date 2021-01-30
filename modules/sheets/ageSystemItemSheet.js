@@ -80,8 +80,9 @@ export default class ageSystemItemSheet extends ItemSheet {
             };
 
             if (this.item.data.type === "power") {
-                html.find(".toggle-damage").click(this._onToggleDamage.bind(this))
-                html.find(".toggle-fatigue").click(this._onToggleFatigue.bind(this))
+                html.find(".toggle-damage").click(this._onToggleDamage.bind(this));
+                html.find(".toggle-healing").click(this._onToggleHealing.bind(this));
+                html.find(".toggle-fatigue").click(this._onToggleFatigue.bind(this));
             };
 
             // Enable field to be focused when selecting it
@@ -100,7 +101,16 @@ export default class ageSystemItemSheet extends ItemSheet {
 
     _onToggleDamage(event) {
         const toggleDmg = !this.item.data.data.causeDamage;
-        this.item.update({"data.causeDamage": toggleDmg});
+        this.item.update({"data.causeDamage": toggleDmg}).then(changed => {
+            if (toggleDmg === true) this.item.update({"data.causeHealing": false});
+        });
+    };
+
+    _onToggleHealing(event) {
+        const toggleHealing = !this.item.data.data.causeHealing;
+        this.item.update({"data.causeHealing": toggleHealing}).then(changed => {
+            if (toggleHealing === true) this.item.update({"data.causeDamage": false});
+        });
     };
 
     _onToggleFatigue(event) {

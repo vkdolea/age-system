@@ -411,7 +411,13 @@ export async function itemDamage(
     if (item.isOwned) {
 
         // Adds up Flavor text for item damage type
-        messageData.flavor += ` | ${game.i18n.localize(`age-system.${item.data.data.dmgType}`)} | ${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}`;
+        if (item.data.data.hasDamage) {
+            messageData.flavor += ` | ${game.i18n.localize(`age-system.${item.data.data.dmgType}`)} | ${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}`;
+        };
+        // Add Healing Flavor text if applicable
+        if (item.data.data.hasHealing) {
+            messageData.flavor += ` | ${game.i18n.localize(`age-system.item.healing`)}`;
+        };
 
         // Adds owner's Ability to damage
         if (dmgAbl !== null && dmgAbl !== "no-abl") {
