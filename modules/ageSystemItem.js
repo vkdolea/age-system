@@ -34,7 +34,7 @@ export class ageSystemItem extends Item {
                 }
             }
             if (data.damageResisted) {
-                if (data.damageResisted.dmgAbl !== "no-abl") {
+                if (data.damageResisted.dmgAbl !== "") {
                     data.damageResisted.ablDamageValue = this.actor.data.data.abilities[data.damageResisted.dmgAbl].total;
                 }                
             }
@@ -51,7 +51,9 @@ export class ageSystemItem extends Item {
             if (data.itemMods.powerForce.isActive) {data.itemForce += data.itemMods.powerForce.value};
             // Adds ability to itemForce
             if (this.actor) {
-                if (data.itemForceAbl !== "no-abl") {data.itemForce += this.actor.data.data.abilities[data.itemForceAbl].total};
+                if ((data.itemForceAbl !== "") && (data.itemForceAbl !== "no-abl")) {
+                    data.itemForce += this.actor.data.data.abilities[data.itemForceAbl].total;
+                };
                 data.itemForce += this._ownerFocusValue();
             };
 

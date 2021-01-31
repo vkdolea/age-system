@@ -156,9 +156,9 @@ export const migrateActorData = function(actor) {
 export const migrateItemData = function(item) {
   const updateData = {};
   _addItemModSpeed(item, updateData);
+  _addItemValidResistedDmgAbl(item, updateData);
   _addExtraPowerData(item, updateData);
   _addItemForceAbl(item, updateData);
-  _addItemValidResistedDmgAbl(item, updateData);
   return updateData;
 };
 
@@ -264,11 +264,12 @@ function _addExtraPowerData(item, updateData) {
  */
 function _addItemValidResistedDmgAbl(item, updateData) {
   if (item.type !== "power") return updateData;
-  if (item.data.damageResisted.dmgAbl !== "") return updateData;
-
-  updateData["data.damageResisted.dmgAbl"] = "will";
-
-  return updateData
+  if (item.data.damageResisted) {
+    if (!item.data.damageResisted.dmgAbl) {
+      updateData["data.damageResisted.dmgAbl"] = "will";  
+    }
+  }
+  return updateData;
 }
 /* -------------------------------------------- */
 
