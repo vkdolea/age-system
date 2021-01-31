@@ -1,6 +1,10 @@
 {{#if inChat}}
 <div class="flexcol flex-justify-center damage-formula">
-    <label>{{localize "age-system.item.damage"}}</label>
+    
+    <label>
+        {{#if data.hasDamage}} {{localize "age-system.item.damage"}} {{/if}}
+        {{#if data.hasHealing}} {{localize "age-system.item.healing"}} {{/if}}
+    </label>
     <p class="in-chat-text">{{concat data.nrDice "d" data.diceType "+" data.extraValue}}{{#when data.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.ablDamageValue}}{{/when}}</p>
     <p class="in-chat-text">{{localize (concat "age-system." data.dmgType)}} | {{localize (concat "age-system." data.dmgSource)}}</p>
     {{#if data.hasTest}}
