@@ -83,6 +83,7 @@ export default class ageSystemItemSheet extends ItemSheet {
                 html.find(".toggle-damage").click(this._onToggleDamage.bind(this));
                 html.find(".toggle-healing").click(this._onToggleHealing.bind(this));
                 html.find(".toggle-fatigue").click(this._onToggleFatigue.bind(this));
+                html.find(".toggle-resist").click(this._onToggleResistTest.bind(this));
             };
 
             // Enable field to be focused when selecting it
@@ -116,7 +117,12 @@ export default class ageSystemItemSheet extends ItemSheet {
     _onToggleFatigue(event) {
         const toggleFtg = !this.item.data.data.useFatigue;
         this.item.update({"data.useFatigue": toggleFtg});
-    };    
+    };
+    
+    _onToggleResistTest(event) {
+        const toggleTest = !this.item.data.data.hasTest;
+        this.item.update({"data.hasTest": toggleTest});
+    };
     
     // Adds an * in front of the owned Focus name whenever the user types a name of another owned Focus
     // => Actors are not allowed to have more than 1 Focus with the same name

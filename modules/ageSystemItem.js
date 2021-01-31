@@ -27,9 +27,16 @@ export class ageSystemItem extends Item {
         data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
 
         // Adds value to represent portion added to dice on damage roll
-        if (this.isOwned && this.hasDamage) {
-            if (data.dmgAbl !== "no-abl") {
-                data.ablDamageValue = this.actor.data.data.abilities[data.dmgAbl].total;
+        if (this.isOwned) {
+            if (data.dmgAbl) {
+                if (data.dmgAbl !== "no-abl") {
+                    data.ablDamageValue = this.actor.data.data.abilities[data.dmgAbl].total;
+                }
+            }
+            if (data.damageResisted) {
+                if (data.damageResisted.dmgAbl !== "no-abl") {
+                    data.damageResisted.ablDamageValue = this.actor.data.data.abilities[data.damageResisted.dmgAbl].total;
+                }                
             }
         };
 

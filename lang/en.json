@@ -338,7 +338,9 @@
             "equiped": "Equiped",
             "minStr": "Min STR",
             "cast": "Cast",
-            "force": "Force"
+            "force": "Force",
+            "resistedEffect": "Resisted Effect",
+            "testResist": "Resist Test"
         },
         "rollDamage": "Roll Damage",
         "rollHealing": "Roll Healing",

@@ -157,7 +157,8 @@ export const migrateItemData = function(item) {
   const updateData = {};
   _addItemModSpeed(item, updateData);
   _addExtraPowerData(item, updateData);
-  _addItemForceAbl(item, updateData)
+  _addItemForceAbl(item, updateData);
+  _addItemValidResistedDmgAbl(item, updateData);
   return updateData;
 };
 
@@ -252,10 +253,24 @@ function _addExtraPowerData(item, updateData) {
   updateData["data.damageResisted.nrDice"] = 1;
   updateData["data.damageResisted.diceType"] = 6;
   updateData["data.damageResisted.extraValue"] = 0;
-  updateData["data.damageResisted.dmgAbl"] = "";
+  updateData["data.damageResisted.dmgAbl"] = "will";
 
   return updateData;
 }
+
+/**
+ * Fix imported values for Ability to Resist Power
+ * @private
+ */
+function _addItemValidResistedDmgAbl(item, updateData) {
+  if (item.type !== "power") return updateData;
+  if (item.data.damageResisted.dmgAbl !== "") return updateData;
+
+  updateData["data.damageResisted.dmgAbl"] = "will";
+
+  return updateData
+}
+/* -------------------------------------------- */
 
 /**
  * Add itemForceAbl field for powers

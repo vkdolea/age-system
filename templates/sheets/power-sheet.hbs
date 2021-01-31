@@ -13,24 +13,24 @@
 
                 {{#if (ne inChat true)}}
                 {{!-- Select Damage and Fatigue Options --}}
-                <div class="flexcol power-type-control flex-justify-between">
+                <div class="power-type-control">
                     <a class="toggle-damage colorset-second-tier {{#unless data.hasDamage}}not-equiped{{/unless}}" title="{{localize "age-system.rollDamage"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="fas fa-fist-raised"></i>
                         </div>
                     </a>
-     
+    
                     <a class="toggle-healing colorset-second-tier {{#unless data.hasHealing}}not-equiped{{/unless}}" title="{{localize "age-system.rollHealing"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="fas fa-heart"></i>
                         </div>
                     </a>
 
-                    {{!-- <a class="toggle-resist colorset-second-tier {{#unless data.hasTest}}not-equiped{{/unless}}" title="{{localize "age-system.resistTest"}}">
+                    <a class="toggle-resist colorset-second-tier {{#unless data.hasTest}}not-equiped{{/unless}}" title="{{localize "age-system.rollHealing"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
-                            <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+                            <i class="far fa-dot-circle"></i>
                         </div>
-                    </a> --}}
+                    </a>
 
                     <a class="toggle-fatigue flexrow use-fatigue-true colorset-second-tier {{#unless data.hasFatigue}}not-equiped{{/unless}}" title="{{localize "age-system.rollFatigue"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
@@ -44,7 +44,6 @@
                 {{> "systems/age-system/templates/partials/ability-focus-select.hbs"}}
 
                 {{!-- Power Point Cost --}}
-
                 {{#unless (and data.inputFatigueTN data.hasFatigue)}}
                 {{#unless (and inChat data.hasFatigue)}}
                 <div class="flexcol">
@@ -115,6 +114,36 @@
                     </div>
                     {{/if}}             
                 </div>
+
+                {{!-- Resist Test --}}
+                {{#if data.hasTest}}
+                {{#if inChat}}
+                <div class="flexcol flex-align-center">
+                    <label style="white-space: nowrap;">{{localize "age-system.item.testResist"}}</label>
+                    <p style="white-space: nowrap;">{{localize (concat "age-system." data.testAbl)}} ({{data.testFocus}})</p>
+                </div>
+                {{else}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.item.testResist"}}</label>
+                    {{!-- Ability to Resist Power --}}
+                    <select name="data.testAbl" class="data-input">
+                        {{#select data.testAbl}}
+                        {{#each config.abilities as |name type|}}
+                        <option value="{{type}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    {{!-- Focus to Resist Power --}}
+                    <input name="data.testFocus" class="data-input" type="text" value="{{data.testFocus}}" placeholder="{{localize "age-system.focus"}}" list="{{item.type}}-{{item._id}}-list"/>
+                    <datalist id="{{item.type}}-{{item._id}}-list">
+                        <option value=""></option>
+                        {{#each config.focus as |focus|}}
+                        <option value="{{focus.name}}"></option>
+                        {{/each}}
+                    </datalist>
+                </div>
+                {{/if}}
+                {{/if}}
 
                 {{!-- Power Damage/Heal --}}
                 {{#if (or data.causeDamage data.causeHealing)}}

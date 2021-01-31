@@ -61,6 +61,27 @@
             margin-right: 4px;
         }
 
+        .power-type-control {
+            display: grid;
+            grid-template-columns: 20px 20px;
+            grid-template-rows: 30px 30px;
+            grid-template-areas:
+                "damage heal"
+                "resist fatigue";
+            .toggle-damage {
+                grid-area: "damage";
+            }
+            .toggle-healing {
+                grid-area: "heal";
+            }
+            .toggle-resist {
+                grid-area: "resist";
+            }
+            .toggle-fatigue {
+                grid-area: "fatigue";
+            }
+        }
+
         input[name="data.shortDesc"].long-text {
             max-width: 100%;
             width: 100%;

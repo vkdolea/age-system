@@ -2,11 +2,14 @@
 <div class="flexcol flex-justify-center damage-formula">
     <label>{{localize "age-system.item.damage"}}</label>
     <p class="in-chat-text">{{concat data.nrDice "d" data.diceType "+" data.extraValue}}{{#when data.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.ablDamageValue}}{{/when}}</p>
-    <p class="in-chat-text">{{localize (concat "age-system." data.dmgType)}} | {{localize (concat "age-system."data.dmgSource)}}</p>
-    
+    <p class="in-chat-text">{{localize (concat "age-system." data.dmgType)}} | {{localize (concat "age-system." data.dmgSource)}}</p>
+    {{#if data.hasTest}}
+    <label>{{localize "age-system.item.resistedEffect"}}</label>
+    <p class="in-chat-text">{{concat data.damageResisted.nrDice "d" data.damageResisted.diceType "+" data.damageResisted.extraValue}}{{#when data.damageResisted.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.damageResisted.ablDamageValue}}{{/when}}</p>
+    {{/if}}
 </div>
 {{else}}
-<div class="flexrow">
+<div class="flexcol">
     <div class="flexcol cause-damage">
         {{#if data.hasDamage}}
         <label>{{localize "age-system.item.damage"}}</label>
@@ -53,9 +56,9 @@
             </select>
         </div>
     </div>
-    {{#if (and (eq itemType "power") data.hasTest)}}
+    {{#if data.hasTest}}
     <div class="flexcol cause-damage">
-        <label>{{localize "age-system.item.damageResisted"}}</label>
+        <label>{{localize "age-system.item.resistedEffect"}}</label>
         <div class="flexrow">
             <div class="flexrow damage-dice-field">
                 <input type="number" name="data.damageResisted.nrDice" value="{{data.damageResisted.nrDice}}" data-dtype="Number" />

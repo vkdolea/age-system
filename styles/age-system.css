@@ -49,6 +49,64 @@
   object-fit: contain;
   margin-right: 4px;
 }
+.age-system.item .focus .power-type-control,
+.age-system.item .power .power-type-control,
+.age-system.item .talent .power-type-control,
+.age-system.item .weapon .power-type-control,
+.age-system.item .equipment .power-type-control,
+.age-system.item .stunts .power-type-control,
+.age-system.item .honorifics .power-type-control,
+.age-system.item .relationship .power-type-control,
+.age-system.item .membership .power-type-control {
+  display: grid;
+  grid-template-columns: 20px 20px;
+  grid-template-rows: 30px 30px;
+  grid-template-areas: "damage heal" "resist fatigue";
+}
+.age-system.item .focus .power-type-control .toggle-damage,
+.age-system.item .power .power-type-control .toggle-damage,
+.age-system.item .talent .power-type-control .toggle-damage,
+.age-system.item .weapon .power-type-control .toggle-damage,
+.age-system.item .equipment .power-type-control .toggle-damage,
+.age-system.item .stunts .power-type-control .toggle-damage,
+.age-system.item .honorifics .power-type-control .toggle-damage,
+.age-system.item .relationship .power-type-control .toggle-damage,
+.age-system.item .membership .power-type-control .toggle-damage {
+  grid-area: "damage";
+}
+.age-system.item .focus .power-type-control .toggle-healing,
+.age-system.item .power .power-type-control .toggle-healing,
+.age-system.item .talent .power-type-control .toggle-healing,
+.age-system.item .weapon .power-type-control .toggle-healing,
+.age-system.item .equipment .power-type-control .toggle-healing,
+.age-system.item .stunts .power-type-control .toggle-healing,
+.age-system.item .honorifics .power-type-control .toggle-healing,
+.age-system.item .relationship .power-type-control .toggle-healing,
+.age-system.item .membership .power-type-control .toggle-healing {
+  grid-area: "heal";
+}
+.age-system.item .focus .power-type-control .toggle-resist,
+.age-system.item .power .power-type-control .toggle-resist,
+.age-system.item .talent .power-type-control .toggle-resist,
+.age-system.item .weapon .power-type-control .toggle-resist,
+.age-system.item .equipment .power-type-control .toggle-resist,
+.age-system.item .stunts .power-type-control .toggle-resist,
+.age-system.item .honorifics .power-type-control .toggle-resist,
+.age-system.item .relationship .power-type-control .toggle-resist,
+.age-system.item .membership .power-type-control .toggle-resist {
+  grid-area: "resist";
+}
+.age-system.item .focus .power-type-control .toggle-fatigue,
+.age-system.item .power .power-type-control .toggle-fatigue,
+.age-system.item .talent .power-type-control .toggle-fatigue,
+.age-system.item .weapon .power-type-control .toggle-fatigue,
+.age-system.item .equipment .power-type-control .toggle-fatigue,
+.age-system.item .stunts .power-type-control .toggle-fatigue,
+.age-system.item .honorifics .power-type-control .toggle-fatigue,
+.age-system.item .relationship .power-type-control .toggle-fatigue,
+.age-system.item .membership .power-type-control .toggle-fatigue {
+  grid-area: "fatigue";
+}
 .age-system.item .focus input[name="data.shortDesc"].long-text,
 .age-system.item .power input[name="data.shortDesc"].long-text,
 .age-system.item .talent input[name="data.shortDesc"].long-text,
