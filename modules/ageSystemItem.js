@@ -20,7 +20,7 @@ export class ageSystemItem extends Item {
         data.useFocusActorId = this._idFocusToUse(itemType, data.useFocus);
         data.hasDamage = this._hasDamage(itemType);
         data.hasHealing = this._hasHealing(itemType);
-        data.hasFatigue = this._hasFatigue();
+        data.hasFatigue = this._hasFatigue(itemType);
         data.hasModificators = this._hasModificators();
     
         // Adds reference to in-use color scheme
@@ -112,16 +112,27 @@ export class ageSystemItem extends Item {
     }
 
     // Check if Item requires Fatigue roll to be used
-    _hasFatigue() {
-        const type = this.type;
+    _hasFatigue(type) {
         if (type === "power") {return this.data.data.useFatigue};
         return false;
     };
 
     // Rolls damage for the item
-    rollDamage(event, stuntDie = null, addFocus = false, atkDmgTradeOff = 0) {
+    rollDamage({
+        event = null,
+        stuntDie = null,
+        addFocus = false,
+        atkDmgTradeOff = 0}={}) {
+
         if (!this.data.data.hasDamage && !this.data.data.hasHealing) {return false};
-        return Dice.itemDamage(event, this, stuntDie, addFocus, atkDmgTradeOff);
+        const damageData = {
+            event: event,
+            item: this,
+            stuntDie: stuntDie,
+            addFocus: addFocus,
+            atkDmgTradeOff: atkDmgTradeOff
+        };
+        return Dice.itemDamage(damageData);
     };
 
     // Roll item and check targetNumbers
@@ -131,7 +142,7 @@ export class ageSystemItem extends Item {
          * - attack
          * - powerActivation
          */
-        const owner = this.actor;
+        const owner = Dice.getActor(ChatMessage.getSpeaker()) || this.actor;
         if (!owner) {return false;}
         let ablCode = (rollType === "fatigue") ? "will" : this.data.data.useAbl;
 
@@ -178,7 +189,15 @@ export class ageSystemItem extends Item {
             }
         }
 
-        Dice.ageRollCheck(event, owner, ablCode, this, false, targetNumber);
+        const rollData = {
+            event: event,
+            actor: owner,
+            abl: ablCode,
+            itemRolled: this,
+            rollTN: targetNumber,
+        }
+        Dice.ageRollCheck(rollData);
+        // Dice.ageRollCheck(event, owner, ablCode, this, false, targetNumber);
     };
 
     /** Returns owner's Focus value, base on Item's useFocus property

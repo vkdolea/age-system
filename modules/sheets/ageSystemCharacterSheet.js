@@ -188,7 +188,12 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     };
 
     _onRollResources(event) {
-        Dice.ageRollCheck(event, this.actor, null, null, true);
+        const rollData = {
+            event: event,
+            actor: Dice.getActor() || this.actor,
+            resourceRoll: true
+        };
+        Dice.ageRollCheck(rollData);
     };
 
     _onLastUpSelect(ev) {
@@ -224,8 +229,12 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     };
 
     _onRollAbility(event) {
-        const ablCode = event.currentTarget.closest(".feature-controls").dataset.ablId;
-        Dice.ageRollCheck(event, this.actor, ablCode);
+        const rollData = {
+            event: event,
+            actor: Dice.getActor() || this.actor,
+            abl: event.currentTarget.closest(".feature-controls").dataset.ablId
+        }
+        Dice.ageRollCheck(rollData);
     };
 
     _onRollItem(event) {
@@ -254,15 +263,18 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         event.preventDefault();
         let e = event.currentTarget;
         let itemId = e.closest(".feature-controls").dataset.itemId;
-        return this.actor.deleteOwnedItem(itemId);
+        const actor = Dice.getActor() || this.actor;
+        return actor.deleteOwnedItem(itemId);
     };
 
     _onRollDamage(event) {
         event.preventDefault();
-        let e = event.currentTarget;
-        let itemId = e.closest(".feature-controls").dataset.itemId;
-        let item = this.actor.getOwnedItem(itemId);
+        const e = event.currentTarget;
+        const itemId = e.closest(".feature-controls").dataset.itemId;
+        const actor = Dice.getActor() || this.actor;
+        const item = actor.getOwnedItem(itemId);
+        const damageData = {event: event};
 
-        return item.rollDamage(event);
+        return item.rollDamage(damageData);
     };
 }

@@ -122,7 +122,7 @@
             </div>
 
             <div class="age-chat-buttons flexcol">
-                {{#if rollInput.itemEntity.data.data.hasDamage}}
+                {{#if (or rollInput.itemEntity.data.data.hasDamage rollInput.itemEntity.data.data.hasHealing)}}
                 <div class="flexcol">
                     <a class="age-button roll-damage" title="{{localize "age-system.rollDamage"}}">
                         <div class="flexrow flex-justify-center flex-align-center">

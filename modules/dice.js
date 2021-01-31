@@ -1,15 +1,15 @@
 import { sortObjArrayByName } from "./setup.js";
 
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
-export async function ageRollCheck(
-    event,
-    actor,
-    abl,
+export async function ageRollCheck({
+    event = null,
+    actor = null, // TODO - actor could be the Token selected, add case to pick the correct actor!
+    abl = null,
     itemRolled = null,
     resourceRoll = false,
     rollTN = null,
     rollUserMod = null,
-    atkDmgTradeOff = null) {
+    atkDmgTradeOff = null}={}) {
 
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
@@ -364,16 +364,15 @@ function _processDamageRollOptions(form) {
 }
 
 // Item damage
-export async function itemDamage(
-    event,
-    item,
+export async function itemDamage({
+    event = null,
+    item = null,
     stuntDie = null,
     addFocus = false,
     atkDmgTradeOff = 0,
     stuntDamage = null,
     dmgExtraDice = null,
-    dmgGeneralMod = null,
-    ) {
+    dmgGeneralMod = null}={}) {
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
@@ -513,3 +512,12 @@ export async function itemDamage(
 
     return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
 };
+
+export function getActor() {
+    const speaker = ChatMessage.getSpeaker();
+    let actor;
+    if (speaker.token) actor = game.actors.tokens[speaker.token];
+    if (!actor) actor = game.actors.get(speaker.actor);
+    if (!actor) return false;
+    return actor;
+}
