@@ -3,7 +3,7 @@ import { sortObjArrayByName } from "./setup.js";
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
 export async function ageRollCheck({
     event = null,
-    actor = null, // TODO - actor could be the Token selected, add case to pick the correct actor!
+    actor = null,
     abl = null,
     itemRolled = null,
     resourceRoll = false,
@@ -25,6 +25,15 @@ export async function ageRollCheck({
     const rMode = setBlind(event);
     let rollData = {};
     rollData.abilityName = "...";
+
+    // Check if actor rolling is unlinked token and log its Token ID
+    if (actor.isToken) {
+        rollData.tokenId = actor.token.data._id;
+        rollData.actorIsToken = true;
+    } else {
+        rollData.tokenId = null;
+        rollData.actorItoken = false;
+    };
     
     // Basic formula created spliting Stunt Die from the others
     let rollFormula = "2d6 + 1d6";

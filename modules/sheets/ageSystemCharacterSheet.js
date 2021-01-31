@@ -231,7 +231,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     _onRollAbility(event) {
         const rollData = {
             event: event,
-            actor: Dice.getActor() || this.actor,
+            actor: this.actor,
             abl: event.currentTarget.closest(".feature-controls").dataset.ablId
         }
         Dice.ageRollCheck(rollData);
@@ -263,7 +263,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         event.preventDefault();
         let e = event.currentTarget;
         let itemId = e.closest(".feature-controls").dataset.itemId;
-        const actor = Dice.getActor() || this.actor;
+        const actor = this.actor;
         return actor.deleteOwnedItem(itemId);
     };
 
@@ -271,7 +271,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         event.preventDefault();
         const e = event.currentTarget;
         const itemId = e.closest(".feature-controls").dataset.itemId;
-        const actor = Dice.getActor() || this.actor;
+        const actor = this.actor;
         const item = actor.getOwnedItem(itemId);
         const damageData = {event: event};
 

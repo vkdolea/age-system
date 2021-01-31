@@ -33,21 +33,6 @@ export class ageSystemItem extends Item {
             }
         };
 
-        // This was transformed into the method _idFocusTouse()
-        //
-        // Identify related Weapon/Power Focus ID owned by Actor
-        // if (this.isOwned && (itemType === "weapon" || itemType === "power")) {
-        //     const owner = this.actor;
-        //     const focusOwned = owner.data.items.filter(i => i.type === "focus");
-        //     const focusArr = focusOwned.filter(i => i.name.toLowerCase() === data.useFocus.toLowerCase());
-        //     // Originalmente:
-        //     // const focusArr = focusOwned.filter(i => i.data.nameLowerCase === data.useFocus.toLowerCase());
-
-        //     if (focusArr.length === 1) {
-        //         data.useFocusActorId = focusArr[0]._id;
-        //     };
-        // };
-
         // Data preparation for Power item type
         if (itemType === "power") {
 
@@ -142,7 +127,7 @@ export class ageSystemItem extends Item {
          * - attack
          * - powerActivation
          */
-        const owner = Dice.getActor(ChatMessage.getSpeaker()) || this.actor;
+        const owner = this.actor;
         if (!owner) {return false;}
         let ablCode = (rollType === "fatigue") ? "will" : this.data.data.useAbl;
 
