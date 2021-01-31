@@ -59,66 +59,14 @@
                     <div class="line-header">{{localize "age-system.settings.stuntPoints"}}</div>
                     <div class="line-value">{{#if ageRollSummary.stunt}}{{ageRollSummary.dice.d3}}{{else}}-{{/if}}</div>
                 </div>
-                {{#if rollInput.resourcesRoll}}
+
+                {{#each partials as |part key|}}
                 <div class="flexrow roll-mod">
-                    <div class="line-header">{{rollInput.resourcesName}}</div>
-                    <div class="line-value">{{rollInput.resources}}</div>
-                </div>            
-                {{/if}}
-                {{#if rollInput.ablCode}}
-                <div class="flexrow roll-mod">
-                    <div class="line-header">{{rollInput.abilityName}}</div>
-                    <div class="line-value">{{rollInput.ability}}</div>
+                    <div class="line-header">{{part.label}}</div>
+                    <div class="line-value">{{part.value}}</div>
                 </div>
-                {{/if}}
-                {{#if rollInput.focusName}}
-                <div class="flexrow roll-mod">
-                    <div class="line-header">{{rollInput.focusName}}</div>
-                    <div class="line-value">{{rollInput.focus}}</div>
-                </div>
-                {{/if}}
-                {{#if rollInput.rollMod}}
-                <div class="flexrow roll-mod">
-                    <div class="line-header">{{localize "age-system.setAgeRollMod"}}</div>
-                    <div class="line-value">{{rollInput.rollMod}}</div>
-                </div>
-                {{/if}}
-                {{#if rollInput.aim}}
-                <div class="flexrow roll-mod">
-                    <div class="line-header">{{localize "age-system.aim"}}</div>
-                    <div class="line-value">{{rollInput.aim}}</div>
-                </div>
-                {{/if}}
-                {{#if rollInput.activationMod}}
-                <div class="flexrow roll-mod">
-                    <div class="line-header">{{localize "age-system.activationMod"}}</div>
-                    <div class="line-value">{{rollInput.activationMod}}</div>
-                </div>
-                {{/if}}
-                {{#if rollInput.atkDmgTradeOff}}
-                <div class="flexrow roll-mod">
-                    <div class="line-header">{{localize "age-system.penaltyToDamage"}}</div>
-                    <div class="line-value">{{rollInput.atkDmgTradeOff}}</div>
-                </div>
-                {{/if}}
-                {{#if rollInput.armorPenalty}}
-                <div class="flexrow roll-mod">
-                    <div class="line-header">{{localize "age-system.armorPenalty"}}</div>
-                    <div class="line-value">{{rollInput.armorPenalty}}</div>
-                </div>
-                {{/if}}
-                {{#if rollInput.fatigue}}
-                <div class="flexrow roll-mod">
-                    <div class="line-header">{{localize "age-system.fatigue"}}</div>
-                    <div class="line-value">{{rollInput.fatigue}}</div>
-                </div>
-                {{/if}}
-                {{#if rollInput.guardUp}}
-                <div class="flexrow roll-mod">
-                    <div class="line-header">{{localize "age-system.guardUp"}}</div>
-                    <div class="line-value">{{rollInput.guardUp}}</div>
-                </div>
-                {{/if}}               
+                {{/each}}
+                
             </div>
 
             <div class="age-chat-buttons flexcol">
