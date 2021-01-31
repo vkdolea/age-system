@@ -181,14 +181,14 @@ export async function ageRollCheck({
     // If rollTN is used, check if roll fails or succeed
     if (rollTN) {
         const rollMargin = ageRoll.total - rollTN;
-        if (rollMargin > -1) {
+        if (rollMargin >= 0) {
             rollData.success = true;
         } else {
             rollData.success = false;
         };
     };
 
-    // Generate Stunt Points if doubles are rolled and: total rolled is higher than TN or there is no TN set
+    // Generate Stunt Points if doubles are rolled and total rolled is higher than TN or there is no TN set
     const generateSP = (rollTN && rollData.success) || !rollTN;
     const rollSummary = ageRollChecker(ageRoll, generateSP)
     let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
