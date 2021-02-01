@@ -80,7 +80,8 @@
             "duplicatedFocus": "Focus is not added to character - it already owns a Focus named ",
             "selectTokenMacro": "Select a token to run the macro.",
             "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro.",
-            "selectOnlyOneTarget": "Select only one target to attack."
+            "selectOnlyOneTarget": "Select only one target to attack.",
+            "originTokenMissing": "Action owner (Actor or Unlinked Token) doesn't exist anymore."
         },
         
         "chatCard": {

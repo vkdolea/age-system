@@ -1,7 +1,8 @@
 <form class="age-system base-age-roll colorset-selection {{rollInput.colorScheme}}">
     <div class="feature-controls"
         data-stunt-die="{{ageRollSummary.dice.d3}}"
-        data-actor-id="{{owner._id}}"
+        data-actor-id="{{actorId}}"
+        data-actor-token="{{isToken}}"
         {{#if rollInput.focusId}}
         data-focus-id="{{rollInput.focusId}}"
         {{/if}}

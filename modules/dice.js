@@ -10,7 +10,7 @@ export async function ageRollCheck({
     rollTN = null,
     rollUserMod = null,
     atkDmgTradeOff = null}={}) {
-
+    
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
     if (!event.ctrlKey && event.altKey) {
@@ -21,20 +21,16 @@ export async function ageRollCheck({
         atkDmgTradeOff = -Math.abs(Number(extraOptions.atkDmgTradeOff));
     };
 
+    // Check if actor rolling is unlinked token and log its Token ID
+    const isToken = actor.isToken;
+    const actorId = isToken ? actor.token.data._id : actor._id;
+
     // Set roll mode
     const rMode = setBlind(event);
     let rollData = {};
     let partials = [];
     rollData.abilityName = "...";
 
-    // Check if actor rolling is unlinked token and log its Token ID
-    if (actor.isToken) {
-        rollData.tokenId = actor.token.data._id;
-        rollData.actorIsToken = true;
-    } else {
-        rollData.tokenId = null;
-        rollData.actorIstoken = false;
-    };
     
     // Basic formula created spliting Stunt Die from the others
     let rollFormula = "2d6 + 1d6";
@@ -196,6 +192,8 @@ export async function ageRollCheck({
     let cardData = {
         rollInput: rollData,
         partials,
+        actorId,
+        isToken,
         roll: ageRoll,
         ageRollSummary: rollSummary,
         owner: actor,
