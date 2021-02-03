@@ -4,10 +4,12 @@ export function addChatListeners(html) {
 };
 
 export function chatDamageRoll(event) {
+    let owner = null;
     const card = event.currentTarget.closest(".feature-controls");
-    const isToken = card.dataset.actorToken;
+    // const isToken = card.dataset.actorToken;
     const actorId = card.dataset.actorId;
-    const owner = isToken ? game.actors.tokens[actorId] : game.actors.get(actorId);
+    owner = game.actors.tokens[actorId];
+    if (!owner) owner = game.actors.get(actorId);
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
     const itemSource = owner.getOwnedItem(card.dataset.itemId);
 
@@ -30,10 +32,12 @@ export function chatDamageRoll(event) {
 };
 
 export function chatFatigueRoll(event) {
+    let owner = null;
     const card = event.currentTarget.closest(".feature-controls");
-    const isToken = card.dataset.isToken;
+    // const isToken = card.dataset.actorToken;
     const actorId = card.dataset.actorId;
-    const owner = isToken ? game.actors.tokens[actorId] : game.actors.get(actorId);
+    owner = game.actors.tokens[actorId];
+    if (!owner) owner = game.actors.get(actorId);
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
     const itemSource = owner.getOwnedItem(card.dataset.itemId);
     itemSource.roll(event, "fatigue");

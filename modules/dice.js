@@ -30,33 +30,36 @@ export async function ageRollCheck({
     let rollData = {};
     let partials = [];
     rollData.abilityName = "...";
-
     
     // Basic formula created spliting Stunt Die from the others
     let rollFormula = "2d6 + 1d6";
 
     // Check if it is a Resource/Income roll
+    let resName;
     if (resourceRoll === true) {
         rollFormula += " + @resources"
         rollData.resources = actor.data.data.resources.total;
         rollData.resourcesRoll = resourceRoll;
         const resSelected = game.settings.get("age-system", "wealthType");
+        resName = game.i18n.localize(`age-system.${resSelected}`)
         partials.push({
-            label: game.i18n.localize(`age-system.${resSelected}`),
+            label: resName,
             value: rollData.resources
         });
         rollData.resourcesName = game.i18n.localize(`age-system.${resSelected}`);
     };
 
     // Check if Ability is used
+    let ablName;
     if (abl !== null && abl !== "no-abl") {
         const ablValue = actor.data.data.abilities[abl].total;
         rollFormula += " + @ability";
+        ablName = game.i18n.localize(`age-system.${abl}`);
         rollData = {
             ability: ablValue,
             ablCode: abl,
             focusId: null,
-            abilityName: game.i18n.localize(`age-system.${abl}`)
+            abilityName: ablName
         };
         partials.push({
             label: rollData.abilityName,
@@ -66,7 +69,7 @@ export async function ageRollCheck({
 
     // Check if item rolled is Focus and prepare its data
     const focusRolled = getFocus(itemRolled);
-
+    let focusId = null
     if (focusRolled) {
         rollFormula += " + @focus";
         rollData.focusName = focusRolled[0];
@@ -75,6 +78,7 @@ export async function ageRollCheck({
             label: focusRolled[0],
             value: focusRolled[1]
         });
+        focusId = focusRolled[2];
     }
 
     // Adds user input roll mod
@@ -91,7 +95,10 @@ export async function ageRollCheck({
     // Also checks if Item has Activation Mod
     if (itemRolled !== null) {
         rollData.itemId = itemRolled._id;
-        rollData.itemEntity = itemRolled;
+        rollData.hasDamage = itemRolled.data.data.hasDamage;
+        rollData.hasHealing = itemRolled.data.data.hasHealing;
+        rollData.hasFatigue = itemRolled.data.data.hasFatigue;
+        // rollData.itemEntity = itemRolled;
         if (itemRolled.data.data.itemMods) {
             if (itemRolled.data.data.itemMods.itemActivation.isActive) {
                 rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
@@ -169,37 +176,70 @@ export async function ageRollCheck({
         })
     };
 
-    // Informs roll card the current color scheme in use by the user
-    rollData.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
+    // Finally, the Age Roll!
     const ageRoll = new Roll(rollFormula, rollData).roll();
 
-
     // If rollTN is used, check if roll fails or succeed
+    let isSuccess = null
     if (rollTN) {
         const rollMargin = ageRoll.total - rollTN;
         if (rollMargin >= 0) {
-            rollData.success = true;
+            isSuccess = true;
         } else {
-            rollData.success = false;
+            isSuccess = false;
         };
     };
 
     // Generate Stunt Points if doubles are rolled and total rolled is higher than TN or there is no TN set
-    const generateSP = (rollTN && rollData.success) || !rollTN;
+    const generateSP = (rollTN && isSuccess) || !rollTN;
     const rollSummary = ageRollChecker(ageRoll, generateSP)
     let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
 
+    // Roll header flavor text
+    let headerTerms = {actor: actor.name};
+    let headerFlavor = "";
+    if (itemRolled) {
+        headerTerms.item = itemRolled.name;
+        switch (itemRolled.type) {
+            case "weapon":
+                headerFlavor = game.i18n.format("age-system.chatCard.rollAttack", headerTerms);
+                break;
+            case "power":
+                headerFlavor = game.i18n.format("age-system.chatCard.rollPower", headerTerms);
+                break;
+            default:
+                headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+                break;
+        }
+    } else {
+        if (resourceRoll) {
+            headerTerms.item = resName;
+            headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+        }
+        if (abl !== null && abl !== "no-abl") {
+            headerTerms.item = ablName;
+            headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+        }
+    };
+
     let cardData = {
-        rollInput: rollData,
+        // Informs card's color scheme
+        colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
+        rollData,
+        headerFlavor,
         partials,
         actorId,
         isToken,
+        isSuccess,
         roll: ageRoll,
         ageRollSummary: rollSummary,
-        owner: actor,
+        // owner: actor,
         guardUpActive: guardUp.active,
+        rollTN,
+        focusId,
     };
-    cardData.rollInput.rollTN = rollTN;
+    cardData = mergeObject(cardData, rollData);
+    // cardData.rollInput.rollTN = rollTN;
 
     let chatData = {
         user: game.user._id,
@@ -272,14 +312,15 @@ function _processAgeRollOptions(form) {
 
 export function getFocus(item) {
     if (item === null) {return false}
-    if (item.type === "focus") return [item.name, item.data.data.initialValue];
+    if (item.type === "focus") return [item.name, item.data.data.initialValue, item.data._id];
     if (item.data.data.useFocus === "") return false;
-    if (item.data.data.useFocusActorId) {
-        const inUseFocus = item.actor.getOwnedItem(item.data.data.useFocusActorId);
+    const ownerFocusId = item.data.data.useFocusActorId;
+    if (ownerFocusId) {
+        const inUseFocus = item.actor.getOwnedItem(ownerFocusId);
         if (inUseFocus.name == "") return false;
-        return [inUseFocus.name, inUseFocus.data.data.initialValue];
+        return [inUseFocus.name, inUseFocus.data.data.initialValue, ownerFocusId];
     } else {
-        return [item.data.data.useFocus, 0]
+        return [item.data.data.useFocus, 0, null]
     }
     
 }

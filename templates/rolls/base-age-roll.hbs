@@ -1,40 +1,16 @@
-<form class="age-system base-age-roll colorset-selection {{rollInput.colorScheme}}">
+<form class="age-system base-age-roll colorset-selection {{colorScheme}}">
     <div class="feature-controls"
         data-stunt-die="{{ageRollSummary.dice.d3}}"
         data-actor-id="{{actorId}}"
         data-actor-token="{{isToken}}"
-        {{#if rollInput.focusId}}
-        data-focus-id="{{rollInput.focusId}}"
-        {{/if}}
-        {{#if rollInput.itemId}}
-        data-item-id="{{rollInput.itemId}}"
-        {{/if}}
-        data-atkdmg-trade="{{rollInput.atkDmgTradeOff}}">
+        data-atkdmg-trade="{{atkDmgTradeOff}}"
+        {{#if focusId}} data-focus-id="{{focusId}}" {{/if}}
+        {{#if itemId}} data-item-id="{{itemId}}" {{/if}}>
 
         <div class="flexcol roll-card regular-roll-card">
 
             <div>
-                <h3 class="action-details colorset-first-tier">
-                    {{#if rollInput.itemEntity}}
-                        {{#if (and (ne rollInput.itemEntity.type "weapon") (ne rollInput.itemEntity.type "power"))}}
-                        {{localize "age-system.chatCard.rollGeneral" actor=owner.name item=rollInput.itemEntity.name}}
-                        {{/if}}
-
-                        {{#if (eq rollInput.itemEntity.type "weapon")}}
-                        {{localize "age-system.chatCard.rollAttack" actor=owner.name item=rollInput.itemEntity.name}}
-                        {{/if}}
-                        
-                        {{#if (eq rollInput.itemEntity.type "power")}}
-                        {{localize "age-system.chatCard.rollPower" actor=owner.name item=rollInput.itemEntity.name}}
-                        {{/if}}
-                    {{else}}
-                        {{#if rollInput.resourcesRoll}}
-                        {{localize "age-system.chatCard.rollGeneral" actor=owner.name item=rollInput.resourcesName}}
-                        {{else}}
-                        {{localize "age-system.chatCard.rollGeneral" actor=owner.name item=rollInput.abilityName}}
-                        {{/if}}
-                    {{/if}}
-                </h3>
+                <h3 class="action-details colorset-first-tier">{{headerFlavor}}</h3>
                 <div class="dice-show trait-test flexrow">
                     {{#each ageRollSummary.dice as |diceFace|}}
                         {{#when diceFace 'eq' 1}}
@@ -53,7 +29,7 @@
                     {{/each}}
                 </div>
                 <div class="flexrow roll-mod total-roll">
-                    <h3 class="line-header">{{localize "age-system.settings.totalRolled"}} {{#if rollInput.rollTN}} {{#if rollInput.success}} ({{localize "age-system.success"}}) {{else}} ({{localize "age-system.miss"}}) {{/if}} {{/if}}</h3>
+                    <h3 class="line-header">{{localize "age-system.settings.totalRolled"}} {{#if rollTN}} {{#if isSuccess}} ({{localize "age-system.success"}}) {{else}} ({{localize "age-system.miss"}}) {{/if}} {{/if}}</h3>
                     <h3 class="line-value">{{roll.total}}</h3>
                 </div>
                 <div class="flexrow roll-mod{{#if ageRollSummary.stunt}} stunted{{/if}}">
@@ -71,7 +47,7 @@
             </div>
 
             <div class="age-chat-buttons flexcol">
-                {{#if (or rollInput.itemEntity.data.data.hasDamage rollInput.itemEntity.data.data.hasHealing)}}
+                {{#if (or hasDamage hasHealing)}}
                 <div class="flexcol">
                     <a class="age-button roll-damage" title="{{localize "age-system.rollDamage"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
@@ -104,8 +80,8 @@
                 </div>
                 {{/if}}
 
-                {{#if rollInput.usingFatigue}}
-                {{#if rollInput.itemEntity.data.data.hasFatigue}}
+                {{#if usingFatigue}}
+                {{#if hasFatigue}}
                 <a class="age-button roll-fatigue flexrow" title="{{localize "age-system.rollFatigue"}}">
                     <div class="flexrow flex-justify-center flex-align-center">
                         <div>{{localize "age-system.rollFatigue"}} </div>
