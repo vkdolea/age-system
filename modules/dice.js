@@ -9,7 +9,8 @@ export async function ageRollCheck({
     resourceRoll = false,
     rollTN = null,
     rollUserMod = null,
-    atkDmgTradeOff = null}={}) {
+    atkDmgTradeOff = null,
+    hasTest = false}={}) {
     
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
@@ -22,7 +23,7 @@ export async function ageRollCheck({
     };
 
     // Check if actor rolling is unlinked token and log its Token ID
-    const isToken = actor.isToken;
+    const isToken = actor.isToken ? 1 : 0;
     const actorId = isToken ? actor.token.data._id : actor._id;
 
     // Set roll mode
@@ -98,6 +99,7 @@ export async function ageRollCheck({
         rollData.hasDamage = itemRolled.data.data.hasDamage;
         rollData.hasHealing = itemRolled.data.data.hasHealing;
         rollData.hasFatigue = itemRolled.data.data.hasFatigue;
+        rollData.hasTest = itemRolled.data.data.hasTest;
         // rollData.itemEntity = itemRolled;
         if (itemRolled.data.data.itemMods) {
             if (itemRolled.data.data.itemMods.itemActivation.isActive) {
@@ -306,7 +308,6 @@ function _processAgeRollOptions(form) {
         }
     }
 
-    // console.log(rollOptions)
     return rollOptions
 }
 
@@ -462,7 +463,8 @@ export async function itemDamage({
     atkDmgTradeOff = 0,
     stuntDamage = null,
     dmgExtraDice = null,
-    dmgGeneralMod = null}={}) {
+    dmgGeneralMod = null,
+    resistedDmg = false}={}) {
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
@@ -474,9 +476,11 @@ export async function itemDamage({
         stuntDamage = damageOptions.setStuntDamage;
     };
     
-    const nrDice = item.data.data.nrDice;
-    const diceSize = item.data.data.diceType;
-    const constDmg = item.data.data.extraValue;
+    const dmgDetails = resistedDmg ? item.data.data.damageResisted : item.data.data;
+    let nrDice = dmgDetails.nrDice;
+    let diceSize = dmgDetails.diceType;
+    let constDmg = dmgDetails.extraValue;
+    let dmgAbl = dmgDetails.dmgAbl
 
     const isBlind = setBlind(event);
     const audience = isGMroll(event);
@@ -490,7 +494,7 @@ export async function itemDamage({
     // Check if damage source has a non 0 portion on its parameters
     if (constDmg !== 0) {damageFormula = `${damageFormula} + @damageMod`}
 
-    const dmgAbl = item.data.data.dmgAbl;
+    // const dmgAbl = item.data.data.dmgAbl;
     let rollData = {
         diceQtd: nrDice,
         diceSize: diceSize,

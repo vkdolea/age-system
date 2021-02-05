@@ -6,27 +6,37 @@ export function addChatListeners(html) {
 export function chatDamageRoll(event) {
     let owner = null;
     const card = event.currentTarget.closest(".feature-controls");
-    // const isToken = card.dataset.actorToken;
+    const isToken = card.dataset.actorToken;
     const actorId = card.dataset.actorId;
-    owner = game.actors.tokens[actorId];
-    if (!owner) owner = game.actors.get(actorId);
+    if (isToken === "1") {
+        owner = game.actors.tokens[actorId];
+    } else {
+        owner = game.actors.get(actorId);
+    };
+    // owner = game.actors.tokens[actorId];
+    // if (!owner) owner = game.actors.get(actorId);
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
     const itemSource = owner.getOwnedItem(card.dataset.itemId);
 
     let stuntDie = null;
     let addFocus = false;
+    let resistedDamage = false;
     if (event.currentTarget.classList.contains('add-stunt-damage')) {
         stuntDie = card.dataset.stuntDie;
     };
     if (event.currentTarget.classList.contains('add-focus-damage')) {
         addFocus = true;
     };
+    if (event.currentTarget.classList.contains('resisted')) {
+        resistedDamage = true;
+    };
 
     const damageData = {
         event: event,
         stuntDie: stuntDie,
         addFocus: addFocus,
-        atkDmgTradeOff: card.dataset.atkdmgTrade
+        atkDmgTradeOff: card.dataset.atkdmgTrade,
+        resistedDmg: resistedDamage
     };
     itemSource.rollDamage(damageData);
 };
@@ -34,10 +44,15 @@ export function chatDamageRoll(event) {
 export function chatFatigueRoll(event) {
     let owner = null;
     const card = event.currentTarget.closest(".feature-controls");
-    // const isToken = card.dataset.actorToken;
+    const isToken = card.dataset.actorToken;
     const actorId = card.dataset.actorId;
-    owner = game.actors.tokens[actorId];
-    if (!owner) owner = game.actors.get(actorId);
+    if (isToken === "1") {
+        owner = game.actors.tokens[actorId];
+    } else {
+        owner = game.actors.get(actorId);
+    };
+    // owner = game.actors.tokens[actorId];
+    // if (!owner) owner = game.actors.get(actorId);
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
     const itemSource = owner.getOwnedItem(card.dataset.itemId);
     itemSource.roll(event, "fatigue");

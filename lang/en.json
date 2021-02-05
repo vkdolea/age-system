@@ -87,7 +87,14 @@
         "chatCard": {
             "rollGeneral": "{actor} rolls {item}",
             "rollAttack": "{actor} attacks with {item}",
-            "rollPower": "{actor} uses {item}"
+            "rollPower": "{actor} uses {item}",
+            
+            "rollFullDamage": "Full Damage",
+            "rollDamage": "Damage",
+            "rollResistedDamage": "Resisted Damage",
+            "addFocusSD": "Add Both",
+            "addFocus": "Add Focus",
+            "addStuntDie": "Add SD"
         },
 
         "testThreshold": "Threshold",
