@@ -46,6 +46,7 @@
                 
             </div>
 
+            {{#if (ne rollType 'fatigue')}}
             <div class="age-chat-buttons flexcol">
                 {{#if (or hasDamage hasHealing)}}
                 <div class="age-chat-buttons-grid">
@@ -124,6 +125,7 @@
                 {{!-- <button class="roll-fatigue">{{localize "age-system.rollFatigue"}}</button> --}}
                 {{!-- <button>teste</button> --}}
             </div>
+            {{/if}}
             
         </div>
         <div class="blind-roll-card flexcol roll-card">

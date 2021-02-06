@@ -10,7 +10,8 @@ export async function ageRollCheck({
     rollTN = null,
     rollUserMod = null,
     atkDmgTradeOff = null,
-    hasTest = false}={}) {
+    hasTest = false,
+    rollType = null}={}) {
     
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
@@ -200,34 +201,39 @@ export async function ageRollCheck({
     // Roll header flavor text
     let headerTerms = {actor: actor.name};
     let headerFlavor = "";
-    if (itemRolled) {
-        headerTerms.item = itemRolled.name;
-        switch (itemRolled.type) {
-            case "weapon":
-                headerFlavor = game.i18n.format("age-system.chatCard.rollAttack", headerTerms);
-                break;
-            case "power":
-                headerFlavor = game.i18n.format("age-system.chatCard.rollPower", headerTerms);
-                break;
-            default:
-                headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-                break;
-        }
+    if (rollType === "fatigue") {
+        headerTerms.item = game.i18n.localize("age-system.fatigue");
+        headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
     } else {
-        if (resourceRoll) {
-            headerTerms.item = resName;
-            headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-        }
-        if (abl !== null && abl !== "no-abl") {
-            headerTerms.item = ablName;
-            headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-        }
-    };
+        if (itemRolled) {
+            headerTerms.item = itemRolled.name;
+            switch (itemRolled.type) {
+                case "weapon":
+                    headerFlavor = game.i18n.format("age-system.chatCard.rollAttack", headerTerms);
+                    break;
+                case "power":
+                    headerFlavor = game.i18n.format("age-system.chatCard.rollPower", headerTerms);
+                    break;
+                default:
+                    headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+                    break;
+            }
+        } else {
+            if (resourceRoll) {
+                headerTerms.item = resName;
+                headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+            }
+            if (abl !== null && abl !== "no-abl") {
+                headerTerms.item = ablName;
+                headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+            }
+        };
+    }
 
-    let cardData = {
+    rollData = {
+        ...rollData,
         // Informs card's color scheme
         colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
-        rollData,
         headerFlavor,
         partials,
         actorId,
@@ -239,8 +245,9 @@ export async function ageRollCheck({
         guardUpActive: guardUp.active,
         rollTN,
         focusId,
+        rollType,
     };
-    cardData = mergeObject(cardData, rollData);
+    // cardData = mergeObject(cardData, rollData);
     // cardData.rollInput.rollTN = rollTN;
 
     let chatData = {
@@ -249,7 +256,8 @@ export async function ageRollCheck({
         // whisper: isGMroll(event),
         blind: event.shiftKey,
         roll: ageRoll,
-        content: await renderTemplate(chatTemplate, cardData)
+        content: await renderTemplate(chatTemplate, rollData)
+        // content: await renderTemplate(chatTemplate, cardData)
     };
 
     // Compatibility with Dice So Nice

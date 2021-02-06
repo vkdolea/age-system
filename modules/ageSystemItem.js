@@ -191,6 +191,7 @@ export class ageSystemItem extends Item {
             abl: ablCode,
             itemRolled: this,
             rollTN: targetNumber,
+            rollType
         }
         Dice.ageRollCheck(rollData);
     };
