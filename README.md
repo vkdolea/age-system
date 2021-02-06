@@ -78,6 +78,7 @@ Here the description of each one of the Modificators:
 - Added buttons on chat message to roll "resisted damage/healing" from applicable Powers.
 - Ronin Green color scheme included.
 - Player can select which Ability will be used to check Power's Fatigue - previously all Fatigue checks were based on Willpower.
+- Fatigue chat message now will not show Damage/Fatigue buttons.
 #### Fixed
 - Bug causing chat message causing damage/fatigue rolls from unliked tokens to roll from Actor.
 - Bug preventing Talent degree to display on character sheet.
