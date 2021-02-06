@@ -34,7 +34,7 @@ export class ageSystemItem extends Item {
                 }
             }
             if (data.damageResisted) {
-                if (data.damageResisted.dmgAbl !== "") {
+                if (data.damageResisted.dmgAbl !== "no-abl") {
                     data.damageResisted.ablDamageValue = this.actor.data.data.abilities[data.damageResisted.dmgAbl].total;
                 }                
             }
@@ -140,7 +140,7 @@ export class ageSystemItem extends Item {
          */
         const owner = this.actor;
         if (!owner) {return false;}
-        let ablCode = (rollType === "fatigue") ? "will" : this.data.data.useAbl;
+        let ablCode = (rollType === "fatigue") ? this.data.data.ablFatigue : this.data.data.useAbl;
 
         if (rollType === null) {
             switch (this.type) {
@@ -157,7 +157,7 @@ export class ageSystemItem extends Item {
         if (targetNumber === null) {
             switch (rollType) {
                 case "fatigue":
-                    ablCode = "will";
+                    ablCode = this.data.data.ablFatigue;
                     targetNumber = this.data.data.fatigueTN ? this.data.data.fatigueTN : null;
                     break;
                 
@@ -193,7 +193,6 @@ export class ageSystemItem extends Item {
             rollTN: targetNumber,
         }
         Dice.ageRollCheck(rollData);
-        // Dice.ageRollCheck(event, owner, ablCode, this, false, targetNumber);
     };
 
     /** Returns owner's Focus value, base on Item's useFocus property

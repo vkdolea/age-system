@@ -406,13 +406,15 @@ export function dialogBoxAbilityFocus(focus, actor) {
     });
 };
 
-async function getDamageRollOptions() {
+async function getDamageRollOptions(addFocus, stuntDmg) {
     // Ve se item rolado e arma, poder ou null/outro, 
 
     const template = "/systems/age-system/templates/rolls/dmg-roll-settings.hbs"
     // const type = itemRolled ? itemRolled.type : null;
 
     const html = await renderTemplate(template, {
+        addFocus,
+        stuntDmg
         // ...data,
         // itemType: type
     });
@@ -440,14 +442,19 @@ async function getDamageRollOptions() {
 
 function _processDamageRollOptions(form) {
 
-    const modifiers = ["setDmgExtraDice", "setDmgGeneralMod", "setStuntDamage"];
+    const modifiers = ["setDmgExtraDice", "setDmgGeneralMod", "setStuntDamage", "addFocus", "stuntDieDmg"];
     let rollOptions = {}
 
     for (let o = 0; o < modifiers.length; o++) {
         const mod = modifiers[o];
-        if (form[mod]) {
-            rollOptions[mod] = parseInt(form[mod].value)
-            if (!Number.isInteger(rollOptions[mod])) rollOptions[mod] = null;
+        const option = form[mod];
+        if (option) {
+            if (option.type === "checkbox") {
+                rollOptions[mod] = option.checked;
+            } else {
+                rollOptions[mod] = parseInt(option.value);
+                if (!Number.isInteger(rollOptions[mod])) rollOptions[mod] = null;
+            }
         }
     }
 
@@ -469,11 +476,13 @@ export async function itemDamage({
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
     if (!event.ctrlKey && event.altKey) {
-        damageOptions = await getDamageRollOptions();
+        damageOptions = await getDamageRollOptions(addFocus, stuntDie);
         if (damageOptions.cancelled) return;
         dmgExtraDice = damageOptions.setDmgExtraDice;
         dmgGeneralMod = damageOptions.setDmgGeneralMod;
         stuntDamage = damageOptions.setStuntDamage;
+        addFocus = damageOptions.addFocus;
+        stuntDie = damageOptions.stuntDieDmg;
     };
     
     const dmgDetails = resistedDmg ? item.data.data.damageResisted : item.data.data;
@@ -486,19 +495,16 @@ export async function itemDamage({
     const audience = isGMroll(event);
 
     let damageFormula = nrDice > 0 ? "(@diceQtd)d(@diceSize)" : "";
-    let messageData = {
-        flavor: `${item.name}`,
-        speaker: ChatMessage.getSpeaker()
-    };
-
-    // Check if damage source has a non 0 portion on its parameters
-    if (constDmg !== 0) {damageFormula = `${damageFormula} + @damageMod`}
-
-    // const dmgAbl = item.data.data.dmgAbl;
     let rollData = {
         diceQtd: nrDice,
         diceSize: diceSize,
         damageMod: constDmg
+    };
+    // Check if damage source has a non 0 portion on its parameters
+    if (constDmg !== 0) {damageFormula = `${damageFormula} + @damageMod`}
+    let messageData = {
+        flavor: `${item.name}`,
+        speaker: ChatMessage.getSpeaker()
     };
 
     if (item.isOwned) {

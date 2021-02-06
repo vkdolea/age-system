@@ -69,16 +69,20 @@
                 "damage heal"
                 "resist fatigue";
             .toggle-damage {
-                grid-area: "damage";
+                grid-area: damage;
+                justify-self: stretch;
             }
             .toggle-healing {
-                grid-area: "heal";
+                grid-area: heal;
+                justify-self: stretch;
             }
             .toggle-resist {
-                grid-area: "resist";
+                grid-area: resist;
+                justify-self: stretch;
             }
             .toggle-fatigue {
-                grid-area: "fatigue";
+                grid-area: fatigue;
+                justify-self: stretch;
             }
         }
 
@@ -148,9 +152,17 @@
                 margin-left: 1px;
                 margin-right: 1px;
             };
+            
+            select[name="data.testAbl"],
+            select[name="data.useAbl"],
+            select[name="data.itemForceAbl"] {
+                text-align: center;
+            }
 
-            input[name="data.useFocus"] {
+            input[name="data.useFocus"],
+            input[name="data.testFocus"] {
                 min-width: 140px;
+                max-width: 250px;
                 text-align: center;
             };
             

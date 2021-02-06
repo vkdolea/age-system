@@ -27,8 +27,16 @@
             {{/select}}
         </select>
     </div>
-    <div class="form-group">
+        <div class="form-group">
         <label>{{localize "age-system.setRollGeneralMod"}}</label>
         <input type="number" name="setDmgGeneralMod"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "age-system.chatCard.addStuntDie"}}</label>
+        <input type="number" name="stuntDieDmg" value="{{stuntDmg}}"/>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" name="addFocus" {{checked addFocus}}/>
+        <label>{{localize "age-system.chatCard.addFocus"}}</label>
     </div>
 </form>

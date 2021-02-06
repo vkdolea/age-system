@@ -5,7 +5,9 @@
         {{#if data.hasHealing}} {{localize "age-system.item.healing"}} {{/if}}
     </label>
     <p class="in-chat-text">{{concat data.nrDice "d" data.diceType "+" data.extraValue}}{{#when data.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.ablDamageValue}}{{/when}}</p>
+    {{#if data.hasDamage}}
     <p class="in-chat-text">{{localize (concat "age-system." data.dmgType)}} | {{localize (concat "age-system." data.dmgSource)}}</p>
+    {{/if}}
     {{#if data.hasTest}}
     <label>{{localize "age-system.item.resistedEffect"}}</label>
     <p class="in-chat-text">{{concat data.damageResisted.nrDice "d" data.damageResisted.diceType "+" data.damageResisted.extraValue}}{{#when data.damageResisted.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.damageResisted.ablDamageValue}}{{/when}}</p>
@@ -42,6 +44,7 @@
                 </select>
             </div>
         </div>
+        {{#if data.hasDamage}}
         <div class="flexrow">
             <select name="data.dmgType">
                 {{#select data.dmgType}}
@@ -58,6 +61,7 @@
                 {{/select}}
             </select>
         </div>
+        {{/if}}
     </div>
     {{#if data.hasTest}}
     <div class="flexcol cause-damage">

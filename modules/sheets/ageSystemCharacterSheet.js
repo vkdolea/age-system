@@ -271,10 +271,16 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         event.preventDefault();
         const e = event.currentTarget;
         const itemId = e.closest(".feature-controls").dataset.itemId;
-        const actor = this.actor;
+        const actor = this._realActor();
         const item = actor.getOwnedItem(itemId);
         const damageData = {event: event};
 
         return item.rollDamage(damageData);
     };
+
+    _realActor() {
+        const isToken = this.actor.isToken;
+        const actor = isToken ? game.actors.tokens[this.actor.token.data._id] : this.actor;
+        return actor;
+    }
 }

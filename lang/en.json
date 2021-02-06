@@ -90,7 +90,7 @@
             "rollPower": "{actor} uses {item}",
             
             "rollFullDamage": "Full Damage",
-            "rollDamage": "Damage",
+            "rollDamage": "Roll Damage",
             "rollResistedDamage": "Resisted Damage",
             "addFocusSD": "Add Both",
             "addFocus": "Add Focus",
@@ -219,6 +219,7 @@
         "weight": "Weight",
 
         "fatigue": "Fatigue",
+        "ablFatigue": "Fatigue Test",
         "useFatigue": "Use Fatigue",
         "inputFatigueTN": "Input TN",
         "fatigueTN": "Fatigue TN",

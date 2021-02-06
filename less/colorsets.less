@@ -4,7 +4,7 @@
 @modern-blue-mid: #B9DBEB;
 @modern-blue-font: #ffffff;
 @modern-blue-light-font: #231F20;
-// @card-background: #5f94a8;
+@modern-blue-list: @modern-blue, @modern-blue-high, @modern-blue-mid, @modern-blue-font, @modern-blue-light-font;
 
 /** Fantasy Blue Colors **/
 @fantasy-blue: #0f4f5b;
@@ -12,6 +12,7 @@
 @fantasy-blue-mid: #c1cbd3;
 @fantasy-blue-font: #ffffff;
 @fantasy-blue-light-font: #dbdada;
+@fantasy-blue-list: @fantasy-blue, @fantasy-blue-high, @fantasy-blue-mid, @fantasy-blue-font, @fantasy-blue-light-font;
 
 /** Dragon Red Colors **/
 @dragon-red: #810207;
@@ -19,6 +20,7 @@
 @dragon-red-mid: #e0beb1;
 @dragon-red-font: #ffffff;
 @dragon-red-light-font: #000000;
+@dragon-red-list: @dragon-red, @dragon-red-high, @dragon-red-mid, @dragon-red-font, @dragon-red-light-font;
 
 /** Threefold Purple Colors **/
 @folded-purple: #565183;
@@ -26,6 +28,15 @@
 @folded-purple-mid: #cfccde;
 @folded-purple-font: #ffffff;
 @folded-purple-light-font: #000000;
+@folded-purple-list: @folded-purple, @folded-purple-high, @folded-purple-mid, @folded-purple-font, @folded-purple-light-font;
+
+/** Ronin Green Colors **/
+@ronin-green: #1d8514;
+@ronin-green-high: #8ec740;
+@ronin-green-mid: #aaaaaa15;
+@ronin-green-font: #ffffff;
+@ronin-green-light-font: #000000;
+@ronin-green-list: @ronin-green, @ronin-green-high, @ronin-green-mid, @ronin-green-font, @ronin-green-light-font;
 
 /** Game Mode Colors **/
 @gritty-color: #DA9E89;
@@ -39,454 +50,118 @@
 @highlight: #eb9e0f;
 @container-background: #ffffff;
 
-// TODO color schemes: Modern AGE, Fantasy AGE, The Expanse, Threefold, Green Ronin, Dragon AGE
-// Identify combinations of colors to add modificators
+// LESS loop to create color schemes - add new name on @colorsets, add color array at @color-list.
+// Name inside @colorsets must be the same key on game Settings!
+@colorsets: modern-blue, fantasy-blue, dragon-red, folded-purple, ronin-green;
+@color-list: @modern-blue-list, @fantasy-blue-list, @dragon-red-list, @folded-purple-list, @ronin-green-list;
 
-// Modern AGE Colorset
-/*-------------------------------------------------------*/
-.colorset-modern-blue {
-    .colorset-first-tier {
-        background-color: @modern-blue;
-        color: @modern-blue-font;
-    };    
-    
-    .colorset-second-tier {
-        background-color: @modern-blue-mid;
-        color: @modern-blue;
-    };
-    
-    .colorset-third-tier {
-        background-color: @modern-blue-high;
-        color: @modern-blue-light-font;
-    };
-
-    input.colorset-first-tier {
-        background-color: @modern-blue;
-        color: @modern-blue-font;
-    };
-
-    .char-sheet {
-        .age-header {
-            label {
-                background-color: @modern-blue;
-                color: @modern-blue-font;
-            }
-            .editor {
-                background-color: #ffffff;
-            }
-        }
-    }
-
-    //Base Age Roll
-    .dice-show.trait-test {
-        // Stunt Die Color on ChatMessage
-        i:last-of-type {
-            color: @modern-blue;
-        };
-    };
-    //Base Age Roll
-    .roll-mod {
-        border-bottom: 1px solid @modern-blue;
-    };
-    .roll-mod.stunted {
-        background-color: @modern-blue;
-        color: @modern-blue-font;
-    };        
-
-    // Styling Character Ability with total value
-    .char-sheet {
-        .item-container {
-            img {
-                border: 1px solid @modern-blue;
-            }
-        }
-        input {
-            background-color: #ffffff;
+each(@colorsets, {
+    .colorset-@{value} {
+        .colorset-first-tier {
+            background-color: extract(extract(@color-list, @index), 1);
+            color: extract(extract(@color-list, @index), 4);
+        };    
+        
+        .colorset-second-tier {
+            background-color: extract(extract(@color-list, @index), 3);
+            color: extract(extract(@color-list, @index), 1);
         };
         
-        input.colorset-second-tier {
-            background-color: @modern-blue-mid !important;
-            color: @modern-blue !important;
+        .colorset-third-tier {
+            background-color: extract(extract(@color-list, @index), 2);
+            color: extract(extract(@color-list, @index), 5);
         };
-
-    };
-
-    .focus,
-    .power,
-    .talent,
-    .weapon,
-    .equipment,
-    .stunts,
-    .honorifics,
-    .membership,
-    .relationship {
-        img {
-            border: 1px solid @modern-blue;
+    
+        input.colorset-first-tier {
+            background-color: extract(extract(@color-list, @index), 1);
+            color: extract(extract(@color-list, @index), 4);
+        };
+    
+        .char-sheet {
+            .age-header {
+                label {
+                    background-color: extract(extract(@color-list, @index), 1);
+                    color: extract(extract(@color-list, @index), 4);
+                }
+                .editor {
+                    background-color: #ffffff;
+                }
+            }
         }
-
-        label {
-            color: @modern-blue;
-        };
-        .item-card-stats {
-            background-color: @modern-blue-mid;
-            input.data-entry {
-                color: @modern-blue-light-font;
+    
+        //Base Age Roll
+        .dice-show.trait-test {
+            // Stunt Die Color on ChatMessage
+            i:last-of-type {
+                color: extract(extract(@color-list, @index), 1);
             };
         };
-        .item-card-desc {
-            background-color: #ffffff;
+        //Base Age Roll
+        .roll-mod {
+            border-bottom: 1px solid extract(extract(@color-list, @index), 1);
         };
-        // Tabs Nav Control  
-        nav {
-            .item {
-                background-color: @modern-blue-mid;
-                color: @modern-blue;
-            }
-            .item.active {
-                background-color: #ffffff;
-            }
-        }
-        // Modificator Cards
-        .mod-card {
-            border: solid @modern-blue-mid 1px;
-        }
-
-    };
-};
-/*-------------------------------------------------------*/
-
-// Fantasy AGE Colorset
-/*-------------------------------------------------------*/
-.colorset-fantasy-blue {
-    .colorset-first-tier {
-        background-color: @fantasy-blue;
-        color: @fantasy-blue-font;
-    };    
+        .roll-mod.stunted {
+            background-color: extract(extract(@color-list, @index), 1);
+            color: extract(extract(@color-list, @index), 4);
+        };        
     
-    .colorset-second-tier {
-        background-color: @fantasy-blue-mid;
-        color: @fantasy-blue;
-    };
-    
-    .colorset-third-tier {
-        background-color: @fantasy-blue-high;
-        color: @fantasy-blue-light-font;
-    };
-
-    input.colorset-first-tier {
-        background-color: @fantasy-blue;
-        color: @fantasy-blue-font;
-    };
-
-    .char-sheet {
-        .age-header {
-            label {
-                background-color: @fantasy-blue;
-                color: @fantasy-blue-font;
+        // Styling Character Ability with total value
+        .char-sheet {
+            .item-container {
+                img {
+                    border: 1px solid extract(extract(@color-list, @index), 1);
+                }
             }
-            .editor {
+            input {
                 background-color: #ffffff;
-            }
-        }
-    }
-
-    //Base Age Roll
-    .dice-show.trait-test {
-        // Stunt Die Color on ChatMessage
-        i:last-of-type {
-            color: @fantasy-blue;
+            };
+            
+            input.colorset-second-tier {
+                background-color: extract(extract(@color-list, @index), 3) !important;
+                color: extract(extract(@color-list, @index), 1) !important;
+            };
+    
         };
-    };
-    //Base Age Roll
-    .roll-mod {
-        border-bottom: 1px solid @fantasy-blue;
-    };
-    .roll-mod.stunted {
-        background-color: @fantasy-blue;
-        color: @fantasy-blue-font;
-    };        
-
-    // Styling Character Ability with total value
-    .char-sheet {
-        .item-container {
+    
+        .focus,
+        .power,
+        .talent,
+        .weapon,
+        .equipment,
+        .stunts,
+        .honorifics,
+        .membership,
+        .relationship {
             img {
-                border: 1px solid @fantasy-blue;
+                border: 1px solid extract(extract(@color-list, @index), 1);
             }
-        }
-        input {
-            background-color: #ffffff;
-        };
-        
-        input.colorset-second-tier {
-            background-color: @fantasy-blue-mid !important;
-            color: @fantasy-blue !important;
-        };
-
-    };
-
-    .focus,
-    .power,
-    .talent,
-    .weapon,
-    .equipment,
-    .stunts,
-    .honorifics,
-    .membership,
-    .relationship {
-        img {
-            border: 1px solid @fantasy-blue;
-        }
-        label {
-            color: @fantasy-blue;
-        };
-        .item-card-stats {
-            background-color: @fantasy-blue-mid;
-            input.data-entry {
-                color: @fantasy-blue-light-font;
-            };
-        };
-        .item-card-desc {
-            background-color: #ffffff;
-        };
-        // Tabs Nav Control  
-        nav {
-            .item {
-                background-color: @fantasy-blue-mid;
-                color: @fantasy-blue;
-            }
-            .item.active {
-                background-color: #ffffff;
-            }
-        }
-        // Modificator Cards
-        .mod-card {
-            border: solid @fantasy-blue-mid 1px;
-        }
-
-    };
-};
-/*-------------------------------------------------------*/
-
-// Dragon AGE Colorset
-/*-------------------------------------------------------*/
-.colorset-dragon-red {
-    .colorset-first-tier {
-        background-color: @dragon-red;
-        color: @dragon-red-font;
-    };    
     
-    .colorset-second-tier {
-        background-color: @dragon-red-mid;
-        color: @dragon-red;
-    };
-    
-    .colorset-third-tier {
-        background-color: @dragon-red-high;
-        color: @dragon-red-light-font;
-    };
-
-    input.colorset-first-tier {
-        background-color: @dragon-red;
-        color: @dragon-red-font;
-    };
-
-    .char-sheet {
-        .age-header {
             label {
-                background-color: @dragon-red;
-                color: @dragon-red-font;
-            }
-            .editor {
-                background-color: #ffffff;
-            }
-        }
-    }
-
-    //Base Age Roll
-    .dice-show.trait-test {
-        // Stunt Die Color on ChatMessage
-        i:last-of-type {
-            color: @dragon-red;
-        };
-    };
-    //Base Age Roll
-    .roll-mod {
-        border-bottom: 1px solid @dragon-red;
-    };
-    .roll-mod.stunted {
-        background-color: @dragon-red;
-        color: @dragon-red-font;
-    };        
-
-    // Styling Character Ability with total value
-    .char-sheet {
-        .item-container {
-            img {
-                border: 1px solid @dragon-red;
-            }
-        }
-        input {
-            background-color: #ffffff;
-        };
-        
-        input.colorset-second-tier {
-            background-color: @dragon-red-mid !important;
-            color: @dragon-red !important;
-        };
-
-    };
-
-    .focus,
-    .power,
-    .talent,
-    .weapon,
-    .equipment,
-    .stunts,
-    .honorifics,
-    .membership,
-    .relationship {
-        img {
-            border: 1px solid @dragon-red;
-        }
-        label {
-            color: @dragon-red;
-        };
-        .item-card-stats {
-            background-color: @dragon-red-mid;
-            input.data-entry {
-                color: @dragon-red-light-font;
+                color: extract(extract(@color-list, @index), 1);
             };
-        };
-        .item-card-desc {
-            background-color: #ffffff;
-        };
-        // Tabs Nav Control  
-        nav {
-            .item {
-                background-color: @dragon-red-mid;
-                color: @dragon-red;
-            }
-            .item.active {
-                background-color: #ffffff;
-            }
-        }
-        // Modificator Cards
-        .mod-card {
-            border: solid @dragon-red-mid 1px;
-        }
-
-    };
-};
-/*-------------------------------------------------------*/
-
-// Folded Purple Colorset
-/*-------------------------------------------------------*/
-.colorset-folded-purple {
-    .colorset-first-tier {
-        background-color: @folded-purple;
-        color: @folded-purple-font;
-    };    
-    
-    .colorset-second-tier {
-        background-color: @folded-purple-mid;
-        color: @folded-purple;
-    };
-    
-    .colorset-third-tier {
-        background-color: @folded-purple-high;
-        color: @folded-purple-light-font;
-    };
-
-    input.colorset-first-tier {
-        background-color: @folded-purple;
-        color: @folded-purple-font;
-    };
-
-    .char-sheet {
-        .age-header {
-            label {
-                background-color: @folded-purple;
-                color: @folded-purple-font;
-            }
-            .editor {
-                background-color: #ffffff;
-            }
-        }
-    }
-
-    //Base Age Roll
-    .dice-show.trait-test {
-        // Stunt Die Color on ChatMessage
-        i:last-of-type {
-            color: @folded-purple;
-        };
-    };
-    //Base Age Roll
-    .roll-mod {
-        border-bottom: 1px solid @folded-purple;
-    };
-    .roll-mod.stunted {
-        background-color: @folded-purple;
-        color: @folded-purple-font;
-    };        
-
-    // Styling Character Ability with total value
-    .char-sheet {
-        .item-container {
-            img {
-                border: 1px solid @folded-purple;
-            }
-        }
-        input {
-            background-color: #ffffff;
-        };
-        
-        input.colorset-second-tier {
-            background-color: @folded-purple-mid !important;
-            color: @folded-purple !important;
-        };
-
-    };
-
-    .focus,
-    .power,
-    .talent,
-    .weapon,
-    .equipment,
-    .stunts,
-    .honorifics,
-    .membership,
-    .relationship {
-        img {
-            border: 1px solid @folded-purple;
-        }
-        label {
-            color: @folded-purple;
-        };
-        .item-card-stats {
-            background-color: @folded-purple-mid;
-            input.data-entry {
-                color: @folded-purple-light-font;
+            .item-card-stats {
+                background-color: extract(extract(@color-list, @index), 3);
+                input.data-entry {
+                    color: extract(extract(@color-list, @index), 5);
+                };
             };
-        };
-        .item-card-desc {
-            background-color: #ffffff;
-        };
-        // Tabs Nav Control  
-        nav {
-            .item {
-                background-color: @folded-purple-mid;
-                color: @folded-purple;
-            }
-            .item.active {
+            .item-card-desc {
                 background-color: #ffffff;
+            };
+            // Tabs Nav Control  
+            nav {
+                .item {
+                    background-color: extract(extract(@color-list, @index), 3);
+                    color: extract(extract(@color-list, @index), 1);
+                }
+                .item.active {
+                    background-color: #ffffff;
+                }
             }
-        }
-        // Modificator Cards
-        .mod-card {
-            border: solid @folded-purple-mid 1px;
-        }
-
+            // Modificator Cards
+            .mod-card {
+                border: solid extract(extract(@color-list, @index), 3) 1px;
+            }
+        };
     };
-};
-/*-------------------------------------------------------*/
+});
