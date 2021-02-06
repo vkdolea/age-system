@@ -124,23 +124,6 @@ ageSystem.conditions = [
     }
 ];
 
-// Conditions - Description
-// ageSystem.conditionsDesc = {
-//     blinded: "age-system.conditions.blindedDesc",
-//     deafened: "age-system.conditions.deafenedDesc",
-//     exhausted: "age-system.conditions.exhaustedDesc",
-//     fatigued: "age-system.conditions.fatiguedDesc",
-//     freefalling: "age-system.conditions.freefallingDesc",
-//     helpless: "age-system.conditions.helplessDesc",
-//     hindred: "age-system.conditions.hindredDesc",
-//     prone: "age-system.conditions.proneDesc",
-//     restrained: "age-system.conditions.restrainedDesc",
-//     injured: "age-system.conditions.injuriedDesc",
-//     wounded: "age-system.conditions.woundedDesc",
-//     unconscious: "age-system.conditions.dyingDesc",
-//     dying: "age-system.conditions.dyingDesc"
-// };
-
 ageSystem.damageType = {
     stun: "age-system.stun",
     wound: "age-system.wound"
@@ -149,6 +132,7 @@ ageSystem.damageSource = {
     impact: "age-system.impact",
     ballistic: "age-system.ballistic",
     penetrating: "age-system.penetrating"
+    // piercing: "age-system.piercing"
 };
 ageSystem.rof = {
     none: "age-system.rof.none",

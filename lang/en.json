@@ -90,8 +90,11 @@
             "rollPower": "{actor} uses {item}",
             
             "rollFullDamage": "Full Damage",
+            "rollFullHealing": "Full Healing",
             "rollDamage": "Roll Damage",
+            "rollHealing": "Roll Healing",
             "rollResistedDamage": "Resisted Damage",
+            "rollResistedHealing": "Resisted Healing",
             "addFocusSD": "Add Both",
             "addFocus": "Add Focus",
             "addStuntDie": "Add SD"

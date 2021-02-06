@@ -50,27 +50,27 @@
                 {{#if (or hasDamage hasHealing)}}
                 <div class="age-chat-buttons-grid">
             
-                    <a class="age-button roll-damage colorset-second-tier main-dmg" title="{{localize "age-system.rollDamage"}}">
-                        {{!-- <div class="flexrow flex-justify-center flex-align-center"> --}}
-                        {{#if hasTest}} {{localize "age-system.chatCard.rollFullDamage"}}
-                        {{else}} {{localize "age-system.chatCard.rollDamage"}} {{/if}}
-
+                    <a class="age-button roll-damage colorset-second-tier main-dmg">
+                        {{#if hasTest}}
+                            {{#if hasDamage}} {{localize "age-system.chatCard.rollFullDamage"}}
+                            {{else}} {{localize "age-system.chatCard.rollFullHealing"}} {{/if}}
+                        {{else}}
+                            {{#if hasDamage}} {{localize "age-system.chatCard.rollDamage"}}
+                            {{else}} {{localize "age-system.chatCard.rollHealing"}} {{/if}}
+                        {{/if}}
                     </a>
 
-                    <a class="age-button roll-damage add-stunt-damage colorset-second-tier sd-dmg" title="{{localize "age-system.rollDamage"}}">
-                        {{!-- <div class="flexrow flex-justify-center flex-align-center"> --}}
-                            {{localize "age-system.chatCard.addStuntDie"}}
-                        {{!-- <div>
-                        </div> --}}
+                    <a class="age-button roll-damage add-stunt-damage colorset-second-tier sd-dmg">
+                        {{localize "age-system.chatCard.addStuntDie"}}
                     </a>
 
-                    <a class="age-button roll-damage add-focus-damage colorset-second-tier focus-dmg" title="{{localize "age-system.rollDamage"}}">
+                    <a class="age-button roll-damage add-focus-damage colorset-second-tier focus-dmg">
                         <div class="flexrow flex-justify-center flex-align-center">
                             {{localize "age-system.chatCard.addFocus"}}
                         </div>
                     </a>
                
-                    <a class="age-button roll-damage add-stunt-damage add-focus-damage colorset-second-tier both-dmg" title="{{localize "age-system.rollDamage"}}">
+                    <a class="age-button roll-damage add-stunt-damage add-focus-damage colorset-second-tier both-dmg">
                         <div class="flexrow flex-justify-center flex-align-center">
                             {{localize "age-system.chatCard.addFocusSD"}}
                         </div>
@@ -82,26 +82,26 @@
                 {{#if (and (or hasDamage hasHealing) hasTest)}}
                 <div class="age-chat-buttons-grid">
             
-                    <a class="age-button roll-damage resisted colorset-second-tier main-dmg" title="{{localize "age-system.rollDamage"}}">
+                    <a class="age-button roll-damage resisted colorset-second-tier main-dmg">
                         <div class="flexrow flex-justify-center flex-align-center">
-                            {{localize "age-system.chatCard.rollResistedDamage"}}
-                            {{!-- <i class="fas fa-fist-raised"></i> --}}
+                            {{#if hasDamage}} {{localize "age-system.chatCard.rollResistedDamage"}}
+                            {{else}} {{localize "age-system.chatCard.rollResistedHealing"}} {{/if}}
                         </div>
                     </a>
 
-                    <a class="age-button roll-damage add-stunt-damage resisted colorset-second-tier sd-dmg" title="{{localize "age-system.rollDamage"}}">
+                    <a class="age-button roll-damage add-stunt-damage resisted colorset-second-tier sd-dmg">
                         <div class="flexrow flex-justify-center flex-align-center">
                             {{localize "age-system.chatCard.addStuntDie"}}
                         </div>
                     </a>
 
-                    <a class="age-button roll-damage add-focus-damage resisted colorset-second-tier focus-dmg" title="{{localize "age-system.rollDamage"}}">
+                    <a class="age-button roll-damage add-focus-damage resisted colorset-second-tier focus-dmg">
                         <div class="flexrow flex-justify-center flex-align-center">
                             {{localize "age-system.chatCard.addFocus"}}
                         </div>
                     </a>
 
-                    <a class="age-button roll-damage add-stunt-damage add-focus-damage colorset-second-tier resisted both-dmg" title="{{localize "age-system.rollDamage"}}">
+                    <a class="age-button roll-damage add-stunt-damage add-focus-damage colorset-second-tier resisted both-dmg">
                         <div class="flexrow flex-justify-center flex-align-center">
                             {{localize "age-system.chatCard.addFocusSD"}}
                         </div>
@@ -112,7 +112,7 @@
 
                 {{#if usingFatigue}}
                 {{#if hasFatigue}}
-                <a class="age-button roll-fatigue flexrow colorset-second-tier" title="{{localize "age-system.rollFatigue"}}">
+                <a class="age-button roll-fatigue flexrow colorset-second-tier">
                     <div class="flexrow flex-justify-center flex-align-center">
                         <div>{{localize "age-system.rollFatigue"}} </div>
                         <i class="fas fa-head-side-cough"></i>
