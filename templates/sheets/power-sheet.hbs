@@ -11,13 +11,24 @@
                 {{!-- Item Image --}}
                 {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}} 
 
-                {{#if inChat}}
-                {{else}}
+                {{#if (ne inChat true)}}
                 {{!-- Select Damage and Fatigue Options --}}
-                <div class="flexcol power-type-control flex-justify-between">
+                <div class="power-type-control">
                     <a class="toggle-damage colorset-second-tier {{#unless data.hasDamage}}not-equiped{{/unless}}" title="{{localize "age-system.rollDamage"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="fas fa-fist-raised"></i>
+                        </div>
+                    </a>
+    
+                    <a class="toggle-healing colorset-second-tier {{#unless data.hasHealing}}not-equiped{{/unless}}" title="{{localize "age-system.rollHealing"}}">
+                        <div class="flexrow flex-justify-center flex-align-center">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </a>
+
+                    <a class="toggle-resist colorset-second-tier {{#unless data.hasTest}}not-equiped{{/unless}}" title="{{localize "age-system.rollHealing"}}">
+                        <div class="flexrow flex-justify-center flex-align-center">
+                            <i class="far fa-dot-circle"></i>
                         </div>
                     </a>
 
@@ -33,7 +44,6 @@
                 {{> "systems/age-system/templates/partials/ability-focus-select.hbs"}}
 
                 {{!-- Power Point Cost --}}
-
                 {{#unless (and data.inputFatigueTN data.hasFatigue)}}
                 {{#unless (and inChat data.hasFatigue)}}
                 <div class="flexcol">
@@ -49,8 +59,17 @@
 
                 {{!-- Fatigue Setup --}}
                 {{#if data.useFatigue}}
-                {{#if inChat}}
-                {{else}}
+                {{#if (ne inChat true)}}       
+                <div class="flexcol use-fatigue-true">
+                    <label class="use-fatigue">{{localize "age-system.ablFatigue"}}</label>
+                    <select name="data.ablFatigue" class="data-input">
+                        {{#select data.ablFatigue}}
+                        {{#each config.abilities as |name type|}}
+                        <option value="{{type}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
                 <div class="flexcol use-fatigue-true">
                     <label class="use-fatigue">{{localize "age-system.inputFatigueTN"}}</label>
                     <input class="use-fatigue" type="checkbox" name="data.inputFatigueTN" {{checked data.inputFatigueTN}} class="checkbox"/>
@@ -92,10 +111,52 @@
                 <div class="flexcol">
                     <label>{{localize "age-system.item.force"}}</label>
                     <span class="data-input">{{data.itemForce}}</span>
+                    {{#if (ne inChat true)}}
+                    {{!-- Ability to activate item --}}
+                    <div class="flexcol">
+                        <select name="data.itemForceAbl" class="data-input">
+                            {{#select data.itemForceAbl}}
+                            {{#each config.abilities as |name type|}}
+                            <option value="{{type}}">{{localize name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+                    {{/if}}             
                 </div>
 
-                {{!-- Power Damage --}}
-                {{#if data.causeDamage}}
+                {{!-- Resist Test --}}
+                {{#if data.hasTest}}
+                {{#if inChat}}
+                <div class="flexcol flex-align-center">
+                    <label style="white-space: nowrap;">{{localize "age-system.item.testResist"}}</label>
+                    <p style="white-space: nowrap;">{{localize (concat "age-system." data.testAbl)}} ({{data.testFocus}})</p>
+                </div>
+                {{else}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.item.testResist"}}</label>
+                    {{!-- Ability to Resist Power --}}
+                    <select name="data.testAbl" class="data-input">
+                        {{#select data.testAbl}}
+                        {{#each config.abilities as |name type|}}
+                        <option value="{{type}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    {{!-- Focus to Resist Power --}}
+                    <input name="data.testFocus" class="data-input" type="text" value="{{data.testFocus}}" placeholder="{{localize "age-system.focus"}}" list="{{item.type}}-{{item._id}}-list"/>
+                    <datalist id="{{item.type}}-{{item._id}}-list">
+                        <option value=""></option>
+                        {{#each config.focus as |focus|}}
+                        <option value="{{focus.name}}"></option>
+                        {{/each}}
+                    </datalist>
+                </div>
+                {{/if}}
+                {{/if}}
+
+                {{!-- Power Damage/Heal --}}
+                {{#if (or data.causeDamage data.causeHealing)}}
                 {{> "systems/age-system/templates/partials/dmg-block-sheet.hbs"}}
                 {{/if}}
 
@@ -114,8 +175,7 @@
 
         </div>
 
-        {{#if inChat}}
-        {{else}}
+        {{#if (ne inChat true)}}
         {{!-- Tab Control --}}
         {{> "systems/age-system/templates/partials/bonus-desc-sheet.hbs"}}
         {{/if}}

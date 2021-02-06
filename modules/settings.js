@@ -185,7 +185,7 @@ export const registerSystemSettings = function() {
       "modern-blue": "SETTINGS.colorModernBlue",
       "fantasy-blue": "SETTINGS.colorFantasyBlue",
       "dragon-red": "SETTINGS.colorDragonRed",
-      // "ronin-green": "SETTINGS.colorRoninGreen",
+      "ronin-green": "SETTINGS.colorRoninGreen",
       // "expanded-blue": "SETTINGS.colorExpandedBlue",
       "folded-purple": "SETTINGS.colorFoldedPurple",
     },

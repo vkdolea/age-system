@@ -156,7 +156,9 @@ export const migrateActorData = function(actor) {
 export const migrateItemData = function(item) {
   const updateData = {};
   _addItemModSpeed(item, updateData);
+  _addItemValidResistedDmgAbl(item, updateData);
   _addExtraPowerData(item, updateData);
+  _addItemForceAbl(item, updateData);
   return updateData;
 };
 
@@ -233,7 +235,6 @@ function _addItemModSpeed(item, updateData) {
 }
 /* -------------------------------------------- */
 
-/* -------------------------------------------- */
 /**
  * Add extra Power elements to address resist Test
  * and half damage when spell is resisted
@@ -252,7 +253,36 @@ function _addExtraPowerData(item, updateData) {
   updateData["data.damageResisted.nrDice"] = 1;
   updateData["data.damageResisted.diceType"] = 6;
   updateData["data.damageResisted.extraValue"] = 0;
-  updateData["data.damageResisted.dmgAbl"] = "";
+  updateData["data.damageResisted.dmgAbl"] = "will";
 
   return updateData;
 }
+
+/**
+ * Fix imported values for Ability to Resist Power
+ * @private
+ */
+function _addItemValidResistedDmgAbl(item, updateData) {
+  if (item.type !== "power") return updateData;
+  if (item.data.damageResisted) {
+    if (!item.data.damageResisted.dmgAbl) {
+      updateData["data.damageResisted.dmgAbl"] = "will";  
+    }
+  }
+  return updateData;
+}
+/* -------------------------------------------- */
+
+/**
+ * Add itemForceAbl field for powers
+ * @private
+ */
+function _addItemForceAbl(item, updateData) {
+  if (item.type !== "power") return updateData;
+  if (item.data.itemForceAbl) return updateData;
+
+  updateData["data.itemForceAbl"] = "will";
+
+  return updateData
+}
+/* -------------------------------------------- */

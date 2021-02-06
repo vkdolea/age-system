@@ -61,6 +61,31 @@
             margin-right: 4px;
         }
 
+        .power-type-control {
+            display: grid;
+            grid-template-columns: 20px 20px;
+            grid-template-rows: 30px 30px;
+            grid-template-areas:
+                "damage heal"
+                "resist fatigue";
+            .toggle-damage {
+                grid-area: damage;
+                justify-self: stretch;
+            }
+            .toggle-healing {
+                grid-area: heal;
+                justify-self: stretch;
+            }
+            .toggle-resist {
+                grid-area: resist;
+                justify-self: stretch;
+            }
+            .toggle-fatigue {
+                grid-area: fatigue;
+                justify-self: stretch;
+            }
+        }
+
         input[name="data.shortDesc"].long-text {
             max-width: 100%;
             width: 100%;
@@ -127,9 +152,17 @@
                 margin-left: 1px;
                 margin-right: 1px;
             };
+            
+            select[name="data.testAbl"],
+            select[name="data.useAbl"],
+            select[name="data.itemForceAbl"] {
+                text-align: center;
+            }
 
-            input[name="data.useFocus"] {
+            input[name="data.useFocus"],
+            input[name="data.testFocus"] {
                 min-width: 140px;
+                max-width: 250px;
                 text-align: center;
             };
             

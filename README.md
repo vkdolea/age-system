@@ -68,6 +68,22 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
+
+### 0.4.0 [2021-02-05]
+#### Added
+- Options to Add Focus to damage and an arbitraty number for Stunt Die now shows up When ALT + Click to roll damage.
+- Powers now have option to roll as Damage or Healing.
+- Added option to indicate a Power as resistable, and add which Ability (Focus) is used to resist.
+- Damage/Healing Powers have a "Resisted Effect" to indicate the damage/healing roll when target resists.
+- Added buttons on chat message to roll "resisted damage/healing" from applicable Powers.
+- Ronin Green color scheme included.
+- Player can select which Ability will be used to check Power's Fatigue - previously all Fatigue checks were based on Willpower.
+- Fatigue chat message now will not show Damage/Fatigue buttons.
+#### Fixed
+- Bug causing chat message causing damage/fatigue rolls from unliked tokens to roll from Actor.
+- Bug preventing Talent degree to display on character sheet.
+- Restyled chat message buttons.
+
 ### v0.3.1 [2021-01-26]
 #### Fixed
 - Incorrect link on system.json preventing system to update automatically using FoundryVTT software.

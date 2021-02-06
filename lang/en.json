@@ -80,13 +80,24 @@
             "duplicatedFocus": "Focus is not added to character - it already owns a Focus named ",
             "selectTokenMacro": "Select a token to run the macro.",
             "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro.",
-            "selectOnlyOneTarget": "Select only one target to attack."
+            "selectOnlyOneTarget": "Select only one target to attack.",
+            "originTokenMissing": "Action owner (Actor or Unlinked Token) doesn't exist anymore."
         },
         
         "chatCard": {
             "rollGeneral": "{actor} rolls {item}",
             "rollAttack": "{actor} attacks with {item}",
-            "rollPower": "{actor} uses {item}"
+            "rollPower": "{actor} uses {item}",
+            
+            "rollFullDamage": "Full Damage",
+            "rollFullHealing": "Full Healing",
+            "rollDamage": "Roll Damage",
+            "rollHealing": "Roll Healing",
+            "rollResistedDamage": "Resisted Damage",
+            "rollResistedHealing": "Resisted Healing",
+            "addFocusSD": "Add Both",
+            "addFocus": "Add Focus",
+            "addStuntDie": "Add SD"
         },
 
         "testThreshold": "Threshold",
@@ -211,6 +222,7 @@
         "weight": "Weight",
 
         "fatigue": "Fatigue",
+        "ablFatigue": "Fatigue Test",
         "useFatigue": "Use Fatigue",
         "inputFatigueTN": "Input TN",
         "fatigueTN": "Fatigue TN",
@@ -321,6 +333,7 @@
         "item": {
             "newItem": "New Item",
             "damage": "Damage",
+            "healing": "Healing",
             "damageType": "Damage Type",
             "minRange": "Minimum Range",
             "maxRange": "Maximum Range",
@@ -337,9 +350,12 @@
             "equiped": "Equiped",
             "minStr": "Min STR",
             "cast": "Cast",
-            "force": "Force"
+            "force": "Force",
+            "resistedEffect": "Resisted Effect",
+            "testResist": "Resist Test"
         },
         "rollDamage": "Roll Damage",
+        "rollHealing": "Roll Healing",
         "itemDmgMod": "General Bonus",
         "thisItemDmgBns": "Item Bonus",
         "rollFatigue": "Roll Fatigue",

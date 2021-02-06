@@ -1,16 +1,18 @@
 import { sortObjArrayByName } from "./setup.js";
 
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
-export async function ageRollCheck(
-    event,
-    actor,
-    abl,
+export async function ageRollCheck({
+    event = null,
+    actor = null,
+    abl = null,
     itemRolled = null,
     resourceRoll = false,
     rollTN = null,
     rollUserMod = null,
-    atkDmgTradeOff = null) {
-
+    atkDmgTradeOff = null,
+    hasTest = false,
+    rollType = null}={}) {
+    
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
     if (!event.ctrlKey && event.altKey) {
@@ -21,74 +23,129 @@ export async function ageRollCheck(
         atkDmgTradeOff = -Math.abs(Number(extraOptions.atkDmgTradeOff));
     };
 
+    // Check if actor rolling is unlinked token and log its Token ID
+    const isToken = actor.isToken ? 1 : 0;
+    const actorId = isToken ? actor.token.data._id : actor._id;
+
     // Set roll mode
     const rMode = setBlind(event);
     let rollData = {};
+    let partials = [];
     rollData.abilityName = "...";
     
     // Basic formula created spliting Stunt Die from the others
     let rollFormula = "2d6 + 1d6";
 
+    // Check if it is a Resource/Income roll
+    let resName;
+    if (resourceRoll === true) {
+        rollFormula += " + @resources"
+        rollData.resources = actor.data.data.resources.total;
+        rollData.resourcesRoll = resourceRoll;
+        const resSelected = game.settings.get("age-system", "wealthType");
+        resName = game.i18n.localize(`age-system.${resSelected}`)
+        partials.push({
+            label: resName,
+            value: rollData.resources
+        });
+        rollData.resourcesName = game.i18n.localize(`age-system.${resSelected}`);
+    };
+
     // Check if Ability is used
+    let ablName;
     if (abl !== null && abl !== "no-abl") {
         const ablValue = actor.data.data.abilities[abl].total;
         rollFormula += " + @ability";
+        ablName = game.i18n.localize(`age-system.${abl}`);
         rollData = {
             ability: ablValue,
             ablCode: abl,
             focusId: null,
-            abilityName: game.i18n.localize(`age-system.${abl}`)
+            abilityName: ablName
         };
+        partials.push({
+            label: rollData.abilityName,
+            value: ablValue
+        });
     };
 
     // Check if item rolled is Focus and prepare its data
     const focusRolled = getFocus(itemRolled);
-
+    let focusId = null
     if (focusRolled) {
         rollFormula += " + @focus";
         rollData.focusName = focusRolled[0];
         rollData.focus = focusRolled[1];
+        partials.push({
+            label: focusRolled[0],
+            value: focusRolled[1]
+        });
+        focusId = focusRolled[2];
+    }
+
+    // Adds user input roll mod
+    if (rollUserMod) {
+        rollData.rollMod = rollUserMod;
+        rollFormula += " + @rollMod";
+        partials.push({
+            label: game.i18n.localize("age-system.setAgeRollMod"),
+            value: rollUserMod
+        });
     }
 
     // Transfer rolled item (if any) to chat message
     // Also checks if Item has Activation Mod
     if (itemRolled !== null) {
         rollData.itemId = itemRolled._id;
-        rollData.itemEntity = itemRolled;
+        rollData.hasDamage = itemRolled.data.data.hasDamage;
+        rollData.hasHealing = itemRolled.data.data.hasHealing;
+        rollData.hasFatigue = itemRolled.data.data.hasFatigue;
+        rollData.hasTest = itemRolled.data.data.hasTest;
+        // rollData.itemEntity = itemRolled;
         if (itemRolled.data.data.itemMods) {
             if (itemRolled.data.data.itemMods.itemActivation.isActive) {
                 rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
                 rollFormula += " + @activationMod"
+                partials.push({
+                    label: game.i18n.localize("age-system.activationMod"),
+                    value: rollData.activationMod
+                });
             }
         }
     } else {
         rollData.itemId = null;
     };
 
-    // Adds user input roll mod
-    if (rollUserMod) {
-        rollData.rollMod = rollUserMod;
-        rollFormula += " + @rollMod";
-    }
-
-    // Adds penalty for Attack which is converted to damage Bonus and pass info to chat Message
-    if (atkDmgTradeOff) {
-        rollData.atkDmgTradeOff = atkDmgTradeOff;
-        rollFormula += " + @atkDmgTradeOff";
-    }
-
     // Check if AIM is active - this bonus will apply to all rolls when it is active
     const aim = actor.data.data.aim;
-    if (aim.active) {
+    if (aim.active && !resourceRoll) {
         rollData.aim = aim.value;
         rollFormula += " + @aim";
+        partials.push({
+            label: game.i18n.localize("age-system.aim"),
+            value: aim.value
+        });
     };
+
+    // Adds penalty for Attack which is converted to damage Bonus and pass info to chat Message
+    if (atkDmgTradeOff && !resourceRoll) {
+        rollData.atkDmgTradeOff = atkDmgTradeOff;
+        rollFormula += " + @atkDmgTradeOff";
+        partials.push({
+            label: game.i18n.localize("age-system.penaltyToDamage"),
+            value: atkDmgTradeOff
+        })
+    }
 
     // Adds Armor Penalty if it is a Dexterity Check
     const armor = actor.data.data.armor;
     if (armor.penalty > 0 && abl === "dex") {
         rollData.armorPenalty = -armor.penalty;
         rollFormula += " + @armorPenalty";
+        partials.push({
+            label: game.i18n.localize("age-system.armorPenalty"),
+            value: rollData.armorPenalty
+        })
     };   
 
     // Check if Fatigue is configured
@@ -103,54 +160,95 @@ export async function ageRollCheck(
         if (fatigue.value > 0) {
             rollData.fatigue = -fatigue.value;
             rollFormula += " + @fatigue";
+            partials.push({
+                label: game.i18n.localize("age-system.fatigue"),
+                value: rollData.fatigue
+            })
         };
     }
 
     // Check Guard Up penalties
     // Here it checks if Guard Up and Defend are checked - when both are checked, the rule is use none
     const guardUp = actor.data.data.guardUp;
-    if (guardUp.active) {
+    if (guardUp.active && !resourceRoll) {
         rollData.guardUp = -guardUp.testPenalty;
         rollFormula += " + @guardUp";
+        partials.push({
+            label: game.i18n.localize("age-system.guardUp"),
+            value: rollData.guardUp
+        })
     };
 
-    // Check if it is a Resource/Income roll
-    if (resourceRoll === true) {
-        rollFormula += " + @resources"
-        rollData.resources = actor.data.data.resources.total;
-        rollData.resourcesRoll = resourceRoll;
-        const resSelected = game.settings.get("age-system", "wealthType");
-        rollData.resourcesName = game.i18n.localize(`age-system.${resSelected}`);
-    };
-
-    // Informs roll card the current color scheme in use by the user
-    rollData.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
+    // Finally, the Age Roll!
     const ageRoll = new Roll(rollFormula, rollData).roll();
 
-
     // If rollTN is used, check if roll fails or succeed
+    let isSuccess = null
     if (rollTN) {
         const rollMargin = ageRoll.total - rollTN;
-        if (rollMargin > -1) {
-            rollData.success = true;
+        if (rollMargin >= 0) {
+            isSuccess = true;
         } else {
-            rollData.success = false;
+            isSuccess = false;
         };
     };
 
-    // Generate Stunt Points if doubles are rolled and: total rolled is higher than TN or there is no TN set
-    const generateSP = (rollTN && rollData.success) || !rollTN;
+    // Generate Stunt Points if doubles are rolled and total rolled is higher than TN or there is no TN set
+    const generateSP = (rollTN && isSuccess) || !rollTN;
     const rollSummary = ageRollChecker(ageRoll, generateSP)
     let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
 
-    let cardData = {
-        rollInput: rollData,
+    // Roll header flavor text
+    let headerTerms = {actor: actor.name};
+    let headerFlavor = "";
+    if (rollType === "fatigue") {
+        headerTerms.item = game.i18n.localize("age-system.fatigue");
+        headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+    } else {
+        if (itemRolled) {
+            headerTerms.item = itemRolled.name;
+            switch (itemRolled.type) {
+                case "weapon":
+                    headerFlavor = game.i18n.format("age-system.chatCard.rollAttack", headerTerms);
+                    break;
+                case "power":
+                    headerFlavor = game.i18n.format("age-system.chatCard.rollPower", headerTerms);
+                    break;
+                default:
+                    headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+                    break;
+            }
+        } else {
+            if (resourceRoll) {
+                headerTerms.item = resName;
+                headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+            }
+            if (abl !== null && abl !== "no-abl") {
+                headerTerms.item = ablName;
+                headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+            }
+        };
+    }
+
+    rollData = {
+        ...rollData,
+        // Informs card's color scheme
+        colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
+        headerFlavor,
+        partials,
+        actorId,
+        isToken,
+        isSuccess,
         roll: ageRoll,
         ageRollSummary: rollSummary,
-        owner: actor,
+        // owner: actor,
         guardUpActive: guardUp.active,
+        rollTN,
+        focusId,
+        rollType,
     };
-    cardData.rollInput.rollTN = rollTN;
+    // cardData = mergeObject(cardData, rollData);
+    // cardData.rollInput.rollTN = rollTN;
 
     let chatData = {
         user: game.user._id,
@@ -158,7 +256,8 @@ export async function ageRollCheck(
         // whisper: isGMroll(event),
         blind: event.shiftKey,
         roll: ageRoll,
-        content: await renderTemplate(chatTemplate, cardData)
+        content: await renderTemplate(chatTemplate, rollData)
+        // content: await renderTemplate(chatTemplate, cardData)
     };
 
     // Compatibility with Dice So Nice
@@ -217,22 +316,22 @@ function _processAgeRollOptions(form) {
         }
     }
 
-    // console.log(rollOptions)
     return rollOptions
 }
 
 export function getFocus(item) {
     if (item === null) {return false}
-    if (item.type === "focus") {
-        return [item.name, item.data.data.initialValue]
+    if (item.type === "focus") return [item.name, item.data.data.initialValue, item.data._id];
+    if (item.data.data.useFocus === "") return false;
+    const ownerFocusId = item.data.data.useFocusActorId;
+    if (ownerFocusId) {
+        const inUseFocus = item.actor.getOwnedItem(ownerFocusId);
+        if (inUseFocus.name == "") return false;
+        return [inUseFocus.name, inUseFocus.data.data.initialValue, ownerFocusId];
     } else {
-        if (item.data.data.useFocusActorId) {
-            const inUseFocus = item.actor.getOwnedItem(item.data.data.useFocusActorId);
-            return [inUseFocus.name, inUseFocus.data.data.initialValue];
-        } else {
-            return [item.data.data.useFocus, 0]
-        }
+        return [item.data.data.useFocus, 0, null]
     }
+    
 }
 
 // Capture GM ID to whisper
@@ -315,13 +414,15 @@ export function dialogBoxAbilityFocus(focus, actor) {
     });
 };
 
-async function getDamageRollOptions() {
+async function getDamageRollOptions(addFocus, stuntDmg) {
     // Ve se item rolado e arma, poder ou null/outro, 
 
     const template = "/systems/age-system/templates/rolls/dmg-roll-settings.hbs"
     // const type = itemRolled ? itemRolled.type : null;
 
     const html = await renderTemplate(template, {
+        addFocus,
+        stuntDmg
         // ...data,
         // itemType: type
     });
@@ -349,14 +450,19 @@ async function getDamageRollOptions() {
 
 function _processDamageRollOptions(form) {
 
-    const modifiers = ["setDmgExtraDice", "setDmgGeneralMod", "setStuntDamage"];
+    const modifiers = ["setDmgExtraDice", "setDmgGeneralMod", "setStuntDamage", "addFocus", "stuntDieDmg"];
     let rollOptions = {}
 
     for (let o = 0; o < modifiers.length; o++) {
         const mod = modifiers[o];
-        if (form[mod]) {
-            rollOptions[mod] = parseInt(form[mod].value)
-            if (!Number.isInteger(rollOptions[mod])) rollOptions[mod] = null;
+        const option = form[mod];
+        if (option) {
+            if (option.type === "checkbox") {
+                rollOptions[mod] = option.checked;
+            } else {
+                rollOptions[mod] = parseInt(option.value);
+                if (!Number.isInteger(rollOptions[mod])) rollOptions[mod] = null;
+            }
         }
     }
 
@@ -364,54 +470,61 @@ function _processDamageRollOptions(form) {
 }
 
 // Item damage
-export async function itemDamage(
-    event,
-    item,
+export async function itemDamage({
+    event = null,
+    item = null,
     stuntDie = null,
     addFocus = false,
     atkDmgTradeOff = 0,
     stuntDamage = null,
     dmgExtraDice = null,
     dmgGeneralMod = null,
-    ) {
+    resistedDmg = false}={}) {
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
     if (!event.ctrlKey && event.altKey) {
-        damageOptions = await getDamageRollOptions();
+        damageOptions = await getDamageRollOptions(addFocus, stuntDie);
         if (damageOptions.cancelled) return;
         dmgExtraDice = damageOptions.setDmgExtraDice;
         dmgGeneralMod = damageOptions.setDmgGeneralMod;
         stuntDamage = damageOptions.setStuntDamage;
+        addFocus = damageOptions.addFocus;
+        stuntDie = damageOptions.stuntDieDmg;
     };
     
-    const nrDice = item.data.data.nrDice;
-    const diceSize = item.data.data.diceType;
-    const constDmg = item.data.data.extraValue;
+    const dmgDetails = resistedDmg ? item.data.data.damageResisted : item.data.data;
+    let nrDice = dmgDetails.nrDice;
+    let diceSize = dmgDetails.diceType;
+    let constDmg = dmgDetails.extraValue;
+    let dmgAbl = dmgDetails.dmgAbl
 
     const isBlind = setBlind(event);
     const audience = isGMroll(event);
 
     let damageFormula = nrDice > 0 ? "(@diceQtd)d(@diceSize)" : "";
-    let messageData = {
-        flavor: `${item.name}`,
-        speaker: ChatMessage.getSpeaker()
-    };
-
-    // Check if damage source has a non 0 portion on its parameters
-    if (constDmg !== 0) {damageFormula = `${damageFormula} + @damageMod`}
-
-    const dmgAbl = item.data.data.dmgAbl;
     let rollData = {
         diceQtd: nrDice,
         diceSize: diceSize,
         damageMod: constDmg
     };
+    // Check if damage source has a non 0 portion on its parameters
+    if (constDmg !== 0) {damageFormula = `${damageFormula} + @damageMod`}
+    let messageData = {
+        flavor: `${item.name}`,
+        speaker: ChatMessage.getSpeaker()
+    };
 
     if (item.isOwned) {
 
         // Adds up Flavor text for item damage type
-        messageData.flavor += ` | ${game.i18n.localize(`age-system.${item.data.data.dmgType}`)} | ${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}`;
+        if (item.data.data.hasDamage) {
+            messageData.flavor += ` | ${game.i18n.localize(`age-system.${item.data.data.dmgType}`)} | ${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}`;
+        };
+        // Add Healing Flavor text if applicable
+        if (item.data.data.hasHealing) {
+            messageData.flavor += ` | ${game.i18n.localize(`age-system.item.healing`)}`;
+        };
 
         // Adds owner's Ability to damage
         if (dmgAbl !== null && dmgAbl !== "no-abl") {
@@ -507,3 +620,12 @@ export async function itemDamage(
 
     return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
 };
+
+export function getActor() {
+    const speaker = ChatMessage.getSpeaker();
+    let actor;
+    if (speaker.token) actor = game.actors.tokens[speaker.token];
+    if (!actor) actor = game.actors.get(speaker.actor);
+    if (!actor) return false;
+    return actor;
+}
