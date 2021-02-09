@@ -1,7 +1,30 @@
 {
     "Actor": {
-        "types": ["char"],
+        "types": [
+            "char",
+            "vehicle"
+        ],
         "templates": {},
+        "vehicle": {
+            "handlingDiff": 0,
+            "capacity": 0,
+            "velocity": {
+                "category": "standard",
+                "catMod": 0
+            },
+            "ramDmg": 1,
+            "hull": 0,
+            "cost": 0,
+            "useFocus": "",
+            "description": "",
+            "coverRating": 0,
+            "armorRating": 0,
+            "partHealth": {
+                "max": 20,
+                "value": 20
+            },
+            "pilot": ""
+        },
         "char": {
             "statBlockView": false,
             "level": 1,

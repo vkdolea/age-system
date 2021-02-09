@@ -1,5 +1,6 @@
 {
     "ACTOR.TypeChar": "Player Character",
+    "ACTOR.TypeVehicle": "Vehicle",
     "ITEM.TypeStunts": "Stunts",
     "ITEM.TypeEquipment": "General Equipment",
     "ITEM.TypePower": "Power & Arcana",
@@ -83,6 +84,12 @@
             "selectOnlyOneTarget": "Select only one target to attack.",
             "originTokenMissing": "Action owner (Actor or Unlinked Token) doesn't exist anymore."
         },
+
+        "parameters": "Parameters",
+        "pilot": "Pilot",
+        "handling": "Handling",
+        "velocity": "Velocity",
+        "ram": "Ram",
         
         "chatCard": {
             "rollGeneral": "{actor} rolls {item}",

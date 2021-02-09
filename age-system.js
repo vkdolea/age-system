@@ -2,6 +2,7 @@
 import {ageSystem} from "./modules/config.js";
 import ageSystemItemSheet from "./modules/sheets/ageSystemItemSheet.js";
 import ageSystemCharacterSheet from "./modules/sheets/ageSystemCharacterSheet.js";
+import ageSystemVehicleSheet from "./modules/sheets/ageSystemVehicleSheet.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
@@ -52,7 +53,16 @@ Hooks.once("init", async function() {
     Items.registerSheet("age-system", ageSystemItemSheet, {makeDefault: true});
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("age-system", ageSystemCharacterSheet, {makeDefault: true});
+    Actors.registerSheet("age-system", ageSystemCharacterSheet, {
+        types: ["char"],
+        makeDefault: true,
+        // label: "DND5E.SheetClassCharacter"
+    });
+    Actors.registerSheet("age-system", ageSystemVehicleSheet, {
+        types: ["vehicle"],
+        makeDefault: true,
+        // label: "DND5E.SheetClassCharacter"
+    });
 
     // Define extra data for Age System Actors
     CONFIG.Actor.entityClass = ageSystemActor;
@@ -109,6 +119,9 @@ Hooks.once("setup", function() {
 });
 
 Hooks.once("ready", function() {
+    // Register color scheme
+    ageSystem.colorScheme = game.settings.get("age-system", "colorScheme");
+    
     // Register System Settings related do Focus Compendium
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
