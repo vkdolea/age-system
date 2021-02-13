@@ -1,4 +1,5 @@
 import * as Dice from "../dice.js";
+import {ageSystem} from "../config.js";
 
 export default class ageSystemCharacterSheet extends ActorSheet {
     
@@ -7,7 +8,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             // resizable: false,
             width: 680,
             height: 800,
-            classes: ["age-system", "sheet", "char", `colorset-${game.settings.get("age-system", "colorScheme")}`]
+            classes: ["age-system", "sheet", "char", `colorset-${ageSystem.colorScheme}`]
         });
     }
 

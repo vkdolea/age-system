@@ -1,3 +1,5 @@
+import {ageSystem} from "../config.js";
+
 export default class ageSystemItemSheet extends ItemSheet {
     constructor(...args) {
         super(...args);
@@ -41,7 +43,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         return mergeObject(super.defaultOptions, {
             height: 340,
             width: 516,
-            classes: ["age-system", "sheet", "item", `colorset-${game.settings.get("age-system", "colorScheme")}`],
+            classes: ["age-system", "sheet", "item", `colorset-${ageSystem.colorScheme}`, "colorset-second-tier"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",
                 contentSelector: ".sheet-tab-section",

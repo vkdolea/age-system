@@ -8,7 +8,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             // resizable: false,
             width: 680,
             height: 600,
-            classes: ["age-system", "sheet", "char", `colorset-${ageSystem.colorScheme}`]
+            classes: ["age-system", "sheet", "vehicle", `colorset-${ageSystem.colorScheme}`, "colorset-second-tier"]
         });
     }
     

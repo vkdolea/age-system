@@ -1,0 +1,75 @@
+.age-system.sheet .window-content {
+    // background: none;
+    background-color: #d1b7ab;
+}
+
+
+.age-system.sheet.vehicle {
+    font-variant: small-caps;
+    min-width: min-content;
+    // Reavaluate when picture is included
+
+    input[type="checkbox"] {
+        margin: 0px;
+        margin-top: 1px;
+        width: 16px;
+        height: 16px;
+    }
+
+    input[name="data.pilot"],
+    input[name="data.focus"] {
+        min-width: 200px;
+        max-height: 20px;
+    }
+
+    label {
+        min-width: 75px;
+        max-height: 20px;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 300px 500px;
+        grid-template-rows: 300px 400px;
+    }
+
+    .grid-parameter {
+        grid-column-start: 1;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+
+        >div {
+            height: min-content;
+        };
+    }
+
+    .grid-description {
+        grid-column-start: 1;
+        grid-column-end: span 2;
+        grid-row-start: 2;
+        grid-row-end: span 1;
+        height: 100%;
+    }
+
+    .grid-img {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+
+        img {
+            object-fit: contain;
+            height: 290px;
+            width: 490px;
+            margin: 5px;
+            padding: 4px;
+            // Border color on colorsets.less
+            border-radius: 50px 5px;
+        }
+    }
+
+    .editor {
+        height: 100%;
+    };
+}

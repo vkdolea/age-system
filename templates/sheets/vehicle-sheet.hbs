@@ -1,45 +1,66 @@
-<form class="{{cssClass}} age-system vehicle colorset-selection {{data.colorScheme}}" autocomplete="off">
+<form class="{{cssClass}} age-system sheet vehicle colorset-second-tier" autocomplete="off">
 
-    <div class="sheet-content vehicle-stats colorset-second-tier">
-        <div class="stats-column flexcol">
-            <h3>{{localize "age-system.parameters"}}</h3>
-            <div class="form-group">
-                <label>{{localize "age-system.pilot"}}</label>
-                <input type="text" name="data.pilot" value="{{data.pilot}}">
-            </div>
-            <div class="form-group">
-                <label>{{localize "age-system.focus"}}</label>
-                <input type="text" name="data.focus" value="{{data.focus}}">
-            </div>
-            <div class="form-group">
-                <label>{{localize "age-system.handling"}}</label>
-                <input type="number" name="data.handling" value="{{data.handling}}" data-dtype="Number">
-            </div>
-            <div class="form-group">
-                <label>{{localize "age-system.defense"}}</label>
-                <input type="number" disabled name="data.defenseTotal" value="{{data.defenseTotal}}" data-dtype="Number">
-            </div>
-            <div class="form-group">
-                <label>{{localize "age-system.velocity"}}</label>
-                <div class="flexrow">
-                    <select name="data.velocity.category">
-                        {{#select data.velocity.category}}
-                        {{#each config.velocityCategory as |category code|}}
-                        <option value="{{code}}">{{localize (concat "age-system.velocity." code)}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>    
-                    /
-                    <input type="number" name="data.velocity.catMod" value="{{data.velocity.catMod}}" data-dtype="Number">
+    <div class="vehicle-stats">
+        {{!-- <h3>{{localize "age-system.parameters"}}</h3> --}}
+        <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
+        <div class="grid-container">
+            <div class="grid-parameter flexcol flexwrap">
+
+                <div class="flexcol">
+                    <label>{{localize "age-system.pilot"}}</label>
+                    <input type="text" name="data.pilot" value="{{data.pilot}}">
+                </div>
+
+                <div class="flexcol">
+                    <label>{{localize "age-system.focus"}}</label>
+                    <input type="text" name="data.focus" value="{{data.focus}}">
+                </div>
+
+                <div class="flexrow flexwrap">
+                    <div class="flexcol no-flexwrap">
+                        <label>{{localize "age-system.velocity"}}</label>
+                        <div class="flexrow no-flexwrap">
+                            <select name="data.velocity.category">
+                                {{#select data.velocity.category}}
+                                {{#each config.velocityCategory as |category code|}}
+                                <option value="{{code}}">{{localize (concat "age-system." code)}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>    
+                            /
+                            <input type="number" name="data.velocity.catMod" value="{{data.velocity.catMod}}" data-dtype="Number">
+                        </div>
+                    </div>
+
+                    <div class="flexcol">
+                        <label>{{localize "age-system.handling"}}</label>
+                        <input type="number" name="data.handling" value="{{data.handling}}" data-dtype="Number">
+                    </div>
+
+                    <div class="flexcol">
+                        <label>{{localize "age-system.defense"}}</label>
+                        <input type="number" disabled name="data.defenseTotal" value="{{data.defenseTotal}}" data-dtype="Number">
+                    </div>
+
+                    <div class="flexcol">
+                        <label>{{localize "age-system.ram"}}</label>
+                        <div class="flexrow">
+                            <input type="number" name="data.ramDmg" value="{{data.ramDmg}}" data-dtype="Number">
+                            <span>{{localize "age-system.settings.d6"}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label>{{localize "age-system.ram"}}</label>
-                <div class="flexrow">
-                    <input type="number" name="data.ramDmg" value="{{data.ramDmg}}" data-dtype="Number">
-                    <span>{{localize "age-system.settings.d6"}}</span>
-                </div>
+
+
+            <div class="grid-img">
+                <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
             </div>
+
+            <div class="grid-description">
+                {{editor content=data.features target="data.description" button=true owner=owner editable=editable}}
+            </div>
+
         </div>
     </div>
     

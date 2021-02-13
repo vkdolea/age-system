@@ -171,6 +171,14 @@ ageSystem.bonusTypes = {
     armorPenalty: "age-system.bonus.armorPenaltyBns"
 };
 
+// Vehicle parameters
+ageSystem.velocityCategory = {
+    velStandard: "age-system.velStandard",
+    velFast: "age-system.velFast",
+    velVeryFast: "age-system.velVeryFast",
+    velExtreme: "age-system.velExtreme"
+};
+
 const itemIconPath = "systems/age-system/resources/imgs/item-icon/";
 ageSystem.itemIcons = {
     "equipment": `${itemIconPath}briefcase.svg`,
