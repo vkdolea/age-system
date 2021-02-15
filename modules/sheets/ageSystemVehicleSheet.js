@@ -7,8 +7,9 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         return mergeObject(super.defaultOptions, {
             // resizable: false,
             width: 680,
-            height: 600,
-            classes: ["age-system", "sheet", "vehicle", `colorset-${ageSystem.colorScheme}`, "colorset-second-tier"]
+            height: 626,
+            resizable: false,
+            classes: ["age-system", "sheet", "vehicle", `colorset-${ageSystem.colorScheme}`]
         });
     }
     

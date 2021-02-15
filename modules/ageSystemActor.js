@@ -212,7 +212,14 @@ export class ageSystemActor extends Actor {
 
     _prepareVehicleBaseData() {
         const actorData = this.data;
-        const data = actorData.data;        
+        const data = actorData.data;
+
+        // Types of damage from a Vehicle
+        // data.sideswipeDmg = 0;
+        // data.collisionDmg = 0;
+        // data.velocityClassDmg = 0;
+        // data.crashDmg = 0;
+
     };
 
     prepareDerivedData() {

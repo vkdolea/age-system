@@ -1,9 +1,9 @@
-<form class="{{cssClass}} age-system sheet vehicle colorset-second-tier" autocomplete="off">
+<form class="{{cssClass}} age-system sheet vehicle" autocomplete="off">
 
+    <input name="name" class="vehicle-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
     <div class="vehicle-stats">
         {{!-- <h3>{{localize "age-system.parameters"}}</h3> --}}
-        <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
-        <div class="grid-container">
+        <div class="grid-container colorset-second-tier">
             <div class="grid-parameter flexcol flexwrap">
 
                 <div class="flexcol">
@@ -12,7 +12,10 @@
                 </div>
 
                 <div class="flexcol">
-                    <label>{{localize "age-system.focus"}}</label>
+                    <div class="flexrow flex-justify-center label-with-icon">
+                        <label class="handling-focus">{{localize "age-system.focus"}}</label>
+                        <a><i class="fas fa-dice"></i></a>                        
+                    </div>
                     <input type="text" name="data.focus" value="{{data.focus}}">
                 </div>
 
@@ -27,22 +30,37 @@
                                 {{/each}}
                                 {{/select}}
                             </select>    
-                            /
+                            <span>/</span>
                             <input type="number" name="data.velocity.catMod" value="{{data.velocity.catMod}}" data-dtype="Number">
                         </div>
                     </div>
 
-                    <div class="flexcol">
+                    <div class="flexcol flex-align-center">
                         <label>{{localize "age-system.handling"}}</label>
                         <input type="number" name="data.handling" value="{{data.handling}}" data-dtype="Number">
                     </div>
 
-                    <div class="flexcol">
+                    <div class="flexcol flex-align-center">
+                        <label>{{localize "age-system.item.cost"}}</label>
+                        <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number">
+                    </div>
+
+                </div>
+
+
+                <div class="flexrow">
+
+                    <div class="flexcol flex-align-center">
                         <label>{{localize "age-system.defense"}}</label>
                         <input type="number" disabled name="data.defenseTotal" value="{{data.defenseTotal}}" data-dtype="Number">
                     </div>
 
-                    <div class="flexcol">
+                    <div class="flexcol flex-align-center">
+                        <label>{{localize "age-system.hull"}}</label>
+                        <input type="number" name="data.hull" value="{{data.hull}}" data-dtype="Number">
+                    </div>
+
+                    <div class="flexcol flex-align-center">
                         <label>{{localize "age-system.ram"}}</label>
                         <div class="flexrow">
                             <input type="number" name="data.ramDmg" value="{{data.ramDmg}}" data-dtype="Number">
@@ -50,6 +68,36 @@
                         </div>
                     </div>
                 </div>
+
+                <table class="velocity-damage-table">
+                    <thead class="colorset-first-tier">
+                        <th>{{localize "age-system.velClass"}}</th>
+                        <th>{{localize "age-system.collision"}}</th>
+                        <th>{{localize "age-system.sideswipe"}}</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{localize "age-system.velStandard"}}</td>
+                            <td><a>1d6</a><a><i class="fa fa-bomb"></i></a></td>
+                            <td><a>1d3</a><a><i class="fa fa-bomb"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>{{localize "age-system.velFast"}}</td>
+                            <td><a>2d6</a><a><i class="fa fa-bomb"></i></a></td>
+                            <td><a>1d6</a><a><i class="fa fa-bomb"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>{{localize "age-system.velVeryFast"}}</td>
+                            <td><a>4d6</a><a><i class="fa fa-bomb"></i></a></td>
+                            <td><a>2d6</a><a><i class="fa fa-bomb"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>{{localize "age-system.velExtreme"}}</td>
+                            <td><a>6d6</a><a><i class="fa fa-bomb"></i></a></td>
+                            <td><a>3d6</a><a><i class="fa fa-bomb"></i></a></td>
+                        </tr>                                                
+                    </tbody>
+                </table>
             </div>
 
 
@@ -58,7 +106,10 @@
             </div>
 
             <div class="grid-description">
-                {{editor content=data.features target="data.description" button=true owner=owner editable=editable}}
+                <div class="flexcol editor">
+                    <label>{{localize "age-system.item.desc"}}</label>
+                    {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+                </div>
             </div>
 
         </div>

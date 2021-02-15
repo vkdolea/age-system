@@ -77,8 +77,7 @@ each(@colorsets, {
             color: extract(extract(@color-list, @index), 4);
         };
     
-        .char-sheet,
-        .vehicle-sheet {
+        .char-sheet {
             .age-header {
                 label {
                     background-color: extract(extract(@color-list, @index), 1);
@@ -87,6 +86,15 @@ each(@colorsets, {
                 .editor {
                     background-color: #ffffff;
                 }
+            }
+        }
+
+        .sheet.vehicle {
+            img {
+                border: 2px solid extract(extract(@color-list, @index), 1);
+            }
+            .editor {
+                background-color: #ffffff;
             }
         }
     
@@ -123,12 +131,6 @@ each(@colorsets, {
             };
     
         };
-
-        .vehicle-stats {
-            img {
-                border: 2px solid extract(extract(@color-list, @index), 1);
-            }
-        }
     
         .focus,
         .power,
