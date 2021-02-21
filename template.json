@@ -6,7 +6,11 @@
         ],
         "templates": {},
         "vehicle": {
-            "handlingDiff": 0,
+            "handling": {
+                "mod": 0,
+                "useFocus": "",
+                "useAbl":"acc"
+            },
             "capacity": 0,
             "velocity": {
                 "category": "standard",
@@ -15,7 +19,6 @@
             "ramDmg": 1,
             "hull": 0,
             "cost": 0,
-            "useFocus": "",
             "description": "",
             "coverRating": 0,
             "armorRating": 0,
@@ -23,7 +26,8 @@
                 "max": 20,
                 "value": 20
             },
-            "pilot": ""
+            "conductor": "",
+            "passengers": []
         },
         "char": {
             "statBlockView": false,

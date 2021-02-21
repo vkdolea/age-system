@@ -990,17 +990,6 @@
 .age-system.sheet.vehicle .label-with-icon i {
   margin-right: 4px;
 }
-.age-system.sheet.vehicle input[type="checkbox"] {
-  margin: 0px;
-  margin-top: 1px;
-  width: 16px;
-  height: 16px;
-}
-.age-system.sheet.vehicle input[name="data.pilot"],
-.age-system.sheet.vehicle input[name="data.focus"] {
-  min-width: 200px;
-  max-height: 20px;
-}
 .age-system.sheet.vehicle .vehicle-name {
   border-radius: 10px 10px 0px 0px;
   text-transform: uppercase;
@@ -1019,7 +1008,7 @@
 .age-system.sheet.vehicle .grid-container {
   display: grid;
   grid-template-columns: 300px 500px;
-  grid-template-rows: 350px 200px;
+  grid-template-rows: 370px 200px;
 }
 .age-system.sheet.vehicle .grid-parameter {
   grid-column-start: 1;
@@ -1035,9 +1024,11 @@
 .age-system.sheet.vehicle .grid-parameter > div div {
   margin: 4px;
 }
+.age-system.sheet.vehicle .grid-parameter .focus-ability {
+  max-height: 70px;
+}
 .age-system.sheet.vehicle .grid-parameter span {
   max-width: min-content;
-  padding-top: 6px;
   margin-left: 2px;
   margin-right: 2px;
 }
@@ -1046,14 +1037,33 @@
   padding: 0px;
   text-align: center;
 }
-.age-system.sheet.vehicle .grid-parameter input[name="data.handling"],
+.age-system.sheet.vehicle .grid-parameter select {
+  margin: 0 auto;
+  max-height: 20px;
+}
+.age-system.sheet.vehicle .grid-parameter input[name="data.handling.mod"],
 .age-system.sheet.vehicle .grid-parameter input[name="data.ramDmg"],
 .age-system.sheet.vehicle .grid-parameter input[name="data.hull"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.defenseTotal"] {
+.age-system.sheet.vehicle .grid-parameter input[name="data.defenseTotal"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.cost"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.velocity.catMod"] {
   max-width: 35px;
+  max-height: 20px;
 }
 .age-system.sheet.vehicle .grid-parameter input[name="data.cost"] {
   max-width: 60px;
+}
+.age-system.sheet.vehicle .grid-parameter input[type="checkbox"] {
+  margin: 0px;
+  margin-top: 1px;
+  width: 16px;
+  height: 16px;
+}
+.age-system.sheet.vehicle .grid-parameter input[name="data.conductor"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.handling.useFocus"],
+.age-system.sheet.vehicle .grid-parameter select[name="data.handling.useAbl"] {
+  max-width: 285px;
+  max-height: 20px;
 }
 .age-system.sheet.vehicle .grid-parameter .velocity-damage-table {
   text-align: center;
@@ -1064,9 +1074,13 @@
 .age-system.sheet.vehicle .grid-parameter .velocity-damage-table td a {
   margin-right: 2px;
 }
+.age-system.sheet.vehicle .grid-parameter table {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
 .age-system.sheet.vehicle .grid-description {
-  grid-column-start: 1;
-  grid-column-end: span 2;
+  grid-column-start: 2;
+  grid-column-end: span 1;
   grid-row-start: 2;
   grid-row-end: span 1;
   height: 200px;
@@ -1074,6 +1088,41 @@
 .age-system.sheet.vehicle .grid-description .editor {
   height: 100%;
   padding: 4px 10px;
+}
+.age-system.sheet.vehicle .passenger-container {
+  grid-column-start: 1;
+  grid-column-end: span 1;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+  padding-left: 8px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+}
+.age-system.sheet.vehicle .passenger-list {
+  overflow: auto;
+  height: 176px;
+  padding-right: 21px;
+}
+.age-system.sheet.vehicle .passenger-list img {
+  max-height: 24px;
+  max-width: 24px;
+  object-fit: contain;
+  border: none;
+}
+.age-system.sheet.vehicle .passenger-list a {
+  max-width: fit-content;
+}
+.age-system.sheet.vehicle .passenger-list span {
+  max-width: fit-content;
+  padding-left: 4px;
+}
+.age-system.sheet.vehicle .passenger-list li {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.age-system.sheet.vehicle .dragover {
+  color: #5f0505;
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.8);
 }
 .age-system.sheet.vehicle .grid-img {
   grid-column-start: 2;
@@ -1905,11 +1954,17 @@
 .age-system .flex-align-center {
   align-items: center;
 }
+.age-system .flex-align-end {
+  align-items: flex-end;
+}
 .age-system .flex-align-start {
   align-items: flex-start;
 }
 .age-system .flex-justify-center {
   justify-content: center;
+}
+.age-system .flex-justify-start {
+  justify-content: flex-start;
 }
 .age-system .flex-justify-between {
   justify-content: space-between;

@@ -7,16 +7,34 @@
             <div class="grid-parameter flexcol flexwrap">
 
                 <div class="flexcol">
-                    <label>{{localize "age-system.pilot"}}</label>
-                    <input type="text" name="data.pilot" value="{{data.pilot}}">
+                    <label>{{localize "age-system.conductor"}}</label>
+                    <select name="data.conductor">
+                        {{#select data.conductor}}
+                        <option value="">{{localize "age-system.noAction"}}</option>
+                        {{#each passengers as |passenger|}}
+                        <option value="{{passenger.id}}">{{passenger.name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>  
                 </div>
 
-                <div class="flexcol">
+                <div class="flexcol focus-ability">
                     <div class="flexrow flex-justify-center label-with-icon">
-                        <label class="handling-focus">{{localize "age-system.focus"}}</label>
-                        <a><i class="fas fa-dice"></i></a>                        
+                        <label class="handling-focus">{{localize "age-system.abl"}} / {{localize "age-system.focus"}}</label>
+                        <a class="roll-maneuver"><i class="fas fa-dice"></i></a>                        
                     </div>
-                    <input type="text" name="data.focus" value="{{data.focus}}">
+                    <div class="flexcol">
+                        <select name="data.handling.useAbl" class="data-input">
+                            {{#select data.handling.useAbl}}
+                            {{#each config.abilities as |name type|}}
+                            <option value="{{type}}">{{localize name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+                    <div>
+                        <input type="text" name="data.handling.useFocus" value="{{data.handling.useFocus}}">
+                    </div>
                 </div>
 
                 <div class="flexrow flexwrap">
@@ -37,7 +55,7 @@
 
                     <div class="flexcol flex-align-center">
                         <label>{{localize "age-system.handling"}}</label>
-                        <input type="number" name="data.handling" value="{{data.handling}}" data-dtype="Number">
+                        <input type="number" name="data.handling.mod" value="{{data.handling.mod}}" data-dtype="Number">
                     </div>
 
                     <div class="flexcol flex-align-center">
@@ -46,7 +64,6 @@
                     </div>
 
                 </div>
-
 
                 <div class="flexrow">
 
@@ -62,7 +79,7 @@
 
                     <div class="flexcol flex-align-center">
                         <label>{{localize "age-system.ram"}}</label>
-                        <div class="flexrow">
+                        <div class="flexrow flex-align-center">
                             <input type="number" name="data.ramDmg" value="{{data.ramDmg}}" data-dtype="Number">
                             <span>{{localize "age-system.settings.d6"}}</span>
                         </div>
@@ -100,6 +117,25 @@
                 </table>
             </div>
 
+            <div class="passenger-container">
+                <label>{{localize "age-system.passengers"}} [{{data.pob}}]</label>
+                <div class="passenger-list">
+                    <ol>
+                        {{#each passengers as |passenger|}}
+                        <li class="flexrow flex-justify-between feature-controls" data-passenger-key="{{@key}}">
+                            <div class="flexrow flex-justify-start flex-align-center">
+                                <img src="{{passenger.picture}}">
+                                <span>{{passenger.name}}</span>
+                                {{#if passenger.conductor}}
+                                <span>({{localize "age-system.conductor"}})</span>
+                                {{/if}}
+                            </div>
+                            <a class="flex-align-end remove-passenger"><i class="fa fa-times"></i></a>
+                        </li>
+                        {{/each}}
+                    </ol>
+                </div>
+            </div>
 
             <div class="grid-img">
                 <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>

@@ -56,35 +56,6 @@ export class ageSystemActor extends Actor {
 
         // Check if Power Points is in use
         data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
-
-        // CAN BE REMOVED AFTER SUCCESFULLY ADDING VEHICLES AS ACTORS!
-        //
-        /*-----------------------------------------------------------------------------------*/
-        // // Check if split Armor is in use
-        // data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
-
-        // // Retrieve wealth mode
-        // data.useResource = data.useIncome = data.useCurrency = data.useCoins = false;
-        // const wealthMode = game.settings.get("age-system", "wealthType");
-        // switch (wealthMode) {
-        //     case "income":
-        //         data.useIncome = true;
-        //         break;
-        //     case "resources":
-        //         data.useResources = true;
-        //         break;
-        //     case "currency":
-        //         data.useCurrency = true;
-        //         break;
-        //     case "coins":
-        //         data.useCoins = true;
-        //         break;
-        //     default:
-        //         break;
-        // };
-        // CAN BE REMOVED AFTER SUCCESFULLY ADDING VEHICLES AS ACTORS!
-        //
-        /*-----------------------------------------------------------------------------------*/
      
         data.ownedBonus = this.ownedItemsBonus();
         const bonuses = data.ownedBonus;
@@ -220,6 +191,20 @@ export class ageSystemActor extends Actor {
         // data.velocityClassDmg = 0;
         // data.crashDmg = 0;
 
+        
+        data.passengers.map( p => {
+            if (!game.actors) {
+                game.postReadyPrepare.push(this);
+            } else {
+                const pData = p.isToken ? game.actors.tokens[p.id] : game.actors.get(p.id);
+                p.name = pData.data.name;
+                p.picture = pData.data.token.img;
+                p.conductor = (p.id === data.conductor) ? true : false;
+            }
+        });
+
+        data.pob = data.passengers.length;
+
     };
 
     prepareDerivedData() {
@@ -231,7 +216,7 @@ export class ageSystemActor extends Actor {
                 this._prepareCharDerivedData();
                 break;
             case "vehicle":
-                this._prepareVehicleVehicleData();
+                this._prepareVehicleDerivedData();
                 break;
         
             default:
@@ -273,7 +258,7 @@ export class ageSystemActor extends Actor {
         data.resources.total = data.resources.base + Number(data.resources.mod);
     };
 
-    _prepareVehicleVehicleData() {
+    _prepareVehicleDerivedData() {
 
     };
 

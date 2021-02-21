@@ -69,6 +69,10 @@ Here the description of each one of the Modificators:
 
 ## Change log
 
+### 0.5.1 [2021-xx-xx]
+#### Added
+- Vehicles as Actors
+
 ### 0.4.0 [2021-02-05]
 #### Added
 - Options to Add Focus to damage and an arbitraty number for Stunt Die now shows up When ALT + Click to roll damage.

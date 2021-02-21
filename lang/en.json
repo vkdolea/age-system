@@ -82,11 +82,14 @@
             "selectTokenMacro": "Select a token to run the macro.",
             "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro.",
             "selectOnlyOneTarget": "Select only one target to attack.",
-            "originTokenMissing": "Action owner (Actor or Unlinked Token) doesn't exist anymore."
+            "originTokenMissing": "Action owner (Actor or Unlinked Token) doesn't exist anymore.",
+            "alreadyOnboard": "Passenger {name} ({id}) is already onboard!",
+            "vehicleIsNotPassenger": "A vehicle can not be a passenger."
         },
 
         "parameters": "Parameters",
-        "pilot": "Pilot",
+        "conductor": "Conductor",
+        "passengers": "Passengers",
         "handling": "Handling",
         "velocity": "Velocity",
         "velClass": "Velocity Class",

@@ -103,9 +103,8 @@ Hooks.once("init", async function() {
         else return options.inverse(this);
     });
 
-    // game.ageSystem = {
-    //     rollOwnedItem,
-    // };
+    // Keep a list of actors that need to prepareData after 'ready' (generally those that rely on other actor data - passengers/mounts)
+    game.postReadyPrepare = [];
 
 });
 
@@ -119,6 +118,12 @@ Hooks.once("setup", function() {
 });
 
 Hooks.once("ready", function() {
+
+    // Prepare Actors dependent on other Actors
+    for(let e of game.postReadyPrepare){
+        e.prepareData();
+    }
+
     // Register color scheme
     ageSystem.colorScheme = game.settings.get("age-system", "colorScheme");
     
