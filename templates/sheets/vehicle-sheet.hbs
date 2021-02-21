@@ -95,23 +95,47 @@
                     <tbody>
                         <tr>
                             <td>{{localize "age-system.velStandard"}}</td>
-                            <td><a>1d6</a><a><i class="fa fa-bomb"></i></a></td>
-                            <td><a>1d3</a><a><i class="fa fa-bomb"></i></a></td>
+                            <td class="feature-controls" data-qtd-dice="1">
+                                <a class="roll-collision">1d6</a>
+                                <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
+                            </td>
+                            <td class="feature-controls" data-qtd-dice="1" data-die-size="3">
+                                <a class="roll-sideswipe">1d3</a>
+                                <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
+                            </td>
                         </tr>
                         <tr>
                             <td>{{localize "age-system.velFast"}}</td>
-                            <td><a>2d6</a><a><i class="fa fa-bomb"></i></a></td>
-                            <td><a>1d6</a><a><i class="fa fa-bomb"></i></a></td>
+                            <td class="feature-controls" data-qtd-dice="2">
+                                <a class="roll-collision">2d6</a>
+                                <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
+                            </td>
+                            <td class="feature-controls" data-qtd-dice="1">
+                                <a class="roll-sideswipe">1d6</a>
+                                <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
+                            </td>
                         </tr>
                         <tr>
                             <td>{{localize "age-system.velVeryFast"}}</td>
-                            <td><a>4d6</a><a><i class="fa fa-bomb"></i></a></td>
-                            <td><a>2d6</a><a><i class="fa fa-bomb"></i></a></td>
+                            <td class="feature-controls" data-qtd-dice="4">
+                                <a class="roll-collision">4d6</a>
+                                <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
+                            </td>
+                            <td class="feature-controls" data-qtd-dice="2">
+                                <a class="roll-sideswipe">2d6</a>
+                                <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
+                            </td>
                         </tr>
                         <tr>
                             <td>{{localize "age-system.velExtreme"}}</td>
-                            <td><a>6d6</a><a><i class="fa fa-bomb"></i></a></td>
-                            <td><a>3d6</a><a><i class="fa fa-bomb"></i></a></td>
+                            <td class="feature-controls" data-qtd-dice="6">
+                                <a class="roll-collision">6d6</a>
+                                <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
+                            </td>
+                            <td class="feature-controls" data-qtd-dice="3">
+                                <a class="roll-sideswipe">3d6</a>
+                                <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
+                            </td>
                         </tr>                                                
                     </tbody>
                 </table>
@@ -126,7 +150,7 @@
                             <div class="flexrow flex-justify-start flex-align-center">
                                 <img src="{{passenger.picture}}">
                                 <span>{{passenger.name}}</span>
-                                {{#if passenger.conductor}}
+                                {{#if passenger.isConductor}}
                                 <span>({{localize "age-system.conductor"}})</span>
                                 {{/if}}
                             </div>

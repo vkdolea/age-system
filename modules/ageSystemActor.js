@@ -1,3 +1,5 @@
+import * as Dice from "./dice.js";
+
 export class ageSystemActor extends Actor {
 
     /** @override */
@@ -191,7 +193,7 @@ export class ageSystemActor extends Actor {
         // data.velocityClassDmg = 0;
         // data.crashDmg = 0;
 
-        
+        data.defenseTotal = 10;
         data.passengers.map( p => {
             if (!game.actors) {
                 game.postReadyPrepare.push(this);
@@ -199,7 +201,16 @@ export class ageSystemActor extends Actor {
                 const pData = p.isToken ? game.actors.tokens[p.id] : game.actors.get(p.id);
                 p.name = pData.data.name;
                 p.picture = pData.data.token.img;
-                p.conductor = (p.id === data.conductor) ? true : false;
+                // p.conductor = (p.id === data.conductor) ? true : false;
+                if (p.id === data.conductor) {
+                    p.isConductor = true;
+                    const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
+                    let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
+                    if (!defenseFocus) defenseFocus = 0;
+                    data.defenseTotal += defenseAbl + defenseFocus;
+                } else {
+                    p.isConductor = false;
+                }
             }
         });
 
@@ -314,4 +325,63 @@ export class ageSystemActor extends Actor {
         return ownedMods;
     };
 
+    _userFocusEntity(useFocus, operatorData) {
+        const useFocusLC = useFocus.toLowerCase();
+        // const vehicleData = this.actor.data;
+        // const data = vehicleData.data;
+        // let user;
+        // if (operatorData.isToken) user = game.actors.tokens[operatorData.id];
+        // if (!operatorData.isToken) user = game.actors.get(operatorData.id);
+        // if (!user) {
+        //     const parts = {name: p.name, id: p.id};
+        //     let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
+        //     ui.notifications.warn(warning);
+        //     return null;
+        // }
+        if (useFocus === null || useFocus === "") {
+            return null;
+        };
+
+        const user = this._vehicleOperator(operatorData);
+        if (!user) return null;
+
+        const userFoci = user.data.items.filter(a => a.type === "focus");
+        // const expectedFocus = data.useFocus.toLowerCase();
+        const validFocus = userFoci.filter(c => c.name.toLowerCase() === useFocusLC);
+
+        if (validFocus.length < 1) {
+            return useFocus;
+        } else {
+            const id = validFocus[0]._id;
+            return user.getOwnedItem(id);
+        };    
+    };
+
+    _vehicleOperator(operatorData) {
+        if (!operatorData) return null;
+        let operator;
+        if (operatorData.isToken) operator = game.actors.tokens[operatorData.id];
+        if (!operatorData.isToken) operator = game.actors.get(operatorData.id);
+        if (!operator) {
+            const parts = {name: p.name, id: p.id};
+            let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
+            ui.notifications.warn(warning);
+            return null;
+        }
+        return operator;
+    }
+
+    rollVehicleDamage(damageData) {
+        const operator = this._vehicleOperator(damageData.operatorData);
+        const useFocus = this._userFocusEntity(this.data.data.handling.useFocus, damageData.operatorData);
+
+        damageData = {
+            ...damageData,
+            operator,
+            useFocus,
+            vehicle: this
+        };
+
+        Dice.vehicleDamage(damageData);
+    };
 };

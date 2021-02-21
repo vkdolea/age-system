@@ -84,7 +84,8 @@
             "selectOnlyOneTarget": "Select only one target to attack.",
             "originTokenMissing": "Action owner (Actor or Unlinked Token) doesn't exist anymore.",
             "alreadyOnboard": "Passenger {name} ({id}) is already onboard!",
-            "vehicleIsNotPassenger": "A vehicle can not be a passenger."
+            "vehicleIsNotPassenger": "A vehicle can not be a passenger.",
+            "userNotAvailable": "Actor {name} ({id}) is not available."
         },
 
         "parameters": "Parameters",
@@ -96,6 +97,7 @@
         "hull": "Hull",
         "collision": "Collision",
         "sideswipe": "Sideswipe",
+        "crash": "Crash",
         "ram": "Ram",
         "velStandard": "Standard",
         "velFast": "Fast ",
@@ -115,7 +117,9 @@
             "rollResistedHealing": "Resisted Healing",
             "addFocusSD": "Add Both",
             "addFocus": "Add Focus",
-            "addStuntDie": "Add SD"
+            "addStuntDie": "Add SD",
+
+            "maneuversVehicle": "{name} maneuvers {vehicle}"
         },
 
         "testThreshold": "Threshold",

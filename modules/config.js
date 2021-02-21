@@ -192,6 +192,12 @@ ageSystem.itemIcons = {
     "focus": `${itemIconPath}gift-of-knowledge.svg`
 };
 
+const actorIconPath = "systems/age-system/resources/imgs/actor-icon/";
+ageSystem.actorIcons = {
+    "vehicle": `${actorIconPath}chariot.svg`,
+    "char": `${actorIconPath}sensousness.svg`,
+}
+
 // Change default Actor Icon
 CONST.DEFAULT_TOKEN = "systems/age-system/resources/imgs/actor-icon/sensousness.svg";
 
