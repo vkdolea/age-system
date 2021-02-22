@@ -32,8 +32,8 @@
 
 /** Ronin Green Colors **/
 @ronin-green: #1d8514;
-@ronin-green-high: #8ec740;
-@ronin-green-mid: #aaaaaa15;
+@ronin-green-high: #92b65f;
+@ronin-green-mid: #c2f5aa;
 @ronin-green-font: #ffffff;
 @ronin-green-light-font: #000000;
 @ronin-green-list: @ronin-green, @ronin-green-high, @ronin-green-mid, @ronin-green-font, @ronin-green-light-font;
@@ -86,6 +86,15 @@ each(@colorsets, {
                 .editor {
                     background-color: #ffffff;
                 }
+            }
+        }
+
+        .sheet.vehicle {
+            img {
+                border: 2px solid extract(extract(@color-list, @index), 1);
+            }
+            .editor {
+                background-color: #ffffff;
             }
         }
     

@@ -11,7 +11,9 @@ export async function ageRollCheck({
     rollUserMod = null,
     atkDmgTradeOff = null,
     hasTest = false,
-    rollType = null}={}) {
+    rollType = null,
+    vehicleHandling = false,
+    flavor = false}={}) {
     
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
@@ -93,9 +95,20 @@ export async function ageRollCheck({
         });
     }
 
+    // Adds Handling bonus for Vehicles, if applicable
+    if (vehicleHandling) {
+        rollData.handling = vehicleHandling;
+        rollFormula += " + @handling";
+        partials.push({
+            label: game.i18n.localize("age-system.handling"),
+            value: vehicleHandling
+        });
+    }
+
     // Transfer rolled item (if any) to chat message
     // Also checks if Item has Activation Mod
-    if (itemRolled !== null) {
+    const teste = typeof(itemRolled);
+    if (itemRolled !== null && typeof(itemRolled) !== "string") {
         rollData.itemId = itemRolled._id;
         rollData.hasDamage = itemRolled.data.data.hasDamage;
         rollData.hasHealing = itemRolled.data.data.hasHealing;
@@ -201,33 +214,37 @@ export async function ageRollCheck({
     // Roll header flavor text
     let headerTerms = {actor: actor.name};
     let headerFlavor = "";
-    if (rollType === "fatigue") {
-        headerTerms.item = game.i18n.localize("age-system.fatigue");
-        headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-    } else {
-        if (itemRolled) {
-            headerTerms.item = itemRolled.name;
-            switch (itemRolled.type) {
-                case "weapon":
-                    headerFlavor = game.i18n.format("age-system.chatCard.rollAttack", headerTerms);
-                    break;
-                case "power":
-                    headerFlavor = game.i18n.format("age-system.chatCard.rollPower", headerTerms);
-                    break;
-                default:
-                    headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-                    break;
-            }
+    if (!flavor) {
+        if (rollType === "fatigue") {
+            headerTerms.item = game.i18n.localize("age-system.fatigue");
+            headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
         } else {
-            if (resourceRoll) {
-                headerTerms.item = resName;
-                headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-            }
-            if (abl !== null && abl !== "no-abl") {
-                headerTerms.item = ablName;
-                headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-            }
-        };
+            if (itemRolled) {
+                headerTerms.item = itemRolled.name;
+                switch (itemRolled.type) {
+                    case "weapon":
+                        headerFlavor = game.i18n.format("age-system.chatCard.rollAttack", headerTerms);
+                        break;
+                    case "power":
+                        headerFlavor = game.i18n.format("age-system.chatCard.rollPower", headerTerms);
+                        break;
+                    default:
+                        headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+                        break;
+                }
+            } else {
+                if (resourceRoll) {
+                    headerTerms.item = resName;
+                    headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+                }
+                if (abl !== null && abl !== "no-abl") {
+                    headerTerms.item = ablName;
+                    headerFlavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
+                }
+            };
+        }
+    } else {
+        headerFlavor = flavor;
     }
 
     rollData = {
@@ -322,6 +339,7 @@ function _processAgeRollOptions(form) {
 export function getFocus(item) {
     if (item === null) {return false}
     if (item.type === "focus") return [item.name, item.data.data.initialValue, item.data._id];
+    if (typeof(item) === "string") return [item, 0, null];
     if (item.data.data.useFocus === "") return false;
     const ownerFocusId = item.data.data.useFocusActorId;
     if (ownerFocusId) {
@@ -467,6 +485,112 @@ function _processDamageRollOptions(form) {
     }
 
     return rollOptions
+}
+
+// Vehicle Damage
+export async function vehicleDamage ({
+    event = null,
+    vehicle = null,
+    operator = null,
+    stuntDie = null,
+    addFocus = false,
+    qtdDice = null,
+    dieSize = null,
+    collisionDmg = null,
+    sideswipeDmg = null,
+    damageSource = "",
+    addRam = false,
+    useFocus = null,
+    dmgGeneralMod = null,
+    dmgExtraDice = 0,
+    stuntDamage = 0}={}) {
+
+    // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
+    let damageOptions = null;
+    if (!event.ctrlKey && event.altKey) {
+        damageOptions = await getDamageRollOptions(addFocus, stuntDie);
+        if (damageOptions.cancelled) return;
+        dmgExtraDice = damageOptions.setDmgExtraDice;
+        dmgGeneralMod = damageOptions.setDmgGeneralMod;
+        stuntDamage = damageOptions.setStuntDamage;
+        addFocus = damageOptions.addFocus;
+        stuntDie = damageOptions.stuntDieDmg;
+    };
+
+    const isBlind = setBlind(event);
+    const audience = isGMroll(event);
+
+    // Initialize Damage Formula, Data and Flavor
+    let damageFormula = `(@qtdDice)d(@dieSize)`;
+    let rollData = {
+        qtdDice: qtdDice,
+        dieSize: dieSize
+    };
+    let messageData = {
+        flavor: `${vehicle.data.name} | ${game.i18n.localize(`age-system.${damageSource}`)}`,
+        speaker: ChatMessage.getSpeaker()
+    };
+
+    // Adds Ram Damage
+    if (addRam) {
+        damageFormula += ` + @ramDamage`;
+        rollData.ramDamage = ` + ${vehicle.data.data.ramDmg}d6`;
+        messageData.flavor += ` | ${game.i18n.localize("age-system.ram")}`;
+    };
+
+    // Check if extra Stunt Die is to be added (normally rolling damage after chat card roll)
+    if (stuntDie !== null) {
+        damageFormula = `${damageFormula} + @stuntDieDmg`;
+        rollData.stuntDieDmg = stuntDie;
+        messageData.flavor += ` | ${damageToString(stuntDie)} ${game.i18n.localize("age-system.stuntDie")}`; 
+    }
+
+    // Check if Focus adds to damage and adds it
+    if (addFocus === true && useFocus) {
+        const focusData = getFocus(useFocus);
+        damageFormula = `${damageFormula} + @focus`;
+        rollData.focus = focusData[1];
+        messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
+    }
+
+    // Adds user Damage input
+    if (dmgGeneralMod && dmgGeneralMod !== 0) {
+        damageFormula += " + @optMod";
+        rollData.optMod = dmgGeneralMod;
+        messageData.flavor += ` | ${damageToString(dmgGeneralMod)}`;             
+    };
+
+    // Adds extra damage for CTRL + click (+1D6) or CTRL + ALT + click (+2D6)
+    if (event.ctrlKey) {
+        if (event.altKey) {
+            damageFormula = `${damageFormula} + 2d6`
+            messageData.flavor += ` | +2D6`;
+        } else {
+            damageFormula = `${damageFormula} + 1d6`
+            messageData.flavor += ` | +1D6`;
+        };
+    };
+
+    // Adds specific Stunt Damage dice
+    if (stuntDamage && stuntDamage !== 0) {
+        const stuntDmgDice = `${stuntDamage}D6`;
+        damageFormula += " + @stuntDmg";
+        rollData.stuntDmg = stuntDmgDice;
+        messageData.flavor += ` | +${stuntDmgDice} ${game.i18n.localize("age-system.stunts")}`;             
+    };
+
+    // Adds Extra Damage dice
+    if (dmgExtraDice && dmgExtraDice !== 0) {
+        const extraDice = `${dmgExtraDice}D6`;
+        damageFormula += " + @extraDice";
+        rollData.extraDice = extraDice;
+        messageData.flavor += ` | +${extraDice}`;             
+    };
+
+    let dmgRoll = new Roll(damageFormula, rollData).roll();
+
+    return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
+
 }
 
 // Item damage

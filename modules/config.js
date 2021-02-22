@@ -171,6 +171,14 @@ ageSystem.bonusTypes = {
     armorPenalty: "age-system.bonus.armorPenaltyBns"
 };
 
+// Vehicle parameters
+ageSystem.velocityCategory = {
+    velStandard: "age-system.velStandard",
+    velFast: "age-system.velFast",
+    velVeryFast: "age-system.velVeryFast",
+    velExtreme: "age-system.velExtreme"
+};
+
 const itemIconPath = "systems/age-system/resources/imgs/item-icon/";
 ageSystem.itemIcons = {
     "equipment": `${itemIconPath}briefcase.svg`,
@@ -183,6 +191,12 @@ ageSystem.itemIcons = {
     "weapon": `${itemIconPath}fist.svg`,
     "focus": `${itemIconPath}gift-of-knowledge.svg`
 };
+
+const actorIconPath = "systems/age-system/resources/imgs/actor-icon/";
+ageSystem.actorIcons = {
+    "vehicle": `${actorIconPath}chariot.svg`,
+    "char": `${actorIconPath}sensousness.svg`,
+}
 
 // Change default Actor Icon
 CONST.DEFAULT_TOKEN = "systems/age-system/resources/imgs/actor-icon/sensousness.svg";

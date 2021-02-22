@@ -1,0 +1,198 @@
+.age-system.sheet .window-content {
+    // background: none;
+    background-color: #d1b7ab;
+}
+
+
+.age-system.sheet.vehicle {
+    font-variant: small-caps;
+    min-width: min-content;
+    // Reavaluate when picture is included
+
+    .label-with-icon {
+        a {
+            max-width: fit-content;
+            margin-left: 4px;
+        }
+        label.handling-focus.handling-focus {
+            max-width: fit-content;
+        }
+        i {
+            margin-right: 4px;
+        }
+    }
+
+    .vehicle-name {           
+        border-radius: 10px 10px 0px 0px;
+        text-transform: uppercase;
+        border: none;
+        padding: 4px;
+    };
+
+    input[name="name"] {
+        padding-left: 10px;
+        min-width: 100%;
+        max-height: 30px;
+    };
+
+    label {
+        // min-width: 75px;
+        max-height: 20px;
+        text-align: center;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 300px 500px;
+        grid-template-rows: 370px 200px;
+    }
+
+    .grid-parameter {
+        grid-column-start: 1;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+
+        font-size: 14px;
+
+        >div {
+            max-height: 50px;
+            margin: 4px;
+            div {
+                margin:4px;
+            }
+        };
+
+        .focus-ability {
+            max-height: 70px;
+        }
+
+        span {
+            max-width: min-content;
+            // padding-top: 6px;
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+
+        input {
+            max-height: 28px;
+            padding: 0px;
+            text-align: center;
+        }
+
+        select{
+            margin: 0 auto;
+            max-height: 20px;
+        }
+
+        input[name="data.handling.mod"],
+        input[name="data.ramDmg"],
+        input[name="data.hull"],
+        input[name="data.defenseTotal"],
+        input[name="data.cost"],
+        input[name="data.velocity.catMod"] {
+            max-width: 35px;
+            max-height: 20px;
+        }
+
+        input[name="data.cost"] {
+            max-width: 60px;
+        }
+        input[type="checkbox"] {
+            margin: 0px;
+            margin-top: 1px;
+            width: 16px;
+            height: 16px;
+        }
+    
+        input[name="data.conductor"],
+        input[name="data.handling.useFocus"],
+        select[name="data.handling.useAbl"] {
+            max-width: 285px;
+            max-height: 20px;
+        }
+
+        .velocity-damage-table {
+            text-align: center;
+            td {
+                align-content: center;
+                a {
+                    margin-right: 2px;
+                }
+            }
+        }
+
+        table {
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+    }
+
+    .grid-description {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 2;
+        grid-row-end: span 1;
+        
+        height: 200px;
+        
+        .editor {
+            height: 100%;
+            padding: 4px 10px;
+        };
+    }
+
+    .passenger-container {
+        grid-column-start: 1;
+        grid-column-end: span 1;
+        grid-row-start: 2;
+        grid-row-end: span 1;
+        padding-left: 8px;
+        padding-right: 4px;
+        padding-bottom: 4px;    
+    }
+    .passenger-list {
+        overflow: auto;
+        height: 176px;
+        padding-right: 21px;
+        img {
+            max-height: 24px;
+            max-width: 24px;
+            object-fit: contain;
+            border: none;
+        }
+        a {
+            max-width: fit-content;
+        }
+        span {
+            max-width: fit-content;
+            padding-left: 4px;
+        }
+        li {
+            padding-top: 2px;
+            padding-bottom: 2px;
+
+        }
+    }
+    .dragover {
+        color: rgb(95, 5, 5);
+        box-shadow: 0 0 5px -1px rgba(0,0,0,0.8);
+    }
+
+    .grid-img {
+        grid-column-start: 2;
+        grid-column-end: span 1;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+
+        img {
+            object-fit: contain;
+            height: 340px;
+            width: 490px;
+            margin: 5px;
+            padding: 4px;
+            // Border color on colorsets.less
+            border-radius: 25px;
+        }
+    }
+}

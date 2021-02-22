@@ -69,6 +69,10 @@ Here the description of each one of the Modificators:
 
 ## Change log
 
+### 0.4.1 [2021-02-22]
+#### Added
+- Vehicles as Actors - GM and trusted players may drag and drop Actors from directory to add as passengers. All players with Owner privilege of a Vehicle will be able to roll for Maneuvers and Damage.
+
 ### 0.4.0 [2021-02-05]
 #### Added
 - Options to Add Focus to damage and an arbitraty number for Stunt Die now shows up When ALT + Click to roll damage.

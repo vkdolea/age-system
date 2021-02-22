@@ -1,5 +1,6 @@
 {
     "ACTOR.TypeChar": "Player Character",
+    "ACTOR.TypeVehicle": "Vehicle",
     "ITEM.TypeStunts": "Stunts",
     "ITEM.TypeEquipment": "General Equipment",
     "ITEM.TypePower": "Power & Arcana",
@@ -81,8 +82,27 @@
             "selectTokenMacro": "Select a token to run the macro.",
             "actorDontHaveValidItem": "Actor selected don't have Items maching name on macro.",
             "selectOnlyOneTarget": "Select only one target to attack.",
-            "originTokenMissing": "Action owner (Actor or Unlinked Token) doesn't exist anymore."
+            "originTokenMissing": "Action owner (Actor or Unlinked Token) doesn't exist anymore.",
+            "alreadyOnboard": "Passenger {name} ({id}) is already onboard!",
+            "vehicleIsNotPassenger": "A vehicle can not be a passenger.",
+            "userNotAvailable": "Actor {name} ({id}) is not available."
         },
+
+        "parameters": "Parameters",
+        "conductor": "Conductor",
+        "passengers": "Passengers",
+        "handling": "Handling",
+        "velocity": "Velocity",
+        "velClass": "Velocity Class",
+        "hull": "Hull",
+        "collision": "Collision",
+        "sideswipe": "Sideswipe",
+        "crash": "Crash",
+        "ram": "Ram",
+        "velStandard": "Standard",
+        "velFast": "Fast ",
+        "velVeryFast": "Very Fast",
+        "velExtreme": "Extreme",
         
         "chatCard": {
             "rollGeneral": "{actor} rolls {item}",
@@ -97,7 +117,9 @@
             "rollResistedHealing": "Resisted Healing",
             "addFocusSD": "Add Both",
             "addFocus": "Add Focus",
-            "addStuntDie": "Add SD"
+            "addStuntDie": "Add SD",
+
+            "maneuversVehicle": "{name} maneuvers {vehicle}"
         },
 
         "testThreshold": "Threshold",
@@ -155,8 +177,8 @@
             "delete": "Delete",
             "changeRollContext": "Use Other Ability",
             "options": "Options",
-            "d6": "d6",
-            "d3": "d3",
+            "d6": "D6",
+            "d3": "D3",
             "plusSign": "+",
             "statBlockViewEnter": "Start Block View",
             "statBlockViewExit": "Resume Standard View",

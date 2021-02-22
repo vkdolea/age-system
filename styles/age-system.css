@@ -43,7 +43,8 @@
 .age-system.item .stunts img,
 .age-system.item .honorifics img,
 .age-system.item .relationship img,
-.age-system.item .membership img {
+.age-system.item .membership img,
+.age-system.item .vehicle img {
   min-height: 60px;
   max-width: 60px;
   object-fit: contain;
@@ -57,7 +58,8 @@
 .age-system.item .stunts .power-type-control,
 .age-system.item .honorifics .power-type-control,
 .age-system.item .relationship .power-type-control,
-.age-system.item .membership .power-type-control {
+.age-system.item .membership .power-type-control,
+.age-system.item .vehicle .power-type-control {
   display: grid;
   grid-template-columns: 20px 20px;
   grid-template-rows: 30px 30px;
@@ -71,7 +73,8 @@
 .age-system.item .stunts .power-type-control .toggle-damage,
 .age-system.item .honorifics .power-type-control .toggle-damage,
 .age-system.item .relationship .power-type-control .toggle-damage,
-.age-system.item .membership .power-type-control .toggle-damage {
+.age-system.item .membership .power-type-control .toggle-damage,
+.age-system.item .vehicle .power-type-control .toggle-damage {
   grid-area: damage;
   justify-self: stretch;
 }
@@ -83,7 +86,8 @@
 .age-system.item .stunts .power-type-control .toggle-healing,
 .age-system.item .honorifics .power-type-control .toggle-healing,
 .age-system.item .relationship .power-type-control .toggle-healing,
-.age-system.item .membership .power-type-control .toggle-healing {
+.age-system.item .membership .power-type-control .toggle-healing,
+.age-system.item .vehicle .power-type-control .toggle-healing {
   grid-area: heal;
   justify-self: stretch;
 }
@@ -95,7 +99,8 @@
 .age-system.item .stunts .power-type-control .toggle-resist,
 .age-system.item .honorifics .power-type-control .toggle-resist,
 .age-system.item .relationship .power-type-control .toggle-resist,
-.age-system.item .membership .power-type-control .toggle-resist {
+.age-system.item .membership .power-type-control .toggle-resist,
+.age-system.item .vehicle .power-type-control .toggle-resist {
   grid-area: resist;
   justify-self: stretch;
 }
@@ -107,7 +112,8 @@
 .age-system.item .stunts .power-type-control .toggle-fatigue,
 .age-system.item .honorifics .power-type-control .toggle-fatigue,
 .age-system.item .relationship .power-type-control .toggle-fatigue,
-.age-system.item .membership .power-type-control .toggle-fatigue {
+.age-system.item .membership .power-type-control .toggle-fatigue,
+.age-system.item .vehicle .power-type-control .toggle-fatigue {
   grid-area: fatigue;
   justify-self: stretch;
 }
@@ -119,7 +125,8 @@
 .age-system.item .stunts input[name="data.shortDesc"].long-text,
 .age-system.item .honorifics input[name="data.shortDesc"].long-text,
 .age-system.item .relationship input[name="data.shortDesc"].long-text,
-.age-system.item .membership input[name="data.shortDesc"].long-text {
+.age-system.item .membership input[name="data.shortDesc"].long-text,
+.age-system.item .vehicle input[name="data.shortDesc"].long-text {
   max-width: 100%;
   width: 100%;
 }
@@ -131,7 +138,8 @@
 .age-system.item .stunts .damage-formula p.in-chat-text,
 .age-system.item .honorifics .damage-formula p.in-chat-text,
 .age-system.item .relationship .damage-formula p.in-chat-text,
-.age-system.item .membership .damage-formula p.in-chat-text {
+.age-system.item .membership .damage-formula p.in-chat-text,
+.age-system.item .vehicle .damage-formula p.in-chat-text {
   white-space: nowrap;
 }
 .age-system.item .focus p.in-chat-text,
@@ -142,7 +150,8 @@
 .age-system.item .stunts p.in-chat-text,
 .age-system.item .honorifics p.in-chat-text,
 .age-system.item .relationship p.in-chat-text,
-.age-system.item .membership p.in-chat-text {
+.age-system.item .membership p.in-chat-text,
+.age-system.item .vehicle p.in-chat-text {
   margin: 0px;
 }
 .age-system.item .focus section.sheet-tab-section,
@@ -153,7 +162,8 @@
 .age-system.item .stunts section.sheet-tab-section,
 .age-system.item .honorifics section.sheet-tab-section,
 .age-system.item .relationship section.sheet-tab-section,
-.age-system.item .membership section.sheet-tab-section {
+.age-system.item .membership section.sheet-tab-section,
+.age-system.item .vehicle section.sheet-tab-section {
   height: 100%;
   border-radius: 0px 0px 10px 10px;
 }
@@ -165,7 +175,8 @@
 .age-system.item .stunts .item-card-title,
 .age-system.item .honorifics .item-card-title,
 .age-system.item .relationship .item-card-title,
-.age-system.item .membership .item-card-title {
+.age-system.item .membership .item-card-title,
+.age-system.item .vehicle .item-card-title {
   border-radius: 10px 10px 0px 0px;
   text-transform: uppercase;
   border: none;
@@ -179,7 +190,8 @@
 .age-system.item .stunts input[name="name"],
 .age-system.item .honorifics input[name="name"],
 .age-system.item .relationship input[name="name"],
-.age-system.item .membership input[name="name"] {
+.age-system.item .membership input[name="name"],
+.age-system.item .vehicle input[name="name"] {
   padding-left: 10px;
   min-width: 100%;
 }
@@ -191,7 +203,8 @@
 .age-system.item .stunts label,
 .age-system.item .honorifics label,
 .age-system.item .relationship label,
-.age-system.item .membership label {
+.age-system.item .membership label,
+.age-system.item .vehicle label {
   font-variant-caps: small-caps;
   font-weight: 500;
   border: none;
@@ -207,7 +220,8 @@
 .age-system.item .stunts .flexcol > label,
 .age-system.item .honorifics .flexcol > label,
 .age-system.item .relationship .flexcol > label,
-.age-system.item .membership .flexcol > label {
+.age-system.item .membership .flexcol > label,
+.age-system.item .vehicle .flexcol > label {
   margin-right: 0px;
 }
 .age-system.item .focus .flexcol > input,
@@ -218,7 +232,8 @@
 .age-system.item .stunts .flexcol > input,
 .age-system.item .honorifics .flexcol > input,
 .age-system.item .relationship .flexcol > input,
-.age-system.item .membership .flexcol > input {
+.age-system.item .membership .flexcol > input,
+.age-system.item .vehicle .flexcol > input {
   text-align: center;
 }
 .age-system.item .focus .flexcol div.item-card-stats.active-mod-container,
@@ -229,7 +244,8 @@
 .age-system.item .stunts .flexcol div.item-card-stats.active-mod-container,
 .age-system.item .honorifics .flexcol div.item-card-stats.active-mod-container,
 .age-system.item .relationship .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .membership .flexcol div.item-card-stats.active-mod-container {
+.age-system.item .membership .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .vehicle .flexcol div.item-card-stats.active-mod-container {
   padding-top: 0px;
 }
 .age-system.item .focus .item-card-stats,
@@ -240,10 +256,23 @@
 .age-system.item .stunts .item-card-stats,
 .age-system.item .honorifics .item-card-stats,
 .age-system.item .relationship .item-card-stats,
-.age-system.item .membership .item-card-stats {
+.age-system.item .membership .item-card-stats,
+.age-system.item .vehicle .item-card-stats {
   flex-wrap: wrap;
   padding: 10px;
   padding-bottom: 6px;
+}
+.age-system.item .focus .item-card-stats .modbox,
+.age-system.item .power .item-card-stats .modbox,
+.age-system.item .talent .item-card-stats .modbox,
+.age-system.item .weapon .item-card-stats .modbox,
+.age-system.item .equipment .item-card-stats .modbox,
+.age-system.item .stunts .item-card-stats .modbox,
+.age-system.item .honorifics .item-card-stats .modbox,
+.age-system.item .relationship .item-card-stats .modbox,
+.age-system.item .membership .item-card-stats .modbox,
+.age-system.item .vehicle .item-card-stats .modbox {
+  padding: 4px;
 }
 .age-system.item .focus .item-card-stats a.not-equiped,
 .age-system.item .power .item-card-stats a.not-equiped,
@@ -253,7 +282,8 @@
 .age-system.item .stunts .item-card-stats a.not-equiped,
 .age-system.item .honorifics .item-card-stats a.not-equiped,
 .age-system.item .relationship .item-card-stats a.not-equiped,
-.age-system.item .membership .item-card-stats a.not-equiped {
+.age-system.item .membership .item-card-stats a.not-equiped,
+.age-system.item .vehicle .item-card-stats a.not-equiped {
   opacity: 0.3;
 }
 .age-system.item .focus .item-card-stats > *,
@@ -264,7 +294,8 @@
 .age-system.item .stunts .item-card-stats > *,
 .age-system.item .honorifics .item-card-stats > *,
 .age-system.item .relationship .item-card-stats > *,
-.age-system.item .membership .item-card-stats > * {
+.age-system.item .membership .item-card-stats > *,
+.age-system.item .vehicle .item-card-stats > * {
   margin-bottom: 4px;
   margin-left: 1px;
   margin-right: 1px;
@@ -278,6 +309,7 @@
 .age-system.item .honorifics .item-card-stats select[name="data.testAbl"],
 .age-system.item .relationship .item-card-stats select[name="data.testAbl"],
 .age-system.item .membership .item-card-stats select[name="data.testAbl"],
+.age-system.item .vehicle .item-card-stats select[name="data.testAbl"],
 .age-system.item .focus .item-card-stats select[name="data.useAbl"],
 .age-system.item .power .item-card-stats select[name="data.useAbl"],
 .age-system.item .talent .item-card-stats select[name="data.useAbl"],
@@ -287,6 +319,7 @@
 .age-system.item .honorifics .item-card-stats select[name="data.useAbl"],
 .age-system.item .relationship .item-card-stats select[name="data.useAbl"],
 .age-system.item .membership .item-card-stats select[name="data.useAbl"],
+.age-system.item .vehicle .item-card-stats select[name="data.useAbl"],
 .age-system.item .focus .item-card-stats select[name="data.itemForceAbl"],
 .age-system.item .power .item-card-stats select[name="data.itemForceAbl"],
 .age-system.item .talent .item-card-stats select[name="data.itemForceAbl"],
@@ -295,7 +328,8 @@
 .age-system.item .stunts .item-card-stats select[name="data.itemForceAbl"],
 .age-system.item .honorifics .item-card-stats select[name="data.itemForceAbl"],
 .age-system.item .relationship .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .membership .item-card-stats select[name="data.itemForceAbl"] {
+.age-system.item .membership .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item .vehicle .item-card-stats select[name="data.itemForceAbl"] {
   text-align: center;
 }
 .age-system.item .focus .item-card-stats input[name="data.useFocus"],
@@ -307,6 +341,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.useFocus"],
 .age-system.item .relationship .item-card-stats input[name="data.useFocus"],
 .age-system.item .membership .item-card-stats input[name="data.useFocus"],
+.age-system.item .vehicle .item-card-stats input[name="data.useFocus"],
 .age-system.item .focus .item-card-stats input[name="data.testFocus"],
 .age-system.item .power .item-card-stats input[name="data.testFocus"],
 .age-system.item .talent .item-card-stats input[name="data.testFocus"],
@@ -315,7 +350,8 @@
 .age-system.item .stunts .item-card-stats input[name="data.testFocus"],
 .age-system.item .honorifics .item-card-stats input[name="data.testFocus"],
 .age-system.item .relationship .item-card-stats input[name="data.testFocus"],
-.age-system.item .membership .item-card-stats input[name="data.testFocus"] {
+.age-system.item .membership .item-card-stats input[name="data.testFocus"],
+.age-system.item .vehicle .item-card-stats input[name="data.testFocus"] {
   min-width: 140px;
   max-width: 250px;
   text-align: center;
@@ -328,7 +364,8 @@
 .age-system.item .stunts .item-card-stats input[name="data.cost"],
 .age-system.item .honorifics .item-card-stats input[name="data.cost"],
 .age-system.item .relationship .item-card-stats input[name="data.cost"],
-.age-system.item .membership .item-card-stats input[name="data.cost"] {
+.age-system.item .membership .item-card-stats input[name="data.cost"],
+.age-system.item .vehicle .item-card-stats input[name="data.cost"] {
   max-width: 60px;
   min-width: 60px;
   text-align: center;
@@ -341,7 +378,8 @@
 .age-system.item .stunts .item-card-stats input[type="checkbox"],
 .age-system.item .honorifics .item-card-stats input[type="checkbox"],
 .age-system.item .relationship .item-card-stats input[type="checkbox"],
-.age-system.item .membership .item-card-stats input[type="checkbox"] {
+.age-system.item .membership .item-card-stats input[type="checkbox"],
+.age-system.item .vehicle .item-card-stats input[type="checkbox"] {
   margin: 0px;
   margin-top: 1px;
   width: 16px;
@@ -356,6 +394,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.targetNumber"],
 .age-system.item .relationship .item-card-stats input[name="data.targetNumber"],
 .age-system.item .membership .item-card-stats input[name="data.targetNumber"],
+.age-system.item .vehicle .item-card-stats input[name="data.targetNumber"],
 .age-system.item .focus .item-card-stats input[name="data.powerPointCost"],
 .age-system.item .power .item-card-stats input[name="data.powerPointCost"],
 .age-system.item .talent .item-card-stats input[name="data.powerPointCost"],
@@ -365,6 +404,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.powerPointCost"],
 .age-system.item .relationship .item-card-stats input[name="data.powerPointCost"],
 .age-system.item .membership .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .vehicle .item-card-stats input[name="data.powerPointCost"],
 .age-system.item .focus .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .power .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .talent .item-card-stats input[name="data.fatigueTN"],
@@ -374,6 +414,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .relationship .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .membership .item-card-stats input[name="data.fatigueTN"],
+.age-system.item .vehicle .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .focus .item-card-stats input[name="data.minStr"],
 .age-system.item .power .item-card-stats input[name="data.minStr"],
 .age-system.item .talent .item-card-stats input[name="data.minStr"],
@@ -383,6 +424,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.minStr"],
 .age-system.item .relationship .item-card-stats input[name="data.minStr"],
 .age-system.item .membership .item-card-stats input[name="data.minStr"],
+.age-system.item .vehicle .item-card-stats input[name="data.minStr"],
 .age-system.item .focus .item-card-stats input[name="data.weight"],
 .age-system.item .power .item-card-stats input[name="data.weight"],
 .age-system.item .talent .item-card-stats input[name="data.weight"],
@@ -392,6 +434,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.weight"],
 .age-system.item .relationship .item-card-stats input[name="data.weight"],
 .age-system.item .membership .item-card-stats input[name="data.weight"],
+.age-system.item .vehicle .item-card-stats input[name="data.weight"],
 .age-system.item .focus .item-card-stats input[name="data.range"],
 .age-system.item .power .item-card-stats input[name="data.range"],
 .age-system.item .talent .item-card-stats input[name="data.range"],
@@ -401,6 +444,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.range"],
 .age-system.item .relationship .item-card-stats input[name="data.range"],
 .age-system.item .membership .item-card-stats input[name="data.range"],
+.age-system.item .vehicle .item-card-stats input[name="data.range"],
 .age-system.item .focus .item-card-stats input[name="data.rangeMax"],
 .age-system.item .power .item-card-stats input[name="data.rangeMax"],
 .age-system.item .talent .item-card-stats input[name="data.rangeMax"],
@@ -410,6 +454,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.rangeMax"],
 .age-system.item .relationship .item-card-stats input[name="data.rangeMax"],
 .age-system.item .membership .item-card-stats input[name="data.rangeMax"],
+.age-system.item .vehicle .item-card-stats input[name="data.rangeMax"],
 .age-system.item .focus .item-card-stats input[name="data.capacity"],
 .age-system.item .power .item-card-stats input[name="data.capacity"],
 .age-system.item .talent .item-card-stats input[name="data.capacity"],
@@ -419,6 +464,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.capacity"],
 .age-system.item .relationship .item-card-stats input[name="data.capacity"],
 .age-system.item .membership .item-card-stats input[name="data.capacity"],
+.age-system.item .vehicle .item-card-stats input[name="data.capacity"],
 .age-system.item .focus .item-card-stats input[name="data.quantity"],
 .age-system.item .power .item-card-stats input[name="data.quantity"],
 .age-system.item .talent .item-card-stats input[name="data.quantity"],
@@ -428,6 +474,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.quantity"],
 .age-system.item .relationship .item-card-stats input[name="data.quantity"],
 .age-system.item .membership .item-card-stats input[name="data.quantity"],
+.age-system.item .vehicle .item-card-stats input[name="data.quantity"],
 .age-system.item .focus .item-card-stats input[name="data.stuntPoints"],
 .age-system.item .power .item-card-stats input[name="data.stuntPoints"],
 .age-system.item .talent .item-card-stats input[name="data.stuntPoints"],
@@ -437,6 +484,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.stuntPoints"],
 .age-system.item .relationship .item-card-stats input[name="data.stuntPoints"],
 .age-system.item .membership .item-card-stats input[name="data.stuntPoints"],
+.age-system.item .vehicle .item-card-stats input[name="data.stuntPoints"],
 .age-system.item .focus .item-card-stats input[name="data.initialValue"],
 .age-system.item .power .item-card-stats input[name="data.initialValue"],
 .age-system.item .talent .item-card-stats input[name="data.initialValue"],
@@ -446,6 +494,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.initialValue"],
 .age-system.item .relationship .item-card-stats input[name="data.initialValue"],
 .age-system.item .membership .item-card-stats input[name="data.initialValue"],
+.age-system.item .vehicle .item-card-stats input[name="data.initialValue"],
 .age-system.item .focus .item-card-stats input[name="data.extraValue"],
 .age-system.item .power .item-card-stats input[name="data.extraValue"],
 .age-system.item .talent .item-card-stats input[name="data.extraValue"],
@@ -455,6 +504,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.extraValue"],
 .age-system.item .relationship .item-card-stats input[name="data.extraValue"],
 .age-system.item .membership .item-card-stats input[name="data.extraValue"],
+.age-system.item .vehicle .item-card-stats input[name="data.extraValue"],
 .age-system.item .focus .item-card-stats input[name="data.nrDice"],
 .age-system.item .power .item-card-stats input[name="data.nrDice"],
 .age-system.item .talent .item-card-stats input[name="data.nrDice"],
@@ -464,6 +514,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.nrDice"],
 .age-system.item .relationship .item-card-stats input[name="data.nrDice"],
 .age-system.item .membership .item-card-stats input[name="data.nrDice"],
+.age-system.item .vehicle .item-card-stats input[name="data.nrDice"],
 .age-system.item .focus .item-card-stats input[name="data.intensity"],
 .age-system.item .power .item-card-stats input[name="data.intensity"],
 .age-system.item .talent .item-card-stats input[name="data.intensity"],
@@ -473,6 +524,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.intensity"],
 .age-system.item .relationship .item-card-stats input[name="data.intensity"],
 .age-system.item .membership .item-card-stats input[name="data.intensity"],
+.age-system.item .vehicle .item-card-stats input[name="data.intensity"],
 .age-system.item .focus .item-card-stats input[name="data.rank"],
 .age-system.item .power .item-card-stats input[name="data.rank"],
 .age-system.item .talent .item-card-stats input[name="data.rank"],
@@ -481,7 +533,8 @@
 .age-system.item .stunts .item-card-stats input[name="data.rank"],
 .age-system.item .honorifics .item-card-stats input[name="data.rank"],
 .age-system.item .relationship .item-card-stats input[name="data.rank"],
-.age-system.item .membership .item-card-stats input[name="data.rank"] {
+.age-system.item .membership .item-card-stats input[name="data.rank"],
+.age-system.item .vehicle .item-card-stats input[name="data.rank"] {
   max-width: 30px;
   min-width: 30px;
   text-align: center;
@@ -494,7 +547,8 @@
 .age-system.item .stunts .item-card-stats span:last-of-type,
 .age-system.item .honorifics .item-card-stats span:last-of-type,
 .age-system.item .relationship .item-card-stats span:last-of-type,
-.age-system.item .membership .item-card-stats span:last-of-type {
+.age-system.item .membership .item-card-stats span:last-of-type,
+.age-system.item .vehicle .item-card-stats span:last-of-type {
   max-width: 25px;
   text-align: center;
 }
@@ -506,7 +560,8 @@
 .age-system.item .stunts .item-card-stats div.power-type-control,
 .age-system.item .honorifics .item-card-stats div.power-type-control,
 .age-system.item .relationship .item-card-stats div.power-type-control,
-.age-system.item .membership .item-card-stats div.power-type-control {
+.age-system.item .membership .item-card-stats div.power-type-control,
+.age-system.item .vehicle .item-card-stats div.power-type-control {
   max-width: fit-content;
 }
 .age-system.item .focus .item-card-stats div.power-type-control a,
@@ -517,7 +572,8 @@
 .age-system.item .stunts .item-card-stats div.power-type-control a,
 .age-system.item .honorifics .item-card-stats div.power-type-control a,
 .age-system.item .relationship .item-card-stats div.power-type-control a,
-.age-system.item .membership .item-card-stats div.power-type-control a {
+.age-system.item .membership .item-card-stats div.power-type-control a,
+.age-system.item .vehicle .item-card-stats div.power-type-control a {
   margin-top: 30%;
   margin-bottom: 50%;
 }
@@ -529,7 +585,8 @@
 .age-system.item .stunts .item-card-stats div.flexrow,
 .age-system.item .honorifics .item-card-stats div.flexrow,
 .age-system.item .relationship .item-card-stats div.flexrow,
-.age-system.item .membership .item-card-stats div.flexrow {
+.age-system.item .membership .item-card-stats div.flexrow,
+.age-system.item .vehicle .item-card-stats div.flexrow {
   margin-right: 4px;
 }
 .age-system.item .focus .item-card-stats div,
@@ -540,7 +597,8 @@
 .age-system.item .stunts .item-card-stats div,
 .age-system.item .honorifics .item-card-stats div,
 .age-system.item .relationship .item-card-stats div,
-.age-system.item .membership .item-card-stats div {
+.age-system.item .membership .item-card-stats div,
+.age-system.item .vehicle .item-card-stats div {
   flex-wrap: nowrap;
   align-items: center;
 }
@@ -552,7 +610,8 @@
 .age-system.item .stunts .item-card-stats input.data-entry,
 .age-system.item .honorifics .item-card-stats input.data-entry,
 .age-system.item .relationship .item-card-stats input.data-entry,
-.age-system.item .membership .item-card-stats input.data-entry {
+.age-system.item .membership .item-card-stats input.data-entry,
+.age-system.item .vehicle .item-card-stats input.data-entry {
   font-variant-caps: small-caps;
 }
 .age-system.item .focus .item-card-desc,
@@ -563,7 +622,8 @@
 .age-system.item .stunts .item-card-desc,
 .age-system.item .honorifics .item-card-desc,
 .age-system.item .relationship .item-card-desc,
-.age-system.item .membership .item-card-desc {
+.age-system.item .membership .item-card-desc,
+.age-system.item .vehicle .item-card-desc {
   height: 100%;
   padding: 4px 10px;
   border-radius: 0px 0px 10px 10px;
@@ -576,7 +636,8 @@
 .age-system.item .stunts .item-card-desc .editor,
 .age-system.item .honorifics .item-card-desc .editor,
 .age-system.item .relationship .item-card-desc .editor,
-.age-system.item .membership .item-card-desc .editor {
+.age-system.item .membership .item-card-desc .editor,
+.age-system.item .vehicle .item-card-desc .editor {
   height: 100%;
 }
 .age-system.item .focus .item-card-desc label:last-of-type,
@@ -587,7 +648,8 @@
 .age-system.item .stunts .item-card-desc label:last-of-type,
 .age-system.item .honorifics .item-card-desc label:last-of-type,
 .age-system.item .relationship .item-card-desc label:last-of-type,
-.age-system.item .membership .item-card-desc label:last-of-type {
+.age-system.item .membership .item-card-desc label:last-of-type,
+.age-system.item .vehicle .item-card-desc label:last-of-type {
   margin-top: 4px;
 }
 .age-system.item .focus .item-card-desc .mod-card,
@@ -598,7 +660,8 @@
 .age-system.item .stunts .item-card-desc .mod-card,
 .age-system.item .honorifics .item-card-desc .mod-card,
 .age-system.item .relationship .item-card-desc .mod-card,
-.age-system.item .membership .item-card-desc .mod-card {
+.age-system.item .membership .item-card-desc .mod-card,
+.age-system.item .vehicle .item-card-desc .mod-card {
   border-radius: 10px;
   max-width: 150px;
   min-width: 150px;
@@ -614,7 +677,8 @@
 .age-system.item .stunts .item-card-desc .mod-card input[type="number"],
 .age-system.item .honorifics .item-card-desc .mod-card input[type="number"],
 .age-system.item .relationship .item-card-desc .mod-card input[type="number"],
-.age-system.item .membership .item-card-desc .mod-card input[type="number"] {
+.age-system.item .membership .item-card-desc .mod-card input[type="number"],
+.age-system.item .vehicle .item-card-desc .mod-card input[type="number"] {
   max-width: 40px;
   min-width: 40px;
   text-align: center;
@@ -909,6 +973,171 @@
   padding-top: 2px;
   padding-bottom: 2px;
 }
+.age-system.sheet .window-content {
+  background-color: #d1b7ab;
+}
+.age-system.sheet.vehicle {
+  font-variant: small-caps;
+  min-width: min-content;
+}
+.age-system.sheet.vehicle .label-with-icon a {
+  max-width: fit-content;
+  margin-left: 4px;
+}
+.age-system.sheet.vehicle .label-with-icon label.handling-focus.handling-focus {
+  max-width: fit-content;
+}
+.age-system.sheet.vehicle .label-with-icon i {
+  margin-right: 4px;
+}
+.age-system.sheet.vehicle .vehicle-name {
+  border-radius: 10px 10px 0px 0px;
+  text-transform: uppercase;
+  border: none;
+  padding: 4px;
+}
+.age-system.sheet.vehicle input[name="name"] {
+  padding-left: 10px;
+  min-width: 100%;
+  max-height: 30px;
+}
+.age-system.sheet.vehicle label {
+  max-height: 20px;
+  text-align: center;
+}
+.age-system.sheet.vehicle .grid-container {
+  display: grid;
+  grid-template-columns: 300px 500px;
+  grid-template-rows: 370px 200px;
+}
+.age-system.sheet.vehicle .grid-parameter {
+  grid-column-start: 1;
+  grid-column-end: span 1;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+  font-size: 14px;
+}
+.age-system.sheet.vehicle .grid-parameter > div {
+  max-height: 50px;
+  margin: 4px;
+}
+.age-system.sheet.vehicle .grid-parameter > div div {
+  margin: 4px;
+}
+.age-system.sheet.vehicle .grid-parameter .focus-ability {
+  max-height: 70px;
+}
+.age-system.sheet.vehicle .grid-parameter span {
+  max-width: min-content;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.age-system.sheet.vehicle .grid-parameter input {
+  max-height: 28px;
+  padding: 0px;
+  text-align: center;
+}
+.age-system.sheet.vehicle .grid-parameter select {
+  margin: 0 auto;
+  max-height: 20px;
+}
+.age-system.sheet.vehicle .grid-parameter input[name="data.handling.mod"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.ramDmg"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.hull"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.defenseTotal"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.cost"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.velocity.catMod"] {
+  max-width: 35px;
+  max-height: 20px;
+}
+.age-system.sheet.vehicle .grid-parameter input[name="data.cost"] {
+  max-width: 60px;
+}
+.age-system.sheet.vehicle .grid-parameter input[type="checkbox"] {
+  margin: 0px;
+  margin-top: 1px;
+  width: 16px;
+  height: 16px;
+}
+.age-system.sheet.vehicle .grid-parameter input[name="data.conductor"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.handling.useFocus"],
+.age-system.sheet.vehicle .grid-parameter select[name="data.handling.useAbl"] {
+  max-width: 285px;
+  max-height: 20px;
+}
+.age-system.sheet.vehicle .grid-parameter .velocity-damage-table {
+  text-align: center;
+}
+.age-system.sheet.vehicle .grid-parameter .velocity-damage-table td {
+  align-content: center;
+}
+.age-system.sheet.vehicle .grid-parameter .velocity-damage-table td a {
+  margin-right: 2px;
+}
+.age-system.sheet.vehicle .grid-parameter table {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.age-system.sheet.vehicle .grid-description {
+  grid-column-start: 2;
+  grid-column-end: span 1;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+  height: 200px;
+}
+.age-system.sheet.vehicle .grid-description .editor {
+  height: 100%;
+  padding: 4px 10px;
+}
+.age-system.sheet.vehicle .passenger-container {
+  grid-column-start: 1;
+  grid-column-end: span 1;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+  padding-left: 8px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+}
+.age-system.sheet.vehicle .passenger-list {
+  overflow: auto;
+  height: 176px;
+  padding-right: 21px;
+}
+.age-system.sheet.vehicle .passenger-list img {
+  max-height: 24px;
+  max-width: 24px;
+  object-fit: contain;
+  border: none;
+}
+.age-system.sheet.vehicle .passenger-list a {
+  max-width: fit-content;
+}
+.age-system.sheet.vehicle .passenger-list span {
+  max-width: fit-content;
+  padding-left: 4px;
+}
+.age-system.sheet.vehicle .passenger-list li {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.age-system.sheet.vehicle .dragover {
+  color: #5f0505;
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.8);
+}
+.age-system.sheet.vehicle .grid-img {
+  grid-column-start: 2;
+  grid-column-end: span 1;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+}
+.age-system.sheet.vehicle .grid-img img {
+  object-fit: contain;
+  height: 340px;
+  width: 490px;
+  margin: 5px;
+  padding: 4px;
+  border-radius: 25px;
+}
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;
 }
@@ -1034,6 +1263,12 @@
   color: #ffffff;
 }
 .colorset-modern-blue .char-sheet .age-header .editor {
+  background-color: #ffffff;
+}
+.colorset-modern-blue .sheet.vehicle img {
+  border: 2px solid #007DAD;
+}
+.colorset-modern-blue .sheet.vehicle .editor {
   background-color: #ffffff;
 }
 .colorset-modern-blue .dice-show.trait-test i:last-of-type {
@@ -1168,6 +1403,12 @@
 .colorset-fantasy-blue .char-sheet .age-header .editor {
   background-color: #ffffff;
 }
+.colorset-fantasy-blue .sheet.vehicle img {
+  border: 2px solid #0f4f5b;
+}
+.colorset-fantasy-blue .sheet.vehicle .editor {
+  background-color: #ffffff;
+}
 .colorset-fantasy-blue .dice-show.trait-test i:last-of-type {
   color: #0f4f5b;
 }
@@ -1298,6 +1539,12 @@
   color: #ffffff;
 }
 .colorset-dragon-red .char-sheet .age-header .editor {
+  background-color: #ffffff;
+}
+.colorset-dragon-red .sheet.vehicle img {
+  border: 2px solid #810207;
+}
+.colorset-dragon-red .sheet.vehicle .editor {
   background-color: #ffffff;
 }
 .colorset-dragon-red .dice-show.trait-test i:last-of-type {
@@ -1432,6 +1679,12 @@
 .colorset-folded-purple .char-sheet .age-header .editor {
   background-color: #ffffff;
 }
+.colorset-folded-purple .sheet.vehicle img {
+  border: 2px solid #565183;
+}
+.colorset-folded-purple .sheet.vehicle .editor {
+  background-color: #ffffff;
+}
 .colorset-folded-purple .dice-show.trait-test i:last-of-type {
   color: #565183;
 }
@@ -1546,11 +1799,11 @@
   color: #ffffff;
 }
 .colorset-ronin-green .colorset-second-tier {
-  background-color: #aaaaaa15;
+  background-color: #c2f5aa;
   color: #1d8514;
 }
 .colorset-ronin-green .colorset-third-tier {
-  background-color: #8ec740;
+  background-color: #92b65f;
   color: #000000;
 }
 .colorset-ronin-green input.colorset-first-tier {
@@ -1562,6 +1815,12 @@
   color: #ffffff;
 }
 .colorset-ronin-green .char-sheet .age-header .editor {
+  background-color: #ffffff;
+}
+.colorset-ronin-green .sheet.vehicle img {
+  border: 2px solid #1d8514;
+}
+.colorset-ronin-green .sheet.vehicle .editor {
   background-color: #ffffff;
 }
 .colorset-ronin-green .dice-show.trait-test i:last-of-type {
@@ -1581,7 +1840,7 @@
   background-color: #ffffff;
 }
 .colorset-ronin-green .char-sheet input.colorset-second-tier {
-  background-color: #aaaaaa15 !important;
+  background-color: #c2f5aa !important;
   color: #1d8514 !important;
 }
 .colorset-ronin-green .focus img,
@@ -1615,7 +1874,7 @@
 .colorset-ronin-green .honorifics .item-card-stats,
 .colorset-ronin-green .membership .item-card-stats,
 .colorset-ronin-green .relationship .item-card-stats {
-  background-color: #aaaaaa15;
+  background-color: #c2f5aa;
 }
 .colorset-ronin-green .focus .item-card-stats input.data-entry,
 .colorset-ronin-green .power .item-card-stats input.data-entry,
@@ -1648,7 +1907,7 @@
 .colorset-ronin-green .honorifics nav .item,
 .colorset-ronin-green .membership nav .item,
 .colorset-ronin-green .relationship nav .item {
-  background-color: #aaaaaa15;
+  background-color: #c2f5aa;
   color: #1d8514;
 }
 .colorset-ronin-green .focus nav .item.active,
@@ -1671,7 +1930,7 @@
 .colorset-ronin-green .honorifics .mod-card,
 .colorset-ronin-green .membership .mod-card,
 .colorset-ronin-green .relationship .mod-card {
-  border: solid #aaaaaa15 1px;
+  border: solid #c2f5aa 1px;
 }
 #context-menu li {
   white-space: nowrap;
@@ -1695,11 +1954,17 @@
 .age-system .flex-align-center {
   align-items: center;
 }
+.age-system .flex-align-end {
+  align-items: flex-end;
+}
 .age-system .flex-align-start {
   align-items: flex-start;
 }
 .age-system .flex-justify-center {
   justify-content: center;
+}
+.age-system .flex-justify-start {
+  justify-content: flex-start;
 }
 .age-system .flex-justify-between {
   justify-content: space-between;
