@@ -1,5 +1,6 @@
 {
     "ACTOR.TypeChar": "Personnage Joueur",
+	"ACTOR.TypeVehicle": "Véhicule",
     "ITEM.TypeStunts": "Prouesses",
     "ITEM.TypeEquipment": "Équipement",
     "ITEM.TypePower": "Pouvoirs et Sorts",
@@ -16,8 +17,8 @@
     "SETTINGS.useFatigue": "Utiliser Fatigue",
     "SETTINGS.useFatigueHint": "Afficher la section Fatigue pour le suivi et la fatigue liée à l'utilisation des Pouvoirs et Sorts",
 	
-	"SETTINGS.useConditions": "Utiliser Affections",
-    "SETTINGS.useConditionsHint": "Afficher une section Affections - les modificateurs de jets de dés ne sont pas implémentés",
+	"SETTINGS.useConditions": "Utiliser Altérations",
+    "SETTINGS.useConditionsHint": "Afficher une section Altérations - les modificateurs de jets de dés ne sont pas implémentés",
 
     "SETTINGS.usePowerPoints": "Utiliser la Mana",
     "SETTINGS.usePowerPointsHint": "Afficher la section Mana pour le suivi et la mana disponible pour les Pouvoirs et Sorts",
@@ -81,9 +82,28 @@
 			"selectTokenMacro": "Sélectionner un token pour lancer la macro",
             "actorDontHaveValidItem": "Le personnage sélectionné n'a pas d'objet correspondant dans la macro.",
 			"selectOnlyOneTarget": "Choisissez une seule cible pour l'attaque.",
-			"originTokenMissing": "Le lanceur de l'action (Personnage ou Token non attribué) n'existe plus."
+			"originTokenMissing": "Le lanceur de l'action (Personnage ou Token non attribué) n'existe plus.",
+			"alreadyOnboard": "Le passager {name} ({id}) est déjà à bord!",
+            "vehicleIsNotPassenger": "Un véhicule ne peut pas être passager.",
+            "userNotAvailable": "Le personnage {name} ({id}) n'est pas disponible."
 		},
         
+		"parameters": "Paramètres",
+        "conductor": "Conducteur",
+        "passengers": "Passagers",
+        "handling": "Maniabilité",
+        "velocity": "Rapidité",
+        "velClass": "Classe de Rapidité",
+        "hull": "Coque",
+        "collision": "Collision",
+        "sideswipe": "Collision latérale",
+        "crash": "Crash",
+        "ram": "Éperonner",
+        "velStandard": "Standard",
+        "velFast": "Rapide ",
+        "velVeryFast": "Très rapide",
+        "velExtreme": "Extrême",
+		
 		"chatCard": {
             "rollGeneral": "{actor} lance {item}",
             "rollAttack": "{actor} attaque avec {item}",
@@ -97,12 +117,14 @@
             "rollResistedHealing": "A résisté aux soins",
             "addFocusSD": "Ajouter les deux",
             "addFocus": "Ajout compétence",
-            "addStuntDie": "Ajout dé étourdissement"
+            "addStuntDie": "Ajout SD",
+			
+			"maneuversVehicle": "{name} conduit {vehicle}"
         },
 		
-        "testThreshold": "Seuil de réussite",
+		"testThreshold": "Seuil de réussite",
 		
-		"conditionsName": "Affections",
+		"conditionsName": "Altérations",
         "conditions": {
             "blinded": "Aveuglé",
             "blindedDesc": "Le personnage ne peut pas voir et échoue automatiquement les jets de compétences basés sur la vision tels que Perception (Vue)",
@@ -111,7 +133,7 @@
             "exhausted": "Épuisé",
             "exhaustedDesc": "Le personnage est très fatigué. Sa rapidité est réduite de moitié et il nepeut pas utiliser les actions Courir et Charger. S'il reçoit une nouvelle altération Fatigué ou Épuisé, il est alors impuissant.",
             "fatigued": "Fatigué",
-            "fatiguedDesc": "Le personnage est fatigué et ne peut pas utiliser l'action Courir ou Charger. S'il reçoit une autre affection Fatigué il devient Épuisé.",
+            "fatiguedDesc": "Le personnage est fatigué et ne peut pas utiliser l'action Courir ou Charger. S'il reçoit une autre altération Fatigué il devient Épuisé.",
             "freefalling": "Chute Libre",
             "freefallingDesc": "Le personnage est effectivement en apesanteur dans un environnement de microgravité ou de chute libre. Il peut seulement se déplacer à l’aide de poignées, d’une surface à pousser, ou d’un certain type de poussée. Une fois qu’il se déplace, il continue de se déplacer avec la même vitesse et la même trajectoire, à moins qu’il ne prenne des mesures pour s'arrêter ou modifier son mouvement.",
             "helpless": "Impuissant",
@@ -121,11 +143,11 @@
             "prone": "Position couchée",
             "proneDesc": "Le personnage est couché sur le sol. Il ne peut pas utiliser l'action Courir ou Charger puisqu'il ne peut se déplacer qu'en rampant. Se relever requiert une action Se déplacer et consomme la moitié de la rapidité du personnage. Contre les personnages en position couchée, les attaques de mêlée ont un bonus de +1 et les attaques à distance un malus de -1.",
             "restrained": "Immobilisé",
-            "restrainedDesc": "Le personnage voit sa rapidité réduite à 0 et il ne peut plus bouger. L'affection Immobilisé peut induire une perte d'autres actions en fonction de la cause de l'affection",
+            "restrainedDesc": "Le personnage voit sa rapidité réduite à 0 et il ne peut plus bouger. L'altération Immobilisé peut induire une perte d'autres actions en fonction de la cause de l'altération",
             "injured": "Blessé",
             "injuredDesc": "Le personnage est touché. Il a une pénalité de -1 à tous ses tests et devient Fatigué, ne pouvant plus utiliser les actions Charger et Courir. Un personnage blessé qui reçoit une nouvelle blessure devient invalide.",
             "wounded": "Invalide",
-            "woundedDesc": "Le personnage est sévèrement blessé. Il a une pénalité de -2 à tous ses tests et devient Épuisé, sa rapidité est réduite de moitié ne pouvant plus utiliser les actions Charger et Courir. Un personnage invalide qui reçoit une nouvelle affection Blessé ou Invalide devient mourrant.",
+            "woundedDesc": "Le personnage est sévèrement blessé. Il a une pénalité de -2 à tous ses tests et devient Épuisé, sa rapidité est réduite de moitié ne pouvant plus utiliser les actions Charger et Courir. Un personnage invalide qui reçoit une nouvelle altération Blessé ou Invalide devient mourrant.",
             "unconscious": "Inconscient",
             "unconsciousDesc": "Le personnage n’est pas conscient de son environnement ou du passage du temps. Le personnage tombe à terre (couché au sol) et est impuissant, incapable d'utiliser la moindre action.",
             "dying": "Mourant",
@@ -350,7 +372,7 @@
             "equiped": "Équipé",
             "minStr": "FOR minRange",
             "cast": "Invocation",
-            "force": "Force",
+            "force": "Puissance Magique",
 			"resistedEffect": "Effet si résiste",
             "testResist": "Test de résistance"
         },
