@@ -33,6 +33,7 @@ Icons were used from [game-icons.net](https://game-icons.net). This icons were p
 - [Briefcase](https://game-icons.net/1x1/delapouite/briefcase.html) (General Equipment icon), by [Delapouite](https://delapouite.com/).
 - [Rank 3](https://game-icons.net/1x1/skoll/rank-3.html) (Honorifics icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
 - [Fist](https://game-icons.net/1x1/skoll/fist.html) (Weapon icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
+- [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
 ### Localization
 - **French**: by Discord user *Imposator#8090*.
 
@@ -68,6 +69,10 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
+
+### 0.5.0 [2021-03-xx]
+#### Added
+- Added a Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompent to roll modifier and TN.
 
 ### 0.4.1 [2021-02-22]
 #### Added
