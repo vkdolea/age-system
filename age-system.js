@@ -7,11 +7,15 @@ import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
 import { rollOwnedItem } from "./modules/macros.js";
+import { AgeRoller } from "./modules/age-roller.js";
 
 import * as Settings from "./modules/settings.js";
 import * as AgeChat from "./modules/age-chat.js";
 import * as Setup from "./modules/setup.js";
 import * as migrations from "./modules/migration.js";
+
+// const ageSystemGlobal = {};
+window.ageSystem = ageSystem;
 
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
@@ -48,6 +52,7 @@ Hooks.once("init", async function() {
     };
 
     CONFIG.ageSystem = ageSystem;
+    window.ageSystem = ageSystem;
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("age-system", ageSystemItemSheet, {makeDefault: true});
@@ -63,6 +68,15 @@ Hooks.once("init", async function() {
         makeDefault: true,
         // label: "DND5E.SheetClassCharacter"
     });
+
+    ageSystem.ageRoller = new AgeRoller({
+        popOut: false,
+        minimizable: false,
+        resizable: false,
+        id: 'age-roller',
+        template: 'systems/age-system/templates/rolls/age-roller.html',
+        classes: []
+      })
 
     // Define extra data for Age System Actors
     CONFIG.Actor.entityClass = ageSystemActor;
@@ -118,7 +132,7 @@ Hooks.once("setup", function() {
 });
 
 Hooks.once("ready", function() {
-
+    ageSystem.ageRoller.refresh()
     // Prepare Actors dependent on other Actors
     for(let e of game.postReadyPrepare){
         e.prepareData();

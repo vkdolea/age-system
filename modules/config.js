@@ -198,6 +198,11 @@ ageSystem.actorIcons = {
     "char": `${actorIconPath}sensousness.svg`,
 }
 
+const uiElementsPath = "systems/age-system/resources/imgs/ui-elements/";
+ageSystem.uiElements = {
+    ageRoller: `${uiElementsPath}cube.svg`
+}
+
 // Change default Actor Icon
 CONST.DEFAULT_TOKEN = "systems/age-system/resources/imgs/actor-icon/sensousness.svg";
 

@@ -108,6 +108,7 @@
             "rollGeneral": "{actor} rolls {item}",
             "rollAttack": "{actor} attacks with {item}",
             "rollPower": "{actor} uses {item}",
+            "looseRoll": "{user} rolls some dice",
             
             "rollFullDamage": "Full Damage",
             "rollFullHealing": "Full Healing",
