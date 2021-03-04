@@ -76,7 +76,7 @@ Hooks.once("init", async function() {
         id: 'age-roller',
         template: 'systems/age-system/templates/rolls/age-roller.html',
         classes: []
-      })
+    })
 
     // Define extra data for Age System Actors
     CONFIG.Actor.entityClass = ageSystemActor;
@@ -152,7 +152,7 @@ Hooks.once("ready", function() {
     // // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.4.0";
+    const NEEDS_MIGRATION_VERSION = "0.5.0";
     // const COMPATIBLE_MIGRATION_VERSION = "0.7.9";
     const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;

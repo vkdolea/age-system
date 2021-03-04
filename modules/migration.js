@@ -128,6 +128,7 @@ export const migrateActorData = function(actor) {
 
   // Actor Data Updates
   _addActorConditions(actor, updateData);
+  _addVehicleCustomDmg(actor, updateData);
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
@@ -203,17 +204,32 @@ function _addActorConditions(actor, updateData) {
   if (actor.type !== "char") return updateData;
 
   // Add Conditions
+  // if (!actor.data.conditions || actor.data.conditions.length === 0) {
   if (!actor.data.conditions) {
     const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindred",
     "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
     
     updateData["data.conditions"] = {};
     for (let c = 0; c < conditions.length; c++) {
-      const cond = contidions[c];
+      const cond = conditions[c];
       const condString = `data.conditions.${cond}`;
       udpateData[condString] = false;    
     }
   };
+
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Add vehicle custom damage
+ * @private
+ */
+function _addVehicleCustomDmg(actor, updateData) {
+  if (actor.type !== "vehicle") return updateData;
+
+  if (!actor.data.customSideswipeDmg) updateData["data.customSideswipeDmg"] = 1;
+  if (!actor.data.customCollisionDmg) updateData["data.customCollisionDmg"] = 1;
 
   return updateData
 }
