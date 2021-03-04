@@ -22,7 +22,7 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 
 ## Credits
 ### Icons
-Icons were used from [game-icons.net](https://game-icons.net). This icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
+Icons were used from [game-icons.net](https://game-icons.net). These icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
 - [Sensuousness](https://game-icons.net/1x1/lorc/sensuousness.html) (Character icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Split Cross](https://game-icons.net/1x1/lorc/split-cross.html) (Stunt icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Embrace Energy](https://game-icons.net/1x1/lorc/embrassed-energy.html) (Power & Arcana icon), by [Lorc](https://lorcblog.blogspot.com/).
@@ -73,6 +73,8 @@ Here the description of each one of the Modificators:
 ### 0.5.0 [2021-03-xx]
 #### Added
 - Added a Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompent to roll modifier and TN.
+- Added to vehicle sheets: Armor Rating, Cover, Total Passengers Capacity and Custom Damage for Collision/Sideswipe.
+- On vehicles damage table, line representing vehicle's Velocity Class will have **bold** characters.
 
 ### 0.4.1 [2021-02-22]
 #### Added
