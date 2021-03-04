@@ -75,6 +75,8 @@ Here the description of each one of the Modificators:
 - Added a Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompent to roll modifier and TN.
 - Added to vehicle sheets: Armor Rating, Cover, Total Passengers Capacity and Custom Damage for Collision/Sideswipe.
 - On vehicles damage table, line representing vehicle's Velocity Class will have **bold** characters.
+#### Fix
+- Migration issue could cause Conditions not to be created properly on migrated Actors.
 
 ### 0.4.1 [2021-02-22]
 #### Added
