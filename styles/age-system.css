@@ -1014,7 +1014,7 @@
   grid-column-start: 1;
   grid-column-end: span 1;
   grid-row-start: 1;
-  grid-row-end: span 1;
+  grid-row-end: span 2;
   font-size: 14px;
 }
 .age-system.sheet.vehicle .grid-parameter > div {
@@ -1046,9 +1046,20 @@
 .age-system.sheet.vehicle .grid-parameter input[name="data.hull"],
 .age-system.sheet.vehicle .grid-parameter input[name="data.defenseTotal"],
 .age-system.sheet.vehicle .grid-parameter input[name="data.cost"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.velocity.catMod"] {
+.age-system.sheet.vehicle .grid-parameter input[name="data.velocity.catMod"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.armorRating"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.coverRating"] {
   max-width: 35px;
   max-height: 20px;
+}
+.age-system.sheet.vehicle .grid-parameter .highlight {
+  font-weight: bolder;
+}
+.age-system.sheet.vehicle .grid-parameter input[name="data.customCollisionDmg"],
+.age-system.sheet.vehicle .grid-parameter input[name="data.customSideswipeDmg"] {
+  max-width: 20px;
+  max-height: 20px;
+  border: none;
 }
 .age-system.sheet.vehicle .grid-parameter input[name="data.cost"] {
   max-width: 60px;
@@ -1090,18 +1101,21 @@
   padding: 4px 10px;
 }
 .age-system.sheet.vehicle .passenger-container {
-  grid-column-start: 1;
-  grid-column-end: span 1;
-  grid-row-start: 2;
-  grid-row-end: span 1;
   padding-left: 8px;
   padding-right: 4px;
   padding-bottom: 4px;
+  max-height: auto;
+  height: 100%;
+}
+.age-system.sheet.vehicle .passenger-container input[name="data.capacity"] {
+  max-height: 16px;
+  max-width: 30px;
+  border: none;
 }
 .age-system.sheet.vehicle .passenger-list {
   overflow: auto;
-  height: 176px;
   padding-right: 21px;
+  height: 140px;
 }
 .age-system.sheet.vehicle .passenger-list img {
   max-height: 24px;

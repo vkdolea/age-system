@@ -27,7 +27,9 @@
                 "value": 20
             },
             "conductor": "",
-            "passengers": []
+            "passengers": [],
+            "customSideswipeDmg": 1,
+            "customCollisionDmg": 1
         },
         "char": {
             "statBlockView": false,

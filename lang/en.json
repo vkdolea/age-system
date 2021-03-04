@@ -103,6 +103,9 @@
         "velFast": "Fast ",
         "velVeryFast": "Very Fast",
         "velExtreme": "Extreme",
+        "velCustom": "Custom",
+        "coverRating": "Cover",
+        "vehicleArmor": "Armor",
         
         "chatCard": {
             "rollGeneral": "{actor} rolls {item}",
