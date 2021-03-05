@@ -240,8 +240,8 @@ function _addActorConditions(actor, updateData) {
 function _addVehicleCustomDmg(actor, updateData) {
   if (actor.type !== "vehicle") return updateData;
 
-  if (!actor.data.customSideswipeDmg) updateData["data.customSideswipeDmg"] = 1;
-  if (!actor.data.customCollisionDmg) updateData["data.customCollisionDmg"] = 1;
+  if (!actor.data.hasOwnProperty(customSideswipeDmg)) updateData["data.customSideswipeDmg"] = 1;
+  if (!actor.data.hasOwnProperty(customCollisionDmg)) updateData["data.customCollisionDmg"] = 1;
 
   return updateData
 }
