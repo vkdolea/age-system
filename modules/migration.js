@@ -202,13 +202,25 @@ export const migrateSceneData = function(scene) {
  */
 function _addActorConditions(actor, updateData) {
   if (actor.type !== "char") return updateData;
+  
+  const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindred",
+  "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
 
-  // Add Conditions
-  // if (!actor.data.conditions || actor.data.conditions.length === 0) {
+  // Add Conditions - added a fix
+  if (actor.data.conditions) {
+    if (typeof actor.data.conditions === "object") {
+      let complete = true;
+      for (let c = 0; c < conditions.length; c++) {
+        const condition = conditions[c];
+        if (!actor.data.conditions.hasOwnProperty(condition)) complete = false;
+      }
+      if (complete) return updateData;
+    } else {
+      delete actor.data.conditions;
+    };
+  }
+  
   if (!actor.data.conditions) {
-    const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindred",
-    "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
-    
     updateData["data.conditions"] = {};
     for (let c = 0; c < conditions.length; c++) {
       const cond = conditions[c];
