@@ -37,7 +37,9 @@ export class ageSystemActor extends Actor {
             case "vehicle":
                 this._prepareVehicleBaseData();
                 break;
-        
+            case "spaceship":
+                this._prepareSpaceshipBaseData();
+                break;
             default:
                 break;
         }
@@ -218,6 +220,10 @@ export class ageSystemActor extends Actor {
 
     };
 
+    _prepareSpaceshipBaseData() {
+
+    }
+
     prepareDerivedData() {
         const actorData = this.data;
         // const data = actorData.data;
@@ -229,7 +235,9 @@ export class ageSystemActor extends Actor {
             case "vehicle":
                 this._prepareVehicleDerivedData();
                 break;
-        
+            case "spaceship":
+                this._prepareSpaceshipDerivedData();
+                break;        
             default:
                 break;
         }
@@ -270,6 +278,10 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareVehicleDerivedData() {
+
+    };
+
+    _prepareSpaceshipDerivedData() {
 
     };
 

@@ -80,7 +80,8 @@
         "SHEETS": {
             "standardChar": "AGE Character",
             "standardVehicle": "AGE Vehicle",
-            "standardItem": "AGE Item"
+            "standardItem": "AGE Item",
+            "standardSpaceship": "AGE Spaceship"
         },
 
         "WARNING": {

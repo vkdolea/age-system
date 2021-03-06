@@ -3,6 +3,7 @@ import {ageSystem} from "./modules/config.js";
 import ageSystemItemSheet from "./modules/sheets/ageSystemItemSheet.js";
 import ageSystemCharacterSheet from "./modules/sheets/ageSystemCharacterSheet.js";
 import ageSystemVehicleSheet from "./modules/sheets/ageSystemVehicleSheet.js";
+import ageSystemSpaceshipSheet from "./modules/sheets/ageSystemSpaceshipSheet.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
@@ -70,6 +71,11 @@ Hooks.once("init", async function() {
         types: ["vehicle"],
         makeDefault: true,
         label: "age-system.SHEETS.standardVehicle"
+    });
+    Actors.registerSheet("age-system", ageSystemSpaceshipSheet, {
+        types: ["spaceship"],
+        makeDefault: true,
+        label: "age-system.SHEETS.standardSpaceship"
     });
 
     ageSystem.ageRoller = new AgeRoller({

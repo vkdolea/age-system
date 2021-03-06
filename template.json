@@ -2,9 +2,91 @@
     "Actor": {
         "types": [
             "char",
-            "vehicle"
+            "vehicle",
+            "spaceship"
         ],
         "templates": {},
+        "spaceship": {
+            "size": "",
+            "hull": "",
+            "description": "",
+            "crew": {
+                "min": 1,
+                "current": 1,
+                "max": 1,
+                "competance": ""
+            },
+            "drive": "",
+            "passengers": [],
+            "maneuver": {
+                "mod": 0,
+                "base": 0,
+                "pilot": "",
+                "useAbl": "",
+                "useFocus": ""
+            },
+            "command": {
+                "mod": 0,
+                "base": 0,
+                "captain": "",
+                "useAbl": "",
+                "useFocus": ""
+            },
+            "sensors": {
+                "mod": 0,
+                "base": 0,
+                "operator": "",
+                "useAbl": "",
+                "useFocus": ""
+            },
+            "damageControl": {
+                "mod": 0,
+                "base": 0,
+                "TN": 11,
+                "useAbl": "",
+                "useFocus": "",
+                "threshold": {
+                    "current": 0,
+                    "target": 5
+                }
+            },
+            "losses": {
+                "normal": {
+                    "collateral": {
+                        "actual": 0,
+                        "max": 6
+                    },
+                    "hull": {
+                        "actual": 0,
+                        "max": 6
+                    },
+                    "maneuverability": {
+                        "actual": 0,
+                        "max": 6
+                    },
+                    "sensors": {
+                        "actual": 0,
+                        "max": 6
+                    },
+                    "weapons": {
+                        "actual": 0,
+                        "max": 6
+                    }
+                },
+                "serious": {
+                    "reactorOffline": {
+                        "actual": 0,
+                        "max": 6
+                    },
+                    "weaponOffline": {
+                        "actual": 0,
+                        "max": 6
+                    }
+                }
+            },
+            "takenOut": false
+
+        },
         "vehicle": {
             "handling": {
                 "mod": 0,
