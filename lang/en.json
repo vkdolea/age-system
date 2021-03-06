@@ -79,7 +79,8 @@
 
         "SHEETS": {
             "standardChar": "AGE Character",
-            "standardVehicle": "AGE Vehicle"
+            "standardVehicle": "AGE Vehicle",
+            "standardItem": "AGE Item"
         },
 
         "WARNING": {

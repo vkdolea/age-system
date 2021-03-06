@@ -52,10 +52,13 @@ Hooks.once("init", async function() {
     };
 
     CONFIG.ageSystem = ageSystem;
-    window.ageSystem = ageSystem;
+    // window.ageSystem = ageSystem;
 
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("age-system", ageSystemItemSheet, {makeDefault: true});
+    Items.registerSheet("age-system", ageSystemItemSheet, {
+        makeDefault: true,
+        label: "age-system.SHEETS.standardItem"
+    });
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("age-system", ageSystemCharacterSheet, {
@@ -73,8 +76,8 @@ Hooks.once("init", async function() {
         popOut: false,
         minimizable: false,
         resizable: false,
-        id: 'age-roller',
-        classes: []
+        // id: 'age-roller',
+        // classes: []
     })
 
     // Define extra data for Age System Actors
