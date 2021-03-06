@@ -77,6 +77,11 @@
 
     "age-system": {
 
+        "SHEETS": {
+            "standardChar": "AGE Character",
+            "standardVehicle": "AGE Vehicle"
+        },
+
         "WARNING": {
             "duplicatedFocus": "Focus is not added to character - it already owns a Focus named ",
             "selectTokenMacro": "Select a token to run the macro.",

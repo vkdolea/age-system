@@ -1946,12 +1946,7 @@
 .colorset-ronin-green .relationship .mod-card {
   border: solid #c2f5aa 1px;
 }
-#context-menu li {
-  white-space: nowrap;
-  text-align: left;
-}
 #age-roller {
-  /*border: 5px solid rgb(255, 123, 0);*/
   position: fixed;
   bottom: 10px;
   left: 800px;
@@ -1961,6 +1956,11 @@
   padding: 0px;
   cursor: pointer;
   display: inline-block;
+  z-index: 99;
+}
+#context-menu li {
+  white-space: nowrap;
+  text-align: left;
 }
 /*---------Flexbox assisting classes------*/
 .age-system .flexcol {

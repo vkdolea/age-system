@@ -4,6 +4,10 @@ export class AgeRoller extends Application {
 	constructor(options = {}) {
 		super(options)
 	}
+
+	get template() {
+		return `systems/age-system/templates/rolls/age-roller.hbs`;
+	}
 	
 	getData(options) {
 		const data = super.getData(options);

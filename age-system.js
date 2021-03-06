@@ -61,12 +61,12 @@ Hooks.once("init", async function() {
     Actors.registerSheet("age-system", ageSystemCharacterSheet, {
         types: ["char"],
         makeDefault: true,
-        // label: "DND5E.SheetClassCharacter"
+        label: "age-system.SHEETS.standardChar"
     });
     Actors.registerSheet("age-system", ageSystemVehicleSheet, {
         types: ["vehicle"],
         makeDefault: true,
-        // label: "DND5E.SheetClassCharacter"
+        label: "age-system.SHEETS.standardVehicle"
     });
 
     ageSystem.ageRoller = new AgeRoller({
@@ -74,7 +74,6 @@ Hooks.once("init", async function() {
         minimizable: false,
         resizable: false,
         id: 'age-roller',
-        template: 'systems/age-system/templates/rolls/age-roller.html',
         classes: []
     })
 
