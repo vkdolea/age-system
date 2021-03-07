@@ -13,14 +13,17 @@ export async function ageRollCheck({
     hasTest = false,
     rollType = null,
     vehicleHandling = false,
+    selectAbl = false,
+    rollVisibility = false,
     flavor = false}={}) {
     
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
-    if (!event.ctrlKey && event.altKey) {
-        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN});
+    if (!event.ctrlKey && event.altKey || selectAbl) {
+        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN, selectAbl, rollVisibility});
         if (extraOptions.cancelled) return;
         if (extraOptions.rollTN) rollTN = extraOptions.rollTN;
+        if (extraOptions.selectedAbl) abl = extraOptions.selectedAbl;
         rollUserMod = extraOptions.ageRollMod;
         atkDmgTradeOff = -Math.abs(Number(extraOptions.atkDmgTradeOff));
     };
@@ -304,6 +307,18 @@ async function getAgeRollOptions(itemRolled, data = {}) {
     const template = "/systems/age-system/templates/rolls/age-roll-settings.hbs"
     const type = itemRolled ? itemRolled.type : null;
 
+    if (data.selectAbl) {
+        const abilitiesPool = CONFIG.ageSystem.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
+        let abilitiesArray = []
+        for (const abl in abilitiesPool) {
+            if (Object.hasOwnProperty.call(abilitiesPool, abl)) {
+                const ablLocal = game.i18n.localize(abilitiesPool[abl]);
+                abilitiesArray.push({ability: abl, name: ablLocal});
+            };
+        };
+        data.abilitiesArray = sortObjArrayByName(abilitiesArray, "name");
+    };
+
     const html = await renderTemplate(template, {
         ...data,
         itemType: type
@@ -332,14 +347,18 @@ async function getAgeRollOptions(itemRolled, data = {}) {
 
 function _processAgeRollOptions(form) {
 
-    const modifiers = ["ageRollMod", "atkDmgTradeOff", "rollTN"];
+    const modifiers = ["ageRollMod", "atkDmgTradeOff", "rollTN", "selectedAbl"];
     let rollOptions = {}
 
     for (let o = 0; o < modifiers.length; o++) {
         const mod = modifiers[o];
         if (form[mod]) {
-            rollOptions[mod] = parseInt(form[mod].value)
-            if (!Number.isInteger(rollOptions[mod])) rollOptions[mod] = null;
+            if (mod === "selectedAbl") {
+                rollOptions[mod] = form[mod].value;
+            } else {
+                rollOptions[mod] = parseInt(form[mod].value)
+                if (!Number.isInteger(rollOptions[mod])) rollOptions[mod] = null;
+            }
         }
     }
 
@@ -404,44 +423,6 @@ export function damageToString(damageMod) {
     return damageMod > 0 ? `+${damageMod}` : `${damageMod}`;
 };
 
-
-// Creates dialog box to pick alternative Ability to roll a Focus - option within Focus' context menu
-export function dialogBoxAbilityFocus(focus, actor) {
-
-    let focusDialog = {
-        title: focus.data.name,
-        content: `<p>${game.i18n.localize("age-system.abilitySelect")}</p>`,
-    };
-    
-    const abilitiesPool = CONFIG.ageSystem.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
-    let abilitiesArray = []
-    for (const abl in abilitiesPool) {
-        if (Object.hasOwnProperty.call(abilitiesPool, abl)) {
-            const ablLocal = game.i18n.localize(abilitiesPool[abl]);
-            abilitiesArray.push({ability: abl, name: ablLocal});
-        };
-    };
-    abilitiesArray = sortObjArrayByName(abilitiesArray, "name");
-    
-    let buttons = {};
-    for (let a = 0; a < abilitiesArray.length; a++) {
-        const obj = abilitiesArray[a];
-        buttons[obj.ability] = {
-            label: obj.name,
-            callback: ev => {
-                ageRollCheck(ev, actor, obj.ability, focus)
-            }
-        }
-    }
-    
-    // In future versions of FoundryVTT (after 0.7.9), Dialog will pass HMTL data and not jQuery
-    // Check this if/when code breaks
-    return new Dialog(focusDialog = {
-        ...focusDialog,
-        buttons
-    });
-};
-
 async function getDamageRollOptions(addFocus, stuntDmg) {
     // Ve se item rolado e arma, poder ou null/outro, 
 
@@ -455,6 +436,7 @@ async function getDamageRollOptions(addFocus, stuntDmg) {
         // itemType: type
     });
 
+    const modifiers = ["setDmgExtraDice", "setDmgGeneralMod", "setStuntDamage", "addFocus", "stuntDieDmg"];
     return new Promise(resolve => {
         const data = {
             title: game.i18n.localize("age-system.damageOptions"),
@@ -462,7 +444,7 @@ async function getDamageRollOptions(addFocus, stuntDmg) {
             buttons: {
                 normal: {
                     label: game.i18n.localize("age-system.roll"),
-                    callback: html => resolve(_processDamageRollOptions(html[0].querySelector("form")))
+                    callback: html => resolve(_processDamageOptions(html[0].querySelector("form"), modifiers))
                 },
                 cancel: {
                     label: game.i18n.localize("age-system.cancel"),
@@ -476,9 +458,9 @@ async function getDamageRollOptions(addFocus, stuntDmg) {
     });
 };
 
-function _processDamageRollOptions(form) {
+function _processDamageOptions(form, modifiers) {
 
-    const modifiers = ["setDmgExtraDice", "setDmgGeneralMod", "setStuntDamage", "addFocus", "stuntDieDmg"];
+    // const modifiers = ["setDmgExtraDice", "setDmgGeneralMod", "setStuntDamage", "addFocus", "stuntDieDmg"];
     let rollOptions = {}
 
     for (let o = 0; o < modifiers.length; o++) {

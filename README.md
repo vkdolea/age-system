@@ -77,6 +77,7 @@ Here the description of each one of the Modificators:
 - On vehicles damage table, line representing vehicle's Velocity Class will have **bold** characters.
 #### Fix
 - Migration issue could cause Conditions not to be created properly on migrated Actors.
+- Bug preventing rolling a Focus using a different Ability (or none).
 
 ### 0.4.1 [2021-02-22]
 #### Added

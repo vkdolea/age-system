@@ -34,8 +34,8 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             // TODO - try to add the Shift + Click rolling to GM inside this callback
             callback: e => {
                 const focus = this.actor.getOwnedItem(e.data("item-id"));
-                let d = Dice.dialogBoxAbilityFocus(focus, this.actor)
-                d.render(true);
+                const ev = new MouseEvent('click', {});
+                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, selectAbl: true});
             }
         },
         {
