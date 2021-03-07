@@ -1,6 +1,7 @@
 {
     "ACTOR.TypeChar": "Player Character",
     "ACTOR.TypeVehicle": "Vehicle",
+    "ACTOR.TypeSpaceship": "Spaceship",
     "ITEM.TypeStunts": "Stunts",
     "ITEM.TypeEquipment": "General Equipment",
     "ITEM.TypePower": "Power & Arcana",
