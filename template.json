@@ -8,7 +8,11 @@
         "templates": {},
         "spaceship": {
             "size": "",
-            "hull": "",
+            "hull": {
+                "diceAmount": 1,
+                "diceSize": 6,
+                "extraValue": 0
+            },
             "description": "",
             "crew": {
                 "min": 1,
@@ -18,6 +22,7 @@
             },
             "drive": "",
             "passengers": [],
+            "weapons": [],
             "maneuver": {
                 "mod": 0,
                 "base": 0,
@@ -295,7 +300,8 @@
             "stunts",
             "relationship",
             "honorifics",
-            "membership"
+            "membership",
+            "spaceshipFeatures"
         ],
         "templates": {
             "itemReq": {
@@ -451,6 +457,20 @@
                     }
                 }
             }
+        },
+        "spaceshipFeatures": {
+            "templates": ["description", "hardItem", "damage"],
+            "type": ["weapon", "focusAssist", "hullStrong", "hullFragile", "vulnerable"],
+            "sensorMod": 0,
+            "maneuverSizeStep": 0,
+            "juiceMod": 0,
+            "hullPlating": 0,
+            "hullFragile": 0,
+            "weaponType": "pdc",
+            "useFocus": "",
+            "useAbl": "",
+            "isQuality": false,
+            "isFlaw": false
         },
         "equipment": {
             "templates": ["description", "hardItem", "bonuses"]

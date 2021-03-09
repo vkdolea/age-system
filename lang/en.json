@@ -11,6 +11,7 @@
     "ITEM.TypeRelationship": "Relationship",
     "ITEM.TypeHonorifics": "Honorifics",
     "ITEM.TypeMembership": "Membership",
+    "ITEM.TypeSpaceshipFeatures": "Spaceship Features",
 
     "SETTINGS.useConviction": "Use Conviction",
     "SETTINGS.useConvictionHint": "Enable Conviction block for tracking",
