@@ -24,6 +24,8 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 ### Icons
 Icons were used from [game-icons.net](https://game-icons.net). These icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
 - [Sensuousness](https://game-icons.net/1x1/lorc/sensuousness.html) (Character icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Chariot](https://game-icons.net/1x1/cathelineau/chariot.html) (Vehicle icon), by [Cathelineau](his link reference is game-icons.net itself).
+- [Rocket Flight](https://game-icons.net/1x1/lorc/rocket-flight.html) (Spaceship icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Split Cross](https://game-icons.net/1x1/lorc/split-cross.html) (Stunt icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Embrace Energy](https://game-icons.net/1x1/lorc/embrassed-energy.html) (Power & Arcana icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Gift of Knowledge](https://game-icons.net/1x1/lorc/gift-of-knowledge.html) (Focus icon), by [Lorc](https://lorcblog.blogspot.com/).
@@ -78,6 +80,7 @@ Here the description of each one of the Modificators:
 #### Fix
 - Migration issue could cause Conditions not to be created properly on migrated Actors.
 - Bug preventing rolling a Focus using a different Ability (or none).
+- When an Icon or Actor is delete from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
 
 ### 0.4.1 [2021-02-22]
 #### Added
