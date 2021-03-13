@@ -140,7 +140,13 @@ Hooks.once("setup", function() {
 });
 
 Hooks.once("ready", function() {
+    // Added missing parts for TOKEN dispositions (friendly/neutral)
+    CONST.TOKEN_DISPLAY_MODES.NEUTRAL = 0;
+    CONST.TOKEN_DISPLAY_MODES.FRIENDLY = 1;
+
+    // Loads Age Roller
     ageSystem.ageRoller.refresh()
+
     // Prepare Actors dependent on other Actors
     for(let e of game.postReadyPrepare){
         e.prepareData();
