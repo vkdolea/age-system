@@ -6,6 +6,8 @@ export class ageSystemActor extends Actor {
     prepareBaseData() {
         const actorData = this.data;
         const data = actorData.data;
+        
+        if (this.data.img == CONST.DEFAULT_TOKEN) this.data.img = CONFIG.ageSystem.actorIcons[actorData.type];
 
         // Check if split Armor is in use
         data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
@@ -189,22 +191,21 @@ export class ageSystemActor extends Actor {
         const actorData = this.data;
         const data = actorData.data;
 
-        // Types of damage from a Vehicle
-        // data.sideswipeDmg = 0;
-        // data.collisionDmg = 0;
-        // data.velocityClassDmg = 0;
-        // data.crashDmg = 0;
-
         data.defenseTotal = 10;
-        data.passengers.map( p => {
+        let invalidPassengers = [];
+        for (let pi = 0; pi < data.passengers.length; pi++) {
+            const p = data.passengers[pi];
             if (!game.actors) {
                 game.postReadyPrepare.push(this);
             } else {
                 const pData = p.isToken ? game.actors.tokens[p.id] : game.actors.get(p.id);
-                p.name = pData.data.name;
-                p.picture = pData.data.token.img;
-                // p.conductor = (p.id === data.conductor) ? true : false;
-                if (p.id === data.conductor) {
+                if (!pData) {
+                    invalidPassengers.push(pi);
+                } else {
+                    p.name = pData.data.name;
+                    p.picture = pData.data.token.img;
+                };
+                if (p.id === data.conductor && pData) {
                     p.isConductor = true;
                     const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
                     let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
@@ -214,7 +215,12 @@ export class ageSystemActor extends Actor {
                     p.isConductor = false;
                 }
             }
-        });
+        }
+        // Remove passengers whose sheets/tokens are not valid anymore
+        for (let ip = 0; ip < invalidPassengers.length; ip++) {
+            const i = invalidPassengers[ip];
+            data.passengers.splice(i, 1);
+        };
 
         data.pob = data.passengers.length;
 
@@ -241,26 +247,6 @@ export class ageSystemActor extends Actor {
             default:
                 break;
         }
-
-        // CAN BE REMOVED AFTER SUCCESFULLY ADDING VEHICLES AS ACTORS!
-        //
-        /*-----------------------------------------------------------------------------------*/
-        // /*--- Add bonuses to Abilities -----------------------*/
-        // // Also create abl.total parameters
-        // // this.setAbilitiesWithMod(data, actorData);
-        // /*----------------------------------------------------*/
-
-        // // Calcualtes total Initiative
-        // data.initiative = data.initiativeMod + data.abilities.dex.total - data.armor.penalty;
-
-        // // Calculate resources/currency
-        // if (data.useCurrency) {
-        //     data.resources.mod = 0;
-        // };
-        // data.resources.total = data.resources.base + Number(data.resources.mod);
-        // CAN BE REMOVED AFTER SUCCESFULLY ADDING VEHICLES AS ACTORS!
-        //
-        /*-----------------------------------------------------------------------------------*/
     };
 
     _prepareCharDerivedData() {

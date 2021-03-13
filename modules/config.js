@@ -196,15 +196,13 @@ const actorIconPath = "systems/age-system/resources/imgs/actor-icon/";
 ageSystem.actorIcons = {
     "vehicle": `${actorIconPath}chariot.svg`,
     "char": `${actorIconPath}sensousness.svg`,
+    "spaceship": `${actorIconPath}rocket.svg`,
 }
 
 const uiElementsPath = "systems/age-system/resources/imgs/ui-elements/";
 ageSystem.uiElements = {
     ageRoller: `${uiElementsPath}cube.svg`
 }
-
-// Change default Actor Icon
-CONST.DEFAULT_TOKEN = "systems/age-system/resources/imgs/actor-icon/sensousness.svg";
 
 // Initializing variable to load focus Compendiaum
 ageSystem.focus = [];
