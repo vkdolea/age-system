@@ -34,19 +34,19 @@ export class ageSystemActor extends Actor {
 
         switch (actorData.type) {
             case "char":
-                this._prepareCharBaseData();
+                this._prepareBaseDataChar();
                 break;
             case "vehicle":
-                this._prepareVehicleBaseData();
+                this._prepareBaseDataVehicle();
                 break;
             case "spaceship":
-                this._prepareSpaceshipBaseData();
+                this._prepareBaseDataSpaceship();
                 break;
             default:
                 break;
         }
     }
-    _prepareCharBaseData() {
+    _prepareBaseDataChar() {
 
         const actorData = this.data;
         const data = actorData.data;
@@ -187,7 +187,7 @@ export class ageSystemActor extends Actor {
         };        
     };
 
-    _prepareVehicleBaseData() {
+    _prepareBaseDataVehicle() {
         const actorData = this.data;
         const data = actorData.data;
 
@@ -222,11 +222,12 @@ export class ageSystemActor extends Actor {
             data.passengers.splice(i, 1);
         };
 
+        //this.sortPassengers();
         data.pob = data.passengers.length;
 
     };
 
-    _prepareSpaceshipBaseData() {
+    _prepareBaseDataSpaceship() {
 
     }
 
@@ -236,20 +237,20 @@ export class ageSystemActor extends Actor {
 
         switch (actorData.type) {
             case "char":
-                this._prepareCharDerivedData();
+                this._prepareDerivedDataChar();
                 break;
             case "vehicle":
-                this._prepareVehicleDerivedData();
+                this._prepareDerivedDataVehicle();
                 break;
             case "spaceship":
-                this._prepareSpaceshipDerivedData();
+                this._prepareDerivedDataSpaceship();
                 break;        
             default:
                 break;
         }
     };
 
-    _prepareCharDerivedData() {
+    _prepareDerivedDataChar() {
         const actorData = this.data;
         const data = actorData.data;
 
@@ -263,11 +264,47 @@ export class ageSystemActor extends Actor {
         data.resources.total = data.resources.base + Number(data.resources.mod);
     };
 
-    _prepareVehicleDerivedData() {
+    _prepareDerivedDataVehicle() {
 
     };
 
-    _prepareSpaceshipDerivedData() {
+    _prepareDerivedDataSpaceship() {
+
+    };
+
+    // TODO - testar essa função, que ainda está em desuso
+    sortPassengers() {
+        const passengers = this.data.data.passengers;
+        let invalidPassengers = [];
+        for (let pi = 0; pi < passengers.length; pi++) {
+            const p = passengers[pi];
+            if (!game.actors) {
+                game.postReadyPrepare.push(this);
+            } else {
+                const pData = p.isToken ? game.actors.tokens[p.id] : game.actors.get(p.id);
+                if (!pData) {
+                    invalidPassengers.push(pi);
+                    // TODO - a partir daqui deve ser feita a avaliação (veículo/espaçonave) para avaliar as funções especiais de cada veículo
+                } else {
+                    p.name = pData.data.name;
+                    p.picture = pData.data.token.img;
+                };
+                if (p.id === data.conductor && pData) {
+                    p.isConductor = true;
+                    const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
+                    let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
+                    if (!defenseFocus) defenseFocus = 0;
+                    data.defenseTotal += defenseAbl + defenseFocus;
+                } else {
+                    p.isConductor = false;
+                }
+            }
+        }
+        // Remove passengers whose sheets/tokens are not valid anymore
+        for (let ip = 0; ip < invalidPassengers.length; ip++) {
+            const i = invalidPassengers[ip];
+            passengers.splice(i, 1);
+        };
 
     };
 
