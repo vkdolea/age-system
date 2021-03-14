@@ -80,7 +80,7 @@ Here the description of each one of the Modificators:
 #### Fix
 - Migration issue could cause Conditions not to be created properly on migrated Actors.
 - Bug preventing rolling a Focus using a different Ability (or none).
-- When an Icon or Actor is delete from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
+- When an Actor is delete from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
 - Fixed a bug causing all NPC tokens to display red border when hovered. Color code for token frames are now as expected (player owned: green; neutral: yeallow; friendly: teal; hostile: red).
 
 ### 0.4.1 [2021-02-22]
