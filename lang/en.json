@@ -97,6 +97,18 @@
             "userNotAvailable": "Actor {name} ({id}) is not available."
         },
 
+        "spaceship": {
+            "op": "Operator",
+            "role": "Role",
+            "operator": {
+                "command": "Captain",
+                "maneuver": "Pilot",
+                "sensors": "Sensor Operator",
+                "damageControl": "Damage Control"
+            },
+            "crew": "Crew",
+            "systems": "Systems"
+        },
         "parameters": "Parameters",
         "conductor": "Conductor",
         "passengers": "Passengers",

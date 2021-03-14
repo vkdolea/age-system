@@ -13,46 +13,49 @@
                 "diceSize": 6,
                 "extraValue": 0
             },
+            "drive": "",
             "description": "",
+            "passengers": [],
             "crew": {
                 "min": 1,
                 "current": 1,
                 "max": 1,
                 "competance": ""
             },
-            "drive": "",
-            "passengers": [],
             "weapons": [],
-            "maneuver": {
-                "mod": 0,
-                "base": 0,
-                "pilot": "",
-                "useAbl": "",
-                "useFocus": ""
-            },
-            "command": {
-                "mod": 0,
-                "base": 0,
-                "captain": "",
-                "useAbl": "",
-                "useFocus": ""
-            },
-            "sensors": {
-                "mod": 0,
-                "base": 0,
-                "operator": "",
-                "useAbl": "",
-                "useFocus": ""
-            },
-            "damageControl": {
-                "mod": 0,
-                "base": 0,
-                "TN": 11,
-                "useAbl": "",
-                "useFocus": "",
-                "threshold": {
-                    "current": 0,
-                    "target": 5
+            "systems": {
+                "maneuver": {
+                    "mod": 0,
+                    "base": 0,
+                    "operator": "",
+                    "useAbl": "",
+                    "useFocus": ""
+                },
+                "command": {
+                    "mod": 0,
+                    "base": 0,
+                    "operator": "",
+                    "useAbl": "",
+                    "useFocus": ""
+                },
+                "sensors": {
+                    "mod": 0,
+                    "base": 0,
+                    "operator": "",
+                    "useAbl": "",
+                    "useFocus": ""
+                },
+                "damageControl": {
+                    "mod": 0,
+                    "base": 0,
+                    "operator": "",
+                    "TN": 11,
+                    "useAbl": "",
+                    "useFocus": "",
+                    "threshold": {
+                        "current": 0,
+                        "target": 5
+                    }
                 }
             },
             "losses": {

@@ -1,0 +1,53 @@
+<form class="{{cssClass}} age-system sheet spaceship" autocomplete="off">
+
+    <input name="name" class="vehicle-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
+    <div class="stats-block systems">
+        <h3>{{localize "age-system.spaceship.systems"}}</h3>
+        <ul class="systems-list">
+            <datalist id="{{this.actor.data.type}}-{{this.actor._id}}-list">
+                <option value=""></option>
+                {{#each config.focus as |focus|}}
+                <option value="{{focus.name}}"></option>
+                {{/each}}
+            </datalist>
+            <li class="flexrow">
+                <p class="system-roll"></p>
+                <p class="system-role">{{localize "age-system.spaceship.role"}}</p>
+                <p class="system-operator">{{localize "age-system.spaceship.op"}}</p>
+                <p class="system-abl">{{localize "age-system.abl"}}</p>
+                <p class="system-focus">{{localize "age-system.focus"}}</p>
+            </li>
+            {{#each data.systems as |system sysName|}}
+            <li class="feature-controls {{sysName}} flexrow">
+                <a class="system-roll"><i class="fas fa-dice"></i></a>
+                <h4 class="system-role">{{localize (concat "age-system.spaceship.operator." sysName)}}</h4>
+                <select name="data.systems.{{sysName}}.operator" class="system-operator">
+                    {{#select system.operator}}
+                    <option value="crew">{{localize "age-system.spaceship.crew"}}</option>
+                    {{#each ../passengers as |passenger|}}
+                    <option value="{{passenger.id}}">{{passenger.name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select name="data.systems.{{sysName}}.useAbl" class="system-abl">
+                    {{#select system.useAbl}}
+                    {{#each config.abilities as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <input name="data.systems.{{sysName}}.useFocus" class="system-focus" type="text" value="{{system.useFocus}}" placeholder="Focus Name" list="{{../this.actor.data.type}}-{{../this.actor._id}}-list"/>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="stats-block parameters">
+
+    </div>
+
+    <div class="stats-block losses">
+
+    </div>    
+    
+</form>
