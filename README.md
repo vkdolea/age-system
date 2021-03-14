@@ -39,7 +39,7 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 ### Localization
 - **French**: by Discord user *Imposator#8090*.
 
-### Shortcuts
+## Shortcuts
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
 2. *CTRL + Click* on Damage rolls adds +1D6 to the total.
 3. *CTRL + ALT + Click* on Damage rolls adds +2D6 to the total.
@@ -47,7 +47,7 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 5. *Right Click* on Focus in the character sheet opens a context menu with options to roll it with another Ability, show on Chat, edit and delete.
 6. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
 
-### Modificators
+## Modificators
 A few items have a "Modificators" section. Modificatores will only apply when the item is equiped/activated (i.e., shield icon in character sheet without opacity).
 The checkbox must be checked to have the mod active in the item.
 Bonuses for maneuvers are on topo of the normal bonuses granted by the maneuver.
