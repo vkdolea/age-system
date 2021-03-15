@@ -181,14 +181,14 @@ ageSystem.velocityCategory = {
 
 // Spacehip sizes
 ageSystem.spaceshipSize = {
-    tiny: 10,
-    small: 20,
-    medium: 30,
-    large: 40,
-    huge: 50,
-    gigantic: 60,
-    colossal: 70,
-    titanic: 80
+    tiny: 1,
+    small: 2,
+    medium: 3,
+    large: 4,
+    huge: 5,
+    gigantic: 6,
+    colossal: 7,
+    titanic: 8
 };
 
 // Spaceship crew competece

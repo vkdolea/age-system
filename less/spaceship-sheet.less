@@ -4,6 +4,11 @@
 }
 
 .age-system.sheet.spaceship {
+    input,
+    select {
+        border: none;
+    }
+
     ul.systems-list {
         text-align: center;
         li {
@@ -27,6 +32,10 @@
             }
         }
     }
+
+    .container {
+        width: fit-content;
+    }
     
     ul.passenger-list {
         max-width: 300px;
@@ -45,220 +54,31 @@
             }
         }
     }
-}
 
-.age-system.sheet.vehicle {
-    font-variant: small-caps;
-    min-width: min-content;
-    // Reavaluate when picture is included
-
-    .label-with-icon {
-        a {
-            max-width: fit-content;
-            margin-left: 4px;
-        }
-        label.handling-focus.handling-focus {
-            max-width: fit-content;
-        }
-        i {
-            margin-right: 4px;
-        }
-    }
-
-    .vehicle-name {           
-        border-radius: 10px 10px 0px 0px;
-        text-transform: uppercase;
-        border: none;
-        padding: 4px;
-    };
-
-    input[name="name"] {
-        padding-left: 10px;
-        min-width: 100%;
-        max-height: 30px;
-    };
-
-    label {
-        // min-width: 75px;
-        max-height: 20px;
+    div.parameters.container {
         text-align: center;
-    }
 
-    .grid-container {
-        display: grid;
-        grid-template-columns: 300px 500px;
-        grid-template-rows: 370px 200px;
-    }
-
-    .grid-parameter {
-        grid-column-start: 1;
-        grid-column-end: span 1;
-        grid-row-start: 1;
-        grid-row-end: span 2;
-
-        font-size: 14px;
-
-        >div {
-            max-height: 50px;
-            margin: 4px;
-            div {
-                margin:4px;
-            }
-        };
-
-        .focus-ability {
-            max-height: 70px;
+        .parameter-label{
+            flex: 0 0 50px;
         }
-
-        span {
-            max-width: min-content;
-            // padding-top: 6px;
-            margin-left: 2px;
-            margin-right: 2px;
+        .hull-dice-qtd {
+            flex: 0 0 35px;
         }
-
-        input {
-            max-height: 28px;
-            padding: 0px;
-            text-align: center;
+        .hull-dice-type {
+            flex: 0 0 40px;
         }
-
-        select{
-            margin: 0 auto;
-            max-height: 20px;
+        .hull-plus-sign {
+            flex: 0 0 16px;
         }
-
-        input[name="data.handling.mod"],
-        input[name="data.ramDmg"],
-        input[name="data.hull"],
-        input[name="data.defenseTotal"],
-        input[name="data.cost"],
-        input[name="data.velocity.catMod"],
-        input[name="data.armorRating"],
-        input[name="data.coverRating"] {
-            max-width: 35px;
-            max-height: 20px;
+        .hull-extra-damage {
+            flex: 0 0 35px;
         }
-
-        .highlight {
-            // background-color: pink;
-            font-weight: bolder;
-        }
-
-        input[name="data.customCollisionDmg"],
-        input[name="data.customSideswipeDmg"] {
-            max-width: 20px;
-            max-height: 20px;
-            border: none;
-        }
-
-        input[name="data.cost"] {
-            max-width: 60px;
-        }
-        input[type="checkbox"] {
-            margin: 0px;
-            margin-top: 1px;
-            width: 16px;
-            height: 16px;
-        }
-    
-        input[name="data.conductor"],
-        input[name="data.handling.useFocus"],
-        select[name="data.handling.useAbl"] {
-            max-width: 285px;
-            max-height: 20px;
-        }
-
-        .velocity-damage-table {
-            text-align: center;
-            td {
-                align-content: center;
-                a {
-                    margin-right: 2px;
-                }
-            }
-        }
-
-        table {
-            margin-top: 4px;
-            margin-bottom: 4px;
+        .ship-size {
+            flex: 0 0 126px;
         }
     }
 
-    .grid-description {
-        grid-column-start: 2;
-        grid-column-end: span 1;
-        grid-row-start: 2;
-        grid-row-end: span 1;
-        
-        height: 200px;
-        
-        .editor {
-            height: 100%;
-            padding: 4px 10px;
-        };
-    }
-
-    .passenger-container {
-        // grid-column-start: 1;
-        // grid-column-end: span 1;
-        // grid-row-start: 2;
-        // grid-row-end: span 1;
-        padding-left: 8px;
-        padding-right: 4px;
-        padding-bottom: 4px;  
-        max-height: auto;
-        height: 100%;
-        
-        input[name="data.capacity"] {
-            max-height: 16px;
-            max-width: 30px;
-            border: none;
-        }
-    }
-    .passenger-list {
-        overflow: auto;
-        padding-right: 21px;
-        // height: 176px;
-        height: 140px;
-        img {
-            max-height: 24px;
-            max-width: 24px;
-            object-fit: contain;
-            border: none;
-        }
-        a {
-            max-width: fit-content;
-        }
-        span {
-            max-width: fit-content;
-            padding-left: 4px;
-        }
-        li {
-            padding-top: 2px;
-            padding-bottom: 2px;
-
-        }
-    }
-    .dragover {
-        color: rgb(95, 5, 5);
-        box-shadow: 0 0 5px -1px rgba(0,0,0,0.8);
-    }
-
-    .grid-img {
-        grid-column-start: 2;
-        grid-column-end: span 1;
-        grid-row-start: 1;
-        grid-row-end: span 1;
-
-        img {
-            object-fit: contain;
-            height: 340px;
-            width: 490px;
-            margin: 5px;
-            padding: 4px;
-            // Border color on colorsets.less
-            border-radius: 25px;
-        }
+    ul.crew-details {
+        padding: 0;
     }
 }

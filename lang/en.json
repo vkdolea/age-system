@@ -100,6 +100,7 @@
         "spaceship": {
             "op": "Operator",
             "role": "Role",
+            "hull": "Hull",
             "operator": {
                 "command": "Captain",
                 "maneuver": "Pilot",
@@ -107,7 +108,27 @@
                 "damageControl": "Engineer"
             },
             "crew": "Crew",
-            "systems": "Systems"
+            "competence": "Competence",
+            "competenceLevel": {
+                "incompetent": "Incompetent",
+                "poor": "Poor",
+                "average": "Average",
+                "capable": "Capable",
+                "skilled": "Skilled",
+                "elite": "Elite"
+            },
+            "systems": "Systems",
+            "size": "Size",
+            "sizeType": {
+                "tiny": "Tiny",
+                "small": "Small",
+                "medium": "Medium",
+                "large": "Large",
+                "huge": "Huge",
+                "gigantic": "Gigantic",
+                "colossal": "Colossal",
+                "titanic": "Titanic"
+            }
         },
         "damageControl": "Damage Control",
         "parameters": "Parameters",
