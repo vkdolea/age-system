@@ -1164,7 +1164,6 @@
 .age-system.sheet.spaceship ul.systems-list li .system-role {
   flex: 0 0 100px;
   max-width: 100px;
-  margin: 0;
 }
 .age-system.sheet.spaceship ul.systems-list li .system-operator {
   flex: 0 0 150px;
@@ -1175,6 +1174,21 @@
 }
 .age-system.sheet.spaceship ul.systems-list li .system-focus {
   flex: 0 0 200px;
+}
+.age-system.sheet.spaceship ul.passenger-list {
+  max-width: 300px;
+}
+.age-system.sheet.spaceship ul.passenger-list li .passenger-token {
+  flex: 0 0 25px;
+}
+.age-system.sheet.spaceship ul.passenger-list li .passenger-damage-control {
+  flex: 0 0 25px;
+}
+.age-system.sheet.spaceship ul.passenger-list li .passenger-name {
+  flex: 0 0 150px;
+}
+.age-system.sheet.spaceship ul.passenger-list li .passenger-remove {
+  flex: 0 0 25 px;
 }
 .age-system.sheet.vehicle {
   font-variant: small-caps;

@@ -104,11 +104,12 @@
                 "command": "Captain",
                 "maneuver": "Pilot",
                 "sensors": "Sensor Operator",
-                "damageControl": "Damage Control"
+                "damageControl": "Engineer"
             },
             "crew": "Crew",
             "systems": "Systems"
         },
+        "damageControl": "Damage Control",
         "parameters": "Parameters",
         "conductor": "Conductor",
         "passengers": "Passengers",

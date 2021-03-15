@@ -179,6 +179,28 @@ ageSystem.velocityCategory = {
     velExtreme: "age-system.velExtreme"
 };
 
+// Spacehip sizes
+ageSystem.spaceshipSize = {
+    tiny: 10,
+    small: 20,
+    medium: 30,
+    large: 40,
+    huge: 50,
+    gigantic: 60,
+    colossal: 70,
+    titanic: 80
+};
+
+// Spaceship crew competece
+ageSystem.spaceshipCrewCompetence = {
+    incompetent: 0,
+    poor: 1,
+    average: 2,
+    capable: 3,
+    skilled: 4,
+    elite: 5
+}
+
 const itemIconPath = "systems/age-system/resources/imgs/item-icon/";
 ageSystem.itemIcons = {
     "equipment": `${itemIconPath}briefcase.svg`,
