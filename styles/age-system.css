@@ -725,6 +725,7 @@
   flex: 1 min-content fit-content;
 }
 .age-system.sheet.char .sheet-header .age-header .editor {
+  min-height: 105px;
   height: 105px;
   padding: 4px;
   border: 1px solid grey;
