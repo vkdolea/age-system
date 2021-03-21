@@ -82,18 +82,14 @@
                                 {{/select}}
                             </select>
                         </div>
-                        <ul class="crew-details">
-                            <li class="flexrow">
-                                <label>Current</label>
-                                <label>Minimum</label>
-                                <label>Typical</label>
-                            </li>
-                            <li class="flexrow">
-                                <input class="" type="number" name="data.crew.current" value="{{data.crew.current}}" data-dtype="Number" />
-                                <input class="" type="number" name="data.crew.min" value="{{data.crew.min}}" data-dtype="Number" />
-                                <input class="" type="number" name="data.crew.typical" value="{{data.crew.typical}}" data-dtype="Number" />
-                            </li>
-                        </ul>
+                        <div class="crew-details flexrow">
+                            <label>{{localize "age-system.spaceship.crewCur"}}</label>
+                            <input class="" type="number" name="data.crew.current" value="{{data.crew.current}}" data-dtype="Number" />
+                            <label>{{localize "age-system.spaceship.crewMin"}}</label>
+                            <input class="" type="number" name="data.crew.min" value="{{data.crew.min}}" data-dtype="Number" />
+                            <label>{{localize "age-system.spaceship.crewTyp"}}</label>
+                            <span style="background: rgba(0, 0, 0, 0.05);" role="textbox" contenteditable name="data.crew.typical" value="{{data.crew.typical}}" data-dtype="Number">{{data.crew.typical}}</span>
+                        </div>
                     </div>
                 </div>
             </div>

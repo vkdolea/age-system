@@ -1219,7 +1219,7 @@
 .age-system.sheet.spaceship div.parameters.container .ship-size {
   flex: 0 0 126px;
 }
-.age-system.sheet.spaceship ul.crew-details {
+.age-system.sheet.spaceship .crew-details {
   padding: 0;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {

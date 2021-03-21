@@ -11,7 +11,7 @@
     "ITEM.TypeRelationship": "Relationship",
     "ITEM.TypeHonorifics": "Honorifics",
     "ITEM.TypeMembership": "Membership",
-    "ITEM.TypeSpaceshipFeatures": "Spaceship Features",
+    "ITEM.TypeSpaceshipfeatures": "Spaceship Features",
 
     "SETTINGS.useConviction": "Use Conviction",
     "SETTINGS.useConvictionHint": "Enable Conviction block for tracking",
@@ -108,6 +108,9 @@
                 "damageControl": "Engineer"
             },
             "crew": "Crew",
+            "crewMin": "Minimum",
+            "crewTyp": "Typical",
+            "crewCur": "Current",
             "competence": "Competence",
             "competenceLevel": {
                 "incompetent": "Incompetent",
