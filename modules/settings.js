@@ -87,7 +87,7 @@ export const registerSystemSettings = function() {
   game.settings.register("age-system", "usePowerPoints", {
       name: "SETTINGS.usePowerPoints",
       hint: "SETTINGS.usePowerPointsHint",
-      scope: "client",
+      scope: "world",
       config: true,
       default: true,
       type: Boolean,
@@ -216,7 +216,7 @@ export const registerSystemSettings = function() {
       "folded-purple": "SETTINGS.colorFoldedPurple",
     },
     onChange:()=>{
-      CONFIG.ageSystem.colorScheme = game.settings.get("age-system", "colorScheme");
+      game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
       [...game.actors.entities, ...Object.values(game.actors.tokens), ...game.items.entities]
       // .filter((o) => {
       //   return true /*(o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship")*/;
@@ -273,7 +273,7 @@ export const loadCompendiaSettings = function() {
   game.settings.register("age-system", "masterFocusCompendium", {
     name: "SETTINGS.masterFocusCompendium",
     hint: "SETTINGS.masterFocusCompendiumHint",
-    scope: "global",
+    scope: "world",
     config: true,
     default: "age-system.focus",
     type: String,

@@ -53,6 +53,9 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         // Check Wealth Mode in use
         data.config.wealthMode = game.settings.get("age-system", "wealthType");
 
+        // Select colorset
+        data.colorScheme = game.user.getFlag("age-system", "colorScheme");
+
         return data;
     };
 

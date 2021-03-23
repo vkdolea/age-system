@@ -141,6 +141,11 @@ Hooks.once("setup", function() {
 });
 
 Hooks.once("ready", function() {
+    // Identify Colorset
+    const color = game.user.getFlag("age-system", "colorScheme");
+    if (color) game.settings.set("age-system", "colorScheme", color);
+    if (!color) game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
+
     // Loads Age Roller
     ageSystem.ageRoller.refresh()
 

@@ -85,6 +85,8 @@ Here the description of each one of the Modificators:
 - When an Actor is delete from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
 - Fixed a bug causing the text field on character sheet header to be innacessible in some browsers.
 - Application will not reload after changin colorsets on "Configure Settings".
+- Color Scheme won't reset when Player changes browser or delete browser historic.
+- "Use Power Points" and "Focus Compendium" settings are now variables set only by game master.
 
 ### 0.4.1 [2021-02-22]
 #### Added

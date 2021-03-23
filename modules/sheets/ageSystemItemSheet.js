@@ -69,7 +69,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         data.config.wealthMode = game.settings.get("age-system", "wealthType");
 
         // Sheet color
-        data.colorScheme = game.settings.get("age-system", "colorScheme");
+        data.colorScheme = game.user.getFlag("age-system", "colorScheme");
 
         return data;
     };
