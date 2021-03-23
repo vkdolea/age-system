@@ -101,6 +101,9 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.ancestry = game.settings.get("age-system", "ancestryOpt");
         data.occupation = game.settings.get("age-system", "occupation");
 
+        // Retrieve Health Mode (Health/Fortune)
+        data.healthMode = game.settings.get("age-system", "healthMode");
+
         // Return data to the sheet
         return data;
     };

@@ -77,6 +77,11 @@
     "SETTINGS.masterFocusCompendium": "Select Compendium with Focus options",
     "SETTINGS.masterFocusCompendiumHint": "Item names inside this Compendium will show as Focus suggestion on sheets",
 
+    "SETTINGS.healthMode": "Select Health Tracker",
+    "SETTINGS.healthModeHint": "Most AGE games will use Health, while The Expanse uses Fortune",
+    "SETTINGS.healthModehealth": "Health",
+    "SETTINGS.healthModefortune": "Fortune",
+
     "age-system": {
 
         "SHEETS": {
@@ -270,6 +275,7 @@
 
         "talentDegree": "Degree",
         "health": "Health",
+        "fortune": "Fortune",
         "conviction": "Conviction",
         "speed": "Speed",
 

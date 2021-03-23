@@ -72,11 +72,11 @@ Hooks.once("init", async function() {
         makeDefault: true,
         label: "age-system.SHEETS.standardVehicle"
     });
-    Actors.registerSheet("age-system", ageSystemSpaceshipSheet, {
-        types: ["spaceship"],
-        makeDefault: true,
-        label: "age-system.SHEETS.standardSpaceship"
-    });
+    // Actors.registerSheet("age-system", ageSystemSpaceshipSheet, {
+    //     types: ["spaceship"],
+    //     makeDefault: true,
+    //     label: "age-system.SHEETS.standardSpaceship"
+    // });
 
     ageSystem.ageRoller = new AgeRoller({
         popOut: false,
@@ -140,10 +140,6 @@ Hooks.once("setup", function() {
 });
 
 Hooks.once("ready", function() {
-    // Added missing parts for TOKEN dispositions (friendly/neutral)
-    CONST.TOKEN_DISPLAY_MODES.NEUTRAL = 0;
-    CONST.TOKEN_DISPLAY_MODES.FRIENDLY = 1;
-
     // Loads Age Roller
     ageSystem.ageRoller.refresh()
 

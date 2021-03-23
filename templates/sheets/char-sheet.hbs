@@ -239,7 +239,7 @@
 
             {{!-- Health block --}}
             <div class="flexcol general-stats">
-                <div class="top-row colorset-first-tier">{{localize "age-system.health"}}</div>
+                <div class="top-row colorset-first-tier">{{localize (concat "SETTINGS.healthMode" healthMode)}}</div>
                 <div class="main-value">
                     <input type="number" name="data.health.value" value="{{data.health.value}}" data-dtype="Number" />
                 </div>

@@ -77,11 +77,12 @@ Here the description of each one of the Modificators:
 - Added a Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompent to roll modifier and TN.
 - Added to vehicle sheets: Armor Rating, Cover, Total Passengers Capacity and Custom Damage for Collision/Sideswipe.
 - On vehicles damage table, line representing vehicle's Velocity Class will have **bold** characters.
+- On Configure Settings it is now possible to configure the flavor text as Health of Fortune.
+- AgeRoller function refactored.
 #### Fix
 - Migration issue could cause Conditions not to be created properly on migrated Actors.
 - Bug preventing rolling a Focus using a different Ability (or none).
 - When an Actor is delete from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
-- Fixed a bug causing all NPC tokens to display red border when hovered. Color code for token frames are now as expected (player owned: green; neutral: yeallow; friendly: teal; hostile: red).
 - Fixed a bug causing the text field on character sheet header to be innacessible in some browsers.
 
 ### 0.4.1 [2021-02-22]

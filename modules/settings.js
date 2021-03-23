@@ -127,6 +127,32 @@ export const registerSystemSettings = function() {
   });  
 
   /**
+   * Register if world will use Game Mode and which one
+   */
+   game.settings.register("age-system", "healthMode", {
+    name: "SETTINGS.healthMode",
+    hint: "SETTINGS.healthModeHint",
+    scope: "world",
+    config: true,
+    default: "health",
+    type: String,
+    choices: {
+        "health": "SETTINGS.healthModehealth",
+        "fortune": "SETTINGS.healthModefortune",
+    },
+    onChange: () => {
+      [...game.actors.entities, ...Object.values(game.actors.tokens)]
+        .filter((o) => {
+          return o.data.type === "char";
+        })
+        .forEach((o) => {
+          o.update({});
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        });
+    },
+  });  
+
+  /**
    * Register currency type
    */
   game.settings.register("age-system", "wealthType", {

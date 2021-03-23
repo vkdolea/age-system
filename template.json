@@ -2,8 +2,7 @@
     "Actor": {
         "types": [
             "char",
-            "vehicle",
-            "spaceship"
+            "vehicle"
         ],
         "templates": {},
         "spaceship": {
@@ -303,8 +302,7 @@
             "stunts",
             "relationship",
             "honorifics",
-            "membership",
-            "spaceshipfeatures"
+            "membership"
         ],
         "templates": {
             "itemReq": {
