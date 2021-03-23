@@ -215,7 +215,17 @@ export const registerSystemSettings = function() {
       // "expanded-blue": "SETTINGS.colorExpandedBlue",
       "folded-purple": "SETTINGS.colorFoldedPurple",
     },
-    onChange:()=>{window.location.reload(!1)}
+    onChange:()=>{
+      CONFIG.ageSystem.colorScheme = game.settings.get("age-system", "colorScheme");
+      [...game.actors.entities, ...Object.values(game.actors.tokens), ...game.items.entities]
+      // .filter((o) => {
+      //   return true /*(o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship")*/;
+      // })
+      .forEach((o) => {
+        o.update({});
+        if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+      });
+    }
   });
 
 /**
@@ -299,7 +309,7 @@ function allCompendia() {
 export function compendiumList(compendiumName) {
   let dataPack = game.packs.get(compendiumName);
   let dataList = [];
-  let i = 0;
+  if (!dataPack) return dataList;
   dataPack.getIndex().then(function(){
   for (let i = 0; i < dataPack.index.length; i++) {
     const entry = dataPack.index[i];

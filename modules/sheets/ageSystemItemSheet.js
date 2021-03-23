@@ -43,7 +43,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         return mergeObject(super.defaultOptions, {
             height: 340,
             width: 516,
-            classes: ["age-system", "sheet", "item", `colorset-${ageSystem.colorScheme}`, "colorset-second-tier"],
+            classes: ["age-system", "sheet", "item", /*`colorset-${ageSystem.colorScheme}`,*/ "colorset-second-tier"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",
                 contentSelector: ".sheet-tab-section",
@@ -67,6 +67,9 @@ export default class ageSystemItemSheet extends ItemSheet {
         const ablSelect = game.settings.get("age-system", "abilitySelection");
         data.config.abilities = data.config.abilitiesSettings[ablSelect];
         data.config.wealthMode = game.settings.get("age-system", "wealthType");
+
+        // Sheet color
+        data.colorScheme = game.settings.get("age-system", "colorScheme");
 
         return data;
     };

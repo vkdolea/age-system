@@ -9,7 +9,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             width: 680,
             height: 646,
             resizable: false,
-            classes: ["age-system", "sheet", "vehicle", `colorset-${ageSystem.colorScheme}`]
+            classes: ["age-system", "sheet", "vehicle"/*, `colorset-${ageSystem.colorScheme}`*/]
         });
     }
     
@@ -52,6 +52,9 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
         // Check Wealth Mode in use
         data.config.wealthMode = game.settings.get("age-system", "wealthType");
+
+        // Sheet color
+        data.colorScheme = game.settings.get("age-system", "colorScheme");       
 
         return data;
     };

@@ -8,7 +8,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             // resizable: false,
             width: 680,
             height: 800,
-            classes: ["age-system", "sheet", "char", `colorset-${ageSystem.colorScheme}`]
+            classes: ["age-system", "sheet", "char", /*`colorset-${ageSystem.colorScheme}`*/]
         });
     }
 
@@ -103,6 +103,9 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
         // Retrieve Health Mode (Health/Fortune)
         data.healthMode = game.settings.get("age-system", "healthMode");
+
+        // Sheet color
+        data.colorScheme = game.settings.get("age-system", "colorScheme");
 
         // Return data to the sheet
         return data;

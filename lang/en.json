@@ -20,7 +20,7 @@
     "SETTINGS.useFatigueHint": "Enable Fatigue block and support for Power & Arcana Fatigue settings",
 
     "SETTINGS.useConditions": "Use Conditions",
-    "SETTINGS.useConditionsHint": "Shows a Conditions section - actual modificators on rolls is not implemented",
+    "SETTINGS.useConditionsHint": "Shows a Conditions section - actual modifiers on rolls are not implemented",
 
     "SETTINGS.usePowerPoints": "Use Power Points",
     "SETTINGS.usePowerPointsHint": "Enable Power Points block and support for Power & Arcana Power Points settings",
@@ -369,7 +369,7 @@
         "targetNumber": "TN",
         "total": "Total",
 
-        "itemMod": "Modificators",
+        "itemMod": "Modifiers",
         "bonus": {
             "type": "Type",
             "value": "Value",

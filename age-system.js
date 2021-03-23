@@ -72,6 +72,7 @@ Hooks.once("init", async function() {
         makeDefault: true,
         label: "age-system.SHEETS.standardVehicle"
     });
+    // Uncomment when spacehips are done!!
     // Actors.registerSheet("age-system", ageSystemSpaceshipSheet, {
     //     types: ["spaceship"],
     //     makeDefault: true,

@@ -84,6 +84,7 @@ Here the description of each one of the Modificators:
 - Bug preventing rolling a Focus using a different Ability (or none).
 - When an Actor is delete from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
 - Fixed a bug causing the text field on character sheet header to be innacessible in some browsers.
+- Application will not reload after changin colorsets on "Configure Settings".
 
 ### 0.4.1 [2021-02-22]
 #### Added

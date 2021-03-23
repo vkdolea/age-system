@@ -1349,10 +1349,10 @@
 .colorset-modern-blue .char-sheet .age-header .editor {
   background-color: #ffffff;
 }
-.colorset-modern-blue .sheet.vehicle img {
+.colorset-modern-blue .vehicle-stats img {
   border: 2px solid #007DAD;
 }
-.colorset-modern-blue .sheet.vehicle .editor {
+.colorset-modern-blue .vehicle-stats .editor {
   background-color: #ffffff;
 }
 .colorset-modern-blue .dice-show.trait-test i:last-of-type {
@@ -1487,10 +1487,10 @@
 .colorset-fantasy-blue .char-sheet .age-header .editor {
   background-color: #ffffff;
 }
-.colorset-fantasy-blue .sheet.vehicle img {
+.colorset-fantasy-blue .vehicle-stats img {
   border: 2px solid #0f4f5b;
 }
-.colorset-fantasy-blue .sheet.vehicle .editor {
+.colorset-fantasy-blue .vehicle-stats .editor {
   background-color: #ffffff;
 }
 .colorset-fantasy-blue .dice-show.trait-test i:last-of-type {
@@ -1625,10 +1625,10 @@
 .colorset-dragon-red .char-sheet .age-header .editor {
   background-color: #ffffff;
 }
-.colorset-dragon-red .sheet.vehicle img {
+.colorset-dragon-red .vehicle-stats img {
   border: 2px solid #810207;
 }
-.colorset-dragon-red .sheet.vehicle .editor {
+.colorset-dragon-red .vehicle-stats .editor {
   background-color: #ffffff;
 }
 .colorset-dragon-red .dice-show.trait-test i:last-of-type {
@@ -1763,10 +1763,10 @@
 .colorset-folded-purple .char-sheet .age-header .editor {
   background-color: #ffffff;
 }
-.colorset-folded-purple .sheet.vehicle img {
+.colorset-folded-purple .vehicle-stats img {
   border: 2px solid #565183;
 }
-.colorset-folded-purple .sheet.vehicle .editor {
+.colorset-folded-purple .vehicle-stats .editor {
   background-color: #ffffff;
 }
 .colorset-folded-purple .dice-show.trait-test i:last-of-type {
@@ -1901,10 +1901,10 @@
 .colorset-ronin-green .char-sheet .age-header .editor {
   background-color: #ffffff;
 }
-.colorset-ronin-green .sheet.vehicle img {
+.colorset-ronin-green .vehicle-stats img {
   border: 2px solid #1d8514;
 }
-.colorset-ronin-green .sheet.vehicle .editor {
+.colorset-ronin-green .vehicle-stats .editor {
   background-color: #ffffff;
 }
 .colorset-ronin-green .dice-show.trait-test i:last-of-type {
