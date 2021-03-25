@@ -1,6 +1,7 @@
 {
     "ACTOR.TypeChar": "Personnage Joueur",
 	"ACTOR.TypeVehicle": "Véhicule",
+	"ACTOR.TypeSpaceship": "Vaisseaux spatiaux",
     "ITEM.TypeStunts": "Prouesses",
     "ITEM.TypeEquipment": "Équipement",
     "ITEM.TypePower": "Pouvoirs et Sorts",
@@ -10,6 +11,7 @@
     "ITEM.TypeRelationship": "Relations",
     "ITEM.TypeHonorifics": "Titres",
     "ITEM.TypeMembership": "Affiliation",
+	"ITEM.TypeSpaceshipfeatures": "Fonctionnalité Vaisseaux spatiaux",
 
     "SETTINGS.useConviction": "Utiliser Conviction",
     "SETTINGS.useConvictionHint": "Afficher la section Conviction pour le suivi",
@@ -17,8 +19,8 @@
     "SETTINGS.useFatigue": "Utiliser Fatigue",
     "SETTINGS.useFatigueHint": "Afficher la section Fatigue pour le suivi et la fatigue liée à l'utilisation des Pouvoirs et Sorts",
 	
-	"SETTINGS.useConditions": "Utiliser Altérations",
-    "SETTINGS.useConditionsHint": "Afficher une section Altérations - les modificateurs de jets de dés ne sont pas implémentés",
+	"SETTINGS.useConditions": "Utiliser Etats",
+    "SETTINGS.useConditionsHint": "Afficher une section Etats - les modificateurs de jets de dés ne sont pas implémentés",
 
     "SETTINGS.usePowerPoints": "Utiliser la Mana",
     "SETTINGS.usePowerPointsHint": "Afficher la section Mana pour le suivi et la mana disponible pour les Pouvoirs et Sorts",
@@ -36,10 +38,10 @@
     "SETTINGS.wealthTypeCurrency": "Monnaie",
     "SETTINGS.wealthTypeCoins": "PO / PA / PC",
 
-    "SETTINGS.primaryAbl": "Sélectionner les caractéristiques primaires",
-    "SETTINGS.primaryAblHint": "Ajoute une case à cocher supplémentaire pour identifier les caractéristiques primaires",
+    "SETTINGS.primaryAbl": "Sélectionner les attributs primaires",
+    "SETTINGS.primaryAblHint": "Ajoute une case à cocher supplémentaire pour identifier les attributs primaires",
 
-    "SETTINGS.abilitySelection": "Configuration des caractéristiques",
+    "SETTINGS.abilitySelection": "Configuration des attributs",
     "SETTINGS.abilitySelectionHint": "Utiliser le système de base AGE ou le système Dragon Age",
     "SETTINGS.abilitySelectionMain": "Système de base AGE",
     "SETTINGS.abilitySelectionDage": "Dragon Age",
@@ -72,10 +74,25 @@
     "SETTINGS.ancestryOptspecies": "Espèce",
     "SETTINGS.ancestryOptrace": "Race",
 
-    "SETTINGS.masterFocusCompendium": "Sélectionner les options du Compendium avec Compétences ",
+    "SETTINGS.stuntSoNice": "Définition des couleur pour le dé de prouesses (dé Dragon) de Dice so Nice",
+    "SETTINGS.stuntSoNiceHint": "Cette couleur ne sera applicable qu'au dé de prouesses (dé Dragon)",
+	
+	"SETTINGS.masterFocusCompendium": "Sélectionner les options du Compendium avec Compétences",
     "SETTINGS.masterFocusCompendiumHint": "Les noms d'objets dans ce Compendium s'afficheront comme des suggestions de compétence sur les feuilles",
+	
+	"SETTINGS.healthMode": "Sélectionner le mode de suivi de la santé",
+    "SETTINGS.healthModeHint": "La plupart des jeux AGE utilisent la santé tandis que The Expanse utilise la Fortune",
+    "SETTINGS.healthModehealth": "Santé",
+    "SETTINGS.healthModefortune": "Fortune",
 
     "age-system": {
+	
+		"SHEETS": {
+            "standardChar": "Personnage AGE",
+            "standardVehicle": "Véhicule AGE",
+            "standardItem": "Objet AGE",
+            "standardSpaceship": "Vaisseau spatial AGE"
+        },
 
         "WARNING": {
             "duplicatedFocus": "Ajout de compétence refusé - le joueur dispose déjà de cette compétence",
@@ -88,6 +105,43 @@
             "userNotAvailable": "Le personnage {name} ({id}) n'est pas disponible."
 		},
         
+		"spaceship": {
+            "op": "Opérateur",
+            "role": "Role",
+            "hull": "Coque",
+            "operator": {
+                "command": "Capitaine",
+                "maneuver": "Pilote",
+                "sensors": "Opérateur Senseurs",
+                "damageControl": "Ingénieur"
+            },
+            "crew": "Personnel",
+            "crewMin": "Minimum",
+            "crewTyp": "Typique",
+            "crewCur": "Courant",
+            "competence": "Compétence",
+            "competenceLevel": {
+                "incompetent": "Incompétent",
+                "poor": "Pauvre",
+                "average": "Moyen",
+                "capable": "Capable",
+                "skilled": "Compétent",
+                "elite": "Elite"
+            },
+            "systems": "Systèmes",
+            "size": "Taille",
+            "sizeType": {
+                "tiny": "Minuscule",
+                "small": "Petit",
+                "medium": "Moyen",
+                "large": "Grand",
+                "huge": "Enorme",
+                "gigantic": "Gigantesque",
+                "colossal": "Colossal",
+                "titanic": "Titanesque"
+            }
+        },
+		"damageControl": "Réduction des dégâts",
 		"parameters": "Paramètres",
         "conductor": "Conducteur",
         "passengers": "Passagers",
@@ -103,11 +157,15 @@
         "velFast": "Rapide ",
         "velVeryFast": "Très rapide",
         "velExtreme": "Extrême",
+		"velCustom": "Personnalisé",
+        "coverRating": "Couverture",
+        "vehicleArmor": "Armure",
 		
 		"chatCard": {
             "rollGeneral": "{actor} lance {item}",
             "rollAttack": "{actor} attaque avec {item}",
             "rollPower": "{actor} utilise {item}",
+			"looseRoll": "{user} lance quelques dés",
 			
 			"rollFullDamage": "Dégâts complets",
             "rollFullHealing": "Soin complet",
@@ -117,14 +175,14 @@
             "rollResistedHealing": "A résisté aux soins",
             "addFocusSD": "Ajouter les deux",
             "addFocus": "Ajout compétence",
-            "addStuntDie": "Ajout SD",
+            "addStuntDie": "Ajout DP/DD",
 			
 			"maneuversVehicle": "{name} conduit {vehicle}"
         },
 		
 		"testThreshold": "Seuil de réussite",
 		
-		"conditionsName": "Altérations",
+		"conditionsName": "Etats",
         "conditions": {
             "blinded": "Aveuglé",
             "blindedDesc": "Le personnage ne peut pas voir et échoue automatiquement les jets de compétences basés sur la vision tels que Perception (Vue)",
@@ -175,7 +233,8 @@
             "equip": "Équipe",
             "edit": "Édite",
             "delete": "Supprime",
-            "changeRollContext": "Utiliser Autre Capacité",
+            "changeRollContext": "Utiliser un autre Attribut",
+			"rollFocusAltAbl": "Choisissez l'attribut pour lancer {focus}",
             "options": "Options",
             "d6": "d6",
             "d3": "d3",
@@ -214,11 +273,12 @@
         "defendManeuver": "Défense",
         "guardUp": "Garde",
         "initiative": "Initiative",
-		"stuntDie": "Dé Étourdissement",
-        "stuntDieIndex": "SD",
+		"stuntDie": "Dé de Prouesse (Dragon)",
+        "stuntDieIndex": "DP/DD",
 
         "talentDegree": "Niveau",
         "health": "Santé",
+		"fortune": "Fortune",
         "conviction": "Conviction",
         "speed": "Rapidité",
 
@@ -275,8 +335,8 @@
         "relationshipIntensity": "Intensité",
 
         "drive": {
-            "drive": "Conduire",
-            "downfall": "Abaissement",
+            "drive": "Conduite",
+            "downfall": "Défaut",
             "quality": "Qualité"
         },
         "noAction": "—",
@@ -329,14 +389,14 @@
             "str": "Force",
             "will": "Volonté",
             "itemActivation": "Activation de l'objet",
-            "itemDamage": "Dégâts de cet objet",
+            "itemDamage": "Dégâts de l'objet",
             "actorOverAllBonus": "Tous les jets",
             "actorDamage": "Tous les dommages",
             "charAbl": "Caractéristique",
             "focus": "Compétence",
             "defense": "Défense",
             "toughness": "Résistance",
-            "impactArmor": "Armure Impact",
+            "impactArmor": "Armure impact",
             "ballisticArmor": "Armure balistique",
             "defendMnv": "Manœuvre de défense",
             "guardupMnv": "Manœuvre de Garde",
@@ -370,7 +430,7 @@
             "reload": "Délai rechargement",
             "capacity": "Compétence",
             "equiped": "Équipé",
-            "minStr": "FOR minRange",
+            "minStr": "FOR min",
             "cast": "Invocation",
             "force": "Puissance Magique",
 			"resistedEffect": "Effet si résiste",
