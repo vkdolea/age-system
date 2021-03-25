@@ -1,1 +1,1 @@
-<img src="{{item.img}}" {{#unless inChat}}data-edit="img"{{/unless}} title="{{item.name}}"/>
+<img class="img-change" src="{{item.img}}" {{#if (ne inChat true)}}data-edit="img"{{/if}} title="{{item.name}}"/>

@@ -79,6 +79,7 @@ Here the description of each one of the Modificators:
 - On vehicles damage table, line representing vehicle's Velocity Class will have **bold** characters.
 - On Configure Settings it is now possible to configure the flavor text as Health of Fortune.
 - AgeRoller function refactored.
+- Dice so Nice users can now can select their Stunt Die colorset option.
 #### Fix
 - Migration issue could cause Conditions not to be created properly on migrated Actors.
 - Bug preventing rolling a Focus using a different Ability (or none).
@@ -87,6 +88,7 @@ Here the description of each one of the Modificators:
 - Application will not reload after changin colorsets on "Configure Settings".
 - Color Scheme won't reset when Player changes browser or delete browser historic.
 - "Use Power Points" and "Focus Compendium" settings are now variables set only by game master.
+- Empty fields in the constant part of damage builder will no longer return "null" on damage formula.
 
 ### 0.4.1 [2021-02-22]
 #### Added

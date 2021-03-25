@@ -69,7 +69,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         data.config.wealthMode = game.settings.get("age-system", "wealthType");
 
         // Sheet color
-        data.colorScheme = game.user.getFlag("age-system", "colorScheme");
+        data.colorScheme = game.settings.get("age-system", "colorScheme");
 
         return data;
     };
@@ -78,6 +78,7 @@ export default class ageSystemItemSheet extends ItemSheet {
     activateListeners(html) {
 
         if (this.isEditable) {
+
             if (this.item.data.type === "focus") {
                 if (this.item.isOwned) {
                     html.find(".item-card-title").keyup(this._onOwnedFocusNameChange.bind(this));

@@ -74,6 +74,9 @@
     "SETTINGS.ancestryOptspecies": "Species",
     "SETTINGS.ancestryOptrace": "Race",
 
+    "SETTINGS.stuntSoNice": "Dice so Nice colorset for Stunt Die",
+    "SETTINGS.stuntSoNiceHint": "This color will be valid only for the stunt die",
+
     "SETTINGS.masterFocusCompendium": "Select Compendium with Focus options",
     "SETTINGS.masterFocusCompendiumHint": "Item names inside this Compendium will show as Focus suggestion on sheets",
 

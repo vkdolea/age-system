@@ -683,9 +683,6 @@
   min-width: 40px;
   text-align: center;
 }
-.age-system.sheet .window-content {
-  background-color: #d1b7ab;
-}
 .age-system.sheet.char {
   font-variant: small-caps;
 }
@@ -1347,7 +1344,7 @@
   color: #ffffff;
 }
 .colorset-modern-blue .char-sheet .age-header .editor {
-  background-color: #ffffff;
+  background-color: hsl(0, 0%, 100%);
 }
 .colorset-modern-blue .vehicle-stats img {
   border: 2px solid #007DAD;
@@ -1485,7 +1482,7 @@
   color: #ffffff;
 }
 .colorset-fantasy-blue .char-sheet .age-header .editor {
-  background-color: #ffffff;
+  background-color: hsl(0, 0%, 100%);
 }
 .colorset-fantasy-blue .vehicle-stats img {
   border: 2px solid #0f4f5b;
@@ -1623,7 +1620,7 @@
   color: #ffffff;
 }
 .colorset-dragon-red .char-sheet .age-header .editor {
-  background-color: #ffffff;
+  background-color: hsl(0, 0%, 100%);
 }
 .colorset-dragon-red .vehicle-stats img {
   border: 2px solid #810207;
@@ -1761,7 +1758,7 @@
   color: #ffffff;
 }
 .colorset-folded-purple .char-sheet .age-header .editor {
-  background-color: #ffffff;
+  background-color: hsl(0, 0%, 100%);
 }
 .colorset-folded-purple .vehicle-stats img {
   border: 2px solid #565183;
@@ -1899,7 +1896,7 @@
   color: #ffffff;
 }
 .colorset-ronin-green .char-sheet .age-header .editor {
-  background-color: #ffffff;
+  background-color: hsl(0, 0%, 100%);
 }
 .colorset-ronin-green .vehicle-stats img {
   border: 2px solid #1d8514;
@@ -2032,6 +2029,15 @@
 #context-menu li {
   white-space: nowrap;
   text-align: left;
+}
+/*---------Background---------------------*/
+.window-app.sheet.char .window-content,
+.window-app.sheet.vehicle .window-content,
+.window-app.sheet.spaceship .window-content,
+.window-app.journal .window-content {
+  background-image: none;
+  background: none;
+  background-color: rgba(207, 194, 188, 0.6);
 }
 /*---------Flexbox assisting classes------*/
 .age-system .flexcol {

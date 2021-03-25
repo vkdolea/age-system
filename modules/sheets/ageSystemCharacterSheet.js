@@ -105,7 +105,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.healthMode = game.settings.get("age-system", "healthMode");
 
         // Sheet color
-        data.colorScheme = game.user.getFlag("age-system", "colorScheme");
+        data.colorScheme = game.settings.get("age-system", "colorScheme");
 
         // Return data to the sheet
         return data;

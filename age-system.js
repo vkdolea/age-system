@@ -140,7 +140,7 @@ Hooks.once("setup", function() {
     }
 });
 
-Hooks.once("ready", function() {
+Hooks.once("ready", async function() {
     // Identify Colorset
     const color = game.user.getFlag("age-system", "colorScheme");
     if (color) game.settings.set("age-system", "colorScheme", color);
@@ -148,6 +148,50 @@ Hooks.once("ready", function() {
 
     // Loads Age Roller
     ageSystem.ageRoller.refresh()
+
+    // Check if Dice so Nice is active to register Stunt Die option
+    if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {
+        import("/modules/dice-so-nice/DiceColors.js").then((diceColors) => {
+            
+            const colorset = diceColors.COLORSETS;
+            let colorChoices = {};
+            for (const type in colorset) {
+                if (colorset.hasOwnProperty(type)) {
+                    const colorCode = colorset[type].name;
+                    const colorName = colorset[type].description;
+                    let newChoice = new Object();
+                    newChoice[colorCode] = colorName;
+                    colorChoices = {
+                    ...colorChoices,
+                    ...newChoice
+                    };
+                };
+            };
+            if (colorChoices !== {}) {
+                // After loading all modules, check if Dice so Nice is installed and add option to select Stunt Die colorset
+                const stuntSoNice = function() {
+                    /**
+                     * Select Dice so Nice effect for Stunt Die
+                     */
+                    game.settings.register("age-system", "stuntSoNice", {
+                    name: "SETTINGS.stuntSoNice",
+                    hint: "SETTINGS.stuntSoNiceHint",
+                    scope: "client",
+                    config: true,
+                    default: "bronze",
+                    type: String,
+                    choices: colorChoices,
+                    onChange:()=>{game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"))}
+                    });
+                };
+                stuntSoNice();
+                // Identify if user has registered Dice so Nice Stunt Die option
+                const stuntSoNiceFlag = game.user.getFlag("age-system", "stuntSoNice");
+                if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);
+                if (!stuntSoNiceFlag) game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
+            };
+        });
+    };
 
     // Prepare Actors dependent on other Actors
     for(let e of game.postReadyPrepare){

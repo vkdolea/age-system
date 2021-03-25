@@ -397,7 +397,9 @@ export function setBlind(event) {
 };
 
 export function diceSoNiceRoller(roll, chatData) {
-    roll.dice[1].options.colorset = "bronze";
+    // Here is selected the colorset of the 3D dice
+    const stuntDieColorset = game.settings.get("age-system", "stuntSoNice");
+    roll.dice[1].options.colorset = stuntDieColorset ? stuntDieColorset : "bronze";
     game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind).then(displayed => ChatMessage.create(chatData));
 };
 
@@ -625,7 +627,7 @@ export async function itemDamage({
         damageMod: constDmg
     };
     // Check if damage source has a non 0 portion on its parameters
-    if (constDmg !== 0) {damageFormula = `${damageFormula} + @damageMod`}
+    if (constDmg) {damageFormula = `${damageFormula} + @damageMod`}
     let messageData = {
         flavor: `${item.name}`,
         speaker: ChatMessage.getSpeaker()

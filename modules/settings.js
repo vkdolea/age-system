@@ -1,5 +1,5 @@
 export const registerSystemSettings = function() {
-
+  // Setting to configure Stunt Die colorset is totally integrated on age-system.js, 
   /**
    * Track the system version upon which point a migration was last applied
    */
@@ -216,7 +216,8 @@ export const registerSystemSettings = function() {
       "folded-purple": "SETTINGS.colorFoldedPurple",
     },
     onChange:()=>{
-      game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
+      const newColor = game.settings.get("age-system", "colorScheme");
+      game.user.setFlag("age-system", "colorScheme", newColor);
       [...game.actors.entities, ...Object.values(game.actors.tokens), ...game.items.entities]
       // .filter((o) => {
       //   return true /*(o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship")*/;

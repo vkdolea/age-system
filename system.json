@@ -40,6 +40,11 @@
             "lang": "fr",
             "name": "François",
             "path": "lang/fr.json"
+        },
+        {
+            "lang": "es",
+            "name": "Español",
+            "path": "lang/fr.json"
         }
     ],
     "socket": false,
