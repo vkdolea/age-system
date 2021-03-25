@@ -1876,53 +1876,53 @@
   border: solid #cfccde 1px;
 }
 .colorset-ronin-green .colorset-first-tier {
-  background-color: #1d8514;
+  background-color: #155f0e;
   color: #ffffff;
 }
 .colorset-ronin-green .colorset-second-tier {
   background-color: #c2f5aa;
-  color: #1d8514;
+  color: #155f0e;
 }
 .colorset-ronin-green .colorset-third-tier {
   background-color: #92b65f;
   color: #000000;
 }
 .colorset-ronin-green input.colorset-first-tier {
-  background-color: #1d8514;
+  background-color: #155f0e;
   color: #ffffff;
 }
 .colorset-ronin-green .char-sheet .age-header label {
-  background-color: #1d8514;
+  background-color: #155f0e;
   color: #ffffff;
 }
 .colorset-ronin-green .char-sheet .age-header .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-ronin-green .vehicle-stats img {
-  border: 2px solid #1d8514;
+  border: 2px solid #155f0e;
 }
 .colorset-ronin-green .vehicle-stats .editor {
   background-color: #ffffff;
 }
 .colorset-ronin-green .dice-show.trait-test i:last-of-type {
-  color: #1d8514;
+  color: #155f0e;
 }
 .colorset-ronin-green .roll-mod {
-  border-bottom: 1px solid #1d8514;
+  border-bottom: 1px solid #155f0e;
 }
 .colorset-ronin-green .roll-mod.stunted {
-  background-color: #1d8514;
+  background-color: #155f0e;
   color: #ffffff;
 }
 .colorset-ronin-green .char-sheet .item-container img {
-  border: 1px solid #1d8514;
+  border: 1px solid #155f0e;
 }
 .colorset-ronin-green .char-sheet input {
   background-color: #ffffff;
 }
 .colorset-ronin-green .char-sheet input.colorset-second-tier {
   background-color: #c2f5aa !important;
-  color: #1d8514 !important;
+  color: #155f0e !important;
 }
 .colorset-ronin-green .focus img,
 .colorset-ronin-green .power img,
@@ -1933,7 +1933,7 @@
 .colorset-ronin-green .honorifics img,
 .colorset-ronin-green .membership img,
 .colorset-ronin-green .relationship img {
-  border: 1px solid #1d8514;
+  border: 1px solid #155f0e;
 }
 .colorset-ronin-green .focus label,
 .colorset-ronin-green .power label,
@@ -1944,7 +1944,7 @@
 .colorset-ronin-green .honorifics label,
 .colorset-ronin-green .membership label,
 .colorset-ronin-green .relationship label {
-  color: #1d8514;
+  color: #155f0e;
 }
 .colorset-ronin-green .focus .item-card-stats,
 .colorset-ronin-green .power .item-card-stats,
@@ -1989,7 +1989,7 @@
 .colorset-ronin-green .membership nav .item,
 .colorset-ronin-green .relationship nav .item {
   background-color: #c2f5aa;
-  color: #1d8514;
+  color: #155f0e;
 }
 .colorset-ronin-green .focus nav .item.active,
 .colorset-ronin-green .power nav .item.active,

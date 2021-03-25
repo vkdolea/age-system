@@ -266,6 +266,7 @@ export class ageSystemItem extends Item {
             data: this.data.data,
             item: this,
             owner: this.actor,
+            colorScheme: game.settings.get("age-system", "colorScheme"),
             config: {}
         };
         cardData.config.wealthMode = game.settings.get("age-system", "wealthType");
