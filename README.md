@@ -37,7 +37,8 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - [Fist](https://game-icons.net/1x1/skoll/fist.html) (Weapon icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
 - [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
 ### Localization
-- **French**: by Discord user *Imposator#8090*.
+- **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
+- **Spanish**: by Discord user *ForjaSalvage#2419*.
 
 ## Shortcuts
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
@@ -47,7 +48,7 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 5. *Right Click* on Focus in the character sheet opens a context menu with options to roll it with another Ability, show on Chat, edit and delete.
 6. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
 
-## Modificators
+## Modifiers
 A few items have a "Modificators" section. Modificatores will only apply when the item is equiped/activated (i.e., shield icon in character sheet without opacity).
 The checkbox must be checked to have the mod active in the item.
 Bonuses for maneuvers are on topo of the normal bonuses granted by the maneuver.
@@ -72,14 +73,13 @@ Here the description of each one of the Modificators:
 
 ## Change log
 
-### 0.5.0 [2021-03-xx]
+### 0.5.0 [2021-03-25]
 #### Added
-- Added a Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompent to roll modifier and TN.
+- Added a Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompet to add modifier and TN.
 - Added to vehicle sheets: Armor Rating, Cover, Total Passengers Capacity and Custom Damage for Collision/Sideswipe.
 - On vehicles damage table, line representing vehicle's Velocity Class will have **bold** characters.
-- On Configure Settings it is now possible to configure the flavor text as Health of Fortune.
-- AgeRoller function refactored.
-- Dice so Nice users can now can select their Stunt Die colorset option.
+- On Configure Settings it is now possible to configure the flavor text as Health and Fortune.
+- Dice so Nice users can now can select their Stunt Die colorset option on System Settings.
 #### Fix
 - Migration issue could cause Conditions not to be created properly on migrated Actors.
 - Bug preventing rolling a Focus using a different Ability (or none).
