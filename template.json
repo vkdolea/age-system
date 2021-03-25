@@ -5,6 +5,95 @@
             "vehicle"
         ],
         "templates": {},
+        "spaceship": {
+            "size": "",
+            "hull": {
+                "nrDice": 1,
+                "diceType": 6,
+                "extraValue": 0
+            },
+            "drive": "",
+            "description": "",
+            "passengers": [],
+            "crew": {
+                "min": 1,
+                "current": 1,
+                "typical": 1,
+                "competence": 1
+            },
+            "weapons": [],
+            "systems": {
+                "maneuver": {
+                    "mod": 0,
+                    "base": 0,
+                    "operator": "",
+                    "useAbl": "",
+                    "useFocus": ""
+                },
+                "command": {
+                    "mod": 0,
+                    "base": 0,
+                    "operator": "",
+                    "useAbl": "",
+                    "useFocus": ""
+                },
+                "sensors": {
+                    "mod": 0,
+                    "base": 0,
+                    "operator": "",
+                    "useAbl": "",
+                    "useFocus": ""
+                },
+                "damageControl": {
+                    "mod": 0,
+                    "base": 0,
+                    "operator": "",
+                    "TN": 11,
+                    "useAbl": "",
+                    "useFocus": "",
+                    "threshold": {
+                        "current": 0,
+                        "target": 5
+                    }
+                }
+            },
+            "losses": {
+                "normal": {
+                    "collateral": {
+                        "actual": 0,
+                        "max": 6
+                    },
+                    "hull": {
+                        "actual": 0,
+                        "max": 6
+                    },
+                    "maneuverability": {
+                        "actual": 0,
+                        "max": 6
+                    },
+                    "sensors": {
+                        "actual": 0,
+                        "max": 6
+                    },
+                    "weapons": {
+                        "actual": 0,
+                        "max": 6
+                    }
+                },
+                "serious": {
+                    "reactorOffline": {
+                        "actual": 0,
+                        "max": 6
+                    },
+                    "weaponOffline": {
+                        "actual": 0,
+                        "max": 6
+                    }
+                }
+            },
+            "takenOut": false
+
+        },
         "vehicle": {
             "handling": {
                 "mod": 0,
@@ -27,7 +116,9 @@
                 "value": 20
             },
             "conductor": "",
-            "passengers": []
+            "passengers": [],
+            "customSideswipeDmg": 1,
+            "customCollisionDmg": 1
         },
         "char": {
             "statBlockView": false,
@@ -367,6 +458,20 @@
                     }
                 }
             }
+        },
+        "spaceshipFeatures": {
+            "templates": ["description", "hardItem", "damage"],
+            "type": ["weapon", "focusAssist", "hullStrong", "hullFragile", "vulnerable"],
+            "sensorMod": 0,
+            "maneuverSizeStep": 0,
+            "juiceMod": 0,
+            "hullPlating": 0,
+            "hullFragile": 0,
+            "weaponType": "pdc",
+            "useFocus": "",
+            "useAbl": "",
+            "isQuality": false,
+            "isFlaw": false
         },
         "equipment": {
             "templates": ["description", "hardItem", "bonuses"]

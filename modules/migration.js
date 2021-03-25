@@ -128,6 +128,7 @@ export const migrateActorData = function(actor) {
 
   // Actor Data Updates
   _addActorConditions(actor, updateData);
+  _addVehicleCustomDmg(actor, updateData);
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
@@ -201,19 +202,46 @@ export const migrateSceneData = function(scene) {
  */
 function _addActorConditions(actor, updateData) {
   if (actor.type !== "char") return updateData;
+  
+  const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindred",
+  "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
 
-  // Add Conditions
+  // Add Conditions - added a fix
+  if (actor.data.conditions) {
+    if (typeof actor.data.conditions === "object") {
+      let complete = true;
+      for (let c = 0; c < conditions.length; c++) {
+        const condition = conditions[c];
+        if (!actor.data.conditions.hasOwnProperty(condition)) complete = false;
+      }
+      if (complete) return updateData;
+    } else {
+      delete actor.data.conditions;
+    };
+  }
+  
   if (!actor.data.conditions) {
-    const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindred",
-    "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
-    
     updateData["data.conditions"] = {};
     for (let c = 0; c < conditions.length; c++) {
-      const cond = contidions[c];
+      const cond = conditions[c];
       const condString = `data.conditions.${cond}`;
       udpateData[condString] = false;    
     }
   };
+
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Add vehicle custom damage
+ * @private
+ */
+function _addVehicleCustomDmg(actor, updateData) {
+  if (actor.type !== "vehicle") return updateData;
+
+  if (!actor.data.hasOwnProperty(customSideswipeDmg)) updateData["data.customSideswipeDmg"] = 1;
+  if (!actor.data.hasOwnProperty(customCollisionDmg)) updateData["data.customCollisionDmg"] = 1;
 
   return updateData
 }

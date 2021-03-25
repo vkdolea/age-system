@@ -8,7 +8,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             // resizable: false,
             width: 680,
             height: 800,
-            classes: ["age-system", "sheet", "char", `colorset-${ageSystem.colorScheme}`]
+            classes: ["age-system", "sheet", "char", /*`colorset-${ageSystem.colorScheme}`*/]
         });
     }
 
@@ -34,8 +34,8 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             // TODO - try to add the Shift + Click rolling to GM inside this callback
             callback: e => {
                 const focus = this.actor.getOwnedItem(e.data("item-id"));
-                let d = Dice.dialogBoxAbilityFocus(focus, this.actor)
-                d.render(true);
+                const ev = new MouseEvent('click', {});
+                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, selectAbl: true});
             }
         },
         {
@@ -100,6 +100,12 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         // Retrieve Prefession/Ancestry settings
         data.ancestry = game.settings.get("age-system", "ancestryOpt");
         data.occupation = game.settings.get("age-system", "occupation");
+
+        // Retrieve Health Mode (Health/Fortune)
+        data.healthMode = game.settings.get("age-system", "healthMode");
+
+        // Sheet color
+        data.colorScheme = game.settings.get("age-system", "colorScheme");
 
         // Return data to the sheet
         return data;

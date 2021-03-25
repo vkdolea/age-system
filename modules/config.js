@@ -179,6 +179,28 @@ ageSystem.velocityCategory = {
     velExtreme: "age-system.velExtreme"
 };
 
+// Spacehip sizes
+ageSystem.spaceshipSize = {
+    tiny: 1,
+    small: 2,
+    medium: 3,
+    large: 4,
+    huge: 5,
+    gigantic: 6,
+    colossal: 7,
+    titanic: 8
+};
+
+// Spaceship crew competece
+ageSystem.spaceshipCrewCompetence = {
+    incompetent: 0,
+    poor: 1,
+    average: 2,
+    capable: 3,
+    skilled: 4,
+    elite: 5
+}
+
 const itemIconPath = "systems/age-system/resources/imgs/item-icon/";
 ageSystem.itemIcons = {
     "equipment": `${itemIconPath}briefcase.svg`,
@@ -196,10 +218,13 @@ const actorIconPath = "systems/age-system/resources/imgs/actor-icon/";
 ageSystem.actorIcons = {
     "vehicle": `${actorIconPath}chariot.svg`,
     "char": `${actorIconPath}sensousness.svg`,
+    "spaceship": `${actorIconPath}rocket.svg`,
 }
 
-// Change default Actor Icon
-CONST.DEFAULT_TOKEN = "systems/age-system/resources/imgs/actor-icon/sensousness.svg";
+const uiElementsPath = "systems/age-system/resources/imgs/ui-elements/";
+ageSystem.uiElements = {
+    ageRoller: `${uiElementsPath}cube.svg`
+}
 
 // Initializing variable to load focus Compendiaum
 ageSystem.focus = [];

@@ -1,8 +1,10 @@
 @import "./item-sheet.less";
 @import "./char-sheet.less";
 @import "./vehicle-sheet.less";
+@import "./spaceship-sheet.less";
 @import "./age-roll-sheet.less";
 @import "./colorsets.less";
+@import "./age-roller.less";
 
 // Avoid text on context-menu from wrapping
 #context-menu {
@@ -10,6 +12,17 @@
         white-space: nowrap;
         text-align: left;
     };
+}
+
+/*---------Background---------------------*/
+.window-app.sheet.char .window-content,
+.window-app.sheet.vehicle .window-content,
+.window-app.sheet.spaceship .window-content,
+.window-app.journal .window-content {
+    background-image: none;
+    background: none;
+    background-color: rgba(207, 194, 188, 0.6);
+    // background-color: rgba(209, 183, 171, 0.8);
 }
 
 /*---------Flexbox assisting classes------*/

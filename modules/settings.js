@@ -1,5 +1,5 @@
 export const registerSystemSettings = function() {
-
+  // Setting to configure Stunt Die colorset is totally integrated on age-system.js, 
   /**
    * Track the system version upon which point a migration was last applied
    */
@@ -87,7 +87,7 @@ export const registerSystemSettings = function() {
   game.settings.register("age-system", "usePowerPoints", {
       name: "SETTINGS.usePowerPoints",
       hint: "SETTINGS.usePowerPointsHint",
-      scope: "client",
+      scope: "world",
       config: true,
       default: true,
       type: Boolean,
@@ -124,6 +124,32 @@ export const registerSystemSettings = function() {
         "pulp": "SETTINGS.gameModePulp",
         "cinematic": "SETTINGS.gameModeCinematic",
     },  
+  });  
+
+  /**
+   * Register if world will use Game Mode and which one
+   */
+   game.settings.register("age-system", "healthMode", {
+    name: "SETTINGS.healthMode",
+    hint: "SETTINGS.healthModeHint",
+    scope: "world",
+    config: true,
+    default: "health",
+    type: String,
+    choices: {
+        "health": "SETTINGS.healthModehealth",
+        "fortune": "SETTINGS.healthModefortune",
+    },
+    onChange: () => {
+      [...game.actors.entities, ...Object.values(game.actors.tokens)]
+        .filter((o) => {
+          return o.data.type === "char";
+        })
+        .forEach((o) => {
+          o.update({});
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        });
+    },
   });  
 
   /**
@@ -189,7 +215,18 @@ export const registerSystemSettings = function() {
       // "expanded-blue": "SETTINGS.colorExpandedBlue",
       "folded-purple": "SETTINGS.colorFoldedPurple",
     },
-    onChange:()=>{window.location.reload(!1)}
+    onChange:()=>{
+      const newColor = game.settings.get("age-system", "colorScheme");
+      game.user.setFlag("age-system", "colorScheme", newColor);
+      [...game.actors.entities, ...Object.values(game.actors.tokens), ...game.items.entities]
+      // .filter((o) => {
+      //   return true /*(o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship")*/;
+      // })
+      .forEach((o) => {
+        o.update({});
+        if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+      });
+    }
   });
 
 /**
@@ -237,7 +274,7 @@ export const loadCompendiaSettings = function() {
   game.settings.register("age-system", "masterFocusCompendium", {
     name: "SETTINGS.masterFocusCompendium",
     hint: "SETTINGS.masterFocusCompendiumHint",
-    scope: "global",
+    scope: "world",
     config: true,
     default: "age-system.focus",
     type: String,
@@ -273,7 +310,7 @@ function allCompendia() {
 export function compendiumList(compendiumName) {
   let dataPack = game.packs.get(compendiumName);
   let dataList = [];
-  let i = 0;
+  if (!dataPack) return dataList;
   dataPack.getIndex().then(function(){
   for (let i = 0; i < dataPack.index.length; i++) {
     const entry = dataPack.index[i];

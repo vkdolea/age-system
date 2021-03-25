@@ -1,6 +1,7 @@
 {
     "ACTOR.TypeChar": "Player Character",
     "ACTOR.TypeVehicle": "Vehicle",
+    "ACTOR.TypeSpaceship": "Spaceship",
     "ITEM.TypeStunts": "Stunts",
     "ITEM.TypeEquipment": "General Equipment",
     "ITEM.TypePower": "Power & Arcana",
@@ -10,6 +11,7 @@
     "ITEM.TypeRelationship": "Relationship",
     "ITEM.TypeHonorifics": "Honorifics",
     "ITEM.TypeMembership": "Membership",
+    "ITEM.TypeSpaceshipfeatures": "Spaceship Features",
 
     "SETTINGS.useConviction": "Use Conviction",
     "SETTINGS.useConvictionHint": "Enable Conviction block for tracking",
@@ -18,7 +20,7 @@
     "SETTINGS.useFatigueHint": "Enable Fatigue block and support for Power & Arcana Fatigue settings",
 
     "SETTINGS.useConditions": "Use Conditions",
-    "SETTINGS.useConditionsHint": "Shows a Conditions section - actual modificators on rolls is not implemented",
+    "SETTINGS.useConditionsHint": "Shows a Conditions section - actual modifiers on rolls are not implemented",
 
     "SETTINGS.usePowerPoints": "Use Power Points",
     "SETTINGS.usePowerPointsHint": "Enable Power Points block and support for Power & Arcana Power Points settings",
@@ -72,10 +74,25 @@
     "SETTINGS.ancestryOptspecies": "Species",
     "SETTINGS.ancestryOptrace": "Race",
 
+    "SETTINGS.stuntSoNice": "Dice so Nice colorset for Stunt Die",
+    "SETTINGS.stuntSoNiceHint": "This color will be valid only for the stunt die",
+
     "SETTINGS.masterFocusCompendium": "Select Compendium with Focus options",
     "SETTINGS.masterFocusCompendiumHint": "Item names inside this Compendium will show as Focus suggestion on sheets",
 
+    "SETTINGS.healthMode": "Select Health Tracker",
+    "SETTINGS.healthModeHint": "Most AGE games will use Health, while The Expanse uses Fortune",
+    "SETTINGS.healthModehealth": "Health",
+    "SETTINGS.healthModefortune": "Fortune",
+
     "age-system": {
+
+        "SHEETS": {
+            "standardChar": "AGE Character",
+            "standardVehicle": "AGE Vehicle",
+            "standardItem": "AGE Item",
+            "standardSpaceship": "AGE Spaceship"
+        },
 
         "WARNING": {
             "duplicatedFocus": "Focus is not added to character - it already owns a Focus named ",
@@ -88,6 +105,43 @@
             "userNotAvailable": "Actor {name} ({id}) is not available."
         },
 
+        "spaceship": {
+            "op": "Operator",
+            "role": "Role",
+            "hull": "Hull",
+            "operator": {
+                "command": "Captain",
+                "maneuver": "Pilot",
+                "sensors": "Sensor Operator",
+                "damageControl": "Engineer"
+            },
+            "crew": "Crew",
+            "crewMin": "Minimum",
+            "crewTyp": "Typical",
+            "crewCur": "Current",
+            "competence": "Competence",
+            "competenceLevel": {
+                "incompetent": "Incompetent",
+                "poor": "Poor",
+                "average": "Average",
+                "capable": "Capable",
+                "skilled": "Skilled",
+                "elite": "Elite"
+            },
+            "systems": "Systems",
+            "size": "Size",
+            "sizeType": {
+                "tiny": "Tiny",
+                "small": "Small",
+                "medium": "Medium",
+                "large": "Large",
+                "huge": "Huge",
+                "gigantic": "Gigantic",
+                "colossal": "Colossal",
+                "titanic": "Titanic"
+            }
+        },
+        "damageControl": "Damage Control",
         "parameters": "Parameters",
         "conductor": "Conductor",
         "passengers": "Passengers",
@@ -103,11 +157,15 @@
         "velFast": "Fast ",
         "velVeryFast": "Very Fast",
         "velExtreme": "Extreme",
+        "velCustom": "Custom",
+        "coverRating": "Cover",
+        "vehicleArmor": "Armor",
         
         "chatCard": {
             "rollGeneral": "{actor} rolls {item}",
             "rollAttack": "{actor} attacks with {item}",
             "rollPower": "{actor} uses {item}",
+            "looseRoll": "{user} rolls some dice",
             
             "rollFullDamage": "Full Damage",
             "rollFullHealing": "Full Healing",
@@ -176,6 +234,7 @@
             "edit": "Edit",
             "delete": "Delete",
             "changeRollContext": "Use Other Ability",
+            "rollFocusAltAbl": "Select Ability to roll {focus}",
             "options": "Options",
             "d6": "D6",
             "d3": "D3",
@@ -219,6 +278,7 @@
 
         "talentDegree": "Degree",
         "health": "Health",
+        "fortune": "Fortune",
         "conviction": "Conviction",
         "speed": "Speed",
 
@@ -312,7 +372,7 @@
         "targetNumber": "TN",
         "total": "Total",
 
-        "itemMod": "Modificators",
+        "itemMod": "Modifiers",
         "bonus": {
             "type": "Type",
             "value": "Value",

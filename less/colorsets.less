@@ -31,7 +31,8 @@
 @folded-purple-list: @folded-purple, @folded-purple-high, @folded-purple-mid, @folded-purple-font, @folded-purple-light-font;
 
 /** Ronin Green Colors **/
-@ronin-green: #1d8514;
+@ronin-green: #155f0e;
+// @ronin-green: #1d8514;
 @ronin-green-high: #92b65f;
 @ronin-green-mid: #c2f5aa;
 @ronin-green-font: #ffffff;
@@ -44,8 +45,8 @@
 @cinematic-color: #A3CCAF;
 @mode-font-color:#231F20;
 
-@circle-main: #e8dfce;
-@circle-small: #e8dfce;
+// @circle-main: #e8dfce;
+// @circle-small: #e8dfce;
 
 @highlight: #eb9e0f;
 @container-background: #ffffff;
@@ -84,12 +85,12 @@ each(@colorsets, {
                     color: extract(extract(@color-list, @index), 4);
                 }
                 .editor {
-                    background-color: #ffffff;
+                    background-color: hsl(0, 0%, 100%);
                 }
             }
         }
 
-        .sheet.vehicle {
+        .vehicle-stats {
             img {
                 border: 2px solid extract(extract(@color-list, @index), 1);
             }

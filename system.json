@@ -2,7 +2,7 @@
     "name": "age-system",
     "title": "AGE System (unofficial)",
     "description": "Unofficial AGE System implementation for most of AGE subsystems",
-    "version": "0.4.1",
+    "version": "0.5.0",
     "templateVersion": 1,
     "author": "VK Dolea",
     "scripts": [],
@@ -40,6 +40,11 @@
             "lang": "fr",
             "name": "François",
             "path": "lang/fr.json"
+        },
+        {
+            "lang": "es",
+            "name": "Español",
+            "path": "lang/fr.json"
         }
     ],
     "socket": false,
@@ -52,5 +57,5 @@
     "compatibleCoreVersion": "0.7.9",
     "url": "https://github.com/vkdolea/age-system",
     "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",
-    "download": "https://github.com/vkdolea/age-system/archive/0.4.1.zip"
+    "download": "https://github.com/vkdolea/age-system/archive/0.5.0.zip"
 }

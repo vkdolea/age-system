@@ -1,9 +1,23 @@
 <form>
     
+    {{#if selectAbl}}
+    <div class="form-group">
+        <label>Select Alternate Ability</label>
+        <select name="selectedAbl">
+            {{#select selectedAbl}}
+            <option value="no-abl">—</option>
+            {{#each abilitiesArray as |alternate|}}
+            <option value="{{alternate.ability}}">{{alternate.name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+    {{/if}}
+
     <div class="form-group">
         <label>{{localize "age-system.setAgeRollMod"}}</label>
         <input type="number" name="ageRollMod" placeholder="{{localize "age-system.setAgeRollMod"}}" value=""/>
-    </div>
+    </div> 
 
     {{#if (eq itemType 'weapon')}}
     <div class="form-group">
@@ -18,5 +32,13 @@
         <input type="number" name="rollTN" value="{{targetNumber}}" placeholder="{{localize "age-system.setAgeRollTN"}}"/>
     </div>
     {{/if}}
+
+    <hr>
+    
+    {{!-- TODO - ADD OPTION OF BLIND ROLL, ROLL TO GM, PUBLIC ROLL --}}
+    {{!-- <div class="form-group">
+        <input type="checkbox" name="gmRoll" {{checked gmRoll}}/>
+        <label>{{localize "age-system.settings.gmRoll"}}</label>
+    </div> --}}
 
 </form>

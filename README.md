@@ -22,8 +22,10 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 
 ## Credits
 ### Icons
-Icons were used from [game-icons.net](https://game-icons.net). This icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
+Icons were used from [game-icons.net](https://game-icons.net). These icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
 - [Sensuousness](https://game-icons.net/1x1/lorc/sensuousness.html) (Character icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Chariot](https://game-icons.net/1x1/cathelineau/chariot.html) (Vehicle icon), by [Cathelineau](his link reference is game-icons.net itself).
+- [Rocket](https://game-icons.net/1x1/lorc/rocket.html) (Spaceship icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Split Cross](https://game-icons.net/1x1/lorc/split-cross.html) (Stunt icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Embrace Energy](https://game-icons.net/1x1/lorc/embrassed-energy.html) (Power & Arcana icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Gift of Knowledge](https://game-icons.net/1x1/lorc/gift-of-knowledge.html) (Focus icon), by [Lorc](https://lorcblog.blogspot.com/).
@@ -33,10 +35,12 @@ Icons were used from [game-icons.net](https://game-icons.net). This icons were p
 - [Briefcase](https://game-icons.net/1x1/delapouite/briefcase.html) (General Equipment icon), by [Delapouite](https://delapouite.com/).
 - [Rank 3](https://game-icons.net/1x1/skoll/rank-3.html) (Honorifics icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
 - [Fist](https://game-icons.net/1x1/skoll/fist.html) (Weapon icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
+- [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
 ### Localization
-- **French**: by Discord user *Imposator#8090*.
+- **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
+- **Spanish**: by Discord user *ForjaSalvage#2419*.
 
-### Shortcuts
+## Shortcuts
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
 2. *CTRL + Click* on Damage rolls adds +1D6 to the total.
 3. *CTRL + ALT + Click* on Damage rolls adds +2D6 to the total.
@@ -44,7 +48,7 @@ Icons were used from [game-icons.net](https://game-icons.net). This icons were p
 5. *Right Click* on Focus in the character sheet opens a context menu with options to roll it with another Ability, show on Chat, edit and delete.
 6. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
 
-### Modificators
+## Modifiers
 A few items have a "Modificators" section. Modificatores will only apply when the item is equiped/activated (i.e., shield icon in character sheet without opacity).
 The checkbox must be checked to have the mod active in the item.
 Bonuses for maneuvers are on topo of the normal bonuses granted by the maneuver.
@@ -68,6 +72,23 @@ Here the description of each one of the Modificators:
 16. **Speed:** adds to Speed Mod field.
 
 ## Change log
+
+### 0.5.0 [2021-03-25]
+#### Added
+- Added a Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompet to add modifier and TN.
+- Added to vehicle sheets: Armor Rating, Cover, Total Passengers Capacity and Custom Damage for Collision/Sideswipe.
+- On vehicles damage table, line representing vehicle's Velocity Class will have **bold** characters.
+- On Configure Settings it is now possible to configure the flavor text as Health and Fortune.
+- Dice so Nice users can now can select their Stunt Die colorset option on System Settings.
+#### Fix
+- Migration issue could cause Conditions not to be created properly on migrated Actors.
+- Bug preventing rolling a Focus using a different Ability (or none).
+- When an Actor is delete from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
+- Fixed a bug causing the text field on character sheet header to be innacessible in some browsers.
+- Application will not reload after changin colorsets on "Configure Settings".
+- Color Scheme won't reset when Player changes browser or delete browser historic.
+- "Use Power Points" and "Focus Compendium" settings are now variables set only by game master.
+- Empty fields in the constant part of damage builder will no longer return "null" on damage formula.
 
 ### 0.4.1 [2021-02-22]
 #### Added

@@ -1,4 +1,4 @@
-<form class="{{cssClass}} age-system sheet vehicle" autocomplete="off">
+<form class="{{cssClass}} age-system sheet vehicle colorset-{{colorScheme}}" autocomplete="off">
 
     <input name="name" class="vehicle-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
     <div class="vehicle-stats">
@@ -33,7 +33,13 @@
                         </select>
                     </div>
                     <div>
-                        <input type="text" name="data.handling.useFocus" value="{{data.handling.useFocus}}">
+                        <input type="text" name="data.handling.useFocus" value="{{data.handling.useFocus}}" list="{{name}}-{{actor._id}}-list">
+                        <datalist id="{{name}}-{{actor._id}}-list">
+                            <option value=""></option>
+                            {{#each config.focus as |focus|}}
+                            <option value="{{focus.name}}"></option>
+                            {{/each}}
+                        </datalist>
                     </div>
                 </div>
 
@@ -78,6 +84,16 @@
                     </div>
 
                     <div class="flexcol flex-align-center">
+                        <label>{{localize "age-system.vehicleArmor"}}</label>
+                        <input type="number" name="data.armorRating" value="{{data.armorRating}}" data-dtype="Number">
+                    </div>
+
+                    <div class="flexcol flex-align-center">
+                        <label>{{localize "age-system.coverRating"}}</label>
+                        <input type="number" name="data.coverRating" value="{{data.coverRating}}" data-dtype="Number">
+                    </div>
+
+                    <div class="flexcol flex-align-center">
                         <label>{{localize "age-system.ram"}}</label>
                         <div class="flexrow flex-align-center">
                             <input type="number" name="data.ramDmg" value="{{data.ramDmg}}" data-dtype="Number">
@@ -93,71 +109,84 @@
                         <th>{{localize "age-system.sideswipe"}}</th>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr {{#if (eq data.velocity.category "velStandard")}} class="highlight"{{/if}}>
                             <td>{{localize "age-system.velStandard"}}</td>
                             <td class="feature-controls" data-qtd-dice="1">
-                                <a class="roll-collision">1d6</a>
+                                <a class="roll-collision">1{{localize "age-system.settings.d6"}}</a>
                                 <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
                             </td>
                             <td class="feature-controls" data-qtd-dice="1" data-die-size="3">
-                                <a class="roll-sideswipe">1d3</a>
+                                <a class="roll-sideswipe">1{{localize "age-system.settings.d3"}}</a>
                                 <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
                             </td>
                         </tr>
-                        <tr>
+                        <tr {{#if (eq data.velocity.category "velFast")}} class="highlight"{{/if}}>
                             <td>{{localize "age-system.velFast"}}</td>
                             <td class="feature-controls" data-qtd-dice="2">
-                                <a class="roll-collision">2d6</a>
+                                <a class="roll-collision">2{{localize "age-system.settings.d6"}}</a>
                                 <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
                             </td>
                             <td class="feature-controls" data-qtd-dice="1">
-                                <a class="roll-sideswipe">1d6</a>
+                                <a class="roll-sideswipe">1{{localize "age-system.settings.d6"}}</a>
                                 <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
                             </td>
                         </tr>
-                        <tr>
+                        <tr {{#if (eq data.velocity.category "velVeryFast")}} class="highlight"{{/if}}>
                             <td>{{localize "age-system.velVeryFast"}}</td>
                             <td class="feature-controls" data-qtd-dice="4">
-                                <a class="roll-collision">4d6</a>
+                                <a class="roll-collision">4{{localize "age-system.settings.d6"}}</a>
                                 <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
                             </td>
                             <td class="feature-controls" data-qtd-dice="2">
-                                <a class="roll-sideswipe">2d6</a>
+                                <a class="roll-sideswipe">2{{localize "age-system.settings.d6"}}</a>
+                                <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
+                            </td>
+                        </tr>
+                        <tr {{#if (eq data.velocity.category "velExtreme")}} class="highlight"{{/if}}>
+                            <td>{{localize "age-system.velExtreme"}}</td>
+                            <td class="feature-controls" data-qtd-dice="6">
+                                <a class="roll-collision">6{{localize "age-system.settings.d6"}}</a>
+                                <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
+                            </td>
+                            <td class="feature-controls" data-qtd-dice="3">
+                                <a class="roll-sideswipe">3{{localize "age-system.settings.d6"}}</a>
                                 <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
                             </td>
                         </tr>
                         <tr>
-                            <td>{{localize "age-system.velExtreme"}}</td>
-                            <td class="feature-controls" data-qtd-dice="6">
-                                <a class="roll-collision">6d6</a>
+                            <td>{{localize "age-system.velCustom"}}</td>
+                            <td class="feature-controls" data-qtd-dice="{{data.customCollisionDmg}}">
+                                <input type="number" name="data.customCollisionDmg" value="{{data.customCollisionDmg}}" data-dtype="Number">
+                                <a class="roll-collision">{{localize "age-system.settings.d6"}}</a>
                                 <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
                             </td>
-                            <td class="feature-controls" data-qtd-dice="3">
-                                <a class="roll-sideswipe">3d6</a>
+                            <td class="feature-controls" data-qtd-dice="{{data.customSideswipeDmg}}">
+                                <input type="number" name="data.customSideswipeDmg" value="{{data.customSideswipeDmg}}" data-dtype="Number">
+                                <a class="roll-sideswipe">{{localize "age-system.settings.d6"}}</a>
                                 <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
                             </td>
                         </tr>                                                
                     </tbody>
                 </table>
-            </div>
 
-            <div class="passenger-container">
-                <label>{{localize "age-system.passengers"}} [{{data.pob}}]</label>
-                <div class="passenger-list">
-                    <ol>
-                        {{#each passengers as |passenger|}}
-                        <li class="flexrow flex-justify-between feature-controls" data-passenger-key="{{@key}}">
-                            <div class="flexrow flex-justify-start flex-align-center">
-                                <img src="{{passenger.picture}}">
-                                <span>{{passenger.name}}</span>
-                                {{#if passenger.isConductor}}
-                                <span>({{localize "age-system.conductor"}})</span>
-                                {{/if}}
-                            </div>
-                            <a class="flex-align-end remove-passenger"><i class="fa fa-times"></i></a>
-                        </li>
-                        {{/each}}
-                    </ol>
+                <div class="passenger-container">
+                    <label class="flexrow flex-align-center">{{localize "age-system.passengers"}} [{{data.pob}} / <input type="number" name="data.capacity" value="{{data.capacity}}" data-dtype="Number">]</label>
+                    <div class="passenger-list">
+                        <ol>
+                            {{#each passengers as |passenger|}}
+                            <li class="flexrow flex-justify-between feature-controls" data-passenger-key="{{@key}}">
+                                <div class="flexrow flex-justify-start flex-align-center">
+                                    <img src="{{passenger.picture}}">
+                                    <span>{{passenger.name}}</span>
+                                    {{#if passenger.isConductor}}
+                                    <span>({{localize "age-system.conductor"}})</span>
+                                    {{/if}}
+                                </div>
+                                <a class="flex-align-end remove-passenger"><i class="fa fa-times"></i></a>
+                            </li>
+                            {{/each}}
+                        </ol>
+                    </div>
                 </div>
             </div>
 
