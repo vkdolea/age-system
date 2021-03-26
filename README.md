@@ -73,6 +73,10 @@ Here the description of each one of the Modificators:
 
 ## Change log
 
+### 0.5.1 [2021-03-25]
+#### Fix
+- Fixed a bug causing Spanish localization to display French text.
+
 ### 0.5.0 [2021-03-25]
 #### Added
 - Added a Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompet to add modifier and TN.
