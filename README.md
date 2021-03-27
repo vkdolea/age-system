@@ -73,6 +73,10 @@ Here the description of each one of the Modificators:
 
 ## Change log
 
+### 0.5.2 [2021-xx-yy]
+#### Added
+-
+
 ### 0.5.1 [2021-03-25]
 #### Fix
 - Fixed a bug causing Spanish localization to display French text.

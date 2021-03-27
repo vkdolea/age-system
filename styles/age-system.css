@@ -1153,9 +1153,17 @@
 .age-system.sheet .window-content {
   background-color: #d1b7ab;
 }
-.age-system.sheet.spaceship input,
-.age-system.sheet.spaceship select {
+.age-system.sheet.spaceship {
+  font-variant: small-caps;
+}
+.age-system.sheet.spaceship input[name="name"] {
+  padding-left: 10px;
+  min-width: 100%;
+  max-height: 30px;
+  border-radius: 10px 10px 0px 0px;
+  text-transform: uppercase;
   border: none;
+  padding: 4px;
 }
 .age-system.sheet.spaceship ul.systems-list {
   text-align: center;
@@ -1177,32 +1185,37 @@
 .age-system.sheet.spaceship ul.systems-list li .system-focus {
   flex: 0 0 200px;
 }
-.age-system.sheet.spaceship .container {
-  width: fit-content;
-}
 .age-system.sheet.spaceship ul.passenger-list {
-  max-width: 300px;
+  padding: 0;
+}
+.age-system.sheet.spaceship ul.passenger-list li {
+  padding: 0;
+  margin-top: 2px;
+}
+.age-system.sheet.spaceship ul.passenger-list li .remove-passenger {
+  flex: 0 0 15px;
 }
 .age-system.sheet.spaceship ul.passenger-list li .passenger-token {
   flex: 0 0 25px;
+  height: 24px;
+  width: 24px;
+  border: none;
 }
 .age-system.sheet.spaceship ul.passenger-list li .passenger-damage-control {
   flex: 0 0 25px;
 }
-.age-system.sheet.spaceship ul.passenger-list li .passenger-name {
-  flex: 0 0 150px;
-}
-.age-system.sheet.spaceship ul.passenger-list li .passenger-remove {
-  flex: 0 0 25 px;
-}
 .age-system.sheet.spaceship div.parameters.container {
   text-align: center;
+  margin-right: 8px;
 }
 .age-system.sheet.spaceship div.parameters.container .parameter-label {
   flex: 0 0 50px;
 }
+.age-system.sheet.spaceship div.parameters.container .hull {
+  flex: 0 0 155px;
+}
 .age-system.sheet.spaceship div.parameters.container .hull-dice-qtd {
-  flex: 0 0 35px;
+  flex: 0 0 20px;
 }
 .age-system.sheet.spaceship div.parameters.container .hull-dice-type {
   flex: 0 0 40px;
@@ -1211,13 +1224,36 @@
   flex: 0 0 16px;
 }
 .age-system.sheet.spaceship div.parameters.container .hull-extra-damage {
-  flex: 0 0 35px;
+  flex: 0 0 20px;
 }
-.age-system.sheet.spaceship div.parameters.container .ship-size {
-  flex: 0 0 126px;
+.age-system.sheet.spaceship fieldset.crew {
+  border-radius: 5px;
 }
 .age-system.sheet.spaceship .crew-details {
   padding: 0;
+  text-align: center;
+}
+.age-system.sheet.spaceship .crew-details label.current-crew {
+  flex: 0 0 60px;
+}
+.age-system.sheet.spaceship .crew-details .current-crew {
+  flex: 0 0 40px;
+}
+.age-system.sheet.spaceship .crew-details input.min-typ-crew {
+  flex: 0 0 40px;
+}
+.age-system.sheet.spaceship .crew-details .min-typ-crew span {
+  padding-top: 4px;
+  background: rgba(0, 0, 0, 0.05);
+}
+.age-system.sheet.spaceship .crew-details .crew-competence {
+  margin-top: 4px;
+}
+.age-system.sheet.spaceship .crew-details .competence-label {
+  flex: 0 0 80px;
+}
+.age-system.sheet.spaceship .passenger.container {
+  flex: 0 0 45%;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;
@@ -1351,6 +1387,9 @@
 }
 .colorset-modern-blue .vehicle-stats .editor {
   background-color: #ffffff;
+}
+.colorset-modern-blue fieldset.crew {
+  border-color: #007DAD;
 }
 .colorset-modern-blue .dice-show.trait-test i:last-of-type {
   color: #007DAD;
@@ -1490,6 +1529,9 @@
 .colorset-fantasy-blue .vehicle-stats .editor {
   background-color: #ffffff;
 }
+.colorset-fantasy-blue fieldset.crew {
+  border-color: #0f4f5b;
+}
 .colorset-fantasy-blue .dice-show.trait-test i:last-of-type {
   color: #0f4f5b;
 }
@@ -1627,6 +1669,9 @@
 }
 .colorset-dragon-red .vehicle-stats .editor {
   background-color: #ffffff;
+}
+.colorset-dragon-red fieldset.crew {
+  border-color: #810207;
 }
 .colorset-dragon-red .dice-show.trait-test i:last-of-type {
   color: #810207;
@@ -1766,6 +1811,9 @@
 .colorset-folded-purple .vehicle-stats .editor {
   background-color: #ffffff;
 }
+.colorset-folded-purple fieldset.crew {
+  border-color: #565183;
+}
 .colorset-folded-purple .dice-show.trait-test i:last-of-type {
   color: #565183;
 }
@@ -1904,6 +1952,9 @@
 .colorset-ronin-green .vehicle-stats .editor {
   background-color: #ffffff;
 }
+.colorset-ronin-green fieldset.crew {
+  border-color: #155f0e;
+}
 .colorset-ronin-green .dice-show.trait-test i:last-of-type {
   color: #155f0e;
 }
@@ -2029,6 +2080,10 @@
 #context-menu li {
   white-space: nowrap;
   text-align: left;
+}
+.age-system input,
+.age-system select {
+  border: none;
 }
 /*---------Background---------------------*/
 .window-app.sheet.char .window-content,

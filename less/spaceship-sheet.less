@@ -4,10 +4,32 @@
 }
 
 .age-system.sheet.spaceship {
-    input,
-    select {
+    font-variant: small-caps;
+    // min-width: min-content;
+    // Reavaluate when picture is included
+
+    // .label-with-icon {
+    //     a {
+    //         max-width: fit-content;
+    //         margin-left: 4px;
+    //     }
+    //     label.handling-focus.handling-focus {
+    //         max-width: fit-content;
+    //     }
+    //     i {
+    //         margin-right: 4px;
+    //     }
+    // }
+
+    input[name="name"] {
+        padding-left: 10px;
+        min-width: 100%;
+        max-height: 30px;
+        border-radius: 10px 10px 0px 0px;
+        text-transform: uppercase;
         border: none;
-    }
+        padding: 4px;
+    };
 
     ul.systems-list {
         text-align: center;
@@ -33,36 +55,47 @@
         }
     }
 
-    .container {
-        width: fit-content;
-    }
+    // .container {
+    //     width: fit-content;
+    // }
     
     ul.passenger-list {
-        max-width: 300px;
+        // max-width: 300px;
+        padding: 0;
         li {
+            padding: 0;
+            margin-top: 2px;
+            .remove-passenger {
+                flex: 0 0 15px;
+            }
             .passenger-token {
                 flex: 0 0 25px;
+                height: 24px;
+                width: 24px;
+                border: none;
             }
+            // .passenger-name {
+            //     flex: 0 0 150px;
+            // }
             .passenger-damage-control {
                 flex: 0 0 25px;
-            }
-            .passenger-name {
-                flex: 0 0 150px;
-            }
-            .passenger-remove {
-                flex: 0 0 25 px;
             }
         }
     }
 
     div.parameters.container {
         text-align: center;
+        margin-right: 8px;
 
         .parameter-label{
             flex: 0 0 50px;
         }
+
+        .hull {
+            flex: 0 0 155px;
+        }
         .hull-dice-qtd {
-            flex: 0 0 35px;
+            flex: 0 0 20px;
         }
         .hull-dice-type {
             flex: 0 0 40px;
@@ -71,14 +104,43 @@
             flex: 0 0 16px;
         }
         .hull-extra-damage {
-            flex: 0 0 35px;
+            flex: 0 0 20px;
         }
-        .ship-size {
-            flex: 0 0 126px;
+        // .ship-size {
+        //     flex: 0 0 126px;
+        // }
+    }
+
+    fieldset.crew {
+        border-radius: 5px;
+    }
+    .crew-details {
+        padding: 0;
+        text-align: center;
+        label.current-crew {
+            flex: 0 0 60px;
+        }
+        .current-crew {
+            flex: 0 0 40px;
+        }
+        input.min-typ-crew {
+            flex: 0 0 40px;
+        }
+        .min-typ-crew {
+            span {
+                padding-top: 4px;
+                background: rgba(0, 0, 0, 0.05);
+            }
+        }
+        .crew-competence {
+            margin-top: 4px;
+        }
+        .competence-label {
+            flex: 0 0 80px;
         }
     }
 
-    .crew-details {
-        padding: 0;
+    .passenger.container {
+        flex: 0 0 45%;
     }
 }

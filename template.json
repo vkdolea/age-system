@@ -2,7 +2,8 @@
     "Actor": {
         "types": [
             "char",
-            "vehicle"
+            "vehicle",
+            "spaceship"
         ],
         "templates": {},
         "spaceship": {

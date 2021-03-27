@@ -1,7 +1,7 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 
-export default class ageSystemVehicleSheet extends ActorSheet {
+export default class ageSpaceshipSheet extends ActorSheet {
     
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -9,7 +9,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             width: 680,
             height: 646,
             resizable: false,
-            classes: ["age-system", "sheet", "vehicle", `colorset-${ageSystem.colorScheme}`]
+            classes: ["age-system", "sheet", "spaceship"]
         });
     }
     
@@ -53,7 +53,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         // Check Wealth Mode in use
         data.config.wealthMode = game.settings.get("age-system", "wealthType");
 
-        // Select colorset
+        // Sheet color
         data.colorScheme = game.settings.get("age-system", "colorScheme");
 
         return data;
@@ -74,13 +74,13 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             inputs.focus(ev => ev.currentTarget.select());
         };
 
-        html.on("dragenter", ".passenger-container", ev => {
+        html.on("dragenter", ".passenger.container", ev => {
             ev.target.classList.add("dragover")
         })
-        html.on("dragleave", ".passenger-container", ev => {
+        html.on("dragleave", ".passenger.container", ev => {
             ev.target.classList.remove("dragover")
         })
-        html.on("drop", ".passenger-container", ev => {
+        html.on("drop", ".passenger.container", ev => {
             ev.target.classList.remove("dragover")
             const dragData = JSON.parse(ev.originalEvent.dataTransfer.getData("text/plain"))
             const passenger = game.actors.get(dragData.id);
@@ -113,31 +113,71 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         
         // Actions by sheet owner only
         if (this.actor.owner) {
-            // new ContextMenu(html, ".focus-options", this.focusContextMenu);
-            // html.find(".item-show").click(this._onItemShow.bind(this));
-            // html.find(".roll-ability").click(this._onRollAbility.bind(this));
-            // html.find(".roll-item").click(this._onRollItem.bind(this));
-            // html.find(".roll-damage").click(this._onRollDamage.bind(this));
-            // html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
-            // html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
-            html.find(".roll-collision").click(this._onCollisionDamage.bind(this));
-            html.find(".roll-sideswipe").click(this._onSideswipeDamage.bind(this));
+
             html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
 
-            let handler = ev => this._onDragStart(ev);
-            // Find all rollable items on the character sheet.
-            let items = html.find(".item-box");
-            for (let i = 0; i < items.length; i++) {
-                const el = items[i];
-                if (el.draggable) {
-                    el.addEventListener("dragstart", handler, false);
-                }   
-            }
+            // let handler = ev => this._onDragStart(ev);
+            // // Find all rollable items on the character sheet.
+            // let items = html.find(".item-box");
+            // for (let i = 0; i < items.length; i++) {
+            //     const el = items[i];
+            //     if (el.draggable) {
+            //         el.addEventListener("dragstart", handler, false);
+            //     }   
+            // }
         };
 
         super.activateListeners(html);
     };
+
+    _onRollManeuver(event) {
+        const vehicleData = this.actor.data.data;
+        const datum = {}
+        const isSystemBox = event.currentTarget.dataset.sysBox;
+        if (isSystemBox) {
+            datum.sysName = event.currentTarget.closest(".feature-controls").dataset.sysName;
+            datum.passengerId = vehicleData.systems[datum.sysName].operator;
+            // datum.passengerName = event.currentTarget.dataset.passengerName;
+        } else {
+            datum.passengerId = event.currentTarget.closest(".feature-controls").dataset.passengerId;
+            datum.passengerName = event.currentTarget.closest(".feature-controls").dataset.passengerName;
+            datum.sysName = event.currentTarget.dataset.sysName;
+        }
+        const useFocus = vehicleData.systems[datum.sysName].useFocus;
+
+        if (datum.passengerId === "crew") {
+            const crewAction = [{
+                value: vehicleData.crew.competence,
+                description: game.i18n.localize("age-system.spaceship.crew")
+            }];
+            const rollData = {
+                moreParts: crewAction,
+                event,
+                flavor: game.i18n.format("age-system.chatCard.rollGeneral", {actor: crewAction[0].description, item: useFocus})
+            }
+            return Dice.ageRollCheck(rollData);
+        }
+
+        let passenger;
+        passenger = game.actors.tokens[datum.passengerId];
+        if (!passenger) passenger = game.actors.get(datum.passengerId);
+        if (!passenger) {
+            const parts = {name: datum.passengerName, id: datum.passengerId};
+            let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
+            return ui.notifications.warn(warning);
+        };
+        const pFocusCheck = passenger.checkFocus(useFocus);
+
+        const rollData = {
+            event: event,
+            actor: passenger,
+            abl: vehicleData.systems[datum.sysName].useAbl,
+            flavor: game.i18n.format("age-system.chatCard.maneuversVehicle", {name: passenger.name, vehicle: this.actor.name}),
+            itemRolled: pFocusCheck.focusItem ? pFocusCheck.focusItem : pFocusCheck.focusName
+        }
+        Dice.ageRollCheck(rollData)
+    }
 
     _onRemovePassenger(event) {
         let update = {};
@@ -148,117 +188,4 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         crew.splice(passengerKey, 1);
         this.actor.update({...update, "data.passengers": crew});
     };
-
-    _onRollManeuver(event) {
-        const vehicleData = this.actor.data.data;
-        const conductorId = vehicleData.conductor;
-        if (conductorId === "") return false
-        const conductorData = vehicleData.passengers.filter(p => p.isConductor === true)[0];
-
-        let user;
-        if (conductorData.isToken) user = game.actors.tokens[conductorData.id];
-        if (!conductorData.isToken) user = game.actors.get(conductorData.id);
-        if (!conductorData) {
-            const parts = {name: conductorData.name, id: conductorData.id};
-            let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
-            return ui.notifications.warn(warning);
-        };
-        
-        const handlingUseFocus = vehicleData.handling.useFocus;
-        const handlingUseAbl = vehicleData.handling.useAbl;
-        const rollData = {
-            event: event,
-            actor: user,
-            abl: handlingUseAbl,
-            flavor: game.i18n.format("age-system.chatCard.maneuversVehicle", {name: user.name, vehicle: this.actor.name}),
-            vehicleHandling: this.actor.data.data.handling.mod,
-            itemRolled: this.actor._userFocusEntity(handlingUseFocus, conductorData)
-        }
-        Dice.ageRollCheck(rollData);
-    };
-
-    _onCollisionDamage(event) {
-        event.preventDefault();
-        const e = event.currentTarget;
-        const addRam = e.classList.contains('add-ram') ? true : false;
-        const qtdDice = Number(e.closest(".feature-controls").dataset.qtdDice);
-        const dieSize = e.closest(".feature-controls").dataset.dieSize ? Number(e.closest(".feature-controls").dataset.dieSize) : 6;
-        const operatorId = this.actor.data.data.conductor;
-        const operatorData = operatorId ? this.actor.data.data.passengers.filter(p => p.id === operatorId)[0] : null;
-        const damageData = {event: event, qtdDice, dieSize, addRam, operatorData, damageSource: "collision"};
-
-        return this.actor.rollVehicleDamage(damageData);
-    };
-
-    _onSideswipeDamage(event) {
-        event.preventDefault();
-        const e = event.currentTarget;
-        const addRam = e.classList.contains('add-ram') ? true : false;
-        const qtdDice = Number(e.closest(".feature-controls").dataset.qtdDice);
-        const dieSize = e.closest(".feature-controls").dataset.dieSize ? Number(e.closest(".feature-controls").dataset.dieSize) : 6;
-        const operatorId = this.actor.data.data.conductor;
-        const operatorData = operatorId ? this.actor.data.data.passengers.filter(p => p.id === operatorId)[0] : null;
-        const damageData = {event: event, qtdDice, dieSize, addRam, operatorData, damageSource: "sideswipe"};
-
-        return this.actor.rollVehicleDamage(damageData);
-    };
-
-    
-
-    // TODO - Method to check if passenger has Actor Data 
-    // _checkPassenger() {
-
-    // }
-
-    // _onItemActivate(event) {
-    //     const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-    //     const itemToToggle = this.actor.getOwnedItem(itemId);
-    //     const itemType = itemToToggle.type;
-    //     if (itemType === "power" || itemType === "talent") {
-    //         const toggleAct = !itemToToggle.data.data.activate;
-    //         itemToToggle.update({"data.activate": toggleAct});
-    //     } else {
-    //         const toggleEqp = !itemToToggle.data.data.equiped;
-    //         itemToToggle.update({"data.equiped": toggleEqp});
-    //     };
-    // };
-
-    // _onRollResources(event) {
-    //     const rollData = {
-    //         event: event,
-    //         actor: Dice.getActor() || this.actor,
-    //         resourceRoll: true
-    //     };
-    //     Dice.ageRollCheck(rollData);
-    // };
-
-    // _onRollItem(event) {
-    //     const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-    //     const itemRolled = this.actor.getOwnedItem(itemId);
-    //     itemRolled.roll(event);
-    // };
-
-    // _onItemShow(event) {
-    //     event.preventDefault();
-    //     const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-    //     const item = this.actor.getOwnedItem(itemId);
-    //     item.showItem();
-    // };
-
-    // _onItemEdit(event) {
-    //     event.preventDefault();
-    //     let e = event.currentTarget;
-    //     let itemId = e.closest(".feature-controls").dataset.itemId;
-    //     let item = this.actor.getOwnedItem(itemId);
-
-    //     item.sheet.render(true);
-    // };
-
-    // _onItemDelete(event) {
-    //     event.preventDefault();
-    //     let e = event.currentTarget;
-    //     let itemId = e.closest(".feature-controls").dataset.itemId;
-    //     const actor = this.actor;
-    //     return actor.deleteOwnedItem(itemId);
-    // };
 };

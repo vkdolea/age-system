@@ -228,7 +228,11 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareBaseDataSpaceship() {
+        const actorData = this.data;
+        const data = actorData.data;
+        this.sortPassengers();
 
+        return data
     }
 
     prepareDerivedData() {
@@ -274,7 +278,8 @@ export class ageSystemActor extends Actor {
 
     // TODO - testar essa função, que ainda está em desuso
     sortPassengers() {
-        const passengers = this.data.data.passengers;
+        const data = this.data.data;
+        const passengers = data.passengers;
         let invalidPassengers = [];
         for (let pi = 0; pi < passengers.length; pi++) {
             const p = passengers[pi];
@@ -419,4 +424,20 @@ export class ageSystemActor extends Actor {
 
         Dice.vehicleDamage(damageData);
     };
+
+    checkFocus(namedFocus) {
+
+        if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null}
+
+        const ownedFoci = this.data.items.filter(a => a.type === "focus");
+        const expectedFocus = namedFocus.toLowerCase();
+        const validFocus = ownedFoci.filter(c => c.name.toLowerCase() === expectedFocus);
+
+        if (validFocus.length < 1) {
+            return {focusName: namedFocus, focusItem: false}
+        } else {
+            const id = validFocus[0]._id;
+            return {focusName: namedFocus, focusItem: this.getOwnedItem(id)}
+        };
+    }
 };

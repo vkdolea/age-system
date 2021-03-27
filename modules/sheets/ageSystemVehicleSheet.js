@@ -113,13 +113,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         
         // Actions by sheet owner only
         if (this.actor.owner) {
-            // new ContextMenu(html, ".focus-options", this.focusContextMenu);
-            // html.find(".item-show").click(this._onItemShow.bind(this));
-            // html.find(".roll-ability").click(this._onRollAbility.bind(this));
-            // html.find(".roll-item").click(this._onRollItem.bind(this));
-            // html.find(".roll-damage").click(this._onRollDamage.bind(this));
-            // html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
-            // html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
+
             html.find(".roll-collision").click(this._onCollisionDamage.bind(this));
             html.find(".roll-sideswipe").click(this._onSideswipeDamage.bind(this));
             html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));

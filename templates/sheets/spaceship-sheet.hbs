@@ -1,6 +1,6 @@
 <form class="{{cssClass}} age-system sheet colorset-{{colorScheme}} spaceship" autocomplete="off">
 
-    <input name="name" class="vehicle-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
+    <input name="name" class="spaceship-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
     <div class="sheet-body colorset-second-tier">
         <div class="stats-block systems">
             <h3>{{localize "age-system.spaceship.systems"}}</h3>
@@ -19,8 +19,8 @@
                     <p class="system-focus">{{localize "age-system.focus"}}</p>
                 </li>
                 {{#each data.systems as |system sysName|}}
-                <li class="feature-controls {{sysName}} flexrow">
-                    <a class="system-roll"><i class="fas fa-dice"></i></a>
+                <li class="feature-controls {{sysName}} flexrow" data-sys-name={{sysName}}>
+                    <a class="system-roll roll-maneuver" data-sys-name="{{sysName}}" data-sys-box="1"><i class="fas fa-dice"></i></a>
                     <p class="system-role">{{localize (concat "age-system.spaceship.operator." sysName)}}</p>
                     <select name="data.systems.{{sysName}}.operator" class="system-operator">
                         {{#select system.operator}}
@@ -32,8 +32,8 @@
                     </select>
                     <select name="data.systems.{{sysName}}.useAbl" class="system-abl">
                         {{#select system.useAbl}}
-                        {{#each config.abilities as |name type|}}
-                        <option value="{{type}}">{{localize name}}</option>
+                        {{#each ../config.abilities as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
                         {{/each}}
                         {{/select}}
                     </select>
@@ -47,67 +47,76 @@
             
             <div class="parameters container">
                 {{!-- TODO - TRANSFORMAR EM HULL --}}
-                <div class="flexrow flex-align-center hull">
-                    <label class="parameter-label">{{localize "age-system.spaceship.hull"}}</label>
-                    <input class="hull-dice-qtd" type="number" name="data.hull.nrDice" value="{{data.hull.nrDice}}" data-dtype="Number" />
-                    <select class="hull-dice-type" name="data.hull.diceType" class="dice-size">
-                        {{#select data.hull.diceType}}
-                        <option value="6">{{localize "age-system.settings.d6"}}</option>
-                        <option value="3">{{localize "age-system.settings.d3"}}</option>
-                        {{/select}}
-                    </select>
-                    <span class="hull-plus-sign">{{localize "age-system.settings.plusSign"}}</span>
-                    <input class="hull-extra-damage" type="number" name="data.hull.extraValue" value="{{data.hull.extraValue}}" data-dtype="Number" />
+                <div class="flexrow">
+                    <div class="flexrow flex-align-center hull">
+                        <label class="parameter-label">{{localize "age-system.spaceship.hull"}}</label>
+                        <input class="hull-dice-qtd" type="number" name="data.hull.nrDice" value="{{data.hull.nrDice}}" data-dtype="Number" />
+                        <select class="hull-dice-type" name="data.hull.diceType" class="dice-size">
+                            {{#select data.hull.diceType}}
+                            <option value="6">{{localize "age-system.settings.d6"}}</option>
+                            <option value="3">{{localize "age-system.settings.d3"}}</option>
+                            {{/select}}
+                        </select>
+                        <span class="hull-plus-sign">{{localize "age-system.settings.plusSign"}}</span>
+                        <input class="hull-extra-damage" type="number" name="data.hull.extraValue" value="{{data.hull.extraValue}}" data-dtype="Number" />
+                    </div>
+                    <div class="flexrow flex-align-center size">
+                        <label class="parameter-label">{{localize "age-system.spaceship.size"}}</label>
+                        <select class="ship-size" name="data.size" class="dice-size">
+                            {{#select data.size}}
+                            {{#each config.spaceshipSize as |size sizeKey|}}
+                            <option value="{{size}}">{{localize (concat "age-system.spaceship.sizeType." sizeKey)}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
                 </div>
-                <div class="flexrow flex-align-center size">
-                    <label class="parameter-label">{{localize "age-system.spaceship.size"}}</label>
-                    <select class="ship-size" name="data.size" class="dice-size">
-                        {{#select data.size}}
-                        {{#each config.shipSize as |size sizeKey|}}
-                        <option value="{{size}}">{{localize (concat "age-system.spaceship.sizeType." sizeKey)}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-                <div class="flexrow flex-align-center crew">
-                    <label class="parameter-label">{{localize "age-system.spaceship.crew"}}</label>
-                    <div class="flexcol">
-                        <div class="flexcol crew-competece">
+                <fieldset class="crew">
+                    <legend>{{localize "age-system.spaceship.crew"}}</legend>
+                    {{!-- <label class="parameter-label">{{localize "age-system.spaceship.crew"}}</label> --}}
+                    
+                    <div class="crew-details flexcol">
+                        <div class="flex-align-center flexrow">
+                            <label class="current-crew">{{localize "age-system.spaceship.crewCur"}}</label>
+                            <input class="current-crew" type="number" name="data.crew.current" value="{{data.crew.current}}" data-dtype="Number" />
+                            <label class="min-typ-crew">{{localize "age-system.spaceship.crewMin"}}/{{localize "age-system.spaceship.crewTyp"}}</label>
+                            <div class="min-typ-crew flexrow">
+                                <input class="min-typ-crew" type="number" name="data.crew.min" value="{{data.crew.min}}" data-dtype="Number" />
+                                <span>(</span>
+                                <input class="min-typ-crew" type="number" name="data.crew.typical" value="{{data.crew.typical}}" data-dtype="Number" />
+                                <span>)</span>
+                            </div>
+                        </div>
+
+                        <div class="flexrow flex-align-center flex-justify-center crew-competence">
                             <label class="competence-label">{{localize "age-system.spaceship.competence"}}</label>
-                            <select class="competence-lsit" name="data.crew.competence">
+                            <select class="competence-list" name="data.crew.competence">
                                 {{#select data.crew.competence}}
-                                {{#each config.crewCompetence as |compet competKey|}}
-                                <option value="{{compet}}">{{localize (concat "age-system.spaceship.competenceLevel." compttKey)}} (+{{compet}})</option>
+                                {{#each config.spaceshipCrewCompetence as |compet competKey|}}
+                                <option value="{{compet}}">{{localize (concat "age-system.spaceship.competenceLevel." competKey)}} (+{{compet}})</option>
                                 {{/each}}
                                 {{/select}}
                             </select>
                         </div>
-                        <div class="crew-details flexrow">
-                            <label>{{localize "age-system.spaceship.crewCur"}}</label>
-                            <input class="" type="number" name="data.crew.current" value="{{data.crew.current}}" data-dtype="Number" />
-                            <label>{{localize "age-system.spaceship.crewMin"}}</label>
-                            <input class="" type="number" name="data.crew.min" value="{{data.crew.min}}" data-dtype="Number" />
-                            <label>{{localize "age-system.spaceship.crewTyp"}}</label>
-                            <span style="background: rgba(0, 0, 0, 0.05);">(</span><span style="background: rgba(0, 0, 0, 0.05);" role="textbox" contenteditable name="data.crew.typical" value="{{data.crew.typical}}" data-dtype="Number">{{data.crew.typical}}</span><span style="background: rgba(0, 0, 0, 0.05);">)</span>
-                        </div>
                     </div>
-                </div>
+                    
+                </fieldset>
             </div>
 
             <div class="passenger container">
                 <label class="flexrow flex-align-center">{{localize "age-system.passengers"}} [{{data.pob}}]</label>
                 <ul class="passenger-list">
                     {{#each passengers as |passenger|}}
-                    <li class="flexrow feature-controls" data-passenger-key="{{@key}}">
-                        <a class="flex-align-end passenger-remove"><i class="fa fa-times"></i></a>
+                    <li class="flexrow feature-controls flex-align-center" data-passenger-key="{{@key}}" data-passenger-id="{{passenger.id}}"  data-passenger-name="{{passenger.name}}">
+                        <a class="remove-passenger"><i class="fa fa-times"></i></a>
                         <img src="{{passenger.picture}}" class="passenger-token">
-                        <a class="passenger-damage-control" title="{{localize "age-system.damageControl"}}"><i class="fas fa-cogs"></i></a>
                         <div class="flexrow flex-justify-start flex-align-center passenger-name">
                             <span>{{passenger.name}}</span>
                             {{#if passenger.isCaptain}}<span>({{localize "age-system.spaceship.operator.command"}})</span>{{/if}}
                             {{#if passenger.isPilot}}<span>({{localize "age-system.spaceship.operator.maneuver"}})</span>{{/if}}
                             {{#if passenger.isSensorOp}}<span>({{localize "age-system.spacehsip.operator.sensors"}})</span>{{/if}}
                         </div>
+                        <a class="passenger-damage-control roll-maneuver" data-sys-name="damageControl" title="{{localize "age-system.damageControl"}}"><i class="fas fa-cogs"></i></a>
                     </li>
                     {{/each}}
                 </ul>

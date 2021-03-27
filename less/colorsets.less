@@ -98,6 +98,10 @@ each(@colorsets, {
                 background-color: #ffffff;
             }
         }
+
+        fieldset.crew {
+            border-color: extract(extract(@color-list, @index), 1);
+        }
     
         //Base Age Roll
         .dice-show.trait-test {
