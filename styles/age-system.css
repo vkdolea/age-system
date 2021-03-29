@@ -1255,6 +1255,12 @@
 .age-system.sheet.spaceship .passenger.container {
   flex: 0 0 45%;
 }
+.age-system.sheet.spaceship .loss-name {
+  flex: 0 0 100px;
+}
+.age-system.sheet.spaceship .checkbox {
+  flex: 0 0 20px;
+}
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;
 }

@@ -116,6 +116,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
             html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
+            html.find(".change-loss").click(this._onChangeLoss.bind(this));
 
             // let handler = ev => this._onDragStart(ev);
             // // Find all rollable items on the character sheet.
@@ -131,6 +132,27 @@ export default class ageSpaceshipSheet extends ActorSheet {
         super.activateListeners(html);
     };
 
+    _onChangeLoss(event) {
+        const lossSev = event.currentTarget.closest(".feature-controls").dataset.lossSev;
+        const lossType = event.currentTarget.closest(".feature-controls").dataset.lossType;
+        let lossValue = event.currentTarget.dataset.boxNumber;
+        lossValue = Number(lossValue) + 1;
+        const currentLoss = this.actor.data.data.losses[lossSev][lossType].actual;
+        let newLoss
+        if (lossValue > currentLoss) {
+            newLoss = lossValue;
+        } else {
+            if (lossValue < currentLoss) {
+                newLoss = lossValue;
+            } else {
+                newLoss = lossValue -1;
+            }
+        }
+
+        const updatePath = `data.losses.${lossSev}.${lossType}.actual`; 
+        this.actor.update({[updatePath]: newLoss});
+    }
+
     _onRollManeuver(event) {
         const vehicleData = this.actor.data.data;
         const datum = {}
@@ -138,44 +160,60 @@ export default class ageSpaceshipSheet extends ActorSheet {
         if (isSystemBox) {
             datum.sysName = event.currentTarget.closest(".feature-controls").dataset.sysName;
             datum.passengerId = vehicleData.systems[datum.sysName].operator;
-            // datum.passengerName = event.currentTarget.dataset.passengerName;
         } else {
             datum.passengerId = event.currentTarget.closest(".feature-controls").dataset.passengerId;
             datum.passengerName = event.currentTarget.closest(".feature-controls").dataset.passengerName;
             datum.sysName = event.currentTarget.dataset.sysName;
         }
         const useFocus = vehicleData.systems[datum.sysName].useFocus;
+        let rollData = {};
+        let passenger = {};
 
         if (datum.passengerId === "crew") {
+            passenger.name = game.i18n.localize("age-system.spaceship.crew");
             const crewAction = [{
                 value: vehicleData.crew.competence,
-                description: game.i18n.localize("age-system.spaceship.crew")
+                description: passenger.name
             }];
-            const rollData = {
+            rollData = {
                 moreParts: crewAction,
-                event,
-                flavor: game.i18n.format("age-system.chatCard.rollGeneral", {actor: crewAction[0].description, item: useFocus})
+                event
             }
-            return Dice.ageRollCheck(rollData);
+        } else {
+            passenger = game.actors.tokens[datum.passengerId];
+            if (!passenger) passenger = game.actors.get(datum.passengerId);
+            if (!passenger) {
+                const parts = {name: datum.passengerName ? datum.passengerName : "", id: datum.passengerId};
+                let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
+                return ui.notifications.warn(warning);
+            };
+            const pFocusCheck = passenger.checkFocus(useFocus);
+    
+            rollData = {
+                event: event,
+                actor: passenger,
+                abl: vehicleData.systems[datum.sysName].useAbl,
+                itemRolled: pFocusCheck.focusItem ? pFocusCheck.focusItem : pFocusCheck.focusName
+            };
         }
 
-        let passenger;
-        passenger = game.actors.tokens[datum.passengerId];
-        if (!passenger) passenger = game.actors.get(datum.passengerId);
-        if (!passenger) {
-            const parts = {name: datum.passengerName, id: datum.passengerId};
-            let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
-            return ui.notifications.warn(warning);
-        };
-        const pFocusCheck = passenger.checkFocus(useFocus);
-
-        const rollData = {
-            event: event,
-            actor: passenger,
-            abl: vehicleData.systems[datum.sysName].useAbl,
-            flavor: game.i18n.format("age-system.chatCard.maneuversVehicle", {name: passenger.name, vehicle: this.actor.name}),
-            itemRolled: pFocusCheck.focusItem ? pFocusCheck.focusItem : pFocusCheck.focusName
+        const parts = {name: passenger.name, vehicle: this.actor.name};
+        let flavorText = "age-system.chatCard.maneuversVehicle";
+        switch (datum.sysName) {
+            case "command":
+                flavorText = "age-system.chatCard.commandsVehicle";
+                break;
+            case "sensors":
+                flavorText = "age-system.chatCard.operatesVehicle";
+                break;
+            case "damageControl":
+                flavorText = "age-system.chatCard.backupVehicle";
+                break;
+            default:
+                break;
         }
+        rollData.flavor = game.i18n.format(flavorText, parts);
+
         Dice.ageRollCheck(rollData)
     }
 

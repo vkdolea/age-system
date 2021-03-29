@@ -139,7 +139,17 @@
                 "gigantic": "Gigantic",
                 "colossal": "Colossal",
                 "titanic": "Titanic"
-            }
+            },
+            "lossesCond": "Loss Condition",
+            "normalLoss": "Normal",
+            "seriousLoss": "Serious",
+            "collateralLoss": "Collateral",
+            "hullLoss": "Hull",
+            "maneuverabilityLoss": "Maneuverability",
+            "sensorsLoss": "Sensors",
+            "weaponsLoss": "Weapons",
+            "reactorOfflineLoss": "Reactor Offline",
+            "weaponOfflineLoss": "Weapon Offline"
         },
         "damageControl": "Damage Control",
         "parameters": "Parameters",
@@ -177,7 +187,10 @@
             "addFocus": "Add Focus",
             "addStuntDie": "Add SD",
 
-            "maneuversVehicle": "{name} maneuvers {vehicle}"
+            "maneuversVehicle": "{name} maneuvers {vehicle}",
+            "commandsVehicle": "{name} commands {vehicle}",
+            "operatesVehicle": "{name} operates {vehicle}",
+            "backupVehicle": "{name} backs up {vehicle}"
         },
 
         "testThreshold": "Threshold",

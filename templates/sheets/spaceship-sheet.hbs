@@ -108,7 +108,7 @@
                 <ul class="passenger-list">
                     {{#each passengers as |passenger|}}
                     <li class="flexrow feature-controls flex-align-center" data-passenger-key="{{@key}}" data-passenger-id="{{passenger.id}}"  data-passenger-name="{{passenger.name}}">
-                        <a class="remove-passenger"><i class="fa fa-times"></i></a>
+                        <a class="remove-passenger"><i class="fa fa-minus"></i></a>
                         <img src="{{passenger.picture}}" class="passenger-token">
                         <div class="flexrow flex-justify-start flex-align-center passenger-name">
                             <span>{{passenger.name}}</span>
@@ -124,7 +124,24 @@
         </div>
         <hr>
         <div class="stats-block losses">
-
+            <h3>{{localize "age-system.spaceship.lossesCond"}}</h3>
+            <ul>
+                {{#each data.losses as |v k|}}
+                <li>
+                    <label>{{localize (concat "age-system.spaceship." k "Loss")}}</label>
+                    <ul>
+                        {{#each v as |v2 k2|}}  
+                        <li class="flexrow feature-controls" data-loss-sev="{{k}}" data-loss-type="{{k2}}">
+                            <label class="loss-name">{{localize (concat "age-system.spaceship." k2 "Loss")}}</label>
+                            {{#each v2.maxArray as |v3 k3|}}
+                            <a class="checkbox change-loss" data-box-number="{{k3}}">{{#if v3}}<i class="fa fa-times"></i>{{else}}<i class="fa fa-genderless"></i>{{/if}}</a>
+                            {{/each}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                </li>
+                {{/each}}
+            </ul>
         </div>    
     </div>
 </form>

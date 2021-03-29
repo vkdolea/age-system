@@ -232,6 +232,24 @@ export class ageSystemActor extends Actor {
         const data = actorData.data;
         this.sortPassengers();
 
+        data.pob = data.passengers.length;
+        
+        for (const loss in data.losses) {
+            if (Object.hasOwnProperty.call(data.losses, loss)) {
+                const severity = data.losses[loss];
+                for (const type in severity) {
+                    if (Object.hasOwnProperty.call(severity, type)) {
+                        severity[type].maxArray = new Array(severity[type].max);
+                        for (let b = 0; b < severity[type].maxArray.length; b++) {
+                            severity[type].maxArray[b] = ((severity[type].actual-1) >= b) ? true : false;                    
+                        }
+                        
+                    }
+                }
+                
+            }
+        }
+
         return data
     }
 
