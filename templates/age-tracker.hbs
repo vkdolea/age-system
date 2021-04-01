@@ -1,0 +1,37 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div class="" id="age-tracker">
+        {{!-- Serendipity Tracker --}}
+        {{#if hasSerendipity}}
+        <div class="age-serendipity flexrow">
+            <a><span data-chg-qtd="6" data-op="minus">-6</span></a>
+            <a><span data-chg-qtd="3" data-op="minus">-3</span></a>
+            <a><span data-chg-qtd="1" data-op="minus">-1</span></a>
+            {{#each serDie as |die|}} {{log this}}
+            <div class="die {{#if (lt ../curSer die.min)}}transparent{{/if}}">
+                {{#if (lte die.value 1)}}
+                <i class="fas fa-dice-one fa-2x"></i>
+                {{/if}} {{#if (eq die.value 2)}}
+                <i class="fas fa-dice-two fa-2x"></i>
+                {{/if}} {{#if (eq die.value 3)}}
+                <i class="fas fa-dice-three fa-2x"></i>
+                {{/if}} {{#if (eq die.value 4)}}
+                <i class="fas fa-dice-four fa-2x"></i>
+                {{/if}} {{#if (eq die.value 5)}}
+                <i class="fas fa-dice-five fa-2x"></i>
+                {{/if}} {{#if (eq die.value 6)}}
+                <i class="fas fa-dice-six fa-2x"></i>
+                {{/if}}
+            </div>
+            {{/each}}
+            <a><span data-chg-qtd="1" data-op="plus">+1</span></a>
+            <a><span data-chg-qtd="3" data-op="plus">+3</span></a>
+            <a><span data-chg-qtd="6" data-op="plus">+6</span></a>
+        </div>
+        {{/if}}
+
+        {{!-- Complication/Churn Tracker --}}
+        {{#if hasComplication}}
+        
+        {{/if}}
+    </div>
+</form>

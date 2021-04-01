@@ -85,6 +85,15 @@
     "SETTINGS.healthModehealth": "Health",
     "SETTINGS.healthModefortune": "Fortune",
 
+    "SETTINGS.complication": "Use Complication or Churn",
+    "SETTINGS.complicationHint": "Use Complication (Modern AGE), Churn (The Expanse) or none",
+    "SETTINGS.complicationNone": "None",
+    "SETTINGS.complicationComp": "Complication",
+    "SETTINGS.complicationChurn": "Churn",
+
+    "SETTINGS.serendipity": "Use Serendipity",
+    "SETTINGS.serendipityHint": "Use Modern AGE option rule for Serendipity",
+
     "age-system": {
 
         "SHEETS": {

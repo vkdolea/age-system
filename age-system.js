@@ -9,6 +9,7 @@ import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
 import { rollOwnedItem } from "./modules/macros.js";
 import { AgeRoller } from "./modules/age-roller.js";
+import { AgeTracker } from "./modules/age-tracker.js";
 
 import * as Settings from "./modules/settings.js";
 import * as AgeChat from "./modules/age-chat.js";
@@ -53,7 +54,7 @@ Hooks.once("init", async function() {
     };
 
     CONFIG.ageSystem = ageSystem;
-    // window.ageSystem = ageSystem;
+    window.ageSystem = ageSystem;
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("age-system", ageSystemItemSheet, {
@@ -83,9 +84,15 @@ Hooks.once("init", async function() {
         popOut: false,
         minimizable: false,
         resizable: false,
-        // id: 'age-roller',
-        // classes: []
-    })
+    });
+
+    ageSystem.ageTracker = new AgeTracker({
+        popOut: false,
+        minimizable: false,
+        resizable: false
+    });
+
+
 
     // Define extra data for Age System Actors
     CONFIG.Actor.entityClass = ageSystemActor;
@@ -149,6 +156,9 @@ Hooks.once("ready", async function() {
     // Loads Age Roller
     ageSystem.ageRoller.refresh()
 
+    // Loads Tracker
+    ageSystem.ageTracker.refresh()
+
     // Check if Dice so Nice is active to register Stunt Die option
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {
         import("/modules/dice-so-nice/DiceColors.js").then((diceColors) => {
@@ -159,32 +169,16 @@ Hooks.once("ready", async function() {
                 if (colorset.hasOwnProperty(type)) {
                     const colorCode = colorset[type].name;
                     const colorName = colorset[type].description;
-                    let newChoice = new Object();
-                    newChoice[colorCode] = colorName;
+                    const newChoice = {[colorCode]: colorName}
                     colorChoices = {
                     ...colorChoices,
                     ...newChoice
                     };
                 };
             };
-            if (colorChoices !== {}) {
-                // After loading all modules, check if Dice so Nice is installed and add option to select Stunt Die colorset
-                const stuntSoNice = function() {
-                    /**
-                     * Select Dice so Nice effect for Stunt Die
-                     */
-                    game.settings.register("age-system", "stuntSoNice", {
-                    name: "SETTINGS.stuntSoNice",
-                    hint: "SETTINGS.stuntSoNiceHint",
-                    scope: "client",
-                    config: true,
-                    default: "bronze",
-                    type: String,
-                    choices: colorChoices,
-                    onChange:()=>{game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"))}
-                    });
-                };
-                stuntSoNice();
+            if (colorChoices !== {} && colorChoices) {
+                // After loading all modules, check if Dice so Nice is installed and add option to select Stunt Die colorset                
+                Settings.stuntSoNice(colorChoices);
                 // Identify if user has registered Dice so Nice Stunt Die option
                 const stuntSoNiceFlag = game.user.getFlag("age-system", "stuntSoNice");
                 if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);

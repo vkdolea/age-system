@@ -229,41 +229,95 @@ export const registerSystemSettings = function() {
     }
   });
 
-/**
- * Select occupation label to best fit world's setting
- */
-game.settings.register("age-system", "occupation", {
-  name: "SETTINGS.occupation",
-  hint: "SETTINGS.occupationHint",
-  scope: "world",
-  config: true,
-  default: "profession",
-  type: String,
-  choices: {
-    "profession": "SETTINGS.occprofession",
-    "class": "SETTINGS.occclass",
-  },
-  onChange:()=>{window.location.reload(!1)}
-});
+  /**
+   * Select occupation label to best fit world's setting
+   */
+  game.settings.register("age-system", "occupation", {
+    name: "SETTINGS.occupation",
+    hint: "SETTINGS.occupationHint",
+    scope: "world",
+    config: true,
+    default: "profession",
+    type: String,
+    choices: {
+      "profession": "SETTINGS.occprofession",
+      "class": "SETTINGS.occclass",
+    },
+    onChange:()=>{window.location.reload(!1)}
+  });
 
-/**
- * Select ancestry flavor
- */
-game.settings.register("age-system", "ancestryOpt", {
-  name: "SETTINGS.ancestryOpt",
-  hint: "SETTINGS.ancestryOptHint",
-  scope: "world",
-  config: true,
-  default: "ancestry",
-  type: String,
-  choices: {
-    "ancestry": "SETTINGS.ancestryOptancestry",
-    "origin": "SETTINGS.ancestryOptorigin",
-    "species": "SETTINGS.ancestryOptspecies",
-    "race": "SETTINGS.ancestryOptrace",
-  },
-  onChange:()=>{window.location.reload(!1)}
-});
+  /**
+   * Select ancestry flavor
+   */
+  game.settings.register("age-system", "ancestryOpt", {
+    name: "SETTINGS.ancestryOpt",
+    hint: "SETTINGS.ancestryOptHint",
+    scope: "world",
+    config: true,
+    default: "ancestry",
+    type: String,
+    choices: {
+      "ancestry": "SETTINGS.ancestryOptancestry",
+      "origin": "SETTINGS.ancestryOptorigin",
+      "species": "SETTINGS.ancestryOptspecies",
+      "race": "SETTINGS.ancestryOptrace",
+    },
+    onChange:()=>{window.location.reload(!1)}
+  });
+
+  /**
+   * Register if world will use Complication/Chrun
+   */
+  game.settings.register("age-system", "complication", {
+    name: "SETTINGS.complication",
+    hint: "SETTINGS.complicationHint",
+    scope: "world",
+    config: true,
+    default: "none",
+    type: String,
+    choices: {
+      "none": "SETTINGS.complicationNone",
+      "complication": "SETTINGS.complicationComp",
+      "churn": "SETTINGS.complicationChurn"
+    },  
+  });
+
+  /**
+   * World's Complication/Chrun value
+   */
+   game.settings.register("age-system", "complicationValue", {
+    name: "SETTINGS.complicationValue",
+    // hint: "SETTINGS.complicationValueHint",
+    scope: "world",
+    config: false,
+    default: 0,
+    type: Number, 
+  });  
+
+  /**
+   * Register if world will use Serendipity
+   */
+   game.settings.register("age-system", "serendipity", {
+    name: "SETTINGS.serendipity",
+    hint: "SETTINGS.serendipityHint",
+    scope: "world",
+    config: true,
+    default: "none",
+    type: Boolean,
+  });
+
+  /**
+   * World's Serendipity value
+   */
+   game.settings.register("age-system", "serendipityValue", {
+    name: "SETTINGS.serendipityValue",
+    // hint: "SETTINGS.serendipityValueHint",
+    scope: "world",
+    config: false,
+    default: 0,
+    type: Number, 
+  }); 
+
 };
 
 // Adds game setting to select focus compendium after loading world's compendia!
@@ -281,6 +335,22 @@ export const loadCompendiaSettings = function() {
     choices: allCompendia(),
     onChange:()=>{
       window.location.reload(!1)}
+  });
+};
+
+export function stuntSoNice(colorChoices) {
+  /**
+   * Select Dice so Nice effect for Stunt Die
+   */
+  game.settings.register("age-system", "stuntSoNice", {
+    name: "SETTINGS.stuntSoNice",
+    hint: "SETTINGS.stuntSoNiceHint",
+    scope: "client",
+    config: true,
+    default: "bronze",
+    type: String,
+    choices: colorChoices,
+    onChange:()=>{game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"))}
   });
 };
 
