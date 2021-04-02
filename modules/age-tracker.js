@@ -14,13 +14,8 @@ export class AgeTracker extends Application {
 		if (game.settings.get("age-system", "serendipityValue") > maxSer) game.settings.set("age-system", "serendipityValue", maxSer);
 		const serend = game.settings.get("age-system", "serendipityValue");
 		data.curSer = serend > 18 ? 18 : serend;
-		// data.serDie = [
-		// 	{min: 1, value: 0},
-		// 	{min: 7, value: 0},
-		// 	{min: 13, value: 0}
-		// ];
 		const serDice = Math.floor(serend/6);
-		const serReminder = serend%6;
+		const serReminder = serend % 6;
 
 		data.serDie = new Array(Math.ceil(maxSer/6));
 		for (let d = 0; d < data.serDie.length; d++) {

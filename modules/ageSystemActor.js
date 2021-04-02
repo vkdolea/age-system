@@ -253,8 +253,15 @@ export class ageSystemActor extends Actor {
         const systems = data.systems;
         const nloss = data.losses.normal;
         // const sloss = data.losses.serious;
-        systems.sensors.total = Number(systems.sensors.base) + Number(systems.sensors.mod) - Number(nloss.sensors.actual);
-        systems.maneuver.total = Number(systems.maneuver.base) + Number(systems.maneuver.mod) - Number(nloss.maneuverability.actual);
+        systems.sensors.loss = -Number(nloss.sensors.actual);
+        systems.sensors.total = Number(systems.sensors.base) + Number(systems.sensors.mod) + systems.sensors.loss;
+
+        systems.maneuver.loss = -Number(nloss.maneuverability.actual);
+        systems.maneuver.total = Number(systems.maneuver.base) + Number(systems.maneuver.mod) + systems.maneuver.loss;
+
+        systems.command.total = Number(systems.command.base) + Number(systems.command.mod);
+        systems.damageControl.total = Number(systems.damageControl.base) + Number(systems.damageControl.mod);
+
         data.hull.extraTotal = Number(data.hull.extraValue) - Number(nloss.hull.actual);
 
 

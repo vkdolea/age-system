@@ -138,7 +138,20 @@
                 "elite": "Elite"
             },
             "systems": "Systems",
-            "systemSensors": "Sensors",
+            "systemName": {
+                "command": "Command",
+                "commandMod": "Command {mod}",
+                "commandLoss": "Command {loss}",
+                "maneuver": "Maneverability",
+                "maneuverMod": "Maneuverability {mod}",
+                "maneuverLoss": "Maneuverability {loss}",
+                "sensors": "Sensor",
+                "sensorsMod": "Sensor {mod}",
+                "sensorsLoss": "Sensor {loss}",
+                "damageControl": "Loss Control",
+                "damageControlMod": "Loss Control {mod}",
+                "damageControlLoss": "Loss Control {loss}"
+            },
             "size": "Size",
             "sizeType": {
                 "tiny": "Tiny",

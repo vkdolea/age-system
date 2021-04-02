@@ -242,15 +242,17 @@ export async function ageRollCheck({
 
     // Check for moreParts
     if (moreParts) {
-        for (let p = 0; p < moreParts.length; p++) {
-            const part = moreParts[p];
-            const partName = `moreParts${p}`;
-            rollData[partName] = part.value;
-            rollFormula += ` + @${partName}`;
-            partials.push({
-                label: part.description,
-                value: part.value
-            })
+        if (moreParts.length > 0) {
+            for (let p = 0; p < moreParts.length; p++) {
+                const part = moreParts[p];
+                const partName = `moreParts${p}`;
+                rollData[partName] = part.value;
+                rollFormula += ` + @${partName}`;
+                partials.push({
+                    label: part.description,
+                    value: part.value
+                })
+            }
         }
     }
 

@@ -1156,6 +1156,10 @@
 .age-system.sheet.spaceship {
   font-variant: small-caps;
 }
+.age-system.sheet.spaceship h2,
+.age-system.sheet.spaceship h3 {
+  text-align: center;
+}
 .age-system.sheet.spaceship input[name="name"] {
   padding-left: 10px;
   min-width: 100%;
@@ -1264,10 +1268,6 @@
 }
 .age-system.sheet.spaceship fieldset.sensors label.sensors-field {
   flex: 0 0 50px;
-}
-.age-system.sheet.spaceship .stats-block.losses h2,
-.age-system.sheet.spaceship .stats-block.losses h3 {
-  text-align: center;
 }
 .age-system.sheet.spaceship .stats-block.losses h3 {
   margin: 0px;

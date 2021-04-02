@@ -162,19 +162,17 @@ export default class ageSpaceshipSheet extends ActorSheet {
             datum.sysName = event.currentTarget.dataset.sysName;
         }
         const useFocus = vehicleData.systems[datum.sysName].useFocus;
-        let rollData = {};
+        let rollData = {moreParts: []};
         let passenger = {};
 
         if (datum.passengerId === "crew") {
             passenger.name = game.i18n.localize("age-system.spaceship.crew");
-            const crewAction = [{
+            const crewAction = {
                 value: vehicleData.crew.competence,
                 description: passenger.name
-            }];
-            rollData = {
-                moreParts: crewAction,
-                event
-            }
+            };
+            rollData.moreParts.push(crewAction);
+            rollData.event = event;
         } else {
             passenger = game.actors.tokens[datum.passengerId];
             if (!passenger) passenger = game.actors.get(datum.passengerId);
@@ -186,6 +184,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             const pFocusCheck = passenger.checkFocus(useFocus);
     
             rollData = {
+                ...rollData,
                 event: event,
                 actor: passenger,
                 abl: vehicleData.systems[datum.sysName].useAbl,
@@ -207,6 +206,14 @@ export default class ageSpaceshipSheet extends ActorSheet {
                 break;
             default:
                 break;
+        }
+
+        const system = this.actor.data.data.systems[datum.sysName]
+        if (system) {
+            rollData.moreParts.push({
+                value: system.total,
+                description: game.i18n.localize(`age-system.spaceship.systemName.${datum.sysName}`)
+            })
         }
         rollData.flavor = game.i18n.format(flavorText, parts);
 

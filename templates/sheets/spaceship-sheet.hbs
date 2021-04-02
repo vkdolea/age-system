@@ -3,7 +3,7 @@
     <input name="name" class="spaceship-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
     <div class="sheet-body colorset-second-tier">
         <div class="stats-block systems">
-            <h3>{{localize "age-system.spaceship.systems"}}</h3>
+            <h2>{{localize "age-system.spaceship.systems"}}</h3>
             <ul class="systems-list">
                 <datalist id="{{this.actor.data.type}}-{{this.actor._id}}-list">
                     <option value=""></option>
@@ -48,29 +48,15 @@
             
             <div class="parameters container">
                 {{!-- TODO - TRANSFORMAR EM HULL --}}
-                <div class="flexrow">
-                    {{!-- <div class="flexrow flex-align-center hull">
-                        <label class="parameter-label">{{localize "age-system.spaceship.hull"}}</label>
-                        <input class="hull-dice-qtd" type="number" name="data.hull.nrDice" value="{{data.hull.nrDice}}" data-dtype="Number" />
-                        <select class="hull-dice-type" name="data.hull.diceType" class="dice-size">
-                            {{#select data.hull.diceType}}
-                            <option value="6">{{localize "age-system.settings.d6"}}</option>
-                            <option value="3">{{localize "age-system.settings.d3"}}</option>
-                            {{/select}}
-                        </select>
-                        <span class="hull-plus-sign">{{localize "age-system.settings.plusSign"}}</span>
-                        <input class="hull-extra-damage" type="number" name="data.hull.extraValue" value="{{data.hull.extraValue}}" data-dtype="Number" />
-                    </div> --}}
-                    <div class="flexrow flex-align-center size">
-                        <label class="parameter-label">{{localize "age-system.spaceship.size"}}</label>
-                        <select class="ship-size" name="data.size" class="dice-size">
-                            {{#select data.size}}
-                            {{#each config.spaceshipSize as |size sizeKey|}}
-                            <option value="{{size}}">{{localize (concat "age-system.spaceship.sizeType." sizeKey)}}</option>
-                            {{/each}}
-                            {{/select}}
-                        </select>
-                    </div>
+                <div class="flexrow flex-align-center size">
+                    <label class="parameter-label">{{localize "age-system.spaceship.size"}}</label>
+                    <select class="ship-size" name="data.size" class="dice-size">
+                        {{#select data.size}}
+                        {{#each config.spaceshipSize as |size sizeKey|}}
+                        <option value="{{size}}">{{localize (concat "age-system.spaceship.sizeType." sizeKey)}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
                 </div>
                 <fieldset class="crew">
                     <legend>{{localize "age-system.spaceship.crew"}}</legend>
@@ -120,7 +106,7 @@
                     </div>
                 </fieldset>
                 <fieldset class="sensors">
-                    <legend>{{localize "age-system.spaceship.systemSensors"}}</legend>
+                    <legend>{{localize "age-system.spaceship.systemName.sensors"}}</legend>
                     <div class="flexrow flex-align-center">
                         <label class="sensor-field">{{localize "age-system.base"}}</label>
                         <input class="sensor-field" type="number" name="data.systems.sensors.base" value="{{data.systems.sensors.base}}" data-dtype="Number" />
@@ -192,7 +178,8 @@
                 </div>
             </div>    
             <div class="weapon-block">
-                <h2>Armas Aqui</h2>
+                <h2>{{localize "age-system.weaponContainer"}}</h2>
+
             </div>
         </div>
     </div>
