@@ -98,6 +98,15 @@ each(@colorsets, {
                 background-color: #ffffff;
             }
         }
+        // Spaceship styling
+        .stats-block.losses {
+            .loss-checkbox {
+                border-color: extract(extract(@color-list, @index), 1);
+            }
+            .loss-checkbox.full-box.full-box {
+                background: extract(extract(@color-list, @index), 1);
+            }
+        }
 
         fieldset.crew {
             border-color: extract(extract(@color-list, @index), 1);

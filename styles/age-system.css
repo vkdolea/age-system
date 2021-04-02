@@ -1255,11 +1255,23 @@
 .age-system.sheet.spaceship .passenger.container {
   flex: 0 0 45%;
 }
-.age-system.sheet.spaceship .loss-name {
-  flex: 0 0 100px;
+.age-system.sheet.spaceship .stats-block.losses h2 {
+  text-align: center;
 }
-.age-system.sheet.spaceship .checkbox {
-  flex: 0 0 20px;
+.age-system.sheet.spaceship .stats-block.losses ul {
+  list-style-type: none;
+  text-align: center;
+}
+.age-system.sheet.spaceship .stats-block.losses .loss-name {
+  flex: 0 0 130px;
+  text-align: right;
+}
+.age-system.sheet.spaceship .stats-block.losses .loss-checkbox {
+  flex: 0 0 10px;
+  border-radius: 3px;
+  border: 1px solid;
+  background: none;
+  margin: 4px;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;
@@ -1393,6 +1405,12 @@
 }
 .colorset-modern-blue .vehicle-stats .editor {
   background-color: #ffffff;
+}
+.colorset-modern-blue .stats-block.losses .loss-checkbox {
+  border-color: #007DAD;
+}
+.colorset-modern-blue .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #007DAD;
 }
 .colorset-modern-blue fieldset.crew {
   border-color: #007DAD;
@@ -1535,6 +1553,12 @@
 .colorset-fantasy-blue .vehicle-stats .editor {
   background-color: #ffffff;
 }
+.colorset-fantasy-blue .stats-block.losses .loss-checkbox {
+  border-color: #0f4f5b;
+}
+.colorset-fantasy-blue .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #0f4f5b;
+}
 .colorset-fantasy-blue fieldset.crew {
   border-color: #0f4f5b;
 }
@@ -1675,6 +1699,12 @@
 }
 .colorset-dragon-red .vehicle-stats .editor {
   background-color: #ffffff;
+}
+.colorset-dragon-red .stats-block.losses .loss-checkbox {
+  border-color: #810207;
+}
+.colorset-dragon-red .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #810207;
 }
 .colorset-dragon-red fieldset.crew {
   border-color: #810207;
@@ -1817,6 +1847,12 @@
 .colorset-folded-purple .vehicle-stats .editor {
   background-color: #ffffff;
 }
+.colorset-folded-purple .stats-block.losses .loss-checkbox {
+  border-color: #565183;
+}
+.colorset-folded-purple .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #565183;
+}
 .colorset-folded-purple fieldset.crew {
   border-color: #565183;
 }
@@ -1957,6 +1993,12 @@
 }
 .colorset-ronin-green .vehicle-stats .editor {
   background-color: #ffffff;
+}
+.colorset-ronin-green .stats-block.losses .loss-checkbox {
+  border-color: #155f0e;
+}
+.colorset-ronin-green .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #155f0e;
 }
 .colorset-ronin-green fieldset.crew {
   border-color: #155f0e;

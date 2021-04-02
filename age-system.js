@@ -16,9 +16,6 @@ import * as AgeChat from "./modules/age-chat.js";
 import * as Setup from "./modules/setup.js";
 import * as migrations from "./modules/migration.js";
 
-// const ageSystemGlobal = {};
-window.ageSystem = ageSystem;
-
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
         "systems/age-system/templates/partials/bonus-desc-sheet.hbs",
@@ -54,7 +51,6 @@ Hooks.once("init", async function() {
     };
 
     CONFIG.ageSystem = ageSystem;
-    window.ageSystem = ageSystem;
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("age-system", ageSystemItemSheet, {
@@ -80,13 +76,13 @@ Hooks.once("init", async function() {
         label: "age-system.SHEETS.standardSpaceship"
     });
 
-    ageSystem.ageRoller = new AgeRoller({
+    game.ageSystem.ageRoller = new AgeRoller({
         popOut: false,
         minimizable: false,
         resizable: false,
     });
 
-    ageSystem.ageTracker = new AgeTracker({
+    game.ageSystem.ageTracker = new AgeTracker({
         popOut: false,
         minimizable: false,
         resizable: false
@@ -154,10 +150,10 @@ Hooks.once("ready", async function() {
     if (!color) game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
 
     // Loads Age Roller
-    ageSystem.ageRoller.refresh()
+    game.ageSystem.ageRoller.refresh()
 
     // Loads Tracker
-    ageSystem.ageTracker.refresh()
+    if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication") !== "none") game.ageSystem.ageTracker.refresh();
 
     // Check if Dice so Nice is active to register Stunt Die option
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {

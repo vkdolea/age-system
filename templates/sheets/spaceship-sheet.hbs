@@ -123,25 +123,31 @@
             </div>
         </div>
         <hr>
-        <div class="stats-block losses">
-            <h3>{{localize "age-system.spaceship.lossesCond"}}</h3>
-            <ul>
-                {{#each data.losses as |v k|}}
-                <li>
-                    <label>{{localize (concat "age-system.spaceship." k "Loss")}}</label>
-                    <ul>
-                        {{#each v as |v2 k2|}}  
-                        <li class="flexrow feature-controls" data-loss-sev="{{k}}" data-loss-type="{{k2}}">
-                            <label class="loss-name">{{localize (concat "age-system.spaceship." k2 "Loss")}}</label>
-                            {{#each v2.maxArray as |v3 k3|}}
-                            <a class="checkbox change-loss" data-box-number="{{k3}}">{{#if v3}}<i class="fa fa-times"></i>{{else}}<i class="fa fa-genderless"></i>{{/if}}</a>
+        <div class="flexrow">
+            <div class="stats-block losses">
+                <h2>{{localize "age-system.spaceship.lossesCond"}}</h2>
+                <ul>
+                    {{#each data.losses as |v k|}}
+                    <li>
+                        <label><h3>{{localize (concat "age-system.spaceship." k "Loss")}}</h3></label>
+                        <ul>
+                            {{#each v as |v2 k2|}}  
+                            <li class="flexrow feature-controls" data-loss-sev="{{k}}" data-loss-type="{{k2}}">
+                                <label class="loss-name">{{localize (concat "age-system.spaceship." k2 "Loss")}} [{{v2.actual}}]</label>
+                                {{#each v2.maxArray as |v3 k3|}}
+                                <a class="loss-checkbox change-loss {{#if v3}}full-box{{/if}}" data-box-number="{{k3}}"></a>
+                                {{/each}}
+                            </li>
                             {{/each}}
-                        </li>
-                        {{/each}}
-                    </ul>
-                </li>
-                {{/each}}
-            </ul>
-        </div>    
+                        </ul>
+                    </li>
+                    {{/each}}
+                </ul>
+                <div><a class="roll-maneuver" data-sys-name="damageControl" title="{{localize "age-system.damageControl"}}"><i class="fas fa-cogs"></i></a>Loss Control TN: 11 Threshold: 5</div>
+            </div>    
+            <div class="weapon-block">
+                <h2>Armas Aqui</h2>
+            </div>
+        </div>
     </div>
 </form>

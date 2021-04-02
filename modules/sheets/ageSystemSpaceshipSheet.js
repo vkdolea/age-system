@@ -142,11 +142,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         if (lossValue > currentLoss) {
             newLoss = lossValue;
         } else {
-            if (lossValue < currentLoss) {
-                newLoss = lossValue;
-            } else {
-                newLoss = lossValue -1;
-            }
+            newLoss = lossValue - 1;
         }
 
         const updatePath = `data.losses.${lossSev}.${lossType}.actual`; 
