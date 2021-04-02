@@ -1170,10 +1170,15 @@
 }
 .age-system.sheet.spaceship ul.systems-list li .system-roll {
   flex: 0 0 16px;
+  margin-right: 4px;
+}
+.age-system.sheet.spaceship ul.systems-list li .system-role.title {
+  text-align: center;
 }
 .age-system.sheet.spaceship ul.systems-list li .system-role {
-  flex: 0 0 100px;
-  max-width: 100px;
+  flex: 0 0 130px;
+  max-width: 130px;
+  text-align: right;
 }
 .age-system.sheet.spaceship ul.systems-list li .system-operator {
   flex: 0 0 150px;
@@ -1211,8 +1216,8 @@
 .age-system.sheet.spaceship div.parameters.container .parameter-label {
   flex: 0 0 50px;
 }
-.age-system.sheet.spaceship div.parameters.container .hull {
-  flex: 0 0 155px;
+.age-system.sheet.spaceship div.parameters.container div.hull {
+  margin: auto;
 }
 .age-system.sheet.spaceship div.parameters.container .hull-dice-qtd {
   flex: 0 0 20px;
@@ -1220,14 +1225,12 @@
 .age-system.sheet.spaceship div.parameters.container .hull-dice-type {
   flex: 0 0 40px;
 }
-.age-system.sheet.spaceship div.parameters.container .hull-plus-sign {
-  flex: 0 0 16px;
-}
 .age-system.sheet.spaceship div.parameters.container .hull-extra-damage {
-  flex: 0 0 20px;
+  flex: 0 0 30px;
 }
-.age-system.sheet.spaceship fieldset.crew {
+.age-system.sheet.spaceship fieldset {
   border-radius: 5px;
+  border-width: 1px;
 }
 .age-system.sheet.spaceship .crew-details {
   padding: 0;
@@ -1255,8 +1258,19 @@
 .age-system.sheet.spaceship .passenger.container {
   flex: 0 0 45%;
 }
-.age-system.sheet.spaceship .stats-block.losses h2 {
+.age-system.sheet.spaceship fieldset.sensors .sensors-field {
+  flex: 0 0 20px;
   text-align: center;
+}
+.age-system.sheet.spaceship fieldset.sensors label.sensors-field {
+  flex: 0 0 50px;
+}
+.age-system.sheet.spaceship .stats-block.losses h2,
+.age-system.sheet.spaceship .stats-block.losses h3 {
+  text-align: center;
+}
+.age-system.sheet.spaceship .stats-block.losses h3 {
+  margin: 0px;
 }
 .age-system.sheet.spaceship .stats-block.losses ul {
   list-style-type: none;
@@ -1272,6 +1286,29 @@
   border: 1px solid;
   background: none;
   margin: 4px;
+}
+.age-system.sheet.spaceship .stats-block.losses .damage-control-box {
+  flex: 0 0 min-content;
+}
+.age-system.sheet.spaceship .stats-block.losses .damage-control-box .numeric-input {
+  flex: 0 0 20px;
+  text-align: center;
+  margin-right: 4px;
+}
+.age-system.sheet.spaceship .stats-block.losses .damage-control-box .threshold-box {
+  flex: 0 0 60px;
+}
+.age-system.sheet.spaceship .stats-block.losses .damage-control-box .threshold-box span {
+  flex: 0 0 10px;
+  padding-top: 4px;
+}
+.age-system.sheet.spaceship .stats-block.losses .damage-control-box label.tn-input {
+  flex: 0 0 30px;
+  text-align: center;
+}
+.age-system.sheet.spaceship .stats-block.losses .damage-control-box label.threshold-input {
+  flex: 0 0 auto;
+  text-align: right;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;
@@ -1412,7 +1449,7 @@
 .colorset-modern-blue .stats-block.losses .loss-checkbox.full-box.full-box {
   background: #007DAD;
 }
-.colorset-modern-blue fieldset.crew {
+.colorset-modern-blue fieldset {
   border-color: #007DAD;
 }
 .colorset-modern-blue .dice-show.trait-test i:last-of-type {
@@ -1559,7 +1596,7 @@
 .colorset-fantasy-blue .stats-block.losses .loss-checkbox.full-box.full-box {
   background: #0f4f5b;
 }
-.colorset-fantasy-blue fieldset.crew {
+.colorset-fantasy-blue fieldset {
   border-color: #0f4f5b;
 }
 .colorset-fantasy-blue .dice-show.trait-test i:last-of-type {
@@ -1706,7 +1743,7 @@
 .colorset-dragon-red .stats-block.losses .loss-checkbox.full-box.full-box {
   background: #810207;
 }
-.colorset-dragon-red fieldset.crew {
+.colorset-dragon-red fieldset {
   border-color: #810207;
 }
 .colorset-dragon-red .dice-show.trait-test i:last-of-type {
@@ -1853,7 +1890,7 @@
 .colorset-folded-purple .stats-block.losses .loss-checkbox.full-box.full-box {
   background: #565183;
 }
-.colorset-folded-purple fieldset.crew {
+.colorset-folded-purple fieldset {
   border-color: #565183;
 }
 .colorset-folded-purple .dice-show.trait-test i:last-of-type {
@@ -2000,7 +2037,7 @@
 .colorset-ronin-green .stats-block.losses .loss-checkbox.full-box.full-box {
   background: #155f0e;
 }
-.colorset-ronin-green fieldset.crew {
+.colorset-ronin-green fieldset {
   border-color: #155f0e;
 }
 .colorset-ronin-green .dice-show.trait-test i:last-of-type {

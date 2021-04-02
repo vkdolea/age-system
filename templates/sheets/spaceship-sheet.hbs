@@ -12,16 +12,17 @@
                     {{/each}}
                 </datalist>
                 <li class="flexrow">
-                    <p class="system-roll"></p>
-                    <p class="system-role">{{localize "age-system.spaceship.role"}}</p>
+                    <p class="system-role title">{{localize "age-system.spaceship.role"}}</p>
+                    {{!-- <p class="system-roll"></p> --}}
                     <p class="system-operator">{{localize "age-system.spaceship.op"}}</p>
                     <p class="system-abl">{{localize "age-system.abl"}}</p>
                     <p class="system-focus">{{localize "age-system.focus"}}</p>
                 </li>
                 {{#each data.systems as |system sysName|}}
                 <li class="feature-controls {{sysName}} flexrow" data-sys-name={{sysName}}>
-                    <a class="system-roll roll-maneuver" data-sys-name="{{sysName}}" data-sys-box="1"><i class="fas fa-dice"></i></a>
-                    <p class="system-role">{{localize (concat "age-system.spaceship.operator." sysName)}}</p>
+                    <p class="system-role">{{localize (concat "age-system.spaceship.operator." sysName)}} 
+                        <a class="system-roll roll-maneuver" data-sys-name="{{sysName}}" data-sys-box="1"><i class="fas fa-dice"></i></a>
+                    </p>
                     <select name="data.systems.{{sysName}}.operator" class="system-operator">
                         {{#select system.operator}}
                         <option value="crew">{{localize "age-system.spaceship.crew"}}</option>
@@ -48,7 +49,7 @@
             <div class="parameters container">
                 {{!-- TODO - TRANSFORMAR EM HULL --}}
                 <div class="flexrow">
-                    <div class="flexrow flex-align-center hull">
+                    {{!-- <div class="flexrow flex-align-center hull">
                         <label class="parameter-label">{{localize "age-system.spaceship.hull"}}</label>
                         <input class="hull-dice-qtd" type="number" name="data.hull.nrDice" value="{{data.hull.nrDice}}" data-dtype="Number" />
                         <select class="hull-dice-type" name="data.hull.diceType" class="dice-size">
@@ -59,7 +60,7 @@
                         </select>
                         <span class="hull-plus-sign">{{localize "age-system.settings.plusSign"}}</span>
                         <input class="hull-extra-damage" type="number" name="data.hull.extraValue" value="{{data.hull.extraValue}}" data-dtype="Number" />
-                    </div>
+                    </div> --}}
                     <div class="flexrow flex-align-center size">
                         <label class="parameter-label">{{localize "age-system.spaceship.size"}}</label>
                         <select class="ship-size" name="data.size" class="dice-size">
@@ -100,6 +101,36 @@
                         </div>
                     </div>
                     
+                </fieldset>
+                <fieldset class="hull">
+                    <legend>{{localize "age-system.spaceship.hull"}}</legend>
+                    <div class="flexrow flex-align-center flex-justify-center hull">
+                        <label class="parameter-label">{{localize "age-system.base"}}</label>
+                        <input class="hull-dice-qtd" type="number" name="data.hull.nrDice" value="{{data.hull.nrDice}}" data-dtype="Number" />
+                        <select class="hull-dice-type" name="data.hull.diceType" class="dice-size">
+                            {{#select data.hull.diceType}}
+                            <option value="6">{{localize "age-system.settings.d6"}}</option>
+                            <option value="3">{{localize "age-system.settings.d3"}}</option>
+                            {{/select}}
+                        </select>
+                        <label class="parameter-label">{{localize "age-system.mod"}}</label>
+                        <input class="hull-extra-damage" type="number" name="data.hull.extraValue" value="{{data.hull.extraValue}}" data-dtype="Number" />
+                        <label class="parameter-label">{{localize "age-system.spaceship.loss"}}</label>
+                        <input class="hull-extra-damage" disabled type="number" name="data.losses.normal.hull.actual" value="{{data.losses.normal.hull.actual}}" data-dtype="Number" />
+                    </div>
+                </fieldset>
+                <fieldset class="sensors">
+                    <legend>{{localize "age-system.spaceship.systemSensors"}}</legend>
+                    <div class="flexrow flex-align-center">
+                        <label class="sensor-field">{{localize "age-system.base"}}</label>
+                        <input class="sensor-field" type="number" name="data.systems.sensors.base" value="{{data.systems.sensors.base}}" data-dtype="Number" />
+                        <label class="sensor-field">{{localize "age-system.mod"}}</label>
+                        <input class="sensor-field" type="number" name="data.systems.sensors.mod" value="{{data.systems.sensors.mod}}" data-dtype="Number" />
+                        <label class="sensor-field">{{localize "age-system.spaceship.loss"}}</label>
+                        <input class="sensor-field" type="number" disabled name="data.losses.normal.sensors.actual" value="{{data.losses.normal.sensors.actual}}" data-dtype="Number" />
+                        <label class="sensor-field">{{localize "age-system.total"}}</label>
+                        <input class="sensor-field" type="number" disabled name="data.systems.sensors.total" value="{{data.systems.sensors.total}}" data-dtype="Number" />
+                    </div>
                 </fieldset>
             </div>
 
@@ -143,7 +174,22 @@
                     </li>
                     {{/each}}
                 </ul>
-                <div><a class="roll-maneuver" data-sys-name="damageControl" title="{{localize "age-system.damageControl"}}"><i class="fas fa-cogs"></i></a>Loss Control TN: 11 Threshold: 5</div>
+                <h3>
+                    {{localize "age-system.damageControl"}}
+                    <a class="roll-maneuver" data-sys-name="damageControl" title="{{localize "age-system.damageControl"}}">
+                        <i class="fas fa-cogs"></i>
+                    </a>
+                </h3>
+                <div class="flexrow flex-align-center flex-justify-center damage-control-box">
+                    <label class="tn-input">{{localize "age-system.targetNumber"}}</label>
+                    <input class="numeric-input" type="number" name="data.systems.damageControl.TN" value="{{data.systems.damageControl.TN}}" data-dtype="Number" />
+                    <label class="threshold-input">{{localize "age-system.testThreshold"}} ({{localize "age-system.targetCurrent"}})</label>
+                    <div class="flexrow threshold-box">
+                        <input class="numeric-input" type="number" name="data.systems.damageControl.threshold.target" value="{{data.systems.damageControl.threshold.target}}" data-dtype="Number" />
+                        <span>/</span>
+                        <input class="numeric-input" type="number" name="data.systems.damageControl.threshold.current" value="{{data.systems.damageControl.threshold.current}}" data-dtype="Number" />
+                    </div>
+                </div>
             </div>    
             <div class="weapon-block">
                 <h2>Armas Aqui</h2>

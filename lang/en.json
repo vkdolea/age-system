@@ -138,6 +138,7 @@
                 "elite": "Elite"
             },
             "systems": "Systems",
+            "systemSensors": "Sensors",
             "size": "Size",
             "sizeType": {
                 "tiny": "Tiny",
@@ -149,6 +150,7 @@
                 "colossal": "Colossal",
                 "titanic": "Titanic"
             },
+            "loss": "Loss",
             "lossesCond": "Loss Condition",
             "normalLoss": "Normal",
             "seriousLoss": "Serious",
@@ -203,6 +205,7 @@
         },
 
         "testThreshold": "Threshold",
+        "targetCurrent": "Target/Current",
 
         "conditionsName": "Conditions",
         "conditions": {

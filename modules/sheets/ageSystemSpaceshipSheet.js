@@ -7,7 +7,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         return mergeObject(super.defaultOptions, {
             // resizable: false,
             width: 680,
-            height: 646,
+            height: 750,
             resizable: false,
             classes: ["age-system", "sheet", "spaceship"]
         });

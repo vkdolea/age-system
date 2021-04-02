@@ -242,13 +242,21 @@ export class ageSystemActor extends Actor {
                         severity[type].maxArray = new Array(severity[type].max);
                         for (let b = 0; b < severity[type].maxArray.length; b++) {
                             severity[type].maxArray[b] = ((severity[type].actual-1) >= b) ? true : false;                    
-                        }
-                        
+                        }                        
                     }
                 }
                 
             }
-        }
+        };
+
+        // Calculated Total value for various aspects
+        const systems = data.systems;
+        const nloss = data.losses.normal;
+        // const sloss = data.losses.serious;
+        systems.sensors.total = Number(systems.sensors.base) + Number(systems.sensors.mod) - Number(nloss.sensors.actual);
+        systems.maneuver.total = Number(systems.maneuver.base) + Number(systems.maneuver.mod) - Number(nloss.maneuverability.actual);
+        data.hull.extraTotal = Number(data.hull.extraValue) - Number(nloss.hull.actual);
+
 
         return data
     }

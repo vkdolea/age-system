@@ -36,10 +36,15 @@
         li {
             .system-roll {
                 flex: 0 0 16px;
+                margin-right: 4px;
             };
+            .system-role.title {
+                text-align: center;
+            }
             .system-role {
-                flex: 0 0 100px;
-                max-width: 100px;
+                flex: 0 0 130px;
+                max-width: 130px;
+                text-align: right;
             };
             .system-operator {
                 // font-size: 1vw;
@@ -91,8 +96,8 @@
             flex: 0 0 50px;
         }
 
-        .hull {
-            flex: 0 0 155px;
+        div.hull {
+            margin: auto;
         }
         .hull-dice-qtd {
             flex: 0 0 20px;
@@ -100,19 +105,17 @@
         .hull-dice-type {
             flex: 0 0 40px;
         }
-        .hull-plus-sign {
-            flex: 0 0 16px;
-        }
         .hull-extra-damage {
-            flex: 0 0 20px;
+            flex: 0 0 30px;
         }
         // .ship-size {
         //     flex: 0 0 126px;
         // }
     }
 
-    fieldset.crew {
+    fieldset {
         border-radius: 5px;
+        border-width: 1px;
     }
     .crew-details {
         padding: 0;
@@ -143,10 +146,22 @@
     .passenger.container {
         flex: 0 0 45%;
     }
-
-    .stats-block.losses {
-        h2 {
+    fieldset.sensors {
+        .sensors-field {
+            flex: 0 0 20px;
             text-align: center;
+        }
+        label.sensors-field {
+            flex: 0 0 50px;
+        }
+    }
+    .stats-block.losses {
+        h2,
+        h3 {
+            text-align: center;
+        };
+        h3 {
+            margin: 0px;
         }
         ul {
             list-style-type: none;
@@ -162,6 +177,29 @@
             border: 1px solid;
             background: none;
             margin: 4px;
+        };
+        .damage-control-box {
+            flex: 0 0 min-content;
+            .numeric-input {
+                flex: 0 0 20px;
+                text-align: center;
+                margin-right: 4px;
+            }
+            .threshold-box {
+                flex: 0 0 60px;
+                span {
+                    flex: 0 0 10px;
+                    padding-top: 4px;
+                }
+            }
+            label.tn-input {
+                flex: 0 0 30px;
+                text-align: center;
+            }
+            label.threshold-input {
+                flex: 0 0 auto;
+                text-align: right;
+            }
         }
     }
 }
