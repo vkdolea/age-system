@@ -27,30 +27,30 @@
                 "maneuver": {
                     "mod": 0,
                     "base": 0,
-                    "operator": "",
-                    "useAbl": "",
+                    "operator": "crew",
+                    "useAbl": "dex",
                     "useFocus": ""
                 },
                 "command": {
                     "mod": 0,
                     "base": 0,
-                    "operator": "",
-                    "useAbl": "",
+                    "operator": "crew",
+                    "useAbl": "comm",
                     "useFocus": ""
                 },
                 "sensors": {
                     "mod": 0,
                     "base": 0,
-                    "operator": "",
-                    "useAbl": "",
+                    "operator": "crew",
+                    "useAbl": "int",
                     "useFocus": ""
                 },
                 "damageControl": {
                     "mod": 0,
                     "base": 0,
-                    "operator": "",
+                    "operator": "crew",
                     "TN": 11,
-                    "useAbl": "",
+                    "useAbl": "int",
                     "useFocus": "",
                     "threshold": {
                         "current": 0,
