@@ -19,6 +19,8 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Drag and drop owned weapons and power to macro bar to create attack shortcuts
 - Possibility to add Conditions on characters (effects must be set manually)
 - Add Stunt Die or Focus (or both) to damage roll when rolling damage from chat
+- Support to track Serendipity (MAGE Companion), Complication (MAGE Companion)
+- Churn Tracker (The Expanse RPG) available
 
 ## Credits
 ### Icons
@@ -38,7 +40,7 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
 ### Localization
 - **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
-- **Spanish**: by Discord user *ForjaSalvage#2419*.
+- **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Shortcuts
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
@@ -73,9 +75,12 @@ Here the description of each one of the Modificators:
 
 ## Change log
 
-### 0.5.2 [2021-xx-yy]
+### 0.6.0 [2021-xx-yy]
 #### Added
--
+- Serendipity tracker (Modern AGE Companion).
+- Complication tracker (Modern AGE Companion).
+- Churn tracker (The Expanse RPG).
+- Right Clicking the Age Roller icon will roll 1d6 (use Left Click + Alt to modify the standard 3d6 roll).
 
 ### 0.5.1 [2021-03-25]
 #### Fix
@@ -83,7 +88,7 @@ Here the description of each one of the Modificators:
 
 ### 0.5.0 [2021-03-25]
 #### Added
-- Added a Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompet to add modifier and TN.
+- Added an Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompet to add modifier and TN.
 - Added to vehicle sheets: Armor Rating, Cover, Total Passengers Capacity and Custom Damage for Collision/Sideswipe.
 - On vehicles damage table, line representing vehicle's Velocity Class will have **bold** characters.
 - On Configure Settings it is now possible to configure the flavor text as Health and Fortune.
@@ -91,11 +96,11 @@ Here the description of each one of the Modificators:
 #### Fix
 - Migration issue could cause Conditions not to be created properly on migrated Actors.
 - Bug preventing rolling a Focus using a different Ability (or none).
-- When an Actor is delete from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
+- When an Actor is deleted from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
 - Fixed a bug causing the text field on character sheet header to be innacessible in some browsers.
-- Application will not reload after changin colorsets on "Configure Settings".
+- Application will not reload after changing colorsets on "Configure Settings".
 - Color Scheme won't reset when Player changes browser or delete browser historic.
-- "Use Power Points" and "Focus Compendium" settings are now variables set only by game master.
+- "Use Power Points" and "Focus Compendium" settings are now accessible only for GMs.
 - Empty fields in the constant part of damage builder will no longer return "null" on damage formula.
 
 ### 0.4.1 [2021-02-22]
