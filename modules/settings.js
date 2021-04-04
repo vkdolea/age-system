@@ -317,6 +317,7 @@ export const registerSystemSettings = function() {
     config: false,
     default: {max: 18, actual: 0},
     type: Object, 
+    onChange: () => {if (game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
   }); 
 
 };

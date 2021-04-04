@@ -42,16 +42,15 @@ export class AgeTracker extends Application {
 	
 	activateListeners(html) {
 		super.activateListeners(html);
-		html.find(".mod").click(this._onClick.bind(this));
+		html.find(".mod").click(this._onClickSer.bind(this));
 		// html.find("#age-roller").contextmenu(this._onRightClick.bind(this));
 	}
 	
 	refresh() {
-		// this.getData();
 		this.render(true);
 	}
 
- 	async _onClick(event) {
+ 	async _onClickSer(event) {
 		event.preventDefault();
 		let value = event.currentTarget.dataset.chgQtd;
 		value = Number(value);
@@ -59,12 +58,8 @@ export class AgeTracker extends Application {
 		const serData = game.settings.get("age-system", "serendipityValue");
 		serData.actual += value;
 		if (serData.actual <= serData.max && serData.actual >= 0) {
-			game.settings.set("age-system", "serendipityValue", serData).then(() => {
-				this.refresh();
-			});
+			game.settings.set("age-system", "serendipityValue", serData)
 		}
-		// const rollHeader = game.i18n.format("age-system.chatCard.looseRoll", {user});
-        // ageRollCheck({event: event, flavor: rollHeader});
 	}
 
 	// async _onRightClick(event) {
