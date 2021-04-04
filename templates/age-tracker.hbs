@@ -1,31 +1,33 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div class="" id="age-tracker">
+    <div class="colorset-{{colorset}}" id="age-tracker">
         {{!-- Serendipity Tracker --}}
         {{#if hasSerendipity}}
-        <div class="age-serendipity flexrow">
-            <a><span data-chg-qtd="6" data-op="minus">-6</span></a>
-            <a><span data-chg-qtd="3" data-op="minus">-3</span></a>
-            <a><span data-chg-qtd="1" data-op="minus">-1</span></a>
-            {{#each serDie as |die|}} {{log this}}
-            <div class="die {{#if (lt ../curSer die.min)}}transparent{{/if}}">
-                {{#if (lte die.value 1)}}
-                <i class="fas fa-dice-one fa-2x"></i>
-                {{/if}} {{#if (eq die.value 2)}}
-                <i class="fas fa-dice-two fa-2x"></i>
-                {{/if}} {{#if (eq die.value 3)}}
-                <i class="fas fa-dice-three fa-2x"></i>
-                {{/if}} {{#if (eq die.value 4)}}
-                <i class="fas fa-dice-four fa-2x"></i>
-                {{/if}} {{#if (eq die.value 5)}}
-                <i class="fas fa-dice-five fa-2x"></i>
-                {{/if}} {{#if (eq die.value 6)}}
-                <i class="fas fa-dice-six fa-2x"></i>
-                {{/if}}
+        <div class="age-serendipity colorset-second-tier flexrow">
+            {{#if isGM}}
+            <a class="mod minus" data-chg-qtd="1" data-op="minus"><i class="fa fa-minus" aria-hidden="true"></i></a>
+            {{/if}}
+            {{#each serDie as |die|}}
+            <div class="die">
+                <div class="{{#if die.inactive}}inactive{{/if}}">
+                    {{#if (lte die.value 1)}}
+                    <i class="fas fa-dice-one fa-2x"></i>
+                    {{/if}} {{#if (eq die.value 2)}}
+                    <i class="fas fa-dice-two fa-2x"></i>
+                    {{/if}} {{#if (eq die.value 3)}}
+                    <i class="fas fa-dice-three fa-2x"></i>
+                    {{/if}} {{#if (eq die.value 4)}}
+                    <i class="fas fa-dice-four fa-2x"></i>
+                    {{/if}} {{#if (eq die.value 5)}}
+                    <i class="fas fa-dice-five fa-2x"></i>
+                    {{/if}} {{#if (eq die.value 6)}}
+                    <i class="active-dice fas fa-dice-six fa-2x"></i>
+                    {{/if}}
+                </div>
             </div>
             {{/each}}
-            <a><span data-chg-qtd="1" data-op="plus">+1</span></a>
-            <a><span data-chg-qtd="3" data-op="plus">+3</span></a>
-            <a><span data-chg-qtd="6" data-op="plus">+6</span></a>
+            {{#if isGM}}
+            <a class="mod" data-chg-qtd="1" data-op="plus"><i class="fa fa-plus" aria-hidden="true"></i></a>
+            {{/if}}
         </div>
         {{/if}}
 

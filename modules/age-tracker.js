@@ -9,19 +9,26 @@ export class AgeTracker extends Application {
 	
 	getData(options) {
 		const data = super.getData(options);
-		const maxSer = 18;
+		data.isGM = game.user.isGM;
 		data.hasSerendipity = game.settings.get("age-system", "serendipity");
-		if (game.settings.get("age-system", "serendipityValue") > maxSer) game.settings.set("age-system", "serendipityValue", maxSer);
-		const serend = game.settings.get("age-system", "serendipityValue");
-		data.curSer = serend > 18 ? 18 : serend;
-		const serDice = Math.floor(serend/6);
-		const serReminder = serend % 6;
+		data.colorset = game.settings.get("age-system", "colorScheme");
 
-		data.serDie = new Array(Math.ceil(maxSer/6));
-		for (let d = 0; d < data.serDie.length; d++) {
-			data.serDie[d] = {
-				value: (d < serDice-1) ? 6 : serReminder,
-				min: d*6 + 1
+		if (data.hasSerendipity) {
+			const serData = game.settings.get("age-system", "serendipityValue");
+			if (serData.actual > serData.max) {
+				serData.actual = serData.max;
+				game.settings.set("age-system", "serendipityValue", serData);
+			};
+			const sides = 6;
+			let total = serData.actual
+			data.serDie = new Array(Math.ceil(serData.max/sides));
+			for (let d = 0; d < data.serDie.length; d++) {
+				data.serDie[d] = {};
+				data.serDie[d].min = d*sides + 1;
+				data.serDie[d].inactive = d*sides < serData.actual ? false : true;
+				const diff = total - sides;
+				data.serDie[d].value = diff >= 0 ? sides : total < 0 ? 0 : total;
+				total = diff;
 			}
 		}
 
@@ -35,20 +42,30 @@ export class AgeTracker extends Application {
 	
 	activateListeners(html) {
 		super.activateListeners(html);
-		// html.find("#age-roller").click(this._onClick.bind(this));
+		html.find(".mod").click(this._onClick.bind(this));
 		// html.find("#age-roller").contextmenu(this._onRightClick.bind(this));
 	}
 	
 	refresh() {
+		// this.getData();
 		this.render(true);
 	}
 
- 	// async _onClick(event) {
-	// 	event.preventDefault();
-	// 	const user = game.user.name;
-	// 	const rollHeader = game.i18n.format("age-system.chatCard.looseRoll", {user});
-    //     ageRollCheck({event: event, flavor: rollHeader});
-	// }
+ 	async _onClick(event) {
+		event.preventDefault();
+		let value = event.currentTarget.dataset.chgQtd;
+		value = Number(value);
+		if (event.currentTarget.classList.contains('minus')) value = -value;
+		const serData = game.settings.get("age-system", "serendipityValue");
+		serData.actual += value;
+		if (serData.actual <= serData.max && serData.actual >= 0) {
+			game.settings.set("age-system", "serendipityValue", serData).then(() => {
+				this.refresh();
+			});
+		}
+		// const rollHeader = game.i18n.format("age-system.chatCard.looseRoll", {user});
+        // ageRollCheck({event: event, flavor: rollHeader});
+	}
 
 	// async _onRightClick(event) {
 	// 	event.preventDefault();

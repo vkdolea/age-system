@@ -226,6 +226,7 @@ export const registerSystemSettings = function() {
         o.update({});
         if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
       });
+      if (game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh();
     }
   });
 
@@ -314,8 +315,8 @@ export const registerSystemSettings = function() {
     // hint: "SETTINGS.serendipityValueHint",
     scope: "world",
     config: false,
-    default: 0,
-    type: Number, 
+    default: {max: 18, actual: 0},
+    type: Object, 
   }); 
 
 };
