@@ -179,7 +179,21 @@
             </div>    
             <div class="weapon-block">
                 <h2>{{localize "age-system.weaponContainer"}}</h2>
-
+                <ul class="weapon-list">
+                    <li class="flexrow">
+                        <div class="weapon-ctrl add"><a><i class="fa fa-plus"></i></a></div>
+                        <div class="weapon-name"><label for="">{{localize "age-system.item.name"}}</label></div>
+                        <div class="weapon-dmg"><label for="">{{localize "age-system.formula"}}</label></div>
+                    </li>
+                    {{#each data.weapons as |weapon|}}
+                    <li class="flexrow flex-align-center">
+                        <a class="weapon-ctrl remove" data-wpn-key="{{@key}}"><i class="fa fa-minus"></i></a>
+                        <input class="weapon-name" type="text" name="data.weapons.{{@key}}.name" value="{{weapon.name}}" placeholder="{{localize "age-system.item.name"}}">
+                        <input class="weapon-dmg" type="text" name="data.weapons.{{@key}}.dmgFormula" value="{{weapon.dmgFormula}}" placeholder="{{localize "age-system.formulaExample"}}">
+                        <a class="weapon-dmg-roll"><i class="fas fa-fist-raised"></i></a>
+                    </li>
+                    {{/each}}
+                </ul>
             </div>
         </div>
     </div>

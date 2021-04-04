@@ -252,7 +252,7 @@ export class ageSystemActor extends Actor {
         // Calculated Total value for various aspects
         const systems = data.systems;
         const nloss = data.losses.normal;
-        // const sloss = data.losses.serious;
+
         systems.sensors.loss = -Number(nloss.sensors.actual);
         systems.sensors.total = Number(systems.sensors.base) + Number(systems.sensors.mod) + systems.sensors.loss;
 
@@ -264,6 +264,8 @@ export class ageSystemActor extends Actor {
 
         data.hull.extraTotal = Number(data.hull.extraValue) - Number(nloss.hull.actual);
 
+        // Weapons System
+        data.weapons = this.sortWeapon(data.weapons);
 
         return data
     }
@@ -308,6 +310,37 @@ export class ageSystemActor extends Actor {
     _prepareDerivedDataSpaceship() {
 
     };
+
+    sortWeapon(weapon) {
+        if (!weapon) return {};
+        let wArray = [];
+        for (const w in weapon) {
+            if (Object.hasOwnProperty.call(weapon, w)) {
+                wArray.push(weapon[w]);
+            }
+        }
+        wArray = wArray.sort(function(a, b) {
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+            return 0;
+        });
+        const   newWpnObj = {};
+        for (let w = 0; w < wArray.length; w++) {
+            // const element = wArray[w];
+            let wKey = String(w);
+            while (wKey.length < 4) {
+                wKey = "0" + wKey;
+            }
+            newWpnObj[wKey] = wArray[w];
+        }
+        return newWpnObj;
+    }
 
     // TODO - testar essa função, que ainda está em desuso
     sortPassengers() {

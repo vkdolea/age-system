@@ -1269,6 +1269,29 @@
 .age-system.sheet.spaceship fieldset.sensors label.sensors-field {
   flex: 0 0 50px;
 }
+.age-system.sheet.spaceship .weapon-block ul.weapon-list {
+  list-style-type: none;
+}
+.age-system.sheet.spaceship .weapon-block ul.weapon-list li {
+  text-align: center;
+  margin-bottom: 4px;
+}
+.age-system.sheet.spaceship .weapon-block ul.weapon-list li .weapon-ctrl {
+  flex: 0 0 16px;
+}
+.age-system.sheet.spaceship .weapon-block ul.weapon-list li .weapon-name {
+  flex: 0 0 150px;
+  margin-right: 4px;
+}
+.age-system.sheet.spaceship .weapon-block ul.weapon-list li .weapon-dmg {
+  flex: 0 0 100px;
+}
+.age-system.sheet.spaceship .weapon-block ul.weapon-list li .weapon-dmg-roll {
+  flex: 0 0 16px;
+}
+.age-system.sheet.spaceship .weapon-block ul.weapon-list li .weapon-dmg-roll i {
+  width: fit-content;
+}
 .age-system.sheet.spaceship .stats-block.losses h3 {
   margin: 0px;
 }

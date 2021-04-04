@@ -22,7 +22,7 @@
                 "typical": 1,
                 "competence": 1
             },
-            "weapons": [],
+            "weapons": {},
             "systems": {
                 "maneuver": {
                     "mod": 0,

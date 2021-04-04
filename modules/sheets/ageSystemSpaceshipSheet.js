@@ -117,6 +117,8 @@ export default class ageSpaceshipSheet extends ActorSheet {
             html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
             html.find(".change-loss").click(this._onChangeLoss.bind(this));
+            html.find(".weapon-ctrl.add").click(this._onClickAddWeapon.bind(this));
+            html.find(".weapon-ctrl.remove").click(this._onClickRemoveWeapon.bind(this));
 
             // let handler = ev => this._onDragStart(ev);
             // // Find all rollable items on the character sheet.
@@ -131,6 +133,25 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
         super.activateListeners(html);
     };
+
+    _onClickAddWeapon(event) {
+        const newWeapon = {}
+        newWeapon.name = "";
+        newWeapon.dmgFormula = "";
+        let weapons = this.actor.data.data.weapons;
+        weapons["newWpn"] = newWeapon;
+        weapons = this.actor.sortWeapon(weapons);
+        this.actor.update({"data.weapons": weapons});
+    }
+
+    _onClickRemoveWeapon(event) {
+        const wKey = event.currentTarget.dataset.wpnKey;
+        let weapons = this.actor.data.data.weapons;
+        delete weapons[wKey];
+        weapons = this.actor.sortWeapon(weapons);
+        this.actor.update({"data.weapons": null});
+        this.actor.update({"data.weapons": weapons});
+    }
 
     _onChangeLoss(event) {
         const lossSev = event.currentTarget.closest(".feature-controls").dataset.lossSev;

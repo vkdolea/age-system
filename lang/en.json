@@ -1,3 +1,4 @@
+  
 {
     "ACTOR.TypeChar": "Player Character",
     "ACTOR.TypeVehicle": "Vehicle",
@@ -485,6 +486,8 @@
         "activationMod": "Roll Bonus",
         "success": "Success",
         "miss": "Miss",
+        "formula": "Formula",
+        "formulaExample": "Ex.: 2d6+2",
 
         "ageRollOptions": "Options",
         "roll": "Roll Dice",
