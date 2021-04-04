@@ -1,10 +1,10 @@
-<form class="{{cssClass}}" autocomplete="off">
-    <div class="colorset-{{colorset}}" id="age-tracker">
+<form class="{{cssClass}} colorset-{{colorset}}" autocomplete="off">
+    <div class="flexcol" id="age-tracker">
         {{!-- Serendipity Tracker --}}
         {{#if hasSerendipity}}
         <div class="age-serendipity colorset-second-tier flexrow">
             {{#if isGM}}
-            <a class="mod minus" data-chg-qtd="1" data-op="minus"><i class="fa fa-minus" aria-hidden="true"></i></a>
+            <a class="ser-mod minus"><i class="fa fa-minus" aria-hidden="true"></i></a>
             {{/if}}
             {{#each serDie as |die|}}
             <div class="die">
@@ -26,14 +26,23 @@
             </div>
             {{/each}}
             {{#if isGM}}
-            <a class="mod" data-chg-qtd="1" data-op="plus"><i class="fa fa-plus" aria-hidden="true"></i></a>
+            <a class="ser-mod"><i class="fa fa-plus" aria-hidden="true"></i></a>
             {{/if}}
         </div>
         {{/if}}
 
         {{!-- Complication/Churn Tracker --}}
+        {{#if isGM}}
         {{#if hasComplication}}
-        
+        <div class="age-comp flexrow flex-align-center colorset-second-tier">
+            <a class="comp-mod refresh"><i class="fa fa-reply"></i></a>
+            {{#each compData.tracker as |v k|}}
+            <div class="comp-checkbox {{#if v.check}}full-box{{/if}} {{#if (and v.milestone k)}}milestone{{/if}}" data-box-number="{{k}}"></div>
+            {{/each}}
+            <a class="comp-mod minus"><i class="fa fa-minus"></i></a>
+            <a class="comp-mod"><i class="fa fa-plus"></i></a>
+        </div>
+        {{/if}}
         {{/if}}
     </div>
 </form>

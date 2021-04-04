@@ -278,21 +278,23 @@ export const registerSystemSettings = function() {
     type: String,
     choices: {
       "none": "SETTINGS.complicationNone",
-      "complication": "SETTINGS.complicationComp",
-      "churn": "SETTINGS.complicationChurn"
-    },  
+      "complication": "SETTINGS.compcomplication",
+      "churn": "SETTINGS.compchurn"
+    },
+    onChange: () => {game.ageSystem.ageTracker.refresh()}
   });
 
   /**
-   * World's Complication/Chrun value
+   * World's Complication/Churn value
    */
    game.settings.register("age-system", "complicationValue", {
     name: "SETTINGS.complicationValue",
     // hint: "SETTINGS.complicationValueHint",
     scope: "world",
     config: false,
-    default: 0,
-    type: Number, 
+    default: {max: 30, actual: 0},
+    type: Object,
+    onChange: () => {if (game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh()}
   });  
 
   /**
@@ -305,6 +307,7 @@ export const registerSystemSettings = function() {
     config: true,
     default: "none",
     type: Boolean,
+    onChange: () => {game.ageSystem.ageTracker.refresh()}
   });
 
   /**

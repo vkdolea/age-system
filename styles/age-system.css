@@ -2164,33 +2164,64 @@
 }
 #age-tracker {
   position: fixed;
-  bottom: 80px;
-  left: 400px;
-  width: 200px;
+  bottom: 69px;
+  left: 260px;
+  width: 800px;
   max-width: max-content;
-  height: 52px;
   margin: 0px;
   padding: 0px;
-  cursor: pointer;
   display: inline-block;
-  z-index: 99;
-  opacity: 0.6;
+  z-index: 50;
+  opacity: 0.8;
 }
 #age-tracker a {
   padding-top: 4px;
-}
-#age-tracker a.mod {
-  margin-top: 2px;
-  margin-left: 8px;
-  margin-right: 8px;
 }
 #age-tracker div.age-serendipity {
   max-width: max-content;
   border-radius: 10px;
   padding: 4px;
 }
-#age-tracker .inactive {
-  opacity: 0.2;
+#age-tracker div.age-serendipity a.ser-mod {
+  margin-top: 2px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+#age-tracker div.age-serendipity .inactive {
+  opacity: 0.3;
+}
+#age-tracker .age-comp {
+  margin-top: 8px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 5px;
+  flex-wrap: nowrap;
+  max-width: max-content;
+}
+#age-tracker .age-comp a {
+  flex: 0 0 16px;
+}
+#age-tracker .age-comp a i {
+  width: 16px;
+  height: 16px;
+}
+#age-tracker .age-comp .comp-checkbox {
+  flex: 0 0 auto;
+  margin: auto 2px auto 2px;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  background: none;
+  border: 1px solid black;
+  background-color: #ffffff;
+}
+#age-tracker .age-comp .full-box {
+  background-color: #eb9e0f;
+}
+#age-tracker .age-comp .milestone.milestone {
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
 }
 #context-menu li {
   white-space: nowrap;
