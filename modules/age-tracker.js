@@ -66,7 +66,7 @@ export class AgeTracker extends Application {
 		const serData = game.settings.get("age-system", "serendipityValue");
 		let value;
 		if (event.shiftKey) value = 6;
-		if (!value && event.ctrltKey) value = 3;
+		if (!value && event.ctrlKey) value = 3;
 		if (!value) value = 1;
 		if (event.currentTarget.classList.contains('minus')) value = -value;
 		serData.actual += value;
