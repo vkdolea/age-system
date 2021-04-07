@@ -303,7 +303,8 @@
             "stunts",
             "relationship",
             "honorifics",
-            "membership"
+            "membership",
+            "shipfeatures"
         ],
         "templates": {
             "itemReq": {
@@ -460,15 +461,15 @@
                 }
             }
         },
-        "spaceshipFeatures": {
+        "shipfeatures": {
             "templates": ["description", "hardItem", "damage"],
-            "type": ["weapon", "focusAssist", "hullStrong", "hullFragile", "vulnerable"],
+            "type": "pdc",
+            "damage": "",
             "sensorMod": 0,
             "maneuverSizeStep": 0,
             "juiceMod": 0,
             "hullPlating": 0,
             "hullFragile": 0,
-            "weaponType": "pdc",
             "useFocus": "",
             "useAbl": "",
             "isQuality": false,

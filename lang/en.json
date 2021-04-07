@@ -3,7 +3,7 @@
     "ACTOR.TypeChar": "Player Character",
     "ACTOR.TypeVehicle": "Vehicle",
     "ACTOR.TypeSpaceship": "Spaceship",
-    "ITEM.TypeStunts": "Stunts",
+    "ITEM.TypeStunts": "Stunt",
     "ITEM.TypeEquipment": "General Equipment",
     "ITEM.TypePower": "Power & Arcana",
     "ITEM.TypeTalent": "Talent",
@@ -12,7 +12,7 @@
     "ITEM.TypeRelationship": "Relationship",
     "ITEM.TypeHonorifics": "Honorifics",
     "ITEM.TypeMembership": "Membership",
-    "ITEM.TypeSpaceshipfeatures": "Spaceship Features",
+    "ITEM.TypeShipfeatures": "Spaceship Feature",
 
     "SETTINGS.useConviction": "Use Conviction",
     "SETTINGS.useConvictionHint": "Enable Conviction block for tracking",
@@ -55,6 +55,8 @@
     "SETTINGS.colorRoninGreen": "Ronin Green",
     "SETTINGS.colorExpandedBlue": "The Expanse",
     "SETTINGS.colorFoldedPurple": "Folded Purple",
+    "SETTINGS.colorSelectOne": "Select One",
+    "SETTINGS.colorTheGrey": "The Grey",
 
     "SETTINGS.gameMode": "Select game mode, if any",
     "SETTINGS.gameModeHint": "Select game mode (as explained on Modern AGE) or none if the setting doesn't state any",
@@ -174,7 +176,15 @@
             "sensorsLoss": "Sensors",
             "weaponsLoss": "Weapons",
             "reactorOfflineLoss": "Reactor Offline",
-            "weaponOfflineLoss": "Weapon Offline"
+            "weaponOfflineLoss": "Weapon Offline",
+            "featuresType": "Feature",
+            "sensorMod": "Sensor Bonus",
+            "maneuverSizeMod": "Maneuver Size Step",
+            "juiceMod": "Juice Bonus",
+            "hullPlating": "Hull Category Increase",
+            "hullMod": "Hull Bonus",
+            "rollable": "Rollable Feature",
+            "weapon": "Mounted Weapon"
         },
         "damageControl": "Damage Control",
         "parameters": "Parameters",

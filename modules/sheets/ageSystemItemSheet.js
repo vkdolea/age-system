@@ -1,4 +1,5 @@
 import {ageSystem} from "../config.js";
+import { sortObjArrayByName } from "../setup.js";
 
 export default class ageSystemItemSheet extends ItemSheet {
     constructor(...args) {
@@ -70,6 +71,19 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Sheet color
         data.colorScheme = game.settings.get("age-system", "colorScheme");
+
+        // Spacechip Features
+        if (this.item.data.type === "shipfeatures") {
+            data.config.featuresTypeLocal = [];
+            for (let f = 0; f < data.config.featuresType.length; f++) {
+                const feat = data.config.featuresType[f];
+                data.config.featuresTypeLocal.push({
+                    key: feat,
+                    name: game.i18n.localize(`age-system.spaceship.${feat}`)
+                });
+            }
+            data.config.featuresTypeLocal = sortObjArrayByName(data.config.featuresTypeLocal, "name");
+        }
 
         return data;
     };

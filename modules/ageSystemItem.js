@@ -11,6 +11,7 @@ export class ageSystemItem extends Item {
         };
         if (!this.data.name) this.data.name = "New " + this.entity;       
         this.data = duplicate(this._data);
+        if (this.data.type === "shipfeatues") return this._prepareShipFeatures();
         
         const itemData = this.data;
         const data = itemData.data;
@@ -63,6 +64,12 @@ export class ageSystemItem extends Item {
         }
 
         this.prepareEmbeddedEntities();        
+    };
+
+    _prepareShipFeatures() {
+        const itemData = this.data;
+        const data = itemData.data;        
+        
     };
 
     _idFocusToUse(itemType, useFocus) {

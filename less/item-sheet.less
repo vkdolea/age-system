@@ -53,7 +53,14 @@
     .honorifics,
     .relationship,
     .membership,
+    .shipfeatures,
     .vehicle {
+        label.part-desc.part-desc,
+        .part-desc-value.part-desc-value {
+            max-width: none;
+            flex: 0 0 50%;
+            text-align: center;
+        }
 
         img {
             min-height: 60px;
@@ -237,8 +244,8 @@
             padding: 4px 10px;
             border-radius: 0px 0px 10px 10px;
 
-            .editor {
-                height: 100%;
+            div.editor.editor {
+                height: 90%;
             };
 
             label:last-of-type {

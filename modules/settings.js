@@ -214,6 +214,8 @@ export const registerSystemSettings = function() {
       "ronin-green": "SETTINGS.colorRoninGreen",
       // "expanded-blue": "SETTINGS.colorExpandedBlue",
       "folded-purple": "SETTINGS.colorFoldedPurple",
+      "select-one": "SETTINGS.colorSelectOne",
+      "the-grey": "SETTINGS.colorTheGrey",
     },
     onChange:()=>{
       const newColor = game.settings.get("age-system", "colorScheme");
@@ -226,7 +228,7 @@ export const registerSystemSettings = function() {
         o.update({});
         if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
       });
-      if (game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh();
+      if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
     }
   });
 

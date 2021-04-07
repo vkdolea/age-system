@@ -37,6 +37,7 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - [Briefcase](https://game-icons.net/1x1/delapouite/briefcase.html) (General Equipment icon), by [Delapouite](https://delapouite.com/).
 - [Rank 3](https://game-icons.net/1x1/skoll/rank-3.html) (Honorifics icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
 - [Fist](https://game-icons.net/1x1/skoll/fist.html) (Weapon icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
+- [Processor](https://game-icons.net/1x1/lorc/processor.html) (Spaceship Features icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
 ### Localization
 - **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
@@ -81,6 +82,11 @@ Here the description of each one of the Modificators:
 - Complication tracker (Modern AGE Companion).
 - Churn tracker (The Expanse RPG).
 - Right Clicking the Age Roller icon will roll 1d6 (use Left Click + Alt to modify the standard 3d6 roll).
+- Added 2 new color sets for character sheet.
+- Added Spaceship Features item, to add Qualities and Flaws to spaceships.
+#### Fix
+- Fixed bug preventing MCE editor to enter editing mode in some Item sheets.
+
 
 ### 0.5.1 [2021-03-25]
 #### Fix

@@ -199,7 +199,13 @@ ageSystem.spaceshipCrewCompetence = {
     capable: 3,
     skilled: 4,
     elite: 5
-}
+};
+
+// Spaceship Features
+ageSystem.featuresType = [
+    "sensorMod", "maneuverSizeMod", "juiceMod",
+    "hullPlating", "hullMod", "rollable", "weapon"
+];
 
 const itemIconPath = "systems/age-system/resources/imgs/item-icon/";
 ageSystem.itemIcons = {
@@ -211,7 +217,8 @@ ageSystem.itemIcons = {
     "relationship": `${itemIconPath}player-next.svg`,
     "membership": `${itemIconPath}backup.svg`,
     "weapon": `${itemIconPath}fist.svg`,
-    "focus": `${itemIconPath}gift-of-knowledge.svg`
+    "focus": `${itemIconPath}gift-of-knowledge.svg`,
+    "shipfeatures": `${itemIconPath}processor.svg`
 };
 
 const actorIconPath = "systems/age-system/resources/imgs/actor-icon/";

@@ -32,12 +32,35 @@
 
 /** Ronin Green Colors **/
 @ronin-green: #155f0e;
-// @ronin-green: #1d8514;
 @ronin-green-high: #92b65f;
 @ronin-green-mid: #c2f5aa;
 @ronin-green-font: #ffffff;
 @ronin-green-light-font: #000000;
 @ronin-green-list: @ronin-green, @ronin-green-high, @ronin-green-mid, @ronin-green-font, @ronin-green-light-font;
+
+/** Select One **/
+@select-one: #273249;
+@select-one-high: #4d627a;
+@select-one-mid: #768d9f;
+@select-one-font: #e7ccc3;
+@select-one-light-font: #360808;
+@select-one-list: @select-one, @select-one-high, @select-one-mid, @select-one-font, @select-one-light-font;
+
+/** This is the Way **/
+@the-grey: #3d3e3f;
+@the-grey-high: #6b6a6a;
+@the-grey-mid: #b4b6b3;
+@the-grey-font: #ccc9c9;
+@the-grey-light-font: #000000;
+@the-grey-list: @the-grey, @the-grey-high, @the-grey-mid, @the-grey-font, @the-grey-light-font;
+
+/** Color Template **/
+// @color-set:
+// @color-set-high:
+// @color-set-mid:
+// @color-set-font:
+// @color-set-light-font:
+// @color-set-list: @color-set, @color-set-high, @color-set-mid, @color-set-font, @color-set-light-font;
 
 /** Game Mode Colors **/
 @gritty-color: #DA9E89;
@@ -53,8 +76,8 @@
 
 // LESS loop to create color schemes - add new name on @colorsets, add color array at @color-list.
 // Name inside @colorsets must be the same key on game Settings!
-@colorsets: modern-blue, fantasy-blue, dragon-red, folded-purple, ronin-green;
-@color-list: @modern-blue-list, @fantasy-blue-list, @dragon-red-list, @folded-purple-list, @ronin-green-list;
+@colorsets: modern-blue, fantasy-blue, dragon-red, folded-purple, ronin-green, select-one, the-grey;
+@color-list: @modern-blue-list, @fantasy-blue-list, @dragon-red-list, @folded-purple-list, @ronin-green-list, @select-one-list, @the-grey-list;
 
 each(@colorsets, {
     .colorset-@{value} {
@@ -154,7 +177,8 @@ each(@colorsets, {
         .stunts,
         .honorifics,
         .membership,
-        .relationship {
+        .relationship,
+        .shipfeatures {
             img {
                 border: 1px solid extract(extract(@color-list, @index), 1);
             }
