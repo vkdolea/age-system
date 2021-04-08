@@ -1232,9 +1232,6 @@
 .age-system.sheet .window-content {
   background-color: #d1b7ab;
 }
-.age-system.sheet.spaceship {
-  font-variant: small-caps;
-}
 .age-system.sheet.spaceship h2,
 .age-system.sheet.spaceship h3 {
   text-align: center;
@@ -2678,19 +2675,24 @@
   width: 16px;
   cursor: pointer;
 }
+@font-face {
+  font-family: "Ethernal Knight";
+  src: url("../resources/fonts/eternalknight/eternalknight.otf");
+}
 #context-menu li {
   white-space: nowrap;
   text-align: left;
 }
+/*----------- General Styling ------------*/
 .age-system input,
 .age-system select {
   border: none;
+  font-variant: small-caps;
 }
 /*---------Background---------------------*/
 .window-app.sheet.char .window-content,
 .window-app.sheet.vehicle .window-content,
-.window-app.sheet.spaceship .window-content,
-.window-app.journal .window-content {
+.window-app.sheet.spaceship .window-content {
   background-image: none;
   background: none;
   background-color: rgba(207, 194, 188, 0.6);

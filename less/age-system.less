@@ -7,6 +7,12 @@
 @import "./age-roller.less";
 @import "./age-tracker.less";
 
+// Adding Fonts
+@font-face {
+    font-family: "Ethernal Knight";
+    src: url("../resources/fonts/eternalknight/eternalknight.otf");
+}
+
 // Avoid text on context-menu from wrapping
 #context-menu {
     li {
@@ -15,18 +21,23 @@
     };
 }
 
+/*----------- General Styling ------------*/
 .age-system {
+    // font-family: 'Ethernal Knight';
+    // font-style: normal;
+    // font-weight: 200;
     input,
     select {
         border: none;
+        font-variant: small-caps;
     }
 }
 
 /*---------Background---------------------*/
+// .window-app.journal-sheet .window-content,
 .window-app.sheet.char .window-content,
 .window-app.sheet.vehicle .window-content,
-.window-app.sheet.spaceship .window-content,
-.window-app.journal .window-content {
+.window-app.sheet.spaceship .window-content {
     background-image: none;
     background: none;
     background-color: rgba(207, 194, 188, 0.6);
