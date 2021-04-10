@@ -114,7 +114,8 @@
             "originTokenMissing": "Action owner (Actor or Unlinked Token) doesn't exist anymore.",
             "alreadyOnboard": "Passenger {name} ({id}) is already onboard!",
             "vehicleIsNotPassenger": "A vehicle can not be a passenger.",
-            "userNotAvailable": "Actor {name} ({id}) is not available."
+            "userNotAvailable": "Actor {name} ({id}) is not available.",
+            "shipPartsOnChar": "Spaceship Features Item type can not be droped on Character sheet."
         },
 
         "spaceship": {
@@ -140,6 +141,9 @@
                 "skilled": "Skilled",
                 "elite": "Elite"
             },
+            "qualityType": "Type",
+            "quality": "Quality",
+            "flaw": "Flaw",
             "systems": "Systems",
             "systemName": {
                 "command": "Command",
@@ -183,8 +187,9 @@
             "juiceMod": "Juice Bonus",
             "hullPlating": "Hull Category Increase",
             "hullMod": "Hull Bonus",
-            "rollable": "Rollable Feature",
-            "weapon": "Mounted Weapon"
+            "rollable": "Rollable",
+            "weapon": "Mounted Weapon",
+            "special": "Special"
         },
         "damageControl": "Damage Control",
         "parameters": "Parameters",

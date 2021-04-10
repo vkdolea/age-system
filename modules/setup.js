@@ -85,14 +85,15 @@ export function addColorScheme(html) {
 export function nameItemSheetWindow(ageSystemItemSheet) {
 
     // Add item type in the title bar within brackets
-    const itemType = ageSystemItemSheet.item.type;
+    const i = ageSystemItemSheet.item.type.toLowerCase();
+    const itemType = i[0].toUpperCase() + i.slice(1);
     let itemWindowId = `item-${ageSystemItemSheet.item._id}`;
     if (ageSystemItemSheet.actor !== null) {
         itemWindowId = `actor-${ageSystemItemSheet.actor.id}-${itemWindowId}`;
     };
     let itemWindow = document.getElementById(itemWindowId);
     let windowHeader = itemWindow.children[0].firstElementChild;
-    windowHeader.textContent += ` [${game.i18n.localize("age-system." + itemType)}]`;
+    windowHeader.textContent += ` [${game.i18n.localize("ITEM.Type" + itemType)}]`;
 };
 
 export function sortObjArrayByName(nameArray, nameKey) {

@@ -463,17 +463,16 @@
         },
         "shipfeatures": {
             "templates": ["description", "hardItem", "damage"],
-            "type": "pdc",
+            "type": "weapon",
             "damage": "",
             "sensorMod": 0,
             "maneuverSizeStep": 0,
             "juiceMod": 0,
             "hullPlating": 0,
-            "hullFragile": 0,
+            "hullMod": 0,
             "useFocus": "",
             "useAbl": "",
-            "isQuality": false,
-            "isFlaw": false
+            "quality": "quality"
         },
         "equipment": {
             "templates": ["description", "hardItem", "bonuses"]

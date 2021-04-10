@@ -147,14 +147,27 @@
     }
     .weapon-block {
         ul.weapon-list {
+            li.item-desc {
+                .weapon-name,
+                .weapon-dmg {
+                    background-color: rgba(0, 0, 0, 0.05);
+                };
+                p {
+                    padding: 1% 0;
+                    margin: 0;
+                    border-radius: 4px;
+                    height: 26px;
+                    vertical-align: middle;
+                }
+            }
             list-style-type: none;
             li {
                 text-align: center;
                 margin-bottom: 4px;
-                .weapon-ctrl {
+                .weapon-remove {
                     flex: 0 0 16px;
                 }
-                .weapon-name {
+                .weapon-name.weapon-name {
                     flex: 0 0 150px;
                     margin-right: 4px;
                 }

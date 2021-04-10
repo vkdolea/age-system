@@ -203,7 +203,7 @@ ageSystem.spaceshipCrewCompetence = {
 
 // Spaceship Features
 ageSystem.featuresType = [
-    "sensorMod", "maneuverSizeMod", "juiceMod",
+    "sensorMod", "maneuverSizeMod", "juiceMod", "special",
     "hullPlating", "hullMod", "rollable", "weapon"
 ];
 

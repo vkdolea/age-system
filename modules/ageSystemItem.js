@@ -11,7 +11,7 @@ export class ageSystemItem extends Item {
         };
         if (!this.data.name) this.data.name = "New " + this.entity;       
         this.data = duplicate(this._data);
-        if (this.data.type === "shipfeatues") return this._prepareShipFeatures();
+        if (this.data.type === "shipfeatures") return this._prepareShipFeatures();
         
         const itemData = this.data;
         const data = itemData.data;
@@ -68,8 +68,35 @@ export class ageSystemItem extends Item {
 
     _prepareShipFeatures() {
         const itemData = this.data;
-        const data = itemData.data;        
+        const data = itemData.data;
+        const featType = data.type;
+
+        switch (featType) {
+            case "sensorMod":
+                data.quality = data[featType] < 0 ? "flaw" : "quality";
+                break;
+            
+            case "maneuverSizeStep":
+                data.quality = data[featType] >= 0 ? "flaw" : "quality";
+                break;
+            
+            case "juiceMod":
+                data.quality = data[featType] <= 0 ? "flaw" : "quality";
+                break;
+
+            case "hullPlating":
+                data.quality = data[featType] <= 0 ? "flaw" : "quality";
+                break;
+
+            case "hullMod":
+                data.quality = data[featType] < 0 ? "flaw" : "quality";
+                break;
+                
+            default:
+                break;
+        }
         
+        this.prepareEmbeddedEntities();
     };
 
     _idFocusToUse(itemType, useFocus) {
@@ -236,7 +263,8 @@ export class ageSystemItem extends Item {
         "power": "systems/age-system/templates/sheets/power-sheet.hbs",
         "relationship": "systems/age-system/templates/sheets/relationship-sheet.hbs",
         "honorifics": "systems/age-system/templates/sheets/honorifics-sheet.hbs",
-        "membership": "systems/age-system/templates/sheets/membership-sheet.hbs"
+        "membership": "systems/age-system/templates/sheets/membership-sheet.hbs",
+        "shipfeatures": "systems/age-system/templates/sheets/shipfeatures-sheet.hbs"
     };
 
     // Returns owned Focus Item entity used to activate this item - false otherwise

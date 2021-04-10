@@ -1,5 +1,6 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
+import { sortObjArrayByName } from "../setup.js";
 
 export default class ageSpaceshipSheet extends ActorSheet {
     
@@ -34,17 +35,16 @@ export default class ageSpaceshipSheet extends ActorSheet {
         // TODO - method on Actor entity to for prepareData() running on Vehicle data em database is updated.
         const data = super.getData();
         data.config = CONFIG.ageSystem;
-        data.passengers = this.actor.data.data.passengers.sort(function(a, b) {
-            const nameA = a.name.toLowerCase();
-            const nameB = b.name.toLowerCase();
-            if (nameA < nameB) {
-              return -1;
-            }
-            if (nameA > nameB) {
-              return 1;
-            }
-            return 0;
-        });
+        data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
+
+        const itemSorted = sortObjArrayByName(data.items, "name");
+        data.sensorMod = itemSorted.filter(i => i.data.type === "sensorMod");
+        data.maneuverSizeMod = itemSorted.filter(i => i.data.type === "maneuverSizeMod");
+        data.juiceMod = itemSorted.filter(i => i.data.type === "juiceMod");
+        data.hullPlating = itemSorted.filter(i => i.data.type === "hullPlating");
+        data.hullMod = itemSorted.filter(i => i.data.type === "hullMod");
+        data.rollable = itemSorted.filter(i => i.data.type === "rollable");
+        data.weapon = itemSorted.filter(i => i.data.type === "weapon");
 
         // Setting which ability settings will be used
         const ablSelect = game.settings.get("age-system", "abilitySelection");
@@ -60,9 +60,9 @@ export default class ageSpaceshipSheet extends ActorSheet {
     };
 
     //  Modification on standard _onDropItem() to prevent user from dropping items on Vehicle Actor
-    async _onDropItem(event, data) {
-        return false;
-    };
+    // async _onDropItem(event, data) {
+    //     return false;
+    // };
 
     activateListeners(html) {
         if (this.isEditable) {
@@ -84,6 +84,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             ev.target.classList.remove("dragover")
             const dragData = JSON.parse(ev.originalEvent.dataTransfer.getData("text/plain"))
             const passenger = game.actors.get(dragData.id);
+            if (!passenger) return;
             if (passenger.data.type === "char") {
 
                 const passengerData = {
