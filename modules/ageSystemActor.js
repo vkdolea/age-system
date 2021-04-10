@@ -264,9 +264,6 @@ export class ageSystemActor extends Actor {
 
         data.hull.extraTotal = Number(data.hull.extraValue) - Number(nloss.hull.actual);
 
-        // Weapons System
-        data.weapons = this.sortWeapon(data.weapons);
-
         return data
     }
 

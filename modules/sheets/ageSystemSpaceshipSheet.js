@@ -59,10 +59,27 @@ export default class ageSpaceshipSheet extends ActorSheet {
         return data;
     };
 
-    //  Modification on standard _onDropItem() to prevent user from dropping items on Vehicle Actor
-    // async _onDropItem(event, data) {
-    //     return false;
-    // };
+    // Modification on standard _onDropItem() to prevent user from dropping Items other than Spaceship Features on Spaceships
+    async _onDropItem(event, data) {
+        if ( !this.actor.owner ) return false;
+        const item = await Item.fromDropData(data);
+        /*-----------Beginning of added code--------------*/
+        if (item.data.type !== "shipfeatures") {
+            let warning = game.i18n.localize("age-system.WARNING.nonShipPartsOnShip");
+            ui.notifications.warn(warning);
+            return false;
+        }
+        /*-------------End of added code------------------*/
+        const itemData = duplicate(item.data);
+        
+        const actor = this.actor;
+        // Handle item sorting within the same Actor
+        let sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id));
+        if (sameActor) return this._onSortItem(event, itemData);
+
+        // Create the owned item
+        return this._onDropItemCreate(itemData);
+    };
 
     activateListeners(html) {
         if (this.isEditable) {
@@ -85,13 +102,17 @@ export default class ageSpaceshipSheet extends ActorSheet {
             const dragData = JSON.parse(ev.originalEvent.dataTransfer.getData("text/plain"))
             const passenger = game.actors.get(dragData.id);
             if (!passenger) return;
+            // const actor = this.actor;
+            let actor
+            if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data._id].actor;
+            if (!actor) actor = this.actor;
             if (passenger.data.type === "char") {
 
                 const passengerData = {
                     id : passenger.id,
                     isToken : passenger.isToken
                 };
-                const passengerList = this.actor.data.data.passengers;
+                const passengerList = actor.data.data.passengers;
                 let alreadyOnboard = false;
                 passengerList.map( p => {
                     if (p.id === passengerData.id) {
@@ -104,7 +125,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
                 if (!alreadyOnboard) {
                     passengerList.push(passengerData);
-                    this.actor.update({"data.passengers" : passengerList})
+                    actor.update({"data.passengers" : passengerList});
                 }
             } else {
                 const warning = game.i18n.localize("age-system.WARNING.vehicleIsNotPassenger");
@@ -118,8 +139,8 @@ export default class ageSpaceshipSheet extends ActorSheet {
             html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
             html.find(".change-loss").click(this._onChangeLoss.bind(this));
-            html.find(".weapon-ctrl.add").click(this._onClickAddWeapon.bind(this));
-            html.find(".weapon-ctrl.remove").click(this._onClickRemoveWeapon.bind(this));
+            // html.find(".weapon-ctrl.add").click(this._onClickAddWeapon.bind(this));
+            // html.find(".weapon-ctrl.remove").click(this._onClickRemoveWeapon.bind(this));
 
             // let handler = ev => this._onDragStart(ev);
             // // Find all rollable items on the character sheet.
@@ -134,25 +155,6 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
         super.activateListeners(html);
     };
-
-    _onClickAddWeapon(event) {
-        const newWeapon = {}
-        newWeapon.name = "";
-        newWeapon.dmgFormula = "";
-        let weapons = this.actor.data.data.weapons;
-        weapons["newWpn"] = newWeapon;
-        weapons = this.actor.sortWeapon(weapons);
-        this.actor.update({"data.weapons": weapons});
-    }
-
-    _onClickRemoveWeapon(event) {
-        const wKey = event.currentTarget.dataset.wpnKey;
-        let weapons = this.actor.data.data.weapons;
-        delete weapons[wKey];
-        weapons = this.actor.sortWeapon(weapons);
-        this.actor.update({"data.weapons": null});
-        this.actor.update({"data.weapons": weapons});
-    }
 
     _onChangeLoss(event) {
         const lossSev = event.currentTarget.closest(".feature-controls").dataset.lossSev;

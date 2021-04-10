@@ -88,7 +88,7 @@
                     </div>
                     
                 </fieldset>
-                <fieldset class="hull">
+                {{!-- <fieldset class="hull">
                     <legend>{{localize "age-system.spaceship.hull"}}</legend>
                     <div class="flexrow flex-align-center flex-justify-center hull">
                         <label class="parameter-label">{{localize "age-system.base"}}</label>
@@ -104,7 +104,7 @@
                         <label class="parameter-label">{{localize "age-system.spaceship.loss"}}</label>
                         <input class="hull-extra-damage" disabled type="number" name="data.losses.normal.hull.actual" value="{{data.losses.normal.hull.actual}}" data-dtype="Number" />
                     </div>
-                </fieldset>
+                </fieldset> --}}
                 <fieldset class="sensors">
                     <legend>{{localize "age-system.spaceship.systemName.sensors"}}</legend>
                     <div class="flexrow flex-align-center">
@@ -177,8 +177,26 @@
                     </div>
                 </div>
             </div>    
-            <div class="weapon-block">
+            <div class="combat-block">
                 <h2>{{localize "age-system.weaponContainer"}}</h2>
+                <fieldset class="hull">
+                    <legend><a><i class="fas fa-dice"></i></a> {{localize "age-system.spaceship.hull"}}</legend>
+                    <div class="flexrow flex-align-center flex-justify-center hull">
+                        <label class="hull-label">{{localize "age-system.base"}}</label>
+                        <input class="hull-dice-qtd" type="number" name="data.hull.nrDice" value="{{data.hull.nrDice}}" data-dtype="Number" />
+                        <select class="hull-dice-type" name="data.hull.diceType" class="dice-size">
+                            {{#select data.hull.diceType}}
+                            <option value="">{{localize "age-system.rof.none"}}</option>
+                            <option value="6">{{localize "age-system.settings.d6"}}</option>
+                            <option value="3">{{localize "age-system.settings.d3"}}</option>
+                            {{/select}}
+                        </select>
+                        <label class="hull-label">{{localize "age-system.mod"}}</label>
+                        <input class="hull-extra-damage" type="number" name="data.hull.extraValue" value="{{data.hull.extraValue}}" data-dtype="Number" />
+                        <label class="hull-label">{{localize "age-system.spaceship.loss"}}</label>
+                        <input class="hull-extra-damage" disabled type="number" name="data.losses.normal.hull.actual" value="{{data.losses.normal.hull.actual}}" data-dtype="Number" />
+                    </div>
+                </fieldset>
                 <ul class="weapon-list">
                     <li class="flexrow">
                         <div class="weapon-name"><label for="">{{localize "age-system.item.name"}}</label></div>
@@ -189,6 +207,7 @@
                     <li class="flexrow item-desc flex-align-center" data-item-id="{{item._id}}">
                         <p class="weapon-name">{{item.name}}</p>
                         <p class="weapon-dmg">{{item.data.damage}}</p>
+                        <a class="weapon-dmg-roll attack"><i class="fas fa-dice"></i></a>
                         <a class="weapon-dmg-roll"><i class="fas fa-fist-raised"></i></a>
                         <a class="weapon-remove"><i class="fa fa-trash"></i></a>
                     </li>

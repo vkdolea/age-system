@@ -1244,6 +1244,9 @@
 .age-system.sheet .window-content {
   background-color: #d1b7ab;
 }
+.age-system.sheet.spaceship {
+  font-variant: small-caps;
+}
 .age-system.sheet.spaceship h2,
 .age-system.sheet.spaceship h3 {
   text-align: center;
@@ -1308,18 +1311,6 @@
 .age-system.sheet.spaceship div.parameters.container .parameter-label {
   flex: 0 0 50px;
 }
-.age-system.sheet.spaceship div.parameters.container div.hull {
-  margin: auto;
-}
-.age-system.sheet.spaceship div.parameters.container .hull-dice-qtd {
-  flex: 0 0 20px;
-}
-.age-system.sheet.spaceship div.parameters.container .hull-dice-type {
-  flex: 0 0 40px;
-}
-.age-system.sheet.spaceship div.parameters.container .hull-extra-damage {
-  flex: 0 0 30px;
-}
 .age-system.sheet.spaceship fieldset {
   border-radius: 5px;
   border-width: 1px;
@@ -1357,38 +1348,56 @@
 .age-system.sheet.spaceship fieldset.sensors label.sensors-field {
   flex: 0 0 50px;
 }
-.age-system.sheet.spaceship .weapon-block ul.weapon-list {
+.age-system.sheet.spaceship .combat-block {
+  text-align: center;
+}
+.age-system.sheet.spaceship .combat-block .hull-label {
+  flex: 0 0 50px;
+}
+.age-system.sheet.spaceship .combat-block div.hull {
+  margin: auto;
+}
+.age-system.sheet.spaceship .combat-block .hull-dice-qtd {
+  flex: 0 0 20px;
+}
+.age-system.sheet.spaceship .combat-block .hull-dice-type {
+  flex: 0 0 40px;
+}
+.age-system.sheet.spaceship .combat-block .hull-extra-damage {
+  flex: 0 0 30px;
+}
+.age-system.sheet.spaceship .combat-block ul.weapon-list {
   list-style-type: none;
 }
-.age-system.sheet.spaceship .weapon-block ul.weapon-list li.item-desc .weapon-name,
-.age-system.sheet.spaceship .weapon-block ul.weapon-list li.item-desc .weapon-dmg {
+.age-system.sheet.spaceship .combat-block ul.weapon-list li.item-desc .weapon-name,
+.age-system.sheet.spaceship .combat-block ul.weapon-list li.item-desc .weapon-dmg {
   background-color: rgba(0, 0, 0, 0.05);
 }
-.age-system.sheet.spaceship .weapon-block ul.weapon-list li.item-desc p {
+.age-system.sheet.spaceship .combat-block ul.weapon-list li.item-desc p {
   padding: 1% 0;
   margin: 0;
   border-radius: 4px;
   height: 26px;
   vertical-align: middle;
 }
-.age-system.sheet.spaceship .weapon-block ul.weapon-list li {
+.age-system.sheet.spaceship .combat-block ul.weapon-list li {
   text-align: center;
   margin-bottom: 4px;
 }
-.age-system.sheet.spaceship .weapon-block ul.weapon-list li .weapon-remove {
+.age-system.sheet.spaceship .combat-block ul.weapon-list li .weapon-remove {
   flex: 0 0 16px;
 }
-.age-system.sheet.spaceship .weapon-block ul.weapon-list li .weapon-name.weapon-name {
+.age-system.sheet.spaceship .combat-block ul.weapon-list li .weapon-name.weapon-name {
   flex: 0 0 150px;
   margin-right: 4px;
 }
-.age-system.sheet.spaceship .weapon-block ul.weapon-list li .weapon-dmg {
+.age-system.sheet.spaceship .combat-block ul.weapon-list li .weapon-dmg {
   flex: 0 0 100px;
 }
-.age-system.sheet.spaceship .weapon-block ul.weapon-list li .weapon-dmg-roll {
+.age-system.sheet.spaceship .combat-block ul.weapon-list li .weapon-dmg-roll {
   flex: 0 0 16px;
 }
-.age-system.sheet.spaceship .weapon-block ul.weapon-list li .weapon-dmg-roll i {
+.age-system.sheet.spaceship .combat-block ul.weapon-list li .weapon-dmg-roll i {
   width: fit-content;
 }
 .age-system.sheet.spaceship .stats-block.losses h3 {

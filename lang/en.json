@@ -115,7 +115,8 @@
             "alreadyOnboard": "Passenger {name} ({id}) is already onboard!",
             "vehicleIsNotPassenger": "A vehicle can not be a passenger.",
             "userNotAvailable": "Actor {name} ({id}) is not available.",
-            "shipPartsOnChar": "Spaceship Features Item type can not be droped on Character sheet."
+            "shipPartsOnChar": "Spaceship Features Item type can not be droped on Character sheet.",
+            "nonShipPartsOnShip": "Only Spaceship Features item type can be droped on Spaceships."
         },
 
         "spaceship": {

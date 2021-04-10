@@ -4,7 +4,7 @@
 }
 
 .age-system.sheet.spaceship {
-    // font-variant: small-caps;
+    font-variant: small-caps;
 
     h2,
     h3 {
@@ -85,19 +85,6 @@
         .parameter-label{
             flex: 0 0 50px;
         }
-
-        div.hull {
-            margin: auto;
-        }
-        .hull-dice-qtd {
-            flex: 0 0 20px;
-        }
-        .hull-dice-type {
-            flex: 0 0 40px;
-        }
-        .hull-extra-damage {
-            flex: 0 0 30px;
-        }
         // .ship-size {
         //     flex: 0 0 126px;
         // }
@@ -145,7 +132,27 @@
             flex: 0 0 50px;
         }
     }
-    .weapon-block {
+    .combat-block {
+        text-align: center;
+
+        // Hull Fieldset
+        .hull-label {
+            flex: 0 0 50px;
+        }
+        div.hull {
+            margin: auto;
+        }
+        .hull-dice-qtd {
+            flex: 0 0 20px;
+        }
+        .hull-dice-type {
+            flex: 0 0 40px;
+        }
+        .hull-extra-damage {
+            flex: 0 0 30px;
+        }
+
+        // Weapon List
         ul.weapon-list {
             li.item-desc {
                 .weapon-name,
