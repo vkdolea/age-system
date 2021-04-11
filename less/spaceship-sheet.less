@@ -4,7 +4,27 @@
 }
 
 .age-system.sheet.spaceship {
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
     font-variant: small-caps;
+
+    p {
+        // padding: 1% 0;
+        margin: 0;
+        border-radius: 4px;
+        height: 26px;
+        // vertical-align: middle;
+        padding-top: 5px;
+    }
+
+    .user-data {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 4px;
+        height: 26px;
+        padding-top: 5px; // Considering font size of 14px
+    }
 
     h2,
     h3 {
@@ -24,6 +44,7 @@
     ul.systems-list {
         text-align: center;
         li {
+            margin-top: 4px;
             .system-roll {
                 flex: 0 0 16px;
                 margin-right: 4px;
@@ -85,14 +106,20 @@
         .parameter-label{
             flex: 0 0 50px;
         }
-        // .ship-size {
-        //     flex: 0 0 126px;
-        // }
     }
 
     fieldset {
         border-radius: 5px;
         border-width: 1px;
+    }
+    .crew-size-penalty {
+        margin-top: 4px;
+        label {
+            flex: 0 0 110px;
+        }
+        p {
+            flex: 0 0 30px;
+        }
     }
     .crew-details {
         padding: 0;
@@ -120,37 +147,54 @@
         }
     }
 
-    .passenger.container {
-        flex: 0 0 45%;
-    }
     fieldset.sensors {
-        .sensors-field {
-            flex: 0 0 20px;
+        .sensor-field {
+            flex: 0 0 80px;
             text-align: center;
+            margin-top: 4px;
         }
-        label.sensors-field {
+        label.sensor-field {
             flex: 0 0 50px;
         }
     }
-    .combat-block {
-        text-align: center;
-
+    .hull {
         // Hull Fieldset
+        padding: 4px;
+        .ship-size {
+            flex: 0 0 92px;
+            font-size: 10px;
+        }
         .hull-label {
             flex: 0 0 50px;
         }
         div.hull {
-            margin: auto;
+            // margin: auto;
+            padding: 0;
         }
-        .hull-dice-qtd {
-            flex: 0 0 20px;
+        .hull-value {
+            flex: 0 0 92px;
+            margin: 0;
+            margin-top: 4px;
         }
-        .hull-dice-type {
-            flex: 0 0 40px;
+    }
+    .hull-sensor {
+        flex: 0 0 100px;
+    }
+    .combat-block {
+        text-align: center;
+        flex: 0 0 100px;
+        .inuse {
+            cursor: pointer;
         }
-        .hull-extra-damage {
-            flex: 0 0 30px;
-        }
+        // .hull-dice-qtd {
+        //     flex: 0 0 20px;
+        // }
+        // .hull-dice-type {
+        //     flex: 0 0 40px;
+        // }
+        // .hull-extra-damage {
+        //     flex: 0 0 30px;
+        // }
 
         // Weapon List
         ul.weapon-list {
@@ -159,15 +203,7 @@
                 .weapon-dmg {
                     background-color: rgba(0, 0, 0, 0.05);
                 };
-                p {
-                    padding: 1% 0;
-                    margin: 0;
-                    border-radius: 4px;
-                    height: 26px;
-                    vertical-align: middle;
-                }
             }
-            list-style-type: none;
             li {
                 text-align: center;
                 margin-bottom: 4px;
@@ -196,7 +232,7 @@
             margin: 0px;
         }
         ul {
-            list-style-type: none;
+            // list-style-type: none;
             text-align: center;
         }
         .loss-name {
@@ -231,6 +267,38 @@
             label.threshold-input {
                 flex: 0 0 auto;
                 text-align: right;
+            }
+        }
+    }
+
+    .quality-block {
+        ul.quality-list {
+            text-align: center;
+            li {
+                margin-top: 4px;
+                > * {
+                    margin-right: 4px;
+                }
+            }
+            li.item-desc {
+                .feature-name.feature-name,
+                .feature-type.feature-type,
+                .feature-value.feature-value {
+                    background-color: rgba(0, 0, 0, 0.05);
+                }
+            }
+            .feature-name {
+                flex: 0 0 120px;
+            }
+            .feature-type {
+                flex: 0 0 100px;
+            }
+            .feature-value {
+                flex: 0 0 35px;
+            }
+            .feature-icon {
+                flex: 0 0 16px;
+                margin: 0;
             }
         }
     }

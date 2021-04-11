@@ -1,4 +1,6 @@
+import { ageSystem } from "./config.js";
 import * as Dice from "./dice.js";
+
 
 export class ageSystemActor extends Actor {
 
@@ -262,10 +264,34 @@ export class ageSystemActor extends Actor {
         systems.command.total = Number(systems.command.base) + Number(systems.command.mod);
         systems.damageControl.total = Number(systems.damageControl.base) + Number(systems.damageControl.mod);
 
-        data.hull.extraTotal = Number(data.hull.extraValue) - Number(nloss.hull.actual);
+        data.sizeNumeric = Number(data.size);
+        data.hull.base = ageSystem.spaceshipHull[data.sizeNumeric - 1];
+
+        data.crew.min = ageSystem.spaceshipCrew[data.sizeNumeric - 1].min
+        data.crew.typical = ageSystem.spaceshipCrew[data.sizeNumeric - 1].typ
+
+        data.crewPenalty = this._addCrewPenalty(data.sizeNumeric, data.crew.current, data.crew.min);
 
         return data
     }
+
+    _addCrewPenalty(size, current, min) {
+        if (current >= min) return 0;
+        const sizeArray = ageSystem.spaceshipCrew;
+        const sizePos = size - 1;
+        let steps;
+        for (let s = 0; s < sizeArray.length; s++) {
+            const minC = sizeArray[s].min; 
+            const diff = current - minC;
+            if (diff < 0) {
+                steps = s;
+                break;
+            }
+        }
+        const diff = sizePos - steps + 1;
+        const penalty = 2 * diff;
+        return -penalty;
+    };
 
     prepareDerivedData() {
         const actorData = this.data;
@@ -305,8 +331,62 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareDerivedDataSpaceship() {
+        const actorData = this.data;
+        const data = actorData.data;
+
+        // Items With Mod
+        const ownedItems = actorData.items.filter(i => i.data.type !== "special" && i.data.type !== "rollable" && i.data.type !== "weapon");
+        let bonuses = {};
+        for (const feature in ownedItems) {
+            if (Object.hasOwnProperty.call(ownedItems, feature)) {
+                const item = ownedItems[feature].data;
+                const dataType = item.type;
+                if (!bonuses[dataType]) {
+                    bonuses = {
+                        ...bonuses,
+                        [dataType]: 0
+                    };
+                };
+                bonuses[dataType] += item[dataType];                
+            }
+        }
+
+        data.hull.baseMod = this._addSizeMod(data.sizeNumeric, bonuses.hullMod);
+        data.hull.total = this._addHullPlatingLoss(data.hull.baseMod, bonuses.hullPlating);
+
+        data.systems.sensors.total = this._addSensorBonus(data.systems.sensors.base, data.systems.sensors.mod, bonuses.sensorMod);
+
+        // data.juiceMod
 
     };
+
+    _addSensorBonus(base, mod, bonus) {
+        const sensorLoss = -this.data.data.losses.normal.sensors.actual;
+        if (!bonus) bonus = 0;
+        return base + mod + bonus + sensorLoss;
+    }
+
+    _addSizeMod(size, mod) {
+        if (!mod) return this.data.data.hull.base;
+        let newSize = size + mod;
+        if (newSize < 1) newSize = 1;
+        if (newSize > ageSystem.spaceshipHull.length) newSize = ageSystem.spaceshipHull.length;
+        const newHull = ageSystem.spaceshipHull[newSize - 1];
+        return newHull;
+    }
+
+    _addHullPlatingLoss(hull, plating) {
+        const hullLoss = -this.data.data.losses.normal.hull.actual;
+        if (Math.abs(hullLoss) === 0 && !plating) return hull;
+        if (!plating) plating = 0;
+        const platLoss = hullLoss + Number(plating);
+        if (platLoss === 0) return hull;
+        if (hull == 1) return platLoss + Number(hull); 
+        const modulus = Math.abs(Number(platLoss));
+        const newPart = platLoss >= 0 ? `+${modulus}` : `-${modulus}`;
+        const newHull = `${hull}${newPart}`;
+        return newHull;
+    }
 
     sortWeapon(weapon) {
         if (!weapon) return {};

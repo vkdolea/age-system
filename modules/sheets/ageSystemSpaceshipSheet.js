@@ -38,12 +38,8 @@ export default class ageSpaceshipSheet extends ActorSheet {
         data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
 
         const itemSorted = sortObjArrayByName(data.items, "name");
-        data.sensorMod = itemSorted.filter(i => i.data.type === "sensorMod");
-        data.maneuverSizeMod = itemSorted.filter(i => i.data.type === "maneuverSizeMod");
-        data.juiceMod = itemSorted.filter(i => i.data.type === "juiceMod");
-        data.hullPlating = itemSorted.filter(i => i.data.type === "hullPlating");
-        data.hullMod = itemSorted.filter(i => i.data.type === "hullMod");
-        data.rollable = itemSorted.filter(i => i.data.type === "rollable");
+        data.qualities = itemSorted.filter(i => i.data.quality === "quality" && i.data.type !== "weapon");
+        data.flaws = itemSorted.filter(i => i.data.quality === "flaw" && i.data.type !== "weapon");
         data.weapon = itemSorted.filter(i => i.data.type === "weapon");
 
         // Setting which ability settings will be used

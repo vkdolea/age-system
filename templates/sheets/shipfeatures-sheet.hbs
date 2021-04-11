@@ -91,7 +91,6 @@
                 </div>
                 {{/if}}
 
-                {{#if (or (eq data.type "special") (eq data.type "rollable"))}}
                 <div class="flexrow feature-details">
                     <label class="part-desc">{{localize "age-system.spaceship.qualityType"}}</label>
                     <select class="part-desc-value" name="data.quality" class="data-input">
@@ -101,7 +100,7 @@
                         {{/select}}
                     </select>
                 </div>
-                {{/if}}
+
             </div>
         </div>
 

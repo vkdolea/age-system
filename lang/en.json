@@ -133,6 +133,7 @@
             "crewMin": "Minimum",
             "crewTyp": "Typical",
             "crewCur": "Current",
+            "crewPenalty": "Crew Size Penalty",
             "competence": "Competence",
             "competenceLevel": {
                 "incompetent": "Incompetent",
@@ -186,8 +187,8 @@
             "sensorMod": "Sensor Bonus",
             "maneuverSizeMod": "Maneuver Size Step",
             "juiceMod": "Juice Bonus",
-            "hullPlating": "Hull Category Increase",
-            "hullMod": "Hull Bonus",
+            "hullPlating": "Hull Plating",
+            "hullMod": "Hull (Step)",
             "rollable": "Rollable",
             "weapon": "Mounted Weapon",
             "special": "Special"
@@ -428,6 +429,7 @@
         "defense": "Defense",
         "targetNumber": "TN",
         "total": "Total",
+        "value": "Value",
 
         "itemMod": "Modifiers",
         "bonus": {

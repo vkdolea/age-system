@@ -67,34 +67,42 @@ export class ageSystemItem extends Item {
     };
 
     _prepareShipFeatures() {
-        const itemData = this.data;
-        const data = itemData.data;
-        const featType = data.type;
+        // const itemData = this.data;
+        // const data = itemData.data;
+        // const featType = data.type;
 
-        switch (featType) {
-            case "sensorMod":
-                data.quality = data[featType] < 0 ? "flaw" : "quality";
-                break;
+        // switch (featType) {
+        //     case "sensorMod":
+        //         data.quality = data[featType] < 0 ? "flaw" : "quality";
+        //         break;
             
-            case "maneuverSizeStep":
-                data.quality = data[featType] >= 0 ? "flaw" : "quality";
-                break;
+        //     case "maneuverSizeStep":
+        //         data.quality = data[featType] >= 0 ? "flaw" : "quality";
+        //         break;
             
-            case "juiceMod":
-                data.quality = data[featType] <= 0 ? "flaw" : "quality";
-                break;
+        //     case "juiceMod":
+        //         data.quality = data[featType] <= 0 ? "flaw" : "quality";
+        //         break;
 
-            case "hullPlating":
-                data.quality = data[featType] <= 0 ? "flaw" : "quality";
-                break;
+        //     case "hullPlating":
+        //         data.quality = data[featType] <= 0 ? "flaw" : "quality";
+        //         break;
 
-            case "hullMod":
-                data.quality = data[featType] < 0 ? "flaw" : "quality";
-                break;
+        //     case "hullMod":
+        //         data.quality = data[featType] < 0 ? "flaw" : "quality";
+        //         break;
+
+        //     case "weapon":
+        //         data.quality = "quality";
+        //         break;
                 
-            default:
-                break;
-        }
+        //     default:
+        //         break;
+        // }
+        // data.finalValue = null;
+        // const nonNumericFeats = ["special", "rollable", "weapon"];
+        // if (nonNumericFeats.indexOf(featType) !== -1) data.finalValue = '—';
+        // if (data.finalValue === null) data.finalValue = data[featType];
         
         this.prepareEmbeddedEntities();
     };

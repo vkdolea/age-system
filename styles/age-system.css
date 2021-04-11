@@ -1247,6 +1247,22 @@
 .age-system.sheet.spaceship {
   font-variant: small-caps;
 }
+.age-system.sheet.spaceship ul {
+  list-style-type: none;
+  padding: 0;
+}
+.age-system.sheet.spaceship p {
+  margin: 0;
+  border-radius: 4px;
+  height: 26px;
+  padding-top: 5px;
+}
+.age-system.sheet.spaceship .user-data {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  height: 26px;
+  padding-top: 5px;
+}
 .age-system.sheet.spaceship h2,
 .age-system.sheet.spaceship h3 {
   text-align: center;
@@ -1262,6 +1278,9 @@
 }
 .age-system.sheet.spaceship ul.systems-list {
   text-align: center;
+}
+.age-system.sheet.spaceship ul.systems-list li {
+  margin-top: 4px;
 }
 .age-system.sheet.spaceship ul.systems-list li .system-roll {
   flex: 0 0 16px;
@@ -1315,6 +1334,15 @@
   border-radius: 5px;
   border-width: 1px;
 }
+.age-system.sheet.spaceship .crew-size-penalty {
+  margin-top: 4px;
+}
+.age-system.sheet.spaceship .crew-size-penalty label {
+  flex: 0 0 110px;
+}
+.age-system.sheet.spaceship .crew-size-penalty p {
+  flex: 0 0 30px;
+}
 .age-system.sheet.spaceship .crew-details {
   padding: 0;
   text-align: center;
@@ -1338,47 +1366,45 @@
 .age-system.sheet.spaceship .crew-details .competence-label {
   flex: 0 0 80px;
 }
-.age-system.sheet.spaceship .passenger.container {
-  flex: 0 0 45%;
-}
-.age-system.sheet.spaceship fieldset.sensors .sensors-field {
-  flex: 0 0 20px;
+.age-system.sheet.spaceship fieldset.sensors .sensor-field {
+  flex: 0 0 80px;
   text-align: center;
+  margin-top: 4px;
 }
-.age-system.sheet.spaceship fieldset.sensors label.sensors-field {
+.age-system.sheet.spaceship fieldset.sensors label.sensor-field {
   flex: 0 0 50px;
+}
+.age-system.sheet.spaceship .hull {
+  padding: 4px;
+}
+.age-system.sheet.spaceship .hull .ship-size {
+  flex: 0 0 92px;
+  font-size: 10px;
+}
+.age-system.sheet.spaceship .hull .hull-label {
+  flex: 0 0 50px;
+}
+.age-system.sheet.spaceship .hull div.hull {
+  padding: 0;
+}
+.age-system.sheet.spaceship .hull .hull-value {
+  flex: 0 0 92px;
+  margin: 0;
+  margin-top: 4px;
+}
+.age-system.sheet.spaceship .hull-sensor {
+  flex: 0 0 100px;
 }
 .age-system.sheet.spaceship .combat-block {
   text-align: center;
+  flex: 0 0 100px;
 }
-.age-system.sheet.spaceship .combat-block .hull-label {
-  flex: 0 0 50px;
-}
-.age-system.sheet.spaceship .combat-block div.hull {
-  margin: auto;
-}
-.age-system.sheet.spaceship .combat-block .hull-dice-qtd {
-  flex: 0 0 20px;
-}
-.age-system.sheet.spaceship .combat-block .hull-dice-type {
-  flex: 0 0 40px;
-}
-.age-system.sheet.spaceship .combat-block .hull-extra-damage {
-  flex: 0 0 30px;
-}
-.age-system.sheet.spaceship .combat-block ul.weapon-list {
-  list-style-type: none;
+.age-system.sheet.spaceship .combat-block .inuse {
+  cursor: pointer;
 }
 .age-system.sheet.spaceship .combat-block ul.weapon-list li.item-desc .weapon-name,
 .age-system.sheet.spaceship .combat-block ul.weapon-list li.item-desc .weapon-dmg {
   background-color: rgba(0, 0, 0, 0.05);
-}
-.age-system.sheet.spaceship .combat-block ul.weapon-list li.item-desc p {
-  padding: 1% 0;
-  margin: 0;
-  border-radius: 4px;
-  height: 26px;
-  vertical-align: middle;
 }
 .age-system.sheet.spaceship .combat-block ul.weapon-list li {
   text-align: center;
@@ -1404,7 +1430,6 @@
   margin: 0px;
 }
 .age-system.sheet.spaceship .stats-block.losses ul {
-  list-style-type: none;
   text-align: center;
 }
 .age-system.sheet.spaceship .stats-block.losses .loss-name {
@@ -1440,6 +1465,33 @@
 .age-system.sheet.spaceship .stats-block.losses .damage-control-box label.threshold-input {
   flex: 0 0 auto;
   text-align: right;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list {
+  text-align: center;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list li {
+  margin-top: 4px;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list li > * {
+  margin-right: 4px;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list li.item-desc .feature-name.feature-name,
+.age-system.sheet.spaceship .quality-block ul.quality-list li.item-desc .feature-type.feature-type,
+.age-system.sheet.spaceship .quality-block ul.quality-list li.item-desc .feature-value.feature-value {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list .feature-name {
+  flex: 0 0 120px;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list .feature-type {
+  flex: 0 0 100px;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list .feature-value {
+  flex: 0 0 35px;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list .feature-icon {
+  flex: 0 0 16px;
+  margin: 0;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;

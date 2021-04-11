@@ -191,6 +191,30 @@ ageSystem.spaceshipSize = {
     titanic: 8
 };
 
+// Spaceship hull by size
+ageSystem.spaceshipHull = [
+    "1",
+    "1d3",
+    "1d6",
+    "2d6",
+    "3d6",
+    "4d6",
+    "5d6",
+    "6d6"
+];
+
+// Spaceship crew by size
+ageSystem.spaceshipCrew = [
+    {min: 1, typ: 2},
+    {min: 1, typ: 2},
+    {min: 2, typ: 4},
+    {min: 4, typ: 16},
+    {min: 16, typ: 64},
+    {min: 64, typ: 512},
+    {min: 256, typ: 2048},
+    {min: 1024, typ: 8192}
+];
+
 // Spaceship crew competece
 ageSystem.spaceshipCrewCompetence = {
     incompetent: 0,
