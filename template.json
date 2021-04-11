@@ -7,7 +7,7 @@
         ],
         "templates": {},
         "spaceship": {
-            "size": "",
+            "size": 1,
             "hull": {
                 "nrDice": 1,
                 "diceType": 6,
