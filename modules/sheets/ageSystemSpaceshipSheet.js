@@ -52,6 +52,10 @@ export default class ageSpaceshipSheet extends ActorSheet {
         // Sheet color
         data.colorScheme = game.settings.get("age-system", "colorScheme");
 
+        // Check if sheet is from synthetic token - Passenger setup will not work for Synth
+        data.notSynth = !(this.token && !this.token.data.actorLink);
+        data.isSynth = !data.notSynth;
+
         return data;
     };
 
@@ -100,7 +104,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             if (!passenger) return;
             // const actor = this.actor;
             let actor
-            if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data._id].actor;
+            // if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data._id].actor;
             if (!actor) actor = this.actor;
             if (passenger.data.type === "char") {
 
@@ -135,18 +139,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
             html.find(".change-loss").click(this._onChangeLoss.bind(this));
-            // html.find(".weapon-ctrl.add").click(this._onClickAddWeapon.bind(this));
-            // html.find(".weapon-ctrl.remove").click(this._onClickRemoveWeapon.bind(this));
 
-            // let handler = ev => this._onDragStart(ev);
-            // // Find all rollable items on the character sheet.
-            // let items = html.find(".item-box");
-            // for (let i = 0; i < items.length; i++) {
-            //     const el = items[i];
-            //     if (el.draggable) {
-            //         el.addEventListener("dragstart", handler, false);
-            //     }   
-            // }
         };
 
         super.activateListeners(html);
@@ -181,6 +174,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             datum.passengerName = event.currentTarget.closest(".feature-controls").dataset.passengerName;
             datum.sysName = event.currentTarget.dataset.sysName;
         }
+        if (event.currentTarget.classList.contains("is-synth")) datum.passengerId === "crew";
         const useFocus = vehicleData.systems[datum.sysName].useFocus;
         let rollData = {moreParts: []};
         let passenger = {};

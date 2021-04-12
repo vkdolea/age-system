@@ -13,7 +13,6 @@
                 </datalist>
                 <li class="flexrow">
                     <p class="system-role title">{{localize "age-system.spaceship.role"}}</p>
-                    {{!-- <p class="system-roll"></p> --}}
                     <p class="system-operator">{{localize "age-system.spaceship.op"}}</p>
                     <p class="system-abl">{{localize "age-system.abl"}}</p>
                     <p class="system-focus">{{localize "age-system.focus"}}</p>
@@ -21,14 +20,16 @@
                 {{#each data.systems as |system sysName|}}
                 <li class="feature-controls {{sysName}} flexrow" data-sys-name={{sysName}}>
                     <p class="system-role">{{localize (concat "age-system.spaceship.operator." sysName)}} 
-                        <a class="system-roll roll-maneuver" data-sys-name="{{sysName}}" data-sys-box="1"><i class="fas fa-dice"></i></a>
+                        <a class="system-roll roll-maneuver {{#if ../isSynth}}is-synth{{/if}}" data-sys-name="{{sysName}}" data-sys-box="1"><i class="fas fa-dice"></i></a>
                     </p>
-                    <select name="data.systems.{{sysName}}.operator" class="system-operator">
+                    <select name="data.systems.{{sysName}}.operator" {{#if ../isSynth}}disabled{{/if}} class="system-operator">
                         {{#select system.operator}}
                         <option value="crew">{{localize "age-system.spaceship.crew"}}</option>
+                        {{#if ../notSynth}}
                         {{#each ../passengers as |passenger|}}
                         <option value="{{passenger.id}}">{{passenger.name}}</option>
                         {{/each}}
+                        {{/if}}
                         {{/select}}
                     </select>
                     <select name="data.systems.{{sysName}}.useAbl" class="system-abl">
@@ -45,49 +46,8 @@
         </div>
         <div class="stats-block parameters flexrow">
             <div class="parameters flexcol container">
-                <div class="flexrow hull-sensor">
-                    {{!-- Hull Block --}}
-                    <fieldset class="hull">
-                        <legend><a><i class="fas fa-dice"></i></a> {{localize "age-system.spaceship.hull"}}</legend>
-                        <div class="flexrow flex-align-center size">
-                            <label class="parameter-label">{{localize "age-system.spaceship.size"}}</label>
-                            <select class="ship-size" name="data.size" class="dice-size">
-                                {{#select data.size}}
-                                {{#each config.spaceshipSize as |size sizeKey|}}
-                                <option value="{{size}}">{{localize (concat "age-system.spaceship.sizeType." sizeKey)}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                        <div class="flexrow flex-align-center">
-                            <label class="hull-label">{{localize "age-system.base"}}</label>
-                            <p class="hull-value user-data">{{data.hull.base}}</p>
-                        </div>
-                        <div class="flexrow flex-align-center">
-                            <label class="hull-label">{{localize "age-system.total"}}</label>
-                            <p class="hull-value user-data">{{data.hull.total}}</p>
-                        </div>
-                    </fieldset>
 
-                    <div class="flexcol">
-                        {{!-- Sensors Block --}}
-                        <fieldset class="sensors">
-                            <legend>{{localize "age-system.spaceship.systemName.sensors"}}</legend>
-                            <div class="flexrow flex-align-center">
-                                <label class="sensor-field">{{localize "age-system.base"}}</label>
-                                <input class="sensor-field" type="number" name="data.systems.sensors.base" value="{{data.systems.sensors.base}}" data-dtype="Number" />
-                            </div>
-                            <div class="flexrow flex-align-center">
-                                <label class="sensor-field">{{localize "age-system.total"}}</label>
-                                <p class="sensor-field user-data">{{data.systems.sensors.total}}</p>
-                            </div>
-                        </fieldset>
-                        <div class="crew-size-penalty flexrow flex-align-center">
-                            <label>{{localize "age-system.spaceship.crewPenalty"}}</label>                        
-                            <p class="user-data">{{data.crewPenalty}}</p>
-                        </div>        
-                    </div>
-                </div>
+                {{!-- Crew Block --}}
                 <fieldset class="crew">
                     <legend>{{localize "age-system.spaceship.crew"}}</legend>
                     <div class="crew-details flexcol">
@@ -114,8 +74,50 @@
                             </select>
                         </div>
                     </div>
-                    
                 </fieldset>
+                <div class="flexrow hull-sensor">
+                    {{!-- Hull Block --}}
+                    <fieldset class="hull">
+                        <legend><a><i class="fas fa-dice"></i></a> {{localize "age-system.spaceship.hull"}}</legend>
+                        <div class="flexrow flex-align-center size">
+                            <label class="parameter-label">{{localize "age-system.spaceship.size"}}</label>
+                            <select class="ship-size" name="data.size" class="dice-size">
+                                {{#select data.size}}
+                                {{#each config.spaceshipSize as |size sizeKey|}}
+                                <option value="{{size}}">{{localize (concat "age-system.spaceship.sizeType." sizeKey)}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="flexrow flex-align-center">
+                            <label class="hull-label">{{localize "age-system.base"}}</label>
+                            <p class="hull-value user-data">{{data.hull.base}}</p>
+                        </div>
+                        <div class="flexrow flex-align-center">
+                            <label class="hull-label">{{localize "age-system.total"}}</label>
+                            <p class="hull-value user-data">{{data.hull.total}}</p>
+                        </div>
+                    </fieldset>
+
+                    <div class="flexcol">
+                        {{!-- Sensors Block --}}
+                        <div class="crew-size-penalty flexrow flex-align-center">
+                            <label>{{localize "age-system.spaceship.crewPenalty"}}</label>                        
+                            <p class="user-data">{{data.crewPenalty}}</p>
+                        </div>    
+                        <fieldset class="sensors">
+                            <legend>{{localize "age-system.spaceship.systemName.sensors"}}</legend>
+                            <div class="flexrow flex-align-center">
+                                <label class="sensor-field">{{localize "age-system.base"}}</label>
+                                <input class="sensor-field" type="number" name="data.systems.sensors.base" value="{{data.systems.sensors.base}}" data-dtype="Number" />
+                            </div>
+                            <div class="flexrow flex-align-center">
+                                <label class="sensor-field">{{localize "age-system.total"}}</label>
+                                <p class="sensor-field user-data">{{data.systems.sensors.total}}</p>
+                            </div>
+                        </fieldset>    
+                    </div>
+                </div>
 
                 {{!-- Losses Section --}}
                 <div class="stats-block losses">
@@ -159,23 +161,41 @@
             </div>
 
             <div class="flexcol">
-
-                {{!-- Devices Section --}}
                 <div class="combat-block">
+                    {{!-- Passenger Container --}}
+                    {{#if notSynth}}
+                    <fieldset class="passenger container">
+                        <legend class="flexrow flex-align-center">{{localize "age-system.passengers"}} [{{data.pob}}]</legend>
+                        <ul class="passenger-list">
+                            {{#each passengers as |passenger|}}
+                            <li class="flexrow feature-controls flex-align-center" data-passenger-key="{{@key}}" data-passenger-id="{{passenger.id}}"  data-passenger-name="{{passenger.name}}">
+                                <a class="remove-passenger"><i class="fa fa-minus"></i></a>
+                                <img src="{{passenger.picture}}" class="passenger-token">
+                                <div class="flexrow flex-justify-start flex-align-center passenger-name">
+                                    <span>{{passenger.name}}</span>
+                                    {{#if passenger.isCaptain}}<span>({{localize "age-system.spaceship.operator.command"}})</span>{{/if}}
+                                    {{#if passenger.isPilot}}<span>({{localize "age-system.spaceship.operator.maneuver"}})</span>{{/if}}
+                                    {{#if passenger.isSensorOp}}<span>({{localize "age-system.spacehsip.operator.sensors"}})</span>{{/if}}
+                                </div>
+                                <a class="passenger-damage-control roll-maneuver" data-sys-name="damageControl" title="{{localize "age-system.damageControl"}}"><i class="fas fa-cogs"></i></a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </fieldset>
+                    {{/if}}
+
+                    {{!-- Weapon Block --}}
                     <h2>{{localize "age-system.weaponContainer"}}</h2>
-
-                    <div class="flexrow">
-
-                    </div>
                     <ul class="weapon-list">
                         <li class="flexrow">
+                            <div class="item-img"></div>
                             <div class="weapon-name"><label for="">{{localize "age-system.spaceship.weapon"}}</label></div>
                             <div class="weapon-dmg"><label for="">{{localize "age-system.formula"}}</label></div>
                             {{!-- <div class="weapon-ctrl add"><a><i class="fa fa-plus"></i></a></div> --}}
                         </li>
                         {{#each weapon as |item|}}
                         <li class="flexrow item-desc flex-align-center" data-item-id="{{item._id}}">
-                            <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                            <img class="item-img" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                             <p class="weapon-name">{{item.name}}</p>
                             <p class="weapon-dmg">{{item.data.damage}}</p>
                             <a class="weapon-dmg-roll attack"><i class="fas fa-dice"></i></a>
@@ -191,13 +211,14 @@
                     <h2>{{localize "age-system.spaceship.quality"}}</h2>
                     <ul class="quality-list">
                         <li class="flexrow">
+                            <div class="item-img"></div>
                             <div class="feature-name"><label>{{localize "age-system.item.name"}}</label></div>
                             <div class="feature-type"><label>{{localize "age-system.spaceship.qualityType"}}</label></div>
                             <div class="feature-value"><label>{{localize "age-system.value"}}</label></div>
                         </li> 
                         {{#each qualities as |item|}}
                         <li class="flexrow item-desc flex-align-center" data-item-id="{{item._id}}">
-                            <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                            <img class="item-img" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                             <p class="feature-name">{{item.name}}</p>
                             <p class="feature-type">{{localize (concat "age-system.spaceship." item.data.type)}}</p>
                             {{#if (eq item.data.type "sensorMod")}}
@@ -228,13 +249,14 @@
                     <h2>{{localize "age-system.spaceship.flaw"}}</h2>
                     <ul class="quality-list">
                         <li class="flexrow">
+                            <div class="item-img"></div>
                             <div class="feature-name"><label>{{localize "age-system.item.name"}}</label></div>
                             <div class="feature-type"><label>{{localize "age-system.spaceship.qualityType"}}</label></div>
                             <div class="feature-value"><label>{{localize "age-system.value"}}</label></div>
                         </li> 
                         {{#each flaws as |item|}}
                         <li class="flexrow item-desc flex-align-center" data-item-id="{{item._id}}">
-                            <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                            <img class="item-img" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                             <p class="feature-name">{{item.name}}</p>
                             <p class="feature-type">{{localize (concat "age-system.spaceship." item.data.type)}}</p>
                             {{#if (eq item.data.type "sensorMod")}}
@@ -262,27 +284,6 @@
                     </ul>
                 </div>
             </div>
-
-            {{!-- Passenger Container --}}
-            {{!-- <div class="passenger container">
-                <label class="flexrow flex-align-center">{{localize "age-system.passengers"}} [{{data.pob}}]</label>
-                <ul class="passenger-list">
-                    {{#each passengers as |passenger|}}
-                    <li class="flexrow feature-controls flex-align-center" data-passenger-key="{{@key}}" data-passenger-id="{{passenger.id}}"  data-passenger-name="{{passenger.name}}">
-                        <a class="remove-passenger"><i class="fa fa-minus"></i></a>
-                        <img src="{{passenger.picture}}" class="passenger-token">
-                        <div class="flexrow flex-justify-start flex-align-center passenger-name">
-                            <span>{{passenger.name}}</span>
-                            {{#if passenger.isCaptain}}<span>({{localize "age-system.spaceship.operator.command"}})</span>{{/if}}
-                            {{#if passenger.isPilot}}<span>({{localize "age-system.spaceship.operator.maneuver"}})</span>{{/if}}
-                            {{#if passenger.isSensorOp}}<span>({{localize "age-system.spacehsip.operator.sensors"}})</span>{{/if}}
-                        </div>
-                        <a class="passenger-damage-control roll-maneuver" data-sys-name="damageControl" title="{{localize "age-system.damageControl"}}"><i class="fas fa-cogs"></i></a>
-                    </li>
-                    {{/each}}
-                </ul>
-            </div> --}}
-
         </div>
     </div>
 </form>

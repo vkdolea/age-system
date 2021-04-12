@@ -1247,9 +1247,17 @@
 .age-system.sheet.spaceship {
   font-variant: small-caps;
 }
+.age-system.sheet.spaceship .stats-block {
+  padding-left: 4px;
+  padding-right: 4px;
+}
 .age-system.sheet.spaceship ul {
   list-style-type: none;
   padding: 0;
+}
+.age-system.sheet.spaceship ul .item-img.item-img {
+  flex: 0 0 24px;
+  border: none;
 }
 .age-system.sheet.spaceship p {
   margin: 0;
@@ -1367,7 +1375,7 @@
   flex: 0 0 80px;
 }
 .age-system.sheet.spaceship fieldset.sensors .sensor-field {
-  flex: 0 0 80px;
+  flex: 0 0 75px;
   text-align: center;
   margin-top: 4px;
 }
@@ -1414,7 +1422,7 @@
   flex: 0 0 16px;
 }
 .age-system.sheet.spaceship .combat-block ul.weapon-list li .weapon-name.weapon-name {
-  flex: 0 0 150px;
+  flex: 0 0 145px;
   margin-right: 4px;
 }
 .age-system.sheet.spaceship .combat-block ul.weapon-list li .weapon-dmg {
@@ -1481,7 +1489,7 @@
   background-color: rgba(0, 0, 0, 0.05);
 }
 .age-system.sheet.spaceship .quality-block ul.quality-list .feature-name {
-  flex: 0 0 120px;
+  flex: 0 0 115px;
 }
 .age-system.sheet.spaceship .quality-block ul.quality-list .feature-type {
   flex: 0 0 100px;

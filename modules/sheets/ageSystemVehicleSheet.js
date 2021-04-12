@@ -1,5 +1,6 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
+import { sortObjArrayByName } from "../setup.js";
 
 export default class ageSystemVehicleSheet extends ActorSheet {
     
@@ -34,17 +35,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         // TODO - method on Actor entity to for prepareData() running on Vehicle data em database is updated.
         const data = super.getData();
         data.config = CONFIG.ageSystem;
-        data.passengers = this.actor.data.data.passengers.sort(function(a, b) {
-            const nameA = a.name.toLowerCase();
-            const nameB = b.name.toLowerCase();
-            if (nameA < nameB) {
-              return -1;
-            }
-            if (nameA > nameB) {
-              return 1;
-            }
-            return 0;
-        });
+        data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
 
         // Setting which ability settings will be used
         const ablSelect = game.settings.get("age-system", "abilitySelection");
@@ -55,6 +46,10 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
         // Sheet color
         data.colorScheme = game.settings.get("age-system", "colorScheme");
+
+        // Check if sheet is from synthetic token - Passenger setup will not work for Synth
+        data.notSynth = !(this.token && !this.token.data.actorLink);
+        data.isSynth = !data.notSynth;        
 
         return data;
     };
@@ -150,13 +145,19 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         const conductorData = vehicleData.passengers.filter(p => p.isConductor === true)[0];
 
         let user;
-        if (conductorData.isToken) user = game.actors.tokens[conductorData.id];
-        if (!conductorData.isToken) user = game.actors.get(conductorData.id);
-        if (!conductorData) {
-            const parts = {name: conductorData.name, id: conductorData.id};
-            let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
-            return ui.notifications.warn(warning);
-        };
+        if (conductorId === "synth-vehicle") {
+            const speaker = ChatMessage.getSpeaker();
+            if (speaker.token) user = game.actors.tokens[speaker.token];
+            if (!user) user = game.actors.get(speaker.actor);
+        } else {
+            if (conductorData.isToken) user = game.actors.tokens[conductorData.id];
+            if (!conductorData.isToken) user = game.actors.get(conductorData.id);
+            if (!conductorData) {
+                const parts = {name: conductorData.name, id: conductorData.id};
+                let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
+                return ui.notifications.warn(warning);
+            };
+        }
         
         const handlingUseFocus = vehicleData.handling.useFocus;
         const handlingUseAbl = vehicleData.handling.useAbl;
