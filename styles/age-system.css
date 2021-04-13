@@ -1250,6 +1250,8 @@
 .age-system.sheet.spaceship .stats-block {
   padding-left: 4px;
   padding-right: 4px;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 .age-system.sheet.spaceship ul {
   list-style-type: none;
@@ -1276,13 +1278,39 @@
   text-align: center;
 }
 .age-system.sheet.spaceship input[name="name"] {
-  padding-left: 10px;
+  padding: 5px;
   min-width: 100%;
-  max-height: 30px;
-  border-radius: 10px 10px 0px 0px;
+  max-height: fit-content;
+  border-radius: 10px;
   text-transform: uppercase;
+  text-align: center;
+  font-size: 30px;
   border: none;
-  padding: 4px;
+}
+.age-system.sheet.spaceship .image-description {
+  height: 200px;
+  max-height: 200px;
+  margin-top: 10px;
+}
+.age-system.sheet.spaceship .image-description .ship-image {
+  object-fit: contain;
+  border: none;
+  height: 190px;
+}
+.age-system.sheet.spaceship .image-description .ship-desc {
+  height: 190px;
+}
+.age-system.sheet.spaceship .image-description .ship-desc label.desc.desc {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+}
+.age-system.sheet.spaceship .image-description .ship-desc .editor {
+  height: 100%;
+}
+.age-system.sheet.spaceship .image-description .ship-desc .editor .editor-content {
+  max-height: 173px;
 }
 .age-system.sheet.spaceship ul.systems-list {
   text-align: center;
