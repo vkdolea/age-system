@@ -135,15 +135,21 @@ export default class ageSpaceshipSheet extends ActorSheet {
         
         // Actions by sheet owner only
         if (this.actor.owner) {
-
             html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
             html.find(".change-loss").click(this._onChangeLoss.bind(this));
-
+            html.find(".toggle").click(this._onEquipChange.bind(this));
         };
 
         super.activateListeners(html);
     };
+
+    _onEquipChange(event) {
+        const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
+        const itemToToggle = this.actor.getOwnedItem(itemId);
+        const toggleEqp = !itemToToggle.data.data.isActive;
+        itemToToggle.update({"data.isActive": toggleEqp});
+    }
 
     _onChangeLoss(event) {
         const lossSev = event.currentTarget.closest(".feature-controls").dataset.lossSev;

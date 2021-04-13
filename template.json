@@ -472,7 +472,8 @@
             "hullMod": 0,
             "useFocus": "",
             "useAbl": "",
-            "quality": "quality"
+            "quality": "quality",
+            "isActive": true
         },
         "equipment": {
             "templates": ["description", "hardItem", "bonuses"]
