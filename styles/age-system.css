@@ -1038,8 +1038,12 @@
   margin-left: 2px;
 }
 .age-system.sheet.char .item-container .item-box.conditions {
-  min-width: 100px;
-  max-width: 100px;
+  flex: 0 0 120px;
+  margin: auto;
+  margin-top: 4px;
+}
+.age-system.sheet.char .item-container .item-box.conditions p {
+  text-transform: uppercase;
 }
 .age-system.sheet.char .item-container .actor-items {
   justify-content: stretch;
@@ -1643,7 +1647,9 @@
 /** Threefold Purple Colors **/
 /** Ronin Green Colors **/
 /** Select One **/
-/** This is the Way **/
+/** This is The Grey **/
+/** Red Warrior **/
+/** Never Dead **/
 /** Color Template **/
 /** Game Mode Colors **/
 .colorset-modern-blue .colorset-first-tier {
@@ -2730,6 +2736,316 @@
 .colorset-the-grey .relationship .mod-card,
 .colorset-the-grey .shipfeatures .mod-card {
   border: solid #b4b6b3 1px;
+}
+.colorset-red-warrior .colorset-first-tier {
+  background-color: #600000;
+  color: #df7c00;
+}
+.colorset-red-warrior .colorset-second-tier {
+  background-color: #cc6d6d;
+  color: #600000;
+}
+.colorset-red-warrior .colorset-third-tier {
+  background-color: #742300;
+  color: #ffa700;
+}
+.colorset-red-warrior input.colorset-first-tier {
+  background-color: #600000;
+  color: #df7c00;
+}
+.colorset-red-warrior .char-sheet .age-header label {
+  background-color: #600000;
+  color: #df7c00;
+}
+.colorset-red-warrior .char-sheet .age-header .editor {
+  background-color: hsl(0, 0%, 100%);
+}
+.colorset-red-warrior .vehicle-stats img {
+  border: 2px solid #600000;
+}
+.colorset-red-warrior .vehicle-stats .editor {
+  background-color: #ffffff;
+}
+.colorset-red-warrior .stats-block.losses .loss-checkbox {
+  border-color: #600000;
+}
+.colorset-red-warrior .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #600000;
+}
+.colorset-red-warrior fieldset {
+  border-color: #600000;
+}
+.colorset-red-warrior .dice-show.trait-test i:last-of-type {
+  color: #600000;
+}
+.colorset-red-warrior .roll-mod {
+  border-bottom: 1px solid #600000;
+}
+.colorset-red-warrior .roll-mod.stunted {
+  background-color: #600000;
+  color: #df7c00;
+}
+.colorset-red-warrior .char-sheet .item-container img {
+  border: 1px solid #600000;
+}
+.colorset-red-warrior .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-red-warrior .char-sheet input.colorset-second-tier {
+  background-color: #cc6d6d !important;
+  color: #600000 !important;
+}
+.colorset-red-warrior .focus img,
+.colorset-red-warrior .power img,
+.colorset-red-warrior .talent img,
+.colorset-red-warrior .weapon img,
+.colorset-red-warrior .equipment img,
+.colorset-red-warrior .stunts img,
+.colorset-red-warrior .honorifics img,
+.colorset-red-warrior .membership img,
+.colorset-red-warrior .relationship img,
+.colorset-red-warrior .shipfeatures img {
+  border: 1px solid #600000;
+}
+.colorset-red-warrior .focus label,
+.colorset-red-warrior .power label,
+.colorset-red-warrior .talent label,
+.colorset-red-warrior .weapon label,
+.colorset-red-warrior .equipment label,
+.colorset-red-warrior .stunts label,
+.colorset-red-warrior .honorifics label,
+.colorset-red-warrior .membership label,
+.colorset-red-warrior .relationship label,
+.colorset-red-warrior .shipfeatures label {
+  color: #600000;
+}
+.colorset-red-warrior .focus .item-card-stats,
+.colorset-red-warrior .power .item-card-stats,
+.colorset-red-warrior .talent .item-card-stats,
+.colorset-red-warrior .weapon .item-card-stats,
+.colorset-red-warrior .equipment .item-card-stats,
+.colorset-red-warrior .stunts .item-card-stats,
+.colorset-red-warrior .honorifics .item-card-stats,
+.colorset-red-warrior .membership .item-card-stats,
+.colorset-red-warrior .relationship .item-card-stats,
+.colorset-red-warrior .shipfeatures .item-card-stats {
+  background-color: #cc6d6d;
+}
+.colorset-red-warrior .focus .item-card-stats input.data-entry,
+.colorset-red-warrior .power .item-card-stats input.data-entry,
+.colorset-red-warrior .talent .item-card-stats input.data-entry,
+.colorset-red-warrior .weapon .item-card-stats input.data-entry,
+.colorset-red-warrior .equipment .item-card-stats input.data-entry,
+.colorset-red-warrior .stunts .item-card-stats input.data-entry,
+.colorset-red-warrior .honorifics .item-card-stats input.data-entry,
+.colorset-red-warrior .membership .item-card-stats input.data-entry,
+.colorset-red-warrior .relationship .item-card-stats input.data-entry,
+.colorset-red-warrior .shipfeatures .item-card-stats input.data-entry {
+  color: #ffa700;
+}
+.colorset-red-warrior .focus .item-card-desc,
+.colorset-red-warrior .power .item-card-desc,
+.colorset-red-warrior .talent .item-card-desc,
+.colorset-red-warrior .weapon .item-card-desc,
+.colorset-red-warrior .equipment .item-card-desc,
+.colorset-red-warrior .stunts .item-card-desc,
+.colorset-red-warrior .honorifics .item-card-desc,
+.colorset-red-warrior .membership .item-card-desc,
+.colorset-red-warrior .relationship .item-card-desc,
+.colorset-red-warrior .shipfeatures .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-red-warrior .focus nav .item,
+.colorset-red-warrior .power nav .item,
+.colorset-red-warrior .talent nav .item,
+.colorset-red-warrior .weapon nav .item,
+.colorset-red-warrior .equipment nav .item,
+.colorset-red-warrior .stunts nav .item,
+.colorset-red-warrior .honorifics nav .item,
+.colorset-red-warrior .membership nav .item,
+.colorset-red-warrior .relationship nav .item,
+.colorset-red-warrior .shipfeatures nav .item {
+  background-color: #cc6d6d;
+  color: #600000;
+}
+.colorset-red-warrior .focus nav .item.active,
+.colorset-red-warrior .power nav .item.active,
+.colorset-red-warrior .talent nav .item.active,
+.colorset-red-warrior .weapon nav .item.active,
+.colorset-red-warrior .equipment nav .item.active,
+.colorset-red-warrior .stunts nav .item.active,
+.colorset-red-warrior .honorifics nav .item.active,
+.colorset-red-warrior .membership nav .item.active,
+.colorset-red-warrior .relationship nav .item.active,
+.colorset-red-warrior .shipfeatures nav .item.active {
+  background-color: #ffffff;
+}
+.colorset-red-warrior .focus .mod-card,
+.colorset-red-warrior .power .mod-card,
+.colorset-red-warrior .talent .mod-card,
+.colorset-red-warrior .weapon .mod-card,
+.colorset-red-warrior .equipment .mod-card,
+.colorset-red-warrior .stunts .mod-card,
+.colorset-red-warrior .honorifics .mod-card,
+.colorset-red-warrior .membership .mod-card,
+.colorset-red-warrior .relationship .mod-card,
+.colorset-red-warrior .shipfeatures .mod-card {
+  border: solid #cc6d6d 1px;
+}
+.colorset-never-dead .colorset-first-tier {
+  background-color: #663322;
+  color: #bb8755;
+}
+.colorset-never-dead .colorset-second-tier {
+  background-color: #eeddcd;
+  color: #663322;
+}
+.colorset-never-dead .colorset-third-tier {
+  background-color: #58705a;
+  color: #222222;
+}
+.colorset-never-dead input.colorset-first-tier {
+  background-color: #663322;
+  color: #bb8755;
+}
+.colorset-never-dead .char-sheet .age-header label {
+  background-color: #663322;
+  color: #bb8755;
+}
+.colorset-never-dead .char-sheet .age-header .editor {
+  background-color: hsl(0, 0%, 100%);
+}
+.colorset-never-dead .vehicle-stats img {
+  border: 2px solid #663322;
+}
+.colorset-never-dead .vehicle-stats .editor {
+  background-color: #ffffff;
+}
+.colorset-never-dead .stats-block.losses .loss-checkbox {
+  border-color: #663322;
+}
+.colorset-never-dead .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #663322;
+}
+.colorset-never-dead fieldset {
+  border-color: #663322;
+}
+.colorset-never-dead .dice-show.trait-test i:last-of-type {
+  color: #663322;
+}
+.colorset-never-dead .roll-mod {
+  border-bottom: 1px solid #663322;
+}
+.colorset-never-dead .roll-mod.stunted {
+  background-color: #663322;
+  color: #bb8755;
+}
+.colorset-never-dead .char-sheet .item-container img {
+  border: 1px solid #663322;
+}
+.colorset-never-dead .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-never-dead .char-sheet input.colorset-second-tier {
+  background-color: #eeddcd !important;
+  color: #663322 !important;
+}
+.colorset-never-dead .focus img,
+.colorset-never-dead .power img,
+.colorset-never-dead .talent img,
+.colorset-never-dead .weapon img,
+.colorset-never-dead .equipment img,
+.colorset-never-dead .stunts img,
+.colorset-never-dead .honorifics img,
+.colorset-never-dead .membership img,
+.colorset-never-dead .relationship img,
+.colorset-never-dead .shipfeatures img {
+  border: 1px solid #663322;
+}
+.colorset-never-dead .focus label,
+.colorset-never-dead .power label,
+.colorset-never-dead .talent label,
+.colorset-never-dead .weapon label,
+.colorset-never-dead .equipment label,
+.colorset-never-dead .stunts label,
+.colorset-never-dead .honorifics label,
+.colorset-never-dead .membership label,
+.colorset-never-dead .relationship label,
+.colorset-never-dead .shipfeatures label {
+  color: #663322;
+}
+.colorset-never-dead .focus .item-card-stats,
+.colorset-never-dead .power .item-card-stats,
+.colorset-never-dead .talent .item-card-stats,
+.colorset-never-dead .weapon .item-card-stats,
+.colorset-never-dead .equipment .item-card-stats,
+.colorset-never-dead .stunts .item-card-stats,
+.colorset-never-dead .honorifics .item-card-stats,
+.colorset-never-dead .membership .item-card-stats,
+.colorset-never-dead .relationship .item-card-stats,
+.colorset-never-dead .shipfeatures .item-card-stats {
+  background-color: #eeddcd;
+}
+.colorset-never-dead .focus .item-card-stats input.data-entry,
+.colorset-never-dead .power .item-card-stats input.data-entry,
+.colorset-never-dead .talent .item-card-stats input.data-entry,
+.colorset-never-dead .weapon .item-card-stats input.data-entry,
+.colorset-never-dead .equipment .item-card-stats input.data-entry,
+.colorset-never-dead .stunts .item-card-stats input.data-entry,
+.colorset-never-dead .honorifics .item-card-stats input.data-entry,
+.colorset-never-dead .membership .item-card-stats input.data-entry,
+.colorset-never-dead .relationship .item-card-stats input.data-entry,
+.colorset-never-dead .shipfeatures .item-card-stats input.data-entry {
+  color: #222222;
+}
+.colorset-never-dead .focus .item-card-desc,
+.colorset-never-dead .power .item-card-desc,
+.colorset-never-dead .talent .item-card-desc,
+.colorset-never-dead .weapon .item-card-desc,
+.colorset-never-dead .equipment .item-card-desc,
+.colorset-never-dead .stunts .item-card-desc,
+.colorset-never-dead .honorifics .item-card-desc,
+.colorset-never-dead .membership .item-card-desc,
+.colorset-never-dead .relationship .item-card-desc,
+.colorset-never-dead .shipfeatures .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-never-dead .focus nav .item,
+.colorset-never-dead .power nav .item,
+.colorset-never-dead .talent nav .item,
+.colorset-never-dead .weapon nav .item,
+.colorset-never-dead .equipment nav .item,
+.colorset-never-dead .stunts nav .item,
+.colorset-never-dead .honorifics nav .item,
+.colorset-never-dead .membership nav .item,
+.colorset-never-dead .relationship nav .item,
+.colorset-never-dead .shipfeatures nav .item {
+  background-color: #eeddcd;
+  color: #663322;
+}
+.colorset-never-dead .focus nav .item.active,
+.colorset-never-dead .power nav .item.active,
+.colorset-never-dead .talent nav .item.active,
+.colorset-never-dead .weapon nav .item.active,
+.colorset-never-dead .equipment nav .item.active,
+.colorset-never-dead .stunts nav .item.active,
+.colorset-never-dead .honorifics nav .item.active,
+.colorset-never-dead .membership nav .item.active,
+.colorset-never-dead .relationship nav .item.active,
+.colorset-never-dead .shipfeatures nav .item.active {
+  background-color: #ffffff;
+}
+.colorset-never-dead .focus .mod-card,
+.colorset-never-dead .power .mod-card,
+.colorset-never-dead .talent .mod-card,
+.colorset-never-dead .weapon .mod-card,
+.colorset-never-dead .equipment .mod-card,
+.colorset-never-dead .stunts .mod-card,
+.colorset-never-dead .honorifics .mod-card,
+.colorset-never-dead .membership .mod-card,
+.colorset-never-dead .relationship .mod-card,
+.colorset-never-dead .shipfeatures .mod-card {
+  border: solid #eeddcd 1px;
 }
 #age-roller {
   position: fixed;

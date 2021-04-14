@@ -57,6 +57,8 @@
     "SETTINGS.colorFoldedPurple": "Folded Purple",
     "SETTINGS.colorSelectOne": "Select One",
     "SETTINGS.colorTheGrey": "The Grey",
+    "SETTINGS.colorRedWarrior": "Red Warrior",
+    "SETTINGS.colorNeverDead": "Never Dead",
 
     "SETTINGS.gameMode": "Select game mode, if any",
     "SETTINGS.gameModeHint": "Select game mode (as explained on Modern AGE) or none if the setting doesn't state any",

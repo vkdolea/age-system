@@ -216,6 +216,8 @@ export const registerSystemSettings = function() {
       "folded-purple": "SETTINGS.colorFoldedPurple",
       "select-one": "SETTINGS.colorSelectOne",
       "the-grey": "SETTINGS.colorTheGrey",
+      "red-warrior": "SETTINGS.colorRedWarrior",
+      "never-dead": "SETTINGS.colorNeverDead"
     },
     onChange:()=>{
       const newColor = game.settings.get("age-system", "colorScheme");
