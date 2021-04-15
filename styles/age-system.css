@@ -2902,7 +2902,7 @@
 }
 .colorset-never-dead .colorset-third-tier {
   background-color: #58705a;
-  color: #222222;
+  color: #29241f;
 }
 .colorset-never-dead input.colorset-first-tier {
   background-color: #663322;
@@ -2996,7 +2996,7 @@
 .colorset-never-dead .membership .item-card-stats input.data-entry,
 .colorset-never-dead .relationship .item-card-stats input.data-entry,
 .colorset-never-dead .shipfeatures .item-card-stats input.data-entry {
-  color: #222222;
+  color: #29241f;
 }
 .colorset-never-dead .focus .item-card-desc,
 .colorset-never-dead .power .item-card-desc,
