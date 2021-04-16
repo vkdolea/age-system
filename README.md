@@ -38,7 +38,7 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
 ### Localization
 - **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
-- **Spanish**: by Discord user *ForjaSalvage#2419*.
+- **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Shortcuts
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
