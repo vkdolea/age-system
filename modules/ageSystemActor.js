@@ -131,6 +131,13 @@ export class ageSystemActor extends Actor {
             data.speed.mod = 0;
         };
         data.speed.total =  Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
+        if (data.useConditions) {
+            if (data.conditions.helpless) {
+                data.speed.total = 0;
+            } else if (data.conditions.exhausted) {
+                data.speed.total = Math.floor(data.speed.total/2);
+            }
+        }
         /*----------------------------------------------------*/
         
         /*--- Calculate Max Health ---------------------------*/
