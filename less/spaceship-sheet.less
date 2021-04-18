@@ -4,11 +4,12 @@
 }
 
 .age-system.sheet.spaceship {
-    .stats-block {
-        padding-left: 4px;
-        padding-right: 4px;
+    .stats-block.stats-block {
+        padding: 5px;
         border-radius: 10px;
         margin-top: 10px;
+        flex: 0 0 auto;
+        text-align: center;
     }
     ul {
         list-style-type: none;
@@ -27,6 +28,11 @@
         height: 26px;
         // vertical-align: middle;
         padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .inuse {
+        cursor: pointer;
     }
 
     .user-data {
@@ -50,6 +56,12 @@
         text-align: center;
         font-size: 30px;
         border: none;
+    };
+    select,
+    input[type="number"],
+    input[type="number"]:disabled {
+        color: inherit;
+        filter: contrast(90%);
     };
 
     .image-description {
@@ -130,13 +142,12 @@
         }
     }
 
-    div.parameters.container {
-        text-align: center;
+    .container {
+        // text-align: center;
         margin-right: 8px;
-
-        .parameter-label{
-            flex: 0 0 50px;
-        }
+        // .parameter-label{
+        //     flex: 0 0 50px;
+        // }
     }
 
     fieldset {
@@ -172,15 +183,19 @@
         }
         .crew-competence {
             margin-top: 4px;
+            margin-bottom: 4px;
         }
         .competence-label {
             flex: 0 0 80px;
+        }
+        select.competence-list {
+            flex: 0 0 220px;
         }
     }
 
     fieldset.sensors {
         .sensor-field {
-            flex: 0 0 75px;
+            flex: 0 0 65px;
             text-align: center;
             margin-top: 4px;
         }
@@ -193,7 +208,7 @@
         padding: 4px;
         .ship-size {
             flex: 0 0 92px;
-            font-size: 10px;
+            font-size: 15px;
         }
         .hull-label {
             flex: 0 0 50px;
@@ -208,59 +223,50 @@
             margin-top: 4px;
         }
     }
-    .hull-sensor {
-        flex: 0 0 100px;
+
+    // Weapon List
+    ul.weapon-list {
+        li.item-desc {
+            height: 100%;
+            .weapon-name,
+            .weapon-dmg {
+                background-color: rgba(0, 0, 0, 0.05);
+                height: fit-content;
+            };
+        }
+        li {
+            text-align: center;
+            margin-bottom: 4px;
+            .inactive {
+                opacity: 0.4;
+            }
+            img {
+                margin-right: 4px;
+            }
+            .weapon-remove {
+                flex: 0 0 16px;
+            }
+            .weapon-name.weapon-name {
+                flex: 0 0 140px;
+                margin-right: 4px;
+            }
+            .weapon-dmg.roll {
+                cursor: pointer;
+            }
+            .weapon-dmg.weapon-dmg {
+                flex: 0 0 85px;
+                margin-right: 4px;
+            }
+            .weapon-icon {
+                flex: 0 0 16px;
+                i {
+                    width: fit-content;
+                }
+            }
+        }
     }
-    .combat-block {
-        text-align: center;
-        flex: 0 0 100px;
-        .inuse {
-            cursor: pointer;
-        }
 
-        // Weapon List
-        ul.weapon-list {
-            li.item-desc {
-                .weapon-name,
-                .weapon-dmg {
-                    background-color: rgba(0, 0, 0, 0.05);
-                };
-            }
-            li {
-                text-align: center;
-                margin-bottom: 4px;
-                .inactive {
-                    opacity: 0.4;
-                }
-                img {
-                    margin-right: 4px;
-                }
-                .weapon-remove {
-                    flex: 0 0 16px;
-                }
-                .weapon-name.weapon-name {
-                    flex: 0 0 140px;
-                    margin-right: 4px;
-                }
-                .weapon-dmg.roll {
-                    cursor: pointer;
-                }
-                .weapon-dmg {
-                    flex: 0 0 95px;
-                    margin-right: 4px;
-                }
-                .weapon-icon {
-                    flex: 0 0 16px;
-                    i {
-                        width: fit-content;
-                    }
-                }
-            }
-        }
-    };
-
-
-    .stats-block.losses {
+    .losses {
         h3 {
             margin: 0px;
         }
@@ -314,14 +320,16 @@
                 }
             }
             li.item-desc {
+                height: 100%;
                 .feature-name.feature-name,
                 .feature-type.feature-type,
                 .feature-value.feature-value {
                     background-color: rgba(0, 0, 0, 0.05);
+                    height: fit-content;
                 }
             }
             .feature-name {
-                flex: 0 0 110px;
+                flex: 0 0 100px;
             }
             .feature-type {
                 flex: 0 0 100px;

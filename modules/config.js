@@ -227,8 +227,8 @@ ageSystem.spaceshipCrewCompetence = {
 
 // Spaceship Features
 ageSystem.featuresType = [
-    "sensorMod", "maneuverSizeMod", "juiceMod", "special",
-    "hullPlating", "hullMod", "rollable", "weapon"
+    "sensorMod", "maneuverSizeStep", "juiceMod", "special",
+    "hullPlating", "hullMod",/* "rollable", */"weapon" // Maybe in the future I can add the rollable feature...
 ];
 
 const itemIconPath = "systems/age-system/resources/imgs/item-icon/";

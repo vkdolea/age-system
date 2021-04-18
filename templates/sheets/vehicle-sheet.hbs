@@ -25,7 +25,7 @@
                 <div class="flexcol focus-ability">
                     <div class="flexrow flex-justify-center label-with-icon">
                         <label class="handling-focus">{{localize "age-system.abl"}} / {{localize "age-system.focus"}}</label>
-                        <a class="roll-maneuver"><i class="fas fa-dice"></i></a>                        
+                        <a class="roll-maneuver {{#if isSynth}}is-synth{{/if}}"><i class="fas fa-dice"></i></a>                        
                     </div>
                     <div class="flexcol">
                         <select name="data.handling.useAbl" class="data-input">

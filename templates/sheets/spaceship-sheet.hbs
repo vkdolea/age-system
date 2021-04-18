@@ -1,7 +1,6 @@
 <form class="{{cssClass}} age-system sheet colorset-{{colorScheme}} spaceship" autocomplete="off">
 
     <input name="name" class="spaceship-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
-    
     <div class="flexrow image-description">
         <img class="ship-image" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
         <div class="ship-desc">
@@ -10,7 +9,8 @@
         </div>
     </div>
 
-    <div class="stats-block systems colorset-second-tier">
+    {{!-- Spaceship Systems --}}
+    <div class="stats-block systems colorset-second-tier ">
         <h2>{{localize "age-system.spaceship.systems"}}</h3>
         <ul class="systems-list">
             <datalist id="{{this.actor.data.type}}-{{this.actor._id}}-list">
@@ -52,12 +52,15 @@
             {{/each}}
         </ul>
     </div>
-    <div class="stats-block parameters flexrow colorset-second-tier">
-        <div class="parameters flexcol container">
+
+    {{!-- Ship Parameters --}}
+    <div class="flexrow">
+        {{!-- Parameters First Column --}}
+        <div class="flexcol container">
 
             {{!-- Crew Block --}}
-            <fieldset class="crew">
-                <legend>{{localize "age-system.spaceship.crew"}}</legend>
+            <div class="crew colorset-third-tier stats-block">
+                <h2>{{localize "age-system.spaceship.crew"}}</h2>
                 <div class="crew-details flexcol">
                     <div class="flex-align-center flexrow">
                         <label class="current-crew">{{localize "age-system.spaceship.crewCur"}}</label>
@@ -82,13 +85,14 @@
                         </select>
                     </div>
                 </div>
-            </fieldset>
-            <div class="flexrow hull-sensor">
+            </div>
+            <div class="flexrow hull-sensor stats-block colorset-third-tier ">
+
                 {{!-- Hull Block --}}
                 <fieldset class="hull">
-                    <legend><a><i class="fas fa-dice"></i></a> {{localize "age-system.spaceship.hull"}}</legend>
+                    <legend><a class="roll-hull"><i class="fas fa-dice"></i></a> {{localize "age-system.spaceship.hull"}}</legend>
                     <div class="flexrow flex-align-center size">
-                        <label class="parameter-label">{{localize "age-system.spaceship.size"}}</label>
+                        <label class="hull-label">{{localize "age-system.spaceship.size"}}</label>
                         <select class="ship-size" name="data.size" class="dice-size">
                             {{#select data.size}}
                             {{#each config.spaceshipSize as |size sizeKey|}}
@@ -107,8 +111,8 @@
                     </div>
                 </fieldset>
 
+                {{!-- Sensors Block --}}
                 <div class="flexcol">
-                    {{!-- Sensors Block --}}
                     <div class="crew-size-penalty flexrow flex-align-center">
                         <label>{{localize "age-system.spaceship.crewPenalty"}}</label>                        
                         <p class="user-data">{{data.crewPenalty}}</p>
@@ -128,7 +132,7 @@
             </div>
 
             {{!-- Losses Section --}}
-            <div class="stats-block losses">
+            <div class="stats-block losses colorset-third-tier ">
                 <h2>{{localize "age-system.spaceship.lossesCond"}}</h2>
                 <ul>
                     {{#each data.losses as |v k|}}
@@ -169,30 +173,30 @@
         </div>
 
         <div class="flexcol">
-            <div class="combat-block">
-                {{!-- Passenger Container --}}
-                {{#if notSynth}}
-                <div class="passenger container flexcol">
-                    <h2>{{localize "age-system.passengers"}} [{{data.pob}}]</h2>
-                    <ul class="passenger-list">
-                        {{#each passengers as |passenger|}}
-                        <li class="flexrow feature-controls flex-align-center" data-passenger-key="{{@key}}" data-passenger-id="{{passenger.id}}"  data-passenger-name="{{passenger.name}}">
-                            <a class="remove-passenger"><i class="fa fa-minus"></i></a>
-                            <img src="{{passenger.picture}}" class="passenger-token">
-                            <div class="flexrow flex-justify-start flex-align-center passenger-name">
-                                <span>{{passenger.name}}</span>
-                                {{#if passenger.isCaptain}}<span>({{localize "age-system.spaceship.operator.command"}})</span>{{/if}}
-                                {{#if passenger.isPilot}}<span>({{localize "age-system.spaceship.operator.maneuver"}})</span>{{/if}}
-                                {{#if passenger.isSensorOp}}<span>({{localize "age-system.spacehsip.operator.sensors"}})</span>{{/if}}
-                            </div>
-                            <a class="passenger-damage-control roll-maneuver" data-sys-name="damageControl" title="{{localize "age-system.damageControl"}}"><i class="fas fa-cogs"></i></a>
-                        </li>
-                        {{/each}}
-                    </ul>
-                </div>
-                {{/if}}
+            {{!-- Passenger Container --}}
+            {{#if notSynth}}
+            <div class="passenger flexcol colorset-third-tier stats-block">
+                <h2>{{localize "age-system.passengers"}} [{{data.pob}}]</h2>
+                <ul class="passenger-list">
+                    {{#each passengers as |passenger|}}
+                    <li class="flexrow feature-controls flex-align-center" data-passenger-key="{{@key}}" data-passenger-id="{{passenger.id}}"  data-passenger-name="{{passenger.name}}">
+                        <a class="remove-passenger"><i class="fa fa-minus"></i></a>
+                        <img src="{{passenger.picture}}" class="passenger-token">
+                        <div class="flexrow flex-justify-start flex-align-center passenger-name">
+                            <span>{{passenger.name}}</span>
+                            {{#if passenger.isCaptain}}<span>({{localize "age-system.spaceship.operator.command"}})</span>{{/if}}
+                            {{#if passenger.isPilot}}<span>({{localize "age-system.spaceship.operator.maneuver"}})</span>{{/if}}
+                            {{#if passenger.isSensorOp}}<span>({{localize "age-system.spacehsip.operator.sensors"}})</span>{{/if}}
+                        </div>
+                        <a class="passenger-damage-control roll-maneuver" data-sys-name="damageControl" title="{{localize "age-system.damageControl"}}"><i class="fas fa-cogs"></i></a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
 
-                {{!-- Weapon Block --}}
+            {{!-- Weapon Block --}}
+            <div class="stats-block colorset-third-tier">
                 <h2>{{localize "age-system.spaceship.weapon"}}</h2>
                 <ul class="weapon-list">
                     <li class="flexrow">
@@ -205,7 +209,7 @@
                     <li class="flexrow item-desc feature-controls flex-align-center" data-item-id="{{item._id}}">
                         <img class="item-img" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                         <p class="weapon-name {{#unless item.data.isActive}}inactive{{/unless}}">{{item.name}}</p>
-                        <p class="weapon-dmg {{#if item.data.isActive}}roll{{else}}inactive{{/if}}">{{item.data.damage}}</p>
+                        <p class="weapon-dmg roll-damage {{#if item.data.isActive}}roll{{else}}inactive{{/if}}">{{item.data.damage}}</p>
                         <a class="weapon-icon toggle {{#unless item.data.isActive}}inactive{{/unless}}"><i class="fas fa-power-off"></i></a>
                         <a class="weapon-icon edit"><i class="fas fa-edit"></i></a>
                         <a class="weapon-icon remove"><i class="fa fa-trash"></i></a>
@@ -215,7 +219,7 @@
             </div>
 
             {{!-- Quality Block --}}
-            <div class="quality-block">
+            <div class="quality-block colorset-third-tier stats-block">
                 <h2>{{localize "age-system.spaceship.quality"}}</h2>
                 <ul class="quality-list">
                     <li class="flexrow">
@@ -233,7 +237,7 @@
                         <p class="feature-value">{{item.data.sensorMod}}</p>
                         {{/if}}
                         {{#if (eq item.data.type "maneuverSizeMod")}}
-                        <p class="feature-value">{{item.data.maneuverSizeMod}}</p>
+                        <p class="feature-value">{{item.data.maneuverSizeStep}}</p>
                         {{/if}}
                         {{#if (eq item.data.type "juiceMod")}}
                         <p class="feature-value">{{item.data.juiceMod}}</p>
@@ -247,8 +251,8 @@
                         {{#if (or (eq item.data.type "rollable") (eq item.data.type "special"))}}
                         <p class="feature-value">—</p>
                         {{/if}}
-                        <a class="feature-edit feature-icon"><i class="fas fa-edit"></i></a>
-                        <a class="weapon-remove feature-icon"><i class="fa fa-trash"></i></a>
+                        <a class="edit feature-icon"><i class="fas fa-edit"></i></a>
+                        <a class="remove feature-icon"><i class="fa fa-trash"></i></a>
                     </li>
                     {{/each}}
                 </ul>
@@ -271,7 +275,7 @@
                         <p class="feature-value">{{item.data.sensorMod}}</p>
                         {{/if}}
                         {{#if (eq item.data.type "maneuverSizeMod")}}
-                        <p class="feature-value">{{item.data.maneuverSizeMod}}</p>
+                        <p class="feature-value">{{item.data.maneuverSizeStep}}</p>
                         {{/if}}
                         {{#if (eq item.data.type "juiceMod")}}
                         <p class="feature-value">{{item.data.juiceMod}}</p>
@@ -285,8 +289,8 @@
                         {{#if (or (eq item.data.type "rollable") (eq item.data.type "special"))}}
                         <p class="feature-value">—</p>
                         {{/if}}
-                        <a class="feature-edit feature-icon"><i class="fas fa-edit"></i></a>
-                        <a class="weapon-remove feature-icon"><i class="fa fa-trash"></i></a>
+                        <a class="edit feature-icon"><i class="fas fa-edit"></i></a>
+                        <a class="remove feature-icon"><i class="fa fa-trash"></i></a>
                     </li>
                     {{/each}}
                 </ul>

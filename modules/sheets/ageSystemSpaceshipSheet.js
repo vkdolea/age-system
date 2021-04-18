@@ -42,13 +42,6 @@ export default class ageSpaceshipSheet extends ActorSheet {
         data.flaws = itemSorted.filter(i => i.data.quality === "flaw" && i.data.type !== "weapon");
         data.weapon = itemSorted.filter(i => i.data.type === "weapon");
 
-        // Setting which ability settings will be used
-        // const ablSelect = game.settings.get("age-system", "abilitySelection");
-        // data.config.abilities = data.config.abilitiesSettings[ablSelect];
-
-        // Check Wealth Mode in use
-        data.config.wealthMode = game.settings.get("age-system", "wealthType");
-
         // Sheet color
         data.colorScheme = game.settings.get("age-system", "colorScheme");
 
@@ -139,10 +132,54 @@ export default class ageSpaceshipSheet extends ActorSheet {
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
             html.find(".change-loss").click(this._onChangeLoss.bind(this));
             html.find(".toggle").click(this._onEquipChange.bind(this));
+            html.find(".remove").click(this._onRemoveFeature.bind(this));
+            html.find(".edit").click(this._onEditFeature.bind(this));
+            html.find(".roll-hull").click(this._onRollDice.bind(this));
+            html.find(".roll-damage").click(this._onRollDice.bind(this));
         };
 
         super.activateListeners(html);
     };
+
+    _onRollDice(event){
+        const messageData = {
+            rollMode: event.shiftKey ? "blindroll" : "roll",
+            flavor: `${this.actor.name}`,
+        }
+        let rollFormula;
+        if (event.currentTarget.classList.contains("roll-damage")) {
+            const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
+            const item = this.actor.getOwnedItem(itemId);
+            rollFormula = item.data.data.damage;
+            messageData.flavor += ` | ${item.name}`;
+        }
+        if (event.currentTarget.classList.constains("roll-hull")) {
+            rollFormula = this.actor.data.data.hull.total;
+            messageData.flavor += `| ${game.i18n.localize("age-system.spaceship.hull")}`;
+        }
+
+        if (event.ctrlKey && !event.altKey) {
+            rollFormula += " + 1D6";
+            messageData.flavor += ` | +1D6`;
+        }
+        if (event.ctrlKey && event.altKey) {
+            rollFormula += " + 2D6";
+            messageData.flavor += ` | +2D6`;
+        }
+        const roll = new Roll(rollFormula).roll();
+        return roll.toMessage(messageData);
+    }
+
+    _onRemoveFeature(event) {
+        const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
+        return this.actor.deleteOwnedItem(itemId);
+    }
+
+    _onEditFeature(event) {
+        const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+        item.sheet.render(true);
+    }
 
     _onEquipChange(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
@@ -180,7 +217,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             datum.passengerName = event.currentTarget.closest(".feature-controls").dataset.passengerName;
             datum.sysName = event.currentTarget.dataset.sysName;
         }
-        if (event.currentTarget.classList.contains("is-synth")) datum.passengerId === "crew";
+        if (event.currentTarget.classList.contains("is-synth")) datum.passengerId = "crew";
         const useFocus = vehicleData.systems[datum.sysName].useFocus;
         let rollData = {moreParts: []};
         let passenger = {};

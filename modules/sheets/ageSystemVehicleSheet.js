@@ -37,13 +37,6 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         data.config = CONFIG.ageSystem;
         data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
 
-        // Setting which ability settings will be used
-        // const ablSelect = game.settings.get("age-system", "abilitySelection");
-        // data.config.abilities = data.config.abilitiesSettings[ablSelect];
-
-        // Check Wealth Mode in use
-        data.config.wealthMode = game.settings.get("age-system", "wealthType");
-
         // Sheet color
         data.colorScheme = game.settings.get("age-system", "colorScheme");
 
@@ -140,16 +133,24 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
     _onRollManeuver(event) {
         const vehicleData = this.actor.data.data;
-        const conductorId = vehicleData.conductor;
-        if (conductorId === "") return false
-        const conductorData = vehicleData.passengers.filter(p => p.isConductor === true)[0];
+        let conductorId;
+        if (event.currentTarget.classList.contains("is-synth")) {
+            conductorId = "synth-vehicle";
+        } else {
+            conductorId = vehicleData.conductor;
+        }
+        if (conductorId === "") return false;
 
+        let conductorData; 
         let user;
         if (conductorId === "synth-vehicle") {
             const speaker = ChatMessage.getSpeaker();
             if (speaker.token) user = game.actors.tokens[speaker.token];
             if (!user) user = game.actors.get(speaker.actor);
+            conductorData = user;
+            if (user.data.type != "char") return false;
         } else {
+            conductorData = vehicleData.passengers.filter(p => p.isConductor === true)[0];
             if (conductorData.isToken) user = game.actors.tokens[conductorData.id];
             if (!conductorData.isToken) user = game.actors.get(conductorData.id);
             if (!conductorData) {
@@ -197,63 +198,4 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
         return this.actor.rollVehicleDamage(damageData);
     };
-
-    
-
-    // TODO - Method to check if passenger has Actor Data 
-    // _checkPassenger() {
-
-    // }
-
-    // _onItemActivate(event) {
-    //     const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-    //     const itemToToggle = this.actor.getOwnedItem(itemId);
-    //     const itemType = itemToToggle.type;
-    //     if (itemType === "power" || itemType === "talent") {
-    //         const toggleAct = !itemToToggle.data.data.activate;
-    //         itemToToggle.update({"data.activate": toggleAct});
-    //     } else {
-    //         const toggleEqp = !itemToToggle.data.data.equiped;
-    //         itemToToggle.update({"data.equiped": toggleEqp});
-    //     };
-    // };
-
-    // _onRollResources(event) {
-    //     const rollData = {
-    //         event: event,
-    //         actor: Dice.getActor() || this.actor,
-    //         resourceRoll: true
-    //     };
-    //     Dice.ageRollCheck(rollData);
-    // };
-
-    // _onRollItem(event) {
-    //     const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-    //     const itemRolled = this.actor.getOwnedItem(itemId);
-    //     itemRolled.roll(event);
-    // };
-
-    // _onItemShow(event) {
-    //     event.preventDefault();
-    //     const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-    //     const item = this.actor.getOwnedItem(itemId);
-    //     item.showItem();
-    // };
-
-    // _onItemEdit(event) {
-    //     event.preventDefault();
-    //     let e = event.currentTarget;
-    //     let itemId = e.closest(".feature-controls").dataset.itemId;
-    //     let item = this.actor.getOwnedItem(itemId);
-
-    //     item.sheet.render(true);
-    // };
-
-    // _onItemDelete(event) {
-    //     event.preventDefault();
-    //     let e = event.currentTarget;
-    //     let itemId = e.closest(".feature-controls").dataset.itemId;
-    //     const actor = this.actor;
-    //     return actor.deleteOwnedItem(itemId);
-    // };
 };
