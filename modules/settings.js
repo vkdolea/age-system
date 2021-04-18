@@ -186,10 +186,11 @@ export const registerSystemSettings = function() {
       "dage": "SETTINGS.abilitySelectionDage",
     },
     onChange: () => {
-      [...game.actors.entities, ...Object.values(game.actors.tokens)]
-        .filter((o) => {
-          return o.data.type === "char";
-        })
+      CONFIG.ageSystem.abilities = CONFIG.ageSystem.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
+      [...game.actors.entities, ...Object.values(game.actors.tokens), ...game.items.entities]
+        // .filter((o) => {
+        //   return o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship";
+        // })
         .forEach((o) => {
           o.update({});
           if (o.sheet != null && o.sheet._state > 0) o.sheet.render();

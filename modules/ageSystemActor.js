@@ -132,7 +132,17 @@ export class ageSystemActor extends Actor {
         } else {
             data.speed.mod = 0;
         };
-        data.speed.total =  Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
+        if (data.useConditions) {
+            if (data.conditions.helpless || data.conditions.restrained) {
+                data.speed.total = 0;
+            }
+            if ((data.conditions.exhausted && !data.conditions.hindred) || (!data.conditions.exhausted && data.conditions.hindred)) {
+                data.speed.total = Math.floor(data.speed.total/2);
+            } else if (data.conditions.exhausted && data.conditions.hindred) {
+                data.speed.total = Math.floor(data.speed.total/4);
+            }
+        }
+        // data.speed.total =  Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
         /*----------------------------------------------------*/
         
         /*--- Calculate Max Health ---------------------------*/

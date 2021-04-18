@@ -38,8 +38,8 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
 
         // Setting which ability settings will be used
-        const ablSelect = game.settings.get("age-system", "abilitySelection");
-        data.config.abilities = data.config.abilitiesSettings[ablSelect];
+        // const ablSelect = game.settings.get("age-system", "abilitySelection");
+        // data.config.abilities = data.config.abilitiesSettings[ablSelect];
 
         // Check Wealth Mode in use
         data.config.wealthMode = game.settings.get("age-system", "wealthType");

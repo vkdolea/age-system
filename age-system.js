@@ -141,6 +141,11 @@ Hooks.once("setup", function() {
         ageSystem.conditions[c].name = game.i18n.localize(ageSystem.conditions[c].name);
         ageSystem.conditions[c].desc = game.i18n.localize(ageSystem.conditions[c].desc);
     }
+
+    // TODO - Consertar essa array!!
+    // Localize Abilities' name
+    Setup.abilitiesName();
+
 });
 
 Hooks.once("ready", async function() {
@@ -230,8 +235,6 @@ Hooks.on("renderageSystemItemSheet", (app, html, data) => {
 });
 
 Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
-    // Hide non used Abilities and order Ability Boxes in alphabeticaly
-    Setup.charSheetSetup(app, html, data);
     // Hide primary Abilities checkbox
     Setup.hidePrimaryAblCheckbox(html);
 });

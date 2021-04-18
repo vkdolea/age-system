@@ -4,27 +4,27 @@ export const ageSystem = {
 
 // Ability set for "main" - core AGE System games
 ageSystem.abilitiesSettings.main = {
-    acc: "age-system.acc",
-    comm: "age-system.comm",
-    cons: "age-system.cons",
-    dex: "age-system.dex",
-    fight: "age-system.fight",
-    int: "age-system.int",
-    per: "age-system.per",
-    str: "age-system.str",
-    will: "age-system.will",
+    "acc": "age-system.acc",
+    "comm": "age-system.comm",
+    "cons": "age-system.cons",
+    "dex": "age-system.dex",
+    "fight": "age-system.fight",
+    "int": "age-system.int",
+    "per": "age-system.per",
+    "str": "age-system.str",
+    "will": "age-system.will",
 };
 
 // Ability set for "dage" - Dragon Age games
 ageSystem.abilitiesSettings.dage = {
-    comm: "age-system.comm",
-    cons: "age-system.cons",
-    cunn: "age-system.cunn",
-    dex: "age-system.dex",
-    magic: "age-system.magic",
-    per: "age-system.per",
-    str: "age-system.str",
-    will: "age-system.will",
+    "comm": "age-system.comm",
+    "cons": "age-system.cons",
+    "cunn": "age-system.cunn",
+    "dex": "age-system.dex",
+    "magic": "age-system.magic",
+    "per": "age-system.per",
+    "str": "age-system.str",
+    "will": "age-system.will",
 };
 
 ageSystem.actionsToCast = {

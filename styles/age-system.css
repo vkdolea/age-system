@@ -2742,7 +2742,7 @@
   color: #df7c00;
 }
 .colorset-red-warrior .colorset-second-tier {
-  background-color: #cc6d6d;
+  background-color: #e68080;
   color: #600000;
 }
 .colorset-red-warrior .colorset-third-tier {
@@ -2792,7 +2792,7 @@
   background-color: #ffffff;
 }
 .colorset-red-warrior .char-sheet input.colorset-second-tier {
-  background-color: #cc6d6d !important;
+  background-color: #e68080 !important;
   color: #600000 !important;
 }
 .colorset-red-warrior .focus img,
@@ -2829,7 +2829,7 @@
 .colorset-red-warrior .membership .item-card-stats,
 .colorset-red-warrior .relationship .item-card-stats,
 .colorset-red-warrior .shipfeatures .item-card-stats {
-  background-color: #cc6d6d;
+  background-color: #e68080;
 }
 .colorset-red-warrior .focus .item-card-stats input.data-entry,
 .colorset-red-warrior .power .item-card-stats input.data-entry,
@@ -2865,7 +2865,7 @@
 .colorset-red-warrior .membership nav .item,
 .colorset-red-warrior .relationship nav .item,
 .colorset-red-warrior .shipfeatures nav .item {
-  background-color: #cc6d6d;
+  background-color: #e68080;
   color: #600000;
 }
 .colorset-red-warrior .focus nav .item.active,
@@ -2890,7 +2890,7 @@
 .colorset-red-warrior .membership .mod-card,
 .colorset-red-warrior .relationship .mod-card,
 .colorset-red-warrior .shipfeatures .mod-card {
-  border: solid #cc6d6d 1px;
+  border: solid #e68080 1px;
 }
 .colorset-never-dead .colorset-first-tier {
   background-color: #663322;

@@ -172,8 +172,8 @@
             <div class="combat-block">
                 {{!-- Passenger Container --}}
                 {{#if notSynth}}
-                <fieldset class="passenger container">
-                    <legend class="flexrow flex-align-center">{{localize "age-system.passengers"}} [{{data.pob}}]</legend>
+                <div class="passenger container flexcol">
+                    <h2>{{localize "age-system.passengers"}} [{{data.pob}}]</h2>
                     <ul class="passenger-list">
                         {{#each passengers as |passenger|}}
                         <li class="flexrow feature-controls flex-align-center" data-passenger-key="{{@key}}" data-passenger-id="{{passenger.id}}"  data-passenger-name="{{passenger.name}}">
@@ -189,7 +189,7 @@
                         </li>
                         {{/each}}
                     </ul>
-                </fieldset>
+                </div>
                 {{/if}}
 
                 {{!-- Weapon Block --}}
