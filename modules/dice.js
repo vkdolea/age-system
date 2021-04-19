@@ -298,7 +298,7 @@ export async function ageRollCheck({
     let chatData = {
         user: game.user._id,
         speaker: ChatMessage.getSpeaker(),
-        // whisper: isGMroll(event),
+        whisper: isGMroll(event),
         blind: event.shiftKey,
         roll: ageRoll,
         content: await renderTemplate(chatTemplate, rollData)
@@ -399,7 +399,7 @@ export function getFocus(item) {
 
 // Capture GM ID to whisper
 export function isGMroll(event) {
-    if (!event.shiftKey) {return false};
+    if (!event.shiftKey) {return null};
     return game.users.filter(u => u.isGM);
 };
 
