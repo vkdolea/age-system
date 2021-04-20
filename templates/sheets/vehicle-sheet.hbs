@@ -8,12 +8,16 @@
 
                 <div class="flexcol">
                     <label>{{localize "age-system.conductor"}}</label>
-                    <select name="data.conductor">
+                    <select name="data.conductor" {{#if isSynth}}disabled{{/if}}>
                         {{#select data.conductor}}
+                        {{#if isSynth}}
+                        <option value="synth-vehicle">Token</option>
+                        {{else}}
                         <option value="">{{localize "age-system.noAction"}}</option>
                         {{#each passengers as |passenger|}}
                         <option value="{{passenger.id}}">{{passenger.name}}</option>
                         {{/each}}
+                        {{/if}}
                         {{/select}}
                     </select>  
                 </div>
@@ -21,7 +25,7 @@
                 <div class="flexcol focus-ability">
                     <div class="flexrow flex-justify-center label-with-icon">
                         <label class="handling-focus">{{localize "age-system.abl"}} / {{localize "age-system.focus"}}</label>
-                        <a class="roll-maneuver"><i class="fas fa-dice"></i></a>                        
+                        <a class="roll-maneuver {{#if isSynth}}is-synth{{/if}}"><i class="fas fa-dice"></i></a>                        
                     </div>
                     <div class="flexcol">
                         <select name="data.handling.useAbl" class="data-input">
@@ -169,6 +173,7 @@
                     </tbody>
                 </table>
 
+                {{#if notSynth}}
                 <div class="passenger-container">
                     <label class="flexrow flex-align-center">{{localize "age-system.passengers"}} [{{data.pob}} / <input type="number" name="data.capacity" value="{{data.capacity}}" data-dtype="Number">]</label>
                     <div class="passenger-list">
@@ -188,6 +193,7 @@
                         </ol>
                     </div>
                 </div>
+                {{/if}}
             </div>
 
             <div class="grid-img">

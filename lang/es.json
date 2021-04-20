@@ -13,22 +13,22 @@
     "ITEM.TypeMembership": "Afiliaciones",
 	"ITEM.TypeSpaceshipfeatures": "Características Nave",
 
-    "SETTINGS.useConviction": "Utilizar Convicción",
+    "SETTINGS.useConviction": "Usar Convicción",
     "SETTINGS.useConvictionHint": "Activar bloque para gestión de Convicción",
 
-    "SETTINGS.useFatigue": "Utilizar Fatiga",
+    "SETTINGS.useFatigue": "Usar Fatiga",
     "SETTINGS.useFatigueHint": "Activar bloque Fatiga y soporte en Conjuros y Poderes",
 
-    "SETTINGS.useConditions": "Utilizar Estados",
+    "SETTINGS.useConditions": "Usar Estados",
     "SETTINGS.useConditionsHint": "Mostrar una sección de Estados - sin automatización",
 
-    "SETTINGS.usePowerPoints": "Utilizar Puntos Poder/Magia",
+    "SETTINGS.usePowerPoints": "Usar Puntos Poder/Magia",
     "SETTINGS.usePowerPointsHint": "Activar bloque Puntos Poder/Magia y soporte en Conjuros y Poderes",
 
-    "SETTINGS.useToughness": "Utilizar Dureza",
+    "SETTINGS.useToughness": "Usar Dureza",
     "SETTINGS.useToughnessHint": "Comprobar si el estilo de juego utiliza la Dureza como atributo",
 
-    "SETTINGS.useBallisticArmor": "Utilizar Impacto y Balas en armadura",
+    "SETTINGS.useBallisticArmor": "Usar Impacto y Balas en armadura",
     "SETTINGS.useBallisticArmorHint": "Seleccionar si las armaduras se dividen con Impacto y Balas",
 
     "SETTINGS.wealthType": "Sistema de riqueza",
@@ -42,7 +42,7 @@
     "SETTINGS.primaryAblHint": "Añade una casilla extra para identificar los Atributos primarios",
 
     "SETTINGS.abilitySelection": "Ajuste Atributos",
-    "SETTINGS.abilitySelectionHint": "Utilizar atributos de AGE básico o Dragon Age",
+    "SETTINGS.abilitySelectionHint": "Usar atributos de AGE básico o Dragon Age",
     "SETTINGS.abilitySelectionMain": "AGE Básico",
     "SETTINGS.abilitySelectionDage": "Dragon Age",
 
@@ -54,6 +54,10 @@
     "SETTINGS.colorRoninGreen": "Verde Ronin",
     "SETTINGS.colorExpandedBlue": "The Expanse",
     "SETTINGS.colorFoldedPurple": "Púrpura",
+	"SETTINGS.colorSelectOne": "Selecciona Uno",
+    "SETTINGS.colorTheGrey": "Gris",
+    "SETTINGS.colorRedWarrior": "Guerrero Rojo",
+    "SETTINGS.colorNeverDead": "No Muerto",
 
     "SETTINGS.gameMode": "Selecciona estilo de juego, si aplica",
     "SETTINGS.gameModeHint": "Selecciona el estilo de juego (según Modern AGE) o ninguno en caso de que la ambientación no lo utilice",
@@ -84,6 +88,15 @@
     "SETTINGS.healthModeHint": "La mayoría de juegos AGE utilizan Salud, mientras The Expanse utiliza Fortuna",
     "SETTINGS.healthModehealth": "Salud",
     "SETTINGS.healthModefortune": "Fortuna",
+	
+	"SETTINGS.complication": "Usar Complicación o Churn",
+    "SETTINGS.complicationHint": "Usar Complicación (Modern AGE), Churn/Revolverse (The Expanse) o ninguno",
+    "SETTINGS.complicationNone": "Ninguno",
+    "SETTINGS.compcomplication": "Complicación",
+    "SETTINGS.compchurn": "Churn",
+
+    "SETTINGS.serendipity": "Usar Serendipia",
+    "SETTINGS.serendipityHint": "Usar la regla opcional de Modern AGE de Serendipia",
 
     "age-system": {
 	
@@ -102,7 +115,9 @@
             "originTokenMissing": "El dueño de la acción (Actor o Token sin enlace) ya no existe.",
             "alreadyOnboard": "Pasajero {name} ({id}) ya se encuentra a bordo!",
             "vehicleIsNotPassenger": "Un vehículo no puede ser pasajero.",
-            "userNotAvailable": "Actor {name} ({id}) no disponible."
+            "userNotAvailable": "Actor {name} ({id}) no disponible.",
+			"shipPartsOnChar": "El tipo de objeto Característica para Nave no se puede asignar en la Hoja de Personaje.",
+            "nonShipPartsOnShip": "Sólo el tipo de objeto Característica para Nave puede asignarse a una Nave."
         },
 
         "spaceship": {
@@ -119,6 +134,7 @@
             "crewMin": "Mínima",
             "crewTyp": "Normal",
             "crewCur": "Actual",
+			"crewPenalty": "Crew Size Penalty",
             "competence": "Competencia",
             "competenceLevel": {
                 "incompetent": "Incompetente",
@@ -128,7 +144,24 @@
                 "skilled": "Experta",
                 "elite": "Elite"
             },
+			"qualityType": "Type",
+            "quality": "Quality",
+            "flaw": "Flaw",
             "systems": "Sistemas",
+			"systemName": {
+                "command": "Puente de Mando",
+                "commandMod": "Puente de Mando {mod}",
+                "commandLoss": "Puente de Mando {loss}",
+                "maneuver": "Maniobras",
+                "maneuverMod": "Maniobras {mod}",
+                "maneuverLoss": "Maniobras {loss}",
+                "sensors": "Sensores",
+                "sensorsMod": "Sensores {mod}",
+                "sensorsLoss": "Sensores {loss}",
+                "damageControl": "Control de Daños",
+                "damageControlMod": "Control de Daños {mod}",
+                "damageControlLoss": "Control de Daños {loss}"
+            },
             "size": "Tamaño",
             "sizeType": {
                 "tiny": "Enana",
@@ -139,7 +172,27 @@
                 "gigantic": "Gigante",
                 "colossal": "Colosal",
                 "titanic": "Titánica"
-            }
+            },
+			"loss": "Daños",
+            "lossesCond": "Estado de Daños",
+            "normalLoss": "Normal",
+            "seriousLoss": "Serio",
+            "collateralLoss": "Colateral",
+            "hullLoss": "Casco",
+            "maneuverabilityLoss": "Maniobra",
+            "sensorsLoss": "Sensores",
+            "weaponsLoss": "Armas",
+            "reactorOfflineLoss": "Reactor Inoperativo",
+            "weaponOfflineLoss": "Armas Inoperativas",
+            "featuresType": "Característica",
+            "sensorMod": "Bono de Sensores",
+            "maneuverSizeStep": "Tamaño Paso Maniobras",
+            "juiceMod": "Bono Potencia",
+            "hullPlating": "Armadura Casco",
+            "hullMod": "Casco (Paso)",
+            "rollable": "Tabla Dados",
+            "weapon": "Arma Instalada",
+            "special": "Especial"
         },
         "damageControl": "Control de Daños",
         "parameters": "Parámetros",
@@ -177,10 +230,16 @@
             "addFocus": "+ Concentración",
             "addStuntDie": "+ Dado Proeza",
 
-            "maneuversVehicle": "{name} maniobra {vehicle}"
+            "maneuversVehicle": "{name} maniobra {vehicle}",
+			"commandsVehicle": "{name} ordena {vehicle}",
+            "operatesVehicle": "{name} opera {vehicle}",
+            "backupVehicle": "{name} respalda {vehicle}",
+
+            "compRoll": "Tirada {compType}"
         },
 
         "testThreshold": "Umbral Tarea",
+		"targetCurrent": "Objetivo/Actual",
 
         "conditionsName": "Estados",
         "conditions": {
@@ -233,7 +292,7 @@
             "equip": "Equipar",
             "edit": "Editar",
             "delete": "Borrar",
-            "changeRollContext": "Utilizar Otro Atributo",
+            "changeRollContext": "Usar Otro Atributo",
 			"rollFocusAltAbl": "Selecciona Atributo para tirar {focus}",
             "options": "Opciones",
             "d6": "D6",
@@ -305,7 +364,7 @@
 
         "fatigue": "Fatiga",
         "ablFatigue": "Prueba Fatiga",
-        "useFatigue": "Utilizar Fatiga",
+        "useFatigue": "Usar Fatiga",
         "inputFatigueTN": "Introduce NO",
         "fatigueTN": "Fatiga NO",
         "noFatigue": "—",
@@ -371,6 +430,7 @@
         "defense": "Defensa",
         "targetNumber": "NO",
         "total": "Total",
+		"value": "Precio",
 
         "itemMod": "Modificadores",
         "bonus": {
@@ -445,6 +505,8 @@
         "activationMod": "Mod. Activación",
         "success": "Éxito",
         "miss": "Fallo",
+		"formula": "Fórmula",
+        "formulaExample": "Ej: 2d6+2",
 
         "ageRollOptions": "Opciones",
         "roll": "Tirar Dados",

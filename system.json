@@ -2,7 +2,7 @@
     "name": "age-system",
     "title": "AGE System (unofficial)",
     "description": "Unofficial AGE System implementation for most of AGE subsystems",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "templateVersion": 1,
     "author": "VK Dolea",
     "scripts": [],
@@ -12,24 +12,7 @@
     "esmodules": [
         "age-system.js"
     ],
-    "packs": [
-        {
-            "name": "focus",
-            "label": "Focus",
-            "system": "age-system",
-            "module": "age-system",
-            "path": "packs/focus.db",
-            "entity": "Item"
-        },
-        {
-            "name": "stunts",
-            "label": "Stunts",
-            "system": "age-system",
-            "module": "age-system",
-            "path": "packs/stunts.db",
-            "entity": "Item"
-        }
-    ],
+    "packs": [],
     "languages": [
         {
             "lang": "en",
@@ -51,11 +34,11 @@
     "initiative": "3d6 + @initiative",
     "gridDistance": 2,
     "gridUnits": "yd",
-    "primaryTokenAttribute": "health",
-    "secondaryTokenAttribute": "powerPoints",
+    "bar1.attribute": "health",
+    "bar2.attribute": "powerPoints",
     "minimumCoreVersion": "0.7.9",
     "compatibleCoreVersion": "0.7.9",
     "url": "https://github.com/vkdolea/age-system",
     "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",
-    "download": "https://github.com/vkdolea/age-system/archive/0.5.1.zip"
+    "download": "https://github.com/vkdolea/age-system/archive/0.6.0.zip"
 }

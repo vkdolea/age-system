@@ -1,8 +1,9 @@
+  
 {
     "ACTOR.TypeChar": "Player Character",
     "ACTOR.TypeVehicle": "Vehicle",
     "ACTOR.TypeSpaceship": "Spaceship",
-    "ITEM.TypeStunts": "Stunts",
+    "ITEM.TypeStunts": "Stunt",
     "ITEM.TypeEquipment": "General Equipment",
     "ITEM.TypePower": "Power & Arcana",
     "ITEM.TypeTalent": "Talent",
@@ -11,7 +12,7 @@
     "ITEM.TypeRelationship": "Relationship",
     "ITEM.TypeHonorifics": "Honorifics",
     "ITEM.TypeMembership": "Membership",
-    "ITEM.TypeSpaceshipfeatures": "Spaceship Features",
+    "ITEM.TypeShipfeatures": "Spaceship Feature",
 
     "SETTINGS.useConviction": "Use Conviction",
     "SETTINGS.useConvictionHint": "Enable Conviction block for tracking",
@@ -54,6 +55,10 @@
     "SETTINGS.colorRoninGreen": "Ronin Green",
     "SETTINGS.colorExpandedBlue": "The Expanse",
     "SETTINGS.colorFoldedPurple": "Folded Purple",
+    "SETTINGS.colorSelectOne": "Select One",
+    "SETTINGS.colorTheGrey": "The Grey",
+    "SETTINGS.colorRedWarrior": "Red Warrior",
+    "SETTINGS.colorNeverDead": "Never Dead",
 
     "SETTINGS.gameMode": "Select game mode, if any",
     "SETTINGS.gameModeHint": "Select game mode (as explained on Modern AGE) or none if the setting doesn't state any",
@@ -85,6 +90,15 @@
     "SETTINGS.healthModehealth": "Health",
     "SETTINGS.healthModefortune": "Fortune",
 
+    "SETTINGS.complication": "Use Complication or Churn",
+    "SETTINGS.complicationHint": "Use Complication (Modern AGE), Churn (The Expanse) or none",
+    "SETTINGS.complicationNone": "None",
+    "SETTINGS.compcomplication": "Complication",
+    "SETTINGS.compchurn": "Churn",
+
+    "SETTINGS.serendipity": "Use Serendipity",
+    "SETTINGS.serendipityHint": "Use Modern AGE option rule for Serendipity",
+
     "age-system": {
 
         "SHEETS": {
@@ -102,7 +116,9 @@
             "originTokenMissing": "Action owner (Actor or Unlinked Token) doesn't exist anymore.",
             "alreadyOnboard": "Passenger {name} ({id}) is already onboard!",
             "vehicleIsNotPassenger": "A vehicle can not be a passenger.",
-            "userNotAvailable": "Actor {name} ({id}) is not available."
+            "userNotAvailable": "Actor {name} ({id}) is not available.",
+            "shipPartsOnChar": "Spaceship Features Item type can not be droped on Character sheet.",
+            "nonShipPartsOnShip": "Only Spaceship Features item type can be droped on Spaceships."
         },
 
         "spaceship": {
@@ -119,6 +135,7 @@
             "crewMin": "Minimum",
             "crewTyp": "Typical",
             "crewCur": "Current",
+            "crewPenalty": "Crew Size Penalty",
             "competence": "Competence",
             "competenceLevel": {
                 "incompetent": "Incompetent",
@@ -128,7 +145,24 @@
                 "skilled": "Skilled",
                 "elite": "Elite"
             },
+            "qualityType": "Type",
+            "quality": "Quality",
+            "flaw": "Flaw",
             "systems": "Systems",
+            "systemName": {
+                "command": "Command",
+                "commandMod": "Command {mod}",
+                "commandLoss": "Command {loss}",
+                "maneuver": "Maneverability",
+                "maneuverMod": "Maneuverability {mod}",
+                "maneuverLoss": "Maneuverability {loss}",
+                "sensors": "Sensor",
+                "sensorsMod": "Sensor {mod}",
+                "sensorsLoss": "Sensor {loss}",
+                "damageControl": "Loss Control",
+                "damageControlMod": "Loss Control {mod}",
+                "damageControlLoss": "Loss Control {loss}"
+            },
             "size": "Size",
             "sizeType": {
                 "tiny": "Tiny",
@@ -139,7 +173,27 @@
                 "gigantic": "Gigantic",
                 "colossal": "Colossal",
                 "titanic": "Titanic"
-            }
+            },
+            "loss": "Loss",
+            "lossesCond": "Loss Condition",
+            "normalLoss": "Normal",
+            "seriousLoss": "Serious",
+            "collateralLoss": "Collateral",
+            "hullLoss": "Hull",
+            "maneuverabilityLoss": "Maneuverability",
+            "sensorsLoss": "Sensors",
+            "weaponsLoss": "Weapons",
+            "reactorOfflineLoss": "Reactor Offline",
+            "weaponOfflineLoss": "Weapon Offline",
+            "featuresType": "Feature",
+            "sensorMod": "Sensor Bonus",
+            "maneuverSizeStep": "Maneuver Size Step",
+            "juiceMod": "Juice Bonus",
+            "hullPlating": "Hull Plating",
+            "hullMod": "Hull (Step)",
+            "rollable": "Rollable",
+            "weapon": "Mounted Weapon",
+            "special": "Special"
         },
         "damageControl": "Damage Control",
         "parameters": "Parameters",
@@ -177,10 +231,16 @@
             "addFocus": "Add Focus",
             "addStuntDie": "Add SD",
 
-            "maneuversVehicle": "{name} maneuvers {vehicle}"
+            "maneuversVehicle": "{name} maneuvers {vehicle}",
+            "commandsVehicle": "{name} commands {vehicle}",
+            "operatesVehicle": "{name} operates {vehicle}",
+            "backupVehicle": "{name} backs up {vehicle}",
+
+            "compRoll": "{compType} Roll"
         },
 
         "testThreshold": "Threshold",
+        "targetCurrent": "Target/Current",
 
         "conditionsName": "Conditions",
         "conditions": {
@@ -196,7 +256,7 @@
             "freefallingDesc": "The character is effectively weightless in a microgravity or free-fall environment. They can only move using handholds, a surface to push off from, or some type of thrust. Once moving, they continue to move with the same speed and trajectory unless acted upon to stop or change their movement.",
             "helpless": "Helpless",
             "helplessDesc": "The character is incapable of doing anything. They cannot take any actions.",
-            "hindred": "Hindred",
+            "hindred": "Hindered",
             "hindredDesc": "The character's Speed is halved (round down) and they cannot take the Charge or Run actions.",
             "prone": "Prone",
             "proneDesc": "The character is lying on the ground. They cannot take the Charge or Run actions, as they can only move by crawling. Standing up from prone requires a Move action using half the character's Speed. Against prone characters, melee attacks have a +1 bonus and ranged attacks have a -1 penalty.",
@@ -371,6 +431,7 @@
         "defense": "Defense",
         "targetNumber": "TN",
         "total": "Total",
+        "value": "Value",
 
         "itemMod": "Modifiers",
         "bonus": {
@@ -445,6 +506,8 @@
         "activationMod": "Roll Bonus",
         "success": "Success",
         "miss": "Miss",
+        "formula": "Formula",
+        "formulaExample": "Ex.: 2d6+2",
 
         "ageRollOptions": "Options",
         "roll": "Roll Dice",

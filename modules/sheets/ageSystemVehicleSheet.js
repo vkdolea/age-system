@@ -1,5 +1,6 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
+import { sortObjArrayByName } from "../setup.js";
 
 export default class ageSystemVehicleSheet extends ActorSheet {
     
@@ -34,27 +35,14 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         // TODO - method on Actor entity to for prepareData() running on Vehicle data em database is updated.
         const data = super.getData();
         data.config = CONFIG.ageSystem;
-        data.passengers = this.actor.data.data.passengers.sort(function(a, b) {
-            const nameA = a.name.toLowerCase();
-            const nameB = b.name.toLowerCase();
-            if (nameA < nameB) {
-              return -1;
-            }
-            if (nameA > nameB) {
-              return 1;
-            }
-            return 0;
-        });
-
-        // Setting which ability settings will be used
-        const ablSelect = game.settings.get("age-system", "abilitySelection");
-        data.config.abilities = data.config.abilitiesSettings[ablSelect];
-
-        // Check Wealth Mode in use
-        data.config.wealthMode = game.settings.get("age-system", "wealthType");
+        data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
 
         // Sheet color
         data.colorScheme = game.settings.get("age-system", "colorScheme");
+
+        // Check if sheet is from synthetic token - Passenger setup will not work for Synth
+        data.notSynth = !(this.token && !this.token.data.actorLink);
+        data.isSynth = !data.notSynth;        
 
         return data;
     };
@@ -113,13 +101,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         
         // Actions by sheet owner only
         if (this.actor.owner) {
-            // new ContextMenu(html, ".focus-options", this.focusContextMenu);
-            // html.find(".item-show").click(this._onItemShow.bind(this));
-            // html.find(".roll-ability").click(this._onRollAbility.bind(this));
-            // html.find(".roll-item").click(this._onRollItem.bind(this));
-            // html.find(".roll-damage").click(this._onRollDamage.bind(this));
-            // html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
-            // html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
+
             html.find(".roll-collision").click(this._onCollisionDamage.bind(this));
             html.find(".roll-sideswipe").click(this._onSideswipeDamage.bind(this));
             html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
@@ -151,18 +133,32 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
     _onRollManeuver(event) {
         const vehicleData = this.actor.data.data;
-        const conductorId = vehicleData.conductor;
-        if (conductorId === "") return false
-        const conductorData = vehicleData.passengers.filter(p => p.isConductor === true)[0];
+        let conductorId;
+        if (event.currentTarget.classList.contains("is-synth")) {
+            conductorId = "synth-vehicle";
+        } else {
+            conductorId = vehicleData.conductor;
+        }
+        if (conductorId === "") return false;
 
+        let conductorData; 
         let user;
-        if (conductorData.isToken) user = game.actors.tokens[conductorData.id];
-        if (!conductorData.isToken) user = game.actors.get(conductorData.id);
-        if (!conductorData) {
-            const parts = {name: conductorData.name, id: conductorData.id};
-            let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
-            return ui.notifications.warn(warning);
-        };
+        if (conductorId === "synth-vehicle") {
+            const speaker = ChatMessage.getSpeaker();
+            if (speaker.token) user = game.actors.tokens[speaker.token];
+            if (!user) user = game.actors.get(speaker.actor);
+            conductorData = user;
+            if (user.data.type != "char") return false;
+        } else {
+            conductorData = vehicleData.passengers.filter(p => p.isConductor === true)[0];
+            if (conductorData.isToken) user = game.actors.tokens[conductorData.id];
+            if (!conductorData.isToken) user = game.actors.get(conductorData.id);
+            if (!conductorData) {
+                const parts = {name: conductorData.name, id: conductorData.id};
+                let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
+                return ui.notifications.warn(warning);
+            };
+        }
         
         const handlingUseFocus = vehicleData.handling.useFocus;
         const handlingUseAbl = vehicleData.handling.useAbl;
@@ -202,63 +198,4 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
         return this.actor.rollVehicleDamage(damageData);
     };
-
-    
-
-    // TODO - Method to check if passenger has Actor Data 
-    // _checkPassenger() {
-
-    // }
-
-    // _onItemActivate(event) {
-    //     const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-    //     const itemToToggle = this.actor.getOwnedItem(itemId);
-    //     const itemType = itemToToggle.type;
-    //     if (itemType === "power" || itemType === "talent") {
-    //         const toggleAct = !itemToToggle.data.data.activate;
-    //         itemToToggle.update({"data.activate": toggleAct});
-    //     } else {
-    //         const toggleEqp = !itemToToggle.data.data.equiped;
-    //         itemToToggle.update({"data.equiped": toggleEqp});
-    //     };
-    // };
-
-    // _onRollResources(event) {
-    //     const rollData = {
-    //         event: event,
-    //         actor: Dice.getActor() || this.actor,
-    //         resourceRoll: true
-    //     };
-    //     Dice.ageRollCheck(rollData);
-    // };
-
-    // _onRollItem(event) {
-    //     const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-    //     const itemRolled = this.actor.getOwnedItem(itemId);
-    //     itemRolled.roll(event);
-    // };
-
-    // _onItemShow(event) {
-    //     event.preventDefault();
-    //     const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-    //     const item = this.actor.getOwnedItem(itemId);
-    //     item.showItem();
-    // };
-
-    // _onItemEdit(event) {
-    //     event.preventDefault();
-    //     let e = event.currentTarget;
-    //     let itemId = e.closest(".feature-controls").dataset.itemId;
-    //     let item = this.actor.getOwnedItem(itemId);
-
-    //     item.sheet.render(true);
-    // };
-
-    // _onItemDelete(event) {
-    //     event.preventDefault();
-    //     let e = event.currentTarget;
-    //     let itemId = e.closest(".feature-controls").dataset.itemId;
-    //     const actor = this.actor;
-    //     return actor.deleteOwnedItem(itemId);
-    // };
 };

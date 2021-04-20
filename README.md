@@ -19,26 +19,15 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Drag and drop owned weapons and power to macro bar to create attack shortcuts
 - Possibility to add Conditions on characters (effects must be set manually)
 - Add Stunt Die or Focus (or both) to damage roll when rolling damage from chat
+- Support to track Serendipity (MAGE Companion), Complication (MAGE Companion)
+- Churn Tracker (The Expanse RPG) available
+- Supports Vehicles and Spaceships
 
-## Credits
-### Icons
-Icons were used from [game-icons.net](https://game-icons.net). These icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
-- [Sensuousness](https://game-icons.net/1x1/lorc/sensuousness.html) (Character icon), by [Lorc](https://lorcblog.blogspot.com/).
-- [Chariot](https://game-icons.net/1x1/cathelineau/chariot.html) (Vehicle icon), by [Cathelineau](his link reference is game-icons.net itself).
-- [Rocket](https://game-icons.net/1x1/lorc/rocket.html) (Spaceship icon), by [Lorc](https://lorcblog.blogspot.com/).
-- [Split Cross](https://game-icons.net/1x1/lorc/split-cross.html) (Stunt icon), by [Lorc](https://lorcblog.blogspot.com/).
-- [Embrace Energy](https://game-icons.net/1x1/lorc/embrassed-energy.html) (Power & Arcana icon), by [Lorc](https://lorcblog.blogspot.com/).
-- [Gift of Knowledge](https://game-icons.net/1x1/lorc/gift-of-knowledge.html) (Focus icon), by [Lorc](https://lorcblog.blogspot.com/).
-- [Backup](https://game-icons.net/1x1/lorc/backup.html) (Membership icon), by [Lorc](https://lorcblog.blogspot.com/).
-- [Skills](https://game-icons.net/1x1/delapouite/skills.html) (Talent icon), by [Delapouite](https://delapouite.com/).
-- [Player Next](https://game-icons.net/1x1/delapouite/player-next.html) (Relationship icon), by [Delapouite](https://delapouite.com/).
-- [Briefcase](https://game-icons.net/1x1/delapouite/briefcase.html) (General Equipment icon), by [Delapouite](https://delapouite.com/).
-- [Rank 3](https://game-icons.net/1x1/skoll/rank-3.html) (Honorifics icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
-- [Fist](https://game-icons.net/1x1/skoll/fist.html) (Weapon icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
-- [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
-### Localization
-- **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
-- **Spanish**: by Discord user *ForjaSalvage#2419*.
+## Spaceship and Vehicle Controls
+You can drag and drop Characters to Veihcles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship. **However, this will only work for vehicles/spaceships with LINKED ACTORS option selected on Prototype Token.**.
+When opening a sheet from an Unlinked Token:
+- **Spaceships:** Passengers section will vanish, roles will assigned automatically to spaceship **Crew**.
+- **Vehicles:** Passengers section will vanish, and the Conductor role will be "Token" - which means you must select a Token on canvas and them click the Dice icon to roll a maneuver. Note: in the future, spaceships will also have this option.
 
 ## Shortcuts
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
@@ -71,7 +60,42 @@ Here the description of each one of the Modificators:
 15. **Ability Names:** these are play bonuses to the specific Ability.
 16. **Speed:** adds to Speed Mod field.
 
+## Credits
+### Icons
+Icons were used from [game-icons.net](https://game-icons.net). These icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:
+- [Sensuousness](https://game-icons.net/1x1/lorc/sensuousness.html) (Character icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Chariot](https://game-icons.net/1x1/cathelineau/chariot.html) (Vehicle icon), by [Cathelineau](his link reference is game-icons.net itself).
+- [Rocket](https://game-icons.net/1x1/lorc/rocket.html) (Spaceship icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Split Cross](https://game-icons.net/1x1/lorc/split-cross.html) (Stunt icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Embrace Energy](https://game-icons.net/1x1/lorc/embrassed-energy.html) (Power & Arcana icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Gift of Knowledge](https://game-icons.net/1x1/lorc/gift-of-knowledge.html) (Focus icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Backup](https://game-icons.net/1x1/lorc/backup.html) (Membership icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Skills](https://game-icons.net/1x1/delapouite/skills.html) (Talent icon), by [Delapouite](https://delapouite.com/).
+- [Player Next](https://game-icons.net/1x1/delapouite/player-next.html) (Relationship icon), by [Delapouite](https://delapouite.com/).
+- [Briefcase](https://game-icons.net/1x1/delapouite/briefcase.html) (General Equipment icon), by [Delapouite](https://delapouite.com/).
+- [Rank 3](https://game-icons.net/1x1/skoll/rank-3.html) (Honorifics icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
+- [Fist](https://game-icons.net/1x1/skoll/fist.html) (Weapon icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
+- [Processor](https://game-icons.net/1x1/lorc/processor.html) (Spaceship Features icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
+### Localization
+- **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
+- **Spanish**: by Discord user *ForjaSalvaje#2419*.
+
 ## Change log
+
+### 0.6.0 [2021-04-19]
+#### Added
+- Serendipity tracker (Modern AGE Companion).
+- Complication tracker (Modern AGE Companion).
+- Churn tracker (The Expanse RPG).
+- Right Clicking the Age Roller icon will roll 1d6 (use Left Click + Alt to modify the standard 3d6 roll).
+- Added new color sets for character sheet.
+- Added Spaceship as Actor.
+- Added Spaceship Features item, to add Qualities, Flaws and Weapons to spaceships.
+- Hindered/Exausted and Helpless/Restrained conditions now affect Speed parameter accordingly. Contributor: Discord user *schlosrat (he/him) #1091*.
+#### Fix
+- Fixed bug preventing MCE editor to enter editing mode in some Item sheets.
+
 
 ### 0.5.1 [2021-03-25]
 #### Fix
@@ -79,7 +103,7 @@ Here the description of each one of the Modificators:
 
 ### 0.5.0 [2021-03-25]
 #### Added
-- Added a Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompet to add modifier and TN.
+- Added an Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompet to add modifier and TN.
 - Added to vehicle sheets: Armor Rating, Cover, Total Passengers Capacity and Custom Damage for Collision/Sideswipe.
 - On vehicles damage table, line representing vehicle's Velocity Class will have **bold** characters.
 - On Configure Settings it is now possible to configure the flavor text as Health and Fortune.
@@ -87,11 +111,11 @@ Here the description of each one of the Modificators:
 #### Fix
 - Migration issue could cause Conditions not to be created properly on migrated Actors.
 - Bug preventing rolling a Focus using a different Ability (or none).
-- When an Actor is delete from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
+- When an Actor is deleted from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
 - Fixed a bug causing the text field on character sheet header to be innacessible in some browsers.
-- Application will not reload after changin colorsets on "Configure Settings".
+- Application will not reload after changing colorsets on "Configure Settings".
 - Color Scheme won't reset when Player changes browser or delete browser historic.
-- "Use Power Points" and "Focus Compendium" settings are now variables set only by game master.
+- "Use Power Points" and "Focus Compendium" settings are now accessible only for GMs.
 - Empty fields in the constant part of damage builder will no longer return "null" on damage formula.
 
 ### 0.4.1 [2021-02-22]

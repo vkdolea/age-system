@@ -1,5 +1,6 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
+import { sortObjArrayByName } from "../setup.js";
 
 export default class ageSystemCharacterSheet extends ActorSheet {
     
@@ -56,17 +57,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.config = CONFIG.ageSystem;
 
         // Order itens into alphabetic order
-        const itemSorted = data.items.sort(function(a, b) {
-            const nameA = a.name.toLowerCase();
-            const nameB = b.name.toLowerCase();
-            if (nameA < nameB) {
-              return -1;
-            }
-            if (nameA > nameB) {
-              return 1;
-            }
-            return 0;
-        });
+        const itemSorted = sortObjArrayByName(data.items, "name");
 
         data.weapon = itemSorted.filter(i => i.type === "weapon");
         data.talent = itemSorted.filter(i => i.type === "talent");
@@ -81,17 +72,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.membership = itemSorted.filter(i => i.type === "membership");
 
         // Sort Conditions alphabetically
-        data.conditions = data.config.conditions.sort(function(a, b) {
-            const nameA = a.name.toLowerCase();
-            const nameB = b.name.toLowerCase();
-            if (nameA < nameB) {
-              return -1;
-            }
-            if (nameA > nameB) {
-              return 1;
-            }
-            return 0;
-        });
+        data.conditions = sortObjArrayByName(data.config.conditions, "name");
         for (let c = 0; c < data.conditions.length; c++) {
             const element = data.conditions[c];
             element.active = this.actor.data.data.conditions[element.id];           
@@ -132,6 +113,11 @@ export default class ageSystemCharacterSheet extends ActorSheet {
                 };            
             };
         };
+        if (item.data.type === "shipfeatures") {
+            let warning = game.i18n.localize("age-system.WARNING.shipPartsOnChar");
+            ui.notifications.warn(warning);
+            return false;
+        }
         /*-------------End of added code------------------*/
         const itemData = duplicate(item.data);
         

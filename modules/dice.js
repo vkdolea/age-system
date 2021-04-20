@@ -15,7 +15,8 @@ export async function ageRollCheck({
     vehicleHandling = false,
     selectAbl = false,
     rollVisibility = false,
-    flavor = false}={}) {
+    flavor = false,
+    moreParts = false}={}) {
     
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
@@ -239,7 +240,21 @@ export async function ageRollCheck({
         // }
     }
 
-
+    // Check for moreParts
+    if (moreParts) {
+        if (moreParts.length > 0) {
+            for (let p = 0; p < moreParts.length; p++) {
+                const part = moreParts[p];
+                const partName = `moreParts${p}`;
+                rollData[partName] = part.value;
+                rollFormula += ` + @${partName}`;
+                partials.push({
+                    label: part.description,
+                    value: part.value
+                })
+            }
+        }
+    }
 
     // Finally, the Age Roll!
     const ageRoll = new Roll(rollFormula, rollData).roll();
@@ -283,7 +298,7 @@ export async function ageRollCheck({
     let chatData = {
         user: game.user._id,
         speaker: ChatMessage.getSpeaker(),
-        // whisper: isGMroll(event),
+        whisper: isGMroll(event),
         blind: event.shiftKey,
         roll: ageRoll,
         content: await renderTemplate(chatTemplate, rollData)
@@ -378,6 +393,7 @@ export function getFocus(item) {
     } else {
         return [item.data.data.useFocus, 0, null]
     }
+    // Returns: [focus name as string, focus value, focus id]
     
 }
 

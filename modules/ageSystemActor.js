@@ -1,4 +1,6 @@
+import { ageSystem } from "./config.js";
 import * as Dice from "./dice.js";
+
 
 export class ageSystemActor extends Actor {
 
@@ -130,7 +132,17 @@ export class ageSystemActor extends Actor {
         } else {
             data.speed.mod = 0;
         };
-        data.speed.total =  Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
+        if (data.useConditions) {
+            if (data.conditions.helpless || data.conditions.restrained) {
+                data.speed.total = 0;
+            }
+            if ((data.conditions.exhausted && !data.conditions.hindred) || (!data.conditions.exhausted && data.conditions.hindred)) {
+                data.speed.total = Math.floor(data.speed.total/2);
+            } else if (data.conditions.exhausted && data.conditions.hindred) {
+                data.speed.total = Math.floor(data.speed.total/4);
+            }
+        }
+        // data.speed.total =  Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
         /*----------------------------------------------------*/
         
         /*--- Calculate Max Health ---------------------------*/
@@ -228,8 +240,68 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareBaseDataSpaceship() {
+        const actorData = this.data;
+        const data = actorData.data;
+        this.sortPassengers();
 
+        data.pob = data.passengers.length;
+        
+        for (const loss in data.losses) {
+            if (Object.hasOwnProperty.call(data.losses, loss)) {
+                const severity = data.losses[loss];
+                for (const type in severity) {
+                    if (Object.hasOwnProperty.call(severity, type)) {
+                        severity[type].maxArray = new Array(severity[type].max);
+                        for (let b = 0; b < severity[type].maxArray.length; b++) {
+                            severity[type].maxArray[b] = ((severity[type].actual-1) >= b) ? true : false;                    
+                        }                        
+                    }
+                }
+                
+            }
+        };
+
+        // Calculated Total value for various aspects
+        const systems = data.systems;
+        const nloss = data.losses.normal;
+
+        systems.sensors.loss = -Number(nloss.sensors.actual);
+        systems.sensors.total = Number(systems.sensors.base) + Number(systems.sensors.mod) + systems.sensors.loss;
+
+        systems.maneuver.loss = -Number(nloss.maneuverability.actual);
+        systems.maneuver.total = Number(systems.maneuver.base) + Number(systems.maneuver.mod) + systems.maneuver.loss;
+
+        systems.command.total = Number(systems.command.base) + Number(systems.command.mod);
+        systems.damageControl.total = Number(systems.damageControl.base) + Number(systems.damageControl.mod);
+
+        data.sizeNumeric = Number(data.size);
+        data.hull.base = ageSystem.spaceshipHull[data.sizeNumeric - 1];
+
+        data.crew.min = ageSystem.spaceshipCrew[data.sizeNumeric - 1].min
+        data.crew.typical = ageSystem.spaceshipCrew[data.sizeNumeric - 1].typ
+
+        data.crewPenalty = this._addCrewPenalty(data.sizeNumeric, data.crew.current, data.crew.min);
+
+        return data
     }
+
+    _addCrewPenalty(size, current, min) {
+        if (current >= min) return 0;
+        const sizeArray = ageSystem.spaceshipCrew;
+        const sizePos = size - 1;
+        let steps;
+        for (let s = 0; s < sizeArray.length; s++) {
+            const minC = sizeArray[s].min; 
+            const diff = current - minC;
+            if (diff < 0) {
+                steps = s;
+                break;
+            }
+        }
+        const diff = sizePos - steps + 1;
+        const penalty = 2 * diff;
+        return -penalty;
+    };
 
     prepareDerivedData() {
         const actorData = this.data;
@@ -269,12 +341,98 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareDerivedDataSpaceship() {
+        const actorData = this.data;
+        const data = actorData.data;
+
+        // Items With Mod
+        const ownedItems = actorData.items.filter(i => i.data.type !== "special" && i.data.type !== "rollable" && i.data.type !== "weapon");
+        let bonuses = {};
+        for (const feature in ownedItems) {
+            if (Object.hasOwnProperty.call(ownedItems, feature)) {
+                const item = ownedItems[feature].data;
+                const dataType = item.type;
+                if (!bonuses[dataType]) {
+                    bonuses = {
+                        ...bonuses,
+                        [dataType]: 0
+                    };
+                };
+                bonuses[dataType] += item[dataType];                
+            }
+        }
+
+        data.hull.baseMod = this._addSizeMod(data.sizeNumeric, bonuses.hullMod);
+        data.hull.total = this._addHullPlatingLoss(data.hull.baseMod, bonuses.hullPlating);
+
+        data.systems.sensors.total = this._addSensorBonus(data.systems.sensors.base, data.systems.sensors.mod, bonuses.sensorMod);
+
+        // data.juiceMod
 
     };
 
+    _addSensorBonus(base, mod, bonus) {
+        const sensorLoss = -this.data.data.losses.normal.sensors.actual;
+        if (!bonus) bonus = 0;
+        return base + mod + bonus + sensorLoss;
+    }
+
+    _addSizeMod(size, mod) {
+        if (!mod) return this.data.data.hull.base;
+        let newSize = size + mod;
+        if (newSize < 1) newSize = 1;
+        if (newSize > ageSystem.spaceshipHull.length) newSize = ageSystem.spaceshipHull.length;
+        const newHull = ageSystem.spaceshipHull[newSize - 1];
+        return newHull;
+    }
+
+    _addHullPlatingLoss(hull, plating) {
+        const hullLoss = -this.data.data.losses.normal.hull.actual;
+        if (Math.abs(hullLoss) === 0 && !plating) return hull;
+        if (!plating) plating = 0;
+        const platLoss = hullLoss + Number(plating);
+        if (platLoss === 0) return hull;
+        if (hull == 1) return platLoss + Number(hull); 
+        const modulus = Math.abs(Number(platLoss));
+        const newPart = platLoss >= 0 ? `+${modulus}` : `-${modulus}`;
+        const newHull = `${hull}${newPart}`;
+        return newHull;
+    }
+
+    sortWeapon(weapon) {
+        if (!weapon) return {};
+        let wArray = [];
+        for (const w in weapon) {
+            if (Object.hasOwnProperty.call(weapon, w)) {
+                wArray.push(weapon[w]);
+            }
+        }
+        wArray = wArray.sort(function(a, b) {
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+            return 0;
+        });
+        const   newWpnObj = {};
+        for (let w = 0; w < wArray.length; w++) {
+            // const element = wArray[w];
+            let wKey = String(w);
+            while (wKey.length < 4) {
+                wKey = "0" + wKey;
+            }
+            newWpnObj[wKey] = wArray[w];
+        }
+        return newWpnObj;
+    }
+
     // TODO - testar essa função, que ainda está em desuso
     sortPassengers() {
-        const passengers = this.data.data.passengers;
+        const data = this.data.data;
+        const passengers = data.passengers;
         let invalidPassengers = [];
         for (let pi = 0; pi < passengers.length; pi++) {
             const p = passengers[pi];
@@ -419,4 +577,20 @@ export class ageSystemActor extends Actor {
 
         Dice.vehicleDamage(damageData);
     };
+
+    checkFocus(namedFocus) {
+
+        if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null}
+
+        const ownedFoci = this.data.items.filter(a => a.type === "focus");
+        const expectedFocus = namedFocus.toLowerCase();
+        const validFocus = ownedFoci.filter(c => c.name.toLowerCase() === expectedFocus);
+
+        if (validFocus.length < 1) {
+            return {focusName: namedFocus, focusItem: false}
+        } else {
+            const id = validFocus[0]._id;
+            return {focusName: namedFocus, focusItem: this.getOwnedItem(id)}
+        };
+    }
 };

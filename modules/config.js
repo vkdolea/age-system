@@ -4,27 +4,27 @@ export const ageSystem = {
 
 // Ability set for "main" - core AGE System games
 ageSystem.abilitiesSettings.main = {
-    acc: "age-system.acc",
-    comm: "age-system.comm",
-    cons: "age-system.cons",
-    dex: "age-system.dex",
-    fight: "age-system.fight",
-    int: "age-system.int",
-    per: "age-system.per",
-    str: "age-system.str",
-    will: "age-system.will",
+    "acc": "age-system.acc",
+    "comm": "age-system.comm",
+    "cons": "age-system.cons",
+    "dex": "age-system.dex",
+    "fight": "age-system.fight",
+    "int": "age-system.int",
+    "per": "age-system.per",
+    "str": "age-system.str",
+    "will": "age-system.will",
 };
 
 // Ability set for "dage" - Dragon Age games
 ageSystem.abilitiesSettings.dage = {
-    comm: "age-system.comm",
-    cons: "age-system.cons",
-    cunn: "age-system.cunn",
-    dex: "age-system.dex",
-    magic: "age-system.magic",
-    per: "age-system.per",
-    str: "age-system.str",
-    will: "age-system.will",
+    "comm": "age-system.comm",
+    "cons": "age-system.cons",
+    "cunn": "age-system.cunn",
+    "dex": "age-system.dex",
+    "magic": "age-system.magic",
+    "per": "age-system.per",
+    "str": "age-system.str",
+    "will": "age-system.will",
 };
 
 ageSystem.actionsToCast = {
@@ -191,6 +191,30 @@ ageSystem.spaceshipSize = {
     titanic: 8
 };
 
+// Spaceship hull by size
+ageSystem.spaceshipHull = [
+    "1",
+    "1d3",
+    "1d6",
+    "2d6",
+    "3d6",
+    "4d6",
+    "5d6",
+    "6d6"
+];
+
+// Spaceship crew by size
+ageSystem.spaceshipCrew = [
+    {min: 1, typ: 2},
+    {min: 1, typ: 2},
+    {min: 2, typ: 4},
+    {min: 4, typ: 16},
+    {min: 16, typ: 64},
+    {min: 64, typ: 512},
+    {min: 256, typ: 2048},
+    {min: 1024, typ: 8192}
+];
+
 // Spaceship crew competece
 ageSystem.spaceshipCrewCompetence = {
     incompetent: 0,
@@ -199,7 +223,13 @@ ageSystem.spaceshipCrewCompetence = {
     capable: 3,
     skilled: 4,
     elite: 5
-}
+};
+
+// Spaceship Features
+ageSystem.featuresType = [
+    "sensorMod", "maneuverSizeStep", "juiceMod", "special",
+    "hullPlating", "hullMod",/* "rollable", */"weapon" // Maybe in the future I can add the rollable feature...
+];
 
 const itemIconPath = "systems/age-system/resources/imgs/item-icon/";
 ageSystem.itemIcons = {
@@ -211,7 +241,8 @@ ageSystem.itemIcons = {
     "relationship": `${itemIconPath}player-next.svg`,
     "membership": `${itemIconPath}backup.svg`,
     "weapon": `${itemIconPath}fist.svg`,
-    "focus": `${itemIconPath}gift-of-knowledge.svg`
+    "focus": `${itemIconPath}gift-of-knowledge.svg`,
+    "shipfeatures": `${itemIconPath}processor.svg`
 };
 
 const actorIconPath = "systems/age-system/resources/imgs/actor-icon/";

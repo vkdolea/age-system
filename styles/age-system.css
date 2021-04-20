@@ -35,6 +35,33 @@
 .age-system.item .fill-card i.fas {
   margin-left: 2px;
 }
+.age-system.item .focus label.part-desc.part-desc,
+.age-system.item .power label.part-desc.part-desc,
+.age-system.item .talent label.part-desc.part-desc,
+.age-system.item .weapon label.part-desc.part-desc,
+.age-system.item .equipment label.part-desc.part-desc,
+.age-system.item .stunts label.part-desc.part-desc,
+.age-system.item .honorifics label.part-desc.part-desc,
+.age-system.item .relationship label.part-desc.part-desc,
+.age-system.item .membership label.part-desc.part-desc,
+.age-system.item .shipfeatures label.part-desc.part-desc,
+.age-system.item .vehicle label.part-desc.part-desc,
+.age-system.item .focus .part-desc-value.part-desc-value,
+.age-system.item .power .part-desc-value.part-desc-value,
+.age-system.item .talent .part-desc-value.part-desc-value,
+.age-system.item .weapon .part-desc-value.part-desc-value,
+.age-system.item .equipment .part-desc-value.part-desc-value,
+.age-system.item .stunts .part-desc-value.part-desc-value,
+.age-system.item .honorifics .part-desc-value.part-desc-value,
+.age-system.item .relationship .part-desc-value.part-desc-value,
+.age-system.item .membership .part-desc-value.part-desc-value,
+.age-system.item .shipfeatures .part-desc-value.part-desc-value,
+.age-system.item .vehicle .part-desc-value.part-desc-value {
+  max-width: none;
+  flex: 0 0 50%;
+  text-align: center;
+  margin-bottom: 2px;
+}
 .age-system.item .focus img,
 .age-system.item .power img,
 .age-system.item .talent img,
@@ -44,6 +71,7 @@
 .age-system.item .honorifics img,
 .age-system.item .relationship img,
 .age-system.item .membership img,
+.age-system.item .shipfeatures img,
 .age-system.item .vehicle img {
   min-height: 60px;
   max-width: 60px;
@@ -59,6 +87,7 @@
 .age-system.item .honorifics .power-type-control,
 .age-system.item .relationship .power-type-control,
 .age-system.item .membership .power-type-control,
+.age-system.item .shipfeatures .power-type-control,
 .age-system.item .vehicle .power-type-control {
   display: grid;
   grid-template-columns: 20px 20px;
@@ -74,6 +103,7 @@
 .age-system.item .honorifics .power-type-control .toggle-damage,
 .age-system.item .relationship .power-type-control .toggle-damage,
 .age-system.item .membership .power-type-control .toggle-damage,
+.age-system.item .shipfeatures .power-type-control .toggle-damage,
 .age-system.item .vehicle .power-type-control .toggle-damage {
   grid-area: damage;
   justify-self: stretch;
@@ -87,6 +117,7 @@
 .age-system.item .honorifics .power-type-control .toggle-healing,
 .age-system.item .relationship .power-type-control .toggle-healing,
 .age-system.item .membership .power-type-control .toggle-healing,
+.age-system.item .shipfeatures .power-type-control .toggle-healing,
 .age-system.item .vehicle .power-type-control .toggle-healing {
   grid-area: heal;
   justify-self: stretch;
@@ -100,6 +131,7 @@
 .age-system.item .honorifics .power-type-control .toggle-resist,
 .age-system.item .relationship .power-type-control .toggle-resist,
 .age-system.item .membership .power-type-control .toggle-resist,
+.age-system.item .shipfeatures .power-type-control .toggle-resist,
 .age-system.item .vehicle .power-type-control .toggle-resist {
   grid-area: resist;
   justify-self: stretch;
@@ -113,6 +145,7 @@
 .age-system.item .honorifics .power-type-control .toggle-fatigue,
 .age-system.item .relationship .power-type-control .toggle-fatigue,
 .age-system.item .membership .power-type-control .toggle-fatigue,
+.age-system.item .shipfeatures .power-type-control .toggle-fatigue,
 .age-system.item .vehicle .power-type-control .toggle-fatigue {
   grid-area: fatigue;
   justify-self: stretch;
@@ -126,6 +159,7 @@
 .age-system.item .honorifics input[name="data.shortDesc"].long-text,
 .age-system.item .relationship input[name="data.shortDesc"].long-text,
 .age-system.item .membership input[name="data.shortDesc"].long-text,
+.age-system.item .shipfeatures input[name="data.shortDesc"].long-text,
 .age-system.item .vehicle input[name="data.shortDesc"].long-text {
   max-width: 100%;
   width: 100%;
@@ -139,6 +173,7 @@
 .age-system.item .honorifics .damage-formula p.in-chat-text,
 .age-system.item .relationship .damage-formula p.in-chat-text,
 .age-system.item .membership .damage-formula p.in-chat-text,
+.age-system.item .shipfeatures .damage-formula p.in-chat-text,
 .age-system.item .vehicle .damage-formula p.in-chat-text {
   white-space: nowrap;
 }
@@ -151,6 +186,7 @@
 .age-system.item .honorifics p.in-chat-text,
 .age-system.item .relationship p.in-chat-text,
 .age-system.item .membership p.in-chat-text,
+.age-system.item .shipfeatures p.in-chat-text,
 .age-system.item .vehicle p.in-chat-text {
   margin: 0px;
 }
@@ -163,6 +199,7 @@
 .age-system.item .honorifics section.sheet-tab-section,
 .age-system.item .relationship section.sheet-tab-section,
 .age-system.item .membership section.sheet-tab-section,
+.age-system.item .shipfeatures section.sheet-tab-section,
 .age-system.item .vehicle section.sheet-tab-section {
   height: 100%;
   border-radius: 0px 0px 10px 10px;
@@ -176,6 +213,7 @@
 .age-system.item .honorifics .item-card-title,
 .age-system.item .relationship .item-card-title,
 .age-system.item .membership .item-card-title,
+.age-system.item .shipfeatures .item-card-title,
 .age-system.item .vehicle .item-card-title {
   border-radius: 10px 10px 0px 0px;
   text-transform: uppercase;
@@ -191,6 +229,7 @@
 .age-system.item .honorifics input[name="name"],
 .age-system.item .relationship input[name="name"],
 .age-system.item .membership input[name="name"],
+.age-system.item .shipfeatures input[name="name"],
 .age-system.item .vehicle input[name="name"] {
   padding-left: 10px;
   min-width: 100%;
@@ -204,6 +243,7 @@
 .age-system.item .honorifics label,
 .age-system.item .relationship label,
 .age-system.item .membership label,
+.age-system.item .shipfeatures label,
 .age-system.item .vehicle label {
   font-variant-caps: small-caps;
   font-weight: 500;
@@ -221,6 +261,7 @@
 .age-system.item .honorifics .flexcol > label,
 .age-system.item .relationship .flexcol > label,
 .age-system.item .membership .flexcol > label,
+.age-system.item .shipfeatures .flexcol > label,
 .age-system.item .vehicle .flexcol > label {
   margin-right: 0px;
 }
@@ -233,6 +274,7 @@
 .age-system.item .honorifics .flexcol > input,
 .age-system.item .relationship .flexcol > input,
 .age-system.item .membership .flexcol > input,
+.age-system.item .shipfeatures .flexcol > input,
 .age-system.item .vehicle .flexcol > input {
   text-align: center;
 }
@@ -245,6 +287,7 @@
 .age-system.item .honorifics .flexcol div.item-card-stats.active-mod-container,
 .age-system.item .relationship .flexcol div.item-card-stats.active-mod-container,
 .age-system.item .membership .flexcol div.item-card-stats.active-mod-container,
+.age-system.item .shipfeatures .flexcol div.item-card-stats.active-mod-container,
 .age-system.item .vehicle .flexcol div.item-card-stats.active-mod-container {
   padding-top: 0px;
 }
@@ -257,6 +300,7 @@
 .age-system.item .honorifics .item-card-stats,
 .age-system.item .relationship .item-card-stats,
 .age-system.item .membership .item-card-stats,
+.age-system.item .shipfeatures .item-card-stats,
 .age-system.item .vehicle .item-card-stats {
   flex-wrap: wrap;
   padding: 10px;
@@ -271,6 +315,7 @@
 .age-system.item .honorifics .item-card-stats .modbox,
 .age-system.item .relationship .item-card-stats .modbox,
 .age-system.item .membership .item-card-stats .modbox,
+.age-system.item .shipfeatures .item-card-stats .modbox,
 .age-system.item .vehicle .item-card-stats .modbox {
   padding: 4px;
 }
@@ -283,6 +328,7 @@
 .age-system.item .honorifics .item-card-stats a.not-equiped,
 .age-system.item .relationship .item-card-stats a.not-equiped,
 .age-system.item .membership .item-card-stats a.not-equiped,
+.age-system.item .shipfeatures .item-card-stats a.not-equiped,
 .age-system.item .vehicle .item-card-stats a.not-equiped {
   opacity: 0.3;
 }
@@ -295,6 +341,7 @@
 .age-system.item .honorifics .item-card-stats > *,
 .age-system.item .relationship .item-card-stats > *,
 .age-system.item .membership .item-card-stats > *,
+.age-system.item .shipfeatures .item-card-stats > *,
 .age-system.item .vehicle .item-card-stats > * {
   margin-bottom: 4px;
   margin-left: 1px;
@@ -309,6 +356,7 @@
 .age-system.item .honorifics .item-card-stats select[name="data.testAbl"],
 .age-system.item .relationship .item-card-stats select[name="data.testAbl"],
 .age-system.item .membership .item-card-stats select[name="data.testAbl"],
+.age-system.item .shipfeatures .item-card-stats select[name="data.testAbl"],
 .age-system.item .vehicle .item-card-stats select[name="data.testAbl"],
 .age-system.item .focus .item-card-stats select[name="data.useAbl"],
 .age-system.item .power .item-card-stats select[name="data.useAbl"],
@@ -319,6 +367,7 @@
 .age-system.item .honorifics .item-card-stats select[name="data.useAbl"],
 .age-system.item .relationship .item-card-stats select[name="data.useAbl"],
 .age-system.item .membership .item-card-stats select[name="data.useAbl"],
+.age-system.item .shipfeatures .item-card-stats select[name="data.useAbl"],
 .age-system.item .vehicle .item-card-stats select[name="data.useAbl"],
 .age-system.item .focus .item-card-stats select[name="data.itemForceAbl"],
 .age-system.item .power .item-card-stats select[name="data.itemForceAbl"],
@@ -329,6 +378,7 @@
 .age-system.item .honorifics .item-card-stats select[name="data.itemForceAbl"],
 .age-system.item .relationship .item-card-stats select[name="data.itemForceAbl"],
 .age-system.item .membership .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item .shipfeatures .item-card-stats select[name="data.itemForceAbl"],
 .age-system.item .vehicle .item-card-stats select[name="data.itemForceAbl"] {
   text-align: center;
 }
@@ -341,6 +391,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.useFocus"],
 .age-system.item .relationship .item-card-stats input[name="data.useFocus"],
 .age-system.item .membership .item-card-stats input[name="data.useFocus"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.useFocus"],
 .age-system.item .vehicle .item-card-stats input[name="data.useFocus"],
 .age-system.item .focus .item-card-stats input[name="data.testFocus"],
 .age-system.item .power .item-card-stats input[name="data.testFocus"],
@@ -351,6 +402,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.testFocus"],
 .age-system.item .relationship .item-card-stats input[name="data.testFocus"],
 .age-system.item .membership .item-card-stats input[name="data.testFocus"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.testFocus"],
 .age-system.item .vehicle .item-card-stats input[name="data.testFocus"] {
   min-width: 140px;
   max-width: 250px;
@@ -365,6 +417,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.cost"],
 .age-system.item .relationship .item-card-stats input[name="data.cost"],
 .age-system.item .membership .item-card-stats input[name="data.cost"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.cost"],
 .age-system.item .vehicle .item-card-stats input[name="data.cost"] {
   max-width: 60px;
   min-width: 60px;
@@ -379,6 +432,7 @@
 .age-system.item .honorifics .item-card-stats input[type="checkbox"],
 .age-system.item .relationship .item-card-stats input[type="checkbox"],
 .age-system.item .membership .item-card-stats input[type="checkbox"],
+.age-system.item .shipfeatures .item-card-stats input[type="checkbox"],
 .age-system.item .vehicle .item-card-stats input[type="checkbox"] {
   margin: 0px;
   margin-top: 1px;
@@ -394,6 +448,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.targetNumber"],
 .age-system.item .relationship .item-card-stats input[name="data.targetNumber"],
 .age-system.item .membership .item-card-stats input[name="data.targetNumber"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.targetNumber"],
 .age-system.item .vehicle .item-card-stats input[name="data.targetNumber"],
 .age-system.item .focus .item-card-stats input[name="data.powerPointCost"],
 .age-system.item .power .item-card-stats input[name="data.powerPointCost"],
@@ -404,6 +459,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.powerPointCost"],
 .age-system.item .relationship .item-card-stats input[name="data.powerPointCost"],
 .age-system.item .membership .item-card-stats input[name="data.powerPointCost"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.powerPointCost"],
 .age-system.item .vehicle .item-card-stats input[name="data.powerPointCost"],
 .age-system.item .focus .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .power .item-card-stats input[name="data.fatigueTN"],
@@ -414,6 +470,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .relationship .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .membership .item-card-stats input[name="data.fatigueTN"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .vehicle .item-card-stats input[name="data.fatigueTN"],
 .age-system.item .focus .item-card-stats input[name="data.minStr"],
 .age-system.item .power .item-card-stats input[name="data.minStr"],
@@ -424,6 +481,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.minStr"],
 .age-system.item .relationship .item-card-stats input[name="data.minStr"],
 .age-system.item .membership .item-card-stats input[name="data.minStr"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.minStr"],
 .age-system.item .vehicle .item-card-stats input[name="data.minStr"],
 .age-system.item .focus .item-card-stats input[name="data.weight"],
 .age-system.item .power .item-card-stats input[name="data.weight"],
@@ -434,6 +492,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.weight"],
 .age-system.item .relationship .item-card-stats input[name="data.weight"],
 .age-system.item .membership .item-card-stats input[name="data.weight"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.weight"],
 .age-system.item .vehicle .item-card-stats input[name="data.weight"],
 .age-system.item .focus .item-card-stats input[name="data.range"],
 .age-system.item .power .item-card-stats input[name="data.range"],
@@ -444,6 +503,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.range"],
 .age-system.item .relationship .item-card-stats input[name="data.range"],
 .age-system.item .membership .item-card-stats input[name="data.range"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.range"],
 .age-system.item .vehicle .item-card-stats input[name="data.range"],
 .age-system.item .focus .item-card-stats input[name="data.rangeMax"],
 .age-system.item .power .item-card-stats input[name="data.rangeMax"],
@@ -454,6 +514,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.rangeMax"],
 .age-system.item .relationship .item-card-stats input[name="data.rangeMax"],
 .age-system.item .membership .item-card-stats input[name="data.rangeMax"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.rangeMax"],
 .age-system.item .vehicle .item-card-stats input[name="data.rangeMax"],
 .age-system.item .focus .item-card-stats input[name="data.capacity"],
 .age-system.item .power .item-card-stats input[name="data.capacity"],
@@ -464,6 +525,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.capacity"],
 .age-system.item .relationship .item-card-stats input[name="data.capacity"],
 .age-system.item .membership .item-card-stats input[name="data.capacity"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.capacity"],
 .age-system.item .vehicle .item-card-stats input[name="data.capacity"],
 .age-system.item .focus .item-card-stats input[name="data.quantity"],
 .age-system.item .power .item-card-stats input[name="data.quantity"],
@@ -474,6 +536,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.quantity"],
 .age-system.item .relationship .item-card-stats input[name="data.quantity"],
 .age-system.item .membership .item-card-stats input[name="data.quantity"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.quantity"],
 .age-system.item .vehicle .item-card-stats input[name="data.quantity"],
 .age-system.item .focus .item-card-stats input[name="data.stuntPoints"],
 .age-system.item .power .item-card-stats input[name="data.stuntPoints"],
@@ -484,6 +547,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.stuntPoints"],
 .age-system.item .relationship .item-card-stats input[name="data.stuntPoints"],
 .age-system.item .membership .item-card-stats input[name="data.stuntPoints"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.stuntPoints"],
 .age-system.item .vehicle .item-card-stats input[name="data.stuntPoints"],
 .age-system.item .focus .item-card-stats input[name="data.initialValue"],
 .age-system.item .power .item-card-stats input[name="data.initialValue"],
@@ -494,6 +558,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.initialValue"],
 .age-system.item .relationship .item-card-stats input[name="data.initialValue"],
 .age-system.item .membership .item-card-stats input[name="data.initialValue"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.initialValue"],
 .age-system.item .vehicle .item-card-stats input[name="data.initialValue"],
 .age-system.item .focus .item-card-stats input[name="data.extraValue"],
 .age-system.item .power .item-card-stats input[name="data.extraValue"],
@@ -504,6 +569,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.extraValue"],
 .age-system.item .relationship .item-card-stats input[name="data.extraValue"],
 .age-system.item .membership .item-card-stats input[name="data.extraValue"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.extraValue"],
 .age-system.item .vehicle .item-card-stats input[name="data.extraValue"],
 .age-system.item .focus .item-card-stats input[name="data.nrDice"],
 .age-system.item .power .item-card-stats input[name="data.nrDice"],
@@ -514,6 +580,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.nrDice"],
 .age-system.item .relationship .item-card-stats input[name="data.nrDice"],
 .age-system.item .membership .item-card-stats input[name="data.nrDice"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.nrDice"],
 .age-system.item .vehicle .item-card-stats input[name="data.nrDice"],
 .age-system.item .focus .item-card-stats input[name="data.intensity"],
 .age-system.item .power .item-card-stats input[name="data.intensity"],
@@ -524,6 +591,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.intensity"],
 .age-system.item .relationship .item-card-stats input[name="data.intensity"],
 .age-system.item .membership .item-card-stats input[name="data.intensity"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.intensity"],
 .age-system.item .vehicle .item-card-stats input[name="data.intensity"],
 .age-system.item .focus .item-card-stats input[name="data.rank"],
 .age-system.item .power .item-card-stats input[name="data.rank"],
@@ -534,6 +602,7 @@
 .age-system.item .honorifics .item-card-stats input[name="data.rank"],
 .age-system.item .relationship .item-card-stats input[name="data.rank"],
 .age-system.item .membership .item-card-stats input[name="data.rank"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.rank"],
 .age-system.item .vehicle .item-card-stats input[name="data.rank"] {
   max-width: 30px;
   min-width: 30px;
@@ -548,6 +617,7 @@
 .age-system.item .honorifics .item-card-stats span:last-of-type,
 .age-system.item .relationship .item-card-stats span:last-of-type,
 .age-system.item .membership .item-card-stats span:last-of-type,
+.age-system.item .shipfeatures .item-card-stats span:last-of-type,
 .age-system.item .vehicle .item-card-stats span:last-of-type {
   max-width: 25px;
   text-align: center;
@@ -561,6 +631,7 @@
 .age-system.item .honorifics .item-card-stats div.power-type-control,
 .age-system.item .relationship .item-card-stats div.power-type-control,
 .age-system.item .membership .item-card-stats div.power-type-control,
+.age-system.item .shipfeatures .item-card-stats div.power-type-control,
 .age-system.item .vehicle .item-card-stats div.power-type-control {
   max-width: fit-content;
 }
@@ -573,6 +644,7 @@
 .age-system.item .honorifics .item-card-stats div.power-type-control a,
 .age-system.item .relationship .item-card-stats div.power-type-control a,
 .age-system.item .membership .item-card-stats div.power-type-control a,
+.age-system.item .shipfeatures .item-card-stats div.power-type-control a,
 .age-system.item .vehicle .item-card-stats div.power-type-control a {
   margin-top: 30%;
   margin-bottom: 50%;
@@ -586,6 +658,7 @@
 .age-system.item .honorifics .item-card-stats div.flexrow,
 .age-system.item .relationship .item-card-stats div.flexrow,
 .age-system.item .membership .item-card-stats div.flexrow,
+.age-system.item .shipfeatures .item-card-stats div.flexrow,
 .age-system.item .vehicle .item-card-stats div.flexrow {
   margin-right: 4px;
 }
@@ -598,20 +671,33 @@
 .age-system.item .honorifics .item-card-stats div,
 .age-system.item .relationship .item-card-stats div,
 .age-system.item .membership .item-card-stats div,
+.age-system.item .shipfeatures .item-card-stats div,
 .age-system.item .vehicle .item-card-stats div {
   flex-wrap: nowrap;
   align-items: center;
 }
-.age-system.item .focus .item-card-stats input.data-entry,
-.age-system.item .power .item-card-stats input.data-entry,
-.age-system.item .talent .item-card-stats input.data-entry,
-.age-system.item .weapon .item-card-stats input.data-entry,
-.age-system.item .equipment .item-card-stats input.data-entry,
-.age-system.item .stunts .item-card-stats input.data-entry,
-.age-system.item .honorifics .item-card-stats input.data-entry,
-.age-system.item .relationship .item-card-stats input.data-entry,
-.age-system.item .membership .item-card-stats input.data-entry,
-.age-system.item .vehicle .item-card-stats input.data-entry {
+.age-system.item .focus .item-card-stats input.data-input,
+.age-system.item .power .item-card-stats input.data-input,
+.age-system.item .talent .item-card-stats input.data-input,
+.age-system.item .weapon .item-card-stats input.data-input,
+.age-system.item .equipment .item-card-stats input.data-input,
+.age-system.item .stunts .item-card-stats input.data-input,
+.age-system.item .honorifics .item-card-stats input.data-input,
+.age-system.item .relationship .item-card-stats input.data-input,
+.age-system.item .membership .item-card-stats input.data-input,
+.age-system.item .shipfeatures .item-card-stats input.data-input,
+.age-system.item .vehicle .item-card-stats input.data-input,
+.age-system.item .focus .item-card-stats select.data-input,
+.age-system.item .power .item-card-stats select.data-input,
+.age-system.item .talent .item-card-stats select.data-input,
+.age-system.item .weapon .item-card-stats select.data-input,
+.age-system.item .equipment .item-card-stats select.data-input,
+.age-system.item .stunts .item-card-stats select.data-input,
+.age-system.item .honorifics .item-card-stats select.data-input,
+.age-system.item .relationship .item-card-stats select.data-input,
+.age-system.item .membership .item-card-stats select.data-input,
+.age-system.item .shipfeatures .item-card-stats select.data-input,
+.age-system.item .vehicle .item-card-stats select.data-input {
   font-variant-caps: small-caps;
 }
 .age-system.item .focus .item-card-desc,
@@ -623,22 +709,24 @@
 .age-system.item .honorifics .item-card-desc,
 .age-system.item .relationship .item-card-desc,
 .age-system.item .membership .item-card-desc,
+.age-system.item .shipfeatures .item-card-desc,
 .age-system.item .vehicle .item-card-desc {
   height: 100%;
   padding: 4px 10px;
   border-radius: 0px 0px 10px 10px;
 }
-.age-system.item .focus .item-card-desc .editor,
-.age-system.item .power .item-card-desc .editor,
-.age-system.item .talent .item-card-desc .editor,
-.age-system.item .weapon .item-card-desc .editor,
-.age-system.item .equipment .item-card-desc .editor,
-.age-system.item .stunts .item-card-desc .editor,
-.age-system.item .honorifics .item-card-desc .editor,
-.age-system.item .relationship .item-card-desc .editor,
-.age-system.item .membership .item-card-desc .editor,
-.age-system.item .vehicle .item-card-desc .editor {
-  height: 100%;
+.age-system.item .focus .item-card-desc div.editor.editor,
+.age-system.item .power .item-card-desc div.editor.editor,
+.age-system.item .talent .item-card-desc div.editor.editor,
+.age-system.item .weapon .item-card-desc div.editor.editor,
+.age-system.item .equipment .item-card-desc div.editor.editor,
+.age-system.item .stunts .item-card-desc div.editor.editor,
+.age-system.item .honorifics .item-card-desc div.editor.editor,
+.age-system.item .relationship .item-card-desc div.editor.editor,
+.age-system.item .membership .item-card-desc div.editor.editor,
+.age-system.item .shipfeatures .item-card-desc div.editor.editor,
+.age-system.item .vehicle .item-card-desc div.editor.editor {
+  height: 90%;
 }
 .age-system.item .focus .item-card-desc label:last-of-type,
 .age-system.item .power .item-card-desc label:last-of-type,
@@ -649,6 +737,7 @@
 .age-system.item .honorifics .item-card-desc label:last-of-type,
 .age-system.item .relationship .item-card-desc label:last-of-type,
 .age-system.item .membership .item-card-desc label:last-of-type,
+.age-system.item .shipfeatures .item-card-desc label:last-of-type,
 .age-system.item .vehicle .item-card-desc label:last-of-type {
   margin-top: 4px;
 }
@@ -661,6 +750,7 @@
 .age-system.item .honorifics .item-card-desc .mod-card,
 .age-system.item .relationship .item-card-desc .mod-card,
 .age-system.item .membership .item-card-desc .mod-card,
+.age-system.item .shipfeatures .item-card-desc .mod-card,
 .age-system.item .vehicle .item-card-desc .mod-card {
   border-radius: 10px;
   max-width: 150px;
@@ -678,6 +768,7 @@
 .age-system.item .honorifics .item-card-desc .mod-card input[type="number"],
 .age-system.item .relationship .item-card-desc .mod-card input[type="number"],
 .age-system.item .membership .item-card-desc .mod-card input[type="number"],
+.age-system.item .shipfeatures .item-card-desc .mod-card input[type="number"],
 .age-system.item .vehicle .item-card-desc .mod-card input[type="number"] {
   max-width: 40px;
   min-width: 40px;
@@ -947,8 +1038,12 @@
   margin-left: 2px;
 }
 .age-system.sheet.char .item-container .item-box.conditions {
-  min-width: 100px;
-  max-width: 100px;
+  flex: 0 0 120px;
+  margin: auto;
+  margin-top: 4px;
+}
+.age-system.sheet.char .item-container .item-box.conditions p {
+  text-transform: uppercase;
 }
 .age-system.sheet.char .item-container .actor-items {
   justify-content: stretch;
@@ -1153,19 +1248,102 @@
 .age-system.sheet .window-content {
   background-color: #d1b7ab;
 }
-.age-system.sheet.spaceship input,
-.age-system.sheet.spaceship select {
+.age-system.sheet.spaceship {
+  font-variant: small-caps;
+}
+.age-system.sheet.spaceship .stats-block.stats-block {
+  padding: 5px;
+  border-radius: 10px;
+  margin-top: 10px;
+  flex: 0 0 auto;
+  text-align: center;
+}
+.age-system.sheet.spaceship ul {
+  list-style-type: none;
+  padding: 0;
+}
+.age-system.sheet.spaceship ul .item-img.item-img {
+  flex: 0 0 24px;
   border: none;
+}
+.age-system.sheet.spaceship p {
+  margin: 0;
+  border-radius: 4px;
+  height: 26px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.age-system.sheet.spaceship .inuse {
+  cursor: pointer;
+}
+.age-system.sheet.spaceship .user-data {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  height: 26px;
+  padding-top: 5px;
+}
+.age-system.sheet.spaceship h2,
+.age-system.sheet.spaceship h3 {
+  text-align: center;
+}
+.age-system.sheet.spaceship input[name="name"] {
+  padding: 5px;
+  min-width: 100%;
+  max-height: fit-content;
+  border-radius: 10px;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 30px;
+  border: none;
+}
+.age-system.sheet.spaceship select,
+.age-system.sheet.spaceship input[type="number"],
+.age-system.sheet.spaceship input[type="number"]:disabled {
+  color: inherit;
+  filter: contrast(90%);
+}
+.age-system.sheet.spaceship .image-description {
+  height: 200px;
+  max-height: 200px;
+  margin-top: 10px;
+}
+.age-system.sheet.spaceship .image-description .ship-image {
+  object-fit: contain;
+  border: none;
+  height: 190px;
+}
+.age-system.sheet.spaceship .image-description .ship-desc {
+  height: 190px;
+}
+.age-system.sheet.spaceship .image-description .ship-desc label.desc.desc {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+}
+.age-system.sheet.spaceship .image-description .ship-desc .editor {
+  height: 100%;
+}
+.age-system.sheet.spaceship .image-description .ship-desc .editor .editor-content {
+  max-height: 173px;
 }
 .age-system.sheet.spaceship ul.systems-list {
   text-align: center;
 }
+.age-system.sheet.spaceship ul.systems-list li {
+  margin-top: 4px;
+}
 .age-system.sheet.spaceship ul.systems-list li .system-roll {
   flex: 0 0 16px;
+  margin-right: 4px;
+}
+.age-system.sheet.spaceship ul.systems-list li .system-role.title {
+  text-align: center;
 }
 .age-system.sheet.spaceship ul.systems-list li .system-role {
-  flex: 0 0 100px;
-  max-width: 100px;
+  flex: 0 0 130px;
+  max-width: 130px;
+  text-align: right;
 }
 .age-system.sheet.spaceship ul.systems-list li .system-operator {
   flex: 0 0 150px;
@@ -1177,47 +1355,202 @@
 .age-system.sheet.spaceship ul.systems-list li .system-focus {
   flex: 0 0 200px;
 }
-.age-system.sheet.spaceship .container {
-  width: fit-content;
-}
 .age-system.sheet.spaceship ul.passenger-list {
-  max-width: 300px;
+  padding: 0;
+}
+.age-system.sheet.spaceship ul.passenger-list li {
+  padding: 0;
+  margin-top: 2px;
+}
+.age-system.sheet.spaceship ul.passenger-list li .remove-passenger {
+  flex: 0 0 15px;
 }
 .age-system.sheet.spaceship ul.passenger-list li .passenger-token {
   flex: 0 0 25px;
+  height: 24px;
+  width: 24px;
+  border: none;
 }
 .age-system.sheet.spaceship ul.passenger-list li .passenger-damage-control {
   flex: 0 0 25px;
 }
-.age-system.sheet.spaceship ul.passenger-list li .passenger-name {
-  flex: 0 0 150px;
+.age-system.sheet.spaceship .container {
+  margin-right: 8px;
 }
-.age-system.sheet.spaceship ul.passenger-list li .passenger-remove {
-  flex: 0 0 25 px;
+.age-system.sheet.spaceship fieldset {
+  border-radius: 5px;
+  border-width: 1px;
 }
-.age-system.sheet.spaceship div.parameters.container {
-  text-align: center;
+.age-system.sheet.spaceship .crew-size-penalty {
+  margin-top: 4px;
 }
-.age-system.sheet.spaceship div.parameters.container .parameter-label {
-  flex: 0 0 50px;
+.age-system.sheet.spaceship .crew-size-penalty label {
+  flex: 0 0 110px;
 }
-.age-system.sheet.spaceship div.parameters.container .hull-dice-qtd {
-  flex: 0 0 35px;
-}
-.age-system.sheet.spaceship div.parameters.container .hull-dice-type {
-  flex: 0 0 40px;
-}
-.age-system.sheet.spaceship div.parameters.container .hull-plus-sign {
-  flex: 0 0 16px;
-}
-.age-system.sheet.spaceship div.parameters.container .hull-extra-damage {
-  flex: 0 0 35px;
-}
-.age-system.sheet.spaceship div.parameters.container .ship-size {
-  flex: 0 0 126px;
+.age-system.sheet.spaceship .crew-size-penalty p {
+  flex: 0 0 30px;
 }
 .age-system.sheet.spaceship .crew-details {
   padding: 0;
+  text-align: center;
+}
+.age-system.sheet.spaceship .crew-details label.current-crew {
+  flex: 0 0 60px;
+}
+.age-system.sheet.spaceship .crew-details .current-crew {
+  flex: 0 0 40px;
+}
+.age-system.sheet.spaceship .crew-details input.min-typ-crew {
+  flex: 0 0 40px;
+}
+.age-system.sheet.spaceship .crew-details .min-typ-crew span {
+  padding-top: 4px;
+  background: rgba(0, 0, 0, 0.05);
+}
+.age-system.sheet.spaceship .crew-details .crew-competence {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.age-system.sheet.spaceship .crew-details .competence-label {
+  flex: 0 0 80px;
+}
+.age-system.sheet.spaceship .crew-details select.competence-list {
+  flex: 0 0 220px;
+}
+.age-system.sheet.spaceship fieldset.sensors .sensor-field {
+  flex: 0 0 65px;
+  text-align: center;
+  margin-top: 4px;
+}
+.age-system.sheet.spaceship fieldset.sensors label.sensor-field {
+  flex: 0 0 50px;
+}
+.age-system.sheet.spaceship .hull {
+  padding: 4px;
+}
+.age-system.sheet.spaceship .hull .ship-size {
+  flex: 0 0 92px;
+  font-size: 15px;
+}
+.age-system.sheet.spaceship .hull .hull-label {
+  flex: 0 0 50px;
+}
+.age-system.sheet.spaceship .hull div.hull {
+  padding: 0;
+}
+.age-system.sheet.spaceship .hull .hull-value {
+  flex: 0 0 92px;
+  margin: 0;
+  margin-top: 4px;
+}
+.age-system.sheet.spaceship ul.weapon-list li.item-desc {
+  height: 100%;
+}
+.age-system.sheet.spaceship ul.weapon-list li.item-desc .weapon-name,
+.age-system.sheet.spaceship ul.weapon-list li.item-desc .weapon-dmg {
+  background-color: rgba(0, 0, 0, 0.05);
+  height: fit-content;
+}
+.age-system.sheet.spaceship ul.weapon-list li {
+  text-align: center;
+  margin-bottom: 4px;
+}
+.age-system.sheet.spaceship ul.weapon-list li .inactive {
+  opacity: 0.4;
+}
+.age-system.sheet.spaceship ul.weapon-list li img {
+  margin-right: 4px;
+}
+.age-system.sheet.spaceship ul.weapon-list li .weapon-remove {
+  flex: 0 0 16px;
+}
+.age-system.sheet.spaceship ul.weapon-list li .weapon-name.weapon-name {
+  flex: 0 0 140px;
+  margin-right: 4px;
+}
+.age-system.sheet.spaceship ul.weapon-list li .weapon-dmg.roll {
+  cursor: pointer;
+}
+.age-system.sheet.spaceship ul.weapon-list li .weapon-dmg.weapon-dmg {
+  flex: 0 0 85px;
+  margin-right: 4px;
+}
+.age-system.sheet.spaceship ul.weapon-list li .weapon-icon {
+  flex: 0 0 16px;
+}
+.age-system.sheet.spaceship ul.weapon-list li .weapon-icon i {
+  width: fit-content;
+}
+.age-system.sheet.spaceship .losses h3 {
+  margin: 0px;
+}
+.age-system.sheet.spaceship .losses ul {
+  text-align: center;
+}
+.age-system.sheet.spaceship .losses .loss-name {
+  flex: 0 0 130px;
+  text-align: right;
+}
+.age-system.sheet.spaceship .losses .loss-checkbox {
+  flex: 0 0 10px;
+  border-radius: 3px;
+  border: 1px solid;
+  background: none;
+  margin: 4px;
+}
+.age-system.sheet.spaceship .losses .damage-control-box {
+  flex: 0 0 min-content;
+}
+.age-system.sheet.spaceship .losses .damage-control-box .numeric-input {
+  flex: 0 0 20px;
+  text-align: center;
+  margin-right: 4px;
+}
+.age-system.sheet.spaceship .losses .damage-control-box .threshold-box {
+  flex: 0 0 60px;
+}
+.age-system.sheet.spaceship .losses .damage-control-box .threshold-box span {
+  flex: 0 0 10px;
+  padding-top: 4px;
+}
+.age-system.sheet.spaceship .losses .damage-control-box label.tn-input {
+  flex: 0 0 30px;
+  text-align: center;
+}
+.age-system.sheet.spaceship .losses .damage-control-box label.threshold-input {
+  flex: 0 0 auto;
+  text-align: right;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list {
+  text-align: center;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list li {
+  margin-top: 4px;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list li > * {
+  margin-right: 4px;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list li.item-desc {
+  height: 100%;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list li.item-desc .feature-name.feature-name,
+.age-system.sheet.spaceship .quality-block ul.quality-list li.item-desc .feature-type.feature-type,
+.age-system.sheet.spaceship .quality-block ul.quality-list li.item-desc .feature-value.feature-value {
+  background-color: rgba(0, 0, 0, 0.05);
+  height: fit-content;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list .feature-name {
+  flex: 0 0 100px;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list .feature-type {
+  flex: 0 0 100px;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list .feature-value {
+  flex: 0 0 35px;
+}
+.age-system.sheet.spaceship .quality-block ul.quality-list .feature-icon {
+  flex: 0 0 16px;
+  margin: 0;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;
@@ -1322,6 +1655,11 @@
 /** Dragon Red Colors **/
 /** Threefold Purple Colors **/
 /** Ronin Green Colors **/
+/** Select One **/
+/** This is The Grey **/
+/** Red Warrior **/
+/** Never Dead **/
+/** Color Template **/
 /** Game Mode Colors **/
 .colorset-modern-blue .colorset-first-tier {
   background-color: #007DAD;
@@ -1352,6 +1690,15 @@
 .colorset-modern-blue .vehicle-stats .editor {
   background-color: #ffffff;
 }
+.colorset-modern-blue .stats-block.losses .loss-checkbox {
+  border-color: #007DAD;
+}
+.colorset-modern-blue .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #007DAD;
+}
+.colorset-modern-blue fieldset {
+  border-color: #007DAD;
+}
 .colorset-modern-blue .dice-show.trait-test i:last-of-type {
   color: #007DAD;
 }
@@ -1380,7 +1727,8 @@
 .colorset-modern-blue .stunts img,
 .colorset-modern-blue .honorifics img,
 .colorset-modern-blue .membership img,
-.colorset-modern-blue .relationship img {
+.colorset-modern-blue .relationship img,
+.colorset-modern-blue .shipfeatures img {
   border: 1px solid #007DAD;
 }
 .colorset-modern-blue .focus label,
@@ -1391,7 +1739,8 @@
 .colorset-modern-blue .stunts label,
 .colorset-modern-blue .honorifics label,
 .colorset-modern-blue .membership label,
-.colorset-modern-blue .relationship label {
+.colorset-modern-blue .relationship label,
+.colorset-modern-blue .shipfeatures label {
   color: #007DAD;
 }
 .colorset-modern-blue .focus .item-card-stats,
@@ -1402,7 +1751,8 @@
 .colorset-modern-blue .stunts .item-card-stats,
 .colorset-modern-blue .honorifics .item-card-stats,
 .colorset-modern-blue .membership .item-card-stats,
-.colorset-modern-blue .relationship .item-card-stats {
+.colorset-modern-blue .relationship .item-card-stats,
+.colorset-modern-blue .shipfeatures .item-card-stats {
   background-color: #B9DBEB;
 }
 .colorset-modern-blue .focus .item-card-stats input.data-entry,
@@ -1413,7 +1763,8 @@
 .colorset-modern-blue .stunts .item-card-stats input.data-entry,
 .colorset-modern-blue .honorifics .item-card-stats input.data-entry,
 .colorset-modern-blue .membership .item-card-stats input.data-entry,
-.colorset-modern-blue .relationship .item-card-stats input.data-entry {
+.colorset-modern-blue .relationship .item-card-stats input.data-entry,
+.colorset-modern-blue .shipfeatures .item-card-stats input.data-entry {
   color: #231F20;
 }
 .colorset-modern-blue .focus .item-card-desc,
@@ -1424,7 +1775,8 @@
 .colorset-modern-blue .stunts .item-card-desc,
 .colorset-modern-blue .honorifics .item-card-desc,
 .colorset-modern-blue .membership .item-card-desc,
-.colorset-modern-blue .relationship .item-card-desc {
+.colorset-modern-blue .relationship .item-card-desc,
+.colorset-modern-blue .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
 .colorset-modern-blue .focus nav .item,
@@ -1435,7 +1787,8 @@
 .colorset-modern-blue .stunts nav .item,
 .colorset-modern-blue .honorifics nav .item,
 .colorset-modern-blue .membership nav .item,
-.colorset-modern-blue .relationship nav .item {
+.colorset-modern-blue .relationship nav .item,
+.colorset-modern-blue .shipfeatures nav .item {
   background-color: #B9DBEB;
   color: #007DAD;
 }
@@ -1447,7 +1800,8 @@
 .colorset-modern-blue .stunts nav .item.active,
 .colorset-modern-blue .honorifics nav .item.active,
 .colorset-modern-blue .membership nav .item.active,
-.colorset-modern-blue .relationship nav .item.active {
+.colorset-modern-blue .relationship nav .item.active,
+.colorset-modern-blue .shipfeatures nav .item.active {
   background-color: #ffffff;
 }
 .colorset-modern-blue .focus .mod-card,
@@ -1458,7 +1812,8 @@
 .colorset-modern-blue .stunts .mod-card,
 .colorset-modern-blue .honorifics .mod-card,
 .colorset-modern-blue .membership .mod-card,
-.colorset-modern-blue .relationship .mod-card {
+.colorset-modern-blue .relationship .mod-card,
+.colorset-modern-blue .shipfeatures .mod-card {
   border: solid #B9DBEB 1px;
 }
 .colorset-fantasy-blue .colorset-first-tier {
@@ -1490,6 +1845,15 @@
 .colorset-fantasy-blue .vehicle-stats .editor {
   background-color: #ffffff;
 }
+.colorset-fantasy-blue .stats-block.losses .loss-checkbox {
+  border-color: #0f4f5b;
+}
+.colorset-fantasy-blue .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #0f4f5b;
+}
+.colorset-fantasy-blue fieldset {
+  border-color: #0f4f5b;
+}
 .colorset-fantasy-blue .dice-show.trait-test i:last-of-type {
   color: #0f4f5b;
 }
@@ -1518,7 +1882,8 @@
 .colorset-fantasy-blue .stunts img,
 .colorset-fantasy-blue .honorifics img,
 .colorset-fantasy-blue .membership img,
-.colorset-fantasy-blue .relationship img {
+.colorset-fantasy-blue .relationship img,
+.colorset-fantasy-blue .shipfeatures img {
   border: 1px solid #0f4f5b;
 }
 .colorset-fantasy-blue .focus label,
@@ -1529,7 +1894,8 @@
 .colorset-fantasy-blue .stunts label,
 .colorset-fantasy-blue .honorifics label,
 .colorset-fantasy-blue .membership label,
-.colorset-fantasy-blue .relationship label {
+.colorset-fantasy-blue .relationship label,
+.colorset-fantasy-blue .shipfeatures label {
   color: #0f4f5b;
 }
 .colorset-fantasy-blue .focus .item-card-stats,
@@ -1540,7 +1906,8 @@
 .colorset-fantasy-blue .stunts .item-card-stats,
 .colorset-fantasy-blue .honorifics .item-card-stats,
 .colorset-fantasy-blue .membership .item-card-stats,
-.colorset-fantasy-blue .relationship .item-card-stats {
+.colorset-fantasy-blue .relationship .item-card-stats,
+.colorset-fantasy-blue .shipfeatures .item-card-stats {
   background-color: #c1cbd3;
 }
 .colorset-fantasy-blue .focus .item-card-stats input.data-entry,
@@ -1551,7 +1918,8 @@
 .colorset-fantasy-blue .stunts .item-card-stats input.data-entry,
 .colorset-fantasy-blue .honorifics .item-card-stats input.data-entry,
 .colorset-fantasy-blue .membership .item-card-stats input.data-entry,
-.colorset-fantasy-blue .relationship .item-card-stats input.data-entry {
+.colorset-fantasy-blue .relationship .item-card-stats input.data-entry,
+.colorset-fantasy-blue .shipfeatures .item-card-stats input.data-entry {
   color: #dbdada;
 }
 .colorset-fantasy-blue .focus .item-card-desc,
@@ -1562,7 +1930,8 @@
 .colorset-fantasy-blue .stunts .item-card-desc,
 .colorset-fantasy-blue .honorifics .item-card-desc,
 .colorset-fantasy-blue .membership .item-card-desc,
-.colorset-fantasy-blue .relationship .item-card-desc {
+.colorset-fantasy-blue .relationship .item-card-desc,
+.colorset-fantasy-blue .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
 .colorset-fantasy-blue .focus nav .item,
@@ -1573,7 +1942,8 @@
 .colorset-fantasy-blue .stunts nav .item,
 .colorset-fantasy-blue .honorifics nav .item,
 .colorset-fantasy-blue .membership nav .item,
-.colorset-fantasy-blue .relationship nav .item {
+.colorset-fantasy-blue .relationship nav .item,
+.colorset-fantasy-blue .shipfeatures nav .item {
   background-color: #c1cbd3;
   color: #0f4f5b;
 }
@@ -1585,7 +1955,8 @@
 .colorset-fantasy-blue .stunts nav .item.active,
 .colorset-fantasy-blue .honorifics nav .item.active,
 .colorset-fantasy-blue .membership nav .item.active,
-.colorset-fantasy-blue .relationship nav .item.active {
+.colorset-fantasy-blue .relationship nav .item.active,
+.colorset-fantasy-blue .shipfeatures nav .item.active {
   background-color: #ffffff;
 }
 .colorset-fantasy-blue .focus .mod-card,
@@ -1596,7 +1967,8 @@
 .colorset-fantasy-blue .stunts .mod-card,
 .colorset-fantasy-blue .honorifics .mod-card,
 .colorset-fantasy-blue .membership .mod-card,
-.colorset-fantasy-blue .relationship .mod-card {
+.colorset-fantasy-blue .relationship .mod-card,
+.colorset-fantasy-blue .shipfeatures .mod-card {
   border: solid #c1cbd3 1px;
 }
 .colorset-dragon-red .colorset-first-tier {
@@ -1628,6 +2000,15 @@
 .colorset-dragon-red .vehicle-stats .editor {
   background-color: #ffffff;
 }
+.colorset-dragon-red .stats-block.losses .loss-checkbox {
+  border-color: #810207;
+}
+.colorset-dragon-red .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #810207;
+}
+.colorset-dragon-red fieldset {
+  border-color: #810207;
+}
 .colorset-dragon-red .dice-show.trait-test i:last-of-type {
   color: #810207;
 }
@@ -1656,7 +2037,8 @@
 .colorset-dragon-red .stunts img,
 .colorset-dragon-red .honorifics img,
 .colorset-dragon-red .membership img,
-.colorset-dragon-red .relationship img {
+.colorset-dragon-red .relationship img,
+.colorset-dragon-red .shipfeatures img {
   border: 1px solid #810207;
 }
 .colorset-dragon-red .focus label,
@@ -1667,7 +2049,8 @@
 .colorset-dragon-red .stunts label,
 .colorset-dragon-red .honorifics label,
 .colorset-dragon-red .membership label,
-.colorset-dragon-red .relationship label {
+.colorset-dragon-red .relationship label,
+.colorset-dragon-red .shipfeatures label {
   color: #810207;
 }
 .colorset-dragon-red .focus .item-card-stats,
@@ -1678,7 +2061,8 @@
 .colorset-dragon-red .stunts .item-card-stats,
 .colorset-dragon-red .honorifics .item-card-stats,
 .colorset-dragon-red .membership .item-card-stats,
-.colorset-dragon-red .relationship .item-card-stats {
+.colorset-dragon-red .relationship .item-card-stats,
+.colorset-dragon-red .shipfeatures .item-card-stats {
   background-color: #e0beb1;
 }
 .colorset-dragon-red .focus .item-card-stats input.data-entry,
@@ -1689,7 +2073,8 @@
 .colorset-dragon-red .stunts .item-card-stats input.data-entry,
 .colorset-dragon-red .honorifics .item-card-stats input.data-entry,
 .colorset-dragon-red .membership .item-card-stats input.data-entry,
-.colorset-dragon-red .relationship .item-card-stats input.data-entry {
+.colorset-dragon-red .relationship .item-card-stats input.data-entry,
+.colorset-dragon-red .shipfeatures .item-card-stats input.data-entry {
   color: #000000;
 }
 .colorset-dragon-red .focus .item-card-desc,
@@ -1700,7 +2085,8 @@
 .colorset-dragon-red .stunts .item-card-desc,
 .colorset-dragon-red .honorifics .item-card-desc,
 .colorset-dragon-red .membership .item-card-desc,
-.colorset-dragon-red .relationship .item-card-desc {
+.colorset-dragon-red .relationship .item-card-desc,
+.colorset-dragon-red .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
 .colorset-dragon-red .focus nav .item,
@@ -1711,7 +2097,8 @@
 .colorset-dragon-red .stunts nav .item,
 .colorset-dragon-red .honorifics nav .item,
 .colorset-dragon-red .membership nav .item,
-.colorset-dragon-red .relationship nav .item {
+.colorset-dragon-red .relationship nav .item,
+.colorset-dragon-red .shipfeatures nav .item {
   background-color: #e0beb1;
   color: #810207;
 }
@@ -1723,7 +2110,8 @@
 .colorset-dragon-red .stunts nav .item.active,
 .colorset-dragon-red .honorifics nav .item.active,
 .colorset-dragon-red .membership nav .item.active,
-.colorset-dragon-red .relationship nav .item.active {
+.colorset-dragon-red .relationship nav .item.active,
+.colorset-dragon-red .shipfeatures nav .item.active {
   background-color: #ffffff;
 }
 .colorset-dragon-red .focus .mod-card,
@@ -1734,7 +2122,8 @@
 .colorset-dragon-red .stunts .mod-card,
 .colorset-dragon-red .honorifics .mod-card,
 .colorset-dragon-red .membership .mod-card,
-.colorset-dragon-red .relationship .mod-card {
+.colorset-dragon-red .relationship .mod-card,
+.colorset-dragon-red .shipfeatures .mod-card {
   border: solid #e0beb1 1px;
 }
 .colorset-folded-purple .colorset-first-tier {
@@ -1766,6 +2155,15 @@
 .colorset-folded-purple .vehicle-stats .editor {
   background-color: #ffffff;
 }
+.colorset-folded-purple .stats-block.losses .loss-checkbox {
+  border-color: #565183;
+}
+.colorset-folded-purple .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #565183;
+}
+.colorset-folded-purple fieldset {
+  border-color: #565183;
+}
 .colorset-folded-purple .dice-show.trait-test i:last-of-type {
   color: #565183;
 }
@@ -1794,7 +2192,8 @@
 .colorset-folded-purple .stunts img,
 .colorset-folded-purple .honorifics img,
 .colorset-folded-purple .membership img,
-.colorset-folded-purple .relationship img {
+.colorset-folded-purple .relationship img,
+.colorset-folded-purple .shipfeatures img {
   border: 1px solid #565183;
 }
 .colorset-folded-purple .focus label,
@@ -1805,7 +2204,8 @@
 .colorset-folded-purple .stunts label,
 .colorset-folded-purple .honorifics label,
 .colorset-folded-purple .membership label,
-.colorset-folded-purple .relationship label {
+.colorset-folded-purple .relationship label,
+.colorset-folded-purple .shipfeatures label {
   color: #565183;
 }
 .colorset-folded-purple .focus .item-card-stats,
@@ -1816,7 +2216,8 @@
 .colorset-folded-purple .stunts .item-card-stats,
 .colorset-folded-purple .honorifics .item-card-stats,
 .colorset-folded-purple .membership .item-card-stats,
-.colorset-folded-purple .relationship .item-card-stats {
+.colorset-folded-purple .relationship .item-card-stats,
+.colorset-folded-purple .shipfeatures .item-card-stats {
   background-color: #cfccde;
 }
 .colorset-folded-purple .focus .item-card-stats input.data-entry,
@@ -1827,7 +2228,8 @@
 .colorset-folded-purple .stunts .item-card-stats input.data-entry,
 .colorset-folded-purple .honorifics .item-card-stats input.data-entry,
 .colorset-folded-purple .membership .item-card-stats input.data-entry,
-.colorset-folded-purple .relationship .item-card-stats input.data-entry {
+.colorset-folded-purple .relationship .item-card-stats input.data-entry,
+.colorset-folded-purple .shipfeatures .item-card-stats input.data-entry {
   color: #000000;
 }
 .colorset-folded-purple .focus .item-card-desc,
@@ -1838,7 +2240,8 @@
 .colorset-folded-purple .stunts .item-card-desc,
 .colorset-folded-purple .honorifics .item-card-desc,
 .colorset-folded-purple .membership .item-card-desc,
-.colorset-folded-purple .relationship .item-card-desc {
+.colorset-folded-purple .relationship .item-card-desc,
+.colorset-folded-purple .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
 .colorset-folded-purple .focus nav .item,
@@ -1849,7 +2252,8 @@
 .colorset-folded-purple .stunts nav .item,
 .colorset-folded-purple .honorifics nav .item,
 .colorset-folded-purple .membership nav .item,
-.colorset-folded-purple .relationship nav .item {
+.colorset-folded-purple .relationship nav .item,
+.colorset-folded-purple .shipfeatures nav .item {
   background-color: #cfccde;
   color: #565183;
 }
@@ -1861,7 +2265,8 @@
 .colorset-folded-purple .stunts nav .item.active,
 .colorset-folded-purple .honorifics nav .item.active,
 .colorset-folded-purple .membership nav .item.active,
-.colorset-folded-purple .relationship nav .item.active {
+.colorset-folded-purple .relationship nav .item.active,
+.colorset-folded-purple .shipfeatures nav .item.active {
   background-color: #ffffff;
 }
 .colorset-folded-purple .focus .mod-card,
@@ -1872,7 +2277,8 @@
 .colorset-folded-purple .stunts .mod-card,
 .colorset-folded-purple .honorifics .mod-card,
 .colorset-folded-purple .membership .mod-card,
-.colorset-folded-purple .relationship .mod-card {
+.colorset-folded-purple .relationship .mod-card,
+.colorset-folded-purple .shipfeatures .mod-card {
   border: solid #cfccde 1px;
 }
 .colorset-ronin-green .colorset-first-tier {
@@ -1904,6 +2310,15 @@
 .colorset-ronin-green .vehicle-stats .editor {
   background-color: #ffffff;
 }
+.colorset-ronin-green .stats-block.losses .loss-checkbox {
+  border-color: #155f0e;
+}
+.colorset-ronin-green .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #155f0e;
+}
+.colorset-ronin-green fieldset {
+  border-color: #155f0e;
+}
 .colorset-ronin-green .dice-show.trait-test i:last-of-type {
   color: #155f0e;
 }
@@ -1932,7 +2347,8 @@
 .colorset-ronin-green .stunts img,
 .colorset-ronin-green .honorifics img,
 .colorset-ronin-green .membership img,
-.colorset-ronin-green .relationship img {
+.colorset-ronin-green .relationship img,
+.colorset-ronin-green .shipfeatures img {
   border: 1px solid #155f0e;
 }
 .colorset-ronin-green .focus label,
@@ -1943,7 +2359,8 @@
 .colorset-ronin-green .stunts label,
 .colorset-ronin-green .honorifics label,
 .colorset-ronin-green .membership label,
-.colorset-ronin-green .relationship label {
+.colorset-ronin-green .relationship label,
+.colorset-ronin-green .shipfeatures label {
   color: #155f0e;
 }
 .colorset-ronin-green .focus .item-card-stats,
@@ -1954,7 +2371,8 @@
 .colorset-ronin-green .stunts .item-card-stats,
 .colorset-ronin-green .honorifics .item-card-stats,
 .colorset-ronin-green .membership .item-card-stats,
-.colorset-ronin-green .relationship .item-card-stats {
+.colorset-ronin-green .relationship .item-card-stats,
+.colorset-ronin-green .shipfeatures .item-card-stats {
   background-color: #c2f5aa;
 }
 .colorset-ronin-green .focus .item-card-stats input.data-entry,
@@ -1965,7 +2383,8 @@
 .colorset-ronin-green .stunts .item-card-stats input.data-entry,
 .colorset-ronin-green .honorifics .item-card-stats input.data-entry,
 .colorset-ronin-green .membership .item-card-stats input.data-entry,
-.colorset-ronin-green .relationship .item-card-stats input.data-entry {
+.colorset-ronin-green .relationship .item-card-stats input.data-entry,
+.colorset-ronin-green .shipfeatures .item-card-stats input.data-entry {
   color: #000000;
 }
 .colorset-ronin-green .focus .item-card-desc,
@@ -1976,7 +2395,8 @@
 .colorset-ronin-green .stunts .item-card-desc,
 .colorset-ronin-green .honorifics .item-card-desc,
 .colorset-ronin-green .membership .item-card-desc,
-.colorset-ronin-green .relationship .item-card-desc {
+.colorset-ronin-green .relationship .item-card-desc,
+.colorset-ronin-green .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
 .colorset-ronin-green .focus nav .item,
@@ -1987,7 +2407,8 @@
 .colorset-ronin-green .stunts nav .item,
 .colorset-ronin-green .honorifics nav .item,
 .colorset-ronin-green .membership nav .item,
-.colorset-ronin-green .relationship nav .item {
+.colorset-ronin-green .relationship nav .item,
+.colorset-ronin-green .shipfeatures nav .item {
   background-color: #c2f5aa;
   color: #155f0e;
 }
@@ -1999,7 +2420,8 @@
 .colorset-ronin-green .stunts nav .item.active,
 .colorset-ronin-green .honorifics nav .item.active,
 .colorset-ronin-green .membership nav .item.active,
-.colorset-ronin-green .relationship nav .item.active {
+.colorset-ronin-green .relationship nav .item.active,
+.colorset-ronin-green .shipfeatures nav .item.active {
   background-color: #ffffff;
 }
 .colorset-ronin-green .focus .mod-card,
@@ -2010,8 +2432,629 @@
 .colorset-ronin-green .stunts .mod-card,
 .colorset-ronin-green .honorifics .mod-card,
 .colorset-ronin-green .membership .mod-card,
-.colorset-ronin-green .relationship .mod-card {
+.colorset-ronin-green .relationship .mod-card,
+.colorset-ronin-green .shipfeatures .mod-card {
   border: solid #c2f5aa 1px;
+}
+.colorset-select-one .colorset-first-tier {
+  background-color: #273249;
+  color: #e7ccc3;
+}
+.colorset-select-one .colorset-second-tier {
+  background-color: #768d9f;
+  color: #273249;
+}
+.colorset-select-one .colorset-third-tier {
+  background-color: #4d627a;
+  color: #360808;
+}
+.colorset-select-one input.colorset-first-tier {
+  background-color: #273249;
+  color: #e7ccc3;
+}
+.colorset-select-one .char-sheet .age-header label {
+  background-color: #273249;
+  color: #e7ccc3;
+}
+.colorset-select-one .char-sheet .age-header .editor {
+  background-color: hsl(0, 0%, 100%);
+}
+.colorset-select-one .vehicle-stats img {
+  border: 2px solid #273249;
+}
+.colorset-select-one .vehicle-stats .editor {
+  background-color: #ffffff;
+}
+.colorset-select-one .stats-block.losses .loss-checkbox {
+  border-color: #273249;
+}
+.colorset-select-one .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #273249;
+}
+.colorset-select-one fieldset {
+  border-color: #273249;
+}
+.colorset-select-one .dice-show.trait-test i:last-of-type {
+  color: #273249;
+}
+.colorset-select-one .roll-mod {
+  border-bottom: 1px solid #273249;
+}
+.colorset-select-one .roll-mod.stunted {
+  background-color: #273249;
+  color: #e7ccc3;
+}
+.colorset-select-one .char-sheet .item-container img {
+  border: 1px solid #273249;
+}
+.colorset-select-one .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-select-one .char-sheet input.colorset-second-tier {
+  background-color: #768d9f !important;
+  color: #273249 !important;
+}
+.colorset-select-one .focus img,
+.colorset-select-one .power img,
+.colorset-select-one .talent img,
+.colorset-select-one .weapon img,
+.colorset-select-one .equipment img,
+.colorset-select-one .stunts img,
+.colorset-select-one .honorifics img,
+.colorset-select-one .membership img,
+.colorset-select-one .relationship img,
+.colorset-select-one .shipfeatures img {
+  border: 1px solid #273249;
+}
+.colorset-select-one .focus label,
+.colorset-select-one .power label,
+.colorset-select-one .talent label,
+.colorset-select-one .weapon label,
+.colorset-select-one .equipment label,
+.colorset-select-one .stunts label,
+.colorset-select-one .honorifics label,
+.colorset-select-one .membership label,
+.colorset-select-one .relationship label,
+.colorset-select-one .shipfeatures label {
+  color: #273249;
+}
+.colorset-select-one .focus .item-card-stats,
+.colorset-select-one .power .item-card-stats,
+.colorset-select-one .talent .item-card-stats,
+.colorset-select-one .weapon .item-card-stats,
+.colorset-select-one .equipment .item-card-stats,
+.colorset-select-one .stunts .item-card-stats,
+.colorset-select-one .honorifics .item-card-stats,
+.colorset-select-one .membership .item-card-stats,
+.colorset-select-one .relationship .item-card-stats,
+.colorset-select-one .shipfeatures .item-card-stats {
+  background-color: #768d9f;
+}
+.colorset-select-one .focus .item-card-stats input.data-entry,
+.colorset-select-one .power .item-card-stats input.data-entry,
+.colorset-select-one .talent .item-card-stats input.data-entry,
+.colorset-select-one .weapon .item-card-stats input.data-entry,
+.colorset-select-one .equipment .item-card-stats input.data-entry,
+.colorset-select-one .stunts .item-card-stats input.data-entry,
+.colorset-select-one .honorifics .item-card-stats input.data-entry,
+.colorset-select-one .membership .item-card-stats input.data-entry,
+.colorset-select-one .relationship .item-card-stats input.data-entry,
+.colorset-select-one .shipfeatures .item-card-stats input.data-entry {
+  color: #360808;
+}
+.colorset-select-one .focus .item-card-desc,
+.colorset-select-one .power .item-card-desc,
+.colorset-select-one .talent .item-card-desc,
+.colorset-select-one .weapon .item-card-desc,
+.colorset-select-one .equipment .item-card-desc,
+.colorset-select-one .stunts .item-card-desc,
+.colorset-select-one .honorifics .item-card-desc,
+.colorset-select-one .membership .item-card-desc,
+.colorset-select-one .relationship .item-card-desc,
+.colorset-select-one .shipfeatures .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-select-one .focus nav .item,
+.colorset-select-one .power nav .item,
+.colorset-select-one .talent nav .item,
+.colorset-select-one .weapon nav .item,
+.colorset-select-one .equipment nav .item,
+.colorset-select-one .stunts nav .item,
+.colorset-select-one .honorifics nav .item,
+.colorset-select-one .membership nav .item,
+.colorset-select-one .relationship nav .item,
+.colorset-select-one .shipfeatures nav .item {
+  background-color: #768d9f;
+  color: #273249;
+}
+.colorset-select-one .focus nav .item.active,
+.colorset-select-one .power nav .item.active,
+.colorset-select-one .talent nav .item.active,
+.colorset-select-one .weapon nav .item.active,
+.colorset-select-one .equipment nav .item.active,
+.colorset-select-one .stunts nav .item.active,
+.colorset-select-one .honorifics nav .item.active,
+.colorset-select-one .membership nav .item.active,
+.colorset-select-one .relationship nav .item.active,
+.colorset-select-one .shipfeatures nav .item.active {
+  background-color: #ffffff;
+}
+.colorset-select-one .focus .mod-card,
+.colorset-select-one .power .mod-card,
+.colorset-select-one .talent .mod-card,
+.colorset-select-one .weapon .mod-card,
+.colorset-select-one .equipment .mod-card,
+.colorset-select-one .stunts .mod-card,
+.colorset-select-one .honorifics .mod-card,
+.colorset-select-one .membership .mod-card,
+.colorset-select-one .relationship .mod-card,
+.colorset-select-one .shipfeatures .mod-card {
+  border: solid #768d9f 1px;
+}
+.colorset-the-grey .colorset-first-tier {
+  background-color: #3d3e3f;
+  color: #ccc9c9;
+}
+.colorset-the-grey .colorset-second-tier {
+  background-color: #b4b6b3;
+  color: #3d3e3f;
+}
+.colorset-the-grey .colorset-third-tier {
+  background-color: #6b6a6a;
+  color: #000000;
+}
+.colorset-the-grey input.colorset-first-tier {
+  background-color: #3d3e3f;
+  color: #ccc9c9;
+}
+.colorset-the-grey .char-sheet .age-header label {
+  background-color: #3d3e3f;
+  color: #ccc9c9;
+}
+.colorset-the-grey .char-sheet .age-header .editor {
+  background-color: hsl(0, 0%, 100%);
+}
+.colorset-the-grey .vehicle-stats img {
+  border: 2px solid #3d3e3f;
+}
+.colorset-the-grey .vehicle-stats .editor {
+  background-color: #ffffff;
+}
+.colorset-the-grey .stats-block.losses .loss-checkbox {
+  border-color: #3d3e3f;
+}
+.colorset-the-grey .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #3d3e3f;
+}
+.colorset-the-grey fieldset {
+  border-color: #3d3e3f;
+}
+.colorset-the-grey .dice-show.trait-test i:last-of-type {
+  color: #3d3e3f;
+}
+.colorset-the-grey .roll-mod {
+  border-bottom: 1px solid #3d3e3f;
+}
+.colorset-the-grey .roll-mod.stunted {
+  background-color: #3d3e3f;
+  color: #ccc9c9;
+}
+.colorset-the-grey .char-sheet .item-container img {
+  border: 1px solid #3d3e3f;
+}
+.colorset-the-grey .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-the-grey .char-sheet input.colorset-second-tier {
+  background-color: #b4b6b3 !important;
+  color: #3d3e3f !important;
+}
+.colorset-the-grey .focus img,
+.colorset-the-grey .power img,
+.colorset-the-grey .talent img,
+.colorset-the-grey .weapon img,
+.colorset-the-grey .equipment img,
+.colorset-the-grey .stunts img,
+.colorset-the-grey .honorifics img,
+.colorset-the-grey .membership img,
+.colorset-the-grey .relationship img,
+.colorset-the-grey .shipfeatures img {
+  border: 1px solid #3d3e3f;
+}
+.colorset-the-grey .focus label,
+.colorset-the-grey .power label,
+.colorset-the-grey .talent label,
+.colorset-the-grey .weapon label,
+.colorset-the-grey .equipment label,
+.colorset-the-grey .stunts label,
+.colorset-the-grey .honorifics label,
+.colorset-the-grey .membership label,
+.colorset-the-grey .relationship label,
+.colorset-the-grey .shipfeatures label {
+  color: #3d3e3f;
+}
+.colorset-the-grey .focus .item-card-stats,
+.colorset-the-grey .power .item-card-stats,
+.colorset-the-grey .talent .item-card-stats,
+.colorset-the-grey .weapon .item-card-stats,
+.colorset-the-grey .equipment .item-card-stats,
+.colorset-the-grey .stunts .item-card-stats,
+.colorset-the-grey .honorifics .item-card-stats,
+.colorset-the-grey .membership .item-card-stats,
+.colorset-the-grey .relationship .item-card-stats,
+.colorset-the-grey .shipfeatures .item-card-stats {
+  background-color: #b4b6b3;
+}
+.colorset-the-grey .focus .item-card-stats input.data-entry,
+.colorset-the-grey .power .item-card-stats input.data-entry,
+.colorset-the-grey .talent .item-card-stats input.data-entry,
+.colorset-the-grey .weapon .item-card-stats input.data-entry,
+.colorset-the-grey .equipment .item-card-stats input.data-entry,
+.colorset-the-grey .stunts .item-card-stats input.data-entry,
+.colorset-the-grey .honorifics .item-card-stats input.data-entry,
+.colorset-the-grey .membership .item-card-stats input.data-entry,
+.colorset-the-grey .relationship .item-card-stats input.data-entry,
+.colorset-the-grey .shipfeatures .item-card-stats input.data-entry {
+  color: #000000;
+}
+.colorset-the-grey .focus .item-card-desc,
+.colorset-the-grey .power .item-card-desc,
+.colorset-the-grey .talent .item-card-desc,
+.colorset-the-grey .weapon .item-card-desc,
+.colorset-the-grey .equipment .item-card-desc,
+.colorset-the-grey .stunts .item-card-desc,
+.colorset-the-grey .honorifics .item-card-desc,
+.colorset-the-grey .membership .item-card-desc,
+.colorset-the-grey .relationship .item-card-desc,
+.colorset-the-grey .shipfeatures .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-the-grey .focus nav .item,
+.colorset-the-grey .power nav .item,
+.colorset-the-grey .talent nav .item,
+.colorset-the-grey .weapon nav .item,
+.colorset-the-grey .equipment nav .item,
+.colorset-the-grey .stunts nav .item,
+.colorset-the-grey .honorifics nav .item,
+.colorset-the-grey .membership nav .item,
+.colorset-the-grey .relationship nav .item,
+.colorset-the-grey .shipfeatures nav .item {
+  background-color: #b4b6b3;
+  color: #3d3e3f;
+}
+.colorset-the-grey .focus nav .item.active,
+.colorset-the-grey .power nav .item.active,
+.colorset-the-grey .talent nav .item.active,
+.colorset-the-grey .weapon nav .item.active,
+.colorset-the-grey .equipment nav .item.active,
+.colorset-the-grey .stunts nav .item.active,
+.colorset-the-grey .honorifics nav .item.active,
+.colorset-the-grey .membership nav .item.active,
+.colorset-the-grey .relationship nav .item.active,
+.colorset-the-grey .shipfeatures nav .item.active {
+  background-color: #ffffff;
+}
+.colorset-the-grey .focus .mod-card,
+.colorset-the-grey .power .mod-card,
+.colorset-the-grey .talent .mod-card,
+.colorset-the-grey .weapon .mod-card,
+.colorset-the-grey .equipment .mod-card,
+.colorset-the-grey .stunts .mod-card,
+.colorset-the-grey .honorifics .mod-card,
+.colorset-the-grey .membership .mod-card,
+.colorset-the-grey .relationship .mod-card,
+.colorset-the-grey .shipfeatures .mod-card {
+  border: solid #b4b6b3 1px;
+}
+.colorset-red-warrior .colorset-first-tier {
+  background-color: #600000;
+  color: #df7c00;
+}
+.colorset-red-warrior .colorset-second-tier {
+  background-color: #e68080;
+  color: #600000;
+}
+.colorset-red-warrior .colorset-third-tier {
+  background-color: #742300;
+  color: #ffa700;
+}
+.colorset-red-warrior input.colorset-first-tier {
+  background-color: #600000;
+  color: #df7c00;
+}
+.colorset-red-warrior .char-sheet .age-header label {
+  background-color: #600000;
+  color: #df7c00;
+}
+.colorset-red-warrior .char-sheet .age-header .editor {
+  background-color: hsl(0, 0%, 100%);
+}
+.colorset-red-warrior .vehicle-stats img {
+  border: 2px solid #600000;
+}
+.colorset-red-warrior .vehicle-stats .editor {
+  background-color: #ffffff;
+}
+.colorset-red-warrior .stats-block.losses .loss-checkbox {
+  border-color: #600000;
+}
+.colorset-red-warrior .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #600000;
+}
+.colorset-red-warrior fieldset {
+  border-color: #600000;
+}
+.colorset-red-warrior .dice-show.trait-test i:last-of-type {
+  color: #600000;
+}
+.colorset-red-warrior .roll-mod {
+  border-bottom: 1px solid #600000;
+}
+.colorset-red-warrior .roll-mod.stunted {
+  background-color: #600000;
+  color: #df7c00;
+}
+.colorset-red-warrior .char-sheet .item-container img {
+  border: 1px solid #600000;
+}
+.colorset-red-warrior .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-red-warrior .char-sheet input.colorset-second-tier {
+  background-color: #e68080 !important;
+  color: #600000 !important;
+}
+.colorset-red-warrior .focus img,
+.colorset-red-warrior .power img,
+.colorset-red-warrior .talent img,
+.colorset-red-warrior .weapon img,
+.colorset-red-warrior .equipment img,
+.colorset-red-warrior .stunts img,
+.colorset-red-warrior .honorifics img,
+.colorset-red-warrior .membership img,
+.colorset-red-warrior .relationship img,
+.colorset-red-warrior .shipfeatures img {
+  border: 1px solid #600000;
+}
+.colorset-red-warrior .focus label,
+.colorset-red-warrior .power label,
+.colorset-red-warrior .talent label,
+.colorset-red-warrior .weapon label,
+.colorset-red-warrior .equipment label,
+.colorset-red-warrior .stunts label,
+.colorset-red-warrior .honorifics label,
+.colorset-red-warrior .membership label,
+.colorset-red-warrior .relationship label,
+.colorset-red-warrior .shipfeatures label {
+  color: #600000;
+}
+.colorset-red-warrior .focus .item-card-stats,
+.colorset-red-warrior .power .item-card-stats,
+.colorset-red-warrior .talent .item-card-stats,
+.colorset-red-warrior .weapon .item-card-stats,
+.colorset-red-warrior .equipment .item-card-stats,
+.colorset-red-warrior .stunts .item-card-stats,
+.colorset-red-warrior .honorifics .item-card-stats,
+.colorset-red-warrior .membership .item-card-stats,
+.colorset-red-warrior .relationship .item-card-stats,
+.colorset-red-warrior .shipfeatures .item-card-stats {
+  background-color: #e68080;
+}
+.colorset-red-warrior .focus .item-card-stats input.data-entry,
+.colorset-red-warrior .power .item-card-stats input.data-entry,
+.colorset-red-warrior .talent .item-card-stats input.data-entry,
+.colorset-red-warrior .weapon .item-card-stats input.data-entry,
+.colorset-red-warrior .equipment .item-card-stats input.data-entry,
+.colorset-red-warrior .stunts .item-card-stats input.data-entry,
+.colorset-red-warrior .honorifics .item-card-stats input.data-entry,
+.colorset-red-warrior .membership .item-card-stats input.data-entry,
+.colorset-red-warrior .relationship .item-card-stats input.data-entry,
+.colorset-red-warrior .shipfeatures .item-card-stats input.data-entry {
+  color: #ffa700;
+}
+.colorset-red-warrior .focus .item-card-desc,
+.colorset-red-warrior .power .item-card-desc,
+.colorset-red-warrior .talent .item-card-desc,
+.colorset-red-warrior .weapon .item-card-desc,
+.colorset-red-warrior .equipment .item-card-desc,
+.colorset-red-warrior .stunts .item-card-desc,
+.colorset-red-warrior .honorifics .item-card-desc,
+.colorset-red-warrior .membership .item-card-desc,
+.colorset-red-warrior .relationship .item-card-desc,
+.colorset-red-warrior .shipfeatures .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-red-warrior .focus nav .item,
+.colorset-red-warrior .power nav .item,
+.colorset-red-warrior .talent nav .item,
+.colorset-red-warrior .weapon nav .item,
+.colorset-red-warrior .equipment nav .item,
+.colorset-red-warrior .stunts nav .item,
+.colorset-red-warrior .honorifics nav .item,
+.colorset-red-warrior .membership nav .item,
+.colorset-red-warrior .relationship nav .item,
+.colorset-red-warrior .shipfeatures nav .item {
+  background-color: #e68080;
+  color: #600000;
+}
+.colorset-red-warrior .focus nav .item.active,
+.colorset-red-warrior .power nav .item.active,
+.colorset-red-warrior .talent nav .item.active,
+.colorset-red-warrior .weapon nav .item.active,
+.colorset-red-warrior .equipment nav .item.active,
+.colorset-red-warrior .stunts nav .item.active,
+.colorset-red-warrior .honorifics nav .item.active,
+.colorset-red-warrior .membership nav .item.active,
+.colorset-red-warrior .relationship nav .item.active,
+.colorset-red-warrior .shipfeatures nav .item.active {
+  background-color: #ffffff;
+}
+.colorset-red-warrior .focus .mod-card,
+.colorset-red-warrior .power .mod-card,
+.colorset-red-warrior .talent .mod-card,
+.colorset-red-warrior .weapon .mod-card,
+.colorset-red-warrior .equipment .mod-card,
+.colorset-red-warrior .stunts .mod-card,
+.colorset-red-warrior .honorifics .mod-card,
+.colorset-red-warrior .membership .mod-card,
+.colorset-red-warrior .relationship .mod-card,
+.colorset-red-warrior .shipfeatures .mod-card {
+  border: solid #e68080 1px;
+}
+.colorset-never-dead .colorset-first-tier {
+  background-color: #663322;
+  color: #bb8755;
+}
+.colorset-never-dead .colorset-second-tier {
+  background-color: #eeddcd;
+  color: #663322;
+}
+.colorset-never-dead .colorset-third-tier {
+  background-color: #58705a;
+  color: #29241f;
+}
+.colorset-never-dead input.colorset-first-tier {
+  background-color: #663322;
+  color: #bb8755;
+}
+.colorset-never-dead .char-sheet .age-header label {
+  background-color: #663322;
+  color: #bb8755;
+}
+.colorset-never-dead .char-sheet .age-header .editor {
+  background-color: hsl(0, 0%, 100%);
+}
+.colorset-never-dead .vehicle-stats img {
+  border: 2px solid #663322;
+}
+.colorset-never-dead .vehicle-stats .editor {
+  background-color: #ffffff;
+}
+.colorset-never-dead .stats-block.losses .loss-checkbox {
+  border-color: #663322;
+}
+.colorset-never-dead .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #663322;
+}
+.colorset-never-dead fieldset {
+  border-color: #663322;
+}
+.colorset-never-dead .dice-show.trait-test i:last-of-type {
+  color: #663322;
+}
+.colorset-never-dead .roll-mod {
+  border-bottom: 1px solid #663322;
+}
+.colorset-never-dead .roll-mod.stunted {
+  background-color: #663322;
+  color: #bb8755;
+}
+.colorset-never-dead .char-sheet .item-container img {
+  border: 1px solid #663322;
+}
+.colorset-never-dead .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-never-dead .char-sheet input.colorset-second-tier {
+  background-color: #eeddcd !important;
+  color: #663322 !important;
+}
+.colorset-never-dead .focus img,
+.colorset-never-dead .power img,
+.colorset-never-dead .talent img,
+.colorset-never-dead .weapon img,
+.colorset-never-dead .equipment img,
+.colorset-never-dead .stunts img,
+.colorset-never-dead .honorifics img,
+.colorset-never-dead .membership img,
+.colorset-never-dead .relationship img,
+.colorset-never-dead .shipfeatures img {
+  border: 1px solid #663322;
+}
+.colorset-never-dead .focus label,
+.colorset-never-dead .power label,
+.colorset-never-dead .talent label,
+.colorset-never-dead .weapon label,
+.colorset-never-dead .equipment label,
+.colorset-never-dead .stunts label,
+.colorset-never-dead .honorifics label,
+.colorset-never-dead .membership label,
+.colorset-never-dead .relationship label,
+.colorset-never-dead .shipfeatures label {
+  color: #663322;
+}
+.colorset-never-dead .focus .item-card-stats,
+.colorset-never-dead .power .item-card-stats,
+.colorset-never-dead .talent .item-card-stats,
+.colorset-never-dead .weapon .item-card-stats,
+.colorset-never-dead .equipment .item-card-stats,
+.colorset-never-dead .stunts .item-card-stats,
+.colorset-never-dead .honorifics .item-card-stats,
+.colorset-never-dead .membership .item-card-stats,
+.colorset-never-dead .relationship .item-card-stats,
+.colorset-never-dead .shipfeatures .item-card-stats {
+  background-color: #eeddcd;
+}
+.colorset-never-dead .focus .item-card-stats input.data-entry,
+.colorset-never-dead .power .item-card-stats input.data-entry,
+.colorset-never-dead .talent .item-card-stats input.data-entry,
+.colorset-never-dead .weapon .item-card-stats input.data-entry,
+.colorset-never-dead .equipment .item-card-stats input.data-entry,
+.colorset-never-dead .stunts .item-card-stats input.data-entry,
+.colorset-never-dead .honorifics .item-card-stats input.data-entry,
+.colorset-never-dead .membership .item-card-stats input.data-entry,
+.colorset-never-dead .relationship .item-card-stats input.data-entry,
+.colorset-never-dead .shipfeatures .item-card-stats input.data-entry {
+  color: #29241f;
+}
+.colorset-never-dead .focus .item-card-desc,
+.colorset-never-dead .power .item-card-desc,
+.colorset-never-dead .talent .item-card-desc,
+.colorset-never-dead .weapon .item-card-desc,
+.colorset-never-dead .equipment .item-card-desc,
+.colorset-never-dead .stunts .item-card-desc,
+.colorset-never-dead .honorifics .item-card-desc,
+.colorset-never-dead .membership .item-card-desc,
+.colorset-never-dead .relationship .item-card-desc,
+.colorset-never-dead .shipfeatures .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-never-dead .focus nav .item,
+.colorset-never-dead .power nav .item,
+.colorset-never-dead .talent nav .item,
+.colorset-never-dead .weapon nav .item,
+.colorset-never-dead .equipment nav .item,
+.colorset-never-dead .stunts nav .item,
+.colorset-never-dead .honorifics nav .item,
+.colorset-never-dead .membership nav .item,
+.colorset-never-dead .relationship nav .item,
+.colorset-never-dead .shipfeatures nav .item {
+  background-color: #eeddcd;
+  color: #663322;
+}
+.colorset-never-dead .focus nav .item.active,
+.colorset-never-dead .power nav .item.active,
+.colorset-never-dead .talent nav .item.active,
+.colorset-never-dead .weapon nav .item.active,
+.colorset-never-dead .equipment nav .item.active,
+.colorset-never-dead .stunts nav .item.active,
+.colorset-never-dead .honorifics nav .item.active,
+.colorset-never-dead .membership nav .item.active,
+.colorset-never-dead .relationship nav .item.active,
+.colorset-never-dead .shipfeatures nav .item.active {
+  background-color: #ffffff;
+}
+.colorset-never-dead .focus .mod-card,
+.colorset-never-dead .power .mod-card,
+.colorset-never-dead .talent .mod-card,
+.colorset-never-dead .weapon .mod-card,
+.colorset-never-dead .equipment .mod-card,
+.colorset-never-dead .stunts .mod-card,
+.colorset-never-dead .honorifics .mod-card,
+.colorset-never-dead .membership .mod-card,
+.colorset-never-dead .relationship .mod-card,
+.colorset-never-dead .shipfeatures .mod-card {
+  border: solid #eeddcd 1px;
 }
 #age-roller {
   position: fixed;
@@ -2026,20 +3069,95 @@
   z-index: 99;
   opacity: 0.6;
 }
+#age-tracker {
+  position: fixed;
+  bottom: 69px;
+  left: 260px;
+  width: 800px;
+  max-width: max-content;
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  z-index: 50;
+  opacity: 0.8;
+}
+#age-tracker a {
+  padding-top: 4px;
+}
+#age-tracker div.age-serendipity {
+  max-width: max-content;
+  border-radius: 10px;
+  padding: 4px;
+}
+#age-tracker div.age-serendipity a.ser-mod {
+  margin-top: 2px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+#age-tracker div.age-serendipity .inactive {
+  opacity: 0.3;
+}
+#age-tracker .age-comp {
+  margin-top: 8px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 5px;
+  flex-wrap: nowrap;
+  max-width: max-content;
+}
+#age-tracker .age-comp a {
+  flex: 0 0 16px;
+}
+#age-tracker .age-comp a i {
+  width: 16px;
+  height: 16px;
+}
+#age-tracker .age-comp .comp-checkbox {
+  flex: 0 0 auto;
+  margin: auto 2px auto 2px;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  background: none;
+  border: 1px solid black;
+  background-color: #ffffff;
+}
+#age-tracker .age-comp .full-box {
+  background-color: #eb9e0f;
+}
+#age-tracker .age-comp .milestone.milestone {
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+}
+@font-face {
+  font-family: "Ethernal Knight";
+  src: url("../resources/fonts/eternalknight/eternalknight.otf");
+}
 #context-menu li {
   white-space: nowrap;
   text-align: left;
 }
+/*----------- General Styling ------------*/
+.age-system input,
+.age-system select {
+  border: none;
+  font-variant: small-caps;
+}
 /*---------Background---------------------*/
 .window-app.sheet.char .window-content,
 .window-app.sheet.vehicle .window-content,
-.window-app.sheet.spaceship .window-content,
-.window-app.journal .window-content {
+.window-app.sheet.spaceship .window-content {
   background-image: none;
   background: none;
   background-color: rgba(207, 194, 188, 0.6);
 }
-/*---------Flexbox assisting classes------*/
+.age-system {
+  /*---------Flexbox assisting classes------*/
+}
+.age-system a:hover {
+  text-shadow: none;
+}
 .age-system .flexcol {
   display: flex;
   flex-direction: column;
