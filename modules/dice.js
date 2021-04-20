@@ -399,7 +399,7 @@ export function getFocus(item) {
 
 // Capture GM ID to whisper
 export function isGMroll(event) {
-    if (!event.shiftKey) {return null};
+    if (!event.shiftKey) {return false};
     return game.users.filter(u => u.isGM);
 };
 
