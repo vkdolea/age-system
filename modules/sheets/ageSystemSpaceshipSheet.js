@@ -84,13 +84,13 @@ export default class ageSpaceshipSheet extends ActorSheet {
             inputs.focus(ev => ev.currentTarget.select());
         };
 
-        html.on("dragenter", ".passenger.container", ev => {
+        html.on("dragenter", ".passenger.stats-block", ev => {
             ev.target.classList.add("dragover")
         })
-        html.on("dragleave", ".passenger.container", ev => {
+        html.on("dragleave", ".passenger.stats-block", ev => {
             ev.target.classList.remove("dragover")
         })
-        html.on("drop", ".passenger.container", ev => {
+        html.on("drop", ".passenger.stats-block", ev => {
             ev.target.classList.remove("dragover")
             const dragData = JSON.parse(ev.originalEvent.dataTransfer.getData("text/plain"))
             const passenger = game.actors.get(dragData.id);

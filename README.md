@@ -83,6 +83,12 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 
 ## Change log
 
+### 0.6.1 [2021-04-21]
+#### Fix
+- Serendipity tracker now set default value as Deactivated when new world is created.
+- Characters can now be draged to Spaceships.
+- Description field for spaceships now have correct line spaces between paragraphs.
+
 ### 0.6.0 [2021-04-19]
 #### Added
 - Serendipity tracker (Modern AGE Companion).

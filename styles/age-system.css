@@ -1267,11 +1267,11 @@
   border: none;
 }
 .age-system.sheet.spaceship p {
-  margin: 0;
   border-radius: 4px;
   height: 26px;
   padding-top: 5px;
   padding-bottom: 5px;
+  margin: 0;
 }
 .age-system.sheet.spaceship .inuse {
   cursor: pointer;
@@ -1314,6 +1314,10 @@
 }
 .age-system.sheet.spaceship .image-description .ship-desc {
   height: 190px;
+}
+.age-system.sheet.spaceship .image-description .ship-desc p {
+  margin: 7px 0;
+  height: auto;
 }
 .age-system.sheet.spaceship .image-description .ship-desc label.desc.desc {
   display: block;
