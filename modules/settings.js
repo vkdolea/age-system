@@ -332,8 +332,8 @@ export const registerSystemSettings = function() {
    * Age Tracker Position
    */
    game.settings.register("age-system", "ageTrackerPos", {
-    name: "SETTINGS.serendipityValue",
-    // hint: "SETTINGS.serendipityValueHint",
+    name: "SETTINGS.ageTrackerPos",
+    // hint: "SETTINGS.ageTrackerPosHint",
     scope: "client",
     config: false,
     default: {isOriginal: true, xPos: 0, yPos: 0},
