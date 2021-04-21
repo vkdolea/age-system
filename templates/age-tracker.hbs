@@ -1,5 +1,8 @@
 <form class="{{cssClass}} colorset-{{colorset}}" autocomplete="off">
     <div class="flexcol" id="age-tracker">
+        {{#if (or hasSerendipity (and isGM hasComplication))}}
+        <div id="age-tracker-drag"></div>
+        {{/if}}
         {{!-- Serendipity Tracker --}}
         {{#if hasSerendipity}}
         <div class="age-serendipity colorset-second-tier flexrow">

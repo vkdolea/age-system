@@ -55,6 +55,9 @@ export class AgeTracker extends Application {
 		html.find(".ser-mod").click(this._onClickSer.bind(this));
 		html.find(".comp-mod").click(this._onClickComp.bind(this));
 		html.find(".milestone").click(this._onRollComp.bind(this));
+
+		// Make the DIV element draggable:
+		this._dragElement(document.getElementById("age-tracker"));
 	}
 	
 	refresh() {
@@ -95,5 +98,46 @@ export class AgeTracker extends Application {
 		const flavor = game.i18n.format("age-system.chatCard.compRoll", {compType});
 		let compRoll = new Roll("1d6");
 		return compRoll.toMessage({flavor}, {whisper: game.users.filter(u => u.isGM), rollMode: "gmroll"});
+	}
+
+	_dragElement(elmnt) {
+		var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+		if (document.getElementById("age-tracker-drag")) {
+		  // if present, the header is where you move the DIV from:
+		  document.getElementById("age-tracker-drag").onmousedown = dragMouseDown;
+		} else {
+		  // otherwise, move the DIV from anywhere inside the DIV:
+		  elmnt.onmousedown = dragMouseDown;
+		}
+	  
+		function dragMouseDown(e) {
+		  e = e || window.event;
+		  e.preventDefault();
+		  // get the mouse cursor position at startup:
+		  pos3 = e.clientX;
+		  pos4 = e.clientY;
+		  document.onmouseup = closeDragElement;
+		  // call a function whenever the cursor moves:
+		  document.onmousemove = elementDrag;
+		}
+	  
+		function elementDrag(e) {
+		  e = e || window.event;
+		  e.preventDefault();
+		  // calculate the new cursor position:
+		  pos1 = pos3 - e.clientX;
+		  pos2 = pos4 - e.clientY;
+		  pos3 = e.clientX;
+		  pos4 = e.clientY;
+		  // set the element's new position:
+		  elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+		  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+		}
+	  
+		function closeDragElement() {
+		  // stop moving when mouse button is released:
+		  document.onmouseup = null;
+		  document.onmousemove = null;
+		}
 	}
 }
