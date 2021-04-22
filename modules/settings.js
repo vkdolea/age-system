@@ -328,19 +328,6 @@ export const registerSystemSettings = function() {
     onChange: () => {if (game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
   }); 
 
-  /**
-   * Age Tracker Position
-   */
-   game.settings.register("age-system", "ageTrackerPos", {
-    name: "SETTINGS.ageTrackerPos",
-    // hint: "SETTINGS.ageTrackerPosHint",
-    scope: "client",
-    config: false,
-    default: {original: {xPos: "260px", yPos: "695px"}, current: {xPos: "260px", yPos: "695px"}},
-    type: Object, 
-    onChange: () => {game.user.setFlag("age-system", "ageTrackerPos", game.settings.get("age-system", "ageTrackerPos"))}
-  });
-
 };
 
 // Adds game setting to select focus compendium after loading world's compendia!

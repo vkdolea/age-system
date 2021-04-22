@@ -155,16 +155,11 @@ Hooks.once("ready", async function() {
 
     // Tracker Handling
     // Identify if User already has ageTrackerPos flag set
-    const userTrackerFlag = game.user.getFlag("age-system", "ageTrackerPos");
-    if (userTrackerFlag) await game.settings.set("age-system", "ageTrackerPos", userTrackerFlag);
-    if (!userTrackerFlag) {
-        const trackerPos = {original: {xPos: "260px", yPos: "695px"}, current: {xPos: "260px", yPos: "695px"}};
-        await game.user.setFlag("age-system", "ageTrackerPos", trackerPos);
-        await game.settings.set("age-system", "ageTrackerPos", trackerPos).then(() => {
-            // Check if Age Tracker is used
-            if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication") !== "none") game.ageSystem.ageTracker.refresh();
-        });
-    }
+    const userTrackerFlag = await game.user.getFlag("age-system", "ageTrackerPos");
+    const useTracker = (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication") !== "none") ? true : false;
+    if (!userTrackerFlag) await game.user.setFlag("age-system", "ageTrackerPos", ageSystem.ageTrackerPos);
+    if (useTracker) game.ageSystem.ageTracker.refresh();
+
     // Loads Age Roller
     game.ageSystem.ageRoller.refresh()
 

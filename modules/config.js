@@ -257,5 +257,7 @@ ageSystem.uiElements = {
     ageRoller: `${uiElementsPath}cube.svg`
 }
 
+// Age Tracker Original Poition
+ageSystem.ageTrackerPos = {xPos: "260px", yPos: "695px"};
 // Initializing variable to load focus Compendiaum
 ageSystem.focus = [];

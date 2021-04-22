@@ -59,11 +59,9 @@ export class AgeTracker extends Application {
 
 		// Set position
 		let tracker = document.getElementById("age-tracker");
-		const trackerPos = game.settings.get("age-system", "ageTrackerPos");
-		tracker.style.left = trackerPos.current.xPos;
-		tracker.style.top = trackerPos.current.yPos;
-		// if (trackerPos) {
-		// }
+		const trackerPos = game.user.getFlag("age-system", "ageTrackerPos");
+		tracker.style.left = trackerPos.xPos;
+		tracker.style.top = trackerPos.yPos;
 
 		// Make the DIV element draggable:
 		this._dragElement(tracker);
@@ -90,11 +88,10 @@ export class AgeTracker extends Application {
 
 	_onRightClick(event) {
 		const tracker = event.currentTarget.closest("#age-tracker");
-		const pos = game.settings.get("age-system", "ageTrackerPos");
-		tracker.style.left = pos.original.xPos;
-		tracker.style.top = pos.original.yPos;
-		pos.current = pos.original;
-		game.settings.set("age-system", "ageTrackerPos", pos);
+		const original = CONFIG.ageSystem.ageTrackerPos;
+		tracker.style.left = original.xPos;
+		tracker.style.top = original.yPos;
+		game.user.setFlag("age-system", "ageTrackerPos", original);
 	}
 
 	_onClickComp(event) {
@@ -154,14 +151,14 @@ export class AgeTracker extends Application {
 		}
 	  
 		function closeDragElement() {
-		  // stop moving when mouse button is released:
-		  document.onmouseup = null;
-		  document.onmousemove = null;
-		  // Save position on appropriate User Flag
-		  const trackerPos = game.settings.get("age-system", "ageTrackerPos");
-		  trackerPos.current.xPos = elmnt.style.left;
-		  trackerPos.current.yPos = elmnt.style.top;
-		  game.settings.set("age-system", "ageTrackerPos", trackerPos);
+		  	// stop moving when mouse button is released:
+		  	document.onmouseup = null;
+		  	document.onmousemove = null;
+		  	// Save position on appropriate User Flag
+			const trackerPos = {};
+			trackerPos.xPos = elmnt.style.left;
+			trackerPos.yPos = elmnt.style.top;
+			game.user.setFlag("age-system", "ageTrackerPos", trackerPos);
 		}
 	}
 }
