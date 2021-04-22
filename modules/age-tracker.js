@@ -54,7 +54,8 @@ export class AgeTracker extends Application {
 		super.activateListeners(html);
 		html.find(".ser-mod").click(this._onClickSer.bind(this));
 		html.find(".comp-mod").click(this._onClickComp.bind(this));
-		html.find(".milestone").click(this._onRollComp.bind(this));
+		html.find(".milestone").click(this._onRollComp.bind(this));		
+		html.find("#age-tracker-drag").contextmenu(this._onRightClick.bind(this));
 
 		// Set position
 		let tracker = document.getElementById("age-tracker");
@@ -85,6 +86,15 @@ export class AgeTracker extends Application {
 		if (serData.actual > serData.max) serData.actual = serData.max;
 		if (serData.actual < 0) serData.actual = 0;
 		game.settings.set("age-system", "serendipityValue", serData);
+	}
+
+	_onRightClick(event) {
+		const tracker = event.currentTarget.closest("#age-tracker");
+		const pos = game.settings.get("age-system", "ageTrackerPos");
+		tracker.style.left = pos.original.xPos;
+		tracker.style.top = pos.original.yPos;
+		pos.current = pos.original;
+		game.settings.set("age-system", "ageTrackerPos", pos);
 	}
 
 	_onClickComp(event) {
@@ -149,7 +159,6 @@ export class AgeTracker extends Application {
 		  document.onmousemove = null;
 		  // Save position on appropriate User Flag
 		  const trackerPos = game.settings.get("age-system", "ageTrackerPos");
-		//   if (!trackerPos) return;
 		  trackerPos.current.xPos = elmnt.style.left;
 		  trackerPos.current.yPos = elmnt.style.top;
 		  game.settings.set("age-system", "ageTrackerPos", trackerPos);

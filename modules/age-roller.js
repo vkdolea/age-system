@@ -33,9 +33,6 @@ export class AgeRoller extends Application {
 
 	async _onRightClick(event) {
 		event.preventDefault();
-		// const user = game.user.name;
-		// const rollHeader = game.i18n.format("age-system.chatCard.looseRoll", {user});
-
 		let roll = new Roll("1d6").roll();
 		return roll.toMessage();
 	}
