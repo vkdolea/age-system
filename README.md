@@ -21,6 +21,7 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Add Stunt Die or Focus (or both) to damage roll when rolling damage from chat
 - Support to track Serendipity (MAGE Companion), Complication (MAGE Companion)
 - Churn Tracker (The Expanse RPG) available
+- Point mouse slightly above Tracker or Roller and a Drag Bar will appear. Click and drag to reposition. Right click Drag Bar to return to  original position!
 - Supports Vehicles and Spaceships
 
 ## Spaceship and Vehicle Controls
@@ -83,11 +84,14 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 
 ## Change log
 
-### 0.6.1 [2021-04-21]
+### 0.6.1 [2021-04-22]
+#### Added
+- Tracker (Complication, Churn, Serendepity) and Roller can now be dragged, and new position will be memorized. Point mouse slightly above Tracker or Roller and a Drag Bar will appear. Click and drag to reposition. Right click Drag Bar to return to original position!
 #### Fix
 - Serendipity tracker now set default value as Deactivated when new world is created.
 - Characters can now be draged to Spaceships.
 - Description field for spaceships now have correct line spaces between paragraphs.
+- Fixed issued preventing Speed to assume values other than 10.
 
 ### 0.6.0 [2021-04-19]
 #### Added
