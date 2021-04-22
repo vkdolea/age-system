@@ -310,7 +310,7 @@ export const registerSystemSettings = function() {
     hint: "SETTINGS.serendipityHint",
     scope: "world",
     config: true,
-    default: "none",
+    default: false,
     type: Boolean,
     onChange: () => {game.ageSystem.ageTracker.refresh()}
   });

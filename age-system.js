@@ -69,7 +69,6 @@ Hooks.once("init", async function() {
         makeDefault: true,
         label: "age-system.SHEETS.standardVehicle"
     });
-    // Uncomment when spacehips are done!!
     Actors.registerSheet("age-system", ageSystemSpaceshipSheet, {
         types: ["spaceship"],
         makeDefault: true,
@@ -154,11 +153,19 @@ Hooks.once("ready", async function() {
     if (color) game.settings.set("age-system", "colorScheme", color);
     if (!color) game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
 
-    // Loads Age Roller
-    game.ageSystem.ageRoller.refresh()
+    // Tracker Handling
+    // Identify if User already has ageTrackerPos flag set
+    const userTrackerFlag = await game.user.getFlag("age-system", "ageTrackerPos");
+    const useTracker = (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication") !== "none") ? true : false;
+    if (!userTrackerFlag) await game.user.setFlag("age-system", "ageTrackerPos", ageSystem.ageTrackerPos);
+    if (useTracker) game.ageSystem.ageTracker.refresh();
 
-    // Loads Tracker
-    if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication") !== "none") game.ageSystem.ageTracker.refresh();
+
+    // Age Roller
+    // Handle Usef Flag
+    const rollerFlag = await game.user.getFlag("age-system", "ageRollerPos");
+    if (!rollerFlag) await game.user.setFlag("age-system", "ageRollerPos", ageSystem.ageRollerPos);
+    game.ageSystem.ageRoller.refresh()
 
     // Check if Dice so Nice is active to register Stunt Die option
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {
