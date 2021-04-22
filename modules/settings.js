@@ -279,7 +279,7 @@ export const registerSystemSettings = function() {
     hint: "SETTINGS.complicationHint",
     scope: "world",
     config: true,
-    default: "none",
+    default: "churn",
     type: String,
     choices: {
       "none": "SETTINGS.complicationNone",
@@ -310,7 +310,7 @@ export const registerSystemSettings = function() {
     hint: "SETTINGS.serendipityHint",
     scope: "world",
     config: true,
-    default: false,
+    default: true,
     type: Boolean,
     onChange: () => {game.ageSystem.ageTracker.refresh()}
   });
@@ -336,9 +336,9 @@ export const registerSystemSettings = function() {
     // hint: "SETTINGS.ageTrackerPosHint",
     scope: "client",
     config: false,
-    default: {isOriginal: true, xPos: 0, yPos: 0},
+    default: {original: {xPos: "260px", yPos: "695px"}, current: {xPos: "260px", yPos: "695px"}},
     type: Object, 
-    onChange: () => {}
+    onChange: () => {game.user.setFlag("age-system", "ageTrackerPos", game.settings.get("age-system", "ageTrackerPos"))}
   });
 
 };

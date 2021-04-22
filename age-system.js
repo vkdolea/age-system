@@ -69,7 +69,6 @@ Hooks.once("init", async function() {
         makeDefault: true,
         label: "age-system.SHEETS.standardVehicle"
     });
-    // Uncomment when spacehips are done!!
     Actors.registerSheet("age-system", ageSystemSpaceshipSheet, {
         types: ["spaceship"],
         makeDefault: true,
@@ -154,11 +153,17 @@ Hooks.once("ready", async function() {
     if (color) game.settings.set("age-system", "colorScheme", color);
     if (!color) game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
 
+    // Tracker Handling
+    // Identify if User already has ageTrackerPos flag set
+    const userTrackerFlag = game.user.getFlag("age-system", "ageTrackerPos");
+    if (userTrackerFlag) game.settings.set("age-system", "ageTrackerPos", userTrackerFlag);
+    if (!userTrackerFlag) await game.user.setFlag("age-system", "ageTrackerPos", game.settings.get("age-system", "ageTrackerPos")).then(() => {
+        // Check if Age Tracker is used
+        if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication") !== "none") game.ageSystem.ageTracker.refresh();
+    });
+    
     // Loads Age Roller
     game.ageSystem.ageRoller.refresh()
-
-    // Loads Tracker
-    if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication") !== "none") game.ageSystem.ageTracker.refresh();
 
     // Check if Dice so Nice is active to register Stunt Die option
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {

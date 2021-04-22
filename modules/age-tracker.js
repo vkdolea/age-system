@@ -46,7 +46,7 @@ export class AgeTracker extends Application {
 
 			data.compData = compData;
 		}
-
+		// game.setting.set("age-system", "ageTrackerPos", game.user.getFlag("age-system", "ageTrackerPos"));
 		return data;
 	}
 	
@@ -56,8 +56,17 @@ export class AgeTracker extends Application {
 		html.find(".comp-mod").click(this._onClickComp.bind(this));
 		html.find(".milestone").click(this._onRollComp.bind(this));
 
+		// Set position
+		let tracker = document.getElementById("age-tracker");
+		const trackerPos = game.settings.get("age-system", "ageTrackerPos");
+		tracker.style.left = trackerPos.current.xPos;
+		tracker.style.top = trackerPos.current.yPos;
+		// if (trackerPos) {
+		// }
+
 		// Make the DIV element draggable:
-		this._dragElement(document.getElementById("age-tracker"));
+		this._dragElement(tracker);
+		// this._dragElement(document.getElementById("age-tracker"));
 	}
 	
 	refresh() {
@@ -138,6 +147,12 @@ export class AgeTracker extends Application {
 		  // stop moving when mouse button is released:
 		  document.onmouseup = null;
 		  document.onmousemove = null;
+		  // Save position on appropriate User Flag
+		  const trackerPos = game.settings.get("age-system", "ageTrackerPos");
+		//   if (!trackerPos) return;
+		  trackerPos.current.xPos = elmnt.style.left;
+		  trackerPos.current.yPos = elmnt.style.top;
+		  game.settings.set("age-system", "ageTrackerPos", trackerPos);
 		}
 	}
 }
