@@ -61,11 +61,10 @@ export class AgeTracker extends Application {
 		let tracker = document.getElementById("age-tracker");
 		const trackerPos = game.user.getFlag("age-system", "ageTrackerPos");
 		tracker.style.left = trackerPos.xPos;
-		tracker.style.top = trackerPos.yPos;
+		tracker.style.bottom = trackerPos.yPos;
 
 		// Make the DIV element draggable:
 		this._dragElement(tracker);
-		// this._dragElement(document.getElementById("age-tracker"));
 	}
 	
 	refresh() {
@@ -90,7 +89,7 @@ export class AgeTracker extends Application {
 		const tracker = event.currentTarget.closest("#age-tracker");
 		const original = CONFIG.ageSystem.ageTrackerPos;
 		tracker.style.left = original.xPos;
-		tracker.style.top = original.yPos;
+		tracker.style.bottom = original.yPos;
 		game.user.setFlag("age-system", "ageTrackerPos", original);
 	}
 
@@ -146,7 +145,8 @@ export class AgeTracker extends Application {
 		  pos3 = e.clientX;
 		  pos4 = e.clientY;
 		  // set the element's new position:
-		  elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+		//   elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+		  elmnt.style.bottom = (elmnt.offsetParent.clientHeight - elmnt.offsetTop - elmnt.clientHeight + pos2) + "px";
 		  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
 		}
 	  
@@ -157,7 +157,7 @@ export class AgeTracker extends Application {
 		  	// Save position on appropriate User Flag
 			const trackerPos = {};
 			trackerPos.xPos = elmnt.style.left;
-			trackerPos.yPos = elmnt.style.top;
+			trackerPos.yPos = elmnt.style.bottom;
 			game.user.setFlag("age-system", "ageTrackerPos", trackerPos);
 		}
 	}

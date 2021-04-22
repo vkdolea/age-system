@@ -160,7 +160,11 @@ Hooks.once("ready", async function() {
     if (!userTrackerFlag) await game.user.setFlag("age-system", "ageTrackerPos", ageSystem.ageTrackerPos);
     if (useTracker) game.ageSystem.ageTracker.refresh();
 
-    // Loads Age Roller
+
+    // Age Roller
+    // Handle Usef Flag
+    const rollerFlag = await game.user.getFlag("age-system", "ageRollerPos");
+    if (!rollerFlag) await game.user.setFlag("age-system", "ageRollerPos", ageSystem.ageRollerPos);
     game.ageSystem.ageRoller.refresh()
 
     // Check if Dice so Nice is active to register Stunt Die option

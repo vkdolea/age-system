@@ -279,7 +279,7 @@ export const registerSystemSettings = function() {
     hint: "SETTINGS.complicationHint",
     scope: "world",
     config: true,
-    default: "churn",
+    default: "none",
     type: String,
     choices: {
       "none": "SETTINGS.complicationNone",
@@ -310,7 +310,7 @@ export const registerSystemSettings = function() {
     hint: "SETTINGS.serendipityHint",
     scope: "world",
     config: true,
-    default: true,
+    default: false,
     type: Boolean,
     onChange: () => {game.ageSystem.ageTracker.refresh()}
   });
