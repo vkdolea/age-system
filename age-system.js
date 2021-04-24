@@ -90,10 +90,10 @@ Hooks.once("init", async function() {
 
 
     // Define extra data for Age System Actors
-    CONFIG.Actor.entityClass = ageSystemActor;
+    CONFIG.Actor.documentClass = ageSystemActor;
 
     // Define extra data for Age System Items
-    CONFIG.Item.entityClass = ageSystemItem;
+    CONFIG.Item.documentClass = ageSystemItem;
 
     // Load partials for Handlebars
     preloadHandlebarsTemplates();
