@@ -8,25 +8,24 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 
 ## Features
 - Different color schemes
-- Possibility to use a few optional rules (Fatigue, Conviction)
 - Checkboxes to identify primary and secondary abilities
 - Checkbox to select last ability leveled up
 - Option to use the Dragon AGE specific ability set
 - Support to Toughness, Impact/Ballistic Armor, and Stun/Wound damage
-- Dice so Nice compatible
 - Support to Income, Resources, Currency and GP/SP/CP wealth systems
+- Possibility to use a few optional rules (Fatigue, Conviction, Complication/Churn, Serendipity)
+- Possibility to add Conditions on characters (effects must be set manually)
+- Support to track Serendipity (MAGE Companion), Complication (MAGE Companion)
+- Dice so Nice compatible
 - Shift, Alt, Ctrl keys support to change check and damage rolls
 - Drag and drop owned weapons and power to macro bar to create attack shortcuts
-- Possibility to add Conditions on characters (effects must be set manually)
 - Add Stunt Die or Focus (or both) to damage roll when rolling damage from chat
-- Support to track Serendipity (MAGE Companion), Complication (MAGE Companion)
-- Churn Tracker (The Expanse RPG) available
 - Point mouse slightly above Tracker or Roller and a Drag Bar will appear. Click and drag to reposition. Right click Drag Bar to return to  original position!
 - Supports Vehicles and Spaceships
 
 ## Spaceship and Vehicle Controls
-You can drag and drop Characters to Veihcles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship. **However, this will only work for vehicles/spaceships with LINKED ACTORS option selected on Prototype Token.**.
-When opening a sheet from an Unlinked Token:
+You can drag and drop Characters to Veihcles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship. **However, this will only work for vehicles/spaceships when opened a character sheet directly from directory or from a token with LINKED ACTORS option selected**.
+When opening a sheet from an *Unlinked Token*:
 - **Spaceships:** Passengers section will vanish, roles will assigned automatically to spaceship **Crew**.
 - **Vehicles:** Passengers section will vanish, and the Conductor role will be "Token" - which means you must select a Token on canvas and them click the Dice icon to roll a maneuver. Note: in the future, spaceships will also have this option.
 
@@ -39,9 +38,9 @@ When opening a sheet from an Unlinked Token:
 6. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
 
 ## Modifiers
-A few items have a "Modificators" section. Modificatores will only apply when the item is equiped/activated (i.e., shield icon in character sheet without opacity).
+A few items have a "Modificators" section. Modificatores will only apply when the item is equiped/activated (i.e., **shield icon** in character sheet without opacity).
 The checkbox must be checked to have the mod active in the item.
-Bonuses for maneuvers are on topo of the normal bonuses granted by the maneuver.
+Bonuses for maneuvers are on top of the normal bonuses granted by the maneuver.
 Here the description of each one of the Modificators:
 1. **This Item Damage:** adds damage when using damage roll for tha particular item (useful only for Weapon and Power & Arcana).
 2. **All Damage:** adds the damage to all types of damage rolls.
@@ -83,6 +82,13 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+
+### 0.6.2 [2021-04-24]
+#### Added
+- Updated French localizatioin
+#### Fix
+- Tooltip fixed on "Test" button Power & Arcana sheet.
+- Styling on Modifiers and Description tabs on Item sheets.
 
 ### 0.6.1 [2021-04-22]
 #### Added
