@@ -54,6 +54,10 @@
     "SETTINGS.colorRoninGreen": "Ronin Green",
     "SETTINGS.colorExpandedBlue": "The Expanse",
     "SETTINGS.colorFoldedPurple": "Folded Purple",
+	"SETTINGS.colorSelectOne": "Select One",
+    "SETTINGS.colorTheGrey": "The Grey",
+    "SETTINGS.colorRedWarrior": "Red Warrior",
+    "SETTINGS.colorNeverDead": "Never Dead",
 
     "SETTINGS.gameMode": "Sélectionner le mode de jeu si besoin",
     "SETTINGS.gameModeHint": "Sélectionner le mode de jeu (comme indiqué dans Modern AGE) ou aucun si le réglage n’existe pas",
@@ -81,10 +85,19 @@
     "SETTINGS.masterFocusCompendiumHint": "Les noms d'objets dans ce Compendium s'afficheront comme des suggestions de compétence sur les feuilles",
 	
 	"SETTINGS.healthMode": "Sélectionner le mode de suivi de la santé",
-    "SETTINGS.healthModeHint": "La plupart des jeux AGE utilisent la santé tandis que The Expanse utilise la Fortune",
+    "SETTINGS.healthModeHint": "La plupart des jeux AGE utilisent la Santé tandis que The Expanse utilise la Fortune",
     "SETTINGS.healthModehealth": "Santé",
     "SETTINGS.healthModefortune": "Fortune",
+	
+	"SETTINGS.complication": "Utiliser Complications ou Turbulence",
+    "SETTINGS.complicationHint": "Utiliser Complication (Modern AGE), Turbulence (The Expanse) ou aucun",
+    "SETTINGS.complicationNone": "Aucun",
+    "SETTINGS.compcomplication": "Complication",
+    "SETTINGS.compchurn": "Turbulence",
 
+	"SETTINGS.serendipity": "Utiliser Sérendipité",
+    "SETTINGS.serendipityHint": "Utiliser la règle optionnelle de Modern AGE pour Sérendipité",
+	
     "age-system": {
 	
 		"SHEETS": {
@@ -103,11 +116,13 @@
 			"alreadyOnboard": "Le passager {name} ({id}) est déjà à bord!",
             "vehicleIsNotPassenger": "Un véhicule ne peut pas être passager.",
             "userNotAvailable": "Le personnage {name} ({id}) n'est pas disponible."
+			"shipPartsOnChar": "Les objets de type Fonctionnalités de Vaisseaux ne peuvent être ajoutées à une feuille de Personnage",
+            "nonShipPartsOnShip": "Seuls les objets de type Fonctionnalités de Vaisseaux peuvent être ajoutée à un Vaisseau."
 		},
         
 		"spaceship": {
             "op": "Opérateur",
-            "role": "Role",
+            "role": "Rôle",
             "hull": "Coque",
             "operator": {
                 "command": "Capitaine",
@@ -120,6 +135,7 @@
             "crewTyp": "Typique",
             "crewCur": "Courant",
             "competence": "Compétence",
+			"crewPenalty": "Pénalité taille d'équipage",
             "competenceLevel": {
                 "incompetent": "Incompétent",
                 "poor": "Pauvre",
@@ -128,18 +144,55 @@
                 "skilled": "Compétent",
                 "elite": "Elite"
             },
+			"qualityType": "Type",
+            "quality": "Qualité",
+            "flaw": "Défaut",
             "systems": "Systèmes",
+            "systemName": {
+                "command": "Commandement",
+                "commandMod": "Commandement {mod}",
+                "commandLoss": "Commandement {réduction}",
+                "maneuver": "Manœuvrabilité",
+                "maneuverMod": "Manœuvrabilité {mod}",
+                "maneuverLoss": "Manœuvrabilité {réduction}",
+                "sensors": "Capteurs",
+                "sensorsMod": "Capteurs {mod}",
+                "sensorsLoss": "Capteurs {réduction}",
+                "damageControl": "Perte de contrôle",
+                "damageControlMod": "Perte de contrôle {mod}",
+                "damageControlLoss": "Perte de contrôle {réduction}"
+            },
             "size": "Taille",
             "sizeType": {
                 "tiny": "Minuscule",
                 "small": "Petit",
                 "medium": "Moyen",
                 "large": "Grand",
-                "huge": "Enorme",
+                "huge": "Très grand",
                 "gigantic": "Gigantesque",
                 "colossal": "Colossal",
                 "titanic": "Titanesque"
-            }
+            },
+			"loss": "Réduction",
+            "lossesCond": "Condition Réduction",
+            "normalLoss": "Normal",
+            "seriousLoss": "Grave",
+            "collateralLoss": "Collatéral",
+            "hullLoss": "Coque",
+            "maneuverabilityLoss": "Manœuvrabilité",
+            "sensorsLoss": "Senseurs",
+            "weaponsLoss": "Armes",
+            "reactorOfflineLoss": "Réacteur éteint",
+            "weaponOfflineLoss": "Arme éteinte",
+            "featuresType": "Fonctionnalité",
+            "sensorMod": "Bonus Capteur",
+            "maneuverSizeStep": "Niveau de Manœuvre Taille",
+            "juiceMod": "Bonus Puissance ",
+            "hullPlating": "Renforcement Coque",
+            "hullMod": "Coque (Niveau)",
+            "rollable": "Lancement",
+            "weapon": "Arme montée",
+            "special": "Spécial"
         },
 		"damageControl": "Réduction des dégâts",
 		"parameters": "Paramètres",
@@ -177,10 +230,16 @@
             "addFocus": "Ajout compétence",
             "addStuntDie": "Ajout DP/DD",
 			
-			"maneuversVehicle": "{name} conduit {vehicle}"
+			"maneuversVehicle": "{name} conduit {vehicle}",
+			"commandsVehicle": "{name} commande {vehicle}",
+            "operatesVehicle": "{name} dirige {vehicle}",
+            "backupVehicle": "{name} soutient {vehicle}",
+
+			"compRoll": "{compType} Jet"
         },
 		
 		"testThreshold": "Seuil de réussite",
+		"targetCurrent": "Cible/Actuel",
 		
 		"conditionsName": "Etats",
         "conditions": {
@@ -189,7 +248,7 @@
             "deafened": "Sourd",
             "deafenedDesc": "Le personnage ne peut pas entendre et échoue automatiquement les jets de compétences basés sur l'ouïe tels que Perception (Ouïe)",
             "exhausted": "Épuisé",
-            "exhaustedDesc": "Le personnage est très fatigué. Sa rapidité est réduite de moitié et il nepeut pas utiliser les actions Courir et Charger. S'il reçoit une nouvelle altération Fatigué ou Épuisé, il est alors impuissant.",
+            "exhaustedDesc": "Le personnage est très fatigué. Sa rapidité est réduite de moitié et il ne peut pas utiliser les actions Courir et Charger. S'il reçoit une nouvelle altération Fatigué ou Épuisé, il est alors impuissant.",
             "fatigued": "Fatigué",
             "fatiguedDesc": "Le personnage est fatigué et ne peut pas utiliser l'action Courir ou Charger. S'il reçoit une autre altération Fatigué il devient Épuisé.",
             "freefalling": "Chute Libre",
@@ -254,7 +313,7 @@
         "cons": "Constitution",
         "cunn": "Ruse",
         "magic": "Magie",
-        "abl": "Caractéristique",
+        "abl": "Attribut",
 
         "income": "Revenu",
         "resources": "Ressources",
@@ -265,7 +324,7 @@
         "cp": "PC",
 
         "improvedFocus": "Amélioré",
-        "abilitySelect": "Choisir une Caractéristique à utiliser avec cette Compétence",
+        "abilitySelect": "Choisir un Attribut à utiliser avec cette Compétence",
         "focusInput": "Valeur",
 
         "aim": "Viser",
@@ -297,7 +356,7 @@
         "armorPenalty": "Pénalité",
 
         "background": "Historique",
-        "socialClass": "Classe Sociale",
+        "socialClass": "Catégorie Sociale",
         "profession": "Profession",
         "age": "Age",
         "height": "Taille",
@@ -335,7 +394,7 @@
         "relationshipIntensity": "Intensité",
 
         "drive": {
-            "drive": "Conduite",
+            "drive": "Motivation",
             "downfall": "Défaut",
             "quality": "Qualité"
         },
@@ -352,7 +411,7 @@
         "twelveHours": "12 Heures",
 
         "rof": {
-            "rof": "ROF",
+            "rof": "CdT",
             "none": "—",
             "singleShot": "SS",
             "semiAuto": "SA",
@@ -371,6 +430,7 @@
         "defense": "Défense",
         "targetNumber": "ND",
         "total": "Total",
+		"value": "Valeur",
 
         "itemMod": "Modificateurs",
         "bonus": {
@@ -398,8 +458,8 @@
             "toughness": "Résistance",
             "impactArmor": "Armure impact",
             "ballisticArmor": "Armure balistique",
-            "defendMnv": "Manœuvre de défense",
-            "guardupMnv": "Manœuvre de Garde",
+            "defendMnv": "Manœuvre : Défense",
+            "guardupMnv": "Manœuvre : Garde",
             "allOutAtkMnv": "dégâts Attaque Totale",
             "maxHealth": "Santé Max",
             "maxConviction": "Conviction Max",
@@ -445,6 +505,8 @@
         "activationMod": "Bonus Jets",
 		"success": "Réussite",
         "miss": "Échec",
+		"formula": "Formule",
+        "formulaExample": "Ex.: 2d6+2",
 
         "ageRollOptions": "Options",
         "roll": "Jet de dés",
