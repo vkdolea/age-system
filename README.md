@@ -24,7 +24,7 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 - Supports Vehicles and Spaceships
 
 ## Spaceship and Vehicle Controls
-You can drag and drop Characters to Veihcles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship. **However, this will only work for vehicles/spaceships when opened a character sheet directly from directory or from a token with LINKED ACTORS option selected**.
+You can drag and drop Characters to Vehicles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship. **However, this will only work for vehicles/spaceships when opened a character sheet directly from directory or from a token with LINKED ACTORS option selected**.
 When opening a sheet from an *Unlinked Token*:
 - **Spaceships:** Passengers section will vanish, roles will assigned automatically to spaceship **Crew**.
 - **Vehicles:** Passengers section will vanish, and the Conductor role will be "Token" - which means you must select a Token on canvas and them click the Dice icon to roll a maneuver. Note: in the future, spaceships will also have this option.
@@ -38,10 +38,10 @@ When opening a sheet from an *Unlinked Token*:
 6. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
 
 ## Modifiers
-A few items have a "Modificators" section. Modificatores will only apply when the item is equiped/activated (i.e., **shield icon** in character sheet without opacity).
+A few items have a "MOdifiers" section. Modifiers will only apply when the item is equiped/activated (i.e., **shield icon** in character sheet without opacity).
 The checkbox must be checked to have the mod active in the item.
 Bonuses for maneuvers are on top of the normal bonuses granted by the maneuver.
-Here the description of each one of the Modificators:
+Here the description of each one of the Modifiers:
 1. **This Item Damage:** adds damage when using damage roll for tha particular item (useful only for Weapon and Power & Arcana).
 2. **All Damage:** adds the damage to all types of damage rolls.
 3. **This Item Activation:** add a bonus to all use rolls for that item (using the dice icon to roll).
@@ -111,7 +111,6 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - Hindered/Exausted and Helpless/Restrained conditions now affect Speed parameter accordingly. Contributor: Discord user *schlosrat (he/him) #1091*.
 #### Fix
 - Fixed bug preventing MCE editor to enter editing mode in some Item sheets.
-
 
 ### 0.5.1 [2021-03-25]
 #### Fix
@@ -185,8 +184,8 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 
 ### v0.2.2 [2021-01-17]
 #### Added
-- Added Speed Modificator.
-- Added Settings option to include Conditions (actual rolls and characteristics modificators not included).
+- Added Speed Modifier.
+- Added Settings option to include Conditions (actual rolls and characteristics modifiers not included).
 - When rolling damage from chat, added options to add Focus, Stunt Die or both to damage.
 #### Fixed
 - Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower.
@@ -245,12 +244,6 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 
 ### Features to be implemented
 - Create stat block view for characters (based on NPC stats on AGE books).
-- Add The Expanse setup.
-- Add The Expanse conditions.
-- Add The Expanse Churn.
-- Add The Expanse spaceship sheet (set as Actor).
-- When attacking a token, indicate Hit or Miss by comparing the roll against token's/enemy's Defense score.
-- Add Alt + Click on test/damage rolls to add modifiers (constants or extra die).
 - Add Dynamic Effects support to Actors.
 - Add support to Organizations (as Actors).
 
