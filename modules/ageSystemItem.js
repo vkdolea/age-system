@@ -4,6 +4,7 @@ export class ageSystemItem extends Item {
     
     /** @override */
     prepareData() {
+        super.prepareData();
         
         if (!this.data.img) {
             if (!CONFIG.ageSystem.itemIcons[this.type]) this.data.img = CONST.DEFAULT_TOKEN;

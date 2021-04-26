@@ -52,8 +52,25 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         return `systems/age-system/templates/sheets/${this.actor.data.type}-sheet.hbs`;
     }
 
-    getData() {
-        const data = super.getData();
+    /* -------------------------------------------- */
+
+    /** @inheritdoc */
+    getData(options) {
+        
+        const isOwner = this.document.isOwner;
+        const isEditable = this.isEditable;
+        const data = foundry.utils.deepClone(this.object.data);
+
+        // Copy and sort Items
+        const items = this.object.items.map(i => foundry.utils.deepClone(i.data));
+        items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+        data.items = items;
+
+        // Copy Active Effects
+        const effects = this.object.effects.map(e => foundry.utils.deepClone(e.data));
+        data.effects = effects;
+
+        // const data = super.getData();
         data.config = CONFIG.ageSystem;
 
         // Order itens into alphabetic order
@@ -89,7 +106,20 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.colorScheme = game.settings.get("age-system", "colorScheme");
 
         // Return data to the sheet
-        return data;
+        // return data;
+
+        // Return template data
+        return {
+            actor: this.object,
+            cssClass: isEditable ? "editable" : "locked",
+            data: data,
+            effects: effects,
+            items: items,
+            limited: this.object.limited,
+            options: this.options,
+            owner: isOwner,
+            title: this.title
+            };
     };
 
     //  Modification on standard _onDropItem() to prevent user from dropping Focus with existing name

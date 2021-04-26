@@ -5,6 +5,7 @@ import * as Dice from "./dice.js";
 export class ageSystemActor extends Actor {
 
     /** @override */
+
     prepareBaseData() {
         const actorData = this.data;
         const data = actorData.data;

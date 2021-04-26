@@ -87,8 +87,6 @@ Hooks.once("init", async function() {
         resizable: false
     });
 
-
-
     // Define extra data for Age System Actors
     CONFIG.Actor.documentClass = ageSystemActor;
 
@@ -159,7 +157,6 @@ Hooks.once("ready", async function() {
     const useTracker = (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication") !== "none") ? true : false;
     if (!userTrackerFlag) await game.user.setFlag("age-system", "ageTrackerPos", ageSystem.ageTrackerPos);
     if (useTracker) game.ageSystem.ageTracker.refresh();
-
 
     // Age Roller
     // Handle Usef Flag
