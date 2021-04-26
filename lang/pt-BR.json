@@ -96,7 +96,7 @@
     "SETTINGS.compchurn": "Agitação",
 
     "SETTINGS.serendipity": "Use Serendipidade️",
-    "SETTINGS.serendipityHint": "Usar regra opçional de Modern AGE para Serendipidade️",
+    "SETTINGS.serendipityHint": "Usar regra opcional de Modern AGE para Serendipidade️",
 
     "age-system": {
 
@@ -108,7 +108,7 @@
         },
 
         "WARNING": {
-            "duplicatedFocus": "O foco não é adicionado ao personagem - ele já possui um foco selecionado",
+            "duplicatedFocus": "O foco não foi adicionado ao personagem - ele já possui um foco de mesmo nome",
             "selectTokenMacro": "Selecione um token para executar uma macro.",
             "actorDontHaveValidItem": "O ator selecionado não tem itens que correspondam ao nome na macro.",
             "selectOnlyOneTarget": "Selecione apenas um alvo para atacar.",
@@ -514,7 +514,7 @@
 
         "setAgeRollMod": "Modificador de Rolagem",
         "setAgeRollAtkDmgTradeOff": "Ataque para Compensação de Danos",
-        "setAgeRollTN": "Rolagem de NA",
+        "setAgeRollTN": "Número Alvo",
 
         "damageOptions": "Opções de Rolagem de Danos",
         "setDmgExtraDice": "Dado Extra",
