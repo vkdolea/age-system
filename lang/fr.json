@@ -115,7 +115,7 @@
 			"originTokenMissing": "Le lanceur de l'action (Personnage ou Token non attribué) n'existe plus.",
 			"alreadyOnboard": "Le passager {name} ({id}) est déjà à bord!",
             "vehicleIsNotPassenger": "Un véhicule ne peut pas être passager.",
-            "userNotAvailable": "Le personnage {name} ({id}) n'est pas disponible."
+            "userNotAvailable": "Le personnage {name} ({id}) n'est pas disponible.",
 			"shipPartsOnChar": "Les objets de type Fonctionnalités de Vaisseaux ne peuvent être ajoutées à une feuille de Personnage",
             "nonShipPartsOnShip": "Seuls les objets de type Fonctionnalités de Vaisseaux peuvent être ajoutée à un Vaisseau."
 		},
