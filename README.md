@@ -77,15 +77,21 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - [Fist](https://game-icons.net/1x1/skoll/fist.html) (Weapon icon), by [Skoll](https://game-icons.net) (his link reference is game-icons.net itself).
 - [Processor](https://game-icons.net/1x1/lorc/processor.html) (Spaceship Features icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
+
 ### Localization
 - **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
+- **Brazilian Portuguese**: byd Discord user *Leandro_Soares#9067*.
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
 
+### 0.6.3 [2021-04-25]
+#### Added
+- Brazilian Portugues localization.
+
 ### 0.6.2 [2021-04-24]
 #### Added
-- Updated French localizatioin
+- Updated French localization
 #### Fix
 - Tooltip fixed on "Test" button Power & Arcana sheet.
 - Styling on Modifiers and Description tabs on Item sheets.
