@@ -1,7 +1,7 @@
 # Unofficial AGE System for FVTT
 Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
 
-<img src="https://imgur.com/3rJNe40.png"/>
+<img src="https://i.imgur.com/qVixpmT.png"/>
 
 ## Intro
 Character sheet designed to serve most of AGE System versions. Not all AGE installments are fully implemented. New features are expected to be added over time.
@@ -80,10 +80,17 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 
 ### Localization
 - **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
-- **Brazilian Portuguese**: byd Discord user *Leandro_Soares#9067*.
+- **Brazilian Portuguese**: by Discord user *Leandro_Soares#9067*.
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.6.4 [2021-04-26]
+#### Fix
+- Breaking bug on French localization.
+
+### 0.6.3 [2021-04-25]
+#### Added
+- Brazilian Portuguese localization.
 
 ### 0.6.3 [2021-04-25]
 #### Added
@@ -117,7 +124,6 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - Hindered/Exausted and Helpless/Restrained conditions now affect Speed parameter accordingly. Contributor: Discord user *schlosrat (he/him) #1091*.
 #### Fix
 - Fixed bug preventing MCE editor to enter editing mode in some Item sheets.
-
 
 ### 0.5.1 [2021-03-25]
 #### Fix
@@ -197,6 +203,7 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 #### Fixed
 - Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower.
 - Fixed "yards" abbreviation to "yd" on grid map.
+
 ### v0.2.1 [2021-01-10]
 #### Fixed
 - Focus context menu (to edit, remove, show and roll with another Ability) is working again.
@@ -251,12 +258,6 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 
 ### Features to be implemented
 - Create stat block view for characters (based on NPC stats on AGE books).
-- Add The Expanse setup.
-- Add The Expanse conditions.
-- Add The Expanse Churn.
-- Add The Expanse spaceship sheet (set as Actor).
-- When attacking a token, indicate Hit or Miss by comparing the roll against token's/enemy's Defense score.
-- Add Alt + Click on test/damage rolls to add modifiers (constants or extra die).
 - Add Dynamic Effects support to Actors.
 - Add support to Organizations (as Actors).
 
