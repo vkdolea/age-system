@@ -72,7 +72,7 @@ export function nameItemSheetWindow(ageSystemItemSheet) {
     // Add item type in the title bar within brackets
     const i = ageSystemItemSheet.item.type.toLowerCase();
     const itemType = i[0].toUpperCase() + i.slice(1);
-    let itemWindowId = `item-${ageSystemItemSheet.item._id}`;
+    let itemWindowId = `item-sheet-${ageSystemItemSheet.item.id}`;
     if (ageSystemItemSheet.actor !== null) {
         itemWindowId = `actor-${ageSystemItemSheet.actor.id}-${itemWindowId}`;
     };

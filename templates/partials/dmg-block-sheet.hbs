@@ -1,41 +1,41 @@
 {{#if inChat}}
 <div class="flexcol flex-justify-center damage-formula">
     <label>
-        {{#if data.hasDamage}} {{localize "age-system.item.damage"}} {{/if}}
-        {{#if data.hasHealing}} {{localize "age-system.item.healing"}} {{/if}}
+        {{#if data.data.hasDamage}} {{localize "age-system.item.damage"}} {{/if}}
+        {{#if data.data.hasHealing}} {{localize "age-system.item.healing"}} {{/if}}
     </label>
-    <p class="in-chat-text">{{concat data.nrDice "d" data.diceType "+" data.extraValue}}{{#when data.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.ablDamageValue}}{{/when}}</p>
+    <p class="in-chat-text">{{concat data.data.nrDice "d" data.data.diceType "+" data.data.extraValue}}{{#when data.data.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.data.ablDamageValue}}{{/when}}</p>
     {{#if data.hasDamage}}
-    <p class="in-chat-text">{{localize (concat "age-system." data.dmgType)}} | {{localize (concat "age-system." data.dmgSource)}}</p>
+    <p class="in-chat-text">{{localize (concat "age-system." data.data.dmgType)}} | {{localize (concat "age-system." data.data.dmgSource)}}</p>
     {{/if}}
-    {{#if data.hasTest}}
+    {{#if data.data.hasTest}}
     <label>{{localize "age-system.item.resistedEffect"}}</label>
-    <p class="in-chat-text">{{concat data.damageResisted.nrDice "d" data.damageResisted.diceType "+" data.damageResisted.extraValue}}{{#when data.damageResisted.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.damageResisted.ablDamageValue}}{{/when}}</p>
+    <p class="in-chat-text">{{concat data.data.damageResisted.nrDice "d" data.data.damageResisted.diceType "+" data.data.damageResisted.extraValue}}{{#when data.data.damageResisted.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.data.damageResisted.ablDamageValue}}{{/when}}</p>
     {{/if}}
 </div>
 {{else}}
 <div class="flexcol">
     <div class="flexcol cause-damage">
-        {{#if data.hasDamage}}
+        {{#if data.data.hasDamage}}
         <label>{{localize "age-system.item.damage"}}</label>
         {{/if}}
-        {{#if data.hasHealing}}
+        {{#if data.data.hasHealing}}
         <label>{{localize "age-system.item.healing"}}</label>
         {{/if}}
         <div class="flexrow">
             <div class="flexrow damage-dice-field">
-                <input type="number" name="data.nrDice" value="{{data.nrDice}}" data-dtype="Number" />
+                <input type="number" name="data.nrDice" value="{{data.data.nrDice}}" data-dtype="Number" />
                 <select name="data.diceType" class="dice-size">
-                    {{#select data.diceType}}
+                    {{#select data.data.diceType}}
                     <option value="6">{{localize "age-system.settings.d6"}}</option>
                     <option value="3">{{localize "age-system.settings.d3"}}</option>
                     {{/select}}
                 </select>
                 <span>{{localize "age-system.settings.plusSign"}}</span>
-                <input type="number" name="data.extraValue" value="{{data.extraValue}}" data-dtype="Number" />
+                <input type="number" name="data.extraValue" value="{{data.data.extraValue}}" data-dtype="Number" />
                 <span>{{localize "age-system.settings.plusSign"}}</span>
                 <select name="data.dmgAbl">
-                    {{#select data.dmgAbl}}
+                    {{#select data.data.dmgAbl}}
                     <option value="no-abl">—</option>
                     {{#each config.abilities as |name type|}}
                     <option value="{{type}}">{{localize name}}</option>
@@ -44,17 +44,17 @@
                 </select>
             </div>
         </div>
-        {{#if data.hasDamage}}
+        {{#if data.data.hasDamage}}
         <div class="flexrow">
             <select name="data.dmgType">
-                {{#select data.dmgType}}
+                {{#select data.data.dmgType}}
                 {{#each config.damageType as |name type|}}
                 <option value="{{type}}">{{localize name}}</option>
                 {{/each}}
                 {{/select}}
             </select>
             <select name="data.dmgSource">
-                {{#select data.dmgSource}}
+                {{#select data.data.dmgSource}}
                 {{#each config.damageSource as |name source|}}
                 <option value="{{source}}">{{localize name}}</option>
                 {{/each}}
@@ -63,23 +63,23 @@
         </div>
         {{/if}}
     </div>
-    {{#if data.hasTest}}
+    {{#if data.data.hasTest}}
     <div class="flexcol cause-damage">
         <label>{{localize "age-system.item.resistedEffect"}}</label>
         <div class="flexrow">
             <div class="flexrow damage-dice-field">
-                <input type="number" name="data.damageResisted.nrDice" value="{{data.damageResisted.nrDice}}" data-dtype="Number" />
+                <input type="number" name="data.damageResisted.nrDice" value="{{data.data.damageResisted.nrDice}}" data-dtype="Number" />
                 <select name="data.damageResisted.diceType" class="dice-size">
-                    {{#select data.damageResisted.diceType}}
+                    {{#select data.data.damageResisted.diceType}}
                     <option value="6">{{localize "age-system.settings.d6"}}</option>
                     <option value="3">{{localize "age-system.settings.d3"}}</option>
                     {{/select}}
                 </select>
                 <span>{{localize "age-system.settings.plusSign"}}</span>
-                <input type="number" name="data.damageResisted.extraValue" value="{{data.damageResisted.extraValue}}" data-dtype="Number" />
+                <input type="number" name="data.damageResisted.extraValue" value="{{data.data.damageResisted.extraValue}}" data-dtype="Number" />
                 <span>{{localize "age-system.settings.plusSign"}}</span>
                 <select name="data.damageResisted.dmgAbl">
-                    {{#select data.damageResisted.dmgAbl}}
+                    {{#select data.data.damageResisted.dmgAbl}}
                     <option value="no-abl">—</option>
                     {{#each config.abilities as |name type|}}
                     <option value="{{type}}">{{localize name}}</option>

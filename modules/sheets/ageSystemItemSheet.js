@@ -59,8 +59,10 @@ export default class ageSystemItemSheet extends ItemSheet {
 
     getData(options) {
         const data = super.getData(options);
-        data.item = data.entity;
-        data.data = data.entity.data;
+        data.item = data.document;
+        // const data = super.getData(options);
+        // data.item = data.entity;
+        // data.data = data.entity.data;
 
         data.config = CONFIG.ageSystem;
         
@@ -111,7 +113,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         };
 
         // Actions by sheet owner only
-        if (this.item.owner) {
+        if (this.item.isOwner) {
             
         };
 

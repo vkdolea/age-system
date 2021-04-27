@@ -6,12 +6,12 @@ export class ageSystemItem extends Item {
     prepareData() {
         super.prepareData();
         
-        if (!this.data.img) {
-            if (!CONFIG.ageSystem.itemIcons[this.type]) this.data.img = CONST.DEFAULT_TOKEN;
+        if (this.data.img === "icons/svg/item-bag.svg") {
+            if (!CONFIG.ageSystem.itemIcons[this.type]) this.data.img = "icons/svg/item-bag.svg";
             this.data.img = CONFIG.ageSystem.itemIcons[this.type];
         };
         if (!this.data.name) this.data.name = "New " + this.entity;       
-        this.data = duplicate(this._data);
+        // this.data = duplicate(this._data);
         if (this.data.type === "shipfeatures") return this._prepareShipFeatures();
         
         const itemData = this.data;

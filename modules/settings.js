@@ -141,7 +141,7 @@ export const registerSystemSettings = function() {
         "fortune": "SETTINGS.healthModefortune",
     },
     onChange: () => {
-      [...game.actors.entities, ...Object.values(game.actors.tokens)]
+      [...game.actors.contents, ...Object.values(game.actors.tokens)]
         .filter((o) => {
           return o.data.type === "char";
         })
@@ -187,7 +187,7 @@ export const registerSystemSettings = function() {
     },
     onChange: () => {
       CONFIG.ageSystem.abilities = CONFIG.ageSystem.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
-      [...game.actors.entities, ...Object.values(game.actors.tokens), ...game.items.entities]
+      [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
         // .filter((o) => {
         //   return o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship";
         // })
@@ -223,7 +223,7 @@ export const registerSystemSettings = function() {
     onChange:()=>{
       const newColor = game.settings.get("age-system", "colorScheme");
       game.user.setFlag("age-system", "colorScheme", newColor);
-      [...game.actors.entities, ...Object.values(game.actors.tokens), ...game.items.entities]
+      [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
       // .filter((o) => {
       //   return true /*(o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship")*/;
       // })

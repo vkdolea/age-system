@@ -109,7 +109,7 @@ export async function ageRollCheck({
     // Also checks if Item has Activation Mod
     const teste = typeof(itemRolled);
     if (itemRolled !== null && typeof(itemRolled) !== "string") {
-        rollData.itemId = itemRolled._id;
+        rollData.itemId = itemRolled.id;
         rollData.hasDamage = itemRolled.data.data.hasDamage;
         rollData.hasHealing = itemRolled.data.data.hasHealing;
         rollData.hasFatigue = itemRolled.data.data.hasFatigue;
@@ -136,7 +136,7 @@ export async function ageRollCheck({
 
         // Check if actor rolling is unlinked token and log its Token ID
         isToken = actor.isToken ? 1 : 0;
-        actorId = isToken ? actor.token.data._id : actor._id;
+        actorId = isToken ? actor.token.data.id : actor.id;
 
         // Check if AIM is active - this bonus will apply to all rolls when it is active
         const aim = actor.data.data.aim;
@@ -257,7 +257,7 @@ export async function ageRollCheck({
     }
 
     // Finally, the Age Roll!
-    const ageRoll = new Roll(rollFormula, rollData).roll();
+    const ageRoll = await new Roll(rollFormula, rollData).evaluate({async: true});
 
     // If rollTN is used, check if roll fails or succeed
     let isSuccess = null
@@ -296,7 +296,7 @@ export async function ageRollCheck({
     // cardData.rollInput.rollTN = rollTN;
 
     let chatData = {
-        user: game.user._id,
+        user: game.user.id,
         speaker: ChatMessage.getSpeaker(),
         whisper: isGMroll(event),
         blind: event.shiftKey,
@@ -382,7 +382,7 @@ function _processAgeRollOptions(form) {
 
 export function getFocus(item) {
     if (item === null) {return false}
-    if (item.type === "focus") return [item.name, item.data.data.initialValue, item.data._id];
+    if (item.type === "focus") return [item.name, item.data.data.initialValue, item.data.id];
     if (typeof(item) === "string") return [item, 0, null];
     if (item.data.data.useFocus === "") return false;
     const ownerFocusId = item.data.data.useFocusActorId;

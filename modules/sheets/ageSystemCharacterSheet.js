@@ -119,7 +119,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             options: this.options,
             owner: isOwner,
             title: this.title
-            };
+        };
     };
 
     //  Modification on standard _onDropItem() to prevent user from dropping Focus with existing name
@@ -171,7 +171,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         };
         
         // Actions by sheet owner only
-        if (this.actor.owner) {
+        if (this.actor.isOwner) {
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
             html.find(".item-show").click(this._onItemShow.bind(this));
             html.find(".roll-ability").click(this._onRollAbility.bind(this));

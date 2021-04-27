@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="flexcol">
-                        {{editor content=data.features target="data.features" button=true owner=owner editable=editable}}
+                        {{editor content=data.data.features target="data.features" button=true owner=owner editable=editable}}
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
             <div class="flexcol general-stats">
                 <div class="top-row colorset-first-tier">{{localize "age-system.level"}}</div>
                 <div class="main-value">
-                    <input type="number" name="data.level" value="{{data.level}}" data-dtype="Number" />
+                    <input type="number" name="data.level" value="{{data.data.level}}" data-dtype="Number" />
                 </div>
                 <div class="stat-modifiers flexcol no-flexwrap">
                     <span>{{localize "age-system.xp"}}</span>
