@@ -100,7 +100,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         })
         
         // Actions by sheet owner only
-        if (this.actor.owner) {
+        if (this.actor.isOwner) {
 
             html.find(".roll-collision").click(this._onCollisionDamage.bind(this));
             html.find(".roll-sideswipe").click(this._onSideswipeDamage.bind(this));

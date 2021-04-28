@@ -68,14 +68,10 @@ export function addColorScheme(html) {
 }
 
 export function nameItemSheetWindow(ageSystemItemSheet) {
-
     // Add item type in the title bar within brackets
     const i = ageSystemItemSheet.item.type.toLowerCase();
     const itemType = i[0].toUpperCase() + i.slice(1);
-    let itemWindowId = `item-sheet-${ageSystemItemSheet.item.id}`;
-    if (ageSystemItemSheet.actor !== null) {
-        itemWindowId = `actor-${ageSystemItemSheet.actor.id}-${itemWindowId}`;
-    };
+    const itemWindowId = ageSystemItemSheet.actor ? `actor-${ageSystemItemSheet.actor.id}-item-${ageSystemItemSheet.item.id}` : `item-sheet-${ageSystemItemSheet.item.id}`;
     let itemWindow = document.getElementById(itemWindowId);
     let windowHeader = itemWindow.children[0].firstElementChild;
     windowHeader.textContent += ` [${game.i18n.localize("ITEM.Type" + itemType)}]`;

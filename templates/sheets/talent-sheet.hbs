@@ -16,9 +16,9 @@
                 <div class="flexcol">
                     <label>{{localize "age-system.talentDegree"}}</label>
                     {{#if inChat}}
-                    <div class="data-input">{{data.shortDesc}}</div>
+                    <div class="data-input">{{data.data.shortDesc}}</div>
                     {{else}}
-                    <input type="text" name="data.shortDesc" value="{{data.shortDesc}}" placeholder="{{localize "age-system.talentDegree"}}" />
+                    <input type="text" name="data.shortDesc" value="{{data.data.shortDesc}}" placeholder="{{localize "age-system.talentDegree"}}" />
                     {{/if}}
                 </div>
             </div>
@@ -31,7 +31,7 @@
             {{!-- Description --}}
             <div class="item-card-desc">
                 <label>{{localize "age-system.item.desc"}}</label>
-                {{editor content=data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+                {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
             </div>
             {{/if}}
 

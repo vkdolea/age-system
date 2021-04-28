@@ -153,7 +153,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         
         const actor = this.actor;
         // Handle item sorting within the same Actor
-        let sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id));
+        let sameActor = (data.actorId === actor.id) || (actor.isToken && (data.tokenId === actor.token.id));
         if (sameActor) return this._onSortItem(event, itemData);
 
         // Create the owned item
@@ -199,7 +199,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
     _onItemActivate(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        const itemToToggle = this.actor.getOwnedItem(itemId);
+        const itemToToggle = this.actor.items.get(itemId);
         const itemType = itemToToggle.type;
         if (itemType === "power" || itemType === "talent") {
             const toggleAct = !itemToToggle.data.data.activate;
@@ -262,14 +262,14 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
     _onRollItem(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        const itemRolled = this.actor.getOwnedItem(itemId);
+        const itemRolled = this.actor.items.get(itemId);
         itemRolled.roll(event);
     };
 
     _onItemShow(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.item.get(itemId);
         item.showItem();
     };
 
@@ -277,7 +277,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         event.preventDefault();
         let e = event.currentTarget;
         let itemId = e.closest(".feature-controls").dataset.itemId;
-        let item = this.actor.getOwnedItem(itemId);
+        let item = this.actor.items.get(itemId);
 
         item.sheet.render(true);
     };
@@ -287,7 +287,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         let e = event.currentTarget;
         let itemId = e.closest(".feature-controls").dataset.itemId;
         const actor = this.actor;
-        return actor.deleteOwnedItem(itemId);
+        return actor.deleteEmbeddedDocuments("Item", itemId);
     };
 
     _onRollDamage(event) {
@@ -303,7 +303,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
     _realActor() {
         const isToken = this.actor.isToken;
-        const actor = isToken ? game.actors.tokens[this.actor.token.data._id] : this.actor;
+        const actor = isToken ? game.actors.tokens[this.actor.token.data.id] : this.actor;
         return actor;
     }
 }

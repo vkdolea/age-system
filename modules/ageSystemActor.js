@@ -327,7 +327,7 @@ export class ageSystemActor extends Actor {
         const actorData = this.data;
         const data = actorData.data;
 
-        // Calcualtes total Initiative
+        // Calculates total Initiative
         data.initiative = data.initiativeMod + data.abilities.dex.total - data.armor.penalty;
 
         // Calculate resources/currency

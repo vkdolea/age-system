@@ -3,8 +3,8 @@ import * as Dice from "./dice.js";
 export class ageSystemItem extends Item {
     
     /** @override */
-    prepareData() {
-        super.prepareData();
+    prepareBaseData() {
+        // super.prepareData();
         
         if (this.data.img === "icons/svg/item-bag.svg") {
             if (!CONFIG.ageSystem.itemIcons[this.type]) this.data.img = "icons/svg/item-bag.svg";
@@ -67,44 +67,7 @@ export class ageSystemItem extends Item {
         this.prepareEmbeddedEntities();        
     };
 
-    _prepareShipFeatures() {
-        // const itemData = this.data;
-        // const data = itemData.data;
-        // const featType = data.type;
-
-        // switch (featType) {
-        //     case "sensorMod":
-        //         data.quality = data[featType] < 0 ? "flaw" : "quality";
-        //         break;
-            
-        //     case "maneuverSizeStep":
-        //         data.quality = data[featType] >= 0 ? "flaw" : "quality";
-        //         break;
-            
-        //     case "juiceMod":
-        //         data.quality = data[featType] <= 0 ? "flaw" : "quality";
-        //         break;
-
-        //     case "hullPlating":
-        //         data.quality = data[featType] <= 0 ? "flaw" : "quality";
-        //         break;
-
-        //     case "hullMod":
-        //         data.quality = data[featType] < 0 ? "flaw" : "quality";
-        //         break;
-
-        //     case "weapon":
-        //         data.quality = "quality";
-        //         break;
-                
-        //     default:
-        //         break;
-        // }
-        // data.finalValue = null;
-        // const nonNumericFeats = ["special", "rollable", "weapon"];
-        // if (nonNumericFeats.indexOf(featType) !== -1) data.finalValue = '—';
-        // if (data.finalValue === null) data.finalValue = data[featType];
-        
+    _prepareShipFeatures() {        
         this.prepareEmbeddedEntities();
     };
 
@@ -117,7 +80,7 @@ export class ageSystemItem extends Item {
             // const focusArr = focusOwned.filter(i => i.data.nameLowerCase === data.useFocus.toLowerCase());
 
             if (focusArr.length === 1) {
-                return focusArr[0]._id;
+                return focusArr[0].id;
             } else return null;
 
         } else return null;
@@ -218,7 +181,7 @@ export class ageSystemItem extends Item {
                         return;
                     } else {
                         const targetId = targets.ids[0];
-                        const targetToken = canvas.tokens.placeables.find(t => t.data._id === targetId);
+                        const targetToken = canvas.tokens.placeables.find(t => t.data.id === targetId);
                         targetNumber = targetToken.actor.data.data.defense.total;
                     }
                     break;
@@ -293,32 +256,30 @@ export class ageSystemItem extends Item {
         if (validFocus.length < 1) {
             return data.useFocus;
         } else {
-            const id = validFocus[0]._id;
+            const id = validFocus[0].id;
             return this.actor.getOwnedItem(id);
         };    
     };
 
     async showItem() {
-        let chatData = {
-            user: game.user._id,
-            speaker: ChatMessage.getSpeaker()
-        };
-
-        let cardData = {
+        
+        const cardData = {
             inChat: true,
             name: this.data.name,
-            data: this.data.data,
+            data: this.data,
             item: this,
             owner: this.actor,
             colorScheme: game.settings.get("age-system", "colorScheme"),
-            config: {}
+            config: {wealthMode: game.settings.get("age-system", "wealthType")}
         };
-        cardData.config.wealthMode = game.settings.get("age-system", "wealthType");
-
-        
-        chatData.content = await renderTemplate(this.chatTemplate[this.type], cardData);
-        chatData.roll = false;
-
+        const chatData = {
+            user: game.user.id,
+            speaker: ChatMessage.getSpeaker(),
+            roll: false,
+            content: await renderTemplate(this.chatTemplate[this.type], cardData)
+        };
+        // cardData.config.wealthMode = game.settings.get("age-system", "wealthType");    
+        // chatData.content = await renderTemplate(this.chatTemplate[this.type], cardData);
         return ChatMessage.create(chatData);
     };
 

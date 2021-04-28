@@ -21,7 +21,7 @@
                 {{!-- Minimum Strenght --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.minStr"}}</label>
-                    <input name="data.minStr" type="text" {{#if inChat}}disabled{{/if}} value="{{data.minStr}}" placeholder="-" data-dtype="String"/>
+                    <input name="data.minStr" type="text" {{#if inChat}}disabled{{/if}} value="{{data.data.minStr}}" placeholder="-" data-dtype="String"/>
                 </div>
                 {{!-- Purchase Block --}}
                 <div class="flexcol">
@@ -30,16 +30,16 @@
                 {{!-- Weight --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.weight"}}</label>
-                    <input type="number" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                    <input type="number" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.data.weight}}" data-dtype="Number" />
                 </div>
                 {{!-- ROF --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.rof.rof"}}</label>
                     {{#if inChat}}
-                    <div>{{localize (concat "age-system.rof." data.rof)}}</div>
+                    <div>{{localize (concat "age-system.rof." data.data.rof)}}</div>
                     {{else}}
                     <select name="data.rof">
-                        {{#select data.rof}}
+                        {{#select data.data.rof}}
                         {{#each config.rof as |rof|}}
                         <option value="{{@key}}">{{localize rof}}</option>
                         {{/each}}
@@ -51,24 +51,24 @@
                 <div class="flexcol">
                     <label>{{localize "age-system.item.range"}} ({{localize "age-system.item.yards"}})</label>                    
                     <div class="flexrow">
-                        <input type="number" {{#if inChat}}disabled{{/if}} name="data.range" value="{{data.range}}" data-dtype="Number" />
+                        <input type="number" {{#if inChat}}disabled{{/if}} name="data.range" value="{{data.data.range}}" data-dtype="Number" />
                         /
-                        <input type="number" {{#if inChat}}disabled{{/if}} name="data.rangeMax" value="{{data.rangeMax}}" data-dtype="Number" />
+                        <input type="number" {{#if inChat}}disabled{{/if}} name="data.rangeMax" value="{{data.data.rangeMax}}" data-dtype="Number" />
                     </div>        
                 </div>
                 {{!-- Capacity --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.capacity"}}</label>
-                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.capacity" value="{{data.capacity}}" data-dtype="Number" />                    
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.capacity" value="{{data.data.capacity}}" data-dtype="Number" />                    
                 </div>
                 {{!-- Reload --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.reload"}}</label>
                     {{#if inChat}}
-                    <div>{{localize (concat "age-system." data.reload)}}</div>
+                    <div>{{localize (concat "age-system." data.data.reload)}}</div>
                     {{else}}
                     <select name="data.reload" {{#if inChat}}disabled{{/if}}>
-                        {{#select data.reload}}
+                        {{#select data.data.reload}}
                         {{#each config.reloadDuration as |reloadDuration|}}
                         <option value="{{@key}}">{{localize reloadDuration}}</option>
                         {{/each}}
@@ -86,7 +86,7 @@
             {{!-- Description --}}
             <div class="item-card-desc">
                 <label>{{localize "age-system.item.desc"}}</label>
-                {{editor content=data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+                {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
             </div>
             {{/if}}
 

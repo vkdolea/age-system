@@ -67,7 +67,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         
         const actor = this.actor;
         // Handle item sorting within the same Actor
-        let sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id));
+        let sameActor = (data.actorId === actor.id) || (actor.isToken && (data.tokenId === actor.token.id));
         if (sameActor) return this._onSortItem(event, itemData);
 
         // Create the owned item
@@ -97,7 +97,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             if (!passenger) return;
             // const actor = this.actor;
             let actor
-            // if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data._id].actor;
+            // if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data.id].actor;
             if (!actor) actor = this.actor;
             if (passenger.data.type === "char") {
 
@@ -127,7 +127,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         })
         
         // Actions by sheet owner only
-        if (this.actor.owner) {
+        if (this.actor.isOwner) {
             html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
             html.find(".change-loss").click(this._onChangeLoss.bind(this));
@@ -149,7 +149,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         let rollFormula;
         if (event.currentTarget.classList.contains("roll-damage")) {
             const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-            const item = this.actor.getOwnedItem(itemId);
+            const item = this.actor.items.get(itemId);
             rollFormula = item.data.data.damage;
             messageData.flavor += ` | ${item.name}`;
         }
@@ -172,18 +172,18 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
     _onRemoveFeature(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        return this.actor.deleteOwnedItem(itemId);
+        return this.actor.deleteEmbeddedDocuments("Item", itemId);
     }
 
     _onEditFeature(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
         item.sheet.render(true);
     }
 
     _onEquipChange(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        const itemToToggle = this.actor.getOwnedItem(itemId);
+        const itemToToggle = this.actor.items.get(itemId);
         const toggleEqp = !itemToToggle.data.data.isActive;
         itemToToggle.update({"data.isActive": toggleEqp});
     }
