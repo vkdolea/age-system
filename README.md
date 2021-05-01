@@ -5,8 +5,6 @@ Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/vkdolea)
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/vkdolea)
-
 ## Intro
 Character sheet designed to serve most of AGE System versions. Not all AGE installments are fully implemented. New features are expected to be added over time.
 
