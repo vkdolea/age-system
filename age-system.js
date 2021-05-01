@@ -46,17 +46,23 @@ Hooks.once("init", async function() {
 
     // Create a namespace within the game global
     game.ageSystem = {
+        applications: {
+            ageSystemCharacterSheet,
+            ageSystemVehicleSheet,
+            ageSystemSpaceshipSheet,
+            ageSystemItemSheet,
+            AgeRoller,
+            AgeTracker
+        },
         migrations: migrations,
-        rollOwnedItem
+        rollOwnedItem,
+        entities: {
+            ageSystemActor,
+            ageSystemItem
+        }
     };
 
     CONFIG.ageSystem = ageSystem;
-
-    Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("age-system", ageSystemItemSheet, {
-        makeDefault: true,
-        label: "age-system.SHEETS.standardItem"
-    });
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("age-system", ageSystemCharacterSheet, {
@@ -73,6 +79,12 @@ Hooks.once("init", async function() {
         types: ["spaceship"],
         makeDefault: true,
         label: "age-system.SHEETS.standardSpaceship"
+    });
+    
+    Items.unregisterSheet("core", ItemSheet);
+    Items.registerSheet("age-system", ageSystemItemSheet, {
+        makeDefault: true,
+        label: "age-system.SHEETS.standardItem"
     });
 
     game.ageSystem.ageRoller = new AgeRoller({

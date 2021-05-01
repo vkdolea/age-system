@@ -30,9 +30,9 @@
             "path": "lang/es.json"
         },
         {
-            "lang": "pt-BR",
+            "lang": "pt-br",
             "name": "Português (Brasil)",
-            "path": "lang/pt-BR.json"
+            "path": "lang/pt-br.json"
         }
     ],
     "socket": false,
