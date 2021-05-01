@@ -3,8 +3,13 @@ Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
 
 <img src="https://i.imgur.com/qVixpmT.png"/>
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/vkdolea)
+
 ## Intro
 Character sheet designed to serve most of AGE System versions. Not all AGE installments are fully implemented. New features are expected to be added over time.
+
+## Wiki
+You can now look at [AGE System (unofficial) wiki](https://github.com/vkdolea/age-system/wiki) to understand how to use the game system
 
 ## Features
 - Different color schemes
@@ -84,6 +89,10 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.6.5 [2021-05-01]
+#### Fix
+- Bug causing spaceship description to disappear when sending to compendium.
+
 ### 0.6.4 [2021-04-26]
 #### Fix
 - Breaking bug on French localization.
