@@ -170,13 +170,13 @@ ageSystem.bonusTypes = {
     aimMnv: "age-system.bonus.aimMnvBns",
     armorPenalty: "age-system.bonus.armorPenaltyBns"
 };
-
+    
 // Vehicle parameters
 ageSystem.velocityCategory = {
-    velStandard: "age-system.velStandard",
-    velFast: "age-system.velFast",
-    velVeryFast: "age-system.velVeryFast",
-    velExtreme: "age-system.velExtreme"
+    velStandard: {colDmg: "1d6", sideDmg: "1d3"},
+    velFast:  {colDmg: "2d6", sideDmg: "1d6"},
+    velVeryFast:  {colDmg: "4d6", sideDmg: "2d6"},
+    velExtreme:  {colDmg: "6d6", sideDmg: "3d6"}
 };
 
 // Spacehip sizes

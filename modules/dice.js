@@ -30,7 +30,8 @@ export async function ageRollCheck({
     };
 
     // Set roll mode
-    const rMode = setBlind(event);
+    // const rMode = setBlind(event);
+    const rollMode = event.shiftKey ? "blindroll" : "roll";
     let rollData = {};
     let partials = [];
     rollData.abilityName = "...";
@@ -72,17 +73,26 @@ export async function ageRollCheck({
     };
 
     // Check if item rolled is Focus and prepare its data
-    const focusRolled = getFocus(itemRolled);
+    // const focusRolled = getFocus(itemRolled);
     let focusId = null
-    if (focusRolled) {
+    // if (focusRolled) {
+    if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.data?.data.useFocus) {
+        const focusObj = itemRolled.actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled)
         rollFormula += " + @focus";
-        rollData.focusName = focusRolled[0];
-        rollData.focus = focusRolled[1];
+        rollData.focusName = focusObj.focusName;
+        rollData.focus = focusObj.focusItem ? focusObj.focusItem.data.data.initialValue : 0;
         partials.push({
-            label: focusRolled[0],
-            value: focusRolled[1]
+            label: rollData.focusName,
+            value: rollData.focus,
         });
-        focusId = focusRolled[2];
+        focusId = focusObj.id;
+        // rollData.focusName = focusRolled[0];
+        // rollData.focus = focusRolled[1];
+        // partials.push({
+        //     label: focusRolled[0],
+        //     value: focusRolled[1]
+        // });
+        // focusId = focusRolled[2];
     }
 
     // Adds user input roll mod
@@ -235,9 +245,6 @@ export async function ageRollCheck({
                 };
             }
         }
-        // } else {
-        //     headerFlavor = flavor;
-        // }
     }
 
     // Check for moreParts
@@ -298,11 +305,10 @@ export async function ageRollCheck({
     let chatData = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker(),
-        whisper: isGMroll(event),
-        blind: event.shiftKey,
+        content: await renderTemplate(chatTemplate, rollData),
         roll: ageRoll,
-        content: await renderTemplate(chatTemplate, rollData)
-        // content: await renderTemplate(chatTemplate, cardData)
+        blind: rollMode === "roll" ? false : true,
+        whisper: isGMroll(event)
     };
 
     // Compatibility with Dice So Nice
@@ -311,9 +317,8 @@ export async function ageRollCheck({
     };
 
     // TODO when blind roll, set message to GM and select another template to all other members
-
     chatData.sound = CONFIG.sounds.dice;
-    return ChatMessage.create(chatData, {rollMode: rMode});
+    return ChatMessage.create(chatData);
 };
 
 async function getAgeRollOptions(itemRolled, data = {}) {
@@ -399,14 +404,20 @@ export function getFocus(item) {
 
 // Capture GM ID to whisper
 export function isGMroll(event) {
-    if (!event.shiftKey) {return false};
-    return game.users.filter(u => u.isGM);
+    if (!event.shiftKey) {return []};
+    const idGM = [];
+    for (let u = 0; u < game.users.length; u++) {
+        const user = game.users[u];
+        if (user.isGM) idGM.push(user._id)        
+    };
+    return idGM;
+    // return game.users.filter(u => u.isGM);
 };
 
 // Code to decide if roll is PUBLIC or BLIND TO GM
 export function setBlind(event) {
     if (event.shiftKey) {
-        return "blindroll";
+        return "blind";
     } else {
         return "roll";
     };

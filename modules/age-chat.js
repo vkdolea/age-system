@@ -59,18 +59,21 @@ export function chatFatigueRoll(event) {
 };
 
 export function selectBlindAgeRoll(chatCard, html, data) {
-    const isBlind = data.message.blind;
+    const isBlind = chatCard.data.blind;
+    const isWhisper = data.isWhisper;
     const isGM = game.user.isGM;
     let ageCard = html.find(".base-age-roll");
     if (ageCard.length > 0) {
-        if (isBlind) {
-            if (isGM) {
-                html.find(".blind-roll-card").css("display", "none");
-            } else {
-                html.find(".regular-roll-card").css("display", "none");
-            };
-        } else {
+        if (isGM) {
             html.find(".blind-roll-card").css("display", "none");
+        } else {
+            if (isBlind || isWhisper) {
+                html.find(".regular-roll-card").css("display", "none");
+                const hideField = game.user.id === chatCard.data.user ? ".other-user-roll" : ".user-roll";
+                html.find(`.blind-roll-card ${hideField}`).css("display", "none");
+            } else {
+                html.find(".blind-roll-card").css("display", "none");
+            };
         };
     };
 };

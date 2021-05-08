@@ -19,7 +19,8 @@ export class ageSystemItem extends Item {
         const itemType = itemData.type;
 
         data.nameLowerCase = itemData.name.toLowerCase();
-        data.useFocusActorId = this._idFocusToUse(itemType, data.useFocus);
+        // data.useFocusActorId = this._idFocusToUse(itemType, data.useFocus);
+        data.useFocusActorId = data.useFocus && this.actor?.data ? this.actor.checkFocus(data.useFocus).id : null;
         data.hasDamage = this._hasDamage(itemType);
         data.hasHealing = this._hasHealing(itemType);
         data.hasFatigue = this._hasFatigue(itemType);
@@ -29,7 +30,7 @@ export class ageSystemItem extends Item {
         data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
 
         // Adds value to represent portion added to dice on damage roll
-        if (this.isOwned) {
+        if (this.isOwned && this.actor.data) {
             if (data.dmgAbl) {
                 if (data.dmgAbl !== "no-abl") {
                     data.ablDamageValue = this.actor.data.data.abilities[data.dmgAbl].total;
@@ -52,7 +53,7 @@ export class ageSystemItem extends Item {
             data.itemForce = 10;
             if (data.itemMods.powerForce.isActive) {data.itemForce += data.itemMods.powerForce.value};
             // Adds ability to itemForce
-            if (this.actor) {
+            if (this.actor?.data) {
                 if ((data.itemForceAbl !== "") && (data.itemForceAbl !== "no-abl")) {
                     data.itemForce += this.actor.data.data.abilities[data.itemForceAbl].total;
                 };
@@ -71,20 +72,20 @@ export class ageSystemItem extends Item {
         this.prepareEmbeddedEntities();
     };
 
-    _idFocusToUse(itemType, useFocus) {
-        if (this.isOwned && (itemType === "weapon" || itemType === "power")) {
-            const owner = this.actor;
-            const focusOwned = owner.data.items.filter(i => i.type === "focus");
-            const focusArr = focusOwned.filter(i => i.name.toLowerCase() === useFocus.toLowerCase());
-            // Originalmente:
-            // const focusArr = focusOwned.filter(i => i.data.nameLowerCase === data.useFocus.toLowerCase());
+    // _idFocusToUse(itemType, useFocus) {
+    //     if (this.isOwned && this.actor?.data && (itemType === "weapon" || itemType === "power")) {
+    //         const owner = this.actor;
+    //         const focusOwned = owner.data.items.filter(i => i.type === "focus");
+    //         const focusArr = focusOwned.filter(i => i.name.toLowerCase() === useFocus.toLowerCase());
+    //         // Originalmente:
+    //         // const focusArr = focusOwned.filter(i => i.data.nameLowerCase === data.useFocus.toLowerCase());
 
-            if (focusArr.length === 1) {
-                return focusArr[0].id;
-            } else return null;
+    //         if (focusArr.length === 1) {
+    //             return focusArr[0].id;
+    //         } else return null;
 
-        } else return null;
-    }
+    //     } else return null;
+    // }
 
     _hasModificators() {
         const inCheckMods = this.data.data.itemMods;

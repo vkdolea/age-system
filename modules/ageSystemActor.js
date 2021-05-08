@@ -581,17 +581,17 @@ export class ageSystemActor extends Actor {
 
     checkFocus(namedFocus) {
 
-        if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null}
+        if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null, id: null}
 
         const ownedFoci = this.data.items.filter(a => a.type === "focus");
         const expectedFocus = namedFocus.toLowerCase();
         const validFocus = ownedFoci.filter(c => c.name.toLowerCase() === expectedFocus);
 
         if (validFocus.length < 1) {
-            return {focusName: namedFocus, focusItem: false}
+            return {focusName: namedFocus, focusItem: false, id: null}
         } else {
-            const id = validFocus[0]._id;
-            return {focusName: namedFocus, focusItem: this.getOwnedItem(id)}
+            const focusId = validFocus[0].id;
+            return {focusName: namedFocus, focusItem: this.data.items.get(focusId), id: focusId}
         };
     }
 };

@@ -42,11 +42,9 @@ export class AgeTracker extends Application {
 				compData.tracker[b] = {};
 				compData.tracker[b].check = (compData.actual-1 >= b) ? true : false;
 				compData.tracker[b].milestone = ((b+1) % 10 === 0) ? true : false;
-			}   
-
+			};
 			data.compData = compData;
-		}
-		// game.setting.set("age-system", "ageTrackerPos", game.user.getFlag("age-system", "ageTrackerPos"));
+		};
 		return data;
 	}
 	
@@ -108,11 +106,11 @@ export class AgeTracker extends Application {
 		game.settings.set("age-system", "complicationValue", compData);
 	}
 
-	_onRollComp() {
+	async _onRollComp() {
 		const compType = game.i18n.localize(`SETTINGS.comp${game.settings.get("age-system", "complication")}`);
 		const flavor = game.i18n.format("age-system.chatCard.compRoll", {compType});
 		let compRoll = new Roll("1d6");
-		return compRoll.toMessage({flavor}, {whisper: game.users.filter(u => u.isGM), rollMode: "gmroll"});
+		return await compRoll.toMessage({flavor, rollMode: "selfroll", whisper: [game.user.id]});
 	}
 
 	_dragElement(elmnt) {

@@ -56,19 +56,12 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
     /** @inheritdoc */
     getData(options) {
-        
         const isOwner = this.document.isOwner;
         const isEditable = this.isEditable;
-        const data = foundry.utils.deepClone(this.object.data);
-
-        // Copy and sort Items
-        const items = this.object.items.map(i => foundry.utils.deepClone(i.data));
-        items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-        data.items = items;
-
-        // Copy Active Effects
-        const effects = this.object.effects.map(e => foundry.utils.deepClone(e.data));
-        data.effects = effects;
+    
+        // Copy actor data to a safe copy
+        const data = this.actor.data.toObject(false);
+        data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
         // const data = super.getData();
         data.config = CONFIG.ageSystem;
@@ -105,16 +98,13 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         // Sheet color
         data.colorScheme = game.settings.get("age-system", "colorScheme");
 
-        // Return data to the sheet
-        // return data;
-
         // Return template data
         return {
             actor: this.object,
             cssClass: isEditable ? "editable" : "locked",
             data: data,
-            effects: effects,
-            items: items,
+            effects: data.effects,
+            items: data.items,
             limited: this.object.limited,
             options: this.options,
             owner: isOwner,
@@ -122,9 +112,9 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         };
     };
 
-    //  Modification on standard _onDropItem() to prevent user from dropping Focus with existing name
-    async _onDropItem(event, data) {
-        if ( !this.actor.owner ) return false;
+    // TODO - remove this logics and REMOVE ITEMS added using a hook.
+    async _onDropItem(event, data){
+        if ( !this.actor.isOwner ) return false;
         const item = await Item.fromDropData(data);
         /*-----------Beginning of added code--------------*/
         // Check if droped item is a Focus and then confirm if Actor already has a Focus with the same name
@@ -149,17 +139,9 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             return false;
         }
         /*-------------End of added code------------------*/
-        const itemData = duplicate(item.data);
-        
-        const actor = this.actor;
-        // Handle item sorting within the same Actor
-        let sameActor = (data.actorId === actor.id) || (actor.isToken && (data.tokenId === actor.token.id));
-        if (sameActor) return this._onSortItem(event, itemData);
 
-        // Create the owned item
-        return this._onDropItemCreate(itemData);
-    };
-
+        super._onDropItem(event, data);
+    }
     activateListeners(html) {
         if (this.isEditable) {
             html.find(".item-edit").click(this._onItemEdit.bind(this));
@@ -199,7 +181,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
     _onItemActivate(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        const itemToToggle = this.actor.items.get(itemId);
+        const itemToToggle = this.actor.getEmbeddedDocument("Item", itemId);
         const itemType = itemToToggle.type;
         if (itemType === "power" || itemType === "talent") {
             const toggleAct = !itemToToggle.data.data.activate;
@@ -269,7 +251,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     _onItemShow(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        const item = this.actor.item.get(itemId);
+        const item = this.actor.items.get(itemId);
         item.showItem();
     };
 
@@ -277,17 +259,16 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         event.preventDefault();
         let e = event.currentTarget;
         let itemId = e.closest(".feature-controls").dataset.itemId;
-        let item = this.actor.items.get(itemId);
-
-        item.sheet.render(true);
+        const item = this.actor.items.get(itemId);
+        return item.sheet.render(true);
     };
 
     _onItemDelete(event) {
         event.preventDefault();
         let e = event.currentTarget;
         let itemId = e.closest(".feature-controls").dataset.itemId;
-        const actor = this.actor;
-        return actor.deleteEmbeddedDocuments("Item", itemId);
+        const item = this.actor.items.get(itemId);
+        return item.delete();
     };
 
     _onRollDamage(event) {
@@ -295,9 +276,8 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         const e = event.currentTarget;
         const itemId = e.closest(".feature-controls").dataset.itemId;
         const actor = this._realActor();
-        const item = actor.getOwnedItem(itemId);
+        const item = actor.items.get(itemId);
         const damageData = {event: event};
-
         return item.rollDamage(damageData);
     };
 

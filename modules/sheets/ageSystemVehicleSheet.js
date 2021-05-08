@@ -3,12 +3,25 @@ import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 
 export default class ageSystemVehicleSheet extends ActorSheet {
+    constructor(...args) {
+        super(...args);
     
+        // Adapt sheet size for synth tokens - Passengers feature wont work for Synths
+        // if (this.isSynth) {
+        //     this.options.height = this.position.height = "560";
+        // };
+    };
+
+    get isSynth() {
+        return (this.token && !this.token.data.actorLink);
+    }    
+
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             // resizable: false,
             width: 680,
-            height: 646,
+            // height: 560,
+            height: 755,
             resizable: false,
             classes: ["age-system", "sheet", "vehicle"/*, `colorset-${ageSystem.colorScheme}`*/]
         });
@@ -31,9 +44,14 @@ export default class ageSystemVehicleSheet extends ActorSheet {
     }
 
     getData() {
+        // const data = super.getData();
+        const isOwner = this.document.isOwner;
+        const isEditable = this.isEditable;
+    
+        // Copy actor data to a safe copy
+        const data = this.actor.data.toObject(false);
+
         this.actor.prepareData(); // Forcing updating sheet after opening, in case an Actor's operator is updated
-        // TODO - method on Actor entity to for prepareData() running on Vehicle data em database is updated.
-        const data = super.getData();
         data.config = CONFIG.ageSystem;
         data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
 
@@ -44,7 +62,18 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         data.notSynth = !(this.token && !this.token.data.actorLink);
         data.isSynth = !data.notSynth;        
 
-        return data;
+        // return data;
+        return {
+            actor: this.object,
+            cssClass: isEditable ? "editable" : "locked",
+            data: data,
+            effects: data.effects,
+            items: data.items,
+            limited: this.object.limited,
+            options: this.options,
+            owner: isOwner,
+            title: this.title
+        };
     };
 
     //  Modification on standard _onDropItem() to prevent user from dropping items on Vehicle Actor

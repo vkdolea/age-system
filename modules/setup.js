@@ -71,7 +71,7 @@ export function nameItemSheetWindow(ageSystemItemSheet) {
     // Add item type in the title bar within brackets
     const i = ageSystemItemSheet.item.type.toLowerCase();
     const itemType = i[0].toUpperCase() + i.slice(1);
-    const itemWindowId = ageSystemItemSheet.actor ? `actor-${ageSystemItemSheet.actor.id}-item-${ageSystemItemSheet.item.id}` : `item-sheet-${ageSystemItemSheet.item.id}`;
+    const itemWindowId = ageSystemItemSheet.actor ? `actor-${ageSystemItemSheet.actor.id}-item-${ageSystemItemSheet.item.id}` : `-${ageSystemItemSheet.item.id}`;
     let itemWindow = document.getElementById(itemWindowId);
     let windowHeader = itemWindow.children[0].firstElementChild;
     windowHeader.textContent += ` [${game.i18n.localize("ITEM.Type" + itemType)}]`;

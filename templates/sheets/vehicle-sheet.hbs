@@ -1,212 +1,188 @@
-<form class="{{cssClass}} age-system sheet vehicle colorset-{{colorScheme}}" autocomplete="off">
+<form class="{{cssClass}} age-system sheet vehicle colorset-{{data.colorScheme}}" autocomplete="off">
 
+    {{!-- Vehicle Header --}}
     <input name="name" class="vehicle-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
-    <div class="vehicle-stats">
-        <div class="grid-container colorset-second-tier">
-            <div class="grid-parameter flexcol flexwrap">
-
-                <div class="flexcol">
-                    <label>{{localize "age-system.conductor"}}</label>
-                    <select name="data.conductor" {{#if isSynth}}disabled{{/if}}>
-                        {{#select data.data.conductor}}
-                        {{#if isSynth}}
-                        <option value="synth-vehicle">Token</option>
-                        {{else}}
-                        <option value="">{{localize "age-system.noAction"}}</option>
-                        {{#each passengers as |passenger|}}
-                        <option value="{{passenger.id}}">{{passenger.name}}</option>
-                        {{/each}}
-                        {{/if}}
-                        {{/select}}
-                    </select>  
-                </div>
-
-                <div class="flexcol focus-ability">
-                    <div class="flexrow flex-justify-center label-with-icon">
-                        <label class="handling-focus">{{localize "age-system.abl"}} / {{localize "age-system.focus"}}</label>
-                        <a class="roll-maneuver {{#if isSynth}}is-synth{{/if}}"><i class="fas fa-dice"></i></a>                        
-                    </div>
-                    <div class="flexcol">
-                        <select name="data.handling.useAbl" class="data-input">
-                            {{#select data.data.handling.useAbl}}
-                            {{#each config.abilities as |name type|}}
-                            <option value="{{type}}">{{localize name}}</option>
-                            {{/each}}
-                            {{/select}}
-                        </select>
-                    </div>
-                    <div>
-                        <input type="text" name="data.handling.useFocus" value="{{data.data.handling.useFocus}}" list="{{name}}-{{actor.id}}-list">
-                        <datalist id="{{name}}-{{actor._id}}-list">
-                            <option value=""></option>
-                            {{#each config.focus as |focus|}}
-                            <option value="{{focus.name}}"></option>
-                            {{/each}}
-                        </datalist>
-                    </div>
-                </div>
-
-                <div class="flexrow flexwrap">
-                    <div class="flexcol no-flexwrap">
-                        <label>{{localize "age-system.velocity"}}</label>
-                        <div class="flexrow no-flexwrap">
-                            <select name="data.velocity.category">
-                                {{#select data.data.velocity.category}}
-                                {{#each config.velocityCategory as |category code|}}
-                                <option value="{{code}}">{{localize (concat "age-system." code)}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>    
-                            <span>/</span>
-                            <input type="number" name="data.velocity.catMod" value="{{data.data.velocity.catMod}}" data-dtype="Number">
-                        </div>
-                    </div>
-
-                    <div class="flexcol flex-align-center">
-                        <label>{{localize "age-system.handling"}}</label>
-                        <input type="number" name="data.handling.mod" value="{{data.data.handling.mod}}" data-dtype="Number">
-                    </div>
-
-                    <div class="flexcol flex-align-center">
-                        <label>{{localize "age-system.item.cost"}}</label>
-                        <input type="text" name="data.cost" value="{{data.data.cost}}" data-dtype="Number">
-                    </div>
-
-                </div>
-
-                <div class="flexrow">
-
-                    <div class="flexcol flex-align-center">
-                        <label>{{localize "age-system.defense"}}</label>
-                        <input type="number" disabled name="data.defenseTotal" value="{{data.data.defenseTotal}}" data-dtype="Number">
-                    </div>
-
-                    <div class="flexcol flex-align-center">
-                        <label>{{localize "age-system.hull"}}</label>
-                        <input type="number" name="data.hull" value="{{data.data.hull}}" data-dtype="Number">
-                    </div>
-
-                    <div class="flexcol flex-align-center">
-                        <label>{{localize "age-system.vehicleArmor"}}</label>
-                        <input type="number" name="data.armorRating" value="{{data.data.armorRating}}" data-dtype="Number">
-                    </div>
-
-                    <div class="flexcol flex-align-center">
-                        <label>{{localize "age-system.coverRating"}}</label>
-                        <input type="number" name="data.coverRating" value="{{data.data.coverRating}}" data-dtype="Number">
-                    </div>
-
-                    <div class="flexcol flex-align-center">
-                        <label>{{localize "age-system.ram"}}</label>
-                        <div class="flexrow flex-align-center">
-                            <input type="number" name="data.ramDmg" value="{{data.data.ramDmg}}" data-dtype="Number">
-                            <span>{{localize "age-system.settings.d6"}}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <table class="velocity-damage-table">
-                    <thead class="colorset-first-tier">
-                        <th>{{localize "age-system.velClass"}}</th>
-                        <th>{{localize "age-system.collision"}}</th>
-                        <th>{{localize "age-system.sideswipe"}}</th>
-                    </thead>
-                    <tbody>
-                        <tr {{#if (eq data.data.velocity.category "velStandard")}} class="highlight"{{/if}}>
-                            <td>{{localize "age-system.velStandard"}}</td>
-                            <td class="feature-controls" data-qtd-dice="1">
-                                <a class="roll-collision">1{{localize "age-system.settings.d6"}}</a>
-                                <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
-                            </td>
-                            <td class="feature-controls" data-qtd-dice="1" data-die-size="3">
-                                <a class="roll-sideswipe">1{{localize "age-system.settings.d3"}}</a>
-                                <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
-                            </td>
-                        </tr>
-                        <tr {{#if (eq data.data.velocity.category "velFast")}} class="highlight"{{/if}}>
-                            <td>{{localize "age-system.velFast"}}</td>
-                            <td class="feature-controls" data-qtd-dice="2">
-                                <a class="roll-collision">2{{localize "age-system.settings.d6"}}</a>
-                                <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
-                            </td>
-                            <td class="feature-controls" data-qtd-dice="1">
-                                <a class="roll-sideswipe">1{{localize "age-system.settings.d6"}}</a>
-                                <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
-                            </td>
-                        </tr>
-                        <tr {{#if (eq data.data.velocity.category "velVeryFast")}} class="highlight"{{/if}}>
-                            <td>{{localize "age-system.velVeryFast"}}</td>
-                            <td class="feature-controls" data-qtd-dice="4">
-                                <a class="roll-collision">4{{localize "age-system.settings.d6"}}</a>
-                                <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
-                            </td>
-                            <td class="feature-controls" data-qtd-dice="2">
-                                <a class="roll-sideswipe">2{{localize "age-system.settings.d6"}}</a>
-                                <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
-                            </td>
-                        </tr>
-                        <tr {{#if (eq data.data.velocity.category "velExtreme")}} class="highlight"{{/if}}>
-                            <td>{{localize "age-system.velExtreme"}}</td>
-                            <td class="feature-controls" data-qtd-dice="6">
-                                <a class="roll-collision">6{{localize "age-system.settings.d6"}}</a>
-                                <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
-                            </td>
-                            <td class="feature-controls" data-qtd-dice="3">
-                                <a class="roll-sideswipe">3{{localize "age-system.settings.d6"}}</a>
-                                <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{{localize "age-system.velCustom"}}</td>
-                            <td class="feature-controls" data-qtd-dice="{{data.data.customCollisionDmg}}">
-                                <input type="number" name="data.customCollisionDmg" value="{{data.data.customCollisionDmg}}" data-dtype="Number">
-                                <a class="roll-collision">{{localize "age-system.settings.d6"}}</a>
-                                <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
-                            </td>
-                            <td class="feature-controls" data-qtd-dice="{{data.data.customSideswipeDmg}}">
-                                <input type="number" name="data.customSideswipeDmg" value="{{data.data.customSideswipeDmg}}" data-dtype="Number">
-                                <a class="roll-sideswipe">{{localize "age-system.settings.d6"}}</a>
-                                <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
-                            </td>
-                        </tr>                                                
-                    </tbody>
-                </table>
-
-                {{#if notSynth}}
-                <div class="passenger-container">
-                    <label class="flexrow flex-align-center">{{localize "age-system.passengers"}} [{{data.data.pob}} / <input type="number" name="data.capacity" value="{{data.data.capacity}}" data-dtype="Number">]</label>
-                    <div class="passenger-list">
-                        <ol>
-                            {{#each passengers as |passenger|}}
-                            <li class="flexrow flex-justify-between feature-controls" data-passenger-key="{{@key}}">
-                                <div class="flexrow flex-justify-start flex-align-center">
-                                    <img src="{{passenger.picture}}">
-                                    <span>{{passenger.name}}</span>
-                                    {{#if passenger.isConductor}}
-                                    <span>({{localize "age-system.conductor"}})</span>
-                                    {{/if}}
-                                </div>
-                                <a class="flex-align-end remove-passenger"><i class="fa fa-times"></i></a>
-                            </li>
-                            {{/each}}
-                        </ol>
-                    </div>
-                </div>
-                {{/if}}
-            </div>
-
-            <div class="grid-img">
-                <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
-            </div>
-
-            <div class="grid-description">
-                <div class="flexcol editor">
-                    <label>{{localize "age-system.item.desc"}}</label>
-                    {{editor content=data.data.description target="data.description" button=true owner=owner editable=editable}}
-                </div>
-            </div>
-
+    <div class="flexrow image-description">
+        <img class="vehicle-image" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+        <div class="vehicle-desc">
+            <label class="colorset-second-tier desc">{{localize "age-system.item.desc"}}</label>
+            {{editor content=data.data.description target="data.description" button=true owner=owner editable=true}}
         </div>
     </div>
-    
+
+    {{!-- First Stats Row --}}
+    <div class="flexrow">
+
+        {{!-- Vehicle Parameters --}}
+        <div class="stats-block parameters flexwrap colorset-second-tier">
+            <h2>{{localize "age-system.parameters"}}</h2>
+            <div class="flexrow conductor-selection">
+                <label class="conductor">{{localize "age-system.conductor"}}</label>
+                <select class="conductor" name="data.conductor">
+                    {{#select data.data.conductor}}
+                    <option value="">{{localize "age-system.noAction"}}</option>
+                    <option value="synth-vehicle">Token</option>
+                    {{#each data.passengers as |passenger|}}
+                    <option value="{{passenger.id}}">{{passenger.name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                {{!-- Synths seems to work now
+                <select class="conductor" name="data.conductor" {{#if data.isSynth}}disabled{{/if}}>
+                    {{#select data.data.conductor}}
+                    {{#if data.isSynth}}
+                    <option value="synth-vehicle">Token</option>
+                    {{else}}
+                    <option value="">{{localize "age-system.noAction"}}</option>
+                    {{#each data.passengers as |passenger|}}
+                    <option value="{{passenger.id}}">{{passenger.name}}</option>
+                    {{/each}}
+                    {{/if}}
+                    {{/select}}
+                </select>   --}}
+            </div>
+
+            <div class="flexcol focus-ability">
+                <div class="flexrow flex-justify-center label-with-icon">
+                    <label class="handling-focus">{{localize "age-system.abl"}} / {{localize "age-system.focus"}}</label>
+                    {{!-- <a class="roll-maneuver {{#if data.isSynth}}is-synth{{/if}}"><i class="fas fa-dice"></i></a>--}}
+                    <a class="roll-maneuver"><i class="fas fa-dice"></i></a>
+                </div>
+                <select name="data.handling.useAbl" class="data-input">
+                    {{#select data.data.handling.useAbl}}
+                    {{#each data.config.abilities as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <input type="text" name="data.handling.useFocus" value="{{data.data.handling.useFocus}}" list="{{name}}-{{actor.id}}-list" placeholder="{{localize "age-system.focus"}}">
+                <datalist id="{{name}}-{{actor.id}}-list">
+                    <option value=""></option>
+                    {{#each data.config.focus as |focus|}}
+                    <option value="{{focus.name}}"></option>
+                    {{/each}}
+                </datalist>
+            </div>
+
+            <div class="flexrow flexwrap">
+                <div class="flexcol no-flexwrap">
+                    <label>{{localize "age-system.velocity"}}</label>
+                    <div class="flexrow no-flexwrap">
+                        <select name="data.velocity.category">
+                            {{#select data.data.velocity.category}}
+                            {{#each data.config.velocityCategory as |category|}}
+                            <option value="{{@key}}">{{localize (concat "age-system." @key)}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>    
+                        <span>/</span>
+                        <input type="number" name="data.velocity.catMod" value="{{data.data.velocity.catMod}}" data-dtype="Number">
+                    </div>
+                </div>
+
+                <div class="flexcol flex-align-center">
+                    <label>{{localize "age-system.handling"}}</label>
+                    <input type="number" name="data.handling.mod" value="{{data.data.handling.mod}}" data-dtype="Number">
+                </div>
+
+                <div class="flexcol flex-align-center">
+                    <label>{{localize "age-system.item.cost"}}</label>
+                    <input type="text" name="data.cost" value="{{data.data.cost}}" data-dtype="Number">
+                </div>
+
+            </div>
+
+            <div class="flexrow">
+                <div class="flexcol flex-align-center">
+                    <label>{{localize "age-system.defense"}}</label>
+                    <input type="number" disabled name="data.defenseTotal" value="{{data.data.defenseTotal}}" data-dtype="Number">
+                </div>
+
+                <div class="flexcol flex-align-center">
+                    <label>{{localize "age-system.hull"}}</label>
+                    <input type="number" name="data.hull" value="{{data.data.hull}}" data-dtype="Number">
+                </div>
+
+                <div class="flexcol flex-align-center">
+                    <label>{{localize "age-system.vehicleArmor"}}</label>
+                    <input type="number" name="data.armorRating" value="{{data.data.armorRating}}" data-dtype="Number">
+                </div>
+
+                <div class="flexcol flex-align-center">
+                    <label>{{localize "age-system.coverRating"}}</label>
+                    <input type="number" name="data.coverRating" value="{{data.data.coverRating}}" data-dtype="Number">
+                </div>
+
+                <div class="flexcol flex-align-center">
+                    <label>{{localize "age-system.ram"}}</label>
+                    <div class="flexrow flex-align-center">
+                        <input type="number" name="data.ramDmg" value="{{data.data.ramDmg}}" data-dtype="Number">
+                        <span>{{localize "age-system.settings.d6"}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Spacer --}}
+        <div class="spacer"></div>
+
+        {{!-- Vehicle Damage --}}
+        <div class="vehicle-damage-chart stats-block colorset-second-tier">
+            <h2>{{localize "age-system.item.damage"}}</h2>
+            <ul class="damage-chart">
+                <li class="flexrow colorset-third-tier header">
+                    <p class="velocity">{{localize "age-system.velClass"}}</p>
+                    <p class="feature-controls">{{localize "age-system.collision"}}</p>
+                    <p class="feature-controls">{{localize "age-system.sideswipe"}}</p>
+                </li>
+                {{#each data.config.velocityCategory as |velocity|}}
+                <li class="flexrow {{#if (eq ../data.data.velocity.category @key)}}highlight{{/if}}">
+                    <p class="velocity">{{localize (concat "age-system." @key)}}</p>
+                    <p class="feature-controls" data-qtd-dice="{{velocity.colDmg}}">
+                        <a class="roll-collision">{{velocity.colDmg}}</a>
+                        <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
+                    </p>
+                    <p class="feature-controls" data-qtd-dice="{{velocity.sideDmg}}">
+                        <a class="roll-sideswipe">{{velocity.sideDmg}}</a>
+                        <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
+                    </p>
+                </li>
+                {{/each}}
+                <li class="flexrow flex-align-center">
+                    <p class="velocity">{{localize "age-system.velCustom"}}</p>
+                    <p class="feature-controls flexrow flex-align-center" data-qtd-dice="{{data.data.customCollisionDmg}}">
+                        <input type="number" name="data.customCollisionDmg" value="{{data.data.customCollisionDmg}}" data-dtype="Number">
+                        <a class="roll-collision">{{localize "age-system.settings.d6"}}</a>
+                        <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
+                    </p>
+                    <p class="feature-controls flexrow flex-align-center" data-qtd-dice="{{data.data.customSideswipeDmg}}">
+                        <input type="number" name="data.customSideswipeDmg" value="{{data.data.customSideswipeDmg}}" data-dtype="Number">
+                        <a class="roll-sideswipe">{{localize "age-system.settings.d6"}}</a>
+                        <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {{!-- Passengers --}}
+    <div class="passenger-container stats-block colorset-second-tier">
+        <h2>{{localize "age-system.passengers"}} [{{data.data.pob}} / <input type="number" name="data.capacity" value="{{data.data.capacity}}" data-dtype="Number">]</h2>
+        <div class="passenger-list">
+            <ol>
+                {{#each data.passengers as |passenger|}}
+                <li class="flexrow flex-justify-between feature-controls" data-passenger-key="{{@key}}">
+                    <div class="flexrow flex-justify-start flex-align-center">
+                        <img src="{{passenger.picture}}">
+                        <span>{{passenger.name}}</span>
+                        {{#if passenger.isConductor}}
+                        <span>({{localize "age-system.conductor"}})</span>
+                        {{/if}}
+                    </div>
+                    <a class="flex-align-end remove-passenger"><i class="fa fa-times"></i></a>
+                </li>
+                {{/each}}
+            </ol>
+        </div>
+    </div>   
 </form>
