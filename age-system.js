@@ -247,7 +247,7 @@ Hooks.on("renderageSystemItemSheet", (app, html, data) => {
     // Add item type on title bar
     Setup.nameItemSheetWindow(app);
     // Hide fatigue entries if Fatigue is not in use
-    Setup.hideFatigueEntry(html);
+    // Setup.hideFatigueEntry(html);
 });
 
 Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
@@ -261,3 +261,41 @@ Hooks.on("renderChatMessage", (app, html, data) => {
     // Hide chat message when rolling to GM
     AgeChat.selectBlindAgeRoll(app, html, data);
 });
+
+// Prevent Items to be created on non campatible Actor types
+Hooks.on("preCreateItem", (itemCreated, itemCreatedData, data, userId) => {
+    const actor = itemCreated.actor;
+    const itemName = itemCreatedData.name
+    const itemType = itemCreatedData.type
+
+    // Avoid dropping Item on Vehicle
+    if (actor.type === "vehicle") {
+        ui.notifications.warn(`Items can not be droped on Vehicle Actor type.`);
+        return data.temporary = true;
+    };
+
+    // Ensure only Spaceship Features are droped on Spaceships
+    if (actor.type === "spaceship" && itemType !== "shipfeatures") {
+        let warning = game.i18n.localize("age-system.WARNING.nonShipPartsOnShip");
+        ui.notifications.warn(warning);
+        return data.temporary = true;
+    }
+    
+    // Prevent adding spaceship features to Actors
+    if (actor.type === "char" && itemType === "shipfeatures") {
+        let warning = game.i18n.localize("age-system.WARNING.shipPartsOnChar");
+        ui.notifications.warn(warning);
+        return data.temporary = true;
+    }
+    
+    // Avoid Focus with repeated name on Actors
+    if (actor.type === "char" && itemType === "focus") {
+        const hasFocus = actor.items.filter(f => f.name === itemCreatedData.name && f.type === "focus");
+        if (hasFocus.length > 0) {
+            let warning = game.i18n.localize("age-system.WARNING.duplicatedFocus");
+            warning += `"${itemName.toUpperCase()}"`;
+            ui.notifications.warn(warning);
+            return data.temporary = true;
+        }
+    }
+})

@@ -206,7 +206,7 @@
                         {{!-- <div class="weapon-ctrl add"><a><i class="fa fa-plus"></i></a></div> --}}
                     </li>
                     {{#each weapon as |item|}}
-                    <li class="flexrow item-desc feature-controls flex-align-center" data-item-id="{{item.id}}">
+                    <li class="flexrow item-desc feature-controls flex-align-center" data-item-id="{{item._id}}">
                         <img class="item-img" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                         <p class="weapon-name {{#unless item.data.isActive}}inactive{{/unless}}">{{item.name}}</p>
                         <p class="weapon-dmg roll-damage {{#if item.data.isActive}}roll{{else}}inactive{{/if}}" title="{{localize "age-system.rollDamage"}}">{{item.data.damage}}</p>
@@ -229,7 +229,7 @@
                         <div class="feature-value"><label>{{localize "age-system.value"}}</label></div>
                     </li> 
                     {{#each qualities as |item|}}
-                    <li class="flexrow item-desc feature-controls flex-align-center" data-item-id="{{item.id}}">
+                    <li class="flexrow item-desc feature-controls flex-align-center" data-item-id="{{item._id}}">
                         <img class="item-img" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                         <p class="feature-name">{{item.name}}</p>
                         <p class="feature-type">{{localize (concat "age-system.spaceship." item.data.type)}}</p>
@@ -267,7 +267,7 @@
                         <div class="feature-value"><label>{{localize "age-system.value"}}</label></div>
                     </li> 
                     {{#each flaws as |item|}}
-                    <li class="flexrow item-desc feature-controls flex-align-center" data-item-id="{{item.id}}">
+                    <li class="flexrow item-desc feature-controls flex-align-center" data-item-id="{{item._id}}">
                         <img class="item-img" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                         <p class="feature-name">{{item.name}}</p>
                         <p class="feature-type">{{localize (concat "age-system.spaceship." item.data.type)}}</p>

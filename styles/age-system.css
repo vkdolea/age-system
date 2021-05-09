@@ -1210,6 +1210,12 @@
   display: flex;
   flex-direction: row;
 }
+.age-system.sheet.vehicle .vehicle-damage-chart ul li .custom-velocity input {
+  flex: 0 0 25px;
+}
+.age-system.sheet.vehicle .vehicle-damage-chart ul li .custom-velocity a {
+  max-width: fit-content;
+}
 .age-system.sheet.vehicle .vehicle-damage-chart ul li .velocity {
   flex: 0 0 100px;
 }

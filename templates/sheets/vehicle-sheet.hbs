@@ -136,29 +136,29 @@
                     <p class="feature-controls">{{localize "age-system.sideswipe"}}</p>
                 </li>
                 {{#each data.config.velocityCategory as |velocity|}}
-                <li class="flexrow {{#if (eq ../data.data.velocity.category @key)}}highlight{{/if}}">
+                <li class="flexrow collision {{#if (eq ../data.data.velocity.category @key)}}highlight{{/if}}">
                     <p class="velocity">{{localize (concat "age-system." @key)}}</p>
                     <p class="feature-controls" data-qtd-dice="{{velocity.colDmg}}">
-                        <a class="roll-collision">{{velocity.colDmg}}</a>
-                        <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
+                        <a class="roll-vehicle-dmg">{{velocity.colDmg}}</a>
+                        <a class="roll-vehicle-dmg add-ram"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
                     </p>
                     <p class="feature-controls" data-qtd-dice="{{velocity.sideDmg}}">
-                        <a class="roll-sideswipe">{{velocity.sideDmg}}</a>
-                        <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
+                        <a class="roll-vehicle-dmg">{{velocity.sideDmg}}</a>
+                        <a class="roll-vehicle-dmg add-ram"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
                     </p>
                 </li>
                 {{/each}}
                 <li class="flexrow flex-align-center">
                     <p class="velocity">{{localize "age-system.velCustom"}}</p>
-                    <p class="feature-controls flexrow flex-align-center" data-qtd-dice="{{data.data.customCollisionDmg}}">
+                    <p class="feature-controls flexrow flex-align-center flex-justify-center custom-velocity collision" data-qtd-dice="{{data.data.customCollisionDmg}}d6">
                         <input type="number" name="data.customCollisionDmg" value="{{data.data.customCollisionDmg}}" data-dtype="Number">
-                        <a class="roll-collision">{{localize "age-system.settings.d6"}}</a>
-                        <a class="roll-collision add-ram"><i class="fa fa-bomb"></i></a>
+                        <a class="roll-vehicle-dmg">{{localize "age-system.settings.d6"}} </a>
+                        <a class="roll-vehicle-dmg add-ram"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
                     </p>
-                    <p class="feature-controls flexrow flex-align-center" data-qtd-dice="{{data.data.customSideswipeDmg}}">
+                    <p class="feature-controls flexrow flex-align-center flex-justify-center custom-velocity" data-qtd-dice="{{data.data.customSideswipeDmg}}d6">
                         <input type="number" name="data.customSideswipeDmg" value="{{data.data.customSideswipeDmg}}" data-dtype="Number">
-                        <a class="roll-sideswipe">{{localize "age-system.settings.d6"}}</a>
-                        <a class="roll-sideswipe add-ram"><i class="fa fa-bomb"></i></a>
+                        <a class="roll-vehicle-dmg">{{localize "age-system.settings.d6"}} </a>
+                        <a class="roll-vehicle-dmg add-ram"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
                     </p>
                 </li>
             </ul>

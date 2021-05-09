@@ -111,37 +111,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             title: this.title
         };
     };
-
-    // TODO - remove this logics and REMOVE ITEMS added using a hook.
-    async _onDropItem(event, data){
-        if ( !this.actor.isOwner ) return false;
-        const item = await Item.fromDropData(data);
-        /*-----------Beginning of added code--------------*/
-        // Check if droped item is a Focus and then confirm if Actor already has a Focus with the same name
-        // If positive, then returns FALSE
-        if (item.data.type === "focus") {
-            const itemNameLowerCase = item.name.toLowerCase();
-            const ownedFoci = this.actor.itemTypes.focus;
-            for (let i = 0; i < ownedFoci.length; i++) {
-                const e = ownedFoci[i];
-                const eName = e.data.data.nameLowerCase;
-                if (eName === itemNameLowerCase) {
-                    let warning = game.i18n.localize("age-system.WARNING.duplicatedFocus");
-                    warning += `"${eName.toUpperCase()}"`;
-                    ui.notifications.warn(warning);
-                    return false;
-                };            
-            };
-        };
-        if (item.data.type === "shipfeatures") {
-            let warning = game.i18n.localize("age-system.WARNING.shipPartsOnChar");
-            ui.notifications.warn(warning);
-            return false;
-        }
-        /*-------------End of added code------------------*/
-
-        super._onDropItem(event, data);
-    }
+    
     activateListeners(html) {
         if (this.isEditable) {
             html.find(".item-edit").click(this._onItemEdit.bind(this));

@@ -52,28 +52,6 @@ export default class ageSpaceshipSheet extends ActorSheet {
         return data;
     };
 
-    // Modification on standard _onDropItem() to prevent user from dropping Items other than Spaceship Features on Spaceships
-    async _onDropItem(event, data) {
-        if ( !this.actor.owner ) return false;
-        const item = await Item.fromDropData(data);
-        /*-----------Beginning of added code--------------*/
-        if (item.data.type !== "shipfeatures") {
-            let warning = game.i18n.localize("age-system.WARNING.nonShipPartsOnShip");
-            ui.notifications.warn(warning);
-            return false;
-        }
-        /*-------------End of added code------------------*/
-        const itemData = duplicate(item.data);
-        
-        const actor = this.actor;
-        // Handle item sorting within the same Actor
-        let sameActor = (data.actorId === actor.id) || (actor.isToken && (data.tokenId === actor.token.id));
-        if (sameActor) return this._onSortItem(event, itemData);
-
-        // Create the owned item
-        return this._onDropItemCreate(itemData);
-    };
-
     activateListeners(html) {
         if (this.isEditable) {
             // html.find(".item-edit").click(this._onItemEdit.bind(this));
@@ -155,7 +133,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         }
         if (event.currentTarget.classList.contains("roll-hull")) {
             rollFormula = this.actor.data.data.hull.total;
-            messageData.flavor += `| ${game.i18n.localize("age-system.spaceship.hull")}`;
+            messageData.flavor += ` | ${game.i18n.localize("age-system.spaceship.hull")}`;
         }
 
         if (event.ctrlKey && !event.altKey) {

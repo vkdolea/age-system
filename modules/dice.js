@@ -542,11 +542,13 @@ export async function vehicleDamage ({
     const audience = isGMroll(event);
 
     // Initialize Damage Formula, Data and Flavor
-    let damageFormula = `(@qtdDice)d(@dieSize)`;
-    let rollData = {
-        qtdDice: qtdDice,
-        dieSize: dieSize
-    };
+    let damageFormula = qtdDice;
+    let rollData = {};
+    // let damageFormula = `(@qtdDice)d(@dieSize)`;
+    // let rollData = {
+    //     qtdDice: qtdDice,
+    //     dieSize: dieSize
+    // };
     let messageData = {
         flavor: `${vehicle.data.name} | ${game.i18n.localize(`age-system.${damageSource}`)}`,
         speaker: ChatMessage.getSpeaker()
@@ -568,10 +570,13 @@ export async function vehicleDamage ({
 
     // Check if Focus adds to damage and adds it
     if (addFocus === true && useFocus) {
-        const focusData = getFocus(useFocus);
+        // const focusData = getFocus(useFocus);
+        // damageFormula = `${damageFormula} + @focus`;
+        // rollData.focus = focusData[1];
+        // messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
         damageFormula = `${damageFormula} + @focus`;
-        rollData.focus = focusData[1];
-        messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
+        rollData.focus = useFocus.focusItem ? useFocus.focusItem.data.data.initialValue : 0;
+        messageData.flavor += ` | ${damageToString(rollData.focus)} ${useFocus.focusName}`;
     }
 
     // Adds user Damage input

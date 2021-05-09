@@ -221,9 +221,12 @@ export class ageSystemActor extends Actor {
                 if (p.id === data.conductor && pData) {
                     p.isConductor = true;
                     const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
-                    let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
-                    if (!defenseFocus) defenseFocus = 0;
-                    data.defenseTotal += defenseAbl + defenseFocus;
+                    // let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
+                    // if (!defenseFocus) defenseFocus = 0;
+                    // data.defenseTotal += defenseAbl + defenseFocus;
+                    const defenseFocus = this.checkFocus(data.handling.useFocus);
+                    const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.data.data.initialValue;
+                    data.defenseTotal += defenseAbl + defenseValue;
                 } else {
                     p.isConductor = false;
                 }
@@ -451,9 +454,12 @@ export class ageSystemActor extends Actor {
                 if (p.id === data.conductor && pData) {
                     p.isConductor = true;
                     const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
-                    let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
-                    if (!defenseFocus) defenseFocus = 0;
-                    data.defenseTotal += defenseAbl + defenseFocus;
+                    // let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
+                    // if (!defenseFocus) defenseFocus = 0;
+                    // data.defenseTotal += defenseAbl + defenseFocus;
+                    const defenseFocus = this.checkFocus(data.handling.useFocus);
+                    const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.data.data.initialValue;
+                    data.defenseTotal += defenseAbl + defenseValue;
                 } else {
                     p.isConductor = false;
                 }
@@ -519,37 +525,37 @@ export class ageSystemActor extends Actor {
         return ownedMods;
     };
 
-    _userFocusEntity(useFocus, operatorData) {
-        const useFocusLC = useFocus.toLowerCase();
-        // const vehicleData = this.actor.data;
-        // const data = vehicleData.data;
-        // let user;
-        // if (operatorData.isToken) user = game.actors.tokens[operatorData.id];
-        // if (!operatorData.isToken) user = game.actors.get(operatorData.id);
-        // if (!user) {
-        //     const parts = {name: p.name, id: p.id};
-        //     let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
-        //     ui.notifications.warn(warning);
-        //     return null;
-        // }
-        if (useFocus === null || useFocus === "") {
-            return null;
-        };
+    // _userFocusEntity(useFocus, operatorData) {
+    //     const useFocusLC = useFocus.toLowerCase();
+    //     // const vehicleData = this.actor.data;
+    //     // const data = vehicleData.data;
+    //     // let user;
+    //     // if (operatorData.isToken) user = game.actors.tokens[operatorData.id];
+    //     // if (!operatorData.isToken) user = game.actors.get(operatorData.id);
+    //     // if (!user) {
+    //     //     const parts = {name: p.name, id: p.id};
+    //     //     let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
+    //     //     ui.notifications.warn(warning);
+    //     //     return null;
+    //     // }
+    //     if (useFocus === null || useFocus === "") {
+    //         return null;
+    //     };
 
-        const user = this._vehicleOperator(operatorData);
-        if (!user) return null;
+    //     const user = this._vehicleOperator(operatorData);
+    //     if (!user) return null;
 
-        const userFoci = user.data.items.filter(a => a.type === "focus");
-        // const expectedFocus = data.useFocus.toLowerCase();
-        const validFocus = userFoci.filter(c => c.name.toLowerCase() === useFocusLC);
+    //     const userFoci = user.data.items.filter(a => a.type === "focus");
+    //     // const expectedFocus = data.useFocus.toLowerCase();
+    //     const validFocus = userFoci.filter(c => c.name.toLowerCase() === useFocusLC);
 
-        if (validFocus.length < 1) {
-            return useFocus;
-        } else {
-            const id = validFocus[0]._id;
-            return user.getOwnedItem(id);
-        };    
-    };
+    //     if (validFocus.length < 1) {
+    //         return useFocus;
+    //     } else {
+    //         const id = validFocus[0]._id;
+    //         return user.getOwnedItem(id);
+    //     };    
+    // };
 
     _vehicleOperator(operatorData) {
         if (!operatorData) return null;
@@ -567,12 +573,15 @@ export class ageSystemActor extends Actor {
 
     rollVehicleDamage(damageData) {
         const operator = this._vehicleOperator(damageData.operatorData);
-        const useFocus = this._userFocusEntity(this.data.data.handling.useFocus, damageData.operatorData);
+        // const useFocus = this._userFocusEntity(this.data.data.handling.useFocus, damageData.operatorData);
+        const vehicleUseFocus = this.data.data.handling.useFocus
+        const useFocus = operator ? operator.checkFocus(vehicleUseFocus) : null;
 
         damageData = {
             ...damageData,
             operator,
             useFocus,
+            // useFocus,
             vehicle: this
         };
 
@@ -580,18 +589,16 @@ export class ageSystemActor extends Actor {
     };
 
     checkFocus(namedFocus) {
-
         if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null, id: null}
 
         const ownedFoci = this.data.items.filter(a => a.type === "focus");
         const expectedFocus = namedFocus.toLowerCase();
         const validFocus = ownedFoci.filter(c => c.name.toLowerCase() === expectedFocus);
-
         if (validFocus.length < 1) {
             return {focusName: namedFocus, focusItem: false, id: null}
         } else {
             const focusId = validFocus[0].id;
-            return {focusName: namedFocus, focusItem: this.data.items.get(focusId), id: focusId}
+            return {focusName: namedFocus, focusItem: this.items.get(focusId), id: focusId}
         };
     }
 };
