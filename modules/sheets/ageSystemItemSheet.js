@@ -85,6 +85,9 @@ export default class ageSystemItemSheet extends ItemSheet {
             data.config.featuresTypeLocal = sortObjArrayByName(data.config.featuresTypeLocal, "name");
         }
 
+        // Active Effects if item owner is a Character
+        if (this.item.actor?.type === "char") data.actorEffects = this.item.actor.effects;
+
         return data;
     };
     

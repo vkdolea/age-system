@@ -4,6 +4,7 @@ import ageSystemItemSheet from "./modules/sheets/ageSystemItemSheet.js";
 import ageSystemCharacterSheet from "./modules/sheets/ageSystemCharacterSheet.js";
 import ageSystemVehicleSheet from "./modules/sheets/ageSystemVehicleSheet.js";
 import ageSystemSpaceshipSheet from "./modules/sheets/ageSystemSpaceshipSheet.js";
+import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
@@ -50,6 +51,7 @@ Hooks.once("init", async function() {
             ageSystemCharacterSheet,
             ageSystemVehicleSheet,
             ageSystemSpaceshipSheet,
+            ageActiveEffectConfig,
             ageSystemItemSheet,
             AgeRoller,
             AgeTracker
@@ -99,11 +101,10 @@ Hooks.once("init", async function() {
         resizable: false
     });
 
-    // Define extra data for Age System Actors
+    // Define extra data for Age System (Actors, Items, ActiveEffectConfig)
     CONFIG.Actor.documentClass = ageSystemActor;
-
-    // Define extra data for Age System Items
     CONFIG.Item.documentClass = ageSystemItem;
+    CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;
 
     // Load partials for Handlebars
     preloadHandlebarsTemplates();
@@ -151,9 +152,11 @@ Hooks.once("setup", function() {
         ageSystem.conditions[c].desc = game.i18n.localize(ageSystem.conditions[c].desc);
     }
 
-    // TODO - Consertar essa array!!
     // Localize Abilities' name
     Setup.abilitiesName();
+
+    // Localize Effects Name and build object
+    Setup.localizeAgeEffects();
 
 });
 
@@ -162,6 +165,8 @@ Hooks.once("ready", async function() {
     const color = game.user.getFlag("age-system", "colorScheme");
     if (color) game.settings.set("age-system", "colorScheme", color);
     if (!color) game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
+    // Register color scheme on global name space
+    ageSystem.colorScheme = game.settings.get("age-system", "colorScheme");
 
     // Tracker Handling
     // Identify if User already has ageTrackerPos flag set
@@ -208,9 +213,6 @@ Hooks.once("ready", async function() {
     for(let e of game.postReadyPrepare){
         e.prepareData();
     }
-
-    // Register color scheme
-    ageSystem.colorScheme = game.settings.get("age-system", "colorScheme");
     
     // Register System Settings related do Focus Compendium
     Settings.loadCompendiaSettings();
@@ -246,8 +248,6 @@ Hooks.on("renderCompendium", function() {
 Hooks.on("renderageSystemItemSheet", (app, html, data) => {
     // Add item type on title bar
     Setup.nameItemSheetWindow(app);
-    // Hide fatigue entries if Fatigue is not in use
-    // Setup.hideFatigueEntry(html);
 });
 
 Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {

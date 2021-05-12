@@ -89,6 +89,15 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.6.5 [2021-xx-xx]
+#### Added
+- New layout for Vehicle sheet.
+
+#### Fix
+- Expanded "Range" field for weapons to accomodate bigger numbers.
+- Issue causing modified Ability value to be hidden even when a Modifier was applied to it.
+- Code cleanup.
+
 ### 0.6.5 [2021-05-01]
 #### Fix
 - Bug causing spaceship description to disappear when sending to compendium.

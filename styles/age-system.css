@@ -494,28 +494,6 @@
 .age-system.item .membership .item-card-stats input[name="data.weight"],
 .age-system.item .shipfeatures .item-card-stats input[name="data.weight"],
 .age-system.item .vehicle .item-card-stats input[name="data.weight"],
-.age-system.item .focus .item-card-stats input[name="data.range"],
-.age-system.item .power .item-card-stats input[name="data.range"],
-.age-system.item .talent .item-card-stats input[name="data.range"],
-.age-system.item .weapon .item-card-stats input[name="data.range"],
-.age-system.item .equipment .item-card-stats input[name="data.range"],
-.age-system.item .stunts .item-card-stats input[name="data.range"],
-.age-system.item .honorifics .item-card-stats input[name="data.range"],
-.age-system.item .relationship .item-card-stats input[name="data.range"],
-.age-system.item .membership .item-card-stats input[name="data.range"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.range"],
-.age-system.item .vehicle .item-card-stats input[name="data.range"],
-.age-system.item .focus .item-card-stats input[name="data.rangeMax"],
-.age-system.item .power .item-card-stats input[name="data.rangeMax"],
-.age-system.item .talent .item-card-stats input[name="data.rangeMax"],
-.age-system.item .weapon .item-card-stats input[name="data.rangeMax"],
-.age-system.item .equipment .item-card-stats input[name="data.rangeMax"],
-.age-system.item .stunts .item-card-stats input[name="data.rangeMax"],
-.age-system.item .honorifics .item-card-stats input[name="data.rangeMax"],
-.age-system.item .relationship .item-card-stats input[name="data.rangeMax"],
-.age-system.item .membership .item-card-stats input[name="data.rangeMax"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.rangeMax"],
-.age-system.item .vehicle .item-card-stats input[name="data.rangeMax"],
 .age-system.item .focus .item-card-stats input[name="data.capacity"],
 .age-system.item .power .item-card-stats input[name="data.capacity"],
 .age-system.item .talent .item-card-stats input[name="data.capacity"],
@@ -606,6 +584,32 @@
 .age-system.item .vehicle .item-card-stats input[name="data.rank"] {
   max-width: 30px;
   min-width: 30px;
+  text-align: center;
+}
+.age-system.item .focus .item-card-stats input[name="data.range"],
+.age-system.item .power .item-card-stats input[name="data.range"],
+.age-system.item .talent .item-card-stats input[name="data.range"],
+.age-system.item .weapon .item-card-stats input[name="data.range"],
+.age-system.item .equipment .item-card-stats input[name="data.range"],
+.age-system.item .stunts .item-card-stats input[name="data.range"],
+.age-system.item .honorifics .item-card-stats input[name="data.range"],
+.age-system.item .relationship .item-card-stats input[name="data.range"],
+.age-system.item .membership .item-card-stats input[name="data.range"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.range"],
+.age-system.item .vehicle .item-card-stats input[name="data.range"],
+.age-system.item .focus .item-card-stats input[name="data.rangeMax"],
+.age-system.item .power .item-card-stats input[name="data.rangeMax"],
+.age-system.item .talent .item-card-stats input[name="data.rangeMax"],
+.age-system.item .weapon .item-card-stats input[name="data.rangeMax"],
+.age-system.item .equipment .item-card-stats input[name="data.rangeMax"],
+.age-system.item .stunts .item-card-stats input[name="data.rangeMax"],
+.age-system.item .honorifics .item-card-stats input[name="data.rangeMax"],
+.age-system.item .relationship .item-card-stats input[name="data.rangeMax"],
+.age-system.item .membership .item-card-stats input[name="data.rangeMax"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.rangeMax"],
+.age-system.item .vehicle .item-card-stats input[name="data.rangeMax"] {
+  max-width: 60px;
+  min-width: 60px;
   text-align: center;
 }
 .age-system.item .focus .item-card-stats span:last-of-type,
@@ -992,6 +996,25 @@
 }
 .age-system.sheet.char .fill-card {
   max-width: fit-content;
+}
+.age-system.sheet.char ul {
+  list-style-type: none;
+  padding: 0px;
+}
+.age-system.sheet.char .item-container.effects .key {
+  flex: 0 0 200px;
+}
+.age-system.sheet.char .item-container.effects .value {
+  flex: 0 0 40px;
+}
+.age-system.sheet.char .item-container.effects .operation {
+  flex: 0 0 70px;
+}
+.age-system.sheet.char .item-container.effects .duration {
+  flex: 0 0 50px;
+}
+.age-system.sheet.char .item-container.effects .source {
+  flex: 0 0 200px;
 }
 .age-system.sheet.char .item-container {
   flex-wrap: wrap;

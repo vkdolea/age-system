@@ -21,6 +21,7 @@ export class ageSystemItem extends Item {
         data.nameLowerCase = itemData.name.toLowerCase();
         // data.useFocusActorId = this._idFocusToUse(itemType, data.useFocus);
         data.useFocusActorId = data.useFocus && this.actor?.data ? this.actor.checkFocus(data.useFocus).id : null;
+        data.useFocusActor = this.actor?.data ? this.actor.checkFocus(data.useFocus) : null;
         data.hasDamage = this._hasDamage(itemType);
         data.hasHealing = this._hasHealing(itemType);
         data.hasFatigue = this._hasFatigue(itemType);
@@ -57,7 +58,7 @@ export class ageSystemItem extends Item {
                 if ((data.itemForceAbl !== "") && (data.itemForceAbl !== "no-abl")) {
                     data.itemForce += this.actor.data.data.abilities[data.itemForceAbl].total;
                 };
-                data.itemForce += this._ownerFocusValue();
+                data.itemForce += data.useFocusActor.value;
             };
 
             // Calculate Fatigue TN if it is not a manual input
@@ -71,21 +72,6 @@ export class ageSystemItem extends Item {
     _prepareShipFeatures() {        
         this.prepareEmbeddedEntities();
     };
-
-    // _idFocusToUse(itemType, useFocus) {
-    //     if (this.isOwned && this.actor?.data && (itemType === "weapon" || itemType === "power")) {
-    //         const owner = this.actor;
-    //         const focusOwned = owner.data.items.filter(i => i.type === "focus");
-    //         const focusArr = focusOwned.filter(i => i.name.toLowerCase() === useFocus.toLowerCase());
-    //         // Originalmente:
-    //         // const focusArr = focusOwned.filter(i => i.data.nameLowerCase === data.useFocus.toLowerCase());
-
-    //         if (focusArr.length === 1) {
-    //             return focusArr[0].id;
-    //         } else return null;
-
-    //     } else return null;
-    // }
 
     _hasModificators() {
         const inCheckMods = this.data.data.itemMods;
@@ -114,7 +100,7 @@ export class ageSystemItem extends Item {
 
     // Check if Item requires Fatigue roll to be used
     _hasFatigue(type) {
-        if (type === "power") {return this.data.data.useFatigue};
+        if (type === "power") {return game.settings.get("age-system", "useFatigue")};
         return false;
     };
 
@@ -241,26 +227,26 @@ export class ageSystemItem extends Item {
     };
 
     // Returns owned Focus Item entity used to activate this item - false otherwise
-    _ownerFocusEntity() {
-        const itemData = this.data;
-        const data = itemData.data;
-        const owner = this.actor;
+    // _ownerFocusEntity() {
+    //     const itemData = this.data;
+    //     const data = itemData.data;
+    //     const owner = this.actor;
 
-        if (data.useFocus === null || data.useFocus === "" || this.isOwned === false || owner === null) {
-            return null;
-        };
+    //     if (data.useFocus === null || data.useFocus === "" || this.isOwned === false || owner === null) {
+    //         return null;
+    //     };
 
-        const ownerFoci = owner.data.items.filter(a => a.type === "focus");
-        const expectedFocus = data.useFocus.toLowerCase();
-        const validFocus = ownerFoci.filter(c => c.name.toLowerCase() === expectedFocus);
+    //     const ownerFoci = owner.data.items.filter(a => a.type === "focus");
+    //     const expectedFocus = data.useFocus.toLowerCase();
+    //     const validFocus = ownerFoci.filter(c => c.name.toLowerCase() === expectedFocus);
 
-        if (validFocus.length < 1) {
-            return data.useFocus;
-        } else {
-            const id = validFocus[0].id;
-            return this.actor.getOwnedItem(id);
-        };    
-    };
+    //     if (validFocus.length < 1) {
+    //         return data.useFocus;
+    //     } else {
+    //         const id = validFocus[0].id;
+    //         return this.actor.getOwnedItem(id);
+    //     };    
+    // };
 
     async showItem() {
         

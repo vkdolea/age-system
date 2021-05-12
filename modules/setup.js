@@ -14,6 +14,33 @@ export function localizeConfig(toLocalize, noSort) {
     }
 }
 
+export function localizeAgeEffects() {
+    const toLocalize = ["ageEffectsKeys"];
+
+    // Localize and sort CONFIG objects
+    for ( let o of toLocalize ) {
+        const localized = Object.entries(CONFIG.ageSystem[o]).map(e => {
+            const label = game.i18n.localize(e[1].label);
+            const mask = e[1].mask;
+            return [e[0], {label, mask}];
+        });
+        CONFIG.ageSystem[o] = localized.reduce((obj, e) => {
+            obj[e[0]] = e[1];
+            return obj;
+        }, {});
+    }
+
+    const originalEffects = CONFIG.ageSystem[toLocalize];
+    CONFIG.ageSystem.ageEffectsOptions = {};
+
+    for (const e in originalEffects) {
+        if (Object.hasOwnProperty.call(originalEffects, e)) {
+            const effect = originalEffects[e];
+            CONFIG.ageSystem.ageEffectsOptions[effect.label] = effect.mask;            
+        }
+    }
+}
+
 export function abilitiesName() {
     // Capture what is the ability set to be used
     const settingAblOption = game.settings.get("age-system", "abilitySelection");
@@ -45,33 +72,28 @@ export function hidePrimaryAblCheckbox(html) {
             e.style.display = "none";
         };
     }
+
+    // Hide Total Ability box if it equal to Original
+    const abilityBox = html.find(".ability-box")
+    for (let t = 0; t < abilityBox.length; t++) {
+        const e = abilityBox[t];
+        const original = e.children[0].querySelector(".abl-value.original");
+        const total = e.children[0].querySelector(".abl-value.total");
+        if (original.value === total.value) total.style.display = "none";        
+    }
 };
 
-export function hideFatigueEntry(html) {
-    // Capture what is the ability set to be used
-    const useFatigue = game.settings.get("age-system", "useFatigue");
-
-    // Hide HTML elements with use-fatigue-true class
-    if (!useFatigue) {
-        const fatigueUsers = html.find(".use-fatigue-true");
-        for (let k = 0; k < fatigueUsers.length; k++) {
-            const e = fatigueUsers[k];
-            e.style.display = "none";
-        };
-    };
-};
-
-export function addColorScheme(html) {
-    const selectedScheme = game.settings.get("age-system", "colorScheme");
-    const colorClass = `colorset-${selectedScheme}`;
-    html.find(".colorset-selection").addClass(colorClass)
-}
+// export function addColorScheme(html) {
+//     const selectedScheme = game.settings.get("age-system", "colorScheme");
+//     const colorClass = `colorset-${selectedScheme}`;
+//     html.find(".colorset-selection").addClass(colorClass)
+// }
 
 export function nameItemSheetWindow(ageSystemItemSheet) {
     // Add item type in the title bar within brackets
     const i = ageSystemItemSheet.item.type.toLowerCase();
     const itemType = i[0].toUpperCase() + i.slice(1);
-    const itemWindowId = ageSystemItemSheet.actor ? `actor-${ageSystemItemSheet.actor.id}-item-${ageSystemItemSheet.item.id}` : `-${ageSystemItemSheet.item.id}`;
+    const itemWindowId = ageSystemItemSheet.actor ? `actor-${ageSystemItemSheet.actor.id}-item-${ageSystemItemSheet.item.id}` : `item-${ageSystemItemSheet.item.id}`;
     let itemWindow = document.getElementById(itemWindowId);
     let windowHeader = itemWindow.children[0].firstElementChild;
     windowHeader.textContent += ` [${game.i18n.localize("ITEM.Type" + itemType)}]`;

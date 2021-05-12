@@ -80,7 +80,7 @@ export async function ageRollCheck({
         const focusObj = itemRolled.actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled)
         rollFormula += " + @focus";
         rollData.focusName = focusObj.focusName;
-        rollData.focus = focusObj.focusItem ? focusObj.focusItem.data.data.initialValue : 0;
+        rollData.focus = focusObj.value;
         partials.push({
             label: rollData.focusName,
             value: rollData.focus,
@@ -570,12 +570,8 @@ export async function vehicleDamage ({
 
     // Check if Focus adds to damage and adds it
     if (addFocus === true && useFocus) {
-        // const focusData = getFocus(useFocus);
-        // damageFormula = `${damageFormula} + @focus`;
-        // rollData.focus = focusData[1];
-        // messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
         damageFormula = `${damageFormula} + @focus`;
-        rollData.focus = useFocus.focusItem ? useFocus.focusItem.data.data.initialValue : 0;
+        rollData.focus = useFocus.value;
         messageData.flavor += ` | ${damageToString(rollData.focus)} ${useFocus.focusName}`;
     }
 
@@ -652,10 +648,10 @@ export async function itemDamage({
     const isBlind = setBlind(event);
     const audience = isGMroll(event);
 
-    let damageFormula = nrDice > 0 ? "(@diceQtd)d(@diceSize)" : "";
+    let damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}` : "";
     let rollData = {
-        diceQtd: nrDice,
-        diceSize: diceSize,
+        // diceQtd: nrDice,
+        // diceSize: diceSize,
         damageMod: constDmg
     };
     // Check if damage source has a non 0 portion on its parameters
@@ -693,10 +689,14 @@ export async function itemDamage({
 
         // Check if Focus adds to damage and adds it
         if (addFocus === true) {
-            const focusData = getFocus(item);
+            // const focusData = getFocus(item);
+            const actor = item.actor;
+            const focusData = actor.checkFocus(item.data.data.useFocus);
             damageFormula = `${damageFormula} + @focus`;
-            rollData.focus = focusData[1];
-            messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
+            // rollData.focus = focusData[1];
+            // messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
+            rollData.focus = focusData.value;
+            messageData.flavor += ` | ${damageToString(focusData.value)} ${focusData.focusName}`;
         }
 
         // Check if extra Stunt Die is to be added (normally rolling damage after chat card roll)

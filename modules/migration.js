@@ -129,6 +129,7 @@ export const migrateActorData = function(actor) {
   // Actor Data Updates
   _addActorConditions(actor, updateData);
   _addVehicleCustomDmg(actor, updateData);
+  _addActorMods(actor, updateData);
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
@@ -242,6 +243,21 @@ function _addVehicleCustomDmg(actor, updateData) {
 
   if (!actor.data.hasOwnProperty(customSideswipeDmg)) updateData["data.customSideswipeDmg"] = 1;
   if (!actor.data.hasOwnProperty(customCollisionDmg)) updateData["data.customCollisionDmg"] = 1;
+
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Add Actor attack, test and damage modifier field
+ * @private
+ */
+ function _addActorMods(actor, updateData) {
+  if (actor.type !== "actor") return updateData;
+
+  if (!actor.data.hasOwnProperty(dmgMod)) updateData["data.dmgMod"] = 0;
+  if (!actor.data.hasOwnProperty(testMod)) updateData["data.testMod"] = 0;
+  if (!actor.data.hasOwnProperty(attackMod)) updateData["data.attackMod"] = 0;
 
   return updateData
 }

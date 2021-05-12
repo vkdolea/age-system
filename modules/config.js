@@ -257,10 +257,44 @@ ageSystem.uiElements = {
     ageRoller: `${uiElementsPath}cube.svg`
 }
 
-// Age Tracker Original Poition
-ageSystem.ageTrackerPos = {xPos: "260px", yPos: "69px"};
+ageSystem.ageEffectsKeys = {
+    "actorOverAllBonus": {label: "age-system.bonus.actorOverAllBonus", mask: "data.testMod"},
+    "actorDamage": {label: "age-system.bonus.itemDmg", mask: "data.dmgMod"},
+    "acc": {label: "age-system.bonus.acc", mask: "data.abilities.acc.total"},
+    "comm": {label: "age-system.bonus.comm", mask: "data.abilities.comm.total"},
+    "cons": {label: "age-system.bonus.cons", mask:"data.abilities.cons.total"},
+    "cunn": {label: "age-system.bonus.cunn", mask: "data.abilities.cunn.total"},
+    "dex": {label: "age-system.bonus.dex", mask: "data.abilities.dex.total"},
+    "fight": {label: "age-system.bonus.fight", mask: "data.abilities.fight.total"},
+    "int": {label: "age-system.bonus.int", mask: "data.abilities.int.total"},
+    "magic": {label: "age-system.bonus.magic", mask: "data.abilities.magic.total"},
+    "per": {label: "age-system.bonus.per", mask: "data.abilities.per.total"},
+    "str": {label: "age-system.bonus.str", mask: "data.abilities.str.total"},
+    "will": {label: "age-system.bonus.will", mask: "data.abilities.total"},
+    "defense": {label: "age-system.bonus.defense", mask: "data.defense.total"},
+    "impactArmor": {label: "age-system.bonus.impactArmor", mask: "data.armor.impact"},
+    "ballisticArmor": {label: "age-system.bonus.ballisticArmor", mask: "data.armor.ballistic"},
+    "defendMnv": {label: "age-system.bonus.defendMnv", mask: "data.defend.total"},
+    "guardupMnv": {label: "age-system.bonus.guardupMnv", mask: "data.guardUp.total"},
+    "allOutAtk": {label: "age-system.bonus.allOutAtkMnv", mask: "data.allOutAttack.total"},
+    "maxHealth": {label: "age-system.bonus.maxHealth", mask: "data.health.max"},
+    "maxConviction": {label: "age-system.bonus.maxConviction", mask: "data.conviction.max"},
+    "maxPowerPoints": {label: "age-system.bonus.maxPowerPoints", mask: "data.powerPoints.max"},
+    "aimMnv": {label: "age-system.bonus.aimMnv", mask: "data.aim.total"},
+    "armorPenalty": {label: "age-system.bonus.armorPenalty", mask: "data.armor.penalty"},
+    "speed": {label: "age-system.bonus.speed", mask: "data.speed.total"},
+    "toughness": {label: "age-system.bonus.toughness", mask: "data.armor.toughness.total"},
+}
 
-// Age Roller Original Poition
+ageSystem.itemEffectsKeys = {
+    "powerForce": {label: "age-system.bonus.powerForceBns", mask: ""},
+    "focus": {label: "age-system.bonus.focusValueBns", mask: ""},
+    "itemDamage": {label: "age-system.bonus.itemAtkBns", mask: ""},
+    "itemActivation": {label: "age-system.bonus.generalDmgBns", mask: ""}
+}
+
+// Age Tracker & Roller Initial Positions
+ageSystem.ageTrackerPos = {xPos: "260px", yPos: "69px"};
 ageSystem.ageRollerPos = {xPos: "800px", yPos: "10px"};
 
 // Initializing variable to load focus Compendiaum

@@ -53,6 +53,27 @@
 
         </header>
 
+        {{!-- Effects & Conditions Block --}}
+        <ul class="item-container effects">
+            <li class="flexrow header colorset-first-tier">
+                <p class="source">Source</p>
+                <p class="key"><a>+</a> Key</p>
+                <p class="value">Value</p>
+                <p class="operation">Operation</p>
+                <p class="duration">Duration</p>
+            </li>
+            {{#each data.effects as |source|}}
+            {{#each source.changes as |change|}}
+            <li class="flexrow colorset-third-tier feature-controls" data-effect-id="{{source._id}}">
+                <p class="source"><a>{{source.label}}</a></p>
+                <p class="key">{{change.key}}</p>
+                <p class="value">{{change.value}}</p>
+                <p class="operation">{{change.mode}}</p>
+                <p class="duration">Duration</p>
+            </li>
+            {{/each}}
+            {{/each}}
+        </ul>
 
         {{!-- Stats Block --}}
         <div class="flexrow">
@@ -77,7 +98,7 @@
             </div>
 
             {{!-- Conviction block --}}
-            {{#if data.useConviction}}
+            {{#if data.data.useConviction}}
             <div class="flexcol general-stats">
                 <div class="top-row colorset-first-tier">{{localize "age-system.conviction"}}</div>
                 <div class="main-value">
@@ -92,7 +113,7 @@
             {{/if}}
 
             {{!-- Fatigue block --}}
-            {{#if data.useFatigue}}
+            {{#if data.data.useFatigue}}
             <div class="flexcol general-stats">
                 <div class="top-row colorset-first-tier">{{localize "age-system.fatigue"}}</div>
                 <div class="main-value">
@@ -150,7 +171,7 @@
             </div>
 
             {{!-- Toughness block --}}
-            {{#if data.useToughness}}
+            {{#if data.data.useToughness}}
             <div class="flexcol general-stats">
                 <div class="top-row colorset-first-tier">{{localize "age-system.toughness"}}</div>
                 <input type="number" disabled class="main-value" name="data.armor.toughness.total" value="{{data.data.armor.toughness.total}}" data-dtype="Number" />
@@ -298,10 +319,8 @@
                         <input type="checkbox" name="data.abilities.{{type}}.primary" {{#with (lookup ../data.data.abilities [type])~}}{{#if primary}}checked{{/if}}{{/with}} class="primary-secondary" />
                         <input type="checkbox" name="data.abilities.{{type}}.lastUp" {{#with (lookup ../data.data.abilities [type])~}}{{#if lastUp}}checked{{/if}}{{/with}} class="last-up" />
                         {{!-- Value with modifiers applied --}}
-                        {{#if (ne name.value name.total)}}
-                        <input type="number" class="abl-value colorset-second-tier" disabled name="data.abilities.{{type}}.total" value="{{#with (lookup ../data.data.abilities [type])~}}{{total}}{{/with}}" data-dtype="Number" />
-                        {{/if}}
-                        <input type="number" class="abl-value" name="data.abilities.{{type}}.value" value="{{#with (lookup ../data.data.abilities [type])~}}{{value}}{{/with}}" data-dtype="Number" />
+                        <input type="number" class="abl-value total colorset-second-tier" disabled name="data.abilities.{{type}}.total" value="{{#with (lookup ../data.data.abilities [type])~}}{{total}}{{/with}}" data-dtype="Number" />
+                        <input type="number" class="abl-value original" name="data.abilities.{{type}}.value" value="{{#with (lookup ../data.data.abilities [type])~}}{{value}}{{/with}}" data-dtype="Number" />
                     </div>
                     <div class="owned-focus flexrow">
                         {{#each ../data.focus as |item|}}

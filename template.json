@@ -122,6 +122,9 @@
             "customCollisionDmg": 1
         },
         "char": {
+            "dmgMod": 0,
+            "testMod": 0,
+            "attackMod": 0,
             "statBlockView": false,
             "level": 1,
             "xp": {

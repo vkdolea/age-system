@@ -134,6 +134,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
             html.find(".roll-resources").click(this._onRollResources.bind(this));
             html.find(".item-equip").click(this._onItemActivate.bind(this));
+            html.find(".effects .source").click(this._onChangeEffect.bind(this));
 
             let handler = ev => this._onDragStart(ev);
             // Find all rollable items on the character sheet.
@@ -148,6 +149,12 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
         super.activateListeners(html);
     };
+
+    _onChangeEffect(event){
+        const effectId = event.currentTarget.closest(".feature-controls").dataset.effectId;
+        const effect = this.actor.effects.get(effectId);
+        effect.sheet.render(true);
+    }
 
     _onItemActivate(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;

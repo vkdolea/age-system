@@ -27,7 +27,31 @@
                     <input type="text" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.data.weight}}" data-dtype="Number" />
                 </div>
             </div>
-                
+
+            {{!-- Effects & Conditions Block --}}
+            {{#if actorEffects}}
+            <ul class="item-container effects">
+                <li class="flexrow header colorset-first-tier">
+                    <p class="source">Source</p>
+                    <p class="key"><a>+</a>Key</p>
+                    <p class="value">Value</p>
+                    <p class="operation">Operation</p>
+                    <p class="duration">Duration</p>
+                </li>
+                {{#each actorEffects as |source|}}
+                {{#each source.data.changes as |change|}}
+                <li class="flexrow colorset-third-tier feature-controls" data-effect-id="{{source._id}}">
+                    <p class="source"><a>{{source.data.label}}</a></p>
+                    <p class="key">{{change.key}}</p>
+                    <p class="value">{{change.value}}</p>
+                    <p class="operation">{{change.mode}}</p>
+                    <p class="duration">Duration</p>
+                </li>
+                {{/each}}
+                {{/each}}
+            </ul>
+            {{/if}}
+
             {{!-- Active Bonuses --}}
             {{> "systems/age-system/templates/partials/active-bonuses.hbs"}}
             

@@ -134,16 +134,16 @@ export class ageSystemActor extends Actor {
             data.speed.mod = 0;
         };
         data.speed.total =  Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
-        if (data.useConditions) {
-            if (data.conditions.helpless || data.conditions.restrained) {
-                data.speed.total = 0;
-            }
-            if ((data.conditions.exhausted && !data.conditions.hindred) || (!data.conditions.exhausted && data.conditions.hindred)) {
-                data.speed.total = Math.floor(data.speed.total/2);
-            } else if (data.conditions.exhausted && data.conditions.hindred) {
-                data.speed.total = Math.floor(data.speed.total/4);
-            }
-        }
+        // if (data.useConditions) {
+        //     if (data.conditions.helpless || data.conditions.restrained) {
+        //         data.speed.total = 0;
+        //     }
+        //     if ((data.conditions.exhausted && !data.conditions.hindred) || (!data.conditions.exhausted && data.conditions.hindred)) {
+        //         data.speed.total = Math.floor(data.speed.total/2);
+        //     } else if (data.conditions.exhausted && data.conditions.hindred) {
+        //         data.speed.total = Math.floor(data.speed.total/4);
+        //     }
+        // }
         /*----------------------------------------------------*/
         
         /*--- Calculate Max Health ---------------------------*/
@@ -221,9 +221,6 @@ export class ageSystemActor extends Actor {
                 if (p.id === data.conductor && pData) {
                     p.isConductor = true;
                     const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
-                    // let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
-                    // if (!defenseFocus) defenseFocus = 0;
-                    // data.defenseTotal += defenseAbl + defenseFocus;
                     const defenseFocus = this.checkFocus(data.handling.useFocus);
                     const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.data.data.initialValue;
                     data.defenseTotal += defenseAbl + defenseValue;
@@ -454,9 +451,6 @@ export class ageSystemActor extends Actor {
                 if (p.id === data.conductor && pData) {
                     p.isConductor = true;
                     const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
-                    // let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
-                    // if (!defenseFocus) defenseFocus = 0;
-                    // data.defenseTotal += defenseAbl + defenseFocus;
                     const defenseFocus = this.checkFocus(data.handling.useFocus);
                     const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.data.data.initialValue;
                     data.defenseTotal += defenseAbl + defenseValue;
@@ -589,16 +583,17 @@ export class ageSystemActor extends Actor {
     };
 
     checkFocus(namedFocus) {
-        if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null, id: null}
+        if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null, id: null, value: 0}
 
         const ownedFoci = this.data.items.filter(a => a.type === "focus");
         const expectedFocus = namedFocus.toLowerCase();
         const validFocus = ownedFoci.filter(c => c.name.toLowerCase() === expectedFocus);
         if (validFocus.length < 1) {
-            return {focusName: namedFocus, focusItem: false, id: null}
+            return {focusName: namedFocus, focusItem: false, id: null, value: 0}
         } else {
             const focusId = validFocus[0].id;
-            return {focusName: namedFocus, focusItem: this.items.get(focusId), id: focusId}
+            const focus = this.items.get(focusId);
+            return {focusName: namedFocus, focusItem: focus, id: focusId, value: focus.data.data.initialValue}
         };
     }
 };
