@@ -130,6 +130,7 @@ export const migrateActorData = function(actor) {
   _addActorConditions(actor, updateData);
   _addVehicleCustomDmg(actor, updateData);
   _addActorMods(actor, updateData);
+  _addActorPersonaFields(actor, updateData);
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
@@ -253,15 +254,29 @@ function _addVehicleCustomDmg(actor, updateData) {
  * @private
  */
  function _addActorMods(actor, updateData) {
-  if (actor.type !== "actor") return updateData;
+  if (actor.type !== "char") return updateData;
 
   if (!actor.data.hasOwnProperty(dmgMod)) updateData["data.dmgMod"] = 0;
   if (!actor.data.hasOwnProperty(testMod)) updateData["data.testMod"] = 0;
   if (!actor.data.hasOwnProperty(attackMod)) updateData["data.attackMod"] = 0;
 
-  return updateData
+  return updateData;
 }
 /* -------------------------------------------- */
+
+/**
+ * Add extra Persona data fields for Player Character
+ * @private
+ */
+ function _addActorPersonaFields(actor, updateData) {
+  if (actor.type !== "char") return updateData;
+
+  if (!actor.data.hasOwnProperty(bio)) {
+    updateData["data.bio"] = actor.data.features;
+    updateData["data.features"] = "";
+  }
+  return updateData;
+}
 
 /**
  * Add Speed Modificator option to item

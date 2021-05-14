@@ -793,7 +793,7 @@
   width: 100%;
 }
 .age-system.sheet.char .sheet-header img {
-  height: 251px;
+  height: 198px;
   width: 150px;
   object-fit: contain;
   border: 0px;
@@ -805,23 +805,66 @@
 .age-system.sheet.char .sheet-header .age-header > div {
   margin-bottom: 4px;
 }
-.age-system.sheet.char .sheet-header .age-header input[name="data.age"],
-.age-system.sheet.char .sheet-header .age-header input[name="data.height"],
-.age-system.sheet.char .sheet-header .age-header input[name="data.weight"] {
-  max-width: 40px;
+.age-system.sheet.char .sheet-header .age-header .level-xp input[type="number"] {
+  text-align: center;
 }
 .age-system.sheet.char .sheet-header .age-header label {
   white-space: nowrap;
   max-width: fit-content;
   padding: 4px;
-  flex: 1 min-content fit-content;
+  flex: 0 0 fit-content;
 }
-.age-system.sheet.char .sheet-header .age-header .editor {
+.age-system.sheet.char nav.add-sheet-tabs .active {
+  text-transform: uppercase;
+  font-weight: 900;
+}
+.age-system.sheet.char .persona .container {
+  margin-bottom: 4px;
+}
+.age-system.sheet.char .persona .features label,
+.age-system.sheet.char .persona .goals label,
+.age-system.sheet.char .persona .bio label {
+  max-width: none;
+  text-align: center;
+}
+.age-system.sheet.char .persona label {
+  white-space: nowrap;
+  max-width: fit-content;
+  padding: 4px;
+  flex: 0 0 fit-content;
+}
+.age-system.sheet.char .persona .editor {
   height: 105px;
   min-height: 105px;
   padding: 4px;
   border: 1px solid grey;
   border-radius: 4px;
+}
+.age-system.sheet.char .persona .bio .editor {
+  height: max-content;
+  min-height: 300px;
+  max-height: 600px;
+}
+.age-system.sheet.char .effects ul {
+  list-style-type: none;
+  padding: 0px;
+}
+.age-system.sheet.char .effects .effect-icon {
+  flex: 0 0 24px;
+  height: 24px;
+  object-fit: contain;
+}
+.age-system.sheet.char .effects .value {
+  flex: 0 0 40px;
+}
+.age-system.sheet.char .effects .operation {
+  flex: 0 0 70px;
+}
+.age-system.sheet.char .effects .duration {
+  flex: 0 0 50px;
+}
+.age-system.sheet.char .effects .source {
+  flex: 0 0 200px;
 }
 .age-system.sheet.char input[type="checkbox"] {
   margin: 0px;
@@ -996,25 +1039,6 @@
 }
 .age-system.sheet.char .fill-card {
   max-width: fit-content;
-}
-.age-system.sheet.char ul {
-  list-style-type: none;
-  padding: 0px;
-}
-.age-system.sheet.char .item-container.effects .key {
-  flex: 0 0 200px;
-}
-.age-system.sheet.char .item-container.effects .value {
-  flex: 0 0 40px;
-}
-.age-system.sheet.char .item-container.effects .operation {
-  flex: 0 0 70px;
-}
-.age-system.sheet.char .item-container.effects .duration {
-  flex: 0 0 50px;
-}
-.age-system.sheet.char .item-container.effects .source {
-  flex: 0 0 200px;
 }
 .age-system.sheet.char .item-container {
   flex-wrap: wrap;
@@ -1719,11 +1743,13 @@
   background-color: #007DAD;
   color: #ffffff;
 }
-.colorset-modern-blue .char-sheet .age-header label {
+.colorset-modern-blue .char-sheet .age-header label,
+.colorset-modern-blue .char-sheet .persona label {
   background-color: #007DAD;
   color: #ffffff;
 }
-.colorset-modern-blue .char-sheet .age-header .editor {
+.colorset-modern-blue .char-sheet .age-header .editor,
+.colorset-modern-blue .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-modern-blue .vehicle-stats img {
@@ -1878,11 +1904,13 @@
   background-color: #0f4f5b;
   color: #ffffff;
 }
-.colorset-fantasy-blue .char-sheet .age-header label {
+.colorset-fantasy-blue .char-sheet .age-header label,
+.colorset-fantasy-blue .char-sheet .persona label {
   background-color: #0f4f5b;
   color: #ffffff;
 }
-.colorset-fantasy-blue .char-sheet .age-header .editor {
+.colorset-fantasy-blue .char-sheet .age-header .editor,
+.colorset-fantasy-blue .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-fantasy-blue .vehicle-stats img {
@@ -2037,11 +2065,13 @@
   background-color: #810207;
   color: #ffffff;
 }
-.colorset-dragon-red .char-sheet .age-header label {
+.colorset-dragon-red .char-sheet .age-header label,
+.colorset-dragon-red .char-sheet .persona label {
   background-color: #810207;
   color: #ffffff;
 }
-.colorset-dragon-red .char-sheet .age-header .editor {
+.colorset-dragon-red .char-sheet .age-header .editor,
+.colorset-dragon-red .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-dragon-red .vehicle-stats img {
@@ -2196,11 +2226,13 @@
   background-color: #565183;
   color: #ffffff;
 }
-.colorset-folded-purple .char-sheet .age-header label {
+.colorset-folded-purple .char-sheet .age-header label,
+.colorset-folded-purple .char-sheet .persona label {
   background-color: #565183;
   color: #ffffff;
 }
-.colorset-folded-purple .char-sheet .age-header .editor {
+.colorset-folded-purple .char-sheet .age-header .editor,
+.colorset-folded-purple .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-folded-purple .vehicle-stats img {
@@ -2355,11 +2387,13 @@
   background-color: #155f0e;
   color: #ffffff;
 }
-.colorset-ronin-green .char-sheet .age-header label {
+.colorset-ronin-green .char-sheet .age-header label,
+.colorset-ronin-green .char-sheet .persona label {
   background-color: #155f0e;
   color: #ffffff;
 }
-.colorset-ronin-green .char-sheet .age-header .editor {
+.colorset-ronin-green .char-sheet .age-header .editor,
+.colorset-ronin-green .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-ronin-green .vehicle-stats img {
@@ -2514,11 +2548,13 @@
   background-color: #273249;
   color: #e7ccc3;
 }
-.colorset-select-one .char-sheet .age-header label {
+.colorset-select-one .char-sheet .age-header label,
+.colorset-select-one .char-sheet .persona label {
   background-color: #273249;
   color: #e7ccc3;
 }
-.colorset-select-one .char-sheet .age-header .editor {
+.colorset-select-one .char-sheet .age-header .editor,
+.colorset-select-one .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-select-one .vehicle-stats img {
@@ -2673,11 +2709,13 @@
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
-.colorset-the-grey .char-sheet .age-header label {
+.colorset-the-grey .char-sheet .age-header label,
+.colorset-the-grey .char-sheet .persona label {
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
-.colorset-the-grey .char-sheet .age-header .editor {
+.colorset-the-grey .char-sheet .age-header .editor,
+.colorset-the-grey .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-the-grey .vehicle-stats img {
@@ -2832,11 +2870,13 @@
   background-color: #600000;
   color: #df7c00;
 }
-.colorset-red-warrior .char-sheet .age-header label {
+.colorset-red-warrior .char-sheet .age-header label,
+.colorset-red-warrior .char-sheet .persona label {
   background-color: #600000;
   color: #df7c00;
 }
-.colorset-red-warrior .char-sheet .age-header .editor {
+.colorset-red-warrior .char-sheet .age-header .editor,
+.colorset-red-warrior .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-red-warrior .vehicle-stats img {
@@ -2991,11 +3031,13 @@
   background-color: #663322;
   color: #bb8755;
 }
-.colorset-never-dead .char-sheet .age-header label {
+.colorset-never-dead .char-sheet .age-header label,
+.colorset-never-dead .char-sheet .persona label {
   background-color: #663322;
   color: #bb8755;
 }
-.colorset-never-dead .char-sheet .age-header .editor {
+.colorset-never-dead .char-sheet .age-header .editor,
+.colorset-never-dead .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-never-dead .vehicle-stats img {

@@ -31,14 +31,19 @@ export function localizeAgeEffects() {
     }
 
     const originalEffects = CONFIG.ageSystem[toLocalize];
-    CONFIG.ageSystem.ageEffectsOptions = {};
-
+    let options = [];
     for (const e in originalEffects) {
         if (Object.hasOwnProperty.call(originalEffects, e)) {
             const effect = originalEffects[e];
-            CONFIG.ageSystem.ageEffectsOptions[effect.label] = effect.mask;            
+            options.push([
+                effect.label,
+                effect.mask,
+                e
+            ]);          
         }
     }
+    options = sortObjArrayByName(options, 0);
+    CONFIG.ageSystem.ageEffectsOptions = options;
 }
 
 export function abilitiesName() {

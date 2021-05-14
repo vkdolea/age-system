@@ -241,7 +241,11 @@
 
         "testThreshold": "Threshold",
         "targetCurrent": "Target/Current",
-
+        "charMain": "Main",
+        "charPersona": "Persona",
+        "bio": "Biography",
+        "goals": "Goals",
+        "charEffects": "Effects",
         "conditionsName": "Conditions",
         "conditions": {
             "blinded": "Blinded",

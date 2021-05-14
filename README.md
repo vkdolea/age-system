@@ -89,9 +89,11 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
-### 0.6.5 [2021-xx-xx]
+### 0.7.0 [2021-xx-xx]
 #### Added
 - New layout for Vehicle sheet.
+- Add tabs for Player Character sheet: Main (game stats), Persona (goal, bio, drive), Effects (effects applied to character not related to onwed Items).
+- "Custom" is now an option for Vehicle Velocity parameter, which will highlight the appropriate Damage table row.
 
 #### Fix
 - Expanded "Range" field for weapons to accomodate bigger numbers.

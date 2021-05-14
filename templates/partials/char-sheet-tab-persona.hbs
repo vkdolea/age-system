@@ -1,0 +1,27 @@
+{{!-- Persona Tab --}}
+
+<div class="flexrow container">
+    <label for="">{{localize "age-system.drive.drive"}}</label>
+    <input type="text" name="data.drive.name" value="{{data.data.drive.name}}">          
+
+    <label for="">{{localize "age-system.drive.quality"}}</label>
+    <input type="text" name="data.drive.quality" value="{{data.data.drive.quality}}">          
+
+    <label for="">{{localize "age-system.drive.downfall"}}</label>
+    <input type="text" name="data.drive.downfall" value="{{data.data.drive.downfall}}">          
+</div>
+
+<div class="flexcol goals container">
+    <label for="">{{localize "age-system.goals"}}</label>
+    {{editor content=data.data.goals target="data.goals" button=true owner=owner editable=true}}
+</div>
+
+<div class="flexcol features container">
+    <label for="">{{localize "age-system.features"}}</label>
+    {{editor content=data.data.features target="data.features" button=true owner=owner editable=true}}
+</div>
+
+<div class="flexcol bio container">
+    <label for="">{{localize "age-system.bio"}}</label>
+    {{editor content=data.data.bio target="data.bio" button=true owner=owner editable=true}}
+</div>

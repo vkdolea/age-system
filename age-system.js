@@ -18,16 +18,21 @@ import * as Setup from "./modules/setup.js";
 import * as migrations from "./modules/migration.js";
 
 async function preloadHandlebarsTemplates() {
+    const path = `systems/age-system/templates/partials/`;
     const templatePaths = [
-        "systems/age-system/templates/partials/bonus-desc-sheet.hbs",
-        "systems/age-system/templates/partials/dmg-block-sheet.hbs",
-        "systems/age-system/templates/partials/bonuses-sheet.hbs",
-        "systems/age-system/templates/partials/active-bonuses.hbs",
-        "systems/age-system/templates/partials/ability-focus-select.hbs",
-        "systems/age-system/templates/partials/cost-resource-block.hbs",
-        "systems/age-system/templates/partials/play-aid-bar.hbs",
-        "systems/age-system/templates/partials/item-image-sheet-card.hbs",
-        "systems/age-system/templates/partials/conditions-block.hbs",
+        `${path}bonus-desc-sheet.hbs`,
+        `${path}dmg-block-sheet.hbs`,
+        `${path}bonuses-sheet.hbs`,
+        `${path}active-bonuses.hbs`,
+        `${path}ability-focus-select.hbs`,
+        `${path}/cost-resource-block.hbs`,
+        `${path}play-aid-bar.hbs`,
+        `${path}item-image-sheet-card.hbs`,
+        `${path}conditions-block.hbs`,
+        `${path}char-sheet-nav-bar.hbs`,
+        `${path}char-sheet-tab-main.hbs`,
+        `${path}char-sheet-tab-persona.hbs`,
+        `${path}char-sheet-tab-effects.hbs`,
     ];
 
     return loadTemplates(templatePaths);
@@ -122,6 +127,15 @@ Hooks.once("init", async function() {
         }
         return outStr;
     });
+
+    // Handlebar to identify item type
+    Handlebars.registerHelper('ageffect', function(mask, options) {
+        for (let o = 0; o < options.length; o++) {
+            const e = options[o];
+            if (e[1] === mask) return e[0]
+        }
+        return "";
+    })
 
     // Handlebar helper to compare 2 data
     Handlebars.registerHelper("when",function(operand_1, operator, operand_2, options) {

@@ -1,7 +1,7 @@
 <div class="item-container">
     <div class="top-row colorset-first-tier">{{localize "age-system.conditionsName"}}</div>
     <div class="actor-items flexrow">
-    {{#each config.conditions as |condition|}}
+    {{#each data.config.conditions as |condition|}}
         <div class="item-box conditions flexrow feature-controls colorset-third-tier">
             <div class="item-name flexrow">
                 <input type="checkbox" name="data.conditions.{{condition.id}}" {{checked condition.active}} class="checkbox condition"/>

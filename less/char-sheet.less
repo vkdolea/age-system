@@ -13,7 +13,7 @@
             }
         }
         img {
-            height: 251px;
+            height: 198px;
             width: 150px;
             object-fit: contain;
             border: 0px;
@@ -27,25 +27,95 @@
                 margin-bottom: 4px
             }
 
-            input[name="data.age"],
-            input[name="data.height"],
-            input[name="data.weight"] {
-                max-width: 40px;
+            // input[name="data.age"],
+            // input[name="data.height"],
+            // input[name="data.weight"] {
+            //     max-width: 40px;
+            // }
+            
+            .level-xp {
+                input[type="number"] {
+                    text-align: center;
+                }
             }
-
             label {
                 white-space: nowrap;
                 max-width: fit-content;
                 padding: 4px;
-                flex: 1 min-content fit-content;
+                flex: 0 0 fit-content;
             }
+            // .editor {
+            //     height: 105px;
+            //     min-height: 105px;
+            //     padding: 4px;
+            //     border: 1px solid grey;
+            //     border-radius: 4px;
+            // };
+        }
+    }
+
+    nav.add-sheet-tabs {
+        .active{
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+    }
+    .persona {
+        .container {
+            margin-bottom: 4px;
+        }
+        .features,
+        .goals,
+        .bio {
+            label {
+                max-width: none;
+                text-align: center;
+            }
+        }
+
+        label {
+            white-space: nowrap;
+            max-width: fit-content;
+            padding: 4px;
+            flex: 0 0 fit-content;
+        }
+
+        .editor {
+            height: 105px;
+            min-height: 105px;
+            padding: 4px;
+            border: 1px solid grey;
+            border-radius: 4px;
+        };
+        .bio {
             .editor {
-                height: 105px;
-                min-height: 105px;
-                padding: 4px;
-                border: 1px solid grey;
-                border-radius: 4px;
-            };
+                height: max-content;
+                min-height: 300px;
+                max-height: 600px;
+            }
+        }
+    }
+    .effects {
+        ul {
+            list-style-type: none;
+            padding: 0px;
+        }
+        .effect-icon {
+            flex: 0 0 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        .value {
+            flex: 0 0 40px;
+        }
+        .operation {
+            flex: 0 0 70px;
+        }
+        .duration {
+            flex: 0 0 50px;
+        }
+        .source {
+            flex: 0 0 200px;
         }
     }
 
@@ -255,34 +325,7 @@
     .fill-card {
         max-width: fit-content;
     }
-    // Effects styling
-    ul {
-        list-style-type: none;
-        padding: 0px;
-    }
-    .item-container.effects {
-        .key {
-            flex: 0 0 200px;
-        }
-        .value {
-            flex: 0 0 40px;
-        }
-        .operation {
-            flex: 0 0 70px;
-        }
-        .duration {
-            flex: 0 0 50px;
-        }
-        .source {
-            flex: 0 0 200px;
-        }
-    }
-    // <p class="key">Key</p>
-    // <p class="value">Value</p>
-    // <p class="operation">Operation</p>
-    // <p class="duration">Duration</p>
-    // <p class="source">Source</p>
-    // End of Effects Styling
+    
     .item-container {
         flex-wrap: wrap;
         resize: vertical;

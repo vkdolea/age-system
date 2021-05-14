@@ -73,6 +73,7 @@
                             {{#each data.config.velocityCategory as |category|}}
                             <option value="{{@key}}">{{localize (concat "age-system." @key)}}</option>
                             {{/each}}
+                            <option value="velCustom">{{localize (concat "age-system.velCustom")}}</option>
                             {{/select}}
                         </select>    
                         <span>/</span>
@@ -148,7 +149,7 @@
                     </p>
                 </li>
                 {{/each}}
-                <li class="flexrow flex-align-center">
+                <li class="flexrow flex-align-center {{#if (eq data.data.velocity.category "velCustom")}}highlight{{/if}}">
                     <p class="velocity">{{localize "age-system.velCustom"}}</p>
                     <p class="feature-controls flexrow flex-align-center flex-justify-center custom-velocity collision" data-qtd-dice="{{data.data.customCollisionDmg}}d6">
                         <input type="number" name="data.customCollisionDmg" value="{{data.data.customCollisionDmg}}" data-dtype="Number">
