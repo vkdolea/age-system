@@ -5,36 +5,63 @@
         {{!-- Effects & Conditions Block --}}
         <ul class="item-container effects">
             <li class="flexrow header colorset-first-tier">
-                <p class="source">Source</p>
-                <p class="key"><a>+</a> Key</p>
-                <p class="value">Value</p>
-                <p class="operation">Operation</p>
-                <p class="duration">Duration</p>
+                {{!-- <p class="effect-icon">I</p> --}}
+                <p class="effect-name">Name</p>
+                {{!-- <p class="effect-source">Origin</p> --}}
+                <p class="effect-key">Key</p>
+                <p class="effect-operation">Operation</p>
+                <p class="effect-value">Value</p>
+                <p class="effect-add"><a><i class="fa fa-plus-circle" aria-hidden="true"></i></a></p>
             </li>
             {{log this}}
             {{#each data.effects as |effect|}}
-            <li class="flexrow colorset-third-tier feature-controls" data-effect-id="{{effect._id}}">
-                <img class="effect-icon" src="{{effect.icon}}">
-                <p class="effect-name"><a>{{effect.label}}</a></p>
-                <ul class="flexcol">
+            <li class="flexrow colorset-third-tier elements feature-controls" data-effect-id="{{effect._id}}">
+                {{!-- <img class="effect-icon" src="{{effect.icon}}"> --}}
+                <div class="effect-name flexrow">
+                    <img class="effect-icon" src="{{effect.icon}}">
+                    <p>{{effect.label}}</p>
+                </div>
+                {{!-- <p class="effect-source">{{effect.origin}}</p> --}}
+                <div class="flexcol effect-key">
                     {{#each effect.changes as |change|}}
-                    <li class="flexrow">
-                        <p class="key">{{ageffect change.key ../../data.config.ageEffectsOptions}}</p>
-                        <p class="operation">
-                            {{#if (eq change.mode 0)}}{{ localize "EFFECT.MODE_CUSTOM" }}{{/if}}
+                    <p>{{ageffect change.key ../../data.config.ageEffectsOptions}}</p>
+                    {{/each}}
+                </div>
+                <div class="flexcol effect-operation">
+                    {{#each effect.changes as |change|}}
+                    <p>{{#if (eq change.mode 0)}}{{ localize "EFFECT.MODE_CUSTOM" }}{{/if}}
+                        {{#if (eq change.mode 1)}}{{ localize "EFFECT.MODE_MULTIPLY" }}{{/if}}
+                        {{#if (eq change.mode 2)}}{{ localize "EFFECT.MODE_ADD" }}{{/if}}
+                        {{#if (eq change.mode 3)}}{{ localize "EFFECT.MODE_DOWNGRADE" }}{{/if}}
+                        {{#if (eq change.mode 4)}}{{ localize "EFFECT.MODE_UPGRADE" }}{{/if}}
+                        {{#if (eq change.mode 5)}}{{ localize "EFFECT.MODE_OVERRIDE" }}{{/if}}
+                    {{/each}}
+                </div>
+                <div class="flexcol effect-value">
+                    {{#each effect.changes as |change|}}
+                    <p>{{change.value}}</p>
+                    {{/each}}
+                </div>
+                {{!-- <ul class="flexcol key-list no-flexwrap">
+                    {{#each effect.changes as |change|}}
+                    <li class="flexrow no-flexwrap elements">
+                        <p class="effect-key">{{ageffect change.key ../../data.config.ageEffectsOptions}}</p>
+                        <p class="effect-operation">{{#if (eq change.mode 0)}}{{ localize "EFFECT.MODE_CUSTOM" }}{{/if}}
                             {{#if (eq change.mode 1)}}{{ localize "EFFECT.MODE_MULTIPLY" }}{{/if}}
                             {{#if (eq change.mode 2)}}{{ localize "EFFECT.MODE_ADD" }}{{/if}}
                             {{#if (eq change.mode 3)}}{{ localize "EFFECT.MODE_DOWNGRADE" }}{{/if}}
                             {{#if (eq change.mode 4)}}{{ localize "EFFECT.MODE_UPGRADE" }}{{/if}}
                             {{#if (eq change.mode 5)}}{{ localize "EFFECT.MODE_OVERRIDE" }}{{/if}}
                         </p>
-                        <p class="value">{{change.value}}</p>
+                        <p class="effect-value">{{change.value}}</p>
                     </li>
                     {{/each}}
-                </ul>
-                <a class="active-effect"><i class="fa fa-check" aria-hidden="true"></i></a>
-                <a class="edit-effect"><i class="fas fa-edit"></i></a>
-                <a class="remove-effect"><i class="fas fa-trash"></i></a>
+                </ul> --}}
+                <div class="effect-add">
+                    <a class="effect-active icon {{#if effect.disabled}}inactive{{/if}}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                    <a class="effect-edit icon"><i class="fas fa-edit"></i></a>
+                    <a class="effect-remove icon"><i class="fas fa-trash"></i></a>
+                </div>
             </li>
             {{/each}}
         </ul>

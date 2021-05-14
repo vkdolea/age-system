@@ -95,28 +95,78 @@
             }
         }
     }
-    .effects {
-        ul {
+    .item-container.effects {
+        ul.effects {
+            margin-top: 0;
+            padding: 0;
             list-style-type: none;
-            padding: 0px;
+            .header {
+                justify-content: center;
+                p {
+                    text-align: center;
+                    // margin: auto 0;
+                }
+                p.effect-name {
+                    text-align: left;
+                }
+            }
         }
-        .effect-icon {
-            flex: 0 0 24px;
+        li.elements {
+            // padding: 0 1%;
+            margin-top: 4px;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            p {
+                text-align: center;
+            }
+        }
+        // .effect-icon {
+        //     flex: 0 0 5%;
+        // }
+        img.effect-icon {
             height: 24px;
-            object-fit: contain;
+            flex: 0 0 24px;
+            object-fit: contain;    
         }
-        .value {
-            flex: 0 0 40px;
+        div.effect-name {
+            align-items: center;
+            text-align: left;
+            p {
+             text-align: left;
+             padding-left: 4px;
+            }
         }
-        .operation {
-            flex: 0 0 70px;
+        .effect-name.effect-name {
+            flex: 0 0 25%;
+            text-align: left;
         }
-        .duration {
-            flex: 0 0 50px;
+        // .effect-origin {
+        //     flex: 0 0 150px;
+        // }
+        .effect-key {
+            flex: 0 0 30%;
         }
-        .source {
-            flex: 0 0 200px;
+        .effect-operation {
+            flex: 0 0 15%;
         }
+        .effect-value {
+            flex: 0 0 15%;
+        }
+        .effect-add{
+            padding-right: 4px;
+            flex: 0 0 10%;
+            text-align: center;
+            .inactive {
+                opacity: 0.2;
+            }
+        }
+        // .controls {
+        //     flex: 0 0 10%;
+        //     // a.icon {
+        //     //     color: red;
+        //     // }
+        // }
     }
 
     input[type="checkbox"] {

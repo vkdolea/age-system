@@ -98,6 +98,7 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 #### Fix
 - Expanded "Range" field for weapons to accomodate bigger numbers.
 - Issue causing modified Ability value to be hidden even when a Modifier was applied to it.
+- Bug freezing Maximum Conviction to 3.
 - Code cleanup.
 
 ### 0.6.5 [2021-05-01]

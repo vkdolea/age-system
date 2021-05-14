@@ -134,7 +134,7 @@ Hooks.once("init", async function() {
             const e = options[o];
             if (e[1] === mask) return e[0]
         }
-        return "";
+        return game.i18n.localize("age-system.custom");
     })
 
     // Handlebar helper to compare 2 data

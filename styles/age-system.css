@@ -845,26 +845,62 @@
   min-height: 300px;
   max-height: 600px;
 }
-.age-system.sheet.char .effects ul {
+.age-system.sheet.char .item-container.effects ul.effects {
+  margin-top: 0;
+  padding: 0;
   list-style-type: none;
-  padding: 0px;
 }
-.age-system.sheet.char .effects .effect-icon {
-  flex: 0 0 24px;
+.age-system.sheet.char .item-container.effects ul.effects .header {
+  justify-content: center;
+}
+.age-system.sheet.char .item-container.effects ul.effects .header p {
+  text-align: center;
+}
+.age-system.sheet.char .item-container.effects ul.effects .header p.effect-name {
+  text-align: left;
+}
+.age-system.sheet.char .item-container.effects li.elements {
+  margin-top: 4px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.age-system.sheet.char .item-container.effects li.elements p {
+  text-align: center;
+}
+.age-system.sheet.char .item-container.effects img.effect-icon {
   height: 24px;
+  flex: 0 0 24px;
   object-fit: contain;
 }
-.age-system.sheet.char .effects .value {
-  flex: 0 0 40px;
+.age-system.sheet.char .item-container.effects div.effect-name {
+  align-items: center;
+  text-align: left;
 }
-.age-system.sheet.char .effects .operation {
-  flex: 0 0 70px;
+.age-system.sheet.char .item-container.effects div.effect-name p {
+  text-align: left;
+  padding-left: 4px;
 }
-.age-system.sheet.char .effects .duration {
-  flex: 0 0 50px;
+.age-system.sheet.char .item-container.effects .effect-name.effect-name {
+  flex: 0 0 25%;
+  text-align: left;
 }
-.age-system.sheet.char .effects .source {
-  flex: 0 0 200px;
+.age-system.sheet.char .item-container.effects .effect-key {
+  flex: 0 0 30%;
+}
+.age-system.sheet.char .item-container.effects .effect-operation {
+  flex: 0 0 15%;
+}
+.age-system.sheet.char .item-container.effects .effect-value {
+  flex: 0 0 15%;
+}
+.age-system.sheet.char .item-container.effects .effect-add {
+  padding-right: 4px;
+  flex: 0 0 10%;
+  text-align: center;
+}
+.age-system.sheet.char .item-container.effects .effect-add .inactive {
+  opacity: 0.2;
 }
 .age-system.sheet.char input[type="checkbox"] {
   margin: 0px;

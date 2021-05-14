@@ -13,7 +13,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             tabs: [{
                 navSelector: ".add-sheet-tabs",
                 contentSelector: ".sheet-tab-section",
-                initial: "main"
+                initial: "effects"
             }]
         });
     }
@@ -139,9 +139,10 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
             html.find(".roll-resources").click(this._onRollResources.bind(this));
             html.find(".item-equip").click(this._onItemActivate.bind(this));
-            html.find(".edit-effect").click(this._onChangeEffect.bind(this));
-            // html.find(".remove-effect").click(this._onRemoveEffect.bind(this));
-            // html.find(".active-effect").click(this._onActiveEffect.bind(this));
+            html.find(".effect-edit").click(this._onChangeEffect.bind(this));
+            html.find(".effect-remove").click(this._onRemoveEffect.bind(this));
+            html.find(".effect-active").click(this._onActiveEffect.bind(this));
+            html.find("p.effect-add").click(this._onAddEffect.bind(this));
 
             let handler = ev => this._onDragStart(ev);
             // Find all rollable items on the character sheet.
@@ -156,6 +157,23 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
         super.activateListeners(html);
     };
+
+    _onAddEffect(event) {
+        const newEffect = {
+            label: game.i18n.localize("age-system.item.newItem"),
+            origin: this.actor.uuid,
+            icon: `icons/svg/aura.svg`,
+            disabled: true
+        };
+        return this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+    }
+
+    _onActiveEffect(event){
+        const effectId = event.currentTarget.closest(".feature-controls").dataset.effectId;
+        const effect = this.actor.effects.get(effectId);
+        const isDisabled = effect.data.disabled;
+        effect.update({"disabled": !isDisabled})
+    }
 
     _onChangeEffect(event){
         const effectId = event.currentTarget.closest(".feature-controls").dataset.effectId;
