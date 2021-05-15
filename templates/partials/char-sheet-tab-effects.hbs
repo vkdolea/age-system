@@ -15,7 +15,6 @@
                 <p class="effect-add"><a><i class="fa fa-plus-circle" aria-hidden="true"></i></a></p>
             </li>
             {{#each data.effects as |effect|}}
-            {{#if (ne effect.flags.["age-system"].type "conditions")}}
             <li class="flexrow colorset-third-tier elements feature-controls" data-effect-id="{{effect._id}}">
                 <div class="effect-name flexrow">
                     <img class="effect-icon" src="{{effect.icon}}">
@@ -47,7 +46,6 @@
                     <a class="effect-remove icon"><i class="fas fa-trash"></i></a>
                 </div>
             </li>
-            {{/if}}
             {{/each}}
         </ul>
     </div>
