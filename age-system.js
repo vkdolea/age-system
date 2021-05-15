@@ -313,3 +313,256 @@ Hooks.on("preCreateItem", (itemCreated, itemCreatedData, data, userId) => {
         }
     }
 })
+
+// Creates Standard Conditions (Active Effect) when actor is created
+Hooks.on("createActor", (actor, data, actorId) => {
+    if (actor.data.type !== "char") return;
+    // Creating each Active Effect
+    // Definition of basic conditions
+    const conditions = [
+        {
+            label: game.i18n.localize("age-system.conditions.blinded"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/magic/defensive/illusion-evasion-echo-purple.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.blindedDesc")
+                }
+            }
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.deafened"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/magic/sonic/bell-alarm-red-purple.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.deafenedDesc")
+                }
+            }
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.dying"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/magic/life/heart-broken-red.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.dyingDesc")
+                }
+            }
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.exhausted"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/magic/unholy/strike-body-explode-disintegrate.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.exhaustedDesc")
+                }
+            },
+            changes: [{
+                key: "data.speed.total",
+                mode: 1,
+                value: "0.5"
+            }]
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.fatigued"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/magic/unholy/strike-body-life-soul-purple.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.fatiguedDesc")
+                }
+            }
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.freefalling"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/magic/air/air-pressure-shield-blue.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.freefallingDesc")
+                }
+            }
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.helpless"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/magic/control/sihouette-hold-beam-green.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.helplessDesc")
+                }
+            }
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.hindered"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/magic/control/debuff-chains-shackles-movement-blue.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.hinderedDesc")
+                }
+            }
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.injured"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/skills/wounds/injury-face-impact-orange.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.injuriedDesc")
+                }
+            },
+            changes: [{
+                key: "data.speed.total",
+                mode: 1,
+                value: "0.5"
+            },
+            {
+                key: "data.testMod",
+                mode: 2,
+                value: "-1"
+            }]
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.prone"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/skills/wounds/injury-face-impact-orange.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.proneDesc")
+                }
+            }
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.restrained"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.restrainedDesc")
+                }
+            },
+            changes: [{
+                key: "data.speed.total",
+                mode: 5,
+                value: "0"
+            }]
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.unconscious"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/magic/control/silhouette-fall-slip-prone.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.unconsciousDesc")
+                }
+            },
+            changes: [{
+                key: "data.speed.total",
+                mode: 5,
+                value: "0"
+            }]
+        },
+        {
+            label: game.i18n.localize("age-system.conditions.wounded"),
+            disabled: true,
+            origin: actor.uuid,
+            icon: "icons/skills/wounds/injury-face-impact-orange.webp",
+            duration: {
+                startRound: 1,
+                rounds: 9999,
+            },
+            flags: {
+                "age-system": {
+                    type: "conditions",
+                    description: game.i18n.localize("age-system.conditions.woundedDesc")
+                }
+            },
+            changes: [{
+                key: "data.speed.total",
+                mode: 1,
+                value: "0.5"
+            },
+            {
+                key: "data.testMod",
+                mode: 2,
+                value: "-2"
+            }]
+        }
+    ]
+    actor.createEmbeddedDocuments("ActiveEffect", conditions);
+})
