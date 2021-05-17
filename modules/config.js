@@ -88,9 +88,9 @@ ageSystem.conditions = [
         id: "helpless"
     },
     {
-        name: "age-system.conditions.hindred",
-        desc: "age-system.conditions.hindredDesc",
-        id: "hindred"
+        name: "age-system.conditions.hindered",
+        desc: "age-system.conditions.hinderedDesc",
+        id: "hindered"
     },
     {
         name: "age-system.conditions.prone",
@@ -256,6 +256,249 @@ const uiElementsPath = "systems/age-system/resources/imgs/ui-elements/";
 ageSystem.uiElements = {
     ageRoller: `${uiElementsPath}cube.svg`
 }
+
+const AGEstatusEffectsPath = "systems/age-system/resources/imgs/effects/";
+ageSystem.AGEstatusEffects = [
+    {
+        icon: `${AGEstatusEffectsPath}number.png`,
+        id: `num0`,
+        label: `0`,
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-1.png`,
+        id: `num1`,
+        label: `1`
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-2.png`,
+        id: `num2`,
+        label: `2`
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-3.png`,
+        id: `num3`,
+        label: `3`
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-4.png`,
+        id: `num4`,
+        label: `4`
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-5.png`,
+        id: `num5`,
+        label: `5`
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-6.png`,
+        id: `num6`,
+        label: `6`
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-7.png`,
+        id: `num7`,
+        label: `7`
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-8.png`,
+        id: `num8`,
+        label: `8`
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-9.png`,
+        id: `num9`,
+        label: `9`
+    },
+    {
+        icon: `${AGEstatusEffectsPath}cancel.png`,
+        id: `dead`,
+        label: `EFFECT.StatusDead`
+    },
+    {
+        icon: `${AGEstatusEffectsPath}liberty-wing.png`,
+        id: `flying`,
+        label: `EFFECT.StatusFlying`
+    },
+    {
+        label: "age-system.conditions.blinded",
+        // id: "blinded",
+        icon: "icons/magic/defensive/illusion-evasion-echo-purple.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "blinded",
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.deafened",
+        id: "deafened",
+        icon: "icons/magic/sonic/bell-alarm-red-purple.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "deafened",
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.dying",
+        id: "dying",
+        icon: "icons/magic/life/heart-broken-red.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "dying"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.exhausted",
+        id: "exhausted",
+        icon: "icons/magic/unholy/strike-body-explode-disintegrate.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "exhausted"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 1,
+            value: "0.5"
+        }]
+    },
+    {
+        label: "age-system.conditions.fatigued",
+        id: "fatigued",
+        icon: "icons/magic/unholy/strike-body-life-soul-purple.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "fatigued"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.freefalling",
+        id: "freefalling",
+        icon: "icons/magic/air/air-pressure-shield-blue.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "freefalling"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.helpless",
+        id: "helpless",
+        icon: "icons/magic/control/sihouette-hold-beam-green.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "helpless"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.hindered",
+        id: "hindered",
+        icon: "icons/magic/control/debuff-chains-shackles-movement-blue.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "hindered"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.injured",
+        id: "injured",
+        icon: "icons/skills/wounds/injury-face-impact-orange.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "injured"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 1,
+            value: "0.5"
+        },
+        {
+            key: "data.testMod",
+            mode: 2,
+            value: "-1"
+        }]
+    },
+    {
+        label: "age-system.conditions.prone",
+        id: "prone",
+        icon: "icons/skills/wounds/injury-face-impact-orange.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "prone"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.restrained",
+        id: "restrained",
+        icon: "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "restrained"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 5,
+            value: "0"
+        }]
+    },
+    {
+        label: "age-system.conditions.unconscious",
+        id: "unconscious",
+        icon: "icons/magic/control/silhouette-fall-slip-prone.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "unconscious"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 5,
+            value: "0"
+        }]
+    },
+    {
+        label: "age-system.conditions.wounded",
+        id: "wounded",
+        icon: "icons/skills/wounds/injury-face-impact-orange.webp",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                condition: "wounded"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 1,
+            value: "0.5"
+        },
+        {
+            key: "data.testMod",
+            mode: 2,
+            value: "-2"
+        }]
+    }
+    
+];
 
 ageSystem.ageEffectsKeys = {
     "actorOverAllBonus": {label: "age-system.bonus.actorOverAllBonus", mask: "data.testMod"},

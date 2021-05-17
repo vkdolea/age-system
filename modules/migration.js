@@ -242,8 +242,8 @@ function _addActorConditions(actor, updateData) {
 function _addVehicleCustomDmg(actor, updateData) {
   if (actor.type !== "vehicle") return updateData;
 
-  if (!actor.data.hasOwnProperty(customSideswipeDmg)) updateData["data.customSideswipeDmg"] = 1;
-  if (!actor.data.hasOwnProperty(customCollisionDmg)) updateData["data.customCollisionDmg"] = 1;
+  if (!actor.data.hasOwnProperty('customSideswipeDmg')) updateData["data.customSideswipeDmg"] = 1;
+  if (!actor.data.hasOwnProperty('customCollisionDmg')) updateData["data.customCollisionDmg"] = 1;
 
   return updateData
 }
@@ -256,25 +256,27 @@ function _addVehicleCustomDmg(actor, updateData) {
  function _addActorMods(actor, updateData) {
   if (actor.type !== "char") return updateData;
 
-  if (!actor.data.hasOwnProperty(dmgMod)) updateData["data.dmgMod"] = 0;
-  if (!actor.data.hasOwnProperty(testMod)) updateData["data.testMod"] = 0;
-  if (!actor.data.hasOwnProperty(attackMod)) updateData["data.attackMod"] = 0;
+  if (!actor.data.hasOwnProperty('dmgMod')) updateData["data.dmgMod"] = 0;
+  if (!actor.data.hasOwnProperty('testMod')) updateData["data.testMod"] = 0;
+  if (!actor.data.hasOwnProperty('attackMod')) updateData["data.attackMod"] = 0;
 
   return updateData;
 }
 /* -------------------------------------------- */
 
 /**
- * Add extra Persona data fields for Player Character
+ * Add extra Persona data fields for Player Character (bio and secretNote)
  * @private
  */
  function _addActorPersonaFields(actor, updateData) {
   if (actor.type !== "char") return updateData;
 
-  if (!actor.data.hasOwnProperty(bio)) {
+  if (!actor.data.hasOwnProperty('bio')) {
     updateData["data.bio"] = actor.data.features;
     updateData["data.features"] = "";
   }
+  if (!actor.data.hasOwnProperty('secretNote')) updateData['data.secretNote'] = "";
+
   return updateData;
 }
 

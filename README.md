@@ -83,6 +83,11 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - [Processor](https://game-icons.net/1x1/lorc/processor.html) (Spaceship Features icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
 
+### Token Stats Icons
+Icons made by:
+- [Pixel Buddha]("https://www.flaticon.com/authors/pixel-buddha") from [www.flaticon.com]("https://www.flaticon.com/"). 
+- [Delapouite](https://delapouite.com/) from [game-icons.net](https://game-icons.net/).
+
 ### Localization
 - **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
 - **Brazilian Portuguese**: by Discord user *Leandro_Soares#9067*.
@@ -92,8 +97,12 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 ### 0.7.0 [2021-xx-xx]
 #### Added
 - New layout for Vehicle sheet.
-- Add tabs for Player Character sheet: Main (game stats), Persona (goal, bio, drive), Effects (effects applied to character not related to onwed Items).
+- Add tabs for Player Character sheet: Main (game stats), Persona (character notes), Effects (effects applied to character).
+- Added a few text fields: Biography, Goals and Player & GM Secret Notes (only GM and actor owner can see this field).
 - "Custom" is now an option for Vehicle Velocity parameter, which will highlight the appropriate Damage table row.
+- When creating a new token, Bar1 will be set to Health/Fortune and Bar2 will be set as Power (Magic) Points (if using this rule is on) or it will be set to Conditions (if this option is in use). If none is used, Bar2 will not be filled.
+- When a token is created out of a Player Owned character/vehicle/spaceship, token's Disposition will be set Friendly.
+- Player Owned actors tokens will always be created with the Link Actor Data option checked. It can be changed afterwards.
 
 #### Fix
 - Expanded "Range" field for weapons to accomodate bigger numbers.

@@ -823,7 +823,8 @@
 }
 .age-system.sheet.char .persona .features label,
 .age-system.sheet.char .persona .goals label,
-.age-system.sheet.char .persona .bio label {
+.age-system.sheet.char .persona .bio label,
+.age-system.sheet.char .persona .secret-note label {
   max-width: none;
   text-align: center;
 }
@@ -844,6 +845,10 @@
   height: max-content;
   min-height: 300px;
   max-height: 600px;
+}
+.age-system.sheet.char .persona .secret-note .editor {
+  height: max-content;
+  max-height: 300px;
 }
 .age-system.sheet.char .item-container.effects ul.effects {
   margin-top: 0;

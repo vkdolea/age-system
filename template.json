@@ -134,8 +134,10 @@
             },
             "features": "",
             "bio": "",
+            "goals": "",
             "age": "",
             "background": "",
+            "secretNote": "",
             "socialClass": "",
             "ancestry": "",
             "profession": "",
@@ -173,7 +175,6 @@
             "sp": 0,
             "cp": 0,
             "currency": 0,
-            "goals": "",
             "fear": 0,
             "horror": {
                 "level": 0,

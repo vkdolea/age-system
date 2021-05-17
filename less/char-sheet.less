@@ -66,7 +66,8 @@
         }
         .features,
         .goals,
-        .bio {
+        .bio,
+        .secret-note {
             label {
                 max-width: none;
                 text-align: center;
@@ -93,6 +94,12 @@
                 min-height: 300px;
                 max-height: 600px;
             }
+        };
+        .secret-note {
+            .editor {
+                height: max-content;
+                max-height: 300px;
+            }
         }
     }
     .item-container.effects {
@@ -112,7 +119,6 @@
             }
         }
         li.elements {
-            // padding: 0 1%;
             margin-top: 4px;
             border-radius: 10px;
             align-items: center;
@@ -121,9 +127,6 @@
                 text-align: center;
             }
         }
-        // .effect-icon {
-        //     flex: 0 0 5%;
-        // }
         img.effect-icon {
             height: 24px;
             flex: 0 0 24px;
@@ -141,9 +144,6 @@
             flex: 0 0 25%;
             text-align: left;
         }
-        // .effect-origin {
-        //     flex: 0 0 150px;
-        // }
         .effect-key {
             flex: 0 0 30%;
         }
@@ -408,8 +408,7 @@
                 padding: 4px;
                 
                 /* Position the tooltip */
-                // TODO - create listener to position tooltips close to mouse pointer
-                position: fixed;
+                position: absolute;
                 z-index: 10;
                 top: 50px;
                 left: 50px;

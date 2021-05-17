@@ -149,6 +149,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".effect-remove").click(this._onRemoveEffect.bind(this));
             html.find(".effect-active").click(this._onActiveEffect.bind(this));
             html.find("p.effect-add").click(this._onAddEffect.bind(this));
+            html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));
 
             let handler = ev => this._onDragStart(ev);
             // Find all rollable items on the character sheet.
@@ -162,6 +163,21 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         };
 
         super.activateListeners(html);
+    };
+
+    _onTooltipHover(event){
+        const tipCont = event.currentTarget.querySelector(".container-tooltip-text");
+        const windowSize = {
+            x: event.view.innerWidth,
+            y: event.view.innerHeight
+        };
+        let xPos = event.clientX;
+        let yPos = event.clientY;
+        tipCont.style.top = `${yPos - tipCont.clientHeight - 5}px`;
+
+        const xMargin = windowSize.x - (xPos + tipCont.clientWidth);
+        if (xMargin < 0) xPos += xMargin;
+        tipCont.style.left = `${xPos}px`;
     };
 
     _onAddEffect(event) {

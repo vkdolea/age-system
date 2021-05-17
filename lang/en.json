@@ -245,6 +245,7 @@
         "charPersona": "Persona",
         "bio": "Biography",
         "goals": "Goals",
+        "secretNote": "Player & GM Secret Notes",
         "charEffects": "Effects",
         "conditionsName": "Conditions",
         "conditions": {
@@ -260,8 +261,8 @@
             "freefallingDesc": "The character is effectively weightless in a microgravity or free-fall environment. They can only move using handholds, a surface to push off from, or some type of thrust. Once moving, they continue to move with the same speed and trajectory unless acted upon to stop or change their movement.",
             "helpless": "Helpless",
             "helplessDesc": "The character is incapable of doing anything. They cannot take any actions.",
-            "hindred": "Hindered",
-            "hindredDesc": "The character's Speed is halved (round down) and they cannot take the Charge or Run actions.",
+            "hindered": "Hindered",
+            "hinderedDesc": "The character's Speed is halved (round down) and they cannot take the Charge or Run actions.",
             "prone": "Prone",
             "proneDesc": "The character is lying on the ground. They cannot take the Charge or Run actions, as they can only move by crawling. Standing up from prone requires a Move action using half the character's Speed. Against prone characters, melee attacks have a +1 bonus and ranged attacks have a -1 penalty.",
             "restrained": "Restrained",
