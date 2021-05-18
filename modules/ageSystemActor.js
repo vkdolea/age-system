@@ -197,7 +197,9 @@ export class ageSystemActor extends Actor {
                                             
             default:
                 break;
-        };        
+        };
+        
+        // this._validateActiveConditions();
     };
 
     _prepareBaseDataVehicle() {
@@ -370,6 +372,24 @@ export class ageSystemActor extends Actor {
         // data.juiceMod
 
     };
+
+    _validateActiveConditions() {
+        const condStatus = this.data.data.conditions;
+        const activeCond = this.effects;
+        // const activeCond = this.effects.filter(e => e.flags["age-system"]?.type === "conditions");
+        for (const c in condStatus) {
+            if (Object.hasOwnProperty.call(condStatus, c)) {
+                const activeEffectArg = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.condition === c )[0];
+                const isActive = condStatus[c];
+                const cd = activeCond.filter(e => e.data.flags?.["age-system"]?.type === "conditions" && e.data.flags?.["age-system"]?.condition === c)[0];
+                // if (!cd && isActive) this.createEmbeddedDocuments("ActiveEffect", []);
+                if (cd && !isActive) this.effects.get(cd.data._id).delete();
+                if (!cd && isActive) {
+                    this.createEmbeddedDocuments("ActiveEffect", [activeEffectArg]);
+                }
+            }
+        }
+    }
 
     _addSensorBonus(base, mod, bonus) {
         const sensorLoss = -this.data.data.losses.normal.sensors.actual;

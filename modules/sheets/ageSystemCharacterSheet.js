@@ -95,9 +95,10 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
         // Sorting Active Effects by Name
         // Separating Effects related to Conditions
-        data.condEffects = data.effects.filter(e => e.flags["age-system"]?.type === "conditions");
+        data.condEffects = data.effects.filter(e => e.flags?.["age-system"]?.type === "conditions");
         // All other Effects
-        data.effects = data.effects.filter(e => !e.flags["age-system"]?.type || e.flags["age-system"]?.type !== "conditions");
+        data.effects = data.effects.filter(e => !e.flags?.["age-system"]?.type);
+        data.effects = sortObjArrayByName(data.effects, `label`);
     
         // Retrieve Prefession/Ancestry settings
         data.ancestry = game.settings.get("age-system", "ancestryOpt");
@@ -124,6 +125,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     };
     
     activateListeners(html) {
+        html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));
         if (this.isEditable) {
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
@@ -149,7 +151,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".effect-remove").click(this._onRemoveEffect.bind(this));
             html.find(".effect-active").click(this._onActiveEffect.bind(this));
             html.find("p.effect-add").click(this._onAddEffect.bind(this));
-            html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));
+            html.find(".condition-checkbox").change(this._onChangeCondition.bind(this));
 
             let handler = ev => this._onDragStart(ev);
             // Find all rollable items on the character sheet.
@@ -165,6 +167,26 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         super.activateListeners(html);
     };
 
+    _onChangeCondition(event) {
+        const isChecked = event.currentTarget.checked;
+        const condId = event.currentTarget.closest(".feature-controls").dataset.conditionId;
+        const condEffects = this.actor.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name == condId);
+        if (!isChecked && condEffects.length < 1) return;
+        if (isChecked && condEffects.length === 1) return;
+        if (!isChecked && condEffects.length > 0) {
+            for (let c = 0; c < condEffects.length; c++) {
+                const effect = condEffects[c];
+                const id = effect.data._id;
+                this.actor.effects.get(id).delete();                
+            }
+        }
+        if (isChecked && condEffects.length < 1) {
+            const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
+            newEffect["flags.core.statusId"] = newEffect.id;
+            this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+        }
+
+    }
     _onTooltipHover(event){
         const tipCont = event.currentTarget.querySelector(".container-tooltip-text");
         const windowSize = {

@@ -282,7 +282,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 });
 
 // Prevent Items to be created on non campatible Actor types
-Hooks.on("preCreateItem", (itemCreated, itemCreatedData, data, userId) => {
+Hooks.on("preCreateItem", (itemCreated, itemCreatedData, options, userId) => {
     const actor = itemCreated.actor;
     const itemName = itemCreatedData.name
     const itemType = itemCreatedData.type
@@ -290,21 +290,21 @@ Hooks.on("preCreateItem", (itemCreated, itemCreatedData, data, userId) => {
     // Avoid dropping Item on Vehicle
     if (actor.type === "vehicle") {
         ui.notifications.warn(`Items can not be droped on Vehicle Actor type.`);
-        return data.temporary = true;
+        return options.temporary = true;
     };
 
     // Ensure only Spaceship Features are droped on Spaceships
     if (actor.type === "spaceship" && itemType !== "shipfeatures") {
         let warning = game.i18n.localize("age-system.WARNING.nonShipPartsOnShip");
         ui.notifications.warn(warning);
-        return data.temporary = true;
+        return options.temporary = true;
     }
     
     // Prevent adding spaceship features to Actors
     if (actor.type === "char" && itemType === "shipfeatures") {
         let warning = game.i18n.localize("age-system.WARNING.shipPartsOnChar");
         ui.notifications.warn(warning);
-        return data.temporary = true;
+        return options.temporary = true;
     }
     
     // Avoid Focus with repeated name on Actors
@@ -314,12 +314,12 @@ Hooks.on("preCreateItem", (itemCreated, itemCreatedData, data, userId) => {
             let warning = game.i18n.localize("age-system.WARNING.duplicatedFocus");
             warning += `"${itemName.toUpperCase()}"`;
             ui.notifications.warn(warning);
-            return data.temporary = true;
+            return options.temporary = true;
         }
     }
 });
 
-Hooks.on("preCreateToken", (tokenDocument, tokenData, tempData, tokenId) => {
+Hooks.on("preCreateToken", (tokenDocument, tokenData, options, userId) => {
     if (tokenDocument.actor.data.type !== "char") return;
     if (!tokenData.bar1.attribute) tokenData.bar1.attribute = "health";
     if (!tokenData.bar2.attribute) tokenData.bar2.attribute = game.settings.get("age-system", "usePowerPoints") ? "powerPoints" : (game.settings.get("age-system", "useConviction") ? "conviction" : null);
@@ -327,4 +327,32 @@ Hooks.on("preCreateToken", (tokenDocument, tokenData, tempData, tokenId) => {
         tokenData.disposition = 1;
         tokenData.actorLink = true;
     };
+})
+
+Hooks.on("preCreateActiveEffect", (activeEffect, activeEffectData, options, userId) => {
+    const isCondition = activeEffectData.flags?.["age-system"]?.type === "conditions" ? true : false;
+    if(isCondition) {
+        const condId = activeEffectData.flags["age-system"].name;
+        const actor = activeEffect.parent;
+        const isChecked = actor.data.data.conditions[condId];
+        if (!isChecked) {
+            const path = `data.conditions.${condId}`;
+            const updateData = {[path]: true};
+            actor.update(updateData);
+        }
+    }
+})
+
+Hooks.on("preDeleteActiveEffect", (activeEffect, options, userId) => {
+    const isCondition = activeEffect.data.flags?.["age-system"]?.type === "conditions" ? true : false;
+    if(isCondition) {
+        const condId = activeEffect.data.flags["age-system"].name;
+        const actor = activeEffect.parent;
+        const isChecked = actor.data.data.conditions[condId];
+        if (isChecked) {
+            const path = `data.conditions.${condId}`;
+            const updateData = {[path]: false};
+            actor.update(updateData);
+        }
+    }
 })

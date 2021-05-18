@@ -103,6 +103,8 @@ Icons made by:
 - When creating a new token, Bar1 will be set to Health/Fortune and Bar2 will be set as Power (Magic) Points (if using this rule is on) or it will be set to Conditions (if this option is in use). If none is used, Bar2 will not be filled.
 - When a token is created out of a Player Owned character/vehicle/spaceship, token's Disposition will be set Friendly.
 - Player Owned actors tokens will always be created with the Link Actor Data option checked. It can be changed afterwards.
+- Conditions (The Expanse) set as Icon Status, and also possible to change on Character sheet.
+- Conditions tooltip now pops up close to mouse pointer.
 
 #### Fix
 - Expanded "Range" field for weapons to accomodate bigger numbers.

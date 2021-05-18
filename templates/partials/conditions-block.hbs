@@ -2,15 +2,17 @@
     <div class="top-row colorset-first-tier">{{localize "age-system.conditionsName"}}</div>
     <div class="actor-items flexrow">
     {{#each data.config.conditions as |condition|}}
-        <div class="item-box conditions flexrow feature-controls colorset-third-tier">
+    {{#unless (eq @key "hindred")}}
+        <div class="item-box conditions flexrow feature-controls colorset-third-tier" data-condition-id="{{condition.id}}">
             <div class="item-name flexrow">
-                <input type="checkbox" name="data.conditions.{{condition.id}}" {{checked condition.active}} class="checkbox condition"/>
+                <input class="condition-checkbox" type="checkbox" name="data.conditions.{{condition.id}}" {{checked condition.active}} class="checkbox condition"/>
                 <div class="tooltip-container">
                     <p>{{condition.name}}</p>
                     <span class="container-tooltip-text colorset-second-tier"><b>{{condition.name}}:</b> {{condition.desc}}</span>
                 </div>
             </div>
         </div>
+    {{/unless}}
     {{/each}}
     </div>
 </div>

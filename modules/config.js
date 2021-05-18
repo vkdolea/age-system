@@ -263,92 +263,152 @@ ageSystem.AGEstatusEffects = [
         icon: `${AGEstatusEffectsPath}number.png`,
         id: `num0`,
         label: `0`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}number-1.png`,
         id: `num1`,
-        label: `1`
+        label: `1`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}number-2.png`,
         id: `num2`,
-        label: `2`
+        label: `2`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}number-3.png`,
         id: `num3`,
-        label: `3`
+        label: `3`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}number-4.png`,
         id: `num4`,
-        label: `4`
+        label: `4`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}number-5.png`,
         id: `num5`,
-        label: `5`
+        label: `5`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}number-6.png`,
         id: `num6`,
-        label: `6`
+        label: `6`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}number-7.png`,
         id: `num7`,
-        label: `7`
+        label: `7`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}number-8.png`,
         id: `num8`,
-        label: `8`
+        label: `8`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}number-9.png`,
         id: `num9`,
-        label: `9`
+        label: `9`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}cancel.png`,
         id: `dead`,
-        label: `EFFECT.StatusDead`
+        label: `EFFECT.StatusDead`,
+        flags: {
+            "age-system": {
+                type: "core"
+            }
+        }
     },
     {
         icon: `${AGEstatusEffectsPath}liberty-wing.png`,
         id: `flying`,
-        label: `EFFECT.StatusFlying`
+        label: `EFFECT.StatusFlying`,
+        flags: {
+            "age-system": {
+                type: "misc"
+            }
+        }
     },
     {
         label: "age-system.conditions.blinded",
-        // id: "blinded",
-        icon: "icons/magic/defensive/illusion-evasion-echo-purple.webp",
+        id: "blinded",
+        icon: "icons/svg/blind.svg",
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "blinded",
+                name: "blinded",
             }
         }
     },
     {
         label: "age-system.conditions.deafened",
         id: "deafened",
-        icon: "icons/magic/sonic/bell-alarm-red-purple.webp",
+        icon: "icons/svg/deaf.svg",
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "deafened",
+                name: "deafened",
             }
         }
     },
     {
         label: "age-system.conditions.dying",
         id: "dying",
-        icon: "icons/magic/life/heart-broken-red.webp",
+        icon: "icons/svg/skull.svg",
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "dying"
+                name: "dying"
             }
         }
     },
@@ -359,7 +419,7 @@ ageSystem.AGEstatusEffects = [
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "exhausted"
+                name: "exhausted"
             }
         },
         changes: [{
@@ -386,7 +446,7 @@ ageSystem.AGEstatusEffects = [
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "freefalling"
+                name: "freefalling"
             }
         }
     },
@@ -397,7 +457,7 @@ ageSystem.AGEstatusEffects = [
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "helpless"
+                name: "helpless"
             }
         }
     },
@@ -408,7 +468,7 @@ ageSystem.AGEstatusEffects = [
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "hindered"
+                name: "hindered"
             }
         }
     },
@@ -419,7 +479,7 @@ ageSystem.AGEstatusEffects = [
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "injured"
+                name: "injured"
             }
         },
         changes: [{
@@ -436,11 +496,11 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.prone",
         id: "prone",
-        icon: "icons/skills/wounds/injury-face-impact-orange.webp",
+        icon: "icons/svg/falling.svg",
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "prone"
+                name: "prone"
             }
         }
     },
@@ -451,7 +511,7 @@ ageSystem.AGEstatusEffects = [
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "restrained"
+                name: "restrained"
             }
         },
         changes: [{
@@ -463,11 +523,11 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.unconscious",
         id: "unconscious",
-        icon: "icons/magic/control/silhouette-fall-slip-prone.webp",
+        icon: "icons/svg/unconscious.svg",
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "unconscious"
+                name: "unconscious"
             }
         },
         changes: [{
@@ -479,11 +539,11 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.wounded",
         id: "wounded",
-        icon: "icons/skills/wounds/injury-face-impact-orange.webp",
+        icon: "icons/skills/wounds/injury-triple-slash-bleed.webp",
         flags: {
             "age-system": {
                 type: "conditions",
-                condition: "wounded"
+                name: "wounded"
             }
         },
         changes: [{

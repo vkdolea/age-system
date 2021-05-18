@@ -205,7 +205,7 @@ export const migrateSceneData = function(scene) {
 function _addActorConditions(actor, updateData) {
   if (actor.type !== "char") return updateData;
   
-  const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindred",
+  const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindered",
   "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
 
   // Add Conditions - added a fix
@@ -230,6 +230,8 @@ function _addActorConditions(actor, updateData) {
       udpateData[condString] = false;    
     }
   };
+
+  if (actor.data.conditions.hasOwnProperty("hindred")) updateData[{"data.conditions.hindered": actor.data.conditions.hindred}]
 
   return updateData
 }
