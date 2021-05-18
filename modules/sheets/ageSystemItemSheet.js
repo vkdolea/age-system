@@ -95,6 +95,10 @@ export default class ageSystemItemSheet extends ItemSheet {
     activateListeners(html) {
 
         if (this.isEditable) {
+            
+            html.find("a.add-bonus").click(this._onAddBonus.bind(this));
+            html.find(".mod-controls a.remove").click(this._onRemoveBonus.bind(this));
+            html.find(".mod-controls a.toggle").click(this._onToggleBonus.bind(this));
 
             if (this.item.data.type === "focus") {
                 if (this.item.isOwned) {
@@ -122,6 +126,55 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         super.activateListeners(html);
     };
+    
+    _onToggleBonus(event) {
+        const modType = event.currentTarget.closest(".feature-controls").dataset.modType;
+        const isActivePath = `data.itemMods.${modType}.isActive`;
+        const isActive = this.item.data.data.itemMods[modType].isActive;
+        this.item.update({[isActivePath]: !isActive});
+    }
+
+    _onRemoveBonus(event){
+        const modType = event.currentTarget.closest(".feature-controls").dataset.modType;
+        const modPath = `data.itemMods.${modType}`;
+        const selectedPath = modPath + ".selected";
+        const isActivePath = modPath + ".isActive";
+        this.item.update({[selectedPath]: false, [isActivePath]: false});
+    };
+
+    async _onAddBonus(event) {
+        const bonusList = this.item.data.data.itemMods;
+        let bonusOptions = {};
+        for (const mod in bonusList) {
+            if (Object.hasOwnProperty.call(bonusList, mod)) {
+                const b = bonusList[mod];
+                if (!b.selected) {
+                    const modName = game.i18n.localize(`age-system.bonus.${mod}`);
+                    const updatePath = `data.itemMods.${mod}.selected`;
+                    bonusOptions = {
+                        ...bonusOptions,
+                        [mod]: {
+                            label: modName,
+                            callback: () => this.item.update({[updatePath]: true})
+                        }
+                    }
+                }
+            }
+        }
+        if (bonusOptions === {}) return;
+        const template = `systems/age-system/templates/bonus-select-form.hbs`;
+        const html = await renderTemplate(template, {bonusOptions, item: this.item})
+        return new Promise(resolve => {
+            const data = {
+                title: false,
+                content: html,
+                buttons: bonusOptions,
+                default: "cancel",
+                close: () => resolve({cancelled: true}),
+            }
+            new Dialog(data, {classes: ["age-system-dialog", "bonus-select", "dialog"]}).render(true);
+        });
+    }
 
     _onToggleDamage(event) {
         const toggleDmg = !this.item.data.data.causeDamage;

@@ -25,7 +25,7 @@ async function preloadHandlebarsTemplates() {
         `${path}bonuses-sheet.hbs`,
         `${path}active-bonuses.hbs`,
         `${path}ability-focus-select.hbs`,
-        `${path}/cost-resource-block.hbs`,
+        `${path}cost-resource-block.hbs`,
         `${path}play-aid-bar.hbs`,
         `${path}item-image-sheet-card.hbs`,
         `${path}conditions-block.hbs`,
@@ -287,6 +287,8 @@ Hooks.on("preCreateItem", (itemCreated, itemCreatedData, options, userId) => {
     const itemName = itemCreatedData.name
     const itemType = itemCreatedData.type
 
+    if (!actor) return;
+
     // Avoid dropping Item on Vehicle
     if (actor.type === "vehicle") {
         ui.notifications.warn(`Items can not be droped on Vehicle Actor type.`);
@@ -319,13 +321,18 @@ Hooks.on("preCreateItem", (itemCreated, itemCreatedData, options, userId) => {
     }
 });
 
-Hooks.on("preCreateToken", (tokenDocument, tokenData, options, userId) => {
+Hooks.on("createToken", (tokenDocument, options, userId) => {
     if (tokenDocument.actor.data.type !== "char") return;
-    if (!tokenData.bar1.attribute) tokenData.bar1.attribute = "health";
-    if (!tokenData.bar2.attribute) tokenData.bar2.attribute = game.settings.get("age-system", "usePowerPoints") ? "powerPoints" : (game.settings.get("age-system", "useConviction") ? "conviction" : null);
+    if (!tokenDocument.data.bar1.attribute) tokenDocument.update({"bar1.attribute": "health"});
+    if (!tokenDocument.data.bar2.attribute) {
+        const barData = game.settings.get("age-system", "usePowerPoints") ? "powerPoints" : (game.settings.get("age-system", "useConviction") ? "conviction" : null);
+        tokenDocument.update({"bar2.attribute": barData});
+    }
     if (tokenDocument.actor.hasPlayerOwner) {
-        tokenData.disposition = 1;
-        tokenData.actorLink = true;
+        tokenDocument.update({
+            "disposition": 1,
+            "actorLink": true
+        });
     };
 })
 

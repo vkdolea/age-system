@@ -13,45 +13,10 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             tabs: [{
                 navSelector: ".add-sheet-tabs",
                 contentSelector: ".sheet-tab-section",
-                initial: "effects"
+                initial: "main"
             }]
         });
     }
-
-    focusContextMenu = [
-        {
-            name: game.i18n.localize("age-system.settings.edit"),
-            icon: '<i class="fas fa-edit"></i>',
-            callback: e => {
-                const item = this.actor.getOwnedItem(e.data("item-id"));
-                item.sheet.render(true);
-            }
-        },
-        {
-            name: game.i18n.localize("age-system.settings.delete"),
-            icon: '<i class="fas fa-trash"></i>',
-            callback: e => {
-                const i = this.actor.deleteOwnedItem(e.data("item-id"));
-            }
-        },
-        {
-            name: game.i18n.localize("age-system.settings.changeRollContext"),
-            icon: '<i class="fas fa-exchange-alt"></i>',
-            // TODO - try to add the Shift + Click rolling to GM inside this callback
-            callback: e => {
-                const focus = this.actor.getOwnedItem(e.data("item-id"));
-                const ev = new MouseEvent('click', {});
-                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, selectAbl: true});
-            }
-        },
-        {
-            name: "Show Item",
-            icon: '<i class="far fa-eye"></i>',
-            callback: e => {
-                const i = this.actor.getOwnedItem(e.data("item-id")).showItem();
-            }
-        }
-    ];
 
     get template() {
         return `systems/age-system/templates/sheets/${this.actor.data.type}-sheet.hbs`;
@@ -338,4 +303,39 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         const actor = isToken ? game.actors.tokens[this.actor.token.data.id] : this.actor;
         return actor;
     }
+
+    focusContextMenu = [
+        {
+            name: game.i18n.localize("age-system.settings.edit"),
+            icon: '<i class="fas fa-edit"></i>',
+            callback: e => {
+                const item = this.actor.getOwnedItem(e.data("item-id"));
+                item.sheet.render(true);
+            }
+        },
+        {
+            name: game.i18n.localize("age-system.settings.delete"),
+            icon: '<i class="fas fa-trash"></i>',
+            callback: e => {
+                const i = this.actor.deleteOwnedItem(e.data("item-id"));
+            }
+        },
+        {
+            name: game.i18n.localize("age-system.settings.changeRollContext"),
+            icon: '<i class="fas fa-exchange-alt"></i>',
+            // TODO - try to add the Shift + Click rolling to GM inside this callback
+            callback: e => {
+                const focus = this.actor.getOwnedItem(e.data("item-id"));
+                const ev = new MouseEvent('click', {});
+                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, selectAbl: true});
+            }
+        },
+        {
+            name: "Show Item",
+            icon: '<i class="far fa-eye"></i>',
+            callback: e => {
+                const i = this.actor.getOwnedItem(e.data("item-id")).showItem();
+            }
+        }
+    ];
 }

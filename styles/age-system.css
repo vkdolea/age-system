@@ -745,35 +745,151 @@
 .age-system.item .vehicle .item-card-desc label:last-of-type {
   margin-top: 4px;
 }
-.age-system.item .focus .item-card-desc .mod-card,
-.age-system.item .power .item-card-desc .mod-card,
-.age-system.item .talent .item-card-desc .mod-card,
-.age-system.item .weapon .item-card-desc .mod-card,
-.age-system.item .equipment .item-card-desc .mod-card,
-.age-system.item .stunts .item-card-desc .mod-card,
-.age-system.item .honorifics .item-card-desc .mod-card,
-.age-system.item .relationship .item-card-desc .mod-card,
-.age-system.item .membership .item-card-desc .mod-card,
-.age-system.item .shipfeatures .item-card-desc .mod-card,
-.age-system.item .vehicle .item-card-desc .mod-card {
-  border-radius: 10px;
-  max-width: 150px;
-  min-width: 150px;
-  height: 70px;
+.age-system.item .focus .item-card-desc ul.mod-card,
+.age-system.item .power .item-card-desc ul.mod-card,
+.age-system.item .talent .item-card-desc ul.mod-card,
+.age-system.item .weapon .item-card-desc ul.mod-card,
+.age-system.item .equipment .item-card-desc ul.mod-card,
+.age-system.item .stunts .item-card-desc ul.mod-card,
+.age-system.item .honorifics .item-card-desc ul.mod-card,
+.age-system.item .relationship .item-card-desc ul.mod-card,
+.age-system.item .membership .item-card-desc ul.mod-card,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card,
+.age-system.item .vehicle .item-card-desc ul.mod-card {
   margin: 4px;
   padding: 4px;
+  border: none;
 }
-.age-system.item .focus .item-card-desc .mod-card input[type="number"],
-.age-system.item .power .item-card-desc .mod-card input[type="number"],
-.age-system.item .talent .item-card-desc .mod-card input[type="number"],
-.age-system.item .weapon .item-card-desc .mod-card input[type="number"],
-.age-system.item .equipment .item-card-desc .mod-card input[type="number"],
-.age-system.item .stunts .item-card-desc .mod-card input[type="number"],
-.age-system.item .honorifics .item-card-desc .mod-card input[type="number"],
-.age-system.item .relationship .item-card-desc .mod-card input[type="number"],
-.age-system.item .membership .item-card-desc .mod-card input[type="number"],
-.age-system.item .shipfeatures .item-card-desc .mod-card input[type="number"],
-.age-system.item .vehicle .item-card-desc .mod-card input[type="number"] {
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item {
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  text-align: center;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item p {
+  text-align: center;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type {
+  flex: 0 0 30%;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value {
+  flex: 0 0 50%;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"] {
+  margin: 2px 0;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls {
+  flex: 0 0 20%;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i {
+  width: fit-content;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive {
+  opacity: 0.2;
+}
+.age-system.item .focus .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .power .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .talent .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .weapon .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .equipment .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .stunts .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .honorifics .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .relationship .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .membership .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .shipfeatures .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .vehicle .item-card-desc ul.mod-card input[type="number"] {
   max-width: 40px;
   min-width: 40px;
   text-align: center;
@@ -1081,6 +1197,9 @@
 .age-system.sheet.char .fill-card {
   max-width: fit-content;
 }
+.age-system.sheet.char .item-container.conditions {
+  overflow: hidden;
+}
 .age-system.sheet.char .item-container {
   flex-wrap: wrap;
   resize: vertical;
@@ -1111,8 +1230,8 @@
   border-radius: 5px;
   padding: 4px;
   /* Position the tooltip */
-  position: fixed;
-  z-index: 10;
+  position: absolute;
+  z-index: 99;
   top: 50px;
   left: 50px;
 }
@@ -3325,6 +3444,9 @@
   background-image: none;
   background: none;
   background-color: rgba(207, 194, 188, 0.6);
+}
+.age-system-dialog.bonus-select button.dialog-button {
+  flex: 0 0 45%;
 }
 .age-system {
   /*---------Flexbox assisting classes------*/

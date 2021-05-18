@@ -439,6 +439,7 @@
         "value": "Value",
 
         "itemMod": "Modifiers",
+        "itemModSelect": "Select new Modifier Type",
         "bonus": {
             "type": "Type",
             "value": "Value",

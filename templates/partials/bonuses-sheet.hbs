@@ -1,21 +1,26 @@
 <div class="flexrow modificators-table">
-    {{#each data.data.itemMods as | modType |}}
-    {{#when @key 'noteq' 'focus'}}
-
-    <div class="flexrow {{@key}}-mod mod-card colorset-second-tier flex-align-center">
-        <div class="flexcol flex-align-center">
-            {{localize (concat "age-system.bonus." @key)}}
-            <div class="flexrow">
-                <input type="checkbox" name="data.itemMods.{{@key}}.isActive" {{checked modType.isActive}}/>
-                <input type="number" name="data.itemMods.{{@key}}.value" value="{{modType.value}}" data-dtype="Number" />
+    <ul class="mod-card">
+        <li class="mod-item header flexrow colorset-first-tier">
+            <p class="mod-type">Mod Type</p>
+            <p class="mod-value">Mod Value</p>
+            <p class="mod-controls"><a class="add-bonus"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></p>
+        </li>
+        {{#each data.data.itemMods as |mod|}}
+        {{#if mod.selected}}
+        <li class="mod-item flexrow feature-controls colorset-third-tier" data-mod-type="{{@key}}">
+            <p class="mod-type">{{localize (concat "age-system.bonus." @key)}}</p>
+            <div class="mod-value">
+                <input type="number" name="data.itemMods.{{@key}}.value" value="{{mod.value}}" data-dtype="Number" />
+                {{#if (eq @key "focus")}}
+                <input type="text" name="data.itemMods.{{@key}}.name" value="{{mod.name}}" placeholder="{{localize "age-system.focus"}}" data-dtype="String" />
+                {{/if}}
             </div>
-        </div>
-    </div>
-
-    {{/when}}
-    {{/each}}
+            <div class="mod-controls">
+                <a class="toggle {{#unless mod.isActive}}inactive{{/unless}}"><i class="fas fa-power-off"></i></a>
+                <a class="remove"><i class="fa fa-trash"></i></a>
+            </div>
+        </li>
+        {{/if}}
+        {{/each}}
+    </ul>
 </div>
-
-{{!-- <div class="flexrow modificators-table">
-
-</div> --}}

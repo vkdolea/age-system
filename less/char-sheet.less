@@ -161,12 +161,6 @@
                 opacity: 0.2;
             }
         }
-        // .controls {
-        //     flex: 0 0 10%;
-        //     // a.icon {
-        //     //     color: red;
-        //     // }
-        // }
     }
 
     input[type="checkbox"] {
@@ -376,6 +370,9 @@
         max-width: fit-content;
     }
     
+    .item-container.conditions {
+        overflow: hidden;
+    }
     .item-container {
         flex-wrap: wrap;
         resize: vertical;
@@ -409,7 +406,7 @@
                 
                 /* Position the tooltip */
                 position: absolute;
-                z-index: 10;
+                z-index: 99;
                 top: 50px;
                 left: 50px;
                 
