@@ -5,6 +5,26 @@ import * as Dice from "./dice.js";
 export class ageSystemActor extends Actor {
 
     /** @override */
+    prepareData() {
+        super.prepareData();
+
+        /*Add post data preparation mods here*/
+    }
+
+    /** @override */
+    prepareEmbeddedEntities() {
+        const embeddedTypes = this.constructor.metadata.embedded || {};
+        for ( let cls of Object.values(embeddedTypes) ) {
+          const collection = cls.metadata.collection;
+          for ( let e of this[collection] ) {
+            e.prepareData();
+          }
+        }
+        
+        // Apply Item Modifiers to Actor before applying Active Effects!
+
+        this.applyActiveEffects();
+    }
 
     prepareBaseData() {
         const actorData = this.data;
@@ -134,17 +154,6 @@ export class ageSystemActor extends Actor {
             data.speed.mod = 0;
         };
         data.speed.total =  Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
-        // if (data.useConditions) {
-        //     if (data.conditions.helpless || data.conditions.restrained) {
-        //         data.speed.total = 0;
-        //     }
-        //     if ((data.conditions.exhausted && !data.conditions.hindred) || (!data.conditions.exhausted && data.conditions.hindred)) {
-        //         data.speed.total = Math.floor(data.speed.total/2);
-        //     } else if (data.conditions.exhausted && data.conditions.hindred) {
-        //         data.speed.total = Math.floor(data.speed.total/4);
-        //     }
-        // }
-        /*----------------------------------------------------*/
         
         /*--- Calculate Max Health ---------------------------*/
         if (bonuses != null && bonuses.maxHealth) {

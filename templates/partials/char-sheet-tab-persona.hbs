@@ -11,9 +11,16 @@
     <input type="text" name="data.drive.downfall" value="{{data.data.drive.downfall}}">          
 </div>
 
-<div class="flexcol goals container">
-    <label for="">{{localize "age-system.goals"}}</label>
-    {{editor content=data.data.goals target="data.goals" button=true owner=owner editable=true}}
+<div class="flexrow goals-language">
+    <div class="flexcol goals container">
+        <label>{{localize "age-system.goals"}}</label>
+        {{editor content=data.data.goals target="data.goals" button=true owner=owner editable=true}}
+    </div>
+    <div class="spacer"></div>
+    <div class="flexcol language container">
+        <label>{{localize "age-system.language"}}</label>
+        {{editor content=data.data.language target="data.language" button=true owner=owner editable=true}}
+    </div>
 </div>
 
 <div class="flexcol features container">

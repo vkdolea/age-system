@@ -930,9 +930,17 @@
   padding: 4px;
   flex: 0 0 fit-content;
 }
+.age-system.sheet.char nav.add-sheet-tabs {
+  justify-content: space-evenly;
+}
+.age-system.sheet.char nav.add-sheet-tabs a.char {
+  max-width: max-content;
+  padding: 2px 4px;
+}
 .age-system.sheet.char nav.add-sheet-tabs .active {
-  text-transform: uppercase;
   font-weight: 900;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
 }
 .age-system.sheet.char .persona .container {
   margin-bottom: 4px;
@@ -940,9 +948,13 @@
 .age-system.sheet.char .persona .features label,
 .age-system.sheet.char .persona .goals label,
 .age-system.sheet.char .persona .bio label,
-.age-system.sheet.char .persona .secret-note label {
+.age-system.sheet.char .persona .secret-note label,
+.age-system.sheet.char .persona .language label {
   max-width: none;
   text-align: center;
+}
+.age-system.sheet.char .persona .goals-language .spacer {
+  flex: 0 0 4px;
 }
 .age-system.sheet.char .persona label {
   white-space: nowrap;
@@ -1230,10 +1242,8 @@
   border-radius: 5px;
   padding: 4px;
   /* Position the tooltip */
-  position: absolute;
-  z-index: 99;
-  top: 50px;
-  left: 50px;
+  position: fixed;
+  z-index: 10;
 }
 .age-system.sheet.char .item-container .item-box .tooltip-container:hover .container-tooltip-text {
   visibility: visible;

@@ -172,7 +172,8 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             label: game.i18n.localize("age-system.item.newItem"),
             origin: this.actor.uuid,
             icon: `icons/svg/aura.svg`,
-            disabled: true
+            disabled: true,
+            duration: {rounds: 1}
         };
         return this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
     }

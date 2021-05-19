@@ -3,7 +3,7 @@
     <div class="actor-items flexrow">
     {{#each data.config.conditions as |condition|}}
     {{#unless (eq @key "hindred")}}
-        <div class="item-box conditions flexrow feature-controls colorset-third-tier" data-condition-id="{{condition.id}}">
+        <div class="item-box conditions flexrow feature-controls {{#if condition.active}}colorset-second-tier{{else}}colorset-third-tier{{/if}}" data-condition-id="{{condition.id}}">
             <div class="item-name flexrow">
                 <input class="condition-checkbox" type="checkbox" name="data.conditions.{{condition.id}}" {{checked condition.active}} class="checkbox condition"/>
                 <div class="tooltip-container">

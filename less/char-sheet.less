@@ -26,12 +26,6 @@
             >div {
                 margin-bottom: 4px
             }
-
-            // input[name="data.age"],
-            // input[name="data.height"],
-            // input[name="data.weight"] {
-            //     max-width: 40px;
-            // }
             
             .level-xp {
                 input[type="number"] {
@@ -55,9 +49,15 @@
     }
 
     nav.add-sheet-tabs {
+        justify-content: space-evenly;
+        a.char {
+            max-width: max-content;
+            padding: 2px 4px;
+        }
         .active{
-            text-transform: uppercase;
             font-weight: 900;
+            background-color: rgba(256, 256, 256, 0.3);
+            border-radius: 5px;
         }
     }
     .persona {
@@ -67,10 +67,16 @@
         .features,
         .goals,
         .bio,
-        .secret-note {
+        .secret-note,
+        .language {
             label {
                 max-width: none;
                 text-align: center;
+            }
+        }
+        .goals-language {
+            .spacer {
+                flex: 0 0 4px;
             }
         }
 
@@ -405,10 +411,8 @@
                 padding: 4px;
                 
                 /* Position the tooltip */
-                position: absolute;
-                z-index: 99;
-                top: 50px;
-                left: 50px;
+                position: fixed;
+                z-index: 10;
                 
             }
             .tooltip-container:hover .container-tooltip-text {

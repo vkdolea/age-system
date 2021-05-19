@@ -278,6 +278,7 @@ function _addVehicleCustomDmg(actor, updateData) {
     updateData["data.features"] = "";
   }
   if (!actor.data.hasOwnProperty('secretNote')) updateData['data.secretNote'] = "";
+  if (!actor.data.hasOwnProperty('language')) updateData['data.language'] = "";
 
   return updateData;
 }
