@@ -42,9 +42,9 @@ export default class ageSystemItemSheet extends ItemSheet {
     static get defaultOptions() {        
         
         return mergeObject(super.defaultOptions, {
-            height: 340,
+            height: 450,
             width: 516,
-            classes: ["age-system", "sheet", "item", /*`colorset-${ageSystem.colorScheme}`,*/ "colorset-second-tier"],
+            classes: ["age-system", "sheet", "item", "colorset-second-tier"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",
                 contentSelector: ".sheet-tab-section",

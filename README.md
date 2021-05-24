@@ -96,12 +96,14 @@ Icons made by:
 ## Change log
 ### 0.7.0 [2021-xx-xx]
 #### Added
-- New layout for Vehicle sheet.
+- New fancy layout for Vehicle sheet.
 - Add tabs for Player Character sheet: Main (game stats), Persona (character notes), Effects (effects applied to character).
-- Added a few text fields: Biography, Goals and Player & GM Secret Notes (only GM and actor owner can see this field).
+- Main Tab: the usual rollable game stats.
+- Persona Tab: Biography (AKA the old nameless field in the header), Distinctive Features, Languages, Goals and Player & GM Secret Notes (only GM and actor owner can see this field).
+- Effects Tab: a hub for all Conditions, Active Effects and bonuses granted from Items. Conditions and Active Effects are managed here, and bonuses from Items must be managed by accessing Item sheet (there is a convinient button to access the item).
 - "Custom" is now an option for Vehicle Velocity parameter, which will highlight the appropriate Damage table row.
 - When creating a new token, Bar1 will be set to Health/Fortune and Bar2 will be set as Power (Magic) Points (if using this rule is on) or it will be set to Conditions (if this option is in use). If none is used, Bar2 will not be filled.
-- When a token is created out of a Player Owned character/vehicle/spaceship, token's Disposition will be set Friendly.
+- When a token is created out of a Player Owned character/vehicle/spaceship, token's Disposition will be set to Friendly.
 - Player Owned actors tokens will always be created with the Link Actor Data option checked. It can be changed afterwards.
 - Conditions (The Expanse) set as Icon Status, and also possible to change on Character sheet.
 - Conditions tooltip now pops up close to mouse pointer.

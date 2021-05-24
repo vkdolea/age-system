@@ -330,9 +330,14 @@ Hooks.on("createToken", (tokenDocument, options, userId) => {
     }
     if (tokenDocument.actor.hasPlayerOwner) {
         tokenDocument.update({
+            "displayBars": 10,
             "disposition": 1,
             "actorLink": true
         });
+    } else {
+        tokenDocument.update({
+            "displayBars": 20,
+        })
     };
 })
 

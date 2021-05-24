@@ -160,7 +160,6 @@
             },
             "armor": {
                 "toughness": {
-                    "total": 0,
                     "mod": 0,
                     "gameModeBonus": 0
                 },
@@ -290,7 +289,7 @@
                 "freefalling": false,
                 "helpless": false,
                 "hindred": false,
-            "hindered": false,
+                "hindered": false,
                 "prone": false,
                 "restrained": false,
                 "injured": false,
