@@ -4,8 +4,8 @@
     {{!-- Conditions Block --}}
     {{> "systems/age-system/templates/partials/conditions-block.hbs"}}
     {{/if}}
+    {{!-- Active Effects Block --}}
     <div class="actor-items flexrow">
-        {{!-- Effects & Conditions Block --}}
         <ul class="item-container effects">
             <li class="flexrow header colorset-first-tier">
                 <p class="effect-name">Name</p>
@@ -33,17 +33,58 @@
                         {{#if (eq change.mode 3)}}{{ localize "EFFECT.MODE_DOWNGRADE" }}{{/if}}
                         {{#if (eq change.mode 4)}}{{ localize "EFFECT.MODE_UPGRADE" }}{{/if}}
                         {{#if (eq change.mode 5)}}{{ localize "EFFECT.MODE_OVERRIDE" }}{{/if}}
+                    </p>
                     {{/each}}
                 </div>
                 <div class="flexcol effect-value">
                     {{#each effect.changes as |change|}}
-                    <p>{{change.value}}</p>
+                    <p>{{#if change.value}}{{change.value}}{{else}}-{{/if}}</p>
                     {{/each}}
                 </div>
                 <div class="effect-add">
                     <a class="effect-active icon {{#if effect.disabled}}inactive{{/if}}"><i class="fas fa-power-off"></i></a>
                     <a class="effect-edit icon"><i class="fas fa-edit"></i></a>
                     <a class="effect-remove icon"><i class="fas fa-trash"></i></a>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    {{!-- Item Modifiers Block --}}
+    <div class="actor-items flexrow">
+        <ul class="item-container modifiers">
+            <li class="flexrow header colorset-first-tier">
+                <p class="mod-name">Type</p>
+                <div class="mod-value flexrow">
+                    <p class="value">Value</p>
+                    <p class="icon">Control</p>
+                </div>
+                <p class="mod-source">Source</p>
+            </li>
+            {{#each itemMods as |items modType|}}
+            <li class="flexrow colorset-third-tier elements">
+                <div class="mod-name flexrow">
+                    <p>{{localize (concat "age-system.bonus." modType)}}</p>
+                </div>
+                <div class="flexcol mod-value">
+                    {{#each items as |item|}}
+                    <div class="flexrow value-data">
+                        {{#if (eq modType "focus")}}
+                        <p class="value">{{#with (lookup item.data.itemMods [modType])~}}{{name}}, {{value}}{{/with}}</p>
+                        {{else}}
+                        <p class="value">{{#with (lookup item.data.itemMods [modType])~}}{{value}}{{/with}}</p>
+                        {{/if}}
+                        {{#with (lookup item.data.itemMods [modType])~}}
+                        <p class="icon"><a class="mod-active icon {{#unless isActive}}inactive{{/unless}}" data-mod-type="{{modType}}" data-item-id="{{item._id}}"><i class="fas fa-power-off"></i></a></p>
+                        {{/with}}
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="flexcol mod-source">
+                    {{#each items as |item|}}
+                    <p class="item-edit" data-item-id={{item._id}}><a>{{item.name}}</a></p>
+                    {{/each}}
                 </div>
             </li>
             {{/each}}

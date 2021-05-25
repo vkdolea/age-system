@@ -14,6 +14,20 @@ export function localizeConfig(toLocalize, noSort) {
     }
 }
 
+export function localizeModifiers() {
+    const toLocalize = ["bonusTypes"]
+    // Localize and sort CONFIG objects
+    for ( let o of toLocalize ) {
+        const localized = Object.entries(CONFIG.ageSystem[o]).map(e => {
+            return [e[0], game.i18n.localize(e[1])];
+        });
+        CONFIG.ageSystem[o] = localized.reduce((obj, e) => {
+            obj[e[0]] = e[1];
+            return obj;
+        }, {});
+    }
+}
+
 export function localizeAgeEffects() {
     const toLocalize = ["ageEffectsKeys"];
 

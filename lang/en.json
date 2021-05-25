@@ -248,6 +248,7 @@
         "language": "Languages",
         "secretNote": "Player & GM Secret Notes",
         "charEffects": "Effects",
+        "custom": "Custom",
         "conditionsName": "Conditions",
         "conditions": {
             "blinded": "Blinded",
@@ -460,6 +461,7 @@
             "itemDamage": "This Item Damage",
             "actorOverAllBonus": "All Rolls",
             "actorDamage": "All Damage",
+            "actorTest": "All Tests",
             "charAbl": "Ability",
             "focus": "Focus",
             "defense": "Defense",

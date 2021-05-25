@@ -7,18 +7,70 @@ export class ageSystemActor extends Actor {
     /** @override */
     prepareData() {
         super.prepareData();
+        // Sorting Items for final data preparation
+        const items = this.items;
+        // First prepare Focus
+        items.forEach(i => {
+            if (i.data.type === "focus") i.prepareData()
+        })
+        // Then prepare other item types which require further prep
+        items.forEach(i => {
+            if (["weapon", "power"].includes(i.data.type)) i.prepareData()
+        })
+    }
 
-        /*Add post data preparation mods here*/
+    prepareBaseData() {
+        const actorData = this.data;
+        const data = actorData.data;
+        
+        if (this.data.img == CONST.DEFAULT_TOKEN) this.data.img = CONFIG.ageSystem.actorIcons[actorData.type];
+
+        // Check if split Armor is in use
+        data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
+
+        // Retrieve wealth mode
+        data.useResource = data.useIncome = data.useCurrency = data.useCoins = false;
+        const wealthMode = game.settings.get("age-system", "wealthType");
+        switch (wealthMode) {
+            case "income":
+                data.useIncome = true;
+                break;
+            case "resources":
+                data.useResources = true;
+                break;
+            case "currency":
+                data.useCurrency = true;
+                break;
+            case "coins":
+                data.useCoins = true;
+                break;
+            default:
+                break;
+        };
+
+        switch (actorData.type) {
+            case "char":
+                this._prepareBaseDataChar();
+                break;
+            case "vehicle":
+                this._prepareBaseDataVehicle();
+                break;
+            case "spaceship":
+                this._prepareBaseDataSpaceship();
+                break;
+            default:
+                break;
+        }
     }
 
     /** @override */
     prepareEmbeddedEntities() {
         const embeddedTypes = this.constructor.metadata.embedded || {};
         for ( let cls of Object.values(embeddedTypes) ) {
-          const collection = cls.metadata.collection;
-          for ( let e of this[collection] ) {
+            const collection = cls.metadata.collection;
+            for ( let e of this[collection] ) {
             e.prepareData();
-          }
+            }
         }
         
         // Apply Item Modifiers to Actor before applying Active Effects!
@@ -26,6 +78,73 @@ export class ageSystemActor extends Actor {
 
         this.applyActiveEffects();
     }
+
+    prepareDerivedData() {
+        const actorData = this.data;
+        // const data = actorData.data;
+
+        switch (actorData.type) {
+            case "char":
+                this._prepareDerivedDataChar();
+                break;
+            case "vehicle":
+                this._prepareDerivedDataVehicle();
+                break;
+            case "spaceship":
+                this._prepareDerivedDataSpaceship();
+                break;        
+            default:
+                break;
+        }
+    };
+
+    _prepareBaseDataChar() {
+
+        const actorData = this.data;
+        const data = actorData.data;
+        
+        // Check if Conviction is in use
+        data.useConviction = game.settings.get("age-system", "useConviction");
+
+        // Check if Toughness is in use
+        data.useToughness = game.settings.get("age-system", "useToughness");
+
+        // Check if Fatigue is in use
+        data.useFatigue = game.settings.get("age-system", "useFatigue");
+
+        // Check if Power Points is in use
+        data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
+
+        // Condintions in use?
+        data.useConditions =  game.settings.get("age-system", "useConditions");
+
+        // Ensure Fatigue has valid Values and creates Status text
+        data.fatigue.status = "";
+        data.fatigue.value = Math.abs(data.fatigue.entered);
+        if (data.fatigue.value > data.fatigue.max) {data.fatigue.value = data.fatigue.max};
+        if (data.fatigue.value < 0) {data.fatigue.value = 0};
+        switch (data.fatigue.value) {
+            case 0:
+                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.noFatigue);
+            break;
+            case 1:
+                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.winded);
+            break;
+            case 2:
+                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.fatigued);
+            break;
+            case 3:
+                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.exhausted);
+            break;
+            case 4:
+                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.dying);
+            break;            
+                                            
+            default:
+                break;
+        };
+        
+    };
 
     applyItemModifiers() {
         const type = this.data.type;
@@ -120,98 +239,52 @@ export class ageSystemActor extends Actor {
             };
         };
 
+        this._preparePostModCharData();
+
     }
 
-    prepareBaseData() {
+    _preparePostModCharData() {
         const actorData = this.data;
         const data = actorData.data;
-        
-        if (this.data.img == CONST.DEFAULT_TOKEN) this.data.img = CONFIG.ageSystem.actorIcons[actorData.type];
 
-        // Check if split Armor is in use
-        data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
-
-        // Retrieve wealth mode
-        data.useResource = data.useIncome = data.useCurrency = data.useCoins = false;
-        const wealthMode = game.settings.get("age-system", "wealthType");
-        switch (wealthMode) {
-            case "income":
-                data.useIncome = true;
-                break;
-            case "resources":
-                data.useResources = true;
-                break;
-            case "currency":
-                data.useCurrency = true;
-                break;
-            case "coins":
-                data.useCoins = true;
-                break;
-            default:
-                break;
+        // Calculate total Defense
+        data.defense.total = 0;
+        if (data.defend.active) {data.defense.total += Number(data.defend.defenseBonus)};
+        if (data.guardUp.active) {data.defense.total += Number(data.guardUp.defenseBonus)};
+        data.defense.total += (Number(data.abilities.dex.total) - Math.abs(Number(data.armor.penalty)) + Number(data.defense.base) + Number(data.defense.mod) + Number(data.defense.gameModeBonus));
+        if (data.allOutAttack.active) {
+            data.defense.total -= Math.abs(Number(data.allOutAttack.defensePenalty));
         };
+        if (data.defense.total < 0) {data.defense.total = 0};
 
-        switch (actorData.type) {
-            case "char":
-                this._prepareBaseDataChar();
-                break;
-            case "vehicle":
-                this._prepareBaseDataVehicle();
-                break;
-            case "spaceship":
-                this._prepareBaseDataSpaceship();
-                break;
-            default:
-                break;
-        }
-    }
-    _prepareBaseDataChar() {
+        // Calculate toughness
+        data.armor.toughness.total = Number(data.abilities.cons.total) + Number(data.armor.toughness.gameModeBonus) + Number(data.armor.toughness.mod);
 
-        const actorData = this.data;
-        const data = actorData.data;
+        // Calculate Speed
+        data.speed.total = Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
         
-        // Check if Conviction is in use
-        data.useConviction = game.settings.get("age-system", "useConviction");
+        // Calculate Max Health
+        data.health.max = Number(data.health.mod) + Number(data.health.set);
 
-        // Check if Toughness is in use
-        data.useToughness = game.settings.get("age-system", "useToughness");
+        // Calculate Max Power Points
+        data.powerPoints.max = Number(data.powerPoints.mod) + Number(data.powerPoints.set);
 
-        // Check if Fatigue is in use
-        data.useFatigue = game.settings.get("age-system", "useFatigue");
+        // Calculate Max Conviction
+        data.conviction.max = Number(data.conviction.mod) + Number(data.conviction.set);
 
-        // Check if Power Points is in use
-        data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
+        // Calculates total Initiative
+        data.initiative = data.initiativeMod + data.abilities.dex.total - data.armor.penalty;
 
-        // Condintions in use?
-        data.useConditions =  game.settings.get("age-system", "useConditions");
-
-        // Ensure Fatigue has valid Values and creates Status text
-        data.fatigue.status = "";
-        data.fatigue.value = Math.abs(data.fatigue.entered);
-        if (data.fatigue.value > data.fatigue.max) {data.fatigue.value = data.fatigue.max};
-        if (data.fatigue.value < 0) {data.fatigue.value = 0};
-        switch (data.fatigue.value) {
-            case 0:
-                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.noFatigue);
-            break;
-            case 1:
-                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.winded);
-            break;
-            case 2:
-                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.fatigued);
-            break;
-            case 3:
-                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.exhausted);
-            break;
-            case 4:
-                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.dying);
-            break;            
-                                            
-            default:
-                break;
+        // Calculate resources/currency
+        if (data.useCurrency) {
+            data.resources.mod = 0;
         };
-        
+        data.resources.total = data.resources.base + Number(data.resources.mod);
     };
+
+    _prepareDerivedDataChar() {
+
+    }
 
     _prepareBaseDataVehicle() {
         const actorData = this.data;
@@ -250,6 +323,10 @@ export class ageSystemActor extends Actor {
 
         //this.sortPassengers();
         data.pob = data.passengers.length;
+
+    };
+
+    _prepareDerivedDataVehicle() {
 
     };
 
@@ -315,68 +392,6 @@ export class ageSystemActor extends Actor {
         const diff = sizePos - steps + 1;
         const penalty = 2 * diff;
         return -penalty;
-    };
-
-    prepareDerivedData() {
-        const actorData = this.data;
-        // const data = actorData.data;
-
-        switch (actorData.type) {
-            case "char":
-                this._prepareDerivedDataChar();
-                break;
-            case "vehicle":
-                this._prepareDerivedDataVehicle();
-                break;
-            case "spaceship":
-                this._prepareDerivedDataSpaceship();
-                break;        
-            default:
-                break;
-        }
-    };
-
-    _prepareDerivedDataChar() {
-        const actorData = this.data;
-        const data = actorData.data;
-
-        // Calculate total Defense
-        data.defense.total = 0;
-        if (data.defend.active) {data.defense.total += Number(data.defend.defenseBonus)};
-        if (data.guardUp.active) {data.defense.total += Number(data.guardUp.defenseBonus)};
-        data.defense.total += (Number(data.abilities.dex.total) - Math.abs(Number(data.armor.penalty)) + Number(data.defense.base) + Number(data.defense.mod) + Number(data.defense.gameModeBonus));
-        if (data.allOutAttack.active) {
-            data.defense.total -= Math.abs(Number(data.allOutAttack.defensePenalty));
-        };
-        if (data.defense.total < 0) {data.defense.total = 0};
-
-        // Calculate toughness
-        data.armor.toughness.total = Number(data.abilities.cons.total) + Number(data.armor.toughness.gameModeBonus) + Number(data.armor.toughness.mod);
-
-        // Calculate Speed
-        data.speed.total = Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
-        
-        // Calculate Max Health
-        data.health.max = Number(data.health.mod) + Number(data.health.set);
-
-        // Calculate Max Power Points
-        data.powerPoints.max = Number(data.powerPoints.mod) + Number(data.powerPoints.set);
-
-        // Calculate Max Conviction
-        data.conviction.max = Number(data.conviction.mod) + Number(data.conviction.set);
-
-        // Calculates total Initiative
-        data.initiative = data.initiativeMod + data.abilities.dex.total - data.armor.penalty;
-
-        // Calculate resources/currency
-        if (data.useCurrency) {
-            data.resources.mod = 0;
-        };
-        data.resources.total = data.resources.base + Number(data.resources.mod);
-    };
-
-    _prepareDerivedDataVehicle() {
-
     };
 
     _prepareDerivedDataSpaceship() {
@@ -505,90 +520,6 @@ export class ageSystemActor extends Actor {
 
     };
 
-    // setAbilitiesWithMod(data) {
-    //     const settingAbls = this.data.data.abilities;
-    //     for (const ablKey in settingAbls) {
-    //         if (settingAbls.hasOwnProperty(ablKey)) {
-    //             data.abilities[ablKey].total = Number(data.abilities[ablKey].value);
-    //             if (data.ownedBonus !== null && data.ownedBonus[ablKey]) {
-    //                 data.abilities[ablKey].total += Number(data.ownedBonus[ablKey].totalMod);
-    //             };
-    //         };
-    //     };
-    // }
-
-    // ownedItemsBonus() {
-    //     if (this.data.items.length === 0) {return null};
-    //     const ownedItems = this.data.items;
-    //     let ownedMods = {};
-
-    //     for (let it = 0; it < ownedItems.length; it++) {
-    //         const itemInCheck = ownedItems[it];
-    //         const inCheckMods = itemInCheck.data.itemMods;
-
-    //         if (itemInCheck.data.equiped === true || itemInCheck.data.activate === true) {
-    //             for (const key in inCheckMods) {
-    //                 if (inCheckMods.hasOwnProperty(key) && inCheckMods[key].isActive && inCheckMods[key].value !== 0) {
-    //                     if (!ownedMods[key]) {
-    //                         ownedMods[key] = {
-    //                             modList: [],
-    //                             totalMod: 0
-    //                         };
-    //                     };
-    //                     ownedMods[key].modList.push({
-    //                         carrierId: itemInCheck._id,
-    //                         carrierName: itemInCheck.name,
-    //                         mod: inCheckMods[key].value
-    //                     });
-    //                 };
-    //             };
-    //         };
-    //     };
-
-    //     // Sums up total mod for each key
-    //     for (const key in ownedMods) {
-    //         if (ownedMods.hasOwnProperty(key)) {
-    //             ownedMods[key].modList.forEach(e => {
-    //                 ownedMods[key].totalMod += e.mod;
-    //             });
-    //         };
-    //     };
-
-    //     return ownedMods;
-    // };
-
-    // _userFocusEntity(useFocus, operatorData) {
-    //     const useFocusLC = useFocus.toLowerCase();
-    //     // const vehicleData = this.actor.data;
-    //     // const data = vehicleData.data;
-    //     // let user;
-    //     // if (operatorData.isToken) user = game.actors.tokens[operatorData.id];
-    //     // if (!operatorData.isToken) user = game.actors.get(operatorData.id);
-    //     // if (!user) {
-    //     //     const parts = {name: p.name, id: p.id};
-    //     //     let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
-    //     //     ui.notifications.warn(warning);
-    //     //     return null;
-    //     // }
-    //     if (useFocus === null || useFocus === "") {
-    //         return null;
-    //     };
-
-    //     const user = this._vehicleOperator(operatorData);
-    //     if (!user) return null;
-
-    //     const userFoci = user.data.items.filter(a => a.type === "focus");
-    //     // const expectedFocus = data.useFocus.toLowerCase();
-    //     const validFocus = userFoci.filter(c => c.name.toLowerCase() === useFocusLC);
-
-    //     if (validFocus.length < 1) {
-    //         return useFocus;
-    //     } else {
-    //         const id = validFocus[0]._id;
-    //         return user.getOwnedItem(id);
-    //     };    
-    // };
-
     _vehicleOperator(operatorData) {
         if (!operatorData) return null;
         let operator;
@@ -605,7 +536,6 @@ export class ageSystemActor extends Actor {
 
     rollVehicleDamage(damageData) {
         const operator = this._vehicleOperator(damageData.operatorData);
-        // const useFocus = this._userFocusEntity(this.data.data.handling.useFocus, damageData.operatorData);
         const vehicleUseFocus = this.data.data.handling.useFocus
         const useFocus = operator ? operator.checkFocus(vehicleUseFocus) : null;
 
@@ -613,7 +543,6 @@ export class ageSystemActor extends Actor {
             ...damageData,
             operator,
             useFocus,
-            // useFocus,
             vehicle: this
         };
 
@@ -631,7 +560,7 @@ export class ageSystemActor extends Actor {
         } else {
             const focusId = validFocus[0].id;
             const focus = this.items.get(focusId);
-            return {focusName: namedFocus, focusItem: focus, id: focusId, value: focus.data.data.initialValue}
+            return {focusName: namedFocus, focusItem: focus, id: focusId, value: focus.data.data.finalValue}
         };
     }
 };

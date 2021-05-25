@@ -978,28 +978,31 @@
   height: max-content;
   max-height: 300px;
 }
-.age-system.sheet.char .item-container.effects ul.effects {
+.age-system.sheet.char .item-container ul {
   margin-top: 0;
   padding: 0;
   list-style-type: none;
 }
-.age-system.sheet.char .item-container.effects ul.effects .header {
+.age-system.sheet.char .item-container ul .header {
   justify-content: center;
 }
-.age-system.sheet.char .item-container.effects ul.effects .header p {
+.age-system.sheet.char .item-container ul .header p {
   text-align: center;
 }
-.age-system.sheet.char .item-container.effects ul.effects .header p.effect-name {
-  text-align: left;
-}
-.age-system.sheet.char .item-container.effects li.elements {
+.age-system.sheet.char .item-container li.elements {
   margin-top: 4px;
   border-radius: 10px;
   align-items: center;
   justify-content: center;
 }
-.age-system.sheet.char .item-container.effects li.elements p {
+.age-system.sheet.char .item-container li.elements p {
   text-align: center;
+}
+.age-system.sheet.char .item-container .inactive {
+  opacity: 0.2;
+}
+.age-system.sheet.char .item-container.effects ul.effects .header p.effect-name {
+  text-align: left;
 }
 .age-system.sheet.char .item-container.effects img.effect-icon {
   height: 24px;
@@ -1032,8 +1035,20 @@
   flex: 0 0 10%;
   text-align: center;
 }
-.age-system.sheet.char .item-container.effects .effect-add .inactive {
-  opacity: 0.2;
+.age-system.sheet.char .item-container.modifiers .mod-name {
+  flex: 0 0 30%;
+}
+.age-system.sheet.char .item-container.modifiers .mod-value {
+  flex: 0 0 40%;
+}
+.age-system.sheet.char .item-container.modifiers .mod-value p.icon.icon {
+  flex: 0 0 30%;
+}
+.age-system.sheet.char .item-container.modifiers .mod-value p.value.value {
+  flex: 0 0 70%;
+}
+.age-system.sheet.char .item-container.modifiers .mod-source.mod-source {
+  flex: 0 0 30%;
 }
 .age-system.sheet.char input[type="checkbox"] {
   margin: 0px;

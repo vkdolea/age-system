@@ -100,7 +100,7 @@ Icons made by:
 - Add tabs for Player Character sheet: Main (game stats), Persona (character notes), Effects (effects applied to character).
 - Main Tab: the usual rollable game stats.
 - Persona Tab: Biography (AKA the old nameless field in the header), Distinctive Features, Languages, Goals and Player & GM Secret Notes (only GM and actor owner can see this field).
-- Effects Tab: a hub for all Conditions, Active Effects and bonuses granted from Items. Conditions and Active Effects are managed here, and bonuses from Items must be managed by accessing Item sheet (there is a convinient button to access the item).
+- Effects Tab: a hub for all Conditions, Active Effects and bonuses granted from Items. Conditions, Active Effects and Item Modifiers are managed here. There is a link to open the item sheet granting a particular modifier.
 - "Custom" is now an option for Vehicle Velocity parameter, which will highlight the appropriate Damage table row.
 - When creating a new token, Bar1 will be set to Health/Fortune and Bar2 will be set as Power (Magic) Points (if using this rule is on) or it will be set to Conditions (if this option is in use). If none is used, Bar2 will not be filled.
 - When a token is created out of a Player Owned character/vehicle/spaceship, token's Disposition will be set to Friendly.

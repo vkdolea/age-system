@@ -56,7 +56,7 @@ Hooks.once("init", async function() {
             ageSystemCharacterSheet,
             ageSystemVehicleSheet,
             ageSystemSpaceshipSheet,
-            ageActiveEffectConfig,
+            // ageActiveEffectConfig,
             ageSystemItemSheet,
             AgeRoller,
             AgeTracker
@@ -114,7 +114,8 @@ Hooks.once("init", async function() {
     // Define extra data for Age System (Actors, Items, ActiveEffectConfig)
     CONFIG.Actor.documentClass = ageSystemActor;
     CONFIG.Item.documentClass = ageSystemItem;
-    CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;
+    // Saving this customization for a later implementation
+    // CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;
 
     // Load partials for Handlebars
     preloadHandlebarsTemplates();
@@ -133,13 +134,13 @@ Hooks.once("init", async function() {
         return outStr;
     });
 
-    // Handlebar to identify item type
+    // Handlebar to identify type of Effect
     Handlebars.registerHelper('ageffect', function(mask, options) {
         for (let o = 0; o < options.length; o++) {
             const e = options[o];
             if (e[1] === mask) return e[0]
         }
-        return game.i18n.localize("age-system.custom");
+        return `${mask} (${game.i18n.localize("age-system.custom")})`;
     })
 
     // Handlebar helper to compare 2 data
@@ -176,6 +177,9 @@ Hooks.once("setup", function() {
 
     // Localize Effects Name and build object
     Setup.localizeAgeEffects();
+
+    // Localize Item modifier label
+    Setup.localizeModifiers();
 
 });
 
@@ -244,7 +248,7 @@ Hooks.once("ready", async function() {
     // // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.5.0";
+    const NEEDS_MIGRATION_VERSION = "0.7.0";
     // const COMPATIBLE_MIGRATION_VERSION = "0.7.9";
     const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;

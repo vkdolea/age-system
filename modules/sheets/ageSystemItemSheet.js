@@ -13,7 +13,7 @@ export default class ageSystemItemSheet extends ItemSheet {
                 break;
             case "weapon":
                 this.options.width = this.position.width = "530";
-                this.options.height = this.position.height = "430";
+                this.options.height = this.position.height = "550";
                 break;
             case "talent":
                 this.options.width = this.position.width = "400";
@@ -139,7 +139,10 @@ export default class ageSystemItemSheet extends ItemSheet {
         const modPath = `data.itemMods.${modType}`;
         const selectedPath = modPath + ".selected";
         const isActivePath = modPath + ".isActive";
-        this.item.update({[selectedPath]: false, [isActivePath]: false});
+        this.item.update({
+            [selectedPath]: false,
+            [isActivePath]: false
+        });
     };
 
     async _onAddBonus(event) {
@@ -150,6 +153,7 @@ export default class ageSystemItemSheet extends ItemSheet {
                 const b = bonusList[mod];
                 if (!b.selected) {
                     const modName = game.i18n.localize(`age-system.bonus.${mod}`);
+                    // const modName = ageSystem.bonusTypes[mod];
                     const updatePath = `data.itemMods.${mod}.selected`;
                     bonusOptions = {
                         ...bonusOptions,

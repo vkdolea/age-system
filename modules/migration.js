@@ -9,7 +9,7 @@ export const migrateWorld = async function() {
   for ( let a of game.actors.entities ) {
     try {
       const updateData = migrateActorData(a.data);
-      if ( !isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
       }
@@ -23,7 +23,7 @@ export const migrateWorld = async function() {
   for ( let i of game.items.entities ) {
     try {
       const updateData = migrateItemData(i.data);
-      if ( !isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Item entity ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
       }
@@ -37,7 +37,7 @@ export const migrateWorld = async function() {
   for ( let s of game.scenes.entities ) {
     try {
       const updateData = migrateSceneData(s.data);
-      if ( !isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Scene entity ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
       }
@@ -76,40 +76,39 @@ export const migrateCompendium = async function(pack) {
 
   // Begin by requesting server-side data model migration and get the migrated content
   await pack.migrate();
-  const content = await pack.getContent();
+  const documents = await pack.getDocuments();
 
   // Iterate over compendium entries - applying fine-tuned migration functions
-  for ( let ent of content ) {
+  for ( let doc of documents ) {
     let updateData = {};
     try {
       switch (entity) {
         case "Actor":
-          updateData = migrateActorData(ent.data);
+          updateData = migrateActorData(doc.data);
           break;
         case "Item":
-          updateData = migrateItemData(ent.data);
+          updateData = migrateItemData(doc.data);
           break;
         case "Scene":
-          updateData = migrateSceneData(ent.data);
+          updateData = migrateSceneData(doc.data);
           break;
       }
-      if ( isObjectEmpty(updateData) ) continue;
 
       // Save the entry, if data was changed
-      updateData["_id"] = ent._id;
-      await pack.updateEntity(updateData);
-      console.log(`Migrated ${entity} entity ${ent.name} in Compendium ${pack.collection}`);
+      if ( foundry.utils.isObjectEmpty(updateData) ) continue;
+      await doc.update(updateData);
+      console.log(`Migrated ${entity} entity ${doc.name} in Compendium ${pack.collection}`);
     }
 
     // Handle migration failures
     catch(err) {
-      err.message = `Failed age-system system migration for entity ${ent.name} in pack ${pack.collection}: ${err.message}`;
+      err.message = `Failed age-system system migration for entity ${doc.name} in pack ${pack.collection}: ${err.message}`;
       console.error(err);
     }
   }
 
   // Apply the original locked status for the pack
-  pack.configure({locked: wasLocked});
+  await pack.configure({locked: wasLocked});
   console.log(`Migrated all ${entity} entities from Compendium ${pack.collection}`);
 };
 
@@ -134,23 +133,22 @@ export const migrateActorData = function(actor) {
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
-  let hasItemUpdates = false;
-  const items = actor.items.map(i => {
+  const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
     let itemUpdate = migrateItemData(i);
-
+    
     // Update the Owned Item
     if ( !isObjectEmpty(itemUpdate) ) {
-      hasItemUpdates = true;
-      return mergeObject(i, itemUpdate, {enforceTypes: false, inplace: false});
-    } else return i;
-  });
-  if ( hasItemUpdates ) updateData.items = items;
+      itemUpdate._id = i.id;
+      arr.push(itemUpdate);
+    }
+
+    return arr;
+  }, []);
+  if ( items.length > 0 ) updateData.items = items;
   return updateData;
 };
-
 /* -------------------------------------------- */
-
 
 /**
  * Migrate a single Item entity to incorporate latest data model changes
@@ -162,6 +160,8 @@ export const migrateItemData = function(item) {
   _addItemValidResistedDmgAbl(item, updateData);
   _addExtraPowerData(item, updateData);
   _addItemForceAbl(item, updateData);
+  _adjustFocusInitialValue(item, updateData);
+  _addSelectedFieldForMods(item, updateData);
   return updateData;
 };
 
@@ -174,24 +174,21 @@ export const migrateItemData = function(item) {
  * @return {Object}       The updateData to apply
  */
 export const migrateSceneData = function(scene) {
-  const tokens = duplicate(scene.tokens);
-  return {
-    tokens: tokens.map(t => {
-      if (!t.actorId || t.actorLink || !t.actorData.data) {
-        t.actorData = {};
-        return t;
-      }
-      const token = new Token(t);
-      if ( !token.actor ) {
-        t.actorId = null;
-        t.actorData = {};
-      } else if ( !t.actorLink ) {
-        const updateData = migrateActorData(token.data.actorData);
-        t.actorData = mergeObject(token.data.actorData, updateData);
-      }
-      return t;
-    })
-  };
+  const tokens = scene.tokens.map(token => {
+    const t = token.toJSON();
+    if (!t.actorId || t.actorLink || !t.actorData.data) {
+      t.actorData = {};
+    }
+    else if ( !game.actors.has(t.actorId) ){
+      t.actorId = null;
+      t.actorData = {};
+    }
+    else if ( !t.actorLink ) {
+      t.actorData = mergeObject(t.actorData, migrateActorData(t.actorData));
+    }
+    return t;
+  });
+  return {tokens};
 };
 
 /* -------------------------------------------- */
@@ -231,7 +228,10 @@ function _addActorConditions(actor, updateData) {
     }
   };
 
-  if (actor.data.conditions.hasOwnProperty("hindred")) updateData[{"data.conditions.hindered": actor.data.conditions.hindred}]
+  if (actor.data.conditions.hasOwnProperty("hindred")) {
+    updateData["data.conditions.hindered"] = actor.data.conditions.hindred;
+    // updateData["data.conditions.-=hindred"] = null;
+  }
 
   return updateData
 }
@@ -289,7 +289,7 @@ function _addVehicleCustomDmg(actor, updateData) {
  */
 function _addItemModSpeed(item, updateData) {
   if (item.type === "focus" || item.type === "honorifics" || item.type === "relationship" || item.type === "membership" || item.type === "stunts") return updateData;
-  if (item.data.itemMods.speed) return updateData;
+  if (item.data.data.itemMods.hasOwnProperty("speed")) return updateData;
 
   updateData["data.itemMods.speed"] = {};
   updateData["data.itemMods.speed.isActive"] = false;
@@ -306,7 +306,7 @@ function _addItemModSpeed(item, updateData) {
  */
 function _addExtraPowerData(item, updateData) {
   if (item.type !== "power") return updateData;
-  if (item.data.ablFatigue) return updateData;
+  if (item.data.data.hasOwnProperty("ablFatigue")) return updateData;
 
   updateData["data.causeHealing"] = false;
   updateData["data.ablFatigue"] = "will";
@@ -328,8 +328,8 @@ function _addExtraPowerData(item, updateData) {
  */
 function _addItemValidResistedDmgAbl(item, updateData) {
   if (item.type !== "power") return updateData;
-  if (item.data.damageResisted) {
-    if (!item.data.damageResisted.dmgAbl) {
+  if (item.data.data.hasOwnProperty("damageResisted")) {
+    if (!item.data.data.damageResisted.hasOwnProperty("dmgAbl")) {
       updateData["data.damageResisted.dmgAbl"] = "will";  
     }
   }
@@ -343,9 +343,45 @@ function _addItemValidResistedDmgAbl(item, updateData) {
  */
 function _addItemForceAbl(item, updateData) {
   if (item.type !== "power") return updateData;
-  if (item.data.itemForceAbl) return updateData;
+  if (item.data.data.hasOwnProperty("itemForceAbl")) return updateData;
 
   updateData["data.itemForceAbl"] = "will";
+
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Adjust Focus value to make for the Improved field
+ * @private
+ */
+ function _adjustFocusInitialValue(item, updateData) {
+  if (item.type !== "focus") return updateData;
+  if (item.data.data.improved) updateData["data.initialValue"] = item.data.data.initialValue - 1;
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Add the @selected field for Item Mods and set to true if Mod is active
+ * @private
+ */
+ function _addSelectedFieldForMods(item, updateData) {
+  if (!item.data.data.hasOwnProperty("itemMods")) return updateData;
+  const itemMods = item.data.data.itemMod;
+  for (const m in itemMods) {
+    if (Object.hasOwnProperty.call(itemMods, m)) {
+      const mod = itemMods[m];
+      if (!mod.hasOwnProperty("selected")) {
+        const updatePath = `data.itemMods.${m}.selected`;
+        if (mod.isActive || mod.value) {
+          updateData[updatePath] = true;
+        } else {
+          updateData[updatePath] = false;
+        }
+      }
+    }
+  }
 
   return updateData
 }

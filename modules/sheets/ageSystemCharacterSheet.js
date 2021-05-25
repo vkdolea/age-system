@@ -51,6 +51,24 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
 
+        // Sorting Modifiers per Type/Item
+        const modList = {}
+        for (let i = 0; i < itemSorted.length; i++) {
+            const item = itemSorted[i];
+            const itemMods = item.data.itemMods
+            if (itemMods && (item.data.equiped || item.data.activate)) {
+                for (const m in itemMods) {
+                    if (Object.hasOwnProperty.call(itemMods, m)) {
+                        const mData = itemMods[m];
+                        if (mData.selected) {
+                            if (!modList[m]) modList[m] = [];
+                            modList[m].push(item)
+                        }
+                    }
+                }
+            }
+        }
+
         // Sort Conditions alphabetically
         data.conditions = sortObjArrayByName(data.config.conditions, "name");
         for (let c = 0; c < data.conditions.length; c++) {
@@ -80,6 +98,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             actor: this.object,
             cssClass: isEditable ? "editable" : "locked",
             data: data,
+            itemMods: modList,
             effects: data.effects,
             items: data.items,
             limited: this.object.limited,
@@ -92,17 +111,9 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     activateListeners(html) {
         html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));
         if (this.isEditable) {
+            new ContextMenu(html, ".focus-options", this.focusContextMenu);
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
-
-            // Enable field to be focused when selecting it
-            const inputs = html.find("input");
-            inputs.focus(ev => ev.currentTarget.select());
-        };
-        
-        // Actions by sheet owner only
-        if (this.actor.isOwner) {
-            new ContextMenu(html, ".focus-options", this.focusContextMenu);
             html.find(".item-show").click(this._onItemShow.bind(this));
             html.find(".roll-ability").click(this._onRollAbility.bind(this));
             html.find(".roll-item").click(this._onRollItem.bind(this));
@@ -117,7 +128,15 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".effect-active").click(this._onActiveEffect.bind(this));
             html.find("p.effect-add").click(this._onAddEffect.bind(this));
             html.find(".condition-checkbox").change(this._onChangeCondition.bind(this));
+            html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
 
+            // Enable field to be focused when selecting it
+            const inputs = html.find("input");
+            inputs.focus(ev => ev.currentTarget.select());
+        };
+        
+        // Actions by sheet owner only
+        if (this.actor.isOwner) {
             let handler = ev => this._onDragStart(ev);
             // Find all rollable items on the character sheet.
             let items = html.find(".item-box");
@@ -131,6 +150,16 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
         super.activateListeners(html);
     };
+
+    _onToggleItemMod(event) {
+        const data = event.currentTarget.dataset;
+        const itemId = data.itemId;
+        const modType = data.modType;
+        const item = this.actor.items.get(itemId);
+        const active = item.data.data.itemMods[modType].isActive;
+        const dataPath = `data.itemMods.${modType}.isActive`;
+        item.update({[dataPath]: !active});
+    }
 
     _onChangeCondition(event) {
         const isChecked = event.currentTarget.checked;
@@ -276,7 +305,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     _onItemEdit(event) {
         event.preventDefault();
         let e = event.currentTarget;
-        let itemId = e.closest(".feature-controls").dataset.itemId;
+        let itemId = e.dataset.itemId ?? e.closest(".feature-controls").dataset.itemId;
         const item = this.actor.items.get(itemId);
         return item.sheet.render(true);
     };
@@ -310,7 +339,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             name: game.i18n.localize("age-system.settings.edit"),
             icon: '<i class="fas fa-edit"></i>',
             callback: e => {
-                const item = this.actor.getOwnedItem(e.data("item-id"));
+                const item = this.actor.items.get(e.data("item-id"));
                 item.sheet.render(true);
             }
         },
@@ -318,7 +347,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             name: game.i18n.localize("age-system.settings.delete"),
             icon: '<i class="fas fa-trash"></i>',
             callback: e => {
-                const i = this.actor.deleteOwnedItem(e.data("item-id"));
+                const i = this.actor.items.get(e.data("item-id")).delete();
             }
         },
         {
@@ -326,7 +355,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             icon: '<i class="fas fa-exchange-alt"></i>',
             // TODO - try to add the Shift + Click rolling to GM inside this callback
             callback: e => {
-                const focus = this.actor.getOwnedItem(e.data("item-id"));
+                const focus = this.actor.items.get(e.data("item-id"));
                 const ev = new MouseEvent('click', {});
                 Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, selectAbl: true});
             }
@@ -335,7 +364,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             name: "Show Item",
             icon: '<i class="far fa-eye"></i>',
             callback: e => {
-                const i = this.actor.getOwnedItem(e.data("item-id")).showItem();
+                const i = this.actor.items.get(e.data("item-id")).showItem();
             }
         }
     ];

@@ -30,8 +30,8 @@ export default class ageActiveEffectConfig extends ActiveEffectConfig {
       ageEffects: CONFIG.ageSystem.ageEffectsOptions, // Adding labels and Masks
       effect: effect, // Backwards compatibility
       data: foundry.utils.deepClone(this.object.data),
-      isActorEffect: this.object.parent.entity === "Actor",
-      isItemEffect: this.object.parent.entity === "Item",
+      isActorEffect: this.object.parent.documentName === "Actor",
+      isItemEffect: this.object.parent.dcoumentName === "Item",
       submitText: "EFFECT.Submit",
       modes: Object.entries(CONST.ACTIVE_EFFECT_MODES).reduce((obj, e) => {
         obj[e[1]] = game.i18n.localize("EFFECT.MODE_"+e[0]);

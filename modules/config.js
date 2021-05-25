@@ -561,8 +561,8 @@ ageSystem.AGEstatusEffects = [
 ];
 
 ageSystem.ageEffectsKeys = {
-    "actorOverAllBonus": {label: "age-system.bonus.actorOverAllBonus", mask: "data.testMod"},
-    "actorDamage": {label: "age-system.bonus.itemDmg", mask: "data.dmgMod"},
+    "actorTest": {label: "age-system.bonus.actorTest", mask: "data.testMod"},
+    "actorDamage": {label: "age-system.bonus.actorDamage", mask: "data.dmgMod"},
     "acc": {label: "age-system.bonus.acc", mask: "data.abilities.acc.total"},
     "comm": {label: "age-system.bonus.comm", mask: "data.abilities.comm.total"},
     "cons": {label: "age-system.bonus.cons", mask:"data.abilities.cons.total"},
