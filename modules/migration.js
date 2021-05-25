@@ -42,7 +42,7 @@ export const migrateWorld = async function() {
         await s.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
-      err.message = `Failed age-system migration for Scene ${s.name}: ${err.message}`;
+      err.message = `Failed AGE System migration for Scene ${s.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -126,20 +126,22 @@ export const migrateActorData = function(actor) {
   const updateData = {};
 
   // Actor Data Updates
-  _addActorConditions(actor, updateData);
-  _addVehicleCustomDmg(actor, updateData);
-  _addActorMods(actor, updateData);
-  _addActorPersonaFields(actor, updateData);
+  if (actor.data) {
+    _addActorConditions(actor, updateData);
+    _addVehicleCustomDmg(actor, updateData);
+    _addActorMods(actor, updateData);
+    _addActorPersonaFields(actor, updateData);
+  }
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
   const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
-    let itemUpdate = migrateItemData(i);
-    
+    let itemUpdate = migrateItemData(i.data.data ? i.data : i);
+
     // Update the Owned Item
     if ( !isObjectEmpty(itemUpdate) ) {
-      itemUpdate._id = i.id;
+      itemUpdate._id = i.data.data ? i.id : i._id;
       arr.push(itemUpdate);
     }
 
@@ -173,9 +175,18 @@ export const migrateItemData = function(item) {
  * @param {Object} scene  The Scene data to Update
  * @return {Object}       The updateData to apply
  */
-export const migrateSceneData = function(scene) {
+ export const migrateSceneData = function(scene) {
   const tokens = scene.tokens.map(token => {
     const t = token.toJSON();
+    if (t.actorData.items) {
+      // const itemUpdates = []
+      token.actor.items.forEach(i => {
+        // itemUpdates.push(migrateItemData(i));
+        const updates = migrateItemData(i.data)
+        i.update(updates);
+      });
+      // token.actor.items.update(itemUpdates);
+    }
     if (!t.actorId || t.actorLink || !t.actorData.data) {
       t.actorData = {};
     }
@@ -206,7 +217,7 @@ function _addActorConditions(actor, updateData) {
   "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
 
   // Add Conditions - added a fix
-  if (actor.data.conditions) {
+  if (actor.data?.conditions) {
     if (typeof actor.data.conditions === "object") {
       let complete = true;
       for (let c = 0; c < conditions.length; c++) {
@@ -219,7 +230,7 @@ function _addActorConditions(actor, updateData) {
     };
   }
   
-  if (!actor.data.conditions) {
+  if (!actor.data?.conditions) {
     updateData["data.conditions"] = {};
     for (let c = 0; c < conditions.length; c++) {
       const cond = conditions[c];
@@ -228,7 +239,7 @@ function _addActorConditions(actor, updateData) {
     }
   };
 
-  if (actor.data.conditions.hasOwnProperty("hindred")) {
+  if (actor.data?.conditions.hasOwnProperty("hindred")) {
     updateData["data.conditions.hindered"] = actor.data.conditions.hindred;
     // updateData["data.conditions.-=hindred"] = null;
   }
@@ -273,7 +284,7 @@ function _addVehicleCustomDmg(actor, updateData) {
  function _addActorPersonaFields(actor, updateData) {
   if (actor.type !== "char") return updateData;
 
-  if (!actor.data.hasOwnProperty('bio')) {
+  if (actor.data.bio === "" || !actor.data.bio) {
     updateData["data.bio"] = actor.data.features;
     updateData["data.features"] = "";
   }
@@ -288,8 +299,8 @@ function _addVehicleCustomDmg(actor, updateData) {
  * @private
  */
 function _addItemModSpeed(item, updateData) {
-  if (item.type === "focus" || item.type === "honorifics" || item.type === "relationship" || item.type === "membership" || item.type === "stunts") return updateData;
-  if (item.data.data.itemMods.hasOwnProperty("speed")) return updateData;
+  if (!item.data.itemMods) return updateData;
+  if (item.data.itemMods.hasOwnProperty("speed")) return updateData;
 
   updateData["data.itemMods.speed"] = {};
   updateData["data.itemMods.speed.isActive"] = false;
@@ -306,7 +317,7 @@ function _addItemModSpeed(item, updateData) {
  */
 function _addExtraPowerData(item, updateData) {
   if (item.type !== "power") return updateData;
-  if (item.data.data.hasOwnProperty("ablFatigue")) return updateData;
+  if (item.data.hasOwnProperty("ablFatigue")) return updateData;
 
   updateData["data.causeHealing"] = false;
   updateData["data.ablFatigue"] = "will";
@@ -328,8 +339,8 @@ function _addExtraPowerData(item, updateData) {
  */
 function _addItemValidResistedDmgAbl(item, updateData) {
   if (item.type !== "power") return updateData;
-  if (item.data.data.hasOwnProperty("damageResisted")) {
-    if (!item.data.data.damageResisted.hasOwnProperty("dmgAbl")) {
+  if (item.data.hasOwnProperty("damageResisted")) {
+    if (!item.data.damageResisted.hasOwnProperty("dmgAbl")) {
       updateData["data.damageResisted.dmgAbl"] = "will";  
     }
   }
@@ -343,7 +354,7 @@ function _addItemValidResistedDmgAbl(item, updateData) {
  */
 function _addItemForceAbl(item, updateData) {
   if (item.type !== "power") return updateData;
-  if (item.data.data.hasOwnProperty("itemForceAbl")) return updateData;
+  if (item.data.hasOwnProperty("itemForceAbl")) return updateData;
 
   updateData["data.itemForceAbl"] = "will";
 
@@ -357,7 +368,7 @@ function _addItemForceAbl(item, updateData) {
  */
  function _adjustFocusInitialValue(item, updateData) {
   if (item.type !== "focus") return updateData;
-  if (item.data.data.improved) updateData["data.initialValue"] = item.data.data.initialValue - 1;
+  if (item.data.improved) updateData["data.initialValue"] = item.data.initialValue - 1;
   return updateData
 }
 /* -------------------------------------------- */
@@ -367,22 +378,21 @@ function _addItemForceAbl(item, updateData) {
  * @private
  */
  function _addSelectedFieldForMods(item, updateData) {
-  if (!item.data.data.hasOwnProperty("itemMods")) return updateData;
-  const itemMods = item.data.data.itemMod;
+  if (!item.data.hasOwnProperty("itemMods")) return updateData;
+  const itemMods = item.data.itemMods;
   for (const m in itemMods) {
     if (Object.hasOwnProperty.call(itemMods, m)) {
       const mod = itemMods[m];
-      if (!mod.hasOwnProperty("selected")) {
-        const updatePath = `data.itemMods.${m}.selected`;
-        if (mod.isActive || mod.value) {
-          updateData[updatePath] = true;
-        } else {
-          updateData[updatePath] = false;
-        }
+      const updatePath = `data.itemMods.${m}.selected`;
+      if (mod.isActive || mod.value) {
+        updateData[updatePath] = true;
+      } else {
+        updateData[updatePath] = false;
       }
     }
   }
-
   return updateData
+
+
 }
 /* -------------------------------------------- */

@@ -67,21 +67,6 @@ export const registerSystemSettings = function() {
   });
 
   /**
-   * Register if world will use Conditons
-   * TODO - in the future, add drop down menu to select if world will use Conditions, Fatigue or None
-   */
-  game.settings.register("age-system", "useConditions", {
-    name: "SETTINGS.useConditions",
-    hint: "SETTINGS.useConditionsHint",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-    onChange:()=>{
-      window.location.reload(!1)}
-  });
-
-  /**
    * Register if world will use Power Points
    */
   game.settings.register("age-system", "usePowerPoints", {

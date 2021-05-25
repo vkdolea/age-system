@@ -115,9 +115,6 @@ export class ageSystemActor extends Actor {
         // Check if Power Points is in use
         data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
 
-        // Condintions in use?
-        data.useConditions =  game.settings.get("age-system", "useConditions");
-
         // Ensure Fatigue has valid Values and creates Status text
         data.fatigue.status = "";
         data.fatigue.value = Math.abs(data.fatigue.entered);
