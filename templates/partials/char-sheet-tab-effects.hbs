@@ -6,10 +6,10 @@
     <div class="actor-items flexrow">
         <ul class="item-container effects">
             <li class="flexrow header colorset-first-tier">
-                <p class="effect-name">Name</p>
-                <p class="effect-key">Key</p>
-                <p class="effect-operation">Operation</p>
-                <p class="effect-value">Value</p>
+                <p class="effect-name">{{localize "age-system.name"}}</p>
+                <p class="effect-key">{{localize "age-system.key"}}</p>
+                <p class="effect-operation">{{localize "age-system.operation"}}</p>
+                <p class="effect-value">{{localize "age-system.value"}}</p>
                 <p class="effect-add"><a><i class="fa fa-plus-circle" aria-hidden="true"></i></a></p>
             </li>
             {{#each data.effects as |effect|}}
@@ -53,12 +53,12 @@
     <div class="actor-items flexrow">
         <ul class="item-container modifiers">
             <li class="flexrow header colorset-first-tier">
-                <p class="mod-name">Type</p>
+                <p class="mod-name">{{localize "age-system.type"}}</p>
                 <div class="mod-value flexrow">
-                    <p class="value">Value</p>
-                    <p class="icon">Control</p>
+                    <p class="value">{{localize "age-system.value"}}</p>
+                    <p class="icon">{{localize "age-system.control"}}</p>
                 </div>
-                <p class="mod-source">Source</p>
+                <p class="mod-source">{{localize "age-system.source"}}</p>
             </li>
             {{#each itemMods as |items modType|}}
             <li class="flexrow colorset-third-tier elements">

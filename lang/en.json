@@ -442,6 +442,11 @@
 
         "itemMod": "Modifiers",
         "itemModSelect": "Select new Modifier Type",
+        "type": "Type",
+        "control": "Control",
+        "source": "Source",
+        "operation": "Operation",
+        "key": "Key",
         "bonus": {
             "type": "Type",
             "value": "Value",
