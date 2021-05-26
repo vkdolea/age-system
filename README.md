@@ -26,13 +26,11 @@ You can now look at [AGE System (unofficial) wiki](https://github.com/vkdolea/ag
 - Drag and drop owned weapons and power to macro bar to create attack shortcuts
 - Add Stunt Die or Focus (or both) to damage roll when rolling damage from chat
 - Point mouse slightly above Tracker or Roller and a Drag Bar will appear. Click and drag to reposition. Right click Drag Bar to return to  original position!
-- Supports Vehicles and Spaceships
+- Supports Vehicles and Spaceships.
+- Active Effects enabled.
 
 ## Spaceship and Vehicle Controls
-You can drag and drop Characters to Veihcles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship. **However, this will only work for vehicles/spaceships when opened a character sheet directly from directory or from a token with LINKED ACTORS option selected**.
-When opening a sheet from an *Unlinked Token*:
-- **Spaceships:** Passengers section will vanish, roles will assigned automatically to spaceship **Crew**.
-- **Vehicles:** Passengers section will vanish, and the Conductor role will be "Token" - which means you must select a Token on canvas and them click the Dice icon to roll a maneuver. Note: in the future, spaceships will also have this option.
+You can drag and drop Characters to Veihcles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship.
 
 ## Shortcuts
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
@@ -93,11 +91,11 @@ Icons made by:
 
 ### Localization
 - **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
-- **Brazilian Portuguese**: by Discord user *Leandro_Soares#9067*.
+- **Brazilian Portuguese**: by Discord user *Leandro_Soares#9067* and me.
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
-### 0.7.0 [2021-xx-xx]
+### 0.7.0 [2021-05-26]
 #### Added
 - New fancy layout for Vehicle sheet.
 - Add tabs for Player Character sheet: Main (game stats), Persona (character notes), Effects (effects applied to character).
