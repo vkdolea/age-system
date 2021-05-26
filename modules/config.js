@@ -141,35 +141,36 @@ ageSystem.rof = {
     fullAuto: "age-system.rof.fullAuto"
 };
 
-ageSystem.bonusTypes = {
-    itemDamage: "age-system.bonus.itemAtkBns",
-    actorDamage: "age-system.bonus.itemDmgBns",
-    itemActivation: "age-system.bonus.generalDmgBns",
-    acc: "age-system.bonus.charAblBns",
-    comm: "age-system.bonus.charAblBns",
-    cons: "age-system.bonus.charAblBns",
-    cun: "age-system.bonus.charAblBns",
-    dex: "age-system.bonus.charAblBns",
-    fight: "age-system.bonus.charAblBns",
-    int: "age-system.bonus.charAblBns",
-    magic: "age-system.bonus.charAblBns",
-    per: "age-system.bonus.charAblBns",
-    str: "age-system.bonus.charAblBns",
-    will: "age-system.bonus.charAblBns",
-    focus: "age-system.bonus.focusValueBns",
-    defense: "age-system.bonus.totalDefenseBns",
-    impactArmor: "age-system.bonus.impactArmorBns",
-    ballisticArmor: "age-system.bonus.ballisticArmorBns",
-    defendMnv: "age-system.bonus.defendMnvBns",
-    guardupMnv: "age-system.bonus.guardupMnvBns",
-    allOutAtk: "age-system.bonus.allOutAtkBns",
-    maxHealth: "age-system.bonus.maxHealthBns",
-    maxConviction: "age-system.bonus.maxConvictionBns",
-    maxPowerPoints: "age-system.bonus.maxPowerPointsBns",
-    powerForce: "age-system.bonus.powerForceBns",
-    aimMnv: "age-system.bonus.aimMnvBns",
-    armorPenalty: "age-system.bonus.armorPenaltyBns"
-};
+// ageSystem.bonusTypes = {
+//     itemDamage: "age-system.bonus.itemAtkBns",
+//     testMod: "age-system.bonus.testMod",
+//     actorDamage: "age-system.bonus.itemDmgBns",
+//     itemActivation: "age-system.bonus.generalDmgBns",
+//     acc: "age-system.bonus.charAblBns",
+//     comm: "age-system.bonus.charAblBns",
+//     cons: "age-system.bonus.charAblBns",
+//     cun: "age-system.bonus.charAblBns",
+//     dex: "age-system.bonus.charAblBns",
+//     fight: "age-system.bonus.charAblBns",
+//     int: "age-system.bonus.charAblBns",
+//     magic: "age-system.bonus.charAblBns",
+//     per: "age-system.bonus.charAblBns",
+//     str: "age-system.bonus.charAblBns",
+//     will: "age-system.bonus.charAblBns",
+//     focus: "age-system.bonus.focusValueBns",
+//     defense: "age-system.bonus.totalDefenseBns",
+//     impactArmor: "age-system.bonus.impactArmorBns",
+//     ballisticArmor: "age-system.bonus.ballisticArmorBns",
+//     defendMnv: "age-system.bonus.defendMnvBns",
+//     guardupMnv: "age-system.bonus.guardupMnvBns",
+//     allOutAtk: "age-system.bonus.allOutAtkBns",
+//     maxHealth: "age-system.bonus.maxHealthBns",
+//     maxConviction: "age-system.bonus.maxConvictionBns",
+//     maxPowerPoints: "age-system.bonus.maxPowerPointsBns",
+//     powerForce: "age-system.bonus.powerForceBns",
+//     aimMnv: "age-system.bonus.aimMnvBns",
+//     armorPenalty: "age-system.bonus.armorPenaltyBns"
+// };
     
 // Vehicle parameters
 ageSystem.velocityCategory = {
@@ -360,7 +361,17 @@ ageSystem.AGEstatusEffects = [
         }
     },
     {
-        icon: `${AGEstatusEffectsPath}cancel.png`,
+        icon: `${AGEstatusEffectsPath}number-10.png`,
+        id: `num10`,
+        label: `10`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}dead-head.png`,
         id: `dead`,
         label: `EFFECT.StatusDead`,
         flags: {
@@ -404,7 +415,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.dying",
         id: "dying",
-        icon: "icons/svg/skull.svg",
+        icon: `${AGEstatusEffectsPath}half-dead.png`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -413,9 +424,20 @@ ageSystem.AGEstatusEffects = [
         }
     },
     {
+        label: "age-system.conditions.fatigued",
+        id: "fatigued",
+        icon: `${AGEstatusEffectsPath}despair.png`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "fatigued"
+            }
+        }
+    },
+    {
         label: "age-system.conditions.exhausted",
         id: "exhausted",
-        icon: "icons/magic/unholy/strike-body-explode-disintegrate.webp",
+        icon: `${AGEstatusEffectsPath}oppression.png`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -429,20 +451,9 @@ ageSystem.AGEstatusEffects = [
         }]
     },
     {
-        label: "age-system.conditions.fatigued",
-        id: "fatigued",
-        icon: "icons/magic/unholy/strike-body-life-soul-purple.webp",
-        flags: {
-            "age-system": {
-                type: "conditions",
-                name: "fatigued"
-            }
-        }
-    },
-    {
         label: "age-system.conditions.freefalling",
         id: "freefalling",
-        icon: "icons/magic/air/air-pressure-shield-blue.webp",
+        icon: `${AGEstatusEffectsPath}acrobatic.png`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -453,7 +464,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.helpless",
         id: "helpless",
-        icon: "icons/magic/control/sihouette-hold-beam-green.webp",
+        icon: `${AGEstatusEffectsPath}knockout.png`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -464,7 +475,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.hindered",
         id: "hindered",
-        icon: "icons/magic/control/debuff-chains-shackles-movement-blue.webp",
+        icon: `${AGEstatusEffectsPath}knee-bandage.png`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -475,7 +486,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.injured",
         id: "injured",
-        icon: "icons/skills/wounds/injury-face-impact-orange.webp",
+        icon: `${AGEstatusEffectsPath}backstab.png`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -494,6 +505,27 @@ ageSystem.AGEstatusEffects = [
         }]
     },
     {
+        label: "age-system.conditions.wounded",
+        id: "wounded",
+        icon: `${AGEstatusEffectsPath}arrowed.png`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "wounded"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 1,
+            value: "0.5"
+        },
+        {
+            key: "data.testMod",
+            mode: 2,
+            value: "-2"
+        }]
+    },
+    {
         label: "age-system.conditions.prone",
         id: "prone",
         icon: "icons/svg/falling.svg",
@@ -507,7 +539,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.restrained",
         id: "restrained",
-        icon: "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
+        icon: `${AGEstatusEffectsPath}imprisoned.png`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -535,33 +567,12 @@ ageSystem.AGEstatusEffects = [
             mode: 5,
             value: "0"
         }]
-    },
-    {
-        label: "age-system.conditions.wounded",
-        id: "wounded",
-        icon: "icons/skills/wounds/injury-triple-slash-bleed.webp",
-        flags: {
-            "age-system": {
-                type: "conditions",
-                name: "wounded"
-            }
-        },
-        changes: [{
-            key: "data.speed.total",
-            mode: 1,
-            value: "0.5"
-        },
-        {
-            key: "data.testMod",
-            mode: 2,
-            value: "-2"
-        }]
-    }
-    
+    }    
 ];
 
 ageSystem.ageEffectsKeys = {
-    "actorTest": {label: "age-system.bonus.actorTest", mask: "data.testMod"},
+    "testMod": {label: "age-system.bonus.testMod", mask: "data.testMod"},
+    "attackMod": {label: "age-system.bonus.attackMod", mask: "data.attackMod"},
     "actorDamage": {label: "age-system.bonus.actorDamage", mask: "data.dmgMod"},
     "acc": {label: "age-system.bonus.acc", mask: "data.abilities.acc.total"},
     "comm": {label: "age-system.bonus.comm", mask: "data.abilities.comm.total"},
@@ -590,10 +601,10 @@ ageSystem.ageEffectsKeys = {
 }
 
 ageSystem.itemEffectsKeys = {
-    "powerForce": {label: "age-system.bonus.powerForceBns", mask: ""},
-    "focus": {label: "age-system.bonus.focusValueBns", mask: ""},
-    "itemDamage": {label: "age-system.bonus.itemAtkBns", mask: ""},
-    "itemActivation": {label: "age-system.bonus.generalDmgBns", mask: ""}
+    "powerForce": {label: "age-system.bonus.powerForce", mask: ""},
+    "focus": {label: "age-system.bonus.focusValue", mask: ""},
+    "itemDamage": {label: "age-system.bonus.itemAtk", mask: ""},
+    "itemActivation": {label: "age-system.bonus.generalDmg", mask: ""}
 }
 
 // Age Tracker & Roller Initial Positions

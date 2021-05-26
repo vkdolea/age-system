@@ -163,6 +163,8 @@ export const migrateItemData = function(item) {
   _addExtraPowerData(item, updateData);
   _addItemForceAbl(item, updateData);
   _adjustFocusInitialValue(item, updateData);
+  _addItemModTest(item, updateData);
+  _addItemAttackMod(item, updateData);
   _addSelectedFieldForMods(item, updateData);
   return updateData;
 };
@@ -304,7 +306,42 @@ function _addItemModSpeed(item, updateData) {
 
   updateData["data.itemMods.speed"] = {};
   updateData["data.itemMods.speed.isActive"] = false;
+  updateData["data.itemMods.speed.selected"] = false;
   updateData["data.itemMods.speed.value"] = 0;
+
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Add Test Modificator option to item
+ * @private
+ */
+ function _addItemModTest(item, updateData) {
+  if (!item.data.itemMods) return updateData;
+  if (item.data.itemMods.hasOwnProperty("testMod")) return updateData;
+
+  updateData["data.itemMods.testMod"] = {};
+  updateData["data.itemMods.testMod.isActive"] = false;
+  updateData["data.itemMods.testMod.selected"] = false;
+  updateData["data.itemMods.testMod.value"] = 0;
+
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Add Attack Modificator option to item
+ * @private
+ */
+ function _addItemAttackMod(item, updateData) {
+  if (!item.data.itemMods) return updateData;
+  if (item.data.itemMods.hasOwnProperty("attackMod")) return updateData;
+
+  updateData["data.itemMods.attackMod"] = {};
+  updateData["data.itemMods.attackMod.isActive"] = false;
+  updateData["data.itemMods.attackMod.selected"] = false;
+  updateData["data.itemMods.attackMod.value"] = 0;
 
   return updateData
 }

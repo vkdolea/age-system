@@ -64,6 +64,9 @@ Here the description of each one of the Modificators:
 14. **Aim:** extra bonus added to attack rolls when Aim maneuver is used, besides the standard value.
 15. **Ability Names:** these are play bonuses to the specific Ability.
 16. **Speed:** adds to Speed Mod field.
+17. **Focus:** adds bonus to Focus maching the name, as long as the character has the given Focus on its character sheet.
+18. **Attack Bonus:** adds to attack rolls.
+19. **All Test:** general bonus adding to all tests, except for attack/damage rolls.
 
 ## Credits
 ### Icons
@@ -85,8 +88,8 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 
 ### Token Stats Icons
 Icons made by:
-- [Pixel Buddha]("https://www.flaticon.com/authors/pixel-buddha") from [www.flaticon.com]("https://www.flaticon.com/"). 
-- [Delapouite](https://delapouite.com/) from [game-icons.net](https://game-icons.net/).
+- Counters by me!
+- [Delapouite](https://delapouite.com/), [DarkZaitev](http://darkzaitzev.deviantart.com/), [Lorc](https://lorcblog.blogspot.com/), [Skoll](https://game-icons.net),   from [game-icons.net](https://game-icons.net/).
 
 ### Localization
 - **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
@@ -105,8 +108,9 @@ Icons made by:
 - When creating a new token, Bar1 will be set to Health/Fortune and Bar2 will be set as Power (Magic) Points (if using this rule is on) or it will be set to Conditions (if this option is in use). If none is used, Bar2 will not be filled.
 - When a token is created out of a Player Owned character/vehicle/spaceship, token's Disposition will be set to Friendly.
 - Player Owned actors tokens will always be created with the Link Actor Data option checked. It can be changed afterwards.
-- Conditions (The Expanse) set as Icon Status, and also possible to change on Character sheet.
+- Conditions (The Expanse) are not optional anymore - they are always available.
 - Conditions tooltip now pops up close to mouse pointer.
+- Added new Item Modifiers: Focus, Attack Bonus, All Test. Look at [AGE System (unofficial) wiki](https://github.com/vkdolea/age-system/wiki) for more details.
 
 #### Fix
 - Expanded "Range" field for weapons to accomodate bigger numbers.

@@ -153,7 +153,6 @@ export default class ageSystemItemSheet extends ItemSheet {
                 const b = bonusList[mod];
                 if (!b.selected) {
                     const modName = game.i18n.localize(`age-system.bonus.${mod}`);
-                    // const modName = ageSystem.bonusTypes[mod];
                     const updatePath = `data.itemMods.${mod}.selected`;
                     bonusOptions = {
                         ...bonusOptions,

@@ -185,6 +185,12 @@ export class ageSystemActor extends Actor {
         // Actor Damage
         data.dmgMod = mods.actorDamage ?? 0;
 
+        // Actor All Tests
+        data.testMod = mods.testMod ?? 0;
+
+        // Actor All Attacks Mod
+        data.attackMod = mods.attackMod ?? 0;
+
         // Defense
         data.defense.mod = mods.defense ?? 0;
 
@@ -248,7 +254,7 @@ export class ageSystemActor extends Actor {
         data.defense.total = 0;
         if (data.defend.active) {data.defense.total += Number(data.defend.defenseBonus)};
         if (data.guardUp.active) {data.defense.total += Number(data.guardUp.defenseBonus)};
-        data.defense.total += (Number(data.abilities.dex.total) - Math.abs(Number(data.armor.penalty)) + Number(data.defense.base) + Number(data.defense.mod) + Number(data.defense.gameModeBonus));
+        data.defense.total += (Number(data.abilities.dex.total) + Number(data.defense.base) + Number(data.defense.mod) + Number(data.defense.gameModeBonus));
         if (data.allOutAttack.active) {
             data.defense.total -= Math.abs(Number(data.allOutAttack.defensePenalty));
         };

@@ -14,19 +14,19 @@ export function localizeConfig(toLocalize, noSort) {
     }
 }
 
-export function localizeModifiers() {
-    const toLocalize = ["bonusTypes"]
-    // Localize and sort CONFIG objects
-    for ( let o of toLocalize ) {
-        const localized = Object.entries(CONFIG.ageSystem[o]).map(e => {
-            return [e[0], game.i18n.localize(e[1])];
-        });
-        CONFIG.ageSystem[o] = localized.reduce((obj, e) => {
-            obj[e[0]] = e[1];
-            return obj;
-        }, {});
-    }
-}
+// export function localizeModifiers() {
+//     const toLocalize = ["bonusTypes"]
+//     // Localize and sort CONFIG objects
+//     for ( let o of toLocalize ) {
+//         const localized = Object.entries(CONFIG.ageSystem[o]).map(e => {
+//             return [e[0], game.i18n.localize(e[1])];
+//         });
+//         CONFIG.ageSystem[o] = localized.reduce((obj, e) => {
+//             obj[e[0]] = e[1];
+//             return obj;
+//         }, {});
+//     }
+// }
 
 export function localizeAgeEffects() {
     const toLocalize = ["ageEffectsKeys"];
@@ -101,12 +101,6 @@ export function hidePrimaryAblCheckbox(html) {
         if (original.value === total.value) total.style.display = "none";        
     }
 };
-
-// export function addColorScheme(html) {
-//     const selectedScheme = game.settings.get("age-system", "colorScheme");
-//     const colorClass = `colorset-${selectedScheme}`;
-//     html.find(".colorset-selection").addClass(colorClass)
-// }
 
 export function nameItemSheetWindow(ageSystemItemSheet) {
     // Add item type in the title bar within brackets

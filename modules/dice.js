@@ -73,9 +73,7 @@ export async function ageRollCheck({
     };
 
     // Check if item rolled is Focus and prepare its data
-    // const focusRolled = getFocus(itemRolled);
     let focusId = null
-    // if (focusRolled) {
     if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.data?.data.useFocus) {
         const focusObj = itemRolled.actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled)
         rollFormula += " + @focus";
@@ -86,13 +84,26 @@ export async function ageRollCheck({
             value: rollData.focus,
         });
         focusId = focusObj.id;
-        // rollData.focusName = focusRolled[0];
-        // rollData.focus = focusRolled[1];
-        // partials.push({
-        //     label: focusRolled[0],
-        //     value: focusRolled[1]
-        // });
-        // focusId = focusRolled[2];
+    }
+
+    // Adds Actor general Attack Bonus if rolltype = "attack"
+    if (rollType === "attack" && actor.data.data.attackMod !== 0) {
+        rollFormula += " + @attackMod";
+        rollData.attackMod = actor.data.data.attackMod;
+        partials.push({
+            label: game.i18n.localize("age-system.bonus.attackMod"),
+            value: rollData.attackMod,
+        });
+    }
+
+    // Adds general roll bonus from Actor
+    if (actor.data.data.testMod && actor.data.data.testMod !== 0) {
+        rollFormula += " + @testMod";
+        rollData.testMod = actor.data.data.testMod;
+        partials.push({
+            label: game.i18n.localize("age-system.bonus.actorTest"),
+            value: rollData.testMod,
+        });
     }
 
     // Adds user input roll mod
@@ -609,7 +620,7 @@ export async function vehicleDamage ({
         messageData.flavor += ` | +${extraDice}`;             
     };
 
-    let dmgRoll = new Roll(damageFormula, rollData).roll();
+    let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
 
     return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
 
@@ -625,7 +636,8 @@ export async function itemDamage({
     stuntDamage = null,
     dmgExtraDice = null,
     dmgGeneralMod = null,
-    resistedDmg = false}={}) {
+    resistedDmg = false,
+    actorDmgMod = 0}={}) {
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
@@ -764,9 +776,16 @@ export async function itemDamage({
             messageData.flavor += ` | +${extraDice}`;             
         };
 
+        // Adds Actor Damage Bonus
+        if (actorDmgMod !== 0) {
+            damageFormula += " + @actorDmgMod";
+            rollData.actorDmgMod = actorDmgMod;
+            messageData.flavor += ` | ${damageToString(actorDmgMod)} ${game.i18n.localize("age-system.bonus.actorDamage")}`;             
+        };
+
     };
 
-    let dmgRoll = new Roll(damageFormula, rollData).roll();
+    let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
 
     return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
 };

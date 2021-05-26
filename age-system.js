@@ -179,7 +179,7 @@ Hooks.once("setup", function() {
     Setup.localizeAgeEffects();
 
     // Localize Item modifier label
-    Setup.localizeModifiers();
+    // Setup.localizeModifiers();
 
 });
 

@@ -352,6 +352,16 @@
                         "isActive": false,
                         "selected": false
                     },
+                    "testMod": {
+                        "value": 0,
+                        "isActive": false,
+                        "selected": false
+                    },
+                    "attackMod": {
+                        "value": 0,
+                        "isActive": false,
+                        "selected": false
+                    },
                     "actorDamage": {
                         "value": 0,
                         "isActive": false,

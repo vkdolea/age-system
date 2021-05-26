@@ -116,13 +116,15 @@ export class ageSystemItem extends Item {
         resistedDmg = false}={}) {
 
         if (!this.data.data.hasDamage && !this.data.data.hasHealing) {return false};
+
         const damageData = {
             event: event,
             item: this,
             stuntDie: stuntDie,
             addFocus: addFocus,
             atkDmgTradeOff: atkDmgTradeOff,
-            resistedDmg: resistedDmg
+            resistedDmg: resistedDmg,
+            actorDmgMod: this.actor ? this.actor.data.data.dmgMod : 0
         };
         return Dice.itemDamage(damageData);
     };
