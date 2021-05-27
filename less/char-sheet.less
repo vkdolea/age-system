@@ -95,14 +95,16 @@
         }
 
         // Biography TinyMCE editor on Persona Tab
-        .editor {
+        .editor.editor {
             min-height: 300px;
-            max-height:600px;
+            max-height: 600px;
+            height: 100%;
             padding: 4px;
             border: 1px solid grey;
             border-radius: 4px;
-            .editor-content {
-                height: max-content;
+            .tox.tox-tinymce {
+                min-height: 290px !important;
+                max-height: 590px !important;
             }
         };
     }

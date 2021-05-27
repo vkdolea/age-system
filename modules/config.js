@@ -371,22 +371,12 @@ ageSystem.AGEstatusEffects = [
         }
     },
     {
-        icon: `${AGEstatusEffectsPath}dead-head.png`,
+        icon: `${AGEstatusEffectsPath}pirate-grave.svg`,
         id: `dead`,
         label: `EFFECT.StatusDead`,
         flags: {
             "age-system": {
                 type: "core"
-            }
-        }
-    },
-    {
-        icon: `${AGEstatusEffectsPath}liberty-wing.png`,
-        id: `flying`,
-        label: `EFFECT.StatusFlying`,
-        flags: {
-            "age-system": {
-                type: "misc"
             }
         }
     },
@@ -415,7 +405,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.dying",
         id: "dying",
-        icon: `${AGEstatusEffectsPath}half-dead.png`,
+        icon: `${AGEstatusEffectsPath}half-dead.svg`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -426,7 +416,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.fatigued",
         id: "fatigued",
-        icon: `${AGEstatusEffectsPath}despair.png`,
+        icon: `${AGEstatusEffectsPath}despair.svg`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -437,7 +427,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.exhausted",
         id: "exhausted",
-        icon: `${AGEstatusEffectsPath}oppression.png`,
+        icon: `${AGEstatusEffectsPath}oppression.svg`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -453,7 +443,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.freefalling",
         id: "freefalling",
-        icon: `${AGEstatusEffectsPath}acrobatic.png`,
+        icon: `${AGEstatusEffectsPath}acrobatic.svg`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -464,7 +454,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.helpless",
         id: "helpless",
-        icon: `${AGEstatusEffectsPath}knockout.png`,
+        icon: `${AGEstatusEffectsPath}knockout.svg`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -475,7 +465,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.hindered",
         id: "hindered",
-        icon: `${AGEstatusEffectsPath}knee-bandage.png`,
+        icon: `${AGEstatusEffectsPath}knee-bandage.svg`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -491,7 +481,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.injured",
         id: "injured",
-        icon: `${AGEstatusEffectsPath}backstab.png`,
+        icon: `${AGEstatusEffectsPath}backstab.svg`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -507,7 +497,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.wounded",
         id: "wounded",
-        icon: `${AGEstatusEffectsPath}arrowed.png`,
+        icon: `${AGEstatusEffectsPath}arrowed.svg`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -539,7 +529,7 @@ ageSystem.AGEstatusEffects = [
     {
         label: "age-system.conditions.restrained",
         id: "restrained",
-        icon: `${AGEstatusEffectsPath}imprisoned.png`,
+        icon: `${AGEstatusEffectsPath}imprisoned.svg`,
         flags: {
             "age-system": {
                 type: "conditions",
@@ -567,7 +557,268 @@ ageSystem.AGEstatusEffects = [
             mode: 5,
             value: "0"
         }]
-    }    
+    },
+    // Below this line are Foundry Core token conditions
+    {
+        id: "sleep",
+        label: "EFFECT.StatusAsleep",
+        icon: "icons/svg/sleep.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "fly",
+        label: "EFFECT.StatusFlying",
+        icon: "icons/svg/wing.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "stun",
+        label: "EFFECT.StatusStunned",
+        icon: "icons/svg/daze.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "paralysis",
+        label: "EFFECT.StatusParalysis",
+        icon: "icons/svg/paralysis.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "silence",
+        label: "EFFECT.StatusSilenced",
+        icon: "icons/svg/silenced.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "fear",
+        label: "EFFECT.StatusFear",
+        icon: "icons/svg/terror.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "burning",
+        label: "EFFECT.StatusBurning",
+        icon: "icons/svg/fire.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "frozen",
+        label: "EFFECT.StatusFrozen",
+        icon: "icons/svg/frozen.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "shock",
+        label: "EFFECT.StatusShocked",
+        icon: "icons/svg/lightning.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "corrode",
+        label: "EFFECT.StatusCorrode",
+        icon: "icons/svg/acid.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+        {
+        id: "bleeding",
+        label: "EFFECT.StatusBleeding",
+        icon: "icons/svg/blood.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "disease",
+        label: "EFFECT.StatusDisease",
+        icon: "icons/svg/biohazard.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "poison",
+        label: "EFFECT.StatusPoison",
+        icon: "icons/svg/poison.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "radiation",
+        label: "EFFECT.StatusRadiation",
+        icon: "icons/svg/radiation.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "regen",
+        label: "EFFECT.StatusRegen",
+        icon: "icons/svg/regen.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "degen",
+        label: "EFFECT.StatusDegen",
+        icon: "icons/svg/degen.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "upgrade",
+        label: "EFFECT.StatusUpgrade",
+        icon: "icons/svg/upgrade.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "downgrade",
+        label: "EFFECT.StatusDowngrade",
+        icon: "icons/svg/downgrade.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "target",
+        label: "EFFECT.StatusTarget",
+        icon: "icons/svg/target.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "eye",
+        label: "EFFECT.StatusMarked",
+        icon: "icons/svg/eye.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "curse",
+        label: "EFFECT.StatusCursed",
+        icon: "icons/svg/sun.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "bless",
+        label: "EFFECT.StatusBlessed",
+        icon: "icons/svg/angel.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "fireShield",
+        label: "EFFECT.StatusFireShield",
+        icon: "icons/svg/fire-shield.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "coldShield",
+        label: "EFFECT.StatusIceShield",
+        icon: "icons/svg/ice-shield.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "magicShield",
+        label: "EFFECT.StatusMagicShield",
+        icon: "icons/svg/mage-shield.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "holyShield",
+        label: "EFFECT.StatusHolyShield",
+        icon: "icons/svg/holy-shield.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
 ];
 
 ageSystem.ageEffectsKeys = {

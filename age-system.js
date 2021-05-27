@@ -74,7 +74,7 @@ Hooks.once("init", async function() {
     // Define Token Icons
     CONFIG.statusEffects = ageSystem.AGEstatusEffects;
     // Changing a few control icons
-    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/dead-head.png"
+    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/hasty-grave.svg"
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("age-system", ageSystemCharacterSheet, {
