@@ -36,7 +36,7 @@ export const migrateWorld = async function() {
   // Migrate Actor Override Tokens
   for ( let s of game.scenes.entities ) {
     try {
-      const updateData = migrateSceneData(s.data);
+      const updateData = await migrateSceneData(s.data);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Scene entity ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
@@ -90,7 +90,7 @@ export const migrateCompendium = async function(pack) {
           updateData = migrateItemData(doc.data);
           break;
         case "Scene":
-          updateData = migrateSceneData(doc.data);
+          updateData = await migrateSceneData(doc.data);
           break;
       }
 
@@ -126,12 +126,11 @@ export const migrateActorData = function(actor) {
   const updateData = {};
 
   // Actor Data Updates
-  if (actor.data) {
-    _addActorConditions(actor, updateData);
-    _addVehicleCustomDmg(actor, updateData);
-    _addActorMods(actor, updateData);
-    _addActorPersonaFields(actor, updateData);
-  }
+  _addActorConditions(actor, updateData);
+  _addVehicleCustomDmg(actor, updateData);
+  _addActorMods(actor, updateData);
+  _addActorPersonaFields(actor, updateData);
+  
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
@@ -177,17 +176,15 @@ export const migrateItemData = function(item) {
  * @param {Object} scene  The Scene data to Update
  * @return {Object}       The updateData to apply
  */
- export const migrateSceneData = function(scene) {
-  const tokens = scene.tokens.map(token => {
+ export const migrateSceneData = async function(scene) {
+  const tokens = scene.tokens.map(async (token) => {
     const t = token.toJSON();
     if (t.actorData.items) {
-      // const itemUpdates = []
-      token.actor.items.forEach(i => {
-        // itemUpdates.push(migrateItemData(i));
+      token.actor.items.forEach(async (i) => {
         const updates = migrateItemData(i.data)
-        i.update(updates);
+        await i.update(updates);
+        console.log(`Migrated ${i.data.type} entity ${i.name} from token ${token.data.name}`);
       });
-      // token.actor.items.update(itemUpdates);
     }
     if (!t.actorId || t.actorLink || !t.actorData.data) {
       t.actorData = {};
@@ -197,7 +194,8 @@ export const migrateItemData = function(item) {
       t.actorData = {};
     }
     else if ( !t.actorLink ) {
-      t.actorData = mergeObject(t.actorData, migrateActorData(t.actorData));
+      t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
+      console.log(t.actorData);
     }
     return t;
   });
@@ -219,12 +217,20 @@ function _addActorConditions(actor, updateData) {
   "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
 
   // Add Conditions - added a fix
-  if (actor.data?.conditions) {
+  if (actor.data.conditions) {
+    let checked = 0;
     if (typeof actor.data.conditions === "object") {
       let complete = true;
       for (let c = 0; c < conditions.length; c++) {
         const condition = conditions[c];
+        checked = condition ? checked+1 : checked;
         if (!actor.data.conditions.hasOwnProperty(condition)) complete = false;
+      }
+      if (complete && (checked > 6)) {
+        conditions.forEach(c => {
+          const updatePath = `data.conditions.${c}`;
+          updateData[updatePath] = false;
+        })
       }
       if (complete) return updateData;
     } else {
@@ -232,7 +238,7 @@ function _addActorConditions(actor, updateData) {
     };
   }
   
-  if (!actor.data?.conditions) {
+  if (!actor.data.conditions) {
     updateData["data.conditions"] = {};
     for (let c = 0; c < conditions.length; c++) {
       const cond = conditions[c];
@@ -241,9 +247,9 @@ function _addActorConditions(actor, updateData) {
     }
   };
 
-  if (actor.data?.conditions.hasOwnProperty("hindred")) {
+  if (actor.data.conditions.hasOwnProperty("hindred")) {
     updateData["data.conditions.hindered"] = actor.data.conditions.hindred;
-    // updateData["data.conditions.-=hindred"] = null;
+    updateData["data.conditions.-=hindred"] = null;
   }
 
   return updateData

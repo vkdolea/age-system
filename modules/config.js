@@ -481,7 +481,12 @@ ageSystem.AGEstatusEffects = [
                 type: "conditions",
                 name: "hindered"
             }
-        }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 1,
+            value: "0.5"
+        }]
     },
     {
         label: "age-system.conditions.injured",
@@ -494,11 +499,6 @@ ageSystem.AGEstatusEffects = [
             }
         },
         changes: [{
-            key: "data.speed.total",
-            mode: 1,
-            value: "0.5"
-        },
-        {
             key: "data.testMod",
             mode: 2,
             value: "-1"

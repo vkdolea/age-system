@@ -74,7 +74,7 @@ Hooks.once("init", async function() {
     // Define Token Icons
     CONFIG.statusEffects = ageSystem.AGEstatusEffects;
     // Changing a few control icons
-    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/cancel.png"
+    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/dead-head.png"
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("age-system", ageSystemCharacterSheet, {
@@ -199,7 +199,7 @@ Hooks.once("ready", async function() {
     if (useTracker) game.ageSystem.ageTracker.refresh();
 
     // Age Roller
-    // Handle Usef Flag
+    // Handle flag
     const rollerFlag = await game.user.getFlag("age-system", "ageRollerPos");
     if (!rollerFlag) await game.user.setFlag("age-system", "ageRollerPos", ageSystem.ageRollerPos);
     game.ageSystem.ageRoller.refresh()
