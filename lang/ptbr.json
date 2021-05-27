@@ -1,5 +1,5 @@
 {
-    "ACTOR.TypeChar": "Personagem Jogador",
+    "ACTOR.TypeChar": "Personagem",
     "ACTOR.TypeVehicle": "Veículo",
     "ACTOR.TypeSpaceship": "Espaçonave",
     "ITEM.TypeStunts": "Façanha",

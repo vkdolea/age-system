@@ -1,5 +1,5 @@
 {
-    "ACTOR.TypeChar": "Personaje Jugador",
+    "ACTOR.TypeChar": "Personaje",
     "ACTOR.TypeVehicle": "Vehículo",
 	"ACTOR.TypeSpaceship": "Nave",
     "ITEM.TypeStunts": "Proezas",
@@ -240,8 +240,15 @@
 
         "testThreshold": "Umbral Tarea",
 		"targetCurrent": "Objetivo/Actual",
-
-        "conditionsName": "Estados",
+        "charMain": "",
+        "charPersona": "",
+        "bio": "",
+        "goals": "",
+        "language": "",
+        "secretNote": "",
+        "charEffects": "",
+        "custom": "",
+        "conditionsName": "",
         "conditions": {
             "blinded": "Cegado",
             "blindedDesc": "El personaje no puede ver y automáticamente falla tiradas de atributo relaccionadas con la vista, como Percepción (Ver).",
@@ -433,6 +440,12 @@
 		"value": "Precio",
 
         "itemMod": "Modificadores",
+        "itemModSelect": "",
+        "type": "",
+        "control": "",
+        "source": "",
+        "operation": "",
+        "key": "",
         "bonus": {
             "type": "Tipo",
             "value": "Valor",
@@ -450,8 +463,9 @@
             "will": "Voluntad",
             "itemActivation": "Activación Objeto",
             "itemDamage": "Daño Objeto",
-            "actorOverAllBonus": "Todas Tiradas",
+            "testMod": "Todas Tiradas",
             "actorDamage": "Todo Daño",
+            "attackMod": "",
             "charAbl": "Atributo",
             "focus": "Concentración",
             "defense": "Defensa",
