@@ -336,7 +336,7 @@ Hooks.on("createToken", (tokenDocument, options, userId) => {
         tokenDocument.update({
             "displayBars": 10,
             "disposition": 1,
-            "actorLink": true
+            "actorLink": tokenDocument.data.actor && true
         });
     } else {
         tokenDocument.update({

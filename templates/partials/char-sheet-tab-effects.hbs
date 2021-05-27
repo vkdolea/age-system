@@ -5,6 +5,7 @@
     {{!-- Active Effects Block --}}
     <div class="actor-items flexrow">
         <ul class="item-container effects">
+            <li class="top-row colorset-first-tier">{{localize "age-system.custom"}}</li>
             <li class="flexrow header colorset-first-tier">
                 <p class="effect-name">{{localize "age-system.name"}}</p>
                 <p class="effect-key">{{localize "age-system.key"}}</p>
@@ -18,9 +19,10 @@
                     <img class="effect-icon" src="{{effect.icon}}">
                     <p>{{effect.label}}</p>
                 </div>
+                {{#if effect.changes}}
                 <div class="flexcol effect-key">
                     {{#each effect.changes as |change|}}
-                    <p>{{ageffect change.key ../../data.config.ageEffectsOptions}}</p>
+                    <p>{{#if change.key}}{{ageffect change.key ../../data.config.ageEffectsOptions}}{{else}}-{{/if}}</p>
                     {{/each}}
                 </div>
                 <div class="flexcol effect-operation">
@@ -36,9 +38,14 @@
                 </div>
                 <div class="flexcol effect-value">
                     {{#each effect.changes as |change|}}
-                    <p>{{#if change.value}}{{change.value}}{{else}}-{{/if}}</p>
+                    <p>{{#if change.key}}{{change.value}}{{else}}-{{/if}}</p>
                     {{/each}}
                 </div>
+                {{else}}
+                <div class="flexcol effect-key"><p>{{localize "age-system.rof.none"}}</p></div>
+                <div class="flexcol effect-operation"><p>{{localize "age-system.rof.none"}}</p></div>
+                <div class="flexcol effect-value"><p>{{localize "age-system.rof.none"}}</p></div>
+                {{/if}}
                 <div class="effect-add">
                     <a class="effect-active icon {{#if effect.disabled}}inactive{{/if}}"><i class="fas fa-power-off"></i></a>
                     <a class="effect-edit icon"><i class="fas fa-edit"></i></a>
@@ -50,8 +57,9 @@
     </div>
 
     {{!-- Item Modifiers Block --}}
-    <div class="actor-items flexrow">
+    <div class="actor-items">
         <ul class="item-container modifiers">
+            <li class="top-row colorset-first-tier">{{localize "age-system.itemMod"}}</li>
             <li class="flexrow header colorset-first-tier">
                 <p class="mod-name">{{localize "age-system.type"}}</p>
                 <div class="mod-value flexrow">

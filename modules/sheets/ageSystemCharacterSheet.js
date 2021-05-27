@@ -77,9 +77,9 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         };
 
         // Sorting Active Effects by Name
-        // Separating Effects related to Conditions
+        // Separating Effects related to Conditions...
         data.condEffects = data.effects.filter(e => e.flags?.["age-system"]?.type === "conditions");
-        // All other Effects
+        // ...from all other Effects
         data.effects = data.effects.filter(e => !e.flags?.["age-system"]?.type);
         data.effects = sortObjArrayByName(data.effects, `label`);
     

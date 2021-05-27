@@ -216,7 +216,7 @@ function _addActorConditions(actor, updateData) {
   const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindered",
   "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
 
-  // Add Conditions - added a fix
+  // Add Conditions - added a fix for previous migration, when 'data.conditions' was created as an Array
   if (actor.data.conditions) {
     let checked = 0;
     if (typeof actor.data.conditions === "object") {
@@ -224,7 +224,7 @@ function _addActorConditions(actor, updateData) {
       for (let c = 0; c < conditions.length; c++) {
         const condition = conditions[c];
         checked = condition ? checked+1 : checked;
-        if (!actor.data.conditions.hasOwnProperty(condition)) complete = false;
+        if (!actor.data.conditions.hasOwnProperty(condition) && !["hindred", "hindered"].includes(condition)) complete = false;
       }
       if (complete && (checked > 6)) {
         conditions.forEach(c => {

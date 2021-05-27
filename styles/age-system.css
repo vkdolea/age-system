@@ -988,6 +988,10 @@
 }
 .age-system.sheet.char .item-container ul .header p {
   text-align: center;
+  margin: 0;
+}
+.age-system.sheet.char .item-container li:first-of-type {
+  margin-bottom: 4px;
 }
 .age-system.sheet.char .item-container li.elements {
   margin-top: 4px;
