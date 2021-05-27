@@ -104,6 +104,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             limited: this.object.limited,
             options: this.options,
             owner: isOwner,
+            editable: isEditable,
             title: this.title,
             isGM: game.user.isGM
         };

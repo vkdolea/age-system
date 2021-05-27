@@ -10,7 +10,7 @@
     </div>
 
     {{!-- Spaceship Systems --}}
-    <div class="stats-block systems colorset-second-tier ">
+    <div class="stats-block systems colorset-second-tier">
         <h2>{{localize "age-system.spaceship.systems"}}</h3>
         <ul class="systems-list">
             <datalist id="{{this.actor.data.type}}-{{this.actor.id}}-list">
@@ -28,7 +28,7 @@
             {{#each data.data.systems as |system sysName|}}
             <li class="feature-controls {{sysName}} flexrow" data-sys-name={{sysName}}>
                 <p class="system-role">{{localize (concat "age-system.spaceship.operator." sysName)}} 
-                    <a class="system-roll roll-maneuver data-sys-name="{{sysName}}" data-sys-box="1"><i class="fas fa-dice"></i></a>
+                    <a class="system-roll roll-maneuver data-sys-name={{sysName}}" data-sys-box="1"><i class="fas fa-dice"></i></a>
                 </p>
                 <select name="data.systems.{{sysName}}.operator" class="system-operator">
                     {{#select system.operator}}
@@ -49,6 +49,7 @@
             </li>
             {{/each}}
         </ul>
+        
     </div>
 
     {{!-- Ship Parameters --}}
@@ -130,7 +131,7 @@
             </div>
 
             {{!-- Losses Section --}}
-            <div class="stats-block losses colorset-third-tier ">
+            <div class="stats-block losses colorset-third-tier">
                 <h2>{{localize "age-system.spaceship.lossesCond"}}</h2>
                 <ul>
                     {{#each data.data.losses as |v k|}}
@@ -171,6 +172,7 @@
         </div>
 
         <div class="flexcol">
+
             {{!-- Passenger Container --}}
             <div class="passenger flexcol colorset-third-tier stats-block">
                 <h2>{{localize "age-system.passengers"}} [{{data.data.pob}}]</h2>
@@ -213,6 +215,14 @@
                     {{/each}}
                 </ul>
             </div>
+
+            {{#if isGM}}
+            {{!-- GM Secret Notes --}}
+            <div class="stats-block gm-secret-notes colorset-third-tier">
+                <h2 class="">{{localize "age-system.gmNotes"}}</h2>
+                <textarea class="free-text" name="data.gmNotes" cols="30" rows="10">{{data.data.gmNotes}}</textarea>
+            </div>
+            {{/if}}
 
             {{!-- Quality Block --}}
             <div class="quality-block colorset-third-tier stats-block">

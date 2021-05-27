@@ -38,13 +38,6 @@
                 padding: 4px;
                 flex: 0 0 fit-content;
             }
-            // .editor {
-            //     height: 105px;
-            //     min-height: 105px;
-            //     padding: 4px;
-            //     border: 1px solid grey;
-            //     border-radius: 4px;
-            // };
         }
     }
 
@@ -72,12 +65,26 @@
             label {
                 max-width: none;
                 text-align: center;
+                max-height: 25px;
+            }
+            textarea.free-text {
+                resize: none;
+                font-family: inherit;
+                background: white;
+                border: none;
+                height: auto;
             }
         }
         .goals-language {
             .spacer {
                 flex: 0 0 4px;
             }
+        }
+        .goals.container,
+        .language.container,
+        .features.container,
+        .secret-note.container {
+            height: 150px;
         }
 
         label {
@@ -87,26 +94,17 @@
             flex: 0 0 fit-content;
         }
 
+        // Biography TinyMCE editor on Persona Tab
         .editor {
-            height: 105px;
-            min-height: 105px;
+            min-height: 300px;
+            max-height:600px;
             padding: 4px;
             border: 1px solid grey;
             border-radius: 4px;
-        };
-        .bio {
-            .editor {
+            .editor-content {
                 height: max-content;
-                min-height: 300px;
-                max-height: 600px;
             }
         };
-        .secret-note {
-            .editor {
-                height: max-content;
-                max-height: 300px;
-            }
-        }
     }
 
     .item-container {
@@ -186,7 +184,6 @@
             flex: 0 0 40%;
             p.icon.icon {
                 flex: 0 0 30%;
-                // max-width: 100px;
             }
             p.value.value {
                 flex: 0 0 70%;

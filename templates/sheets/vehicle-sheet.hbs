@@ -185,5 +185,13 @@
                 {{/each}}
             </ol>
         </div>
-    </div>   
+    </div>
+
+    {{#if isGM}}
+    {{!-- GM Secret Notes --}}
+    <div class="stats-block gm-secret-notes colorset-third-tier">
+        <h2 class="">{{localize "age-system.gmNotes"}}</h2>
+        <textarea class="free-text" name="data.gmNotes" cols="30" rows="10">{{data.data.gmNotes}}</textarea>
+    </div>
+    {{/if}} 
 </form>

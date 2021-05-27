@@ -14,35 +14,36 @@
 <div class="flexrow goals-language">
     <div class="flexcol goals container">
         <label>{{localize "age-system.goals"}}</label>
-        {{editor content=data.data.goals target="data.goals" button=true owner=owner editable=true}}
+        <textarea class="free-text" name="data.goals" cols="30" rows="10">{{data.data.goals}}</textarea>
     </div>
     <div class="spacer"></div>
     <div class="flexcol language container">
         <label>{{localize "age-system.language"}}</label>
-        {{editor content=data.data.language target="data.language" button=true owner=owner editable=true}}
+        <textarea class="free-text" name="data.language" cols="30" rows="10">{{data.data.language}}</textarea>
     </div>
 </div>
 
 <div class="flexcol features container">
     <label for="">{{localize "age-system.features"}}</label>
-    {{editor content=data.data.features target="data.features" button=true owner=owner editable=true}}
+    <textarea class="free-text" name="data.traits" cols="30" rows="10">{{data.data.traits}}</textarea>
 </div>
 
 {{#if isGM}}
 <div class="flexcol secret-note container">
     <label for="">{{localize "age-system.gmNotes"}}</label>
-    {{editor content=data.data.gmNotes target="data.gmNotes" button=true owner=owner editable=true}}
+    <textarea class="free-text" name="data.gmNotes" cols="30" rows="10">{{data.data.gmNotes}}</textarea>
 </div>
 {{/if}}
 
 {{#if owner}}
 <div class="flexcol secret-note container">
     <label for="">{{localize "age-system.secretNote"}}</label>
-    {{editor content=data.data.secretNote target="data.secretNote" button=true owner=owner editable=true}}
+    <textarea class="free-text" name="data.secretNote" cols="30" rows="10">{{data.data.secretNote}}</textarea>
 </div>
 {{/if}}
 
 <div class="flexcol bio container">
     <label for="">{{localize "age-system.bio"}}</label>
-    {{editor content=data.data.bio target="data.bio" button=true owner=owner editable=true}}
+    {{editor content=data.data.features target="data.features" button=true owner=owner editable=editable}}
+    {{!-- {{editor content=data.data.features target="data.features" button=true owner=owner editable=true}} --}}
 </div>

@@ -293,10 +293,7 @@ function _addVehicleCustomDmg(actor, updateData) {
   if (!actor.data.hasOwnProperty('gmNotes')) updateData['data.gmNotes'] = "";
   
   if (actor.type !== "char") return updateData;
-  if (actor.data.bio === "" || !actor.data.hasOwnProperty('bio')) {
-    updateData["data.bio"] = actor.data.features;
-    updateData["data.features"] = "";
-  }
+  if (!actor.data.hasOwnProperty('traits')) updateData['data.traits'] = "";
   if (!actor.data.hasOwnProperty('secretNote')) updateData['data.secretNote'] = "";
   if (!actor.data.hasOwnProperty('language')) updateData['data.language'] = "";
 

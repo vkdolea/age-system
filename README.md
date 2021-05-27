@@ -98,6 +98,7 @@ Icons made by:
 ### 0.7.0 [2021-05-26]
 #### Added
 - New fancy layout for Vehicle sheet.
+- Added notes visible only by GM on each actor sheet.
 - Add tabs for Player Character sheet: Main (game stats), Persona (character notes), Effects (effects applied to character).
 - Main Tab: the usual rollable game stats.
 - Persona Tab: Biography (AKA the old nameless field in the header), Distinctive Features, Languages, Goals and Player & GM Secret Notes (only GM and actor owner can see this field).

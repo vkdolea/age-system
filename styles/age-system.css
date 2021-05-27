@@ -952,9 +952,27 @@
 .age-system.sheet.char .persona .language label {
   max-width: none;
   text-align: center;
+  max-height: 25px;
+}
+.age-system.sheet.char .persona .features textarea.free-text,
+.age-system.sheet.char .persona .goals textarea.free-text,
+.age-system.sheet.char .persona .bio textarea.free-text,
+.age-system.sheet.char .persona .secret-note textarea.free-text,
+.age-system.sheet.char .persona .language textarea.free-text {
+  resize: none;
+  font-family: inherit;
+  background: white;
+  border: none;
+  height: auto;
 }
 .age-system.sheet.char .persona .goals-language .spacer {
   flex: 0 0 4px;
+}
+.age-system.sheet.char .persona .goals.container,
+.age-system.sheet.char .persona .language.container,
+.age-system.sheet.char .persona .features.container,
+.age-system.sheet.char .persona .secret-note.container {
+  height: 150px;
 }
 .age-system.sheet.char .persona label {
   white-space: nowrap;
@@ -963,20 +981,14 @@
   flex: 0 0 fit-content;
 }
 .age-system.sheet.char .persona .editor {
-  height: 105px;
-  min-height: 105px;
+  min-height: 300px;
+  max-height: 600px;
   padding: 4px;
   border: 1px solid grey;
   border-radius: 4px;
 }
-.age-system.sheet.char .persona .bio .editor {
+.age-system.sheet.char .persona .editor .editor-content {
   height: max-content;
-  min-height: 300px;
-  max-height: 600px;
-}
-.age-system.sheet.char .persona .secret-note .editor {
-  height: max-content;
-  max-height: 300px;
 }
 .age-system.sheet.char .item-container ul {
   margin-top: 0;
@@ -1369,6 +1381,16 @@
 .age-system.sheet.vehicle .image-description .vehicle-desc .editor .editor-content {
   max-height: 173px;
 }
+.age-system.sheet.vehicle .gm-secret-notes.gm-secret-notes {
+  height: max-content;
+}
+.age-system.sheet.vehicle .gm-secret-notes.gm-secret-notes textarea.free-text {
+  resize: none;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  height: 150px;
+}
 .age-system.sheet.vehicle .parameters.stats-block {
   font-size: 14px;
 }
@@ -1581,6 +1603,16 @@
 }
 .age-system.sheet.spaceship .image-description .ship-desc .editor .editor-content {
   max-height: 173px;
+}
+.age-system.sheet.spaceship .gm-secret-notes.gm-secret-notes {
+  height: max-content;
+}
+.age-system.sheet.spaceship .gm-secret-notes.gm-secret-notes textarea.free-text {
+  resize: none;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  height: 150px;
 }
 .age-system.sheet.spaceship ul.systems-list {
   text-align: center;
@@ -3479,6 +3511,9 @@
 }
 .age-system {
   /*---------Flexbox assisting classes------*/
+}
+.age-system textarea:focus {
+  box-shadow: none;
 }
 .age-system a:hover {
   text-shadow: none;
