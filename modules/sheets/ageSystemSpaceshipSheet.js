@@ -32,8 +32,12 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
     getData() {
         this.actor.prepareData(); // Forcing updating sheet after opening, in case an Actor's operator is updated
-        // TODO - method on Actor entity to for prepareData() running on Vehicle data em database is updated.
-        const data = super.getData();
+        const isOwner = this.document.isOwner;
+        const isEditable = this.isEditable;
+    
+        // Copy actor data to a safe copy
+        const data = this.actor.data.toObject(false);
+        // const data = super.getData();
         data.config = CONFIG.ageSystem;
         data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
 
@@ -49,7 +53,19 @@ export default class ageSpaceshipSheet extends ActorSheet {
         data.notSynth = !(this.token && !this.token.data.actorLink);
         data.isSynth = !data.notSynth;
 
-        return data;
+        // return data;
+        return {
+            actor: this.object,
+            cssClass: isEditable ? "editable" : "locked",
+            data: data,
+            effects: data.effects,
+            items: data.items,
+            limited: this.object.limited,
+            options: this.options,
+            owner: isOwner,
+            title: this.title,
+            isGM: game.user.isGM
+        };
     };
 
     activateListeners(html) {

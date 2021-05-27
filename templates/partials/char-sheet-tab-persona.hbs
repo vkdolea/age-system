@@ -28,6 +28,13 @@
     {{editor content=data.data.features target="data.features" button=true owner=owner editable=true}}
 </div>
 
+{{#if isGM}}
+<div class="flexcol secret-note container">
+    <label for="">{{localize "age-system.gmNotes"}}</label>
+    {{editor content=data.data.gmNotes target="data.gmNotes" button=true owner=owner editable=true}}
+</div>
+{{/if}}
+
 {{#if owner}}
 <div class="flexcol secret-note container">
     <label for="">{{localize "age-system.secretNote"}}</label>

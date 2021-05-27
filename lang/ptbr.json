@@ -246,6 +246,7 @@
         "goals": "Objetivos",
         "language": "Línguas",
         "secretNote": "Anotações Secretas entre Mestre e Jogador",
+        "gmNotes": "Notas Secretas do Mestre",
         "charEffects": "Efeitos",
         "custom": "Sob Medida",
         "conditionsName": "Condições",

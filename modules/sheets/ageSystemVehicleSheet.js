@@ -72,7 +72,8 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             limited: this.object.limited,
             options: this.options,
             owner: isOwner,
-            title: this.title
+            title: this.title,
+            isGM: game.user.isGM
         };
     };
 

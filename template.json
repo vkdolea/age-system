@@ -15,6 +15,7 @@
             },
             "drive": "",
             "description": "",
+            "gmNotes": "",
             "passengers": [],
             "crew": {
                 "min": 1,
@@ -110,6 +111,7 @@
             "hull": 0,
             "cost": 0,
             "description": "",
+            "gmNotes": "",
             "coverRating": 0,
             "armorRating": 0,
             "partHealth": {
@@ -139,6 +141,7 @@
             "language": "",
             "background": "",
             "secretNote": "",
+            "gmNotes": "",
             "socialClass": "",
             "ancestry": "",
             "profession": "",

@@ -97,7 +97,7 @@ export async function ageRollCheck({
     }
 
     // Adds general roll bonus from Actor
-    if (actor.data.data.testMod && actor.data.data.testMod !== 0) {
+    if (actor?.data.data.testMod && actor?.data.data.testMod !== 0) {
         rollFormula += " + @testMod";
         rollData.testMod = actor.data.data.testMod;
         partials.push({

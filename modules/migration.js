@@ -290,9 +290,10 @@ function _addVehicleCustomDmg(actor, updateData) {
  * @private
  */
  function _addActorPersonaFields(actor, updateData) {
+  if (!actor.data.hasOwnProperty('gmNotes')) updateData['data.gmNotes'] = "";
+  
   if (actor.type !== "char") return updateData;
-
-  if (actor.data.bio === "" || !actor.data.bio) {
+  if (actor.data.bio === "" || !actor.data.hasOwnProperty('bio')) {
     updateData["data.bio"] = actor.data.features;
     updateData["data.features"] = "";
   }

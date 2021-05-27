@@ -246,6 +246,7 @@
         "goals": "Goals",
         "language": "Languages",
         "secretNote": "Player & GM Secret Notes",
+        "gmNotes": "GM Secret Notes",
         "charEffects": "Effects",
         "custom": "Custom",
         "conditionsName": "Conditions",

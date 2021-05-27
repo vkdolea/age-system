@@ -1,11 +1,11 @@
-<form class="{{cssClass}} age-system sheet colorset-{{colorScheme}} spaceship" autocomplete="off">
+<form class="{{cssClass}} age-system sheet colorset-{{data.colorScheme}} spaceship" autocomplete="off">
 
     <input name="name" class="spaceship-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
     <div class="flexrow image-description">
         <img class="ship-image" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
         <div class="ship-desc">
             <label class="colorset-second-tier desc">{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.description target="data.description" button=true owner=owner editable=true}}
+            {{editor content=data.data.description target="data.description" button=true owner=owner editable=true}}
         </div>
     </div>
 
@@ -15,7 +15,7 @@
         <ul class="systems-list">
             <datalist id="{{this.actor.data.type}}-{{this.actor.id}}-list">
                 <option value=""></option>
-                {{#each config.focus as |focus|}}
+                {{#each data.config.focus as |focus|}}
                 <option value="{{focus.name}}"></option>
                 {{/each}}
             </datalist>
@@ -28,21 +28,19 @@
             {{#each data.data.systems as |system sysName|}}
             <li class="feature-controls {{sysName}} flexrow" data-sys-name={{sysName}}>
                 <p class="system-role">{{localize (concat "age-system.spaceship.operator." sysName)}} 
-                    <a class="system-roll roll-maneuver {{#if ../isSynth}}is-synth{{/if}}" data-sys-name="{{sysName}}" data-sys-box="1"><i class="fas fa-dice"></i></a>
+                    <a class="system-roll roll-maneuver data-sys-name="{{sysName}}" data-sys-box="1"><i class="fas fa-dice"></i></a>
                 </p>
-                <select name="data.systems.{{sysName}}.operator" {{#if ../isSynth}}disabled{{/if}} class="system-operator">
+                <select name="data.systems.{{sysName}}.operator" class="system-operator">
                     {{#select system.operator}}
                     <option value="crew">{{localize "age-system.spaceship.crew"}}</option>
-                    {{#if ../notSynth}}
-                    {{#each ../passengers as |passenger|}}
+                    {{#each ../data.passengers as |passenger|}}
                     <option value="{{passenger.id}}">{{passenger.name}}</option>
                     {{/each}}
-                    {{/if}}
                     {{/select}}
                 </select>
                 <select name="data.systems.{{sysName}}.useAbl" class="system-abl">
                     {{#select system.useAbl}}
-                    {{#each ../config.abilities as |name type|}}
+                    {{#each ../data.config.abilities as |name type|}}
                     <option value="{{type}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -78,7 +76,7 @@
                         <label class="competence-label">{{localize "age-system.spaceship.competence"}}</label>
                         <select class="competence-list" name="data.crew.competence">
                             {{#select data.data.crew.competence}}
-                            {{#each config.spaceshipCrewCompetence as |compet competKey|}}
+                            {{#each data.config.spaceshipCrewCompetence as |compet competKey|}}
                             <option value="{{compet}}">{{localize (concat "age-system.spaceship.competenceLevel." competKey)}} (+{{compet}})</option>
                             {{/each}}
                             {{/select}}
@@ -95,7 +93,7 @@
                         <label class="hull-label">{{localize "age-system.spaceship.size"}}</label>
                         <select class="ship-size" name="data.size" class="dice-size">
                             {{#select data.data.size}}
-                            {{#each config.spaceshipSize as |size sizeKey|}}
+                            {{#each data.config.spaceshipSize as |size sizeKey|}}
                             <option value="{{size}}">{{localize (concat "age-system.spaceship.sizeType." sizeKey)}}</option>
                             {{/each}}
                             {{/select}}
@@ -155,7 +153,7 @@
                 {{!-- Loss Control Block --}}
                 <h3 class="feature-controls" data-passenger-id="{{data.data.systems.damageControl.operator}}">
                     {{localize "age-system.damageControl"}}
-                    <a class="roll-maneuver {{#if isSynth}}is-synth{{/if}}" data-sys-name="damageControl" title="{{localize "age-system.damageControl"}}">
+                    <a class="roll-maneuver {{#if data.isSynth}}is-synth{{/if}}" data-sys-name="damageControl" title="{{localize "age-system.damageControl"}}">
                         <i class="fas fa-cogs"></i>
                     </a>
                 </h3>
@@ -174,11 +172,10 @@
 
         <div class="flexcol">
             {{!-- Passenger Container --}}
-            {{#if notSynth}}
             <div class="passenger flexcol colorset-third-tier stats-block">
                 <h2>{{localize "age-system.passengers"}} [{{data.data.pob}}]</h2>
                 <ul class="passenger-list">
-                    {{#each passengers as |passenger|}}
+                    {{#each data.passengers as |passenger|}}
                     <li class="flexrow feature-controls flex-align-center" data-passenger-key="{{@key}}" data-passenger-id="{{passenger.id}}"  data-passenger-name="{{passenger.name}}">
                         <a class="remove-passenger"><i class="fa fa-minus"></i></a>
                         <img src="{{passenger.picture}}" class="passenger-token">
@@ -193,7 +190,6 @@
                     {{/each}}
                 </ul>
             </div>
-            {{/if}}
 
             {{!-- Weapon Block --}}
             <div class="stats-block colorset-third-tier">
@@ -205,7 +201,7 @@
                         <div class="weapon-dmg"><label for="">{{localize "age-system.formula"}}</label></div>
                         {{!-- <div class="weapon-ctrl add"><a><i class="fa fa-plus"></i></a></div> --}}
                     </li>
-                    {{#each weapon as |item|}}
+                    {{#each data.weapon as |item|}}
                     <li class="flexrow item-desc feature-controls flex-align-center" data-item-id="{{item._id}}">
                         <img class="item-img" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                         <p class="weapon-name {{#unless item.data.isActive}}inactive{{/unless}}">{{item.name}}</p>
@@ -228,7 +224,7 @@
                         <div class="feature-type"><label>{{localize "age-system.spaceship.qualityType"}}</label></div>
                         <div class="feature-value"><label>{{localize "age-system.value"}}</label></div>
                     </li> 
-                    {{#each qualities as |item|}}
+                    {{#each data.qualities as |item|}}
                     <li class="flexrow item-desc feature-controls flex-align-center" data-item-id="{{item._id}}">
                         <img class="item-img" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                         <p class="feature-name">{{item.name}}</p>
@@ -266,7 +262,7 @@
                         <div class="feature-type"><label>{{localize "age-system.spaceship.qualityType"}}</label></div>
                         <div class="feature-value"><label>{{localize "age-system.value"}}</label></div>
                     </li> 
-                    {{#each flaws as |item|}}
+                    {{#each data.flaws as |item|}}
                     <li class="flexrow item-desc feature-controls flex-align-center" data-item-id="{{item._id}}">
                         <img class="item-img" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                         <p class="feature-name">{{item.name}}</p>
