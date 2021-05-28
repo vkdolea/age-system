@@ -177,7 +177,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             for (let c = 0; c < condEffects.length; c++) {
                 const effect = condEffects[c];
                 const id = effect.data._id;
-                await this.actor.effects.get(id).delete();                
+                await this.actor.effects.get(id).delete();
             }
             return
         }
@@ -185,10 +185,10 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         if (isChecked && condEffects.length < 1) {
             const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
             newEffect["flags.core.statusId"] = newEffect.id;
-            await this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+            return this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
         }
     }
-    
+
     _onTooltipHover(event){
         const tipCont = event.currentTarget.querySelector(".container-tooltip-text");
         const windowSize = {

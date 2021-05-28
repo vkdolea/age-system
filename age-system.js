@@ -351,7 +351,7 @@ Hooks.on("createToken", (tokenDocument, options, userId) => {
     };
 })
 
-Hooks.on("preCreateActiveEffect", async (activeEffect, activeEffectData, options, userId) => {
+Hooks.on("preCreateActiveEffect", (activeEffect, activeEffectData, options, userId) => {
     // Ensur this change occurs only once
     if (game.user.id !== userId) return
 
@@ -363,12 +363,12 @@ Hooks.on("preCreateActiveEffect", async (activeEffect, activeEffectData, options
         if (!isChecked) {
             const path = `data.conditions.${condId}`;
             const updateData = {[path]: true};
-            await actor.update(updateData);
+            return actor.update(updateData);
         }
     }
 })
 
-Hooks.on("preDeleteActiveEffect", async (activeEffect, options, userId) => {
+Hooks.on("preDeleteActiveEffect", (activeEffect, options, userId) => {
     // Ensur this change occurs only once
     if (game.user.id !== userId) return
 
@@ -380,7 +380,7 @@ Hooks.on("preDeleteActiveEffect", async (activeEffect, options, userId) => {
         if (isChecked) {
             const path = `data.conditions.${condId}`;
             const updateData = {[path]: false};
-            await actor.update(updateData);
+            return actor.update(updateData);
         }
     }
 })
