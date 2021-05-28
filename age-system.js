@@ -351,7 +351,7 @@ Hooks.on("createToken", (tokenDocument, options, userId) => {
     };
 })
 
-Hooks.on("preCreateActiveEffect", (activeEffect, activeEffectData, options, userId) => {
+Hooks.on("preCreateActiveEffect", async (activeEffect, activeEffectData, options, userId) => {
     // Ensur this change occurs only once
     if (game.user.id !== userId) return
 
@@ -363,15 +363,15 @@ Hooks.on("preCreateActiveEffect", (activeEffect, activeEffectData, options, user
         if (!isChecked) {
             const path = `data.conditions.${condId}`;
             const updateData = {[path]: true};
-            actor.update(updateData);
+            await actor.update(updateData);
         }
     }
 })
 
-Hooks.on("preDeleteActiveEffect", (activeEffect, options, userId) => {
+Hooks.on("preDeleteActiveEffect", async (activeEffect, options, userId) => {
     // Ensur this change occurs only once
     if (game.user.id !== userId) return
-    
+
     const isCondition = activeEffect.data.flags?.["age-system"]?.type === "conditions" ? true : false;
     if(isCondition) {
         const condId = activeEffect.data.flags["age-system"].name;
@@ -380,7 +380,7 @@ Hooks.on("preDeleteActiveEffect", (activeEffect, options, userId) => {
         if (isChecked) {
             const path = `data.conditions.${condId}`;
             const updateData = {[path]: false};
-            actor.update(updateData);
+            await actor.update(updateData);
         }
     }
 })

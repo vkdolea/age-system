@@ -185,10 +185,10 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         if (isChecked && condEffects.length < 1) {
             const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
             newEffect["flags.core.statusId"] = newEffect.id;
-            return this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+            await this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
         }
-
     }
+    
     _onTooltipHover(event){
         const tipCont = event.currentTarget.querySelector(".container-tooltip-text");
         const windowSize = {
