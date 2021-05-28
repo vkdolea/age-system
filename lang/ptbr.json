@@ -285,8 +285,8 @@
         "talent": "Talentos",
         "stunts": "Façanhas",
         "focus": "Focos",
-        "relationship": "Vínculos",
-        "honorifics": "Honrarias",
+        "relationship": "Relações",
+        "honorifics": "Honoríficos",
         "membership": "Filiações",
 
         "settings": {
@@ -392,13 +392,13 @@
         "talentContainer": "Talentos & Especializações",
         "weaponContainer": "Armas",
         "focusContainer": "Focos",
-        "honorificsContainer": "Honrarias",
+        "honorificsContainer": "Honoríficos",
         "membershipContainer": "Filiações",
-        "rank": "Grau",
+        "rank": "Nível",
         "membershipPosition": "Posição",
 
-        "relationshipContainer": "Vínculos",
-        "relationshipBond": "Laço",
+        "relationshipContainer": "Relações",
+        "relationshipBond": "Vínculo",
         "relationshipIntensity": "Intensidade",
 
         "drive": {
