@@ -287,6 +287,9 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 
 // Prevent Items to be created on non campatible Actor types
 Hooks.on("preCreateItem", (itemCreated, itemCreatedData, options, userId) => {
+    // Ensure this change occurs once
+    if (game.user.id !== userId) return;
+
     const actor = itemCreated.actor;
     const itemName = itemCreatedData.name
     const itemType = itemCreatedData.type
@@ -326,6 +329,9 @@ Hooks.on("preCreateItem", (itemCreated, itemCreatedData, options, userId) => {
 });
 
 Hooks.on("createToken", (tokenDocument, options, userId) => {
+    // Ensur this change occurs only once
+    if (game.user.id !== userId) return
+
     if (tokenDocument.actor.data.type !== "char") return;
     if (!tokenDocument.data.bar1?.attribute) tokenDocument.update({"bar1.attribute": "health"});
     if (!tokenDocument.data.bar2?.attribute) {
@@ -346,6 +352,9 @@ Hooks.on("createToken", (tokenDocument, options, userId) => {
 })
 
 Hooks.on("preCreateActiveEffect", (activeEffect, activeEffectData, options, userId) => {
+    // Ensur this change occurs only once
+    if (game.user.id !== userId) return
+
     const isCondition = activeEffectData.flags?.["age-system"]?.type === "conditions" ? true : false;
     if(isCondition) {
         const condId = activeEffectData.flags["age-system"].name;
@@ -360,6 +369,9 @@ Hooks.on("preCreateActiveEffect", (activeEffect, activeEffectData, options, user
 })
 
 Hooks.on("preDeleteActiveEffect", (activeEffect, options, userId) => {
+    // Ensur this change occurs only once
+    if (game.user.id !== userId) return
+    
     const isCondition = activeEffect.data.flags?.["age-system"]?.type === "conditions" ? true : false;
     if(isCondition) {
         const condId = activeEffect.data.flags["age-system"].name;
