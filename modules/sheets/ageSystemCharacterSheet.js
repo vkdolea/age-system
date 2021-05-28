@@ -160,7 +160,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         const item = this.actor.items.get(itemId);
         const active = item.data.data.itemMods[modType].isActive;
         const dataPath = `data.itemMods.${modType}.isActive`;
-        item.update({[dataPath]: !active});
+        return item.update({[dataPath]: !active});
     }
 
     _onChangeCondition(event) {
@@ -173,13 +173,13 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             for (let c = 0; c < condEffects.length; c++) {
                 const effect = condEffects[c];
                 const id = effect.data._id;
-                this.actor.effects.get(id).delete();                
+                return this.actor.effects.get(id).delete();                
             }
         }
         if (isChecked && condEffects.length < 1) {
             const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
             newEffect["flags.core.statusId"] = newEffect.id;
-            this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+            return this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
         }
 
     }
