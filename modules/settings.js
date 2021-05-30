@@ -375,16 +375,11 @@ function allCompendia() {
 export function compendiumList(compendiumName) {
   let dataPack = game.packs.get(compendiumName);
   let dataList = [];
-  if (!dataPack) return dataList;
-  dataPack.getIndex().then(function(){
-  for (let i = 0; i < dataPack.index.length; i++) {
-    const entry = dataPack.index[i];
-    if(entry)
-      dataList[i] = {
-        _id: entry._id,
-        name: entry.name
-      };   
-    }
-  });
+  let foci = dataPack.index;
+  foci.map(i => {
+    if(i.type === "focus") dataList.push({
+    _id: i._id,
+    name: i.name
+  })})
   return dataList;
 };
