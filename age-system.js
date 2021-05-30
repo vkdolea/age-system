@@ -4,7 +4,9 @@ import ageSystemItemSheet from "./modules/sheets/ageSystemItemSheet.js";
 import ageSystemCharacterSheet from "./modules/sheets/ageSystemCharacterSheet.js";
 import ageSystemVehicleSheet from "./modules/sheets/ageSystemVehicleSheet.js";
 import ageSystemSpaceshipSheet from "./modules/sheets/ageSystemSpaceshipSheet.js";
+import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
+import {ageEffect} from "./modules/ageEffect.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
 import { rollOwnedItem } from "./modules/macros.js";
@@ -17,16 +19,21 @@ import * as Setup from "./modules/setup.js";
 import * as migrations from "./modules/migration.js";
 
 async function preloadHandlebarsTemplates() {
+    const path = `systems/age-system/templates/partials/`;
     const templatePaths = [
-        "systems/age-system/templates/partials/bonus-desc-sheet.hbs",
-        "systems/age-system/templates/partials/dmg-block-sheet.hbs",
-        "systems/age-system/templates/partials/bonuses-sheet.hbs",
-        "systems/age-system/templates/partials/active-bonuses.hbs",
-        "systems/age-system/templates/partials/ability-focus-select.hbs",
-        "systems/age-system/templates/partials/cost-resource-block.hbs",
-        "systems/age-system/templates/partials/play-aid-bar.hbs",
-        "systems/age-system/templates/partials/item-image-sheet-card.hbs",
-        "systems/age-system/templates/partials/conditions-block.hbs",
+        `${path}bonus-desc-sheet.hbs`,
+        `${path}dmg-block-sheet.hbs`,
+        `${path}bonuses-sheet.hbs`,
+        `${path}active-bonuses.hbs`,
+        `${path}ability-focus-select.hbs`,
+        `${path}cost-resource-block.hbs`,
+        `${path}play-aid-bar.hbs`,
+        `${path}item-image-sheet-card.hbs`,
+        `${path}conditions-block.hbs`,
+        `${path}char-sheet-nav-bar.hbs`,
+        `${path}char-sheet-tab-main.hbs`,
+        `${path}char-sheet-tab-persona.hbs`,
+        `${path}char-sheet-tab-effects.hbs`,
     ];
 
     return loadTemplates(templatePaths);
@@ -46,17 +53,30 @@ Hooks.once("init", async function() {
 
     // Create a namespace within the game global
     game.ageSystem = {
+        applications: {
+            ageSystemCharacterSheet,
+            ageSystemVehicleSheet,
+            ageSystemSpaceshipSheet,
+            // ageActiveEffectConfig,
+            ageSystemItemSheet,
+            AgeRoller,
+            AgeTracker
+        },
         migrations: migrations,
-        rollOwnedItem
+        rollOwnedItem,
+        entities: {
+            ageSystemActor,
+            ageSystemItem,
+            ageEffect
+        }
     };
 
     CONFIG.ageSystem = ageSystem;
 
-    Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("age-system", ageSystemItemSheet, {
-        makeDefault: true,
-        label: "age-system.SHEETS.standardItem"
-    });
+    // Define Token Icons
+    CONFIG.statusEffects = ageSystem.AGEstatusEffects;
+    // Changing a few control icons
+    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/hasty-grave.svg"
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("age-system", ageSystemCharacterSheet, {
@@ -74,6 +94,12 @@ Hooks.once("init", async function() {
         makeDefault: true,
         label: "age-system.SHEETS.standardSpaceship"
     });
+    
+    Items.unregisterSheet("core", ItemSheet);
+    Items.registerSheet("age-system", ageSystemItemSheet, {
+        makeDefault: true,
+        label: "age-system.SHEETS.standardItem"
+    });
 
     game.ageSystem.ageRoller = new AgeRoller({
         popOut: false,
@@ -87,13 +113,12 @@ Hooks.once("init", async function() {
         resizable: false
     });
 
-
-
-    // Define extra data for Age System Actors
-    CONFIG.Actor.entityClass = ageSystemActor;
-
-    // Define extra data for Age System Items
-    CONFIG.Item.entityClass = ageSystemItem;
+    // Define extra data for Age System (Actors, Items, ActiveEffectConfig)
+    CONFIG.Actor.documentClass = ageSystemActor;
+    CONFIG.Item.documentClass = ageSystemItem;
+    CONFIG.ActiveEffect.documentClass = ageEffect;
+    // Saving this customization for a later implementation
+    // CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;
 
     // Load partials for Handlebars
     preloadHandlebarsTemplates();
@@ -111,6 +136,25 @@ Hooks.once("init", async function() {
         }
         return outStr;
     });
+
+    // Handlebar to identify type of Effect
+    Handlebars.registerHelper('ageffect', function(mask, options) {
+        for (let o = 0; o < options.length; o++) {
+            const e = options[o];
+            if (e[1] === mask) return e[0]
+        }
+        return `${mask} (${game.i18n.localize("age-system.custom")})`;
+    })
+
+    // Handlebar to identify if there is any Condition ongoing
+    Handlebars.registerHelper('conditionOn', function(conditionKey, effects) {
+        let checked = "";
+        for (let e = 0; e < effects.length; e++) {
+            const flags = effects[e].flags["age-system"];
+            if (flags?.type === 'conditons' && (flags?.name === conditionKey)) checked = "checked";
+        };
+        return checked;
+    })
 
     // Handlebar helper to compare 2 data
     Handlebars.registerHelper("when",function(operand_1, operator, operand_2, options) {
@@ -141,9 +185,14 @@ Hooks.once("setup", function() {
         ageSystem.conditions[c].desc = game.i18n.localize(ageSystem.conditions[c].desc);
     }
 
-    // TODO - Consertar essa array!!
     // Localize Abilities' name
     Setup.abilitiesName();
+
+    // Localize Effects Name and build object
+    Setup.localizeAgeEffects();
+
+    // Localize Item modifier label
+    // Setup.localizeModifiers();
 
 });
 
@@ -152,6 +201,8 @@ Hooks.once("ready", async function() {
     const color = game.user.getFlag("age-system", "colorScheme");
     if (color) game.settings.set("age-system", "colorScheme", color);
     if (!color) game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
+    // Register color scheme on global name space
+    ageSystem.colorScheme = game.settings.get("age-system", "colorScheme");
 
     // Tracker Handling
     // Identify if User already has ageTrackerPos flag set
@@ -160,9 +211,8 @@ Hooks.once("ready", async function() {
     if (!userTrackerFlag) await game.user.setFlag("age-system", "ageTrackerPos", ageSystem.ageTrackerPos);
     if (useTracker) game.ageSystem.ageTracker.refresh();
 
-
     // Age Roller
-    // Handle Usef Flag
+    // Handle flag
     const rollerFlag = await game.user.getFlag("age-system", "ageRollerPos");
     if (!rollerFlag) await game.user.setFlag("age-system", "ageRollerPos", ageSystem.ageRollerPos);
     game.ageSystem.ageRoller.refresh()
@@ -199,11 +249,9 @@ Hooks.once("ready", async function() {
     for(let e of game.postReadyPrepare){
         e.prepareData();
     }
-
-    // Register color scheme
-    ageSystem.colorScheme = game.settings.get("age-system", "colorScheme");
     
     // Register System Settings related do Focus Compendium
+    ageSystem.itemCompendia = Settings.allCompendia("Item");
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.compendiumList(setCompendium);
@@ -214,7 +262,7 @@ Hooks.once("ready", async function() {
     // // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.5.0";
+    const NEEDS_MIGRATION_VERSION = "0.7.0";
     // const COMPATIBLE_MIGRATION_VERSION = "0.7.9";
     const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;
@@ -228,8 +276,12 @@ Hooks.once("ready", async function() {
 
 });
 
+Hooks.on("createCompendium", () => {
+    ageSystem.itemCompendia = Settings.allCompendia("Item");
+})
+
 // If Compendia are updated, then compendiumList is gathered once again
-Hooks.on("renderCompendium", function() {
+Hooks.on("renderCompendium", () => {
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.compendiumList(setCompendium);
 });
@@ -237,8 +289,6 @@ Hooks.on("renderCompendium", function() {
 Hooks.on("renderageSystemItemSheet", (app, html, data) => {
     // Add item type on title bar
     Setup.nameItemSheetWindow(app);
-    // Hide fatigue entries if Fatigue is not in use
-    Setup.hideFatigueEntry(html);
 });
 
 Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
@@ -252,3 +302,69 @@ Hooks.on("renderChatMessage", (app, html, data) => {
     // Hide chat message when rolling to GM
     AgeChat.selectBlindAgeRoll(app, html, data);
 });
+
+// Prevent Items to be created on non campatible Actor types
+Hooks.on("preCreateItem", (itemCreated, itemCreatedData, options, userId) => {
+    // Ensure this change occurs once
+    if (game.user.id !== userId) return;
+
+    const actor = itemCreated.actor;
+    const itemName = itemCreatedData.name
+    const itemType = itemCreatedData.type
+
+    if (!actor) return;
+
+    // Avoid dropping Item on Vehicle
+    if (actor.type === "vehicle") {
+        ui.notifications.warn(`Items can not be droped on Vehicle Actor type.`);
+        return options.temporary = true;
+    };
+
+    // Ensure only Spaceship Features are droped on Spaceships
+    if (actor.type === "spaceship" && itemType !== "shipfeatures") {
+        let warning = game.i18n.localize("age-system.WARNING.nonShipPartsOnShip");
+        ui.notifications.warn(warning);
+        return options.temporary = true;
+    }
+    
+    // Prevent adding spaceship features to Actors
+    if (actor.type === "char" && itemType === "shipfeatures") {
+        let warning = game.i18n.localize("age-system.WARNING.shipPartsOnChar");
+        ui.notifications.warn(warning);
+        return options.temporary = true;
+    }
+    
+    // Avoid Focus with repeated name on Actors
+    if (actor.type === "char" && itemType === "focus") {
+        const hasFocus = actor.items.filter(f => f.name === itemCreatedData.name && f.type === "focus");
+        if (hasFocus.length > 0) {
+            let warning = game.i18n.localize("age-system.WARNING.duplicatedFocus");
+            warning += `"${itemName.toUpperCase()}"`;
+            ui.notifications.warn(warning);
+            return options.temporary = true;
+        }
+    }
+});
+
+Hooks.on("createToken", (tokenDocument, options, userId) => {
+    // Ensur this change occurs only once
+    if (game.user.id !== userId) return
+
+    if (tokenDocument.actor?.data?.type !== "char") return;
+    if (!tokenDocument.data.bar1?.attribute) tokenDocument.update({"bar1.attribute": "health"});
+    if (!tokenDocument.data.bar2?.attribute) {
+        const barData = game.settings.get("age-system", "usePowerPoints") ? "powerPoints" : (game.settings.get("age-system", "useConviction") ? "conviction" : null);
+        tokenDocument.update({"bar2.attribute": barData});
+    }
+    if (tokenDocument.actor.hasPlayerOwner) {
+        tokenDocument.update({
+            "displayBars": 10,
+            "disposition": 1,
+            "actorLink": tokenDocument.data.actor && true
+        });
+    } else {
+        tokenDocument.update({
+            "displayBars": 20,
+        })
+    };
+})

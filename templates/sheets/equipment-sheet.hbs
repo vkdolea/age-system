@@ -19,15 +19,15 @@
                 {{!-- Quantity --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.quantity"}}</label>
-                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+                    <input type="number" {{#if inChat}}disabled{{/if}} name="data.quantity" value="{{data.data.quantity}}" data-dtype="Number" />
                 </div>                
                 {{!-- Weight --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.weight"}}</label>
-                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.data.weight}}" data-dtype="Number" />
                 </div>
             </div>
-                
+
             {{!-- Active Bonuses --}}
             {{> "systems/age-system/templates/partials/active-bonuses.hbs"}}
             
@@ -36,7 +36,7 @@
             {{!-- Description --}}
             <div class="item-card-desc">
                 <label>{{localize "age-system.item.desc"}}</label>
-                {{editor content=data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+                {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
             </div>
             {{/if}}
 
@@ -47,7 +47,6 @@
         {{!-- Tab Control --}}
         {{> "systems/age-system/templates/partials/bonus-desc-sheet.hbs"}}
         {{/if}}
-        
     </div>
     
 </form>

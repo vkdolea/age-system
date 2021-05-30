@@ -32,8 +32,12 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
     getData() {
         this.actor.prepareData(); // Forcing updating sheet after opening, in case an Actor's operator is updated
-        // TODO - method on Actor entity to for prepareData() running on Vehicle data em database is updated.
-        const data = super.getData();
+        const isOwner = this.document.isOwner;
+        const isEditable = this.isEditable;
+    
+        // Copy actor data to a safe copy
+        const data = this.actor.data.toObject(false);
+        // const data = super.getData();
         data.config = CONFIG.ageSystem;
         data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
 
@@ -49,29 +53,19 @@ export default class ageSpaceshipSheet extends ActorSheet {
         data.notSynth = !(this.token && !this.token.data.actorLink);
         data.isSynth = !data.notSynth;
 
-        return data;
-    };
-
-    // Modification on standard _onDropItem() to prevent user from dropping Items other than Spaceship Features on Spaceships
-    async _onDropItem(event, data) {
-        if ( !this.actor.owner ) return false;
-        const item = await Item.fromDropData(data);
-        /*-----------Beginning of added code--------------*/
-        if (item.data.type !== "shipfeatures") {
-            let warning = game.i18n.localize("age-system.WARNING.nonShipPartsOnShip");
-            ui.notifications.warn(warning);
-            return false;
-        }
-        /*-------------End of added code------------------*/
-        const itemData = duplicate(item.data);
-        
-        const actor = this.actor;
-        // Handle item sorting within the same Actor
-        let sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id));
-        if (sameActor) return this._onSortItem(event, itemData);
-
-        // Create the owned item
-        return this._onDropItemCreate(itemData);
+        // return data;
+        return {
+            actor: this.object,
+            cssClass: isEditable ? "editable" : "locked",
+            data: data,
+            effects: data.effects,
+            items: data.items,
+            limited: this.object.limited,
+            options: this.options,
+            owner: isOwner,
+            title: this.title,
+            isGM: game.user.isGM
+        };
     };
 
     activateListeners(html) {
@@ -97,7 +91,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             if (!passenger) return;
             // const actor = this.actor;
             let actor
-            // if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data._id].actor;
+            // if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data.id].actor;
             if (!actor) actor = this.actor;
             if (passenger.data.type === "char") {
 
@@ -127,7 +121,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         })
         
         // Actions by sheet owner only
-        if (this.actor.owner) {
+        if (this.actor.isOwner) {
             html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
             html.find(".change-loss").click(this._onChangeLoss.bind(this));
@@ -149,13 +143,13 @@ export default class ageSpaceshipSheet extends ActorSheet {
         let rollFormula;
         if (event.currentTarget.classList.contains("roll-damage")) {
             const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-            const item = this.actor.getOwnedItem(itemId);
+            const item = this.actor.items.get(itemId);
             rollFormula = item.data.data.damage;
             messageData.flavor += ` | ${item.name}`;
         }
         if (event.currentTarget.classList.contains("roll-hull")) {
             rollFormula = this.actor.data.data.hull.total;
-            messageData.flavor += `| ${game.i18n.localize("age-system.spaceship.hull")}`;
+            messageData.flavor += ` | ${game.i18n.localize("age-system.spaceship.hull")}`;
         }
 
         if (event.ctrlKey && !event.altKey) {
@@ -172,18 +166,18 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
     _onRemoveFeature(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        return this.actor.deleteOwnedItem(itemId);
+        return this.actor.deleteEmbeddedDocuments("Item", itemId);
     }
 
     _onEditFeature(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
         item.sheet.render(true);
     }
 
     _onEquipChange(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        const itemToToggle = this.actor.getOwnedItem(itemId);
+        const itemToToggle = this.actor.items.get(itemId);
         const toggleEqp = !itemToToggle.data.data.isActive;
         itemToToggle.update({"data.isActive": toggleEqp});
     }

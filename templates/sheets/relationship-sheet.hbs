@@ -16,16 +16,16 @@
                     <div class="flexrow long-text flex-align-start" style="min-width: 100%;">
                         <label>{{localize "age-system.relationshipBond"}}</label>
                         {{#if inChat}}
-                        <p>{{data.shortDesc}}</p>
+                        <p>{{data.data.shortDesc}}</p>
                         {{else}}
-                        <input name="data.shortDesc" class="long-text" type="text" text-type="long" value="{{data.shortDesc}}" placeholder="{{localize "age-system.relationshipBond"}}"/>
+                        <input name="data.shortDesc" class="long-text" type="text" text-type="long" value="{{data.data.shortDesc}}" placeholder="{{localize "age-system.relationshipBond"}}"/>
                         {{/if}}
                     </div>
 
                     {{!-- Intensity --}}
                     <div class="flexrow flex-align-start">
                         <label>{{localize "age-system.relationshipIntensity"}}</label>
-                        <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensity" value="{{data.intensity}}"/>
+                        <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensity" value="{{data.data.intensity}}"/>
                     </div>
                 </div>
 
@@ -33,7 +33,7 @@
         </div>
         <div class="item-card-desc">
             <label>{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
         </div>
     </div>
     

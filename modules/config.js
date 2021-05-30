@@ -88,9 +88,9 @@ ageSystem.conditions = [
         id: "helpless"
     },
     {
-        name: "age-system.conditions.hindred",
-        desc: "age-system.conditions.hindredDesc",
-        id: "hindred"
+        name: "age-system.conditions.hindered",
+        desc: "age-system.conditions.hinderedDesc",
+        id: "hindered"
     },
     {
         name: "age-system.conditions.prone",
@@ -140,43 +140,13 @@ ageSystem.rof = {
     semiAuto: "age-system.rof.semiAuto",
     fullAuto: "age-system.rof.fullAuto"
 };
-
-ageSystem.bonusTypes = {
-    itemDamage: "age-system.bonus.itemAtkBns",
-    actorDamage: "age-system.bonus.itemDmgBns",
-    itemActivation: "age-system.bonus.generalDmgBns",
-    acc: "age-system.bonus.charAblBns",
-    comm: "age-system.bonus.charAblBns",
-    cons: "age-system.bonus.charAblBns",
-    cun: "age-system.bonus.charAblBns",
-    dex: "age-system.bonus.charAblBns",
-    fight: "age-system.bonus.charAblBns",
-    int: "age-system.bonus.charAblBns",
-    magic: "age-system.bonus.charAblBns",
-    per: "age-system.bonus.charAblBns",
-    str: "age-system.bonus.charAblBns",
-    will: "age-system.bonus.charAblBns",
-    focus: "age-system.bonus.focusValueBns",
-    defense: "age-system.bonus.totalDefenseBns",
-    impactArmor: "age-system.bonus.impactArmorBns",
-    ballisticArmor: "age-system.bonus.ballisticArmorBns",
-    defendMnv: "age-system.bonus.defendMnvBns",
-    guardupMnv: "age-system.bonus.guardupMnvBns",
-    allOutAtk: "age-system.bonus.allOutAtkBns",
-    maxHealth: "age-system.bonus.maxHealthBns",
-    maxConviction: "age-system.bonus.maxConvictionBns",
-    maxPowerPoints: "age-system.bonus.maxPowerPointsBns",
-    powerForce: "age-system.bonus.powerForceBns",
-    aimMnv: "age-system.bonus.aimMnvBns",
-    armorPenalty: "age-system.bonus.armorPenaltyBns"
-};
-
+    
 // Vehicle parameters
 ageSystem.velocityCategory = {
-    velStandard: "age-system.velStandard",
-    velFast: "age-system.velFast",
-    velVeryFast: "age-system.velVeryFast",
-    velExtreme: "age-system.velExtreme"
+    velStandard: {colDmg: "1d6", sideDmg: "1d3"},
+    velFast:  {colDmg: "2d6", sideDmg: "1d6"},
+    velVeryFast:  {colDmg: "4d6", sideDmg: "2d6"},
+    velExtreme:  {colDmg: "6d6", sideDmg: "3d6"}
 };
 
 // Spacehip sizes
@@ -257,11 +227,612 @@ ageSystem.uiElements = {
     ageRoller: `${uiElementsPath}cube.svg`
 }
 
-// Age Tracker Original Poition
-ageSystem.ageTrackerPos = {xPos: "260px", yPos: "69px"};
+const AGEstatusEffectsPath = "systems/age-system/resources/imgs/effects/";
+ageSystem.AGEstatusEffects = [
+    {
+        icon: `${AGEstatusEffectsPath}number.png`,
+        id: `num0`,
+        label: `0`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-1.png`,
+        id: `num1`,
+        label: `1`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-2.png`,
+        id: `num2`,
+        label: `2`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-3.png`,
+        id: `num3`,
+        label: `3`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-4.png`,
+        id: `num4`,
+        label: `4`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-5.png`,
+        id: `num5`,
+        label: `5`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-6.png`,
+        id: `num6`,
+        label: `6`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-7.png`,
+        id: `num7`,
+        label: `7`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-8.png`,
+        id: `num8`,
+        label: `8`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-9.png`,
+        id: `num9`,
+        label: `9`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}number-10.png`,
+        id: `num10`,
+        label: `10`,
+        flags: {
+            "age-system": {
+                type: "counter"
+            }
+        }
+    },
+    {
+        icon: `${AGEstatusEffectsPath}pirate-grave.svg`,
+        id: `dead`,
+        label: `EFFECT.StatusDead`,
+        flags: {
+            "age-system": {
+                type: "core"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.blinded",
+        id: "blinded",
+        icon: "icons/svg/blind.svg",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "blinded",
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.deafened",
+        id: "deafened",
+        icon: "icons/svg/deaf.svg",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "deafened",
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.dying",
+        id: "dying",
+        icon: `${AGEstatusEffectsPath}half-dead.svg`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "dying"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.fatigued",
+        id: "fatigued",
+        icon: `${AGEstatusEffectsPath}despair.svg`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "fatigued"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.exhausted",
+        id: "exhausted",
+        icon: `${AGEstatusEffectsPath}oppression.svg`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "exhausted"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 1,
+            value: "0.5"
+        }]
+    },
+    {
+        label: "age-system.conditions.freefalling",
+        id: "freefalling",
+        icon: `${AGEstatusEffectsPath}acrobatic.svg`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "freefalling"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.helpless",
+        id: "helpless",
+        icon: `${AGEstatusEffectsPath}knockout.svg`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "helpless"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.hindered",
+        id: "hindered",
+        icon: `${AGEstatusEffectsPath}knee-bandage.svg`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "hindered"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 1,
+            value: "0.5"
+        }]
+    },
+    {
+        label: "age-system.conditions.injured",
+        id: "injured",
+        icon: `${AGEstatusEffectsPath}backstab.svg`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "injured"
+            }
+        },
+        changes: [{
+            key: "data.testMod",
+            mode: 2,
+            value: "-1"
+        }]
+    },
+    {
+        label: "age-system.conditions.wounded",
+        id: "wounded",
+        icon: `${AGEstatusEffectsPath}arrowed.svg`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "wounded"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 1,
+            value: "0.5"
+        },
+        {
+            key: "data.testMod",
+            mode: 2,
+            value: "-2"
+        }]
+    },
+    {
+        label: "age-system.conditions.prone",
+        id: "prone",
+        icon: "icons/svg/falling.svg",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "prone"
+            }
+        }
+    },
+    {
+        label: "age-system.conditions.restrained",
+        id: "restrained",
+        icon: `${AGEstatusEffectsPath}imprisoned.svg`,
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "restrained"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 5,
+            value: "0"
+        }]
+    },
+    {
+        label: "age-system.conditions.unconscious",
+        id: "unconscious",
+        icon: "icons/svg/unconscious.svg",
+        flags: {
+            "age-system": {
+                type: "conditions",
+                name: "unconscious"
+            }
+        },
+        changes: [{
+            key: "data.speed.total",
+            mode: 5,
+            value: "0"
+        }]
+    },
+    // Below this line are Foundry Core token conditions
+    {
+        id: "sleep",
+        label: "EFFECT.StatusAsleep",
+        icon: "icons/svg/sleep.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "fly",
+        label: "EFFECT.StatusFlying",
+        icon: "icons/svg/wing.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "stun",
+        label: "EFFECT.StatusStunned",
+        icon: "icons/svg/daze.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "paralysis",
+        label: "EFFECT.StatusParalysis",
+        icon: "icons/svg/paralysis.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "silence",
+        label: "EFFECT.StatusSilenced",
+        icon: "icons/svg/silenced.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "fear",
+        label: "EFFECT.StatusFear",
+        icon: "icons/svg/terror.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "burning",
+        label: "EFFECT.StatusBurning",
+        icon: "icons/svg/fire.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "frozen",
+        label: "EFFECT.StatusFrozen",
+        icon: "icons/svg/frozen.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "shock",
+        label: "EFFECT.StatusShocked",
+        icon: "icons/svg/lightning.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "corrode",
+        label: "EFFECT.StatusCorrode",
+        icon: "icons/svg/acid.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+        {
+        id: "bleeding",
+        label: "EFFECT.StatusBleeding",
+        icon: "icons/svg/blood.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "disease",
+        label: "EFFECT.StatusDisease",
+        icon: "icons/svg/biohazard.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "poison",
+        label: "EFFECT.StatusPoison",
+        icon: "icons/svg/poison.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "radiation",
+        label: "EFFECT.StatusRadiation",
+        icon: "icons/svg/radiation.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "regen",
+        label: "EFFECT.StatusRegen",
+        icon: "icons/svg/regen.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "degen",
+        label: "EFFECT.StatusDegen",
+        icon: "icons/svg/degen.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "upgrade",
+        label: "EFFECT.StatusUpgrade",
+        icon: "icons/svg/upgrade.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "downgrade",
+        label: "EFFECT.StatusDowngrade",
+        icon: "icons/svg/downgrade.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "target",
+        label: "EFFECT.StatusTarget",
+        icon: "icons/svg/target.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "eye",
+        label: "EFFECT.StatusMarked",
+        icon: "icons/svg/eye.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "curse",
+        label: "EFFECT.StatusCursed",
+        icon: "icons/svg/sun.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "bless",
+        label: "EFFECT.StatusBlessed",
+        icon: "icons/svg/angel.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "fireShield",
+        label: "EFFECT.StatusFireShield",
+        icon: "icons/svg/fire-shield.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "coldShield",
+        label: "EFFECT.StatusIceShield",
+        icon: "icons/svg/ice-shield.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "magicShield",
+        label: "EFFECT.StatusMagicShield",
+        icon: "icons/svg/mage-shield.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+    {
+        id: "holyShield",
+        label: "EFFECT.StatusHolyShield",
+        icon: "icons/svg/holy-shield.svg",
+        flags: {
+            "age-system": {
+                type: "general"
+            }
+        }
+    },
+];
 
-// Age Roller Original Poition
+ageSystem.ageEffectsKeys = {
+    "testMod": {label: "age-system.bonus.testMod", mask: "data.testMod"},
+    "attackMod": {label: "age-system.bonus.attackMod", mask: "data.attackMod"},
+    "actorDamage": {label: "age-system.bonus.actorDamage", mask: "data.dmgMod"},
+    "acc": {label: "age-system.bonus.acc", mask: "data.abilities.acc.total"},
+    "comm": {label: "age-system.bonus.comm", mask: "data.abilities.comm.total"},
+    "cons": {label: "age-system.bonus.cons", mask:"data.abilities.cons.total"},
+    "cunn": {label: "age-system.bonus.cunn", mask: "data.abilities.cunn.total"},
+    "dex": {label: "age-system.bonus.dex", mask: "data.abilities.dex.total"},
+    "fight": {label: "age-system.bonus.fight", mask: "data.abilities.fight.total"},
+    "int": {label: "age-system.bonus.int", mask: "data.abilities.int.total"},
+    "magic": {label: "age-system.bonus.magic", mask: "data.abilities.magic.total"},
+    "per": {label: "age-system.bonus.per", mask: "data.abilities.per.total"},
+    "str": {label: "age-system.bonus.str", mask: "data.abilities.str.total"},
+    "will": {label: "age-system.bonus.will", mask: "data.abilities.total"},
+    "defense": {label: "age-system.bonus.defense", mask: "data.defense.total"},
+    "impactArmor": {label: "age-system.bonus.impactArmor", mask: "data.armor.impact"},
+    "ballisticArmor": {label: "age-system.bonus.ballisticArmor", mask: "data.armor.ballistic"},
+    "defendMnv": {label: "age-system.bonus.defendMnv", mask: "data.defend.total"},
+    "guardupMnv": {label: "age-system.bonus.guardupMnv", mask: "data.guardUp.total"},
+    "allOutAtk": {label: "age-system.bonus.allOutAtkMnv", mask: "data.allOutAttack.total"},
+    "maxHealth": {label: "age-system.bonus.maxHealth", mask: "data.health.max"},
+    "maxConviction": {label: "age-system.bonus.maxConviction", mask: "data.conviction.max"},
+    "maxPowerPoints": {label: "age-system.bonus.maxPowerPoints", mask: "data.powerPoints.max"},
+    "aimMnv": {label: "age-system.bonus.aimMnv", mask: "data.aim.total"},
+    "armorPenalty": {label: "age-system.bonus.armorPenalty", mask: "data.armor.penalty"},
+    "speed": {label: "age-system.bonus.speed", mask: "data.speed.total"},
+    "toughness": {label: "age-system.bonus.toughness", mask: "data.armor.toughness.total"},
+}
+
+ageSystem.itemEffectsKeys = {
+    "powerForce": {label: "age-system.bonus.powerForce", mask: ""},
+    "focus": {label: "age-system.bonus.focusValue", mask: ""},
+    "itemDamage": {label: "age-system.bonus.itemAtk", mask: ""},
+    "itemActivation": {label: "age-system.bonus.generalDmg", mask: ""}
+}
+
+// Age Tracker & Roller Initial Positions
+ageSystem.ageTrackerPos = {xPos: "260px", yPos: "69px"};
 ageSystem.ageRollerPos = {xPos: "800px", yPos: "10px"};
 
 // Initializing variable to load focus Compendiaum
 ageSystem.focus = [];
+
+// List with world's Item compendia
+ageSystem.itemCompendia = [];

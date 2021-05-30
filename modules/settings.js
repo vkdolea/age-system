@@ -67,21 +67,6 @@ export const registerSystemSettings = function() {
   });
 
   /**
-   * Register if world will use Conditons
-   * TODO - in the future, add drop down menu to select if world will use Conditions, Fatigue or None
-   */
-  game.settings.register("age-system", "useConditions", {
-    name: "SETTINGS.useConditions",
-    hint: "SETTINGS.useConditionsHint",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-    onChange:()=>{
-      window.location.reload(!1)}
-  });
-
-  /**
    * Register if world will use Power Points
    */
   game.settings.register("age-system", "usePowerPoints", {
@@ -141,7 +126,7 @@ export const registerSystemSettings = function() {
         "fortune": "SETTINGS.healthModefortune",
     },
     onChange: () => {
-      [...game.actors.entities, ...Object.values(game.actors.tokens)]
+      [...game.actors.contents, ...Object.values(game.actors.tokens)]
         .filter((o) => {
           return o.data.type === "char";
         })
@@ -187,7 +172,7 @@ export const registerSystemSettings = function() {
     },
     onChange: () => {
       CONFIG.ageSystem.abilities = CONFIG.ageSystem.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
-      [...game.actors.entities, ...Object.values(game.actors.tokens), ...game.items.entities]
+      [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
         // .filter((o) => {
         //   return o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship";
         // })
@@ -223,7 +208,7 @@ export const registerSystemSettings = function() {
     onChange:()=>{
       const newColor = game.settings.get("age-system", "colorScheme");
       game.user.setFlag("age-system", "colorScheme", newColor);
-      [...game.actors.entities, ...Object.values(game.actors.tokens), ...game.items.entities]
+      [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
       // .filter((o) => {
       //   return true /*(o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship")*/;
       // })
@@ -342,9 +327,8 @@ export const loadCompendiaSettings = function() {
     config: true,
     default: "age-system.focus",
     type: String,
-    choices: allCompendia(),
-    onChange:()=>{
-      window.location.reload(!1)}
+    choices: CONFIG.ageSystem.itemCompendia,
+    onChange:()=>{CONFIG.ageSystem.focus = compendiumList(game.settings.get("age-system", "masterFocusCompendium"))}
   });
 };
 
@@ -365,41 +349,30 @@ export function stuntSoNice(colorChoices) {
 };
 
 // Creates the Options object with all compendia in alphabetic order
-function allCompendia() {
+export function allCompendia(docType) {
   let list = {};
-  let compendia = game.packs.map(e => e);
-  compendia = compendia.sort(function(a, b) {
-    const nameA = a.title.toLowerCase();
-    const nameB = b.title.toLowerCase();
-    if (nameA < nameB) {
-      return -1;
+  game.packs.map(e => {
+    if (e.metadata.entity === docType) {
+      const newItem = {[`${e.metadata.package}.${e.metadata.name}`]: e.metadata.label};
+      list = {
+        ...list,
+        ...newItem
+      }
     }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
   });
-  for (let c = 0; c < compendia.length; c++) {
-    const comp = compendia[c];
-    list[comp.collection] = comp.title;
-  };
   return list
 };
 
 // Creates a list of entries in the Compendium (name and _id)
 export function compendiumList(compendiumName) {
+  if ([null, undefined, false, ""].includes(compendiumName)) return;
   let dataPack = game.packs.get(compendiumName);
   let dataList = [];
-  if (!dataPack) return dataList;
-  dataPack.getIndex().then(function(){
-  for (let i = 0; i < dataPack.index.length; i++) {
-    const entry = dataPack.index[i];
-    if(entry)
-      dataList[i] = {
-        _id: entry._id,
-        name: entry.name
-      };   
-    }
-  });
+  // let foci = dataPack.index;
+  dataPack.index.map(i => {
+    if(i.type === "focus") dataList.push({
+    _id: i._id,
+    name: i.name
+  })})
   return dataList;
 };

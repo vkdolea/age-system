@@ -13,23 +13,23 @@
                 <div class="flexcol long-text">
                     <label>{{localize "age-system.membershipPosition"}}</label>
                     {{#if inChat}}
-                    <p>{{data.shortDesc}}</p>
+                    <p>{{data.data.shortDesc}}</p>
                     {{else}}
-                    <input name="data.shortDesc" type="text" text-type="long" value="{{data.shortDesc}}" placeholder="{{localize "age-system.membershipPosition"}}" style="text-align: center";/>
+                    <input name="data.shortDesc" type="text" text-type="long" value="{{data.data.shortDesc}}" placeholder="{{localize "age-system.membershipPosition"}}" style="text-align: center";/>
                     {{/if}}
                 </div>
 
                 {{!-- Rank --}}
                 <div class="flexcol" style="max-width: fit-content;">
                     <label>{{localize "age-system.rank"}}</label>
-                    <input type="number" {{#if inChat}}disabled{{/if}} name="data.rank" value="{{data.rank}}"/>
+                    <input type="number" {{#if inChat}}disabled{{/if}} name="data.rank" value="{{data.data.rank}}"/>
                 </div>
 
             </div>
         </div>
         <div class="item-card-desc">
             <label>{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
         </div>
     </div>
     

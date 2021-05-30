@@ -30,7 +30,8 @@ export async function ageRollCheck({
     };
 
     // Set roll mode
-    const rMode = setBlind(event);
+    // const rMode = setBlind(event);
+    const rollMode = event.shiftKey ? "blindroll" : "roll";
     let rollData = {};
     let partials = [];
     rollData.abilityName = "...";
@@ -72,17 +73,37 @@ export async function ageRollCheck({
     };
 
     // Check if item rolled is Focus and prepare its data
-    const focusRolled = getFocus(itemRolled);
     let focusId = null
-    if (focusRolled) {
+    if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.data?.data.useFocus) {
+        const focusObj = itemRolled.actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled)
         rollFormula += " + @focus";
-        rollData.focusName = focusRolled[0];
-        rollData.focus = focusRolled[1];
+        rollData.focusName = focusObj.focusName;
+        rollData.focus = focusObj.value;
         partials.push({
-            label: focusRolled[0],
-            value: focusRolled[1]
+            label: rollData.focusName,
+            value: rollData.focus,
         });
-        focusId = focusRolled[2];
+        focusId = focusObj.id;
+    }
+
+    // Adds Actor general Attack Bonus if rolltype = "attack"
+    if (rollType === "attack" && actor.data.data.attackMod !== 0) {
+        rollFormula += " + @attackMod";
+        rollData.attackMod = actor.data.data.attackMod;
+        partials.push({
+            label: game.i18n.localize("age-system.bonus.attackMod"),
+            value: rollData.attackMod,
+        });
+    }
+
+    // Adds general roll bonus from Actor
+    if (actor?.data.data.testMod && actor?.data.data.testMod !== 0) {
+        rollFormula += " + @testMod";
+        rollData.testMod = actor.data.data.testMod;
+        partials.push({
+            label: game.i18n.localize("age-system.bonus.testMod"),
+            value: rollData.testMod,
+        });
     }
 
     // Adds user input roll mod
@@ -109,7 +130,7 @@ export async function ageRollCheck({
     // Also checks if Item has Activation Mod
     const teste = typeof(itemRolled);
     if (itemRolled !== null && typeof(itemRolled) !== "string") {
-        rollData.itemId = itemRolled._id;
+        rollData.itemId = itemRolled.id;
         rollData.hasDamage = itemRolled.data.data.hasDamage;
         rollData.hasHealing = itemRolled.data.data.hasHealing;
         rollData.hasFatigue = itemRolled.data.data.hasFatigue;
@@ -136,7 +157,7 @@ export async function ageRollCheck({
 
         // Check if actor rolling is unlinked token and log its Token ID
         isToken = actor.isToken ? 1 : 0;
-        actorId = isToken ? actor.token.data._id : actor._id;
+        actorId = isToken ? actor.token.data.id : actor.id;
 
         // Check if AIM is active - this bonus will apply to all rolls when it is active
         const aim = actor.data.data.aim;
@@ -235,9 +256,6 @@ export async function ageRollCheck({
                 };
             }
         }
-        // } else {
-        //     headerFlavor = flavor;
-        // }
     }
 
     // Check for moreParts
@@ -257,7 +275,7 @@ export async function ageRollCheck({
     }
 
     // Finally, the Age Roll!
-    const ageRoll = new Roll(rollFormula, rollData).roll();
+    const ageRoll = await new Roll(rollFormula, rollData).evaluate({async: true});
 
     // If rollTN is used, check if roll fails or succeed
     let isSuccess = null
@@ -296,13 +314,12 @@ export async function ageRollCheck({
     // cardData.rollInput.rollTN = rollTN;
 
     let chatData = {
-        user: game.user._id,
+        user: game.user.id,
         speaker: ChatMessage.getSpeaker(),
-        whisper: isGMroll(event),
-        blind: event.shiftKey,
+        content: await renderTemplate(chatTemplate, rollData),
         roll: ageRoll,
-        content: await renderTemplate(chatTemplate, rollData)
-        // content: await renderTemplate(chatTemplate, cardData)
+        blind: rollMode === "roll" ? false : true,
+        whisper: isGMroll(event)
     };
 
     // Compatibility with Dice So Nice
@@ -311,9 +328,8 @@ export async function ageRollCheck({
     };
 
     // TODO when blind roll, set message to GM and select another template to all other members
-
     chatData.sound = CONFIG.sounds.dice;
-    return ChatMessage.create(chatData, {rollMode: rMode});
+    return ChatMessage.create(chatData);
 };
 
 async function getAgeRollOptions(itemRolled, data = {}) {
@@ -382,7 +398,7 @@ function _processAgeRollOptions(form) {
 
 export function getFocus(item) {
     if (item === null) {return false}
-    if (item.type === "focus") return [item.name, item.data.data.initialValue, item.data._id];
+    if (item.type === "focus") return [item.name, item.data.data.initialValue, item.data.id];
     if (typeof(item) === "string") return [item, 0, null];
     if (item.data.data.useFocus === "") return false;
     const ownerFocusId = item.data.data.useFocusActorId;
@@ -399,14 +415,20 @@ export function getFocus(item) {
 
 // Capture GM ID to whisper
 export function isGMroll(event) {
-    if (!event.shiftKey) {return false};
-    return game.users.filter(u => u.isGM);
+    if (!event.shiftKey) {return []};
+    const idGM = [];
+    for (let u = 0; u < game.users.length; u++) {
+        const user = game.users[u];
+        if (user.isGM) idGM.push(user._id)        
+    };
+    return idGM;
+    // return game.users.filter(u => u.isGM);
 };
 
 // Code to decide if roll is PUBLIC or BLIND TO GM
 export function setBlind(event) {
     if (event.shiftKey) {
-        return "blindroll";
+        return "blind";
     } else {
         return "roll";
     };
@@ -531,11 +553,13 @@ export async function vehicleDamage ({
     const audience = isGMroll(event);
 
     // Initialize Damage Formula, Data and Flavor
-    let damageFormula = `(@qtdDice)d(@dieSize)`;
-    let rollData = {
-        qtdDice: qtdDice,
-        dieSize: dieSize
-    };
+    let damageFormula = qtdDice;
+    let rollData = {};
+    // let damageFormula = `(@qtdDice)d(@dieSize)`;
+    // let rollData = {
+    //     qtdDice: qtdDice,
+    //     dieSize: dieSize
+    // };
     let messageData = {
         flavor: `${vehicle.data.name} | ${game.i18n.localize(`age-system.${damageSource}`)}`,
         speaker: ChatMessage.getSpeaker()
@@ -557,10 +581,9 @@ export async function vehicleDamage ({
 
     // Check if Focus adds to damage and adds it
     if (addFocus === true && useFocus) {
-        const focusData = getFocus(useFocus);
         damageFormula = `${damageFormula} + @focus`;
-        rollData.focus = focusData[1];
-        messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
+        rollData.focus = useFocus.value;
+        messageData.flavor += ` | ${damageToString(rollData.focus)} ${useFocus.focusName}`;
     }
 
     // Adds user Damage input
@@ -597,7 +620,7 @@ export async function vehicleDamage ({
         messageData.flavor += ` | +${extraDice}`;             
     };
 
-    let dmgRoll = new Roll(damageFormula, rollData).roll();
+    let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
 
     return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
 
@@ -613,7 +636,8 @@ export async function itemDamage({
     stuntDamage = null,
     dmgExtraDice = null,
     dmgGeneralMod = null,
-    resistedDmg = false}={}) {
+    resistedDmg = false,
+    actorDmgMod = 0}={}) {
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
@@ -636,10 +660,10 @@ export async function itemDamage({
     const isBlind = setBlind(event);
     const audience = isGMroll(event);
 
-    let damageFormula = nrDice > 0 ? "(@diceQtd)d(@diceSize)" : "";
+    let damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}` : "";
     let rollData = {
-        diceQtd: nrDice,
-        diceSize: diceSize,
+        // diceQtd: nrDice,
+        // diceSize: diceSize,
         damageMod: constDmg
     };
     // Check if damage source has a non 0 portion on its parameters
@@ -677,10 +701,14 @@ export async function itemDamage({
 
         // Check if Focus adds to damage and adds it
         if (addFocus === true) {
-            const focusData = getFocus(item);
+            // const focusData = getFocus(item);
+            const actor = item.actor;
+            const focusData = actor.checkFocus(item.data.data.useFocus);
             damageFormula = `${damageFormula} + @focus`;
-            rollData.focus = focusData[1];
-            messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
+            // rollData.focus = focusData[1];
+            // messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
+            rollData.focus = focusData.value;
+            messageData.flavor += ` | ${damageToString(focusData.value)} ${focusData.focusName}`;
         }
 
         // Check if extra Stunt Die is to be added (normally rolling damage after chat card roll)
@@ -748,9 +776,16 @@ export async function itemDamage({
             messageData.flavor += ` | +${extraDice}`;             
         };
 
+        // Adds Actor Damage Bonus
+        if (actorDmgMod !== 0) {
+            damageFormula += " + @actorDmgMod";
+            rollData.actorDmgMod = actorDmgMod;
+            messageData.flavor += ` | ${damageToString(actorDmgMod)} ${game.i18n.localize("age-system.bonus.actorDamage")}`;             
+        };
+
     };
 
-    let dmgRoll = new Roll(damageFormula, rollData).roll();
+    let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
 
     return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
 };

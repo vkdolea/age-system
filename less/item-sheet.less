@@ -197,8 +197,6 @@
             input[name="data.fatigueTN"],
             input[name="data.minStr"],
             input[name="data.weight"],
-            input[name="data.range"],
-            input[name="data.rangeMax"],
             input[name="data.capacity"],
             input[name="data.quantity"],
             input[name="data.stuntPoints"],
@@ -211,6 +209,13 @@
                 min-width: 30px;
                 text-align: center;
             };
+
+            input[name="data.range"],
+            input[name="data.rangeMax"] {
+                max-width: 60px;
+                min-width: 60px;
+                text-align: center;
+            }
 
             span:last-of-type {
                 max-width: 25px;
@@ -254,13 +259,40 @@
                 margin-top: 4px;
             };
 
-            .mod-card {
-                border-radius: 10px;
-                max-width: 150px;
-                min-width: 150px;
-                height: 70px;
+            ul.mod-card {
                 margin: 4px;
                 padding: 4px;
+                border: none;
+                li.mod-item.mod-item {
+                    border-radius: 10px;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 4px;
+                    text-align: center;
+                    p {
+                        text-align: center;
+                        // margin: auto 0;
+                    };
+                    .mod-type {
+                        flex: 0 0 30%;
+                    }
+                    .mod-value {
+                        flex: 0 0 50%;
+                        input[type="text"],
+                        input[type="number"]{
+                            margin: 2px 0;
+                        }
+                    }
+                    .mod-controls {
+                        flex: 0 0 20%;
+                        i {
+                            width: fit-content;
+                        }
+                        .inactive {
+                            opacity: 0.2;
+                        }
+                    }
+                }
 
                 input[type="number"] {
                     max-width: 40px;

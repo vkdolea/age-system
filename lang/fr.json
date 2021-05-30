@@ -1,5 +1,5 @@
 {
-    "ACTOR.TypeChar": "Personnage Joueur",
+    "ACTOR.TypeChar": "Personnage",
 	"ACTOR.TypeVehicle": "Véhicule",
 	"ACTOR.TypeSpaceship": "Vaisseaux spatiaux",
     "ITEM.TypeStunts": "Prouesses",
@@ -240,7 +240,14 @@
 		
 		"testThreshold": "Seuil de réussite",
 		"targetCurrent": "Cible/Actuel",
-		
+        "charMain": "",
+        "charPersona": "",
+        "bio": "",
+        "goals": "",
+        "language": "",
+        "secretNote": "",
+        "charEffects": "",
+        "custom": "",
 		"conditionsName": "Etats",
         "conditions": {
             "blinded": "Aveuglé",
@@ -433,6 +440,12 @@
 		"value": "Valeur",
 
         "itemMod": "Modificateurs",
+        "itemModSelect": "",
+        "type": "",
+        "control": "",
+        "source": "",
+        "operation": "",
+        "key": "",
         "bonus": {
             "type": "Type",
             "value": "Valeur",
@@ -450,8 +463,9 @@
             "will": "Volonté",
             "itemActivation": "Activation de l'objet",
             "itemDamage": "Dégâts de l'objet",
-            "actorOverAllBonus": "Tous les jets",
+            "testMod": "Tous les jets",
             "actorDamage": "Tous les dommages",
+            "attackMod": "",
             "charAbl": "Caractéristique",
             "focus": "Compétence",
             "defense": "Défense",

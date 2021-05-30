@@ -2,9 +2,17 @@
     "name": "age-system",
     "title": "AGE System (unofficial)",
     "description": "Unofficial AGE System implementation for most of AGE subsystems",
-    "version": "0.6.5",
+    "version": "0.7.0",
     "templateVersion": 1,
     "author": "VK Dolea",
+    "authors": [
+		{
+			"name": "VK Dolea",
+			"discord": "vkdolea#7974",
+			"reddit":"u/vkdolea",
+			"ko-fi":"vkdolea"
+		}
+    ],
     "scripts": [],
     "styles": [
         "styles/age-system.css"
@@ -30,20 +38,20 @@
             "path": "lang/es.json"
         },
         {
-            "lang": "pt-BR",
+            "lang": "pt-br",
             "name": "Português (Brasil)",
-            "path": "lang/pt-BR.json"
+            "path": "lang/ptbr.json"
         }
     ],
     "socket": false,
     "initiative": "3d6 + @initiative",
     "gridDistance": 2,
     "gridUnits": "yd",
-    "bar1.attribute": "health",
-    "bar2.attribute": "powerPoints",
-    "minimumCoreVersion": "0.7.9",
-    "compatibleCoreVersion": "0.7.9",
+    "minimumCoreVersion": "0.8.5",
+    "compatibleCoreVersion": "0.8.6",
     "url": "https://github.com/vkdolea/age-system",
     "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",
-    "download": "https://github.com/vkdolea/age-system/archive/0.6.5.zip"
+    "download": "https://github.com/vkdolea/age-system/archive/0.7.0.zip",
+    "bugs": "https://github.com/vkdolea/age-system/issues",
+    "readme": "https://github.com/vkdolea/age-system/blob/main/README.md"
 }

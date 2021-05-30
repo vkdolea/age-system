@@ -1,9 +1,3 @@
-// .age-system.sheet .window-content {
-//     // background-color: rgb(209, 183, 171);
-//     // background: none;
-//     // background-color:  rgba(117, 20, 61, 0.7);
-// }
-
 .age-system.sheet.char {
     font-variant: small-caps;
 
@@ -19,7 +13,7 @@
             }
         }
         img {
-            height: 251px;
+            height: 198px;
             width: 150px;
             object-fit: contain;
             border: 0px;
@@ -32,26 +26,173 @@
             >div {
                 margin-bottom: 4px
             }
-
-            input[name="data.age"],
-            input[name="data.height"],
-            input[name="data.weight"] {
-                max-width: 40px;
+            
+            .level-xp {
+                input[type="number"] {
+                    text-align: center;
+                }
             }
-
             label {
                 white-space: nowrap;
                 max-width: fit-content;
                 padding: 4px;
-                flex: 1 min-content fit-content;
+                flex: 0 0 fit-content;
             }
-            .editor {
-                height: 105px;
-                min-height: 105px;
-                padding: 4px;
-                border: 1px solid grey;
-                border-radius: 4px;
-            };
+        }
+    }
+
+    nav.add-sheet-tabs {
+        justify-content: space-evenly;
+        a.char {
+            max-width: max-content;
+            padding: 2px 4px;
+        }
+        .active{
+            font-weight: 900;
+            background-color: rgba(256, 256, 256, 0.3);
+            border-radius: 5px;
+        }
+    }
+    .persona {
+        .container {
+            margin-bottom: 4px;
+        }
+        .features,
+        .goals,
+        .bio,
+        .secret-note,
+        .language {
+            label {
+                max-width: none;
+                text-align: center;
+                max-height: 25px;
+            }
+            textarea.free-text {
+                resize: none;
+                font-family: inherit;
+                background: white;
+                border: none;
+                height: auto;
+            }
+        }
+        .goals-language {
+            .spacer {
+                flex: 0 0 4px;
+            }
+        }
+        .goals.container,
+        .language.container,
+        .features.container,
+        .secret-note.container {
+            height: 150px;
+        }
+
+        label {
+            white-space: nowrap;
+            max-width: fit-content;
+            padding: 4px;
+            flex: 0 0 fit-content;
+        }
+
+        // Biography TinyMCE editor on Persona Tab
+        .editor.editor {
+            min-height: 300px;
+            max-height: 600px;
+            height: 100%;
+            padding: 4px;
+            border: 1px solid grey;
+            border-radius: 4px;
+            .tox.tox-tinymce {
+                min-height: 290px !important;
+                max-height: 590px !important;
+            }
+        };
+    }
+
+    .item-container {
+        ul {
+            margin-top: 0;
+            padding: 0;
+            list-style-type: none;
+            .header {
+                justify-content: center;
+                p {
+                    text-align: center;
+                    margin: 0;
+                }
+            }
+        }
+        li:first-of-type {
+            margin-bottom: 1px;
+        }
+        li.elements {
+            margin-top: 4px;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            p {
+                text-align: center;
+            }
+        }
+        .inactive {
+            opacity: 0.2;
+        }
+    }
+    .item-container.effects {
+        ul.effects {
+            .header {
+                p.effect-name {
+                    text-align: left;
+                }
+            }
+        }
+        img.effect-icon {
+            height: 24px;
+            flex: 0 0 24px;
+            object-fit: contain;    
+        }
+        div.effect-name {
+            align-items: center;
+            text-align: left;
+            p {
+             text-align: left;
+             padding-left: 4px;
+            }
+        }
+        .effect-name.effect-name {
+            flex: 0 0 25%;
+            text-align: left;
+        }
+        .effect-key {
+            flex: 0 0 30%;
+        }
+        .effect-operation {
+            flex: 0 0 15%;
+        }
+        .effect-value {
+            flex: 0 0 15%;
+        }
+        .effect-add{
+            padding-right: 4px;
+            flex: 0 0 10%;
+            text-align: center;
+        }
+    }
+    .item-container.modifiers {
+        .mod-name {
+            flex: 0 0 30%;
+        }
+        .mod-value {
+            flex: 0 0 40%;
+            p.icon.icon {
+                flex: 0 0 30%;
+            }
+            p.value.value {
+                flex: 0 0 70%;
+            }
+        }
+        .mod-source.mod-source {
+            flex: 0 0 30%;
         }
     }
 
@@ -261,6 +402,10 @@
     .fill-card {
         max-width: fit-content;
     }
+    
+    .item-container.conditions {
+        overflow: hidden;
+    }
     .item-container {
         flex-wrap: wrap;
         resize: vertical;
@@ -293,11 +438,8 @@
                 padding: 4px;
                 
                 /* Position the tooltip */
-                // TODO - create listener to position tooltips close to mouse pointer
                 position: fixed;
                 z-index: 10;
-                top: 50px;
-                left: 50px;
                 
             }
             .tooltip-container:hover .container-tooltip-text {

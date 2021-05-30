@@ -5,6 +5,20 @@ import * as Dice from "./dice.js";
 export class ageSystemActor extends Actor {
 
     /** @override */
+    prepareData() {
+        super.prepareData();
+        // Sorting Items for final data preparation
+        const items = this.items;
+        // First prepare Focus
+        items.forEach(i => {
+            if (i.data.type === "focus") i.prepareData()
+        })
+        // Then prepare other item types which require further prep
+        items.forEach(i => {
+            if (["weapon", "power"].includes(i.data.type)) i.prepareData()
+        })
+    }
+
     prepareBaseData() {
         const actorData = this.data;
         const data = actorData.data;
@@ -48,6 +62,62 @@ export class ageSystemActor extends Actor {
                 break;
         }
     }
+
+    /** @override */
+    prepareEmbeddedEntities() {
+        const embeddedTypes = this.constructor.metadata.embedded || {};
+        for ( let cls of Object.values(embeddedTypes) ) {
+            const collection = cls.metadata.collection;
+            for ( let e of this[collection] ) {
+            e.prepareData();
+            }
+        }
+        
+        // Apply Item Modifiers to Actor before applying Active Effects!
+        this.applyItemModifiers();
+
+        // Check for Conditions and related Active Effects
+        // const conditions = this.data.data.conditions;
+        // const effects = this.effects;
+        // const docs = [];
+        // const deletion = [];
+        // for (const cd in conditions) {
+        //     if (Object.hasOwnProperty.call(conditions, cd)) {
+        //         const relatedEffect = this.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === cd);
+        //         const isChecked = conditions[cd];
+        //         // If there are effects but Condition is unchecked, check it!
+        //         if (relatedEffect.length > 0 && !isChecked) this.data.data.conditons[c] = true
+        //         // If there is no effect but Condition is checked, create effect!
+        //         if (relatedEffect.length < 1 && isChecked) {
+        //             const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === cd)[0];
+        //             newEffect["flags.core.statusId"] = newEffect.id;
+        //             this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+        //         }
+        //     }
+        // }
+
+        this.applyActiveEffects();
+    }
+
+    prepareDerivedData() {
+        const actorData = this.data;
+        // const data = actorData.data;
+
+        switch (actorData.type) {
+            case "char":
+                this._prepareDerivedDataChar();
+                break;
+            case "vehicle":
+                this._prepareDerivedDataVehicle();
+                break;
+            case "spaceship":
+                this._prepareDerivedDataSpaceship();
+                break;        
+            default:
+                break;
+        }
+    };
+
     _prepareBaseDataChar() {
 
         const actorData = this.data;
@@ -64,113 +134,6 @@ export class ageSystemActor extends Actor {
 
         // Check if Power Points is in use
         data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
-     
-        data.ownedBonus = this.ownedItemsBonus();
-        const bonuses = data.ownedBonus;
-
-        /*--- Conditions in Use ------------------------------*/
-        data.useConditions =  game.settings.get("age-system", "useConditions");
-        /*----------------------------------------------------*/
-
-        /*--- Add bonuses to Abilities -----------------------*/
-        // Also create abl.total parameters
-        this.setAbilitiesWithMod(data, actorData);
-        /*----------------------------------------------------*/
-
-        /*--- Calculate Armor Penalty ------------------------*/
-        if (bonuses != null && bonuses.armorPenalty) {
-            data.armor.penalty = Math.abs(Number(bonuses.armorPenalty.totalMod));
-        } else {
-            data.armor.penalty = 0;
-        };
-        /*----------------------------------------------------*/
-
-        /*--- Calculate Impact Armor -------------------------*/
-        if (bonuses != null && bonuses.impactArmor) {
-            data.armor.impact = Number(bonuses.impactArmor.totalMod);
-        } else {
-            data.armor.impact = 0;
-        };
-        /*----------------------------------------------------*/
-
-        /*--- Calculate Ballistic Armor -------------------------*/
-        if (bonuses != null && bonuses.ballisticArmor) {
-            data.armor.ballistic = Number(bonuses.ballisticArmor.totalMod);
-        } else {
-            data.armor.ballistic = 0;
-        };
-        /*----------------------------------------------------*/
-
-        /*--- Calculate total Defense ------------------------*/
-        data.defense.total = 0;
-        if (data.defend.active) {data.defense.total += Number(data.defend.defenseBonus)};
-        if (data.guardUp.active) {data.defense.total += Number(data.guardUp.defenseBonus)};
-        
-        // Add Defense Bonus if any
-        if (bonuses != null && bonuses.defense) {data.defense.mod = bonuses.defense.totalMod}
-        
-        data.defense.total += (Number(data.abilities.dex.total) - Math.abs(Number(data.armor.penalty)) + Number(data.defense.base) + Number(data.defense.mod) + Number(data.defense.gameModeBonus));
-        if (data.allOutAttack.active) {
-            data.defense.total -= Math.abs(Number(data.allOutAttack.defensePenalty));
-        };
-        if (data.defense.total < 0) {data.defense.total = 0};
-        /*----------------------------------------------------*/
-
-        /*--- Calculate toughness ----------------------------*/
-        // Identify Tougness bonus if any
-        if (bonuses != null && bonuses.toughness) {
-            data.armor.toughness.mod = bonuses.toughness.totalMod;
-        } else {
-            data.armor.toughness.mod = 0;
-        };
-        data.armor.toughness.total = Number(data.abilities.cons.total) + Number(data.armor.toughness.gameModeBonus) + Number(data.armor.toughness.mod);
-        /*----------------------------------------------------*/
-
-        /*--- Calculate Speed --------------------------------*/
-        if (bonuses != null && bonuses.speed) {
-            data.speed.mod = Number(bonuses.speed.totalMod);
-        } else {
-            data.speed.mod = 0;
-        };
-        data.speed.total =  Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
-        if (data.useConditions) {
-            if (data.conditions.helpless || data.conditions.restrained) {
-                data.speed.total = 0;
-            }
-            if ((data.conditions.exhausted && !data.conditions.hindred) || (!data.conditions.exhausted && data.conditions.hindred)) {
-                data.speed.total = Math.floor(data.speed.total/2);
-            } else if (data.conditions.exhausted && data.conditions.hindred) {
-                data.speed.total = Math.floor(data.speed.total/4);
-            }
-        }
-        /*----------------------------------------------------*/
-        
-        /*--- Calculate Max Health ---------------------------*/
-        if (bonuses != null && bonuses.maxHealth) {
-            data.health.mod = Number(bonuses.maxHealth.totalMod);
-        } else {
-            data.health.mod = 0;
-        };
-        data.health.max = Number(data.health.mod) + Number(data.health.set);
-        /*----------------------------------------------------*/
-
-        /*--- Calculate Max Power Points ---------------------*/
-        if (bonuses != null && bonuses.maxPowerPoints) {
-            data.powerPoints.mod = Number(bonuses.maxPowerPoints.totalMod);
-        } else {
-            data.powerPoints.mod = 0;
-        };
-        data.powerPoints.max = Number(data.powerPoints.mod) + Number(data.powerPoints.set);
-        /*---------------------------------------------------*/
-
-        /*--- Calculate Max Conviction ----------------------*/
-        if (bonuses != null && bonuses.maxConviction) {
-            data.conviction.mod = Number(bonuses.maxConviction.totalMod);
-        } else {
-            data.conviction.mod = 0;
-        };
-        data.conviction.max = Number(data.conviction.mod) + Number(data.conviction.set);
-        /*---------------------------------------------------*/
 
         // Ensure Fatigue has valid Values and creates Status text
         data.fatigue.status = "";
@@ -196,8 +159,155 @@ export class ageSystemActor extends Actor {
                                             
             default:
                 break;
-        };        
+        };
+        
     };
+
+    applyItemModifiers() {
+        const type = this.data.type;
+
+        switch (type) {
+            case "char": return this._charItemModifiers();
+            case "spaceship": return;
+            case "vehicle": return;
+        }
+    }
+
+    _charItemModifiers() {
+        const mods = {};
+        this.items.forEach(i => {
+            if (i.data.data.itemMods && (i.data.data.equiped || i.data.data.activate)) {
+                const itemMod = i.data.data.itemMods;
+                for (const modKey in itemMod) {
+                    if (Object.hasOwnProperty.call(itemMod, modKey)) {
+                        const modObj = itemMod[modKey];
+                        const focusElement = modKey === "focus" ? {name: modObj.name, value: modObj.value} : null;
+                        if (modObj.selected && modObj.isActive) {
+                            if (mods.hasOwnProperty(modKey)) {
+                                mods[modKey] = focusElement ? mods[modKey].push(focusElement) : mods[modKey] + modObj.value;
+                            } else {
+                                mods[modKey] = focusElement ? [focusElement] : modObj.value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        this.data.data["ownedMods"] = mods;
+
+        // Applying modifiers to Actor data
+        const actorData = this.data;
+        const data = actorData.data
+
+        // Armor Penalty
+        data.armor.penalty = Math.max(mods.armorPenalty ?? 0, 0);
+
+        // Actor Damage
+        data.dmgMod = mods.actorDamage ?? 0;
+
+        // Actor All Tests
+        data.testMod = mods.testMod ?? 0;
+
+        // Actor All Attacks Mod
+        data.attackMod = mods.attackMod ?? 0;
+
+        // Defense
+        data.defense.mod = mods.defense ?? 0;
+
+        // Impact Armor
+        data.armor.impact = mods.impactArmor ?? 0;
+
+        // Ballistic Armor
+        data.armor.ballistic = mods.ballisticArmor ?? 0;
+
+        // Toughness
+        // TODO - add Constitution to total, how to apply Active Effects?
+        data.armor.toughness.mod = mods.toughness ?? 0;
+
+        // Speed
+        // TODO - add Constitution to total, how to apply Active Effects?
+        // TODO - apply Armor Penalty before this one
+        data.speed.mod = mods.speed ?? 0;
+
+        // Defend Maneuver (bonus to Defense)
+        data.defend.mod = mods.defendMnv ?? 0;
+
+        // Guard Up Maneuver
+        data.guardUp.mod = mods.guardupMnv ?? 0;
+
+        // All Out Attack
+        data.allOutAttack.mod = mods.allOutAtkMnv ?? 0;
+
+        // Max Health
+        data.health.mod = mods.maxHealth ?? 0;
+
+        // Max Conviction
+        data.conviction.mod = mods.maxConviction ?? 0;
+
+        // Max Power Points
+        data.powerPoints.mod = mods.maxPowerPoints ?? 0;
+
+        // Power Force
+        // This bonus must be treated on each Item
+
+        // Aim Maneuver
+        data.aim.mod = mods.aimMnv ?? 0;
+
+        // Applying Abilities mods
+        const settingAbls = ageSystem.abilities;
+        for (const ablKey in settingAbls) {
+            if (settingAbls.hasOwnProperty(ablKey)) {
+                data.abilities[ablKey].mod = mods[ablKey] ?? 0;
+                data.abilities[ablKey].total = data.abilities[ablKey].mod + data.abilities[ablKey].value
+            };
+        };
+
+        this._preparePostModCharData();
+
+    }
+
+    _preparePostModCharData() {
+        const actorData = this.data;
+        const data = actorData.data;
+
+        // Calculate total Defense
+        data.defense.total = 0;
+        if (data.defend.active) {data.defense.total += Number(data.defend.defenseBonus)};
+        if (data.guardUp.active) {data.defense.total += Number(data.guardUp.defenseBonus)};
+        data.defense.total += (Number(data.abilities.dex.total) + Number(data.defense.base) + Number(data.defense.mod) + Number(data.defense.gameModeBonus));
+        if (data.allOutAttack.active) {
+            data.defense.total -= Math.abs(Number(data.allOutAttack.defensePenalty));
+        };
+        if (data.defense.total < 0) {data.defense.total = 0};
+
+        // Calculate toughness
+        data.armor.toughness.total = Number(data.abilities.cons.total) + Number(data.armor.toughness.gameModeBonus) + Number(data.armor.toughness.mod);
+
+        // Calculate Speed
+        data.speed.total = Number(data.abilities.dex.total) - Math.abs(data.armor.penalty) + Number(data.speed.base) + Number(data.speed.mod)
+        
+        // Calculate Max Health
+        data.health.max = Number(data.health.mod) + Number(data.health.set);
+
+        // Calculate Max Power Points
+        data.powerPoints.max = Number(data.powerPoints.mod) + Number(data.powerPoints.set);
+
+        // Calculate Max Conviction
+        data.conviction.max = Number(data.conviction.mod) + Number(data.conviction.set);
+
+        // Calculates total Initiative
+        data.initiative = data.initiativeMod + data.abilities.dex.total - data.armor.penalty;
+
+        // Calculate resources/currency
+        if (data.useCurrency) {
+            data.resources.mod = 0;
+        };
+        data.resources.total = data.resources.base + Number(data.resources.mod);
+    };
+
+    _prepareDerivedDataChar() {
+
+    }
 
     _prepareBaseDataVehicle() {
         const actorData = this.data;
@@ -220,9 +330,9 @@ export class ageSystemActor extends Actor {
                 if (p.id === data.conductor && pData) {
                     p.isConductor = true;
                     const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
-                    let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
-                    if (!defenseFocus) defenseFocus = 0;
-                    data.defenseTotal += defenseAbl + defenseFocus;
+                    const defenseFocus = this.checkFocus(data.handling.useFocus);
+                    const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.data.data.initialValue;
+                    data.defenseTotal += defenseAbl + defenseValue;
                 } else {
                     p.isConductor = false;
                 }
@@ -236,6 +346,10 @@ export class ageSystemActor extends Actor {
 
         //this.sortPassengers();
         data.pob = data.passengers.length;
+
+    };
+
+    _prepareDerivedDataVehicle() {
 
     };
 
@@ -301,43 +415,6 @@ export class ageSystemActor extends Actor {
         const diff = sizePos - steps + 1;
         const penalty = 2 * diff;
         return -penalty;
-    };
-
-    prepareDerivedData() {
-        const actorData = this.data;
-        // const data = actorData.data;
-
-        switch (actorData.type) {
-            case "char":
-                this._prepareDerivedDataChar();
-                break;
-            case "vehicle":
-                this._prepareDerivedDataVehicle();
-                break;
-            case "spaceship":
-                this._prepareDerivedDataSpaceship();
-                break;        
-            default:
-                break;
-        }
-    };
-
-    _prepareDerivedDataChar() {
-        const actorData = this.data;
-        const data = actorData.data;
-
-        // Calcualtes total Initiative
-        data.initiative = data.initiativeMod + data.abilities.dex.total - data.armor.penalty;
-
-        // Calculate resources/currency
-        if (data.useCurrency) {
-            data.resources.mod = 0;
-        };
-        data.resources.total = data.resources.base + Number(data.resources.mod);
-    };
-
-    _prepareDerivedDataVehicle() {
-
     };
 
     _prepareDerivedDataSpaceship() {
@@ -450,9 +527,9 @@ export class ageSystemActor extends Actor {
                 if (p.id === data.conductor && pData) {
                     p.isConductor = true;
                     const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
-                    let defenseFocus = Dice.getFocus(this._userFocusEntity(data.handling.useFocus, p))[1];
-                    if (!defenseFocus) defenseFocus = 0;
-                    data.defenseTotal += defenseAbl + defenseFocus;
+                    const defenseFocus = this.checkFocus(data.handling.useFocus);
+                    const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.data.data.initialValue;
+                    data.defenseTotal += defenseAbl + defenseValue;
                 } else {
                     p.isConductor = false;
                 }
@@ -464,90 +541,6 @@ export class ageSystemActor extends Actor {
             passengers.splice(i, 1);
         };
 
-    };
-
-    setAbilitiesWithMod(data) {
-        const settingAbls = this.data.data.abilities;
-        for (const ablKey in settingAbls) {
-            if (settingAbls.hasOwnProperty(ablKey)) {
-                data.abilities[ablKey].total = Number(data.abilities[ablKey].value);
-                if (data.ownedBonus !== null && data.ownedBonus[ablKey]) {
-                    data.abilities[ablKey].total += Number(data.ownedBonus[ablKey].totalMod);
-                };
-            };
-        };
-    }
-
-    ownedItemsBonus() {
-        if (this.data.items.length === 0) {return null};
-        const ownedItems = this.data.items;
-        let ownedMods = {};
-
-        for (let it = 0; it < ownedItems.length; it++) {
-            const itemInCheck = ownedItems[it];
-            const inCheckMods = itemInCheck.data.itemMods;
-
-            if (itemInCheck.data.equiped === true || itemInCheck.data.activate === true) {
-                for (const key in inCheckMods) {
-                    if (inCheckMods.hasOwnProperty(key) && inCheckMods[key].isActive && inCheckMods[key].value !== 0) {
-                        if (!ownedMods[key]) {
-                            ownedMods[key] = {
-                                modList: [],
-                                totalMod: 0
-                            };
-                        };
-                        ownedMods[key].modList.push({
-                            carrierId: itemInCheck._id,
-                            carrierName: itemInCheck.name,
-                            mod: inCheckMods[key].value
-                        });
-                    };
-                };
-            };
-        };
-
-        // Sums up total mod for each key
-        for (const key in ownedMods) {
-            if (ownedMods.hasOwnProperty(key)) {
-                ownedMods[key].modList.forEach(e => {
-                    ownedMods[key].totalMod += e.mod;
-                });
-            };
-        };
-
-        return ownedMods;
-    };
-
-    _userFocusEntity(useFocus, operatorData) {
-        const useFocusLC = useFocus.toLowerCase();
-        // const vehicleData = this.actor.data;
-        // const data = vehicleData.data;
-        // let user;
-        // if (operatorData.isToken) user = game.actors.tokens[operatorData.id];
-        // if (!operatorData.isToken) user = game.actors.get(operatorData.id);
-        // if (!user) {
-        //     const parts = {name: p.name, id: p.id};
-        //     let warning = game.i18n.format("age-system.WARNING.userNotAvailable", parts);
-        //     ui.notifications.warn(warning);
-        //     return null;
-        // }
-        if (useFocus === null || useFocus === "") {
-            return null;
-        };
-
-        const user = this._vehicleOperator(operatorData);
-        if (!user) return null;
-
-        const userFoci = user.data.items.filter(a => a.type === "focus");
-        // const expectedFocus = data.useFocus.toLowerCase();
-        const validFocus = userFoci.filter(c => c.name.toLowerCase() === useFocusLC);
-
-        if (validFocus.length < 1) {
-            return useFocus;
-        } else {
-            const id = validFocus[0]._id;
-            return user.getOwnedItem(id);
-        };    
     };
 
     _vehicleOperator(operatorData) {
@@ -566,7 +559,8 @@ export class ageSystemActor extends Actor {
 
     rollVehicleDamage(damageData) {
         const operator = this._vehicleOperator(damageData.operatorData);
-        const useFocus = this._userFocusEntity(this.data.data.handling.useFocus, damageData.operatorData);
+        const vehicleUseFocus = this.data.data.handling.useFocus
+        const useFocus = operator ? operator.checkFocus(vehicleUseFocus) : null;
 
         damageData = {
             ...damageData,
@@ -579,18 +573,17 @@ export class ageSystemActor extends Actor {
     };
 
     checkFocus(namedFocus) {
-
-        if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null}
+        if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null, id: null, value: 0}
 
         const ownedFoci = this.data.items.filter(a => a.type === "focus");
         const expectedFocus = namedFocus.toLowerCase();
         const validFocus = ownedFoci.filter(c => c.name.toLowerCase() === expectedFocus);
-
         if (validFocus.length < 1) {
-            return {focusName: namedFocus, focusItem: false}
+            return {focusName: namedFocus, focusItem: false, id: null, value: 0}
         } else {
-            const id = validFocus[0]._id;
-            return {focusName: namedFocus, focusItem: this.getOwnedItem(id)}
+            const focusId = validFocus[0].id;
+            const focus = this.items.get(focusId);
+            return {focusName: namedFocus, focusItem: focus, id: focusId, value: focus.data.data.finalValue}
         };
     }
 };

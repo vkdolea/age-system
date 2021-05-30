@@ -37,8 +37,8 @@ export async function createAgeMacro(data, slot) {
   const item = data.data;
 
   // Create the macro command
-  const command = `game.ageSystem.rollOwnedItem("${item.name}", false); \n\n// Change second argument to true to prompt user for Roll Options`;
-  let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+  const command = `game.ageSystem.rollOwnedItem("${item.name}", true);\n\n/*Change second argument to false to skip Roll Options*/`;
+  let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
   if (!macro) {
     macro = await Macro.create({
       name: item.name,

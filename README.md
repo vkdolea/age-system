@@ -26,13 +26,11 @@ You can now look at [AGE System (unofficial) wiki](https://github.com/vkdolea/ag
 - Drag and drop owned weapons and power to macro bar to create attack shortcuts
 - Add Stunt Die or Focus (or both) to damage roll when rolling damage from chat
 - Point mouse slightly above Tracker or Roller and a Drag Bar will appear. Click and drag to reposition. Right click Drag Bar to return to  original position!
-- Supports Vehicles and Spaceships
+- Supports Vehicles and Spaceships.
+- Active Effects enabled.
 
 ## Spaceship and Vehicle Controls
-You can drag and drop Characters to Veihcles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship. **However, this will only work for vehicles/spaceships when opened a character sheet directly from directory or from a token with LINKED ACTORS option selected**.
-When opening a sheet from an *Unlinked Token*:
-- **Spaceships:** Passengers section will vanish, roles will assigned automatically to spaceship **Crew**.
-- **Vehicles:** Passengers section will vanish, and the Conductor role will be "Token" - which means you must select a Token on canvas and them click the Dice icon to roll a maneuver. Note: in the future, spaceships will also have this option.
+You can drag and drop Characters to Veihcles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship.
 
 ## Shortcuts
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
@@ -64,6 +62,9 @@ Here the description of each one of the Modificators:
 14. **Aim:** extra bonus added to attack rolls when Aim maneuver is used, besides the standard value.
 15. **Ability Names:** these are play bonuses to the specific Ability.
 16. **Speed:** adds to Speed Mod field.
+17. **Focus:** adds bonus to Focus maching the name, as long as the character has the given Focus on its character sheet.
+18. **Attack Bonus:** adds to attack rolls.
+19. **All Test:** general bonus adding to all tests, except for attack/damage rolls.
 
 ## Credits
 ### Icons
@@ -83,12 +84,39 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - [Processor](https://game-icons.net/1x1/lorc/processor.html) (Spaceship Features icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Cubes](https://game-icons.net/1x1/lorc/cubes.html) (Age Roller icon), by [Lorc](https://lorcblog.blogspot.com/).
 
+### Token Stats Icons
+Icons made by:
+- Counters by me!
+- [Delapouite](https://delapouite.com/), [DarkZaitev](http://darkzaitzev.deviantart.com/), [Lorc](https://lorcblog.blogspot.com/), [Skoll](https://game-icons.net),   from [game-icons.net](https://game-icons.net/).
+
 ### Localization
 - **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
-- **Brazilian Portuguese**: by Discord user *Leandro_Soares#9067*.
+- **Brazilian Portuguese**: by Discord user *Leandro_Soares#9067* and me.
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.0 [2021-05-30]
+#### Added
+- New fancy layout for Vehicle sheet.
+- Added notes visible only by GM on each actor sheet (Character, Vehicle, Spaceship).
+- New tabs for Character sheet: Main (game stats), Persona (character notes), Effects (effects applied to character).
+- Main Tab: the usual rollable game stats.
+- Persona Tab: Biography (AKA the old nameless field in the header), Distinctive Features, Languages, Goals and Player & GM Secret Notes (only GM and actor owner can see this field), GM Notes (notes visible only by GM).
+- Effects Tab: a hub for all Conditions, Active Effects and bonuses granted from Items. Conditions, Active Effects and Item Modifiers are managed here. There is a link to open the item sheet granting a particular modifier.
+- Vehicles: "Custom" is now an option for Velocity parameter, which will highlight the appropriate Damage table row.
+- When creating a new token, Bar1 will be set to Health/Fortune and Bar2 will be set as Power (Magic) Points (if using this rule is on) or it will be set to Conditions (if this option is in use). If none is used, Bar2 will not be filled.
+- When a token is created out of a Player Owned character/vehicle/spaceship, token's Disposition will be set to Friendly.
+- Player Owned actors tokens will always be created with the Link Actor Data option checked. It can be changed afterwards.
+- Conditions (The Expanse) are not optional anymore - they are always available.
+- Conditions tooltip now pops up close to mouse pointer.
+- Added new Item Modifiers: Focus, Attack Bonus, All Test. Look at [AGE System (unofficial) wiki](https://github.com/vkdolea/age-system/wiki) for more details.
+
+#### Fix
+- Expanded "Range" field for weapons to accomodate bigger numbers.
+- Issue causing modified Ability value to be hidden even when a Modifier was applied to it.
+- Bug freezing Maximum Conviction to 3.
+- Code cleanup.
+
 ### 0.6.5 [2021-05-01]
 #### Fix
 - Bug causing spaceship description to disappear when sending to compendium.
@@ -100,6 +128,10 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 ### 0.6.3 [2021-04-25]
 #### Added
 - Brazilian Portuguese localization.
+
+### 0.6.3 [2021-04-25]
+#### Added
+- Brazilian Portugues localization.
 
 ### 0.6.2 [2021-04-24]
 #### Added

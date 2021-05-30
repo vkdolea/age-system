@@ -16,10 +16,10 @@
                 <div class="flexcol">
                     <label>{{localize "age-system.abl"}}</label>
                     {{#if inChat}}
-                    <div name="data.useAbl" class="data-input">{{localize (concat "age-system." data.useAbl)}}</div>
+                    <div name="data.useAbl" class="data-input">{{localize (concat "age-system." data.data.useAbl)}}</div>
                     {{else}}
                     <select name="data.useAbl" class="data-input">
-                        {{#select data.useAbl}}
+                        {{#select data.data.useAbl}}
                         {{#each config.abilities as |name type|}}
                         <option value="{{type}}">{{localize name}}</option>
                         {{/each}}
@@ -31,26 +31,29 @@
                 {{!-- Improved Focus --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.improvedFocus"}}</label>
-                    <input type="checkbox" {{#if inChat}}disabled{{/if}} name="data.improved" {{checked data.improved}} class="checkbox"/>
+                    <input type="checkbox" {{#if inChat}}disabled{{/if}} name="data.improved" {{checked data.data.improved}} class="checkbox"/>
                 </div>
 
                 {{!-- Focus Initial Value --}}
+                {{#if inChat}}
+                {{else}}
                 <div class="flexcol">
                     <label>{{localize "age-system.focusInput"}}</label>
-                    <input type="number" name="data.initialValue" {{#if inChat}}disabled{{/if}} value="{{data.initialValue}}" class="checkbox"/>
+                    <input type="number" name="data.initialValue" {{#if inChat}}disabled{{/if}} value="{{data.data.initialValue}}" class="checkbox"/>
+                </div>
+                {{/if}}
+
+                {{!-- Focus Final Value --}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.total"}}</label>
+                    <input type="number" disabled name="data.finalValue" value="{{data.data.finalValue}}" class="checkbox"/>
                 </div>
 
-                {{!-- Focus Modificator --}}
-                {{!-- FocusValue not in use - only initialValue --}}
-                {{!-- <div class="flexcol">
-                    <label>{{localize "age-system.total"}}</label>
-                    <div>{{data.focusValue}}</div>
-                </div> --}}
             </div>
         </div>
         <div class="item-card-desc">
             <label>{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
         </div>
     </div>
     

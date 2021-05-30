@@ -6,7 +6,18 @@
 .age-system.sheet.vehicle {
     font-variant: small-caps;
     min-width: min-content;
-    // Reavaluate when picture is included
+
+    .stats-block.stats-block {
+        padding: 5px;
+        border-radius: 10px;
+        margin-top: 10px;
+        // flex: 0 0 50%;
+        text-align: center;
+    }
+
+    .spacer {
+        flex: 0 0 10px;
+    }
 
     .label-with-icon {
         a {
@@ -21,50 +32,85 @@
         }
     }
 
-    .vehicle-name {           
-        border-radius: 10px 10px 0px 0px;
-        text-transform: uppercase;
-        border: none;
-        padding: 4px;
-    };
-
     input[name="name"] {
-        padding-left: 10px;
+        padding: 5px;
         min-width: 100%;
-        max-height: 30px;
+        max-height: fit-content;
+        border-radius: 10px;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 30px;
+        border: none;
+        height: 47px;
+        max-height: 47px;
     };
 
-    label {
-        // min-width: 75px;
-        max-height: 20px;
-        text-align: center;
-    }
-
-    .grid-container {
-        display: grid;
-        grid-template-columns: 300px 500px;
-        grid-template-rows: 370px 200px;
-    }
-
-    .grid-parameter {
-        grid-column-start: 1;
-        grid-column-end: span 1;
-        grid-row-start: 1;
-        grid-row-end: span 2;
-
-        font-size: 14px;
-
-        >div {
-            max-height: 50px;
-            margin: 4px;
-            div {
-                margin:4px;
+    .image-description {
+        height: 200px;
+        max-height: 200px;
+        margin-top: 10px;
+        .vehicle-image {
+            object-fit: contain;
+            border: none;
+            height: 190px;
+        }
+        .vehicle-desc {
+            p {
+                margin: 7px 0;
+                height: auto;
             }
-        };
+            label.desc.desc {
+                display: block;
+                // flex: 0 0 20%;
+                width: 100%;
+                border-radius: 5px;
+                text-align: center;
+            }
+            height: 190px;
+            .editor {
+                height: 100%;
+                .editor-content {
+                    max-height: 173px;
+                }
+            }
+        }
+    }
+    
+    .gm-secret-notes.gm-secret-notes {
+        height: max-content;
+        textarea.free-text {
+            resize: none;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            height: 150px;
+        }
+    }
+
+    .parameters.stats-block {
+        font-size: 14px;
+        >* {
+            min-height: 20px;
+            margin-top: 4px;
+        }
+
+        .conductor-selection {
+            flex: 0 0 20px;
+            label.conductor {
+                flex: 0 0 60px;
+                margin-right: 4px;
+                height: 20px;
+            }
+        }
 
         .focus-ability {
             max-height: 70px;
+            >* {
+                margin-top: 4px;
+            }
         }
+
+        h2 {margin-top: 0};
 
         span {
             max-width: min-content;
@@ -96,18 +142,6 @@
             max-height: 20px;
         }
 
-        .highlight {
-            // background-color: pink;
-            font-weight: bolder;
-        }
-
-        input[name="data.customCollisionDmg"],
-        input[name="data.customSideswipeDmg"] {
-            max-width: 20px;
-            max-height: 20px;
-            border: none;
-        }
-
         input[name="data.cost"] {
             max-width: 60px;
         }
@@ -118,41 +152,44 @@
             height: 16px;
         }
     
-        input[name="data.conductor"],
+        // input[name="data.conductor"],
         input[name="data.handling.useFocus"],
         select[name="data.handling.useAbl"] {
-            max-width: 285px;
+            // max-width: 285px;
             max-height: 20px;
-        }
-
-        .velocity-damage-table {
-            text-align: center;
-            td {
-                align-content: center;
-                a {
-                    margin-right: 2px;
-                }
-            }
-        }
-
-        table {
-            margin-top: 4px;
-            margin-bottom: 4px;
         }
     }
 
-    .grid-description {
-        grid-column-start: 2;
-        grid-column-end: span 1;
-        grid-row-start: 2;
-        grid-row-end: span 1;
-        
-        height: 200px;
-        
-        .editor {
-            height: 100%;
-            padding: 4px 10px;
-        };
+    .vehicle-damage-chart {
+        ul {
+            .highlight {
+                background-color: rgba(0,0,0,0.1);
+            }
+            list-style-type: none;
+            padding: 0;
+            .header {
+                margin-bottom: 5px;
+            }
+            li {
+                border-radius: 10px;
+                display: flex;
+                flex-direction: row;
+                .custom-velocity {
+                    input {
+                        flex: 0 0 25px;
+                    }
+                    a {
+                        max-width: fit-content;
+                    }
+                }
+                .velocity {
+                    flex: 0 0 100px;
+                }
+                .feature-controls {
+                    flex: 0 0 100px;
+                }
+            }
+        }
     }
 
     .passenger-container {
@@ -199,22 +236,5 @@
     .dragover {
         color: rgb(95, 5, 5);
         box-shadow: 0 0 5px -1px rgba(0,0,0,0.8);
-    }
-
-    .grid-img {
-        grid-column-start: 2;
-        grid-column-end: span 1;
-        grid-row-start: 1;
-        grid-row-end: span 1;
-
-        img {
-            object-fit: contain;
-            height: 340px;
-            width: 490px;
-            margin: 5px;
-            padding: 4px;
-            // Border color on colorsets.less
-            border-radius: 25px;
-        }
     }
 }

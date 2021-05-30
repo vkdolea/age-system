@@ -15,6 +15,7 @@
             },
             "drive": "",
             "description": "",
+            "gmNotes": "",
             "passengers": [],
             "crew": {
                 "min": 1,
@@ -110,6 +111,7 @@
             "hull": 0,
             "cost": 0,
             "description": "",
+            "gmNotes": "",
             "coverRating": 0,
             "armorRating": 0,
             "partHealth": {
@@ -122,6 +124,9 @@
             "customCollisionDmg": 1
         },
         "char": {
+            "dmgMod": 0,
+            "testMod": 0,
+            "attackMod": 0,
             "statBlockView": false,
             "level": 1,
             "xp": {
@@ -130,8 +135,13 @@
                 "advPoints": 0
             },
             "features": "",
+            "traits": "",
+            "goals": "",
             "age": "",
+            "language": "",
             "background": "",
+            "secretNote": "",
+            "gmNotes": "",
             "socialClass": "",
             "ancestry": "",
             "profession": "",
@@ -153,7 +163,6 @@
             },
             "armor": {
                 "toughness": {
-                    "total": 0,
                     "mod": 0,
                     "gameModeBonus": 0
                 },
@@ -169,7 +178,6 @@
             "sp": 0,
             "cp": 0,
             "currency": 0,
-            "goals": "",
             "fear": 0,
             "horror": {
                 "level": 0,
@@ -284,6 +292,7 @@
                 "freefalling": false,
                 "helpless": false,
                 "hindred": false,
+                "hindered": false,
                 "prone": false,
                 "restrained": false,
                 "injured": false,
@@ -343,120 +352,159 @@
                 "itemMods": {
                     "itemDamage": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
+                    },
+                    "testMod": {
+                        "value": 0,
+                        "isActive": false,
+                        "selected": false
+                    },
+                    "attackMod": {
+                        "value": 0,
+                        "isActive": false,
+                        "selected": false
                     },
                     "actorDamage": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "itemActivation": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "focus": {
                         "name": "",
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "defense":  {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "impactArmor":  {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "ballisticArmor":  {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "toughness":  {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "speed": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "defendMnv":  {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "guardupMnv":  {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "allOutAtkMnv":  {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "maxHealth":  {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "maxConviction": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "maxPowerPoints": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "powerForce": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "aimMnv": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "armorPenalty": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "acc": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "comm": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "cons": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "cunn": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "dex": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "fight": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "int": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "magic": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "per": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "str": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     },
                     "will": {
                         "value": 0,
-                        "isActive": false
+                        "isActive": false,
+                        "selected": false
                     }
                 }
             }

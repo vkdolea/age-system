@@ -494,28 +494,6 @@
 .age-system.item .membership .item-card-stats input[name="data.weight"],
 .age-system.item .shipfeatures .item-card-stats input[name="data.weight"],
 .age-system.item .vehicle .item-card-stats input[name="data.weight"],
-.age-system.item .focus .item-card-stats input[name="data.range"],
-.age-system.item .power .item-card-stats input[name="data.range"],
-.age-system.item .talent .item-card-stats input[name="data.range"],
-.age-system.item .weapon .item-card-stats input[name="data.range"],
-.age-system.item .equipment .item-card-stats input[name="data.range"],
-.age-system.item .stunts .item-card-stats input[name="data.range"],
-.age-system.item .honorifics .item-card-stats input[name="data.range"],
-.age-system.item .relationship .item-card-stats input[name="data.range"],
-.age-system.item .membership .item-card-stats input[name="data.range"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.range"],
-.age-system.item .vehicle .item-card-stats input[name="data.range"],
-.age-system.item .focus .item-card-stats input[name="data.rangeMax"],
-.age-system.item .power .item-card-stats input[name="data.rangeMax"],
-.age-system.item .talent .item-card-stats input[name="data.rangeMax"],
-.age-system.item .weapon .item-card-stats input[name="data.rangeMax"],
-.age-system.item .equipment .item-card-stats input[name="data.rangeMax"],
-.age-system.item .stunts .item-card-stats input[name="data.rangeMax"],
-.age-system.item .honorifics .item-card-stats input[name="data.rangeMax"],
-.age-system.item .relationship .item-card-stats input[name="data.rangeMax"],
-.age-system.item .membership .item-card-stats input[name="data.rangeMax"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.rangeMax"],
-.age-system.item .vehicle .item-card-stats input[name="data.rangeMax"],
 .age-system.item .focus .item-card-stats input[name="data.capacity"],
 .age-system.item .power .item-card-stats input[name="data.capacity"],
 .age-system.item .talent .item-card-stats input[name="data.capacity"],
@@ -606,6 +584,32 @@
 .age-system.item .vehicle .item-card-stats input[name="data.rank"] {
   max-width: 30px;
   min-width: 30px;
+  text-align: center;
+}
+.age-system.item .focus .item-card-stats input[name="data.range"],
+.age-system.item .power .item-card-stats input[name="data.range"],
+.age-system.item .talent .item-card-stats input[name="data.range"],
+.age-system.item .weapon .item-card-stats input[name="data.range"],
+.age-system.item .equipment .item-card-stats input[name="data.range"],
+.age-system.item .stunts .item-card-stats input[name="data.range"],
+.age-system.item .honorifics .item-card-stats input[name="data.range"],
+.age-system.item .relationship .item-card-stats input[name="data.range"],
+.age-system.item .membership .item-card-stats input[name="data.range"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.range"],
+.age-system.item .vehicle .item-card-stats input[name="data.range"],
+.age-system.item .focus .item-card-stats input[name="data.rangeMax"],
+.age-system.item .power .item-card-stats input[name="data.rangeMax"],
+.age-system.item .talent .item-card-stats input[name="data.rangeMax"],
+.age-system.item .weapon .item-card-stats input[name="data.rangeMax"],
+.age-system.item .equipment .item-card-stats input[name="data.rangeMax"],
+.age-system.item .stunts .item-card-stats input[name="data.rangeMax"],
+.age-system.item .honorifics .item-card-stats input[name="data.rangeMax"],
+.age-system.item .relationship .item-card-stats input[name="data.rangeMax"],
+.age-system.item .membership .item-card-stats input[name="data.rangeMax"],
+.age-system.item .shipfeatures .item-card-stats input[name="data.rangeMax"],
+.age-system.item .vehicle .item-card-stats input[name="data.rangeMax"] {
+  max-width: 60px;
+  min-width: 60px;
   text-align: center;
 }
 .age-system.item .focus .item-card-stats span:last-of-type,
@@ -741,35 +745,151 @@
 .age-system.item .vehicle .item-card-desc label:last-of-type {
   margin-top: 4px;
 }
-.age-system.item .focus .item-card-desc .mod-card,
-.age-system.item .power .item-card-desc .mod-card,
-.age-system.item .talent .item-card-desc .mod-card,
-.age-system.item .weapon .item-card-desc .mod-card,
-.age-system.item .equipment .item-card-desc .mod-card,
-.age-system.item .stunts .item-card-desc .mod-card,
-.age-system.item .honorifics .item-card-desc .mod-card,
-.age-system.item .relationship .item-card-desc .mod-card,
-.age-system.item .membership .item-card-desc .mod-card,
-.age-system.item .shipfeatures .item-card-desc .mod-card,
-.age-system.item .vehicle .item-card-desc .mod-card {
-  border-radius: 10px;
-  max-width: 150px;
-  min-width: 150px;
-  height: 70px;
+.age-system.item .focus .item-card-desc ul.mod-card,
+.age-system.item .power .item-card-desc ul.mod-card,
+.age-system.item .talent .item-card-desc ul.mod-card,
+.age-system.item .weapon .item-card-desc ul.mod-card,
+.age-system.item .equipment .item-card-desc ul.mod-card,
+.age-system.item .stunts .item-card-desc ul.mod-card,
+.age-system.item .honorifics .item-card-desc ul.mod-card,
+.age-system.item .relationship .item-card-desc ul.mod-card,
+.age-system.item .membership .item-card-desc ul.mod-card,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card,
+.age-system.item .vehicle .item-card-desc ul.mod-card {
   margin: 4px;
   padding: 4px;
+  border: none;
 }
-.age-system.item .focus .item-card-desc .mod-card input[type="number"],
-.age-system.item .power .item-card-desc .mod-card input[type="number"],
-.age-system.item .talent .item-card-desc .mod-card input[type="number"],
-.age-system.item .weapon .item-card-desc .mod-card input[type="number"],
-.age-system.item .equipment .item-card-desc .mod-card input[type="number"],
-.age-system.item .stunts .item-card-desc .mod-card input[type="number"],
-.age-system.item .honorifics .item-card-desc .mod-card input[type="number"],
-.age-system.item .relationship .item-card-desc .mod-card input[type="number"],
-.age-system.item .membership .item-card-desc .mod-card input[type="number"],
-.age-system.item .shipfeatures .item-card-desc .mod-card input[type="number"],
-.age-system.item .vehicle .item-card-desc .mod-card input[type="number"] {
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item {
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  text-align: center;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item p,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item p {
+  text-align: center;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-type {
+  flex: 0 0 30%;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value {
+  flex: 0 0 50%;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="text"],
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"],
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-value input[type="number"] {
+  margin: 2px 0;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls {
+  flex: 0 0 20%;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls i {
+  width: fit-content;
+}
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item .mod-controls .inactive {
+  opacity: 0.2;
+}
+.age-system.item .focus .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .power .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .talent .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .weapon .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .equipment .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .stunts .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .honorifics .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .relationship .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .membership .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .shipfeatures .item-card-desc ul.mod-card input[type="number"],
+.age-system.item .vehicle .item-card-desc ul.mod-card input[type="number"] {
   max-width: 40px;
   min-width: 40px;
   text-align: center;
@@ -789,7 +909,7 @@
   width: 100%;
 }
 .age-system.sheet.char .sheet-header img {
-  height: 251px;
+  height: 198px;
   width: 150px;
   object-fit: contain;
   border: 0px;
@@ -801,23 +921,152 @@
 .age-system.sheet.char .sheet-header .age-header > div {
   margin-bottom: 4px;
 }
-.age-system.sheet.char .sheet-header .age-header input[name="data.age"],
-.age-system.sheet.char .sheet-header .age-header input[name="data.height"],
-.age-system.sheet.char .sheet-header .age-header input[name="data.weight"] {
-  max-width: 40px;
+.age-system.sheet.char .sheet-header .age-header .level-xp input[type="number"] {
+  text-align: center;
 }
 .age-system.sheet.char .sheet-header .age-header label {
   white-space: nowrap;
   max-width: fit-content;
   padding: 4px;
-  flex: 1 min-content fit-content;
+  flex: 0 0 fit-content;
 }
-.age-system.sheet.char .sheet-header .age-header .editor {
-  height: 105px;
-  min-height: 105px;
+.age-system.sheet.char nav.add-sheet-tabs {
+  justify-content: space-evenly;
+}
+.age-system.sheet.char nav.add-sheet-tabs a.char {
+  max-width: max-content;
+  padding: 2px 4px;
+}
+.age-system.sheet.char nav.add-sheet-tabs .active {
+  font-weight: 900;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+.age-system.sheet.char .persona .container {
+  margin-bottom: 4px;
+}
+.age-system.sheet.char .persona .features label,
+.age-system.sheet.char .persona .goals label,
+.age-system.sheet.char .persona .bio label,
+.age-system.sheet.char .persona .secret-note label,
+.age-system.sheet.char .persona .language label {
+  max-width: none;
+  text-align: center;
+  max-height: 25px;
+}
+.age-system.sheet.char .persona .features textarea.free-text,
+.age-system.sheet.char .persona .goals textarea.free-text,
+.age-system.sheet.char .persona .bio textarea.free-text,
+.age-system.sheet.char .persona .secret-note textarea.free-text,
+.age-system.sheet.char .persona .language textarea.free-text {
+  resize: none;
+  font-family: inherit;
+  background: white;
+  border: none;
+  height: auto;
+}
+.age-system.sheet.char .persona .goals-language .spacer {
+  flex: 0 0 4px;
+}
+.age-system.sheet.char .persona .goals.container,
+.age-system.sheet.char .persona .language.container,
+.age-system.sheet.char .persona .features.container,
+.age-system.sheet.char .persona .secret-note.container {
+  height: 150px;
+}
+.age-system.sheet.char .persona label {
+  white-space: nowrap;
+  max-width: fit-content;
+  padding: 4px;
+  flex: 0 0 fit-content;
+}
+.age-system.sheet.char .persona .editor.editor {
+  min-height: 300px;
+  max-height: 600px;
+  height: 100%;
   padding: 4px;
   border: 1px solid grey;
   border-radius: 4px;
+}
+.age-system.sheet.char .persona .editor.editor .tox.tox-tinymce {
+  min-height: 290px !important;
+  max-height: 590px !important;
+}
+.age-system.sheet.char .item-container ul {
+  margin-top: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.age-system.sheet.char .item-container ul .header {
+  justify-content: center;
+}
+.age-system.sheet.char .item-container ul .header p {
+  text-align: center;
+  margin: 0;
+}
+.age-system.sheet.char .item-container li:first-of-type {
+  margin-bottom: 1px;
+}
+.age-system.sheet.char .item-container li.elements {
+  margin-top: 4px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.age-system.sheet.char .item-container li.elements p {
+  text-align: center;
+}
+.age-system.sheet.char .item-container .inactive {
+  opacity: 0.2;
+}
+.age-system.sheet.char .item-container.effects ul.effects .header p.effect-name {
+  text-align: left;
+}
+.age-system.sheet.char .item-container.effects img.effect-icon {
+  height: 24px;
+  flex: 0 0 24px;
+  object-fit: contain;
+}
+.age-system.sheet.char .item-container.effects div.effect-name {
+  align-items: center;
+  text-align: left;
+}
+.age-system.sheet.char .item-container.effects div.effect-name p {
+  text-align: left;
+  padding-left: 4px;
+}
+.age-system.sheet.char .item-container.effects .effect-name.effect-name {
+  flex: 0 0 25%;
+  text-align: left;
+}
+.age-system.sheet.char .item-container.effects .effect-key {
+  flex: 0 0 30%;
+}
+.age-system.sheet.char .item-container.effects .effect-operation {
+  flex: 0 0 15%;
+}
+.age-system.sheet.char .item-container.effects .effect-value {
+  flex: 0 0 15%;
+}
+.age-system.sheet.char .item-container.effects .effect-add {
+  padding-right: 4px;
+  flex: 0 0 10%;
+  text-align: center;
+}
+.age-system.sheet.char .item-container.modifiers .mod-name {
+  flex: 0 0 30%;
+}
+.age-system.sheet.char .item-container.modifiers .mod-value {
+  flex: 0 0 40%;
+}
+.age-system.sheet.char .item-container.modifiers .mod-value p.icon.icon {
+  flex: 0 0 30%;
+}
+.age-system.sheet.char .item-container.modifiers .mod-value p.value.value {
+  flex: 0 0 70%;
+}
+.age-system.sheet.char .item-container.modifiers .mod-source.mod-source {
+  flex: 0 0 30%;
 }
 .age-system.sheet.char input[type="checkbox"] {
   margin: 0px;
@@ -993,6 +1242,9 @@
 .age-system.sheet.char .fill-card {
   max-width: fit-content;
 }
+.age-system.sheet.char .item-container.conditions {
+  overflow: hidden;
+}
 .age-system.sheet.char .item-container {
   flex-wrap: wrap;
   resize: vertical;
@@ -1025,8 +1277,6 @@
   /* Position the tooltip */
   position: fixed;
   z-index: 10;
-  top: 50px;
-  left: 50px;
 }
 .age-system.sheet.char .item-container .item-box .tooltip-container:hover .container-tooltip-text {
   visibility: visible;
@@ -1073,6 +1323,15 @@
   font-variant: small-caps;
   min-width: min-content;
 }
+.age-system.sheet.vehicle .stats-block.stats-block {
+  padding: 5px;
+  border-radius: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
+.age-system.sheet.vehicle .spacer {
+  flex: 0 0 10px;
+}
 .age-system.sheet.vehicle .label-with-icon a {
   max-width: fit-content;
   margin-left: 4px;
@@ -1083,115 +1342,145 @@
 .age-system.sheet.vehicle .label-with-icon i {
   margin-right: 4px;
 }
-.age-system.sheet.vehicle .vehicle-name {
-  border-radius: 10px 10px 0px 0px;
-  text-transform: uppercase;
-  border: none;
-  padding: 4px;
-}
 .age-system.sheet.vehicle input[name="name"] {
-  padding-left: 10px;
+  padding: 5px;
   min-width: 100%;
-  max-height: 30px;
+  max-height: fit-content;
+  border-radius: 10px;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 30px;
+  border: none;
+  height: 47px;
+  max-height: 47px;
 }
-.age-system.sheet.vehicle label {
-  max-height: 20px;
+.age-system.sheet.vehicle .image-description {
+  height: 200px;
+  max-height: 200px;
+  margin-top: 10px;
+}
+.age-system.sheet.vehicle .image-description .vehicle-image {
+  object-fit: contain;
+  border: none;
+  height: 190px;
+}
+.age-system.sheet.vehicle .image-description .vehicle-desc {
+  height: 190px;
+}
+.age-system.sheet.vehicle .image-description .vehicle-desc p {
+  margin: 7px 0;
+  height: auto;
+}
+.age-system.sheet.vehicle .image-description .vehicle-desc label.desc.desc {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
   text-align: center;
 }
-.age-system.sheet.vehicle .grid-container {
-  display: grid;
-  grid-template-columns: 300px 500px;
-  grid-template-rows: 370px 200px;
+.age-system.sheet.vehicle .image-description .vehicle-desc .editor {
+  height: 100%;
 }
-.age-system.sheet.vehicle .grid-parameter {
-  grid-column-start: 1;
-  grid-column-end: span 1;
-  grid-row-start: 1;
-  grid-row-end: span 2;
+.age-system.sheet.vehicle .image-description .vehicle-desc .editor .editor-content {
+  max-height: 173px;
+}
+.age-system.sheet.vehicle .gm-secret-notes.gm-secret-notes {
+  height: max-content;
+}
+.age-system.sheet.vehicle .gm-secret-notes.gm-secret-notes textarea.free-text {
+  resize: none;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  height: 150px;
+}
+.age-system.sheet.vehicle .parameters.stats-block {
   font-size: 14px;
 }
-.age-system.sheet.vehicle .grid-parameter > div {
-  max-height: 50px;
-  margin: 4px;
+.age-system.sheet.vehicle .parameters.stats-block > * {
+  min-height: 20px;
+  margin-top: 4px;
 }
-.age-system.sheet.vehicle .grid-parameter > div div {
-  margin: 4px;
+.age-system.sheet.vehicle .parameters.stats-block .conductor-selection {
+  flex: 0 0 20px;
 }
-.age-system.sheet.vehicle .grid-parameter .focus-ability {
+.age-system.sheet.vehicle .parameters.stats-block .conductor-selection label.conductor {
+  flex: 0 0 60px;
+  margin-right: 4px;
+  height: 20px;
+}
+.age-system.sheet.vehicle .parameters.stats-block .focus-ability {
   max-height: 70px;
 }
-.age-system.sheet.vehicle .grid-parameter span {
+.age-system.sheet.vehicle .parameters.stats-block .focus-ability > * {
+  margin-top: 4px;
+}
+.age-system.sheet.vehicle .parameters.stats-block h2 {
+  margin-top: 0;
+}
+.age-system.sheet.vehicle .parameters.stats-block span {
   max-width: min-content;
   margin-left: 2px;
   margin-right: 2px;
 }
-.age-system.sheet.vehicle .grid-parameter input {
+.age-system.sheet.vehicle .parameters.stats-block input {
   max-height: 28px;
   padding: 0px;
   text-align: center;
 }
-.age-system.sheet.vehicle .grid-parameter select {
+.age-system.sheet.vehicle .parameters.stats-block select {
   margin: 0 auto;
   max-height: 20px;
 }
-.age-system.sheet.vehicle .grid-parameter input[name="data.handling.mod"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.ramDmg"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.hull"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.defenseTotal"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.cost"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.velocity.catMod"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.armorRating"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.coverRating"] {
+.age-system.sheet.vehicle .parameters.stats-block input[name="data.handling.mod"],
+.age-system.sheet.vehicle .parameters.stats-block input[name="data.ramDmg"],
+.age-system.sheet.vehicle .parameters.stats-block input[name="data.hull"],
+.age-system.sheet.vehicle .parameters.stats-block input[name="data.defenseTotal"],
+.age-system.sheet.vehicle .parameters.stats-block input[name="data.cost"],
+.age-system.sheet.vehicle .parameters.stats-block input[name="data.velocity.catMod"],
+.age-system.sheet.vehicle .parameters.stats-block input[name="data.armorRating"],
+.age-system.sheet.vehicle .parameters.stats-block input[name="data.coverRating"] {
   max-width: 35px;
   max-height: 20px;
 }
-.age-system.sheet.vehicle .grid-parameter .highlight {
-  font-weight: bolder;
-}
-.age-system.sheet.vehicle .grid-parameter input[name="data.customCollisionDmg"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.customSideswipeDmg"] {
-  max-width: 20px;
-  max-height: 20px;
-  border: none;
-}
-.age-system.sheet.vehicle .grid-parameter input[name="data.cost"] {
+.age-system.sheet.vehicle .parameters.stats-block input[name="data.cost"] {
   max-width: 60px;
 }
-.age-system.sheet.vehicle .grid-parameter input[type="checkbox"] {
+.age-system.sheet.vehicle .parameters.stats-block input[type="checkbox"] {
   margin: 0px;
   margin-top: 1px;
   width: 16px;
   height: 16px;
 }
-.age-system.sheet.vehicle .grid-parameter input[name="data.conductor"],
-.age-system.sheet.vehicle .grid-parameter input[name="data.handling.useFocus"],
-.age-system.sheet.vehicle .grid-parameter select[name="data.handling.useAbl"] {
-  max-width: 285px;
+.age-system.sheet.vehicle .parameters.stats-block input[name="data.handling.useFocus"],
+.age-system.sheet.vehicle .parameters.stats-block select[name="data.handling.useAbl"] {
   max-height: 20px;
 }
-.age-system.sheet.vehicle .grid-parameter .velocity-damage-table {
-  text-align: center;
+.age-system.sheet.vehicle .vehicle-damage-chart ul {
+  list-style-type: none;
+  padding: 0;
 }
-.age-system.sheet.vehicle .grid-parameter .velocity-damage-table td {
-  align-content: center;
+.age-system.sheet.vehicle .vehicle-damage-chart ul .highlight {
+  background-color: rgba(0, 0, 0, 0.1);
 }
-.age-system.sheet.vehicle .grid-parameter .velocity-damage-table td a {
-  margin-right: 2px;
+.age-system.sheet.vehicle .vehicle-damage-chart ul .header {
+  margin-bottom: 5px;
 }
-.age-system.sheet.vehicle .grid-parameter table {
-  margin-top: 4px;
-  margin-bottom: 4px;
+.age-system.sheet.vehicle .vehicle-damage-chart ul li {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
 }
-.age-system.sheet.vehicle .grid-description {
-  grid-column-start: 2;
-  grid-column-end: span 1;
-  grid-row-start: 2;
-  grid-row-end: span 1;
-  height: 200px;
+.age-system.sheet.vehicle .vehicle-damage-chart ul li .custom-velocity input {
+  flex: 0 0 25px;
 }
-.age-system.sheet.vehicle .grid-description .editor {
-  height: 100%;
-  padding: 4px 10px;
+.age-system.sheet.vehicle .vehicle-damage-chart ul li .custom-velocity a {
+  max-width: fit-content;
+}
+.age-system.sheet.vehicle .vehicle-damage-chart ul li .velocity {
+  flex: 0 0 100px;
+}
+.age-system.sheet.vehicle .vehicle-damage-chart ul li .feature-controls {
+  flex: 0 0 100px;
 }
 .age-system.sheet.vehicle .passenger-container {
   padding-left: 8px;
@@ -1230,20 +1519,6 @@
 .age-system.sheet.vehicle .dragover {
   color: #5f0505;
   box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.8);
-}
-.age-system.sheet.vehicle .grid-img {
-  grid-column-start: 2;
-  grid-column-end: span 1;
-  grid-row-start: 1;
-  grid-row-end: span 1;
-}
-.age-system.sheet.vehicle .grid-img img {
-  object-fit: contain;
-  height: 340px;
-  width: 490px;
-  margin: 5px;
-  padding: 4px;
-  border-radius: 25px;
 }
 .age-system.sheet .window-content {
   background-color: #d1b7ab;
@@ -1330,6 +1605,16 @@
 }
 .age-system.sheet.spaceship .image-description .ship-desc .editor .editor-content {
   max-height: 173px;
+}
+.age-system.sheet.spaceship .gm-secret-notes.gm-secret-notes {
+  height: max-content;
+}
+.age-system.sheet.spaceship .gm-secret-notes.gm-secret-notes textarea.free-text {
+  resize: none;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  height: 150px;
 }
 .age-system.sheet.spaceship ul.systems-list {
   text-align: center;
@@ -1681,11 +1966,13 @@
   background-color: #007DAD;
   color: #ffffff;
 }
-.colorset-modern-blue .char-sheet .age-header label {
+.colorset-modern-blue .char-sheet .age-header label,
+.colorset-modern-blue .char-sheet .persona label {
   background-color: #007DAD;
   color: #ffffff;
 }
-.colorset-modern-blue .char-sheet .age-header .editor {
+.colorset-modern-blue .char-sheet .age-header .editor,
+.colorset-modern-blue .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-modern-blue .vehicle-stats img {
@@ -1840,11 +2127,13 @@
   background-color: #0f4f5b;
   color: #ffffff;
 }
-.colorset-fantasy-blue .char-sheet .age-header label {
+.colorset-fantasy-blue .char-sheet .age-header label,
+.colorset-fantasy-blue .char-sheet .persona label {
   background-color: #0f4f5b;
   color: #ffffff;
 }
-.colorset-fantasy-blue .char-sheet .age-header .editor {
+.colorset-fantasy-blue .char-sheet .age-header .editor,
+.colorset-fantasy-blue .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-fantasy-blue .vehicle-stats img {
@@ -1999,11 +2288,13 @@
   background-color: #810207;
   color: #ffffff;
 }
-.colorset-dragon-red .char-sheet .age-header label {
+.colorset-dragon-red .char-sheet .age-header label,
+.colorset-dragon-red .char-sheet .persona label {
   background-color: #810207;
   color: #ffffff;
 }
-.colorset-dragon-red .char-sheet .age-header .editor {
+.colorset-dragon-red .char-sheet .age-header .editor,
+.colorset-dragon-red .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-dragon-red .vehicle-stats img {
@@ -2158,11 +2449,13 @@
   background-color: #565183;
   color: #ffffff;
 }
-.colorset-folded-purple .char-sheet .age-header label {
+.colorset-folded-purple .char-sheet .age-header label,
+.colorset-folded-purple .char-sheet .persona label {
   background-color: #565183;
   color: #ffffff;
 }
-.colorset-folded-purple .char-sheet .age-header .editor {
+.colorset-folded-purple .char-sheet .age-header .editor,
+.colorset-folded-purple .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-folded-purple .vehicle-stats img {
@@ -2317,11 +2610,13 @@
   background-color: #155f0e;
   color: #ffffff;
 }
-.colorset-ronin-green .char-sheet .age-header label {
+.colorset-ronin-green .char-sheet .age-header label,
+.colorset-ronin-green .char-sheet .persona label {
   background-color: #155f0e;
   color: #ffffff;
 }
-.colorset-ronin-green .char-sheet .age-header .editor {
+.colorset-ronin-green .char-sheet .age-header .editor,
+.colorset-ronin-green .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-ronin-green .vehicle-stats img {
@@ -2476,11 +2771,13 @@
   background-color: #273249;
   color: #e7ccc3;
 }
-.colorset-select-one .char-sheet .age-header label {
+.colorset-select-one .char-sheet .age-header label,
+.colorset-select-one .char-sheet .persona label {
   background-color: #273249;
   color: #e7ccc3;
 }
-.colorset-select-one .char-sheet .age-header .editor {
+.colorset-select-one .char-sheet .age-header .editor,
+.colorset-select-one .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-select-one .vehicle-stats img {
@@ -2635,11 +2932,13 @@
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
-.colorset-the-grey .char-sheet .age-header label {
+.colorset-the-grey .char-sheet .age-header label,
+.colorset-the-grey .char-sheet .persona label {
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
-.colorset-the-grey .char-sheet .age-header .editor {
+.colorset-the-grey .char-sheet .age-header .editor,
+.colorset-the-grey .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-the-grey .vehicle-stats img {
@@ -2794,11 +3093,13 @@
   background-color: #600000;
   color: #df7c00;
 }
-.colorset-red-warrior .char-sheet .age-header label {
+.colorset-red-warrior .char-sheet .age-header label,
+.colorset-red-warrior .char-sheet .persona label {
   background-color: #600000;
   color: #df7c00;
 }
-.colorset-red-warrior .char-sheet .age-header .editor {
+.colorset-red-warrior .char-sheet .age-header .editor,
+.colorset-red-warrior .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-red-warrior .vehicle-stats img {
@@ -2953,11 +3254,13 @@
   background-color: #663322;
   color: #bb8755;
 }
-.colorset-never-dead .char-sheet .age-header label {
+.colorset-never-dead .char-sheet .age-header label,
+.colorset-never-dead .char-sheet .persona label {
   background-color: #663322;
   color: #bb8755;
 }
-.colorset-never-dead .char-sheet .age-header .editor {
+.colorset-never-dead .char-sheet .age-header .editor,
+.colorset-never-dead .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-never-dead .vehicle-stats img {
@@ -3205,8 +3508,14 @@
   background: none;
   background-color: rgba(207, 194, 188, 0.6);
 }
+.age-system-dialog.bonus-select button.dialog-button {
+  flex: 0 0 45%;
+}
 .age-system {
   /*---------Flexbox assisting classes------*/
+}
+.age-system textarea:focus {
+  box-shadow: none;
 }
 .age-system a:hover {
   text-shadow: none;

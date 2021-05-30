@@ -118,7 +118,8 @@ each(@colorsets, {
         };
     
         .char-sheet {
-            .age-header {
+            .age-header,
+            .persona {
                 label {
                     background-color: extract(extract(@color-list, @index), 1);
                     color: extract(extract(@color-list, @index), 4);
@@ -127,6 +128,7 @@ each(@colorsets, {
                     background-color: hsl(0, 0%, 100%);
                 }
             }
+
         }
 
         .vehicle-stats {
