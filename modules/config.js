@@ -140,37 +140,6 @@ ageSystem.rof = {
     semiAuto: "age-system.rof.semiAuto",
     fullAuto: "age-system.rof.fullAuto"
 };
-
-// ageSystem.bonusTypes = {
-//     itemDamage: "age-system.bonus.itemAtkBns",
-//     testMod: "age-system.bonus.testMod",
-//     actorDamage: "age-system.bonus.itemDmgBns",
-//     itemActivation: "age-system.bonus.generalDmgBns",
-//     acc: "age-system.bonus.charAblBns",
-//     comm: "age-system.bonus.charAblBns",
-//     cons: "age-system.bonus.charAblBns",
-//     cun: "age-system.bonus.charAblBns",
-//     dex: "age-system.bonus.charAblBns",
-//     fight: "age-system.bonus.charAblBns",
-//     int: "age-system.bonus.charAblBns",
-//     magic: "age-system.bonus.charAblBns",
-//     per: "age-system.bonus.charAblBns",
-//     str: "age-system.bonus.charAblBns",
-//     will: "age-system.bonus.charAblBns",
-//     focus: "age-system.bonus.focusValueBns",
-//     defense: "age-system.bonus.totalDefenseBns",
-//     impactArmor: "age-system.bonus.impactArmorBns",
-//     ballisticArmor: "age-system.bonus.ballisticArmorBns",
-//     defendMnv: "age-system.bonus.defendMnvBns",
-//     guardupMnv: "age-system.bonus.guardupMnvBns",
-//     allOutAtk: "age-system.bonus.allOutAtkBns",
-//     maxHealth: "age-system.bonus.maxHealthBns",
-//     maxConviction: "age-system.bonus.maxConvictionBns",
-//     maxPowerPoints: "age-system.bonus.maxPowerPointsBns",
-//     powerForce: "age-system.bonus.powerForceBns",
-//     aimMnv: "age-system.bonus.aimMnvBns",
-//     armorPenalty: "age-system.bonus.armorPenaltyBns"
-// };
     
 // Vehicle parameters
 ageSystem.velocityCategory = {
