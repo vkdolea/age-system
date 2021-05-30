@@ -95,7 +95,7 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
-### 0.7.0 [2021-05-26]
+### 0.7.0 [2021-05-30]
 #### Added
 - New fancy layout for Vehicle sheet.
 - Added notes visible only by GM on each actor sheet (Character, Vehicle, Spaceship).
