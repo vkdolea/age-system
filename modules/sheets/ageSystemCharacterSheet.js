@@ -330,7 +330,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         event.preventDefault();
         const e = event.currentTarget;
         const itemId = e.closest(".feature-controls").dataset.itemId;
-        const item = this.items.get(itemId);
+        const item = this.actor.items.get(itemId);
         const damageData = {event: event};
         return item.rollDamage(damageData);
     };
