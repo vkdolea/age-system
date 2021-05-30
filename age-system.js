@@ -6,6 +6,7 @@ import ageSystemVehicleSheet from "./modules/sheets/ageSystemVehicleSheet.js";
 import ageSystemSpaceshipSheet from "./modules/sheets/ageSystemSpaceshipSheet.js";
 import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
+import {ageEffect} from "./modules/ageEffect.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
 import { rollOwnedItem } from "./modules/macros.js";
@@ -65,7 +66,8 @@ Hooks.once("init", async function() {
         rollOwnedItem,
         entities: {
             ageSystemActor,
-            ageSystemItem
+            ageSystemItem,
+            ageEffect
         }
     };
 
@@ -114,6 +116,7 @@ Hooks.once("init", async function() {
     // Define extra data for Age System (Actors, Items, ActiveEffectConfig)
     CONFIG.Actor.documentClass = ageSystemActor;
     CONFIG.Item.documentClass = ageSystemItem;
+    CONFIG.ActiveEffect.documentClass = ageEffect;
     // Saving this customization for a later implementation
     // CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;
 
@@ -141,6 +144,16 @@ Hooks.once("init", async function() {
             if (e[1] === mask) return e[0]
         }
         return `${mask} (${game.i18n.localize("age-system.custom")})`;
+    })
+
+    // Handlebar to identify if there is any Condition ongoing
+    Handlebars.registerHelper('conditionOn', function(conditionKey, effects) {
+        let checked = "";
+        for (let e = 0; e < effects.length; e++) {
+            const flags = effects[e].flags["age-system"];
+            if (flags?.type === 'conditons' && (flags?.name === conditionKey)) checked = "checked";
+        };
+        return checked;
     })
 
     // Handlebar helper to compare 2 data
@@ -238,6 +251,7 @@ Hooks.once("ready", async function() {
     }
     
     // Register System Settings related do Focus Compendium
+    ageSystem.itemCompendia = Settings.allCompendia("Item");
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.compendiumList(setCompendium);
@@ -262,8 +276,12 @@ Hooks.once("ready", async function() {
 
 });
 
+Hooks.on("createCompendium", () => {
+    ageSystem.itemCompendia = Settings.allCompendia("Item");
+})
+
 // If Compendia are updated, then compendiumList is gathered once again
-Hooks.on("renderCompendium", function() {
+Hooks.on("renderCompendium", () => {
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.compendiumList(setCompendium);
 });
@@ -349,38 +367,4 @@ Hooks.on("createToken", (tokenDocument, options, userId) => {
             "displayBars": 20,
         })
     };
-})
-
-Hooks.on("preCreateActiveEffect", (activeEffect, activeEffectData, options, userId) => {
-    // Ensur this change occurs only once
-    if (game.user.id !== userId) return
-
-    const isCondition = activeEffectData.flags?.["age-system"]?.type === "conditions" ? true : false;
-    if(isCondition) {
-        const condId = activeEffectData.flags["age-system"].name;
-        const actor = activeEffect.parent;
-        const isChecked = actor.data.data.conditions[condId];
-        if (!isChecked) {
-            const path = `data.conditions.${condId}`;
-            const updateData = {[path]: true};
-            return actor.update(updateData);
-        }
-    }
-})
-
-Hooks.on("preDeleteActiveEffect", (activeEffect, options, userId) => {
-    // Ensur this change occurs only once
-    if (game.user.id !== userId) return
-
-    const isCondition = activeEffect.data.flags?.["age-system"]?.type === "conditions" ? true : false;
-    if(isCondition) {
-        const condId = activeEffect.data.flags["age-system"].name;
-        const actor = activeEffect.parent;
-        const isChecked = actor.data.data.conditions[condId];
-        if (isChecked) {
-            const path = `data.conditions.${condId}`;
-            const updateData = {[path]: false};
-            return actor.update(updateData);
-        }
-    }
 })

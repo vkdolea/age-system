@@ -76,6 +76,26 @@ export class ageSystemActor extends Actor {
         // Apply Item Modifiers to Actor before applying Active Effects!
         this.applyItemModifiers();
 
+        // Check for Conditions and related Active Effects
+        // const conditions = this.data.data.conditions;
+        // const effects = this.effects;
+        // const docs = [];
+        // const deletion = [];
+        // for (const cd in conditions) {
+        //     if (Object.hasOwnProperty.call(conditions, cd)) {
+        //         const relatedEffect = this.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === cd);
+        //         const isChecked = conditions[cd];
+        //         // If there are effects but Condition is unchecked, check it!
+        //         if (relatedEffect.length > 0 && !isChecked) this.data.data.conditons[c] = true
+        //         // If there is no effect but Condition is checked, create effect!
+        //         if (relatedEffect.length < 1 && isChecked) {
+        //             const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === cd)[0];
+        //             newEffect["flags.core.statusId"] = newEffect.id;
+        //             this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+        //         }
+        //     }
+        // }
+
         this.applyActiveEffects();
     }
 

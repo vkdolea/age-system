@@ -327,9 +327,8 @@ export const loadCompendiaSettings = function() {
     config: true,
     default: "age-system.focus",
     type: String,
-    choices: allCompendia(),
-    onChange:()=>{
-      window.location.reload(!1)}
+    choices: CONFIG.ageSystem.itemCompendia,
+    onChange:()=>{CONFIG.ageSystem.focus = compendiumList(game.settings.get("age-system", "masterFocusCompendium"))}
   });
 };
 
@@ -350,33 +349,27 @@ export function stuntSoNice(colorChoices) {
 };
 
 // Creates the Options object with all compendia in alphabetic order
-function allCompendia() {
+export function allCompendia(docType) {
   let list = {};
-  let compendia = game.packs.map(e => e);
-  compendia = compendia.sort(function(a, b) {
-    const nameA = a.title.toLowerCase();
-    const nameB = b.title.toLowerCase();
-    if (nameA < nameB) {
-      return -1;
+  game.packs.map(e => {
+    if (e.metadata.entity === docType) {
+      const newItem = {[`${e.metadata.package}.${e.metadata.name}`]: e.metadata.label};
+      list = {
+        ...list,
+        ...newItem
+      }
     }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
   });
-  for (let c = 0; c < compendia.length; c++) {
-    const comp = compendia[c];
-    list[comp.collection] = comp.title;
-  };
   return list
 };
 
 // Creates a list of entries in the Compendium (name and _id)
 export function compendiumList(compendiumName) {
+  if ([null, undefined, false, ""].includes(compendiumName)) return;
   let dataPack = game.packs.get(compendiumName);
   let dataList = [];
-  let foci = dataPack.index;
-  foci.map(i => {
+  // let foci = dataPack.index;
+  dataPack.index.map(i => {
     if(i.type === "focus") dataList.push({
     _id: i._id,
     name: i.name

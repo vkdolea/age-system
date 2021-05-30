@@ -163,11 +163,11 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         return item.update({[dataPath]: !active});
     }
 
-    async _onChangeCondition(event) {
+    _onChangeCondition(event) {
         const isChecked = event.currentTarget.checked;
         const condId = event.currentTarget.closest(".feature-controls").dataset.conditionId;
         // Array with Conditions
-        const condEffects = this.actor.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name == condId);
+        const condEffects = this.actor.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === condId);
         // Condition not checked, and no related Effect is on - do nothing
         if (!isChecked && condEffects.length < 1) return;
         // Condition is checked and there is related Effect - do nothing
@@ -177,7 +177,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             for (let c = 0; c < condEffects.length; c++) {
                 const effect = condEffects[c];
                 const id = effect.data._id;
-                await this.actor.effects.get(id).delete();
+                this.actor.effects.get(id).delete();
             }
             return
         }

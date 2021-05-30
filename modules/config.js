@@ -833,3 +833,6 @@ ageSystem.ageRollerPos = {xPos: "800px", yPos: "10px"};
 
 // Initializing variable to load focus Compendiaum
 ageSystem.focus = [];
+
+// List with world's Item compendia
+ageSystem.itemCompendia = [];
