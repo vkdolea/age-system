@@ -101,7 +101,7 @@ export async function ageRollCheck({
         rollFormula += " + @testMod";
         rollData.testMod = actor.data.data.testMod;
         partials.push({
-            label: game.i18n.localize("age-system.bonus.actorTest"),
+            label: game.i18n.localize("age-system.bonus.testMod"),
             value: rollData.testMod,
         });
     }

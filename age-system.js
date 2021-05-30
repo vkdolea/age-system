@@ -332,7 +332,7 @@ Hooks.on("createToken", (tokenDocument, options, userId) => {
     // Ensur this change occurs only once
     if (game.user.id !== userId) return
 
-    if (tokenDocument.actor.data.type !== "char") return;
+    if (tokenDocument.actor?.data?.type !== "char") return;
     if (!tokenDocument.data.bar1?.attribute) tokenDocument.update({"bar1.attribute": "health"});
     if (!tokenDocument.data.bar2?.attribute) {
         const barData = game.settings.get("age-system", "usePowerPoints") ? "powerPoints" : (game.settings.get("age-system", "useConviction") ? "conviction" : null);
