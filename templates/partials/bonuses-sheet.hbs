@@ -11,9 +11,9 @@
             <p class="mod-type">{{localize (concat "age-system.bonus." @key)}}</p>
             <div class="mod-value">
                 {{#if (eq @key "focus")}}
-                <input type="text" name="data.itemMods.{{@key}}.name" value="{{mod.name}}" placeholder="{{localize "age-system.focus"}}" data-dtype="String" />
+                <input type="text" class="mod"  name="data.itemMods.{{@key}}.name" value="{{mod.name}}" placeholder="{{localize "age-system.focus"}}" data-dtype="String" />
                 {{/if}}
-                <input type="number" name="data.itemMods.{{@key}}.value" value="{{mod.value}}" data-dtype="Number" />
+                <input type="number" class="mod" name="data.itemMods.{{@key}}.value" value="{{mod.value}}" data-dtype="Number" />
             </div>
             <div class="mod-controls">
                 <a class="toggle {{#unless mod.isActive}}inactive{{/unless}}"><i class="fas fa-power-off"></i></a>

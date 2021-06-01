@@ -777,6 +777,19 @@
   margin-bottom: 4px;
   text-align: center;
 }
+.age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item input.mod,
+.age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item input.mod,
+.age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item input.mod,
+.age-system.item .weapon .item-card-desc ul.mod-card li.mod-item.mod-item input.mod,
+.age-system.item .equipment .item-card-desc ul.mod-card li.mod-item.mod-item input.mod,
+.age-system.item .stunts .item-card-desc ul.mod-card li.mod-item.mod-item input.mod,
+.age-system.item .honorifics .item-card-desc ul.mod-card li.mod-item.mod-item input.mod,
+.age-system.item .relationship .item-card-desc ul.mod-card li.mod-item.mod-item input.mod,
+.age-system.item .membership .item-card-desc ul.mod-card li.mod-item.mod-item input.mod,
+.age-system.item .shipfeatures .item-card-desc ul.mod-card li.mod-item.mod-item input.mod,
+.age-system.item .vehicle .item-card-desc ul.mod-card li.mod-item.mod-item input.mod {
+  color: inherit !important;
+}
 .age-system.item .focus .item-card-desc ul.mod-card li.mod-item.mod-item p,
 .age-system.item .power .item-card-desc ul.mod-card li.mod-item.mod-item p,
 .age-system.item .talent .item-card-desc ul.mod-card li.mod-item.mod-item p,
@@ -3078,68 +3091,68 @@
   border: solid #b4b6b3 1px;
 }
 .colorset-red-warrior .colorset-first-tier {
-  background-color: #600000;
-  color: #df7c00;
+  background-color: #751119;
+  color: #f7b755;
 }
 .colorset-red-warrior .colorset-second-tier {
-  background-color: #e68080;
-  color: #600000;
+  background-color: #d1635b;
+  color: #751119;
 }
 .colorset-red-warrior .colorset-third-tier {
-  background-color: #742300;
-  color: #ffa700;
+  background-color: #b22126;
+  color: #c7c691;
 }
 .colorset-red-warrior input.colorset-first-tier {
-  background-color: #600000;
-  color: #df7c00;
+  background-color: #751119;
+  color: #f7b755;
 }
 .colorset-red-warrior .char-sheet .age-header label,
 .colorset-red-warrior .char-sheet .persona label {
-  background-color: #600000;
-  color: #df7c00;
+  background-color: #751119;
+  color: #f7b755;
 }
 .colorset-red-warrior .char-sheet .age-header .editor,
 .colorset-red-warrior .char-sheet .persona .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-red-warrior .vehicle-stats img {
-  border: 2px solid #600000;
+  border: 2px solid #751119;
 }
 .colorset-red-warrior .vehicle-stats .editor {
   background-color: #ffffff;
 }
 .colorset-red-warrior .stats-block.losses .loss-checkbox {
-  border-color: #600000;
+  border-color: #751119;
 }
 .colorset-red-warrior .stats-block.losses .loss-checkbox.full-box.full-box {
-  background: #600000;
+  background: #751119;
 }
 .colorset-red-warrior fieldset {
-  border-color: #600000;
+  border-color: #751119;
 }
 .colorset-red-warrior #age-tracker-drag:hover,
 .colorset-red-warrior #age-roller-drag:hover {
-  background-color: #600000;
+  background-color: #751119;
 }
 .colorset-red-warrior .dice-show.trait-test i:last-of-type {
-  color: #600000;
+  color: #751119;
 }
 .colorset-red-warrior .roll-mod {
-  border-bottom: 1px solid #600000;
+  border-bottom: 1px solid #751119;
 }
 .colorset-red-warrior .roll-mod.stunted {
-  background-color: #600000;
-  color: #df7c00;
+  background-color: #751119;
+  color: #f7b755;
 }
 .colorset-red-warrior .char-sheet .item-container img {
-  border: 1px solid #600000;
+  border: 1px solid #751119;
 }
 .colorset-red-warrior .char-sheet input {
   background-color: #ffffff;
 }
 .colorset-red-warrior .char-sheet input.colorset-second-tier {
-  background-color: #e68080 !important;
-  color: #600000 !important;
+  background-color: #d1635b !important;
+  color: #751119 !important;
 }
 .colorset-red-warrior .focus img,
 .colorset-red-warrior .power img,
@@ -3151,7 +3164,7 @@
 .colorset-red-warrior .membership img,
 .colorset-red-warrior .relationship img,
 .colorset-red-warrior .shipfeatures img {
-  border: 1px solid #600000;
+  border: 1px solid #751119;
 }
 .colorset-red-warrior .focus label,
 .colorset-red-warrior .power label,
@@ -3163,7 +3176,7 @@
 .colorset-red-warrior .membership label,
 .colorset-red-warrior .relationship label,
 .colorset-red-warrior .shipfeatures label {
-  color: #600000;
+  color: #751119;
 }
 .colorset-red-warrior .focus .item-card-stats,
 .colorset-red-warrior .power .item-card-stats,
@@ -3175,7 +3188,7 @@
 .colorset-red-warrior .membership .item-card-stats,
 .colorset-red-warrior .relationship .item-card-stats,
 .colorset-red-warrior .shipfeatures .item-card-stats {
-  background-color: #e68080;
+  background-color: #d1635b;
 }
 .colorset-red-warrior .focus .item-card-stats input.data-entry,
 .colorset-red-warrior .power .item-card-stats input.data-entry,
@@ -3187,7 +3200,7 @@
 .colorset-red-warrior .membership .item-card-stats input.data-entry,
 .colorset-red-warrior .relationship .item-card-stats input.data-entry,
 .colorset-red-warrior .shipfeatures .item-card-stats input.data-entry {
-  color: #ffa700;
+  color: #c7c691;
 }
 .colorset-red-warrior .focus .item-card-desc,
 .colorset-red-warrior .power .item-card-desc,
@@ -3211,8 +3224,8 @@
 .colorset-red-warrior .membership nav .item,
 .colorset-red-warrior .relationship nav .item,
 .colorset-red-warrior .shipfeatures nav .item {
-  background-color: #e68080;
-  color: #600000;
+  background-color: #d1635b;
+  color: #751119;
 }
 .colorset-red-warrior .focus nav .item.active,
 .colorset-red-warrior .power nav .item.active,
@@ -3236,7 +3249,7 @@
 .colorset-red-warrior .membership .mod-card,
 .colorset-red-warrior .relationship .mod-card,
 .colorset-red-warrior .shipfeatures .mod-card {
-  border: solid #e68080 1px;
+  border: solid #d1635b 1px;
 }
 .colorset-never-dead .colorset-first-tier {
   background-color: #663322;
@@ -3479,7 +3492,7 @@
   background-color: #ffffff;
 }
 #age-tracker .age-comp .full-box {
-  background-color: #eb9e0f;
+  background-color: #f1bb57;
 }
 #age-tracker .age-comp .milestone.milestone {
   height: 16px;
