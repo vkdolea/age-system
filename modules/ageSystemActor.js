@@ -567,9 +567,9 @@ export class ageSystemActor extends Actor {
         };
     }
 
-    handleConditions(condId) {
+    handleConditions(condId, isChecked = null) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;
-        const isChecked = this.data.data.conditions[condId];
+        if (isChecked === null) isChecked = !this.data.data.conditions[condId];
         const condEffects = this.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === condId);
         // Condition not checked, and no related Effect is on - do nothing
         if (!isChecked && condEffects.length < 1) return;
