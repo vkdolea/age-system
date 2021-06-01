@@ -41,10 +41,10 @@ You can drag and drop Characters to Veihcles and Spaceships, so these passengers
 6. *Drag and drop* a owned Weapon or owned Power to macrobar to create a macro.
 
 ## Modifiers
-A few items have a "Modificators" section. Modificatores will only apply when the item is equiped/activated (i.e., **shield icon** in character sheet without opacity).
+A few items have a "Modifiers" section. Modifiers will only apply when the item is equiped/activated (i.e., **shield icon** in character sheet without opacity).
 The checkbox must be checked to have the mod active in the item.
 Bonuses for maneuvers are on top of the normal bonuses granted by the maneuver.
-Here the description of each one of the Modificators:
+Here the description of each one of the Modifiers:
 1. **This Item Damage:** adds damage when using damage roll for tha particular item (useful only for Weapon and Power & Arcana).
 2. **All Damage:** adds the damage to all types of damage rolls.
 3. **This Item Activation:** add a bonus to all use rolls for that item (using the dice icon to roll).

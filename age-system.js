@@ -146,16 +146,6 @@ Hooks.once("init", async function() {
         return `${mask} (${game.i18n.localize("age-system.custom")})`;
     })
 
-    // Handlebar to identify if there is any Condition ongoing
-    Handlebars.registerHelper('conditionOn', function(conditionKey, effects) {
-        let checked = "";
-        for (let e = 0; e < effects.length; e++) {
-            const flags = effects[e].flags["age-system"];
-            if (flags?.type === 'conditons' && (flags?.name === conditionKey)) checked = "checked";
-        };
-        return checked;
-    })
-
     // Handlebar helper to compare 2 data
     Handlebars.registerHelper("when",function(operand_1, operator, operand_2, options) {
         let operators = {

@@ -276,7 +276,7 @@
             "unconscious": "Inconsciente",
             "unconsciousDesc": "O personagem não está ciente de seus arredores ou da passagem do tempo. Ele está Caído e Indefeso, incapaz de realizar ações",
             "dying": "Morrendo",
-            "dyingDesc": "O personagem perde 1 ponto de Constituição a cada rodada no início do turno do personagem. Quando o valor de Constituição chegar a –3, o personagem morre. Os primeiros socorros bem-sucedidos aplicados a um personagem Morrendo estabilizam sua condição, o deixando <strong>Indefeso, Inconsciente e Machucado</strong>. Ele deve se recuperar dessas condições normalmente"
+            "dyingDesc": "O personagem perde 1 ponto de Constituição a cada rodada no início do turno do personagem. Quando o valor de Constituição chegar a –3, o personagem morre. Os primeiros socorros bem-sucedidos aplicados a um personagem Morrendo estabilizam sua condição, o deixando Indefeso, Inconsciente e Machucado. Ele deve se recuperar dessas condições normalmente"
         },
 
         "power": "Poderes",
@@ -294,7 +294,7 @@
             "flavorTextRoll": "rola",
             "stunts": "Façanhas",
             "stunt": "Façanha",
-            "stuntPoints": "Pontos de Façanhas",
+            "stuntPoints": "Pontos de Façanha",
             "stuntPointsIndex": "PF",
             "attack": "Atacar",
             "equip": "Equipar",
@@ -366,7 +366,7 @@
         "background": "Antecedente",
         "socialClass": "Classe Social",
         "profession": "Profissão",
-        "age": "Ano",
+        "age": "Idade",
         "height": "Altura",
         "weight": "Peso",
 
@@ -402,15 +402,15 @@
         "relationshipIntensity": "Intensidade",
 
         "drive": {
-            "drive": "Objetivo",
-            "downfall": "Perdição",
+            "drive": "Motivação",
+            "downfall": "Falha",
             "quality": "Qualidade"
         },
         "noAction": "—",
         "minorAction": "Ação Menor",
         "majorAction": "Ação Maior",
         "d6minor": "1d6 Menor",
-        "oneMinute": "1 Muinuto",
+        "oneMinute": "1 Minuto",
         "fiveMinutes": "5 Minutos",
         "tenMinutes": "10 Minutos",
         "twentyMinutes": "20 Minutos",
@@ -430,7 +430,7 @@
         "level": "Nível",
         "xp": "EXP",
         "currentLevel": "EXP Atual",
-        "nextLevel": "EXP Próximo Nìvel",
+        "nextLevel": "EXP Próx. Nvl.",
         "advPoints": "Pto de Avanço",
         "mod": "Mod",
         "base": "Base",
