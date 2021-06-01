@@ -1,7 +1,7 @@
 # Unofficial AGE System for FVTT
 Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
 
-<img src="https://i.imgur.com/qVixpmT.png"/>
+<img src="https://imgur.com/5k8i0Fy.png"/>
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/vkdolea)
 
@@ -95,6 +95,12 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.1 [2021-06-01]
+#### Fixed 
+- Updated French localization.
+- Corrected a few typos on Brazilian Portuguese localiztion.
+- Addressed styling issue causing a text fileds to have the same color as background
+
 ### 0.7.0 [2021-05-30]
 #### Added
 - New fancy layout for Vehicle sheet.
