@@ -76,26 +76,6 @@ export class ageSystemActor extends Actor {
         // Apply Item Modifiers to Actor before applying Active Effects!
         this.applyItemModifiers();
 
-        // Check for Conditions and related Active Effects
-        // const conditions = this.data.data.conditions;
-        // const effects = this.effects;
-        // const docs = [];
-        // const deletion = [];
-        // for (const cd in conditions) {
-        //     if (Object.hasOwnProperty.call(conditions, cd)) {
-        //         const relatedEffect = this.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === cd);
-        //         const isChecked = conditions[cd];
-        //         // If there are effects but Condition is unchecked, check it!
-        //         if (relatedEffect.length > 0 && !isChecked) this.data.data.conditons[c] = true
-        //         // If there is no effect but Condition is checked, create effect!
-        //         if (relatedEffect.length < 1 && isChecked) {
-        //             const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === cd)[0];
-        //             newEffect["flags.core.statusId"] = newEffect.id;
-        //             this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
-        //         }
-        //     }
-        // }
-
         this.applyActiveEffects();
     }
 
@@ -585,5 +565,30 @@ export class ageSystemActor extends Actor {
             const focus = this.items.get(focusId);
             return {focusName: namedFocus, focusItem: focus, id: focusId, value: focus.data.data.finalValue}
         };
+    }
+
+    handleConditions(condId) {
+        if (["spaceship", "vehicle"].includes(this.type)) return null;
+        const isChecked = this.data.data.conditions[condId];
+        const condEffects = this.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === condId);
+        // Condition not checked, and no related Effect is on - do nothing
+        if (!isChecked && condEffects.length < 1) return;
+        // Condition is checked and there is related Effect - do nothing
+        if (isChecked && condEffects.length === 1) return;
+        // Condition is not checked and there 1+ related Effects - delete everyting
+        if (!isChecked && condEffects.length > 0) {
+            for (let c = 0; c < condEffects.length; c++) {
+                const effect = condEffects[c];
+                const id = effect.data._id;
+                this.effects.get(id).delete();
+            }
+            return
+        }
+        // Condition is checked and there is no related Effect - create new Active Effect
+        if (isChecked && condEffects.length < 1) {
+            const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
+            newEffect["flags.core.statusId"] = newEffect.id;
+            return this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+        }
     }
 };

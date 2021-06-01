@@ -164,29 +164,8 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     }
 
     _onChangeCondition(event) {
-        const isChecked = event.currentTarget.checked;
         const condId = event.currentTarget.closest(".feature-controls").dataset.conditionId;
-        // Array with Conditions
-        const condEffects = this.actor.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === condId);
-        // Condition not checked, and no related Effect is on - do nothing
-        if (!isChecked && condEffects.length < 1) return;
-        // Condition is checked and there is related Effect - do nothing
-        if (isChecked && condEffects.length === 1) return;
-        // Condition is not checked and there 1+ related Effects - delete everyting
-        if (!isChecked && condEffects.length > 0) {
-            for (let c = 0; c < condEffects.length; c++) {
-                const effect = condEffects[c];
-                const id = effect.data._id;
-                this.actor.effects.get(id).delete();
-            }
-            return
-        }
-        // Condition is checked and there is no related Effect - create new Active Effect
-        if (isChecked && condEffects.length < 1) {
-            const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
-            newEffect["flags.core.statusId"] = newEffect.id;
-            return this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
-        }
+        return this.actor.handleConditions(condId);
     }
 
     _onTooltipHover(event){
