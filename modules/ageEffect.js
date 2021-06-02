@@ -24,7 +24,7 @@ export class ageEffect extends ActiveEffect {
 
         const isCondition = effectData.flags?.["age-system"]?.type === "conditions" ? true : false;
         if(isCondition) {
-            const condId = this.data.flags.core.statusId;
+            const condId = effectData.flags.core.statusId;
             const actor = this.parent;
             const isChecked = actor.data.data.conditions[condId];
             if (!isChecked) {
