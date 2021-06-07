@@ -75,7 +75,8 @@ export async function ageRollCheck({
     // Check if item rolled is Focus and prepare its data
     let focusId = null
     if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.data?.data.useFocus) {
-        const focusObj = itemRolled.actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled)
+        const focusObj = actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled);
+        // const focusObj = itemRolled.actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled);
         rollFormula += " + @focus";
         rollData.focusName = focusObj.focusName;
         rollData.focus = focusObj.value;
@@ -135,7 +136,6 @@ export async function ageRollCheck({
         rollData.hasHealing = itemRolled.data.data.hasHealing;
         rollData.hasFatigue = itemRolled.data.data.hasFatigue;
         rollData.hasTest = itemRolled.data.data.hasTest;
-        // rollData.itemEntity = itemRolled;
         if (itemRolled.data.data.itemMods) {
             if (itemRolled.data.data.itemMods.itemActivation.isActive) {
                 rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
@@ -637,11 +637,12 @@ export async function itemDamage({
     dmgExtraDice = null,
     dmgGeneralMod = null,
     resistedDmg = false,
-    actorDmgMod = 0}={}) {
+    actorDmgMod = 0,
+    openOptions = false}={}) {
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
-    if (!event.ctrlKey && event.altKey) {
+    if ((!event.ctrlKey && event.altKey) || openOptions) {
         damageOptions = await getDamageRollOptions(addFocus, stuntDie);
         if (damageOptions.cancelled) return;
         dmgExtraDice = damageOptions.setDmgExtraDice;
@@ -700,13 +701,10 @@ export async function itemDamage({
         }
 
         // Check if Focus adds to damage and adds it
-        if (addFocus === true) {
-            // const focusData = getFocus(item);
+        if (addFocus === true && item.data.data.useFocus) {
             const actor = item.actor;
             const focusData = actor.checkFocus(item.data.data.useFocus);
             damageFormula = `${damageFormula} + @focus`;
-            // rollData.focus = focusData[1];
-            // messageData.flavor += ` | ${damageToString(focusData[1])} ${focusData[0]}`;
             rollData.focus = focusData.value;
             messageData.flavor += ` | ${damageToString(focusData.value)} ${focusData.focusName}`;
         }

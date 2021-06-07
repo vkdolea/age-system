@@ -70,10 +70,22 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
     activateListeners(html) {
         if (this.isEditable) {
-            // html.find(".item-edit").click(this._onItemEdit.bind(this));
-            // html.find(".item-delete").click(this._onItemDelete.bind(this));
-
-            // Enable field to be focused when selecting it
+            html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
+            html.find(".change-loss").click(this._onChangeLoss.bind(this));
+            html.find(".toggle").click(this._onEquipChange.bind(this));
+            html.find(".remove").click(this._onRemoveFeature.bind(this));
+            html.find(".edit").click(this._onEditFeature.bind(this));
+            html.find(".roll-hull").click(this._onRollDice.bind(this));
+            html.find(".roll-damage.roll").click(this._onRollDice.bind(this));
+            
+            const freeText = html.find("textarea.free-text");
+            for (let t = 0; t < freeText.length; t++) {
+                const area = freeText[t];
+                const newValue = area.value.replace(/^\s+|\s+$/gm,'');
+                this.actor.update({[area.name]: newValue}).then(a => {
+                    area.value = newValue;
+                })
+            }
             const inputs = html.find("input");
             inputs.focus(ev => ev.currentTarget.select());
         };
@@ -122,14 +134,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         
         // Actions by sheet owner only
         if (this.actor.isOwner) {
-            html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
-            html.find(".change-loss").click(this._onChangeLoss.bind(this));
-            html.find(".toggle").click(this._onEquipChange.bind(this));
-            html.find(".remove").click(this._onRemoveFeature.bind(this));
-            html.find(".edit").click(this._onEditFeature.bind(this));
-            html.find(".roll-hull").click(this._onRollDice.bind(this));
-            html.find(".roll-damage.roll").click(this._onRollDice.bind(this));
         };
 
         super.activateListeners(html);
@@ -166,7 +171,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
     _onRemoveFeature(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-        return this.actor.deleteEmbeddedDocuments("Item", itemId);
+        return this.actor.items.get(itemId).delete();
     }
 
     _onEditFeature(event) {

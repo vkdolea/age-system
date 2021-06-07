@@ -113,6 +113,14 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     activateListeners(html) {
         html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));
         if (this.isEditable) {
+            const freeText = html.find("textarea.free-text");
+            for (let t = 0; t < freeText.length; t++) {
+                const area = freeText[t];
+                const newValue = area.value.replace(/^\s+|\s+$/gm,'');
+                this.actor.update({[area.name]: newValue}).then(a => {
+                    area.value = newValue;
+                })
+            }
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));

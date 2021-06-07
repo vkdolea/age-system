@@ -16,7 +16,7 @@ export function chatDamageRoll(event) {
     // owner = game.actors.tokens[actorId];
     // if (!owner) owner = game.actors.get(actorId);
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
-    const itemSource = owner.getOwnedItem(card.dataset.itemId);
+    const itemSource = owner.items.get(card.dataset.itemId);
 
     let stuntDie = null;
     let addFocus = false;
@@ -36,7 +36,8 @@ export function chatDamageRoll(event) {
         stuntDie: stuntDie,
         addFocus: addFocus,
         atkDmgTradeOff: card.dataset.atkdmgTrade,
-        resistedDmg: resistedDamage
+        resistedDmg: resistedDamage,
+        openOptions: true
     };
     itemSource.rollDamage(damageData);
 };

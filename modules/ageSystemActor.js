@@ -10,13 +10,15 @@ export class ageSystemActor extends Actor {
         // Sorting Items for final data preparation
         const items = this.items;
         // First prepare Focus
-        items.forEach(i => {
-            if (i.data.type === "focus") i.prepareData()
-        })
-        // Then prepare other item types which require further prep
-        items.forEach(i => {
-            if (["weapon", "power"].includes(i.data.type)) i.prepareData()
-        })
+        if (this.data.type === 'char') {
+            items.forEach(i => {
+                if (i.data.type === "focus") i.prepareData()
+            })
+            // Then prepare other item types which require further prep
+            items.forEach(i => {
+                if (["weapon", "power"].includes(i.data.type)) i.prepareData()
+            })
+        }
     }
 
     prepareBaseData() {
@@ -148,7 +150,7 @@ export class ageSystemActor extends Actor {
 
         switch (type) {
             case "char": return this._charItemModifiers();
-            case "spaceship": return;
+            case "spaceship": return this._spaceshipItemModifiers();
             case "vehicle": return;
         }
     }
@@ -286,7 +288,28 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareDerivedDataChar() {
+    }
 
+    _spaceshipItemModifiers() {
+        const actorData = this.data;
+        const data = actorData.data;
+
+        // Items With Mod
+        const ownedItems = actorData.items.filter(i => i.data.type !== "special" && i.data.type !== "rollable" && i.data.type !== "weapon");
+        let bonuses = {};
+        ownedItems.map(f => {
+            const item = f.data.data;
+            const dataType = item.type;
+            if (!bonuses[dataType]) {
+                bonuses = {
+                    ...bonuses,
+                    [dataType]: 0
+                };
+            };
+            bonuses[dataType] += item[dataType];
+        })
+
+        data.itemMods = bonuses;
     }
 
     _prepareBaseDataVehicle() {
@@ -401,27 +424,10 @@ export class ageSystemActor extends Actor {
         const actorData = this.data;
         const data = actorData.data;
 
-        // Items With Mod
-        const ownedItems = actorData.items.filter(i => i.data.type !== "special" && i.data.type !== "rollable" && i.data.type !== "weapon");
-        let bonuses = {};
-        for (const feature in ownedItems) {
-            if (Object.hasOwnProperty.call(ownedItems, feature)) {
-                const item = ownedItems[feature].data;
-                const dataType = item.type;
-                if (!bonuses[dataType]) {
-                    bonuses = {
-                        ...bonuses,
-                        [dataType]: 0
-                    };
-                };
-                bonuses[dataType] += item[dataType];                
-            }
-        }
+        data.hull.baseMod = this._addSizeMod(data.sizeNumeric, data.itemMods.hullMod);
+        data.hull.total = this._addHullPlatingLoss(data.hull.baseMod, data.itemMods.hullPlating);
 
-        data.hull.baseMod = this._addSizeMod(data.sizeNumeric, bonuses.hullMod);
-        data.hull.total = this._addHullPlatingLoss(data.hull.baseMod, bonuses.hullPlating);
-
-        data.systems.sensors.total = this._addSensorBonus(data.systems.sensors.base, data.systems.sensors.mod, bonuses.sensorMod);
+        data.systems.sensors.total = this._addSensorBonus(data.systems.sensors.base, data.systems.sensors.mod, data.itemMods.sensorMod);
 
         // data.juiceMod
 
