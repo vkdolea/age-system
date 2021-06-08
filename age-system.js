@@ -13,6 +13,7 @@ import { rollOwnedItem } from "./modules/macros.js";
 import { AgeRoller } from "./modules/age-roller.js";
 import { AgeTracker } from "./modules/age-tracker.js";
 
+import * as Dice from "./modules/dice.js";
 import * as Settings from "./modules/settings.js";
 import * as AgeChat from "./modules/age-chat.js";
 import * as Setup from "./modules/setup.js";
@@ -48,7 +49,7 @@ Hooks.once("init", async function() {
  /_/  |_\\____/_____/   /____/\\__, /____/\\__/\\___/_/ /_/ /_/ 
                             /____/                          `;
 
-    console.log("age-system | Entering a new AGE...");
+    console.log("AGE System | Entering a new AGE...");
     console.log(ageSystemText);
 
     // Create a namespace within the game global
@@ -62,6 +63,7 @@ Hooks.once("init", async function() {
             AgeRoller,
             AgeTracker
         },
+        dice: Dice,
         migrations: migrations,
         rollOwnedItem,
         entities: {

@@ -318,8 +318,9 @@ export async function ageRollCheck({
         speaker: ChatMessage.getSpeaker(),
         content: await renderTemplate(chatTemplate, rollData),
         roll: ageRoll,
-        blind: rollMode === "roll" ? false : true,
-        whisper: isGMroll(event)
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        blind: event.shiftKey,
+        whisper: event.shiftKey ? ChatMessage.getWhisperRecipients("GM").map(u => u.id) : []
     };
 
     // Compatibility with Dice So Nice
@@ -415,14 +416,12 @@ export function getFocus(item) {
 
 // Capture GM ID to whisper
 export function isGMroll(event) {
-    if (!event.shiftKey) {return []};
-    const idGM = [];
-    for (let u = 0; u < game.users.length; u++) {
-        const user = game.users[u];
-        if (user.isGM) idGM.push(user._id)        
-    };
+    let idGM = [];
+    if (!event.shiftKey) return idGM;
+    game.users.map(u => {
+        if (u.isGM) idGM.push(u.id)
+    })
     return idGM;
-    // return game.users.filter(u => u.isGM);
 };
 
 // Code to decide if roll is PUBLIC or BLIND TO GM

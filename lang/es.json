@@ -246,7 +246,7 @@
         "goals": "Objetivos",
         "language": "Idiomas",
         "secretNote": "Notas Ocultas",
-        "gmNotes": "Notas Ocultas (Mestre)",
+        "gmNotes": "Notas Ocultas (Master)",
         "charEffects": "Efectos",
         "custom": "Customizar",
         "conditionsName": "Estados",
@@ -438,7 +438,7 @@
         "defense": "Defensa",
         "targetNumber": "NO",
         "total": "Total",
-		"value": "Precio",
+		"value": "Valor",
 
         "itemMod": "Modificadores",
         "itemModSelect": "Escoge Tipo Modificador",
