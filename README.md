@@ -95,6 +95,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.3 [2021-06-08]
+#### Fixed
+- Bug causing Dice so Nice animation to be played twice.
+
 ### 0.7.2 [2021-06-07]
 #### Added
 - By default, clicking on "Roll Damage" button on chat card will bring the damage options menu.

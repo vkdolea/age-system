@@ -310,8 +310,6 @@ export async function ageRollCheck({
         focusId,
         rollType,
     };
-    // cardData = mergeObject(cardData, rollData);
-    // cardData.rollInput.rollTN = rollTN;
 
     let chatData = {
         user: game.user.id,
@@ -325,11 +323,11 @@ export async function ageRollCheck({
 
     // Compatibility with Dice So Nice
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {
-        return diceSoNiceRoller(ageRoll, chatData);
+        const stuntDieColorset = game.settings.get("age-system", "stuntSoNice");
+        chatData.roll.terms[2].options.colorset = stuntDieColorset ? stuntDieColorset : "bronze";
     };
 
-    // TODO when blind roll, set message to GM and select another template to all other members
-    chatData.sound = CONFIG.sounds.dice;
+    if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;
     return ChatMessage.create(chatData);
 };
 
@@ -397,23 +395,6 @@ function _processAgeRollOptions(form) {
     return rollOptions
 }
 
-export function getFocus(item) {
-    if (item === null) {return false}
-    if (item.type === "focus") return [item.name, item.data.data.initialValue, item.data.id];
-    if (typeof(item) === "string") return [item, 0, null];
-    if (item.data.data.useFocus === "") return false;
-    const ownerFocusId = item.data.data.useFocusActorId;
-    if (ownerFocusId) {
-        const inUseFocus = item.actor.getOwnedItem(ownerFocusId);
-        if (inUseFocus.name == "") return false;
-        return [inUseFocus.name, inUseFocus.data.data.initialValue, ownerFocusId];
-    } else {
-        return [item.data.data.useFocus, 0, null]
-    }
-    // Returns: [focus name as string, focus value, focus id]
-    
-}
-
 // Capture GM ID to whisper
 export function isGMroll(event) {
     let idGM = [];
@@ -431,13 +412,6 @@ export function setBlind(event) {
     } else {
         return "roll";
     };
-};
-
-export function diceSoNiceRoller(roll, chatData) {
-    // Here is selected the colorset of the 3D dice
-    const stuntDieColorset = game.settings.get("age-system", "stuntSoNice");
-    roll.dice[1].options.colorset = stuntDieColorset ? stuntDieColorset : "bronze";
-    game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind).then(displayed => ChatMessage.create(chatData));
 };
 
 // Code to identify Doubles and pass on dice summary     
