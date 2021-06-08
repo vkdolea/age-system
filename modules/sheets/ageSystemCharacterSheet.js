@@ -113,6 +113,14 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     activateListeners(html) {
         html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));
         if (this.isEditable) {
+            const freeText = html.find("textarea.free-text");
+            for (let t = 0; t < freeText.length; t++) {
+                const area = freeText[t];
+                const newValue = area.value.replace(/^\s+|\s+$/gm,'');
+                this.actor.update({[area.name]: newValue}).then(a => {
+                    area.value = newValue;
+                })
+            }
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
@@ -166,27 +174,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     _onChangeCondition(event) {
         const isChecked = event.currentTarget.checked;
         const condId = event.currentTarget.closest(".feature-controls").dataset.conditionId;
-        // Array with Conditions
-        const condEffects = this.actor.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === condId);
-        // Condition not checked, and no related Effect is on - do nothing
-        if (!isChecked && condEffects.length < 1) return;
-        // Condition is checked and there is related Effect - do nothing
-        if (isChecked && condEffects.length === 1) return;
-        // Condition is not checked and there 1+ related Effects - delete everyting
-        if (!isChecked && condEffects.length > 0) {
-            for (let c = 0; c < condEffects.length; c++) {
-                const effect = condEffects[c];
-                const id = effect.data._id;
-                this.actor.effects.get(id).delete();
-            }
-            return
-        }
-        // Condition is checked and there is no related Effect - create new Active Effect
-        if (isChecked && condEffects.length < 1) {
-            const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
-            newEffect["flags.core.statusId"] = newEffect.id;
-            return this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
-        }
+        return this.actor.handleConditions(condId, isChecked);
     }
 
     _onTooltipHover(event){

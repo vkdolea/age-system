@@ -79,9 +79,14 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
     activateListeners(html) {
         if (this.isEditable) {
-            // html.find(".item-edit").click(this._onItemEdit.bind(this));
-            // html.find(".item-delete").click(this._onItemDelete.bind(this));
-
+            const freeText = html.find("textarea.free-text");
+            for (let t = 0; t < freeText.length; t++) {
+                const area = freeText[t];
+                const newValue = area.value.replace(/^\s+|\s+$/gm,'');
+                this.actor.update({[area.name]: newValue}).then(a => {
+                    area.value = newValue;
+                })
+            }
             // Enable field to be focused when selecting it
             const inputs = html.find("input");
             inputs.focus(ev => ev.currentTarget.select());

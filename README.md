@@ -95,11 +95,24 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.2 [2021-06-07]
+#### Added
+- By default, clicking on "Roll Damage" button on chat card will bring the damage options menu.
+
+#### Fixed
+- Issued preventing Spaceship Features deletion.
+- Text fields on characters' Persona tab was adding extra white spaces when selecting another field.
+- Text fields on GM Secret Notes on Spaceship and Vehicle sheets were unreadable when certain color schemes were used.
+- Targeted attacks on token are working again.
+- Dice rolls shall be consistent with method selected on chat command (Public Roll, Private GM Roll, Blind GM Roll, Self Roll).
+- Changing multiple System Settings at once no longer cause some not being updated.
+- Corrected Spanish and Portuguese (Brazilian) localization.
+
 ### 0.7.1 [2021-06-01]
 #### Fixed 
 - Updated French localization.
 - Corrected a few typos on Brazilian Portuguese localiztion.
-- Addressed styling issue causing a text fileds to have the same color as background
+- Addressed styling issue causing a text fileds to have the same color as background.
 
 ### 0.7.0 [2021-05-30]
 #### Added

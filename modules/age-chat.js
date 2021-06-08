@@ -16,7 +16,7 @@ export function chatDamageRoll(event) {
     // owner = game.actors.tokens[actorId];
     // if (!owner) owner = game.actors.get(actorId);
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
-    const itemSource = owner.getOwnedItem(card.dataset.itemId);
+    const itemSource = owner.items.get(card.dataset.itemId);
 
     let stuntDie = null;
     let addFocus = false;
@@ -36,7 +36,8 @@ export function chatDamageRoll(event) {
         stuntDie: stuntDie,
         addFocus: addFocus,
         atkDmgTradeOff: card.dataset.atkdmgTrade,
-        resistedDmg: resistedDamage
+        resistedDmg: resistedDamage,
+        openOptions: true
     };
     itemSource.rollDamage(damageData);
 };
@@ -61,19 +62,34 @@ export function chatFatigueRoll(event) {
 export function selectBlindAgeRoll(chatCard, html, data) {
     const isBlind = chatCard.data.blind;
     const isWhisper = data.isWhisper;
+    const whisperTo = data.message.whisper;
+    const author = data.author.id;
     const isGM = game.user.isGM;
+    const userId = game.user.id;
     let ageCard = html.find(".base-age-roll");
+    
     if (ageCard.length > 0) {
-        if (isGM) {
+        if ((whisperTo.includes(userId) || whisperTo.length < 1 || author === userId) && !isBlind) {
             html.find(".blind-roll-card").css("display", "none");
         } else {
-            if (isBlind || isWhisper) {
-                html.find(".regular-roll-card").css("display", "none");
-                const hideField = game.user.id === chatCard.data.user ? ".other-user-roll" : ".user-roll";
-                html.find(`.blind-roll-card ${hideField}`).css("display", "none");
-            } else {
+            if (isBlind && whisperTo.includes(userId)) {
                 html.find(".blind-roll-card").css("display", "none");
-            };
-        };
+            } else {
+                html.find(".regular-roll-card").css("display", "none");
+                const hideField = userId === author ? ".other-user-roll" : ".user-roll";
+                html.find(`.blind-roll-card ${hideField}`).css("display", "none");
+            }
+        }
+        // if (isGM) {
+        //     html.find(".blind-roll-card").css("display", "none");
+        // } else {
+        //     if (isBlind || isWhisper) {
+        //         html.find(".regular-roll-card").css("display", "none");
+        //         const hideField = game.user.id === chatCard.data.user ? ".other-user-roll" : ".user-roll";
+        //         html.find(`.blind-roll-card ${hideField}`).css("display", "none");
+        //     } else {
+        //         html.find(".blind-roll-card").css("display", "none");
+        //     };
+        // };
     };
 };

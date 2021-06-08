@@ -3513,6 +3513,10 @@
   border: none;
   font-variant: small-caps;
 }
+.age-system textarea {
+  white-space: normal;
+  color: inherit;
+}
 /*---------Background---------------------*/
 .window-app.sheet.char .window-content,
 .window-app.sheet.vehicle .window-content,

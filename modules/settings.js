@@ -1,5 +1,5 @@
+const debouncedReload = debounce(() => window.location.reload(), 100)
 export const registerSystemSettings = function() {
-  // Setting to configure Stunt Die colorset is totally integrated on age-system.js, 
   /**
    * Track the system version upon which point a migration was last applied
    */
@@ -15,14 +15,13 @@ export const registerSystemSettings = function() {
    * Register if world will use Conviction
    */
   game.settings.register("age-system", "useConviction", {
-      name: "SETTINGS.useConviction",
-      hint: "SETTINGS.useConvictionHint",
-      scope: "world",
-      config: true,
-      default: true,
-      type: Boolean,
-      onChange:()=>{
-        window.location.reload(!1)}
+    name: "SETTINGS.useConviction",
+    hint: "SETTINGS.useConvictionHint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean,
+    onChange: debouncedReload
   });
 
   /**
@@ -35,8 +34,7 @@ export const registerSystemSettings = function() {
     config: true,
     default: true,
     type: Boolean,
-    onChange:()=>{
-      window.location.reload(!1)}
+    onChange: debouncedReload
   }); 
 
   /**
@@ -49,7 +47,7 @@ export const registerSystemSettings = function() {
     config: true,
     default: true,
     type: Boolean,
-    onChange:()=>{window.location.reload(!1)}
+    onChange: debouncedReload
   });
 
   /**
@@ -62,8 +60,7 @@ export const registerSystemSettings = function() {
     config: true,
     default: true,
     type: Boolean,
-    onChange:()=>{
-      window.location.reload(!1)}
+    onChange: debouncedReload
   });
 
   /**
@@ -76,8 +73,7 @@ export const registerSystemSettings = function() {
       config: true,
       default: true,
       type: Boolean,
-      onChange:()=>{
-        window.location.reload(!1)}
+      onChange: debouncedReload
   });
 
   /**
@@ -90,7 +86,7 @@ export const registerSystemSettings = function() {
     config: true,
     default: false,
     type: Boolean,
-    onChange:()=>{window.location.reload(!1)}
+    onChange: debouncedReload
   });
 
   /**
@@ -104,10 +100,10 @@ export const registerSystemSettings = function() {
     default: "pulp",
     type: String,
     choices: {
-        "none": "SETTINGS.gameModeNone",
-        "gritty": "SETTINGS.gameModeGritty",
-        "pulp": "SETTINGS.gameModePulp",
-        "cinematic": "SETTINGS.gameModeCinematic",
+      "none": "SETTINGS.gameModeNone",
+      "gritty": "SETTINGS.gameModeGritty",
+      "pulp": "SETTINGS.gameModePulp",
+      "cinematic": "SETTINGS.gameModeCinematic",
     },  
   });  
 
@@ -122,8 +118,8 @@ export const registerSystemSettings = function() {
     default: "health",
     type: String,
     choices: {
-        "health": "SETTINGS.healthModehealth",
-        "fortune": "SETTINGS.healthModefortune",
+      "health": "SETTINGS.healthModehealth",
+      "fortune": "SETTINGS.healthModefortune",
     },
     onChange: () => {
       [...game.actors.contents, ...Object.values(game.actors.tokens)]
@@ -153,7 +149,7 @@ export const registerSystemSettings = function() {
       "currency": "SETTINGS.wealthTypeCurrency",
       "coins": "SETTINGS.wealthTypeCoins",
     },
-    onChange:()=>{window.location.reload(!1)}
+    onChange: debouncedReload
   });
 
   /**
@@ -170,17 +166,7 @@ export const registerSystemSettings = function() {
       "main": "SETTINGS.abilitySelectionMain",
       "dage": "SETTINGS.abilitySelectionDage",
     },
-    onChange: () => {
-      CONFIG.ageSystem.abilities = CONFIG.ageSystem.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
-      [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
-        // .filter((o) => {
-        //   return o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship";
-        // })
-        .forEach((o) => {
-          o.update({});
-          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
-        });
-    },
+    onChange: debouncedReload
   });
 
   /**
@@ -209,9 +195,6 @@ export const registerSystemSettings = function() {
       const newColor = game.settings.get("age-system", "colorScheme");
       game.user.setFlag("age-system", "colorScheme", newColor);
       [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
-      // .filter((o) => {
-      //   return true /*(o.data.type === "char" || o.data.type === "vehicle" || o.data.type === "spaceship")*/;
-      // })
       .forEach((o) => {
         o.update({});
         if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
@@ -234,7 +217,7 @@ export const registerSystemSettings = function() {
       "profession": "SETTINGS.occprofession",
       "class": "SETTINGS.occclass",
     },
-    onChange:()=>{window.location.reload(!1)}
+    onChange: debouncedReload
   });
 
   /**
@@ -253,7 +236,7 @@ export const registerSystemSettings = function() {
       "species": "SETTINGS.ancestryOptspecies",
       "race": "SETTINGS.ancestryOptrace",
     },
-    onChange:()=>{window.location.reload(!1)}
+    onChange: debouncedReload
   });
 
   /**
@@ -271,7 +254,7 @@ export const registerSystemSettings = function() {
       "complication": "SETTINGS.compcomplication",
       "churn": "SETTINGS.compchurn"
     },
-    onChange: () => {game.ageSystem.ageTracker.refresh()}
+    onChange: () => game.ageSystem.ageTracker.refresh()
   });
 
   /**
@@ -297,7 +280,7 @@ export const registerSystemSettings = function() {
     config: true,
     default: false,
     type: Boolean,
-    onChange: () => {game.ageSystem.ageTracker.refresh()}
+    onChange: () => game.ageSystem.ageTracker.refresh()
   });
 
   /**

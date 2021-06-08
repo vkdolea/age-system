@@ -118,12 +118,13 @@ export class ageSystemItem extends Item {
         if (!this.data.data.hasDamage && !this.data.data.hasHealing) {return false};
 
         const damageData = {
-            event: event,
+            // event: event,
+            // atkDmgTradeOff: atkDmgTradeOff,
+            // stuntDie: stuntDie,
+            // addFocus: addFocus,
+            // resistedDmg: resistedDmg,
+            ...arguments[0],
             item: this,
-            stuntDie: stuntDie,
-            addFocus: addFocus,
-            atkDmgTradeOff: atkDmgTradeOff,
-            resistedDmg: resistedDmg,
             actorDmgMod: this.actor ? this.actor.data.data.dmgMod : 0
         };
         return Dice.itemDamage(damageData);
@@ -173,7 +174,7 @@ export class ageSystemItem extends Item {
                         return;
                     } else {
                         const targetId = targets.ids[0];
-                        const targetToken = canvas.tokens.placeables.find(t => t.data.id === targetId);
+                        const targetToken = canvas.tokens.placeables.find(t => t.data._id === targetId);
                         targetNumber = targetToken.actor.data.data.defense.total;
                     }
                     break;
