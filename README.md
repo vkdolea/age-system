@@ -95,6 +95,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.4 [2021-06-08]
+#### Fixed
+- Chat message hardcoded when other players roll blind.
+
 ### 0.7.3 [2021-06-08]
 #### Fixed
 - Bug causing Dice so Nice animation to be played twice.
