@@ -304,11 +304,10 @@ export async function ageRollCheck({
         isSuccess,
         roll: ageRoll,
         ageRollSummary: rollSummary,
-        // owner: actor,
-        // guardUpActive: guardUp.active,
         rollTN,
         focusId,
         rollType,
+        user: game.user
     };
 
     let chatData = {
@@ -316,19 +315,21 @@ export async function ageRollCheck({
         speaker: ChatMessage.getSpeaker(),
         content: await renderTemplate(chatTemplate, rollData),
         roll: ageRoll,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-        blind: event.shiftKey,
-        whisper: event.shiftKey ? ChatMessage.getWhisperRecipients("GM").map(u => u.id) : []
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL
     };
 
-    // Compatibility with Dice So Nice
+    // Configuration of Stunt Die if using Dice so Nice
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {
         const stuntDieColorset = game.settings.get("age-system", "stuntSoNice");
         chatData.roll.terms[2].options.colorset = stuntDieColorset ? stuntDieColorset : "bronze";
     };
 
     if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;
-    return ChatMessage.create(chatData);
+    if (rollMode === "blindroll") {
+        ChatMessage.create(ChatMessage.applyRollMode(chatData, rollMode));
+    } else {
+        ChatMessage.create(chatData);
+    }
 };
 
 async function getAgeRollOptions(itemRolled, data = {}) {

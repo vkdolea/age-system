@@ -218,7 +218,7 @@
             "rollGeneral": "{actor} rola {item}",
             "rollAttack": "{actor} ataca com {item}",
             "rollPower": "{actor} utiliza {item}",
-            "looseRoll": "{user} rola alguns dados",
+            "looseRoll": "{user} rolou alguns dados",
             
             "rollFullDamage": "Dano Total",
             "rollFullHealing": "Cura Total",
@@ -227,8 +227,8 @@
             "rollResistedDamage": "Dano Resistido",
             "rollResistedHealing": "Cura Resistida",
             "addFocusSD": "Incluir Ambos",
-            "addFocus": "Inclui Foco",
-            "addStuntDie": "Inclui Façanha",
+            "addFocus": "Incluir Foco",
+            "addStuntDie": "Incluir Façanha",
 
             "maneuversVehicle": "{name} manobra {vehicle}",
             "commandsVehicle": "{name} comanda {vehicle}",
