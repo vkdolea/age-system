@@ -110,7 +110,7 @@ export const registerSystemSettings = function() {
   /**
    * Register if world will use Game Mode and which one
    */
-   game.settings.register("age-system", "healthMode", {
+  game.settings.register("age-system", "healthMode", {
     name: "SETTINGS.healthMode",
     hint: "SETTINGS.healthModeHint",
     scope: "world",
@@ -286,7 +286,7 @@ export const registerSystemSettings = function() {
   /**
    * World's Serendipity value
    */
-   game.settings.register("age-system", "serendipityValue", {
+  game.settings.register("age-system", "serendipityValue", {
     name: "SETTINGS.serendipityValue",
     // hint: "SETTINGS.serendipityValueHint",
     scope: "world",
@@ -294,8 +294,38 @@ export const registerSystemSettings = function() {
     default: {max: 18, actual: 0},
     type: Object, 
     onChange: () => {if (game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
-  }); 
+  });
 
+  // /**
+  //  * Damage Roll for Chat Option
+  //  */
+  // game.settings.register("age-system", "chatDmgRollOpt", {
+  //   name: "SETTINGS.chatDmgRollOpt",
+  //   hint: "SETTINGS.chatDmgRollOptHint",
+  //   scope: "client",
+  //   config: true,
+  //   default: "none",
+  //   type: String,
+  //   choices: {
+  //     "openOptions": "SETTINGS.chatDmgRollOptopenOptions",
+  //     "onAlt": "SETTINGS.chatDmgRollOptonAlt",
+  //     "onStunt": "SETTINGS.chatDmgRollOptonStunt"
+  //   },
+  //   onChange: () => game.user.setFlag("age-system", "chatDmgRollOpt", game.settings.get("age-system", "chatDmgRollOpt"))
+  // });
+
+  /**
+   * Let Observers roll (chat and sheet)
+   */
+   game.settings.register("age-system", "observerRoll", {
+    name: "SETTINGS.observerRoll",
+    hint: "SETTINGS.observerRollHint",
+    scope: "world",
+    config: true,
+    default: "true",
+    type: Boolean,
+    onChange: debouncedReload
+  });
 };
 
 // Adds game setting to select focus compendium after loading world's compendia!
@@ -348,10 +378,10 @@ export function allCompendia(docType) {
 
 // Creates a list of entries in the Compendium (name and _id)
 export function compendiumList(compendiumName) {
-  if ([null, undefined, false, ""].includes(compendiumName)) return;
-  let dataPack = game.packs.get(compendiumName);
   let dataList = [];
-  // let foci = dataPack.index;
+  if ([null, undefined, false, ""].includes(compendiumName)) return dataList;
+  let dataPack = game.packs.get(compendiumName);
+  if (!dataPack?.index) return dataList;
   dataPack.index.map(i => {
     if(i.type === "focus") dataList.push({
     _id: i._id,

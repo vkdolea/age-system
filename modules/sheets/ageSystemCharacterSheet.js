@@ -22,6 +22,10 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         return `systems/age-system/templates/sheets/${this.actor.data.type}-sheet.hbs`;
     }
 
+    get observerRoll () {
+        return game.settings.get("age-system", "observerRoll");
+    }
+
     /* -------------------------------------------- */
 
     /** @inheritdoc */
@@ -125,13 +129,9 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
             html.find(".item-show").click(this._onItemShow.bind(this));
-            html.find(".roll-ability").click(this._onRollAbility.bind(this));
-            html.find(".roll-item").click(this._onRollItem.bind(this));
-            html.find(".roll-damage").click(this._onRollDamage.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
-            html.find(".roll-resources").click(this._onRollResources.bind(this));
             html.find(".item-equip").click(this._onItemActivate.bind(this));
             html.find(".effect-edit").click(this._onChangeEffect.bind(this));
             html.find(".effect-remove").click(this._onRemoveEffect.bind(this));
@@ -145,8 +145,20 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             inputs.focus(ev => ev.currentTarget.select());
         };
         
-        // Actions by sheet owner only
-        if (this.actor.isOwner) {
+        // Actions by sheet owner and observers (when optional settings is on)
+        if (this.actor.isOwner || this.observerRoll) {
+            html.find(".roll-ability")
+                .click(this._onRollAbility.bind(this))
+                .contextmenu(this._onRollAbility.bind(this));
+            html.find(".roll-item")
+                .click(this._onRollItem.bind(this))
+                .contextmenu(this._onRollItem.bind(this));
+            html.find(".roll-damage")
+                .click(this._onRollDamage.bind(this))
+                .contextmenu(this._onRollDamage.bind(this));
+            html.find(".roll-resources")
+                .click(this._onRollResources.bind(this))
+                .contextmenu(this._onRollResources.bind(this));
             let handler = ev => this._onDragStart(ev);
             // Find all rollable items on the character sheet.
             let items = html.find(".item-box");

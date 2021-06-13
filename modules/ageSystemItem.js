@@ -19,7 +19,7 @@ export class ageSystemItem extends Item {
 
     // Check if Item requires Fatigue roll to be used
     get hasFatigue() {
-        if (this.data.type === "power") {return game.settings.get("age-system", "useFatigue")};
+        if (this.data.type === "power" && this.data.data.useFatigue) {return game.settings.get("age-system", "useFatigue")};
         return false;
     };
     

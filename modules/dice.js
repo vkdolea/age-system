@@ -20,7 +20,7 @@ export async function ageRollCheck({
     
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
-    if (!event.ctrlKey && event.altKey || selectAbl) {
+    if (!event.ctrlKey && event.altKey || selectAbl || event.type === "contextmenu") {
         extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN, selectAbl, rollVisibility});
         if (extraOptions.cancelled) return;
         if (extraOptions.rollTN) rollTN = extraOptions.rollTN;
@@ -513,7 +513,7 @@ export async function vehicleDamage ({
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
-    if (!event.ctrlKey && event.altKey) {
+    if (!event.ctrlKey && event.altKey || event.type === "contextmenu") {
         damageOptions = await getDamageRollOptions(addFocus, stuntDie);
         if (damageOptions.cancelled) return;
         dmgExtraDice = damageOptions.setDmgExtraDice;
@@ -616,7 +616,7 @@ export async function itemDamage({
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
-    if ((!event.ctrlKey && event.altKey) || openOptions) {
+    if ((!event.ctrlKey && event.altKey) || event.type === "contextmenu") {
         damageOptions = await getDamageRollOptions(addFocus, stuntDie);
         if (damageOptions.cancelled) return;
         dmgExtraDice = damageOptions.setDmgExtraDice;

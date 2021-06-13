@@ -98,6 +98,9 @@
     "SETTINGS.serendipity": "Use Serendipity",
     "SETTINGS.serendipityHint": "Use Modern AGE option rule for Serendipity",
 
+    "SETTINGS.observerRoll": "Allow Observers to roll",
+    "SETTINGS.observerRollHint": "Allow players with Observer permission level to roll from observed sheets and from chat rolls",
+
     "age-system": {
 
         "SHEETS": {

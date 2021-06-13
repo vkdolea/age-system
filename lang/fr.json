@@ -97,6 +97,9 @@
 
 	"SETTINGS.serendipity": "Utiliser Sérendipité",
     "SETTINGS.serendipityHint": "Utiliser la règle optionnelle de Modern AGE pour Sérendipité",
+
+    "SETTINGS.observerRoll": "",
+    "SETTINGS.observerRollHint": "",
 	
     "age-system": {
 	

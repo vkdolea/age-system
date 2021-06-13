@@ -98,6 +98,9 @@
     "SETTINGS.serendipity": "Use Serendipidade️",
     "SETTINGS.serendipityHint": "Usar regra opcional de Modern AGE para Serendipidade️",
 
+    "SETTINGS.observerRoll": "Permitir rolagem de Observadores",
+    "SETTINGS.observerRollHint": "Permitir que jogadores com permissão Observador possam rolar das fichas observadas ou do chat",
+
     "age-system": {
 
         "SHEETS": {

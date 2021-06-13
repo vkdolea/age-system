@@ -1,9 +1,12 @@
 export function addChatListeners(html) {
     html.on('click', '.roll-damage', chatDamageRoll);
+    html.on('contextmenu', '.roll-damage', chatDamageRoll);
     html.on('click', '.roll-fatigue', chatFatigueRoll);
+    html.on('contextmenu', '.roll-fatigue', chatFatigueRoll);
 };
 
 export function chatDamageRoll(event) {
+    event.preventDefault();
     let owner = null;
     const card = event.currentTarget.closest(".feature-controls");
     const isToken = card.dataset.actorToken;
@@ -37,7 +40,6 @@ export function chatDamageRoll(event) {
         addFocus: addFocus,
         atkDmgTradeOff: card.dataset.atkdmgTrade,
         resistedDmg: resistedDamage,
-        openOptions: true
     };
     itemSource.rollDamage(damageData);
 };
@@ -60,12 +62,17 @@ export function chatFatigueRoll(event) {
 };
 
 export function selectBlindAgeRoll(chatCard, html, data) {
+    const htmlData = html.find(".age-system.base-age-roll .feature-controls");
+    if (htmlData === html || !htmlData[0]?.dataset) return
+    const actorId = htmlData[0].dataset.actorId;
+    const actor = game.actors.get(actorId);
     const isBlind = chatCard.data.blind;
     const isWhisper = data.isWhisper;
     const whisperTo = data.message.whisper;
     const author = data.author.id;
     const isGM = game.user.isGM;
     const userId = game.user.id;
+    // const actorId = html.closest(".feature-controls").dataset.actorId;
     let ageCard = html.find(".base-age-roll");
     
     if (ageCard.length > 0) {
@@ -80,16 +87,8 @@ export function selectBlindAgeRoll(chatCard, html, data) {
                 html.find(`.blind-roll-card ${hideField}`).css("display", "none");
             }
         }
-        // if (isGM) {
-        //     html.find(".blind-roll-card").css("display", "none");
-        // } else {
-        //     if (isBlind || isWhisper) {
-        //         html.find(".regular-roll-card").css("display", "none");
-        //         const hideField = game.user.id === chatCard.data.user ? ".other-user-roll" : ".user-roll";
-        //         html.find(`.blind-roll-card ${hideField}`).css("display", "none");
-        //     } else {
-        //         html.find(".blind-roll-card").css("display", "none");
-        //     };
-        // };
+        const validPerm = [CONST.ENTITY_PERMISSIONS.OWNER];
+        if (game.settings.get("age-system", "observerRoll")) validPerm.push(CONST.ENTITY_PERMISSIONS.OBSERVER);
+        if (!validPerm.includes(actor?.permission)) html.find(`.age-chat-buttons-grid`).css("display", "none");
     };
 };

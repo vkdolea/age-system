@@ -98,6 +98,9 @@
     "SETTINGS.serendipity": "Usar Serendipia",
     "SETTINGS.serendipityHint": "Usar la regla opcional de Modern AGE de Serendipia",
 
+    "SETTINGS.observerRoll": "",
+    "SETTINGS.observerRollHint": "",
+
     "age-system": {
 	
 		"SHEETS": {

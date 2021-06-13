@@ -95,6 +95,19 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.5 [2021-xx-xx]
+#### Changed
+- Left click on attack/damage buttons will roll directly.
+- Right click on attack/damage buttons will open roll options.
+- Only player owners (and GMs) will be able to see buttons from chat cards to roll damage, healing and fatigue.
+
+#### Added
+- Game setting added to allow Observers to roll Abilities, attacks and Damage from Observed character sheet or chat cards.
+
+#### Fixed
+- Non breaking error when loading a world without Item compendia.
+- Shift + RightClick on AGE Roller will know correctly blind roll 1d6 to GM.
+
 ### 0.7.4 [2021-06-08]
 #### Fixed
 - Chat message hardcoded when other players roll blind.
