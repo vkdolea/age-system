@@ -215,7 +215,9 @@ export class ageSystemItem extends Item {
             name: this.data.name,
             data: this.data,
             item: this,
+            itemId: this.id,
             owner: this.actor,
+            ownerUuid: this.actor.uuid,
             colorScheme: game.settings.get("age-system", "colorScheme"),
             config: {wealthMode: game.settings.get("age-system", "wealthType")}
         };

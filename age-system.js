@@ -7,6 +7,7 @@ import ageSystemSpaceshipSheet from "./modules/sheets/ageSystemSpaceshipSheet.js
 import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageEffect} from "./modules/ageEffect.js";
+import {ageToken} from "./modules/ageToken.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
 import { rollOwnedItem } from "./modules/macros.js";
@@ -68,6 +69,7 @@ Hooks.once("init", async function() {
         rollOwnedItem,
         entities: {
             ageSystemActor,
+            ageToken,
             ageSystemItem,
             ageEffect
         }
@@ -117,6 +119,7 @@ Hooks.once("init", async function() {
 
     // Define extra data for Age System (Actors, Items, ActiveEffectConfig)
     CONFIG.Actor.documentClass = ageSystemActor;
+    CONFIG.Token.objectClass = ageToken;
     CONFIG.Item.documentClass = ageSystemItem;
     CONFIG.ActiveEffect.documentClass = ageEffect;
     // Saving this customization for a later implementation
@@ -292,7 +295,7 @@ Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
 
 Hooks.on("renderChatMessage", (app, html, data) => {
     // Hide chat message when rolling to GM
-    AgeChat.selectBlindAgeRoll(app, html, data);
+    AgeChat.sortCustomAgeChatCards(app, html, data);
 });
 
 // Prevent Items to be created on non campatible Actor types
@@ -337,26 +340,3 @@ Hooks.on("preCreateItem", (itemCreated, itemCreatedData, options, userId) => {
         }
     }
 });
-
-Hooks.on("createToken", (tokenDocument, options, userId) => {
-    // Ensure this change occurs only once
-    if (game.user.id !== userId) return
-
-    if (tokenDocument.actor?.data?.type !== "char") return;
-    if (!tokenDocument.data.bar1?.attribute) tokenDocument.update({"bar1.attribute": "health"});
-    if (!tokenDocument.data.bar2?.attribute) {
-        const barData = game.settings.get("age-system", "usePowerPoints") ? "powerPoints" : ((tokenDocument.actor.hasPlayerOwner) && (game.settings.get("age-system", "useConviction")) ? "conviction" : null);
-        tokenDocument.update({"bar2.attribute": barData});
-    }
-    if (tokenDocument.actor.hasPlayerOwner) {
-        tokenDocument.update({
-            "displayBars": 10,
-            "disposition": 1,
-            "actorLink": tokenDocument.data.actor && true
-        });
-    } else {
-        tokenDocument.update({
-            "displayBars": 20,
-        })
-    };
-})

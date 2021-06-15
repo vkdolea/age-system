@@ -1,3 +1,6 @@
+.age-system.item-chat-controls {
+  margin-top: 6px;
+}
 .age-system.item {
   font-variant: small-caps;
 }
@@ -3533,6 +3536,15 @@
 }
 .age-system textarea:focus {
   box-shadow: none;
+}
+.age-system button {
+  box-shadow: none;
+}
+.age-system button:hover {
+  box-shadow: none;
+}
+.age-system button:active {
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
 }
 .age-system a:hover {
   text-shadow: none;

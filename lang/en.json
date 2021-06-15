@@ -222,6 +222,7 @@
             "rollAttack": "{actor} attacks with {item}",
             "rollPower": "{actor} uses {item}",
             "looseRoll": "{user} rolls some dice",
+            "roll": "Roll",
             
             "rollFullDamage": "Full Damage",
             "rollFullHealing": "Full Healing",

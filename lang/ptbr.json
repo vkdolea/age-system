@@ -222,6 +222,7 @@
             "rollAttack": "{actor} ataca com {item}",
             "rollPower": "{actor} utiliza {item}",
             "looseRoll": "{user} rolou alguns dados",
+            "roll": "Rolar",
             
             "rollFullDamage": "Dano Total",
             "rollFullHealing": "Cura Total",

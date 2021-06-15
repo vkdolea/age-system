@@ -17,6 +17,15 @@ export async function ageRollCheck({
     rollVisibility = false,
     flavor = false,
     moreParts = false}={}) {
+
+    let isToken = null;
+    let actorId = null;
+    // Check if actor rolling is unlinked token and log its Token ID
+    if (actor) {
+        isToken = actor.isToken ? 1 : 0;
+        actorId = actor.uuid;
+        // actorId = isToken ? actor.uuid : actor.id;
+    }
     
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
@@ -150,14 +159,9 @@ export async function ageRollCheck({
         rollData.itemId = null;
     };
 
-    let isToken = null;
-    let actorId = null;
     // If no actor is selected, the checks inside this loop are not relevant
     if (actor) {
 
-        // Check if actor rolling is unlinked token and log its Token ID
-        isToken = actor.isToken ? 1 : 0;
-        actorId = isToken ? actor.token.data.id : actor.id;
 
         // Check if AIM is active - this bonus will apply to all rolls when it is active
         const aim = actor.data.data.aim;

@@ -222,6 +222,7 @@
             "rollAttack": "{actor} attaque avec {item}",
             "rollPower": "{actor} utilise {item}",
 			"looseRoll": "{user} lance quelques dés",
+            "roll": "Lancer",
 			
 			"rollFullDamage": "Dégâts complets",
             "rollFullHealing": "Soin complet",
