@@ -425,11 +425,7 @@ function _addItemForceAbl(item, updateData) {
     if (Object.hasOwnProperty.call(itemMods, m)) {
       const mod = itemMods[m];
       const updatePath = `data.itemMods.${m}.selected`;
-      if (mod.isActive || mod.value) {
-        updateData[updatePath] = true;
-      } else {
-        updateData[updatePath] = false;
-      }
+      if (mod.isActive || mod.value != 0 || mod.name) updateData[updatePath] = true;
     }
   }
   return updateData
@@ -437,3 +433,42 @@ function _addItemForceAbl(item, updateData) {
 
 }
 /* -------------------------------------------- */
+
+// Codes to active Mods - some users reported mods disappeard from their items after version 0.7.0
+
+// Restore Actors' mods
+const actorModsRestore = game.actors.map(async (a) => {
+  const items = a.items;
+  items.map(async (i) => {
+    const mods = i.data.data.itemMods;
+    const updates = {};
+    if (mods) {
+      for (const key in mods) {
+        if (Object.hasOwnProperty.call(key, mods)) {
+          if (mods[key].isActive || mods[key].value != 0) {
+            const path = `data.itemMods.${key}.selected`;
+            updates[path] = true;
+          };
+        }
+      }
+      await i.update(updates);
+    }
+  })
+});
+
+// Restore mods on item rom Item directory
+const itemModsRestore = game.items.map(async (i) => {
+  const mods = i.data.data.itemMods;
+  const updates = {};
+  if (mods) {
+    for (const key in mods) {
+      if (Object.hasOwnProperty.call(key, mods)) {
+        if (mods[key].isActive || mods[key].value != 0) {
+          const path = `data.itemMods.${key}.selected`;
+          updates[path] = true;
+        };
+      }
+    }
+    await i.update(updates);
+  }
+});

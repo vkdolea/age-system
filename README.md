@@ -103,7 +103,7 @@ Icons made by:
 
 #### Added
 - Game setting added to allow Observers to roll Abilities, attacks and Damage from Observed character sheet or chat cards.
-- When rolling to chat weapon and arcana cards, buttons will show up to roll attack and damage.
+- When rolling to chat weapon and arcana cards, buttons will show up to roll attack and damage. Only players with permission to control the actor/token will see and be able to interact with the buttons.
 
 #### Fixed
 - Non breaking error when loading a world without Item compendia.
