@@ -226,8 +226,8 @@
             
             "rollFullDamage": "Full Damage",
             "rollFullHealing": "Full Healing",
-            "rollDamage": "Roll Damage",
-            "rollHealing": "Roll Healing",
+            "rollDamage": "Damage",
+            "rollHealing": "Healing",
             "rollResistedDamage": "Resisted Damage",
             "rollResistedHealing": "Resisted Healing",
             "addFocusSD": "Add Both",
@@ -527,7 +527,7 @@
         "formula": "Formula",
         "formulaExample": "Ex.: 2d6+2",
 
-        "ageRollOptions": "Options",
+        "ageRollOptions": "Roll Options",
         "roll": "Roll Dice",
         "cancel": "Cancel",
 

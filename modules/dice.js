@@ -85,7 +85,6 @@ export async function ageRollCheck({
     let focusId = null
     if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.data?.data.useFocus) {
         const focusObj = actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled);
-        // const focusObj = itemRolled.actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled);
         rollFormula += " + @focus";
         rollData.focusName = focusObj.focusName;
         rollData.focus = focusObj.value;

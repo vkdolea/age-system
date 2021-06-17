@@ -226,8 +226,8 @@
             
             "rollFullDamage": "Daño Completo",
             "rollFullHealing": "Curación Completa",
-            "rollDamage": "Tirar Daño",
-            "rollHealing": "Tirar Curación",
+            "rollDamage": "Daño",
+            "rollHealing": "Curación",
             "rollResistedDamage": "Resiste Daño",
             "rollResistedHealing": "Resiste Curación",
             "addFocusSD": "+ Ambos",

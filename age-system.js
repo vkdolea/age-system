@@ -36,6 +36,7 @@ async function preloadHandlebarsTemplates() {
         `${path}char-sheet-tab-main.hbs`,
         `${path}char-sheet-tab-persona.hbs`,
         `${path}char-sheet-tab-effects.hbs`,
+        `${path}item-card-buttons.hbs`,
     ];
 
     return loadTemplates(templatePaths);
@@ -257,9 +258,9 @@ Hooks.once("ready", async function() {
     // // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.7.0";
-    // const COMPATIBLE_MIGRATION_VERSION = "0.7.9";
-    const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+    const NEEDS_MIGRATION_VERSION = "0.7.5";
+    // const COMPATIBLE_MIGRATION_VERSION = "0.8.7";
+    const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;
 
     // Perform the migration

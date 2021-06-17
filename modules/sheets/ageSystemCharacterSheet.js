@@ -300,6 +300,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     _onRollItem(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const itemRolled = this.actor.items.get(itemId);
+        if (itemRolled.data.type === "focus" && event.button !== 0) return
         itemRolled.roll(event);
     };
 
@@ -307,7 +308,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
         event.preventDefault();
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const item = this.actor.items.get(itemId);
-        item.showItem();
+        item.showItem(event.shiftKey);
     };
 
     _onItemEdit(event) {
@@ -337,18 +338,19 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
     focusContextMenu = [
         {
-            name: game.i18n.localize("age-system.settings.edit"),
-            icon: '<i class="fas fa-edit"></i>',
+            name: game.i18n.localize("age-system.ageRollOptions"),
+            icon: '<i class="fas fa-dice"></i>',
             callback: e => {
-                const item = this.actor.items.get(e.data("item-id"));
-                item.sheet.render(true);
+                const focus = this.actor.items.get(e.data("item-id"));
+                const ev = new MouseEvent('click', {altKey: true});
+                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor});
             }
         },
         {
-            name: game.i18n.localize("age-system.settings.delete"),
-            icon: '<i class="fas fa-trash"></i>',
+            name: game.i18n.localize("age-system.chatCard.roll"),
+            icon: '<i class="far fa-eye"></i>',
             callback: e => {
-                const i = this.actor.items.get(e.data("item-id")).delete();
+                const i = this.actor.items.get(e.data("item-id")).showItem(e.shiftKey);
             }
         },
         {
@@ -362,10 +364,18 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             }
         },
         {
-            name: "Show Item",
-            icon: '<i class="far fa-eye"></i>',
+            name: game.i18n.localize("age-system.settings.edit"),
+            icon: '<i class="fas fa-edit"></i>',
             callback: e => {
-                const i = this.actor.items.get(e.data("item-id")).showItem();
+                const item = this.actor.items.get(e.data("item-id"));
+                item.sheet.render(true);
+            }
+        },
+        {
+            name: game.i18n.localize("age-system.settings.delete"),
+            icon: '<i class="fas fa-trash"></i>',
+            callback: e => {
+                const i = this.actor.items.get(e.data("item-id")).delete();
             }
         }
     ];

@@ -226,8 +226,8 @@
 			
 			"rollFullDamage": "Dégâts complets",
             "rollFullHealing": "Soin complet",
-            "rollDamage": "Jet de dégâts",
-            "rollHealing": "Jet de soin",
+            "rollDamage": "Dégâts",
+            "rollHealing": "Soin",
             "rollResistedDamage": "A résisté aux dégâts",
             "rollResistedHealing": "A résisté aux soins",
             "addFocusSD": "Ajouter les deux",

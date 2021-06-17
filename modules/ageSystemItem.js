@@ -92,7 +92,7 @@ export class ageSystemItem extends Item {
 
         // Calculate Item Force
         data.itemForce = 10;
-        if (data.itemMods.powerForce.isActive && data.itemMods.powerForce.isSelected) {data.itemForce += data.itemMods.powerForce.value};
+        if (data.itemMods.powerForce.isActive && data.itemMods.powerForce.selected) {data.itemForce += data.itemMods.powerForce.value};
         // Adds ability to itemForce
         if (this.actor?.data) {
             if ((data.itemForceAbl !== "") && (data.itemForceAbl !== "no-abl")) {
@@ -208,7 +208,7 @@ export class ageSystemItem extends Item {
         "shipfeatures": "systems/age-system/templates/sheets/shipfeatures-sheet.hbs"
     };
 
-    async showItem() {
+    async showItem(selfRoll = false) {
         
         const cardData = {
             inChat: true,
@@ -227,6 +227,11 @@ export class ageSystemItem extends Item {
             roll: false,
             content: await renderTemplate(this.chatTemplate[this.type], cardData)
         };
+
+        if (selfRoll) {
+            chatData.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
+            chatData.whisper = [game.user.id];
+        }
         return ChatMessage.create(chatData);
     };
 };

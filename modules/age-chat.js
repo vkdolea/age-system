@@ -47,7 +47,7 @@ export async function chatFatigueRoll(event) {
     owner = await fromUuid(actorId) ?? game.actors.get(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
     owner = owner?.actor ?? owner;
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
-    const itemSource = owner.getOwnedItem(card.dataset.itemId);
+    const itemSource = owner.items.get(card.dataset.itemId);
     itemSource.roll(event, "fatigue");
 };
 

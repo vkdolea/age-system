@@ -226,8 +226,8 @@
             
             "rollFullDamage": "Dano Total",
             "rollFullHealing": "Cura Total",
-            "rollDamage": "Rolar Dano",
-            "rollHealing": "Rolar Cura",
+            "rollDamage": "Dano",
+            "rollHealing": "Cura",
             "rollResistedDamage": "Dano Resistido",
             "rollResistedHealing": "Cura Resistida",
             "addFocusSD": "Incluir Ambos",
