@@ -98,6 +98,9 @@
     "SETTINGS.serendipity": "Usar Serendipia",
     "SETTINGS.serendipityHint": "Usar la regla opcional de Modern AGE de Serendipia",
 
+    "SETTINGS.observerRoll": "",
+    "SETTINGS.observerRollHint": "",
+
     "age-system": {
 	
 		"SHEETS": {
@@ -219,11 +222,12 @@
             "rollAttack": "{actor} ataca con {item}",
             "rollPower": "{actor} utiliza {item}",
 			"looseRoll": "{user} tira dados",
+            "roll": "Tirar",
             
             "rollFullDamage": "Daño Completo",
             "rollFullHealing": "Curación Completa",
-            "rollDamage": "Tirar Daño",
-            "rollHealing": "Tirar Curación",
+            "rollDamage": "Daño",
+            "rollHealing": "Curación",
             "rollResistedDamage": "Resiste Daño",
             "rollResistedHealing": "Resiste Curación",
             "addFocusSD": "+ Ambos",

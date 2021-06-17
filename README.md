@@ -95,6 +95,25 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.5 [2021-06-17]
+#### Changed
+- Left click on attack/damage buttons will roll directly.
+- Right click on attack/damage buttons will open roll options.
+- Only player owners (and GMs) will be able to see buttons from chat cards to roll damage, healing and fatigue.
+
+#### Added
+- Game setting added to allow Observers to roll Abilities, attacks and Damage from Observed character sheet or chat cards.
+- When rolling to chat weapon and arcana cards, buttons will show up to roll attack and damage. Only players with permission to control the actor/token will see and be able to interact with the buttons.
+- When rolling an Item to Chat using Shift + Right click, the roll will be a Self Roll (i.e., whispered to self).
+
+#### Fixed
+- Non breaking error when loading a world without Item compendia.
+- Shift + RightClick on AGE Roller will know correctly blind roll 1d6 to GM.
+- Rolls from chat were not using data form unlinked token, only from Actor.
+- Bug preventing Power Force to be taken into account when calculating total.
+- Fixed a bug which was preventing data migration from happening on newer releases.
+- Fixed a bug preventing Item mods from older version from showing up automatically on item sheets.
+
 ### 0.7.4 [2021-06-08]
 #### Fixed
 - Chat message hardcoded when other players roll blind.

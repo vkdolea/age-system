@@ -7,6 +7,7 @@ import ageSystemSpaceshipSheet from "./modules/sheets/ageSystemSpaceshipSheet.js
 import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageEffect} from "./modules/ageEffect.js";
+import {ageToken} from "./modules/ageToken.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
 import { rollOwnedItem } from "./modules/macros.js";
@@ -35,6 +36,7 @@ async function preloadHandlebarsTemplates() {
         `${path}char-sheet-tab-main.hbs`,
         `${path}char-sheet-tab-persona.hbs`,
         `${path}char-sheet-tab-effects.hbs`,
+        `${path}item-card-buttons.hbs`,
     ];
 
     return loadTemplates(templatePaths);
@@ -68,6 +70,7 @@ Hooks.once("init", async function() {
         rollOwnedItem,
         entities: {
             ageSystemActor,
+            ageToken,
             ageSystemItem,
             ageEffect
         }
@@ -117,6 +120,7 @@ Hooks.once("init", async function() {
 
     // Define extra data for Age System (Actors, Items, ActiveEffectConfig)
     CONFIG.Actor.documentClass = ageSystemActor;
+    CONFIG.Token.objectClass = ageToken;
     CONFIG.Item.documentClass = ageSystemItem;
     CONFIG.ActiveEffect.documentClass = ageEffect;
     // Saving this customization for a later implementation
@@ -254,9 +258,9 @@ Hooks.once("ready", async function() {
     // // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.7.0";
-    // const COMPATIBLE_MIGRATION_VERSION = "0.7.9";
-    const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+    const NEEDS_MIGRATION_VERSION = "0.7.5";
+    // const COMPATIBLE_MIGRATION_VERSION = "0.8.7";
+    const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;
 
     // Perform the migration
@@ -292,7 +296,7 @@ Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
 
 Hooks.on("renderChatMessage", (app, html, data) => {
     // Hide chat message when rolling to GM
-    AgeChat.selectBlindAgeRoll(app, html, data);
+    AgeChat.sortCustomAgeChatCards(app, html, data);
 });
 
 // Prevent Items to be created on non campatible Actor types
@@ -337,26 +341,3 @@ Hooks.on("preCreateItem", (itemCreated, itemCreatedData, options, userId) => {
         }
     }
 });
-
-Hooks.on("createToken", (tokenDocument, options, userId) => {
-    // Ensur this change occurs only once
-    if (game.user.id !== userId) return
-
-    if (tokenDocument.actor?.data?.type !== "char") return;
-    if (!tokenDocument.data.bar1?.attribute) tokenDocument.update({"bar1.attribute": "health"});
-    if (!tokenDocument.data.bar2?.attribute) {
-        const barData = game.settings.get("age-system", "usePowerPoints") ? "powerPoints" : (game.settings.get("age-system", "useConviction") ? "conviction" : null);
-        tokenDocument.update({"bar2.attribute": barData});
-    }
-    if (tokenDocument.actor.hasPlayerOwner) {
-        tokenDocument.update({
-            "displayBars": 10,
-            "disposition": 1,
-            "actorLink": tokenDocument.data.actor && true
-        });
-    } else {
-        tokenDocument.update({
-            "displayBars": 20,
-        })
-    };
-})

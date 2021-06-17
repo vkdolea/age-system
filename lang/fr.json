@@ -97,6 +97,9 @@
 
 	"SETTINGS.serendipity": "Utiliser Sérendipité",
     "SETTINGS.serendipityHint": "Utiliser la règle optionnelle de Modern AGE pour Sérendipité",
+
+    "SETTINGS.observerRoll": "",
+    "SETTINGS.observerRollHint": "",
 	
     "age-system": {
 	
@@ -219,11 +222,12 @@
             "rollAttack": "{actor} attaque avec {item}",
             "rollPower": "{actor} utilise {item}",
 			"looseRoll": "{user} lance quelques dés",
+            "roll": "Lancer",
 			
 			"rollFullDamage": "Dégâts complets",
             "rollFullHealing": "Soin complet",
-            "rollDamage": "Jet de dégâts",
-            "rollHealing": "Jet de soin",
+            "rollDamage": "Dégâts",
+            "rollHealing": "Soin",
             "rollResistedDamage": "A résisté aux dégâts",
             "rollResistedHealing": "A résisté aux soins",
             "addFocusSD": "Ajouter les deux",

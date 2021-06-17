@@ -98,6 +98,9 @@
     "SETTINGS.serendipity": "Use Serendipidade️",
     "SETTINGS.serendipityHint": "Usar regra opcional de Modern AGE para Serendipidade️",
 
+    "SETTINGS.observerRoll": "Permitir rolagem de Observadores",
+    "SETTINGS.observerRollHint": "Permitir que jogadores com permissão Observador possam rolar das fichas observadas ou do chat",
+
     "age-system": {
 
         "SHEETS": {
@@ -219,11 +222,12 @@
             "rollAttack": "{actor} ataca com {item}",
             "rollPower": "{actor} utiliza {item}",
             "looseRoll": "{user} rolou alguns dados",
+            "roll": "Rolar",
             
             "rollFullDamage": "Dano Total",
             "rollFullHealing": "Cura Total",
-            "rollDamage": "Rolar Dano",
-            "rollHealing": "Rolar Cura",
+            "rollDamage": "Dano",
+            "rollHealing": "Cura",
             "rollResistedDamage": "Dano Resistido",
             "rollResistedHealing": "Cura Resistida",
             "addFocusSD": "Incluir Ambos",

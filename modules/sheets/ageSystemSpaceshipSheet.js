@@ -17,6 +17,10 @@ export default class ageSpaceshipSheet extends ActorSheet {
     get template() {
         return `systems/age-system/templates/sheets/${this.actor.data.type}-sheet.hbs`;
     }
+    
+    get observerRoll () {
+        return game.settings.get("age-system", "observerRoll");
+    }
 
     // From MooMan
     async _onDrop(event) {
@@ -70,14 +74,11 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
     activateListeners(html) {
         if (this.isEditable) {
-            html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
             html.find(".change-loss").click(this._onChangeLoss.bind(this));
             html.find(".toggle").click(this._onEquipChange.bind(this));
             html.find(".remove").click(this._onRemoveFeature.bind(this));
             html.find(".edit").click(this._onEditFeature.bind(this));
             html.find(".roll-hull").click(this._onRollDice.bind(this));
-            html.find(".roll-damage.roll").click(this._onRollDice.bind(this));
-            
             const freeText = html.find("textarea.free-text");
             for (let t = 0; t < freeText.length; t++) {
                 const area = freeText[t];
@@ -96,45 +97,55 @@ export default class ageSpaceshipSheet extends ActorSheet {
         html.on("dragleave", ".passenger.stats-block", ev => {
             ev.target.classList.remove("dragover")
         })
-        html.on("drop", ".passenger.stats-block", ev => {
-            ev.target.classList.remove("dragover")
-            const dragData = JSON.parse(ev.originalEvent.dataTransfer.getData("text/plain"))
-            const passenger = game.actors.get(dragData.id);
-            if (!passenger) return;
-            // const actor = this.actor;
-            let actor
-            // if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data.id].actor;
-            if (!actor) actor = this.actor;
-            if (passenger.data.type === "char") {
 
-                const passengerData = {
-                    id : passenger.id,
-                    isToken : passenger.isToken
-                };
-                const passengerList = actor.data.data.passengers;
-                let alreadyOnboard = false;
-                passengerList.map( p => {
-                    if (p.id === passengerData.id) {
-                        alreadyOnboard = true;
-                        const parts = {name: p.name, id: p.id};
-                        let warning = game.i18n.format("age-system.WARNING.alreadyOnboard", parts);
-                        ui.notifications.warn(warning);
-                    }
-                });
-
-                if (!alreadyOnboard) {
-                    passengerList.push(passengerData);
-                    actor.update({"data.passengers" : passengerList});
-                }
-            } else {
-                const warning = game.i18n.localize("age-system.WARNING.vehicleIsNotPassenger");
-                ui.notifications.warn(warning);
-            }
-        })
+        // Actions by sheet owner and observers (if setting is TRUE)
+        if (this.actor.isOwner || this.observerRoll) {
+            html.find(".roll-maneuver")
+                .click(this._onRollManeuver.bind(this))
+                .contextmenu(this._onRollManeuver.bind(this));
+            html.find(".roll-damage.roll")
+                .click(this._onRollDice.bind(this))
+                .contextmenu(this._onRollDice.bind(this));
+        };
         
         // Actions by sheet owner only
         if (this.actor.isOwner) {
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
+            html.on("drop", ".passenger.stats-block", ev => {
+                ev.target.classList.remove("dragover")
+                const dragData = JSON.parse(ev.originalEvent.dataTransfer.getData("text/plain"))
+                const passenger = game.actors.get(dragData.id);
+                if (!passenger) return;
+                // const actor = this.actor;
+                let actor
+                // if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data.id].actor;
+                if (!actor) actor = this.actor;
+                if (passenger.data.type === "char") {
+    
+                    const passengerData = {
+                        id : passenger.id,
+                        isToken : passenger.isToken
+                    };
+                    const passengerList = actor.data.data.passengers;
+                    let alreadyOnboard = false;
+                    passengerList.map( p => {
+                        if (p.id === passengerData.id) {
+                            alreadyOnboard = true;
+                            const parts = {name: p.name, id: p.id};
+                            let warning = game.i18n.format("age-system.WARNING.alreadyOnboard", parts);
+                            ui.notifications.warn(warning);
+                        }
+                    });
+    
+                    if (!alreadyOnboard) {
+                        passengerList.push(passengerData);
+                        actor.update({"data.passengers" : passengerList});
+                    }
+                } else {
+                    const warning = game.i18n.localize("age-system.WARNING.vehicleIsNotPassenger");
+                    ui.notifications.warn(warning);
+                }
+            })
         };
 
         super.activateListeners(html);

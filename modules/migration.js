@@ -126,10 +126,10 @@ export const migrateActorData = function(actor) {
   const updateData = {};
 
   // Actor Data Updates
-  _addActorConditions(actor, updateData);
-  _addVehicleCustomDmg(actor, updateData);
-  _addActorMods(actor, updateData);
-  _addActorPersonaFields(actor, updateData);
+  // _addActorConditions(actor, updateData);
+  // _addVehicleCustomDmg(actor, updateData);
+  // _addActorMods(actor, updateData);
+  // _addActorPersonaFields(actor, updateData);
   
 
   // Migrate Owned Items
@@ -156,15 +156,16 @@ export const migrateActorData = function(actor) {
  * @param item
  */
 export const migrateItemData = function(item) {
+  const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
   const updateData = {};
-  _addItemModSpeed(item, updateData);
-  _addItemValidResistedDmgAbl(item, updateData);
-  _addExtraPowerData(item, updateData);
-  _addItemForceAbl(item, updateData);
-  _adjustFocusInitialValue(item, updateData);
-  _addItemModTest(item, updateData);
-  _addItemAttackMod(item, updateData);
-  _addSelectedFieldForMods(item, updateData);
+  // _addItemModSpeed(item, updateData);
+  // _addItemValidResistedDmgAbl(item, updateData);
+  // _addExtraPowerData(item, updateData);
+  // _addItemForceAbl(item, updateData);
+  // _addItemModTest(item, updateData);
+  // _addItemAttackMod(item, updateData);
+  if (isNewerVersion("0.7.0", lastMigrationVer)) _adjustFocusInitialValue(item, updateData); // Do not execute if last migration was 0.7.0 ore earlier
+  if (isNewerVersion("0.7.5", lastMigrationVer)) _addSelectedFieldForMods(item, updateData);
   return updateData;
 };
 
@@ -325,7 +326,7 @@ function _addItemModSpeed(item, updateData) {
   if (!item.data.itemMods) return updateData;
   if (item.data.itemMods.hasOwnProperty("testMod")) return updateData;
 
-  updateData["data.itemMods.testMod"] = {};
+  // updateData["data.itemMods.testMod"] = {};
   updateData["data.itemMods.testMod.isActive"] = false;
   updateData["data.itemMods.testMod.selected"] = false;
   updateData["data.itemMods.testMod.value"] = 0;
@@ -342,7 +343,7 @@ function _addItemModSpeed(item, updateData) {
   if (!item.data.itemMods) return updateData;
   if (item.data.itemMods.hasOwnProperty("attackMod")) return updateData;
 
-  updateData["data.itemMods.attackMod"] = {};
+  // updateData["data.itemMods.attackMod"] = {};
   updateData["data.itemMods.attackMod.isActive"] = false;
   updateData["data.itemMods.attackMod.selected"] = false;
   updateData["data.itemMods.attackMod.value"] = 0;
@@ -418,22 +419,58 @@ function _addItemForceAbl(item, updateData) {
  * Add the @selected field for Item Mods and set to true if Mod is active
  * @private
  */
- function _addSelectedFieldForMods(item, updateData) {
+function _addSelectedFieldForMods(item, updateData) {
   if (!item.data.hasOwnProperty("itemMods")) return updateData;
   const itemMods = item.data.itemMods;
   for (const m in itemMods) {
     if (Object.hasOwnProperty.call(itemMods, m)) {
       const mod = itemMods[m];
       const updatePath = `data.itemMods.${m}.selected`;
-      if (mod.isActive || mod.value) {
-        updateData[updatePath] = true;
-      } else {
-        updateData[updatePath] = false;
-      }
+      if (mod.isActive || mod.value != 0 || mod.name) updateData[updatePath] = true;
     }
   }
   return updateData
-
-
 }
+
+// Codes to active Mods - some users reported mods disappeard from their items after version 0.7.0
+/** 
+* Search Actor Directory and selects all Item Mods which are active or have non falsy value
+*/
+export async function actorDirectoryOwnedItemsModsOn() {
+  game.actors.map(async (a) => {
+    const items = a.items;
+    items.map(async (i) => {
+      await itemModsOn(i);
+    });
+  });
+};
+
+/** 
+* Turns all item Mods with value !=
+*/
+export async function itemDirectoryModsOn() {
+  game.items.map(async (i) => {
+    await itemModsOn(i);
+  });
+};
+
+/** 
+* Turns all item Mods with value !=
+*/
+export async function itemModsOn(item) {
+  const mods = item.data.data.itemMods;
+  if (!mods) return
+  const updates = {};
+  if (mods) {
+    for (const key in mods) {
+      if (Object.hasOwnProperty.call(key, mods)) {
+        if (mods[key].isActive || mods[key].value != 0) {
+          const path = `data.itemMods.${key}.selected`;
+          updates[path] = true;
+        };
+      }
+    }
+    await i.update(updates);
+  };
+};
 /* -------------------------------------------- */

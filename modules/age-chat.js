@@ -1,20 +1,19 @@
 export function addChatListeners(html) {
     html.on('click', '.roll-damage', chatDamageRoll);
+    html.on('contextmenu', '.roll-damage', chatDamageRoll);
     html.on('click', '.roll-fatigue', chatFatigueRoll);
+    html.on('contextmenu', '.roll-fatigue', chatFatigueRoll);
+    html.on('click', '.roll-item', rollItemFromChat);
+    html.on('contextmenu', '.roll-item', rollItemFromChat);
 };
 
-export function chatDamageRoll(event) {
+export async function chatDamageRoll(event) {
+    event.preventDefault();
     let owner = null;
     const card = event.currentTarget.closest(".feature-controls");
-    const isToken = card.dataset.actorToken;
     const actorId = card.dataset.actorId;
-    if (isToken === "1") {
-        owner = game.actors.tokens[actorId];
-    } else {
-        owner = game.actors.get(actorId);
-    };
-    // owner = game.actors.tokens[actorId];
-    // if (!owner) owner = game.actors.get(actorId);
+    if (actorId) owner = game.actors.get(actorId) ?? await fromUuid(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
+    owner = owner?.actor ?? owner;
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
     const itemSource = owner.items.get(card.dataset.itemId);
 
@@ -37,59 +36,95 @@ export function chatDamageRoll(event) {
         addFocus: addFocus,
         atkDmgTradeOff: card.dataset.atkdmgTrade,
         resistedDmg: resistedDamage,
-        openOptions: true
     };
     itemSource.rollDamage(damageData);
 };
 
-export function chatFatigueRoll(event) {
+export async function chatFatigueRoll(event) {
     let owner = null;
     const card = event.currentTarget.closest(".feature-controls");
-    const isToken = card.dataset.actorToken;
     const actorId = card.dataset.actorId;
-    if (isToken === "1") {
-        owner = game.actors.tokens[actorId];
-    } else {
-        owner = game.actors.get(actorId);
-    };
-    // owner = game.actors.tokens[actorId];
-    // if (!owner) owner = game.actors.get(actorId);
+    owner = await fromUuid(actorId) ?? game.actors.get(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
+    owner = owner?.actor ?? owner;
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
-    const itemSource = owner.getOwnedItem(card.dataset.itemId);
+    const itemSource = owner.items.get(card.dataset.itemId);
     itemSource.roll(event, "fatigue");
 };
 
-export function selectBlindAgeRoll(chatCard, html, data) {
-    const isBlind = chatCard.data.blind;
-    const isWhisper = data.isWhisper;
-    const whisperTo = data.message.whisper;
-    const author = data.author.id;
-    const isGM = game.user.isGM;
-    const userId = game.user.id;
-    let ageCard = html.find(".base-age-roll");
+export async function rollItemFromChat(event) {
+    const classList = event.currentTarget.classList;
+    const actorUuid = event.currentTarget.closest(".feature-controls").dataset.ownerUuid;
+    const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
+    let owner = await fromUuid(actorUuid);
+    owner = owner?.actor ?? owner;
+    const item = owner.items.get(itemId);
+    if (classList.contains("damage")) item.rollDamage({event});
+    if (classList.contains("attack")) item.roll(event);
+}
+
+export async function sortCustomAgeChatCards(chatCard, html, data) {
+    // Add attribute type="button" to AGE buttons
+    _buttonType(html);
+
+    // Toggle chat card visibility of AGE Roll Cards
+    if (html.find(".base-age-roll").length > 0) _handleAgeRollVisibility(html, chatCard, data);
+
+    // Check permission level to show and roll chat buttons when rolling item card
+    if (html.find(".item-chat-controls").length > 0) _handleItemCardButton(html);
+};
+
+function _buttonType(html) {
+    const buttons = html.find(".age-system.item-chat-controls button");
+    for (let b = 0; b < buttons.length; b++) {
+        const button = buttons[b];
+        button.type = "button";
+    }
+}
+
+async function _handleAgeRollVisibility(html, chatCard, chatData){
+    const element = html.find(".age-system.base-age-roll .feature-controls");
+    for (let e = 0; e < element.length; e++) {
+        const el = element[e];
+        const data = el.dataset;
+        const actorId = data.actorId;
+        let actor;
+        if (actorId) actor = game.actors.get(actorId) ?? await fromUuid(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
+        actor = actor?.actor ?? actor;
+        const isBlind = chatCard.data.blind;
+        const whisperTo = chatData.message.whisper;
+        const author = chatData.author.id;
+        const userId = game.user.id;
     
-    if (ageCard.length > 0) {
         if ((whisperTo.includes(userId) || whisperTo.length < 1 || author === userId) && !isBlind) {
-            html.find(".blind-roll-card").css("display", "none");
+            el.querySelector(".blind-roll-card").style.display = "none";
         } else {
             if (isBlind && whisperTo.includes(userId)) {
-                html.find(".blind-roll-card").css("display", "none");
+                el.querySelector(".blind-roll-card").style.display = "none";
             } else {
-                html.find(".regular-roll-card").css("display", "none");
+                el.querySelector(".regular-roll-card").style.display = "none";
                 const hideField = userId === author ? ".other-user-roll" : ".user-roll";
-                html.find(`.blind-roll-card ${hideField}`).css("display", "none");
+                el.querySelector(`.blind-roll-card ${hideField}`).style.display = "none";
             }
         }
-        // if (isGM) {
-        //     html.find(".blind-roll-card").css("display", "none");
-        // } else {
-        //     if (isBlind || isWhisper) {
-        //         html.find(".regular-roll-card").css("display", "none");
-        //         const hideField = game.user.id === chatCard.data.user ? ".other-user-roll" : ".user-roll";
-        //         html.find(`.blind-roll-card ${hideField}`).css("display", "none");
-        //     } else {
-        //         html.find(".blind-roll-card").css("display", "none");
-        //     };
-        // };
-    };
-};
+        _permCheck(actor?.permission, el.querySelector(`.age-chat-buttons-grid`));
+    }
+}
+
+async function _handleItemCardButton(html){
+    const sectionClass = `.item-chat-controls`
+    const data = html.find(sectionClass);
+    for (let d = 0; d < data.length; d++) {
+        const el = data[d];
+        const actorId = el.dataset.ownerUuid;
+        let actor;
+        if (actorId) actor = await fromUuid(actorId);
+        _permCheck(actor?.permission, el, sectionClass);
+    }
+}
+
+function _permCheck(actorPerm, element) {
+    if (!element) return
+    const validPerm = [CONST.ENTITY_PERMISSIONS.OWNER];
+    if (game.settings.get("age-system", "observerRoll")) validPerm.push(CONST.ENTITY_PERMISSIONS.OBSERVER);
+    if (!validPerm.includes(actorPerm)) element.style.display = "none";
+}

@@ -19,7 +19,7 @@ export class ageSystemItem extends Item {
 
     // Check if Item requires Fatigue roll to be used
     get hasFatigue() {
-        if (this.data.type === "power") {return game.settings.get("age-system", "useFatigue")};
+        if (this.data.type === "power" && this.data.data.useFatigue) {return game.settings.get("age-system", "useFatigue")};
         return false;
     };
     
@@ -92,7 +92,7 @@ export class ageSystemItem extends Item {
 
         // Calculate Item Force
         data.itemForce = 10;
-        if (data.itemMods.powerForce.isActive && data.itemMods.powerForce.isSelected) {data.itemForce += data.itemMods.powerForce.value};
+        if (data.itemMods.powerForce.isActive && data.itemMods.powerForce.selected) {data.itemForce += data.itemMods.powerForce.value};
         // Adds ability to itemForce
         if (this.actor?.data) {
             if ((data.itemForceAbl !== "") && (data.itemForceAbl !== "no-abl")) {
@@ -208,14 +208,16 @@ export class ageSystemItem extends Item {
         "shipfeatures": "systems/age-system/templates/sheets/shipfeatures-sheet.hbs"
     };
 
-    async showItem() {
+    async showItem(selfRoll = false) {
         
         const cardData = {
             inChat: true,
             name: this.data.name,
             data: this.data,
             item: this,
+            itemId: this.id,
             owner: this.actor,
+            ownerUuid: this.actor.uuid,
             colorScheme: game.settings.get("age-system", "colorScheme"),
             config: {wealthMode: game.settings.get("age-system", "wealthType")}
         };
@@ -225,6 +227,11 @@ export class ageSystemItem extends Item {
             roll: false,
             content: await renderTemplate(this.chatTemplate[this.type], cardData)
         };
+
+        if (selfRoll) {
+            chatData.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
+            chatData.whisper = [game.user.id];
+        }
         return ChatMessage.create(chatData);
     };
 };

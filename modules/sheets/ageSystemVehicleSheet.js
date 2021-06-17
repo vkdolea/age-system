@@ -3,18 +3,22 @@ import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 
 export default class ageSystemVehicleSheet extends ActorSheet {
-    constructor(...args) {
-        super(...args);
+    // constructor(...args) {
+    //     super(...args);
     
-        // Adapt sheet size for synth tokens - Passengers feature wont work for Synths
-        // if (this.isSynth) {
-        //     this.options.height = this.position.height = "560";
-        // };
-    };
+    //     // Adapt sheet size for synth tokens - Passengers feature wont work for Synths
+    //     if (this.isSynth) {
+    //         this.options.height = this.position.height = "560";
+    //     };
+    // };
 
     get isSynth() {
         return (this.token && !this.token.data.actorLink);
-    }    
+    }  
+    
+    get observerRoll () {
+        return game.settings.get("age-system", "observerRoll");
+    }  
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -129,13 +133,20 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             }
         })
         
-        // Actions by sheet owner only
+        // Actions by sheet owner and observers (if optional setting is TRUE)
+        if (this.actor.isOwner || this.observerRoll) {
+
+            html.find(".roll-vehicle-dmg")
+                .click(this._onVehicleDamage.bind(this))
+                .contextmenu(this._onVehicleDamage.bind(this));
+            html.find(".roll-maneuver")
+                .click(this._onRollManeuver.bind(this))
+                .contextmenu(this._onRollManeuver.bind(this));
+
+        };
+        
+        // Actions by Owner only
         if (this.actor.isOwner) {
-
-            html.find(".roll-vehicle-dmg").click(this._onVehicleDamage.bind(this));
-            html.find(".roll-maneuver").click(this._onRollManeuver.bind(this));
-            html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
-
             let handler = ev => this._onDragStart(ev);
             // Find all rollable items on the character sheet.
             let items = html.find(".item-box");
@@ -145,8 +156,9 @@ export default class ageSystemVehicleSheet extends ActorSheet {
                     el.addEventListener("dragstart", handler, false);
                 }   
             }
-        };
-
+            html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
+        }
+        
         super.activateListeners(html);
     };
 

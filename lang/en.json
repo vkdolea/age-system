@@ -98,6 +98,9 @@
     "SETTINGS.serendipity": "Use Serendipity",
     "SETTINGS.serendipityHint": "Use Modern AGE option rule for Serendipity",
 
+    "SETTINGS.observerRoll": "Allow Observers to roll",
+    "SETTINGS.observerRollHint": "Allow players with Observer permission level to roll from observed sheets and from chat rolls",
+
     "age-system": {
 
         "SHEETS": {
@@ -219,11 +222,12 @@
             "rollAttack": "{actor} attacks with {item}",
             "rollPower": "{actor} uses {item}",
             "looseRoll": "{user} rolls some dice",
+            "roll": "Roll",
             
             "rollFullDamage": "Full Damage",
             "rollFullHealing": "Full Healing",
-            "rollDamage": "Roll Damage",
-            "rollHealing": "Roll Healing",
+            "rollDamage": "Damage",
+            "rollHealing": "Healing",
             "rollResistedDamage": "Resisted Damage",
             "rollResistedHealing": "Resisted Healing",
             "addFocusSD": "Add Both",
@@ -523,7 +527,7 @@
         "formula": "Formula",
         "formulaExample": "Ex.: 2d6+2",
 
-        "ageRollOptions": "Options",
+        "ageRollOptions": "Roll Options",
         "roll": "Roll Dice",
         "cancel": "Cancel",
 
