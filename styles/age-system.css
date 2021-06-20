@@ -1,9 +1,6 @@
 .age-system.item-chat-controls {
   margin-top: 6px;
 }
-.age-system.item {
-  font-variant: small-caps;
-}
 .age-system.item body input {
   text-align: center;
 }
@@ -248,7 +245,6 @@
 .age-system.item .membership label,
 .age-system.item .shipfeatures label,
 .age-system.item .vehicle label {
-  font-variant-caps: small-caps;
   font-weight: 500;
   border: none;
   margin-right: 4px;
@@ -683,30 +679,6 @@
   flex-wrap: nowrap;
   align-items: center;
 }
-.age-system.item .focus .item-card-stats input.data-input,
-.age-system.item .power .item-card-stats input.data-input,
-.age-system.item .talent .item-card-stats input.data-input,
-.age-system.item .weapon .item-card-stats input.data-input,
-.age-system.item .equipment .item-card-stats input.data-input,
-.age-system.item .stunts .item-card-stats input.data-input,
-.age-system.item .honorifics .item-card-stats input.data-input,
-.age-system.item .relationship .item-card-stats input.data-input,
-.age-system.item .membership .item-card-stats input.data-input,
-.age-system.item .shipfeatures .item-card-stats input.data-input,
-.age-system.item .vehicle .item-card-stats input.data-input,
-.age-system.item .focus .item-card-stats select.data-input,
-.age-system.item .power .item-card-stats select.data-input,
-.age-system.item .talent .item-card-stats select.data-input,
-.age-system.item .weapon .item-card-stats select.data-input,
-.age-system.item .equipment .item-card-stats select.data-input,
-.age-system.item .stunts .item-card-stats select.data-input,
-.age-system.item .honorifics .item-card-stats select.data-input,
-.age-system.item .relationship .item-card-stats select.data-input,
-.age-system.item .membership .item-card-stats select.data-input,
-.age-system.item .shipfeatures .item-card-stats select.data-input,
-.age-system.item .vehicle .item-card-stats select.data-input {
-  font-variant-caps: small-caps;
-}
 .age-system.item .focus .item-card-desc,
 .age-system.item .power .item-card-desc,
 .age-system.item .talent .item-card-desc,
@@ -909,9 +881,6 @@
   max-width: 40px;
   min-width: 40px;
   text-align: center;
-}
-.age-system.sheet.char {
-  font-variant: small-caps;
 }
 .age-system.sheet.char .sheet-header {
   height: 100%;
@@ -1336,7 +1305,6 @@
   background-color: #d1b7ab;
 }
 .age-system.sheet.vehicle {
-  font-variant: small-caps;
   min-width: min-content;
 }
 .age-system.sheet.vehicle .stats-block.stats-block {
@@ -1538,9 +1506,6 @@
 }
 .age-system.sheet .window-content {
   background-color: #d1b7ab;
-}
-.age-system.sheet.spaceship {
-  font-variant: small-caps;
 }
 .age-system.sheet.spaceship .stats-block.stats-block {
   padding: 5px;
@@ -3506,15 +3471,32 @@
   font-family: "Ethernal Knight";
   src: url("../resources/fonts/eternalknight/eternalknight.otf");
 }
+@font-face {
+  font-family: "Exo2";
+  src: url("../resources/fonts/exo2/Exo2-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Electrolize";
+  src: url("../resources/fonts/electrolize/Electrolize-Regular.ttf");
+}
+@font-face {
+  font-family: "Gotu";
+  src: url("../resources/fonts/gotu/Gotu-Regular.ttf");
+}
 #context-menu li {
   white-space: nowrap;
   text-align: left;
+}
+/*---- Font Override----*/
+body,
+select {
+  font-family: 'Exo2' !important;
+  font-style: normal !important;
 }
 /*----------- General Styling ------------*/
 .age-system input,
 .age-system select {
   border: none;
-  font-variant: small-caps;
 }
 .age-system textarea {
   white-space: normal;
