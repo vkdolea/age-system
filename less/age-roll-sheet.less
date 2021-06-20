@@ -11,7 +11,8 @@
 
                 .age-chat-buttons-grid {
                     margin-top: 4px;
-                    font-size: 12px;
+                    font-size: 12px !important;
+                    font-family: inherit;
                     display: grid;
                     grid-template-columns: repeat(8, 12.5%);
                     grid-template-rows: repeat(2, 20px);
@@ -20,7 +21,6 @@
                         "main main bothdmg bothdmg bothdmg bothdmg bothdmg bothdmg";
                     .main-dmg {
                         grid-area: main;
-                        padding-top: 4px;
                     }
                     .sd-dmg {
                         grid-area: stuntdie;
@@ -37,17 +37,17 @@
                     margin-top: 4px;
                 }
 
-                .age-button {
-                    display: table-cell;
-                    border: 1px solid #bbb;
-                    // background:#DDD;
-                    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-                    cursor: pointer;
-                    padding: 2px;
-                    text-align: center;
-                }
+                // .age-button {
+                //     // display: table-cell;
+                //     // border: 1px solid #bbb;
+                //     // background:#DDD;
+                //     // box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+                //     cursor: pointer;
+                //     // padding: 2px;
+                //     // text-align: center;
+                // }
                 .age-button:active{
-                    color: rgb(95, 5, 5);
+                    color: rgb(95, 5, 5); // incluir esquema de cor ou então o highlight do Tracker
                     box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
                 };
                 

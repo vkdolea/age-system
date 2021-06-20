@@ -65,6 +65,7 @@ Here the description of each one of the Modifiers:
 17. **Focus:** adds bonus to Focus maching the name, as long as the character has the given Focus on its character sheet.
 18. **Attack Bonus:** adds to attack rolls.
 19. **All Test:** general bonus adding to all tests, except for attack/damage rolls.
+20. **Armor Strain:** this is the extra Power/Spell/Magic Points necessary to cast a spell when wearing the item bearing this mod.
 
 ## Credits
 ### Icons
@@ -95,6 +96,15 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.6 [2021-06-20]
+#### Added
+- Rolling items to chat will honor chat option selection. Shift+Click will override this option and submit a self roll.
+- Armor Strain as Item Modifier.
+
+#### Fixed
+- Chat card buttons restyled, so they will have coherent look based on other buttons in the system. Chat cards rolled previously will lose their buttons' styling, but clicking the name will still roll the test.
+- Bug preventing damage options dialog box from being pre-filled in with options from a chat button when using Right Click.
+
 ### 0.7.5 [2021-06-17]
 #### Changed
 - Left click on attack/damage buttons will roll directly.

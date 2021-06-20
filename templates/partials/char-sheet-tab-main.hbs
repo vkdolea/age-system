@@ -313,7 +313,7 @@
                 <div class="item-box flexrow feature-controls colorset-third-tier" data-item-id="{{item._id}}">
                     <div class="item-name flexrow">
                         <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                        <a class="item-show">{{item.name}}</a>
+                        <a class="item-show">{{item.name}}{{#if (gt item.data.quantity 1)}} [{{item.data.quantity}}]{{/if}}</a>
                     </div>
                     <div class="flexrow fill-card">
                         {{!-- <a class="item-control roll-item" title="{{localize "age-system.settings.attack"}}"><i class="fas fa-dice"></i></a>

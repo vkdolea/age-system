@@ -139,6 +139,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             html.find("p.effect-add").click(this._onAddEffect.bind(this));
             html.find(".condition-checkbox").change(this._onChangeCondition.bind(this));
             html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
+            html.find(".change-qtd").click(this._onChangeQuantity.bind(this));
 
             // Enable field to be focused when selecting it
             const inputs = html.find("input");
@@ -172,6 +173,10 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
         super.activateListeners(html);
     };
+
+    _onChangeQuantity(event) {
+
+    }
 
     _onToggleItemMod(event) {
         const data = event.currentTarget.dataset;

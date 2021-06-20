@@ -406,6 +406,11 @@
                         "isActive": false,
                         "selected": false
                     },
+                    "armorStrain": {
+                        "value": 0,
+                        "isActive": false,
+                        "selected": false
+                    },
                     "defendMnv":  {
                         "value": 0,
                         "isActive": false,

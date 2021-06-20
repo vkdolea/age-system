@@ -486,7 +486,8 @@
             "powerForce": "Força do Poder",
             "aimMnv": "Mirar",
             "armorPenalty": "Penalidade de Armadura",
-            "speed": "Velocidade"
+            "speed": "Velocidade",
+            "armorStrain": "Tensão de Armadura"
         },
 
         "stuntsContainer": "Façanhas",
@@ -515,6 +516,8 @@
             "resistedEffect": "Efeito Resistido",
             "testResist": "Teste Resistido"
         },
+        "incQtd": "Aumentar Quantidade",
+        "decQtd": "Reduzir Quantidade",
         "rollDamage": "Rolar Dano",
         "rollHealing": "Rolar Cura",
         "itemDmgMod": "Bônus Geral",

@@ -405,7 +405,7 @@ ageSystem.AGEstatusEffects = [
         },
         changes: [{
             key: "data.speed.total",
-            mode: 1,
+            mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
             value: "0.5"
         }]
     },
@@ -443,7 +443,7 @@ ageSystem.AGEstatusEffects = [
         },
         changes: [{
             key: "data.speed.total",
-            mode: 1,
+            mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
             value: "0.5"
         }]
     },
@@ -459,7 +459,7 @@ ageSystem.AGEstatusEffects = [
         },
         changes: [{
             key: "data.testMod",
-            mode: 2,
+            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: "-1"
         }]
     },
@@ -475,12 +475,12 @@ ageSystem.AGEstatusEffects = [
         },
         changes: [{
             key: "data.speed.total",
-            mode: 1,
+            mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
             value: "0.5"
         },
         {
             key: "data.testMod",
-            mode: 2,
+            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: "-2"
         }]
     },
@@ -507,7 +507,7 @@ ageSystem.AGEstatusEffects = [
         },
         changes: [{
             key: "data.speed.total",
-            mode: 5,
+            mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
             value: "0"
         }]
     },
@@ -523,7 +523,7 @@ ageSystem.AGEstatusEffects = [
         },
         changes: [{
             key: "data.speed.total",
-            mode: 5,
+            mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
             value: "0"
         }]
     },
@@ -816,6 +816,7 @@ ageSystem.ageEffectsKeys = {
     "maxPowerPoints": {label: "age-system.bonus.maxPowerPoints", mask: "data.powerPoints.max"},
     "aimMnv": {label: "age-system.bonus.aimMnv", mask: "data.aim.total"},
     "armorPenalty": {label: "age-system.bonus.armorPenalty", mask: "data.armor.penalty"},
+    "armorStrain": {label: "age-system.bonus.armorStrain", mask: "data.armor.strain"},
     "speed": {label: "age-system.bonus.speed", mask: "data.speed.total"},
     "toughness": {label: "age-system.bonus.toughness", mask: "data.armor.toughness.total"},
 }
