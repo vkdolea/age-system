@@ -49,9 +49,14 @@
                 <div class="flexcol">
                     <label>{{localize "age-system.powerPointsIndex"}}</label>
                     {{#if inChat}}
-                    <div>{{data.data.powerPointCost}}</div>
+                    <div>{{data.data.powerPointCostTotal}}</div>
                     {{else}}
-                    <input type="text" name="data.powerPointCost" value="{{data.data.powerPointCost}}" data-dtype="Number" />
+                    <div class="flexrow">
+                        <input type="text" name="data.powerPointCost" value="{{data.data.powerPointCost}}" data-dtype="Number" />
+                        {{#if (ne data.data.powerPointCost data.data.powerPointCostTotal)}}
+                        <div>({{data.data.powerPointCostTotal}})</div>
+                        {{/if}}
+                    </div>
                     {{/if}}
                 </div>
                 {{/unless}}

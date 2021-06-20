@@ -98,8 +98,8 @@
 	"SETTINGS.serendipity": "Utiliser Sérendipité",
     "SETTINGS.serendipityHint": "Utiliser la règle optionnelle de Modern AGE pour Sérendipité",
 
-    "SETTINGS.observerRoll": "",
-    "SETTINGS.observerRollHint": "",
+    "SETTINGS.observerRoll": "XXX",
+    "SETTINGS.observerRollHint": "XXX",
 	
     "age-system": {
 	
@@ -486,7 +486,8 @@
             "powerForce": "Puissance magique",
             "aimMnv": "Viser",
             "armorPenalty": "Pénalité d'armure",
-			"speed": "Rapidité"
+			"speed": "Rapidité",
+            "armorStrain": "XXX"
         },
 
         "stuntsContainer": "Prouesses",
@@ -515,6 +516,8 @@
 			"resistedEffect": "Effet si résiste",
             "testResist": "Test de résistance"
         },
+        "incQtd": "XXX - Increase Quantity",
+        "decQtd": "XXX - Decrease Quantity",
         "rollDamage": "Jet de dégâts",
 		"rollHealing": "Jet de soin",
         "itemDmgMod": "Bonus Général",

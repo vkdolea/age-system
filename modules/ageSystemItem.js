@@ -88,21 +88,22 @@ export class ageSystemItem extends Item {
 
     _preparePower(data) {
         const useFatigue = game.settings.get("age-system", "useFatigue");
-        if (!useFatigue) {data.useFatigue = false};
+        if (!useFatigue) data.useFatigue = false;
 
         // Calculate Item Force
         data.itemForce = 10;
-        if (data.itemMods.powerForce.isActive && data.itemMods.powerForce.selected) {data.itemForce += data.itemMods.powerForce.value};
-        // Adds ability to itemForce
+        if (data.itemMods.powerForce.isActive && data.itemMods.powerForce.selected) data.itemForce += data.itemMods.powerForce.value;
+        
+        // Calculate derived data
+        data.powerPointCostTotal = data.powerPointCost;
         if (this.actor?.data) {
-            if ((data.itemForceAbl !== "") && (data.itemForceAbl !== "no-abl")) {
-                data.itemForce += this.actor.data.data.abilities[data.itemForceAbl].total;
-            };
+            if ((data.itemForceAbl !== "") && (data.itemForceAbl !== "no-abl")) data.itemForce += this.actor.data.data.abilities[data.itemForceAbl].total;
             data.itemForce += data.useFocusActor.value;
+            data.powerPointCostTotal += this.actor.data.data.armor.strain;
         };
 
         // Calculate Fatigue TN if it is not a manual input
-        if (data.inputFatigueTN === false) {data.fatigueTN = 9 + Math.floor(Number(data.powerPointCost)/2)};
+        if (data.inputFatigueTN === false) data.fatigueTN = 9 + Math.floor(Number(data.powerPointCost)/2);
     }
 
     _prepareShipFeatures(data) {};
@@ -115,7 +116,7 @@ export class ageSystemItem extends Item {
         atkDmgTradeOff = 0,
         resistedDmg = false}={}) {
 
-        if (!this.data.data.hasDamage && !this.data.data.hasHealing) {return false};
+        if (!this.data.data.hasDamage && !this.data.data.hasHealing) return false;
 
         const damageData = {
             // event: event,
@@ -138,7 +139,7 @@ export class ageSystemItem extends Item {
          * - powerActivation
          */
         const owner = this.actor;
-        if (!owner) {return false;}
+        if (!owner) return false;
         let ablCode = (rollType === "fatigue") ? this.data.data.ablFatigue : this.data.data.useAbl;
 
         if (rollType === null) {
@@ -208,8 +209,8 @@ export class ageSystemItem extends Item {
         "shipfeatures": "systems/age-system/templates/sheets/shipfeatures-sheet.hbs"
     };
 
-    async showItem(selfRoll = false) {
-        
+    async showItem(forceSelfRoll = false) {
+        const rollMode = game.settings.get("core", "rollMode");       
         const cardData = {
             inChat: true,
             name: this.data.name,
@@ -227,10 +228,11 @@ export class ageSystemItem extends Item {
             roll: false,
             content: await renderTemplate(this.chatTemplate[this.type], cardData)
         };
-
-        if (selfRoll) {
+        if (forceSelfRoll) {
             chatData.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
             chatData.whisper = [game.user.id];
+        } else {
+            ChatMessage.applyRollMode(chatData, rollMode);
         }
         return ChatMessage.create(chatData);
     };

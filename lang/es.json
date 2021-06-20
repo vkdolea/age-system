@@ -98,8 +98,8 @@
     "SETTINGS.serendipity": "Usar Serendipia",
     "SETTINGS.serendipityHint": "Usar la regla opcional de Modern AGE de Serendipia",
 
-    "SETTINGS.observerRoll": "",
-    "SETTINGS.observerRollHint": "",
+    "SETTINGS.observerRoll": "XXX",
+    "SETTINGS.observerRollHint": "XXX",
 
     "age-system": {
 	
@@ -486,7 +486,8 @@
             "powerForce": "Fuerza Poder",
             "aimMnv": "Apuntar",
             "armorPenalty": "Penalizador Armadura",
-            "speed": "Velocidad"
+            "speed": "Velocidad",
+            "armorStrain": "XXX"
         },
 
         "stuntsContainer": "Proezas",
@@ -515,6 +516,8 @@
             "resistedEffect": "Efecto Resistido",
             "testResist": "Prueba Resist."
         },
+        "incQtd": "XXX - Increase Quantity",
+        "decQtd": "XXX - Decrease Quantity",
         "rollDamage": "Tirar Daño",
         "rollHealing": "Tirar Curación",
         "itemDmgMod": "Mod. General",

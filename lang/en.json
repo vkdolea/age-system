@@ -486,7 +486,8 @@
             "powerForce": "Power Force",
             "aimMnv": "Aim",
             "armorPenalty": "Armor Penalty",
-            "speed": "Speed"
+            "speed": "Speed",
+            "armorStrain": "Armor Strain"
         },
 
         "stuntsContainer": "Stunts",
@@ -515,6 +516,8 @@
             "resistedEffect": "Resisted Effect",
             "testResist": "Resist Test"
         },
+        "incQtd": "Increase Quantity",
+        "decQtd": "Decrease Quantity",
         "rollDamage": "Roll Damage",
         "rollHealing": "Roll Healing",
         "itemDmgMod": "General Bonus",

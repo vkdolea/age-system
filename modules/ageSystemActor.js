@@ -181,8 +181,9 @@ export class ageSystemActor extends Actor {
         const actorData = this.data;
         const data = actorData.data
 
-        // Armor Penalty
+        // Armor Penalty & Strain
         data.armor.penalty = Math.max(mods.armorPenalty ?? 0, 0);
+        data.armor.strain = Math.max(mods.armorStrain ?? 0, 0)
 
         // Actor Damage
         data.dmgMod = mods.actorDamage ?? 0;
