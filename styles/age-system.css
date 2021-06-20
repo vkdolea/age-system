@@ -3496,9 +3496,6 @@ select {
 .age-system-dialog.bonus-select button.dialog-button {
   flex: 0 0 45%;
 }
-.age-system {
-  /*---------Flexbox assisting classes------*/
-}
 .age-system input,
 .age-system select {
   border: none;
