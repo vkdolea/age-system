@@ -10,7 +10,8 @@ export function addChatListeners(html) {
 export async function chatDamageRoll(event) {
     event.preventDefault();
     let owner = null;
-    const card = event.currentTarget.closest(".feature-controls");
+    const classList = event.currentTarget.classList;
+    const card = event.type === "contextmenu" ? event.target.closest(".feature-controls") : event.currentTarget.closest(".feature-controls");
     const actorId = card.dataset.actorId;
     if (actorId) owner = game.actors.get(actorId) ?? await fromUuid(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
     owner = owner?.actor ?? owner;
@@ -20,13 +21,13 @@ export async function chatDamageRoll(event) {
     let stuntDie = null;
     let addFocus = false;
     let resistedDamage = false;
-    if (event.currentTarget.classList.contains('add-stunt-damage')) {
+    if (classList.contains('add-stunt-damage')) {
         stuntDie = card.dataset.stuntDie;
     };
-    if (event.currentTarget.classList.contains('add-focus-damage')) {
+    if (classList.contains('add-focus-damage')) {
         addFocus = true;
     };
-    if (event.currentTarget.classList.contains('resisted')) {
+    if (classList.contains('resisted')) {
         resistedDamage = true;
     };
 
@@ -64,7 +65,8 @@ export async function rollItemFromChat(event) {
 
 export async function sortCustomAgeChatCards(chatCard, html, data) {
     // Add attribute type="button" to AGE buttons
-    _buttonType(html);
+    _buttonType(html.find(".age-system.item-chat-controls button"));
+    _buttonType(html.find("button.age-button"));
 
     // Toggle chat card visibility of AGE Roll Cards
     if (html.find(".base-age-roll").length > 0) _handleAgeRollVisibility(html, chatCard, data);
@@ -73,8 +75,7 @@ export async function sortCustomAgeChatCards(chatCard, html, data) {
     if (html.find(".item-chat-controls").length > 0) _handleItemCardButton(html);
 };
 
-function _buttonType(html) {
-    const buttons = html.find(".age-system.item-chat-controls button");
+function _buttonType(buttons) {
     for (let b = 0; b < buttons.length; b++) {
         const button = buttons[b];
         button.type = "button";

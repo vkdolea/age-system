@@ -21,8 +21,8 @@
     src: url("../resources/fonts/electrolize/Electrolize-Regular.ttf");
 }
 @font-face {
-    font-family: "Gotu";
-    src: url("../resources/fonts/gotu/Gotu-Regular.ttf");
+    font-family: "Roboto";
+    src: url("../resources/fonts/roboto/Roboto-Regular.ttf");
 }
 
 // Avoid text on context-menu from wrapping
@@ -36,21 +36,8 @@
 /*---- Font Override----*/
 body,
 select {
-    font-family: 'Exo2' !important;
+    font-family: 'Roboto' !important;
     font-style: normal !important;
-}
-
-/*----------- General Styling ------------*/
-.age-system {
-    input,
-    select {
-        border: none;
-        // font-variant: small-caps;
-    }
-    textarea {
-        white-space: normal;
-        color: inherit;
-    }
 }
 
 /*---------Background---------------------*/
@@ -72,10 +59,27 @@ select {
 }
 
 .age-system {
+    // Removing some FoundryVTT core styling
+    input,
+    select {
+        border: none;
+        // font-variant: small-caps;
+    }
+    textarea {
+        white-space: normal;
+        color: inherit;
+    }
     textarea:focus {box-shadow: none;}
+
     button {box-shadow: none;}
     button:hover {box-shadow: none;}
     button:active {box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);}
+    button.age-button {
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+
     a:hover {text-shadow: none;}
     .tabs .active {text-shadow: none;}
     /*---------Flexbox assisting classes------*/

@@ -96,10 +96,14 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
-### 0.7.6 [2021-xx-yy]
+### 0.7.6 [2021-06-20]
 #### Added
 - Rolling items to chat will honor chat option selection. Shift+Click will override this option and submit a self roll.
 - Armor Strain as Item Modifier.
+
+#### Fixed
+- Chat card buttons restyled, so they will have coherent look based on other buttons in the system. Chat cards rolled previously will lose their buttons' styling, but clicking the name will still roll the test.
+- Bug preventing damage options dialog box from being pre-filled in with options from a chat button when using Right Click.
 
 ### 0.7.5 [2021-06-17]
 #### Changed
