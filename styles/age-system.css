@@ -1867,7 +1867,7 @@
   margin-bottom: 4px;
   padding-left: 4px;
   padding-right: 4px;
-  font-weight: 800;
+  font-weight: bold;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card > div div.stunted,
 #chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card > div div.stunted,
@@ -3476,6 +3476,22 @@
   font-family: "Roboto";
   src: url("../resources/fonts/roboto/Roboto-Regular.ttf");
 }
+@font-face {
+  font-family: "Roboto";
+  src: url("../resources/fonts/roboto/Roboto-Bold.ttf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../resources/fonts/roboto/Roboto-Italic.ttf");
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../resources/fonts/roboto/Roboto-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
 #context-menu li {
   white-space: nowrap;
   text-align: left;
@@ -3492,7 +3508,11 @@ select {
 .window-app.sheet.spaceship .window-content {
   background-image: none;
   background: none;
-  background-color: rgba(207, 194, 188, 0.6);
+  background-color: rgba(207, 194, 188, 0.4);
+}
+.window-app.sheet.item .window-content {
+  background-image: none;
+  background: none;
 }
 .age-system-dialog.bonus-select button.dialog-button {
   flex: 0 0 45%;

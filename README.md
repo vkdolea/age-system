@@ -96,6 +96,13 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.7 [2021-xx-yy]
+#### Added
+- Picture on Honorifics and Membership item sheets.
+
+#### Fixed
+- Styling issue causing bold characters to be blurred.
+
 ### 0.7.6 [2021-06-20]
 #### Added
 - Rolling items to chat will honor chat option selection. Shift+Click will override this option and submit a self roll.
