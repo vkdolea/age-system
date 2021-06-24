@@ -102,9 +102,11 @@ Icons made by:
 - System Setting option to indicate the Initiative focus (world specific).
 - Added arrows up and down in front of Weapon and Item name (Main Tab) as a quantity counter for all item type.
 - Quantities will always show up inside brackets.
+- After rolling a weapon check with Aim box checked, it will be unchecked automatically.
 
 #### Fixed
 - Styling issue causing bold characters to be blurred.
+- Styling issue causing item names on Persona Tab to be convoluted if it is 3+ lines long.
 
 ### 0.7.6 [2021-06-20]
 #### Added

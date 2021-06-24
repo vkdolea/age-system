@@ -13,7 +13,7 @@
     "ITEM.TypeMembership": "Membership",
     "ITEM.TypeShipfeatures": "Spaceship Feature",
 
-    "SETTINGS.initiativeFocus": "Initiative Focus",
+    "SETTINGS.initiativeFocus": "Initiative Focus Name",
     "SETTINGS.initiativeFocusHint": "Type the name of Focus used in the Initiative roll - leave it in blank to disregard focus bonus to Initiative",
 
     "SETTINGS.useConviction": "Use Conviction",
