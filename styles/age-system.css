@@ -1239,7 +1239,6 @@
 }
 .age-system.sheet.char .item-container .item-box {
   min-width: 150px;
-  max-height: 41px;
   border-radius: 5px;
   padding: 4px;
   margin: 2px 4px 2px 4px;
@@ -1283,15 +1282,31 @@
 .age-system.sheet.char .item-container .actor-items {
   justify-content: stretch;
 }
-.age-system.sheet.char .item-container .item-name {
+.age-system.sheet.char .item-container .item-card {
+  align-items: center;
+  justify-content: space-between;
+}
+.age-system.sheet.char .item-container .item-card .main-data {
   align-items: center;
 }
-.age-system.sheet.char .item-container .item-name img {
+.age-system.sheet.char .item-container .item-card img {
   max-width: 20px;
   max-height: 20px;
 }
-.age-system.sheet.char .item-container .item-name a {
+.age-system.sheet.char .item-container .item-card .item-name {
+  width: fit-content;
+  max-width: fit-content;
+}
+.age-system.sheet.char .item-container .item-card a {
   padding-left: 2px;
+}
+.age-system.sheet.char .item-container .item-card .item-qtd-control {
+  font-size: 7px;
+  flex: 0 0 5px;
+  width: fit-content;
+}
+.age-system.sheet.char .item-container .item-card .controls {
+  max-width: fit-content;
 }
 .age-system.sheet.char .top-row {
   height: 20px;
@@ -1867,6 +1882,7 @@
   margin-bottom: 4px;
   padding-left: 4px;
   padding-right: 4px;
+  font-weight: bold;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card > div div.stunted,
 #chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card > div div.stunted,
@@ -3475,6 +3491,22 @@
   font-family: "Roboto";
   src: url("../resources/fonts/roboto/Roboto-Regular.ttf");
 }
+@font-face {
+  font-family: "Roboto";
+  src: url("../resources/fonts/roboto/Roboto-Bold.ttf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../resources/fonts/roboto/Roboto-Italic.ttf");
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../resources/fonts/roboto/Roboto-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
 #context-menu li {
   white-space: nowrap;
   text-align: left;
@@ -3483,7 +3515,6 @@
 body,
 select {
   font-family: 'Roboto' !important;
-  font-style: normal !important;
 }
 /*---------Background---------------------*/
 .window-app.sheet.char .window-content,
@@ -3491,7 +3522,11 @@ select {
 .window-app.sheet.spaceship .window-content {
   background-image: none;
   background: none;
-  background-color: rgba(207, 194, 188, 0.6);
+  background-color: rgba(207, 194, 188, 0.4);
+}
+.window-app.sheet.item .window-content {
+  background-image: none;
+  background: none;
 }
 .age-system-dialog.bonus-select button.dialog-button {
   flex: 0 0 45%;

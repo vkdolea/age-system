@@ -8,6 +8,8 @@
             <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
             {{/if}}
             <div class="item-card-stats flexrow">
+
+                {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}}
                 
                 {{!-- Rank Desc --}}
                 <div class="flexcol long-text">

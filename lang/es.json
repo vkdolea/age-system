@@ -13,6 +13,9 @@
     "ITEM.TypeMembership": "Afiliaciones",
 	"ITEM.TypeSpaceshipfeatures": "Características Nave",
 
+    "SETTINGS.initiativeFocus": "Nombre Concentración Iniciativa",
+    "SETTINGS.initiativeFocusHint": "Escribe el nombre de la Concentración a utilizar en tiradas de iniciativa - dejar vacío para ignorar el bonificador",
+    
     "SETTINGS.useConviction": "Usar Convicción",
     "SETTINGS.useConvictionHint": "Activar bloque para gestión de Convicción",
 
@@ -98,8 +101,8 @@
     "SETTINGS.serendipity": "Usar Serendipia",
     "SETTINGS.serendipityHint": "Usar la regla opcional de Modern AGE de Serendipia",
 
-    "SETTINGS.observerRoll": "XXX",
-    "SETTINGS.observerRollHint": "XXX",
+    "SETTINGS.observerRoll": "Permitir tiradas Observador",
+    "SETTINGS.observerRollHint": "Permite a los jugadores con permisos de Observador tirar los dados desde la Hoja y el Chat",
 
     "age-system": {
 	
@@ -487,7 +490,7 @@
             "aimMnv": "Apuntar",
             "armorPenalty": "Penalizador Armadura",
             "speed": "Velocidad",
-            "armorStrain": "XXX"
+            "armorStrain": "Estrés Armadura"
         },
 
         "stuntsContainer": "Proezas",
@@ -516,8 +519,8 @@
             "resistedEffect": "Efecto Resistido",
             "testResist": "Prueba Resist."
         },
-        "incQtd": "XXX - Increase Quantity",
-        "decQtd": "XXX - Decrease Quantity",
+        "incQtd": "Incrementa Cantidad",
+        "decQtd": "Reduce Cantidad",
         "rollDamage": "Tirar Daño",
         "rollHealing": "Tirar Curación",
         "itemDmgMod": "Mod. General",

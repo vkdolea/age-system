@@ -13,6 +13,9 @@
     "ITEM.TypeMembership": "Filiação",
     "ITEM.TypeShipfeatures": "Atributo de Espaçonave",
 
+    "SETTINGS.initiativeFocus": "Foco para Iniciativa",
+    "SETTINGS.initiativeFocusHint": "Foco usado para rolar Iniciativa no comabate - deixe em branco para não usar um Foco na rolagem",
+
     "SETTINGS.useConviction": "Usar Convicção",
     "SETTINGS.useConvictionHint": "Ativa bloco para gerenciamento de Convicção",
 

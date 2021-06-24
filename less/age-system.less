@@ -20,9 +20,27 @@
     font-family: "Electrolize";
     src: url("../resources/fonts/electrolize/Electrolize-Regular.ttf");
 }
+
+// Roboto fonts declaration
 @font-face {
     font-family: "Roboto";
     src: url("../resources/fonts/roboto/Roboto-Regular.ttf");
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../resources/fonts/roboto/Roboto-Bold.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../resources/fonts/roboto/Roboto-Italic.ttf");
+    font-style: italic;
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../resources/fonts/roboto/Roboto-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
 }
 
 // Avoid text on context-menu from wrapping
@@ -37,7 +55,7 @@
 body,
 select {
     font-family: 'Roboto' !important;
-    font-style: normal !important;
+    // font-style: normal !important;
 }
 
 /*---------Background---------------------*/
@@ -47,8 +65,11 @@ select {
 .window-app.sheet.spaceship .window-content {
     background-image: none;
     background: none;
-    background-color: rgba(207, 194, 188, 0.6);
-    // background-color: rgba(209, 183, 171, 0.8);
+    background-color: rgba(207, 194, 188, 0.4);
+}
+.window-app.sheet.item .window-content {
+    background-image: none;
+    background: none;
 }
 
 // Buttons Styling for age-system-dialog Dialog boxes

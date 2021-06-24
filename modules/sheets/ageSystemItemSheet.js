@@ -9,10 +9,10 @@ export default class ageSystemItemSheet extends ItemSheet {
         const itemType = this.object.data.type;
         switch (itemType) {
             case "focus":
-                this.options.width = this.position.width = "350";
+                this.options.width = this.position.width = "410";
                 break;
             case "weapon":
-                this.options.width = this.position.width = "530";
+                this.options.width = this.position.width = "920";
                 this.options.height = this.position.height = "550";
                 break;
             case "talent":
@@ -25,10 +25,6 @@ export default class ageSystemItemSheet extends ItemSheet {
             case "relationship":
                 this.options.width = this.position.width = "600";
                 this.options.height = this.position.height = "300";
-                break;  
-            case "membership":
-                this.options.width = this.position.width = "295";
-                this.options.height = this.position.height = "360";
                 break;
             case "power":
                 this.options.width = this.position.width = "468";
@@ -43,7 +39,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         
         return mergeObject(super.defaultOptions, {
             height: 450,
-            width: 516,
+            width: 500,
             classes: ["age-system", "sheet", "item", "colorset-second-tier"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",

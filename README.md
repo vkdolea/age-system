@@ -96,6 +96,18 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.7 [2021-06-24]
+#### Added
+- Picture on Honorifics and Membership item sheets.
+- System Setting option to indicate the Initiative focus (world specific).
+- Added arrows up and down in front of Weapon and Item name (Main Tab) as a quantity counter for these item types.
+- Quantities will always show up inside brackets.
+- After rolling a weapon check with Aim box checked, it will be unchecked automatically.
+
+#### Fixed
+- Styling issue causing bold characters to be blurred.
+- Styling issue causing item names on Persona Tab to be convoluted if it is 3+ lines long.
+
 ### 0.7.6 [2021-06-20]
 #### Added
 - Rolling items to chat will honor chat option selection. Shift+Click will override this option and submit a self roll.

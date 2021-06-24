@@ -171,6 +171,7 @@ export async function ageRollCheck({
                 label: game.i18n.localize("age-system.aim"),
                 value: aim.value
             });
+            if (itemRolled?.data?.type === "weapon") await actor.update({"data.aim.active": false});
         };
         
         // Adds penalty for Attack which is converted to damage Bonus and pass info to chat Message

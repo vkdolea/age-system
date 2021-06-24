@@ -18,6 +18,13 @@ export class ageSystemActor extends Actor {
             items.forEach(i => {
                 if (["weapon", "power"].includes(i.data.type)) i.prepareData()
             })
+
+            // Calculate Initiative based on Focus (if set on System Settings)
+            const initiativeFocus = game.settings.get("age-system", "initiativeFocus");
+            if (initiativeFocus) {
+                const init = this.checkFocus(initiativeFocus);
+                this.data.data.initiative += init.value;
+            }
         }
     }
 
