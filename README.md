@@ -99,6 +99,9 @@ Icons made by:
 ### 0.7.7 [2021-xx-yy]
 #### Added
 - Picture on Honorifics and Membership item sheets.
+- System Setting option to indicate the Initiative focus (world specific).
+- Added arrows up and down in front of Weapon and Item name (Main Tab) as a quantity counter for all item type.
+- Quantities will always show up inside brackets.
 
 #### Fixed
 - Styling issue causing bold characters to be blurred.

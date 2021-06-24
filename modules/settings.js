@@ -12,6 +12,19 @@ export const registerSystemSettings = function() {
   });
 
   /**
+   * Register World's Initiative Focus
+   */
+     game.settings.register("age-system", "initiativeFocus", {
+      name: "SETTINGS.initiativeFocus",
+      hint: "SETTINGS.initiativeFocusHint",
+      scope: "world",
+      config: true,
+      default: "",
+      type: String,
+      onChange: debouncedReload
+    });
+
+  /**
    * Register if world will use Conviction
    */
   game.settings.register("age-system", "useConviction", {

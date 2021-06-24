@@ -9,10 +9,10 @@ export default class ageSystemItemSheet extends ItemSheet {
         const itemType = this.object.data.type;
         switch (itemType) {
             case "focus":
-                this.options.width = this.position.width = "350";
+                this.options.width = this.position.width = "410";
                 break;
             case "weapon":
-                this.options.width = this.position.width = "530";
+                this.options.width = this.position.width = "920";
                 this.options.height = this.position.height = "550";
                 break;
             case "talent":

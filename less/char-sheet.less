@@ -466,14 +466,30 @@
             justify-content: stretch;
         }
         
-        .item-name {
+        .item-card {
             align-items: center;
+            justify-content: space-between;
+            .main-data{
+                align-items: center;
+            }
             img {
                 max-width: 20px;
                 max-height: 20px;
             }
+            .item-name {
+                width: fit-content;
+                max-width: fit-content
+            };
             a {
                 padding-left: 2px;
+            }
+            .item-qtd-control {
+                font-size: 7px;
+                flex: 0 0 5px;
+                width: fit-content;
+            }
+            .controls {
+                max-width: fit-content;
             }
         }
     }

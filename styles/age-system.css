@@ -1283,15 +1283,31 @@
 .age-system.sheet.char .item-container .actor-items {
   justify-content: stretch;
 }
-.age-system.sheet.char .item-container .item-name {
+.age-system.sheet.char .item-container .item-card {
+  align-items: center;
+  justify-content: space-between;
+}
+.age-system.sheet.char .item-container .item-card .main-data {
   align-items: center;
 }
-.age-system.sheet.char .item-container .item-name img {
+.age-system.sheet.char .item-container .item-card img {
   max-width: 20px;
   max-height: 20px;
 }
-.age-system.sheet.char .item-container .item-name a {
+.age-system.sheet.char .item-container .item-card .item-name {
+  width: fit-content;
+  max-width: fit-content;
+}
+.age-system.sheet.char .item-container .item-card a {
   padding-left: 2px;
+}
+.age-system.sheet.char .item-container .item-card .item-qtd-control {
+  font-size: 7px;
+  flex: 0 0 5px;
+  width: fit-content;
+}
+.age-system.sheet.char .item-container .item-card .controls {
+  max-width: fit-content;
 }
 .age-system.sheet.char .top-row {
   height: 20px;
@@ -3500,7 +3516,6 @@
 body,
 select {
   font-family: 'Roboto' !important;
-  font-style: normal !important;
 }
 /*---------Background---------------------*/
 .window-app.sheet.char .window-content,

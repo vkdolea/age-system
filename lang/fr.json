@@ -13,6 +13,9 @@
     "ITEM.TypeMembership": "Affiliation",
 	"ITEM.TypeSpaceshipfeatures": "Fonctionnalité Vaisseaux spatiaux",
 
+    "SETTINGS.initiativeFocus": "XXX -Inform name of Initiative Focus",
+    "SETTINGS.initiativeFocusHint": "XXX - Type the name of Focus used in the Initiative roll - leave it in blank to disregard focus bonus to Initiative",
+
     "SETTINGS.useConviction": "Utiliser Conviction",
     "SETTINGS.useConvictionHint": "Afficher la section Conviction pour le suivi",
 
@@ -98,8 +101,8 @@
 	"SETTINGS.serendipity": "Utiliser Sérendipité",
     "SETTINGS.serendipityHint": "Utiliser la règle optionnelle de Modern AGE pour Sérendipité",
 
-    "SETTINGS.observerRoll": "XXX",
-    "SETTINGS.observerRollHint": "XXX",
+    "SETTINGS.observerRoll": "Permet à un Observateur de faire des jets",
+    "SETTINGS.observerRollHint": "Permet aux joueurs avec le rôle d'Observateur de faire des jets depuis les fiches ou les jets de la discussion",
 	
     "age-system": {
 	
@@ -487,7 +490,7 @@
             "aimMnv": "Viser",
             "armorPenalty": "Pénalité d'armure",
 			"speed": "Rapidité",
-            "armorStrain": "XXX"
+            "armorStrain": "Fatigue d'armure"
         },
 
         "stuntsContainer": "Prouesses",
@@ -516,8 +519,8 @@
 			"resistedEffect": "Effet si résiste",
             "testResist": "Test de résistance"
         },
-        "incQtd": "XXX - Increase Quantity",
-        "decQtd": "XXX - Decrease Quantity",
+        "incQtd": "Augmente la quantité",
+        "decQtd": "Diminue la quantité",
         "rollDamage": "Jet de dégâts",
 		"rollHealing": "Jet de soin",
         "itemDmgMod": "Bonus Général",

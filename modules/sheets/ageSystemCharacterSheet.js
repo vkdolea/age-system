@@ -128,7 +128,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
-            html.find(".item-show").click(this._onItemShow.bind(this));
+            html.find(".item-name").click(this._onItemShow.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
@@ -175,7 +175,14 @@ export default class ageSystemCharacterSheet extends ActorSheet {
     };
 
     _onChangeQuantity(event) {
-
+        event.preventDefault();
+        const e = event.currentTarget;
+        const classList = e.classList;
+        let itemId = e.closest(".feature-controls").dataset.itemId;
+        const item = this.actor.items.get(itemId);
+        const qtd = item.data.data.quantity;
+        if (classList.contains("add")) return item.update({"data.quantity": qtd+1});
+        if (classList.contains("remove") && qtd > 0) return item.update({"data.quantity": qtd-1});
     }
 
     _onToggleItemMod(event) {
