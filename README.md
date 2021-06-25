@@ -96,6 +96,12 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.8 [2021-06-25]
+#### Fixed
+- French translation correction.
+- Talent degree is now showing up again in front of Talent name.
+- Bug preventing Condition selection from character sheet.
+
 ### 0.7.7 [2021-06-24]
 #### Added
 - Picture on Honorifics and Membership item sheets.

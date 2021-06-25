@@ -247,7 +247,7 @@
                     <div class="item-card flexrow">
                         <div class="main-data flexrow">
                             <img class="item-image" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                            <a class="item-show item-name">{{item.name}}</a>
+                            <a class="item-show item-name">{{item.name}}{{#if item.data.shortDesc}} ({{item.data.shortDesc}}){{/if}}</a>
                         </div>
                         <div class="controls flexrow">
                             <a class="item-control item-equip {{#unless item.data.activate}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i></a>

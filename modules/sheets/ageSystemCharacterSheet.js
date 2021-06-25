@@ -128,7 +128,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
-            html.find(".item-name").click(this._onItemShow.bind(this));
+            html.find(".item-show").click(this._onItemShow.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
