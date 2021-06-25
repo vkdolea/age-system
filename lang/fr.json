@@ -13,8 +13,8 @@
     "ITEM.TypeMembership": "Affiliation",
 	"ITEM.TypeSpaceshipfeatures": "Fonctionnalité Vaisseaux spatiaux",
 
-    "SETTINGS.initiativeFocus": "Initiative Compétence Nom",
-    "SETTINGS.initiativeFocusHint": "Tapez le nom de Compétence utilisé dans le jet d'Initiative - laissez-le en blanc pour ignorer le bonus de compétence à l'Initiative",
+    "SETTINGS.initiativeFocus": "Indiquez le Compétence donnant un bonus d'Initiative",
+    "SETTINGS.initiativeFocusHint": "Indiquez le nom du Compétence utilisé pour le bonus d'Initiative - ne mentionnez rien pour n'appliquer aucun bonus à l'Initiative",
 
     "SETTINGS.useConviction": "Utiliser Conviction",
     "SETTINGS.useConvictionHint": "Afficher la section Conviction pour le suivi",
