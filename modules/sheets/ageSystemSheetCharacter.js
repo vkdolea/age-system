@@ -9,7 +9,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             // resizable: false,
             width: 680,
             height: 800,
-            classes: ["age-system", "sheet", "char", /*`colorset-${ageSystem.colorScheme}`*/],
+            classes: ["age-system", "sheet", "char", "standard"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",
                 contentSelector: ".sheet-tab-section",

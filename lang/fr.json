@@ -107,10 +107,11 @@
     "age-system": {
 	
 		"SHEETS": {
-            "standardChar": "Personnage AGE",
-            "standardVehicle": "Véhicule AGE",
-            "standardItem": "Objet AGE",
-            "standardSpaceship": "Vaisseau spatial AGE"
+            "charStandard": "Personnage AGE",
+            "charStatBlock": "",
+            "vehicleStandard": "Véhicule AGE",
+            "itemStandard": "Objet AGE",
+            "spaceshipStandard": "Vaisseau spatial AGE"
         },
 
         "WARNING": {

@@ -1,3 +1,7 @@
+/*******************************/
+/**     Color Schemed Def     **/
+/*******************************/
+
 /** Modern Blue Colors **/
 @modern-blue: #007DAD;
 @modern-blue-high: #35A5CA;
@@ -94,6 +98,10 @@
 // Name inside @colorsets must be the same key on game Settings!
 @colorsets: modern-blue, fantasy-blue, dragon-red, folded-purple, ronin-green, select-one, the-grey, red-warrior,never-dead;
 @color-list: @modern-blue-list, @fantasy-blue-list, @dragon-red-list, @folded-purple-list, @ronin-green-list, @select-one-list, @the-grey-list, @red-warrior-list, @never-dead-list;
+
+/*******************************/
+/**     Color Style Rules     **/
+/*******************************/
 
 each(@colorsets, {
     .colorset-@{value} {

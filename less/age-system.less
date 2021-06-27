@@ -1,5 +1,6 @@
 @import "./item-sheet.less";
 @import "./char-sheet.less";
+@import "./char-stat-block.less";
 @import "./vehicle-sheet.less";
 @import "./spaceship-sheet.less";
 @import "./age-roll-sheet.less";
@@ -45,6 +46,7 @@
 
 // Avoid text on context-menu from wrapping
 #context-menu {
+    width: fit-content;
     li {
         white-space: nowrap;
         text-align: left;
@@ -52,10 +54,8 @@
 }
 
 /*---- Font Override----*/
-body,
-select {
+body *:not(i) {
     font-family: 'Roboto' !important;
-    // font-style: normal !important;
 }
 
 /*---------Background---------------------*/
