@@ -577,7 +577,7 @@ export class ageSystemActor extends Actor {
         } else {
             const focusId = validFocus[0].id;
             const focus = this.items.get(focusId);
-            return {focusName: namedFocus, focusItem: focus, id: focusId, value: focus.data.data.finalValue}
+            return {focusName: namedFocus, focusItem: focus, id: focusId, focusAbl: focus.data.data.useAbl, value: focus.data.data.finalValue}
         };
     }
 

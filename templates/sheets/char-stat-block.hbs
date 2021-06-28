@@ -1,9 +1,11 @@
 {{!-- Colorset defined in the Actor Sheet Class --}}
 <form class="actor-sheet {{cssClass}} colorset-{{data.colorScheme}} colorset-selection" autocomplete="off">
     <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
-    <div class="flexcol">
+    
+    <div class="stat-block-container flexcol">
+        
         {{!-- Abilities and Focus --}}
-        <ul class="ability-table">
+        <ul class="ability-table font-small-table column-width block-item">
             <li class="ability-row header">
                 <span><strong>{{localize "age-system.abl"}}</strong>&nbsp({{localize "age-system.focus"}})</span>
             </li>
@@ -17,7 +19,7 @@
                 <div class="abl-name-focus flexrow">
                     <a class="abl-name roll-ability">{{name}}</a>
                     {{#each (focusbyabl ../data.focus type) as |item|}}
-                    <div class="item-name item-box focus-options feature-controls" data-item-id="{{item._id}}">
+                    <div class="item-name focus-options feature-controls" data-item-id="{{item._id}}">
                         <a class="item-name roll-item{{#if item.data.improved}} improved-focus{{/if}}">{{#if @first}}&nbsp({{else}}&nbsp{{/if}}{{item.name}}{{#if @last}}){{else}},{{/if}}</a>
                     </div>
                     {{/each}}
@@ -27,7 +29,7 @@
         </ul>
 
         {{!-- Speed, Health, Defense, Armor/Toughness --}}
-        <div class="flexcol ability-table footer">
+        <div class="flexcol derived-stats-table font-small-table footer column-width block-item">
             <div class="flexrow header">
                 <span class="speed">{{localize "age-system.speed"}}</span>
                 <span class="health">{{localize "age-system.health"}}</span>
@@ -52,11 +54,11 @@
                 <span class="armor flexrow flex-align-center">
                     <div>{{data.data.armor.impact}}{{#if data.data.useBallisticArmor}}{{localize "age-system.impactIndex"}}{{/if}}</div>
                     {{#if data.data.useBallisticArmor}}
-                    <span>&nbsp/&nbsp</span>
+                    <span>/</span>
                     <div>{{data.data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
                     {{/if}}
                     {{#if data.data.useToughness}}
-                    <span>&nbsp+&nbsp</span>
+                    <span>+</span>
                     <input type="number" disabled class="main-value" name="data.armor.toughness.total" value="{{data.data.armor.toughness.total}}" data-dtype="Number" />
                     {{/if}}
                 </span>
@@ -64,27 +66,80 @@
         </div>
 
         {{!-- Weapons and Attacks --}}
-        <ul class="flexcol weapon-table">
+        <ul class="flexcol weapon-table font-small-table column-width block-item">
             <li class="flexrow header">
                 <span class="weapon-name">{{localize "age-system.weapon"}}</span>
                 <span class="weapon-attack">{{localize "age-system.settings.attack"}}</span>
                 <span class="weapon-damage">{{localize "age-system.item.damage"}}</span>
             </li>
-            {{#each (equippedwpn data.weapon) as |weapon|}}
-            <li class="item-name item-box feature-controls" data-item-id="{{weapon._id}}">
-                <a class="weapon-name show-item">{{weapon.name}}{{#if (ne weapon.data.quantity 1)}} ({{weapon.data.quantity}}){{/if}}</a>
-                <a class="weapon-attack roll-item"></a>
-                <a class="weapon-damage roll-damage"></a>
+            {{#each (equippedwpn data.weapon) as |item|}}
+            <li class="item-name item-box feature-controls flexrow body colorset-second-tier" data-item-id="{{item._id}}">
+                <a class="weapon-name item-show">{{item.name}}{{#if (ne item.data.quantity 1)}} ({{item.data.quantity}}){{/if}}</a>
+                <a class="weapon-attack roll-item">{{#if (gte item.data.atkRollMod 0)}}+{{/if}}{{item.data.atkRollMod}}</a>
+                <a class="weapon-damage roll-damage">{{item.data.dmgFormula}}</a>
+            </li>
+            {{/each}}
+            {{#each (dmgpower data.power) as |item|}}
+            <li class="item-name item-box feature-controls flexrow body colorset-second-tier" data-item-id="{{item._id}}">
+                <a class="weapon-name item-show">{{item.name}}{{#if item.data.hasHealing}} <i class="fas fa-heart"></i>{{/if}}</a>
+                <a class="weapon-attack roll-item">{{#if (gte item.data.atkRollMod 0)}}+{{/if}}{{item.data.atkRollMod}}</a>
+                <a class="weapon-damage roll-damage">{{item.data.dmgFormula}}</a>
             </li>
             {{/each}}
         </ul>
 
         {{!-- Special Qualities --}}
-        <div>
-            {{!-- Talents --}}
+        <ul class="flexcol special-quality-table font-small-table column-width block-item">
+            <li class="header">{{localize "age-system.specialQualities"}}</li>
+
+            {{!-- Equipment --}}
+            {{#if (carriedequip items)}}
+            <li class="flexrow equipment-list description body item-box">
+                <p>
+                    <span class="quality-label colorset-second-tier">{{localize "age-system.equipment"}}:</span>
+                    {{#each (carriedequip items) as |item|}}
+                    <span class="item-name feature-controls" data-item-id="{{item._id}}">
+                        <a class="item-name item-show">&nbsp<a class="item-control item-equip {{#unless item.data.equiped}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i></a> {{item.name}}{{#if (ne item.data.quantity 1)}} ({{item.data.quantity}}){{/if}}{{#if @last}}.{{else}},{{/if}}</a>
+                    </span>
+                    {{/each}}
+                </p>
+            </li>
+            {{/if}}
             {{!-- Stunts --}}
+            {{#if data.stunts}}
+            <li class="flexrow description body item-box">
+                <p>
+                    <span class="quality-label colorset-second-tier">{{localize "age-system.settings.stunts"}}:</span>
+                    {{#each data.stunts as |item|}}
+                    <span class="item-name feature-controls" data-item-id="{{item._id}}">
+                        <a class="item-name item-show">&nbsp[{{item.data.stuntPoints}} {{localize "age-system.settings.stuntPointsIndex"}}] {{item.name}}{{#if @last}}.{{else}},{{/if}}</a>
+                    </span>
+                    {{/each}}
+                </p>
+            </li>
+            {{/if}}
+            {{#if data.talent}}
+            <li class="flexrow description body item-box">
+                <p>
+                    <span class="quality-label colorset-second-tier">{{localize "age-system.talent"}}:</span>
+                    {{#each data.talent as |item|}}
+                    <span class="item-name feature-controls" data-item-id="{{item._id}}">
+                        <a class="item-name item-show">&nbsp{{item.name}}{{#if item.data.shortDesc}} ({{item.data.shortDesc}}){{/if}}{{#if @last}}.{{else}},{{/if}}</a>
+                    </span>
+                    {{/each}}
+                </p>
+            </li>
+            {{/if}}
+
             {{!-- Powers --}}
-        </div>
+            {{#each data.power as |item|}}
+            <li class="item-box description body feature-controls" data-item-id="{{item._id}}">
+                <label class="quality-label colorset-second-tier"><a class="item-control item-equip {{#unless item.data.activate}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i></a> <a class="item-show">{{item.name}}</a></label>
+                <div>{{{item.data.longDesc}}}</div>
+            </li>
+            {{/each}}
+        </ul>        
+
 
     </div>
 </form>

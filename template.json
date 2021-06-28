@@ -548,7 +548,7 @@
             "templates": ["damage", "itemReq", "description", "activation", "bonuses"],
             "powerLevel": 0,
             "castTime": "minor",
-            "activated": false,
+            "activate": false,
             "useFatigue": false,
             "inputFatigueTN": false,
             "ablFatigue": "will",

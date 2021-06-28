@@ -168,6 +168,16 @@ Hooks.once("init", async function() {
         return weapons.filter(f => f.data.equiped === true)
     })
 
+    // Handlebar returning array with active Power dealing damage
+    Handlebars.registerHelper('dmgpower', function(powers) {
+        return powers.filter(p => p.data.activate === true && (p.data.hasDamage || p.data.hasHealing))
+    })
+
+    // Handlebar returning all carried itens
+    Handlebars.registerHelper('carriedequip', function(items) {
+        return items.filter(p => p.type === "equipment" || p.type === "weapon")
+    })
+
     // Handlebar helper to compare 2 data
     Handlebars.registerHelper("when",function(operand_1, operator, operand_2, options) {
         let operators = {

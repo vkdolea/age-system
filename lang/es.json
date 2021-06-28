@@ -296,6 +296,7 @@
         "relationship": "Vínculo",
         "honorifics": "Títulos",
         "membership": "Afiliación",
+        "specialQualities": "XXX Special Qualities",
 
         "settings": {
             "totalRolled": "Total tirada",

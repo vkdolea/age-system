@@ -3,7 +3,7 @@
     "ACTOR.TypeVehicle": "Vehicle",
     "ACTOR.TypeSpaceship": "Spaceship",
     "ITEM.TypeStunts": "Stunt",
-    "ITEM.TypeEquipment": "General Equipment",
+    "ITEM.TypeEquipment": "Equipment",
     "ITEM.TypePower": "Power & Arcana",
     "ITEM.TypeTalent": "Talent",
     "ITEM.TypeFocus": "Focus",
@@ -296,6 +296,7 @@
         "relationship": "Relationship",
         "honorifics": "Honorifics",
         "membership": "Membership",
+        "specialQualities": "Special Qualities",
 
         "settings": {
             "totalRolled": "Roll Total",

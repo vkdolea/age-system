@@ -3,6 +3,20 @@
 /*******************************/
 
 .age-system.sheet.char.stat-block {
+    .stat-block-container {
+        align-content: center;
+        .block-item {
+            flex: 0 0 auto;
+        }
+        .flexcol.block-item {
+            > * {
+                flex: 0 0 auto;
+            }
+        }
+    }
+    .not-equiped {
+        opacity: 0.4 !important;
+    }
     input {
         text-align: center;
     }
@@ -10,6 +24,9 @@
         margin: 0;
         padding: 0;
         list-style-type: none;
+    }
+    li {
+        padding: 0 4px;
     }
     li.ability-box:nth-of-type(2n+1) {
         background-color: white;
@@ -23,28 +40,33 @@
         text-align: center;
         background-color: white;
         color: black;
+        max-height: fit-content;
+    }
+    // .column-width {
+    //     min-width: 300px;
+    // }
+    .font-small-table {
+        font-variant: small-caps;
+        font-size: 12px;
     }
     li.ability-row.header {
         padding-top: 5px;
     }
     li.ability-row {
         min-height: 26px;
-        font-variant: small-caps;
         align-items: center;
-        width: 300px;
         .abl-value-box {
             flex: 0 0 50px;
             input {
                 max-width: 50px;
-                // min-width: 20px;
             }
         }
         .abl-name-focus {
+            flex: 0 0 fit-content;
             .abl-name {
                 font-weight: bold;
             }
             justify-content: center;
-            flex: 0 0 250px;
             .improved-focus {
                 text-decoration: underline;
             }
@@ -53,15 +75,25 @@
             }
         }
     }
-    .ability-table.footer {
-        font-variant: small-caps;
-        width: 300px;
-        font-size: 12px;
+    .derived-stats-table.footer {
         .data,
         .header {
             text-align: center;
             justify-items: center;
             align-items: center;
+        }
+        .data .armor span {
+            flex: 0 0 min-content;
+        }
+    }
+    .item-box {
+        border-bottom: 1px solid black;
+    }
+    .description {
+        text-align: justify;
+        .quality-label {
+            background-color: white !important;
+            font-weight: bold;
         }
     }
 
