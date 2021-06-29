@@ -9,7 +9,7 @@ export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter
         return mergeObject(super.defaultOptions, {
             // resizable: false,
             width: 400,
-            height: 600,
+            height: 500,
             classes: ["age-system", "sheet", "char", "stat-block"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",

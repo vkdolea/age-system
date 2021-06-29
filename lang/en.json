@@ -113,6 +113,8 @@
             "itemStandard": "AGE Item",
             "spaceshipStandard": "AGE Spaceship"
         },
+        "sheetFull": "Full",
+        "sheetBlock": "Block",
 
         "WARNING": {
             "duplicatedFocus": "Focus is not added to character - it already owns a Focus named ",

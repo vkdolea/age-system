@@ -113,6 +113,8 @@
             "itemStandard": "Objet AGE",
             "spaceshipStandard": "Vaisseau spatial AGE"
         },
+        "sheetFull": "Full",
+        "sheetBlock": "Block",
 
         "WARNING": {
             "duplicatedFocus": "Ajout de compétence refusé - le joueur dispose déjà de cette compétence",

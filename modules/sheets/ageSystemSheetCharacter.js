@@ -2,7 +2,7 @@ import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 
-export default class ageSystemCharacterSheet extends ActorSheet {
+export default class ageSystemSheetCharacter extends ActorSheet {
     
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -122,7 +122,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
 
         buttons = [
             {
-              label: isFull ? "Block" : "Standard",
+              label: isFull ? game.i18n.localize("age-system.sheetBlock") : game.i18n.localize("age-system.sheetFull"),
               class: "configure-sheet-inuse",
               icon: "far fa-id-badge",
               onclick: ev => this._onToggleSheet(ev)
@@ -141,7 +141,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
           Object.values(CONFIG.Actor.sheetClasses['char']).filter(s => s.default)[0].id
         console.log('original: ' + original)
     
-        if (original != 'age-system.AgeSystemSheetCharacter') newSheet = 'age-system.AgeSystemSheetCharacter'
+        if (original != 'age-system.ageSystemSheetCharacter') newSheet = 'age-system.ageSystemSheetCharacter'
     
         this.actor.openSheet(newSheet)
     }

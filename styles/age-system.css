@@ -1340,6 +1340,13 @@
 .age-system.sheet.char.stat-block input {
   text-align: center;
 }
+.age-system.sheet.char.stat-block input[name="name"] {
+  min-width: 100%;
+  border-radius: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 2px 10px;
+}
 .age-system.sheet.char.stat-block ul {
   margin: 0;
   padding: 0;

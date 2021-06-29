@@ -314,7 +314,7 @@ Hooks.on("renderageSystemItemSheet", (app, html, data) => {
     Setup.nameItemSheetWindow(app);
 });
 
-Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
+Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {
     // Hide primary Abilities checkbox
     Setup.hidePrimaryAblCheckbox(html);
 });

@@ -113,6 +113,8 @@
             "itemStandard": "Item AGE",
             "spaceshipStandard": "Espaçonave AGE"
         },
+        "sheetFull": "Completa",
+        "sheetBlock": "Bloco",
 
         "WARNING": {
             "duplicatedFocus": "O foco não foi adicionado ao personagem - ele já possui um foco de mesmo nome",

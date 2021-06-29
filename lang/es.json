@@ -113,6 +113,8 @@
             "itemStandard": "Objeto AGE",
             "spaceshipStandard": "Nave AGE"
         },
+        "sheetFull": "xxx Full",
+        "sheetBlock": "xxx Block",
 
         "WARNING": {
             "duplicatedFocus": "Concentración no añadida al personaje - ya dispone de una con nombre ",
