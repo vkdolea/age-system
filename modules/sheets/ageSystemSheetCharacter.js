@@ -124,7 +124,7 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             {
               label: isFull ? "Block" : "Standard",
               class: "configure-sheet-inuse",
-              icon: "fa fa-bars",
+              icon: "far fa-id-badge",
               onclick: ev => this._onToggleSheet(ev)
             }
         ].concat(buttons);
