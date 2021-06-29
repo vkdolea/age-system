@@ -113,6 +113,38 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             isGM: game.user.isGM
         };
     };
+
+    _getHeaderButtons() {
+        let buttons = super._getHeaderButtons();
+
+        const sheet = this.actor.getFlag('core', 'sheetClass');
+        const isFull = sheet === undefined || sheet === 'age-system.AgeSystemSheetCharacter';
+
+        buttons = [
+            {
+              label: isFull ? "Block" : "Standard",
+              class: "configure-sheet-inuse",
+              icon: "fa fa-bars",
+              onclick: ev => this._onToggleSheet(ev)
+            }
+        ].concat(buttons);
+
+        return buttons;
+    }
+
+    async _onToggleSheet(event) {
+        event.preventDefault()
+        let newSheet = 'age-system.ageSystemSheetCharStatBlock'
+    
+        const original =
+          this.actor.getFlag('core', 'sheetClass') ||
+          Object.values(CONFIG.Actor.sheetClasses['char']).filter(s => s.default)[0].id
+        console.log('original: ' + original)
+    
+        if (original != 'age-system.AgeSystemSheetCharacter') newSheet = 'age-system.AgeSystemSheetCharacter'
+    
+        this.actor.openSheet(newSheet)
+    }
     
     activateListeners(html) {
         html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));

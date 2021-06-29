@@ -38,6 +38,7 @@ async function preloadHandlebarsTemplates() {
         `${path}char-sheet-tab-persona.hbs`,
         `${path}char-sheet-tab-effects.hbs`,
         `${path}item-card-buttons.hbs`,
+        `${path}char-stat-block-column1.hbs`,
     ];
 
     return loadTemplates(templatePaths);

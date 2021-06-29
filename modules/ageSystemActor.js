@@ -605,4 +605,13 @@ export class ageSystemActor extends Actor {
             return this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
         }
     }
+
+    async openSheet(newSheet) {
+        const sheet = this.sheet
+        await sheet.close()
+        this._sheet = null
+        delete this.apps[sheet.appId]
+        await this.setFlag('core', 'sheetClass', newSheet)
+        this.sheet.render(true)
+    }
 };
