@@ -96,6 +96,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.9 [2021-06-xx]
+#### Added
+- Stat block sheet implemented.
+
 ### 0.7.8 [2021-06-25]
 #### Fixed
 - French translation correction.

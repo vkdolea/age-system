@@ -1325,6 +1325,18 @@
 /*******************************/
 /**     Stat Block Style      **/
 /*******************************/
+.age-system.sheet.char.stat-block form.actor-sheet > * {
+  flex: 0 0 auto;
+}
+.age-system.sheet.char.stat-block form.actor-sheet .filler {
+  flex: auto;
+  background-color: white;
+}
+.age-system.sheet.char.stat-block footer {
+  height: 26px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
 .age-system.sheet.char.stat-block .stat-block-container {
   align-content: center;
 }

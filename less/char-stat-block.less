@@ -3,6 +3,18 @@
 /*******************************/
 
 .age-system.sheet.char.stat-block {
+    form.actor-sheet > * {
+        flex: 0 0 auto;
+    }
+    form.actor-sheet .filler {
+        flex: auto;
+        background-color: white;
+    }
+    footer {
+        height: 26px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
     .stat-block-container {
         align-content: center;
         .block-item {
@@ -49,9 +61,6 @@
         color: black;
         max-height: fit-content;
     }
-    // .column-width {
-    //     min-width: 300px;
-    // }
     .font-small-table {
         font-variant: small-caps;
         font-size: 12px;
