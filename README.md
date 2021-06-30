@@ -100,6 +100,9 @@ Icons made by:
 #### Added
 - Stat block sheet implemented.
 
+#### Fixed
+- Item template correction (Talent *activate* field added).
+
 ### 0.7.8 [2021-06-25]
 #### Fixed
 - French translation correction.

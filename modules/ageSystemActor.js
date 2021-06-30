@@ -107,6 +107,23 @@ export class ageSystemActor extends Actor {
         }
     };
 
+    // Attempt to register Compact shee to GM Screen, but not successful... :-(
+        
+    // _onCreate(data, options, userId) {
+    //     super._onCreate(data, options, userId);
+    //     if (data.type === "char" && game.user.id === userId) {
+    //         const gmScreenFlag = {gmScreenSheetClass: `age-system.ageSystemSheetCharStatBlock`};
+    //         this.data.flags = {
+    //             ...this.data.flgas,
+    //             "gm-screen": gmScreenFlag
+    //         };
+    //         this._sheet.object.data.flags = {
+    //             ...this._sheet.object.data.flags,
+    //             "gm-screen": gmScreenFlag
+    //         }
+    //     }
+    // }
+
     _prepareBaseDataChar() {
 
         const actorData = this.data;

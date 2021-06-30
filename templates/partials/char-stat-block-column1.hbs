@@ -24,14 +24,14 @@
 </ul>
 
 {{!-- Speed, Health, Defense, Armor/Toughness --}}
-<div class="flexcol derived-stats-table font-small-table footer column-width block-item">
-    <div class="flexrow header">
+<ul class="derived-stats-table font-small-table footer column-width block-item">
+    <li class="flexrow header">
         <span class="speed">{{localize "age-system.speed"}}</span>
         <span class="health">{{localize "age-system.health"}}</span>
         <span class="defense">{{localize "age-system.defense"}}</span>
         <span class="armor">{{localize "age-system.armor"}}</span>
-    </div>
-    <div class="flexrow data body">
+    </li>
+    <li class="flexrow data body">
         <span class="speed">
             <input type="number" disabled class="main-value" name="data.speed.total" value="{{data.data.speed.total}}" data-dtype="Number" />
         </span>
@@ -57,8 +57,8 @@
             <input type="number" disabled class="main-value" name="data.armor.toughness.total" value="{{data.data.armor.toughness.total}}" data-dtype="Number" />
             {{/if}}
         </span>
-    </div>
-</div>
+    </li>
+</li>
 
 {{!-- Weapons and Attacks --}}
 <ul class="flexcol weapon-table font-small-table column-width block-item">
@@ -84,7 +84,7 @@
 </ul>
 
 {{!-- Special Qualities --}}
-<ul class="flexcol special-quality-table font-small-table column-width block-item">
+<ul class="special-quality-table font-small-table column-width block-item">
     <li class="header">{{localize "age-system.specialQualities"}}</li>
 
     {{!-- Equipment --}}
@@ -94,7 +94,7 @@
             <span class="quality-label colorset-second-tier">{{localize "age-system.equipment"}}:</span>
             {{#each (carriedequip items) as |item|}}
             <span class="item-name feature-controls" data-item-id="{{item._id}}">
-                <a class="item-name item-show">&nbsp<a class="item-control item-equip {{#unless item.data.equiped}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i></a> {{item.name}}{{#if (ne item.data.quantity 1)}} ({{item.data.quantity}}){{/if}}{{#if @last}}.{{else}},{{/if}}</a>
+                <span class="item-name">&nbsp<a class="item-control item-equip {{#unless item.data.equiped}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i></a> <a class="item-show">{{item.name}}{{#if (ne item.data.quantity 1)}} ({{item.data.quantity}}){{/if}}</a>{{#if @last}}.{{else}},{{/if}}</span>
             </span>
             {{/each}}
         </p>
@@ -113,13 +113,14 @@
         </p>
     </li>
     {{/if}}
+    {{!-- Talents --}}
     {{#if data.talent}}
     <li class="flexrow description body item-box">
         <p>
             <span class="quality-label colorset-second-tier">{{localize "age-system.talent"}}:</span>
             {{#each data.talent as |item|}}
             <span class="item-name feature-controls" data-item-id="{{item._id}}">
-                <a class="item-name item-show">&nbsp{{item.name}}{{#if item.data.shortDesc}} ({{item.data.shortDesc}}){{/if}}{{#if @last}}.{{else}},{{/if}}</a>
+                <span class="item-name">&nbsp<a class="item-control item-equip {{#unless item.data.activate}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i></a> <a class="item-show">{{item.name}}{{#if item.data.shortDesc}} ({{item.data.shortDesc}}){{/if}}</a>{{#if @last}}.{{else}},{{/if}}</span>
             </span>
             {{/each}}
         </p>

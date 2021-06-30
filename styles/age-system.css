@@ -1325,26 +1325,18 @@
 /*******************************/
 /**     Stat Block Style      **/
 /*******************************/
-.age-system.sheet.char.stat-block form.actor-sheet > * {
-  flex: 0 0 auto;
-}
 .age-system.sheet.char.stat-block form.actor-sheet .filler {
   flex: auto;
   background-color: white;
 }
 .age-system.sheet.char.stat-block footer {
-  height: 26px;
+  flex: 0 0 26px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 .age-system.sheet.char.stat-block .stat-block-container {
   align-content: center;
-}
-.age-system.sheet.char.stat-block .stat-block-container .block-item {
-  flex: 0 0 auto;
-}
-.age-system.sheet.char.stat-block .stat-block-container .flexcol.block-item > * {
-  flex: 0 0 auto;
+  min-width: 100%;
 }
 .age-system.sheet.char.stat-block .not-equiped {
   opacity: 0.4 !important;
@@ -1354,6 +1346,7 @@
 }
 .age-system.sheet.char.stat-block input[name="name"] {
   min-width: 100%;
+  max-height: 26px;
   border-radius: 0;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -1363,6 +1356,7 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
+  width: 100%;
 }
 .age-system.sheet.char.stat-block li {
   padding: 0 4px;
@@ -1399,7 +1393,6 @@
   max-width: 50px;
 }
 .age-system.sheet.char.stat-block li.ability-row .abl-name-focus {
-  flex: 0 0 fit-content;
   justify-content: center;
 }
 .age-system.sheet.char.stat-block li.ability-row .abl-name-focus .abl-name {
@@ -1417,11 +1410,8 @@
   justify-items: center;
   align-items: center;
 }
-.age-system.sheet.char.stat-block .derived-stats-table.footer .data .armor span {
-  flex: 0 0 min-content;
-}
 .age-system.sheet.char.stat-block .item-box {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 .age-system.sheet.char.stat-block .description {
   text-align: justify;
