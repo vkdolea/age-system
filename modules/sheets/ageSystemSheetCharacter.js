@@ -2,14 +2,14 @@ import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 
-export default class ageSystemCharacterSheet extends ActorSheet {
+export default class ageSystemSheetCharacter extends ActorSheet {
     
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             // resizable: false,
             width: 680,
             height: 800,
-            classes: ["age-system", "sheet", "char", /*`colorset-${ageSystem.colorScheme}`*/],
+            classes: ["age-system", "sheet", "char", "standard"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",
                 contentSelector: ".sheet-tab-section",
@@ -113,6 +113,38 @@ export default class ageSystemCharacterSheet extends ActorSheet {
             isGM: game.user.isGM
         };
     };
+
+    _getHeaderButtons() {
+        let buttons = super._getHeaderButtons();
+
+        const sheet = this.actor.getFlag('core', 'sheetClass');
+        const isFull = sheet === undefined || sheet === 'age-system.ageSystemSheetCharacter';
+
+        buttons = [
+            {
+              label: isFull ? game.i18n.localize("age-system.sheetBlock") : game.i18n.localize("age-system.sheetFull"),
+              class: "configure-sheet-inuse",
+              icon: "far fa-id-badge",
+              onclick: ev => this._onToggleSheet(ev)
+            }
+        ].concat(buttons);
+
+        return buttons;
+    }
+
+    async _onToggleSheet(event) {
+        event.preventDefault()
+        let newSheet = 'age-system.ageSystemSheetCharStatBlock'
+    
+        const original =
+          this.actor.getFlag('core', 'sheetClass') ||
+          Object.values(CONFIG.Actor.sheetClasses['char']).filter(s => s.default)[0].id
+        console.log('original: ' + original)
+    
+        if (original != 'age-system.ageSystemSheetCharacter') newSheet = 'age-system.ageSystemSheetCharacter'
+    
+        this.actor.openSheet(newSheet)
+    }
     
     activateListeners(html) {
         html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));

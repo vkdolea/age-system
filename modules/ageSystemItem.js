@@ -22,6 +22,63 @@ export class ageSystemItem extends Item {
         if (this.data.type === "power" && this.data.data.useFatigue) {return game.settings.get("age-system", "useFatigue")};
         return false;
     };
+
+    // Check attack formula
+    get attackBonus() {
+        if (!this.hasDamage || !this.actor?.data) return null;
+        const actor = this.actor.data.data;
+        const item = this.data.data;
+        const useFocus = this.actor.checkFocus(this.data.data.useFocus);
+        let bonus = useFocus.focusAbl + useFocus.value;
+        const actorMods = [
+            {mod: "testMod", value: 0},
+            {mode: "attackMod", value: 0}
+        ];
+        const itemMods = [
+            {mod: "itemActivation", value: 0}
+        ]
+        if (actor.ownedBonus) {
+            for (let am = 0; am < m.length; am++) {
+                const m = actorMods[am];
+                if (actor.ownedBonus[m.mod]) bonus += m.value;
+            };
+        };
+        for (let am = 0; am < m.length; am++) {
+            const m = itemMods[am];
+            if (item.itemMods[m.mod].selected && item.itemMods[m.mod].isActive) bonus += m.value;
+        };
+
+        return bonus;
+    }
+
+    // Damage formula
+    get damageFormula() {
+        if (!this.hasDamage || !this.actor?.data) return null;
+        const actor = this.actor.data.data;
+        const item = this.data.data;
+        let bonus = actor.abilities[item.dmgAbl].total + item.extraValue;
+        const actorMods = [
+            {mod: "actorDamage", value: 0},
+            {mode: "attackMod", value: 0}
+        ];
+        const itemMods = [
+            {mod: "itemDamage", value: 0}
+        ]
+        if (actor.ownedBonus) {
+            for (let am = 0; am < m.length; am++) {
+                const m = actorMods[am];
+                if (actor.ownedBonus[m.mod]) bonus += m.value;
+            };
+        };
+        for (let am = 0; am < m.length; am++) {
+            const m = itemMods[am];
+            if (item.itemMods[m.mod].selected && item.itemMods[m.mod].isActive) bonus += m.value;
+        };
+        const bonusString = bonus < 0 ? `${bonus}` : `+${bonus}`;
+        const formula = item.nrDice > 0 ? `${item.nrDrice}d${item.diceType} ${bonusString}` : `${bonusString}`;
+
+        return formula;
+    }
     
     /** @override */
     prepareBaseData() {
@@ -62,6 +119,49 @@ export class ageSystemItem extends Item {
                     }                
                 }
             };
+
+            // Evaluate Attack and Damage modifier
+            if (data.hasDamage || data.hasHealing) {
+                const actor = this.actor?.data?.data;
+                const useFocus = actor ? this.actor.checkFocus(this.data.data.useFocus) : null;
+
+                // Attack Mod
+                let atkBonus = useFocus ? useFocus.value : 0;
+                atkBonus += actor ? actor.abilities[data.useAbl].total ?? 0 : 0;
+                const atkBonusActor = ["testMod", "attackMod"];
+                if (actor?.ownedBonus) {
+                    for (let am = 0; am < atkBonusActor.length; am++) {
+                        const modName = atkBonusActor[am];
+                        if (actor.ownedBonus[modName]) atkBonus += actor.ownedBonus[modName].value;
+                    };
+                };
+                const atkBonusItem = ["itemActivation"];
+                for (let am = 0; am < atkBonusItem.length; am++) {
+                    const modName = atkBonusItem[am];
+                    if (data.itemMods[modName].selected && data.itemMods[modName].isActive) atkBonus += data.itemMods[modName].value;
+                };
+                data.atkRollMod = atkBonus;
+
+                // Damage Formula
+                let dmgBonus = 0;
+                const dmgBonusActor = ["actorDamage"];
+                if (actor?.ownedBonus) {
+                    for (let am = 0; am < dmgBonusActor.length; am++) {
+                        const modName = dmgBonusActor[am];
+                        if (actor.ownedBonus[modName]) dmgBonus += actor.ownedBonus[modName].value;
+                    };
+                };
+                const dmgBonusItem = ["itemDamage"];
+                for (let am = 0; am < dmgBonusItem.length; am++) {
+                    const modName = dmgBonusItem[am];
+                    if (data.itemMods[modName].selected && data.itemMods[modName].isActive) dmgBonus += data.itemMods[modName].value;
+                };
+                const abl = data.dmgAbl === "no-abl" ? null : data.dmgAbl;
+                let actorAblDmg = 0;
+                actorAblDmg += this.actor?.data?.data?.abilities?.[abl]?.total ?? 0;
+                data.dmgFormula = `${data.nrDice}d${data.diceType}+` + Roll.safeEval(`${dmgBonus} + ${data.extraValue} + ${actorAblDmg}`);
+            }
+
         }
 
         switch (itemType) {

@@ -1,3 +1,6 @@
+/*******************************/
+/**        Item Sheet         **/
+/*******************************/
 .age-system.item-chat-controls {
   margin-top: 6px;
 }
@@ -882,90 +885,93 @@
   min-width: 40px;
   text-align: center;
 }
-.age-system.sheet.char .sheet-header {
+/*******************************/
+/**    Default Char Sheet     **/
+/*******************************/
+.age-system.sheet.char.standard .sheet-header {
   height: 100%;
 }
-.age-system.sheet.char .sheet-header h1.charname {
+.age-system.sheet.char.standard .sheet-header h1.charname {
   margin-bottom: 4px;
 }
-.age-system.sheet.char .sheet-header h1.charname > input[name="name"] {
+.age-system.sheet.char.standard .sheet-header h1.charname > input[name="name"] {
   margin: 0px;
   padding: 10px 5px;
   width: 100%;
 }
-.age-system.sheet.char .sheet-header img {
+.age-system.sheet.char.standard .sheet-header img {
   height: 198px;
   width: 150px;
   object-fit: contain;
   border: 0px;
   margin-bottom: 4px;
 }
-.age-system.sheet.char .sheet-header .age-header {
+.age-system.sheet.char.standard .sheet-header .age-header {
   margin-bottom: 4px;
 }
-.age-system.sheet.char .sheet-header .age-header > div {
+.age-system.sheet.char.standard .sheet-header .age-header > div {
   margin-bottom: 4px;
 }
-.age-system.sheet.char .sheet-header .age-header .level-xp input[type="number"] {
+.age-system.sheet.char.standard .sheet-header .age-header .level-xp input[type="number"] {
   text-align: center;
 }
-.age-system.sheet.char .sheet-header .age-header label {
+.age-system.sheet.char.standard .sheet-header .age-header label {
   white-space: nowrap;
   max-width: fit-content;
   padding: 4px;
   flex: 0 0 fit-content;
 }
-.age-system.sheet.char nav.add-sheet-tabs {
+.age-system.sheet.char.standard nav.add-sheet-tabs {
   justify-content: space-evenly;
 }
-.age-system.sheet.char nav.add-sheet-tabs a.char {
+.age-system.sheet.char.standard nav.add-sheet-tabs a.char {
   max-width: max-content;
   padding: 2px 4px;
 }
-.age-system.sheet.char nav.add-sheet-tabs .active {
+.age-system.sheet.char.standard nav.add-sheet-tabs .active {
   font-weight: 900;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
 }
-.age-system.sheet.char .persona .container {
+.age-system.sheet.char.standard .persona .container {
   margin-bottom: 4px;
 }
-.age-system.sheet.char .persona .features label,
-.age-system.sheet.char .persona .goals label,
-.age-system.sheet.char .persona .bio label,
-.age-system.sheet.char .persona .secret-note label,
-.age-system.sheet.char .persona .language label {
+.age-system.sheet.char.standard .persona .features label,
+.age-system.sheet.char.standard .persona .goals label,
+.age-system.sheet.char.standard .persona .bio label,
+.age-system.sheet.char.standard .persona .secret-note label,
+.age-system.sheet.char.standard .persona .language label {
   max-width: none;
   text-align: center;
   max-height: 25px;
 }
-.age-system.sheet.char .persona .features textarea.free-text,
-.age-system.sheet.char .persona .goals textarea.free-text,
-.age-system.sheet.char .persona .bio textarea.free-text,
-.age-system.sheet.char .persona .secret-note textarea.free-text,
-.age-system.sheet.char .persona .language textarea.free-text {
+.age-system.sheet.char.standard .persona .features textarea.free-text,
+.age-system.sheet.char.standard .persona .goals textarea.free-text,
+.age-system.sheet.char.standard .persona .bio textarea.free-text,
+.age-system.sheet.char.standard .persona .secret-note textarea.free-text,
+.age-system.sheet.char.standard .persona .language textarea.free-text {
   resize: none;
   font-family: inherit;
   background: white;
   border: none;
   height: auto;
 }
-.age-system.sheet.char .persona .goals-language .spacer {
+.age-system.sheet.char.standard .persona .goals-language .spacer {
   flex: 0 0 4px;
 }
-.age-system.sheet.char .persona .goals.container,
-.age-system.sheet.char .persona .language.container,
-.age-system.sheet.char .persona .features.container,
-.age-system.sheet.char .persona .secret-note.container {
+.age-system.sheet.char.standard .persona .goals.container,
+.age-system.sheet.char.standard .persona .language.container,
+.age-system.sheet.char.standard .persona .features.container,
+.age-system.sheet.char.standard .persona .secret-note.container {
   height: 150px;
 }
-.age-system.sheet.char .persona label {
+.age-system.sheet.char.standard .persona label {
   white-space: nowrap;
   max-width: fit-content;
   padding: 4px;
   flex: 0 0 fit-content;
 }
-.age-system.sheet.char .persona .editor.editor {
+.age-system.sheet.char.standard .persona .editor.editor {
   min-height: 300px;
   max-height: 600px;
   height: 100%;
@@ -973,217 +979,217 @@
   border: 1px solid grey;
   border-radius: 4px;
 }
-.age-system.sheet.char .persona .editor.editor .tox.tox-tinymce {
+.age-system.sheet.char.standard .persona .editor.editor .tox.tox-tinymce {
   min-height: 290px !important;
   max-height: 590px !important;
 }
-.age-system.sheet.char .item-container ul {
+.age-system.sheet.char.standard .item-container ul {
   margin-top: 0;
   padding: 0;
   list-style-type: none;
 }
-.age-system.sheet.char .item-container ul .header {
+.age-system.sheet.char.standard .item-container ul .header {
   justify-content: center;
 }
-.age-system.sheet.char .item-container ul .header p {
+.age-system.sheet.char.standard .item-container ul .header p {
   text-align: center;
   margin: 0;
 }
-.age-system.sheet.char .item-container li:first-of-type {
+.age-system.sheet.char.standard .item-container li:first-of-type {
   margin-bottom: 1px;
 }
-.age-system.sheet.char .item-container li.elements {
+.age-system.sheet.char.standard .item-container li.elements {
   margin-top: 4px;
   border-radius: 10px;
   align-items: center;
   justify-content: center;
 }
-.age-system.sheet.char .item-container li.elements p {
+.age-system.sheet.char.standard .item-container li.elements p {
   text-align: center;
 }
-.age-system.sheet.char .item-container .inactive {
+.age-system.sheet.char.standard .item-container .inactive {
   opacity: 0.2;
 }
-.age-system.sheet.char .item-container.effects ul.effects .header p.effect-name {
+.age-system.sheet.char.standard .item-container.effects ul.effects .header p.effect-name {
   text-align: left;
 }
-.age-system.sheet.char .item-container.effects img.effect-icon {
+.age-system.sheet.char.standard .item-container.effects img.effect-icon {
   height: 24px;
   flex: 0 0 24px;
   object-fit: contain;
 }
-.age-system.sheet.char .item-container.effects div.effect-name {
+.age-system.sheet.char.standard .item-container.effects div.effect-name {
   align-items: center;
   text-align: left;
 }
-.age-system.sheet.char .item-container.effects div.effect-name p {
+.age-system.sheet.char.standard .item-container.effects div.effect-name p {
   text-align: left;
   padding-left: 4px;
 }
-.age-system.sheet.char .item-container.effects .effect-name.effect-name {
+.age-system.sheet.char.standard .item-container.effects .effect-name.effect-name {
   flex: 0 0 25%;
   text-align: left;
 }
-.age-system.sheet.char .item-container.effects .effect-key {
+.age-system.sheet.char.standard .item-container.effects .effect-key {
   flex: 0 0 30%;
 }
-.age-system.sheet.char .item-container.effects .effect-operation {
+.age-system.sheet.char.standard .item-container.effects .effect-operation {
   flex: 0 0 15%;
 }
-.age-system.sheet.char .item-container.effects .effect-value {
+.age-system.sheet.char.standard .item-container.effects .effect-value {
   flex: 0 0 15%;
 }
-.age-system.sheet.char .item-container.effects .effect-add {
+.age-system.sheet.char.standard .item-container.effects .effect-add {
   padding-right: 4px;
   flex: 0 0 10%;
   text-align: center;
 }
-.age-system.sheet.char .item-container.modifiers .mod-name {
+.age-system.sheet.char.standard .item-container.modifiers .mod-name {
   flex: 0 0 30%;
 }
-.age-system.sheet.char .item-container.modifiers .mod-value {
+.age-system.sheet.char.standard .item-container.modifiers .mod-value {
   flex: 0 0 40%;
 }
-.age-system.sheet.char .item-container.modifiers .mod-value p.icon.icon {
+.age-system.sheet.char.standard .item-container.modifiers .mod-value p.icon.icon {
   flex: 0 0 30%;
 }
-.age-system.sheet.char .item-container.modifiers .mod-value p.value.value {
+.age-system.sheet.char.standard .item-container.modifiers .mod-value p.value.value {
   flex: 0 0 70%;
 }
-.age-system.sheet.char .item-container.modifiers .mod-source.mod-source {
+.age-system.sheet.char.standard .item-container.modifiers .mod-source.mod-source {
   flex: 0 0 30%;
 }
-.age-system.sheet.char input[type="checkbox"] {
+.age-system.sheet.char.standard input[type="checkbox"] {
   margin: 0px;
   margin-top: 1px;
   width: 16px;
   height: 16px;
 }
-.age-system.sheet.char .resource-box {
+.age-system.sheet.char.standard .resource-box {
   display: flex;
   flex-direction: column;
 }
-.age-system.sheet.char .grid-resp {
+.age-system.sheet.char.standard .grid-resp {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 140px));
   row-gap: 4px;
   margin-bottom: 4px;
 }
-.age-system.sheet.char .general-stats {
+.age-system.sheet.char.standard .general-stats {
   text-align: center;
   margin-bottom: 4px;
 }
-.age-system.sheet.char .general-stats input[name="data.fatigue.status"] {
+.age-system.sheet.char.standard .general-stats input[name="data.fatigue.status"] {
   font-size: 12px;
 }
-.age-system.sheet.char .general-stats > div.armor {
+.age-system.sheet.char.standard .general-stats > div.armor {
   border-radius: 4px;
   background-color: white;
 }
-.age-system.sheet.char .general-stats .resources a {
+.age-system.sheet.char.standard .general-stats .resources a {
   max-width: fit-content;
 }
-.age-system.sheet.char .general-stats .resources i {
+.age-system.sheet.char.standard .general-stats .resources i {
   margin-right: 4px;
 }
-.age-system.sheet.char .general-stats input[type="number"] {
+.age-system.sheet.char.standard .general-stats input[type="number"] {
   max-height: 26px;
 }
-.age-system.sheet.char .general-stats > div {
+.age-system.sheet.char.standard .general-stats > div {
   margin-bottom: 4px;
 }
-.age-system.sheet.char .general-stats .top-row {
+.age-system.sheet.char.standard .general-stats .top-row {
   margin-bottom: 2px;
 }
-.age-system.sheet.char .general-stats .main-value {
+.age-system.sheet.char.standard .general-stats .main-value {
   font-size: 20px;
 }
-.age-system.sheet.char .general-stats .coins label {
+.age-system.sheet.char.standard .general-stats .coins label {
   font-size: 10px;
   max-width: 14px;
   margin-right: 2px;
 }
-.age-system.sheet.char .general-stats .coins > div {
+.age-system.sheet.char.standard .general-stats .coins > div {
   margin-top: 2px;
 }
-.age-system.sheet.char .general-stats .coins input[name="data.gp"],
-.age-system.sheet.char .general-stats .coins input[name="data.sp"],
-.age-system.sheet.char .general-stats .coins input[name="data.cp"] {
+.age-system.sheet.char.standard .general-stats .coins input[name="data.gp"],
+.age-system.sheet.char.standard .general-stats .coins input[name="data.sp"],
+.age-system.sheet.char.standard .general-stats .coins input[name="data.cp"] {
   font-size: 12px;
   max-height: 16px;
 }
-.age-system.sheet.char .general-stats .stat-modifiers {
+.age-system.sheet.char.standard .general-stats .stat-modifiers {
   padding-left: 2px;
   padding-right: 2px;
 }
-.age-system.sheet.char .general-stats .stat-modifiers div {
+.age-system.sheet.char.standard .general-stats .stat-modifiers div {
   font-size: 14px;
 }
-.age-system.sheet.char .general-stats .stat-modifiers label {
+.age-system.sheet.char.standard .general-stats .stat-modifiers label {
   margin-left: 2px;
   text-align: left;
 }
-.age-system.sheet.char .general-stats .stat-modifiers input[type="number"] {
+.age-system.sheet.char.standard .general-stats .stat-modifiers input[type="number"] {
   max-width: 25px;
   min-width: 25px;
   height: 16px;
 }
-.age-system.sheet.char .general-stats .stat-modifiers input[type="number"][number-type="five-digits"],
-.age-system.sheet.char .general-stats .stat-modifiers input[name="data.powerPoints.set"],
-.age-system.sheet.char .general-stats .stat-modifiers input[name="data.powerPoints.max"],
-.age-system.sheet.char .general-stats .stat-modifiers input[name="data.health.set"],
-.age-system.sheet.char .general-stats .stat-modifiers input[name="data.health.max"] {
+.age-system.sheet.char.standard .general-stats .stat-modifiers input[type="number"][number-type="five-digits"],
+.age-system.sheet.char.standard .general-stats .stat-modifiers input[name="data.powerPoints.set"],
+.age-system.sheet.char.standard .general-stats .stat-modifiers input[name="data.powerPoints.max"],
+.age-system.sheet.char.standard .general-stats .stat-modifiers input[name="data.health.set"],
+.age-system.sheet.char.standard .general-stats .stat-modifiers input[name="data.health.max"] {
   max-width: 50px;
   min-width: 50px;
   height: 16px;
 }
-.age-system.sheet.char .general-aid-bar {
+.age-system.sheet.char.standard .general-aid-bar {
   padding: 4px;
   margin-bottom: 4px;
   text-align: center;
 }
-.age-system.sheet.char .general-aid-bar > div {
+.age-system.sheet.char.standard .general-aid-bar > div {
   margin-left: 2px;
 }
-.age-system.sheet.char .general-aid-bar label {
+.age-system.sheet.char.standard .general-aid-bar label {
   padding-left: 2px;
   margin-right: 4px;
   max-height: 19px;
   white-space: nowrap;
 }
-.age-system.sheet.char .general-aid-bar input[type="number"] {
+.age-system.sheet.char.standard .general-aid-bar input[type="number"] {
   margin: 0px;
   max-width: 25px;
   min-width: 25px;
   max-height: 16px;
   text-align: center;
 }
-.age-system.sheet.char .col-1 {
+.age-system.sheet.char.standard .col-1 {
   max-width: 200px;
 }
-.age-system.sheet.char .col-1 .ability-box:last-of-type {
+.age-system.sheet.char.standard .col-1 .ability-box:last-of-type {
   border-bottom: solid grey 1px;
 }
-.age-system.sheet.char .col-1 .ability-box {
+.age-system.sheet.char.standard .col-1 .ability-box {
   border: solid grey 1px;
   border-bottom: none;
 }
-.age-system.sheet.char .col-1 .ability-box .abl-header {
+.age-system.sheet.char.standard .col-1 .ability-box .abl-header {
   align-items: center;
 }
-.age-system.sheet.char .col-1 .ability-box .abl-header .abl-name {
+.age-system.sheet.char.standard .col-1 .ability-box .abl-header .abl-name {
   padding-left: 4px;
   min-width: fit-content;
   height: max-content;
   flex-grow: 3;
 }
-.age-system.sheet.char .col-1 .ability-box .abl-header .primary-secondary,
-.age-system.sheet.char .col-1 .ability-box .abl-header .last-up {
+.age-system.sheet.char.standard .col-1 .ability-box .abl-header .primary-secondary,
+.age-system.sheet.char.standard .col-1 .ability-box .abl-header .last-up {
   height: 1em;
   justify-self: end;
   margin: 0px;
 }
-.age-system.sheet.char .col-1 .ability-box input[type="number"].abl-value {
+.age-system.sheet.char.standard .col-1 .ability-box input[type="number"].abl-value {
   border-radius: 0%;
   border: none;
   border-left: 1px solid grey;
@@ -1194,7 +1200,7 @@
   text-align: center;
   font-size: 15px;
 }
-.age-system.sheet.char .col-1 .ability-box .owned-focus {
+.age-system.sheet.char.standard .col-1 .ability-box .owned-focus {
   padding: 4px;
   min-height: 2em;
   width: 100%;
@@ -1202,57 +1208,57 @@
   align-items: flex-start;
   justify-content: stretch;
 }
-.age-system.sheet.char .col-1 .ability-box .owned-focus .improved-focus {
+.age-system.sheet.char.standard .col-1 .ability-box .owned-focus .improved-focus {
   text-decoration: underline;
 }
-.age-system.sheet.char .col-1 .ability-box .owned-focus .item-name {
+.age-system.sheet.char.standard .col-1 .ability-box .owned-focus .item-name {
   font-size: 14px;
   border-radius: 5px;
   margin: 2px;
   vertical-align: middle;
   text-align: center;
 }
-.age-system.sheet.char .col-2 {
+.age-system.sheet.char.standard .col-2 {
   margin-left: 4px;
 }
-.age-system.sheet.char .col-2 label {
+.age-system.sheet.char.standard .col-2 label {
   background-color: #007DAD;
   color: white;
   white-space: nowrap;
   padding: 4px;
 }
-.age-system.sheet.char .item-control {
+.age-system.sheet.char.standard .item-control {
   max-width: fit-content;
 }
-.age-system.sheet.char .fill-card {
+.age-system.sheet.char.standard .fill-card {
   max-width: fit-content;
 }
-.age-system.sheet.char .item-container.conditions {
+.age-system.sheet.char.standard .item-container.conditions {
   overflow: hidden;
 }
-.age-system.sheet.char .item-container {
+.age-system.sheet.char.standard .item-container {
   flex-wrap: wrap;
   resize: vertical;
   overflow: auto;
   justify-content: center;
   margin-bottom: 4px;
 }
-.age-system.sheet.char .item-container .item-box {
+.age-system.sheet.char.standard .item-container .item-box {
   min-width: 150px;
   border-radius: 5px;
   padding: 4px;
   margin: 2px 4px 2px 4px;
   align-items: center;
 }
-.age-system.sheet.char .item-container .item-box p {
+.age-system.sheet.char.standard .item-container .item-box p {
   margin: 0px;
   font-size: 12px;
 }
-.age-system.sheet.char .item-container .item-box .tooltip-container {
+.age-system.sheet.char.standard .item-container .item-box .tooltip-container {
   position: relative;
   display: inline-block;
 }
-.age-system.sheet.char .item-container .item-box .container-tooltip-text {
+.age-system.sheet.char.standard .item-container .item-box .container-tooltip-text {
   visibility: hidden;
   width: 300px;
   text-align: left;
@@ -1262,53 +1268,53 @@
   position: fixed;
   z-index: 10;
 }
-.age-system.sheet.char .item-container .item-box .tooltip-container:hover .container-tooltip-text {
+.age-system.sheet.char.standard .item-container .item-box .tooltip-container:hover .container-tooltip-text {
   visibility: visible;
 }
-.age-system.sheet.char .item-container .item-box a.item-equip.not-equiped {
+.age-system.sheet.char.standard .item-container .item-box a.item-equip.not-equiped {
   opacity: 0.3;
 }
-.age-system.sheet.char .item-container .item-box a {
+.age-system.sheet.char.standard .item-container .item-box a {
   margin-left: 2px;
 }
-.age-system.sheet.char .item-container .item-box.conditions {
+.age-system.sheet.char.standard .item-container .item-box.conditions {
   flex: 0 0 120px;
   margin: auto;
   margin-top: 4px;
 }
-.age-system.sheet.char .item-container .item-box.conditions p {
+.age-system.sheet.char.standard .item-container .item-box.conditions p {
   text-transform: uppercase;
 }
-.age-system.sheet.char .item-container .actor-items {
+.age-system.sheet.char.standard .item-container .actor-items {
   justify-content: stretch;
 }
-.age-system.sheet.char .item-container .item-card {
+.age-system.sheet.char.standard .item-container .item-card {
   align-items: center;
   justify-content: space-between;
 }
-.age-system.sheet.char .item-container .item-card .main-data {
+.age-system.sheet.char.standard .item-container .item-card .main-data {
   align-items: center;
 }
-.age-system.sheet.char .item-container .item-card img {
+.age-system.sheet.char.standard .item-container .item-card img {
   max-width: 20px;
   max-height: 20px;
 }
-.age-system.sheet.char .item-container .item-card .item-name {
+.age-system.sheet.char.standard .item-container .item-card .item-name {
   width: fit-content;
   max-width: fit-content;
 }
-.age-system.sheet.char .item-container .item-card a {
+.age-system.sheet.char.standard .item-container .item-card a {
   padding-left: 2px;
 }
-.age-system.sheet.char .item-container .item-card .item-qtd-control {
+.age-system.sheet.char.standard .item-container .item-card .item-qtd-control {
   font-size: 7px;
   flex: 0 0 5px;
   width: fit-content;
 }
-.age-system.sheet.char .item-container .item-card .controls {
+.age-system.sheet.char.standard .item-container .item-card .controls {
   max-width: fit-content;
 }
-.age-system.sheet.char .top-row {
+.age-system.sheet.char.standard .top-row {
   height: 20px;
   max-height: 20px;
   text-align: center;
@@ -1316,9 +1322,107 @@
   padding-top: 2px;
   padding-bottom: 2px;
 }
-.age-system.sheet .window-content {
-  background-color: #d1b7ab;
+/*******************************/
+/**     Stat Block Style      **/
+/*******************************/
+.age-system.sheet.char.stat-block form.actor-sheet .filler {
+  flex: auto;
+  background-color: white;
 }
+.age-system.sheet.char.stat-block footer {
+  flex: 0 0 26px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.age-system.sheet.char.stat-block .stat-block-container {
+  align-content: center;
+  min-width: 100%;
+}
+.age-system.sheet.char.stat-block .not-equiped {
+  opacity: 0.4 !important;
+}
+.age-system.sheet.char.stat-block input {
+  text-align: center;
+}
+.age-system.sheet.char.stat-block input[name="name"] {
+  min-width: 100%;
+  max-height: 26px;
+  border-radius: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 2px 10px;
+}
+.age-system.sheet.char.stat-block ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+}
+.age-system.sheet.char.stat-block li {
+  padding: 0 4px;
+}
+.age-system.sheet.char.stat-block li.ability-box:nth-of-type(2n+1) {
+  background-color: white;
+}
+.age-system.sheet.char.stat-block .header {
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+.age-system.sheet.char.stat-block .body {
+  text-align: center;
+  background-color: white;
+  color: black;
+  max-height: fit-content;
+}
+.age-system.sheet.char.stat-block .font-small-table {
+  font-variant: small-caps;
+  font-size: 12px;
+}
+.age-system.sheet.char.stat-block li.ability-row.header {
+  padding-top: 5px;
+}
+.age-system.sheet.char.stat-block li.ability-row {
+  min-height: 26px;
+  align-items: center;
+}
+.age-system.sheet.char.stat-block li.ability-row .abl-value-box {
+  flex: 0 0 50px;
+}
+.age-system.sheet.char.stat-block li.ability-row .abl-value-box input {
+  max-width: 50px;
+}
+.age-system.sheet.char.stat-block li.ability-row .abl-name-focus {
+  justify-content: center;
+}
+.age-system.sheet.char.stat-block li.ability-row .abl-name-focus .abl-name {
+  font-weight: bold;
+}
+.age-system.sheet.char.stat-block li.ability-row .abl-name-focus .improved-focus {
+  text-decoration: underline;
+}
+.age-system.sheet.char.stat-block li.ability-row .abl-name-focus > * {
+  flex: 0 0 auto;
+}
+.age-system.sheet.char.stat-block .derived-stats-table.footer .data,
+.age-system.sheet.char.stat-block .derived-stats-table.footer .header {
+  text-align: center;
+  justify-items: center;
+  align-items: center;
+}
+.age-system.sheet.char.stat-block .item-box {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+.age-system.sheet.char.stat-block .description {
+  text-align: justify;
+}
+.age-system.sheet.char.stat-block .description .quality-label {
+  background-color: white !important;
+  font-weight: bold;
+}
+/*******************************/
+/**       Vehicle Style       **/
+/*******************************/
 .age-system.sheet.vehicle {
   min-width: min-content;
 }
@@ -1519,9 +1623,9 @@
   color: #5f0505;
   box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.8);
 }
-.age-system.sheet .window-content {
-  background-color: #d1b7ab;
-}
+/*******************************/
+/**   Spaceship Sheet Style   **/
+/*******************************/
 .age-system.sheet.spaceship .stats-block.stats-block {
   padding: 5px;
   border-radius: 10px;
@@ -1837,6 +1941,9 @@
   flex: 0 0 16px;
   margin: 0;
 }
+/*******************************/
+/**       AGE Roll Card       **/
+/*******************************/
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;
 }
@@ -1928,6 +2035,9 @@
 #chat-log .chat-message .message-content .age-system.base-age-roll .blind-value {
   text-align: center;
 }
+/*******************************/
+/**     Color Schemed Def     **/
+/*******************************/
 /** Modern Blue Colors **/
 /** Fantasy Blue Colors **/
 /** Dragon Red Colors **/
@@ -1939,6 +2049,9 @@
 /** Never Dead **/
 /** Color Template **/
 /** Game Mode Colors **/
+/*******************************/
+/**     Color Style Rules     **/
+/*******************************/
 .colorset-modern-blue .colorset-first-tier {
   background-color: #007DAD;
   color: #ffffff;
@@ -3388,6 +3501,9 @@
 .colorset-never-dead .shipfeatures .mod-card {
   border: solid #eeddcd 1px;
 }
+/*******************************/
+/**   AGE Roller Interface    **/
+/*******************************/
 #age-roller {
   position: absolute;
   width: 52px;
@@ -3407,6 +3523,9 @@
 #age-roller-drag:hover {
   cursor: move;
 }
+/*******************************/
+/**        AGE Tracker        **/
+/*******************************/
 #age-tracker-drag {
   width: 100%;
   height: 10px;
@@ -3507,13 +3626,15 @@
   font-weight: bold;
   font-style: italic;
 }
+#context-menu {
+  width: fit-content;
+}
 #context-menu li {
   white-space: nowrap;
   text-align: left;
 }
 /*---- Font Override----*/
-body,
-select {
+body *:not(i) {
   font-family: 'Roboto' !important;
 }
 /*---------Background---------------------*/

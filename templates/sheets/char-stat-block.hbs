@@ -1,0 +1,24 @@
+{{!-- Colorset defined in the Actor Sheet Class --}}
+<form class="actor-sheet {{cssClass}} colorset-{{data.colorScheme}} colorset-selection flexcol" autocomplete="off">
+    <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
+    
+    <div class="block-section flexrow">
+
+        {{!-- Column 1 - Stats Block based on AGE books --}}
+        <div class="stat-block-container flexcol">
+            {{> "systems/age-system/templates/partials/char-stat-block-column1.hbs"}}
+        </div>
+
+        {{!-- Column 2 - Conditions, Effects and Item Mods Handler --}}
+        {{!-- <div class="stat-block-container flexcol char sheet age-system standard">
+            {{> "systems/age-system/templates/partials/conditions-block.hbs"}}
+        </div> --}}
+
+    </div>
+
+    <div class="filler">
+    </div>
+    
+    <footer class="colorset-first-tier">
+    </footer>
+</form>

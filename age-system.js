@@ -1,9 +1,10 @@
 // import * as Macros from "./modules/macros.js";
 import {ageSystem} from "./modules/config.js";
-import ageSystemItemSheet from "./modules/sheets/ageSystemItemSheet.js";
-import ageSystemCharacterSheet from "./modules/sheets/ageSystemCharacterSheet.js";
-import ageSystemVehicleSheet from "./modules/sheets/ageSystemVehicleSheet.js";
-import ageSystemSpaceshipSheet from "./modules/sheets/ageSystemSpaceshipSheet.js";
+import ageSystemSheetItem from "./modules/sheets/ageSystemSheetItem.js";
+import ageSystemSheetCharacter from "./modules/sheets/ageSystemSheetCharacter.js";
+import ageSystemSheetCharStatBlock from "./modules/sheets/ageSystemSheetCharStatBlock.js";
+import ageSystemSheetVehicle from "./modules/sheets/ageSystemSheetVehicle.js";
+import ageSystemSheetSpaceship from "./modules/sheets/ageSystemSheetSpaceship.js";
 import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageEffect} from "./modules/ageEffect.js";
@@ -37,6 +38,7 @@ async function preloadHandlebarsTemplates() {
         `${path}char-sheet-tab-persona.hbs`,
         `${path}char-sheet-tab-effects.hbs`,
         `${path}item-card-buttons.hbs`,
+        `${path}char-stat-block-column1.hbs`,
     ];
 
     return loadTemplates(templatePaths);
@@ -57,11 +59,12 @@ Hooks.once("init", async function() {
     // Create a namespace within the game global
     game.ageSystem = {
         applications: {
-            ageSystemCharacterSheet,
-            ageSystemVehicleSheet,
-            ageSystemSpaceshipSheet,
+            ageSystemSheetCharacter,
+            ageSystemSheetCharStatBlock,
+            ageSystemSheetVehicle,
+            ageSystemSheetSpaceship,
             // ageActiveEffectConfig,
-            ageSystemItemSheet,
+            ageSystemSheetItem,
             AgeRoller,
             AgeTracker
         },
@@ -84,26 +87,30 @@ Hooks.once("init", async function() {
     CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/hasty-grave.svg"
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("age-system", ageSystemCharacterSheet, {
+    Actors.registerSheet("age-system", ageSystemSheetCharacter, {
         types: ["char"],
         makeDefault: true,
-        label: "age-system.SHEETS.standardChar"
+        label: "age-system.SHEETS.charStandard"
     });
-    Actors.registerSheet("age-system", ageSystemVehicleSheet, {
+    Actors.registerSheet("age-system", ageSystemSheetCharStatBlock, {
+        types: ["char"],
+        label: "age-system.SHEETS.charStatBlock"
+    });
+    Actors.registerSheet("age-system", ageSystemSheetVehicle, {
         types: ["vehicle"],
         makeDefault: true,
-        label: "age-system.SHEETS.standardVehicle"
+        label: "age-system.SHEETS.vehicleStandard"
     });
-    Actors.registerSheet("age-system", ageSystemSpaceshipSheet, {
+    Actors.registerSheet("age-system", ageSystemSheetSpaceship, {
         types: ["spaceship"],
         makeDefault: true,
-        label: "age-system.SHEETS.standardSpaceship"
+        label: "age-system.SHEETS.spaceshipStandard"
     });
     
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("age-system", ageSystemItemSheet, {
+    Items.registerSheet("age-system", ageSystemSheetItem, {
         makeDefault: true,
-        label: "age-system.SHEETS.standardItem"
+        label: "age-system.SHEETS.itemStandard"
     });
 
     game.ageSystem.ageRoller = new AgeRoller({
@@ -150,6 +157,26 @@ Hooks.once("init", async function() {
             if (e[1] === mask) return e[0]
         }
         return `${mask} (${game.i18n.localize("age-system.custom")})`;
+    })
+
+    // Handlebar returning array with Focus for a given Ability
+    Handlebars.registerHelper('focusbyabl', function(focus, abl) {
+        return focus.filter(f => f.data.useAbl === abl)
+    })
+
+    // Handlebar returning array with equiped weapon
+    Handlebars.registerHelper('equippedwpn', function(weapons) {
+        return weapons.filter(f => f.data.equiped === true)
+    })
+
+    // Handlebar returning array with active Power dealing damage
+    Handlebars.registerHelper('dmgpower', function(powers) {
+        return powers.filter(p => p.data.activate === true && (p.data.hasDamage || p.data.hasHealing))
+    })
+
+    // Handlebar returning all carried itens
+    Handlebars.registerHelper('carriedequip', function(items) {
+        return items.filter(p => p.type === "equipment" || p.type === "weapon")
     })
 
     // Handlebar helper to compare 2 data
@@ -287,7 +314,7 @@ Hooks.on("renderageSystemItemSheet", (app, html, data) => {
     Setup.nameItemSheetWindow(app);
 });
 
-Hooks.on("renderageSystemCharacterSheet", (app, html, data) => {
+Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {
     // Hide primary Abilities checkbox
     Setup.hidePrimaryAblCheckbox(html);
 });

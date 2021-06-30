@@ -12,6 +12,7 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 You can now look at [AGE System (unofficial) wiki](https://github.com/vkdolea/age-system/wiki) to understand how to use the game system
 
 ## Features
+- Two possible Character sheet - one Complete and another condensed, ideal for NPCs and quick character overview
 - Different color schemes
 - Checkboxes to identify primary and secondary abilities
 - Checkbox to select last ability leveled up
@@ -96,6 +97,13 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.9 [2021-06-xx]
+#### Added
+- Stat block sheet implemented.
+
+#### Fixed
+- Item template correction (Talent *activate* field added).
+
 ### 0.7.8 [2021-06-25]
 #### Fixed
 - French translation correction.

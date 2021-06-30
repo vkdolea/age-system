@@ -107,11 +107,14 @@
     "age-system": {
 	
 		"SHEETS": {
-            "standardChar": "Personaje AGE",
-            "standardVehicle": "Vehículo AGE",
-            "standardItem": "Objeto AGE",
-            "standardSpaceship": "Nave AGE"
+            "charStandard": "Personaje AGE",
+            "charStatBlock": "",
+            "vehicleStandard": "Vehículo AGE",
+            "itemStandard": "Objeto AGE",
+            "spaceshipStandard": "Nave AGE"
         },
+        "sheetFull": "Completa",
+        "sheetBlock": "Comprimida",
 
         "WARNING": {
             "duplicatedFocus": "Concentración no añadida al personaje - ya dispone de una con nombre ",
@@ -295,6 +298,7 @@
         "relationship": "Vínculo",
         "honorifics": "Títulos",
         "membership": "Afiliación",
+        "specialQualities": "Dotes Especiales",
 
         "settings": {
             "totalRolled": "Total tirada",

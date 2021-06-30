@@ -548,7 +548,7 @@
             "templates": ["damage", "itemReq", "description", "activation", "bonuses"],
             "powerLevel": 0,
             "castTime": "minor",
-            "activated": false,
+            "activate": false,
             "useFatigue": false,
             "inputFatigueTN": false,
             "ablFatigue": "will",
@@ -567,7 +567,7 @@
         },
         "talent": {
             "templates": ["description", "bonuses"],
-            "activated": false
+            "activate": false
         },
         "stunts": {
             "templates": ["description"],

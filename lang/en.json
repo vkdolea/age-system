@@ -3,7 +3,7 @@
     "ACTOR.TypeVehicle": "Vehicle",
     "ACTOR.TypeSpaceship": "Spaceship",
     "ITEM.TypeStunts": "Stunt",
-    "ITEM.TypeEquipment": "General Equipment",
+    "ITEM.TypeEquipment": "Equipment",
     "ITEM.TypePower": "Power & Arcana",
     "ITEM.TypeTalent": "Talent",
     "ITEM.TypeFocus": "Focus",
@@ -107,11 +107,14 @@
     "age-system": {
 
         "SHEETS": {
-            "standardChar": "AGE Character",
-            "standardVehicle": "AGE Vehicle",
-            "standardItem": "AGE Item",
-            "standardSpaceship": "AGE Spaceship"
+            "charStandard": "AGE Character",
+            "charStatBlock": "AGE Character Stat Block",
+            "vehicleStandard": "AGE Vehicle",
+            "itemStandard": "AGE Item",
+            "spaceshipStandard": "AGE Spaceship"
         },
+        "sheetFull": "Full",
+        "sheetBlock": "Block",
 
         "WARNING": {
             "duplicatedFocus": "Focus is not added to character - it already owns a Focus named ",
@@ -295,6 +298,7 @@
         "relationship": "Relationship",
         "honorifics": "Honorifics",
         "membership": "Membership",
+        "specialQualities": "Special Qualities",
 
         "settings": {
             "totalRolled": "Roll Total",

@@ -107,6 +107,23 @@ export class ageSystemActor extends Actor {
         }
     };
 
+    // Attempt to register Compact shee to GM Screen, but not successful... :-(
+        
+    // _onCreate(data, options, userId) {
+    //     super._onCreate(data, options, userId);
+    //     if (data.type === "char" && game.user.id === userId) {
+    //         const gmScreenFlag = {gmScreenSheetClass: `age-system.ageSystemSheetCharStatBlock`};
+    //         this.data.flags = {
+    //             ...this.data.flgas,
+    //             "gm-screen": gmScreenFlag
+    //         };
+    //         this._sheet.object.data.flags = {
+    //             ...this._sheet.object.data.flags,
+    //             "gm-screen": gmScreenFlag
+    //         }
+    //     }
+    // }
+
     _prepareBaseDataChar() {
 
         const actorData = this.data;
@@ -577,7 +594,7 @@ export class ageSystemActor extends Actor {
         } else {
             const focusId = validFocus[0].id;
             const focus = this.items.get(focusId);
-            return {focusName: namedFocus, focusItem: focus, id: focusId, value: focus.data.data.finalValue}
+            return {focusName: namedFocus, focusItem: focus, id: focusId, focusAbl: focus.data.data.useAbl, value: focus.data.data.finalValue}
         };
     }
 
@@ -604,5 +621,14 @@ export class ageSystemActor extends Actor {
             newEffect["flags.core.statusId"] = newEffect.id;
             return this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
         }
+    }
+
+    async openSheet(newSheet) {
+        const sheet = this.sheet
+        await sheet.close()
+        this._sheet = null
+        delete this.apps[sheet.appId]
+        await this.setFlag('core', 'sheetClass', newSheet)
+        this.sheet.render(true)
     }
 };
