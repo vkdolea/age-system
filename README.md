@@ -12,6 +12,7 @@ Character sheet designed to serve most of AGE System versions. Not all AGE insta
 You can now look at [AGE System (unofficial) wiki](https://github.com/vkdolea/age-system/wiki) to understand how to use the game system
 
 ## Features
+- Two possible Character sheet - one Complete and another condensed, ideal for NPCs and quick character overview
 - Different color schemes
 - Checkboxes to identify primary and secondary abilities
 - Checkbox to select last ability leveled up
