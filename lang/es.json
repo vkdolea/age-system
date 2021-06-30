@@ -113,8 +113,8 @@
             "itemStandard": "Objeto AGE",
             "spaceshipStandard": "Nave AGE"
         },
-        "sheetFull": "xxx Full",
-        "sheetBlock": "xxx Block",
+        "sheetFull": "Completa",
+        "sheetBlock": "Comprimida",
 
         "WARNING": {
             "duplicatedFocus": "Concentración no añadida al personaje - ya dispone de una con nombre ",
@@ -298,7 +298,7 @@
         "relationship": "Vínculo",
         "honorifics": "Títulos",
         "membership": "Afiliación",
-        "specialQualities": "XXX Special Qualities",
+        "specialQualities": "Dotes Especiales",
 
         "settings": {
             "totalRolled": "Total tirada",
