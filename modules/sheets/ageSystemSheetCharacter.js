@@ -342,6 +342,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     };
 
     _onRollItem(event) {
+        event.preventDefault();
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const itemRolled = this.actor.items.get(itemId);
         if (itemRolled.data.type === "focus" && event.button !== 0) return
