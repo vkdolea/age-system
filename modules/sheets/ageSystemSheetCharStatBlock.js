@@ -29,33 +29,40 @@ export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter
     //     return super.getData(options);
     // };
     
-    // activateListeners(html) {
-    //     super.activateListeners(html);
-    //     if (this.isEditable) {
-    //         new ContextMenu(html, ".item-show", this.itemContextMenu);
-    //     }
-    // };
+    activateListeners(html) {
+        super.activateListeners(html);
+        if (this.isEditable) {
+            new ContextMenu(html, ".item-show", this.itemContextMenu);
+        }
+    };
 
-    // itemContextMenu = [
-    //     {
-    //         name: game.i18n.localize("age-system.chatCard.roll"),
-    //         icon: '<i class="far fa-eye"></i>',
-    //         callback: e => this._onRollItem(e)
-    //     },
-    //     {
-    //         name: game.i18n.localize("age-system.settings.edit"),
-    //         icon: '<i class="fas fa-edit"></i>',
-    //         callback: e => {
-    //             const item = this.actor.items.get(e.data("item-id"));
-    //             item.sheet.render(true);
-    //         }
-    //     },
-    //     {
-    //         name: game.i18n.localize("age-system.settings.delete"),
-    //         icon: '<i class="fas fa-trash"></i>',
-    //         callback: e => {
-    //             const i = this.actor.items.get(e.data("item-id")).delete();
-    //         }
-    //     }
-    // ];
+    itemContextMenu = [
+        {
+            name: game.i18n.localize("age-system.chatCard.roll"),
+            icon: '<i class="far fa-eye"></i>',
+            callback: e => {
+                const data = e[0].closest(".feature-controls").dataset;
+                const item = this.actor.items.get(data.itemId);
+                item.showItem(e.shiftKey)
+            }
+        },
+        {
+            name: game.i18n.localize("age-system.settings.edit"),
+            icon: '<i class="fas fa-edit"></i>',
+            callback: e => {
+                const data = e[0].closest(".feature-controls").dataset;
+                const item = this.actor.items.get(data.itemId);
+                item.sheet.render(true);
+            }
+        },
+        {
+            name: game.i18n.localize("age-system.settings.delete"),
+            icon: '<i class="fas fa-trash"></i>',
+            callback: e => {
+                const data = e[0].closest(".feature-controls").dataset;
+                const item = this.actor.items.get(data.itemId);
+                item.delete();
+            }
+        }
+    ];
 }

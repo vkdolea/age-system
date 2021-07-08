@@ -114,7 +114,7 @@
             "spaceshipStandard": "Nave AGE"
         },
         "sheetFull": "Completa",
-        "sheetBlock": "Compacta",
+        "sheetBlock": "Comprimida",
 
         "WARNING": {
             "duplicatedFocus": "Concentración no añadida al personaje - ya dispone de una con nombre ",
@@ -237,8 +237,8 @@
             "rollResistedDamage": "Resiste Daño",
             "rollResistedHealing": "Resiste Curación",
             "addFocusSD": "+ Ambos",
-            "addFocus": "+ Concentración",
-            "addStuntDie": "+ Dado Proeza",
+            "addFocus": "+ Concen.",
+            "addStuntDie": "+ Proeza",
 
             "maneuversVehicle": "{name} maniobra {vehicle}",
 			"commandsVehicle": "{name} ordena {vehicle}",
@@ -298,7 +298,7 @@
         "relationship": "Vínculo",
         "honorifics": "Títulos",
         "membership": "Afiliación",
-        "specialQualities": "Habilidades Especiales",
+        "specialQualities": "Dotes Especiales",
 
         "settings": {
             "totalRolled": "Total tirada",

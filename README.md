@@ -97,7 +97,11 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
-### 0.7.9 [2021-06-xx]
+### 0.7.10 [2021-xx-yy]
+#### Added
+- Added context menu for items on block sheets
+
+### 0.7.9 [2021-06-30]
 #### Added
 - Stat block sheet implemented.
 
