@@ -148,29 +148,21 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     
     activateListeners(html) {
         html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));
+        const freeText = html.find("textarea.free-text");
+        for (let t = 0; t < freeText.length; t++) {
+            const area = freeText[t];
+            const newValue = area.value.replace(/^\s+|\s+$/gm,'');
+            this.actor.update({[area.name]: newValue}).then(a => {
+                area.value = newValue;
+            })
+        }    
         if (this.isEditable) {
-            const freeText = html.find("textarea.free-text");
-            for (let t = 0; t < freeText.length; t++) {
-                const area = freeText[t];
-                const newValue = area.value.replace(/^\s+|\s+$/gm,'');
-                this.actor.update({[area.name]: newValue}).then(a => {
-                    area.value = newValue;
-                })
-            }
-            new ContextMenu(html, ".focus-options", this.focusContextMenu);
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
-            html.find(".item-show").click(this._onItemShow.bind(this));
-            html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
-            html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
-            html.find(".item-equip").click(this._onItemActivate.bind(this));
             html.find(".effect-edit").click(this._onChangeEffect.bind(this));
-            html.find(".effect-remove").click(this._onRemoveEffect.bind(this));
-            html.find(".effect-active").click(this._onActiveEffect.bind(this));
+            html.find(".effect-remove").click(this._onRemoveEffect.bind(this));   
             html.find("p.effect-add").click(this._onAddEffect.bind(this));
-            html.find(".condition-checkbox").change(this._onChangeCondition.bind(this));
-            html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
             html.find(".change-qtd").click(this._onChangeQuantity.bind(this));
 
             // Enable field to be focused when selecting it
@@ -192,7 +184,9 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".roll-resources")
                 .click(this._onRollResources.bind(this))
                 .contextmenu(this._onRollResources.bind(this));
+            html.find(".effect-active").click(this._onActiveEffect.bind(this));
             let handler = ev => this._onDragStart(ev);
+            
             // Find all rollable items on the character sheet.
             let items = html.find(".item-box");
             for (let i = 0; i < items.length; i++) {
@@ -202,6 +196,16 @@ export default class ageSystemSheetCharacter extends ActorSheet {
                 }   
             }
         };
+
+        if (this.actor.isOwner) {
+            new ContextMenu(html, ".focus-options", this.focusContextMenu);
+            html.find(".item-equip").click(this._onItemActivate.bind(this));
+            html.find(".item-show").click(this._onItemShow.bind(this));
+            html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
+            html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
+            html.find(".condition-checkbox").change(this._onChangeCondition.bind(this));
+            html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
+        }
 
         super.activateListeners(html);
     };
@@ -342,6 +346,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     };
 
     _onRollItem(event) {
+        event.preventDefault();
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const itemRolled = this.actor.items.get(itemId);
         if (itemRolled.data.type === "focus" && event.button !== 0) return

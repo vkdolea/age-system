@@ -237,8 +237,8 @@
             "rollResistedDamage": "Resiste Daño",
             "rollResistedHealing": "Resiste Curación",
             "addFocusSD": "+ Ambos",
-            "addFocus": "+ Concentración",
-            "addStuntDie": "+ Dado Proeza",
+            "addFocus": "+ Concen.",
+            "addStuntDie": "+ Proeza",
 
             "maneuversVehicle": "{name} maniobra {vehicle}",
 			"commandsVehicle": "{name} ordena {vehicle}",
