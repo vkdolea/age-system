@@ -1364,12 +1364,20 @@
 .age-system.sheet.char.stat-block li.ability-box:nth-of-type(2n+1) {
   background-color: white;
 }
-.age-system.sheet.char.stat-block .header {
+.age-system.sheet.char.stat-block .general-aid-bar {
+  font-size: 10px;
+}
+.age-system.sheet.char.stat-block .general-aid-bar input[type="checkbox"] {
+  height: 10px;
+}
+.age-system.sheet.char.stat-block .header,
+.age-system.sheet.char.stat-block .general-aid-bar div {
   text-align: center;
   background-color: black;
   color: white;
 }
-.age-system.sheet.char.stat-block .body {
+.age-system.sheet.char.stat-block .body,
+.age-system.sheet.char.stat-block .general-aid-bar input[type="checkbox"] {
   text-align: center;
   background-color: white;
   color: black;

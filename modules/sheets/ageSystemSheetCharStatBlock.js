@@ -24,10 +24,13 @@ export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter
     }
 
     /* -------------------------------------------- */
-    // /** @inheritdoc */
-    // getData(options) {
-    //     return super.getData(options);
-    // };
+    /** @inheritdoc */
+    getData(options) {
+        return {
+            ...super.getData(options),
+            isBlock: true
+        }
+    };
     
     activateListeners(html) {
         super.activateListeners(html);
