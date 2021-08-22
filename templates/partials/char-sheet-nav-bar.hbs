@@ -4,6 +4,7 @@
     <a class="char" data-tab="main">{{localize "age-system.charMain"}}</a>
     <a class="char" data-tab="persona">{{localize "age-system.charPersona"}}</a>
     <a class="char" data-tab="effects">{{localize "age-system.charEffects"}}</a>
+    <a class="char" data-tab="options">{{localize "age-system.charOptions"}}</a>
 </nav>
 
 <section class="sheet-tab-section">
@@ -21,6 +22,11 @@
     {{!-- Effects Tab --}}
     <div class="tab effects" data-group="primary" data-tab="effects">
         {{> "systems/age-system/templates/partials/char-sheet-tab-effects.hbs"}}
+    </div>
+
+    {{!-- Options Tab --}}
+    <div class="tab options" data-group="primary" data-tab="options">
+        {{> "systems/age-system/templates/partials/char-sheet-tab-options.hbs"}}
     </div>
 
 </section>

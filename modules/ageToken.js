@@ -1,7 +1,7 @@
 export class ageToken extends Token {
 
     async _onCreate(tokenData, options, userId) {
-        super._onCreate(tokenData, options, userId);
+        await super._onCreate(tokenData, options, userId);
         // Ensure this change occurs only once
         if (game.user.id !== userId) return
         if (this.actor?.data?.type !== "char") return;

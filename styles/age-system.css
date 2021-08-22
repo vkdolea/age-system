@@ -1243,6 +1243,9 @@
   justify-content: center;
   margin-bottom: 4px;
 }
+.age-system.sheet.char.standard .item-container .inactive {
+  opacity: 0.3;
+}
 .age-system.sheet.char.standard .item-container .item-box {
   min-width: 150px;
   border-radius: 5px;
@@ -1284,6 +1287,10 @@
 }
 .age-system.sheet.char.standard .item-container .item-box.conditions p {
   text-transform: uppercase;
+}
+.age-system.sheet.char.standard .item-container .item-box.weapon-groups {
+  text-align: center;
+  max-width: 200px;
 }
 .age-system.sheet.char.standard .item-container .actor-items {
   justify-content: stretch;

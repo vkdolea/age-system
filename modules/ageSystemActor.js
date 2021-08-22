@@ -141,6 +141,9 @@ export class ageSystemActor extends Actor {
         // Check if Power Points is in use
         data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
 
+        // Check if Weapon Groups is in Use
+        // _setWeaponGroups();
+
         // Ensure Fatigue has valid Values and creates Status text
         data.fatigue.status = "";
         data.fatigue.value = Math.abs(data.fatigue.entered);
@@ -168,6 +171,12 @@ export class ageSystemActor extends Actor {
         };
         
     };
+
+    // _setWeaponGroups() {
+    //     groups = ageSystem.weaponGroups;
+    //     if (!groups) return;
+    // };
+
 
     applyItemModifiers() {
         const type = this.data.type;

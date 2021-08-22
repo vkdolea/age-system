@@ -104,6 +104,9 @@
     "SETTINGS.observerRoll": "Allow Observers to roll",
     "SETTINGS.observerRollHint": "Allow players with Observer permission level to roll from observed sheets and from chat rolls",
 
+    "SETTINGS.weaponGroups": "Weapon Groups",
+    "SETTINGS.weaponGroupsHint": "Input weapon groups name using ; to separate groups. Leave it empty if Weapon Groups are not used (as in Modern AGE)",
+
     "age-system": {
 
         "SHEETS": {
@@ -252,12 +255,13 @@
         "targetCurrent": "Target/Current",
         "charMain": "Main",
         "charPersona": "Persona",
+        "charEffects": "Effects",
+        "charOptions": "Options",
         "bio": "Biography",
         "goals": "Goals",
         "language": "Languages",
         "secretNote": "Player & GM Secret Notes",
         "gmNotes": "GM Secret Notes",
-        "charEffects": "Effects",
         "custom": "Custom",
         "conditionsName": "Conditions",
         "conditions": {

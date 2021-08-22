@@ -97,6 +97,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
+### 0.7.11 [2021-x-y]
+#### Fixed
+- Bug causing errors when deploying tokens
+
 ### 0.7.10 [2021-07-17]
 #### Added
 - Added context menu for items on block sheets.
