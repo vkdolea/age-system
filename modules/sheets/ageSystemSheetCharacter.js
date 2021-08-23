@@ -214,16 +214,15 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     async _onWeaponGroupToggle(event) {
         event.preventDefault();
         const wgroupId = event.currentTarget.closest(".feature-controls").dataset.wgroupId.trim();
-        let knownGroups = await this.actor.getFlag("age-system", "weaponGroups");
-        if (!knownGroups) knownGroups = [];
-        const hasGroup = knownGroups.includes(wgroupId);
+        const wgroups = await this.actor.data.data.wgroups;
+        const hasGroup = wgroups.includes(wgroupId);
         if (hasGroup) {
-            const pos = knownGroups.indexOf(wgroupId);
-            knownGroups.splice(pos, 1);
+            const pos = wgroups.indexOf(wgroupId);
+            wgroups.splice(pos, 1);
         } else {
-            knownGroups.push(wgroupId);
+            wgroups.push(wgroupId);
         }
-        return this.actor.setFlag("age-system", "weaponGroups", knownGroups);
+        return this.actor.update({"data.wgroups": wgroups});
     }
 
     _onChangeQuantity(event) {

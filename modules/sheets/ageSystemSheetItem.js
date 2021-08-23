@@ -79,7 +79,11 @@ export default class ageSystemItemSheet extends ItemSheet {
                 });
             }
             data.config.featuresTypeLocal = sortObjArrayByName(data.config.featuresTypeLocal, "name");
-        }
+        };
+
+        // Options Tab Preparation
+        // Weapon Groups
+        data.weaponGroups = ageSystem.weaponGroups;
 
         // Active Effects if item owner is a Character
         if (this.item.actor?.type === "char") data.actorEffects = this.item.actor.effects;
@@ -117,11 +121,25 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Actions by sheet owner only
         if (this.item.isOwner) {
-            
+            html.find(".wgroup-item").click(this._onWeaponGroupToggle.bind(this));
         };
 
         super.activateListeners(html);
     };
+
+    async _onWeaponGroupToggle(event) {
+        event.preventDefault();
+        const wgroupId = event.currentTarget.closest(".feature-controls").dataset.wgroupId.trim();
+        const wgroups = await this.item.data.data.wgroups;
+        const hasGroup = wgroups.includes(wgroupId);
+        if (hasGroup) {
+            const pos = wgroups.indexOf(wgroupId);
+            wgroups.splice(pos, 1);
+        } else {
+            wgroups.push(wgroupId);
+        }
+        return this.item.update({"data.wgroups": wgroups});
+    }
     
     _onToggleBonus(event) {
         const modType = event.currentTarget.closest(".feature-controls").dataset.modType;

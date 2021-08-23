@@ -24,22 +24,23 @@ import * as migrations from "./modules/migration.js";
 async function preloadHandlebarsTemplates() {
     const path = `systems/age-system/templates/partials/`;
     const templatePaths = [
-        `${path}bonus-desc-sheet.hbs`,
-        `${path}dmg-block-sheet.hbs`,
-        `${path}bonuses-sheet.hbs`,
-        `${path}active-bonuses.hbs`,
         `${path}ability-focus-select.hbs`,
-        `${path}cost-resource-block.hbs`,
-        `${path}play-aid-bar.hbs`,
-        `${path}item-image-sheet-card.hbs`,
-        `${path}conditions-block.hbs`,
+        `${path}active-bonuses.hbs`,
+        `${path}bonus-desc-sheet.hbs`,
+        `${path}bonuses-sheet.hbs`,
         `${path}char-sheet-nav-bar.hbs`,
         `${path}char-sheet-tab-main.hbs`,
         `${path}char-sheet-tab-persona.hbs`,
         `${path}char-sheet-tab-effects.hbs`,
         `${path}char-sheet-tab-options.hbs`,
-        `${path}item-card-buttons.hbs`,
         `${path}char-stat-block-column1.hbs`,
+        `${path}conditions-block.hbs`,
+        `${path}cost-resource-block.hbs`,
+        `${path}dmg-block-sheet.hbs`,
+        `${path}item-card-buttons.hbs`,
+        `${path}item-image-sheet-card.hbs`,
+        `${path}item-options-sheet.hbs`,
+        `${path}play-aid-bar.hbs`,
     ];
 
     return loadTemplates(templatePaths);
@@ -181,9 +182,9 @@ Hooks.once("init", async function() {
     });
 
     // Handlebar to itentify if Weapon Group is know
-    Handlebars.registerHelper('haswgroup', function(wGroup, knownGroups) {
-        if (!knownGroups["age-system"]?.weaponGroups) return false;
-        return knownGroups["age-system"].weaponGroups.includes(wGroup) ? true : false;
+    Handlebars.registerHelper('haswgroup', function(wGroup, groupArray) {
+        if (!groupArray === []) return false;
+        return groupArray.includes(wGroup) ? true : false;
     });
 
     // Handlebar helper to compare 2 data

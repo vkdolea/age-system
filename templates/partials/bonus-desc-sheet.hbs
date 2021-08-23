@@ -1,12 +1,13 @@
 {{!-- Sheet Tab Navigation --}}
-
 <nav class="add-sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="main">{{localize "age-system.item.desc"}}</a>
     <a class="item" data-tab="bonus">{{localize "age-system.itemMod"}}</a>
+    {{#if weaponGroups}}
+    <a class="item" data-tab="options">{{localize "age-system.charOptions"}}</a>
+    {{/if}}
 </nav>
 
 <section class="sheet-tab-section">
-
     {{!-- Main Tab --}}
     <div class="item-card-desc tab main" data-group="primary" data-tab="main">
         {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
@@ -17,4 +18,10 @@
         {{> "systems/age-system/templates/partials/bonuses-sheet.hbs"}}
     </div>
 
+    {{#if weaponGroups}}
+    {{!-- Options Tab --}}
+    <div class="item-card-desc tab options" data-group="primary" data-tab="options">
+        {{> "systems/age-system/templates/partials/item-options-sheet.hbs"}}
+    </div>
+    {{/if}}
 </section>
