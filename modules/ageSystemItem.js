@@ -226,7 +226,8 @@ export class ageSystemItem extends Item {
             // resistedDmg: resistedDmg,
             ...arguments[0],
             item: this,
-            actorDmgMod: this.actor ? this.actor.data.data.dmgMod : 0
+            actorDmgMod: this.actor ? this.actor.data.data.dmgMod : 0,
+            actorWgroups: this.actor.data.data.wgroups
         };
         return Dice.itemDamage(damageData);
     };

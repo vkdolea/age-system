@@ -161,6 +161,15 @@ export async function ageRollCheck({
     // If no actor is selected, the checks inside this loop are not relevant
     if (actor) {
 
+        // Check if Item requires Weapon Group Proficiency
+        if (hasWeaponGroupPenalty(itemRolled, actor?.data.data.wgroups)) {
+            rollData.wgroup = -2;
+            rollFormula += " + @wgroup";
+            partials.push({
+                label: game.i18n.localize("age-system.wgroupPenalty"),
+                value: rollData.wgroup
+            });
+        };
 
         // Check if AIM is active - this bonus will apply to all rolls when it is active
         const aim = actor.data.data.aim;
@@ -334,6 +343,20 @@ export async function ageRollCheck({
     } else {
         ChatMessage.create(chatData);
     }
+};
+
+// Check if the roll has Weapon Group penalty
+function hasWeaponGroupPenalty(item, ownedGroups) {
+    if (!item || !ownedGroups || !Array.isArray(ownedGroups)) return false;
+    let hasPenalty = true;
+    const reqGroup = item?.data.data.wgroups;
+    if (Array.isArray(reqGroup)) {
+        for (let i = 0; i < reqGroup.length; i++) {
+            const wg = reqGroup[i];
+            if (ownedGroups.includes(wg) && CONFIG.ageSystem.weaponGroups.includes(wg)) hasPenalty = false;
+        }
+    };
+    return hasPenalty
 };
 
 async function getAgeRollOptions(itemRolled, data = {}) {
@@ -616,7 +639,8 @@ export async function itemDamage({
     dmgGeneralMod = null,
     resistedDmg = false,
     actorDmgMod = 0,
-    openOptions = false}={}) {
+    openOptions = false,
+    actorWgroups = []}={}) {
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     let damageOptions = null;
@@ -760,6 +784,8 @@ export async function itemDamage({
         };
 
     };
+
+    if (hasWeaponGroupPenalty(item, actorWgroups)) damageFormula = `(${damageFormula})/2`;
 
     let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
 

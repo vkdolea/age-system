@@ -97,7 +97,9 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## Change log
-### 0.7.11 [2021-x-y]
+### 0.7.11 [2021-08-25]
+#### Added
+- Weapon Group support for
 #### Fixed
 - Bug causing errors when deploying tokens
 
