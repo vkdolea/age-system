@@ -347,7 +347,9 @@ export async function ageRollCheck({
 
 // Check if the roll has Weapon Group penalty
 function hasWeaponGroupPenalty(item, ownedGroups) {
-    if (!item || !ownedGroups || !Array.isArray(ownedGroups)) return false;
+    const hasWgroups = CONFIG.ageSystem.weaponGroups;
+    if (!hasWgroups) return false;
+    if (!item || !ownedGroups || !Array.isArray(ownedGroups) ) return false;
     let hasPenalty = true;
     const reqGroup = item?.data.data.wgroups;
     if (Array.isArray(reqGroup)) {
