@@ -912,6 +912,21 @@
 /*******************************/
 /**    Default Char Sheet     **/
 /*******************************/
+.age-system.sheet.char.standard .owned-wgroups {
+  margin: 0 4px;
+  margin-top: 4px;
+  border-radius: 5px;
+  padding: 2px 4px;
+  font-size: 12px;
+}
+.age-system.sheet.char.standard .owned-wgroups label.wgroup {
+  font-weight: 800;
+}
+.age-system.sheet.char.standard .owned-wgroups .wgroup {
+  background-color: inherit;
+  color: inherit;
+  padding: 0;
+}
 .age-system.sheet.char.standard .sheet-header {
   height: 100%;
 }

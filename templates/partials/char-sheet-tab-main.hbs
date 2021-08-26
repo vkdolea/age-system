@@ -292,6 +292,14 @@
         {{!-- Weapon Block --}}
         <div class="item-container">
             <div class="top-row colorset-first-tier">{{localize "age-system.weaponContainer"}}</div>
+            {{#if data.weaponGroups}}
+            <div class="owned-wgroups colorset-second-tier">
+                <label class="wgroup">{{localize "SETTINGS.weaponGroups"}}:</label>
+                {{#each actor.data.data.wgroups as |wgroup|}}
+                <span>&nbsp{{wgroup}}{{#if @last}}.{{else}},{{/if}}</span>
+                {{/each}}
+            </div>
+            {{/if}}
             <div class="actor-items flexrow">
             {{#each data.weapon as |item id|}}
                 <div class="item-box flexrow feature-controls colorset-third-tier" draggable="true" data-item-id="{{item._id}}">
