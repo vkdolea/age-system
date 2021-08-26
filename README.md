@@ -96,68 +96,68 @@ Icons made by:
 - **Brazilian Portuguese**: by Discord user *Leandro_Soares#9067* and me.
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
-## Change log
-### 0.7.12 [2021-08-26]
-#### Fixed
+## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.7.13 [2021-08-26]
+### Fixed
+- Bug causing games without Weapon Group settings to always penalize damage and attack rolls.
+
+## 0.7.12 [2021-08-26]
+### Fixed
 - Bug prevent some item sheets from opening.
 
-### 0.7.11 [2021-08-25]
-#### Added
+## 0.7.11 [2021-08-25]
+### Added
 - Weapon Group support for Fantasy AGE, Blue Rose and Dragon AGE.
-#### Fixed
+### Fixed
 - Bug causing errors when deploying tokens.
 
-### 0.7.10 [2021-07-17]
-#### Added
+## 0.7.10 [2021-07-17]
+### Added
 - Added context menu for items on block sheets.
 - Added aid bar to stat block sheet.
 
-### 0.7.9 [2021-06-30]
-#### Added
+## 0.7.9 [2021-06-30]
+### Added
 - Stat block sheet implemented.
-
-#### Fixed
+### Fixed
 - Item template correction (Talent *activate* field added).
 
-### 0.7.8 [2021-06-25]
-#### Fixed
+## 0.7.8 [2021-06-25]
+### Fixed
 - French translation correction.
 - Talent degree is now showing up again in front of Talent name.
 - Bug preventing Condition selection from character sheet.
 
-### 0.7.7 [2021-06-24]
-#### Added
+## 0.7.7 [2021-06-24]
+### Added
 - Picture on Honorifics and Membership item sheets.
 - System Setting option to indicate the Initiative focus (world specific).
 - Added arrows up and down in front of Weapon and Item name (Main Tab) as a quantity counter for these item types.
 - Quantities will always show up inside brackets.
 - After rolling a weapon check with Aim box checked, it will be unchecked automatically.
-
-#### Fixed
+### Fixed
 - Styling issue causing bold characters to be blurred.
 - Styling issue causing item names on Persona Tab to be convoluted if it is 3+ lines long.
 
-### 0.7.6 [2021-06-20]
-#### Added
+## 0.7.6 [2021-06-20]
+### Added
 - Rolling items to chat will honor chat option selection. Shift+Click will override this option and submit a self roll.
 - Armor Strain as Item Modifier.
-
-#### Fixed
+### Fixed
 - Chat card buttons restyled, so they will have coherent look based on other buttons in the system. Chat cards rolled previously will lose their buttons' styling, but clicking the name will still roll the test.
 - Bug preventing damage options dialog box from being pre-filled in with options from a chat button when using Right Click.
 
-### 0.7.5 [2021-06-17]
-#### Changed
+## 0.7.5 [2021-06-17]
+### Changed
 - Left click on attack/damage buttons will roll directly.
 - Right click on attack/damage buttons will open roll options.
 - Only player owners (and GMs) will be able to see buttons from chat cards to roll damage, healing and fatigue.
-
-#### Added
+### Added
 - Game setting added to allow Observers to roll Abilities, attacks and Damage from Observed character sheet or chat cards.
 - When rolling to chat weapon and arcana cards, buttons will show up to roll attack and damage. Only players with permission to control the actor/token will see and be able to interact with the buttons.
 - When rolling an Item to Chat using Shift + Right click, the roll will be a Self Roll (i.e., whispered to self).
 
-#### Fixed
+### Fixed
 - Non breaking error when loading a world without Item compendia.
 - Shift + RightClick on AGE Roller will know correctly blind roll 1d6 to GM.
 - Rolls from chat were not using data form unlinked token, only from Actor.
@@ -165,19 +165,19 @@ Icons made by:
 - Fixed a bug which was preventing data migration from happening on newer releases.
 - Fixed a bug preventing Item mods from older version from showing up automatically on item sheets.
 
-### 0.7.4 [2021-06-08]
-#### Fixed
+## 0.7.4 [2021-06-08]
+### Fixed
 - Chat message hardcoded when other players roll blind.
 
-### 0.7.3 [2021-06-08]
-#### Fixed
+## 0.7.3 [2021-06-08]
+### Fixed
 - Bug causing Dice so Nice animation to be played twice.
 
-### 0.7.2 [2021-06-07]
-#### Added
+## 0.7.2 [2021-06-07]
+### Added
 - By default, clicking on "Roll Damage" button on chat card will bring the damage options menu.
 
-#### Fixed
+### Fixed
 - Issued preventing Spaceship Features deletion.
 - Text fields on characters' Persona tab was adding extra white spaces when selecting another field.
 - Text fields on GM Secret Notes on Spaceship and Vehicle sheets were unreadable when certain color schemes were used.
@@ -186,14 +186,14 @@ Icons made by:
 - Changing multiple System Settings at once no longer cause some not being updated.
 - Corrected Spanish and Portuguese (Brazilian) localization.
 
-### 0.7.1 [2021-06-01]
-#### Fixed 
+## 0.7.1 [2021-06-01]
+### Fixed 
 - Updated French localization.
 - Corrected a few typos on Brazilian Portuguese localiztion.
 - Addressed styling issue causing a text fileds to have the same color as background.
 
-### 0.7.0 [2021-05-30]
-#### Added
+## 0.7.0 [2021-05-30]
+### Added
 - New fancy layout for Vehicle sheet.
 - Added notes visible only by GM on each actor sheet (Character, Vehicle, Spaceship).
 - New tabs for Character sheet: Main (game stats), Persona (character notes), Effects (effects applied to character).
@@ -207,47 +207,46 @@ Icons made by:
 - Conditions (The Expanse) are not optional anymore - they are always available.
 - Conditions tooltip now pops up close to mouse pointer.
 - Added new Item Modifiers: Focus, Attack Bonus, All Test. Look at [AGE System (unofficial) wiki](https://github.com/vkdolea/age-system/wiki) for more details.
-
-#### Fix
+### Fix
 - Expanded "Range" field for weapons to accomodate bigger numbers.
 - Issue causing modified Ability value to be hidden even when a Modifier was applied to it.
 - Bug freezing Maximum Conviction to 3.
 - Code cleanup.
 
-### 0.6.5 [2021-05-01]
-#### Fix
+## 0.6.5 [2021-05-01]
+### Fix
 - Bug causing spaceship description to disappear when sending to compendium.
 
-### 0.6.4 [2021-04-26]
-#### Fix
+## 0.6.4 [2021-04-26]
+### Fix
 - Breaking bug on French localization.
 
-### 0.6.3 [2021-04-25]
-#### Added
+## 0.6.3 [2021-04-25]
+### Added
 - Brazilian Portuguese localization.
 
-### 0.6.3 [2021-04-25]
-#### Added
+## 0.6.3 [2021-04-25]
+### Added
 - Brazilian Portugues localization.
 
-### 0.6.2 [2021-04-24]
-#### Added
+## 0.6.2 [2021-04-24]
+### Added
 - Updated French localization
-#### Fix
+### Fix
 - Tooltip fixed on "Test" button Power & Arcana sheet.
 - Styling on Modifiers and Description tabs on Item sheets.
 
-### 0.6.1 [2021-04-22]
-#### Added
+## 0.6.1 [2021-04-22]
+### Added
 - Tracker (Complication, Churn, Serendepity) and Roller can now be dragged, and new position will be memorized. Point mouse slightly above Tracker or Roller and a Drag Bar will appear. Click and drag to reposition. Right click Drag Bar to return to original position!
-#### Fix
+### Fix
 - Serendipity tracker now set default value as Deactivated when new world is created.
 - Characters can now be draged to Spaceships.
 - Description field for spaceships now have correct line spaces between paragraphs.
 - Fixed issued preventing Speed to assume values other than 10.
 
-### 0.6.0 [2021-04-19]
-#### Added
+## 0.6.0 [2021-04-19]
+### Added
 - Serendipity tracker (Modern AGE Companion).
 - Complication tracker (Modern AGE Companion).
 - Churn tracker (The Expanse RPG).
@@ -256,21 +255,21 @@ Icons made by:
 - Added Spaceship as Actor.
 - Added Spaceship Features item, to add Qualities, Flaws and Weapons to spaceships.
 - Hindered/Exausted and Helpless/Restrained conditions now affect Speed parameter accordingly. Contributor: Discord user *schlosrat (he/him) #1091*.
-#### Fix
+### Fix
 - Fixed bug preventing MCE editor to enter editing mode in some Item sheets.
 
-### 0.5.1 [2021-03-25]
-#### Fix
+## 0.5.1 [2021-03-25]
+### Fix
 - Fixed a bug causing Spanish localization to display French text.
 
-### 0.5.0 [2021-03-25]
-#### Added
+## 0.5.0 [2021-03-25]
+### Added
 - Added an Age Roller close to hotbar. Click to roll 3d6 and check stunts. Right click to be prompet to add modifier and TN.
 - Added to vehicle sheets: Armor Rating, Cover, Total Passengers Capacity and Custom Damage for Collision/Sideswipe.
 - On vehicles damage table, line representing vehicle's Velocity Class will have **bold** characters.
 - On Configure Settings it is now possible to configure the flavor text as Health and Fortune.
 - Dice so Nice users can now can select their Stunt Die colorset option on System Settings.
-#### Fix
+### Fix
 - Migration issue could cause Conditions not to be created properly on migrated Actors.
 - Bug preventing rolling a Focus using a different Ability (or none).
 - When an Actor is deleted from game/directory, it will also be removed from vehicles' passenger list the next time the sheet is updated.
@@ -280,12 +279,12 @@ Icons made by:
 - "Use Power Points" and "Focus Compendium" settings are now accessible only for GMs.
 - Empty fields in the constant part of damage builder will no longer return "null" on damage formula.
 
-### 0.4.1 [2021-02-22]
-#### Added
+## 0.4.1 [2021-02-22]
+### Added
 - Vehicles as Actors - GM and trusted players may drag and drop Actors from directory to add as passengers. All players with Owner privilege of a Vehicle will be able to roll for Maneuvers and Damage.
 
-### 0.4.0 [2021-02-05]
-#### Added
+## 0.4.0 [2021-02-05]
+### Added
 - Options to Add Focus to damage and an arbitraty number for Stunt Die now shows up When ALT + Click to roll damage.
 - Powers now have option to roll as Damage or Healing.
 - Added option to indicate a Power as resistable, and add which Ability (Focus) is used to resist.
@@ -294,97 +293,97 @@ Icons made by:
 - Ronin Green color scheme included.
 - Player can select which Ability will be used to check Power's Fatigue - previously all Fatigue checks were based on Willpower.
 - Fatigue chat message now will not show Damage/Fatigue buttons.
-#### Fixed
+### Fixed
 - Bug causing chat message causing damage/fatigue rolls from unliked tokens to roll from Actor.
 - Bug preventing Talent degree to display on character sheet.
 - Restyled chat message buttons.
 
-### v0.3.1 [2021-01-26]
-#### Fixed
+## v0.3.1 [2021-01-26]
+### Fixed
 - Incorrect link on system.json preventing system to update automatically using FoundryVTT software.
 
-### v0.3.0 [2021-01-25]
-#### Added
+## v0.3.0 [2021-01-25]
+### Added
 - Press Alt key when rolling a roll check to bring menu with options to set TN, add modifier and Attack to Damage trade off (this one only when rolling weapon attacks).
 - When targeting a token and rolling an weapon attack, roll will be check versus target's Defense (attack selecting multiple tokens warns user to select only one token to attack).
 - When attacking a token or when rolling versus a TN, chat card will show "Success" or "Miss" - if the check is a "Miss", stunt points will not be generated.
 - Default macro (when dragging Power or Weapon to macro bar) behaviour is rolling the Item without prompting for a dialog box. Setting second argument to "true" after in the macro script it will prompt user for roll options (i.e., it will simulate the Click + Alt on character sheet roll).
 - When rolling damage, use Alt + Click to open menu to input extra damage options (extra dice and flat bonus/penality).
 - Added 4 and 12 hours option for casting time.
-#### Fixed
+### Fixed
 - Rolling Focus with another Ability from Focus' context menu now functional.
 - Fixed labeling on Cost field of equipment should "Purchase TN" instead of "Cost".
 - Styling on Power sheet causing PP cost field to disapear.
 - Data migration issues when preventing Speed mod to be include to some items.
 
-### v0.2.4 [2021-01-21]
-#### Added
+## v0.2.4 [2021-01-21]
+### Added
 - French localization by Discord user *Imposator#8090*.
-#### Fixed
+### Fixed
 - Version issue on 0.2.3 causing it to behave as 0.2.2.
 
-### v0.2.3 [2021-01-20]
-#### Added
+## v0.2.3 [2021-01-20]
+### Added
 - When selecting a input field, the text will be focused for quick edit.
-#### Fixed
+### Fixed
 - Issue causing worlds created on versions 0.2.1 and earlier not compatible to version 0.2.2.
 
-### v0.2.2 [2021-01-17]
-#### Added
+## v0.2.2 [2021-01-17]
+### Added
 - Added Speed Modificator.
 - Added Settings option to include Conditions (actual rolls and characteristics modificators not included).
 - When rolling damage from chat, added options to add Focus, Stunt Die or both to damage.
-#### Fixed
+### Fixed
 - Arcana/Power Fatigue rolls were previously based on Power's key Ability, no reverted to Willpower.
 - Fixed "yards" abbreviation to "yd" on grid map.
 
-### v0.2.1 [2021-01-10]
-#### Fixed
+## v0.2.1 [2021-01-10]
+### Fixed
 - Focus context menu (to edit, remove, show and roll with another Ability) is working again.
 
-### v0.2.0 [2021-01-09]
-#### Added
+## v0.2.0 [2021-01-09]
+### Added
 - Header from chat cards when rolling items shows different text.
 - Option to use GP / SP / CP as a wealth type.
 - Support to drag Weapons and Powers to marcobar.
 - Cost and Minimum STR fields now accepts text input.
 - Extra field on weapon chards to input max/long range.
-#### Fixed
+### Fixed
 - Removed unnecessary arguments from ageRollCheck.
 - When equip/activate icon is clicked on character sheet, only this element is updated on Item object and not the whole entity.
 
-### v0.1.1 [2021-01-05]
-#### Fixed
+## v0.1.1 [2021-01-05]
+### Fixed
 - Minimum and compatible versions updated on system.json.
 
-### v0.1.0
-#### Added
+## v0.1.0
+### Added
 - Checkbox to indicate primary Abilities.
 - Option to hide primary Abilities checkbox if not used.
 - Option to use Impact and Ballistic armor or generic Armor.
 - Added field in character sheet to track Threshold during Advanced Tests.
 - Shield icon working to equip/activate items. Unequiped/unactive items do not add bonuses to character.
 - Added custom icons for each item type and character, and users are allowed to change them as they please.
-#### Fixed
+### Fixed
 - Fixed an error causing Currency input to be disabled.
 - Added missing Membership sheet template.
 - Fixed styling issue causing all item name container to be slightly shorter than other sheet rows.
 
-### 2020.12.31
+## 2020.12.31
 - Included Ancestry/Race/Origin field with selection on Settings
 - Added option to change label between Profession/Class
 - Damage formula for items know support no Ability selected
 - Added a horizontal line to
 
-### 2020.12.29
+## 2020.12.29
 - Added functional color schemes for Modern AGE, Fantasy AGE, Threefold and Dragon AGE books.
 - Fixed bug causing Talent item to be reset when dragging it to character sheet.
 - Fixed bug causing Ability values disappearing from character sheet.
 
-### 2020.12.28
+## 2020.12.28
 - Added damage type (stun, wound, impact, ballistic, penetrating) on damage roll char card.
 
-### 2020.12.27
+## 2020.12.27
 - Added Settings menu to swap setting specific data (Fatigue, Power Points, Fatigue, Conviction, Currency, Income, Resources, Toughness).
 - Dragon AGE and Core AGE abilities are now supported, only select the desired at Settings.
 - Added settings to change game mode (Gritty, Pulp, Cinematic), but no practical changes on the system.
