@@ -104,6 +104,9 @@
     "SETTINGS.observerRoll": "Permitir rolagem de Observadores",
     "SETTINGS.observerRollHint": "Permitir que jogadores com permissão Observador possam rolar das fichas observadas ou do chat",
 
+    "SETTINGS.weaponGroups": "Grupos de Armas",
+    "SETTINGS.weaponGroupsHint": "Escreva os diferentes grupos de armas e use ; para os serparar. Deixe em branco caso não use essa função (The Expanse, Modern AGE)",
+
     "age-system": {
 
         "SHEETS": {
@@ -252,12 +255,13 @@
         "targetCurrent": "Alvo/Atual",
         "charMain": "Principal",
         "charPersona": "Persona",
+        "charEffects": "Efeitos",
+        "charOptions": "Opções",
         "bio": "Histórico",
         "goals": "Objetivos",
         "language": "Línguas",
         "secretNote": "Anotações Secretas entre Mestre e Jogador",
         "gmNotes": "Notas Secretas do Mestre",
-        "charEffects": "Efeitos",
         "custom": "Sob Medida",
         "conditionsName": "Condições",
         "conditions": {
@@ -531,6 +535,7 @@
         "thisItemDmgBns": "Bônus do Item",
         "rollFatigue": "Rolar Fadiga",
         "blindRollSomeone": "Você rolou às cegas para o Mestre",
+        "wgroupPenalty": "Penal Grupo de Armas",
         "activationMod": "Bônus",
         "success": "Sucesso",
         "miss": "Falha",

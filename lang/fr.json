@@ -103,6 +103,9 @@
 
     "SETTINGS.observerRoll": "Permet à un Observateur de faire des jets",
     "SETTINGS.observerRollHint": "Permet aux joueurs avec le rôle d'Observateur de faire des jets depuis les fiches ou les jets de la discussion",
+
+    "SETTINGS.weaponGroups": "Groups d'Armes",
+    "SETTINGS.weaponGroupsHint": "Indiquez les groupes d'armes en utilisant ; pour séparer les groupes. Laissez vide si les groupes d'armes ne sont pas utilisés (comme dans Modern Age)",
 	
     "age-system": {
 	
@@ -252,12 +255,13 @@
 		"targetCurrent": "Cible/Actuel",
         "charMain": "Principal",
         "charPersona": "Personnage",
+        "charEffects": "Effets",
+        "charOptions": "Options",
         "bio": "Biographie",
         "goals": "Objectifs",
         "language": "Langues",
         "secretNote": "Notes secrètes (MJ & Joueur)",
         "gmNotes": "Notes secrètes du MJ",
-        "charEffects": "Effets",
         "custom": "personnalisé",
 		"conditionsName": "Etats",
         "conditions": {
@@ -531,6 +535,7 @@
         "thisItemDmgBns": "Bonus Objets",
         "rollFatigue": "Jet de fatigue",
         "blindRollSomeone": "Vous avez fait un jet caché vers le MJ",
+        "wgroupPenalty": "Pénalité Group d'Armes",
         "activationMod": "Bonus Jets",
 		"success": "Réussite",
         "miss": "Échec",

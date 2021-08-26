@@ -1,0 +1,13 @@
+{{!-- Options Tab --}}
+<div class="item-container">
+    <div class="top-row colorset-first-tier">{{localize "SETTINGS.weaponGroups"}}</div>
+    <div class="flexrow container options flex-justify-center">
+        {{#each data.weaponGroups as |wgroup|}}
+        <div class="item-box weapon-groups flexrow feature-controls colorset-second-tier {{#unless (haswgroup wgroup ../actor.data.data.wgroups)}}inactive{{/unless}}" data-wgroup-id="{{wgroup}}">
+            <div class="item-name flexrow wgroup-item">
+                <a><p>{{wgroup}}</p></a>
+            </div>
+        </div>
+        {{/each}}      
+    </div>
+</div>

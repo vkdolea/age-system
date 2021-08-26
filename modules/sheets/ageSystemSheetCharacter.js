@@ -97,6 +97,11 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         // Sheet color
         data.colorScheme = game.settings.get("age-system", "colorScheme");
 
+        // Options Tab Preparation
+        // Weapon Groups
+        data.weaponGroups = ageSystem.weaponGroups;
+
+
         // Return template data
         return {
             actor: this.object,
@@ -135,19 +140,14 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     async _onToggleSheet(event) {
         event.preventDefault()
         let newSheet = 'age-system.ageSystemSheetCharStatBlock'
-    
-        const original =
-          this.actor.getFlag('core', 'sheetClass') ||
-          Object.values(CONFIG.Actor.sheetClasses['char']).filter(s => s.default)[0].id
-        console.log('original: ' + original)
-    
+        const original = this.actor.getFlag('core', 'sheetClass') || Object.values(CONFIG.Actor.sheetClasses['char']).filter(s => s.default)[0].id
         if (original != 'age-system.ageSystemSheetCharacter') newSheet = 'age-system.ageSystemSheetCharacter'
-    
         this.actor.openSheet(newSheet)
     }
     
     activateListeners(html) {
         html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));
+        // Remove unncessary white space and line breaks from Textarea fields
         const freeText = html.find("textarea.free-text");
         for (let t = 0; t < freeText.length; t++) {
             const area = freeText[t];
@@ -205,10 +205,25 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".condition-checkbox").change(this._onChangeCondition.bind(this));
             html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
+            html.find(".wgroup-item").click(this._onWeaponGroupToggle.bind(this));
         }
 
         super.activateListeners(html);
     };
+
+    async _onWeaponGroupToggle(event) {
+        event.preventDefault();
+        const wgroupId = event.currentTarget.closest(".feature-controls").dataset.wgroupId.trim();
+        const wgroups = await this.actor.data.data.wgroups;
+        const hasGroup = wgroups.includes(wgroupId);
+        if (hasGroup) {
+            const pos = wgroups.indexOf(wgroupId);
+            wgroups.splice(pos, 1);
+        } else {
+            wgroups.push(wgroupId);
+        }
+        return this.actor.update({"data.wgroups": wgroups});
+    }
 
     _onChangeQuantity(event) {
         event.preventDefault();

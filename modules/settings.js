@@ -253,6 +253,19 @@ export const registerSystemSettings = function() {
   });
 
   /**
+   * Configure Weapon Groups
+   */
+  game.settings.register("age-system", "weaponGroups", {
+    name: "SETTINGS.weaponGroups",
+    hint: "SETTINGS.weaponGroupsHint",
+    scope: "world",
+    config: true,
+    default: "",
+    type: String,
+    onChange: debouncedReload
+  });
+
+  /**
    * Register if world will use Complication/Chrun
    */
   game.settings.register("age-system", "complication", {

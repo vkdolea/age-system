@@ -24,21 +24,23 @@ import * as migrations from "./modules/migration.js";
 async function preloadHandlebarsTemplates() {
     const path = `systems/age-system/templates/partials/`;
     const templatePaths = [
-        `${path}bonus-desc-sheet.hbs`,
-        `${path}dmg-block-sheet.hbs`,
-        `${path}bonuses-sheet.hbs`,
-        `${path}active-bonuses.hbs`,
         `${path}ability-focus-select.hbs`,
-        `${path}cost-resource-block.hbs`,
-        `${path}play-aid-bar.hbs`,
-        `${path}item-image-sheet-card.hbs`,
-        `${path}conditions-block.hbs`,
+        `${path}active-bonuses.hbs`,
+        `${path}bonus-desc-sheet.hbs`,
+        `${path}bonuses-sheet.hbs`,
         `${path}char-sheet-nav-bar.hbs`,
         `${path}char-sheet-tab-main.hbs`,
         `${path}char-sheet-tab-persona.hbs`,
         `${path}char-sheet-tab-effects.hbs`,
-        `${path}item-card-buttons.hbs`,
+        `${path}char-sheet-tab-options.hbs`,
         `${path}char-stat-block-column1.hbs`,
+        `${path}conditions-block.hbs`,
+        `${path}cost-resource-block.hbs`,
+        `${path}dmg-block-sheet.hbs`,
+        `${path}item-card-buttons.hbs`,
+        `${path}item-image-sheet-card.hbs`,
+        `${path}item-options-sheet.hbs`,
+        `${path}play-aid-bar.hbs`,
     ];
 
     return loadTemplates(templatePaths);
@@ -157,27 +159,33 @@ Hooks.once("init", async function() {
             if (e[1] === mask) return e[0]
         }
         return `${mask} (${game.i18n.localize("age-system.custom")})`;
-    })
+    });
 
     // Handlebar returning array with Focus for a given Ability
     Handlebars.registerHelper('focusbyabl', function(focus, abl) {
         return focus.filter(f => f.data.useAbl === abl)
-    })
+    });
 
     // Handlebar returning array with equiped weapon
     Handlebars.registerHelper('equippedwpn', function(weapons) {
         return weapons.filter(f => f.data.equiped === true)
-    })
+    });
 
     // Handlebar returning array with active Power dealing damage
     Handlebars.registerHelper('dmgpower', function(powers) {
         return powers.filter(p => p.data.activate === true && (p.data.hasDamage || p.data.hasHealing))
-    })
+    });
 
     // Handlebar returning all carried itens
     Handlebars.registerHelper('carriedequip', function(items) {
         return items.filter(p => p.type === "equipment" || p.type === "weapon")
-    })
+    });
+
+    // Handlebar to itentify if Weapon Group is know
+    Handlebars.registerHelper('haswgroup', function(wGroup, groupArray) {
+        if (!groupArray === []) return false;
+        return groupArray.includes(wGroup) ? true : false;
+    });
 
     // Handlebar helper to compare 2 data
     Handlebars.registerHelper("when",function(operand_1, operator, operand_2, options) {
@@ -279,10 +287,34 @@ Hooks.once("ready", async function() {
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.compendiumList(setCompendium);
 
+    // Register Weapon Groups (if any)
+    const userGroups = game.settings.get("age-system", "weaponGroups");
+    if (!userGroups) {
+        ageSystem.weaponGroups = null;
+    } else {
+        ageSystem.weaponGroups = userGroups.split(`;`);
+        for (let index = 0; index < ageSystem.weaponGroups.length; index++) {
+            ageSystem.weaponGroups[index] = ageSystem.weaponGroups[index].trim();
+        };
+        // Sort Weapon Group names alphabetically
+        ageSystem.weaponGroups.sort(function(a, b) {
+            let nameA = a.toUpperCase(); // ignore upper and lowercase
+            let nameB = b.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+            // names must be equal
+            return 0;
+        });
+    }
+
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on("hotbarDrop", (bar, data, slot) => createAgeMacro(data, slot));
 
-    // // Determine whether a system migration is required and feasible
+    // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
     const NEEDS_MIGRATION_VERSION = "0.7.5";

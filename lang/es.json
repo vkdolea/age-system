@@ -104,6 +104,9 @@
     "SETTINGS.observerRoll": "Permitir tiradas Observador",
     "SETTINGS.observerRollHint": "Permite a los jugadores con permisos de Observador tirar los dados desde la Hoja y el Chat",
 
+    "SETTINGS.weaponGroups": "Grupos de Armas",
+    "SETTINGS.weaponGroupsHint": "Introduce el nombre del grupo de armas, utilizando ; para separar por grupos. Dejar vacío si los Grupos de Armas no se utilizan  (como en Modern AGE, The Expanse)",
+
     "age-system": {
 	
 		"SHEETS": {
@@ -252,12 +255,13 @@
 		"targetCurrent": "Objetivo/Actual",
         "charMain": "General",
         "charPersona": "Personaje",
+        "charEffects": "Efectos",
+        "charOptions": "Opciones",
         "bio": "Bio",
         "goals": "Objetivos",
         "language": "Idiomas",
         "secretNote": "Notas Ocultas",
         "gmNotes": "Notas Ocultas (Master)",
-        "charEffects": "Efectos",
         "custom": "Customizar",
         "conditionsName": "Estados",
         "conditions": {
@@ -531,6 +535,7 @@
         "thisItemDmgBns": "Mod. Objeto",
         "rollFatigue": "Tirar Fatiga",
         "blindRollSomeone": "Tirada para el DJ a ciegas",
+        "wgroupPenalty": "Penal. Grupo de Armas",
         "activationMod": "Mod. Activación",
         "success": "Éxito",
         "miss": "Fallo",
