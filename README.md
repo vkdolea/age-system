@@ -97,6 +97,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.7.14 [2021-08-27]
+### Fixed
+- Bug causing Weapon Groups to apply to Focus, Ability rolls, etc.
+
 ## 0.7.13 [2021-08-26]
 ### Fixed
 - Bug causing games without Weapon Group settings to always penalize damage and attack rolls.
