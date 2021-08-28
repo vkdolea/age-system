@@ -7,6 +7,10 @@ export function addChatListeners(html) {
     html.on('contextmenu', '.roll-item', rollItemFromChat);
 };
 
+// export function applyDamage(source, target) {
+
+// }
+
 export async function chatDamageRoll(event) {
     event.preventDefault();
     let owner = null;

@@ -2034,17 +2034,6 @@
   justify-content: center;
   margin-bottom: 4px;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card div.total-roll,
-#chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card div.total-roll {
-  padding-top: 0px;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card div.total-roll h3,
-#chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card div.total-roll h3 {
-  margin-bottom: 4px;
-  padding-left: 4px;
-  padding-right: 4px;
-  font-weight: bold;
-}
 #chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card > div div.stunted,
 #chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card > div div.stunted,
 #chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card > div div:last-of-type,
@@ -2058,6 +2047,10 @@
   padding-bottom: 4px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+#chat-log .chat-message .message-content .age-system.base-age-roll .action-details h3,
+#chat-log .chat-message .message-content .age-system.base-age-roll .action-details h4 {
+  margin: 0;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show {
   align-content: space-between;
@@ -2074,8 +2067,12 @@
 #chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show a {
   max-width: min-content;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .total-roll {
-  font-weight: 900;
+#chat-log .chat-message .message-content .age-system.base-age-roll .total-roll h3 {
+  font-weight: bold;
+  margin: 0;
+}
+#chat-log .chat-message .message-content .age-system.base-age-roll .italic {
+  font-style: italic;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod {
   padding: 4px;
