@@ -348,16 +348,32 @@ export async function ageRollCheck({
 // Check if the roll has Weapon Group penalty
 function hasWeaponGroupPenalty(item, ownedGroups) {
     const hasWgroups = CONFIG.ageSystem.weaponGroups;
+
+    // CASE 1 - Weapon Groups not in use or item rolled is not a weapon
     if (!hasWgroups || !["weapon"].includes(item?.type)) return false;
+
+    // CASE 2 - No item rolled, Actor is no expected to have Weapon Groups, Weapon Groups is not an Array
     if (!item || !ownedGroups || !Array.isArray(ownedGroups) ) return false;
+
+    const itemWgroups = item?.data.data.wgroups;
+    
+    // CASE 3 - Item's Weapon Groups is not an Array
+    if (!Array.isArray(itemWgroups)) return false;
+
+    // CASE 4 - Item's Weapon Group is currently not configured on Game Settings or Array is empty
+    let applicableWgroup = [];
+    for (let i = 0; i < itemWgroups.length; i++) {
+        const w = itemWgroups[i];
+        if (hasWgroups.includes(w)) applicableWgroup.push(w);        
+    }
+    if (applicableWgroup.length === 0) return false;
+
+    // CASE 5 - Item has applicable Weapon Groups and Actor is also applicable - time to check compatibility
     let hasPenalty = true;
-    const reqGroup = item?.data.data.wgroups;
-    if (Array.isArray(reqGroup)) {
-        for (let i = 0; i < reqGroup.length; i++) {
-            const wg = reqGroup[i];
-            if (ownedGroups.includes(wg) && CONFIG.ageSystem.weaponGroups.includes(wg)) hasPenalty = false;
-        }
-    };
+    for (let i = 0; i < applicableWgroup.length; i++) {
+        const wg = applicableWgroup[i];
+        if (ownedGroups.includes(wg)) hasPenalty = false;
+    }
     return hasPenalty
 };
 
@@ -665,133 +681,146 @@ export async function itemDamage({
     const isBlind = setBlind(event);
     const audience = isGMroll(event);
 
-    let damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}` : "";
+    // let damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}` : "";
+    let damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${game.i18n.localize("age-system.base")}, ${nrDice}d${diceSize}]` : "";
     let rollData = {
         // diceQtd: nrDice,
         // diceSize: diceSize,
         damageMod: constDmg
     };
     // Check if damage source has a non 0 portion on its parameters
-    if (constDmg) {damageFormula = `${damageFormula} + @damageMod`}
-    let messageData = {
-        flavor: `${item.name}`,
-        speaker: ChatMessage.getSpeaker()
-    };
+    if (constDmg) {damageFormula = `${damageFormula} + @damageMod[${game.i18n.localize("age-system.base")}]`}
+    
+    let damageDesc = "";
 
     if (item.isOwned) {
 
         // Adds up Flavor text for item damage type
         if (item.data.data.hasDamage) {
-            messageData.flavor += ` | ${game.i18n.localize(`age-system.${item.data.data.dmgType}`)} | ${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}`;
+            damageDesc += `${game.i18n.localize(`age-system.chatCard.rollDamage`)}`;
+            if (await game.settings.get("age-system", "useBallisticArmor")) damageDesc += ` | ${game.i18n.localize(`age-system.${item.data.data.dmgType}`)} | ${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}`;
         };
         // Add Healing Flavor text if applicable
         if (item.data.data.hasHealing) {
-            messageData.flavor += ` | ${game.i18n.localize(`age-system.item.healing`)}`;
+            damageDesc = `${game.i18n.localize(`age-system.item.healing`)}`;
         };
 
         // Adds owner's Ability to damage
         if (dmgAbl !== null && dmgAbl !== "no-abl") {
             const ablMod = item.actor.data.data.abilities[dmgAbl].total;
-            damageFormula = `${damageFormula} + @abilityMod`;
+            damageFormula = `${damageFormula} + @abilityMod[${game.i18n.localize("age-system." + dmgAbl)}]`;
             rollData.abilityMod = ablMod;
-            messageData.flavor += ` | ${damageToString(ablMod)} ${game.i18n.localize("age-system." + dmgAbl)}`
         }
 
         // Check if Attack to Damage Trade Off is applied
         if (atkDmgTradeOff) {
-            damageFormula = `${damageFormula} + @atkDmgTradeOff`;
+            damageFormula = `${damageFormula} + @atkDmgTradeOff[${game.i18n.localize("age-system.penaltyToDamage")}]`;
             rollData.atkDmgTradeOff = Math.abs(atkDmgTradeOff);
-            messageData.flavor += ` | ${damageToString(Math.abs(atkDmgTradeOff))} ${game.i18n.localize("age-system.penaltyToDamage")}`;
         }
 
         // Check if Focus adds to damage and adds it
         if (addFocus === true && item.data.data.useFocus) {
             const actor = item.actor;
             const focusData = actor.checkFocus(item.data.data.useFocus);
-            damageFormula = `${damageFormula} + @focus`;
+            damageFormula = `${damageFormula} + @focus[${focusData.focusName}]`;
             rollData.focus = focusData.value;
-            messageData.flavor += ` | ${damageToString(focusData.value)} ${focusData.focusName}`;
         }
 
         // Check if extra Stunt Die is to be added (normally rolling damage after chat card roll)
         if (stuntDie !== null) {
-            damageFormula = `${damageFormula} + @stuntDieDmg`;
+            damageFormula = `${damageFormula} + @stuntDieDmg[${game.i18n.localize("age-system.stuntDie")}]`;
             rollData.stuntDieDmg = stuntDie;
-            messageData.flavor += ` | ${damageToString(stuntDie)} ${game.i18n.localize("age-system.stuntDie")}`; 
         }
 
         // Check if Item has Mod to add to its own Damage
         if (item.data.data.itemMods.itemDamage.isActive) {
             const itemDmg = item.data.data.itemMods.itemDamage.value;
-            damageFormula = `${damageFormula} + @itemBonus`;
+            damageFormula = `${damageFormula} + @itemBonus[${game.i18n.localize("age-system.itemDmgMod")}]`;
             rollData.itemBonus = itemDmg;
-            messageData.flavor += ` | ${damageToString(itemDmg)} ${game.i18n.localize("age-system.itemDmgMod")}`;
         };
 
         // Adds user Damage input
         if (dmgGeneralMod && dmgGeneralMod !== 0) {
-            damageFormula += " + @optMod";
+            damageFormula += ` + @optMod[${game.i18n.localize("age-system.setRollGeneralMod")}]`;
             rollData.optMod = dmgGeneralMod;
-            messageData.flavor += ` | ${damageToString(dmgGeneralMod)}`;             
         };
         
         // Check if item onwer has items which adds up to general damage
         if (item.actor.data.data.ownedBonus != null && item.actor.data.data.ownedBonus.actorDamage) {
             const actorDmgMod = item.actor.data.data.ownedBonus.actorDamage.totalMod;
-            damageFormula = `${damageFormula} + @generalDmgMod`;
+            damageFormula = `${damageFormula} + @generalDmgMod[${game.i18n.localize("age-system.itemDmgMod")}]`;
             rollData.generalDmgMod = actorDmgMod;
-            messageData.flavor += ` | ${damageToString(actorDmgMod)} ${game.i18n.localize("age-system.itemDmgMod")}`;
         };
 
         // Adds extra damage for All-Out Attack maneuver
         if (item.actor.data.data.allOutAttack.active) {
             const allOutAttackMod = item.actor.data.data.allOutAttack.dmgBonus;
-            damageFormula = `${damageFormula} + @allOutAttack`;
+            damageFormula = `${damageFormula} + @allOutAttack[${game.i18n.localize("age-system.allOutAttack")}]`;
             rollData.allOutAttack = allOutAttackMod;
-            messageData.flavor += ` | ${damageToString(allOutAttackMod)} ${game.i18n.localize("age-system.allOutAttack")}`;                
         };
 
         // Adds extra damage for CTRL + click (+1D6) or CTRL + ALT + click (+2D6)
         if (event.ctrlKey) {
+            let extraD
             if (event.altKey) {
-                damageFormula = `${damageFormula} + 2d6`
-                messageData.flavor += ` | +2D6`;
+                extraD = `2D6`
             } else {
-                damageFormula = `${damageFormula} + 1d6`
-                messageData.flavor += ` | +1D6`;
+                extraD = `1D6`
             };
-        };
-
-        // Adds specific Stunt Damage dice
-        if (stuntDamage && stuntDamage !== 0) {
-            const stuntDmgDice = `${stuntDamage}D6`;
-            damageFormula += " + @stuntDmg";
-            rollData.stuntDmg = stuntDmgDice;
-            messageData.flavor += ` | +${stuntDmgDice} ${game.i18n.localize("age-system.stunts")}`;             
+            damageFormula = `${damageFormula} + ${extraD}[+${extraD}]`
         };
 
         // Adds Extra Damage dice
         if (dmgExtraDice && dmgExtraDice !== 0) {
             const extraDice = `${dmgExtraDice}D6`;
-            damageFormula += " + @extraDice";
+            damageFormula += ` + @extraDice[+${extraDice}]`;
             rollData.extraDice = extraDice;
-            messageData.flavor += ` | +${extraDice}`;             
+        };
+
+        // Adds specific Stunt Damage dice
+        if (stuntDamage && stuntDamage !== 0) {
+            const stuntDmgDice = `${stuntDamage}D6`;
+            damageFormula += ` + @stuntDmg[${game.i18n.localize("age-system.stunts")} +${stuntDmgDice}]`;
+            rollData.stuntDmg = stuntDmgDice;
         };
 
         // Adds Actor Damage Bonus
         if (actorDmgMod !== 0) {
-            damageFormula += " + @actorDmgMod";
+            damageFormula += ` + @actorDmgMod[${game.i18n.localize("age-system.bonus.actorDamage")}]`;
             rollData.actorDmgMod = actorDmgMod;
-            messageData.flavor += ` | ${damageToString(actorDmgMod)} ${game.i18n.localize("age-system.bonus.actorDamage")}`;             
         };
 
     };
 
-    if (hasWeaponGroupPenalty(item, actorWgroups)) damageFormula = `(${damageFormula})/2`;
-
     let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
+    // if (hasWeaponGroupPenalty(item, actorWgroups)) damageFormula = `(${damageFormula})/2[${game.i18n.localize("SETTINGS.weaponGroups")}]`;
+    
+    // Preparing custom damage chat card
+    let chatTemplate = "/systems/age-system/templates/rolls/damage-roll.hbs";
+    
+    const wGroupPenalty = hasWeaponGroupPenalty(item, actorWgroups);
+    rollData = {
+        ...rollData,
+        // rawRollData: dmgRoll,
+        wGroupPenalty: wGroupPenalty,
+        finalValue: wGroupPenalty? dmgRoll.total/2 : dmgRoll.total,
+        diceTerms: dmgRoll.terms,
+        colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
+        flavor: item ? `${item.name} [${item.actor.name}]` : damageDesc,
+        flavor2: item ? damageDesc : null,
+        user: game.user
+    };
 
-    return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
+    let chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker(),
+        content: await renderTemplate(chatTemplate, rollData),
+        roll: dmgRoll,
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL
+    };
+
+    if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;
+    ChatMessage.create(chatData);
 };
 
 export function getActor() {

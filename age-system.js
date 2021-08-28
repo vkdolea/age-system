@@ -187,6 +187,13 @@ Hooks.once("init", async function() {
         return groupArray.includes(wGroup) ? true : false;
     });
 
+    // Handlebar to build damage summary on chat card
+    Handlebars.registerHelper('termOperator', function(diceTerms, k) {
+        if (k === 0) return ``;
+        const op = diceTerms[k-1].operator;
+        return op === `+` ? `` : op;
+    });
+
     // Handlebar helper to compare 2 data
     Handlebars.registerHelper("when",function(operand_1, operator, operand_2, options) {
         let operators = {

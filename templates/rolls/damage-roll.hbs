@@ -1,0 +1,127 @@
+<form class="age-system base-age-roll damage-roll colorset-selection {{colorScheme}}">
+    {{log this}}
+    <div class="feature-controls"
+        data-stunt-die="{{ageRollSummary.dice.d3}}"
+        data-actor-id="{{actorId}}"
+        data-actor-token="{{isToken}}"
+        data-atkdmg-trade="{{atkDmgTradeOff}}"
+        {{#if focusId}} data-focus-id="{{focusId}}" {{/if}}
+        {{#if itemId}} data-item-id="{{itemId}}" {{/if}}>
+
+        <div class="flexcol roll-card regular-roll-card">
+
+            <div>
+                <div class="action-details colorset-first-tier">
+                    <h3>{{flavor}}</h3>
+                    {{#if flavor2}}
+                    <h4>{{flavor2}}</h4>
+                    {{/if}}
+                </div>
+                <div class="flexrow roll-mod total-roll">
+                    <h3 class="line-header">{{localize "age-system.settings.totalRolled"}}</h3>
+                    <h3 class="line-value">{{finalValue}}</h3>
+                </div>
+
+                {{#each diceTerms as |part key|}}
+                {{#unless part.operator}}
+                <div class="flexrow roll-mod">
+                    <div class="line-header">{{part.options.flavor}}</div>
+                    {{#if part.results}}
+                    <div class="line-value">{{termOperator ../diceTerms key}}{{#each part.results as |die|}}{{die.result}}{{#unless @last}}, {{/unless}}{{/each}}</div>
+                    {{else}}
+                    <div class="line-value">{{termOperator ../diceTerms key}}{{part.total}}</div>
+                    {{/if}}
+                </div>
+                {{/unless}}
+                {{/each}}
+                {{#if wGroupPenalty}}
+                <div class="flexrow roll-mod wgroup-penalty italic">
+                    <div class="line-header">{{localize "SETTINGS.weaponGroups"}}</div>
+                    <div class="line-value">÷2</div>
+                </div>
+                {{/if}}
+                
+            </div>
+
+            {{!-- {{#if (ne rollType 'fatigue')}}
+            <div class="age-chat-buttons flexcol">
+                {{#if (or hasDamage hasHealing)}}
+                <div class="age-chat-buttons-grid">
+
+                    <button class="age-button roll-damage main-dmg">
+                        {{#if hasTest}}
+                            {{#if hasDamage}} {{localize "age-system.chatCard.rollFullDamage"}}
+                            {{else}} {{localize "age-system.chatCard.rollFullHealing"}} {{/if}}
+                        {{else}}
+                            {{#if hasDamage}} {{localize "age-system.chatCard.rollDamage"}}
+                            {{else}} {{localize "age-system.chatCard.rollHealing"}} {{/if}}
+                        {{/if}}
+                    </button>
+
+                    <button class="age-button roll-damage add-stunt-damage sd-dmg">
+                        {{localize "age-system.chatCard.addStuntDie"}}
+                    </button>
+
+                    <button class="age-button roll-damage add-focus-damage focus-dmg">
+                        {{localize "age-system.chatCard.addFocus"}}
+                    </button>
+
+                    <button class="age-button roll-damage add-focus-damage add-stunt-damage both-dmg">
+                        {{localize "age-system.chatCard.addFocusSD"}}
+                    </button>
+
+                </div>
+                {{/if}}
+
+                {{#if (and (or hasDamage hasHealing) hasTest)}}
+                <div class="age-chat-buttons-grid">
+            
+                    <button class="age-button roll-damage resisted main-dmg">
+                        {{#if hasDamage}} {{localize "age-system.chatCard.rollResistedDamage"}}
+                        {{else}} {{localize "age-system.chatCard.rollResistedHealing"}} {{/if}}
+                    </button>
+
+                    <button class="age-button roll-damage resisted add-stunt-damage sd-dmg">
+                        {{localize "age-system.chatCard.addStuntDie"}}
+                    </button>
+
+                    <button class="age-button roll-damage resisted add-focus-damage focus-dmg">
+                        {{localize "age-system.chatCard.addFocus"}}
+                    </button>
+
+                    <button class="age-button roll-damage resisted add-focus-damage add-stunt-damage both-dmg">
+                        {{localize "age-system.chatCard.addFocusSD"}}
+                    </button>
+              
+                </div>
+                {{/if}}
+
+                {{#if usingFatigue}}
+                {{#if hasFatigue}}
+                <button class="roll-fatigue age-button">
+                    {{localize "age-system.rollFatigue"}} <i class="fas fa-head-side-cough"></i>
+                </button>
+                {{/if}}
+                {{/if}}
+            </div>
+            {{/if}}
+            
+        </div> --}}
+        <div class="blind-roll-card flexcol roll-card">
+            <div>
+                <h3 class="action-details colorset-first-tier other-user-roll">
+                    {{localize "age-system.chatCard.looseRoll" user=user.name }}
+                </h3>
+                <h3 class="action-details colorset-first-tier user-roll">
+                    {{localize "age-system.blindRollSomeone"}}
+                </h3>
+                <div class="dice-show trait-test flexrow">
+                    <i class="fas fa-question-circle fa-4x"></i>
+                    <i class="fas fa-question-circle fa-4x"></i>
+                    <i class="fas fa-question-circle fa-4x"></i>
+                </div>
+                <div class="roll-mod stunted blind-value">???</div>
+            </div>
+        </div>
+    </div>
+</form>

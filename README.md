@@ -97,6 +97,12 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.7.15 [2021-08-28]
+### Added
+- New chat card for weapon damage (in preparation for damage automation).
+### Fixed
+- Yet another bug causing some damages to be only half the value expected when using Weapon Groups.
+
 ## 0.7.14 [2021-08-27]
 ### Fixed
 - Bug causing Weapon Groups to apply to Focus, Ability rolls, etc.
