@@ -262,7 +262,7 @@
         "language": "Langues",
         "secretNote": "Notes secrètes (MJ & Joueur)",
         "gmNotes": "Notes secrètes du MJ",
-        "custom": "personnalisé",
+        "custom": "Personnalisé",
 		"conditionsName": "Etats",
         "conditions": {
             "blinded": "Aveuglé",

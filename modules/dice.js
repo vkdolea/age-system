@@ -174,11 +174,11 @@ export async function ageRollCheck({
         // Check if AIM is active - this bonus will apply to all rolls when it is active
         const aim = actor.data.data.aim;
         if (aim.active && !resourceRoll) {
-            rollData.aim = aim.value;
+            rollData.aim = aim.value + aim.mod;
             rollFormula += " + @aim";
             partials.push({
                 label: game.i18n.localize("age-system.aim"),
-                value: aim.value
+                value: rollData.aim
             });
             if (itemRolled?.data?.type === "weapon") await actor.update({"data.aim.active": false});
         };

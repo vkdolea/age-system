@@ -228,12 +228,9 @@ export class ageSystemActor extends Actor {
         data.armor.ballistic = mods.ballisticArmor ?? 0;
 
         // Toughness
-        // TODO - add Constitution to total, how to apply Active Effects?
         data.armor.toughness.mod = mods.toughness ?? 0;
 
         // Speed
-        // TODO - add Constitution to total, how to apply Active Effects?
-        // TODO - apply Armor Penalty before this one
         data.speed.mod = mods.speed ?? 0;
 
         // Defend Maneuver (bonus to Defense)

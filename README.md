@@ -97,6 +97,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.7.16 [2021-08-29]
+### Fixed
+- Bug preventing Mod to Aim to be taken into accound when rolling.
+
 ## 0.7.15 [2021-08-28]
 ### Added
 - New chat card for weapon damage (in preparation for damage automation).
