@@ -288,7 +288,7 @@ Hooks.once("ready", async function() {
         e.prepareData();
     }
     
-    // Register System Settings related do Focus Compendium
+    // Register System Settings related to Focus Compendium
     ageSystem.itemCompendia = Settings.allCompendia("Item");
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
@@ -317,6 +317,13 @@ Hooks.once("ready", async function() {
             return 0;
         });
     }
+
+    // Select weapon damage type based on Ballistic armor
+    const useBallisticArmor = await game.settings.get("age-system", "useBallisticArmor");
+    CONFIG.ageSystem.settings = {
+        useBallistic: useBallisticArmor
+    };
+    CONFIG.ageSystem.damageSource = useBallisticArmor ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
 
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on("hotbarDrop", (bar, data, slot) => createAgeMacro(data, slot));

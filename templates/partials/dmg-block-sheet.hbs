@@ -46,6 +46,7 @@
         </div>
         {{#if data.data.hasDamage}}
         <div class="flexrow">
+            {{#if config.settings.useBallistic}}
             <select name="data.dmgType">
                 {{#select data.data.dmgType}}
                 {{#each config.damageType as |name type|}}
@@ -53,6 +54,7 @@
                 {{/each}}
                 {{/select}}
             </select>
+            {{/if}}
             <select name="data.dmgSource">
                 {{#select data.data.dmgSource}}
                 {{#each config.damageSource as |name source|}}

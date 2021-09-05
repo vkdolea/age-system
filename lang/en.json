@@ -375,6 +375,7 @@
         "stundIndex": "S",
         "wound": "Wound",
         "woundIndex": "W",
+        "normalDamage": "Normal",
         "hasDamage": "Damage?",
         "armorPenalty": "Penalty",
 

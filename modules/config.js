@@ -128,12 +128,22 @@ ageSystem.damageType = {
     stun: "age-system.stun",
     wound: "age-system.wound"
 };
-ageSystem.damageSource = {
-    impact: "age-system.impact",
-    ballistic: "age-system.ballistic",
-    penetrating: "age-system.penetrating"
-    // piercing: "age-system.piercing"
-};
+// ageSystem.damageSource = {
+//     impact: "age-system.impact",
+//     ballistic: "age-system.ballistic",
+//     penetrating: "age-system.penetrating",
+// };
+ageSystem.damageSourceOpts = {
+    useBallistic: {
+        impact: "age-system.impact",
+        ballistic: "age-system.ballistic",
+        penetrating: "age-system.penetrating"
+    },
+    noBallistic : {
+        normalDamage: "age-system.normalDamage",
+        penetrating: "age-system.penetrating"
+    }
+}
 ageSystem.rof = {
     none: "age-system.rof.none",
     singleShot: "age-system.rof.singleShot",

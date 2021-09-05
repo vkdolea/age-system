@@ -680,6 +680,7 @@ export async function itemDamage({
 
     const isBlind = setBlind(event);
     const audience = isGMroll(event);
+    const useBallisticArmor = await game.settings.get("age-system", "useBallisticArmor");
 
     // let damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}` : "";
     let damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${game.i18n.localize("age-system.base")}, ${nrDice}d${diceSize}]` : "";
@@ -692,19 +693,29 @@ export async function itemDamage({
     if (constDmg) {damageFormula = `${damageFormula} + @damageMod[${game.i18n.localize("age-system.base")}]`}
     
     let damageDesc = "";
+    const messageFlag = {
+        dmgType: null,
+        dmgSrc: null,
+    };
+
+    // Adds up Flavor text for item damage type
+    if (item.data.data.hasDamage) {
+        damageDesc += `${game.i18n.localize(`age-system.chatCard.rollDamage`)}`;
+        if (useBallisticArmor) {
+            const dmgType = game.i18n.localize(`age-system.${item.data.data.dmgType}`);
+            const dmgSrc = game.i18n.localize(`age-system.${item.data.data.dmgSource}`);
+            damageDesc += ` | ${dmgType} | ${dmgSrc}`;
+            messageFlag.dmgType = item.data.data.dmgType;
+            messageFlag.dmgSrc = item.data.data.dmgSource;
+        }
+    };
+    // Add Healing Flavor text if applicable
+    if (item.data.data.hasHealing) {
+        damageDesc = `${game.i18n.localize(`age-system.item.healing`)}`;
+        messageFlag.isHealing = true;
+    };
 
     if (item.isOwned) {
-
-        // Adds up Flavor text for item damage type
-        if (item.data.data.hasDamage) {
-            damageDesc += `${game.i18n.localize(`age-system.chatCard.rollDamage`)}`;
-            if (await game.settings.get("age-system", "useBallisticArmor")) damageDesc += ` | ${game.i18n.localize(`age-system.${item.data.data.dmgType}`)} | ${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}`;
-        };
-        // Add Healing Flavor text if applicable
-        if (item.data.data.hasHealing) {
-            damageDesc = `${game.i18n.localize(`age-system.item.healing`)}`;
-        };
-
         // Adds owner's Ability to damage
         if (dmgAbl !== null && dmgAbl !== "no-abl") {
             const ablMod = item.actor.data.data.abilities[dmgAbl].total;
@@ -793,12 +804,13 @@ export async function itemDamage({
     };
 
     let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
-    // if (hasWeaponGroupPenalty(item, actorWgroups)) damageFormula = `(${damageFormula})/2[${game.i18n.localize("SETTINGS.weaponGroups")}]`;
     
     // Preparing custom damage chat card
     let chatTemplate = "/systems/age-system/templates/rolls/damage-roll.hbs";
     
     const wGroupPenalty = hasWeaponGroupPenalty(item, actorWgroups);
+    messageFlag.wGroupPenalty = wGroupPenalty;
+
     rollData = {
         ...rollData,
         // rawRollData: dmgRoll,
@@ -816,7 +828,18 @@ export async function itemDamage({
         speaker: ChatMessage.getSpeaker(),
         content: await renderTemplate(chatTemplate, rollData),
         roll: dmgRoll,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        flags: {
+            "age-system": {
+                type: "damage",
+                damageData: {
+                    ...messageFlag,
+                    totalDamage: rollData.finalValue,
+                    attacker: item.actor.name,
+                    attackerId: item.actor.uuid
+                }
+            }
+        }
     };
 
     if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;

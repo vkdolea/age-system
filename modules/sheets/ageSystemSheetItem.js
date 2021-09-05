@@ -60,10 +60,6 @@ export default class ageSystemItemSheet extends ItemSheet {
     getData(options) {
         const data = super.getData(options);
         data.item = data.document;
-        // const data = super.getData(options);
-        // data.item = data.entity;
-        // data.data = data.entity.data;
-
         data.config = CONFIG.ageSystem;
         
         // Setting which ability settings will be used
@@ -90,8 +86,6 @@ export default class ageSystemItemSheet extends ItemSheet {
         data.hasOptionsTab = this.hasWgroups;
         // Weapon Groups
         data.weaponGroups = ageSystem.weaponGroups;
-
-
 
         // Active Effects if item owner is a Character
         if (this.item.actor?.type === "char") data.actorEffects = this.item.actor.effects;
