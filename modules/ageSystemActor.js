@@ -190,7 +190,11 @@ export class ageSystemActor extends Actor {
                         const focusElement = modKey === "focus" ? {name: modObj.name, value: modObj.value} : null;
                         if (modObj.selected && modObj.isActive) {
                             if (mods.hasOwnProperty(modKey)) {
-                                mods[modKey] = focusElement ? mods[modKey].push(focusElement) : mods[modKey] + modObj.value;
+                                if (focusElement) {
+                                    mods[modKey].push(focusElement);
+                                } else {
+                                    mods[modKey] += modObj.value;
+                                }
                             } else {
                                 mods[modKey] = focusElement ? [focusElement] : modObj.value;
                             }

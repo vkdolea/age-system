@@ -3685,7 +3685,7 @@
   text-align: left;
 }
 /*---- Font Override----*/
-body *:not(i) {
+body *:not(i, .fa) {
   font-family: 'Roboto' !important;
 }
 /*---------Background---------------------*/
