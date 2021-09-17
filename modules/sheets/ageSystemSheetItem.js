@@ -53,9 +53,9 @@ export default class ageSystemItemSheet extends ItemSheet {
         return `systems/age-system/templates/sheets/${this.item.data.type}-sheet.hbs`;
     };
 
-    get hasWgroups() {
-        return this.item.data.data.wgroups ? true : false;
-    };
+    // get hasWgroups() {
+    //     return this.item.data.data.wgroups ? true : false;
+    // };
 
     getData(options) {
         const data = super.getData(options);
@@ -83,7 +83,7 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Options Tab Preparation
         // Does it have Options tab?
-        data.hasOptionsTab = this.hasWgroups;
+        data.hasOptionsTab = ageSystem.weaponGroups;
         // Weapon Groups
         data.weaponGroups = ageSystem.weaponGroups;
 
