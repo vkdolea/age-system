@@ -54,12 +54,43 @@ export const migrateWorld = async function() {
     await migrateCompendium(p);
   }
 
+  // Migrate Game Settings
+  const settingsUpdates = await migrateSettings();
+
   // Set the migration as complete
-  game.settings.set("age-system", "systemMigrationVersion", game.system.data.version);
+  await game.settings.set("age-system", "systemMigrationVersion", game.system.data.version);
+  if (settingsUpdates !== []) {
+    for (let s = 0; s < settingsUpdates.length; s++) {
+      const setting = settingsUpdates[s];
+      game.settings.set("age-system", setting.key, setting.value);
+    }
+  }
   ui.notifications.info(`AGE System Migration to version ${game.system.data.version} completed!`, {permanent: true});
 };
 
 /* -------------------------------------------- */
+
+/**
+ * Migrate Game Settings
+ */
+export async function migrateSettings() {
+  const lastMigrationVer = await game.settings.get("age-system", "systemMigrationVersion");
+  const healthSys = await game.settings.get("age-system", "healthSys");
+  let updateSettings = [];
+  if (isNewerVersion("0.8.0", lastMigrationVer)) { // Do not execute if last migration version was 0.8.0 or earlier
+    const newHealthSys = await removeToughHealthBallistic();
+    if (newHealthSys !== healthSys) updateSettings.push({key: "healthSys", value: newHealthSys})
+  };
+  return updateSettings;
+};
+
+export async function removeToughHealthBallistic() {
+  const useToughness = await game.settings.get("age-system", "useToughness");
+  const useBallisticArmor = await game.settings.get("age-system", "useBallisticArmor");
+  // const healthMode = await game.settings.get("age-system", "healthMode");
+  let healthSys = useBallisticArmor ? "mage" : useToughness ? "expanse" : "basic";
+  return healthSys;
+}
 
 /**
  * Apply migration rules to all Entities within a single Compendium pack
@@ -164,7 +195,7 @@ export const migrateItemData = function(item) {
   // _addItemForceAbl(item, updateData);
   // _addItemModTest(item, updateData);
   // _addItemAttackMod(item, updateData);
-  if (isNewerVersion("0.7.0", lastMigrationVer)) _adjustFocusInitialValue(item, updateData); // Do not execute if last migration was 0.7.0 ore earlier
+  if (isNewerVersion("0.7.0", lastMigrationVer)) _adjustFocusInitialValue(item, updateData); // Do not execute if last migration was 0.7.0 or earlier
   if (isNewerVersion("0.7.5", lastMigrationVer)) _addSelectedFieldForMods(item, updateData);
   return updateData;
 };

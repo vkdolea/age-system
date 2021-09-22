@@ -14,15 +14,6 @@ export default class ageActiveEffectConfig extends ActiveEffectConfig {
     });
   }
 
-//   /* ----------------------------------------- */
-
-//   /** @override */
-//   get title() {
-//     return `${game.i18n.localize("EFFECT.ConfigTitle")}: ${this.object.data.label}`;
-//   }
-
-//   /* ----------------------------------------- */
-
   /** @override */
   getData(options) {
     const effect = foundry.utils.deepClone(this.object.data);
@@ -39,56 +30,4 @@ export default class ageActiveEffectConfig extends ActiveEffectConfig {
       }, {})
     };
   }
-
-//   /* ----------------------------------------- */
-
-//   /** @override */
-//   activateListeners(html) {
-//     super.activateListeners(html);
-//     html.find(".effect-control").click(this._onEffectControl.bind(this));
-//   }
-
-//   /* ----------------------------------------- */
-
-//   /**
-//    * Provide centralized handling of mouse clicks on control buttons.
-//    * Delegate responsibility out to action-specific handlers depending on the button action.
-//    * @param {MouseEvent} event      The originating click event
-//    * @private
-//    */
-//   _onEffectControl(event) {
-//     event.preventDefault();
-//     const button = event.currentTarget;
-//     switch ( button.dataset.action ) {
-//       case "add":
-//         return this._addEffectChange();
-//       case "delete":
-//         button.closest(".effect-change").remove();
-//         return this.submit({preventClose: true}).then(() => this.render());
-//     }
-//   }
-
-//   /* ----------------------------------------- */
-
-//   /**
-//    * Handle adding a new change to the changes array.
-//    * @private
-//    */
-//   async _addEffectChange() {
-//     const idx = this.document.data.changes.length;
-//     return this.submit({preventClose: true, updateData: {
-//       [`changes.${idx}`]: {key: "", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: ""}
-//     }});
-//   }
-
-//   /* ----------------------------------------- */
-
-//   /** @inheritdoc */
-//   _getSubmitData(updateData={}) {
-//     const fd = new FormDataExtended(this.form, {editors: this.editors});
-//     let data = foundry.utils.expandObject(fd.toObject());
-//     if ( updateData ) foundry.utils.mergeObject(data, updateData);
-//     data.changes = Array.from(Object.values(data.changes || {}));
-//     return data;
-//   }
 }

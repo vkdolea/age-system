@@ -6,7 +6,7 @@
     </label>
     <p class="in-chat-text">{{concat data.data.nrDice "d" data.data.diceType "+" data.data.extraValue}}{{#when data.data.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.data.ablDamageValue}}{{/when}}</p>
     {{#if data.hasDamage}}
-    <p class="in-chat-text">{{localize (concat "age-system." data.data.dmgType)}} | {{localize (concat "age-system." data.data.dmgSource)}}</p>
+    <p class="in-chat-text">{{localize (concat "age-system." data.data.dmgType)}}{{#if config.healthSys.useBallistic}} | {{localize (concat "age-system." data.data.dmgSource)}}{{/if}}</p>
     {{/if}}
     {{#if data.data.hasTest}}
     <label>{{localize "age-system.item.resistedEffect"}}</label>
@@ -24,6 +24,9 @@
         {{/if}}
         <div class="flexrow">
             <div class="flexrow damage-dice-field">
+                {{#if config.healthSys.useInjury}}
+                <input type="number" name="data.damageInjury" value="{{data.data.damageInjury}}" data-dtype="Number" />
+                {{else}}
                 <input type="number" name="data.nrDice" value="{{data.data.nrDice}}" data-dtype="Number" />
                 <select name="data.diceType" class="dice-size">
                     {{#select data.data.diceType}}
@@ -33,6 +36,7 @@
                 </select>
                 <span>{{localize "age-system.settings.plusSign"}}</span>
                 <input type="number" name="data.extraValue" value="{{data.data.extraValue}}" data-dtype="Number" />
+                {{/if}}
                 <span>{{localize "age-system.settings.plusSign"}}</span>
                 <select name="data.dmgAbl">
                     {{#select data.data.dmgAbl}}
@@ -46,7 +50,7 @@
         </div>
         {{#if data.data.hasDamage}}
         <div class="flexrow">
-            {{#if config.settings.useBallistic}}
+            {{#if config.healthSys.useBallistic}}
             <select name="data.dmgType">
                 {{#select data.data.dmgType}}
                 {{#each config.damageType as |name type|}}
@@ -70,6 +74,9 @@
         <label>{{localize "age-system.item.resistedEffect"}}</label>
         <div class="flexrow">
             <div class="flexrow damage-dice-field">
+                {{#if config.healthSys.useInjury}}
+                <input type="number" name="data.damageResisted.damageInjury" value="{{data.data.damageResisted.damageInjury}}" data-dtype="Number" />
+                {{else}}
                 <input type="number" name="data.damageResisted.nrDice" value="{{data.data.damageResisted.nrDice}}" data-dtype="Number" />
                 <select name="data.damageResisted.diceType" class="dice-size">
                     {{#select data.data.damageResisted.diceType}}
@@ -79,6 +86,7 @@
                 </select>
                 <span>{{localize "age-system.settings.plusSign"}}</span>
                 <input type="number" name="data.damageResisted.extraValue" value="{{data.data.damageResisted.extraValue}}" data-dtype="Number" />
+                {{/if}}
                 <span>{{localize "age-system.settings.plusSign"}}</span>
                 <select name="data.damageResisted.dmgAbl">
                     {{#select data.data.damageResisted.dmgAbl}}

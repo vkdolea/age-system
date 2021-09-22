@@ -77,7 +77,7 @@
     </div>
 
     {{!-- Toughness block --}}
-    {{#if data.data.useToughness}}
+    {{#if data.config.healthSys.useToughness}}
     <div class="flexcol general-stats">
         <div class="top-row colorset-first-tier">{{localize "age-system.toughness"}}</div>
         <input type="number" disabled class="main-value" name="data.armor.toughness.total" value="{{data.data.armor.toughness.total}}" data-dtype="Number" />
@@ -151,8 +151,8 @@
     <div class="flexcol general-stats">
         <div class="top-row colorset-first-tier">{{localize "age-system.armor"}}</div>
         <div class="main-value flexcol armor">
-            <div>{{data.data.armor.impact}}{{#if data.data.useBallisticArmor}}{{localize "age-system.impactIndex"}}{{/if}}</div>
-            {{#if data.data.useBallisticArmor}}
+            <div>{{data.data.armor.impact}}{{#if data.config.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}{{/if}}</div>
+            {{#if data.config.healthSys.useBallistic}}
             <div>{{data.data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
             {{/if}}
         </div>
@@ -163,9 +163,10 @@
         <div class="bottom-row"></div>
     </div>
 
+    {{#if (or data.config.healthSys.useHealth data.config.healthSys.useHealth)}}
     {{!-- Health/Fortune block --}}
     <div class="flexcol general-stats">
-        <div class="top-row colorset-first-tier">{{localize (concat "SETTINGS.healthMode" data.healthMode)}}</div>
+        <div class="top-row colorset-first-tier">{{#if data.config.healthSys.useHealth}}{{localize "SETTINGS.healthModehealth"}}{{else}}{{localize "SETTINGS.healthModefortune"}}{{/if}}</div>
         <div class="main-value">
             <input type="number" name="data.health.value" value="{{data.data.health.value}}" data-dtype="Number" />
         </div>
@@ -179,6 +180,15 @@
             <label>{{localize "age-system.maximum"}}</label>
         </div>
     </div>
+    {{/if}}
+
+    {{#if data.config.healthSys.useInjury}}
+    {{!-- Injury block --}}
+    {{/if}}
+
+    {{#if data.config.healthSys.useVitality}}
+    {{!-- Injury block --}}
+    {{/if}}
 
     {{!-- Power Points block --}}
     {{#if data.data.usePowerPoints}}

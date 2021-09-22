@@ -1,5 +1,5 @@
 const debouncedReload = debounce(() => window.location.reload(), 100)
-export const registerSystemSettings = function() {
+export const registerSystemSettings = async function() {
   /**
    * Track the system version upon which point a migration was last applied
    */
@@ -118,6 +118,26 @@ export const registerSystemSettings = function() {
       "pulp": "SETTINGS.gameModePulp",
       "cinematic": "SETTINGS.gameModeCinematic",
     },  
+  });
+  
+  /**
+   * Register Health System in use (Basic, The Expanse, MAGE, MAGE + Injury, MAGE + Injury + Vitality)
+   */
+   game.settings.register("age-system", "healthSys", {
+    name: "SETTINGS.healthSys",
+    hint: "SETTINGS.healthSysHint",
+    scope: "world",
+    config: true,
+    default: "basic",
+    type: String,
+    choices: {
+      "basic": "SETTINGS.healthSysBasic",
+      "expanse": "SETTINGS.healthSysExpanse",
+      "mage": "SETTINGS.healthSysMage",
+      "mageInjury": "SETTINGS.healthSysMageInjury",
+      "mageVitality": "SETTINGS.healthSysMageVitality",
+    },
+    onChange: debouncedReload
   });  
 
   /**
@@ -204,13 +224,15 @@ export const registerSystemSettings = function() {
       "red-warrior": "SETTINGS.colorRedWarrior",
       "never-dead": "SETTINGS.colorNeverDead"
     },
-    onChange:()=>{
-      const newColor = game.settings.get("age-system", "colorScheme");
-      game.user.setFlag("age-system", "colorScheme", newColor);
+    onChange: async ()=>{
+      const newColor = await game.settings.get("age-system", "colorScheme");
+      await game.user.setFlag("age-system", "colorScheme", newColor);
       [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
       .forEach((o) => {
-        o.update({});
-        if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        if (o) {
+          o.update({});
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        }
       });
       if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
     }
@@ -293,7 +315,7 @@ export const registerSystemSettings = function() {
     config: false,
     default: {max: 30, actual: 0},
     type: Object,
-    onChange: () => {if (game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh()}
+    onChange: async () => {if (await game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh()}
   });  
 
   /**
@@ -319,7 +341,7 @@ export const registerSystemSettings = function() {
     config: false,
     default: {max: 18, actual: 0},
     type: Object, 
-    onChange: () => {if (game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
+    onChange: async () => {if (await game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
   });
 
   // /**
@@ -367,7 +389,7 @@ export const loadCompendiaSettings = function() {
     default: "age-system.focus",
     type: String,
     choices: CONFIG.ageSystem.itemCompendia,
-    onChange:()=>{CONFIG.ageSystem.focus = compendiumList(game.settings.get("age-system", "masterFocusCompendium"))}
+    onChange: async ()=>{CONFIG.ageSystem.focus = compendiumList(await game.settings.get("age-system", "masterFocusCompendium"))}
   });
 };
 
