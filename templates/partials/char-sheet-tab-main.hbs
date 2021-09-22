@@ -184,10 +184,54 @@
 
     {{#if data.config.healthSys.useInjury}}
     {{!-- Injury block --}}
+    <div class="flexcol general-stats">
+        <div class="top-row colorset-first-tier">{{localize "age-system.injury"}}</div>
+        <ul class="stats-list">
+            <li class="flexrow">
+                <span class="degree">{{localize "age-system.injuryDegree"}}</span>
+                <span class="qtd">{{localize "age-system.injuryMarks"}}</span>
+                <span class="marks">{{localize "age-system.injuryMarks"}}</span>
+            </li>
+            <li class="flexrow">
+                <span class="degree">{{localize "age-system.injuryLight"}}</span>
+                <input class="qtd" type="number" name="data.injury.degrees.light" value="{{data.data.injury.degrees.light}}" data-dtype="Number" />
+                <input class="marks" type="number" name="data.injury.degrees.lightMarks" value="{{data.data.injury.degrees.lightMarks}}" data-dtype="Number" />
+            </li>
+            <li class="flexrow">
+                <span class="degree">{{localize "age-system.injurySerious"}}</span>
+                <input class="qtd" type="number" name="data.injury.degrees.serious" value="{{data.data.injury.degrees.serious}}" data-dtype="Number" />
+                <input class="marks" type="number" name="data.injury.degrees.seriousMarks" value="{{data.data.injury.degrees.seriousMarks}}" data-dtype="Number" />
+            </li>
+            <li class="flexrow">
+                <span class="degree">{{localize "age-system.injurySevere"}}</span>
+                <input class="qtd" type="number" name="data.injury.degrees.severe" value="{{data.data.injury.degrees.severe}}" data-dtype="Number" />
+                <input class="marks" type="number" name="data.injury.degrees.severeMarks" value="{{data.data.injury.degrees.severeMarks}}" data-dtype="Number" />
+            </li>
+            <li class="flexrow">
+                <span>{{localize "age-system.total"}}</span>
+                <input type="number" name="data.injury.degrees.totalMarks" disabled value="{{data.data.injury.degrees.totalMarks}}" data-dtype="Number" />
+            </li>
+        </ul>
+    </div>
     {{/if}}
 
     {{#if data.config.healthSys.useVitality}}
-    {{!-- Injury block --}}
+    {{!-- Vitality block --}}
+    <div class="flexcol general-stats">
+        <div class="top-row colorset-first-tier">{{localize "age-system.vitality"}}</div>
+        <div class="main-value">
+            <input type="number" name="data.injury.vitality.value" value="{{data.data.injury.vitality.value}}" data-dtype="Number" />
+        </div>
+        <div class="flexcol stat-modifiers flex-align-center no-flexwrap">
+            <div class="flexcol no-flexwrap">
+                {{#if (ne data.data.health.set data.data.health.max)}}
+                <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="data.injury.vitality.max" value="{{data.data.injury.vitality.max}}" data-dtype="Number" />
+                {{/if}}
+                <input type="number" number-type="five-digits" name="data.injury.vitality.set" value="{{data.data.injury.vitality.set}}" data-dtype="Number" />
+            </div>
+            <label>{{localize "age-system.maximum"}}</label>
+        </div>
+    </div>
     {{/if}}
 
     {{!-- Power Points block --}}

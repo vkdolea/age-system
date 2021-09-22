@@ -4,7 +4,8 @@
         {{#if data.data.hasDamage}} {{localize "age-system.item.damage"}} {{/if}}
         {{#if data.data.hasHealing}} {{localize "age-system.item.healing"}} {{/if}}
     </label>
-    <p class="in-chat-text">{{concat data.data.nrDice "d" data.data.diceType "+" data.data.extraValue}}{{#when data.data.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.data.ablDamageValue}}{{/when}}</p>
+    {{!-- <p class="in-chat-text">{{concat data.data.nrDice "d" data.data.diceType "+" data.data.extraValue}}{{#when data.data.dmgAbl 'noteq' 'no-abl'}}{{concat "+" data.data.ablDamageValue}}{{/when}}</p> --}}
+    <p class="in-chat-text">{{data.data.dmgFormula}}</p>
     {{#if data.hasDamage}}
     <p class="in-chat-text">{{localize (concat "age-system." data.data.dmgType)}}{{#if config.healthSys.useBallistic}} | {{localize (concat "age-system." data.data.dmgSource)}}{{/if}}</p>
     {{/if}}

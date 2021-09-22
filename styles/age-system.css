@@ -1118,6 +1118,21 @@
   text-align: center;
   margin-bottom: 4px;
 }
+.age-system.sheet.char.standard .general-stats ul {
+  list-style-type: none;
+}
+.age-system.sheet.char.standard .general-stats .stats-list {
+  font-size: 10px;
+}
+.age-system.sheet.char.standard .general-stats .stats-list .degree {
+  flex: 0 0 30px;
+}
+.age-system.sheet.char.standard .general-stats .stats-list .qtd {
+  flex: 0 0 30px;
+}
+.age-system.sheet.char.standard .general-stats .stats-list .marks {
+  flex: 0 0 30px;
+}
 .age-system.sheet.char.standard .general-stats input[name="data.fatigue.status"] {
   font-size: 12px;
 }
@@ -2051,6 +2066,11 @@
 #chat-log .chat-message .message-content .age-system.base-age-roll .action-details h3,
 #chat-log .chat-message .message-content .age-system.base-age-roll .action-details h4 {
   margin: 0;
+}
+#chat-log .chat-message .message-content .age-system.base-age-roll .action-details h4 {
+  text-transform: lowercase;
+  font-variant: small-caps;
+  color: rgba(255, 255, 255, 0.4);
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show {
   align-content: space-between;

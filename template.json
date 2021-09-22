@@ -171,6 +171,18 @@
                 "ballistic": 0,
                 "penalty": 0
             },
+            "injury": {
+                "degrees": {
+                    "severe": 0,
+                    "serious": 0,
+                    "light": 0
+                },
+                "vitality": {
+                    "min": 0,
+                    "max": 3,
+                    "value": 3 
+                }
+            },
             "resources": {
                 "base": 4,
                 "mod": 0

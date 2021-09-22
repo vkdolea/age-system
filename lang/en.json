@@ -379,6 +379,13 @@
         "hasDamage": "Damage?",
         "armorPenalty": "Penalty",
 
+        "injury": "Injury",
+        "injuryMarks": "Marks",
+        "injuryDegree": "Degree",
+        "injuryLight": "Light",
+        "injurySerious": "Serious",
+        "injurySevere": "Severe",
+
         "background": "Background",
         "socialClass": "Social Class",
         "profession": "Profession",

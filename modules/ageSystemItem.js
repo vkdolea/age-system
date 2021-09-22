@@ -24,66 +24,62 @@ export class ageSystemItem extends Item {
     };
 
     // Check attack formula
-    get attackBonus() {
-        if (!this.hasDamage || !this.actor?.data) return null;
-        const actor = this.actor.data.data;
-        const item = this.data.data;
-        const useFocus = this.actor.checkFocus(this.data.data.useFocus);
-        let bonus = useFocus.focusAbl + useFocus.value;
-        const actorMods = [
-            {mod: "testMod", value: 0},
-            {mode: "attackMod", value: 0}
-        ];
-        const itemMods = [
-            {mod: "itemActivation", value: 0}
-        ]
-        if (actor.ownedBonus) {
-            for (let am = 0; am < m.length; am++) {
-                const m = actorMods[am];
-                if (actor.ownedBonus[m.mod]) bonus += m.value;
-            };
-        };
-        for (let am = 0; am < m.length; am++) {
-            const m = itemMods[am];
-            if (item.itemMods[m.mod].selected && item.itemMods[m.mod].isActive) bonus += m.value;
-        };
-
-        return bonus;
-    }
+    // get attackBonus() {
+    //     if (!this.hasDamage || !this.actor?.data) return null;
+    //     const actor = this.actor.data.data;
+    //     const item = this.data.data;
+    //     const useFocus = this.actor.checkFocus(this.data.data.useFocus);
+    //     let bonus = useFocus.focusAbl + useFocus.value;
+    //     const actorMods = [
+    //         {mod: "testMod", value: 0},
+    //         {mode: "attackMod", value: 0}
+    //     ];
+    //     const itemMods = [
+    //         {mod: "itemActivation", value: 0}
+    //     ]
+    //     if (actor.ownedBonus) {
+    //         for (let am = 0; am < m.length; am++) {
+    //             const m = actorMods[am];
+    //             if (actor.ownedBonus[m.mod]) bonus += m.value;
+    //         };
+    //     };
+    //     for (let am = 0; am < m.length; am++) {
+    //         const m = itemMods[am];
+    //         if (item.itemMods[m.mod].selected && item.itemMods[m.mod].isActive) bonus += m.value;
+    //     };
+    //     return bonus;
+    // }
 
     // Damage formula
-    get damageFormula() {
-        if (!this.hasDamage || !this.actor?.data) return null;
-        const actor = this.actor.data.data;
-        const item = this.data.data;
-        let bonus = actor.abilities[item.dmgAbl].total + item.extraValue;
-        const actorMods = [
-            {mod: "actorDamage", value: 0},
-            {mode: "attackMod", value: 0}
-        ];
-        const itemMods = [
-            {mod: "itemDamage", value: 0}
-        ]
-        if (actor.ownedBonus) {
-            for (let am = 0; am < m.length; am++) {
-                const m = actorMods[am];
-                if (actor.ownedBonus[m.mod]) bonus += m.value;
-            };
-        };
-        for (let am = 0; am < m.length; am++) {
-            const m = itemMods[am];
-            if (item.itemMods[m.mod].selected && item.itemMods[m.mod].isActive) bonus += m.value;
-        };
-        const bonusString = bonus < 0 ? `${bonus}` : `+${bonus}`;
-        const formula = item.nrDice > 0 ? `${item.nrDrice}d${item.diceType} ${bonusString}` : `${bonusString}`;
-
-        return formula;
-    }
+    // get damageFormula() {
+    //     if (!this.hasDamage || !this.actor?.data) return null;
+    //     const actor = this.actor.data.data;
+    //     const item = this.data.data;
+    //     let bonus = actor.abilities[item.dmgAbl].total + item.extraValue;
+    //     const actorMods = [
+    //         {mod: "actorDamage", value: 0},
+    //         {mode: "attackMod", value: 0}
+    //     ];
+    //     const itemMods = [
+    //         {mod: "itemDamage", value: 0}
+    //     ]
+    //     if (actor.ownedBonus) {
+    //         for (let am = 0; am < m.length; am++) {
+    //             const m = actorMods[am];
+    //             if (actor.ownedBonus[m.mod]) bonus += m.value;
+    //         };
+    //     };
+    //     for (let am = 0; am < m.length; am++) {
+    //         const m = itemMods[am];
+    //         if (item.itemMods[m.mod].selected && item.itemMods[m.mod].isActive) bonus += m.value;
+    //     };
+    //     const bonusString = bonus < 0 ? `${bonus}` : `+${bonus}`;
+    //     const formula = item.nrDice > 0 ? `${item.nrDrice}d${item.diceType} ${bonusString}` : `${bonusString}`;
+    //     return formula;
+    // }
     
     /** @override */
     prepareBaseData() {
-        // super.prepareData();
-        
         if (this.data.img === "icons/svg/item-bag.svg") {
             if (!CONFIG.ageSystem.itemIcons[this.data.type]) this.data.img = "icons/svg/item-bag.svg";
             this.data.img = CONFIG.ageSystem.itemIcons[this.data.type];
@@ -96,8 +92,7 @@ export class ageSystemItem extends Item {
 
         data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
         data.nameLowerCase = itemData.name.toLowerCase();
-        // data.useFocusActorId = this._idFocusToUse(itemType, data.useFocus);
-
+        
         // Adding common data for Power and Weapon
         if (["power", "weapon"].includes(itemType)) {
             data.useFocusActorId = data.useFocus && this.actor?.data ? this.actor.checkFocus(data.useFocus).id : null;
@@ -124,6 +119,8 @@ export class ageSystemItem extends Item {
             if (data.hasDamage || data.hasHealing) {
                 const actor = this.actor?.data?.data;
                 const useFocus = actor ? this.actor.checkFocus(this.data.data.useFocus) : null;
+                const mode = game.settings.get("age-system", "healthSys");
+                const useInjury = [`mageInjury`, `mageVitality`].includes(mode);
 
                 // Attack Mod
                 let atkBonus = useFocus ? useFocus.value : 0;
@@ -159,7 +156,11 @@ export class ageSystemItem extends Item {
                 const abl = data.dmgAbl === "no-abl" ? null : data.dmgAbl;
                 let actorAblDmg = 0;
                 actorAblDmg += this.actor?.data?.data?.abilities?.[abl]?.total ?? 0;
-                data.dmgFormula = `${data.nrDice}d${data.diceType}+` + Roll.safeEval(`${dmgBonus} + ${data.extraValue} + ${actorAblDmg}`);
+                if (useInjury) {
+                    data.dmgFormula = Roll.safeEval(`13 + ${data.damageInjury} + ${dmgBonus} + ${actorAblDmg}`);
+                } else {
+                    data.dmgFormula = `${data.nrDice}d${data.diceType}+` + Roll.safeEval(`${dmgBonus} + ${data.extraValue} + ${actorAblDmg}`);
+                }
             }
 
         }

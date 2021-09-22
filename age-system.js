@@ -335,6 +335,7 @@ Hooks.once("ready", async function() {
         useHealth: [`basic`, `mage`].includes(hstype),
         useInjury: [`mageInjury`, `mageVitality`].includes(hstype),
         useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
+        baseDamageTN: 13
     };
     CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
     CONFIG.ageSystem.healthSys = HEALTH_SYS;

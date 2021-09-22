@@ -98,9 +98,13 @@ Icons made by:
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
 ## 0.8.0 [2021-xx-yy]
+### Added
+- Support to Modern AGE alternate damage: Injury (no Health)
+
 ### Fixed
 - Focus bonus disappears if 2 or more items had a Focus bonus.
 - CSS styling issue preventing some icons from different modules from being displayed.
+- Changed styling of damage chat cards.
 
 ## 0.7.16 [2021-08-29]
 ### Fixed
