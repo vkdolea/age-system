@@ -227,6 +227,7 @@ export const registerSystemSettings = async function() {
     onChange: async ()=>{
       const newColor = await game.settings.get("age-system", "colorScheme");
       await game.user.setFlag("age-system", "colorScheme", newColor);
+      if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
       [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
       .forEach((o) => {
         if (o) {
@@ -234,8 +235,7 @@ export const registerSystemSettings = async function() {
           if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
         }
       });
-      if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
-    }
+    },
   });
 
   /**

@@ -30,6 +30,7 @@ async function preloadHandlebarsTemplates() {
         `${path}bonuses-sheet.hbs`,
         `${path}char-sheet-nav-bar.hbs`,
         `${path}char-sheet-tab-main.hbs`,
+        `${path}char-sheet-injury-bar.hbs`,
         `${path}char-sheet-tab-persona.hbs`,
         `${path}char-sheet-tab-effects.hbs`,
         `${path}char-sheet-tab-options.hbs`,

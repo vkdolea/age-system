@@ -826,7 +826,7 @@ export async function itemDamage({
         finalValue: wGroupPenalty? dmgRoll.total/2 : dmgRoll.total,
         diceTerms: dmgRoll.terms,
         colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
-        flavor: item ? `${item.name} [${item.actor.name}]` : damageDesc,
+        flavor: item ? `${item.name} | ${item.actor.name}` : damageDesc,
         flavor2: item ? damageDesc : null,
         user: game.user
     };

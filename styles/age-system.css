@@ -1120,18 +1120,7 @@
 }
 .age-system.sheet.char.standard .general-stats ul {
   list-style-type: none;
-}
-.age-system.sheet.char.standard .general-stats .stats-list {
-  font-size: 10px;
-}
-.age-system.sheet.char.standard .general-stats .stats-list .degree {
-  flex: 0 0 30px;
-}
-.age-system.sheet.char.standard .general-stats .stats-list .qtd {
-  flex: 0 0 30px;
-}
-.age-system.sheet.char.standard .general-stats .stats-list .marks {
-  flex: 0 0 30px;
+  padding: 0;
 }
 .age-system.sheet.char.standard .general-stats input[name="data.fatigue.status"] {
   font-size: 12px;
@@ -2123,6 +2112,11 @@
 /*******************************/
 /**     Color Style Rules     **/
 /*******************************/
+.window-app.sheet.char.colorset-modern-blue .window-content,
+.window-app.sheet.vehicle.colorset-modern-blue .window-content,
+.window-app.sheet.spaceship.colorset-modern-blue .window-content {
+  background-color: rgba(185, 219, 235, 0.6);
+}
 .colorset-modern-blue .colorset-first-tier {
   background-color: #007DAD;
   color: #ffffff;
@@ -2283,6 +2277,11 @@
 .colorset-modern-blue .relationship .mod-card,
 .colorset-modern-blue .shipfeatures .mod-card {
   border: solid #B9DBEB 1px;
+}
+.window-app.sheet.char.colorset-fantasy-blue .window-content,
+.window-app.sheet.vehicle.colorset-fantasy-blue .window-content,
+.window-app.sheet.spaceship.colorset-fantasy-blue .window-content {
+  background-color: rgba(193, 203, 211, 0.6);
 }
 .colorset-fantasy-blue .colorset-first-tier {
   background-color: #0f4f5b;
@@ -2445,6 +2444,11 @@
 .colorset-fantasy-blue .shipfeatures .mod-card {
   border: solid #c1cbd3 1px;
 }
+.window-app.sheet.char.colorset-dragon-red .window-content,
+.window-app.sheet.vehicle.colorset-dragon-red .window-content,
+.window-app.sheet.spaceship.colorset-dragon-red .window-content {
+  background-color: rgba(224, 190, 177, 0.6);
+}
 .colorset-dragon-red .colorset-first-tier {
   background-color: #810207;
   color: #ffffff;
@@ -2605,6 +2609,11 @@
 .colorset-dragon-red .relationship .mod-card,
 .colorset-dragon-red .shipfeatures .mod-card {
   border: solid #e0beb1 1px;
+}
+.window-app.sheet.char.colorset-folded-purple .window-content,
+.window-app.sheet.vehicle.colorset-folded-purple .window-content,
+.window-app.sheet.spaceship.colorset-folded-purple .window-content {
+  background-color: rgba(207, 204, 222, 0.6);
 }
 .colorset-folded-purple .colorset-first-tier {
   background-color: #565183;
@@ -2767,6 +2776,11 @@
 .colorset-folded-purple .shipfeatures .mod-card {
   border: solid #cfccde 1px;
 }
+.window-app.sheet.char.colorset-ronin-green .window-content,
+.window-app.sheet.vehicle.colorset-ronin-green .window-content,
+.window-app.sheet.spaceship.colorset-ronin-green .window-content {
+  background-color: rgba(194, 245, 170, 0.6);
+}
 .colorset-ronin-green .colorset-first-tier {
   background-color: #155f0e;
   color: #ffffff;
@@ -2927,6 +2941,11 @@
 .colorset-ronin-green .relationship .mod-card,
 .colorset-ronin-green .shipfeatures .mod-card {
   border: solid #c2f5aa 1px;
+}
+.window-app.sheet.char.colorset-select-one .window-content,
+.window-app.sheet.vehicle.colorset-select-one .window-content,
+.window-app.sheet.spaceship.colorset-select-one .window-content {
+  background-color: rgba(118, 141, 159, 0.6);
 }
 .colorset-select-one .colorset-first-tier {
   background-color: #273249;
@@ -3089,6 +3108,11 @@
 .colorset-select-one .shipfeatures .mod-card {
   border: solid #768d9f 1px;
 }
+.window-app.sheet.char.colorset-the-grey .window-content,
+.window-app.sheet.vehicle.colorset-the-grey .window-content,
+.window-app.sheet.spaceship.colorset-the-grey .window-content {
+  background-color: rgba(180, 182, 179, 0.6);
+}
 .colorset-the-grey .colorset-first-tier {
   background-color: #3d3e3f;
   color: #ccc9c9;
@@ -3250,6 +3274,11 @@
 .colorset-the-grey .shipfeatures .mod-card {
   border: solid #b4b6b3 1px;
 }
+.window-app.sheet.char.colorset-red-warrior .window-content,
+.window-app.sheet.vehicle.colorset-red-warrior .window-content,
+.window-app.sheet.spaceship.colorset-red-warrior .window-content {
+  background-color: rgba(209, 99, 91, 0.6);
+}
 .colorset-red-warrior .colorset-first-tier {
   background-color: #751119;
   color: #f7b755;
@@ -3410,6 +3439,11 @@
 .colorset-red-warrior .relationship .mod-card,
 .colorset-red-warrior .shipfeatures .mod-card {
   border: solid #d1635b 1px;
+}
+.window-app.sheet.char.colorset-never-dead .window-content,
+.window-app.sheet.vehicle.colorset-never-dead .window-content,
+.window-app.sheet.spaceship.colorset-never-dead .window-content {
+  background-color: rgba(238, 221, 205, 0.6);
 }
 .colorset-never-dead .colorset-first-tier {
   background-color: #663322;
