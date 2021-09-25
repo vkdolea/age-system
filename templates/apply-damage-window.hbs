@@ -1,6 +1,6 @@
-<form class="apply-damage-window feature-controls">
+<div class="apply-damage-window feature-controls">
     {{log this}}
-    <h2>Damage</h2>
+    <h2>{{localize "age-system.item.damage"}}</h2>
     <div class="header flexrow">
         <div class="damage column-ad">
             <p>{{localize "age-system.item.damage"}}</p>
@@ -9,6 +9,7 @@
                 <input type="number" class="basic-damage" name="damageData.totalDamage" value="{{damageData.totalDamage}}" data-dtype="Number" />
                 <div class="change-damage increase"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
             </div>
+            {{damageData.finalDmg}}
             <p>{{#if damageData.healthSys.useBallistic}}{{localize (concat "age-system." damageData.dmgSrc)}} | {{/if}}{{localize (concat "age-system." damageData.dmgType)}}</p>
         </div>
         <div class="column-ad controls">
@@ -46,12 +47,12 @@
                 <p>{{localize "age-system.damageReceived"}}</p>
                 <div class="flexrow">
                     <div class="change-damage decrease"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
-                    <input type="number" class="basic-damage" name="damageData.totalDamage" value="{{damageReceived}}" data-dtype="Number" />
+                    <input type="number" class="basic-damage" name="damageData.totalDamage" value="{{../damageReceived}}" data-dtype="Number" />
                     <div class="change-damage increase"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
                 </div>
             </div>
             <div>
-                <p>{{#if (eq damageData.healthSys.type 'expanse')}}{{localize "age-system.fortune"}}{{else}}{{localize "age-system.health"}}{{/if}}</p>
+                <p>{{#if (eq ../damageData.healthSys.type 'expanse')}}{{localize "age-system.fortune"}}{{else}}{{localize "age-system.health"}}{{/if}}</p>
                 <p>{{target.actor.data.data.health.value}} <i class="fa fa-arrow-right" aria-hidden="true"></i> 5</p>
                 
             </div>
@@ -66,4 +67,4 @@
         {{/unless}}
         {{/each}}
     </div>
-</form>
+</div>

@@ -37,10 +37,11 @@ export default class ApplyDamageDialog extends Application {
   }
 
   getData() {
-    const data = super.getData()
+    const data = super.getData();
     data.targets = this.targets;
     data.damageData = this.damageData;
     data.useInjury = this.useInjury;
+    data.handler = new DamageHandler(data.targets, data.damageData);
     data.damageData.finalDmg = 10 * data.damageData.totalDamage;
     return data
   }
@@ -50,9 +51,10 @@ export default class ApplyDamageDialog extends Application {
     */
   activateListeners(html) {
     super.activateListeners(html)
-
+    html.find(".basic-damae").change(ev => this.updateUI());
   }
-  
+
+
   /*
     * Updates the UI based on the current state of the _calculator.
     */
@@ -60,4 +62,37 @@ export default class ApplyDamageDialog extends Application {
     this.render(false)
   }
 }
-  
+
+export class DamageHandler {
+  constructor(targets, damageData) {
+    const healthSys = damageData.healthSys;
+    this._useBallistic = healthSys._useBallistic;
+    this._useInjury = healthSys.useInjury;
+    this._useToughness = healthSys.useToughness;
+    this._type = healthSys.type
+    this._basicDamage = this.damageData.totalDamage;
+    this._armorPenetration = 0; // 0=none; 1=half armor; 2=ignore armor
+
+
+    let harmedOnes = [];
+    for (let t = 0; t < targets.length; t++) {
+      const h = targets[t];
+      harmedOnes.push({
+        name: h.name,
+        img: h.img,
+        uuid: h.data.actorLink ? h.actor.uuid : h.uuid,
+        data: foundry.utils.deepClone(h.actor.data)
+      })
+      
+    }
+    this._harmedOnes = harmedOnes.map(harmed => this.damage(harmed, damageData))
+  }
+
+
+
+  async damage(h, d) {
+    if (!this._useBallistic && !this._useToughness) {
+
+    }
+  }
+}
