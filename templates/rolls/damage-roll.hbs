@@ -36,70 +36,22 @@
                 
             </div>
 
-            {{!-- {{#if (ne rollType 'fatigue')}}
             <div class="age-chat-buttons flexcol">
-                {{#if (or hasDamage hasHealing)}}
-                <div class="age-chat-buttons-grid">
-
-                    <button class="age-button roll-damage main-dmg">
-                        {{#if hasTest}}
-                            {{#if hasDamage}} {{localize "age-system.chatCard.rollFullDamage"}}
-                            {{else}} {{localize "age-system.chatCard.rollFullHealing"}} {{/if}}
-                        {{else}}
-                            {{#if hasDamage}} {{localize "age-system.chatCard.rollDamage"}}
-                            {{else}} {{localize "age-system.chatCard.rollHealing"}} {{/if}}
-                        {{/if}}
-                    </button>
-
-                    <button class="age-button roll-damage add-stunt-damage sd-dmg">
-                        {{localize "age-system.chatCard.addStuntDie"}}
-                    </button>
-
-                    <button class="age-button roll-damage add-focus-damage focus-dmg">
-                        {{localize "age-system.chatCard.addFocus"}}
-                    </button>
-
-                    <button class="age-button roll-damage add-focus-damage add-stunt-damage both-dmg">
-                        {{localize "age-system.chatCard.addFocusSD"}}
-                    </button>
-
-                </div>
-                {{/if}}
-
-                {{#if (and (or hasDamage hasHealing) hasTest)}}
-                <div class="age-chat-buttons-grid">
-            
-                    <button class="age-button roll-damage resisted main-dmg">
-                        {{#if hasDamage}} {{localize "age-system.chatCard.rollResistedDamage"}}
-                        {{else}} {{localize "age-system.chatCard.rollResistedHealing"}} {{/if}}
-                    </button>
-
-                    <button class="age-button roll-damage resisted add-stunt-damage sd-dmg">
-                        {{localize "age-system.chatCard.addStuntDie"}}
-                    </button>
-
-                    <button class="age-button roll-damage resisted add-focus-damage focus-dmg">
-                        {{localize "age-system.chatCard.addFocus"}}
-                    </button>
-
-                    <button class="age-button roll-damage resisted add-focus-damage add-stunt-damage both-dmg">
-                        {{localize "age-system.chatCard.addFocusSD"}}
-                    </button>
-              
-                </div>
-                {{/if}}
-
-                {{#if usingFatigue}}
-                {{#if hasFatigue}}
-                <button class="roll-fatigue age-button">
-                    {{localize "age-system.rollFatigue"}} <i class="fas fa-head-side-cough"></i>
+                {{#if useInjury}}
+                <button class="age-button resist-damage">
+                    <i class="fa fa-shield-alt" aria-hidden="true"></i>
+                    Resist Damage
+                </button>
+                {{else}}
+                <button class="age-button apply-damage gm-only">
+                    <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                    Apply Damage
                 </button>
                 {{/if}}
-                {{/if}}
             </div>
-            {{/if}}
             
-        </div> --}}
+        </div>
+
         <div class="blind-roll-card flexcol roll-card">
             <div>
                 <h3 class="action-details colorset-first-tier other-user-roll">

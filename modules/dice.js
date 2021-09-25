@@ -697,7 +697,7 @@ export async function itemDamage({
     };
     
     let damageDesc = "";
-    const messageFlag = {
+    const dmgDesc = {
         dmgType: null,
         dmgSrc: null,
     };
@@ -709,15 +709,15 @@ export async function itemDamage({
             const dmgType = game.i18n.localize(`age-system.${item.data.data.dmgType}`);
             const dmgSrc = game.i18n.localize(`age-system.${item.data.data.dmgSource}`);
             damageDesc += ` | ${dmgType} | ${dmgSrc}`;
-            messageFlag.dmgType = item.data.data.dmgType;
-            messageFlag.dmgSrc = item.data.data.dmgSource;
+            dmgDesc.dmgType = item.data.data.dmgType;
+            dmgDesc.dmgSrc = item.data.data.dmgSource;
         }
     };
 
     // Add Healing Flavor text if applicable
     if (item.data.data.hasHealing) {
         damageDesc = `${game.i18n.localize(`age-system.item.healing`)}`;
-        messageFlag.isHealing = true;
+        dmgDesc.isHealing = true;
     };
 
     if (item.isOwned) {
@@ -817,7 +817,7 @@ export async function itemDamage({
     let chatTemplate = "/systems/age-system/templates/rolls/damage-roll.hbs";
     
     const wGroupPenalty = hasWeaponGroupPenalty(item, actorWgroups);
-    messageFlag.wGroupPenalty = wGroupPenalty;
+    dmgDesc.wGroupPenalty = wGroupPenalty;
 
     rollData = {
         ...rollData,
@@ -828,7 +828,8 @@ export async function itemDamage({
         colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
         flavor: item ? `${item.name} | ${item.actor.name}` : damageDesc,
         flavor2: item ? damageDesc : null,
-        user: game.user
+        user: game.user,
+        useInjury: healthSys.useInjury
     };
 
     let chatData = {
@@ -841,10 +842,11 @@ export async function itemDamage({
             "age-system": {
                 type: "damage",
                 damageData: {
-                    ...messageFlag,
+                    ...dmgDesc,
                     totalDamage: rollData.finalValue,
                     attacker: item.actor.name,
-                    attackerId: item.actor.uuid
+                    attackerId: item.actor.uuid,
+                    healthSys
                 }
             }
         }

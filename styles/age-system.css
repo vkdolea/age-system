@@ -2002,11 +2002,14 @@
 /*******************************/
 /**       AGE Roll Card       **/
 /*******************************/
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons {
+  margin-top: 4px;
+}
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid {
-  margin-top: 4px;
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid,
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid {
   font-size: 12px !important;
   font-family: inherit;
   display: grid;
@@ -2014,16 +2017,20 @@
   grid-template-rows: repeat(2, 20px);
   grid-template-areas: "main main stuntdie stuntdie stuntdie focusdmg focusdmg focusdmg" "main main bothdmg bothdmg bothdmg bothdmg bothdmg bothdmg";
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .main-dmg {
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .main-dmg,
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .main-dmg {
   grid-area: main;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .sd-dmg {
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .sd-dmg,
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .sd-dmg {
   grid-area: stuntdie;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .focus-dmg {
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .focus-dmg,
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .focus-dmg {
   grid-area: focusdmg;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .both-dmg {
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .both-dmg,
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .both-dmg {
   grid-area: bothdmg;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-button.roll-fatigue {
