@@ -1,3 +1,5 @@
+import ApplyDamageDialog from "./apply-damage.js";
+
 export function addChatListeners(html) {
     html.on('click', '.roll-damage', chatDamageRoll);
     html.on('contextmenu', '.roll-damage', chatDamageRoll);
@@ -10,10 +12,11 @@ export function addChatListeners(html) {
 
 export async function applyDamageChat(event) {
     event.preventDefault();
-    const cardId = event.target.closest(".data-message-id");
-    const damageData = await game.messages.get(cardId).flags["age-system"].damageData;
+    const card = event.target.closest(".chat-message");
+    const cardId = card.dataset.messageId;
+    const damageData = await game.messages.get(cardId).data.flags["age-system"].damageData;
     const cardHealthSys = damageData.healthSys;
-    const targets = canvas.token.controlled;
+    const targets = canvas.tokens.controlled;
     if (!checkHealth(cardHealthSys, CONFIG.ageSystem.healthSys)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
     return new ApplyDamageDialog(targets, damageData, cardHealthSys.useInjury).render(true);
 }

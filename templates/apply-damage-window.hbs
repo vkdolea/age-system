@@ -1,0 +1,69 @@
+<form class="apply-damage-window feature-controls">
+    {{log this}}
+    <h2>Damage</h2>
+    <div class="header flexrow">
+        <div class="damage column-ad">
+            <p>{{localize "age-system.item.damage"}}</p>
+            <div class="flexrow">
+                <div class="change-damage decrease"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+                <input type="number" class="basic-damage" name="damageData.totalDamage" value="{{damageData.totalDamage}}" data-dtype="Number" />
+                <div class="change-damage increase"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+            </div>
+            <p>{{#if damageData.healthSys.useBallistic}}{{localize (concat "age-system." damageData.dmgSrc)}} | {{/if}}{{localize (concat "age-system." damageData.dmgType)}}</p>
+        </div>
+        <div class="column-ad controls">
+                <div class="form-group">
+                <input type="radio" name="extraOption" {{checked extraOption}}/>
+                <label for="">None</label>
+            </div>
+            <div class="form-group">
+                <input type="radio" name="extraOption" {{checked extraOption}}/>
+                <label for="">Piercing</label>
+            </div>
+            <div class="form-group">
+                <input type="radio" name="extraOption" {{checked extraOption}}/>
+                <label>Ignore Armor</label>
+            </div>
+        </div>
+    </div>
+    <div class="targets">
+        <h2>Targets</h2>
+        {{#each targets as |target|}}
+        <div class="individual flexrow">
+            <div>
+                <img class="item-image" src="{{target.data.img}}" title="{{target.name}}" width="75" height="75"/>
+                <p>{{target.name}}</p>
+            </div>
+            <div>
+                <p>{{localize "age-system.armor"}}</p>
+                2I/9B
+            </div>
+            <div>
+                <p>{{localize "age-system.toughness"}}</p>
+                <p>{{target.actor.data.data.armor.toughness.total}}</p>
+            </div>
+            <div>
+                <p>{{localize "age-system.damageReceived"}}</p>
+                <div class="flexrow">
+                    <div class="change-damage decrease"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+                    <input type="number" class="basic-damage" name="damageData.totalDamage" value="{{damageReceived}}" data-dtype="Number" />
+                    <div class="change-damage increase"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+                </div>
+            </div>
+            <div>
+                <p>{{#if (eq damageData.healthSys.type 'expanse')}}{{localize "age-system.fortune"}}{{else}}{{localize "age-system.health"}}{{/if}}</p>
+                <p>{{target.actor.data.data.health.value}} <i class="fa fa-arrow-right" aria-hidden="true"></i> 5</p>
+                
+            </div>
+            <div class="form-group">
+                <label><p>{{localize "age-system.ignoreDamage"}}</p></label>
+                <input type="checkbox" name="ignore" {{checked ../ignore}}/>
+            </div>
+        </div>
+        {{log @last}}
+        {{#unless @last}}
+        <hr>
+        {{/unless}}
+        {{/each}}
+    </div>
+</form>
