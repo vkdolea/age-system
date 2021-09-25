@@ -92,6 +92,12 @@ export default class ApplyDamageDialog extends Application {
       this._handler.basicDamage = dmg;
       this.updateUI()
     });
+    
+    html.find("input.basic-damage").change(ev => {
+      const value = ev.currentTarget.value
+      this._handler.basicDamage = value;
+      this.updateUI()
+    })
   }
 
 
@@ -162,7 +168,7 @@ export class DamageHandler {
     const ballisticArmor = h.data.data.armor.ballistic;
     const toughness = h.data.data.armor.toughness.total > 0 ? h.data.data.armor.toughness.total : 0;
     const applyToughness = this.useToughness(d.healthSys.useToughness, this._damageType, this._damageSource, d.healthSys.mode);
-    const totalDmg = this.basicDamage + h.dmgMod;
+    const totalDmg = Number(this.basicDamage) + Number(h.dmgMod);
     
     let reducedDmg = totalDmg - (applyToughness ? toughness : 0);
     
