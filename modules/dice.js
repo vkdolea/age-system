@@ -809,6 +809,13 @@ export async function itemDamage({
 
     };
 
+    // Adds +2 damage if Health System is Modern AGE and game Setting is 'pulp' or 'cinematic'
+    if (['mage', 'mageInjury', 'mageVitality'].includes(healthSys.type) && ['pulp', 'cinematic'].includes(healthSys.mode)) {
+        const modeDamage = healthSys.useInjury ? 1 : 2;
+        damageFormula += ` + @modeDamage[${game.i18n.localize(`SETTINGS.gameMode${healthSys.mode.charAt(0).toUpperCase() + healthSys.mode.slice(1)}`)}]`;
+        rollData.modeDamage = modeDamage;
+    };
+
     let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
     
     // Preparing custom damage chat card

@@ -107,6 +107,14 @@
     "SETTINGS.weaponGroups": "Weapon Groups",
     "SETTINGS.weaponGroupsHint": "Input weapon groups name using ; to separate groups. Leave it empty if Weapon Groups are not used (as in Modern AGE)",
 
+    "SETTINGS.healthSys": "Health Tracking System",
+    "SETTINGS.healthSysHint": "\"Basic\" uses Armor Rating and Health, \"The Expanse\" adds Toughness and Fortune, and \"Modern AGE\" uses different damage and armor types and vitality depending on mode selected",
+    "SETTINGS.healthSysbasic": "Basic (FAGE, DAGE, BR)",
+    "SETTINGS.healthSysexpanse": "The Expanse",
+    "SETTINGS.healthSysmage": "Modern AGE",
+    "SETTINGS.healthSysmageInjury": "Modern AGE (alternate damage: Injury)",
+    "SETTINGS.healthSysmageVitality": "Modern AGE (alternate damage: Injury & Vitality)",
+
     "age-system": {
 
         "SHEETS": {
@@ -129,7 +137,9 @@
             "vehicleIsNotPassenger": "A vehicle can not be a passenger.",
             "userNotAvailable": "Actor {name} ({id}) is not available.",
             "shipPartsOnChar": "Spaceship Features Item type can not be droped on Character sheet.",
-            "nonShipPartsOnShip": "Only Spaceship Features item type can be droped on Spaceships."
+            "nonShipPartsOnShip": "Only Spaceship Features item type can be droped on Spaceships.",
+            "healthSysNotMatching": "Health System from card and actual in use do not match.",
+            "noValidTokensSelected": "No valid tokens selected."
         },
 
         "spaceship": {

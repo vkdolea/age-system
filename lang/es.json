@@ -107,6 +107,14 @@
     "SETTINGS.weaponGroups": "Grupos de Armas",
     "SETTINGS.weaponGroupsHint": "Introduce el nombre del grupo de armas, utilizando ; para separar por grupos. Dejar vacío si los Grupos de Armas no se utilizan  (como en Modern AGE, The Expanse)",
 
+    "SETTINGS.healthSys": "Health Tracking System",
+    "SETTINGS.healthSysHint": "\"Basic\" uses Armor Rating and Health, \"The Expanse\" adds Toughness and Fortune, and \"Modern AGE\" uses different damage and armor types and vitality depending on mode selected",
+    "SETTINGS.healthSysbasic": "Basic (FAGE, DAGE, BR)",
+    "SETTINGS.healthSysexpanse": "The Expanse",
+    "SETTINGS.healthSysmage": "Modern AGE",
+    "SETTINGS.healthSysmageInjury": "Modern AGE (alternate damage: Injury)",
+    "SETTINGS.healthSysmageVitality": "Modern AGE (alternate damage: Injury & Vitality)",
+
     "age-system": {
 	
 		"SHEETS": {
@@ -129,7 +137,9 @@
             "vehicleIsNotPassenger": "Un vehículo no puede ser pasajero.",
             "userNotAvailable": "Actor {name} ({id}) no disponible.",
 			"shipPartsOnChar": "El tipo de objeto Característica para Nave no se puede asignar en la Hoja de Personaje.",
-            "nonShipPartsOnShip": "Sólo el tipo de objeto Característica para Nave puede asignarse a una Nave."
+            "nonShipPartsOnShip": "Sólo el tipo de objeto Característica para Nave puede asignarse a una Nave.",
+            "healthSysNotMatching": "Health System from card and actual in use do not match.",
+            "noValidTokensSelected": "No valid tokens selected."
         },
 
         "spaceship": {
@@ -375,8 +385,16 @@
         "stundIndex": "Pro",
         "wound": "Herida",
         "woundIndex": "H",
+        "normalDamage": "Normal",
         "hasDamage": "¿Daño?",
         "armorPenalty": "Penalizador",
+        
+        "injury": "Injury",
+        "injuryMarks": "Marks",
+        "injuryDegree": "Degree",
+        "injuryLight": "Light",
+        "injurySerious": "Serious",
+        "injurySevere": "Severe",
 
         "background": "Trasfondo",
         "socialClass": "Clase Social",
@@ -554,6 +572,13 @@
         "setDmgExtraDice": "Dado Extra",
         "setStuntDmg": "Daño Proeza",
         "setRollGeneralMod": "Mod. General Daño",
-        "penaltyToDamage": "Penalización Daño"
+        "penaltyToDamage": "Penalización Daño",
+        
+        "ignoreDamage": "Ignore Damage",
+        "applyDamage": "Apply Damage",
+        "armorPiercing": "Armor Piercing",
+        "none": "None",
+        "halfArmor": "Half Armor",
+        "ignoreArmor": "Ignore Armor"
     }
 }

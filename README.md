@@ -100,6 +100,7 @@ Icons made by:
 ## 0.8.0 [2021-xx-yy]
 ### Added
 - Damage chat card now have "Apply Damage" button to automate damage to all selected tokens.
+- When "Health Tracking" is selected as Modern AGE (or its variants) and "Game Mode" is set to "Pulp" or "Cinematic", all damages will be have 2 added.
 
 ### Fixed
 - Focus bonus disappears if 2 or more items had a Focus bonus.

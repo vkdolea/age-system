@@ -39,12 +39,13 @@ export const registerSystemSettings = async function() {
 
   /**
    * Register if world will use Toughness
+   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
    */
   game.settings.register("age-system", "useToughness", {
     name: "SETTINGS.useToughness",
     hint: "SETTINGS.useToughnessHint",
     scope: "world",
-    config: true,
+    config: false,
     default: true,
     type: Boolean,
     onChange: debouncedReload
@@ -52,12 +53,13 @@ export const registerSystemSettings = async function() {
 
   /**
    * Option to use split armor
+   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
    */
   game.settings.register("age-system", "useBallisticArmor", {
     name: "SETTINGS.useBallisticArmor",
     hint: "SETTINGS.useBallisticArmorHint",
     scope: "world",
-    config: true,
+    config: false,
     default: true,
     type: Boolean,
     onChange: debouncedReload
@@ -131,11 +133,11 @@ export const registerSystemSettings = async function() {
     default: "basic",
     type: String,
     choices: {
-      "basic": "SETTINGS.healthSysBasic",
-      "expanse": "SETTINGS.healthSysExpanse",
-      "mage": "SETTINGS.healthSysMage",
-      // "mageInjury": "SETTINGS.healthSysMageInjury",
-      // "mageVitality": "SETTINGS.healthSysMageVitality",
+      "basic": "SETTINGS.healthSysbasic",
+      "expanse": "SETTINGS.healthSysexpanse",
+      "mage": "SETTINGS.healthSysmage",
+      // "mageInjury": "SETTINGS.healthSysmageInjury",
+      // "mageVitality": "SETTINGS.healthSysmageVitality",
     },
     onChange: debouncedReload
   });  
