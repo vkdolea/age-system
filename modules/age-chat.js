@@ -28,7 +28,7 @@ export async function applyDamageChat(event) {
             targets.splice(nonChar[t],1)
         }
     }
-    if (targets === []) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.noValidTokensSelected"));
+    if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.noValidTokensSelected"));
     if (!checkHealth(cardHealthSys, CONFIG.ageSystem.healthSys)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
     return new ApplyDamageDialog(targets, damageData, cardHealthSys.useInjury).render(true);
 }
