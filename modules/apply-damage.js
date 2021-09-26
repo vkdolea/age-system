@@ -26,7 +26,7 @@ export default class ApplyDamageDialog extends Application {
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ['age-dialog', 'sheet', 'actor'],
+      classes: ['age-system-dialog', 'age-system'],
       id: 'apply-damage-window',
       template: 'systems/age-system/templates/apply-damage-window.hbs',
       resizable: true,
@@ -61,14 +61,6 @@ export default class ApplyDamageDialog extends Application {
     return data
   }
 
-  // set damageData(value) {
-  //   this._damageData = value
-  // }
-
-  // get damageData() {
-  //   return this._damageData
-  // }
-
   /*
     * Wire the logic to the UI.
     */
@@ -82,7 +74,7 @@ export default class ApplyDamageDialog extends Application {
       this.updateUI()
     });
 
-    // Change Basic Damage for all targets
+    // Change Basic Damage for all targets - using symbols ( - or +)
     html.find(".overall-dmg .change-damage").click(ev => {
       let dmg = this._handler.basicDamage;
       const classes = ev.currentTarget.classList;
@@ -93,11 +85,39 @@ export default class ApplyDamageDialog extends Application {
       this.updateUI()
     });
     
+    // Typing updates on input field for basic damage (all targets)
     html.find("input.basic-damage").change(ev => {
       const value = ev.currentTarget.value
       this._handler.basicDamage = value;
       this.updateUI()
     })
+
+    // Individual target mod (using + or -)
+    html.find(".targets .individual .change-damage").click(ev => {
+      const i = ev.target.closest(".feature-controls").dataset.i;
+      let dmg = this._handler.harmedOnes[i].dmgMod;
+      const classes = ev.currentTarget.classList;
+      if (classes.contains("increase")) dmg += 1;
+      if (classes.contains("decrease")) dmg -= 1;
+      if (dmg < 0) dmg = 0
+      this._handler.harmedOnes[i].dmgMod = dmg;
+      this.updateUI()
+    });
+
+    // Typing updates on input field for individual target
+    html.find(".targets .individual input.target-damage-mod").change(ev => {
+      const value = ev.currentTarget.value
+      const i = ev.target.closest(".feature-controls").dataset.i;
+      this._handler.harmedOnes[i].dmgMod = value;
+      this.updateUI()
+    })
+
+    // Select if that target will be spared
+    html.find(".targets .individual .do-not-apply").change(ev => {
+      const checked = ev.currentTarget.checked;
+      const i = ev.target.closest(".feature-controls").dataset.i;
+      this._handler.harmedOnes[i].ignoreDmg = checked;
+    });
   }
 
 
@@ -163,9 +183,20 @@ export class DamageHandler {
     return this._basicDamage;
   }
 
+  get armorPenetrationMult() {
+    const ap = this.armorPenetration;
+    if (ap === "half") return 0.5;
+    if (ap === "ignore") return 0;
+    return 1;
+  }
+
   damage(h, d) {
-    const impactArmor = h.data.data.armor.impact;
-    const ballisticArmor = h.data.data.armor.ballistic;
+    let ap = this.armorPenetration;
+    if (ap === "none") ap = 1;
+    if (ap === "half") ap = 0.5;
+    if (ap === "ignore") ap = 0;
+    const impactArmor = h.data.data.armor.impact * ap;
+    const ballisticArmor = h.data.data.armor.ballistic * ap;
     const toughness = h.data.data.armor.toughness.total > 0 ? h.data.data.armor.toughness.total : 0;
     const applyToughness = this.useToughness(d.healthSys.useToughness, this._damageType, this._damageSource, d.healthSys.mode);
     const totalDmg = Number(this.basicDamage) + Number(h.dmgMod);
@@ -188,13 +219,13 @@ export class DamageHandler {
     if (!setting) return false;
     if (mode === 'none') return true;
     if (mode === 'gritty') {
-      if (['penetrating', 'impact'].includes(type) && ['stun'].includes(source)) return true;
+      if (['penetrating', 'impact'].includes(source) && ['stun'].includes(type)) return true;
     }
     if (mode === 'pulp') {
-      if (['penetrating', 'impact'].includes(type) && ['stun', 'wound'].includes(source)) return true;
+      if (['penetrating', 'impact'].includes(source) && ['stun', 'wound'].includes(type)) return true;
     }
     if (mode === 'cinematic') {
-      if (!(['penetrating'].includes(type) && ['wound'].includes(source))) return true;
+      if (!(['penetrating'].includes(source) && ['wound'].includes(type))) return true;
     }
     return false;
   }
