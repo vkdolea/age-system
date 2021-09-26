@@ -181,7 +181,8 @@
                     "min": 0,
                     "max": 3,
                     "value": 3 
-                }
+                },
+                "marks": 0
             },
             "resources": {
                 "base": 4,

@@ -927,6 +927,45 @@
   color: inherit;
   padding: 0;
 }
+.age-system.sheet.char.standard .item-qtd-control,
+.age-system.sheet.char.standard .arrow-control {
+  font-size: 7px;
+  flex: 0 0 5px;
+  width: fit-content;
+}
+.age-system.sheet.char.standard .injury-bar .arrow-control {
+  margin-left: 4px;
+}
+.age-system.sheet.char.standard .injury-degrees {
+  justify-content: center;
+}
+.age-system.sheet.char.standard .injury-degrees .degree {
+  margin: 0 6px;
+}
+.age-system.sheet.char.standard .injury-degrees .degree input[type='number'] {
+  margin-left: 2px;
+}
+.age-system.sheet.char.standard .injury-degrees > * {
+  justify-content: center;
+  max-width: fit-content;
+}
+.age-system.sheet.char.standard .marks-control {
+  justify-content: center;
+}
+.age-system.sheet.char.standard .marks-control .tracker-container {
+  max-width: fit-content;
+  margin-right: 2px;
+}
+.age-system.sheet.char.standard .marks-control .severe-injury-tracker {
+  border-radius: 50%;
+  border: solid white 2px;
+  background-color: white;
+  width: 4px;
+  max-width: 4px;
+  height: 4px;
+  max-height: 4px;
+  margin-top: 1px;
+}
 .age-system.sheet.char.standard .sheet-header {
   height: 100%;
 }
@@ -1355,11 +1394,6 @@
 }
 .age-system.sheet.char.standard .item-container .item-card a {
   padding-left: 2px;
-}
-.age-system.sheet.char.standard .item-container .item-card .item-qtd-control {
-  font-size: 7px;
-  flex: 0 0 5px;
-  width: fit-content;
 }
 .age-system.sheet.char.standard .item-container .item-card .controls {
   max-width: fit-content;
@@ -3746,7 +3780,7 @@
   text-align: left;
 }
 /*---- Font Override----*/
-body *:not(i, .fa) {
+body *:not(i, .fa, .far, .fas) {
   font-family: 'Roboto' !important;
 }
 /*---------Background---------------------*/

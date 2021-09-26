@@ -21,6 +21,50 @@
         }
     }
 
+    // Arrow controls
+    .item-qtd-control,
+    .arrow-control {
+        font-size: 7px;
+        flex: 0 0 5px;
+        width: fit-content;
+    }
+
+    .injury-bar .arrow-control {
+        margin-left: 4px;
+    }
+
+    .injury-degrees {
+        justify-content: center;
+        .degree {
+            margin: 0 6px;
+            input[type='number'] {
+                margin-left: 2px;
+            }
+        }
+        > * {
+            justify-content: center;
+            max-width: fit-content;
+        }
+    }
+
+    .marks-control {
+        justify-content: center;
+        .tracker-container {
+            max-width: fit-content;
+            margin-right: 2px;
+        }
+        .severe-injury-tracker {
+            border-radius: 50%;
+            border: solid white 2px;
+            background-color: white;
+            width: 4px;
+            max-width: 4px;
+            height: 4px;
+            max-height: 4px;
+            margin-top: 1px;
+        }
+    }
+
     .sheet-header {
         height: 100%;
 
@@ -517,11 +561,6 @@
             };
             a {
                 padding-left: 2px;
-            }
-            .item-qtd-control {
-                font-size: 7px;
-                flex: 0 0 5px;
-                width: fit-content;
             }
             .controls {
                 max-width: fit-content;

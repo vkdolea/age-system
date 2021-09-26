@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div>
-                    <p>{{#if (eq ../damageData.healthSys.type 'expanse')}}{{localize "age-system.fortune"}}{{else}}{{localize "age-system.health"}}{{/if}}</p>
+                    <p>{{../damageData.healthSys.healthName}}</p>
                     <p>{{target.data.data.health.value}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{target.remainingHP}}</p>
                     
                 </div>

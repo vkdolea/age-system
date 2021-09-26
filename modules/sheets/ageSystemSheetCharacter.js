@@ -164,6 +164,10 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".effect-remove").click(this._onRemoveEffect.bind(this));   
             html.find("p.effect-add").click(this._onAddEffect.bind(this));
             html.find(".change-qtd").click(this._onChangeQuantity.bind(this));
+            html.find(".degree .change-injury").click(this._onChangeInjury.bind(this));
+            html.find(".mark .change-injury").click(this._onChangeMark.bind(this));
+            html.find(".refresh-injury-marks").click(this._onRefreshMarks.bind(this));
+            html.find(".heal-all-injuries").click(this._onFullHeal.bind(this));
 
             // Enable field to be focused when selecting it
             const inputs = html.find("input");
@@ -209,6 +213,90 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         }
 
         super.activateListeners(html);
+    };
+
+    _onFullHeal() {
+        const updateData = {
+            "data.injury.degrees.light": 0,
+            "data.injury.degrees.serious": 0,
+            "data.injury.degrees.severe": 0,
+            "data.injury.marks": 0,
+        }
+        return this.actor.update(updateData);
+    }
+
+    _onRefreshMarks(event) {
+        const data = this.actor.data.data.injury.degrees;
+        const marks = data.light + data.serious + data.severe * data.severeMult
+        return this.actor.update({"data.injury.marks": marks});
+    }
+
+    _onChangeMark(event) {
+        const data = this.actor.data.data;
+        const marks = data.injury.marks;
+        if (marks === 0) return false;
+        let updateData = {"data.injury.marks": marks-1};
+        if (data.injury.degrees.severe > 0) {
+            const expectedMarks = data.injury.degrees.light + data.injury.degrees.serious + data.injury.degrees.severe * data.injury.degrees.severeMult;
+            if (expectedMarks - (marks-1) === data.injury.degrees.severeMult) {
+                updateData = {
+                    ...updateData,
+                    "data.injury.degrees.severe": data.injury.degrees.severe-1
+                }
+            }
+        } else {
+            if (data.injury.degrees.serious > 0) {
+                updateData = {
+                    ...updateData,
+                    "data.injury.degrees.serious": data.injury.degrees.serious-1
+                }
+            } else {
+                if (data.injury.degrees.light > 0) {
+                    updateData = {
+                        ...updateData,
+                        "data.injury.degrees.light": data.injury.degrees.light-1
+                    }
+                }
+            }
+        }
+        return this.actor.update(updateData);
+    }
+
+    _onChangeInjury(event) {
+        event.preventDefault();
+        const data = this.actor.data.data;
+        const e = event.currentTarget;
+        const classList = e.classList;
+        const supEl = event.currentTarget.closest('.arrow-control');
+        const supClassList = supEl.classList;
+        let parameter;
+        let marks;
+        if(supClassList.contains('light')) {parameter = "light"; marks = 1}
+        if(supClassList.contains('serious')) {parameter = "serious"; marks = 1}
+        if(supClassList.contains('severe')) {parameter = "severe"; marks = data.injury.degrees.severeMult}
+        if (!parameter) return false;
+        // if(supClassList.contains('mark')) parameter = this.actor.data.data.injury.degrees.totalMarks;
+
+        const qtd = data.injury.degrees[parameter]
+        const updatePath = `data.injury.degrees.${parameter}`;
+
+        if (classList.contains("add")) {
+            return this.actor.update({
+                [updatePath]: qtd+1,
+                "data.injury.marks": data.injury.marks + marks
+            });
+        }
+        if (classList.contains("remove") && qtd > 0) {
+            if (parameter === 'severe') {
+                if (data.injury.marksExcess = 0) marks = marks;
+                if (data.injury.marksExcess > 0) marks = -data.injury.marksExcess;
+                if (data.injury.marksExcess < 0) marks = data.injury.marksExcess;
+            }
+            return this.actor.update({
+                [updatePath]: qtd-1,
+                "data.injury.marks": data.injury.marks - marks
+            });
+        } 
     };
 
     async _onWeaponGroupToggle(event) {

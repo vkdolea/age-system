@@ -136,8 +136,8 @@ export const registerSystemSettings = async function() {
       "basic": "SETTINGS.healthSysbasic",
       "expanse": "SETTINGS.healthSysexpanse",
       "mage": "SETTINGS.healthSysmage",
-      // "mageInjury": "SETTINGS.healthSysmageInjury",
-      // "mageVitality": "SETTINGS.healthSysmageVitality",
+      "mageInjury": "SETTINGS.healthSysmageInjury",
+      "mageVitality": "SETTINGS.healthSysmageVitality",
     },
     onChange: debouncedReload
   });  
@@ -156,7 +156,8 @@ export const registerSystemSettings = async function() {
       "health": "SETTINGS.healthModehealth",
       "fortune": "SETTINGS.healthModefortune",
     },
-    onChange: () => {
+    onChange: async () => {
+      CONFIG.ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`),
       [...game.actors.contents, ...Object.values(game.actors.tokens)]
         .filter((o) => {
           return o.data.type === "char";

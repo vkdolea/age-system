@@ -331,6 +331,7 @@ Hooks.once("ready", async function() {
     const HEALTH_SYS = {
         type: hstype,
         mode: await game.settings.get("age-system", "gameMode"),
+        healthName: game.i18n.localize(`SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`),
         useToughness: ![`basic`].includes(hstype),
         useFortune: [`expanse`].includes(hstype),
         useHealth: [`basic`, `mage`].includes(hstype),
