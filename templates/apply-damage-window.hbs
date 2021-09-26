@@ -1,63 +1,85 @@
-<div class="apply-damage-window feature-controls">
-    <h2>{{localize "age-system.item.damage"}}</h2>
-    <div class="header flexrow">
-        <div class="damage overall-dmg column-ad">
-            <p>{{localize "age-system.item.damage"}}</p>
-            <div class="flexrow">
-                <div class="change-damage decrease"><a><i class="fa fa-minus-square" aria-hidden="true"></i></a></div>
-                <input type="number" class="basic-damage" name="handler.basicDamage" value="{{handler.basicDamage}}" data-dtype="Number" />
-                <div class="change-damage increase"><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
+<div class="apply-damage-window flexrow feature-controls">
+
+    <div class="column defenders">
+        <h2>Tokens</h2>
+        <div class="targets">
+            {{#each handler.harmedOnes as |target i|}}
+            <div class="individual flexrow feature-controls" data-i="{{i}}">
+                <div>
+                    <p><strong>{{target.name}}</strong></p>
+                    <img class="item-image" src="{{target.data.img}}" title="{{target.name}}" width="75" height="75"/>
+                </div>
+                <div>
+                    <p>{{localize "age-system.armor"}}</p>
+                    <p>
+                        <div>{{target.data.data.armor.impact}}{{#if ../damageData.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}{{/if}}</div>
+                        {{#if ../damageData.healthSys.useBallistic}}
+                        <div>{{target.data.data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
+                        {{/if}}
+                    </p>
+                </div>
+                <div>
+                    <p>{{localize "age-system.toughness"}}</p>
+                    <p>{{target.data.data.armor.toughness.total}}</p>
+                </div>
+                <div>
+                    <p>{{localize "age-system.item.damage"}}</p>
+                    <p>{{target.damage}}</p>
+                    <p>{{localize "age-system.setRollGeneralMod"}}</p>
+                    <div class="flexrow dmg-box">
+                        <div class="change-damage decrease"><a><i class="fa fa-minus-square" aria-hidden="true"></i></a></div>
+                        <input type="number" class="target-damage-mod damage-value" name="handler.harmedOnes.{{i}}.dmgMod" value="{{target.dmgMod}}" data-dtype="Number" />
+                        <div class="change-damage increase"><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+                <div>
+                    <p>{{#if (eq ../damageData.healthSys.type 'expanse')}}{{localize "age-system.fortune"}}{{else}}{{localize "age-system.health"}}{{/if}}</p>
+                    <p>{{target.data.data.health.value}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{target.remainingHP}}</p>
+                    
+                </div>
+                <div class="form-group">
+                    <label><p>{{localize "age-system.ignoreDamage"}}</p></label>
+                    <input type="checkbox" class="do-not-apply" name="handler.harmedOnes.{{i}}.ignoreDmg" {{checked target.ignoreDmg}}/>
+                </div>
             </div>
-            <p>{{#if damageData.healthSys.useBallistic}}{{localize (concat "age-system." damageData.dmgSrc)}} | {{/if}}{{localize (concat "age-system." damageData.dmgType)}}</p>
-        </div>
-        <div class="column-ad armor-penetration controls flexcol">
-            {{radioBoxes radioB.name radioB.choices radioB.options}}
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
+            {{/each}}
         </div>
     </div>
-    <div class="targets">
-        <h2>Targets</h2>
-        {{#each handler.harmedOnes as |target i|}}
-        <div class="individual flexrow feature-controls" data-i="{{i}}">
-            <div>
-                <img class="item-image" src="{{target.data.img}}" title="{{target.name}}" width="75" height="75"/>
-                <p>{{target.name}}</p>
-            </div>
-            <div>
-                <p>{{localize "age-system.armor"}}</p>
-                <p>
-                    <div>{{target.data.data.armor.impact}}{{#if ../damgeData.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}{{/if}}</div>
-                    {{#if ../damgeData.healthSys.useBallistic}}
-                    <div>{{target.data.data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
-                    {{/if}}
-                </p>
-            </div>
-            <div>
-                <p>{{localize "age-system.toughness"}}</p>
-                <p>{{target.data.data.armor.toughness.total}}</p>
-            </div>
-            <div>
-                <p>{{localize "age-system.extraDamage"}}</p>
-                <div class="flexrow">
+
+    <div class="column controls">
+        <h2>{{localize "age-system.item.damage"}}</h2>
+        <div class="header flexcol">
+            <div class="damage overall-dmg flex-jusitfy-center">
+                <h3>{{localize "age-system.base"}}</h3>
+                <div class="flexrow dmg-box">
                     <div class="change-damage decrease"><a><i class="fa fa-minus-square" aria-hidden="true"></i></a></div>
-                    <input type="number" class="target-damage-mod" name="handler.harmedOnes.{{i}}.dmgMod" value="{{target.dmgMod}}" data-dtype="Number" />
+                    <input type="number" class="basic-damage damage-value" name="handler.basicDamage" value="{{handler.basicDamage}}" data-dtype="Number" />
                     <div class="change-damage increase"><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
                 </div>
-                <p>{{localize "age-system.totalDamage"}}</p>
-                <p>{{target.totalDmg}}</p>
+                {{#if damageData.healthSys.useBallistic}}
+                <p>{{localize (concat "age-system." damageData.dmgType)}} | {{localize (concat "age-system." damageData.dmgSrc)}}</p>
+                {{else}}
+                {{#if (eq damageData.dmgSrc 'penetrating')}}
+                <p>{{localize (concat "age-system.penetrating")}}</p>
+                {{else}}
+                <p>{{localize (concat "age-system.normalDamage")}}</p>
+                {{/if}}
+                {{/if}}
             </div>
-            <div>
-                <p>{{#if (eq ../damageData.healthSys.type 'expanse')}}{{localize "age-system.fortune"}}{{else}}{{localize "age-system.health"}}{{/if}}</p>
-                <p>{{target.data.data.health.value}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{target.remainingHP}}</p>
-                
+            <div class="column-ad armor-penetration controls flexcol">
+                <h3>{{localize "age-system.armorPiercing"}}</h3>
+                {{radioBoxes radioB.name radioB.choices radioB.options}}
             </div>
-            <div class="form-group">
-                <label><p>{{localize "age-system.ignoreDamage"}}</p></label>
-                <input type="checkbox" class="do-not-apply" name="handler.harmedOnes.{{i}}.ignoreDmg" {{checked target.ignoreDmg}}/>
-            </div>
+            <button type="button" class="apply-damage">
+                {{localize "age-system.applyDamage"}}
+            </button>
+            {{!-- <button type="button">
+                {{localize "age-system.cancel"}}
+            </button> --}}
         </div>
-        {{#unless @last}}
-        <hr>
-        {{/unless}}
-        {{/each}}
     </div>
+
 </div>

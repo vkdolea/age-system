@@ -81,6 +81,46 @@ body *:not(i, .fa) {
     }
 }
 
+.age-system-dialog {
+    .apply-damage-window {
+        .column {
+            text-align: center;
+            .overall-dmg {
+                margin-bottom: 10px;
+            }
+            button {
+                margin-top: 10px;
+            }
+            .individual {
+                h3 {
+                    font-weight: 800;
+                }
+                img {
+                    border: 0;
+                }
+            }
+        }
+        .column.controls {
+            flex: 0 0 200px;
+            padding-left: 8px;
+            // border-right: 2px solid brown;
+        }
+        input[type="number"] {
+            max-width: 50px;
+        }
+        .change-damage {
+            max-width: fit-content;
+        }
+        .dmg-box {
+            align-items: baseline;
+            justify-content: center;
+        }
+        // .overall-dmg {
+        //     text-align: center;
+        // }
+    }
+}
+
 .age-system {
     // Removing some FoundryVTT core styling
     input,

@@ -134,8 +134,8 @@ export const registerSystemSettings = async function() {
       "basic": "SETTINGS.healthSysBasic",
       "expanse": "SETTINGS.healthSysExpanse",
       "mage": "SETTINGS.healthSysMage",
-      "mageInjury": "SETTINGS.healthSysMageInjury",
-      "mageVitality": "SETTINGS.healthSysMageVitality",
+      // "mageInjury": "SETTINGS.healthSysMageInjury",
+      // "mageVitality": "SETTINGS.healthSysMageVitality",
     },
     onChange: debouncedReload
   });  

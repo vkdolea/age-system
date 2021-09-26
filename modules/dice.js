@@ -705,13 +705,11 @@ export async function itemDamage({
     // Adds up Flavor text for item damage type
     if (item.data.data.hasDamage) {
         damageDesc += `${game.i18n.localize(`age-system.chatCard.rollDamage`)}`;
-        if (healthSys.useBallistic) {
-            const dmgType = game.i18n.localize(`age-system.${item.data.data.dmgType}`);
-            const dmgSrc = game.i18n.localize(`age-system.${item.data.data.dmgSource}`);
-            damageDesc += ` | ${dmgType} | ${dmgSrc}`;
-            dmgDesc.dmgType = item.data.data.dmgType;
-            dmgDesc.dmgSrc = item.data.data.dmgSource;
-        }
+        const dmgType = game.i18n.localize(`age-system.${item.data.data.dmgType}`);
+        const dmgSrc = game.i18n.localize(`age-system.${item.data.data.dmgSource}`);
+        dmgDesc.dmgType = item.data.data.dmgType;
+        dmgDesc.dmgSrc = item.data.data.dmgSource;
+        if (healthSys.useBallistic) damageDesc += ` | ${dmgType} | ${dmgSrc}`;
     };
 
     // Add Healing Flavor text if applicable

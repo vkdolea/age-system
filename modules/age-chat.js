@@ -16,7 +16,18 @@ export async function applyDamageChat(event) {
     const cardId = card.dataset.messageId;
     const damageData = await game.messages.get(cardId).data.flags["age-system"].damageData;
     const cardHealthSys = damageData.healthSys;
-    const targets = canvas.tokens.controlled;
+    let targets = canvas.tokens.controlled;
+    let nonChar = []
+    if (nonChar !== []) {
+        for (let t = 0; t < targets.length; t++) {
+            const el = targets[t];
+            const actorType = el.actor?.type;
+            if (actorType !== 'char') nonChar.push(t);
+        }
+        for (let t = nonChar.length-1; t >= 0; t--) {
+            targets.splice(nonChar[t],1)
+        }
+    }
     if (!checkHealth(cardHealthSys, CONFIG.ageSystem.healthSys)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
     return new ApplyDamageDialog(targets, damageData, cardHealthSys.useInjury).render(true);
 }
@@ -29,13 +40,6 @@ export function checkHealth(card, game) {
     }
     return true;
 }
-
-// export function conventionalDamage(source, targets) {
-//     const useBallistic = source.healthSys.useBallistic;
-//     const useToughness = source.healthSys.useToughness;
-//     const dmgType = source.dmgDesc.dmgType;
-//     const dmgSrc = source.dmgDesc.dmgSrc;
-// }
 
 export async function chatDamageRoll(event) {
     event.preventDefault();

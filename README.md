@@ -99,7 +99,7 @@ Icons made by:
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
 ## 0.8.0 [2021-xx-yy]
 ### Added
-- Support to Modern AGE alternate damage: Injury (no Health)
+- Damage chat card now have "Apply Damage" button to automate damage to all selected tokens.
 
 ### Fixed
 - Focus bonus disappears if 2 or more items had a Focus bonus.

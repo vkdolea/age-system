@@ -1,18 +1,4 @@
-/**
- * Displays the Apply Damage Dialog. Delegates all the logic behind calculating
- * and applying damage to a character to instance variable _calculator.
- *
- * Takes as input a GurpsActor and DamageData.
- *
- */
 export default class ApplyDamageDialog extends Application {
-  /**
-   * Create a new ADD.
-   *
-   * @param {GurpsActor} actor
-   * @param {Array} damageData
-   * @param {*} options
-   */
   constructor(targets, damageData, useInjury, options = {}) {
     super(options)
 
@@ -33,7 +19,7 @@ export default class ApplyDamageDialog extends Application {
       minimizable: false,
       width: 800,
       height: 'auto',
-      title: game.i18n.localize('age-system.applyDamageWindow'),
+      title: game.i18n.localize('age-system.applyDamage'),
     })
   }
 
@@ -48,9 +34,9 @@ export default class ApplyDamageDialog extends Application {
     data.radioB = {
       name: "handler.armorPenetration",
       choices: {
-        none: "None",
-        half: "Half Armor",
-        ignore: "Ignore Armor"
+        none: game.i18n.localize('age-system.none'),
+        half: game.i18n.localize('age-system.halfArmor'),
+        ignore: game.i18n.localize('age-system.ignoreArmor')
       },
       options: {
         hash: {
@@ -61,9 +47,6 @@ export default class ApplyDamageDialog extends Application {
     return data
   }
 
-  /*
-    * Wire the logic to the UI.
-    */
   activateListeners(html) {
     super.activateListeners(html)
 
@@ -99,7 +82,6 @@ export default class ApplyDamageDialog extends Application {
       const classes = ev.currentTarget.classList;
       if (classes.contains("increase")) dmg += 1;
       if (classes.contains("decrease")) dmg -= 1;
-      if (dmg < 0) dmg = 0
       this._handler.harmedOnes[i].dmgMod = dmg;
       this.updateUI()
     });
@@ -118,12 +100,19 @@ export default class ApplyDamageDialog extends Application {
       const i = ev.target.closest(".feature-controls").dataset.i;
       this._handler.harmedOnes[i].ignoreDmg = checked;
     });
+
+    html.find("button.apply-damage").click(ev => {
+      this._handler.harmedOnes.map(async (h) => {
+        if (!h.ignoreDmg) {
+          let actor = await fromUuid(h.uuid);
+          if (actor.documentName === "Token") actor = actor.actor;
+          actor.update({"data.health.value": h.remainingHP})
+        }
+      })
+      this.close();
+    })
   }
 
-
-  /*
-    * Updates the UI based on the current state of the _calculator.
-    */
   updateUI() {
     this.render(false)
   }
@@ -149,10 +138,11 @@ export class DamageHandler {
       harmedOnes.push({
         name: h.name,
         img: h.data.img,
-        uuid: h.data.actorLink ? h.actor.uuid : h.uuid,
+        uuid: h.data.actorLink ? h.actor.uuid : h.document.uuid,
         data: foundry.utils.deepClone(h.actor.data),
         dmgMod: 0,
         remainingHP: 0,
+        damage: 0,
         ignoreDmg: false
       })
     }
@@ -209,8 +199,14 @@ export class DamageHandler {
 
     if (reducedDmg < 0) reducedDmg === 0;
 
-    h.remainingHP = h.data.data.health.value - reducedDmg;
-    h.totalDmg = totalDmg;
+    if (h.ignoreDmg) {
+      h.remainingHP = h.data.data.health.value;
+      h.totalDmg = 0
+    } else {
+      h.remainingHP = h.data.data.health.value - reducedDmg;
+      h.damage = reducedDmg
+      h.totalDmg = totalDmg;
+    }
 
     return h;
   }

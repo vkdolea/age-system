@@ -3764,6 +3764,35 @@ body *:not(i, .fa) {
 .age-system-dialog.bonus-select button.dialog-button {
   flex: 0 0 45%;
 }
+.age-system-dialog .apply-damage-window .column {
+  text-align: center;
+}
+.age-system-dialog .apply-damage-window .column .overall-dmg {
+  margin-bottom: 10px;
+}
+.age-system-dialog .apply-damage-window .column button {
+  margin-top: 10px;
+}
+.age-system-dialog .apply-damage-window .column .individual h3 {
+  font-weight: 800;
+}
+.age-system-dialog .apply-damage-window .column .individual img {
+  border: 0;
+}
+.age-system-dialog .apply-damage-window .column.controls {
+  flex: 0 0 200px;
+  padding-left: 8px;
+}
+.age-system-dialog .apply-damage-window input[type="number"] {
+  max-width: 50px;
+}
+.age-system-dialog .apply-damage-window .change-damage {
+  max-width: fit-content;
+}
+.age-system-dialog .apply-damage-window .dmg-box {
+  align-items: baseline;
+  justify-content: center;
+}
 .age-system input,
 .age-system select {
   border: none;

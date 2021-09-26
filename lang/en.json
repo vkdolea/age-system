@@ -562,6 +562,13 @@
         "setDmgExtraDice": "Extra Dice",
         "setStuntDmg": "Stunt Damage",
         "setRollGeneralMod": "Damage Modifier",
-        "penaltyToDamage": "Penalty Converted to Damage"
+        "penaltyToDamage": "Penalty Converted to Damage",
+
+        "ignoreDamage": "Ignore Damage",
+        "applyDamage": "Apply Damage",
+        "armorPiercing": "Armor Piercing",
+        "none": "None",
+        "halfArmor": "Half Armor",
+        "ignoreArmor": "Ignore Armor"
     }
 }
