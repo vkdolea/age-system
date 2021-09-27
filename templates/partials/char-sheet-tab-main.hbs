@@ -185,6 +185,25 @@
     </div>
     {{/if}}
 
+    {{#if data.config.healthSys.useVitality}}
+    {{!-- Vitality block --}}
+    <div class="flexcol general-stats">
+        <div class="top-row colorset-first-tier">{{data.config.healthSys.healthName}}</div>
+        <div class="main-value">
+            <input type="number" name="data.vitality.value" value="{{data.data.vitality.value}}" data-dtype="Number" />
+        </div>
+        <div class="flexcol stat-modifiers flex-align-center no-flexwrap">
+            <div class="flexcol no-flexwrap">
+                {{#if (ne data.data.vitality.set data.data.vitality.max)}}
+                <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="data.health.max" value="{{data.data.vitality.max}}" data-dtype="Number" />
+                {{/if}}
+                <input type="number" number-type="five-digits" name="data.vitality.set" value="{{data.data.vitality.set}}" data-dtype="Number" />
+            </div>
+            <label>{{localize "age-system.maximum"}}</label>
+        </div>
+    </div>
+    {{/if}}    
+
     {{!-- Power Points block --}}
     {{#if data.data.usePowerPoints}}
     <div class="flexcol general-stats">

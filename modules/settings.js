@@ -119,7 +119,18 @@ export const registerSystemSettings = async function() {
       "gritty": "SETTINGS.gameModeGritty",
       "pulp": "SETTINGS.gameModePulp",
       "cinematic": "SETTINGS.gameModeCinematic",
-    },  
+    },
+    onChange: async () => {
+      CONFIG.ageSystem.healthSys.mode = await game.settings.get("age-system", "healthMode"),
+      [...game.actors.contents, ...Object.values(game.actors.tokens)]
+        .filter((o) => {
+          return o.data.type === "char";
+        })
+        .forEach((o) => {
+          o.update({});
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        });
+    },
   });
   
   /**

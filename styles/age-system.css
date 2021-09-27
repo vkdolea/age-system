@@ -912,6 +912,44 @@
 /*******************************/
 /**    Default Char Sheet     **/
 /*******************************/
+.age-system.sheet.char .arrow-control {
+  font-size: 7px;
+  flex: 0 0 5px;
+  width: fit-content;
+}
+.age-system.sheet.char .injury-bar .arrow-control {
+  margin-left: 4px;
+}
+.age-system.sheet.char .injury-degrees {
+  justify-content: center;
+}
+.age-system.sheet.char .injury-degrees .degree {
+  margin: 0 6px;
+}
+.age-system.sheet.char .injury-degrees .degree input[type='number'] {
+  margin-left: 2px;
+}
+.age-system.sheet.char .injury-degrees > * {
+  justify-content: center;
+  max-width: fit-content;
+}
+.age-system.sheet.char .marks-control {
+  justify-content: center;
+}
+.age-system.sheet.char .marks-control .tracker-container {
+  max-width: fit-content;
+  margin-right: 2px;
+}
+.age-system.sheet.char .marks-control .severe-injury-tracker {
+  border-radius: 50%;
+  border: solid white 2px;
+  background-color: white;
+  width: 4px;
+  max-width: 4px;
+  height: 4px;
+  max-height: 4px;
+  margin-top: 1px;
+}
 .age-system.sheet.char.standard .owned-wgroups {
   margin: 0 4px;
   margin-top: 4px;
@@ -1447,6 +1485,32 @@
 }
 .age-system.sheet.char.stat-block li.ability-box:nth-of-type(2n+1) {
   background-color: white;
+}
+.age-system.sheet.char.stat-block .injury-bar {
+  padding-bottom: 4px;
+  text-transform: uppercase;
+  background-color: black;
+}
+.age-system.sheet.char.stat-block .injury-bar input[type='number'] {
+  background-color: white;
+  color: black;
+  margin: 2px 4px !important;
+  height: 20px;
+  max-width: 20px;
+  font-size: 12px;
+}
+.age-system.sheet.char.stat-block .injury-bar .tracker-container {
+  justify-content: center;
+}
+.age-system.sheet.char.stat-block .injury-bar .injury-box {
+  align-items: center;
+}
+.age-system.sheet.char.stat-block .injury-bar .injury-box .degree > * {
+  max-width: fit-content;
+  margin: auto 0;
+}
+.age-system.sheet.char.stat-block .injury-bar .marks-box {
+  flex: 0 0 150px;
 }
 .age-system.sheet.char.stat-block .general-aid-bar {
   font-size: 10px;
