@@ -97,7 +97,7 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
-## 0.8.0 [2021-xx-yy]
+## 0.8.0 [2021-09-27]
 ### Added
 - Damage chat card now have "Apply Damage" button to automate damage to all selected tokens.
 - When "Health Tracking" is selected as Modern AGE (or its variants) and "Game Mode" is set to "Pulp" or "Cinematic", all damages will be have 2 added.
