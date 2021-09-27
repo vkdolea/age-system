@@ -672,7 +672,9 @@ export async function itemDamage({
         stuntDie = damageOptions.stuntDieDmg;
     };
     
+    const healthSys = CONFIG.ageSystem.healthSys;
     const dmgDetails = resistedDmg ? item.data.data.damageResisted : item.data.data;
+
     let nrDice = dmgDetails.nrDice;
     let diceSize = dmgDetails.diceType;
     let constDmg = dmgDetails.extraValue;
@@ -681,31 +683,44 @@ export async function itemDamage({
     const isBlind = setBlind(event);
     const audience = isGMroll(event);
 
-    // let damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}` : "";
-    let damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${game.i18n.localize("age-system.base")}, ${nrDice}d${diceSize}]` : "";
-    let rollData = {
-        // diceQtd: nrDice,
-        // diceSize: diceSize,
-        damageMod: constDmg
+    let damageFormula
+    let rollData = {};
+    if (healthSys.useInjury) {
+        let baseDmg = healthSys.baseDamageTN;
+        if (item?.data?.data?.damageInjury !== 0) baseDmg += item.data.data.damageInjury;
+        damageFormula = `${baseDmg}[${game.i18n.localize("age-system.base")}]`;
+    } else {
+        damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${game.i18n.localize("age-system.base")}, ${nrDice}d${diceSize}]` : "";
+        rollData.damageMod = constDmg;
+        // Check if damage source has a non 0 portion on its parameters
+        if (constDmg) {damageFormula = `${damageFormula} + @damageMod[${game.i18n.localize("age-system.base")}]`}
     };
-    // Check if damage source has a non 0 portion on its parameters
-    if (constDmg) {damageFormula = `${damageFormula} + @damageMod[${game.i18n.localize("age-system.base")}]`}
     
     let damageDesc = "";
+    const dmgDesc = {
+        dmgType: null,
+        dmgSrc: null,
+    };
+
+    // Adds up Flavor text for item damage type
+    if (item.data.data.hasDamage) {
+        damageDesc += `${game.i18n.localize(`age-system.chatCard.rollDamage`)}`;
+        const dmgType = game.i18n.localize(`age-system.${item.data.data.dmgType}`);
+        const dmgSrc = game.i18n.localize(`age-system.${item.data.data.dmgSource}`);
+        dmgDesc.dmgType = item.data.data.dmgType;
+        dmgDesc.dmgSrc = item.data.data.dmgSource;
+        if (healthSys.useBallistic) damageDesc += ` | ${dmgType} | ${dmgSrc}`;
+    };
+
+    // Add Healing Flavor text if applicable
+    if (item.data.data.hasHealing) {
+        damageDesc = `${game.i18n.localize(`age-system.item.healing`)}`;
+        dmgDesc.isHealing = true;
+    };
 
     if (item.isOwned) {
-
-        // Adds up Flavor text for item damage type
-        if (item.data.data.hasDamage) {
-            damageDesc += `${game.i18n.localize(`age-system.chatCard.rollDamage`)}`;
-            if (await game.settings.get("age-system", "useBallisticArmor")) damageDesc += ` | ${game.i18n.localize(`age-system.${item.data.data.dmgType}`)} | ${game.i18n.localize(`age-system.${item.data.data.dmgSource}`)}`;
-        };
-        // Add Healing Flavor text if applicable
-        if (item.data.data.hasHealing) {
-            damageDesc = `${game.i18n.localize(`age-system.item.healing`)}`;
-        };
-
         // Adds owner's Ability to damage
+        // Fully added even on Injury Mode
         if (dmgAbl !== null && dmgAbl !== "no-abl") {
             const ablMod = item.actor.data.data.abilities[dmgAbl].total;
             damageFormula = `${damageFormula} + @abilityMod[${game.i18n.localize("age-system." + dmgAbl)}]`;
@@ -715,7 +730,7 @@ export async function itemDamage({
         // Check if Attack to Damage Trade Off is applied
         if (atkDmgTradeOff) {
             damageFormula = `${damageFormula} + @atkDmgTradeOff[${game.i18n.localize("age-system.penaltyToDamage")}]`;
-            rollData.atkDmgTradeOff = Math.abs(atkDmgTradeOff);
+            rollData.atkDmgTradeOff = healthSys.useInjury ? Math.ceil(Math.abs(atkDmgTradeOff)/3) : Math.abs(atkDmgTradeOff);
         }
 
         // Check if Focus adds to damage and adds it
@@ -723,13 +738,14 @@ export async function itemDamage({
             const actor = item.actor;
             const focusData = actor.checkFocus(item.data.data.useFocus);
             damageFormula = `${damageFormula} + @focus[${focusData.focusName}]`;
-            rollData.focus = focusData.value;
+            rollData.focus = healthSys.useInjury ? Math.ceil(focusData.value/3) : focusData.value;
         }
 
         // Check if extra Stunt Die is to be added (normally rolling damage after chat card roll)
         if (stuntDie !== null) {
             damageFormula = `${damageFormula} + @stuntDieDmg[${game.i18n.localize("age-system.stuntDie")}]`;
-            rollData.stuntDieDmg = stuntDie;
+            // When Stunt Die is added to damage using Injury, it counts as 1d6, hence +1
+            rollData.stuntDieDmg = healthSys.useInjury ? 1 : stuntDie;
         }
 
         // Check if Item has Mod to add to its own Damage
@@ -754,7 +770,8 @@ export async function itemDamage({
 
         // Adds extra damage for All-Out Attack maneuver
         if (item.actor.data.data.allOutAttack.active) {
-            const allOutAttackMod = item.actor.data.data.allOutAttack.dmgBonus;
+            let allOutAttackMod = item.actor.data.data.allOutAttack.dmgBonus;
+            if (healthSys.useInjury) allOutAttackMod = Math.ceil(allOutAttackMod/3);
             damageFormula = `${damageFormula} + @allOutAttack[${game.i18n.localize("age-system.allOutAttack")}]`;
             rollData.allOutAttack = allOutAttackMod;
         };
@@ -763,25 +780,25 @@ export async function itemDamage({
         if (event.ctrlKey) {
             let extraD
             if (event.altKey) {
-                extraD = `2D6`
+                extraD = 2
             } else {
-                extraD = `1D6`
+                extraD = 1
             };
-            damageFormula = `${damageFormula} + ${extraD}[+${extraD}]`
-        };
-
-        // Adds Extra Damage dice
-        if (dmgExtraDice && dmgExtraDice !== 0) {
-            const extraDice = `${dmgExtraDice}D6`;
-            damageFormula += ` + @extraDice[+${extraDice}]`;
-            rollData.extraDice = extraDice;
+            damageFormula += healthSys.useInjury ? ` + ${extraD}[+${extraD}]` : ` + ${extraD}D6[+${extraD}D6]`;
         };
 
         // Adds specific Stunt Damage dice
         if (stuntDamage && stuntDamage !== 0) {
-            const stuntDmgDice = `${stuntDamage}D6`;
-            damageFormula += ` + @stuntDmg[${game.i18n.localize("age-system.stunts")} +${stuntDmgDice}]`;
+            const stuntDmgDice = healthSys.useInjury ? stuntDamage : `${stuntDamage}D6`;
+            damageFormula += ` + @stuntDmg[${game.i18n.localize("age-system.stunts")}, ${stuntDmgDice}]`;
             rollData.stuntDmg = stuntDmgDice;
+        };
+
+        // Adds Extra Damage dice
+        if (dmgExtraDice && dmgExtraDice !== 0) {
+            const extraDice = healthSys.useInjury ? dmgExtraDice : `${dmgExtraDice}D6`;
+            damageFormula += ` + @extraDice[+${extraDice}]`;
+            rollData.extraDice = extraDice;
         };
 
         // Adds Actor Damage Bonus
@@ -792,13 +809,21 @@ export async function itemDamage({
 
     };
 
+    // Adds +2 damage if Health System is Modern AGE and game Setting is 'pulp' or 'cinematic'
+    if (['mage', 'mageInjury', 'mageVitality'].includes(healthSys.type) && ['pulp', 'cinematic'].includes(healthSys.mode)) {
+        const modeDamage = healthSys.useInjury ? 1 : 2;
+        damageFormula += ` + @modeDamage[${game.i18n.localize(`SETTINGS.gameMode${healthSys.mode.charAt(0).toUpperCase() + healthSys.mode.slice(1)}`)}]`;
+        rollData.modeDamage = modeDamage;
+    };
+
     let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
-    // if (hasWeaponGroupPenalty(item, actorWgroups)) damageFormula = `(${damageFormula})/2[${game.i18n.localize("SETTINGS.weaponGroups")}]`;
     
     // Preparing custom damage chat card
     let chatTemplate = "/systems/age-system/templates/rolls/damage-roll.hbs";
     
     const wGroupPenalty = hasWeaponGroupPenalty(item, actorWgroups);
+    dmgDesc.wGroupPenalty = wGroupPenalty;
+
     rollData = {
         ...rollData,
         // rawRollData: dmgRoll,
@@ -806,9 +831,10 @@ export async function itemDamage({
         finalValue: wGroupPenalty? dmgRoll.total/2 : dmgRoll.total,
         diceTerms: dmgRoll.terms,
         colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
-        flavor: item ? `${item.name} [${item.actor.name}]` : damageDesc,
+        flavor: item ? `${item.name} | ${item.actor.name}` : damageDesc,
         flavor2: item ? damageDesc : null,
-        user: game.user
+        user: game.user,
+        useInjury: healthSys.useInjury
     };
 
     let chatData = {
@@ -816,7 +842,19 @@ export async function itemDamage({
         speaker: ChatMessage.getSpeaker(),
         content: await renderTemplate(chatTemplate, rollData),
         roll: dmgRoll,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        flags: {
+            "age-system": {
+                type: "damage",
+                damageData: {
+                    ...dmgDesc,
+                    totalDamage: rollData.finalValue,
+                    attacker: item.actor.name,
+                    attackerId: item.actor.uuid,
+                    healthSys
+                }
+            }
+        }
     };
 
     if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;

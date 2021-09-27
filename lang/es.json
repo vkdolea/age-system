@@ -11,7 +11,7 @@
     "ITEM.TypeRelationship": "Vínculos",
     "ITEM.TypeHonorifics": "Títulos",
     "ITEM.TypeMembership": "Afiliaciones",
-	"ITEM.TypeSpaceshipfeatures": "Características Nave",
+	"ITEM.TypeShipfeatures": "Características Nave",
 
     "SETTINGS.initiativeFocus": "Nombre Concentración Iniciativa",
     "SETTINGS.initiativeFocusHint": "Escribe el nombre de la Concentración a utilizar en tiradas de iniciativa - dejar vacío para ignorar el bonificador",
@@ -107,6 +107,14 @@
     "SETTINGS.weaponGroups": "Grupos de Armas",
     "SETTINGS.weaponGroupsHint": "Introduce el nombre del grupo de armas, utilizando ; para separar por grupos. Dejar vacío si los Grupos de Armas no se utilizan  (como en Modern AGE, The Expanse)",
 
+    "SETTINGS.healthSys": "Sistema Gestión Heridas",
+    "SETTINGS.healthSysHint": "\"Base\" utiliza Armadura y Vida, \"The Expanse\" añade Dureza y Fortuna, y \"Modern AGE\" utiliza diferentes tipos de daño y armadura y vitalidad dependiendo del modo seleccionado",
+    "SETTINGS.healthSysbasic": "Base (FAGE, DAGE, BR)",
+    "SETTINGS.healthSysexpanse": "The Expanse",
+    "SETTINGS.healthSysmage": "Modern AGE",
+    "SETTINGS.healthSysmageInjury": "Modern AGE (alternate: Heridas)",
+    "SETTINGS.healthSysmageVitality": "Modern AGE (alternate: Heridas & Vitalidad)",
+
     "age-system": {
 	
 		"SHEETS": {
@@ -129,7 +137,9 @@
             "vehicleIsNotPassenger": "Un vehículo no puede ser pasajero.",
             "userNotAvailable": "Actor {name} ({id}) no disponible.",
 			"shipPartsOnChar": "El tipo de objeto Característica para Nave no se puede asignar en la Hoja de Personaje.",
-            "nonShipPartsOnShip": "Sólo el tipo de objeto Característica para Nave puede asignarse a una Nave."
+            "nonShipPartsOnShip": "Sólo el tipo de objeto Característica para Nave puede asignarse a una Nave.",
+            "healthSysNotMatching": "Sistema de Heridas en la tarjeta y el actual en uso no coinciden.",
+            "noValidTokensSelected": "No hay un Token seleccionado."
         },
 
         "spaceship": {
@@ -277,8 +287,8 @@
             "freefallingDesc": "El personaje se encuentra sin peso en un entorno de microgravedad o caída libre. Se puede desplazar sólo utilizando asideros, una superficie donde empujarse, o algún tipo de empuje. Una vez en movimiento, se continua con la misma velocidad y trayectoria hasta que se actúe para frenar o cambiar el mismo.",
             "helpless": "Indefenso",
             "helplessDesc": "El personaje es incapaz de hacer nada. No puede efectuar ninguna acción.",
-            "hindred": "Obstruido",
-            "hindredDesc": "La velocidad del personaje se reduce a la mitad (redondeado para abajo) y no puede realizar las acciones Cargar o Correr.",
+            "hindered": "Obstruido",
+            "hinderedDesc": "La velocidad del personaje se reduce a la mitad (redondeado para abajo) y no puede realizar las acciones Cargar o Correr.",
             "prone": "Derribado",
             "proneDesc": "El personaje esta en el suelo. No puede realizar las acciones de Cargar o Correr, ya que sólo puede arrastrase. Levantarse requiere una acción de Mover gastando la mitad de la velocidad disponible. Los ataques Melé tienen un bono +1 y a distancia una penalización -1 contra los personajes en el suelo.",
             "restrained": "Retenido",
@@ -375,8 +385,16 @@
         "stundIndex": "Pro",
         "wound": "Herida",
         "woundIndex": "H",
+        "normalDamage": "Normal",
         "hasDamage": "¿Daño?",
         "armorPenalty": "Penalizador",
+        
+        "injury": "Herida",
+        "injuryMarks": "Marcas",
+        "injuryDegree": "Nivel",
+        "injuryLight": "Leve",
+        "injurySerious": "Seria",
+        "injurySevere": "Severa",
 
         "background": "Trasfondo",
         "socialClass": "Clase Social",
@@ -554,6 +572,13 @@
         "setDmgExtraDice": "Dado Extra",
         "setStuntDmg": "Daño Proeza",
         "setRollGeneralMod": "Mod. General Daño",
-        "penaltyToDamage": "Penalización Daño"
+        "penaltyToDamage": "Penalización Daño",
+        
+        "ignoreDamage": "Ignorar Daño",
+        "applyDamage": "Aplicar Daño",
+        "armorPiercing": "Penetrante",
+        "none": "No",
+        "halfArmor": "Mitad Armadura",
+        "ignoreArmor": "Ignorar Armadura"
     }
 }

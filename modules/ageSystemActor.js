@@ -166,7 +166,24 @@ export class ageSystemActor extends Actor {
             default:
                 break;
         };
-        
+
+        // Injury Degrees and Injury Marks
+        const gameMode = game.settings.get("age-system", "gameMode");
+        if (gameMode === 'none') data.injury.degrees.severeMult = 2;
+        if (gameMode === 'gritty') data.injury.degrees.severeMult = 3;
+        if (gameMode === 'pulp') data.injury.degrees.severeMult = 2;
+        if (gameMode === 'cinematic') data.injury.degrees.severeMult = 1;
+        data.injury.totalDegrees = data.injury.degrees.light + data.injury.degrees.serious + data.injury.degrees.severe;
+        const expectedMarks = data.injury.degrees.light + data.injury.degrees.serious + data.injury.degrees.severe * data.injury.degrees.severeMult;
+        const diffMarks = expectedMarks - data.injury.marks
+        let marksArray = Array.apply(null, Array(data.injury.degrees.severeMult))
+        if (data.injury.degrees.severe) {
+            for (let m = 0; m < marksArray.length; m++) {
+                marksArray[m] = diffMarks <= m ? true : false
+            }
+        }
+        data.injury.marksArray = marksArray;
+
     };
 
     applyItemModifiers() {
@@ -190,7 +207,11 @@ export class ageSystemActor extends Actor {
                         const focusElement = modKey === "focus" ? {name: modObj.name, value: modObj.value} : null;
                         if (modObj.selected && modObj.isActive) {
                             if (mods.hasOwnProperty(modKey)) {
-                                mods[modKey] = focusElement ? mods[modKey].push(focusElement) : mods[modKey] + modObj.value;
+                                if (focusElement) {
+                                    mods[modKey].push(focusElement);
+                                } else {
+                                    mods[modKey] += modObj.value;
+                                }
                             } else {
                                 mods[modKey] = focusElement ? [focusElement] : modObj.value;
                             }

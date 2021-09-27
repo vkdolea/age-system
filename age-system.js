@@ -30,6 +30,7 @@ async function preloadHandlebarsTemplates() {
         `${path}bonuses-sheet.hbs`,
         `${path}char-sheet-nav-bar.hbs`,
         `${path}char-sheet-tab-main.hbs`,
+        `${path}char-sheet-injury-bar.hbs`,
         `${path}char-sheet-tab-persona.hbs`,
         `${path}char-sheet-tab-effects.hbs`,
         `${path}char-sheet-tab-options.hbs`,
@@ -236,11 +237,11 @@ Hooks.once("setup", function() {
 
 Hooks.once("ready", async function() {
     // Identify Colorset
-    const color = game.user.getFlag("age-system", "colorScheme");
-    if (color) game.settings.set("age-system", "colorScheme", color);
+    const color = await game.user.getFlag("age-system", "colorScheme");
+    if (color) await game.settings.set("age-system", "colorScheme", color);
     if (!color) game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
     // Register color scheme on global name space
-    ageSystem.colorScheme = game.settings.get("age-system", "colorScheme");
+    ageSystem.colorScheme = await game.settings.get("age-system", "colorScheme");
 
     // Tracker Handling
     // Identify if User already has ageTrackerPos flag set
@@ -288,7 +289,7 @@ Hooks.once("ready", async function() {
         e.prepareData();
     }
     
-    // Register System Settings related do Focus Compendium
+    // Register System Settings related to Focus Compendium
     ageSystem.itemCompendia = Settings.allCompendia("Item");
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
@@ -318,13 +319,36 @@ Hooks.once("ready", async function() {
         });
     }
 
+    // Select weapon damage type based on Ballistic armor
+    const useBallisticArmor = await game.settings.get("age-system", "useBallisticArmor");
+    CONFIG.ageSystem.settings = {
+        useBallistic: useBallisticArmor
+    };
+    CONFIG.ageSystem.damageSource = useBallisticArmor ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
+
+    // Set Health System configuration
+    const hstype = await game.settings.get("age-system", "healthSys");
+    const HEALTH_SYS = {
+        type: hstype,
+        mode: await game.settings.get("age-system", "gameMode"),
+        healthName: game.i18n.localize(`SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`),
+        useToughness: ![`basic`].includes(hstype),
+        useFortune: [`expanse`].includes(hstype),
+        useHealth: [`basic`, `mage`].includes(hstype),
+        useInjury: [`mageInjury`, `mageVitality`].includes(hstype),
+        useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
+        baseDamageTN: 13
+    };
+    CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
+    CONFIG.ageSystem.healthSys = HEALTH_SYS;
+
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on("hotbarDrop", (bar, data, slot) => createAgeMacro(data, slot));
 
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.7.5";
+    const NEEDS_MIGRATION_VERSION = "0.8.0";
     // const COMPATIBLE_MIGRATION_VERSION = "0.8.7";
     const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;

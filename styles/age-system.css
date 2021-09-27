@@ -912,6 +912,44 @@
 /*******************************/
 /**    Default Char Sheet     **/
 /*******************************/
+.age-system.sheet.char .arrow-control {
+  font-size: 7px;
+  flex: 0 0 5px;
+  width: fit-content;
+}
+.age-system.sheet.char .injury-bar .arrow-control {
+  margin-left: 4px;
+}
+.age-system.sheet.char .injury-degrees {
+  justify-content: center;
+}
+.age-system.sheet.char .injury-degrees .degree {
+  margin: 0 6px;
+}
+.age-system.sheet.char .injury-degrees .degree input[type='number'] {
+  margin-left: 2px;
+}
+.age-system.sheet.char .injury-degrees > * {
+  justify-content: center;
+  max-width: fit-content;
+}
+.age-system.sheet.char .marks-control {
+  justify-content: center;
+}
+.age-system.sheet.char .marks-control .tracker-container {
+  max-width: fit-content;
+  margin-right: 2px;
+}
+.age-system.sheet.char .marks-control .severe-injury-tracker {
+  border-radius: 50%;
+  border: solid white 2px;
+  background-color: white;
+  width: 4px;
+  max-width: 4px;
+  height: 4px;
+  max-height: 4px;
+  margin-top: 1px;
+}
 .age-system.sheet.char.standard .owned-wgroups {
   margin: 0 4px;
   margin-top: 4px;
@@ -926,6 +964,45 @@
   background-color: inherit;
   color: inherit;
   padding: 0;
+}
+.age-system.sheet.char.standard .item-qtd-control,
+.age-system.sheet.char.standard .arrow-control {
+  font-size: 7px;
+  flex: 0 0 5px;
+  width: fit-content;
+}
+.age-system.sheet.char.standard .injury-bar .arrow-control {
+  margin-left: 4px;
+}
+.age-system.sheet.char.standard .injury-degrees {
+  justify-content: center;
+}
+.age-system.sheet.char.standard .injury-degrees .degree {
+  margin: 0 6px;
+}
+.age-system.sheet.char.standard .injury-degrees .degree input[type='number'] {
+  margin-left: 2px;
+}
+.age-system.sheet.char.standard .injury-degrees > * {
+  justify-content: center;
+  max-width: fit-content;
+}
+.age-system.sheet.char.standard .marks-control {
+  justify-content: center;
+}
+.age-system.sheet.char.standard .marks-control .tracker-container {
+  max-width: fit-content;
+  margin-right: 2px;
+}
+.age-system.sheet.char.standard .marks-control .severe-injury-tracker {
+  border-radius: 50%;
+  border: solid white 2px;
+  background-color: white;
+  width: 4px;
+  max-width: 4px;
+  height: 4px;
+  max-height: 4px;
+  margin-top: 1px;
 }
 .age-system.sheet.char.standard .sheet-header {
   height: 100%;
@@ -1117,6 +1194,10 @@
 .age-system.sheet.char.standard .general-stats {
   text-align: center;
   margin-bottom: 4px;
+}
+.age-system.sheet.char.standard .general-stats ul {
+  list-style-type: none;
+  padding: 0;
 }
 .age-system.sheet.char.standard .general-stats input[name="data.fatigue.status"] {
   font-size: 12px;
@@ -1352,11 +1433,6 @@
 .age-system.sheet.char.standard .item-container .item-card a {
   padding-left: 2px;
 }
-.age-system.sheet.char.standard .item-container .item-card .item-qtd-control {
-  font-size: 7px;
-  flex: 0 0 5px;
-  width: fit-content;
-}
 .age-system.sheet.char.standard .item-container .item-card .controls {
   max-width: fit-content;
 }
@@ -1409,6 +1485,32 @@
 }
 .age-system.sheet.char.stat-block li.ability-box:nth-of-type(2n+1) {
   background-color: white;
+}
+.age-system.sheet.char.stat-block .injury-bar {
+  padding-bottom: 4px;
+  text-transform: uppercase;
+  background-color: black;
+}
+.age-system.sheet.char.stat-block .injury-bar input[type='number'] {
+  background-color: white;
+  color: black;
+  margin: 2px 4px !important;
+  height: 20px;
+  max-width: 20px;
+  font-size: 12px;
+}
+.age-system.sheet.char.stat-block .injury-bar .tracker-container {
+  justify-content: center;
+}
+.age-system.sheet.char.stat-block .injury-bar .injury-box {
+  align-items: center;
+}
+.age-system.sheet.char.stat-block .injury-bar .injury-box .degree > * {
+  max-width: fit-content;
+  margin: auto 0;
+}
+.age-system.sheet.char.stat-block .injury-bar .marks-box {
+  flex: 0 0 150px;
 }
 .age-system.sheet.char.stat-block .general-aid-bar {
   font-size: 10px;
@@ -1998,11 +2100,14 @@
 /*******************************/
 /**       AGE Roll Card       **/
 /*******************************/
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons {
+  margin-top: 4px;
+}
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid {
-  margin-top: 4px;
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid,
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid {
   font-size: 12px !important;
   font-family: inherit;
   display: grid;
@@ -2010,16 +2115,20 @@
   grid-template-rows: repeat(2, 20px);
   grid-template-areas: "main main stuntdie stuntdie stuntdie focusdmg focusdmg focusdmg" "main main bothdmg bothdmg bothdmg bothdmg bothdmg bothdmg";
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .main-dmg {
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .main-dmg,
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .main-dmg {
   grid-area: main;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .sd-dmg {
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .sd-dmg,
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .sd-dmg {
   grid-area: stuntdie;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .focus-dmg {
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .focus-dmg,
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .focus-dmg {
   grid-area: focusdmg;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .both-dmg {
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .both-dmg,
+#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .both-dmg {
   grid-area: bothdmg;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-button.roll-fatigue {
@@ -2051,6 +2160,11 @@
 #chat-log .chat-message .message-content .age-system.base-age-roll .action-details h3,
 #chat-log .chat-message .message-content .age-system.base-age-roll .action-details h4 {
   margin: 0;
+}
+#chat-log .chat-message .message-content .age-system.base-age-roll .action-details h4 {
+  text-transform: lowercase;
+  font-variant: small-caps;
+  color: rgba(255, 255, 255, 0.4);
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show {
   align-content: space-between;
@@ -2103,6 +2217,11 @@
 /*******************************/
 /**     Color Style Rules     **/
 /*******************************/
+.window-app.sheet.char.colorset-modern-blue .window-content,
+.window-app.sheet.vehicle.colorset-modern-blue .window-content,
+.window-app.sheet.spaceship.colorset-modern-blue .window-content {
+  background-color: rgba(185, 219, 235, 0.6);
+}
 .colorset-modern-blue .colorset-first-tier {
   background-color: #007DAD;
   color: #ffffff;
@@ -2263,6 +2382,11 @@
 .colorset-modern-blue .relationship .mod-card,
 .colorset-modern-blue .shipfeatures .mod-card {
   border: solid #B9DBEB 1px;
+}
+.window-app.sheet.char.colorset-fantasy-blue .window-content,
+.window-app.sheet.vehicle.colorset-fantasy-blue .window-content,
+.window-app.sheet.spaceship.colorset-fantasy-blue .window-content {
+  background-color: rgba(193, 203, 211, 0.6);
 }
 .colorset-fantasy-blue .colorset-first-tier {
   background-color: #0f4f5b;
@@ -2425,6 +2549,11 @@
 .colorset-fantasy-blue .shipfeatures .mod-card {
   border: solid #c1cbd3 1px;
 }
+.window-app.sheet.char.colorset-dragon-red .window-content,
+.window-app.sheet.vehicle.colorset-dragon-red .window-content,
+.window-app.sheet.spaceship.colorset-dragon-red .window-content {
+  background-color: rgba(224, 190, 177, 0.6);
+}
 .colorset-dragon-red .colorset-first-tier {
   background-color: #810207;
   color: #ffffff;
@@ -2585,6 +2714,11 @@
 .colorset-dragon-red .relationship .mod-card,
 .colorset-dragon-red .shipfeatures .mod-card {
   border: solid #e0beb1 1px;
+}
+.window-app.sheet.char.colorset-folded-purple .window-content,
+.window-app.sheet.vehicle.colorset-folded-purple .window-content,
+.window-app.sheet.spaceship.colorset-folded-purple .window-content {
+  background-color: rgba(207, 204, 222, 0.6);
 }
 .colorset-folded-purple .colorset-first-tier {
   background-color: #565183;
@@ -2747,6 +2881,11 @@
 .colorset-folded-purple .shipfeatures .mod-card {
   border: solid #cfccde 1px;
 }
+.window-app.sheet.char.colorset-ronin-green .window-content,
+.window-app.sheet.vehicle.colorset-ronin-green .window-content,
+.window-app.sheet.spaceship.colorset-ronin-green .window-content {
+  background-color: rgba(194, 245, 170, 0.6);
+}
 .colorset-ronin-green .colorset-first-tier {
   background-color: #155f0e;
   color: #ffffff;
@@ -2907,6 +3046,11 @@
 .colorset-ronin-green .relationship .mod-card,
 .colorset-ronin-green .shipfeatures .mod-card {
   border: solid #c2f5aa 1px;
+}
+.window-app.sheet.char.colorset-select-one .window-content,
+.window-app.sheet.vehicle.colorset-select-one .window-content,
+.window-app.sheet.spaceship.colorset-select-one .window-content {
+  background-color: rgba(118, 141, 159, 0.6);
 }
 .colorset-select-one .colorset-first-tier {
   background-color: #273249;
@@ -3069,6 +3213,11 @@
 .colorset-select-one .shipfeatures .mod-card {
   border: solid #768d9f 1px;
 }
+.window-app.sheet.char.colorset-the-grey .window-content,
+.window-app.sheet.vehicle.colorset-the-grey .window-content,
+.window-app.sheet.spaceship.colorset-the-grey .window-content {
+  background-color: rgba(180, 182, 179, 0.6);
+}
 .colorset-the-grey .colorset-first-tier {
   background-color: #3d3e3f;
   color: #ccc9c9;
@@ -3230,6 +3379,11 @@
 .colorset-the-grey .shipfeatures .mod-card {
   border: solid #b4b6b3 1px;
 }
+.window-app.sheet.char.colorset-red-warrior .window-content,
+.window-app.sheet.vehicle.colorset-red-warrior .window-content,
+.window-app.sheet.spaceship.colorset-red-warrior .window-content {
+  background-color: rgba(209, 99, 91, 0.6);
+}
 .colorset-red-warrior .colorset-first-tier {
   background-color: #751119;
   color: #f7b755;
@@ -3390,6 +3544,11 @@
 .colorset-red-warrior .relationship .mod-card,
 .colorset-red-warrior .shipfeatures .mod-card {
   border: solid #d1635b 1px;
+}
+.window-app.sheet.char.colorset-never-dead .window-content,
+.window-app.sheet.vehicle.colorset-never-dead .window-content,
+.window-app.sheet.spaceship.colorset-never-dead .window-content {
+  background-color: rgba(238, 221, 205, 0.6);
 }
 .colorset-never-dead .colorset-first-tier {
   background-color: #663322;
@@ -3685,7 +3844,7 @@
   text-align: left;
 }
 /*---- Font Override----*/
-body *:not(i) {
+body *:not(i, .fa, .far, .fas) {
   font-family: 'Roboto' !important;
 }
 /*---------Background---------------------*/
@@ -3702,6 +3861,35 @@ body *:not(i) {
 }
 .age-system-dialog.bonus-select button.dialog-button {
   flex: 0 0 45%;
+}
+.age-system-dialog .apply-damage-window .column {
+  text-align: center;
+}
+.age-system-dialog .apply-damage-window .column .overall-dmg {
+  margin-bottom: 10px;
+}
+.age-system-dialog .apply-damage-window .column button {
+  margin-top: 10px;
+}
+.age-system-dialog .apply-damage-window .column .individual h3 {
+  font-weight: 800;
+}
+.age-system-dialog .apply-damage-window .column .individual img {
+  border: 0;
+}
+.age-system-dialog .apply-damage-window .column.controls {
+  flex: 0 0 200px;
+  padding-left: 8px;
+}
+.age-system-dialog .apply-damage-window input[type="number"] {
+  max-width: 50px;
+}
+.age-system-dialog .apply-damage-window .change-damage {
+  max-width: fit-content;
+}
+.age-system-dialog .apply-damage-window .dmg-box {
+  align-items: baseline;
+  justify-content: center;
 }
 .age-system input,
 .age-system select {

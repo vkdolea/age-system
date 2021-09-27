@@ -171,6 +171,19 @@
                 "ballistic": 0,
                 "penalty": 0
             },
+            "injury": {
+                "degrees": {
+                    "severe": 0,
+                    "serious": 0,
+                    "light": 0
+                },
+                "vitality": {
+                    "min": 0,
+                    "max": 3,
+                    "value": 3 
+                },
+                "marks": 0
+            },
             "resources": {
                 "base": 4,
                 "mod": 0
@@ -327,7 +340,8 @@
                 "nrDice": "1",
                 "diceType": "6",
                 "extraValue": 0,
-                "dmgAbl": "str"
+                "dmgAbl": "str",
+                "damageInjury": 1
             },
             "hardItem": {
                 "weight": 0,
@@ -542,7 +556,7 @@
             "reload": "minor",
             "capacity": 5,
             "range": 2,
-            "rangeMax": "-",
+            "rangeMax": 2,
             "rof": "none",
             "wgroups": []
         },
@@ -564,7 +578,8 @@
                 "nrDice": "1",
                 "diceType": "6",
                 "extraValue": 0,
-                "dmgAbl": "int"
+                "dmgAbl": "int",
+                "damageInjury": 1
             }
         },
         "talent": {

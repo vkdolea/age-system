@@ -8,13 +8,14 @@
             .age-system.base-age-roll {
 
                 .age-chat-buttons {
+                    margin-top: 4px;
                     i.fas {
                         max-width: min-content;
                     }
                 };
 
-                .age-chat-buttons-grid {
-                    margin-top: 4px;
+                .age-chat-buttons-grid, //to be removed in the future
+                .age-chat-buttons.grid {
                     font-size: 12px !important;
                     font-family: inherit;
                     display: grid;
@@ -70,6 +71,11 @@
                     border-top-right-radius: 10px;
                     h3, h4 {
                         margin: 0;
+                    }
+                    h4 {
+                        text-transform: lowercase;
+                        font-variant: small-caps;
+                        color: rgba(255, 255, 255, 0.4);
                     }
                 };
     

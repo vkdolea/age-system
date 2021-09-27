@@ -106,6 +106,13 @@
 
     "SETTINGS.weaponGroups": "Groups d'Armes",
     "SETTINGS.weaponGroupsHint": "Indiquez les groupes d'armes en utilisant ; pour séparer les groupes. Laissez vide si les groupes d'armes ne sont pas utilisés (comme dans Modern Age)",
+    "SETTINGS.healthSys": "Système de gestion de la Santé",
+    "SETTINGS.healthSysHint": "\"Standard\" utilise Score d'Armure & Santé, \"The Expanse\" ajoute Résistance et Fortune, et \"Modern AGE\" utilise différents types de dommage, armure et vitalité en fonction du mode sélectionné ",
+    "SETTINGS.healthSysbasic": "Standard (FAGE, DAGE, BR)",
+    "SETTINGS.healthSysexpanse": "The Expanse",
+    "SETTINGS.healthSysmage": "Modern AGE",
+    "SETTINGS.healthSysmageInjury": "Modern AGE (dommage alternatif : Blessure)",
+    "SETTINGS.healthSysmageVitality": "Modern AGE (dommage alternatif : Blessure & Vitalité)",
 	
     "age-system": {
 	
@@ -129,7 +136,9 @@
             "vehicleIsNotPassenger": "Un véhicule ne peut pas être passager.",
             "userNotAvailable": "Le personnage {name} ({id}) n'est pas disponible.",
 			"shipPartsOnChar": "Les objets de type Fonctionnalités de Vaisseaux ne peuvent être ajoutées à une feuille de Personnage",
-            "nonShipPartsOnShip": "Seuls les objets de type Fonctionnalités de Vaisseaux peuvent être ajoutée à un Vaisseau."
+            "nonShipPartsOnShip": "Seuls les objets de type Fonctionnalités de Vaisseaux peuvent être ajoutée à un Vaisseau.",
+            "healthSysNotMatching": "Le système de Santé en utilisation actuellement et sur la fiche ne correspondent pas.",
+            "noValidTokensSelected": "Aucun tokens valides sélectionnés."
 		},
         
 		"spaceship": {
@@ -375,8 +384,16 @@
         "stundIndex": "S",
         "wound": "Blessure",
         "woundIndex": "W",
+        "normalDamage": "Normal",
         "hasDamage": "Dégâts?",
         "armorPenalty": "Pénalité",
+
+        "injury": "Blessure",
+        "injuryMarks": "Marks",
+        "injuryDegree": "Degré",
+        "injuryLight": "Légère",
+        "injurySerious": "Sérieuse",
+        "injurySevere": "Fatale",
 
         "background": "Historique",
         "socialClass": "Catégorie Sociale",
@@ -554,6 +571,13 @@
 		"setDmgExtraDice": "Dé bonus",
         "setStuntDmg": "dégâts étourdissement",
         "setRollGeneralMod": "Modificateur de dégâts",
-        "penaltyToDamage": "Pénalité convertie en dégâts"
+        "penaltyToDamage": "Pénalité convertie en dégâts",
+
+        "ignoreDamage": "Ignore les dommages",
+        "applyDamage": "Applique les dommages",
+        "armorPiercing": "Pénétration d'armure",
+        "none": "Aucun",
+        "halfArmor": "Demi armure",
+        "ignoreArmor": "Ignore l'armure"
     }
 }

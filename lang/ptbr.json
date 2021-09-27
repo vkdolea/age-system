@@ -52,7 +52,7 @@
     "SETTINGS.colorScheme": "Selecione o esquema de cor",
     "SETTINGS.colorSchemeHint": "Configurações de cores para ficha de personagem e itens",
     "SETTINGS.colorModernBlue": "Azul Moderno",
-    "SETTINGS.colorFantasyBlue": "Azul Fantástico",
+    "SETTINGS.colorFantasyBlue": "Azul Fantasia",
     "SETTINGS.colorDragonRed": "Vermelho Dragão",
     "SETTINGS.colorRoninGreen": "Verde Ronin",
     "SETTINGS.colorExpandedBlue": "The Expanse",
@@ -107,6 +107,14 @@
     "SETTINGS.weaponGroups": "Grupos de Armas",
     "SETTINGS.weaponGroupsHint": "Escreva os diferentes grupos de armas e use ; para os serparar. Deixe em branco caso não use essa função (The Expanse, Modern AGE)",
 
+    "SETTINGS.healthSys": "Sistema de Saúde",
+    "SETTINGS.healthSysHint": "\"Básico\" utiliza Armadura e Saúde, \"The Expanse\" adiciona Resistência e Destino, e \"Modern AGE\" usa diferentes tipos de dano e armadura, a depender da opção escolhida",
+    "SETTINGS.healthSysbasic": "Básico (FAGE, DAGE, BR)",
+    "SETTINGS.healthSysexpanse": "The Expanse",
+    "SETTINGS.healthSysmage": "Modern AGE",
+    "SETTINGS.healthSysmageInjury": "Modern AGE (dano alternativo: Ferimento)",
+    "SETTINGS.healthSysmageVitality": "Modern AGE (dano alternativo: Ferimento & Vitalidade)",
+
     "age-system": {
 
         "SHEETS": {
@@ -129,7 +137,9 @@
             "vehicleIsNotPassenger": "Um veículo não pode ser um passageiro.",
             "userNotAvailable": "Ator {name} ({id}) não está disponível.",
             "shipPartsOnChar": "Items do tipo \"Atributo de Espaçonave\" não podem ser arrastados para ficha de Personagem ou Veículo.",
-            "nonShipPartsOnShip": "Apenas Items do tipo \"Atributos de Espaçonave\" pode ser colocado em uma Nave Espacial."
+            "nonShipPartsOnShip": "Apenas Items do tipo \"Atributos de Espaçonave\" pode ser colocado em uma Nave Espacial.",
+            "healthSysNotMatching": "Sistema de Saúdo do cartão não é o mesmo Sistema em uso.",
+            "noValidTokensSelected": "Nenhum token válido selecionado."
         },
 
         "spaceship": {
@@ -375,8 +385,16 @@
         "stundIndex": "C",
         "wound": "Ferimento",
         "woundIndex": "F",
+        "normalDamage": "Normal",
         "hasDamage": "Dano?",
         "armorPenalty": "Penal",
+
+        "injury": "Ferimento",
+        "injuryMarks": "Marcadores",
+        "injuryDegree": "Grau",
+        "injuryLight": "Leve",
+        "injurySerious": "Sério",
+        "injurySevere": "Grave",
 
         "background": "Antecedente",
         "socialClass": "Classe Social",
@@ -554,6 +572,13 @@
         "setDmgExtraDice": "Dado Extra",
         "setStuntDmg": "Dano de Façanha",
         "setRollGeneralMod": "Modificador de Dano",
-        "penaltyToDamage": "Penalidade Convertida em Dano"
+        "penaltyToDamage": "Penalidade Convertida em Dano",
+
+        "ignoreDamage": "Desprezar Dano",
+        "applyDamage": "Infligir Dano",
+        "armorPiercing": "Penetração de Armadura",
+        "none": "Nenhuma",
+        "halfArmor": "Metade da Armadura",
+        "ignoreArmor": "Ignora Armadura"
     }
 }

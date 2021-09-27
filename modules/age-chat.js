@@ -1,3 +1,5 @@
+import ApplyDamageDialog from "./apply-damage.js";
+
 export function addChatListeners(html) {
     html.on('click', '.roll-damage', chatDamageRoll);
     html.on('contextmenu', '.roll-damage', chatDamageRoll);
@@ -5,11 +7,40 @@ export function addChatListeners(html) {
     html.on('contextmenu', '.roll-fatigue', chatFatigueRoll);
     html.on('click', '.roll-item', rollItemFromChat);
     html.on('contextmenu', '.roll-item', rollItemFromChat);
+    html.on('click', '.apply-damage', applyDamageChat)
 };
 
-// export function applyDamage(source, target) {
+export async function applyDamageChat(event) {
+    event.preventDefault();
+    const card = event.target.closest(".chat-message");
+    const cardId = card.dataset.messageId;
+    const damageData = await game.messages.get(cardId).data.flags["age-system"].damageData;
+    const cardHealthSys = damageData.healthSys;
+    let targets = canvas.tokens.controlled;
+    let nonChar = []
+    if (nonChar !== []) {
+        for (let t = 0; t < targets.length; t++) {
+            const el = targets[t];
+            const actorType = el.actor?.type;
+            if (actorType !== 'char') nonChar.push(t);
+        }
+        for (let t = nonChar.length-1; t >= 0; t--) {
+            targets.splice(nonChar[t],1)
+        }
+    }
+    if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.noValidTokensSelected"));
+    if (!checkHealth(cardHealthSys, CONFIG.ageSystem.healthSys)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
+    return new ApplyDamageDialog(targets, damageData, cardHealthSys.useInjury).render(true);
+}
 
-// }
+export function checkHealth(card, game) {
+    const attributes = ["useToughness", "useInjury", "useBallistic"];
+    for (let a = 0; a < attributes.length; a++) {
+        const att = attributes[a];
+        if (card[att] !== game[att]) return false;
+    }
+    return true;
+}
 
 export async function chatDamageRoll(event) {
     event.preventDefault();
@@ -101,17 +132,19 @@ async function _handleAgeRollVisibility(html, chatCard, chatData){
         const userId = game.user.id;
     
         if ((whisperTo.includes(userId) || whisperTo.length < 1 || author === userId) && !isBlind) {
-            el.querySelector(".blind-roll-card").style.display = "none";
+            el.querySelector(".blind-roll-card").remove();
         } else {
             if (isBlind && whisperTo.includes(userId)) {
-                el.querySelector(".blind-roll-card").style.display = "none";
+                el.querySelector(".blind-roll-card").remove();
             } else {
-                el.querySelector(".regular-roll-card").style.display = "none";
+                el.querySelector(".regular-roll-card").remove();
                 const hideField = userId === author ? ".other-user-roll" : ".user-roll";
-                el.querySelector(`.blind-roll-card ${hideField}`).style.display = "none";
+                el.querySelector(`.blind-roll-card ${hideField}`).remove();
             }
         }
-        _permCheck(actor?.permission, el.querySelector(`.age-chat-buttons-grid`));
+        _permCheck(actor?.permission, el.querySelector(`.age-chat-buttons-grid`)); // to be removed in the future
+        _permCheck(actor?.permission, el.querySelector(`.age-chat-buttons.grid`));
+        if (!game.user.isGM) el.querySelector(".gm-only").remove();
     }
 }
 
@@ -131,5 +164,5 @@ function _permCheck(actorPerm, element) {
     if (!element) return
     const validPerm = [CONST.ENTITY_PERMISSIONS.OWNER];
     if (game.settings.get("age-system", "observerRoll")) validPerm.push(CONST.ENTITY_PERMISSIONS.OBSERVER);
-    if (!validPerm.includes(actorPerm)) element.style.display = "none";
+    if (!validPerm.includes(actorPerm)) element.remove();
 }

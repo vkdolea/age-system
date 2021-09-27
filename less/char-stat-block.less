@@ -43,6 +43,34 @@
     li.ability-box:nth-of-type(2n+1) {
         background-color: white;
     }
+    .injury-bar {
+        padding-bottom: 4px;
+        text-transform: uppercase;
+        background-color: black;
+        input[type='number'] {
+            background-color: white;
+            color: black;
+            margin: 2px 4px !important;
+            height: 20px;
+            max-width: 20px;
+            font-size: 12px;
+            // border-radius: 0;
+        }
+        .tracker-container {
+            justify-content: center;
+        }
+        .injury-box {
+            align-items: center;
+            
+            .degree > * {
+                max-width: fit-content;
+                margin: auto 0;
+            }
+        }
+        .marks-box {
+            flex: 0 0 150px;
+        }
+    }
     .general-aid-bar {
         font-size: 10px;
         input[type="checkbox"] {

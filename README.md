@@ -97,6 +97,17 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.0 [2021-09-27]
+### Added
+- Damage chat card now have "Apply Damage" button to automate damage to all selected tokens.
+- When "Health Tracking" is selected as Modern AGE (or its variants) and "Game Mode" is set to "Pulp" or "Cinematic", all damages will be have 2 added.
+### Changed
+- "Use Toughness" and "Use Impact and Ballistic Armor" deprecated in favor of "Health System" setting. This simplication was necessary to enable damage automation.
+### Fixed
+- Focus bonus disappears if 2 or more items had a Focus bonus.
+- CSS styling issue preventing some icons from different modules from being displayed.
+- Changed styling of damage chat cards.
+
 ## 0.7.16 [2021-08-29]
 ### Fixed
 - Bug preventing Mod to Aim to be taken into accound when rolling.

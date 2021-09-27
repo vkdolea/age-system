@@ -27,19 +27,6 @@
                     {{/each}}
                     {{/select}}
                 </select>
-                {{!-- Synths seems to work now
-                <select class="conductor" name="data.conductor" {{#if data.isSynth}}disabled{{/if}}>
-                    {{#select data.data.conductor}}
-                    {{#if data.isSynth}}
-                    <option value="synth-vehicle">Token</option>
-                    {{else}}
-                    <option value="">{{localize "age-system.noAction"}}</option>
-                    {{#each data.passengers as |passenger|}}
-                    <option value="{{passenger.id}}">{{passenger.name}}</option>
-                    {{/each}}
-                    {{/if}}
-                    {{/select}}
-                </select>   --}}
             </div>
 
             <div class="flexcol focus-ability">

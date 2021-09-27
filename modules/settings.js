@@ -1,191 +1,10 @@
 const debouncedReload = debounce(() => window.location.reload(), 100)
-export const registerSystemSettings = function() {
-  /**
-   * Track the system version upon which point a migration was last applied
-   */
-  game.settings.register("age-system", "systemMigrationVersion", {
-    name: "System Migration Version",
-    scope: "world",
-    config: false,
-    type: String,
-    default: 0
-  });
-
-  /**
-   * Register World's Initiative Focus
-   */
-     game.settings.register("age-system", "initiativeFocus", {
-      name: "SETTINGS.initiativeFocus",
-      hint: "SETTINGS.initiativeFocusHint",
-      scope: "world",
-      config: true,
-      default: "",
-      type: String,
-      onChange: debouncedReload
-    });
-
-  /**
-   * Register if world will use Conviction
-   */
-  game.settings.register("age-system", "useConviction", {
-    name: "SETTINGS.useConviction",
-    hint: "SETTINGS.useConvictionHint",
-    scope: "world",
-    config: true,
-    default: true,
-    type: Boolean,
-    onChange: debouncedReload
-  });
-
-  /**
-   * Register if world will use Toughness
-   */
-  game.settings.register("age-system", "useToughness", {
-    name: "SETTINGS.useToughness",
-    hint: "SETTINGS.useToughnessHint",
-    scope: "world",
-    config: true,
-    default: true,
-    type: Boolean,
-    onChange: debouncedReload
-  }); 
-
-  /**
-   * Option to use split armor
-   */
-  game.settings.register("age-system", "useBallisticArmor", {
-    name: "SETTINGS.useBallisticArmor",
-    hint: "SETTINGS.useBallisticArmorHint",
-    scope: "world",
-    config: true,
-    default: true,
-    type: Boolean,
-    onChange: debouncedReload
-  });
-
-  /**
-   * Register if world will use Fatigue
-   */
-  game.settings.register("age-system", "useFatigue", {
-    name: "SETTINGS.useFatigue",
-    hint: "SETTINGS.useFatigueHint",
-    scope: "world",
-    config: true,
-    default: true,
-    type: Boolean,
-    onChange: debouncedReload
-  });
-
-  /**
-   * Register if world will use Power Points
-   */
-  game.settings.register("age-system", "usePowerPoints", {
-      name: "SETTINGS.usePowerPoints",
-      hint: "SETTINGS.usePowerPointsHint",
-      scope: "world",
-      config: true,
-      default: true,
-      type: Boolean,
-      onChange: debouncedReload
-  });
-
-  /**
-   * Option to use Primary and Secondary Abilities
-   */
-  game.settings.register("age-system", "primaryAbl", {
-    name: "SETTINGS.primaryAbl",
-    hint: "SETTINGS.primaryAblHint",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-    onChange: debouncedReload
-  });
-
-  /**
-   * Register if world will use Game Mode and which one
-   */
-  game.settings.register("age-system", "gameMode", {
-    name: "SETTINGS.gameMode",
-    hint: "SETTINGS.gameModeHint",
-    scope: "world",
-    config: true,
-    default: "pulp",
-    type: String,
-    choices: {
-      "none": "SETTINGS.gameModeNone",
-      "gritty": "SETTINGS.gameModeGritty",
-      "pulp": "SETTINGS.gameModePulp",
-      "cinematic": "SETTINGS.gameModeCinematic",
-    },  
-  });  
-
-  /**
-   * Register if world will use Game Mode and which one
-   */
-  game.settings.register("age-system", "healthMode", {
-    name: "SETTINGS.healthMode",
-    hint: "SETTINGS.healthModeHint",
-    scope: "world",
-    config: true,
-    default: "health",
-    type: String,
-    choices: {
-      "health": "SETTINGS.healthModehealth",
-      "fortune": "SETTINGS.healthModefortune",
-    },
-    onChange: () => {
-      [...game.actors.contents, ...Object.values(game.actors.tokens)]
-        .filter((o) => {
-          return o.data.type === "char";
-        })
-        .forEach((o) => {
-          o.update({});
-          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
-        });
-    },
-  });  
-
-  /**
-   * Register currency type
-   */
-  game.settings.register("age-system", "wealthType", {
-    name: "SETTINGS.wealthType",
-    hint: "SETTINGS.wealthTypeHint",
-    scope: "world",
-    config: true,
-    default: "resources",
-    type: String,
-    choices: {
-      "resources": "SETTINGS.wealthTypeResources",
-      "income": "SETTINGS.wealthTypeIncome",
-      "currency": "SETTINGS.wealthTypeCurrency",
-      "coins": "SETTINGS.wealthTypeCoins",
-    },
-    onChange: debouncedReload
-  });
-
-  /**
-   * Register Ability selection
-   */
-  game.settings.register("age-system", "abilitySelection", {
-    name: "SETTINGS.abilitySelection",
-    hint: "SETTINGS.abilitySelectionHint",
-    scope: "world",
-    config: true,
-    default: "main",
-    type: String,
-    choices: {
-      "main": "SETTINGS.abilitySelectionMain",
-      "dage": "SETTINGS.abilitySelectionDage",
-    },
-    onChange: debouncedReload
-  });
+export const registerSystemSettings = async function() {
 
   /**
    * Select color scheme
    */
-  game.settings.register("age-system", "colorScheme", {
+   game.settings.register("age-system", "colorScheme", {
     name: "SETTINGS.colorScheme",
     hint: "SETTINGS.colorSchemeHint",
     scope: "client",
@@ -204,16 +23,169 @@ export const registerSystemSettings = function() {
       "red-warrior": "SETTINGS.colorRedWarrior",
       "never-dead": "SETTINGS.colorNeverDead"
     },
-    onChange:()=>{
-      const newColor = game.settings.get("age-system", "colorScheme");
-      game.user.setFlag("age-system", "colorScheme", newColor);
+    onChange: async ()=>{
+      const newColor = await game.settings.get("age-system", "colorScheme");
+      await game.user.setFlag("age-system", "colorScheme", newColor);
+      if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
       [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
       .forEach((o) => {
-        o.update({});
-        if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        if (o) {
+          o.update({});
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        }
       });
-      if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
-    }
+    },
+  });
+
+  /**
+ * Register Health System in use (Basic, The Expanse, MAGE, MAGE + Injury, MAGE + Injury + Vitality)
+ */
+    game.settings.register("age-system", "healthSys", {
+    name: "SETTINGS.healthSys",
+    hint: "SETTINGS.healthSysHint",
+    scope: "world",
+    config: true,
+    default: "basic",
+    type: String,
+    choices: {
+      "basic": "SETTINGS.healthSysbasic",
+      "expanse": "SETTINGS.healthSysexpanse",
+      "mage": "SETTINGS.healthSysmage",
+      // "mageInjury": "SETTINGS.healthSysmageInjury",
+      // "mageVitality": "SETTINGS.healthSysmageVitality",
+    },
+    onChange: debouncedReload
+  });  
+
+  /**
+   * Register Ability selection
+   */
+   game.settings.register("age-system", "abilitySelection", {
+    name: "SETTINGS.abilitySelection",
+    hint: "SETTINGS.abilitySelectionHint",
+    scope: "world",
+    config: true,
+    default: "main",
+    type: String,
+    choices: {
+      "main": "SETTINGS.abilitySelectionMain",
+      "dage": "SETTINGS.abilitySelectionDage",
+    },
+    onChange: debouncedReload
+  });
+
+  /**
+  * Option to use Primary and Secondary Abilities
+  */
+  game.settings.register("age-system", "primaryAbl", {
+    name: "SETTINGS.primaryAbl",
+    hint: "SETTINGS.primaryAblHint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange: debouncedReload
+  });
+
+  /**
+   * Register if world will use Game Mode and which one
+   */
+   game.settings.register("age-system", "healthMode", {
+    name: "SETTINGS.healthMode",
+    hint: "SETTINGS.healthModeHint",
+    scope: "world",
+    config: true,
+    default: "health",
+    type: String,
+    choices: {
+      "health": "SETTINGS.healthModehealth",
+      "fortune": "SETTINGS.healthModefortune",
+    },
+    onChange: async () => {
+      CONFIG.ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`),
+      [...game.actors.contents, ...Object.values(game.actors.tokens)]
+        .filter((o) => {
+          return o.data.type === "char";
+        })
+        .forEach((o) => {
+          o.update({});
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        });
+    },
+  }); 
+
+  /**
+   * Register if world will use Game Mode and which one
+   */
+  game.settings.register("age-system", "gameMode", {
+    name: "SETTINGS.gameMode",
+    hint: "SETTINGS.gameModeHint",
+    scope: "world",
+    config: true,
+    default: "pulp",
+    type: String,
+    choices: {
+      "none": "SETTINGS.gameModeNone",
+      "gritty": "SETTINGS.gameModeGritty",
+      "pulp": "SETTINGS.gameModePulp",
+      "cinematic": "SETTINGS.gameModeCinematic",
+    },
+    onChange: async () => {
+      CONFIG.ageSystem.healthSys.mode = await game.settings.get("age-system", "healthMode"),
+      [...game.actors.contents, ...Object.values(game.actors.tokens)]
+        .filter((o) => {
+          return o.data.type === "char";
+        })
+        .forEach((o) => {
+          o.update({});
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        });
+    },
+  });
+
+  /**
+   * Register World's Initiative Focus
+   */
+   game.settings.register("age-system", "initiativeFocus", {
+    name: "SETTINGS.initiativeFocus",
+    hint: "SETTINGS.initiativeFocusHint",
+    scope: "world",
+    config: true,
+    default: "",
+    type: String,
+    onChange: debouncedReload
+  });
+
+  /**
+   * Configure Weapon Groups
+   */
+   game.settings.register("age-system", "weaponGroups", {
+    name: "SETTINGS.weaponGroups",
+    hint: "SETTINGS.weaponGroupsHint",
+    scope: "world",
+    config: true,
+    default: "",
+    type: String,
+    onChange: debouncedReload
+  });
+
+ /**
+   * Register currency type
+   */
+  game.settings.register("age-system", "wealthType", {
+    name: "SETTINGS.wealthType",
+    hint: "SETTINGS.wealthTypeHint",
+    scope: "world",
+    config: true,
+    default: "resources",
+    type: String,
+    choices: {
+      "resources": "SETTINGS.wealthTypeResources",
+      "income": "SETTINGS.wealthTypeIncome",
+      "currency": "SETTINGS.wealthTypeCurrency",
+      "coins": "SETTINGS.wealthTypeCoins",
+    },
+    onChange: debouncedReload
   });
 
   /**
@@ -253,16 +225,81 @@ export const registerSystemSettings = function() {
   });
 
   /**
-   * Configure Weapon Groups
+   * Track the system version upon which point a migration was last applied
    */
-  game.settings.register("age-system", "weaponGroups", {
-    name: "SETTINGS.weaponGroups",
-    hint: "SETTINGS.weaponGroupsHint",
+  game.settings.register("age-system", "systemMigrationVersion", {
+    name: "System Migration Version",
+    scope: "world",
+    config: false,
+    type: String,
+    default: 0
+  });
+
+  /**
+   * Register if world will use Conviction
+   */
+  game.settings.register("age-system", "useConviction", {
+    name: "SETTINGS.useConviction",
+    hint: "SETTINGS.useConvictionHint",
     scope: "world",
     config: true,
-    default: "",
-    type: String,
+    default: true,
+    type: Boolean,
     onChange: debouncedReload
+  });
+
+  /**
+   * Register if world will use Toughness
+   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
+   */
+  game.settings.register("age-system", "useToughness", {
+    name: "SETTINGS.useToughness",
+    hint: "SETTINGS.useToughnessHint",
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean,
+    onChange: debouncedReload
+  }); 
+
+  /**
+   * Option to use split armor
+   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
+   */
+  game.settings.register("age-system", "useBallisticArmor", {
+    name: "SETTINGS.useBallisticArmor",
+    hint: "SETTINGS.useBallisticArmorHint",
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean,
+    onChange: debouncedReload
+  });
+
+  /**
+   * Register if world will use Fatigue
+   */
+  game.settings.register("age-system", "useFatigue", {
+    name: "SETTINGS.useFatigue",
+    hint: "SETTINGS.useFatigueHint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean,
+    onChange: debouncedReload
+  });
+
+  /**
+   * Register if world will use Power Points
+   */
+  game.settings.register("age-system", "usePowerPoints", {
+      name: "SETTINGS.usePowerPoints",
+      hint: "SETTINGS.usePowerPointsHint",
+      scope: "world",
+      config: true,
+      default: true,
+      type: Boolean,
+      onChange: debouncedReload
   });
 
   /**
@@ -293,7 +330,7 @@ export const registerSystemSettings = function() {
     config: false,
     default: {max: 30, actual: 0},
     type: Object,
-    onChange: () => {if (game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh()}
+    onChange: async () => {if (await game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh()}
   });  
 
   /**
@@ -319,7 +356,7 @@ export const registerSystemSettings = function() {
     config: false,
     default: {max: 18, actual: 0},
     type: Object, 
-    onChange: () => {if (game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
+    onChange: async () => {if (await game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
   });
 
   // /**
@@ -352,6 +389,16 @@ export const registerSystemSettings = function() {
     type: Boolean,
     onChange: debouncedReload
   });
+
+  /**
+  * Register option made for Setting Migration over time
+  */
+  game.settings.register("age-system", "settingsMigrationData", {
+    scope: "world",
+    config: false,
+    default: [],
+    type: Array
+  });
 };
 
 // Adds game setting to select focus compendium after loading world's compendia!
@@ -367,7 +414,7 @@ export const loadCompendiaSettings = function() {
     default: "age-system.focus",
     type: String,
     choices: CONFIG.ageSystem.itemCompendia,
-    onChange:()=>{CONFIG.ageSystem.focus = compendiumList(game.settings.get("age-system", "masterFocusCompendium"))}
+    onChange: async ()=>{CONFIG.ageSystem.focus = compendiumList(await game.settings.get("age-system", "masterFocusCompendium"))}
   });
 };
 

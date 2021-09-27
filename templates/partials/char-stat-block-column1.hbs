@@ -23,11 +23,21 @@
     {{/each}}
 </ul>
 
+{{!-- Injury Bar --}}
+{{#if data.config.healthSys.useInjury}}
+{{> "systems/age-system/templates/partials/char-sheet-injury-bar.hbs"}}
+{{/if}}
+
 {{!-- Speed, Health, Defense, Armor/Toughness --}}
 <ul class="derived-stats-table font-small-table footer column-width block-item">
     <li class="flexrow header">
         <span class="speed">{{localize "age-system.speed"}}</span>
+        {{#if data.config.healthSys.useVitality}}
+        <span class="health">{{localize "age-system.vitality"}}</span>
+        {{/if}}
+        {{#unless data.config.healthSys.useInjury}}
         <span class="health">{{localize "age-system.health"}}</span>
+        {{/unless}}
         <span class="defense">{{localize "age-system.defense"}}</span>
         <span class="armor">{{localize "age-system.armor"}}</span>
     </li>
@@ -35,6 +45,17 @@
         <span class="speed">
             <input type="number" disabled class="main-value" name="data.speed.total" value="{{data.data.speed.total}}" data-dtype="Number" />
         </span>
+        {{#if data.config.healthSys.useVitality}}
+        <span class="health flexrow flex-align-center">
+            <input type="number" name="data.vitality.value" value="{{data.data.vitality.value}}" data-dtype="Number" />
+            <span>&nbsp/&nbsp</span>
+            {{#if (ne data.data.vitality.set data.data.vitality.max)}}
+            <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="data.vitality.max" value="{{data.data.vitality.max}}" data-dtype="Number" />
+            {{/if}}
+            <input type="number" number-type="five-digits" name="data.vitality.set" value="{{data.data.vitality.set}}" data-dtype="Number" />
+        </span>
+        {{/if}}
+        {{#unless data.config.healthSys.useInjury}}
         <span class="health flexrow flex-align-center">
             <input type="number" name="data.health.value" value="{{data.data.health.value}}" data-dtype="Number" />
             <span>&nbsp/&nbsp</span>
@@ -43,6 +64,7 @@
             {{/if}}
             <input type="number" number-type="five-digits" name="data.health.set" value="{{data.data.health.set}}" data-dtype="Number" />
         </span>
+        {{/unless}}
         <span class="defense">
             <input type="number" disabled class="main-value" name="data.defense.total" value="{{data.data.defense.total}}" data-dtype="Number" />
         </span>
