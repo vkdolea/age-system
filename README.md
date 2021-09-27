@@ -101,7 +101,8 @@ Icons made by:
 ### Added
 - Damage chat card now have "Apply Damage" button to automate damage to all selected tokens.
 - When "Health Tracking" is selected as Modern AGE (or its variants) and "Game Mode" is set to "Pulp" or "Cinematic", all damages will be have 2 added.
-
+### Changed
+- "Use Toughness" and "Use Impact and Ballistic Armor" deprecated in favor of "Health System" setting. This simplication was necessary to enable damage automation.
 ### Fixed
 - Focus bonus disappears if 2 or more items had a Focus bonus.
 - CSS styling issue preventing some icons from different modules from being displayed.
