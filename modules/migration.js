@@ -77,17 +77,26 @@ export async function migrateSettings() {
   const lastMigrationVer = await game.settings.get("age-system", "systemMigrationVersion");
   const healthSys = await game.settings.get("age-system", "healthSys");
   let updateSettings = [];
+  let migData = await game.settings.get("age-system", "settingsMigrationData");
+  
   if (isNewerVersion("0.8.0", lastMigrationVer)) { // Do not execute if last migration version was 0.8.0 or earlier
     const newHealthSys = await removeToughHealthBallistic();
-    if (newHealthSys !== healthSys) updateSettings.push({key: "healthSys", value: newHealthSys})
+    const newData = {key: "healthSys", value: newHealthSys, version: "0.8.0"}
+    let diff = false
+    for (let s = 0; s < migData.length; s++) {
+      if (migData[s] === newData) diff = true;
+    }
+    if (!diff) migData.push(newData)
+    if (newHealthSys !== healthSys) updateSettings.push(newData)
   };
+  
+  await game.settings.set("age-system", "settingsMigrationData", migData);
   return updateSettings;
 };
 
 export async function removeToughHealthBallistic() {
   const useToughness = await game.settings.get("age-system", "useToughness");
   const useBallisticArmor = await game.settings.get("age-system", "useBallisticArmor");
-  // const healthMode = await game.settings.get("age-system", "healthMode");
   let healthSys = useBallisticArmor ? "mage" : useToughness ? "expanse" : "basic";
   return healthSys;
 }

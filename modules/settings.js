@@ -1,5 +1,229 @@
 const debouncedReload = debounce(() => window.location.reload(), 100)
 export const registerSystemSettings = async function() {
+
+  /**
+   * Select color scheme
+   */
+   game.settings.register("age-system", "colorScheme", {
+    name: "SETTINGS.colorScheme",
+    hint: "SETTINGS.colorSchemeHint",
+    scope: "client",
+    config: true,
+    default: "the-grey",
+    type: String,
+    choices: {
+      "modern-blue": "SETTINGS.colorModernBlue",
+      "fantasy-blue": "SETTINGS.colorFantasyBlue",
+      "dragon-red": "SETTINGS.colorDragonRed",
+      "ronin-green": "SETTINGS.colorRoninGreen",
+      // "expanded-blue": "SETTINGS.colorExpandedBlue",
+      "folded-purple": "SETTINGS.colorFoldedPurple",
+      "select-one": "SETTINGS.colorSelectOne",
+      "the-grey": "SETTINGS.colorTheGrey",
+      "red-warrior": "SETTINGS.colorRedWarrior",
+      "never-dead": "SETTINGS.colorNeverDead"
+    },
+    onChange: async ()=>{
+      const newColor = await game.settings.get("age-system", "colorScheme");
+      await game.user.setFlag("age-system", "colorScheme", newColor);
+      if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
+      [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
+      .forEach((o) => {
+        if (o) {
+          o.update({});
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        }
+      });
+    },
+  });
+
+  /**
+ * Register Health System in use (Basic, The Expanse, MAGE, MAGE + Injury, MAGE + Injury + Vitality)
+ */
+    game.settings.register("age-system", "healthSys", {
+    name: "SETTINGS.healthSys",
+    hint: "SETTINGS.healthSysHint",
+    scope: "world",
+    config: true,
+    default: "basic",
+    type: String,
+    choices: {
+      "basic": "SETTINGS.healthSysbasic",
+      "expanse": "SETTINGS.healthSysexpanse",
+      "mage": "SETTINGS.healthSysmage",
+      // "mageInjury": "SETTINGS.healthSysmageInjury",
+      // "mageVitality": "SETTINGS.healthSysmageVitality",
+    },
+    onChange: debouncedReload
+  });  
+
+  /**
+   * Register Ability selection
+   */
+   game.settings.register("age-system", "abilitySelection", {
+    name: "SETTINGS.abilitySelection",
+    hint: "SETTINGS.abilitySelectionHint",
+    scope: "world",
+    config: true,
+    default: "main",
+    type: String,
+    choices: {
+      "main": "SETTINGS.abilitySelectionMain",
+      "dage": "SETTINGS.abilitySelectionDage",
+    },
+    onChange: debouncedReload
+  });
+
+  /**
+  * Option to use Primary and Secondary Abilities
+  */
+  game.settings.register("age-system", "primaryAbl", {
+    name: "SETTINGS.primaryAbl",
+    hint: "SETTINGS.primaryAblHint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange: debouncedReload
+  });
+
+  /**
+   * Register if world will use Game Mode and which one
+   */
+   game.settings.register("age-system", "healthMode", {
+    name: "SETTINGS.healthMode",
+    hint: "SETTINGS.healthModeHint",
+    scope: "world",
+    config: true,
+    default: "health",
+    type: String,
+    choices: {
+      "health": "SETTINGS.healthModehealth",
+      "fortune": "SETTINGS.healthModefortune",
+    },
+    onChange: async () => {
+      CONFIG.ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`),
+      [...game.actors.contents, ...Object.values(game.actors.tokens)]
+        .filter((o) => {
+          return o.data.type === "char";
+        })
+        .forEach((o) => {
+          o.update({});
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        });
+    },
+  }); 
+
+  /**
+   * Register if world will use Game Mode and which one
+   */
+  game.settings.register("age-system", "gameMode", {
+    name: "SETTINGS.gameMode",
+    hint: "SETTINGS.gameModeHint",
+    scope: "world",
+    config: true,
+    default: "pulp",
+    type: String,
+    choices: {
+      "none": "SETTINGS.gameModeNone",
+      "gritty": "SETTINGS.gameModeGritty",
+      "pulp": "SETTINGS.gameModePulp",
+      "cinematic": "SETTINGS.gameModeCinematic",
+    },
+    onChange: async () => {
+      CONFIG.ageSystem.healthSys.mode = await game.settings.get("age-system", "healthMode"),
+      [...game.actors.contents, ...Object.values(game.actors.tokens)]
+        .filter((o) => {
+          return o.data.type === "char";
+        })
+        .forEach((o) => {
+          o.update({});
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+        });
+    },
+  });
+
+  /**
+   * Register World's Initiative Focus
+   */
+   game.settings.register("age-system", "initiativeFocus", {
+    name: "SETTINGS.initiativeFocus",
+    hint: "SETTINGS.initiativeFocusHint",
+    scope: "world",
+    config: true,
+    default: "",
+    type: String,
+    onChange: debouncedReload
+  });
+
+  /**
+   * Configure Weapon Groups
+   */
+   game.settings.register("age-system", "weaponGroups", {
+    name: "SETTINGS.weaponGroups",
+    hint: "SETTINGS.weaponGroupsHint",
+    scope: "world",
+    config: true,
+    default: "",
+    type: String,
+    onChange: debouncedReload
+  });
+
+ /**
+   * Register currency type
+   */
+  game.settings.register("age-system", "wealthType", {
+    name: "SETTINGS.wealthType",
+    hint: "SETTINGS.wealthTypeHint",
+    scope: "world",
+    config: true,
+    default: "resources",
+    type: String,
+    choices: {
+      "resources": "SETTINGS.wealthTypeResources",
+      "income": "SETTINGS.wealthTypeIncome",
+      "currency": "SETTINGS.wealthTypeCurrency",
+      "coins": "SETTINGS.wealthTypeCoins",
+    },
+    onChange: debouncedReload
+  });
+
+  /**
+   * Select occupation label to best fit world's setting
+   */
+  game.settings.register("age-system", "occupation", {
+    name: "SETTINGS.occupation",
+    hint: "SETTINGS.occupationHint",
+    scope: "world",
+    config: true,
+    default: "profession",
+    type: String,
+    choices: {
+      "profession": "SETTINGS.occprofession",
+      "class": "SETTINGS.occclass",
+    },
+    onChange: debouncedReload
+  });
+
+  /**
+   * Select ancestry flavor
+   */
+  game.settings.register("age-system", "ancestryOpt", {
+    name: "SETTINGS.ancestryOpt",
+    hint: "SETTINGS.ancestryOptHint",
+    scope: "world",
+    config: true,
+    default: "ancestry",
+    type: String,
+    choices: {
+      "ancestry": "SETTINGS.ancestryOptancestry",
+      "origin": "SETTINGS.ancestryOptorigin",
+      "species": "SETTINGS.ancestryOptspecies",
+      "race": "SETTINGS.ancestryOptrace",
+    },
+    onChange: debouncedReload
+  });
+
   /**
    * Track the system version upon which point a migration was last applied
    */
@@ -10,19 +234,6 @@ export const registerSystemSettings = async function() {
     type: String,
     default: 0
   });
-
-  /**
-   * Register World's Initiative Focus
-   */
-     game.settings.register("age-system", "initiativeFocus", {
-      name: "SETTINGS.initiativeFocus",
-      hint: "SETTINGS.initiativeFocusHint",
-      scope: "world",
-      config: true,
-      default: "",
-      type: String,
-      onChange: debouncedReload
-    });
 
   /**
    * Register if world will use Conviction
@@ -89,216 +300,6 @@ export const registerSystemSettings = async function() {
       default: true,
       type: Boolean,
       onChange: debouncedReload
-  });
-
-  /**
-   * Option to use Primary and Secondary Abilities
-   */
-  game.settings.register("age-system", "primaryAbl", {
-    name: "SETTINGS.primaryAbl",
-    hint: "SETTINGS.primaryAblHint",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-    onChange: debouncedReload
-  });
-
-  /**
-   * Register if world will use Game Mode and which one
-   */
-  game.settings.register("age-system", "gameMode", {
-    name: "SETTINGS.gameMode",
-    hint: "SETTINGS.gameModeHint",
-    scope: "world",
-    config: true,
-    default: "pulp",
-    type: String,
-    choices: {
-      "none": "SETTINGS.gameModeNone",
-      "gritty": "SETTINGS.gameModeGritty",
-      "pulp": "SETTINGS.gameModePulp",
-      "cinematic": "SETTINGS.gameModeCinematic",
-    },
-    onChange: async () => {
-      CONFIG.ageSystem.healthSys.mode = await game.settings.get("age-system", "healthMode"),
-      [...game.actors.contents, ...Object.values(game.actors.tokens)]
-        .filter((o) => {
-          return o.data.type === "char";
-        })
-        .forEach((o) => {
-          o.update({});
-          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
-        });
-    },
-  });
-  
-  /**
-   * Register Health System in use (Basic, The Expanse, MAGE, MAGE + Injury, MAGE + Injury + Vitality)
-   */
-   game.settings.register("age-system", "healthSys", {
-    name: "SETTINGS.healthSys",
-    hint: "SETTINGS.healthSysHint",
-    scope: "world",
-    config: true,
-    default: "basic",
-    type: String,
-    choices: {
-      "basic": "SETTINGS.healthSysbasic",
-      "expanse": "SETTINGS.healthSysexpanse",
-      "mage": "SETTINGS.healthSysmage",
-      // "mageInjury": "SETTINGS.healthSysmageInjury",
-      // "mageVitality": "SETTINGS.healthSysmageVitality",
-    },
-    onChange: debouncedReload
-  });  
-
-  /**
-   * Register if world will use Game Mode and which one
-   */
-  game.settings.register("age-system", "healthMode", {
-    name: "SETTINGS.healthMode",
-    hint: "SETTINGS.healthModeHint",
-    scope: "world",
-    config: true,
-    default: "health",
-    type: String,
-    choices: {
-      "health": "SETTINGS.healthModehealth",
-      "fortune": "SETTINGS.healthModefortune",
-    },
-    onChange: async () => {
-      CONFIG.ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`),
-      [...game.actors.contents, ...Object.values(game.actors.tokens)]
-        .filter((o) => {
-          return o.data.type === "char";
-        })
-        .forEach((o) => {
-          o.update({});
-          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
-        });
-    },
-  });  
-
-  /**
-   * Register currency type
-   */
-  game.settings.register("age-system", "wealthType", {
-    name: "SETTINGS.wealthType",
-    hint: "SETTINGS.wealthTypeHint",
-    scope: "world",
-    config: true,
-    default: "resources",
-    type: String,
-    choices: {
-      "resources": "SETTINGS.wealthTypeResources",
-      "income": "SETTINGS.wealthTypeIncome",
-      "currency": "SETTINGS.wealthTypeCurrency",
-      "coins": "SETTINGS.wealthTypeCoins",
-    },
-    onChange: debouncedReload
-  });
-
-  /**
-   * Register Ability selection
-   */
-  game.settings.register("age-system", "abilitySelection", {
-    name: "SETTINGS.abilitySelection",
-    hint: "SETTINGS.abilitySelectionHint",
-    scope: "world",
-    config: true,
-    default: "main",
-    type: String,
-    choices: {
-      "main": "SETTINGS.abilitySelectionMain",
-      "dage": "SETTINGS.abilitySelectionDage",
-    },
-    onChange: debouncedReload
-  });
-
-  /**
-   * Select color scheme
-   */
-  game.settings.register("age-system", "colorScheme", {
-    name: "SETTINGS.colorScheme",
-    hint: "SETTINGS.colorSchemeHint",
-    scope: "client",
-    config: true,
-    default: "the-grey",
-    type: String,
-    choices: {
-      "modern-blue": "SETTINGS.colorModernBlue",
-      "fantasy-blue": "SETTINGS.colorFantasyBlue",
-      "dragon-red": "SETTINGS.colorDragonRed",
-      "ronin-green": "SETTINGS.colorRoninGreen",
-      // "expanded-blue": "SETTINGS.colorExpandedBlue",
-      "folded-purple": "SETTINGS.colorFoldedPurple",
-      "select-one": "SETTINGS.colorSelectOne",
-      "the-grey": "SETTINGS.colorTheGrey",
-      "red-warrior": "SETTINGS.colorRedWarrior",
-      "never-dead": "SETTINGS.colorNeverDead"
-    },
-    onChange: async ()=>{
-      const newColor = await game.settings.get("age-system", "colorScheme");
-      await game.user.setFlag("age-system", "colorScheme", newColor);
-      if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
-      [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
-      .forEach((o) => {
-        if (o) {
-          o.update({});
-          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
-        }
-      });
-    },
-  });
-
-  /**
-   * Select occupation label to best fit world's setting
-   */
-  game.settings.register("age-system", "occupation", {
-    name: "SETTINGS.occupation",
-    hint: "SETTINGS.occupationHint",
-    scope: "world",
-    config: true,
-    default: "profession",
-    type: String,
-    choices: {
-      "profession": "SETTINGS.occprofession",
-      "class": "SETTINGS.occclass",
-    },
-    onChange: debouncedReload
-  });
-
-  /**
-   * Select ancestry flavor
-   */
-  game.settings.register("age-system", "ancestryOpt", {
-    name: "SETTINGS.ancestryOpt",
-    hint: "SETTINGS.ancestryOptHint",
-    scope: "world",
-    config: true,
-    default: "ancestry",
-    type: String,
-    choices: {
-      "ancestry": "SETTINGS.ancestryOptancestry",
-      "origin": "SETTINGS.ancestryOptorigin",
-      "species": "SETTINGS.ancestryOptspecies",
-      "race": "SETTINGS.ancestryOptrace",
-    },
-    onChange: debouncedReload
-  });
-
-  /**
-   * Configure Weapon Groups
-   */
-  game.settings.register("age-system", "weaponGroups", {
-    name: "SETTINGS.weaponGroups",
-    hint: "SETTINGS.weaponGroupsHint",
-    scope: "world",
-    config: true,
-    default: "",
-    type: String,
-    onChange: debouncedReload
   });
 
   /**
@@ -387,6 +388,16 @@ export const registerSystemSettings = async function() {
     default: "true",
     type: Boolean,
     onChange: debouncedReload
+  });
+
+  /**
+  * Register option made for Setting Migration over time
+  */
+  game.settings.register("age-system", "settingsMigrationData", {
+    scope: "world",
+    config: false,
+    default: [],
+    type: Array
   });
 };
 
