@@ -97,6 +97,11 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.3 [2021-xx-xx]
+### Fixed
+- When applying damage, armor division (due to Piercing) is now rounded down.
+- Half damage from attacks with untrained weapon (from Weapon Groups) is now rounded down.
+
 ## 0.8.1 [2021-09-28]
 ### Fixed
 - Item sheets not opening when Weapon Groups setting is in use.
