@@ -83,7 +83,7 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Options Tab Preparation
         // Does it have Options tab?
-        data.hasOptionsTab = ageSystem.weaponGroups;
+        data.hasOptionsTab = (['weapon'].includes(this.item.data.type) && data.weaponGroups !== null);
         // Weapon Groups
         data.weaponGroups = ageSystem.weaponGroups;
 
