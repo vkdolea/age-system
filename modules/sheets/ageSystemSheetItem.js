@@ -82,10 +82,10 @@ export default class ageSystemItemSheet extends ItemSheet {
         };
 
         // Options Tab Preparation
-        // Does it have Options tab?
-        data.hasOptionsTab = ageSystem.weaponGroups;
         // Weapon Groups
         data.weaponGroups = ageSystem.weaponGroups;
+        // Does it have Options tab?
+        data.hasOptionsTab = (['weapon'].includes(this.item.data.type) && data.weaponGroups);
 
         // Active Effects if item owner is a Character
         if (this.item.actor?.type === "char") data.actorEffects = this.item.actor.effects;

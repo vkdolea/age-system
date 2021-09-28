@@ -97,6 +97,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.1 [2021-09-28]
+### Fixed
+- Item sheets not opening when Weapon Groups setting is in use.
+
 ## 0.8.0 [2021-09-27]
 ### Added
 - Damage chat card now have "Apply Damage" button to automate damage to all selected tokens.
