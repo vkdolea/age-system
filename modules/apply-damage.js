@@ -124,8 +124,6 @@ export class DamageHandler {
     this._damageData = damageData
     this._useBallistic = healthSys._useBallistic;
     this._useInjury = healthSys.useInjury;
-    this._useToughness = healthSys.useToughness;
-    this._type = healthSys.type
     this._basicDamage = damageData.totalDamage;
     this._armorPenetration = "none";
     this._damageType = damageData.dmgType
@@ -185,18 +183,18 @@ export class DamageHandler {
     if (ap === "none") ap = 1;
     if (ap === "half") ap = 0.5;
     if (ap === "ignore") ap = 0;
-    const impactArmor = h.data.data.armor.impact * ap;
-    const ballisticArmor = h.data.data.armor.ballistic * ap;
+    const impactArmor = Math.floor(h.data.data.armor.impact * ap);
+    const ballisticArmor = Math.floor(h.data.data.armor.ballistic * ap);
     const toughness = h.data.data.armor.toughness.total > 0 ? h.data.data.armor.toughness.total : 0;
     const applyToughness = this.useToughness(d.healthSys.useToughness, this._damageType, this._damageSource, d.healthSys.mode);
     const totalDmg = Number(this.basicDamage) + Number(h.dmgMod);
+    let dmgProtection = applyToughness ? toughness : 0;
     
-    let reducedDmg = totalDmg - (applyToughness ? toughness : 0);
-    
-    if (this._useBallistic && this._damageSource === 'ballistic') reducedDmg -= ballisticArmor;
-    if (this._useBallistic && this._damageSource === 'impact') reducedDmg -= impactArmor;
-    if (!this._useBallistic && this._damageSource !== 'penetrating') reducedDmg -= impactArmor;
+    if (this._useBallistic && this._damageSource === 'ballistic') dmgProtection += ballisticArmor;
+    if (this._useBallistic && this._damageSource === 'impact') dmgProtection += impactArmor;
+    if (!this._useBallistic && this._damageSource !== 'penetrating') dmgProtection += impactArmor;
 
+    const reducedDmg = totalDmg - dmgProtection;
     if (reducedDmg < 0) reducedDmg === 0;
 
     if (h.ignoreDmg) {

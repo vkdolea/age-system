@@ -1220,6 +1220,7 @@
 }
 .age-system.sheet.char.standard .general-stats .top-row {
   margin-bottom: 2px;
+  min-width: max-content;
 }
 .age-system.sheet.char.standard .general-stats .main-value {
   font-size: 20px;

@@ -189,6 +189,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
                 .click(this._onRollResources.bind(this))
                 .contextmenu(this._onRollResources.bind(this));
             html.find(".effect-active").click(this._onActiveEffect.bind(this));
+            html.find(".roll-toughness").click(this._onRollToughness.bind(this));
             let handler = ev => this._onDragStart(ev);
             
             // Find all rollable items on the character sheet.
@@ -214,6 +215,20 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
         super.activateListeners(html);
     };
+
+    _onRollToughness(ev) {
+        const event = new MouseEvent('contextmenu')
+        const rollData = {
+            actor: this.actor,
+            event,
+            flavor: `${this.actor.name} (${game.i18n.localize("age-system.toughness")})`,
+            moreParts: [{
+                label: game.i18n.localize("age-system.toughness"),
+                value: this.actor.data.data.armor.toughness.total
+            }],
+        }
+        Dice.ageRollCheck(rollData);
+    }
 
     _onFullHeal() {
         const updateData = {

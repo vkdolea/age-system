@@ -74,7 +74,8 @@ export function hidePrimaryAblCheckbox(html) {
     if (!primaryAblShow) {
         for (let k = 0; k < boxes.length; k++) {
             const e = boxes[k];
-            e.style.display = "none";
+            e.remove();
+            // e.style.display = "none";
         };
     }
 
@@ -84,7 +85,8 @@ export function hidePrimaryAblCheckbox(html) {
         const e = abilityBox[t];
         const original = e.children[0].querySelector(".abl-value.original");
         const total = e.children[0].querySelector(".abl-value.total");
-        if (original.value === total.value) total.style.display = "none";        
+        if (original.value === total.value) total.remove();
+        // if (original.value === total.value) total.style.display = "none";
     }
 };
 

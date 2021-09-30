@@ -81,8 +81,13 @@
 
     {{!-- Toughness block --}}
     {{#if data.config.healthSys.useToughness}}
-    <div class="flexcol general-stats">
-        <div class="top-row colorset-first-tier">{{localize "age-system.toughness"}}</div>
+    <div class="flexcol general-stats larger">
+        <div class="top-row colorset-first-tier">
+            {{#if data.config.healthSys.useInjury}}
+            <a class="roll-toughness feature-controls"><i class="fas fa-dice"></i></a>
+            {{/if}}
+            {{localize "age-system.toughness"}}
+        </div>
         <input type="number" disabled class="main-value" name="data.armor.toughness.total" value="{{data.data.armor.toughness.total}}" data-dtype="Number" />
         <div class="stat-modifiers flexcol">
             <div class="flexrow no-flexwrap">

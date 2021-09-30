@@ -39,7 +39,12 @@
         <span class="health">{{localize "age-system.health"}}</span>
         {{/unless}}
         <span class="defense">{{localize "age-system.defense"}}</span>
-        <span class="armor">{{localize "age-system.armor"}}</span>
+        <span class="armor">      
+            {{#if data.config.healthSys.useInjury}}
+            <a class="roll-toughness feature-controls"><i class="fas fa-dice"></i></a>
+            {{/if}}
+            {{localize "age-system.armor"}}
+        </span>
     </li>
     <li class="flexrow data body">
         <span class="speed">
@@ -69,12 +74,12 @@
             <input type="number" disabled class="main-value" name="data.defense.total" value="{{data.data.defense.total}}" data-dtype="Number" />
         </span>
         <span class="armor flexrow flex-align-center">
-            <div>{{data.data.armor.impact}}{{#if data.data.useBallisticArmor}}{{localize "age-system.impactIndex"}}{{/if}}</div>
-            {{#if data.data.useBallisticArmor}}
+            <div>{{data.data.armor.impact}}{{#if data.config.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}{{/if}}</div>
+            {{#if data.config.healthSys.useBallistic}}
             <span>/</span>
             <div>{{data.data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
             {{/if}}
-            {{#if data.data.useToughness}}
+            {{#if data.config.healthSys.useToughness}}
             <span>+</span>
             <input type="number" disabled class="main-value" name="data.armor.toughness.total" value="{{data.data.armor.toughness.total}}" data-dtype="Number" />
             {{/if}}

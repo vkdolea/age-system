@@ -51,7 +51,7 @@ export const registerSystemSettings = async function() {
       "basic": "SETTINGS.healthSysbasic",
       "expanse": "SETTINGS.healthSysexpanse",
       "mage": "SETTINGS.healthSysmage",
-      // "mageInjury": "SETTINGS.healthSysmageInjury",
+      "mageInjury": "SETTINGS.healthSysmageInjury",
       // "mageVitality": "SETTINGS.healthSysmageVitality",
     },
     onChange: debouncedReload

@@ -280,7 +280,7 @@ export async function ageRollCheck({
                 rollData[partName] = part.value;
                 rollFormula += ` + @${partName}`;
                 partials.push({
-                    label: part.description,
+                    label: part.label,
                     value: part.value
                 })
             }
@@ -828,7 +828,7 @@ export async function itemDamage({
         ...rollData,
         // rawRollData: dmgRoll,
         wGroupPenalty: wGroupPenalty,
-        finalValue: wGroupPenalty? dmgRoll.total/2 : dmgRoll.total,
+        finalValue: wGroupPenalty? Math.floor(dmgRoll.total/2) : dmgRoll.total,
         diceTerms: dmgRoll.terms,
         colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
         flavor: item ? `${item.name} | ${item.actor.name}` : damageDesc,
@@ -869,3 +869,29 @@ export function getActor() {
     if (!actor) return false;
     return actor;
 }
+
+// export function toughnessRoll(actor, event, damageData = {}) {
+//     const healthSys = CONFIG.ageSystem.healthSys;
+//     if (["mageInjury", "mageVitality"].includes(healthSys.mode)) return false
+//     let ballisticArmor = actor.data.data.armor.ballistic;
+//     let impactArmor = actor.data.data.armor.ballistic;
+//     let toughness = actor.data.data.armor.toughness.total;
+    
+//     if (damageData === {}) {
+//         // Incluir Dialog Box para preencher as opções abaixo
+//         damageData = {
+//             dmgSrc: "impact",
+//             dmgType: "wound",
+//             armorPiercing: "none",
+//             TN: 13
+//         }
+//     }
+
+//     const rollData = {
+//         actor,
+//         event
+//     }
+
+//     return ageRollCheck(rollData);
+
+// }
