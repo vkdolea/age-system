@@ -336,6 +336,7 @@ Hooks.once("ready", async function() {
         useFortune: [`expanse`].includes(hstype),
         useHealth: [`basic`, `mage`].includes(hstype),
         useInjury: [`mageInjury`, `mageVitality`].includes(hstype),
+        useVitality: [`mageVitality`].includes(hstype),
         useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
         baseDamageTN: 13
     };

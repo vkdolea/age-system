@@ -97,10 +97,14 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
-## 0.8.3 [2021-xx-xx]
+## 0.8.3 [2021-09-29]
+### Added
+- Modern AGE Companion alternate damage Injury is now a selectable option. Basic Toughness roll implemented, no automation (yet). Check [Injury Bar wiki](https://github.com/vkdolea/age-system/wiki/Injury-bar) for details on how it works.
+
 ### Fixed
 - When applying damage, armor division (due to Piercing) is now rounded down.
 - Half damage from attacks with untrained weapon (from Weapon Groups) is now rounded down.
+- Armor values not showing up properly on block sheet when ballistic armore is used.
 
 ## 0.8.1 [2021-09-28]
 ### Fixed
