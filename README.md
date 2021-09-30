@@ -97,7 +97,7 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
-## 0.8.3 [2021-09-29]
+## 0.8.2 [2021-09-29]
 ### Added
 - Modern AGE Companion alternate damage Injury is now a selectable option. Basic Toughness roll implemented, no automation (yet). Check [Injury Bar wiki](https://github.com/vkdolea/age-system/wiki/Injury-bar) for details on how it works.
 
