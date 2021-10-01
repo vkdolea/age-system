@@ -1,3 +1,5 @@
+import * as Dice from "./dice.js";
+
 export default class ApplyDamageDialog extends Application {
   constructor(targets, damageData, useInjury, options = {}) {
     super(options)
@@ -29,7 +31,6 @@ export default class ApplyDamageDialog extends Application {
     data.damageData = this.damageData;
     data.useInjury = this.useInjury;
     data.handler = this._handler;
-    data.damageData.finalDmg = 10 * data.handler.basicDamage;
 
     data.radioB = {
       name: "handler.armorPenetration",
@@ -86,6 +87,17 @@ export default class ApplyDamageDialog extends Application {
       this.updateUI()
     });
 
+    // Individual target Toughness Mod (using + or -)
+    html.find(".change-toughness").click(ev => {
+      const i = ev.target.closest(".feature-controls").dataset.i;
+      let mod = this._handler.harmedOnes[i].toughMod;
+      const classes = ev.currentTarget.classList;
+      if (classes.contains("increase")) mod += 1;
+      if (classes.contains("decrease")) mod -= 1;
+      this._handler.harmedOnes[i].toughMod = mod;
+      this.updateUI()
+    });
+
     // Typing updates on input field for individual target
     html.find(".targets .individual input.target-damage-mod").change(ev => {
       const value = ev.currentTarget.value
@@ -102,11 +114,31 @@ export default class ApplyDamageDialog extends Application {
     });
 
     html.find("button.apply-damage").click(ev => {
+      const applyAll = ev.currentTarget.classList.contains('auto-apply-all');
       this._handler.harmedOnes.map(async (h) => {
         if (!h.ignoreDmg) {
           let actor = await fromUuid(h.uuid);
           if (actor.documentName === "Token") actor = actor.actor;
-          actor.update({"data.health.value": h.remainingHP})
+          if (!this.useInjury) {
+            actor.update({"data.health.value": h.remainingHP})
+          } else {
+            // Toughness Test
+            const rollData = {
+              actor,
+              event: new MouseEvent('click'),
+              rollTN: h.totalDmg,
+              rollType: (applyAll || h.autoInjury) ? CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS_AUTO : CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS,
+              moreParts: h.injuryParts
+            }
+            // Faltando:
+            // Flavor
+            // Falta incluir cálculo do (Stunt Die - Math.floor(marks/3)) quando falhar
+            // Alterar o ageRollCheck() para incluir dano automático
+            // Lógica para aplicar ou não Ferimento automático
+            // Lógica para rolar da ficha, perguntando TN, tipo do dano, modificadores, etc.
+            Dice.ageRollCheck(rollData);
+          }
+          
         }
       })
       this.close();
@@ -133,15 +165,20 @@ export class DamageHandler {
     let harmedOnes = [];
     for (let t = 0; t < targets.length; t++) {
       const h = targets[t];
+      const data = foundry.utils.deepClone(h.actor.data);
       harmedOnes.push({
         name: h.name,
         img: h.data.img,
         uuid: h.data.actorLink ? h.actor.uuid : h.document.uuid,
-        data: foundry.utils.deepClone(h.actor.data),
+        data,
         dmgMod: 0,
         remainingHP: 0,
         damage: 0,
-        ignoreDmg: false
+        ignoreDmg: false,
+        autoInjury: !data.document.hasPlayerOwner,
+        injuries: data.data.injury.marks,
+        testMod: data.data.ownedMods?.testMod ? data.data.ownedMods.testMod : 0,
+        toughMod: 0
       })
     }
     this._harmedOnes = harmedOnes.map(harmed => this.damage(harmed, this._damageData));
@@ -180,6 +217,7 @@ export class DamageHandler {
 
   damage(h, d) {
     let ap = this.armorPenetration;
+    let injuryParts = [];
     if (ap === "none") ap = 1;
     if (ap === "half") ap = 0.5;
     if (ap === "ignore") ap = 0;
@@ -188,22 +226,70 @@ export class DamageHandler {
     const toughness = h.data.data.armor.toughness.total > 0 ? h.data.data.armor.toughness.total : 0;
     const applyToughness = this.useToughness(d.healthSys.useToughness, this._damageType, this._damageSource, d.healthSys.mode);
     const totalDmg = Number(this.basicDamage) + Number(h.dmgMod);
-    let dmgProtection = applyToughness ? toughness : 0;
     
-    if (this._useBallistic && this._damageSource === 'ballistic') dmgProtection += ballisticArmor;
-    if (this._useBallistic && this._damageSource === 'impact') dmgProtection += impactArmor;
-    if (!this._useBallistic && this._damageSource !== 'penetrating') dmgProtection += impactArmor;
+    let dmgProtection
+    if (this._useInjury) {
+      dmgProtection = applyToughness ? toughness : Math.ceil(toughness/2);
+      injuryParts.push({
+        label: game.i18n.localize("age-system.toughness"),
+        value: dmgProtection
+      })
+      dmgProtection += h.toughMod;
+      if (h.toughMod) injuryParts.push({
+        label: game.i18n.localize("age-system.mod"),
+        value: h.toughMod
+      })
+      dmgProtection -= h.injuries;
+      injuryParts.push({
+        label: game.i18n.localize("age-system.injuryMarks"),
+        value: -h.injuries
+      })
+      dmgProtection += h.testMod;
+      if (h.testMod) injuryParts.push({
+        label: game.i18n.localize("age-system.bonus.testMod"),
+        value: h.testMod
+      })
+    } else {
+      dmgProtection = applyToughness ? toughness : 0;
+    }
+
+    let armorDesc
+    if (this._useBallistic && this._damageSource === 'ballistic') {
+      dmgProtection += ballisticArmor;
+      armorDesc = {
+        label: game.i18n.localize("age-system.ballisticArmor"),
+        value: ballisticArmor
+      }
+    } 
+    if (this._useBallistic && this._damageSource === 'impact') {
+      dmgProtection += impactArmor;
+      armorDesc = {
+        label: game.i18n.localize("age-system.impactArmor"),
+        value: impactArmor
+      }
+    }
+    if (!this._useBallistic && this._damageSource !== 'penetrating') {
+      dmgProtection += impactArmor;
+      armorDesc = {
+        label: game.i18n.localize("age-system.armor"),
+        value: impactArmor
+      } 
+    }
+    if (armorDesc) injuryParts.push(armorDesc);
 
     const reducedDmg = totalDmg - dmgProtection;
     if (reducedDmg < 0) reducedDmg === 0;
 
     if (h.ignoreDmg) {
       h.remainingHP = h.data.data.health.value;
-      h.totalDmg = 0
+      h.totalDmg = 0;
+      h.dmgProtection = dmgProtection;
     } else {
       h.remainingHP = h.data.data.health.value - reducedDmg;
       h.damage = reducedDmg
       h.totalDmg = totalDmg;
+      h.dmgProtection = dmgProtection;
+      h.injuryParts = injuryParts;
     }
 
     return h;

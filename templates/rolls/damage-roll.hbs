@@ -37,17 +37,17 @@
             </div>
 
             <div class="age-chat-buttons flexcol">
-                {{#if useInjury}}
                 {{!-- <button class="age-button resist-damage">
                     <i class="fa fa-shield-alt" aria-hidden="true"></i>
-                    Resist Damage
                 </button> --}}
-                {{else}}
                 <button class="age-button apply-damage gm-only">
                     <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                    {{#if useInjury}}
+                    Resist Damage
+                    {{else}}
                     {{localize "age-system.applyDamage"}}
+                    {{/if}}
                 </button>
-                {{/if}}
             </div>
             
         </div>

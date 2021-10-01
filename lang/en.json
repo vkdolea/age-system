@@ -395,6 +395,9 @@
         "injuryLight": "Light",
         "injurySerious": "Serious",
         "injurySevere": "Severe",
+        "toughnessTest": "Toughness Test",
+        "autoApplyInjury": "Auto Apply",
+        "autoApplyAll": "Roll and apply Injury to all",
 
         "background": "Background",
         "socialClass": "Social Class",

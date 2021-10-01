@@ -6,7 +6,6 @@ export async function ageRollCheck({
     actor = null,
     abl = null,
     itemRolled = null,
-    resourceRoll = false,
     rollTN = null,
     rollUserMod = null,
     atkDmgTradeOff = null,
@@ -17,6 +16,8 @@ export async function ageRollCheck({
     rollVisibility = false,
     flavor = false,
     moreParts = false}={}) {
+
+    const ROLL_TYPE = CONFIG.ageSystem.ROLL_TYPE;
 
     let isToken = null;
     let actorId = null;
@@ -50,7 +51,7 @@ export async function ageRollCheck({
 
     // Check if it is a Resource/Income roll
     let resName;
-    if (resourceRoll === true) {
+    if (rollType === ROLL_TYPE.RESOURCES) {
         rollFormula += " + @resources"
         rollData.resources = actor.data.data.resources.total;
         rollData.resourcesRoll = resourceRoll;
@@ -96,7 +97,7 @@ export async function ageRollCheck({
     }
 
     // Adds Actor general Attack Bonus if rolltype = "attack"
-    if (rollType === "attack" && actor.data.data.attackMod !== 0) {
+    if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK].includes(rollType) && actor.data.data.attackMod !== 0) {
         rollFormula += " + @attackMod";
         rollData.attackMod = actor.data.data.attackMod;
         partials.push({
@@ -137,7 +138,6 @@ export async function ageRollCheck({
 
     // Transfer rolled item (if any) to chat message
     // Also checks if Item has Activation Mod
-    const teste = typeof(itemRolled);
     if (itemRolled !== null && typeof(itemRolled) !== "string") {
         rollData.itemId = itemRolled.id;
         rollData.hasDamage = itemRolled.data.data.hasDamage;
@@ -173,7 +173,7 @@ export async function ageRollCheck({
 
         // Check if AIM is active - this bonus will apply to all rolls when it is active
         const aim = actor.data.data.aim;
-        if (aim.active && !resourceRoll) {
+        if (aim.active && !(rollType === ROLL_TYPE.RESOURCES)) {
             rollData.aim = aim.value + aim.mod;
             rollFormula += " + @aim";
             partials.push({
@@ -184,7 +184,7 @@ export async function ageRollCheck({
         };
         
         // Adds penalty for Attack which is converted to damage Bonus and pass info to chat Message
-        if (atkDmgTradeOff && !resourceRoll) {
+        if (atkDmgTradeOff && !(rollType === ROLL_TYPE.RESOURCES)) {
             rollData.atkDmgTradeOff = atkDmgTradeOff;
             rollFormula += " + @atkDmgTradeOff";
             partials.push({
@@ -226,7 +226,7 @@ export async function ageRollCheck({
         // Check Guard Up penalties
         // Here it checks if Guard Up and Defend are checked - when both are checked, the rule is use none
         const guardUp = actor.data.data.guardUp;
-        if (guardUp.active && !resourceRoll) {
+        if (guardUp.active && !(rollType === ROLL_TYPE.RESOURCES)) {
             rollData.guardUp = -guardUp.testPenalty;
             rollData.guardUpActive = true;
             rollFormula += " + @guardUp";
@@ -240,7 +240,7 @@ export async function ageRollCheck({
         let headerTerms = {actor: actor.name};
         // let headerFlavor = flavor;
         if (!flavor) {
-            if (rollType === "fatigue") {
+            if (rollType === ROLL_TYPE.FATIGUE) {
                 headerTerms.item = game.i18n.localize("age-system.fatigue");
                 flavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
             } else {
@@ -258,7 +258,7 @@ export async function ageRollCheck({
                             break;
                     }
                 } else {
-                    if (resourceRoll) {
+                    if (rollType === ROLL_TYPE.RESOURCES) {
                         headerTerms.item = resName;
                         flavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
                     }
@@ -328,7 +328,13 @@ export async function ageRollCheck({
         speaker: ChatMessage.getSpeaker(),
         content: await renderTemplate(chatTemplate, rollData),
         roll: ageRoll,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        flags: {
+            "age-system": {
+                type: "ageroll",
+                rollData
+            }
+        }
     };
 
     // Configuration of Stunt Die if using Dice so Nice

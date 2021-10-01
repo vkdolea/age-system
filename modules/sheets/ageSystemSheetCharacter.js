@@ -290,7 +290,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         if(supClassList.contains('serious')) {parameter = "serious"; marks = 1}
         if(supClassList.contains('severe')) {parameter = "severe"; marks = data.injury.degrees.severeMult}
         if (!parameter) return false;
-        // if(supClassList.contains('mark')) parameter = this.actor.data.data.injury.degrees.totalMarks;
 
         const qtd = data.injury.degrees[parameter]
         const updatePath = `data.injury.degrees.${parameter}`;
@@ -416,8 +415,8 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     _onRollResources(event) {
         const rollData = {
             event: event,
-            actor: Dice.getActor() || this.actor,
-            resourceRoll: true
+            actor: this.actor,
+            rollType: CONFIG.ageSystem.ROLL_TYPE.RESOURCES
         };
         Dice.ageRollCheck(rollData);
     };
