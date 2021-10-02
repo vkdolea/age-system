@@ -305,6 +305,7 @@ export async function ageRollCheck({
     const generateSP = (rollTN && isSuccess) || !rollTN;
     const rollSummary = ageRollChecker(ageRoll, generateSP)
     let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
+    const injuryMarks = (rollType = ROLL_TYPE.TOUGHNESS) || (rollType = ROLL_TYPE.TOUGHNESS_AUTO) ? actor.data.data.injury.marks : null;
 
     rollData = {
         ...rollData,
@@ -320,6 +321,8 @@ export async function ageRollCheck({
         rollTN,
         focusId,
         rollType,
+        injuryMarks,
+        injuryDegree: injuryDegree(rollSummary.dice.d3, injuryMarks),
         user: game.user
     };
 
@@ -344,11 +347,8 @@ export async function ageRollCheck({
     };
 
     if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;
-    if (rollMode === "blindroll") {
-        ChatMessage.create(ChatMessage.applyRollMode(chatData, rollMode));
-    } else {
-        ChatMessage.create(chatData);
-    }
+    if (rollMode === "blindroll") chatData = await ChatMessage.applyRollMode(chatData, rollMode);
+    return ChatMessage.create(chatData);
 };
 
 // Check if the roll has Weapon Group penalty
@@ -874,6 +874,24 @@ export function getActor() {
     if (!actor) actor = game.actors.get(speaker.actor);
     if (!actor) return false;
     return actor;
+}
+
+export function injuryDegree(sd, marks) {
+    if (sd === null | marks === null) return null;
+    const mode = CONFIG.ageSystem.healthSys.type;
+    const penalty = Math.floor(marks/3);
+    let result = sd - penalty;
+    if (mode === 'mageInjury') {
+        if (result <= 1) return 'severe';
+        if (result >= 2 && result <= 4) return 'serious';
+        if (result > 4) return 'serious';
+    }
+    if (mode === 'mageVitality') {
+        if (result <= 2) return 'severe';
+        if (result >= 3 && result <= 5) return 'serious';
+        if (result > 5) return 'serious';
+    }
+    return null
 }
 
 // export function toughnessRoll(actor, event, damageData = {}) {

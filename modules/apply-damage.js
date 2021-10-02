@@ -113,6 +113,13 @@ export default class ApplyDamageDialog extends Application {
       this._handler.harmedOnes[i].ignoreDmg = checked;
     });
 
+    // Select if that target will have Injury Auto implemented
+    html.find(".targets .individual .auto-apply-injury").change(ev => {
+      const checked = ev.currentTarget.checked;
+      const i = ev.target.closest(".feature-controls").dataset.i;
+      this._handler.harmedOnes[i].autoInjury = checked;
+    });
+
     html.find("button.apply-damage").click(ev => {
       const applyAll = ev.currentTarget.classList.contains('auto-apply-all');
       this._handler.harmedOnes.map(async (h) => {
@@ -123,20 +130,34 @@ export default class ApplyDamageDialog extends Application {
             actor.update({"data.health.value": h.remainingHP})
           } else {
             // Toughness Test
+            const applyInjury = applyAll || h.autoInjury;
             const rollData = {
               actor,
               event: new MouseEvent('click'),
               rollTN: h.totalDmg,
               rollType: (applyAll || h.autoInjury) ? CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS_AUTO : CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS,
-              moreParts: h.injuryParts
+              moreParts: h.injuryParts,
+              flavor: h.name,
+              flavor2: `${game.i18n.format("age-system.toughnessTest")}`
             }
             // Faltando:
-            // Flavor
-            // Falta incluir cálculo do (Stunt Die - Math.floor(marks/3)) quando falhar
-            // Alterar o ageRollCheck() para incluir dano automático
-            // Lógica para aplicar ou não Ferimento automático
-            // Lógica para rolar da ficha, perguntando TN, tipo do dano, modificadores, etc.
-            Dice.ageRollCheck(rollData);
+            // Flavor => formatar
+            const card = await Dice.ageRollCheck(rollData);
+            const cardFlag = card.data.flags["age-system"].rollData;
+            const roll = card.roll;
+            const degree = cardFlag.injuryDegree;
+            if (applyInjury) {
+              if (!cardFlag.isSuccess && degree !== null) {
+                const updateDegree = `data.injury.degrees.${degree}`
+                const newDegree = actor.data.data.injury.degrees[degree] + 1;
+                const newMarks = degree === 'severe' ? actor.data.data.injury.degrees.severeMult : 1;
+                actor.update({
+                  [updateDegree]: newDegree,
+                  'data.injury.marks': newMarks
+                })
+              }
+            }
+            // Lógica para rolar da ficha, perguntando TN, tipo do dano, modificadores, etc. ==> alterar o app ApplyDamageDialog para usuário definir tipo e quantidade de dano
           }
           
         }
@@ -176,7 +197,8 @@ export class DamageHandler {
         damage: 0,
         ignoreDmg: false,
         autoInjury: !data.document.hasPlayerOwner,
-        injuries: data.data.injury.marks,
+        injuryMarks: data.data.injury.marks,
+        injurySDpenalty: Math.floor(data.data.injury.marks/3),
         testMod: data.data.ownedMods?.testMod ? data.data.ownedMods.testMod : 0,
         toughMod: 0
       })
@@ -239,10 +261,10 @@ export class DamageHandler {
         label: game.i18n.localize("age-system.mod"),
         value: h.toughMod
       })
-      dmgProtection -= h.injuries;
+      dmgProtection -= h.injuryMarks;
       injuryParts.push({
         label: game.i18n.localize("age-system.injuryMarks"),
-        value: -h.injuries
+        value: -h.injuryMarks
       })
       dmgProtection += h.testMod;
       if (h.testMod) injuryParts.push({

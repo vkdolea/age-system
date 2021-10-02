@@ -854,8 +854,8 @@ ageSystem.ROLL_TYPE = {
     FATIGUE: "fatigue",
     MELEE_ATTACK: "meleeAttack",
     RANGE_ATTACK: "rangedAttack",
-    TOUGHNESS_TEST: "toughness",
-    TOUGHNESS_TEST_AUTO: "toughnessAuto",
+    TOUGHNESS: "toughness",
+    TOUGHNESS_AUTO: "toughnessAuto",
     RESOURCES: "resources",
     POWER: "powerActivation"
 }
