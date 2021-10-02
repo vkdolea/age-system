@@ -240,7 +240,7 @@
             "rollGeneral": "{actor} rolls {item}",
             "rollAttack": "{actor} attacks with {item}",
             "rollPower": "{actor} uses {item}",
-            "looseRoll": "{user} rolls some dice",
+            "looseRoll": "rolls some dice",
             "roll": "Roll",
             
             "rollFullDamage": "Full Damage",
@@ -253,10 +253,10 @@
             "addFocus": "Add Focus",
             "addStuntDie": "Add SD",
 
-            "maneuversVehicle": "{name} maneuvers {vehicle}",
-            "commandsVehicle": "{name} commands {vehicle}",
-            "operatesVehicle": "{name} operates {vehicle}",
-            "backupVehicle": "{name} backs up {vehicle}",
+            "maneuversVehicle": "maneuvers {vehicle}",
+            "commandsVehicle": "commands {vehicle}",
+            "operatesVehicle": "operates {vehicle}",
+            "backupVehicle": "backs up {vehicle}",
 
             "compRoll": "{compType} Roll"
         },

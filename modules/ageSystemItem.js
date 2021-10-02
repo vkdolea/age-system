@@ -1,3 +1,4 @@
+import {ageSystem} from "./config.js";
 import * as Dice from "./dice.js";
 
 export class ageSystemItem extends Item {

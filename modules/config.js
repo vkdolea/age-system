@@ -851,11 +851,14 @@ ageSystem.itemCompendia = [];
 // Roll Types definition
 ageSystem.ROLL_TYPE = {
     ATTACK: "attack",
-    FATIGUE: "fatigue",
     MELEE_ATTACK: "meleeAttack",
-    RANGE_ATTACK: "rangedAttack",
+    RANGED_ATTACK: "rangedAttack",
+    FATIGUE: "fatigue",
     TOUGHNESS: "toughness",
     TOUGHNESS_AUTO: "toughnessAuto",
     RESOURCES: "resources",
-    POWER: "powerActivation"
+    POWER: "powerActivation",
+    ABILITY: 'ability',
+    FOCUS: 'focus',
+    VEHICLE_ACTION: 'vehicle'
 }

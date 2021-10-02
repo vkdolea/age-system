@@ -3,15 +3,6 @@ import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 
 export default class ageSystemVehicleSheet extends ActorSheet {
-    // constructor(...args) {
-    //     super(...args);
-    
-    //     // Adapt sheet size for synth tokens - Passengers feature wont work for Synths
-    //     if (this.isSynth) {
-    //         this.options.height = this.position.height = "560";
-    //     };
-    // };
-
     get isSynth() {
         return (this.token && !this.token.data.actorLink);
     }  
@@ -61,10 +52,6 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
         // Sheet color
         data.colorScheme = game.settings.get("age-system", "colorScheme");
-
-        // Check if sheet is from synthetic token - Passenger setup will not work for Synth
-        // data.notSynth = !(this.token && !this.token.data.actorLink);
-        // data.isSynth = !data.notSynth;        
 
         // return data;
         return {
@@ -208,9 +195,11 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             event: event,
             actor: user,
             abl: handlingUseAbl,
-            flavor: game.i18n.format("age-system.chatCard.maneuversVehicle", {name: user.name, vehicle: this.actor.name}),
+            flavor: user.name,
+            flavor2: game.i18n.format("age-system.chatCard.maneuversVehicle",{vehicle: this.actor.name}),
             vehicleHandling: this.actor.data.data.handling.mod,
-            itemRolled: handlingFocusItem.id === null ? handlingFocusItem.focusName : handlingFocusItem.focusItem
+            itemRolled: handlingFocusItem.id === null ? handlingFocusItem.focusName : handlingFocusItem.focusItem,
+            rollType: ageSystem.ROLL_TYPE.VEHICLE_ACTION
         }
         Dice.ageRollCheck(rollData);
     };

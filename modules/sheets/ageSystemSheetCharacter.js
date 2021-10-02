@@ -226,6 +226,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
                 label: game.i18n.localize("age-system.toughness"),
                 value: this.actor.data.data.armor.toughness.total
             }],
+            rollType: ageSystem.ROLL_TYPE.TOUGHNESS
         }
         Dice.ageRollCheck(rollData);
     }
@@ -416,7 +417,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const rollData = {
             event: event,
             actor: this.actor,
-            rollType: CONFIG.ageSystem.ROLL_TYPE.RESOURCES
+            rollType: ageSystem.ROLL_TYPE.RESOURCES
         };
         Dice.ageRollCheck(rollData);
     };
@@ -457,7 +458,8 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const rollData = {
             event: event,
             actor: this.actor,
-            abl: event.currentTarget.closest(".feature-controls").dataset.ablId
+            abl: event.currentTarget.closest(".feature-controls").dataset.ablId,
+            rollType: ageSystem.ROLL_TYPE.ABILITY
         }
         Dice.ageRollCheck(rollData);
     };
@@ -465,9 +467,10 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     _onRollItem(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
+        const rollType = event.currentTarget.closest(".feature-controls").dataset.rollType
         const itemRolled = this.actor.items.get(itemId);
         if (itemRolled.data.type === "focus" && event.button !== 0) return
-        itemRolled.roll(event);
+        itemRolled.roll(event, rollType);
     };
 
     _onItemShow(event) {
@@ -509,7 +512,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             callback: e => {
                 const focus = this.actor.items.get(e.data("item-id"));
                 const ev = new MouseEvent('click', {altKey: true});
-                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor});
+                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, rollType: ageSystem.ROLL_TYPE.FOCUS});
             }
         },
         {
@@ -526,7 +529,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             callback: e => {
                 const focus = this.actor.items.get(e.data("item-id"));
                 const ev = new MouseEvent('click', {});
-                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, selectAbl: true});
+                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, selectAbl: true, rollType: ageSystem.ROLL_TYPE.FOCUS});
             }
         },
         {

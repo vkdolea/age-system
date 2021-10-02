@@ -236,7 +236,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             passenger.name = game.i18n.localize("age-system.spaceship.crew");
             const crewAction = {
                 value: vehicleData.crew.competence,
-                description: passenger.name
+                label: passenger.name
             };
             rollData.moreParts.push(crewAction);
             rollData.event = event;
@@ -274,15 +274,17 @@ export default class ageSpaceshipSheet extends ActorSheet {
             default:
                 break;
         }
+        rollData.flavor = passenger.name;
+        rollData.flavor2 = game.i18n.format(flavorText, parts);
+        rollData.rollType = ageSystem.ROLL_TYPE.VEHICLE_ACTION;
 
         const system = this.actor.data.data.systems[datum.sysName]
         if (system) {
             rollData.moreParts.push({
                 value: system.total,
-                description: game.i18n.localize(`age-system.spaceship.systemName.${datum.sysName}`)
+                label: game.i18n.localize(`age-system.spaceship.systemName.${datum.sysName}`)
             })
         }
-        rollData.flavor = game.i18n.format(flavorText, parts);
 
         Dice.ageRollCheck(rollData)
     }

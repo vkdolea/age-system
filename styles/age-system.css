@@ -2191,6 +2191,10 @@
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod {
   padding: 4px;
+  font-variant: small-caps;
+}
+#chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod:not(.total-roll) {
+  text-transform: lowercase;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .line-header {
   min-width: 200px;

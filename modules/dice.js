@@ -14,7 +14,8 @@ export async function ageRollCheck({
     vehicleHandling = false,
     selectAbl = false,
     rollVisibility = false,
-    flavor = false,
+    flavor = null,
+    flavor2 = null,
     moreParts = false}={}) {
 
     const ROLL_TYPE = CONFIG.ageSystem.ROLL_TYPE;
@@ -84,8 +85,9 @@ export async function ageRollCheck({
 
     // Check if item rolled is Focus and prepare its data
     let focusId = null
+    let focusObj = null
     if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.data?.data.useFocus) {
-        const focusObj = actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled);
+        focusObj = actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled);
         rollFormula += " + @focus";
         rollData.focusName = focusObj.focusName;
         rollData.focus = focusObj.value;
@@ -235,40 +237,44 @@ export async function ageRollCheck({
                 value: rollData.guardUp
             })
         };
+    }
 
-        // Roll header flavor text
-        let headerTerms = {actor: actor.name};
-        // let headerFlavor = flavor;
-        if (!flavor) {
-            if (rollType === ROLL_TYPE.FATIGUE) {
-                headerTerms.item = game.i18n.localize("age-system.fatigue");
-                flavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-            } else {
-                if (itemRolled) {
-                    headerTerms.item = itemRolled.name;
-                    switch (itemRolled.type) {
-                        case "weapon":
-                            flavor = game.i18n.format("age-system.chatCard.rollAttack", headerTerms);
-                            break;
-                        case "power":
-                            flavor = game.i18n.format("age-system.chatCard.rollPower", headerTerms);
-                            break;
-                        default:
-                            flavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-                            break;
-                    }
-                } else {
-                    if (rollType === ROLL_TYPE.RESOURCES) {
-                        headerTerms.item = resName;
-                        flavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-                    }
-                    if (abl !== null && abl !== "no-abl") {
-                        headerTerms.item = ablName;
-                        flavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-                    }
-                };
-            }
-        }
+    // Define flavor and flavor2
+    // ATTACK: "attack",
+    // FATIGUE: "fatigue",
+    // MELEE_ATTACK: "meleeAttack",
+    // RANGE_ATTACK: "rangedAttack",
+    // TOUGHNESS: "toughness",
+    // TOUGHNESS_AUTO: "toughnessAuto",
+    // RESOURCES: "resources",
+    // POWER: "powerActivation",
+    // ABILITY: 'ability',
+    // FOCUS: 'focus'
+    if (!flavor) flavor = actor?.name ?? game.user.name;
+    switch (rollType) {
+        case ROLL_TYPE.ATTACK || ROLL_TYPE.MELEE_ATTACK || RANGED_ATTACK:
+            flavor2 = `${game.i18n.localize("age-system.settings.attack")} | ${itemRolled.name}`;
+            break;
+        case ROLL_TYPE.FATIGUE:
+            flavor2 = game.i18n.localize("age-system.fatigue");
+            break;
+        case ROLL_TYPE.TOUGHNESS || ROLL_TYPE.TOUGHNESS_AUTO:
+            flavor2 = game.i18n.localize("age-system.toughnessTest");
+            break;
+        case ROLL_TYPE.RESOURCES:
+            flavor2 = game.i18n.localize("SETTINGS.wealthTypeCurrency");
+            break;
+        case ROLL_TYPE.POWER:
+            flavor2 = `${game.i18n.localize("age-system.power")} | ${itemRolled.name}`;
+            break;
+        case ROLL_TYPE.ABILITY:
+            flavor2 = ablName;
+            break;
+        case ROLL_TYPE.FOCUS:
+            flavor2 = `${ablName} (${focusObj.focusName})`;
+            break;
+        default:
+            break;
     }
 
     // Check for moreParts
@@ -305,13 +311,14 @@ export async function ageRollCheck({
     const generateSP = (rollTN && isSuccess) || !rollTN;
     const rollSummary = ageRollChecker(ageRoll, generateSP)
     let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
-    const injuryMarks = (rollType = ROLL_TYPE.TOUGHNESS) || (rollType = ROLL_TYPE.TOUGHNESS_AUTO) ? actor.data.data.injury.marks : null;
+    const injuryMarks = (rollType === ROLL_TYPE.TOUGHNESS) || (rollType === ROLL_TYPE.TOUGHNESS_AUTO) ? actor.data.data.injury.marks : null;
 
     rollData = {
         ...rollData,
         // Informs card's color scheme
         colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
         flavor,
+        flavor2,
         partials,
         actorId,
         isToken,
@@ -321,6 +328,7 @@ export async function ageRollCheck({
         rollTN,
         focusId,
         rollType,
+        ROLL_TYPE,
         injuryMarks,
         injuryDegree: injuryDegree(rollSummary.dice.d3, injuryMarks),
         user: game.user
@@ -893,29 +901,3 @@ export function injuryDegree(sd, marks) {
     }
     return null
 }
-
-// export function toughnessRoll(actor, event, damageData = {}) {
-//     const healthSys = CONFIG.ageSystem.healthSys;
-//     if (["mageInjury", "mageVitality"].includes(healthSys.mode)) return false
-//     let ballisticArmor = actor.data.data.armor.ballistic;
-//     let impactArmor = actor.data.data.armor.ballistic;
-//     let toughness = actor.data.data.armor.toughness.total;
-    
-//     if (damageData === {}) {
-//         // Incluir Dialog Box para preencher as opções abaixo
-//         damageData = {
-//             dmgSrc: "impact",
-//             dmgType: "wound",
-//             armorPiercing: "none",
-//             TN: 13
-//         }
-//     }
-
-//     const rollData = {
-//         actor,
-//         event
-//     }
-
-//     return ageRollCheck(rollData);
-
-// }

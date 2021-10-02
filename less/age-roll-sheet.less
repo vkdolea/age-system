@@ -107,10 +107,13 @@
                     font-style: italic;
                 }
                 
-                // Set table padding
                 .roll-mod {
                     padding: 4px;
+                    font-variant: small-caps;
                 };
+                .roll-mod:not(.total-roll) {
+                    text-transform: lowercase;
+                }
 
                 .line-header {
                     min-width: 200px;

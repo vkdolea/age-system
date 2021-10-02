@@ -10,7 +10,13 @@
         <div class="flexcol roll-card regular-roll-card">
 
             <div>
-                <h3 class="action-details colorset-first-tier">{{flavor}}</h3>
+                <div class="action-details colorset-first-tier">
+                    <h3>{{flavor}}</h3>
+                    {{#if flavor2}}
+                    <h4>{{flavor2}}</h4>
+                    {{/if}}
+                </div>
+                {{!-- <h3 class="action-details colorset-first-tier">{{flavor}}</h3> --}}
                 <div class="dice-show trait-test flexrow">
                     {{#each ageRollSummary.dice as |diceFace|}}
                         {{#when diceFace 'eq' 1}}
@@ -99,12 +105,11 @@
                 </div>
                 {{/if}}
 
-                {{#if usingFatigue}}
-                {{#if hasFatigue}}
+                {{#if (and hasFatigue usingFatigue (ne ROLL_TYPE.FATIGUE rollType))}}
+                {{log this}}
                 <button class="roll-fatigue age-button">
-                    {{localize "age-system.rollFatigue"}} <i class="fas fa-head-side-cough"></i>
+                    <i class="fas fa-head-side-cough"></i> {{localize "age-system.rollFatigue"}}
                 </button>
-                {{/if}}
                 {{/if}}
             </div>
             {{/if}}

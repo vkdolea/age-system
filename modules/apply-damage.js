@@ -138,7 +138,7 @@ export default class ApplyDamageDialog extends Application {
               rollType: (applyAll || h.autoInjury) ? CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS_AUTO : CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS,
               moreParts: h.injuryParts,
               flavor: h.name,
-              flavor2: `${game.i18n.format("age-system.toughnessTest")}`
+              flavor2: `${game.i18n.localize("age-system.toughnessTest")}`
             }
             // Faltando:
             // Flavor => formatar
