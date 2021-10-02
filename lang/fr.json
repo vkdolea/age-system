@@ -236,10 +236,10 @@
         "vehicleArmor": "Armure",
 		
 		"chatCard": {
-            "rollGeneral": "{actor} lance {item}",
-            "rollAttack": "{actor} attaque avec {item}",
-            "rollPower": "{actor} utilise {item}",
-			"looseRoll": "{user} lance quelques dés",
+            "rollGeneral": "lance {item}",
+            "rollAttack": "attaque avec {item}",
+            "rollPower": "utilise {item}",
+			"looseRoll": "lance quelques dés",
             "roll": "Lancer",
 			
 			"rollFullDamage": "Dégâts complets",
@@ -252,10 +252,10 @@
             "addFocus": "Ajout compétence",
             "addStuntDie": "Ajout DP/DD",
 			
-			"maneuversVehicle": "{name} conduit {vehicle}",
-			"commandsVehicle": "{name} commande {vehicle}",
-            "operatesVehicle": "{name} dirige {vehicle}",
-            "backupVehicle": "{name} soutient {vehicle}",
+			"maneuversVehicle": "conduit {vehicle}",
+			"commandsVehicle": "commande {vehicle}",
+            "operatesVehicle": "dirige {vehicle}",
+            "backupVehicle": "soutient {vehicle}",
 
 			"compRoll": "{compType} Jet"
         },
