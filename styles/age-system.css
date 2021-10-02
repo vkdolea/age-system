@@ -3867,6 +3867,28 @@ body *:not(i, .fa, .far, .fas) {
 .age-system-dialog.bonus-select button.dialog-button {
   flex: 0 0 45%;
 }
+.age-system.damage-summary-card .strong {
+  font-weight: 800;
+}
+.age-system.damage-summary-card ul {
+  padding: 0;
+}
+.age-system.damage-summary-card p {
+  margin: 0 2px;
+  font-size: 12px;
+  text-transform: lowercase;
+  font-variant: small-caps;
+}
+.age-system.damage-summary-card div.use-injury div p {
+  text-align: center;
+}
+.age-system.damage-summary-card img {
+  flex: 0 0 50px;
+  height: 50px;
+  width: 50px;
+  margin-right: 4px;
+  border: none;
+}
 .age-system-dialog .apply-damage-window .column {
   text-align: center;
 }

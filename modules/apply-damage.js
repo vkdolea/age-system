@@ -120,14 +120,23 @@ export default class ApplyDamageDialog extends Application {
       this._handler.harmedOnes[i].autoInjury = checked;
     });
 
-    html.find("button.apply-damage").click(ev => {
+    html.find("button.apply-damage").click(async (ev) => {
       const applyAll = ev.currentTarget.classList.contains('auto-apply-all');
-      this._handler.harmedOnes.map(async (h) => {
+      const summary = [];
+      const victims = this._handler.harmedOnes.map(async (h) => {
         if (!h.ignoreDmg) {
           let actor = await fromUuid(h.uuid);
-          if (actor.documentName === "Token") actor = actor.actor;
+          if (actor.documentName === "Token")
+            actor = actor.actor;
+
           if (!this.useInjury) {
-            actor.update({"data.health.value": h.remainingHP})
+            summary.push({
+              name: actor.name,
+              img: actor.data.token.img,
+              previousHP: actor.data.data.health.value,
+              newHP: h.remainingHP
+            });
+            actor.update({ "data.health.value": h.remainingHP });
           } else {
             // Toughness Test
             const applyInjury = applyAll || h.autoInjury;
@@ -139,28 +148,60 @@ export default class ApplyDamageDialog extends Application {
               moreParts: h.injuryParts,
               flavor: h.name,
               flavor2: `${game.i18n.localize("age-system.toughnessTest")}`
-            }
-            // Faltando:
-            // Flavor => formatar
+            };
             const card = await Dice.ageRollCheck(rollData);
             const cardFlag = card.data.flags["age-system"].rollData;
             const roll = card.roll;
             const degree = cardFlag.injuryDegree;
+
             if (applyInjury) {
               if (!cardFlag.isSuccess && degree !== null) {
-                const updateDegree = `data.injury.degrees.${degree}`
+                // Identify correct path and new amount for that degree
+                const updateDegree = `data.injury.degrees.${degree}`;
                 const newDegree = actor.data.data.injury.degrees[degree] + 1;
-                const newMarks = degree === 'severe' ? actor.data.data.injury.degrees.severeMult : 1;
+                // Carries totalInjuries to summary
+                const totalInjuries = foundry.utils.deepClone(actor.data.data.injury.degrees);
+                totalInjuries[degree] = newDegree;
+                // Calculate new marks
+                let newMarks = (degree === 'severe') ? actor.data.data.injury.degrees.severeMult : 1;
+                newMarks += actor.data.data.injury.marks;
+                // Adds up to summary array
+                summary.push({
+                  name: actor.name,
+                  img: actor.data.token.img,
+                  degree,
+                  totalInjuries,
+                  newMarks
+                });
                 actor.update({
                   [updateDegree]: newDegree,
                   'data.injury.marks': newMarks
-                })
+                });
               }
             }
-            // Lógica para rolar da ficha, perguntando TN, tipo do dano, modificadores, etc. ==> alterar o app ApplyDamageDialog para usuário definir tipo e quantidade de dano
-          }
-          
+          };
         }
+        // Lógica para criar chat cards com sumário de dano
+      });
+      await Promise.all(victims).then(async() => {
+        const chatTemplate = "/systems/age-system/templates/rolls/damage-summary.hbs";
+        const templateData = {
+          summary: summary,
+          useInjury: this.useInjury
+        }
+        let chatData = {
+          user: game.user.id,
+          speaker: ChatMessage.getSpeaker(),
+          content: await renderTemplate(chatTemplate, templateData),
+          type: CONST.CHAT_MESSAGE_TYPES.OOC,
+          // flags: {
+          //   "age-system": {
+          //     type: "ageroll",
+          //     rollData
+          // }
+        }
+        await ChatMessage.applyRollMode(chatData, 'selfroll');
+        ChatMessage.create(chatData);
       })
       this.close();
     })
