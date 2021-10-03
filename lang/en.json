@@ -396,8 +396,6 @@
         "injurySerious": "Serious",
         "injurySevere": "Severe",
         "toughnessTest": "Toughness Test",
-        "autoApplyInjury": "Auto Apply",
-        "autoApplyAll": "Roll and apply Injury to all",
 
         "background": "Background",
         "socialClass": "Social Class",
@@ -584,6 +582,8 @@
         "halfArmor": "Half Armor",
         "ignoreArmor": "Ignore Armor",
         "damageSummary": "Damage Summary",
-        "noCharHurt": "No injuried or damage applied"
+        "noCharHurt": "No injuried or damage applied",
+        "autoApplyInjury": "Auto Apply",
+        "autoApplyAll": "Roll and apply Injury to all"
     }
 }
