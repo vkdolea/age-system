@@ -298,14 +298,14 @@ export async function ageRollCheck({
 
     // If rollTN is used, check if roll fails or succeed
     let isSuccess = null
-    if (rollTN) {
+    if (rollTN || rollTN === 0) {
         const rollMargin = ageRoll.total - rollTN;
         if (rollMargin >= 0) {
             isSuccess = true;
         } else {
             isSuccess = false;
         };
-    };
+    }
 
     // Generate Stunt Points if doubles are rolled and total rolled is higher than TN or there is no TN set
     const generateSP = (rollTN && isSuccess) || !rollTN;
@@ -342,8 +342,10 @@ export async function ageRollCheck({
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         flags: {
             "age-system": {
-                type: "ageroll",
-                rollData
+                "ageroll": {
+                    rollType,
+                    rollData
+                }
             }
         }
     };

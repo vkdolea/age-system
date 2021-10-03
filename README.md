@@ -97,6 +97,14 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.3 [2021-10-03]
+### Added
+- After using chat button to apply damage to tokens, a chat message with summary of all damage dealt will be sent privatelly to game master, for a quick review.
+- Included automation to apply damage when using Injury system. The following options are available: (1) force selected tokens to roll for Toughness and evaluate their chat outputs and them apply Injuries using buttons inside each chat card; (2) Let all tokens roll for Toughness and then automatically apply Injuries on target (a message will be sent privately to GMs with summary); (3) Allow players to roll the Toughness Test for their owned tokens - each player will receive a whispered message from GM with a button to roll for the Toughness Test with all necessary modifiers already set; with GM opted for the "Inflict Injury" option, the message with the roll will inform the Injury taken. If the option was no selected, the user will be prompted to select with Injury to take in a failed roll.
+
+### Fixed
+- When applying more damage then the current total of Health or Fortune, final value for token will be zero (and not a negative number as before).
+
 ## 0.8.2 [2021-09-29]
 ### Added
 - Modern AGE Companion alternate damage Injury is now a selectable option. Basic Toughness roll implemented, no automation (yet). Check [Injury Bar wiki](https://github.com/vkdolea/age-system/wiki/Injury-bar) for details on how it works.

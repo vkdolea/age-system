@@ -35,7 +35,7 @@
                     {{/each}}
                 </div>
                 <div class="flexrow roll-mod total-roll">
-                    <h3 class="line-header">{{localize "age-system.settings.totalRolled"}} {{#if rollTN}} {{#if isSuccess}} ({{localize "age-system.success"}}) {{else}} ({{localize "age-system.miss"}}) {{/if}} {{/if}}</h3>
+                    <h3 class="line-header">{{localize "age-system.settings.totalRolled"}}{{#if isSuccess}} ({{localize "age-system.success"}}) {{else}} ({{localize "age-system.miss"}}) {{/if}}</h3>
                     <h3 class="line-value">{{roll.total}}</h3>
                 </div>
                 <div class="flexrow roll-mod{{#if ageRollSummary.stunt}} stunted{{/if}}">
@@ -111,6 +111,28 @@
                     <i class="fas fa-head-side-cough"></i> {{localize "age-system.rollFatigue"}}
                 </button>
                 {{/if}}
+
+                {{#unless isSuccess}}
+                {{#if (eq ROLL_TYPE.TOUGHNESS rollType)}}
+                <p class="injury-info colorset-third-tier">{{localize "age-system.autoApplyInjury"}}</p>
+                <div class="flexrow">
+                    <button class="apply-injury light age-button">
+                        <i class="fas fa-dizzy opacity-high"></i> {{localize "age-system.injuryLight"}}
+                    </button>
+                    <button class="apply-injury serious age-button">
+                        <i class="fas fa-dizzy opacity-low"></i> {{localize "age-system.injurySerious"}}
+                    </button>
+                    <button class="apply-injury severe age-button">
+                        <i class="fas fa-dizzy"></i> {{localize "age-system.injurySevere"}}
+                    </button>
+                </div>
+                {{/if}}
+
+                {{#if (eq ROLL_TYPE.TOUGHNESS_AUTO rollType)}}
+                <p class="injury-info colorset-third-tier">{{localize (concat "age-system." injuryDegree "InjuryInflicted")}}</p>
+                {{/if}}
+                {{/unless}}
+
             </div>
             {{/if}}
             

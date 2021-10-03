@@ -2196,6 +2196,17 @@
 #chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod:not(.total-roll) {
   text-transform: lowercase;
 }
+#chat-log .chat-message .message-content .age-system.base-age-roll .injury-info {
+  text-align: center;
+  font-size: 12px;
+  margin: 0 0 2px 0;
+  padding: 2px 0;
+  font-weight: 800;
+  border-radius: 10px;
+}
+#chat-log .chat-message .message-content .age-system.base-age-roll .apply-injury {
+  font-size: 12px;
+}
 #chat-log .chat-message .message-content .age-system.base-age-roll .line-header {
   min-width: 200px;
 }
@@ -3863,6 +3874,12 @@ body *:not(i, .fa, .far, .fas) {
 .window-app.sheet.item .window-content {
   background-image: none;
   background: none;
+}
+.age-system .opacity-high {
+  opacity: 0.2;
+}
+.age-system .opacity-low {
+  opacity: 0.5;
 }
 .age-system-dialog.bonus-select button.dialog-button {
   flex: 0 0 45%;
