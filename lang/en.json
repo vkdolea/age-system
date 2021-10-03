@@ -584,6 +584,6 @@
         "halfArmor": "Half Armor",
         "ignoreArmor": "Ignore Armor",
         "damageSummary": "Damage Summary",
-        "noCharHurt": "No injuried characters"
+        "noCharHurt": "No injuried or damage applied"
     }
 }

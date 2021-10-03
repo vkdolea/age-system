@@ -395,6 +395,7 @@
         "injuryLight": "Leve",
         "injurySerious": "Seria",
         "injurySevere": "Severa",
+        "toughnessTest": "Toughness Test",
 
         "background": "Trasfondo",
         "socialClass": "Clase Social",
@@ -579,6 +580,10 @@
         "armorPiercing": "Penetrante",
         "none": "No",
         "halfArmor": "Mitad Armadura",
-        "ignoreArmor": "Ignorar Armadura"
+        "ignoreArmor": "Ignorar Armadura",
+        "damageSummary": "Damage Summary",
+        "noCharHurt": "No injuried or damage applied",
+        "autoApplyInjury": "Auto Apply",
+        "autoApplyAll": "Roll and apply Injury to all"
     }
 }

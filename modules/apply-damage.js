@@ -207,7 +207,6 @@ export default class ApplyDamageDialog extends Application {
     }
     let chatData = {
       user: game.user.id,
-      speaker: ChatMessage.getSpeaker(),
       content: await renderTemplate(chatTemplate, templateData),
       type: CONST.CHAT_MESSAGE_TYPES.OOC,
     }

@@ -394,6 +394,7 @@
         "injuryLight": "Légère",
         "injurySerious": "Sérieuse",
         "injurySevere": "Fatale",
+        "toughnessTest": "Toughness Test",
 
         "background": "Historique",
         "socialClass": "Catégorie Sociale",
@@ -578,6 +579,10 @@
         "armorPiercing": "Pénétration d'armure",
         "none": "Aucun",
         "halfArmor": "Demi armure",
-        "ignoreArmor": "Ignore l'armure"
+        "ignoreArmor": "Ignore l'armure",
+        "damageSummary": "Damage Summary",
+        "noCharHurt": "No injuried or damage applied",
+        "autoApplyInjury": "Auto Apply",
+        "autoApplyAll": "Roll and apply Injury to all"
     }
 }
