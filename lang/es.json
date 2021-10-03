@@ -583,7 +583,8 @@
         "ignoreArmor": "Ignorar Armadura",
         "damageSummary": "Damage Summary",
         "noCharHurt": "No injuried or damage applied",
-        "autoApplyInjury": "Auto Apply",
-        "autoApplyAll": "Roll and apply Injury to all"
+        "autoApplyInjury": "Apply Injury",
+        "autoApplyAll": "Apply Injury to All",
+        "letPlayerRoll": "Let Player Roll"
     }
 }

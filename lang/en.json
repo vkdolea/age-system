@@ -585,7 +585,6 @@
         "noCharHurt": "No injuried or damage applied",
         "autoApplyInjury": "Apply Injury",
         "autoApplyAll": "Apply Injury to All",
-        "toughnessTestOnly": "Toughness Test",
         "letPlayerRoll": "Let Player Roll"
     }
 }

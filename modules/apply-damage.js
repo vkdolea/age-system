@@ -19,7 +19,7 @@ export default class ApplyDamageDialog extends Application {
       template: 'systems/age-system/templates/apply-damage-window.hbs',
       resizable: true,
       minimizable: false,
-      width: 800,
+      width: 900,
       height: 'auto',
       title: game.i18n.localize('age-system.applyDamage'),
     })
@@ -137,8 +137,10 @@ export default class ApplyDamageDialog extends Application {
             summary.push(this.applyHPloss(actor, h.remainingHP));
           } else {
             // Toughness Test
+            // Criar lógica aqui para enviar cartão para o jogador rolar Teste de Resistência - ou já rolar e aplicar
+            // Também aval
             const applyInjury = applyAll || h.autoInjury;
-            const card = await this.toughnessTest(actor, h.injuryParts, h.totalDmg, applyInjury)
+            const card = await toughnessTest(actor, h.injuryParts, h.totalDmg, applyInjury)
             const cardFlag = card.data.flags["age-system"].rollData;
             const degree = cardFlag.injuryDegree;
             if (applyInjury && !cardFlag.isSuccess && degree !== null) summary.push(this.applyInjury(actor, degree));
@@ -154,19 +156,19 @@ export default class ApplyDamageDialog extends Application {
     this.render(false)
   }
 
-  toughnessTest (actor, parts, rollTN, applyInjury = false) {
-    // const card = await toughnessTest(actor, h.injuryParts, h.totalDmg, applyAll)
-    const rollData = {
-      actor,
-      event: new MouseEvent('click'),
-      rollTN,
-      rollType: applyInjury ? CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS_AUTO : CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS,
-      moreParts: parts,
-      flavor: actor.name,
-      flavor2: `${game.i18n.localize("age-system.toughnessTest")}`
-    };
-    return Dice.ageRollCheck(rollData);
-  }
+  // toughnessTest (actor, parts, rollTN, applyInjury = false) {
+  //   // const card = await toughnessTest(actor, h.injuryParts, h.totalDmg, applyAll)
+  //   const rollData = {
+  //     actor,
+  //     event: new MouseEvent('click'),
+  //     rollTN,
+  //     rollType: applyInjury ? CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS_AUTO : CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS,
+  //     moreParts: parts,
+  //     flavor: actor.name,
+  //     flavor2: `${game.i18n.localize("age-system.toughnessTest")}`
+  //   };
+  //   return Dice.ageRollCheck(rollData);
+  // }
 
   applyInjury (actor, injuryDegree) {
     // Identify correct path and new amount for that degree
@@ -219,6 +221,20 @@ export default class ApplyDamageDialog extends Application {
     await ChatMessage.applyRollMode(chatData, 'gmroll');
     ChatMessage.create(chatData);
   }
+}
+
+export function toughnessTest (actor, parts, rollTN, applyInjury = false) {
+  // const card = await toughnessTest(actor, h.injuryParts, h.totalDmg, applyAll)
+  const rollData = {
+    actor,
+    event: new MouseEvent('click'),
+    rollTN,
+    rollType: applyInjury ? CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS_AUTO : CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS,
+    moreParts: parts,
+    flavor: actor.name,
+    flavor2: `${game.i18n.localize("age-system.toughnessTest")}`
+  };
+  return Dice.ageRollCheck(rollData);
 }
 
 export class DamageHandler {

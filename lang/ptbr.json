@@ -583,7 +583,8 @@
         "ignoreArmor": "Ignora Armadura",
         "damageSummary": "Sumário de Dano",
         "noCharHurt": "Nenhum ferimento ou dano infligido",
-        "autoApplyInjury": "Infligir Ferimentos Automaticamente",
-        "autoApplyAll": "Infligir a Todos"
+        "autoApplyInjury": "Infligir Ferimento",
+        "autoApplyAll": "Infligir Ferimento a Todos",
+        "letPlayerRoll": "Jogadores rolam"
     }
 }
