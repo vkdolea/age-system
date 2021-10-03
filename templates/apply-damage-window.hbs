@@ -93,12 +93,16 @@
                 {{radioBoxes radioB.name radioB.choices radioB.options}}
             </div>
             <button type="button" class="apply-damage">
-                {{localize "age-system.applyDamage"}}
+                {{localize "age-system.toughnessTestOnly"}}
             </button>
-            {{#if useInjury}}
-            <button type="button" class="apply-damage auto-apply-all">
+            <button type="button" class="apply-damage apply-all">
                 {{localize "age-system.autoApplyAll"}}
             </button>
+            {{#if useInjury}}
+            <div class="form-group flexrow">
+                <input type="checkbox" class="players-roll" name="handler.letPlayerRoll" {{checked handler.letPlayerRoll}}/>
+                <label><p>{{localize "age-system.letPlayerRoll"}}</p></label>
+            </div>
             {{/if}}
         </div>
     </div>

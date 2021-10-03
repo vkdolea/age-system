@@ -102,7 +102,7 @@ export default class ApplyDamageDialog extends Application {
     html.find(".targets .individual input.target-damage-mod").change(ev => {
       const value = ev.currentTarget.value
       const i = ev.target.closest(".feature-controls").dataset.i;
-      this._handler.harmedOnes[i].dmgMod = value;
+      this._handler.letPlayerRoll = value;
       this.updateUI()
     })
 
@@ -118,6 +118,12 @@ export default class ApplyDamageDialog extends Application {
       const checked = ev.currentTarget.checked;
       const i = ev.target.closest(".feature-controls").dataset.i;
       this._handler.harmedOnes[i].autoInjury = checked;
+    });
+
+    // Change Let Player Roll Toughness Test
+    html.find(".players-roll").change(ev => {
+      const checked = ev.currentTarget.checked;
+      this._handler.letPlayerRoll = checked;
     });
 
     html.find("button.apply-damage").click(async (ev) => {
@@ -223,8 +229,9 @@ export class DamageHandler {
     this._useInjury = healthSys.useInjury;
     this._basicDamage = damageData.totalDamage;
     this._armorPenetration = "none";
-    this._damageType = damageData.dmgType
-    this._damageSource = damageData.dmgSrc
+    this._damageType = damageData.dmgType;
+    this._damageSource = damageData.dmgSrc;
+    this._letPlayerRoll = true;
 
 
     let harmedOnes = [];
@@ -279,6 +286,14 @@ export class DamageHandler {
     if (ap === "half") return 0.5;
     if (ap === "ignore") return 0;
     return 1;
+  }
+
+  set letPlayerRoll(value) {
+    this._letPlayerRoll = value;
+  }
+
+  get letPlayerRoll() {
+    return this._letPlayerRoll;
   }
 
   damage(h, d) {
