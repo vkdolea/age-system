@@ -88,7 +88,7 @@ export default class ApplyDamageDialog extends Application {
     });
 
     // Individual target Toughness Mod (using + or -)
-    html.find(".change-toughness").click(ev => {
+    html.find(".targets .change-toughness").click(ev => {
       const i = ev.target.closest(".feature-controls").dataset.i;
       let mod = this._handler.harmedOnes[i].toughMod;
       const classes = ev.currentTarget.classList;
@@ -126,89 +126,93 @@ export default class ApplyDamageDialog extends Application {
       const victims = this._handler.harmedOnes.map(async (h) => {
         if (!h.ignoreDmg) {
           let actor = await fromUuid(h.uuid);
-          if (actor.documentName === "Token")
-            actor = actor.actor;
-
+          if (actor.documentName === "Token")actor = actor.actor;
           if (!this.useInjury) {
-            summary.push({
-              name: actor.name,
-              img: actor.data.token.img,
-              previousHP: actor.data.data.health.value,
-              newHP: h.remainingHP
-            });
-            actor.update({ "data.health.value": h.remainingHP });
+            summary.push(this.applyHPloss(actor, h.remainingHP));
           } else {
             // Toughness Test
             const applyInjury = applyAll || h.autoInjury;
-            const rollData = {
-              actor,
-              event: new MouseEvent('click'),
-              rollTN: h.totalDmg,
-              rollType: (applyAll || h.autoInjury) ? CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS_AUTO : CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS,
-              moreParts: h.injuryParts,
-              flavor: h.name,
-              flavor2: `${game.i18n.localize("age-system.toughnessTest")}`
-            };
-            const card = await Dice.ageRollCheck(rollData);
+            const card = await this.toughnessTest(actor, h.injuryParts, h.totalDmg, applyInjury)
             const cardFlag = card.data.flags["age-system"].rollData;
-            const roll = card.roll;
             const degree = cardFlag.injuryDegree;
-
-            if (applyInjury) {
-              if (!cardFlag.isSuccess && degree !== null) {
-                // Identify correct path and new amount for that degree
-                const updateDegree = `data.injury.degrees.${degree}`;
-                const newDegree = actor.data.data.injury.degrees[degree] + 1;
-                // Carries totalInjuries to summary
-                const totalInjuries = foundry.utils.deepClone(actor.data.data.injury.degrees);
-                totalInjuries[degree] = newDegree;
-                // Calculate new marks
-                let newMarks = (degree === 'severe') ? actor.data.data.injury.degrees.severeMult : 1;
-                newMarks += actor.data.data.injury.marks;
-                // Adds up to summary array
-                summary.push({
-                  name: actor.name,
-                  img: actor.data.token.img,
-                  degree,
-                  totalInjuries,
-                  newMarks
-                });
-                actor.update({
-                  [updateDegree]: newDegree,
-                  'data.injury.marks': newMarks
-                });
-              }
-            }
+            if (applyInjury && !cardFlag.isSuccess && degree !== null) summary.push(this.applyInjury(actor, degree));
           };
         }
-        // Lógica para criar chat cards com sumário de dano
       });
-      await Promise.all(victims).then(async() => {
-        const chatTemplate = "/systems/age-system/templates/rolls/damage-summary.hbs";
-        const templateData = {
-          summary: summary,
-          useInjury: this.useInjury
-        }
-        let chatData = {
-          user: game.user.id,
-          speaker: ChatMessage.getSpeaker(),
-          content: await renderTemplate(chatTemplate, templateData),
-          type: CONST.CHAT_MESSAGE_TYPES.OOC,
-          // flags: {
-          //   "age-system": {
-          //     type: "ageroll",
-          //     rollData
-          // }
-        }
-        await ChatMessage.applyRollMode(chatData, 'selfroll');
-        ChatMessage.create(chatData);
-      })
+      await Promise.all(victims).then(async() => {this.summaryToChat(summary, this.useInjury)})
       this.close();
     })
   }
 
   updateUI() {
     this.render(false)
+  }
+
+  toughnessTest (actor, parts, rollTN, applyInjury = false) {
+    // const card = await toughnessTest(actor, h.injuryParts, h.totalDmg, applyAll)
+    const rollData = {
+      actor,
+      event: new MouseEvent('click'),
+      rollTN,
+      rollType: applyInjury ? CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS_AUTO : CONFIG.ageSystem.ROLL_TYPE.TOUGHNESS,
+      moreParts: parts,
+      flavor: actor.name,
+      flavor2: `${game.i18n.localize("age-system.toughnessTest")}`
+    };
+    return Dice.ageRollCheck(rollData);
+  }
+
+  applyInjury (actor, injuryDegree) {
+    // Identify correct path and new amount for that degree
+    const updateDegree = `data.injury.degrees.${injuryDegree}`;
+    const newDegree = actor.data.data.injury.degrees[injuryDegree] + 1;
+    // Carries totalInjuries to summary
+    const totalInjuries = foundry.utils.deepClone(actor.data.data.injury.degrees);
+    totalInjuries[injuryDegree] = newDegree;
+    // Calculate new marks
+    let newMarks = (injuryDegree === 'severe') ? actor.data.data.injury.degrees.severeMult : 1;
+    newMarks += actor.data.data.injury.marks;
+    // Update Actor's injuries and marks
+    actor.update({
+      [updateDegree]: newDegree,
+      'data.injury.marks': newMarks
+    });
+    // Returns a summary array
+    return {
+      name: actor.name,
+      img: actor.data.token.img,
+      degree: injuryDegree,
+      totalInjuries,
+      newMarks
+    }
+  }
+
+  applyHPloss (actor, remainingHP) {
+    const summary = {
+      name: actor.name,
+      img: actor.data.token.img,
+      previousHP: actor.data.data.health.value,
+      newHP: remainingHP
+    };
+    actor.update({"data.health.value": remainingHP});
+    return summary
+  }
+
+  async summaryToChat (summary, useInjury) {
+    const chatTemplate = "/systems/age-system/templates/rolls/damage-summary.hbs";
+    const templateData = {
+      summary,
+      useInjury,
+      healthName: CONFIG.ageSystem.healthSys.healthName
+    }
+    let chatData = {
+      user: game.user.id,
+      speaker: ChatMessage.getSpeaker(),
+      content: await renderTemplate(chatTemplate, templateData),
+      type: CONST.CHAT_MESSAGE_TYPES.OOC,
+    }
+    await ChatMessage.applyRollMode(chatData, 'gmroll');
+    ChatMessage.create(chatData);
   }
 }
 
@@ -297,16 +301,19 @@ export class DamageHandler {
         label: game.i18n.localize("age-system.toughness"),
         value: dmgProtection
       })
+
       dmgProtection += h.toughMod;
-      if (h.toughMod) injuryParts.push({
+      if (h.toughMod !== 0) injuryParts.push({
         label: game.i18n.localize("age-system.mod"),
         value: h.toughMod
       })
+
       dmgProtection -= h.injuryMarks;
       injuryParts.push({
         label: game.i18n.localize("age-system.injuryMarks"),
         value: -h.injuryMarks
       })
+
       dmgProtection += h.testMod;
       if (h.testMod) injuryParts.push({
         label: game.i18n.localize("age-system.bonus.testMod"),

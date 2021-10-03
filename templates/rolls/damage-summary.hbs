@@ -1,11 +1,13 @@
 <form class="age-system damage-summary-card">
-	{{log this}}
-	<h2>Damage Summary</h2>
+	<h2>{{localize "age-system.damageSummary"}}</h2>
+	{{#unless summary}}
+	<p>{{localize "age-system.noCharHurt"}}</p>
+	{{/unless}}
 	<ul>
 		{{#each summary as |victim i|}}
 		<li class="flexrow">
 			<img src="{{victim.img}}" alt="{{victim.name}}">
-			<div>
+			<div class="flexcol justity-content-center">
 				<p class="strong">{{victim.name}}</p>
 				{{#if ../useInjury}}
 				<div class="flexrow use-injury">
@@ -27,7 +29,7 @@
 					</div>
 				</div>
 				{{else}}
-				<p>{{victim.previousHP}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{victim.newHP}}</p>
+				<p class="italic">{{../healthName}}: {{victim.previousHP}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{victim.newHP}}</p>
 				{{/if}}
 			</div>
 		</li>

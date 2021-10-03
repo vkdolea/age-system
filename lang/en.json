@@ -582,6 +582,8 @@
         "armorPiercing": "Armor Piercing",
         "none": "None",
         "halfArmor": "Half Armor",
-        "ignoreArmor": "Ignore Armor"
+        "ignoreArmor": "Ignore Armor",
+        "damageSummary": "Damage Summary",
+        "noCharHurt": "No injuried characters"
     }
 }

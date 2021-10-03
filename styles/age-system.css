@@ -3870,6 +3870,9 @@ body *:not(i, .fa, .far, .fas) {
 .age-system.damage-summary-card .strong {
   font-weight: 800;
 }
+.age-system.damage-summary-card .italic {
+  font-style: italic;
+}
 .age-system.damage-summary-card ul {
   padding: 0;
 }

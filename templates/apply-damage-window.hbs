@@ -44,7 +44,7 @@
                     <p>{{localize "age-system.mod"}}</p>
                     <div class="flexrow dmg-box toughness-test">
                         <div class="change-toughness decrease"><a><i class="fa fa-minus-square" aria-hidden="true"></i></a></div>
-                        <input type="number" class="target-damage-mod damage-value" name="handler.harmedOnes.{{i}}.toughMod" value="{{target.toughMod}}" data-dtype="Number" />
+                        <input type="number" class="target-damage-mod damage-value" disabled name="handler.harmedOnes.{{i}}.toughMod" value="{{target.toughMod}}" data-dtype="Number" />
                         <div class="change-toughness increase"><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
                     </div>
                     {{else}}
@@ -55,8 +55,10 @@
                 <div class="form-group">
                     <label><p>{{localize "age-system.ignoreDamage"}}</p></label>
                     <input type="checkbox" class="do-not-apply" name="handler.harmedOnes.{{i}}.ignoreDmg" {{checked target.ignoreDmg}}/>
+                    {{#if ../useInjury}}
                     <label><p>{{localize "age-system.autoApplyInjury"}}</p></label>
                     <input type="checkbox" class="auto-apply-injury" name="handler.harmedOnes.{{i}}.autoInjury" {{checked target.autoInjury}}/>
+                    {{/if}}
                 </div>
             </div>
             {{#unless @last}}
