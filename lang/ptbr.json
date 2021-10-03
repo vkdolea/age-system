@@ -585,6 +585,9 @@
         "noCharHurt": "Nenhum ferimento ou dano infligido",
         "autoApplyInjury": "Infligir Ferimento",
         "autoApplyAll": "Infligir Ferimento a Todos",
-        "letPlayerRoll": "Jogadores rolam"
+        "letPlayerRoll": "Jogadores rolam Resistência",
+        "lightInjuryInflicted": "1 Ferimento Leve infligido",
+        "seriousInjuryInflicted": "1 Ferimento Sério infligido",
+        "severeInjuryInflicted": "1 Ferimento Grave infligido"
     }
 }

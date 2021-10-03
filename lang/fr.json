@@ -581,10 +581,13 @@
         "none": "Aucun",
         "halfArmor": "Demi armure",
         "ignoreArmor": "Ignore l'armure",
-        "damageSummary": "Damage Summary",
-        "noCharHurt": "No injuried or damage applied",
-        "autoApplyInjury": "Apply Injury",
-        "autoApplyAll": "Apply Injury to All",
-        "letPlayerRoll": "Let Player Roll"
+        "damageSummary": "Résumé des dommages",
+        "noCharHurt": "Aucune blessure ou dommage appliqué",
+        "autoApplyInjury": "Appliquer les blessures",
+        "autoApplyAll": "Appliquer les blessures à tous",
+        "letPlayerRoll": "Laisser le joueur lancer les dés",
+        "lightInjuryInflicted": "1 Blessure Légère infligée",
+        "seriousInjuryInflicted": "1 Blessure Sérieuse infligée",
+        "severeInjuryInflicted": "1 Blessure Fatale infligée"
     }
 }

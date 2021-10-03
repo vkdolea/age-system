@@ -585,6 +585,9 @@
         "noCharHurt": "No injuried or damage applied",
         "autoApplyInjury": "Apply Injury",
         "autoApplyAll": "Apply Injury to All",
-        "letPlayerRoll": "Let Player Roll"
+        "letPlayerRoll": "Let Player Roll",
+        "lightInjuryInflicted": "1 Light Injury inflicted",
+        "seriousInjuryInflicted": "1 Serious Injury inflicted",
+        "severeInjuryInflicted": "1 Severe Injury inflicted"
     }
 }
