@@ -11,20 +11,25 @@
                 </div>
                 <div>
                     <p>{{localize "age-system.armor"}}</p>
-                    <p>
-                        <div>{{target.data.data.armor.impact}}{{#if ../damageData.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}{{/if}}</div>
-                        {{#if ../damageData.healthSys.useBallistic}}
-                        <div>{{target.data.data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
-                        {{/if}}
-                    </p>
+                    <p>{{target.data.data.armor.impact}}{{#if ../damageData.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}/{{target.data.data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}{{/if}}</p>
+                    <p>{{localize "age-system.bonus.testMod"}}</p>
+                    <p>{{target.testMod}}</p>
                 </div>
                 <div>
                     <p>{{localize "age-system.toughness"}}</p>
                     <p>{{target.data.data.armor.toughness.total}}</p>
+                    {{#if ../useInjury}}
+                    <p>{{localize "age-system.injuryMarks"}}</p>
+                    <p>{{target.injuryMarks}}</p>
+                    {{/if}}
                 </div>
                 <div>
                     <p>{{localize "age-system.item.damage"}}</p>
+                    {{#if ../useInjury}}
+                    <p>{{target.totalDmg}}</p>
+                    {{else}}
                     <p>{{target.damage}}</p>
+                    {{/if}}
                     <p>{{localize "age-system.setRollGeneralMod"}}</p>
                     <div class="flexrow dmg-box">
                         <div class="change-damage decrease"><a><i class="fa fa-minus-square" aria-hidden="true"></i></a></div>
@@ -33,13 +38,27 @@
                     </div>
                 </div>
                 <div>
+                    {{#if ../useInjury}}
+                    <p>{{localize "age-system.toughnessTest"}}</p>
+                    <p>{{#if (gte target.dmgProtection 1)}}+{{/if}}{{target.dmgProtection}}</p>
+                    <p>{{localize "age-system.mod"}}</p>
+                    <div class="flexrow dmg-box toughness-test">
+                        <div class="change-toughness decrease"><a><i class="fa fa-minus-square" aria-hidden="true"></i></a></div>
+                        <input type="number" class="target-damage-mod damage-value" disabled name="handler.harmedOnes.{{i}}.toughMod" value="{{target.toughMod}}" data-dtype="Number" />
+                        <div class="change-toughness increase"><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
+                    </div>
+                    {{else}}
                     <p>{{../damageData.healthSys.healthName}}</p>
                     <p>{{target.data.data.health.value}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{target.remainingHP}}</p>
-                    
+                    {{/if}}
                 </div>
                 <div class="form-group">
                     <label><p>{{localize "age-system.ignoreDamage"}}</p></label>
                     <input type="checkbox" class="do-not-apply" name="handler.harmedOnes.{{i}}.ignoreDmg" {{checked target.ignoreDmg}}/>
+                    {{#if ../useInjury}}
+                    <label><p>{{localize "age-system.autoApplyInjury"}}</p></label>
+                    <input type="checkbox" class="auto-apply-injury" name="handler.harmedOnes.{{i}}.autoInjury" {{checked target.autoInjury}}/>
+                    {{/if}}
                 </div>
             </div>
             {{#unless @last}}
@@ -74,11 +93,17 @@
                 {{radioBoxes radioB.name radioB.choices radioB.options}}
             </div>
             <button type="button" class="apply-damage">
-                {{localize "age-system.applyDamage"}}
+                {{localize "age-system.toughnessTest"}}
             </button>
-            {{!-- <button type="button">
-                {{localize "age-system.cancel"}}
-            </button> --}}
+            <button type="button" class="apply-damage apply-all">
+                {{localize "age-system.autoApplyAll"}}
+            </button>
+            {{#if useInjury}}
+            <div class="form-group flexrow">
+                <input type="checkbox" class="players-roll" name="handler.letPlayerRoll" {{checked handler.letPlayerRoll}}/>
+                <label><p>{{localize "age-system.letPlayerRoll"}}</p></label>
+            </div>
+            {{/if}}
         </div>
     </div>
 

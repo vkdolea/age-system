@@ -1,3 +1,4 @@
+import {ageSystem} from "./config.js";
 import * as Dice from "./dice.js";
 
 export class ageSystemItem extends Item {
@@ -22,61 +23,6 @@ export class ageSystemItem extends Item {
         if (this.data.type === "power" && this.data.data.useFatigue) {return game.settings.get("age-system", "useFatigue")};
         return false;
     };
-
-    // Check attack formula
-    // get attackBonus() {
-    //     if (!this.hasDamage || !this.actor?.data) return null;
-    //     const actor = this.actor.data.data;
-    //     const item = this.data.data;
-    //     const useFocus = this.actor.checkFocus(this.data.data.useFocus);
-    //     let bonus = useFocus.focusAbl + useFocus.value;
-    //     const actorMods = [
-    //         {mod: "testMod", value: 0},
-    //         {mode: "attackMod", value: 0}
-    //     ];
-    //     const itemMods = [
-    //         {mod: "itemActivation", value: 0}
-    //     ]
-    //     if (actor.ownedBonus) {
-    //         for (let am = 0; am < m.length; am++) {
-    //             const m = actorMods[am];
-    //             if (actor.ownedBonus[m.mod]) bonus += m.value;
-    //         };
-    //     };
-    //     for (let am = 0; am < m.length; am++) {
-    //         const m = itemMods[am];
-    //         if (item.itemMods[m.mod].selected && item.itemMods[m.mod].isActive) bonus += m.value;
-    //     };
-    //     return bonus;
-    // }
-
-    // Damage formula
-    // get damageFormula() {
-    //     if (!this.hasDamage || !this.actor?.data) return null;
-    //     const actor = this.actor.data.data;
-    //     const item = this.data.data;
-    //     let bonus = actor.abilities[item.dmgAbl].total + item.extraValue;
-    //     const actorMods = [
-    //         {mod: "actorDamage", value: 0},
-    //         {mode: "attackMod", value: 0}
-    //     ];
-    //     const itemMods = [
-    //         {mod: "itemDamage", value: 0}
-    //     ]
-    //     if (actor.ownedBonus) {
-    //         for (let am = 0; am < m.length; am++) {
-    //             const m = actorMods[am];
-    //             if (actor.ownedBonus[m.mod]) bonus += m.value;
-    //         };
-    //     };
-    //     for (let am = 0; am < m.length; am++) {
-    //         const m = itemMods[am];
-    //         if (item.itemMods[m.mod].selected && item.itemMods[m.mod].isActive) bonus += m.value;
-    //     };
-    //     const bonusString = bonus < 0 ? `${bonus}` : `+${bonus}`;
-    //     const formula = item.nrDice > 0 ? `${item.nrDrice}d${item.diceType} ${bonusString}` : `${bonusString}`;
-    //     return formula;
-    // }
     
     /** @override */
     prepareBaseData() {
@@ -240,17 +186,18 @@ export class ageSystemItem extends Item {
          * - attack
          * - powerActivation
          */
+        const ROLL_TYPE = CONFIG.ageSystem.ROLL_TYPE;
         const owner = this.actor;
         if (!owner) return false;
-        let ablCode = (rollType === "fatigue") ? this.data.data.ablFatigue : this.data.data.useAbl;
+        let ablCode = (rollType === ROLL_TYPE.FATIGUE) ? this.data.data.ablFatigue : this.data.data.useAbl;
 
         if (rollType === null) {
             switch (this.type) {
                 case "weapon":
-                    rollType = "attack"
+                    rollType = ROLL_TYPE.ATTACK
                     break;
                 case "power":
-                    rollType = "powerActivation"
+                    rollType = ROLL_TYPE.POWER
                 default:
                     break;
             }
@@ -258,16 +205,16 @@ export class ageSystemItem extends Item {
         
         if (targetNumber === null) {
             switch (rollType) {
-                case "fatigue":
+                case ROLL_TYPE.FATIGUE:
                     ablCode = this.data.data.ablFatigue;
                     targetNumber = this.data.data.fatigueTN ? this.data.data.fatigueTN : null;
                     break;
                 
-                case "powerActivation":
+                case ROLL_TYPE.POWER:
                     targetNumber = this.data.data.targetNumber ? this.data.data.targetNumber : null;
                     break;
     
-                case "attack":
+                case ROLL_TYPE.ATTACK || ROLL_TYPE.RANGED_ATTACK || ROLL_TYPE.MELEE_ATTACK:
                     const targets = game.user.targets;
                     if (targets.size === 0) break;
                     if (targets.size > 1) {

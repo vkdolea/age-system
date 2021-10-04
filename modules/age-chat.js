@@ -7,8 +7,34 @@ export function addChatListeners(html) {
     html.on('contextmenu', '.roll-fatigue', chatFatigueRoll);
     html.on('click', '.roll-item', rollItemFromChat);
     html.on('contextmenu', '.roll-item', rollItemFromChat);
-    html.on('click', '.apply-damage', applyDamageChat)
+    html.on('click', '.apply-damage', applyDamageChat);
+    html.on('click', '.roll-toughness-test', resistInjury);
+    html.on('click', '.apply-injury', inflictInjury);
 };
+
+export async function inflictInjury(event){
+    event.preventDefault();
+    const b = event.currentTarget;
+    let degree;
+    if (b.classList.contains('light')) degree = 'light'
+    if (b.classList.contains('serious')) degree = 'serious'
+    if (b.classList.contains('severe')) degree = 'severe'
+    if (!degree) return
+    const card = event.target.closest(".chat-message");
+    const cardId = card.dataset.messageId;
+    const cardData = await game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
+    const actor = await fromUuid(cardData.actorId);
+    return actor.applyInjury(degree);
+}
+
+export async function resistInjury(event) {
+    event.preventDefault();
+    const card = event.target.closest(".chat-message");
+    const cardId = card.dataset.messageId;
+    const cardData = await game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
+    const actor = await fromUuid(cardData.actorId);
+    return actor.toughnessTest(foundry.utils.deepClone(cardData.injuryParts), cardData.rollTN, cardData.autoApply);
+}
 
 export async function applyDamageChat(event) {
     event.preventDefault();

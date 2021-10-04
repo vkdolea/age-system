@@ -847,3 +847,18 @@ ageSystem.focus = [];
 
 // List with world's Item compendia
 ageSystem.itemCompendia = [];
+
+// Roll Types definition
+ageSystem.ROLL_TYPE = {
+    ATTACK: "attack",
+    MELEE_ATTACK: "meleeAttack",
+    RANGED_ATTACK: "rangedAttack",
+    FATIGUE: "fatigue",
+    TOUGHNESS: "toughness",
+    TOUGHNESS_AUTO: "toughnessAuto",
+    RESOURCES: "resources",
+    POWER: "powerActivation",
+    ABILITY: 'ability',
+    FOCUS: 'focus',
+    VEHICLE_ACTION: 'vehicle'
+}

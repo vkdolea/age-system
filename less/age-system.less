@@ -65,7 +65,7 @@ body *:not(i, .fa, .far, .fas) {
 .window-app.sheet.spaceship .window-content {
     background-image: none;
     background: none;
-    background-color: rgba(207, 194, 188, 0.4);
+    background-color: rgba(207, 194, 188, 0.6);
     // padding: 0;
     // margin: 8px;
 }
@@ -74,10 +74,49 @@ body *:not(i, .fa, .far, .fas) {
     background: none;
 }
 
+// Opacity Degrees
+.age-system {
+    .opacity-high {
+        opacity: 0.2
+    }
+    .opacity-low {
+        opacity: 0.5
+    }
+}
+
 // Buttons Styling for age-system-dialog Dialog boxes
 .age-system-dialog.bonus-select {
     button.dialog-button {
         flex: 0 0 45%
+    }
+}
+
+// Damage Summary Card
+.age-system.damage-summary-card {
+    .strong {
+        font-weight: 800;
+    }
+    .italic {
+        font-style: italic;
+    }
+    ul {
+        padding: 0;
+    }
+    p {
+        margin: 0 2px;
+        font-size: 12px;
+        text-transform: lowercase;
+        font-variant: small-caps;
+    }
+    div.use-injury div p{
+        text-align: center;
+    }
+    img {
+        flex: 0 0 50px;
+        height: 50px;
+        width: 50px;
+        margin-right: 4px;
+        border: none;
     }
 }
 

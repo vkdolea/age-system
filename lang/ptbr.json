@@ -237,10 +237,10 @@
         "vehicleArmor": "Armadura",
         
         "chatCard": {
-            "rollGeneral": "{actor} rola {item}",
-            "rollAttack": "{actor} ataca com {item}",
-            "rollPower": "{actor} utiliza {item}",
-            "looseRoll": "{user} rolou alguns dados",
+            "rollGeneral": "rola {item}",
+            "rollAttack": "ataca com {item}",
+            "rollPower": "utiliza {item}",
+            "looseRoll": "rolou alguns dados",
             "roll": "Rolar",
             
             "rollFullDamage": "Dano Total",
@@ -253,10 +253,10 @@
             "addFocus": "Incluir Foco",
             "addStuntDie": "Incluir Façanha",
 
-            "maneuversVehicle": "{name} manobra {vehicle}",
-            "commandsVehicle": "{name} comanda {vehicle}",
-            "operatesVehicle": "{name} opera {vehicle}",
-            "backupVehicle": "{name} auxilia {vehicle}",
+            "maneuversVehicle": "manobra {vehicle}",
+            "commandsVehicle": "comanda {vehicle}",
+            "operatesVehicle": "opera {vehicle}",
+            "backupVehicle": "auxilia {vehicle}",
 
             "compRoll": "Rola {compType}"
         },
@@ -395,6 +395,7 @@
         "injuryLight": "Leve",
         "injurySerious": "Sério",
         "injurySevere": "Grave",
+        "toughnessTest": "Teste de Resistência",
 
         "background": "Antecedente",
         "socialClass": "Classe Social",
@@ -579,6 +580,14 @@
         "armorPiercing": "Penetração de Armadura",
         "none": "Nenhuma",
         "halfArmor": "Metade da Armadura",
-        "ignoreArmor": "Ignora Armadura"
+        "ignoreArmor": "Ignora Armadura",
+        "damageSummary": "Sumário de Dano",
+        "noCharHurt": "Nenhum ferimento ou dano infligido",
+        "autoApplyInjury": "Infligir Ferimento",
+        "autoApplyAll": "Infligir Ferimento a Todos",
+        "letPlayerRoll": "Jogadores rolam Resistência",
+        "lightInjuryInflicted": "1 Ferimento Leve infligido",
+        "seriousInjuryInflicted": "1 Ferimento Sério infligido",
+        "severeInjuryInflicted": "1 Ferimento Grave infligido"
     }
 }

@@ -616,6 +616,62 @@ export class ageSystemActor extends Actor {
         };
     }
 
+    async toughnessTest (parts, rollTN, applyInjury = false) {
+        parts.push({
+            label: game.i18n.localize("age-system.injuryMarks"),
+            value: -this.data.data.injury.marks
+        });
+        const rollData = {
+          actor: this,
+          event: new MouseEvent('click'),
+          rollTN,
+          rollType: applyInjury ? ageSystem.ROLL_TYPE.TOUGHNESS_AUTO : ageSystem.ROLL_TYPE.TOUGHNESS,
+          moreParts: parts,
+          flavor: this.name,
+          flavor2: `${game.i18n.localize("age-system.toughnessTest")}`
+        };
+        const toughTest = await Dice.ageRollCheck(rollData);
+        const data = toughTest.data.flags["age-system"].ageroll.rollData
+        if (applyInjury && data.isSuccess !== null && !data.isSuccess) await this.applyInjury(data.injuryDegree);
+        return toughTest;
+    }
+
+    async applyInjury (injuryDegree) {
+        // Identify correct path and new amount for that degree
+        const updateDegree = `data.injury.degrees.${injuryDegree}`;
+        const newDegree = this.data.data.injury.degrees[injuryDegree] + 1;
+        // Carries totalInjuries to summary
+        const totalInjuries = foundry.utils.deepClone(this.data.data.injury.degrees);
+        totalInjuries[injuryDegree] = newDegree;
+        // Calculate new marks
+        let newMarks = (injuryDegree === 'severe') ? this.data.data.injury.degrees.severeMult : 1;
+        newMarks += this.data.data.injury.marks;
+        // Update Actor's injuries and marks
+        await this.update({
+          [updateDegree]: newDegree,
+          'data.injury.marks': newMarks
+        });
+        // Returns a summary array
+        return {
+          name: this.name,
+          img: this.data.token.img,
+          degree: injuryDegree,
+          totalInjuries,
+          newMarks
+        }
+    }
+
+    applyHPloss (remainingHP) {
+        const summary = {
+          name: this.name,
+          img: this.data.token.img,
+          previousHP: this.data.data.health.value,
+          newHP: remainingHP
+        };
+        this.update({"data.health.value": remainingHP});
+        return summary
+    }
+
     handleConditions(condId, isChecked = null) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;
         if (isChecked === null) isChecked = !this.data.data.conditions[condId];

@@ -106,6 +106,7 @@
 
     "SETTINGS.weaponGroups": "Groups d'Armes",
     "SETTINGS.weaponGroupsHint": "Indiquez les groupes d'armes en utilisant ; pour séparer les groupes. Laissez vide si les groupes d'armes ne sont pas utilisés (comme dans Modern Age)",
+
     "SETTINGS.healthSys": "Système de gestion de la Santé",
     "SETTINGS.healthSysHint": "\"Standard\" utilise Score d'Armure & Santé, \"The Expanse\" ajoute Résistance et Fortune, et \"Modern AGE\" utilise différents types de dommage, armure et vitalité en fonction du mode sélectionné ",
     "SETTINGS.healthSysbasic": "Standard (FAGE, DAGE, BR)",
@@ -236,10 +237,10 @@
         "vehicleArmor": "Armure",
 		
 		"chatCard": {
-            "rollGeneral": "{actor} lance {item}",
-            "rollAttack": "{actor} attaque avec {item}",
-            "rollPower": "{actor} utilise {item}",
-			"looseRoll": "{user} lance quelques dés",
+            "rollGeneral": "lance {item}",
+            "rollAttack": "attaque avec {item}",
+            "rollPower": "utilise {item}",
+			"looseRoll": "lance quelques dés",
             "roll": "Lancer",
 			
 			"rollFullDamage": "Dégâts complets",
@@ -252,10 +253,10 @@
             "addFocus": "Ajout compétence",
             "addStuntDie": "Ajout DP/DD",
 			
-			"maneuversVehicle": "{name} conduit {vehicle}",
-			"commandsVehicle": "{name} commande {vehicle}",
-            "operatesVehicle": "{name} dirige {vehicle}",
-            "backupVehicle": "{name} soutient {vehicle}",
+			"maneuversVehicle": "conduit {vehicle}",
+			"commandsVehicle": "commande {vehicle}",
+            "operatesVehicle": "dirige {vehicle}",
+            "backupVehicle": "soutient {vehicle}",
 
 			"compRoll": "{compType} Jet"
         },
@@ -394,6 +395,7 @@
         "injuryLight": "Légère",
         "injurySerious": "Sérieuse",
         "injurySevere": "Fatale",
+        "toughnessTest": "Toughness Test",
 
         "background": "Historique",
         "socialClass": "Catégorie Sociale",
@@ -578,6 +580,14 @@
         "armorPiercing": "Pénétration d'armure",
         "none": "Aucun",
         "halfArmor": "Demi armure",
-        "ignoreArmor": "Ignore l'armure"
+        "ignoreArmor": "Ignore l'armure",
+        "damageSummary": "Résumé des dommages",
+        "noCharHurt": "Aucune blessure ou dommage appliqué",
+        "autoApplyInjury": "Appliquer les blessures",
+        "autoApplyAll": "Appliquer les blessures à tous",
+        "letPlayerRoll": "Laisser le joueur lancer les dés",
+        "lightInjuryInflicted": "1 Blessure Légère infligée",
+        "seriousInjuryInflicted": "1 Blessure Sérieuse infligée",
+        "severeInjuryInflicted": "1 Blessure Fatale infligée"
     }
 }

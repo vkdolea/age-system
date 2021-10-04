@@ -1,0 +1,41 @@
+<form class="age-system damage-summary-card">
+	<h2>{{localize "age-system.damageSummary"}}</h2>
+	{{#unless summary}}
+	<p>{{localize "age-system.noCharHurt"}}</p>
+	{{/unless}}
+	<ul>
+		{{#each summary as |victim i|}}
+		<li class="flexrow">
+			<img src="{{victim.img}}" alt="{{victim.name}}">
+			<div class="flexcol justity-content-center">
+				<p class="strong">{{victim.name}}</p>
+				{{#if ../useInjury}}
+				<div class="flexrow use-injury">
+					<div class="{{#if (eq victim.degree 'light')}} strong{{/if}}">
+						<p>{{localize "age-system.injuryLight"}}</p>
+						<p>{{victim.totalInjuries.light}}</p>
+					</div>
+					<div class="{{#if (eq victim.degree 'serious')}} strong{{/if}}">
+						<p>{{localize "age-system.injurySerious"}}</p>
+						<p>{{victim.totalInjuries.serious}}</p>
+					</div>
+					<div class="{{#if (eq victim.degree 'severe')}} strong{{/if}}">
+						<p>{{localize "age-system.injurySevere"}}</p>
+						<p>{{victim.totalInjuries.severe}}</p>
+					</div>
+					<div>
+						<p>{{localize "age-system.injuryMarks"}}</p>
+						<p>{{victim.newMarks}}</p>
+					</div>
+				</div>
+				{{else}}
+				<p class="italic">{{../healthName}}: {{victim.previousHP}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{victim.newHP}}</p>
+				{{/if}}
+			</div>
+		</li>
+		{{#unless @last}}
+		<hr>
+		{{/unless}}
+		{{/each}}
+	</ul>
+</form>

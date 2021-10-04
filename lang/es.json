@@ -237,10 +237,10 @@
         "vehicleArmor": "Blindaje",
         
         "chatCard": {
-            "rollGeneral": "{actor} tira {item}",
-            "rollAttack": "{actor} ataca con {item}",
-            "rollPower": "{actor} utiliza {item}",
-			"looseRoll": "{user} tira dados",
+            "rollGeneral": "tira {item}",
+            "rollAttack": "ataca con {item}",
+            "rollPower": "utiliza {item}",
+			"looseRoll": "tira dados",
             "roll": "Tirar",
             
             "rollFullDamage": "Daño Completo",
@@ -253,10 +253,10 @@
             "addFocus": "+ Concen.",
             "addStuntDie": "+ Proeza",
 
-            "maneuversVehicle": "{name} maniobra {vehicle}",
-			"commandsVehicle": "{name} ordena {vehicle}",
-            "operatesVehicle": "{name} opera {vehicle}",
-            "backupVehicle": "{name} respalda {vehicle}",
+            "maneuversVehicle": "maniobra {vehicle}",
+			"commandsVehicle": "ordena {vehicle}",
+            "operatesVehicle": "opera {vehicle}",
+            "backupVehicle": "respalda {vehicle}",
 
             "compRoll": "Tirada {compType}"
         },
@@ -395,6 +395,7 @@
         "injuryLight": "Leve",
         "injurySerious": "Seria",
         "injurySevere": "Severa",
+        "toughnessTest": "Toughness Test",
 
         "background": "Trasfondo",
         "socialClass": "Clase Social",
@@ -579,6 +580,14 @@
         "armorPiercing": "Penetrante",
         "none": "No",
         "halfArmor": "Mitad Armadura",
-        "ignoreArmor": "Ignorar Armadura"
+        "ignoreArmor": "Ignorar Armadura",
+        "damageSummary": "Balance Daño",
+        "noCharHurt": "Sin heridas o daño aplicado",
+        "autoApplyInjury": "Aplicar Herida",
+        "autoApplyAll": "Aplicar Herida a Todos",
+        "letPlayerRoll": "Dejar tire Jugador",
+        "lightInjuryInflicted": "1 Herida Leve",
+        "seriousInjuryInflicted": "1 Herida Importante",
+        "severeInjuryInflicted": "1 Herida Grave"
     }
 }

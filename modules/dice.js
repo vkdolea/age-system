@@ -6,7 +6,6 @@ export async function ageRollCheck({
     actor = null,
     abl = null,
     itemRolled = null,
-    resourceRoll = false,
     rollTN = null,
     rollUserMod = null,
     atkDmgTradeOff = null,
@@ -15,8 +14,11 @@ export async function ageRollCheck({
     vehicleHandling = false,
     selectAbl = false,
     rollVisibility = false,
-    flavor = false,
+    flavor = null,
+    flavor2 = null,
     moreParts = false}={}) {
+
+    const ROLL_TYPE = CONFIG.ageSystem.ROLL_TYPE;
 
     let isToken = null;
     let actorId = null;
@@ -50,7 +52,7 @@ export async function ageRollCheck({
 
     // Check if it is a Resource/Income roll
     let resName;
-    if (resourceRoll === true) {
+    if (rollType === ROLL_TYPE.RESOURCES) {
         rollFormula += " + @resources"
         rollData.resources = actor.data.data.resources.total;
         rollData.resourcesRoll = resourceRoll;
@@ -83,8 +85,9 @@ export async function ageRollCheck({
 
     // Check if item rolled is Focus and prepare its data
     let focusId = null
+    let focusObj = null
     if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.data?.data.useFocus) {
-        const focusObj = actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled);
+        focusObj = actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled);
         rollFormula += " + @focus";
         rollData.focusName = focusObj.focusName;
         rollData.focus = focusObj.value;
@@ -96,7 +99,7 @@ export async function ageRollCheck({
     }
 
     // Adds Actor general Attack Bonus if rolltype = "attack"
-    if (rollType === "attack" && actor.data.data.attackMod !== 0) {
+    if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK].includes(rollType) && actor.data.data.attackMod !== 0) {
         rollFormula += " + @attackMod";
         rollData.attackMod = actor.data.data.attackMod;
         partials.push({
@@ -137,7 +140,6 @@ export async function ageRollCheck({
 
     // Transfer rolled item (if any) to chat message
     // Also checks if Item has Activation Mod
-    const teste = typeof(itemRolled);
     if (itemRolled !== null && typeof(itemRolled) !== "string") {
         rollData.itemId = itemRolled.id;
         rollData.hasDamage = itemRolled.data.data.hasDamage;
@@ -173,7 +175,7 @@ export async function ageRollCheck({
 
         // Check if AIM is active - this bonus will apply to all rolls when it is active
         const aim = actor.data.data.aim;
-        if (aim.active && !resourceRoll) {
+        if (aim.active && !(rollType === ROLL_TYPE.RESOURCES)) {
             rollData.aim = aim.value + aim.mod;
             rollFormula += " + @aim";
             partials.push({
@@ -184,7 +186,7 @@ export async function ageRollCheck({
         };
         
         // Adds penalty for Attack which is converted to damage Bonus and pass info to chat Message
-        if (atkDmgTradeOff && !resourceRoll) {
+        if (atkDmgTradeOff && !(rollType === ROLL_TYPE.RESOURCES)) {
             rollData.atkDmgTradeOff = atkDmgTradeOff;
             rollFormula += " + @atkDmgTradeOff";
             partials.push({
@@ -226,7 +228,7 @@ export async function ageRollCheck({
         // Check Guard Up penalties
         // Here it checks if Guard Up and Defend are checked - when both are checked, the rule is use none
         const guardUp = actor.data.data.guardUp;
-        if (guardUp.active && !resourceRoll) {
+        if (guardUp.active && !(rollType === ROLL_TYPE.RESOURCES)) {
             rollData.guardUp = -guardUp.testPenalty;
             rollData.guardUpActive = true;
             rollFormula += " + @guardUp";
@@ -235,40 +237,44 @@ export async function ageRollCheck({
                 value: rollData.guardUp
             })
         };
+    }
 
-        // Roll header flavor text
-        let headerTerms = {actor: actor.name};
-        // let headerFlavor = flavor;
-        if (!flavor) {
-            if (rollType === "fatigue") {
-                headerTerms.item = game.i18n.localize("age-system.fatigue");
-                flavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-            } else {
-                if (itemRolled) {
-                    headerTerms.item = itemRolled.name;
-                    switch (itemRolled.type) {
-                        case "weapon":
-                            flavor = game.i18n.format("age-system.chatCard.rollAttack", headerTerms);
-                            break;
-                        case "power":
-                            flavor = game.i18n.format("age-system.chatCard.rollPower", headerTerms);
-                            break;
-                        default:
-                            flavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-                            break;
-                    }
-                } else {
-                    if (resourceRoll) {
-                        headerTerms.item = resName;
-                        flavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-                    }
-                    if (abl !== null && abl !== "no-abl") {
-                        headerTerms.item = ablName;
-                        flavor = game.i18n.format("age-system.chatCard.rollGeneral", headerTerms);
-                    }
-                };
-            }
-        }
+    // Define flavor and flavor2
+    // ATTACK: "attack",
+    // FATIGUE: "fatigue",
+    // MELEE_ATTACK: "meleeAttack",
+    // RANGE_ATTACK: "rangedAttack",
+    // TOUGHNESS: "toughness",
+    // TOUGHNESS_AUTO: "toughnessAuto",
+    // RESOURCES: "resources",
+    // POWER: "powerActivation",
+    // ABILITY: 'ability',
+    // FOCUS: 'focus'
+    if (!flavor) flavor = actor?.name ?? game.user.name;
+    switch (rollType) {
+        case ROLL_TYPE.ATTACK || ROLL_TYPE.MELEE_ATTACK || RANGED_ATTACK:
+            flavor2 = `${game.i18n.localize("age-system.settings.attack")} | ${itemRolled.name}`;
+            break;
+        case ROLL_TYPE.FATIGUE:
+            flavor2 = game.i18n.localize("age-system.fatigue");
+            break;
+        case ROLL_TYPE.TOUGHNESS || ROLL_TYPE.TOUGHNESS_AUTO:
+            flavor2 = game.i18n.localize("age-system.toughnessTest");
+            break;
+        case ROLL_TYPE.RESOURCES:
+            flavor2 = game.i18n.localize("SETTINGS.wealthTypeCurrency");
+            break;
+        case ROLL_TYPE.POWER:
+            flavor2 = `${game.i18n.localize("age-system.power")} | ${itemRolled.name}`;
+            break;
+        case ROLL_TYPE.ABILITY:
+            flavor2 = ablName;
+            break;
+        case ROLL_TYPE.FOCUS:
+            flavor2 = `${ablName} (${focusObj.focusName})`;
+            break;
+        default:
+            break;
     }
 
     // Check for moreParts
@@ -292,25 +298,27 @@ export async function ageRollCheck({
 
     // If rollTN is used, check if roll fails or succeed
     let isSuccess = null
-    if (rollTN) {
+    if (rollTN || rollTN === 0) {
         const rollMargin = ageRoll.total - rollTN;
         if (rollMargin >= 0) {
             isSuccess = true;
         } else {
             isSuccess = false;
         };
-    };
+    }
 
     // Generate Stunt Points if doubles are rolled and total rolled is higher than TN or there is no TN set
     const generateSP = (rollTN && isSuccess) || !rollTN;
     const rollSummary = ageRollChecker(ageRoll, generateSP)
     let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
+    const injuryMarks = (rollType === ROLL_TYPE.TOUGHNESS) || (rollType === ROLL_TYPE.TOUGHNESS_AUTO) ? actor.data.data.injury.marks : null;
 
     rollData = {
         ...rollData,
         // Informs card's color scheme
         colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
         flavor,
+        flavor2,
         partials,
         actorId,
         isToken,
@@ -320,6 +328,9 @@ export async function ageRollCheck({
         rollTN,
         focusId,
         rollType,
+        ROLL_TYPE,
+        injuryMarks,
+        injuryDegree: injuryDegree(rollSummary.dice.d3, injuryMarks),
         user: game.user
     };
 
@@ -328,7 +339,15 @@ export async function ageRollCheck({
         speaker: ChatMessage.getSpeaker(),
         content: await renderTemplate(chatTemplate, rollData),
         roll: ageRoll,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        flags: {
+            "age-system": {
+                "ageroll": {
+                    rollType,
+                    rollData
+                }
+            }
+        }
     };
 
     // Configuration of Stunt Die if using Dice so Nice
@@ -338,11 +357,8 @@ export async function ageRollCheck({
     };
 
     if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;
-    if (rollMode === "blindroll") {
-        ChatMessage.create(ChatMessage.applyRollMode(chatData, rollMode));
-    } else {
-        ChatMessage.create(chatData);
-    }
+    if (rollMode === "blindroll") chatData = await ChatMessage.applyRollMode(chatData, rollMode);
+    return ChatMessage.create(chatData);
 };
 
 // Check if the roll has Weapon Group penalty
@@ -870,28 +886,20 @@ export function getActor() {
     return actor;
 }
 
-// export function toughnessRoll(actor, event, damageData = {}) {
-//     const healthSys = CONFIG.ageSystem.healthSys;
-//     if (["mageInjury", "mageVitality"].includes(healthSys.mode)) return false
-//     let ballisticArmor = actor.data.data.armor.ballistic;
-//     let impactArmor = actor.data.data.armor.ballistic;
-//     let toughness = actor.data.data.armor.toughness.total;
-    
-//     if (damageData === {}) {
-//         // Incluir Dialog Box para preencher as opções abaixo
-//         damageData = {
-//             dmgSrc: "impact",
-//             dmgType: "wound",
-//             armorPiercing: "none",
-//             TN: 13
-//         }
-//     }
-
-//     const rollData = {
-//         actor,
-//         event
-//     }
-
-//     return ageRollCheck(rollData);
-
-// }
+export function injuryDegree(sd, marks) {
+    if (sd === null | marks === null) return null;
+    const mode = CONFIG.ageSystem.healthSys.type;
+    const penalty = Math.floor(marks/3);
+    let result = sd - penalty;
+    if (mode === 'mageInjury') {
+        if (result <= 1) return 'severe';
+        if (result >= 2 && result <= 4) return 'serious';
+        if (result > 4) return 'serious';
+    }
+    if (mode === 'mageVitality') {
+        if (result <= 2) return 'severe';
+        if (result >= 3 && result <= 5) return 'serious';
+        if (result > 5) return 'serious';
+    }
+    return null
+}
