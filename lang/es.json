@@ -581,13 +581,13 @@
         "none": "No",
         "halfArmor": "Mitad Armadura",
         "ignoreArmor": "Ignorar Armadura",
-        "damageSummary": "Damage Summary",
-        "noCharHurt": "No injuried or damage applied",
-        "autoApplyInjury": "Apply Injury",
-        "autoApplyAll": "Apply Injury to All",
-        "letPlayerRoll": "Let Player Roll",
-        "lightInjuryInflicted": "1 Light Injury inflicted",
-        "seriousInjuryInflicted": "1 Serious Injury inflicted",
-        "severeInjuryInflicted": "1 Severe Injury inflicted"
+        "damageSummary": "Balance Daño",
+        "noCharHurt": "Sin heridas o daño aplicado",
+        "autoApplyInjury": "Aplicar Herida",
+        "autoApplyAll": "Aplicar Herida a Todos",
+        "letPlayerRoll": "Dejar tire Jugador",
+        "lightInjuryInflicted": "1 Herida Leve",
+        "seriousInjuryInflicted": "1 Herida Importante",
+        "severeInjuryInflicted": "1 Herida Grave"
     }
 }
