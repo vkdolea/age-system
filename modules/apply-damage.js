@@ -230,7 +230,7 @@ export class DamageHandler {
       const h = targets[t];
       const data = foundry.utils.deepClone(h.actor.data);
       harmedOnes.push({
-        name: h.name,
+        name: h.actor.name,
         img: h.data.img,
         uuid: h.data.actorLink ? h.actor.uuid : h.document.uuid,
         data,
@@ -352,8 +352,8 @@ export class DamageHandler {
     }
     if (armorDesc) injuryParts.push(armorDesc);
 
-    const reducedDmg = totalDmg - dmgProtection;
-    if (reducedDmg < 0) reducedDmg === 0;
+    let reducedDmg = totalDmg - dmgProtection;
+    if (reducedDmg < 0) reducedDmg = 0;
 
     if (h.ignoreDmg) {
       h.remainingHP = h.data.data.health.value;
