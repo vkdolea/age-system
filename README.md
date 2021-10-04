@@ -97,6 +97,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.4 [2021-10-04]
+### Fixed
+- Button on Apply Damage dialog displaying wrong text.
+
 ## 0.8.3 [2021-10-03]
 ### Added
 - After using chat button to apply damage to tokens, a chat message with summary of all damage dealt will be sent privatelly to game master, for a quick review.
