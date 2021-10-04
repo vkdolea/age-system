@@ -12,8 +12,10 @@
                 <div>
                     <p>{{localize "age-system.armor"}}</p>
                     <p>{{target.data.data.armor.impact}}{{#if ../damageData.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}/{{target.data.data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}{{/if}}</p>
+                    {{#if useInjury}}
                     <p>{{localize "age-system.bonus.testMod"}}</p>
                     <p>{{target.testMod}}</p>
+                    {{/if}}
                 </div>
                 <div>
                     <p>{{localize "age-system.toughness"}}</p>

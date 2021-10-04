@@ -97,6 +97,11 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.5 [2021-10-04]
+### Fixed
+- Wrong text on Apply Damage window.
+- If armor was higher then damage taken, tokens were "healed" instead of just not taking damage.
+
 ## 0.8.4 [2021-10-04]
 ### Fixed
 - Button on Apply Damage dialog displaying wrong text.
