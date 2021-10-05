@@ -3879,6 +3879,10 @@ body *:not(i, .fa, .far, .fas) {
 .age-system-dialog .apply-damage-window .column .individual img {
   border: 0;
 }
+.age-system-dialog .apply-damage-window .column .armor-penetration {
+  text-align: left;
+  margin: 0 auto;
+}
 .age-system-dialog .apply-damage-window .column.controls {
   flex: 0 0 200px;
   padding-left: 8px;
