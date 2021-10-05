@@ -2249,6 +2249,12 @@
   background-color: #007DAD;
   color: #ffffff;
 }
+.colorset-modern-blue #age-tracker .full-box {
+  background-color: #007DAD !important;
+}
+.colorset-modern-blue #age-tracker .comp-checkbox {
+  border-color: #007DAD !important;
+}
 .colorset-modern-blue .char-sheet .age-header label,
 .colorset-modern-blue .char-sheet .persona label {
   background-color: #007DAD;
@@ -2409,6 +2415,12 @@
 .colorset-fantasy-blue input.colorset-first-tier {
   background-color: #0f4f5b;
   color: #ffffff;
+}
+.colorset-fantasy-blue #age-tracker .full-box {
+  background-color: #0f4f5b !important;
+}
+.colorset-fantasy-blue #age-tracker .comp-checkbox {
+  border-color: #0f4f5b !important;
 }
 .colorset-fantasy-blue .char-sheet .age-header label,
 .colorset-fantasy-blue .char-sheet .persona label {
@@ -2571,6 +2583,12 @@
   background-color: #810207;
   color: #ffffff;
 }
+.colorset-dragon-red #age-tracker .full-box {
+  background-color: #810207 !important;
+}
+.colorset-dragon-red #age-tracker .comp-checkbox {
+  border-color: #810207 !important;
+}
 .colorset-dragon-red .char-sheet .age-header label,
 .colorset-dragon-red .char-sheet .persona label {
   background-color: #810207;
@@ -2731,6 +2749,12 @@
 .colorset-folded-purple input.colorset-first-tier {
   background-color: #565183;
   color: #ffffff;
+}
+.colorset-folded-purple #age-tracker .full-box {
+  background-color: #565183 !important;
+}
+.colorset-folded-purple #age-tracker .comp-checkbox {
+  border-color: #565183 !important;
 }
 .colorset-folded-purple .char-sheet .age-header label,
 .colorset-folded-purple .char-sheet .persona label {
@@ -2893,6 +2917,12 @@
   background-color: #155f0e;
   color: #ffffff;
 }
+.colorset-ronin-green #age-tracker .full-box {
+  background-color: #155f0e !important;
+}
+.colorset-ronin-green #age-tracker .comp-checkbox {
+  border-color: #155f0e !important;
+}
 .colorset-ronin-green .char-sheet .age-header label,
 .colorset-ronin-green .char-sheet .persona label {
   background-color: #155f0e;
@@ -3053,6 +3083,12 @@
 .colorset-select-one input.colorset-first-tier {
   background-color: #273249;
   color: #e7ccc3;
+}
+.colorset-select-one #age-tracker .full-box {
+  background-color: #273249 !important;
+}
+.colorset-select-one #age-tracker .comp-checkbox {
+  border-color: #273249 !important;
 }
 .colorset-select-one .char-sheet .age-header label,
 .colorset-select-one .char-sheet .persona label {
@@ -3215,6 +3251,12 @@
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
+.colorset-the-grey #age-tracker .full-box {
+  background-color: #3d3e3f !important;
+}
+.colorset-the-grey #age-tracker .comp-checkbox {
+  border-color: #3d3e3f !important;
+}
 .colorset-the-grey .char-sheet .age-header label,
 .colorset-the-grey .char-sheet .persona label {
   background-color: #3d3e3f;
@@ -3375,6 +3417,12 @@
 .colorset-red-warrior input.colorset-first-tier {
   background-color: #751119;
   color: #f7b755;
+}
+.colorset-red-warrior #age-tracker .full-box {
+  background-color: #751119 !important;
+}
+.colorset-red-warrior #age-tracker .comp-checkbox {
+  border-color: #751119 !important;
 }
 .colorset-red-warrior .char-sheet .age-header label,
 .colorset-red-warrior .char-sheet .persona label {
@@ -3537,6 +3585,12 @@
   background-color: #663322;
   color: #bb8755;
 }
+.colorset-never-dead #age-tracker .full-box {
+  background-color: #663322 !important;
+}
+.colorset-never-dead #age-tracker .comp-checkbox {
+  border-color: #663322 !important;
+}
 .colorset-never-dead .char-sheet .age-header label,
 .colorset-never-dead .char-sheet .persona label {
   background-color: #663322;
@@ -3694,7 +3748,6 @@
   cursor: pointer;
   display: inline-block;
   z-index: 99;
-  opacity: 0.6;
 }
 #age-roller-drag {
   width: 100%;
@@ -3723,7 +3776,6 @@
   padding: 0px;
   display: inline-block;
   z-index: 50;
-  opacity: 0.8;
 }
 #age-tracker a {
   padding-top: 4px;
@@ -3764,11 +3816,8 @@
   height: 10px;
   width: 10px;
   background: none;
-  border: 1px solid black;
+  border: 1px solid;
   background-color: #ffffff;
-}
-#age-tracker .age-comp .full-box {
-  background-color: #f1bb57;
 }
 #age-tracker .age-comp .milestone.milestone {
   height: 16px;
@@ -3829,6 +3878,12 @@ body *:not(i, .fa, .far, .fas) {
 .window-app.sheet.item .window-content {
   background-image: none;
   background: none;
+}
+.age-opacity-hover {
+  opacity: 0.4;
+}
+.age-opacity-hover:hover {
+  opacity: 0.6;
 }
 .age-system .opacity-high {
   opacity: 0.2;

@@ -129,6 +129,15 @@ each(@colorsets, {
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);
         };
+
+        #age-tracker {
+            .full-box {
+                background-color: extract(extract(@color-list, @index), 1) !important;
+            }
+            .comp-checkbox {
+                border-color: extract(extract(@color-list, @index), 1) !important;
+            }
+        }
     
         .char-sheet {
             .age-header,
