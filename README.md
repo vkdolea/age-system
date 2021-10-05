@@ -97,6 +97,13 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.6 [2021-10-05]
+### Fixed
+- Issue causing tokens created from player-owner characters to be created without health bar.
+- Income/Resources roll working again
+- Tests without declared Target Number will no longer return MISS for every roll.
+- French localization correction.
+
 ## 0.8.5 [2021-10-04]
 ### Fixed
 - Wrong text on Apply Damage window.
