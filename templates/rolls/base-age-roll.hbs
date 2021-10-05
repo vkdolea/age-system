@@ -16,7 +16,6 @@
                     <h4>{{flavor2}}</h4>
                     {{/if}}
                 </div>
-                {{!-- <h3 class="action-details colorset-first-tier">{{flavor}}</h3> --}}
                 <div class="dice-show trait-test flexrow">
                     {{#each ageRollSummary.dice as |diceFace|}}
                         {{#when diceFace 'eq' 1}}
@@ -35,7 +34,7 @@
                     {{/each}}
                 </div>
                 <div class="flexrow roll-mod total-roll">
-                    <h3 class="line-header">{{localize "age-system.settings.totalRolled"}}{{#if isSuccess}} ({{localize "age-system.success"}}) {{else}} ({{localize "age-system.miss"}}) {{/if}}</h3>
+                    <h3 class="line-header">{{localize "age-system.settings.totalRolled"}}{{#if rollTN}}{{#if isSuccess}} ({{localize "age-system.success"}}) {{else}} ({{localize "age-system.miss"}}) {{/if}}{{/if}}</h3>
                     <h3 class="line-value">{{roll.total}}</h3>
                 </div>
                 <div class="flexrow roll-mod{{#if ageRollSummary.stunt}} stunted{{/if}}">
@@ -52,7 +51,7 @@
                 
             </div>
 
-            {{#if (ne rollType 'fatigue')}}
+            {{#if (ne rollType ROLL_TYPE.FATIGUE)}}
             <div class="age-chat-buttons flexcol">
                 {{#if (or hasDamage hasHealing)}}
                 <div class="age-chat-buttons grid">

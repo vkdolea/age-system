@@ -13,7 +13,7 @@ export class ageToken extends Token {
         if (this.actor.hasPlayerOwner) {
             updateData["displayBars"] = 10;
             updateData["disposition"] = 1;
-            updateData["actorLink"] = token.data.actor && true;
+            updateData["actorLink"] = true;
         } else {
             updateData["displayBars"] = 20;
         };

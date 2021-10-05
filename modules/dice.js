@@ -55,9 +55,10 @@ export async function ageRollCheck({
     if (rollType === ROLL_TYPE.RESOURCES) {
         rollFormula += " + @resources"
         rollData.resources = actor.data.data.resources.total;
-        rollData.resourcesRoll = resourceRoll;
+        // rollData.resourcesRoll = resourceRoll;
         const resSelected = game.settings.get("age-system", "wealthType");
         resName = game.i18n.localize(`age-system.${resSelected}`)
+        flavor2 = resName
         partials.push({
             label: resName,
             value: rollData.resources
@@ -262,7 +263,7 @@ export async function ageRollCheck({
             flavor2 = game.i18n.localize("age-system.toughnessTest");
             break;
         case ROLL_TYPE.RESOURCES:
-            flavor2 = game.i18n.localize("SETTINGS.wealthTypeCurrency");
+            flavor2 = resName;
             break;
         case ROLL_TYPE.POWER:
             flavor2 = `${game.i18n.localize("age-system.power")} | ${itemRolled.name}`;
