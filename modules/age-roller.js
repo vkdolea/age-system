@@ -20,19 +20,33 @@ export class AgeRoller extends Application {
 		html.find("#age-roller img").click(this._onClick.bind(this));
 		html.find("#age-roller img").contextmenu(this._onRightClick.bind(this));
 		html.find("#age-roller-drag").contextmenu(this._onResetPosition.bind(this));
+		html.find("#age-roller-drag").mousedown(this._onHideOptions.bind(this));
+		html.find("#age-roller-container").mouseleave(this._onHideOptions.bind(this));
+		html.find("#age-roller-container").mouseenter(this._onShowOptions.bind(this));
+		html.find("#age-roller").hover(this._onShowOptions.bind(this));
 
 		// Set position
 		let roller = document.getElementById("age-roller");
 		const rollerPos = game.user.getFlag("age-system", "ageRollerPos");
 		roller.style.left = rollerPos.xPos;
 		roller.style.bottom = rollerPos.yPos;
-
+		
 		// Make the DIV element draggable:
 		this._dragElement(roller);
 	}
 	
 	refresh() {
 		this.render(true);
+	}
+
+	_onHideOptions(ev) {
+		const opt = document.getElementById("age-roller-options");
+		opt.style.display = 'none';
+	}
+
+	_onShowOptions(ev) {
+		const opt = document.getElementById("age-roller-options");
+		opt.style.display = 'inline-block';
 	}
 
  	async _onClick(event) {
@@ -56,28 +70,39 @@ export class AgeRoller extends Application {
 		const original = CONFIG.ageSystem.ageRollerPos;
 		elmnt.style.left = original.xPos;
 		elmnt.style.bottom = original.yPos;
+		this._setOptionsMenuPos(elmnt);
 		game.user.setFlag("age-system", "ageRollerPos", original);
+	}
+
+	_setOptionsMenuPos(ref) {
+		let opts = document.getElementById("age-roller-options");
+		opts.style.left = (ref.offsetLeft + 52) + "px";
+		opts.style.bottom = (ref.offsetParent.clientHeight - ref.offsetTop - ref.clientHeight) + "px";
 	}
 
 	_dragElement(elmnt) {
 		var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+		const ageRoller = this;
 		if (document.getElementById("age-roller-drag")) {
-		  // if present, the header is where you move the DIV from:
-		  document.getElementById("age-roller-drag").onmousedown = dragMouseDown;
+			// if present, the header is where you move the DIV from:
+			document.getElementById("age-roller-drag").onmousedown = dragMouseDown;
 		} else {
-		  // otherwise, move the DIV from anywhere inside the DIV:
-		  elmnt.onmousedown = dragMouseDown;
+			// otherwise, move the DIV from anywhere inside the DIV:
+			elmnt.onmousedown = dragMouseDown;
 		}
+
+		// Set new position for Options Menu
+		this._setOptionsMenuPos(elmnt)
 	  
 		function dragMouseDown(e) {
-		  e = e || window.event;
-		  e.preventDefault();
-		  // get the mouse cursor position at startup:
-		  pos3 = e.clientX;
-		  pos4 = e.clientY;
-		  document.onmouseup = closeDragElement;
-		  // call a function whenever the cursor moves:
-		  document.onmousemove = elementDrag;
+			e = e || window.event;
+			e.preventDefault();
+			// get the mouse cursor position at startup:
+			pos3 = e.clientX;
+			pos4 = e.clientY;
+			document.onmouseup = closeDragElement;
+			// call a function whenever the cursor moves:
+			document.onmousemove = elementDrag;
 		}
 	  
 		function elementDrag(e) {
@@ -102,6 +127,7 @@ export class AgeRoller extends Application {
 			rollerPos.xPos = elmnt.style.left;
 			rollerPos.yPos = elmnt.style.bottom;
 			game.user.setFlag("age-system", "ageRollerPos", rollerPos);
+			ageRoller._setOptionsMenuPos(elmnt)
 		}
 	}
 }

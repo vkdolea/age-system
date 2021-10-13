@@ -314,10 +314,7 @@ export class DamageHandler {
       })
 
       dmgProtection -= h.injuryMarks;
-      // injuryParts.push({
-      //   label: game.i18n.localize("age-system.injuryMarks"),
-      //   value: -h.injuryMarks
-      // })
+      // Injury Marks is not sent to chat card: when prompting for Toughness Roll, character will first check for current Marks and them apply to roll
 
       dmgProtection += h.testMod;
       if (h.testMod) injuryParts.push({
@@ -343,6 +340,7 @@ export class DamageHandler {
         value: impactArmor
       }
     }
+    
     if (!this._useBallistic && this._damageSource !== 'penetrating') {
       dmgProtection += impactArmor;
       armorDesc = {
