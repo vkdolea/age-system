@@ -103,6 +103,7 @@ Icons made by:
 
 ### Fixed
 - Bug preventing rolling Toughness Test by clicking on whipered chat card.
+- Sending damage card to chat when using Injury damage system, dice sound effect won't be played.
 
 ## 0.8.6 [2021-10-05]
 ### Fixed
