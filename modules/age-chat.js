@@ -31,8 +31,8 @@ export async function resistInjury(event) {
     event.preventDefault();
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
-    const cardData = await game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
-    const actor = await fromUuid(cardData.actorId);
+    const cardData = await game.messages.get(cardId).data.flags["age-system"].toughnessTestCard;
+    const actor = await fromUuid(cardData.actorUuid);
     return actor.toughnessTest(foundry.utils.deepClone(cardData.injuryParts), cardData.rollTN, cardData.autoApply);
 }
 

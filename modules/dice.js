@@ -874,7 +874,13 @@ export async function itemDamage({
         }
     };
 
-    if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;
+    if (!chatData.sound) {
+        if (healthSys.type === 'mageInjury' || healthSys.type === 'mageVitality') {
+            chatData.sound = CONFIG.sounds.notification;
+        } else {
+            chatData.sound = CONFIG.sounds.dice;
+        }
+    }
     ChatMessage.create(chatData);
 };
 

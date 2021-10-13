@@ -97,6 +97,14 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.7 [2021-10-xx]
+### Added
+- Link to system's wiki when hovering AGE Roller icon.
+
+### Fixed
+- Bug preventing rolling Toughness Test by clicking on whipered chat card.
+- Sending damage card to chat when using Injury damage system, dice sound effect won't be played.
+
 ## 0.8.6 [2021-10-05]
 ### Fixed
 - Issue causing tokens created from player-owner characters to be created without health bar.
