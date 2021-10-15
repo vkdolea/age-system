@@ -672,7 +672,7 @@ export class ageSystemActor extends Actor {
         return summary
     }
 
-    handleConditions(condId, isChecked = null) {
+    async handleConditions(condId, isChecked = null) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;
         if (isChecked === null) isChecked = !this.data.data.conditions[condId];
         const condEffects = this.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === condId);
@@ -685,7 +685,7 @@ export class ageSystemActor extends Actor {
             for (let c = 0; c < condEffects.length; c++) {
                 const effect = condEffects[c];
                 const id = effect.data._id;
-                this.effects.get(id).delete();
+                await this.effects.get(id).delete();
             }
             return
         }
@@ -693,7 +693,7 @@ export class ageSystemActor extends Actor {
         if (isChecked && condEffects.length < 1) {
             const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
             newEffect["flags.core.statusId"] = newEffect.id;
-            return this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+            await this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
         }
     }
 

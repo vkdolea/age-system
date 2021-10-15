@@ -14,7 +14,7 @@
         <div class="abl-name-focus flexrow">
             <a class="abl-name roll-ability">{{name}}</a>
             {{#each (focusbyabl ../data.focus type) as |item|}}
-            <div class="item-name focus-options feature-controls" data-item-id="{{item._id}}">
+            <div class="item-name focus-options feature-controls" data-item-id="{{item._id}}" data-roll-type="{{../../data.config.ROLL_TYPE.FOCUS}}">
                 <a class="item-name roll-item{{#if item.data.improved}} improved-focus{{/if}}">{{#if @first}}&nbsp({{else}}&nbsp{{/if}}{{item.name}}{{#if @last}}){{else}},{{/if}}</a>
             </div>
             {{/each}}
