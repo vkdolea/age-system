@@ -1,15 +1,15 @@
 <div class="apply-damage-window flexrow feature-controls">
 
     <div class="column defenders">
-        <h2>Tokens</h2>
+        <h2>Token Effects</h2>
         <div class="targets">
-            {{#each handler.harmedOnes as |target i|}}
+            {{#each conditions as |condition i|}}
             <div class="individual flexcol feature-controls" data-i="{{i}}">
                 <div class="flexrow">
-                    <img class="item-image" src="{{target.img}}" title="{{target.name}}" width="100" height="100"/>
+                    <img class="item-image" src="{{condition.icon}}" title="{{condition.label}}" width="100" height="100"/>
                     <div>
-                        <input type="text" class="" name="handler.harmedOnes.{{i}}.name" value="{{target.name}}" data-dtype="Number" />
-                        <textarea name="condition.{{i}}.description" id="" cols="30" rows="10">{{target.description}}</textarea>
+                        <input type="text" class="" name="conditions.{{i}}.label" value="{{condition.label}}" data-dtype="Number" />
+                        <textarea name="conditions.{{i}}.flags.age-system.desc" id="" cols="30" rows="10">{{#with (lookup condition.flags ["age-system"])~}}{{desc}}{{/with}}</textarea>
                     </div>
                 </div>
                 <section class="tab" data-tab="effects">
@@ -22,7 +22,7 @@
                         </div>
                     </header>
                     <ol class="changes-list">
-                        {{#each data.changes as |change i|}}
+                        {{#each condition.data.changes as |change i|}}
                         <li class="effect-change flexrow" data-index="{{i}}">
                             <div class="key">
                                 <input type="text" name="changes.{{i}}.key" value="{{change.key}}"/>
