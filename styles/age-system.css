@@ -3937,6 +3937,9 @@ body *:not(i, .fa, .far, .fas) {
   margin-right: 4px;
   border: none;
 }
+.age-system-dialog .conditions-workshop .individual-effects .item-image {
+  flex: 0 0 100px;
+}
 .age-system-dialog .apply-damage-window .column {
   text-align: center;
 }
