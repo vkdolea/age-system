@@ -249,34 +249,6 @@ export const registerSystemSettings = async function() {
   });
 
   /**
-   * Register if world will use Toughness
-   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
-   */
-  game.settings.register("age-system", "useToughness", {
-    name: "SETTINGS.useToughness",
-    hint: "SETTINGS.useToughnessHint",
-    scope: "world",
-    config: false,
-    default: true,
-    type: Boolean,
-    onChange: debouncedReload
-  }); 
-
-  /**
-   * Option to use split armor
-   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
-   */
-  game.settings.register("age-system", "useBallisticArmor", {
-    name: "SETTINGS.useBallisticArmor",
-    hint: "SETTINGS.useBallisticArmorHint",
-    scope: "world",
-    config: false,
-    default: true,
-    type: Boolean,
-    onChange: debouncedReload
-  });
-
-  /**
    * Register if world will use Fatigue
    */
   game.settings.register("age-system", "useFatigue", {
@@ -398,6 +370,44 @@ export const registerSystemSettings = async function() {
     config: false,
     default: [],
     type: Array
+  });
+
+  /**
+   * Register custom token Effects array
+   */
+  game.settings.register("age-system", "customTokenEffects", {
+    scope: "world",
+    config: false,
+    default: [],
+    type: Array
+  })
+
+  /**
+   * Register if world will use Toughness
+   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
+   */
+  game.settings.register("age-system", "useToughness", {
+    name: "SETTINGS.useToughness",
+    hint: "SETTINGS.useToughnessHint",
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean,
+    onChange: debouncedReload
+  }); 
+
+  /**
+   * Option to use split armor
+   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
+   */
+  game.settings.register("age-system", "useBallisticArmor", {
+    name: "SETTINGS.useBallisticArmor",
+    hint: "SETTINGS.useBallisticArmorHint",
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean,
+    onChange: debouncedReload
   });
 };
 

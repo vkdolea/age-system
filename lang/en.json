@@ -588,6 +588,8 @@
         "letPlayerRoll": "Let Player Roll",
         "lightInjuryInflicted": "1 Light Injury inflicted",
         "seriousInjuryInflicted": "1 Serious Injury inflicted",
-        "severeInjuryInflicted": "1 Severe Injury inflicted"
+        "severeInjuryInflicted": "1 Severe Injury inflicted",
+
+        "conditionsWorkshop": "Conditions Workshop"
     }
 }

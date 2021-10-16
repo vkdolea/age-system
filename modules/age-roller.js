@@ -12,6 +12,7 @@ export class AgeRoller extends Application {
 	getData(options) {
 		const data = super.getData(options);
 		data.colorset = game.settings.get("age-system", "colorScheme");
+		data.isGM = game.user.isGM;
 		return data;
 	}
 	

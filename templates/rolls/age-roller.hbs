@@ -11,10 +11,12 @@
 				</li class="age-opacity-hover">
 				<li class="age-opacity-hover colorset-second-tier">
 					Reset Weapon Groups for all Weapons
-				</li>
-				<li class="age-opacity-hover colorset-second-tier">
-					Convert Weapon Damage
 				</li> --}}
+				{{#if isGM}}
+				<li class="age-opacity-hover colorset-second-tier">
+					{{localize "age-system.conditionsWorkshop"}}
+				</li>
+				{{/if}}
 				<li class="age-opacity-hover colorset-second-tier">
 					<a href="https://github.com/vkdolea/age-system/wiki">wiki</a>
 				</li>
