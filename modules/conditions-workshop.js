@@ -1,14 +1,10 @@
 export default class ConditionsWorkshop extends Application {
-  // constructor(targets, damageData, useInjury, options = {}) {
-  //   super(options)
-
-  //   if (!Array.isArray(targets)) targets = [targets]
-
-  //   this.targets = targets;
-  //   this.damageData = damageData;
-  //   this.useInjury = useInjury;
-  //   this._handler = new DamageHandler(targets, damageData);
-  // }
+  constructor(options = {}) {
+    super(options)
+    this._inUseEffects = CONFIG.statusEffects;
+    this._inUseConditions = game.settings.get("age-system", "inUseConditions");
+    this._customEffects = game.settings.get("age-system", "customTokenEffects");
+  }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
@@ -25,7 +21,9 @@ export default class ConditionsWorkshop extends Application {
 
   getData() {
     const data = super.getData();
-    data.conditions = CONFIG.statusEffects;
+    // data.conditions = CONFIG.statusEffects;
+    data.modes = CONST.ACTIVE_EFFECT_MODES;
+    data.conditions = this._customEffects;
     // data.handler = this._handler;
 
     // data.radioB = {
@@ -71,90 +69,6 @@ export default class ConditionsWorkshop extends Application {
     //   this._handler.basicDamage = value;
     //   this.updateUI()
     // })
-
-    // // Individual target mod (using + or -)
-    // html.find(".targets .individual .change-damage").click(ev => {
-    //   const i = ev.target.closest(".feature-controls").dataset.i;
-    //   let dmg = this._handler.harmedOnes[i].dmgMod;
-    //   const classes = ev.currentTarget.classList;
-    //   if (classes.contains("increase")) dmg += 1;
-    //   if (classes.contains("decrease")) dmg -= 1;
-    //   this._handler.harmedOnes[i].dmgMod = dmg;
-    //   this.updateUI()
-    // });
-
-    // // Individual target Toughness Mod (using + or -)
-    // html.find(".targets .change-toughness").click(ev => {
-    //   const i = ev.target.closest(".feature-controls").dataset.i;
-    //   let mod = this._handler.harmedOnes[i].toughMod;
-    //   const classes = ev.currentTarget.classList;
-    //   if (classes.contains("increase")) mod += 1;
-    //   if (classes.contains("decrease")) mod -= 1;
-    //   this._handler.harmedOnes[i].toughMod = mod;
-    //   this.updateUI()
-    // });
-
-    // // Typing updates on input field for individual target
-    // html.find(".targets .individual input.target-damage-mod").change(ev => {
-    //   const value = ev.currentTarget.value
-    //   const i = ev.target.closest(".feature-controls").dataset.i;
-    //   this._handler.letPlayerRoll = value;
-    //   this.updateUI()
-    // })
-
-    // // Select if that target will be spared
-    // html.find(".targets .individual .do-not-apply").change(ev => {
-    //   const checked = ev.currentTarget.checked;
-    //   const i = ev.target.closest(".feature-controls").dataset.i;
-    //   this._handler.harmedOnes[i].ignoreDmg = checked;
-    // });
-
-    // // Select if that target will have Injury Auto implemented
-    // html.find(".targets .individual .auto-apply-injury").change(ev => {
-    //   const checked = ev.currentTarget.checked;
-    //   const i = ev.target.closest(".feature-controls").dataset.i;
-    //   this._handler.harmedOnes[i].autoInjury = checked;
-    // });
-
-    // // Change Let Player Roll Toughness Test
-    // html.find(".players-roll").change(ev => {
-    //   const checked = ev.currentTarget.checked;
-    //   this._handler.letPlayerRoll = checked;
-    // });
-
-    // html.find("button.apply-damage").click(async (ev) => {
-    //   const applyInjuryAll = ev.currentTarget.classList.contains('apply-all');
-    //   const summary = [];
-    //   const victims = this._handler.harmedOnes.map(async (h) => {
-    //     if (!h.ignoreDmg) {
-    //       const applyInjury = applyInjuryAll || h.autoInjury;
-    //       let actor = await fromUuid(h.uuid);
-    //       if (actor.documentName === "Token") actor = actor.actor;
-    //       if (!this.useInjury) {
-    //         summary.push(actor.applyHPloss(h.remainingHP));
-    //       } else {
-    //         // Toughness Test
-    //         if (actor.hasPlayerOwner && this._handler.letPlayerRoll) {
-    //           // Criar lógica aqui para enviar cartão para o jogador rolar Teste de Resistência - ou já rolar e aplicar
-    //           this.promptPlayerToRoll(actor, h.injuryParts, h.totalDmg, applyInjury);
-    //         } else {
-    //           const card = await actor.toughnessTest(h.injuryParts, h.totalDmg, applyInjury);
-    //           const cardFlag = card.data.flags["age-system"].ageroll.rollData;
-    //           const degree = cardFlag.injuryDegree;
-    //           if (applyInjury && !cardFlag.isSuccess && degree !== null) summary.push({
-    //             name: actor.name,
-    //             img: actor.data.token.img,
-    //             degree,
-    //             totalInjuries: foundry.utils.deepClone(actor.data.data.injury.degrees),
-    //             newMarks: actor.data.data.injury.marks
-    //           });
-    //         }
-    //       };
-    //     }
-    //   });
-    //   await Promise.all(victims).then(async() => {this.summaryToChat(summary, this.useInjury)})
-    //   this.close();
-    // })
   }
 
   updateUI() {
@@ -177,6 +91,12 @@ export default class ConditionsWorkshop extends Application {
     ChatMessage.create(chatData);
   }
 
+}
+
+export class AgeTokenEffectsHandler {
+  constructor(effects) {
+
+  }
 }
 
 // export class ConditionHandler {

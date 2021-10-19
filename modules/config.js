@@ -238,7 +238,8 @@ ageSystem.uiElements = {
 }
 
 const AGEstatusEffectsPath = "systems/age-system/resources/imgs/effects/";
-ageSystem.AGEstatusEffects = [
+ageSystem.statusEffects = {
+    expanse: [
     {
         icon: `${AGEstatusEffectsPath}number.png`,
         id: `num0`,
@@ -798,7 +799,7 @@ ageSystem.AGEstatusEffects = [
             }
         }
     },
-];
+]};
 
 ageSystem.ageEffectsKeys = {
     "testMod": {label: "age-system.bonus.testMod", mask: "data.testMod"},

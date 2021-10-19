@@ -82,13 +82,6 @@ Hooks.once("init", async function() {
         }
     };
 
-    CONFIG.ageSystem = ageSystem;
-
-    // Define Token Icons
-    CONFIG.statusEffects = ageSystem.AGEstatusEffects;
-    // Changing a few control icons
-    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/hasty-grave.svg"
-
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("age-system", ageSystemSheetCharacter, {
         types: ["char"],
@@ -141,6 +134,16 @@ Hooks.once("init", async function() {
 
     // Register System Settings
     Settings.registerSystemSettings();
+
+    // Define Token Icons and In Use Token Effects
+    CONFIG.ageSystem = ageSystem;
+    ageSystem.statusEffects.custom = await game.settings.get("age-system", "customTokenEffects");
+    let inUseConditions = await game.settings.get("age-system", "inUseConditions");
+    if (!['expanse', 'custom'].includes(inUseConditions)) inUseConditions = 'custom';
+    CONFIG.statusEffects = ageSystem.statusEffects[inUseConditions];
+    
+    // Changing a few control icons
+    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/hasty-grave.svg"
 
     // Useful concat Helper from Boilerplate system!
     Handlebars.registerHelper('concat', function() {

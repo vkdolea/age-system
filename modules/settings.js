@@ -372,6 +372,18 @@ export const registerSystemSettings = async function() {
     type: Array
   });
 
+  
+  /**
+   * Register which Conditios set is used
+   */
+  game.settings.register("age-system", "inUseConditions", {
+    scope: "world",
+    config: false,
+    default: 'expanse', // Currently, the only valid values are 'custom' and 'expanse'
+    type: String,
+    onChange: async () => CONFIG.statusEffects = CONFIG.ageSystem.statusEffects[await game.settings.get("age-system", "inUseConditions")]
+  })
+  
   /**
    * Register custom token Effects array
    */
