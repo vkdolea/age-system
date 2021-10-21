@@ -8,8 +8,8 @@
                 <div class="flexrow">
                     <img class="item-image" src="{{condition.icon}}" title="{{condition.label}}" width="100" height="100"/>
                     <div>
-                        <input type="text" class="" name="conditions.{{i}}.label" value="{{condition.label}}" data-dtype="Number" />
-                        <textarea name="conditions.{{i}}.flags.age-system.name" id="" cols="30" rows="10">{{#with (lookup condition.flags "age-system")~}}{{name}}{{/with}}</textarea>
+                        <input type="text" class="user-entry" name="conditions.{{i}}.label" value="{{condition.label}}" data-dtype="Number" data-field='name'/>
+                        <textarea class="user-entry" name="conditions.{{i}}.flags.age-system.desc" data-field='desc' cols="30" rows="10">{{#with (lookup condition.flags "age-system")~}}{{desc}}{{/with}}</textarea>
                     </div>
                 </div>
                 <div class="effects">
@@ -25,15 +25,15 @@
                         {{#each condition.changes as |change i|}}
                         <li class="effect-change flexrow" data-index="{{i}}">
                             <div class="key">
-                                <input type="text" name="changes.{{i}}.key" value="{{change.key}}"/>
+                                <input type="text" class="user-entry" name="changes.{{i}}.key" value="{{change.key}}"/>
                             </div>
                             <div class="mode">
-                                <select name="changes.{{i}}.mode" data-dtype="Number">
+                                <select name="changes.{{i}}.mode" class="user-entry" data-dtype="Number">
                                     {{selectOptions ../../modes selected=change.mode}}
                                 </select>
                             </div>
                             <div class="value">
-                                <input type="text" name="changes.{{i}}.value" value="{{change.value}}"/>
+                                <input type="text" class="user-entry" name="changes.{{i}}.value" value="{{change.value}}"/>
                             </div>
                             <div class="effect-controls">
                                 <a class="effect-control" data-action="delete"><i class="fas fa-trash"></i></a>

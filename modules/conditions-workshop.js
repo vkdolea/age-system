@@ -45,8 +45,10 @@ export default class ConditionsWorkshop extends Application {
   activateListeners(html) {
     super.activateListeners(html)
 
-    // Modify Armor Penetration properties for all targets
     html.find(".effect-control").click(this._onManageChange.bind(this));
+    // Update changes on fields
+    html.find('textarea').change(this._onFieldUpdate.bind(this));
+
 
     // // Change Basic Damage for all targets - using symbols ( - or +)
     // html.find(".overall-dmg .change-damage").click(ev => {
@@ -65,6 +67,16 @@ export default class ConditionsWorkshop extends Application {
     //   this._handler.basicDamage = value;
     //   this.updateUI()
     // })
+  }
+
+  _onFieldUpdate(ev) {
+    const conditionIndex = ev.currentTarget.closest('.individual-effects').dataset.conditionI;
+    const newValue = ev.currentTarget.value;
+    const condition = this._customEffects[conditionIndex];
+    if (!condition.flags) condition.flags = {};
+    if (!condition.flags["age-system"]) condition.flags["age-system"] = {};
+    condition.flags["age-system"].desc = newValue;
+    this.updateUI()
   }
 
   _onManageChange(ev) {
