@@ -45,12 +45,8 @@ export default class ConditionsWorkshop extends Application {
   activateListeners(html) {
     super.activateListeners(html)
 
-    // // Modify Armor Penetration properties for all targets
-    // html.find(".armor-penetration input").click(ev => {
-    //   const newValue = ev.currentTarget.value
-    //   this._handler.armorPenetration = newValue;
-    //   this.updateUI()
-    // });
+    // Modify Armor Penetration properties for all targets
+    html.find(".effect-control").click(this._onManageChange.bind(this));
 
     // // Change Basic Damage for all targets - using symbols ( - or +)
     // html.find(".overall-dmg .change-damage").click(ev => {
@@ -70,6 +66,34 @@ export default class ConditionsWorkshop extends Application {
     //   this.updateUI()
     // })
   }
+
+  _onManageChange(ev) {
+    const conditionIndex = ev.currentTarget.closest('.individual-effects').dataset.conditionI;
+    const changeIndex = ev.currentTarget.closest('.effect-change').dataset.index;
+    const condition = this._customEffects[conditionIndex];
+    const operation = ev.currentTarget.dataset.action;
+    switch (operation) {
+      case 'add':
+        const newEffect = {
+          key: "",
+          mode: "",
+          value: ""
+        };
+        if (condition.changes) {
+          condition.changes.push(newEffect)
+        } else {
+          condition.changes = [newEffect]
+        }
+        break;
+    
+      case 'delete':
+        condition.changes.splice(changeIndex, 1);
+
+      default:
+        break;
+    }
+    this.updateUI()
+  };
 
   updateUI() {
     this.render(false)
