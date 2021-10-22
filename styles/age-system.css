@@ -3940,6 +3940,65 @@ body *:not(i, .fa, .far, .fas) {
 .age-system-dialog .conditions-workshop .individual-effects .item-image {
   flex: 0 0 100px;
 }
+.age-system-dialog .conditions-workshop .individual-effects .item-image:hover {
+  cursor: pointer;
+}
+.age-system-dialog .conditions-workshop .individual-effects .order-control {
+  justify-content: space-between;
+  flex: 0 0 20px;
+  width: min-content;
+  margin: auto 0;
+}
+.age-system-dialog .conditions-workshop .individual-effects .order-control i:hover {
+  cursor: pointer;
+}
+.age-system-dialog .conditions-workshop .individual-effects .order-control .delete-effect {
+  margin: 20px 0;
+}
+.age-system-dialog .conditions-workshop .changes-list {
+  padding: 0;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header,
+.age-system-dialog .conditions-workshop .effects .effect-change {
+  justify-content: space-between;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header > *,
+.age-system-dialog .conditions-workshop .effects .effect-change > * {
+  text-align: center;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header .key,
+.age-system-dialog .conditions-workshop .effects .effect-change .key {
+  flex: 0 0 40%;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header .mode,
+.age-system-dialog .conditions-workshop .effects .effect-change .mode {
+  flex: 0 0 30%;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header .value,
+.age-system-dialog .conditions-workshop .effects .effect-change .value {
+  flex: 0 0 25%;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header .effect-controls,
+.age-system-dialog .conditions-workshop .effects .effect-change .effect-controls {
+  flex: 0 0 20px;
+}
+.age-system-dialog .conditions-workshop textarea {
+  height: 66px;
+  width: -webkit-fill-available;
+  margin-left: 4px;
+  resize: none;
+}
+.age-system-dialog .conditions-workshop .individual-effects h3 {
+  padding-left: 4px;
+}
+.age-system-dialog .column.controls {
+  flex: 0 0 30%;
+  padding-left: 10px;
+  text-align: center;
+}
+.age-system-dialog .column.controls button {
+  margin: 2px 4px;
+}
 .age-system-dialog .apply-damage-window .column {
   text-align: center;
 }

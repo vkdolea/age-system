@@ -1,9 +1,9 @@
 export default class ConditionsWorkshop extends Application {
   constructor(options = {}) {
     super(options)
-    this._inUseEffects = CONFIG.statusEffects;
     this._inUseConditions = game.settings.get("age-system", "inUseConditions");
     this._customEffects = game.settings.get("age-system", "customTokenEffects");
+    this._inUseEffects = CONFIG.statusEffects;
   }
 
   static get defaultOptions() {
@@ -21,62 +21,167 @@ export default class ConditionsWorkshop extends Application {
 
   getData() {
     const data = super.getData();
-    // data.conditions = CONFIG.statusEffects;
-    data.modes = CONST.ACTIVE_EFFECT_MODES;
     data.conditions = this._customEffects;
-    // data.handler = this._handler;
+    data.inUseConditions = this._inUseConditions;
+    data.modes = Object.entries(CONST.ACTIVE_EFFECT_MODES).reduce((obj, e) => {
+      obj[e[1]] = game.i18n.localize("EFFECT.MODE_"+e[0]);
+      return obj;
+    }, {})
 
-    // data.radioB = {
-    //   name: "handler.armorPenetration",
-    //   choices: {
-    //     none: game.i18n.localize('age-system.none'),
-    //     half: game.i18n.localize('age-system.halfArmor'),
-    //     ignore: game.i18n.localize('age-system.ignoreArmor')
-    //   },
-    //   options: {
-    //     hash: {
-    //       checked: data.handler.armorPenetration
-    //     }
-    //   }
-    // }
+    data.radioB = {
+      name: "inUseConditions",
+      choices: {
+        expanse: game.i18n.localize('SETTINGS.healthSysexpanse'),
+        custom: game.i18n.localize('age-system.custom')
+      },
+      options: {
+        hash: {
+          checked: data.inUseConditions
+        }
+      }
+    }
     return data
   }
 
   activateListeners(html) {
     super.activateListeners(html)
 
-    html.find(".effect-control").click(this._onManageChange.bind(this));
-    // Update changes on fields
-    html.find('textarea').change(this._onFieldUpdate.bind(this));
+    if (this._inUseConditions == 'custom') {
+      html.find(".effect-control").click(this._onManageChange.bind(this));
+      // Update changes on fields
+      html.find('.user-entry').change(this._onFieldUpdate.bind(this));
+      html.find('img.user-entry').click(ev => this._onEditImage(ev));
+      html.find('.delete-effect').click(this._onDeleteEffect.bind(this));
+      html.find('.add-effect').click(this._onAddEffect.bind(this));
+      html.find('.change-order').click(this._onOrderEffect.bind(this));
+    }
+    html.find('.in-use-condition input').change(this._onInUseConditionsSwap.bind(this))
+  }
 
+  // Rever essa função
+  _onInUseConditionsSwap(ev) {
+    const value = ev.currentTarget.value;
+    this._inUseConditions = value;
+    game.settings.set("age-system", "inUseConditions", this._inUseConditions);
+    this._inUseEffects = CONFIG.statusEffects;
+    this._customEffects = game.settings.get("age-system", "customTokenEffects");
+    this._refresh();
+  }
 
-    // // Change Basic Damage for all targets - using symbols ( - or +)
-    // html.find(".overall-dmg .change-damage").click(ev => {
-    //   let dmg = this._handler.basicDamage;
-    //   const classes = ev.currentTarget.classList;
-    //   if (classes.contains("increase")) dmg += 1;
-    //   if (classes.contains("decrease")) dmg -= 1;
-    //   if (dmg < 0) dmg = 0
-    //   this._handler.basicDamage = dmg;
-    //   this.updateUI()
-    // });
+  _onOrderEffect(ev) {
+    const i = Number(ev.currentTarget.closest('.feature-controls').dataset.conditionI);
+    const direction = ev.currentTarget.dataset.direction;
+    const size = this._customEffects.length;
+    const effect = foundry.utils.deepClone(this._customEffects[i]);
+    switch (direction) {
+      case "up":
+        if (i == 0) break;
+        this._customEffects.splice(i, 1);
+        this._customEffects.splice(i-1, 0, effect);
+        break;
     
-    // // Typing updates on input field for basic damage (all targets)
-    // html.find("input.basic-damage").change(ev => {
-    //   const value = ev.currentTarget.value
-    //   this._handler.basicDamage = value;
-    //   this.updateUI()
-    // })
+      case 'down':
+        if (i == size-1) break;
+        this._customEffects.splice(i, 1);
+        this._customEffects.splice(i + 1, 0, effect);
+      default:
+        break;
+    }
+    this._refresh();
+  }
+
+  _onAddEffect(ev) {
+    const pos = ev.currentTarget.dataset.position;
+    const size = this._customEffects.length;
+    const newEffect = {
+      icon: "icons/svg/aura.svg",
+      label: "",
+      changes: [],
+      flags: {
+        "age-system": {
+          "desc": ""
+        }
+      }
+    }
+    switch (pos) {
+      case 'top':
+        this._customEffects.splice(0, 0, newEffect);
+        break;
+    
+      case 'bottom':
+        this._customEffects.push(newEffect);
+        break;
+
+      default:
+        break;
+    }
+    this._refresh();
+  }
+
+  _onDeleteEffect(ev) {
+    const index = ev.currentTarget.closest('.feature-controls').dataset.conditionI;
+    this._customEffects.splice(index, 1);
+    this._refresh();
+  }
+
+  _onEditImage(event) {
+    const current = event.currentTarget.src.replace(/http:\/\/.*?\//, '');
+    const conditionId = event.currentTarget.closest('.individual-effects').dataset.conditionI;
+    const condition = this._customEffects[conditionId];
+    const fp = new FilePicker({
+      type: "image",
+      current: current,
+      callback: path => {
+        // const sanePath = path.replace(/http:\/\/*\//, '')
+        event.currentTarget.src = path;
+        condition.icon = path;
+        this._saveCustomEffects();
+      },
+      top: this.position.top + 40,
+      left: this.position.left + 10
+    });
+    return fp.browse();
   }
 
   _onFieldUpdate(ev) {
     const conditionIndex = ev.currentTarget.closest('.individual-effects').dataset.conditionI;
+    const part = ev.currentTarget.dataset.field;
+    let changeId = ev.currentTarget.closest('.effect-change');
+    if (changeId) changeId = changeId.dataset.index;
     const newValue = ev.currentTarget.value;
     const condition = this._customEffects[conditionIndex];
     if (!condition.flags) condition.flags = {};
     if (!condition.flags["age-system"]) condition.flags["age-system"] = {};
-    condition.flags["age-system"].desc = newValue;
-    this.updateUI()
+
+    switch (part) {
+      case 'name':
+        condition.label = newValue;
+        break;
+
+      case 'desc':
+        condition.flags["age-system"].desc = newValue;
+        break;
+
+      case 'change-key':
+        condition.changes[changeId].key = newValue;
+        break;
+      
+      case 'change-mode':
+        condition.changes[changeId].mode = newValue;
+        break;
+
+      case 'change-value':
+        condition.changes[changeId].value = newValue;
+        break;
+
+      case 'img':
+        condition.icon = newValue;
+        break;
+    
+      default:
+        break;
+    }
+    this._refresh();
   }
 
   _onManageChange(ev) {
@@ -104,205 +209,19 @@ export default class ConditionsWorkshop extends Application {
       default:
         break;
     }
-    this.updateUI()
+    this._refresh();
   };
 
   updateUI() {
     this.render(false)
   }
 
-  async summaryToChat (summary, useInjury) {
-    const chatTemplate = "/systems/age-system/templates/rolls/damage-summary.hbs";
-    const templateData = {
-      summary,
-      useInjury,
-      healthName: CONFIG.ageSystem.healthSys.healthName
-    }
-    let chatData = {
-      user: game.user.id,
-      content: await renderTemplate(chatTemplate, templateData),
-      type: CONST.CHAT_MESSAGE_TYPES.OOC,
-    }
-    await ChatMessage.applyRollMode(chatData, 'gmroll');
-    ChatMessage.create(chatData);
+  _saveCustomEffects() {
+    game.settings.set("age-system", "customTokenEffects", this._customEffects)
   }
 
-}
-
-export class AgeTokenEffectsHandler {
-  constructor(effects) {
-
+  _refresh() {
+    this._saveCustomEffects();
+    this.updateUI();
   }
 }
-
-// export class ConditionHandler {
-//   constructor(targets, damageData) {
-//     const healthSys = damageData.healthSys;
-//     this._damageData = damageData
-//     this._useBallistic = healthSys._useBallistic;
-//     this._useInjury = healthSys.useInjury;
-//     this._basicDamage = damageData.totalDamage;
-//     this._armorPenetration = "none";
-//     this._damageType = damageData.dmgType;
-//     this._damageSource = damageData.dmgSrc;
-//     this._letPlayerRoll = true;
-
-//     let harmedOnes = [];
-//     for (let t = 0; t < targets.length; t++) {
-//       const h = targets[t];
-//       const data = foundry.utils.deepClone(h.actor.data);
-//       harmedOnes.push({
-//         name: h.actor.name,
-//         img: h.data.img,
-//         uuid: h.data.actorLink ? h.actor.uuid : h.document.uuid,
-//         data,
-//         dmgMod: 0,
-//         remainingHP: 0,
-//         damage: 0,
-//         ignoreDmg: false,
-//         autoInjury: !data.document.hasPlayerOwner,
-//         injuryMarks: data.data.injury.marks,
-//         injurySDpenalty: Math.floor(data.data.injury.marks/3),
-//         testMod: data.data.ownedMods?.testMod ? data.data.ownedMods.testMod : 0,
-//         toughMod: 0
-//       })
-//     }
-//     this._harmedOnes = harmedOnes.map(harmed => this.damage(harmed, this._damageData));
-//   }
-
-//   set harmedOnes(value) {
-//     this._harmedOnes = value;
-//   }
-
-//   get harmedOnes() {
-//     return this._harmedOnes.map(harmed => this.damage(harmed, this._damageData));
-//   }
-
-//   set armorPenetration(value) {
-//     this._armorPenetration = value;
-//   }
-
-//   get armorPenetration() {
-//     return this._armorPenetration;
-//   }
-
-//   set basicDamage(value) {
-//     this._basicDamage = value;
-//   }
-
-//   get basicDamage() {
-//     return this._basicDamage;
-//   }
-
-//   get armorPenetrationMult() {
-//     const ap = this.armorPenetration;
-//     if (ap === "half") return 0.5;
-//     if (ap === "ignore") return 0;
-//     return 1;
-//   }
-
-//   set letPlayerRoll(value) {
-//     this._letPlayerRoll = value;
-//   }
-
-//   get letPlayerRoll() {
-//     return this._letPlayerRoll;
-//   }
-
-//   damage(h, d) {
-//     let ap = this.armorPenetration;
-//     let injuryParts = [];
-//     if (ap === "none") ap = 1;
-//     if (ap === "half") ap = 0.5;
-//     if (ap === "ignore") ap = 0;
-//     const impactArmor = Math.floor(h.data.data.armor.impact * ap);
-//     const ballisticArmor = Math.floor(h.data.data.armor.ballistic * ap);
-//     const toughness = h.data.data.armor.toughness.total > 0 ? h.data.data.armor.toughness.total : 0;
-//     const applyToughness = this.useToughness(d.healthSys.useToughness, this._damageType, this._damageSource, d.healthSys.mode);
-//     const totalDmg = Number(this.basicDamage) + Number(h.dmgMod);
-    
-//     let dmgProtection
-//     if (this._useInjury) {
-//       dmgProtection = applyToughness ? toughness : Math.ceil(toughness/2);
-//       injuryParts.push({
-//         label: game.i18n.localize("age-system.toughness"),
-//         value: dmgProtection
-//       })
-
-//       dmgProtection += h.toughMod;
-//       if (h.toughMod !== 0) injuryParts.push({
-//         label: game.i18n.localize("age-system.mod"),
-//         value: h.toughMod
-//       })
-
-//       dmgProtection -= h.injuryMarks;
-//       // Injury Marks is not sent to chat card: when prompting for Toughness Roll, character will first check for current Marks and them apply to roll
-
-//       dmgProtection += h.testMod;
-//       if (h.testMod) injuryParts.push({
-//         label: game.i18n.localize("age-system.bonus.testMod"),
-//         value: h.testMod
-//       })
-//     } else {
-//       dmgProtection = applyToughness ? toughness : 0;
-//     }
-
-//     let armorDesc
-//     if (this._useBallistic && this._damageSource === 'ballistic') {
-//       dmgProtection += ballisticArmor;
-//       armorDesc = {
-//         label: game.i18n.localize("age-system.ballisticArmor"),
-//         value: ballisticArmor
-//       }
-//     } 
-//     if (this._useBallistic && this._damageSource === 'impact') {
-//       dmgProtection += impactArmor;
-//       armorDesc = {
-//         label: game.i18n.localize("age-system.impactArmor"),
-//         value: impactArmor
-//       }
-//     }
-    
-//     if (!this._useBallistic && this._damageSource !== 'penetrating') {
-//       dmgProtection += impactArmor;
-//       armorDesc = {
-//         label: game.i18n.localize("age-system.armor"),
-//         value: impactArmor
-//       } 
-//     }
-//     if (armorDesc) injuryParts.push(armorDesc);
-
-//     let reducedDmg = totalDmg - dmgProtection;
-//     if (reducedDmg < 0) reducedDmg = 0;
-
-//     if (h.ignoreDmg) {
-//       h.remainingHP = h.data.data.health.value;
-//       h.totalDmg = 0;
-//       h.dmgProtection = dmgProtection;
-//     } else {
-//       h.remainingHP = h.data.data.health.value - reducedDmg;
-//       if (h.remainingHP < 0) h.remainingHP = 0;
-//       h.damage = reducedDmg
-//       h.totalDmg = Number(totalDmg);
-//       h.dmgProtection = dmgProtection;
-//       h.injuryParts = injuryParts;
-//     }
-
-//     return h;
-//   }
-
-//   useToughness(setting, type, source, mode) {
-//     if (!setting) return false;
-//     if (mode === 'none') return true;
-//     if (mode === 'gritty') {
-//       if (['penetrating', 'impact'].includes(source) && ['stun'].includes(type)) return true;
-//     }
-//     if (mode === 'pulp') {
-//       if (['penetrating', 'impact'].includes(source) && ['stun', 'wound'].includes(type)) return true;
-//     }
-//     if (mode === 'cinematic') {
-//       if (!(['penetrating'].includes(source) && ['wound'].includes(type))) return true;
-//     }
-//     return false;
-//   }
-// }

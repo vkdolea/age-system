@@ -590,6 +590,9 @@
         "seriousInjuryInflicted": "1 Serious Injury inflicted",
         "severeInjuryInflicted": "1 Severe Injury inflicted",
 
-        "conditionsWorkshop": "Conditions Workshop"
+        "conditionsWorkshop": "Conditions Workshop",
+        "tokenEffects": "Token Effects",
+        "addEffectTop": "Add new effect on top",
+        "addEffectBottom": "Add new effect at bottom"
     }
 }

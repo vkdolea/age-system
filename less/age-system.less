@@ -132,8 +132,66 @@ body *:not(i, .fa, .far, .fas) {
             .item-image {
                 flex: 0 0 100px; 
             }
+            .item-image:hover {
+                cursor: pointer;
+            }
+            .order-control {
+                justify-content: space-between;
+                flex: 0 0 20px;
+                width: min-content;
+                margin: auto 0;
+                i:hover {
+                    cursor: pointer;
+                }
+                .delete-effect {
+                    margin: 20px 0;
+                }
+            }
+        }
+        .changes-list {
+            padding: 0;
+        }
+        .effects {
+            .effects-header,
+            .effect-change {
+                > * {
+                    text-align: center;
+                }
+                justify-content: space-between;
+                .key {
+                    flex: 0 0 40%;
+                }
+                .mode {
+                    flex: 0 0 30%
+                }
+                .value {
+                    flex: 0 0 25%
+                }
+                .effect-controls {
+                    flex: 0 0 20px;
+                }
+            }
+        }
+        textarea {
+            height: 66px;
+            width: -webkit-fill-available;
+            margin-left: 4px;
+            resize: none;
+        }
+        .individual-effects {
+            h3 {
+                padding-left: 4px
+            }
         }
     };
+    .column.controls {
+        flex: 0 0 30%;
+        padding-left: 10px;
+        text-align: center;
+        button {
+            margin: 2px 4px;
+        }
+    }
     .apply-damage-window {
         .column {
             text-align: center;
