@@ -126,6 +126,7 @@ Hooks.once("init", async function() {
     CONFIG.Token.objectClass = ageToken;
     CONFIG.Item.documentClass = ageSystemItem;
     CONFIG.ActiveEffect.documentClass = ageEffect;
+    CONFIG.ageSystem = ageSystem;
     // Saving this customization for a later implementation
     // CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;
 
@@ -134,16 +135,6 @@ Hooks.once("init", async function() {
 
     // Register System Settings
     Settings.registerSystemSettings();
-
-    // Define Token Icons and In Use Token Effects
-    CONFIG.ageSystem = ageSystem;
-    ageSystem.statusEffects.custom = await game.settings.get("age-system", "customTokenEffects");
-    let inUseConditions = await game.settings.get("age-system", "inUseConditions");
-    if (!['expanse', 'custom'].includes(inUseConditions)) inUseConditions = 'custom';
-    CONFIG.statusEffects = ageSystem.statusEffects[inUseConditions];
-    
-    // Changing a few control icons
-    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/hasty-grave.svg"
 
     // Useful concat Helper from Boilerplate system!
     Handlebars.registerHelper('concat', function() {
@@ -257,7 +248,15 @@ Hooks.once("ready", async function() {
     // Handle flag
     const rollerFlag = await game.user.getFlag("age-system", "ageRollerPos");
     if (!rollerFlag) await game.user.setFlag("age-system", "ageRollerPos", ageSystem.ageRollerPos);
-    game.ageSystem.ageRoller.refresh()
+    game.ageSystem.ageRoller.refresh();
+
+    // Define Token Icons and In Use Token Effects
+    ageSystem.statusEffects.custom = await game.settings.get("age-system", "customTokenEffects");
+    let inUseConditions = await game.settings.get("age-system", "inUseConditions");
+    if (!['expanse', 'custom'].includes(inUseConditions)) inUseConditions = 'custom';
+    CONFIG.statusEffects = foundry.utils.deepClone(ageSystem.statusEffects[inUseConditions]);
+    // Changing a few control icons
+    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/hasty-grave.svg"
 
     // Check if Dice so Nice is active to register Stunt Die option
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {

@@ -380,8 +380,7 @@ export const registerSystemSettings = async function() {
     scope: "world",
     config: false,
     default: 'expanse', // Currently, the only valid values are 'custom' and 'expanse'
-    type: String,
-    onChange: async () => CONFIG.statusEffects = CONFIG.ageSystem.statusEffects[await game.settings.get("age-system", "inUseConditions")]
+    type: String
   })
   
   /**

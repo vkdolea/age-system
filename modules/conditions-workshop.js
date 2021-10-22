@@ -21,7 +21,7 @@ export default class ConditionsWorkshop extends Application {
 
   getData() {
     const data = super.getData();
-    data.conditions = this._customEffects;
+    data.conditions = this._inUseConditions === 'custom' ? this._customEffects : CONFIG.ageSystem.statusEffects[this._inUseConditions];
     data.inUseConditions = this._inUseConditions;
     data.modes = Object.entries(CONST.ACTIVE_EFFECT_MODES).reduce((obj, e) => {
       obj[e[1]] = game.i18n.localize("EFFECT.MODE_"+e[0]);
@@ -55,17 +55,24 @@ export default class ConditionsWorkshop extends Application {
       html.find('.add-effect').click(this._onAddEffect.bind(this));
       html.find('.change-order').click(this._onOrderEffect.bind(this));
     }
-    html.find('.in-use-condition input').change(this._onInUseConditionsSwap.bind(this))
+    html.find('.in-use-condition input').change(this._onInUseConditionsSwap.bind(this));
+    html.find('.save-close').click(this._onCloseWorkshop.bind(this));
   }
 
   // Rever essa função
   _onInUseConditionsSwap(ev) {
     const value = ev.currentTarget.value;
     this._inUseConditions = value;
-    game.settings.set("age-system", "inUseConditions", this._inUseConditions);
-    this._inUseEffects = CONFIG.statusEffects;
-    this._customEffects = game.settings.get("age-system", "customTokenEffects");
     this._refresh();
+  }
+
+  async _onCloseWorkshop(ev) {
+    const type = this._inUseConditions;
+    await game.settings.set("age-system", "inUseConditions", type);
+    await game.settings.set("age-system", "customTokenEffects", this._customEffects);
+    if (type === 'custom') CONFIG.ageSystem.statusEffects[type] = this._customEffects;
+    CONFIG.statusEffects = foundry.utils.deepClone(CONFIG.ageSystem.statusEffects[type]);
+    this.close();
   }
 
   _onOrderEffect(ev) {
@@ -96,10 +103,11 @@ export default class ConditionsWorkshop extends Application {
     const newEffect = {
       icon: "icons/svg/aura.svg",
       label: "",
+      id: 'AGEcustom.' + this._makeId(10),
       changes: [],
       flags: {
         "age-system": {
-          "desc": ""
+          desc: ""
         }
       }
     }
@@ -132,10 +140,9 @@ export default class ConditionsWorkshop extends Application {
       type: "image",
       current: current,
       callback: path => {
-        // const sanePath = path.replace(/http:\/\/*\//, '')
         event.currentTarget.src = path;
         condition.icon = path;
-        this._saveCustomEffects();
+        // this._saveCustomEffects();
       },
       top: this.position.top + 40,
       left: this.position.left + 10
@@ -184,6 +191,16 @@ export default class ConditionsWorkshop extends Application {
     this._refresh();
   }
 
+  _makeId(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
   _onManageChange(ev) {
     const conditionIndex = ev.currentTarget.closest('.individual-effects').dataset.conditionI;
     const changeIndex = ev.currentTarget.closest('.effect-change').dataset.index;
@@ -216,12 +233,16 @@ export default class ConditionsWorkshop extends Application {
     this.render(false)
   }
 
-  _saveCustomEffects() {
-    game.settings.set("age-system", "customTokenEffects", this._customEffects)
-  }
+  // _saveCustomEffects() {
+  //   game.settings.set("age-system", "customTokenEffects", this._customEffects)
+  // }
+
+  // _setInUseConditions() {
+  //   game.settings.set("age-system", "inUseConditions", this._inUseConditions)
+  // }
 
   _refresh() {
-    this._saveCustomEffects();
+    // this._saveCustomEffects();
     this.updateUI();
   }
 }
