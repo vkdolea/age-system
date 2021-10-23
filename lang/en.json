@@ -139,7 +139,8 @@
             "shipPartsOnChar": "Spaceship Features Item type can not be droped on Character sheet.",
             "nonShipPartsOnShip": "Only Spaceship Features item type can be droped on Spaceships.",
             "healthSysNotMatching": "Health System from card and actual in use do not match.",
-            "noValidTokensSelected": "No valid tokens selected."
+            "noValidTokensSelected": "No valid tokens selected.",
+            "repetedIconCondition": "Saving is not possible. Two or more conditons have the same icon selected."
         },
 
         "spaceship": {
@@ -593,6 +594,8 @@
         "conditionsWorkshop": "Conditions Workshop",
         "tokenEffects": "Token Effects",
         "addEffectTop": "Add new effect on top",
-        "addEffectBottom": "Add new effect at bottom"
+        "addEffectBottom": "Add new effect at bottom",
+        "saveClose": "Save & Close",
+        "copyFrom": "Copy from..."
     }
 }

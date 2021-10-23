@@ -68,9 +68,19 @@ export default class ConditionsWorkshop extends Application {
 
   async _onCloseWorkshop(ev) {
     const type = this._inUseConditions;
+    const effects = this._customEffects;
+    // Check if icons are repeated
+    const icons = []
+    if (type === 'custom') {
+      for (let e = 0; e < effects.length; e++) {
+        const icon = effects[e].icon;
+        if (icons.includes(icon)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.repetedIconCondition"));
+        icons.push(icon);
+      }
+    }
     await game.settings.set("age-system", "inUseConditions", type);
-    await game.settings.set("age-system", "customTokenEffects", this._customEffects);
-    if (type === 'custom') CONFIG.ageSystem.statusEffects[type] = this._customEffects;
+    await game.settings.set("age-system", "customTokenEffects", effects);
+    if (type === 'custom') CONFIG.ageSystem.statusEffects[type] = effects;
     CONFIG.statusEffects = foundry.utils.deepClone(CONFIG.ageSystem.statusEffects[type]);
     this.close();
   }
@@ -229,20 +239,7 @@ export default class ConditionsWorkshop extends Application {
     this._refresh();
   };
 
-  updateUI() {
-    this.render(false)
-  }
-
-  // _saveCustomEffects() {
-  //   game.settings.set("age-system", "customTokenEffects", this._customEffects)
-  // }
-
-  // _setInUseConditions() {
-  //   game.settings.set("age-system", "inUseConditions", this._inUseConditions)
-  // }
-
   _refresh() {
-    // this._saveCustomEffects();
-    this.updateUI();
+    this.render(false)
   }
 }

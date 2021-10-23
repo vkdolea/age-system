@@ -14,8 +14,13 @@
                         </div>
                         <img class="item-image user-entry" src="{{condition.icon}}" data-field="img" title="{{condition.label}}" width="100" height="100"/>
                         <div>
+                            {{#if (eq ../inUseConditions "custom")}}
                             <h3><input type="text" class="user-entry" name="conditions.{{i}}.label" value="{{condition.label}}" data-dtype="Number" data-field="name"/></h3>
                             <textarea class="user-entry" name="conditions.{{i}}.flags.age-system.desc" data-field="desc" cols="30" rows="10">{{#with (lookup condition.flags "age-system")~}}{{desc}}{{/with}}</textarea>
+                            {{else}}
+                            <h3><input type="text" disabled class="user-entry" name="conditions.{{i}}.label" value="{{localize condition.label}}" data-dtype="Number" data-field="name"/></h3>
+                            <textarea class="user-entry" disabled name="conditions.{{i}}.flags.age-system.desc" data-field="desc" cols="30" rows="10">{{#with (lookup condition.flags "age-system")~}}{{localize desc}}{{/with}}</textarea>
+                            {{/if}}
                         </div>
                     </div>
                     <div class="effects">
@@ -60,8 +65,7 @@
     <div class="column controls">
         <h2>{{localize "age-system.settings.options"}}</h2>
         <div>
-            <h3>{{localize "age-system.inUseEffects"}}</h3>
-            <div class="in-use-condition">
+            <div class="in-use-condition flexcol">
                 {{radioBoxes radioB.name radioB.choices radioB.options}}
             </div>
             {{#if (eq inUseConditions 'custom')}}
@@ -70,7 +74,7 @@
             <button >{{localize "age-system.copyFrom"}}</button>
             {{/if}}
             <hr>
-            <button class="save-close">Save & Close</button>
+            <button class="save-close">{{localize "age-system.saveClose"}}</button>
         </div>
     </div>
 

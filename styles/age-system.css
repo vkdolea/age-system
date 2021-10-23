@@ -3999,6 +3999,13 @@ body *:not(i, .fa, .far, .fas) {
 .age-system-dialog .column.controls button {
   margin: 2px 4px;
 }
+.age-system-dialog .column.controls .in-use-condition {
+  text-align: left;
+  margin: 0 auto;
+}
+.age-system-dialog .column.controls .in-use-condition label {
+  font-size: 16px;
+}
 .age-system-dialog .apply-damage-window .column {
   text-align: center;
 }
