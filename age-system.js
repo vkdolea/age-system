@@ -147,6 +147,18 @@ Hooks.once("init", async function() {
         return outStr;
     });
 
+    Handlebars.registerHelper('effectModeName', function(modeNumber) {
+        const modeNames = [
+            "EFFECT.MODE_CUSTOM",
+            "EFFECT.MODE_MULTIPLY",
+            "EFFECT.MODE_ADD",
+            "EFFECT.MODE_DOWNGRADE",
+            "EFFECT.MODE_UPGRADE",
+            "EFFECT.MODE_OVERRIDE"
+        ];
+        return game.i18n.localize(modeNames[modeNumber]);
+    })
+
     // Handlebar to identify type of Effect
     Handlebars.registerHelper('ageffect', function(mask, options) {
         for (let o = 0; o < options.length; o++) {

@@ -1395,6 +1395,10 @@
   position: fixed;
   z-index: 10;
 }
+.age-system.sheet.char.standard .item-container .item-box .container-tooltip-text .effect-changes {
+  margin-top: 4px;
+  font-size: 12px;
+}
 .age-system.sheet.char.standard .item-container .item-box .tooltip-container:hover .container-tooltip-text {
   visibility: visible;
 }

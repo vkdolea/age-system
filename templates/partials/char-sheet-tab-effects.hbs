@@ -27,13 +27,7 @@
                 </div>
                 <div class="flexcol effect-operation">
                     {{#each effect.changes as |change|}}
-                    <p>{{#if (eq change.mode 0)}}{{ localize "EFFECT.MODE_CUSTOM" }}{{/if}}
-                        {{#if (eq change.mode 1)}}{{ localize "EFFECT.MODE_MULTIPLY" }}{{/if}}
-                        {{#if (eq change.mode 2)}}{{ localize "EFFECT.MODE_ADD" }}{{/if}}
-                        {{#if (eq change.mode 3)}}{{ localize "EFFECT.MODE_DOWNGRADE" }}{{/if}}
-                        {{#if (eq change.mode 4)}}{{ localize "EFFECT.MODE_UPGRADE" }}{{/if}}
-                        {{#if (eq change.mode 5)}}{{ localize "EFFECT.MODE_OVERRIDE" }}{{/if}}
-                    </p>
+                    <p>{{effectModeName change.mode}}</p>
                     {{/each}}
                 </div>
                 <div class="flexcol effect-value">

@@ -86,7 +86,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
         // Sorting Active Effects by Name
         data.effects = data.effects.filter(e => !e.flags?.["age-system"]?.isCondition && !e.flags?.core?.statusId);
-        data.effects = sortObjArrayByName(data.effects, `label`);
+        data.effects = sortObjArrayByName(data.effects, `label`);       
     
         // Retrieve Prefession/Ancestry settings
         data.ancestry = game.settings.get("age-system", "ancestryOpt");
@@ -117,7 +117,8 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             editable: isEditable,
             title: this.title,
             isGM: game.user.isGM,
-            conditions: data.condEffects
+            conditions: data.condEffects,
+            modeNames: modeNames
         };
     };
 
