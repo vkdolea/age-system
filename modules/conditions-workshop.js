@@ -59,10 +59,8 @@ export default class ConditionsWorkshop extends Application {
     html.find('.save-close').click(this._onCloseWorkshop.bind(this));
   }
 
-  // Rever essa função
   _onInUseConditionsSwap(ev) {
-    const value = ev.currentTarget.value;
-    this._inUseConditions = value;
+    this._inUseConditions = ev.currentTarget.value;
     this._refresh();
   }
 
@@ -94,7 +92,7 @@ export default class ConditionsWorkshop extends Application {
       case "up":
         if (i == 0) break;
         this._customEffects.splice(i, 1);
-        this._customEffects.splice(i-1, 0, effect);
+        this._customEffects.splice(i - 1, 0, effect);
         break;
     
       case 'down':
@@ -109,15 +107,15 @@ export default class ConditionsWorkshop extends Application {
 
   _onAddEffect(ev) {
     const pos = ev.currentTarget.dataset.position;
-    const size = this._customEffects.length;
     const newEffect = {
       icon: "icons/svg/aura.svg",
       label: "",
-      id: 'AGEcustom.' + this._makeId(10),
+      id: 'AGEcustom.' + this._makeId(20),
       changes: [],
       flags: {
         "age-system": {
-          desc: ""
+          desc: "",
+          isCondition: false
         }
       }
     }
@@ -177,6 +175,10 @@ export default class ConditionsWorkshop extends Application {
 
       case 'desc':
         condition.flags["age-system"].desc = newValue;
+        break;
+      
+      case 'isCondition':
+        condition.flags["age-system"].isCondition = ev.currentTarget.checked;
         break;
 
       case 'change-key':

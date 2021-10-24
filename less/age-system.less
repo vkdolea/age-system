@@ -129,8 +129,12 @@ body *:not(i, .fa, .far, .fas) {
 .age-system-dialog {
     .conditions-workshop {
         .individual-effects {
+            img {
+                height: 124px;
+                width: 124px;
+            }
             .item-image {
-                flex: 0 0 100px; 
+                flex: 0 0 124px; 
             }
             .item-image:hover {
                 cursor: pointer;
@@ -177,6 +181,15 @@ body *:not(i, .fa, .far, .fas) {
             width: -webkit-fill-available;
             margin-left: 4px;
             resize: none;
+        }
+        .is-condition {
+            margin-left: 4px;
+            margin-bottom: 4px;
+            > * {
+                margin: auto 0;
+                font-size: 12px;
+                margin-right: 4px;
+            }
         }
         .individual-effects {
             h3 {

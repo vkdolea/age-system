@@ -1373,6 +1373,8 @@
   padding: 4px;
   margin: 2px 4px 2px 4px;
   align-items: center;
+  text-align: center;
+  cursor: pointer;
 }
 .age-system.sheet.char.standard .item-container .item-box p {
   margin: 0px;
@@ -1388,6 +1390,7 @@
   text-align: left;
   border-radius: 5px;
   padding: 4px;
+  opacity: 0.8;
   /* Position the tooltip */
   position: fixed;
   z-index: 10;
@@ -3937,8 +3940,12 @@ body *:not(i, .fa, .far, .fas) {
   margin-right: 4px;
   border: none;
 }
+.age-system-dialog .conditions-workshop .individual-effects img {
+  height: 124px;
+  width: 124px;
+}
 .age-system-dialog .conditions-workshop .individual-effects .item-image {
-  flex: 0 0 100px;
+  flex: 0 0 124px;
 }
 .age-system-dialog .conditions-workshop .individual-effects .item-image:hover {
   cursor: pointer;
@@ -3987,6 +3994,15 @@ body *:not(i, .fa, .far, .fas) {
   width: -webkit-fill-available;
   margin-left: 4px;
   resize: none;
+}
+.age-system-dialog .conditions-workshop .is-condition {
+  margin-left: 4px;
+  margin-bottom: 4px;
+}
+.age-system-dialog .conditions-workshop .is-condition > * {
+  margin: auto 0;
+  font-size: 12px;
+  margin-right: 4px;
 }
 .age-system-dialog .conditions-workshop .individual-effects h3 {
   padding-left: 4px;

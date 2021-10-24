@@ -74,17 +74,18 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         }
 
         // Sort Conditions alphabetically
-        data.conditions = sortObjArrayByName(data.config.conditions, "name");
-        for (let c = 0; c < data.conditions.length; c++) {
-            const element = data.conditions[c];
-            element.active = this.actor.data.data.conditions[element.id];           
-        };
+        data.conditions = foundry.utils.deepClone(CONFIG.statusEffects).filter(e => e.flags["age-system"].isCondition);
+        for (let i = 0; i < data.conditions.length; i++) {
+            if (ageSystem.inUseStatusEffects !== 'custom') data.conditions[i].label = game.i18n.localize(data.conditons[i].label);
+            const cond = data.conditions[i];
+            const hasCondition = data.effects.filter(c => c?.flags?.core?.statusId === cond.id);
+            if (hasCondition.length > 0) data.conditions[i].active = true;
+        }
+        
+        data.conditions = sortObjArrayByName(data.conditions, "label");
 
         // Sorting Active Effects by Name
-        // Separating Effects related to Conditions...
-        data.condEffects = data.effects.filter(e => e.flags?.["age-system"]?.type === "conditions");
-        // ...from all other Effects
-        data.effects = data.effects.filter(e => !e.flags?.["age-system"]?.type);
+        data.effects = data.effects.filter(e => !e.flags?.["age-system"]?.isCondition && !e.flags?.core?.statusId);
         data.effects = sortObjArrayByName(data.effects, `label`);
     
         // Retrieve Prefession/Ancestry settings
@@ -115,7 +116,8 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             owner: isOwner,
             editable: isEditable,
             title: this.title,
-            isGM: game.user.isGM
+            isGM: game.user.isGM,
+            conditions: data.condEffects
         };
     };
 
@@ -208,7 +210,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".item-show").click(this._onItemShow.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
-            html.find(".condition-checkbox").change(this._onChangeCondition.bind(this));
+            html.find(".conditions .item-name").click(this._onChangeCondition.bind(this));
             html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
             html.find(".wgroup-item").click(this._onWeaponGroupToggle.bind(this));
         }
@@ -350,13 +352,14 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     }
 
     _onChangeCondition(event) {
-        const isChecked = event.currentTarget.checked;
+        const isChecked = null;
         const condId = event.currentTarget.closest(".feature-controls").dataset.conditionId;
-        return this.actor.handleConditions(condId, isChecked);
+        return this.actor.handleConditions(condId);
     }
 
     _onTooltipHover(event){
         const tipCont = event.currentTarget.querySelector(".container-tooltip-text");
+        if (!tipCont) return
         const windowSize = {
             x: event.view.innerWidth,
             y: event.view.innerHeight
@@ -370,7 +373,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         tipCont.style.left = `${xPos}px`;
     };
 
-    _onAddEffect(event) {
+    async _onAddEffect(event) {
         const newEffect = {
             label: game.i18n.localize("age-system.item.newItem"),
             origin: this.actor.uuid,
@@ -378,7 +381,8 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             disabled: true,
             duration: {rounds: 1}
         };
-        return this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+        const e = await this.actor.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+        return e[0].sheet.render(true);
     }
 
     _onActiveEffect(event){

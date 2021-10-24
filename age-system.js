@@ -254,6 +254,7 @@ Hooks.once("ready", async function() {
     ageSystem.statusEffects.custom = await game.settings.get("age-system", "customTokenEffects");
     let inUseConditions = await game.settings.get("age-system", "inUseConditions");
     if (!['expanse', 'custom'].includes(inUseConditions)) inUseConditions = 'custom';
+    ageSystem.inUseStatusEffects = inUseConditions;
     CONFIG.statusEffects = foundry.utils.deepClone(ageSystem.statusEffects[inUseConditions]);
     // Changing a few control icons
     CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/hasty-grave.svg"

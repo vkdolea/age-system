@@ -12,10 +12,14 @@
                             <i class="fas fa-trash delete-effect"></i>
                             <i class="fa fa-chevron-down change-order" data-direction="down" aria-hidden="true"></i>
                         </div>
-                        <img class="item-image user-entry" src="{{condition.icon}}" data-field="img" title="{{condition.label}}" width="100" height="100"/>
+                        <img class="item-image user-entry" src="{{condition.icon}}" data-field="img" title="{{condition.label}}"/>
                         <div>
                             {{#if (eq ../inUseConditions "custom")}}
                             <h3><input type="text" class="user-entry" name="conditions.{{i}}.label" value="{{condition.label}}" data-dtype="Number" data-field="name"/></h3>
+                            <div class="is-condition flexrow">
+                                <input type="checkbox" class="user-entry" {{#if condition.flags.age-system.isCondition}}checked{{/if}} name="conditions.{{i}}.flags.age-system.isCondition" data-field="isCondition">
+                                <label>Is Condition</label>
+                            </div>
                             <textarea class="user-entry" name="conditions.{{i}}.flags.age-system.desc" data-field="desc" cols="30" rows="10">{{#with (lookup condition.flags "age-system")~}}{{desc}}{{/with}}</textarea>
                             {{else}}
                             <h3><input type="text" disabled class="user-entry" name="conditions.{{i}}.label" value="{{localize condition.label}}" data-dtype="Number" data-field="name"/></h3>
