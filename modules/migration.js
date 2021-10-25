@@ -228,6 +228,19 @@ export const migrateItemData = function(item) {
 /* -------------------------------------------- */
 
 /**
+ * Migrate a single Item entity to incorporate latest data model changes
+ * @param effect
+ */
+ export const migrateEffectData = function(effect) {
+  const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
+  const updateData = {};
+  if (isNewerVersion("0.8.8", lastMigrationVer)) _addEffectFlags(effect, updateData); // Do not execute if last migration was 0.8.8 or earlier
+  return updateData;
+};
+
+/* -------------------------------------------- */
+
+/**
  * Migrate a single Scene entity to incorporate changes to the data model of it's actor data overrides
  * Return an Object of updateData to be applied
  * @param {Object} scene  The Scene data to Update
@@ -243,10 +256,10 @@ export const migrateItemData = function(item) {
         console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
       });
     }
-    // Migrate Effects, version 8.10
+    // Migrate Effects, version 0.8.8
     if (t.actorData.effects) {
       token.actor.effects.forEach(async (e) => {
-        const updates = migrateEffectData(e) // Create migrateEffectData
+        const updates = migrateEffectData(e)
         await e.update(updates);
         console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
       });
@@ -269,6 +282,21 @@ export const migrateItemData = function(item) {
 
 /* -------------------------------------------- */
 /*  Low level migration utilities
+/* -------------------------------------------- */
+
+/**
+ * Add Effects flags for version 0.8.8
+ * @private
+ */
+ function _addEffectFlags(effect, updateData) {
+  if (effect.data.flags["age-system"]?.type === 'conditions') {
+    updateData["data.flags.age-system"].isCondition = true;
+    updateData["data.flags.age-system"].conditionType = 'expanse';
+    updateData["data.flags.age-system"].desc = `age-system.conditions.${effect.data.flags["age-system"].name}.desc`;
+  }
+
+  return updateData
+}
 /* -------------------------------------------- */
 
 /**
