@@ -98,8 +98,12 @@ Icons made by:
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
 ## 0.8.8 [2021-10-xx]
+### Added
+- Conditions Workshop, to create custom Conditions and Token Effect. Only GMs can access. To access Conditions Workshop, hover Age Roller icon and select the option in the right-hand side menu.
+
 ### Fixed
 - Flavor incorrect on chat card when rolling Focus from stat block sheet.
+- Correct damage deduction when applying damage using Ballistic damage.
 
 ## 0.8.7 [2021-10-13]
 ### Added

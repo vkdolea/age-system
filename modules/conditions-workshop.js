@@ -31,7 +31,7 @@ export default class ConditionsWorkshop extends Application {
     data.radioB = {
       name: "inUseConditions",
       choices: {
-        expanse: game.i18n.localize('SETTINGS.healthSysexpanse'),
+        expanse: "The Expanse",
         custom: game.i18n.localize('age-system.custom')
       },
       options: {
@@ -54,9 +54,22 @@ export default class ConditionsWorkshop extends Application {
       html.find('.delete-effect').click(this._onDeleteEffect.bind(this));
       html.find('.add-effect').click(this._onAddEffect.bind(this));
       html.find('.change-order').click(this._onOrderEffect.bind(this));
+      html.find('.copy-effects').click(this._onCopyToCustom.bind(this));
     }
     html.find('.in-use-condition input').change(this._onInUseConditionsSwap.bind(this));
     html.find('.save-close').click(this._onCloseWorkshop.bind(this));
+  }
+
+  _onCopyToCustom(ev) {
+    const origin = ev.currentTarget.dataset.origin;
+    const newEffects = foundry.utils.deepClone(CONFIG.ageSystem.statusEffects[origin]);
+    for (let ef = 0; ef < newEffects.length; ef++) {
+      newEffects[ef].label = game.i18n.localize(newEffects[ef].label);
+      newEffects[ef].flags["age-system"].desc = game.i18n.localize(newEffects[ef].flags["age-system"]?.desc);
+      newEffects[ef].flags["age-system"].conditionType = 'custom';
+    }
+    this._customEffects = newEffects;
+    this._refresh()
   }
 
   _onInUseConditionsSwap(ev) {
@@ -115,7 +128,8 @@ export default class ConditionsWorkshop extends Application {
       flags: {
         "age-system": {
           desc: "",
-          isCondition: false
+          isCondition: false,
+          conditionType: 'custom'
         }
       }
     }

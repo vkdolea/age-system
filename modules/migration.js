@@ -6,11 +6,11 @@ export const migrateWorld = async function() {
   ui.notifications.info(`Applying AGE System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
 
   // Migrate World Actors
-  for ( let a of game.actors.entities ) {
+  for ( let a of game.actors.contents ) {
     try {
       const updateData = migrateActorData(a.data);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
-        console.log(`Migrating Actor entity ${a.name}`);
+        console.log(`Migrating Actor document ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
@@ -20,11 +20,11 @@ export const migrateWorld = async function() {
   }
 
   // Migrate World Items
-  for ( let i of game.items.entities ) {
+  for ( let i of game.items.contents ) {
     try {
       const updateData = migrateItemData(i.data);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
-        console.log(`Migrating Item entity ${i.name}`);
+        console.log(`Migrating Item document ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
@@ -34,11 +34,11 @@ export const migrateWorld = async function() {
   }
 
   // Migrate Actor Override Tokens
-  for ( let s of game.scenes.entities ) {
+  for ( let s of game.scenes.contents ) {
     try {
       const updateData = await migrateSceneData(s.data);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
-        console.log(`Migrating Scene entity ${s.name}`);
+        console.log(`Migrating Scene document ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
@@ -149,7 +149,7 @@ export const migrateCompendium = async function(pack) {
 
   // Apply the original locked status for the pack
   await pack.configure({locked: wasLocked});
-  console.log(`Migrated all ${entity} entities from Compendium ${pack.collection}`);
+  console.log(`Migrated all ${entity} documents from Compendium ${pack.collection}`);
 };
 
 /* -------------------------------------------- */
@@ -171,6 +171,22 @@ export const migrateActorData = function(actor) {
   // _addActorMods(actor, updateData);
   // _addActorPersonaFields(actor, updateData);
   
+  // Migrate Owned Effects
+  if (actor.effects) { // Rever essa função!!!!
+    const effects = actor.effects.reduce((arr, e) => {
+      // Migrate the Owned Effect
+      let effectUpdate = migrateEffectData(e);
+  
+      // Update the Owned Effect
+      if ( !isObjectEmpty(effectUpdate) ) {
+        effectUpdate._id = e._id;
+        arr.push(effectUpdate);
+      }
+  
+      return arr;
+    }, []);
+    if (effects.length > 0) updateData.effects = effects;
+  }
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
@@ -224,7 +240,15 @@ export const migrateItemData = function(item) {
       token.actor.items.forEach(async (i) => {
         const updates = migrateItemData(i.data)
         await i.update(updates);
-        console.log(`Migrated ${i.data.type} entity ${i.name} from token ${token.data.name}`);
+        console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
+      });
+    }
+    // Migrate Effects, version 8.10
+    if (t.actorData.effects) {
+      token.actor.effects.forEach(async (e) => {
+        const updates = migrateEffectData(e) // Create migrateEffectData
+        await e.update(updates);
+        console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
       });
     }
     if (!t.actorId || t.actorLink || !t.actorData.data) {

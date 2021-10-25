@@ -76,7 +76,10 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         // Sort Conditions alphabetically
         data.conditions = foundry.utils.deepClone(CONFIG.statusEffects).filter(e => e.flags["age-system"].isCondition);
         for (let i = 0; i < data.conditions.length; i++) {
-            if (ageSystem.inUseStatusEffects !== 'custom') data.conditions[i].label = game.i18n.localize(data.conditons[i].label);
+            if (ageSystem.inUseStatusEffects !== 'custom') {
+                data.conditions[i].label = game.i18n.localize(data.conditions[i].label);
+                if (data.conditions[i].flags["age-system"].desc) data.conditions[i].flags["age-system"].desc = game.i18n.localize(data.conditions[i].flags["age-system"].desc);
+            }
             const cond = data.conditions[i];
             const hasCondition = data.effects.filter(c => c?.flags?.core?.statusId === cond.id);
             if (hasCondition.length > 0) data.conditions[i].active = true;
@@ -85,7 +88,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.conditions = sortObjArrayByName(data.conditions, "label");
 
         // Sorting Active Effects by Name
-        data.effects = data.effects.filter(e => !e.flags?.["age-system"]?.isCondition && !e.flags?.core?.statusId);
+        data.effects = data.effects.filter(e => ((e.flags?.["age-system"]?.conditionType !== ageSystem.inUseStatusEffects) && e.flags?.core?.statusId) || !e.flags?.core?.statusId);
         data.effects = sortObjArrayByName(data.effects, `label`);       
     
         // Retrieve Prefession/Ancestry settings
@@ -117,8 +120,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             editable: isEditable,
             title: this.title,
             isGM: game.user.isGM,
-            conditions: data.condEffects,
-            modeNames: modeNames
+            conditions: data.condEffects
         };
     };
 

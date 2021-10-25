@@ -368,6 +368,9 @@ ageSystem.statusEffects = {
             "age-system": {
                 type: "conditions",
                 name: "blinded",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.blindedDesc"
             }
         }
     },
@@ -379,6 +382,9 @@ ageSystem.statusEffects = {
             "age-system": {
                 type: "conditions",
                 name: "deafened",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.deafenedDesc"
             }
         }
     },
@@ -389,7 +395,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "dying"
+                name: "dying",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.dyingDesc"
             }
         }
     },
@@ -400,7 +409,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "fatigued"
+                name: "fatigued",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.fatiguedDesc",
             }
         }
     },
@@ -411,7 +423,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "exhausted"
+                name: "exhausted",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.exhaustedDesc"
             }
         },
         changes: [{
@@ -427,7 +442,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "freefalling"
+                name: "freefalling",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.freefallingDesc"
             }
         }
     },
@@ -438,7 +456,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "helpless"
+                name: "helpless",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.helplessDesc"
             }
         }
     },
@@ -449,7 +470,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "hindered"
+                name: "hindered",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.hinderedDesc"
             }
         },
         changes: [{
@@ -465,7 +489,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "injured"
+                name: "injured",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.injuredDesc"
             }
         },
         changes: [{
@@ -481,7 +508,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "wounded"
+                name: "wounded",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.woundedDesc"
             }
         },
         changes: [{
@@ -502,7 +532,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "prone"
+                name: "prone",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.proneDesc"
             }
         }
     },
@@ -513,7 +546,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "restrained"
+                name: "restrained",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.restrainedDesc",
             }
         },
         changes: [{
@@ -529,7 +565,10 @@ ageSystem.statusEffects = {
         flags: {
             "age-system": {
                 type: "conditions",
-                name: "unconscious"
+                name: "unconscious",
+                isCondition: true,
+                conditionType: "expanse",
+                desc: "age-system.conditions.unconsciousDesc"
             }
         },
         changes: [{

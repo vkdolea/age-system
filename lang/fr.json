@@ -104,7 +104,7 @@
     "SETTINGS.observerRoll": "Permet à un Observateur de faire des jets",
     "SETTINGS.observerRollHint": "Permet aux joueurs avec le rôle d'Observateur de faire des jets depuis les fiches ou les jets de la discussion",
 
-    "SETTINGS.weaponGroups": "Groups d'Armes",
+    "SETTINGS.weaponGroups": "Groups d'armes",
     "SETTINGS.weaponGroupsHint": "Indiquez les groupes d'armes en utilisant ; pour séparer les groupes. Laissez vide si les groupes d'armes ne sont pas utilisés (comme dans Modern Age)",
 
     "SETTINGS.healthSys": "Système de gestion de la Santé",
@@ -139,7 +139,8 @@
 			"shipPartsOnChar": "Les objets de type Fonctionnalités de Vaisseaux ne peuvent être ajoutées à une feuille de Personnage",
             "nonShipPartsOnShip": "Seuls les objets de type Fonctionnalités de Vaisseaux peuvent être ajoutée à un Vaisseau.",
             "healthSysNotMatching": "Le système de Santé en utilisation actuellement et sur la fiche ne correspondent pas.",
-            "noValidTokensSelected": "Aucun tokens valides sélectionnés."
+            "noValidTokensSelected": "Aucun tokens valides sélectionnés.",
+            "repetedIconCondition": "La sauvegarde est impossible. Deux conditions ou plus ont le même icone sélectionné."
 		},
         
 		"spaceship": {
@@ -554,7 +555,7 @@
         "thisItemDmgBns": "Bonus Objets",
         "rollFatigue": "Jet de fatigue",
         "blindRollSomeone": "Vous avez fait un jet caché vers le MJ",
-        "wgroupPenalty": "Pénalité Group d'Armes",
+        "wgroupPenalty": "Pénalité Group d'armes",
         "activationMod": "Bonus Jets",
 		"success": "Réussite",
         "miss": "Échec",
@@ -588,6 +589,13 @@
         "letPlayerRoll": "Laisser le joueur lancer les dés",
         "lightInjuryInflicted": "1 Blessure Légère infligée",
         "seriousInjuryInflicted": "1 Blessure Sérieuse infligée",
-        "severeInjuryInflicted": "1 Blessure Fatale infligée"
+        "severeInjuryInflicted": "1 Blessure Fatale infligée",
+
+        "conditionsWorkshop": "Atelier des conditions",
+        "tokenEffects": "Effets du Jeton",
+        "addEffectTop": "Ajouter un nouvel effet en haut",
+        "addEffectBottom": "Ajouter un nouvel effet en bas",
+        "saveClose": "Sauvegarde & Ferme",
+        "copyEffectsExpanse": "Copie les effets de The Expanse"
     }
 }
