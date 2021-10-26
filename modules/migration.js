@@ -179,7 +179,8 @@ export const migrateActorData = function(actor) {
   
       // Update the Owned Effect
       if ( !isObjectEmpty(effectUpdate) ) {
-        effectUpdate._id = e._id;
+        effectUpdate._id = e?.data?.data ? e.id : e._id;
+        // effectUpdate._id = e._id;
         arr.push(effectUpdate);
       }
   
@@ -289,12 +290,26 @@ export const migrateItemData = function(item) {
  * @private
  */
  function _addEffectFlags(effect, updateData) {
-  if (effect.data.flags["age-system"]?.type === 'conditions') {
+  if (effect.data.flags["age-system"]?.type === 'conditions' && effect.data.flags.core.statusId) {
     updateData["data.flags.age-system"].isCondition = true;
     updateData["data.flags.age-system"].conditionType = 'expanse';
     updateData["data.flags.age-system"].desc = `age-system.conditions.${effect.data.flags["age-system"].name}.desc`;
   }
 
+  const a =     {
+    label: "age-system.conditions.deafened",
+    id: "deafened",
+    icon: "icons/svg/deaf.svg",
+    flags: {
+        "age-system": {
+            type: "conditions",
+            name: "deafened",
+            isCondition: true,
+            conditionType: "expanse",
+            desc: "age-system.conditions.deafenedDesc"
+        }
+    }
+},
   return updateData
 }
 /* -------------------------------------------- */
