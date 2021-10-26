@@ -7,7 +7,6 @@ import ageSystemSheetVehicle from "./modules/sheets/ageSystemSheetVehicle.js";
 import ageSystemSheetSpaceship from "./modules/sheets/ageSystemSheetSpaceship.js";
 import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
-import {ageEffect} from "./modules/ageEffect.js";
 import {ageToken} from "./modules/ageToken.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
@@ -66,7 +65,6 @@ Hooks.once("init", async function() {
             ageSystemSheetCharStatBlock,
             ageSystemSheetVehicle,
             ageSystemSheetSpaceship,
-            // ageActiveEffectConfig,
             ageSystemSheetItem,
             AgeRoller,
             AgeTracker
@@ -77,8 +75,7 @@ Hooks.once("init", async function() {
         entities: {
             ageSystemActor,
             ageToken,
-            ageSystemItem,
-            ageEffect
+            ageSystemItem
         }
     };
 
@@ -125,7 +122,6 @@ Hooks.once("init", async function() {
     CONFIG.Actor.documentClass = ageSystemActor;
     CONFIG.Token.objectClass = ageToken;
     CONFIG.Item.documentClass = ageSystemItem;
-    CONFIG.ActiveEffect.documentClass = ageEffect;
     CONFIG.ageSystem = ageSystem;
     // Saving this customization for a later implementation
     // CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;

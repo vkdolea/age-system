@@ -39,7 +39,7 @@ export const migrateWorld = async function() {
       const updateData = await migrateSceneData(s.data);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Scene document ${s.name}`);
-        await s.update(updateData, {enforceTypes: false});
+        // await s.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
       err.message = `Failed AGE System migration for Scene ${s.name}: ${err.message}`;
@@ -175,11 +175,11 @@ export const migrateActorData = function(actor) {
   if (actor.effects) { // Rever essa função!!!!
     const effects = actor.effects.reduce((arr, e) => {
       // Migrate the Owned Effect
-      let effectUpdate = migrateEffectData(e);
+      let effectUpdate = migrateEffectData(e.data ?? e);
   
       // Update the Owned Effect
       if ( !isObjectEmpty(effectUpdate) ) {
-        effectUpdate._id = e?.data?.data ? e.id : e._id;
+        effectUpdate._id = e.id;
         // effectUpdate._id = e._id;
         arr.push(effectUpdate);
       }
@@ -247,7 +247,7 @@ export const migrateItemData = function(item) {
  * @param {Object} scene  The Scene data to Update
  * @return {Object}       The updateData to apply
  */
- export const migrateSceneData = async function(scene) {
+export const migrateSceneData = async function(scene) {
   const tokens = scene.tokens.map(async (token) => {
     const t = token.toJSON();
     if (t.actorData.items) {
@@ -260,9 +260,9 @@ export const migrateItemData = function(item) {
     // Migrate Effects, version 0.8.8
     if (t.actorData.effects) {
       token.actor.effects.forEach(async (e) => {
-        const updates = migrateEffectData(e)
+        const updates = migrateEffectData(e.data ?? e)
         await e.update(updates);
-        console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
+        console.log(`Migrated Active Effect named ${e.id} from token ${token.data.name}`);
       });
     }
     if (!t.actorId || t.actorLink || !t.actorData.data) {
@@ -274,7 +274,7 @@ export const migrateItemData = function(item) {
     }
     else if ( !t.actorLink ) {
       t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
-      console.log(t.actorData);
+      // console.log(t.actorData);
     }
     return t;
   });
@@ -290,26 +290,15 @@ export const migrateItemData = function(item) {
  * @private
  */
  function _addEffectFlags(effect, updateData) {
-  if (effect.data.flags["age-system"]?.type === 'conditions' && effect.data.flags.core.statusId) {
-    updateData["data.flags.age-system"].isCondition = true;
-    updateData["data.flags.age-system"].conditionType = 'expanse';
-    updateData["data.flags.age-system"].desc = `age-system.conditions.${effect.data.flags["age-system"].name}.desc`;
+  if (effect.flags["age-system"]?.type === 'conditions' && effect.flags.core.statusId) {
+    updateData.flags = {
+      "age-system": {
+        isCondition: true,
+        conditionType: 'expanse',
+        desc: `age-system.conditions.${effect.flags["age-system"].name}.desc`
+      }
+    };
   }
-
-  const a =     {
-    label: "age-system.conditions.deafened",
-    id: "deafened",
-    icon: "icons/svg/deaf.svg",
-    flags: {
-        "age-system": {
-            type: "conditions",
-            name: "deafened",
-            isCondition: true,
-            conditionType: "expanse",
-            desc: "age-system.conditions.deafenedDesc"
-        }
-    }
-},
   return updateData
 }
 /* -------------------------------------------- */

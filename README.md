@@ -104,6 +104,7 @@ Icons made by:
 ### Fixed
 - Flavor incorrect on chat card when rolling Focus from stat block sheet.
 - Correct damage deduction when applying damage using Ballistic damage.
+- When performing migration, invalid tokens were created on scenes on to top left corner.
 
 ## 0.8.7 [2021-10-13]
 ### Added
