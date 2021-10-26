@@ -27,6 +27,7 @@ export const registerSystemSettings = async function() {
       const newColor = await game.settings.get("age-system", "colorScheme");
       await game.user.setFlag("age-system", "colorScheme", newColor);
       if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
+      game.ageSystem.ageRoller.refresh();
       [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
       .forEach((o) => {
         if (o) {

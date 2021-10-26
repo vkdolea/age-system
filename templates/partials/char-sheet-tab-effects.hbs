@@ -17,7 +17,11 @@
             <li class="flexrow colorset-third-tier elements feature-controls" data-effect-id="{{effect._id}}">
                 <div class="effect-name flexrow">
                     <img class="effect-icon" src="{{effect.icon}}">
+                    {{#if (eq effect.flags.age-system.conditionType "expanse")}}
+                    <p>{{localize effect.label}}</p>
+                    {{else}}
                     <p>{{effect.label}}</p>
+                    {{/if}}
                 </div>
                 {{#if effect.changes}}
                 <div class="flexcol effect-key">

@@ -139,7 +139,8 @@
 			"shipPartsOnChar": "El tipo de objeto Característica para Nave no se puede asignar en la Hoja de Personaje.",
             "nonShipPartsOnShip": "Sólo el tipo de objeto Característica para Nave puede asignarse a una Nave.",
             "healthSysNotMatching": "Sistema de Heridas en la tarjeta y el actual en uso no coinciden.",
-            "noValidTokensSelected": "No hay un Token seleccionado."
+            "noValidTokensSelected": "No hay un Token seleccionado.",
+            "repetedIconCondition": "Guardar no es posible. Dos o más estados tienen el mismo icono seleccionado."
         },
 
         "spaceship": {
@@ -588,6 +589,13 @@
         "letPlayerRoll": "Dejar tire Jugador",
         "lightInjuryInflicted": "1 Herida Leve",
         "seriousInjuryInflicted": "1 Herida Importante",
-        "severeInjuryInflicted": "1 Herida Grave"
+        "severeInjuryInflicted": "1 Herida Grave",
+
+        "conditionsWorkshop": "Taller de Estados",
+        "tokenEffects": "Efectos de Token",
+        "addEffectTop": "Añadir nuevo efecto superior",
+        "addEffectBottom": "Añadir nuevo efecto inferior",
+        "saveClose": "Guardar & Salir",
+        "copyEffectsExpanse": "Copiar efectos desde The Expanse"
     }
 }
