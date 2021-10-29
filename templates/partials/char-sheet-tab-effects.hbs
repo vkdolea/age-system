@@ -17,7 +17,7 @@
             <li class="flexrow colorset-third-tier elements feature-controls" data-effect-id="{{effect._id}}">
                 <div class="effect-name flexrow">
                     <img class="effect-icon" src="{{effect.icon}}">
-                    {{#if (eq effect.flags.age-system.conditionType "expanse")}}
+                    {{#if (ne effect.flags.age-system.conditionType "custom")}}
                     <p>{{localize effect.label}}</p>
                     {{else}}
                     <p>{{effect.label}}</p>
@@ -45,8 +45,10 @@
                 <div class="flexcol effect-value"><p>{{localize "age-system.rof.none"}}</p></div>
                 {{/if}}
                 <div class="effect-add">
+                    {{#unless (and effect.flags.age-system (ne effect.flags.age-system.conditionType ../inUseStatusEffects))}}
                     <a class="effect-active icon {{#if effect.disabled}}inactive{{/if}}"><i class="fas fa-power-off"></i></a>
                     <a class="effect-edit icon"><i class="fas fa-edit"></i></a>
+                    {{/unless}}
                     <a class="effect-remove icon"><i class="fas fa-trash"></i></a>
                 </div>
             </li>

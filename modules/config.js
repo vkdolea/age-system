@@ -582,11 +582,6 @@ ageSystem.statusEffects = {
         id: "sleep",
         label: "EFFECT.StatusAsleep",
         icon: "icons/svg/sleep.svg",
-        flags: {
-            "age-system": {
-                type: "general"
-            }
-        }
     },
     {
         id: "fly",
