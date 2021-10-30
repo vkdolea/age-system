@@ -4,6 +4,18 @@ export default class ConditionsWorkshop extends Application {
     this._inUseConditions = game.settings.get("age-system", "inUseConditions");
     this._customEffects = game.settings.get("age-system", "customTokenEffects");
     this._inUseEffects = CONFIG.statusEffects;
+
+    let hasDead = false;
+    for (const k in this._customEffects) {
+      if (Object.hasOwnProperty.call(this._customEffects, k)) {
+        if (this._customEffects[k].id === `dead`) hasDead = true;
+      }
+    }
+    if (!hasDead) this._customEffects.splice(0, 0, {
+      icon: `${CONFIG.ageSystem.statusEffectsPath}pirate-grave.svg`,
+      id: `dead`,
+      label: game.i18n.localize(`EFFECT.StatusDead`),
+    });
   }
 
   static get defaultOptions() {
@@ -51,7 +63,7 @@ export default class ConditionsWorkshop extends Application {
       // Update changes on fields
       html.find('.user-entry').change(this._onFieldUpdate.bind(this));
       html.find('img.user-entry').click(ev => this._onEditImage(ev));
-      html.find('.delete-effect').click(this._onDeleteEffect.bind(this));
+      html.find('.delete-effect.active').click(this._onDeleteEffect.bind(this));
       html.find('.add-effect').click(this._onAddEffect.bind(this));
       html.find('.change-order').click(this._onOrderEffect.bind(this));
       html.find('.copy-effects').click(this._onCopyToCustom.bind(this));
@@ -65,7 +77,7 @@ export default class ConditionsWorkshop extends Application {
     const newEffects = foundry.utils.deepClone(CONFIG.ageSystem.statusEffects[origin]);
     for (let ef = 0; ef < newEffects.length; ef++) {
       newEffects[ef].label = game.i18n.localize(newEffects[ef].label);
-      newEffects[ef].id = this._makeId(20);
+      newEffects[ef].id = newEffects[ef].id === `dead` ? `dead` : this._makeId(20);
       const newDesc = newEffects[ef].flags?.["age-system"]?.desc;
       const newFlags = {
         "age-system": {

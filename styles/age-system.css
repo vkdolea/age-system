@@ -3966,6 +3966,10 @@ body *:not(i, .fa, .far, .fas) {
 .age-system-dialog .conditions-workshop .individual-effects .order-control .delete-effect {
   margin: 20px 0;
 }
+.age-system-dialog .conditions-workshop .individual-effects .order-control .delete-effect.inactive {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
 .age-system-dialog .conditions-workshop .changes-list {
   padding: 0;
 }
