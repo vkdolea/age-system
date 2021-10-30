@@ -250,7 +250,31 @@ export const migrateItemData = function(item) {
 export const migrateSceneData = async function(scene) {
   const tokens = scene.tokens.map(async (token) => {
     const t = token.toJSON();
-    if (!t.actorId || t.actorLink || !t.actorData.data) {
+
+    if (!t.actorLink && game.actors.has(t.actorId) && (t.actorData.data || t.actorData.effects || t.actorData.items)) {
+      // Migrate Actor Data
+      t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
+
+      // Migrate Items
+      if (t.actorData.items) {
+        token.actor.items.forEach(async (i) => {
+          const updates = migrateItemData(i.data)
+          await i.update(updates);
+          console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
+        });
+      };
+  
+      // // Migrate Effects, version 0.8.8
+      if (t.actorData.effects) {
+        token.actor.effects.forEach(async (e) => {
+          const updates = migrateEffectData(e.data ?? e)
+          await e.update(updates);
+          console.log(`Migrated Active Effect named ${e.id} from token ${token.data.name}`);
+        });
+      };
+    }
+
+    if (!t.actorId || t.actorLink || !t.actorData.data || !t.actorData.effects || !t.actorData.items) {
       t.actorData = {};
     } else if ( !game.actors.has(t.actorId) ){
       t.actorId = null;
