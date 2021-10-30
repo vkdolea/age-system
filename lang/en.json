@@ -139,7 +139,8 @@
             "shipPartsOnChar": "Spaceship Features Item type can not be droped on Character sheet.",
             "nonShipPartsOnShip": "Only Spaceship Features item type can be droped on Spaceships.",
             "healthSysNotMatching": "Health System from card and actual in use do not match.",
-            "noValidTokensSelected": "No valid tokens selected."
+            "noValidTokensSelected": "No valid tokens selected.",
+            "repetedIconCondition": "Saving is not possible. Two or more conditions have the same icon selected."
         },
 
         "spaceship": {
@@ -588,6 +589,13 @@
         "letPlayerRoll": "Let Player Roll",
         "lightInjuryInflicted": "1 Light Injury inflicted",
         "seriousInjuryInflicted": "1 Serious Injury inflicted",
-        "severeInjuryInflicted": "1 Severe Injury inflicted"
+        "severeInjuryInflicted": "1 Severe Injury inflicted",
+
+        "conditionsWorkshop": "Conditions Workshop",
+        "tokenEffects": "Token Effects",
+        "addEffectTop": "Add new effect on top",
+        "addEffectBottom": "Add new effect at bottom",
+        "saveClose": "Save & Close",
+        "copyEffectsExpanse": "Copy effects from The Expanse"
     }
 }

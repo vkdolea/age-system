@@ -7,7 +7,6 @@ import ageSystemSheetVehicle from "./modules/sheets/ageSystemSheetVehicle.js";
 import ageSystemSheetSpaceship from "./modules/sheets/ageSystemSheetSpaceship.js";
 import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
-import {ageEffect} from "./modules/ageEffect.js";
 import {ageToken} from "./modules/ageToken.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
 import { createAgeMacro } from "./modules/macros.js";
@@ -66,7 +65,6 @@ Hooks.once("init", async function() {
             ageSystemSheetCharStatBlock,
             ageSystemSheetVehicle,
             ageSystemSheetSpaceship,
-            // ageActiveEffectConfig,
             ageSystemSheetItem,
             AgeRoller,
             AgeTracker
@@ -77,17 +75,9 @@ Hooks.once("init", async function() {
         entities: {
             ageSystemActor,
             ageToken,
-            ageSystemItem,
-            ageEffect
+            ageSystemItem
         }
     };
-
-    CONFIG.ageSystem = ageSystem;
-
-    // Define Token Icons
-    CONFIG.statusEffects = ageSystem.AGEstatusEffects;
-    // Changing a few control icons
-    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/hasty-grave.svg"
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("age-system", ageSystemSheetCharacter, {
@@ -132,7 +122,7 @@ Hooks.once("init", async function() {
     CONFIG.Actor.documentClass = ageSystemActor;
     CONFIG.Token.objectClass = ageToken;
     CONFIG.Item.documentClass = ageSystemItem;
-    CONFIG.ActiveEffect.documentClass = ageEffect;
+    CONFIG.ageSystem = ageSystem;
     // Saving this customization for a later implementation
     // CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;
 
@@ -152,6 +142,18 @@ Hooks.once("init", async function() {
         }
         return outStr;
     });
+
+    Handlebars.registerHelper('effectModeName', function(modeNumber) {
+        const modeNames = [
+            "EFFECT.MODE_CUSTOM",
+            "EFFECT.MODE_MULTIPLY",
+            "EFFECT.MODE_ADD",
+            "EFFECT.MODE_DOWNGRADE",
+            "EFFECT.MODE_UPGRADE",
+            "EFFECT.MODE_OVERRIDE"
+        ];
+        return game.i18n.localize(modeNames[modeNumber]);
+    })
 
     // Handlebar to identify type of Effect
     Handlebars.registerHelper('ageffect', function(mask, options) {
@@ -254,7 +256,16 @@ Hooks.once("ready", async function() {
     // Handle flag
     const rollerFlag = await game.user.getFlag("age-system", "ageRollerPos");
     if (!rollerFlag) await game.user.setFlag("age-system", "ageRollerPos", ageSystem.ageRollerPos);
-    game.ageSystem.ageRoller.refresh()
+    game.ageSystem.ageRoller.refresh();
+
+    // Define Token Icons and In Use Token Effects
+    ageSystem.statusEffects.custom = await game.settings.get("age-system", "customTokenEffects");
+    let inUseConditions = await game.settings.get("age-system", "inUseConditions");
+    if (!['expanse', 'custom'].includes(inUseConditions)) inUseConditions = 'custom';
+    ageSystem.inUseStatusEffects = inUseConditions;
+    CONFIG.statusEffects = foundry.utils.deepClone(ageSystem.statusEffects[inUseConditions]);
+    // Changing a few control icons
+    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/pirate-grave.svg"
 
     // Check if Dice so Nice is active to register Stunt Die option
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {
@@ -349,7 +360,7 @@ Hooks.once("ready", async function() {
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.8.0";
+    const NEEDS_MIGRATION_VERSION = "0.8.8";
     // const COMPATIBLE_MIGRATION_VERSION = "0.8.7";
     const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;

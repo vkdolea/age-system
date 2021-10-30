@@ -1,4 +1,5 @@
 import { ageRollCheck } from "./dice.js";
+import ConditionsWorkshop from "./conditions-workshop.js";
 
 export class AgeRoller extends Application {
 	constructor(options = {}) {
@@ -12,6 +13,7 @@ export class AgeRoller extends Application {
 	getData(options) {
 		const data = super.getData(options);
 		data.colorset = game.settings.get("age-system", "colorScheme");
+		data.isGM = game.user.isGM;
 		return data;
 	}
 	
@@ -24,6 +26,7 @@ export class AgeRoller extends Application {
 		html.find("#age-roller-container").mouseleave(this._onHideOptions.bind(this));
 		html.find("#age-roller-container").mouseenter(this._onShowOptions.bind(this));
 		html.find("#age-roller").hover(this._onShowOptions.bind(this));
+		html.find(".conditions-workshop").click(this.openConditionWorkshop.bind(this));
 
 		// Set position
 		let roller = document.getElementById("age-roller");
@@ -37,6 +40,10 @@ export class AgeRoller extends Application {
 	
 	refresh() {
 		this.render(true);
+	}
+
+	openConditionWorkshop(ev) {
+		return new ConditionsWorkshop().render(true);
 	}
 
 	_onHideOptions(ev) {

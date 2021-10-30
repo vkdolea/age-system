@@ -27,6 +27,7 @@ export const registerSystemSettings = async function() {
       const newColor = await game.settings.get("age-system", "colorScheme");
       await game.user.setFlag("age-system", "colorScheme", newColor);
       if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
+      game.ageSystem.ageRoller.refresh();
       [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
       .forEach((o) => {
         if (o) {
@@ -249,34 +250,6 @@ export const registerSystemSettings = async function() {
   });
 
   /**
-   * Register if world will use Toughness
-   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
-   */
-  game.settings.register("age-system", "useToughness", {
-    name: "SETTINGS.useToughness",
-    hint: "SETTINGS.useToughnessHint",
-    scope: "world",
-    config: false,
-    default: true,
-    type: Boolean,
-    onChange: debouncedReload
-  }); 
-
-  /**
-   * Option to use split armor
-   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
-   */
-  game.settings.register("age-system", "useBallisticArmor", {
-    name: "SETTINGS.useBallisticArmor",
-    hint: "SETTINGS.useBallisticArmorHint",
-    scope: "world",
-    config: false,
-    default: true,
-    type: Boolean,
-    onChange: debouncedReload
-  });
-
-  /**
    * Register if world will use Fatigue
    */
   game.settings.register("age-system", "useFatigue", {
@@ -398,6 +371,56 @@ export const registerSystemSettings = async function() {
     config: false,
     default: [],
     type: Array
+  });
+
+  
+  /**
+   * Register which Conditios set is used
+   */
+  game.settings.register("age-system", "inUseConditions", {
+    scope: "world",
+    config: false,
+    default: 'expanse', // Currently, the only valid values are 'custom' and 'expanse'
+    type: String,
+    onChange: async () => CONFIG.ageSystem.inUseStatusEffects = await game.settings.get("age-system", "inUseConditions"),
+  })
+  
+  /**
+   * Register custom token Effects array
+   */
+  game.settings.register("age-system", "customTokenEffects", {
+    scope: "world",
+    config: false,
+    default: [],
+    type: Array
+  })
+
+  /**
+   * Register if world will use Toughness
+   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
+   */
+  game.settings.register("age-system", "useToughness", {
+    name: "SETTINGS.useToughness",
+    hint: "SETTINGS.useToughnessHint",
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean,
+    onChange: debouncedReload
+  }); 
+
+  /**
+   * Option to use split armor
+   * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
+   */
+  game.settings.register("age-system", "useBallisticArmor", {
+    name: "SETTINGS.useBallisticArmor",
+    hint: "SETTINGS.useBallisticArmorHint",
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean,
+    onChange: debouncedReload
   });
 };
 

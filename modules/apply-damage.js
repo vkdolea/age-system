@@ -217,7 +217,7 @@ export class DamageHandler {
   constructor(targets, damageData) {
     const healthSys = damageData.healthSys;
     this._damageData = damageData
-    this._useBallistic = healthSys._useBallistic;
+    this._useBallistic = healthSys.useBallistic;
     this._useInjury = healthSys.useInjury;
     this._basicDamage = damageData.totalDamage;
     this._armorPenetration = "none";

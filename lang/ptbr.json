@@ -139,7 +139,8 @@
             "shipPartsOnChar": "Items do tipo \"Atributo de Espaçonave\" não podem ser arrastados para ficha de Personagem ou Veículo.",
             "nonShipPartsOnShip": "Apenas Items do tipo \"Atributos de Espaçonave\" pode ser colocado em uma Nave Espacial.",
             "healthSysNotMatching": "Sistema de Saúdo do cartão não é o mesmo Sistema em uso.",
-            "noValidTokensSelected": "Nenhum token válido selecionado."
+            "noValidTokensSelected": "Nenhum token válido selecionado.",
+            "repetedIconCondition": "Não é possível salvar. Dois ou mais efeitos possuiem o mesmo ícone selecionado."
         },
 
         "spaceship": {
@@ -588,6 +589,13 @@
         "letPlayerRoll": "Jogadores rolam Resistência",
         "lightInjuryInflicted": "1 Ferimento Leve infligido",
         "seriousInjuryInflicted": "1 Ferimento Sério infligido",
-        "severeInjuryInflicted": "1 Ferimento Grave infligido"
+        "severeInjuryInflicted": "1 Ferimento Grave infligido",
+
+        "conditionsWorkshop": "Workshop de Condições",
+        "tokenEffects": "Efeitos de Token",
+        "addEffectTop": "Adicionar efeito no topo",
+        "addEffectBottom": "Adicionar efeito ao fim",
+        "saveClose": "Salvar & Fechar",
+        "copyEffectsExpanse": "Copiar efeitos de \"The Expanse\""
     }
 }

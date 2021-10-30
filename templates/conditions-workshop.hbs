@@ -1,0 +1,89 @@
+<div class="flexrow conditions-workshop">
+
+    <div class="column defenders">
+        <h2>{{localize "age-system.tokenEffects"}}</h2>
+        <div class="targets">
+            {{#each conditions as |condition i|}}
+            <div class="individual-effects flexrow feature-controls" data-condition-i="{{i}}">
+                <div class="effect-data flexcol">
+                    <div class="flexrow">
+                        <div class="order-control">
+                            <i class="fa fa-chevron-up change-order" data-direction="up" aria-hidden="true"></i>
+                            <i class="fas fa-trash delete-effect {{#if (eq condition.id "dead")}}inactive{{else}}active{{/if}}"></i>
+                            <i class="fa fa-chevron-down change-order" data-direction="down" aria-hidden="true"></i>
+                        </div>
+                        <img class="item-image user-entry" src="{{condition.icon}}" data-field="img" title="{{condition.label}}"/>
+                        <div>
+                            {{#if (eq ../inUseConditions "custom")}}
+                            <h3><input type="text" class="user-entry" name="conditions.{{i}}.label" value="{{condition.label}}" data-dtype="Number" placeholder="{{localize "age-system.name"}}" data-field="name"/></h3>
+                            <div class="is-condition flexrow">
+                                <input type="checkbox" class="user-entry" {{#if condition.flags.age-system.isCondition}}checked{{/if}} name="conditions.{{i}}.flags.age-system.isCondition" data-field="isCondition">
+                                <label>Is Condition</label>
+                            </div>
+                            <textarea class="user-entry" name="conditions.{{i}}.flags.age-system.desc" data-field="desc" placeholder="{{localize "age-system.item.desc"}}" cols="30" rows="10">{{#with (lookup condition.flags "age-system")~}}{{desc}}{{/with}}</textarea>
+                            {{else}}
+                            <h3><input type="text" disabled class="user-entry" name="conditions.{{i}}.label" value="{{localize condition.label}}" data-dtype="Number" data-field="name"/></h3>
+                            <div class="is-condition flexrow">
+                                <input type="checkbox" disabled class="user-entry" {{#if condition.flags.age-system.isCondition}}checked{{/if}} name="conditions.{{i}}.flags.age-system.isCondition" data-field="isCondition">
+                                <label>Is Condition</label>
+                            </div>
+                            <textarea class="user-entry" disabled name="conditions.{{i}}.flags.age-system.desc" data-field="desc" cols="30" rows="10">{{#with (lookup condition.flags "age-system")~}}{{localize desc}}{{/with}}</textarea>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="effects">
+                        <header class="effect-change effects-header flexrow">
+                            <div class="key">{{ localize "EFFECT.ChangeKey" }}</div>
+                            <div class="mode">{{ localize "EFFECT.ChangeMode" }}</div>
+                            <div class="value">{{ localize "EFFECT.ChangeValue" }}</div>
+                            <div class="effect-controls">
+                                <a class="effect-control" data-action="add"><i class="far fa-plus-square"></i></a>
+                            </div>
+                        </header>
+                        <ol class="changes-list">
+                            {{#each condition.changes as |change i|}}
+                            <li class="effect-change flexrow" data-index="{{i}}">
+                                <div class="key">
+                                    <input type="text" class="user-entry" data-field="change-key" name="changes.{{i}}.key" value="{{change.key}}"/>
+                                </div>
+                                <div class="mode">
+                                    <select name="changes.{{i}}.mode" class="user-entry" data-field="change-mode" data-dtype="Number">
+                                        {{selectOptions ../../modes selected=change.mode }}
+                                    </select>
+                                </div>
+                                <div class="value">
+                                    <input type="text" class="user-entry" name="changes.{{i}}.value" data-field="change-value" value="{{change.value}}"/>
+                                </div>
+                                <div class="effect-controls">
+                                    <a class="effect-control" data-action="delete"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="column controls">
+        <h2>{{localize "age-system.settings.options"}}</h2>
+        <div>
+            <div class="in-use-condition flexcol">
+                {{radioBoxes radioB.name radioB.choices radioB.options}}
+            </div>
+            {{#if (eq inUseConditions 'custom')}}
+            <button class="add-effect" data-position="top">{{localize "age-system.addEffectTop"}}</button>
+            <button class="add-effect" data-position="bottom">{{localize "age-system.addEffectBottom"}}</button>
+            <button class="copy-effects" data-origin="expanse" >{{localize "age-system.copyEffectsExpanse"}}</button>
+            {{/if}}
+            <hr>
+            <button class="save-close">{{localize "age-system.saveClose"}}</button>
+        </div>
+    </div>
+
+</div>

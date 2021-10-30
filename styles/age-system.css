@@ -1373,6 +1373,8 @@
   padding: 4px;
   margin: 2px 4px 2px 4px;
   align-items: center;
+  text-align: center;
+  cursor: pointer;
 }
 .age-system.sheet.char.standard .item-container .item-box p {
   margin: 0px;
@@ -1388,9 +1390,14 @@
   text-align: left;
   border-radius: 5px;
   padding: 4px;
+  opacity: 0.9;
   /* Position the tooltip */
   position: fixed;
   z-index: 10;
+}
+.age-system.sheet.char.standard .item-container .item-box .container-tooltip-text .effect-changes {
+  margin-top: 4px;
+  font-size: 12px;
 }
 .age-system.sheet.char.standard .item-container .item-box .tooltip-container:hover .container-tooltip-text {
   visibility: visible;
@@ -3936,6 +3943,92 @@ body *:not(i, .fa, .far, .fas) {
   width: 50px;
   margin-right: 4px;
   border: none;
+}
+.age-system-dialog .conditions-workshop .individual-effects img {
+  height: 124px;
+  width: 124px;
+}
+.age-system-dialog .conditions-workshop .individual-effects .item-image {
+  flex: 0 0 124px;
+}
+.age-system-dialog .conditions-workshop .individual-effects .item-image:hover {
+  cursor: pointer;
+}
+.age-system-dialog .conditions-workshop .individual-effects .order-control {
+  justify-content: space-between;
+  flex: 0 0 20px;
+  width: min-content;
+  margin: auto 0;
+}
+.age-system-dialog .conditions-workshop .individual-effects .order-control i:hover {
+  cursor: pointer;
+}
+.age-system-dialog .conditions-workshop .individual-effects .order-control .delete-effect {
+  margin: 20px 0;
+}
+.age-system-dialog .conditions-workshop .individual-effects .order-control .delete-effect.inactive {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+.age-system-dialog .conditions-workshop .changes-list {
+  padding: 0;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header,
+.age-system-dialog .conditions-workshop .effects .effect-change {
+  justify-content: space-between;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header > *,
+.age-system-dialog .conditions-workshop .effects .effect-change > * {
+  text-align: center;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header .key,
+.age-system-dialog .conditions-workshop .effects .effect-change .key {
+  flex: 0 0 40%;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header .mode,
+.age-system-dialog .conditions-workshop .effects .effect-change .mode {
+  flex: 0 0 30%;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header .value,
+.age-system-dialog .conditions-workshop .effects .effect-change .value {
+  flex: 0 0 25%;
+}
+.age-system-dialog .conditions-workshop .effects .effects-header .effect-controls,
+.age-system-dialog .conditions-workshop .effects .effect-change .effect-controls {
+  flex: 0 0 20px;
+}
+.age-system-dialog .conditions-workshop textarea {
+  height: 66px;
+  width: -webkit-fill-available;
+  margin-left: 4px;
+  resize: none;
+}
+.age-system-dialog .conditions-workshop .is-condition {
+  margin-left: 4px;
+  margin-bottom: 4px;
+}
+.age-system-dialog .conditions-workshop .is-condition > * {
+  margin: auto 0;
+  font-size: 12px;
+  margin-right: 4px;
+}
+.age-system-dialog .conditions-workshop .individual-effects h3 {
+  padding-left: 4px;
+}
+.age-system-dialog .column.controls {
+  flex: 0 0 30%;
+  padding-left: 10px;
+  text-align: center;
+}
+.age-system-dialog .column.controls button {
+  margin: 2px 4px;
+}
+.age-system-dialog .column.controls .in-use-condition {
+  text-align: left;
+  margin: 0 auto;
+}
+.age-system-dialog .column.controls .in-use-condition label {
+  font-size: 16px;
 }
 .age-system-dialog .apply-damage-window .column {
   text-align: center;

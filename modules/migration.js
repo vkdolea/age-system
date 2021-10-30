@@ -6,11 +6,11 @@ export const migrateWorld = async function() {
   ui.notifications.info(`Applying AGE System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
 
   // Migrate World Actors
-  for ( let a of game.actors.entities ) {
+  for ( let a of game.actors.contents ) {
     try {
       const updateData = migrateActorData(a.data);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
-        console.log(`Migrating Actor entity ${a.name}`);
+        console.log(`Migrating Actor document ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
@@ -20,11 +20,11 @@ export const migrateWorld = async function() {
   }
 
   // Migrate World Items
-  for ( let i of game.items.entities ) {
+  for ( let i of game.items.contents ) {
     try {
       const updateData = migrateItemData(i.data);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
-        console.log(`Migrating Item entity ${i.name}`);
+        console.log(`Migrating Item document ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
@@ -34,12 +34,12 @@ export const migrateWorld = async function() {
   }
 
   // Migrate Actor Override Tokens
-  for ( let s of game.scenes.entities ) {
+  for ( let s of game.scenes.contents ) {
     try {
       const updateData = await migrateSceneData(s.data);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
-        console.log(`Migrating Scene entity ${s.name}`);
-        await s.update(updateData, {enforceTypes: false});
+        console.log(`Migrating Scene document ${s.name}`);
+        // await s.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
       err.message = `Failed AGE System migration for Scene ${s.name}: ${err.message}`;
@@ -149,7 +149,7 @@ export const migrateCompendium = async function(pack) {
 
   // Apply the original locked status for the pack
   await pack.configure({locked: wasLocked});
-  console.log(`Migrated all ${entity} entities from Compendium ${pack.collection}`);
+  console.log(`Migrated all ${entity} documents from Compendium ${pack.collection}`);
 };
 
 /* -------------------------------------------- */
@@ -171,6 +171,23 @@ export const migrateActorData = function(actor) {
   // _addActorMods(actor, updateData);
   // _addActorPersonaFields(actor, updateData);
   
+  // Migrate Owned Effects
+  if (actor.effects) { // Rever essa função!!!!
+    const effects = actor.effects.reduce((arr, e) => {
+      // Migrate the Owned Effect
+      let effectUpdate = migrateEffectData(e.data ?? e);
+  
+      // Update the Owned Effect
+      if ( !isObjectEmpty(effectUpdate) ) {
+        effectUpdate._id = e.id;
+        // effectUpdate._id = e._id;
+        arr.push(effectUpdate);
+      }
+  
+      return arr;
+    }, []);
+    if (effects.length > 0) updateData.effects = effects;
+  }
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
@@ -212,31 +229,78 @@ export const migrateItemData = function(item) {
 /* -------------------------------------------- */
 
 /**
+ * Migrate a single Item entity to incorporate latest data model changes
+ * @param effect
+ */
+ export const migrateEffectData = function(effect) {
+  const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
+  const updateData = {};
+  if (isNewerVersion("0.8.8", lastMigrationVer)) _addEffectFlags(effect, updateData); // Do not execute if last migration was 0.8.8 or earlier
+  return updateData;
+};
+
+/* -------------------------------------------- */
+
+/**
  * Migrate a single Scene entity to incorporate changes to the data model of it's actor data overrides
  * Return an Object of updateData to be applied
  * @param {Object} scene  The Scene data to Update
  * @return {Object}       The updateData to apply
  */
- export const migrateSceneData = async function(scene) {
+export const migrateSceneData = async function(scene) {
   const tokens = scene.tokens.map(async (token) => {
     const t = token.toJSON();
-    if (t.actorData.items) {
-      token.actor.items.forEach(async (i) => {
-        const updates = migrateItemData(i.data)
-        await i.update(updates);
-        console.log(`Migrated ${i.data.type} entity ${i.name} from token ${token.data.name}`);
-      });
+
+    if (!t.actorLink && game.actors.has(t.actorId) && (t.actorData.data || t.actorData.effects || t.actorData.items)) {
+      // Migrate Actor Data
+      t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
+
+      // Migrate Items
+      if (t.actorData.items) {
+        token.actor.items.forEach(async (i) => {
+          const updates = migrateItemData(i.data)
+          await i.update(updates);
+          console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
+        });
+      };
+  
+      // // Migrate Effects, version 0.8.8
+      if (t.actorData.effects) {
+        token.actor.effects.forEach(async (e) => {
+          const updates = migrateEffectData(e.data ?? e)
+          await e.update(updates);
+          console.log(`Migrated Active Effect named ${e.id} from token ${token.data.name}`);
+        });
+      };
     }
-    if (!t.actorId || t.actorLink || !t.actorData.data) {
+
+    if (!t.actorId || t.actorLink || !t.actorData.data || !t.actorData.effects || !t.actorData.items) {
       t.actorData = {};
-    }
-    else if ( !game.actors.has(t.actorId) ){
+    } else if ( !game.actors.has(t.actorId) ){
       t.actorId = null;
       t.actorData = {};
-    }
-    else if ( !t.actorLink ) {
+    } else if ( !t.actorLink ) {
+
+      // Migrate Actor Data
       t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
-      console.log(t.actorData);
+      
+      // Migrate Items
+      // if (t.actorData.items) {
+      //   token.actor.items.forEach(async (i) => {
+      //     const updates = migrateItemData(i.data)
+      //     await i.update(updates);
+      //     console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
+      //   });
+      // };
+  
+      // // Migrate Effects, version 0.8.8
+      // if (t.actorData.effects) {
+      //   token.actor.effects.forEach(async (e) => {
+      //     const updates = migrateEffectData(e.data ?? e)
+      //     await e.update(updates);
+      //     console.log(`Migrated Active Effect named ${e.id} from token ${token.data.name}`);
+      //   });
+      // };
     }
     return t;
   });
@@ -245,6 +309,24 @@ export const migrateItemData = function(item) {
 
 /* -------------------------------------------- */
 /*  Low level migration utilities
+/* -------------------------------------------- */
+
+/**
+ * Add Effects flags for version 0.8.8
+ * @private
+ */
+ function _addEffectFlags(effect, updateData) {
+  if (effect.flags?.["age-system"]?.type === 'conditions' && effect.flags?.core?.statusId) {
+    updateData.flags = {
+      "age-system": {
+        isCondition: true,
+        conditionType: 'expanse',
+        desc: `age-system.conditions.${effect.flags["age-system"].name}.desc`
+      }
+    };
+  }
+  return updateData
+}
 /* -------------------------------------------- */
 
 /**

@@ -672,28 +672,48 @@ export class ageSystemActor extends Actor {
         return summary
     }
 
-    handleConditions(condId, isChecked = null) {
+    // async handleConditions(condId, isChecked = null) {
+    //     if (["spaceship", "vehicle"].includes(this.type)) return null;
+    //     if (isChecked === null) isChecked = !this.data.data.conditions[condId];
+    //     const condEffects = this.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === condId);
+    //     // Condition not checked, and no related Effect is on - do nothing
+    //     if (!isChecked && condEffects.length < 1) return;
+    //     // Condition is checked and there is related Effect - do nothing
+    //     if (isChecked && condEffects.length === 1) return;
+    //     // Condition is not checked and there 1+ related Effects - delete everyting
+    //     if (!isChecked && condEffects.length > 0) {
+    //         for (let c = 0; c < condEffects.length; c++) {
+    //             const effect = condEffects[c];
+    //             const id = effect.data._id;
+    //             await this.effects.get(id).delete();
+    //         }
+    //         return
+    //     }
+    //     // Condition is checked and there is no related Effect - create new Active Effect
+    //     if (isChecked && condEffects.length < 1) {
+    //         const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
+    //         newEffect["flags.core.statusId"] = newEffect.id;
+    //         await this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+    //     }
+    // }
+
+    async handleConditions(condId) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;
-        if (isChecked === null) isChecked = !this.data.data.conditions[condId];
-        const condEffects = this.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === condId);
-        // Condition not checked, and no related Effect is on - do nothing
-        if (!isChecked && condEffects.length < 1) return;
-        // Condition is checked and there is related Effect - do nothing
-        if (isChecked && condEffects.length === 1) return;
-        // Condition is not checked and there 1+ related Effects - delete everyting
-        if (!isChecked && condEffects.length > 0) {
-            for (let c = 0; c < condEffects.length; c++) {
-                const effect = condEffects[c];
+        const effectsOn = this.effects.filter(e => e.data.flags?.["age-system"]?.isCondition && e.data.flags?.core?.statusId === condId);
+        
+        if (effectsOn.length < 1) {
+            // If there is no Effect on, create one
+            const newEffect = CONFIG.statusEffects.filter(e => e.id === condId)[0];
+            newEffect["flags.core.statusId"] = newEffect.id;
+            await this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+        } else {
+            // If there are Effects, delete everything
+            for (let c = 0; c < effectsOn.length; c++) {
+                const effect = effectsOn[c];
                 const id = effect.data._id;
-                this.effects.get(id).delete();
+                await this.effects.get(id).delete();
             }
             return
-        }
-        // Condition is checked and there is no related Effect - create new Active Effect
-        if (isChecked && condEffects.length < 1) {
-            const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
-            newEffect["flags.core.statusId"] = newEffect.id;
-            return this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
         }
     }
 

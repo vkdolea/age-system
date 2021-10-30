@@ -97,7 +97,16 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
-## 0.8.7 [2021-10-xx]
+## 0.8.8 [2021-10-30]
+### Added
+- Conditions Workshop, to create custom Conditions and Token Effect. Only GMs can access. To access Conditions Workshop, hover Age Roller icon and select the option in the right-hand side menu.
+
+### Fixed
+- Flavor incorrect on chat card when rolling Focus from stat block sheet.
+- Correct damage deduction when applying damage using Ballistic damage.
+- When performing migration, invalid tokens were created on scenes on to top left corner.
+
+## 0.8.7 [2021-10-13]
 ### Added
 - Link to system's wiki when hovering AGE Roller icon.
 

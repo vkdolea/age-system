@@ -17,7 +17,11 @@
             <li class="flexrow colorset-third-tier elements feature-controls" data-effect-id="{{effect._id}}">
                 <div class="effect-name flexrow">
                     <img class="effect-icon" src="{{effect.icon}}">
+                    {{#if (ne effect.flags.age-system.conditionType "custom")}}
+                    <p>{{localize effect.label}}</p>
+                    {{else}}
                     <p>{{effect.label}}</p>
+                    {{/if}}
                 </div>
                 {{#if effect.changes}}
                 <div class="flexcol effect-key">
@@ -27,13 +31,7 @@
                 </div>
                 <div class="flexcol effect-operation">
                     {{#each effect.changes as |change|}}
-                    <p>{{#if (eq change.mode 0)}}{{ localize "EFFECT.MODE_CUSTOM" }}{{/if}}
-                        {{#if (eq change.mode 1)}}{{ localize "EFFECT.MODE_MULTIPLY" }}{{/if}}
-                        {{#if (eq change.mode 2)}}{{ localize "EFFECT.MODE_ADD" }}{{/if}}
-                        {{#if (eq change.mode 3)}}{{ localize "EFFECT.MODE_DOWNGRADE" }}{{/if}}
-                        {{#if (eq change.mode 4)}}{{ localize "EFFECT.MODE_UPGRADE" }}{{/if}}
-                        {{#if (eq change.mode 5)}}{{ localize "EFFECT.MODE_OVERRIDE" }}{{/if}}
-                    </p>
+                    <p>{{effectModeName change.mode}}</p>
                     {{/each}}
                 </div>
                 <div class="flexcol effect-value">
@@ -47,8 +45,10 @@
                 <div class="flexcol effect-value"><p>{{localize "age-system.rof.none"}}</p></div>
                 {{/if}}
                 <div class="effect-add">
+                    {{#unless (and effect.flags.age-system (ne effect.flags.age-system.conditionType ../inUseStatusEffects))}}
                     <a class="effect-active icon {{#if effect.disabled}}inactive{{/if}}"><i class="fas fa-power-off"></i></a>
                     <a class="effect-edit icon"><i class="fas fa-edit"></i></a>
+                    {{/unless}}
                     <a class="effect-remove icon"><i class="fas fa-trash"></i></a>
                 </div>
             </li>

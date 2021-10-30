@@ -1,18 +1,34 @@
 <div class="item-container conditions">
     <div class="top-row colorset-first-tier">{{localize "age-system.conditionsName"}}</div>
     <div class="actor-items flexrow">
-    {{#each data.config.conditions as |condition|}}
-    {{#unless (eq @key "hindred")}}
+        {{#each data.conditions as |condition|}}
         <div class="item-box conditions flexrow feature-controls {{#if condition.active}}colorset-second-tier{{else}}colorset-third-tier{{/if}}" data-condition-id="{{condition.id}}">
             <div class="item-name flexrow">
-                <input class="condition-checkbox" type="checkbox" name="data.conditions.{{condition.id}}" {{checked condition.active}} class="checkbox condition"/>
+                {{!-- <input class="condition-checkbox" type="checkbox" name="data.conditions.{{condition.id}}" {{checked condition.active}} class="checkbox condition"/> --}}
                 <div class="tooltip-container">
-                    <p>{{condition.name}}</p>
-                    <span class="container-tooltip-text colorset-second-tier"><b>{{condition.name}}:</b> {{condition.desc}}</span>
+                    <p>{{condition.label}}</p>
+                    {{#if (ne condition.flags.age-system.desc "")}}
+                    <span class="container-tooltip-text colorset-second-tier">
+                        <span><b>{{condition.label}}:</b> {{condition.flags.age-system.desc}}</span>
+                        {{/if}}
+                        {{#if condition.changes}}
+                        <em>
+                        <ul class="effect-changes">
+                            <b>{{localize "EFFECT.TabEffects"}}</b>
+                            {{#each condition.changes as |change|}}
+                            <li>
+                                <span>
+                                    {{#if change.key}}{{change.key}}{{else}}-{{/if}} ({{effectModeName change.mode}}, {{#if change.key}}{{change.value}}{{else}}-{{/if}})
+                                </span>
+                            </li>
+                            {{/each}}
+                        </ul>
+                        </em>
+                        {{/if}}
+                    </span>
                 </div>
             </div>
         </div>
-    {{/unless}}
-    {{/each}}
+        {{/each}}
     </div>
 </div>
