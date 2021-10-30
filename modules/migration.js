@@ -250,31 +250,33 @@ export const migrateItemData = function(item) {
 export const migrateSceneData = async function(scene) {
   const tokens = scene.tokens.map(async (token) => {
     const t = token.toJSON();
-    if (t.actorData.items) {
-      token.actor.items.forEach(async (i) => {
-        const updates = migrateItemData(i.data)
-        await i.update(updates);
-        console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
-      });
-    }
-    // Migrate Effects, version 0.8.8
-    if (t.actorData.effects) {
-      token.actor.effects.forEach(async (e) => {
-        const updates = migrateEffectData(e.data ?? e)
-        await e.update(updates);
-        console.log(`Migrated Active Effect named ${e.id} from token ${token.data.name}`);
-      });
-    }
     if (!t.actorId || t.actorLink || !t.actorData.data) {
       t.actorData = {};
-    }
-    else if ( !game.actors.has(t.actorId) ){
+    } else if ( !game.actors.has(t.actorId) ){
       t.actorId = null;
       t.actorData = {};
-    }
-    else if ( !t.actorLink ) {
+    } else if ( !t.actorLink ) {
+
+      // Migrate Actor Data
       t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
-      // console.log(t.actorData);
+      
+      // Migrate Items
+      // if (t.actorData.items) {
+      //   token.actor.items.forEach(async (i) => {
+      //     const updates = migrateItemData(i.data)
+      //     await i.update(updates);
+      //     console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
+      //   });
+      // };
+  
+      // // Migrate Effects, version 0.8.8
+      // if (t.actorData.effects) {
+      //   token.actor.effects.forEach(async (e) => {
+      //     const updates = migrateEffectData(e.data ?? e)
+      //     await e.update(updates);
+      //     console.log(`Migrated Active Effect named ${e.id} from token ${token.data.name}`);
+      //   });
+      // };
     }
     return t;
   });
@@ -290,7 +292,7 @@ export const migrateSceneData = async function(scene) {
  * @private
  */
  function _addEffectFlags(effect, updateData) {
-  if (effect.flags["age-system"]?.type === 'conditions' && effect.flags.core.statusId) {
+  if (effect.flags?.["age-system"]?.type === 'conditions' && effect.flags?.core?.statusId) {
     updateData.flags = {
       "age-system": {
         isCondition: true,
