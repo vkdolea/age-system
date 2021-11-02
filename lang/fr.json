@@ -104,7 +104,7 @@
     "SETTINGS.observerRoll": "Permet à un Observateur de faire des jets",
     "SETTINGS.observerRollHint": "Permet aux joueurs avec le rôle d'Observateur de faire des jets depuis les fiches ou les jets de la discussion",
 
-    "SETTINGS.weaponGroups": "Groups d'armes",
+    "SETTINGS.weaponGroups": "Groupes d'armes",
     "SETTINGS.weaponGroupsHint": "Indiquez les groupes d'armes en utilisant ; pour séparer les groupes. Laissez vide si les groupes d'armes ne sont pas utilisés (comme dans Modern Age)",
 
     "SETTINGS.healthSys": "Système de gestion de la Santé",
