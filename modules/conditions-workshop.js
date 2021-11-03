@@ -178,12 +178,15 @@ export default class ConditionsWorkshop extends Application {
   }
 
   _onEditImage(event) {
-    const current = event.currentTarget.src.replace(/http:\/\/.*?\//, '');
+    let path = event.currentTarget.src.toLowerCase();
+    let current
+    if (path.includes("https://")) current = path.replace(/https:\/\/.*?\//i, '');
+    if (path.includes("http://")) current = path.replace(/http:\/\/.*?\//i, '');
     const conditionId = event.currentTarget.closest('.individual-effects').dataset.conditionI;
     const condition = this._customEffects[conditionId];
     const fp = new FilePicker({
+      current,
       type: "image",
-      current: current,
       callback: path => {
         event.currentTarget.src = path;
         condition.icon = path;
