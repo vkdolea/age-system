@@ -27,6 +27,15 @@ ageSystem.abilitiesSettings.dage = {
     "will": "age-system.will",
 };
 
+// Organization Abilities
+ageSystem.abilitiesOrg = {
+    "might": "age-system.org.might",
+    "wealth": "age-system.org.wealth",
+    "influence": "age-system.org.influence",
+    "intrigue": "age-system.org.intrigue",
+    "phenomena": "age-system.org.phenomena",
+};
+
 ageSystem.actionsToCast = {
     noAction: "age-system.noAction",
     minorAction: "age-system.minorAction",

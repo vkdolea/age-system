@@ -1455,16 +1455,20 @@
 /*******************************/
 /**     Stat Block Style      **/
 /*******************************/
-.age-system.sheet.char.stat-block form.actor-sheet .filler {
+.age-system.stat-block .organization-sheet {
+  background-color: white;
+  border-radius: 11px;
+}
+.age-system.stat-block .filler {
   flex: auto;
   background-color: white;
 }
-.age-system.sheet.char.stat-block footer {
+.age-system.stat-block footer {
   flex: 0 0 26px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.age-system.sheet.char.stat-block .stat-block-container {
+.age-system.stat-block .stat-block-container {
   align-content: center;
   min-width: 100%;
 }
@@ -2267,8 +2271,8 @@
   background-color: #007DAD;
   color: #ffffff;
 }
-.colorset-modern-blue .char-sheet .age-header .editor,
-.colorset-modern-blue .char-sheet .persona .editor {
+.colorset-modern-blue .char-sheet .editor,
+.colorset-modern-blue .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-modern-blue .vehicle-stats img {
@@ -2434,8 +2438,8 @@
   background-color: #0f4f5b;
   color: #ffffff;
 }
-.colorset-fantasy-blue .char-sheet .age-header .editor,
-.colorset-fantasy-blue .char-sheet .persona .editor {
+.colorset-fantasy-blue .char-sheet .editor,
+.colorset-fantasy-blue .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-fantasy-blue .vehicle-stats img {
@@ -2601,8 +2605,8 @@
   background-color: #810207;
   color: #ffffff;
 }
-.colorset-dragon-red .char-sheet .age-header .editor,
-.colorset-dragon-red .char-sheet .persona .editor {
+.colorset-dragon-red .char-sheet .editor,
+.colorset-dragon-red .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-dragon-red .vehicle-stats img {
@@ -2768,8 +2772,8 @@
   background-color: #565183;
   color: #ffffff;
 }
-.colorset-folded-purple .char-sheet .age-header .editor,
-.colorset-folded-purple .char-sheet .persona .editor {
+.colorset-folded-purple .char-sheet .editor,
+.colorset-folded-purple .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-folded-purple .vehicle-stats img {
@@ -2935,8 +2939,8 @@
   background-color: #155f0e;
   color: #ffffff;
 }
-.colorset-ronin-green .char-sheet .age-header .editor,
-.colorset-ronin-green .char-sheet .persona .editor {
+.colorset-ronin-green .char-sheet .editor,
+.colorset-ronin-green .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-ronin-green .vehicle-stats img {
@@ -3102,8 +3106,8 @@
   background-color: #273249;
   color: #e7ccc3;
 }
-.colorset-select-one .char-sheet .age-header .editor,
-.colorset-select-one .char-sheet .persona .editor {
+.colorset-select-one .char-sheet .editor,
+.colorset-select-one .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-select-one .vehicle-stats img {
@@ -3269,8 +3273,8 @@
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
-.colorset-the-grey .char-sheet .age-header .editor,
-.colorset-the-grey .char-sheet .persona .editor {
+.colorset-the-grey .char-sheet .editor,
+.colorset-the-grey .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-the-grey .vehicle-stats img {
@@ -3436,8 +3440,8 @@
   background-color: #751119;
   color: #f7b755;
 }
-.colorset-red-warrior .char-sheet .age-header .editor,
-.colorset-red-warrior .char-sheet .persona .editor {
+.colorset-red-warrior .char-sheet .editor,
+.colorset-red-warrior .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-red-warrior .vehicle-stats img {
@@ -3603,8 +3607,8 @@
   background-color: #663322;
   color: #bb8755;
 }
-.colorset-never-dead .char-sheet .age-header .editor,
-.colorset-never-dead .char-sheet .persona .editor {
+.colorset-never-dead .char-sheet .editor,
+.colorset-never-dead .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-never-dead .vehicle-stats img {
@@ -3890,7 +3894,7 @@
 }
 /*---- Font Override----*/
 body *:not(i, .fa, .far, .fas) {
-  font-family: 'Roboto' !important;
+  font-family: "Roboto" !important;
 }
 /*---------Background---------------------*/
 .window-app.sheet.char .window-content,

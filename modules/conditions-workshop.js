@@ -146,7 +146,7 @@ export default class ConditionsWorkshop extends Application {
     const newEffect = {
       icon: "icons/svg/aura.svg",
       label: "",
-      id: 'AGEcustom.' + this._makeId(20),
+      id: 'AGEcustom.' + foundry.utils.randomID(20),
       changes: [],
       flags: {
         "age-system": {
@@ -241,16 +241,6 @@ export default class ConditionsWorkshop extends Application {
         break;
     }
     this._refresh();
-  }
-
-  _makeId(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
   }
 
   _onManageChange(ev) {

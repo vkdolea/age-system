@@ -2,6 +2,7 @@
     "ACTOR.TypeChar": "Character",
     "ACTOR.TypeVehicle": "Vehicle",
     "ACTOR.TypeSpaceship": "Spaceship",
+    "ACTOR.TypeOrganization": "Organization",
     "ITEM.TypeStunts": "Stunt",
     "ITEM.TypeEquipment": "Equipment",
     "ITEM.TypePower": "Power & Arcana",
@@ -122,7 +123,8 @@
             "charStatBlock": "AGE Character Stat Block",
             "vehicleStandard": "AGE Vehicle",
             "itemStandard": "AGE Item",
-            "spaceshipStandard": "AGE Spaceship"
+            "spaceshipStandard": "AGE Spaceship",
+            "orgStandard": "AGE Organization"
         },
         "sheetFull": "Full",
         "sheetBlock": "Block",
@@ -260,6 +262,14 @@
             "backupVehicle": "backs up {vehicle}",
 
             "compRoll": "{compType} Roll"
+        },
+
+        "org": {
+            "might": "Might",
+            "wealth": "Wealth",
+            "influence": "Influence",
+            "intrigue": "Intrigue",
+            "phenomena": "Phenomena"
         },
 
         "testThreshold": "Threshold",

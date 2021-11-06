@@ -3,9 +3,46 @@
         "types": [
             "char",
             "vehicle",
-            "spaceship"
+            "spaceship",
+            "organization"
         ],
         "templates": {},
+        "organization": {
+            "description": "",
+            "abilities": {
+                "might": {
+                    "value": 0,
+                    "focus": []
+                },
+                "wealth": {
+                    "value": 0,
+                    "focus": []
+                },
+                "influence": {
+                    "value": 0,
+                    "focus": []
+                },
+                "intrigue": {
+                    "value": 0,
+                    "focus": []
+                },
+                "phenomena": {
+                    "value": 0,
+                    "focus": []
+                }
+            },
+            "combat": {
+                "structure": 5,
+                "stability": {
+                    "min": 0,
+                    "max": 25,
+                    "value": 25
+                }
+            },
+            "scope": "regional",
+            "notes": "",
+            "gmNotes": ""
+        },
         "spaceship": {
             "size": 1,
             "hull": {

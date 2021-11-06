@@ -1,0 +1,34 @@
+{{!-- Colorset defined in the Actor Sheet Class --}}
+<form class="organization-sheet {{cssClass}} colorset-{{config.colorScheme}} colorset-selection flexcol" autocomplete="off">
+    <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
+    
+    {{!-- Abilities and Focus --}}
+    <ul class="ability-table font-small-table column-width block-item">
+        <li class="ability-row header">
+            <span><strong>{{localize "age-system.abl"}}</strong>&nbsp({{localize "age-system.focus"}})</span>
+        </li>
+        {{#each config.abilitiesOrg as |name type|}}
+        <li class="ability-row ability-box flexrow {{type}} feature-controls colorset-second-tier" data-abl-id="{{type}}">
+            <div class="flexrow abl-value-box">
+                <input type="number" class="abl-value original" name="data.abilities.{{type}}.value" value="{{#with (lookup ../data.abilities [type])~}}{{value}}{{/with}}" data-dtype="Number" />
+            </div>
+            <div class="abl-name-focus flexrow">
+                <a class="abl-name roll-ability">{{name}}</a>
+                {{#each (focusbyabl ../focus type) as |item|}}
+                <div class="item-name focus-options feature-controls" data-item-id="{{item._id}}" data-roll-type="{{../../config.ROLL_TYPE.FOCUS}}">
+                    <a class="item-name roll-item{{#if item.data.improved}} improved-focus{{/if}}">{{#if @first}}&nbsp({{else}}&nbsp{{/if}}{{item.name}}{{#if @last}}){{else}},{{/if}}</a>
+                </div>
+                {{/each}}
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+
+    {{editor content=data.description target="data.description" button=true owner=owner editable=true}}
+
+    <div class="filler">
+    </div>
+    
+    <footer class="colorset-first-tier">
+    </footer>
+</form>

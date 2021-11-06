@@ -50,21 +50,23 @@ export function abilitiesName() {
     // Capture what is the ability set to be used
     const settingAblOption = game.settings.get("age-system", "abilitySelection");
     const ablOptions = CONFIG.ageSystem.abilitiesSettings;
-    const ablType = ["main", "dage"];
+    const orgAbl = CONFIG.ageSystem.abilitiesOrg;
+    const ablType = [ablOptions["main"], ablOptions["dage"], orgAbl];
 
-    for ( let o of ablType ) {
-        const localized = Object.entries(ablOptions[o]).map(e => {
-            return [e[0], game.i18n.localize(e[1])];
-        });
-        // if ( !noSort.includes(o) ) localized.sort((a, b) => a[1].localeCompare(b[1])); // All entries are sorted
-        localized.sort((a, b) => a[1].localeCompare(b[1]));
-        ablOptions[o] = localized.reduce((obj, e) => {
-            obj[e[0]] = e[1];
-            return obj;
-        }, {});
-    }
+    CONFIG.ageSystem.abilities = localizeObj(ablOptions[settingAblOption], true);
+    CONFIG.ageSystem.abilitiesOrg = localizeObj(orgAbl, false);
+}
 
-    CONFIG.ageSystem.abilities = ablOptions[settingAblOption];
+function localizeObj(source, sort = false) {
+    const localized = Object.entries(source).map(e => {
+        return [e[0], game.i18n.localize(e[1])];
+    });
+    if ( sort ) localized.sort((a, b) => a[1].localeCompare(b[1])); // All entries are sorted
+    source = localized.reduce((obj, e) => {
+        obj[e[0]] = e[1];
+        return obj;
+    }, {});
+    return source
 }
 
 // Hide checkboxes to select Primary Abilities

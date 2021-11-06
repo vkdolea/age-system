@@ -5,6 +5,7 @@ import ageSystemSheetCharacter from "./modules/sheets/ageSystemSheetCharacter.js
 import ageSystemSheetCharStatBlock from "./modules/sheets/ageSystemSheetCharStatBlock.js";
 import ageSystemSheetVehicle from "./modules/sheets/ageSystemSheetVehicle.js";
 import ageSystemSheetSpaceship from "./modules/sheets/ageSystemSheetSpaceship.js";
+import ageSystemSheetOrg from "./modules/sheets/ageSystemSheetOrg.js";
 import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageToken} from "./modules/ageToken.js";
@@ -65,6 +66,7 @@ Hooks.once("init", async function() {
             ageSystemSheetCharStatBlock,
             ageSystemSheetVehicle,
             ageSystemSheetSpaceship,
+            ageSystemSheetOrg,
             ageSystemSheetItem,
             AgeRoller,
             AgeTracker
@@ -98,6 +100,11 @@ Hooks.once("init", async function() {
         types: ["spaceship"],
         makeDefault: true,
         label: "age-system.SHEETS.spaceshipStandard"
+    });
+    Actors.registerSheet("age-system", ageSystemSheetOrg, {
+        types: ["organization"],
+        makeDefault: true,
+        label: "age-system.SHEETS.orgStandard"
     });
     
     Items.unregisterSheet("core", ItemSheet);
