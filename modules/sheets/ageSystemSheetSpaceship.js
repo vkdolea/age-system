@@ -1,6 +1,7 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
+import {isDropedItemValid} from "../setup.js";
 
 export default class ageSpaceshipSheet extends ActorSheet {
     
@@ -150,6 +151,11 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
         super.activateListeners(html);
     };
+
+    _onDropItemCreate(itemData) {
+        if (!isDropedItemValid(this.actor, itemData.type, itemData.name)) return false;
+        super._onDropItemCreate(itemData);
+    }
 
     _onRollDice(event){
         const messageData = {

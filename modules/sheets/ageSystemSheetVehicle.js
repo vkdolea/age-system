@@ -1,6 +1,7 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
+import {isDropedItemValid} from "../setup.js";
 
 export default class ageSystemVehicleSheet extends ActorSheet {
     get isSynth() {
@@ -148,6 +149,11 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         
         super.activateListeners(html);
     };
+
+    _onDropItemCreate(itemData) {
+        if (!isDropedItemValid(this.actor, itemData.type, itemData.name)) return false;
+        super._onDropItemCreate(itemData);
+    }
 
     _onRemovePassenger(event) {
         let update = {};

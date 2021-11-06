@@ -97,6 +97,13 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.9 [2021-11-xx]
+### Added
+- Organization as Actor
+
+### Fixed
+- Some unauthorized items were able to be created on different Actor types (more than 1 focus with the same name, Spaceship Features could be created on Characters)
+
 ## 0.8.8 [2021-10-30]
 ### Added
 - Conditions Workshop, to create custom Conditions and Token Effect. Only GMs can access. To access Conditions Workshop, hover Age Roller icon and select the option in the right-hand side menu.

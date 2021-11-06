@@ -112,9 +112,12 @@ export class ageSystemItem extends Item {
         }
 
         switch (itemType) {
-            case "focus": return this._prepareFocus(data);
-            case "power": return this._preparePower(data);
-            case "shipfeatures": return this._prepareShipFeatures(data);
+            case "focus": this._prepareFocus(data);
+                break;
+            case "power": this._preparePower(data);
+                break;
+            case "shipfeatures": this._prepareShipFeatures(data);
+                break;
         }
 
         this.prepareEmbeddedEntities();        

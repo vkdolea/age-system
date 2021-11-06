@@ -586,6 +586,7 @@
         "focus": {
             "templates": ["description", "activation"],
             "improved": false,
+            "isOrg": false,
             "initialValue": 2
         },
         "weapon": {
