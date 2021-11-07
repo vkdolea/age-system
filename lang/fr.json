@@ -2,6 +2,7 @@
     "ACTOR.TypeChar": "Personnage",
 	"ACTOR.TypeVehicle": "Véhicule",
 	"ACTOR.TypeSpaceship": "Vaisseaux spatiaux",
+    "ACTOR.TypeOrganization": "Organisation",
     "ITEM.TypeStunts": "Prouesses",
     "ITEM.TypeEquipment": "Équipement",
     "ITEM.TypePower": "Pouvoirs et Sorts",
@@ -122,7 +123,8 @@
             "charStatBlock": "",
             "vehicleStandard": "Véhicule AGE",
             "itemStandard": "Objet AGE",
-            "spaceshipStandard": "Vaisseau spatial AGE"
+            "spaceshipStandard": "Vaisseau spatial AGE",
+            "organizationStandard": "Organisation AGE"
         },
         "sheetFull": "Complète",
         "sheetBlock": "Bloc",
@@ -140,7 +142,11 @@
             "nonShipPartsOnShip": "Seuls les objets de type Fonctionnalités de Vaisseaux peuvent être ajoutée à un Vaisseau.",
             "healthSysNotMatching": "Le système de Santé en utilisation actuellement et sur la fiche ne correspondent pas.",
             "noValidTokensSelected": "Aucun tokens valides sélectionnés.",
-            "repetedIconCondition": "La sauvegarde est impossible. Deux conditions ou plus ont le même icone sélectionné."
+            "repetedIconCondition": "La sauvegarde est impossible. Deux conditions ou plus ont le même icone sélectionné.",
+            "orgItem": "Seulement des Focus peuvent être ajoutés aux Organisations",
+            "charFocusToOrg": "Les Focus de personnage ne peuvent pas être ajoutés aux Organisations",
+            "orgFocusToChar": "Les Focus d'Organisation ne peuvent pas être ajoutés à un personnage.",
+            "vehicleItem": "Les véhicules ne peuvent pas recevoir d'objets."
 		},
         
 		"spaceship": {
@@ -261,6 +267,15 @@
 
 			"compRoll": "{compType} Jet"
         },
+
+        "org": {
+            "might": "Puissance",
+            "wealth": "Richesse",
+            "influence": "Influence",
+            "intrigue": "Intrigue",
+            "phenomena": "Phénomène / Magie / Étrange"
+        },
+        "orgFocus": "Org. Focus",
 		
 		"testThreshold": "Seuil de réussite",
 		"targetCurrent": "Cible/Actuel",

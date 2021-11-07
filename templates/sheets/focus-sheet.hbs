@@ -20,9 +20,19 @@
                     {{else}}
                     <select name="data.useAbl" class="data-input">
                         {{#select data.data.useAbl}}
+                        
+                        {{#if data.data.isOrg}}
+                        {{#each config.abilitiesOrg as |name type|}}
+                        <option value="{{type}}">{{localize name}}</option>
+                        {{/each}}
+                        
+                        {{else}}
+
                         {{#each config.abilities as |name type|}}
                         <option value="{{type}}">{{localize name}}</option>
                         {{/each}}
+                        {{/if}}
+
                         {{/select}}
                     </select>
                     {{/if}}
@@ -34,12 +44,21 @@
                     <input type="checkbox" {{#if inChat}}disabled{{/if}} name="data.improved" {{checked data.data.improved}} class="checkbox"/>
                 </div>
 
-                {{!-- Focus Initial Value --}}
+                {{log this}}
+                {{#if displayIsOrg}}
+                {{!-- Is Organization Focus --}}
+                <div class="flexcol">
+                    <label>{{localize "age-system.orgFocus"}}</label>
+                    <input type="checkbox" name="data.isOrg" {{checked data.data.isOrg}} class="checkbox"/>
+                </div>
+                {{/if}}
+
                 {{#if inChat}}
                 {{else}}
+                {{!-- Focus Initial Value --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.focusInput"}}</label>
-                    <input type="number" name="data.initialValue" {{#if inChat}}disabled{{/if}} value="{{data.data.initialValue}}" class="checkbox"/>
+                    <input type="number" name="data.initialValue" value="{{data.data.initialValue}}" class="checkbox"/>
                 </div>
                 {{/if}}
 

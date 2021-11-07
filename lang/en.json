@@ -142,7 +142,11 @@
             "nonShipPartsOnShip": "Only Spaceship Features item type can be droped on Spaceships.",
             "healthSysNotMatching": "Health System from card and actual in use do not match.",
             "noValidTokensSelected": "No valid tokens selected.",
-            "repetedIconCondition": "Saving is not possible. Two or more conditions have the same icon selected."
+            "repetedIconCondition": "Saving is not possible. Two or more conditions have the same icon selected.",
+            "orgItem": "Only Focus can be added to Organizations",
+            "charFocusToOrg": "Character Focus can not be added to Organization",
+            "orgFocusToChar": "Organization Focus can not be added to Character",
+            "vehicleItem": "Vehicles can not receive Items"
         },
 
         "spaceship": {
@@ -269,8 +273,9 @@
             "wealth": "Wealth",
             "influence": "Influence",
             "intrigue": "Intrigue",
-            "phenomena": "Phenomena"
+            "phenomena": "Phenomena / Magic / Weird"
         },
+        "orgFocus": "Org. Focus",
 
         "testThreshold": "Threshold",
         "targetCurrent": "Target/Current",

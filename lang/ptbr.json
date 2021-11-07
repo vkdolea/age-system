@@ -2,6 +2,7 @@
     "ACTOR.TypeChar": "Personagem",
     "ACTOR.TypeVehicle": "Veículo",
     "ACTOR.TypeSpaceship": "Espaçonave",
+    "ACTOR.TypeOrganization": "Organização",
     "ITEM.TypeStunts": "Façanha",
     "ITEM.TypeEquipment": "Equipamento",
     "ITEM.TypePower": "Arcana & Poder",
@@ -122,7 +123,8 @@
             "charStatBlock": "Bloco de Peronsagem AGE",
             "vehicleStandard": "Veículo AGE",
             "itemStandard": "Item AGE",
-            "spaceshipStandard": "Espaçonave AGE"
+            "spaceshipStandard": "Espaçonave AGE",
+            "organizationStandard": "Organização AGE"
         },
         "sheetFull": "Completa",
         "sheetBlock": "Bloco",
@@ -140,7 +142,11 @@
             "nonShipPartsOnShip": "Apenas Items do tipo \"Atributos de Espaçonave\" pode ser colocado em uma Nave Espacial.",
             "healthSysNotMatching": "Sistema de Saúdo do cartão não é o mesmo Sistema em uso.",
             "noValidTokensSelected": "Nenhum token válido selecionado.",
-            "repetedIconCondition": "Não é possível salvar. Dois ou mais efeitos possuiem o mesmo ícone selecionado."
+            "repetedIconCondition": "Não é possível salvar. Dois ou mais efeitos possuiem o mesmo ícone selecionado.",
+            "orgItem": "Apenas Foco pode ser adicionar a Organizações.",
+            "charFocusToOrg": "Foco de Personagem não pode ser adicionado a Organizações.",
+            "orgFocusToChar": "Foco de Organização não pode ser adicionar a Personagens.",
+            "vehicleItem": "Veículos não podem receber Items."
         },
 
         "spaceship": {
@@ -261,6 +267,15 @@
 
             "compRoll": "Rola {compType}"
         },
+
+        "org": {
+            "might": "Poder",
+            "wealth": "Riqueza",
+            "influence": "Influência",
+            "intrigue": "Intriga",
+            "phenomena": "Fenômeno"
+        },
+        "orgFocus": "Foco de Org.",
 
         "testThreshold": "Limiar",
         "targetCurrent": "Alvo/Atual",

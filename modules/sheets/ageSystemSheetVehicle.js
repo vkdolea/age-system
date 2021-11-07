@@ -1,7 +1,7 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
-import {isDropedItemValid} from "../setup.js";
+import {isDropedItemValid} from "./helper.js";
 
 export default class ageSystemVehicleSheet extends ActorSheet {
     get isSynth() {
@@ -151,7 +151,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
     };
 
     _onDropItemCreate(itemData) {
-        if (!isDropedItemValid(this.actor, itemData.type, itemData.name)) return false;
+        if (!isDropedItemValid(this.actor, itemData)) return false;
         super._onDropItemCreate(itemData);
     }
 

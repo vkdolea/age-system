@@ -8,9 +8,9 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Expand the default size of different item sheet
         const itemType = this.object.data.type;
         switch (itemType) {
-            case "focus":
-                this.options.width = this.position.width = "410";
-                break;
+            // case "focus":
+            //     this.options.width = this.position.width = "410";
+            //     break;
             case "weapon":
                 this.options.width = this.position.width = "920";
                 this.options.height = this.position.height = "550";
@@ -89,6 +89,8 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Active Effects if item owner is a Character
         if (this.item.actor?.type === "char") data.actorEffects = this.item.actor.effects;
+        
+        data.displayIsOrg = !this.item.isOwned;
 
         return data;
     };

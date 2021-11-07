@@ -1,7 +1,7 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
-import {isDropedItemValid} from "../setup.js";
+import {isDropedItemValid} from "./helper.js";
 
 export default class ageSystemSheetCharacter extends ActorSheet {
     
@@ -241,7 +241,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     };
 
     _onDropItemCreate(itemData) {
-        if (!isDropedItemValid(this.actor, itemData.type, itemData.name)) return false;
+        if (!isDropedItemValid(this.actor, itemData)) return false;
         super._onDropItemCreate(itemData);
     }
 
@@ -543,7 +543,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             callback: e => {
                 const focus = this.actor.items.get(e.data("item-id"));
                 const ev = new MouseEvent('click', {altKey: true});
-                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, rollType: ageSystem.ROLL_TYPE.FOCUS});
+                focus.roll(ev);
             }
         },
         {

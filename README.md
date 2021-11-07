@@ -102,7 +102,9 @@ Icons made by:
 - Organization as Actor
 
 ### Fixed
-- Some unauthorized items were able to be created on different Actor types (more than 1 focus with the same name, Spaceship Features could be created on Characters)
+- Some unauthorized items were able to be created on different Actor types (more than 1 focus with the same name, Spaceship Features could be created on Characters).
+- Fine tuning French translation.
+- Issue preventing from rolling Focus correctly when using context menu to add roll modifiers.
 
 ## 0.8.8 [2021-10-30]
 ### Added
