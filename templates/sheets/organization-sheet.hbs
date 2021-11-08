@@ -1,5 +1,5 @@
 {{!-- Colorset defined in the Actor Sheet Class --}}
-<form class="organization-sheet {{cssClass}} colorset-{{config.colorScheme}} colorset-selection flexcol" autocomplete="off">
+<form class="organization-sheet {{cssClass}} colorset-{{config.colorScheme}} colorset-selection" autocomplete="off">
     <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
     
     {{!-- Abilities and Focus --}}
@@ -7,13 +7,14 @@
         <li class="ability-row header">
             <span><strong>{{localize "age-system.abl"}}</strong>&nbsp({{localize "age-system.focus"}})</span>
         </li>
-        {{#each config.abilitiesOrg as |name type|}}
+        {{#each data.abilities as |abl type|}}
+        {{log this}}
         <li class="ability-row ability-box flexrow {{type}} feature-controls colorset-second-tier" data-abl-id="{{type}}">
             <div class="flexrow abl-value-box">
-                <input type="number" class="abl-value original" name="data.abilities.{{type}}.value" value="{{#with (lookup ../data.abilities [type])~}}{{value}}{{/with}}" data-dtype="Number" />
+                <input type="number" class="abl-value original" name="data.abilities.{{type}}.total" value="{{abl.value}}" data-dtype="Number" />
             </div>
             <div class="abl-name-focus flexrow">
-                <a class="abl-name roll-ability">{{name}}</a>
+                <a class="abl-name roll-ability">{{localize (concat "age-system.org." type)}}</a>
                 {{#each (focusbyabl ../focus type) as |item|}}
                 <div class="item-name focus-options feature-controls" data-item-id="{{item._id}}" data-roll-type="{{../../config.ROLL_TYPE.FOCUS}}">
                     <a class="item-name roll-item{{#if item.data.improved}} improved-focus{{/if}}">{{#if @first}}&nbsp({{else}}&nbsp{{/if}}{{item.name}}{{#if @last}}){{else}},{{/if}}</a>
@@ -24,11 +25,44 @@
         {{/each}}
     </ul>
 
+    {{!-- Structure, Stability, Scope --}}
+    <ul class="derived-stats-table font-small-table footer column-width block-item">
+        <li class="header">
+            <span>{{localize "age-system.combatRatings"}}</span>
+        </li>
+        <li class="flexrow header">
+            <span class="speed">{{localize "age-system.structure"}}</span>
+            <span class="health">{{localize "age-system.stability"}}</span>
+            
+        </li>
+        <li class="flexrow data body">
+            <span class="speed">
+                <input type="number" class="main-value" name="data.combat.structure" value="{{data.combat.structure}}" data-dtype="Number" />
+            </span>
+            <span class="health flexrow flex-align-center">
+                <input type="number" name="data.combat.stability.value" value="{{data.combat.stability.value}}" data-dtype="Number" />
+                <span style="flex: 0 0 5px">&nbsp/&nbsp</span>
+                <input type="number" number-type="five-digits" name="data.combat.stability.max" value="{{data.combat.stability.max}}" data-dtype="Number" />
+            </span>
+        </li>
+        <li class="header">
+            <span class="defense">{{localize "age-system.scope"}}</span>
+        </li>
+        <li>
+            <span class="defense flexrow flex-align-center">
+                <select name="data.scope">
+                    {{#select data.data.scope}}
+                    {{#each config.orgScope as |name scope|}}
+                    <option value="{{scope}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </span>
+        </li>
+    </ul>
+
     {{editor content=data.description target="data.description" button=true owner=owner editable=true}}
 
-    <div class="filler">
-    </div>
-    
-    <footer class="colorset-first-tier">
-    </footer>
+    <div class="filler"></div>
+    <footer class="colorset-first-tier"></footer>
 </form>

@@ -36,6 +36,14 @@ ageSystem.abilitiesOrg = {
     "phenomena": "age-system.org.phenomena",
 };
 
+// Organization scope
+ageSystem.orgScope = {
+    "local": "age-system.orgScope.local",
+    "regional": "age-system.orgScope.regional",
+    "national": "age-system.orgScope.national",
+    "international": "age-system.orgScope.international"
+};
+
 ageSystem.actionsToCast = {
     noAction: "age-system.noAction",
     minorAction: "age-system.minorAction",

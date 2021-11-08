@@ -228,8 +228,9 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
         if (this.actor.isOwner) {
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
+            new ContextMenu(html, ".item-card .main-data", this.itemContextMenu); // Elaborar
             html.find(".item-equip").click(this._onItemActivate.bind(this));
-            html.find(".item-show").click(this._onItemShow.bind(this));
+            // html.find(".item-show").click(this._onItemShow.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".conditions .item-name").click(this._onChangeCondition.bind(this));
@@ -576,6 +577,36 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             icon: '<i class="fas fa-trash"></i>',
             callback: e => {
                 const i = this.actor.items.get(e.data("item-id")).delete();
+            }
+        }
+    ];
+
+    itemContextMenu = [
+        {
+            name: game.i18n.localize("age-system.chatCard.roll"),
+            icon: '<i class="far fa-eye"></i>',
+            callback: e => {
+                const data = e[0].closest(".feature-controls").dataset;
+                const item = this.actor.items.get(data.itemId);
+                item.showItem(e.shiftKey)
+            }
+        },
+        {
+            name: game.i18n.localize("age-system.settings.edit"),
+            icon: '<i class="fas fa-edit"></i>',
+            callback: e => {
+                const data = e[0].closest(".feature-controls").dataset;
+                const item = this.actor.items.get(data.itemId);
+                item.sheet.render(true);
+            }
+        },
+        {
+            name: game.i18n.localize("age-system.settings.delete"),
+            icon: '<i class="fas fa-trash"></i>',
+            callback: e => {
+                const data = e[0].closest(".feature-controls").dataset;
+                const item = this.actor.items.get(data.itemId);
+                item.delete();
             }
         }
     ];

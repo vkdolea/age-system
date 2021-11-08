@@ -1354,13 +1354,8 @@
 .age-system.sheet.char.standard .fill-card {
   max-width: fit-content;
 }
-.age-system.sheet.char.standard .item-container.conditions {
-  overflow: hidden;
-}
 .age-system.sheet.char.standard .item-container {
   flex-wrap: wrap;
-  resize: vertical;
-  overflow: auto;
   justify-content: center;
   margin-bottom: 4px;
 }
@@ -3887,6 +3882,7 @@
 }
 #context-menu {
   width: fit-content;
+  z-index: 99;
 }
 #context-menu li {
   white-space: nowrap;

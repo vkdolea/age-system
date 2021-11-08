@@ -11,24 +11,19 @@
             "description": "",
             "abilities": {
                 "might": {
-                    "value": 0,
-                    "focus": []
+                    "total": 0
                 },
                 "wealth": {
-                    "value": 0,
-                    "focus": []
+                    "total": 0
                 },
                 "influence": {
-                    "value": 0,
-                    "focus": []
+                    "total": 0
                 },
                 "intrigue": {
-                    "value": 0,
-                    "focus": []
+                    "total": 0
                 },
                 "phenomena": {
-                    "value": 0,
-                    "focus": []
+                    "total": 0
                 }
             },
             "combat": {

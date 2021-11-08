@@ -19,6 +19,7 @@ export async function ageRollCheck({
     moreParts = false}={}) {
 
     const ROLL_TYPE = CONFIG.ageSystem.ROLL_TYPE;
+    const actorType = actor?.type;
 
     let isToken = null;
     let actorId = null;
@@ -32,7 +33,7 @@ export async function ageRollCheck({
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
     if (!event.ctrlKey && event.altKey || selectAbl || event.type === "contextmenu") {
-        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN, selectAbl, rollVisibility});
+        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN, selectAbl, rollVisibility, actorType});
         if (extraOptions.cancelled) return;
         if (extraOptions.rollTN) rollTN = extraOptions.rollTN;
         if (extraOptions.selectedAbl) abl = extraOptions.selectedAbl;
@@ -99,26 +100,38 @@ export async function ageRollCheck({
         focusId = focusObj.id;
     }
 
-    // Adds Actor general Attack Bonus if rolltype = "attack"
-    if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK].includes(rollType) && actor.data.data.attackMod !== 0) {
-        rollFormula += " + @attackMod";
-        rollData.attackMod = actor.data.data.attackMod;
-        partials.push({
-            label: game.i18n.localize("age-system.bonus.attackMod"),
-            value: rollData.attackMod,
-        });
+    if (actorType === 'char') {
+        // Adds Actor general Attack Bonus if rolltype = "attack"
+        if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK].includes(rollType) && actor.data.data.attackMod !== 0) {
+            rollFormula += " + @attackMod";
+            rollData.attackMod = actor.data.data.attackMod;
+            partials.push({
+                label: game.i18n.localize("age-system.bonus.attackMod"),
+                value: rollData.attackMod,
+            });
+        }
+    
+        // Adds general roll bonus from Actor
+        if (actor?.data.data.testMod && actor?.data.data.testMod !== 0) {
+            rollFormula += " + @testMod";
+            rollData.testMod = actor.data.data.testMod;
+            partials.push({
+                label: game.i18n.localize("age-system.bonus.testMod"),
+                value: rollData.testMod,
+            });
+        }
+        
+        // Adds Handling bonus for Vehicles, if applicable
+        if (vehicleHandling) {
+            rollData.handling = vehicleHandling;
+            rollFormula += " + @handling";
+            partials.push({
+                label: game.i18n.localize("age-system.handling"),
+                value: vehicleHandling
+            });
+        }
     }
-
-    // Adds general roll bonus from Actor
-    if (actor?.data.data.testMod && actor?.data.data.testMod !== 0) {
-        rollFormula += " + @testMod";
-        rollData.testMod = actor.data.data.testMod;
-        partials.push({
-            label: game.i18n.localize("age-system.bonus.testMod"),
-            value: rollData.testMod,
-        });
-    }
-
+    
     // Adds user input roll mod
     if (rollUserMod) {
         rollData.rollMod = rollUserMod;
@@ -126,16 +139,6 @@ export async function ageRollCheck({
         partials.push({
             label: game.i18n.localize("age-system.setAgeRollMod"),
             value: rollUserMod
-        });
-    }
-
-    // Adds Handling bonus for Vehicles, if applicable
-    if (vehicleHandling) {
-        rollData.handling = vehicleHandling;
-        rollFormula += " + @handling";
-        partials.push({
-            label: game.i18n.localize("age-system.handling"),
-            value: vehicleHandling
         });
     }
 
@@ -147,8 +150,8 @@ export async function ageRollCheck({
         rollData.hasHealing = itemRolled.data.data.hasHealing;
         rollData.hasFatigue = itemRolled.data.data.hasFatigue;
         rollData.hasTest = itemRolled.data.data.hasTest;
-        if (itemRolled.data.data.itemMods) {
-            if (itemRolled.data.data.itemMods.itemActivation.isActive) {
+        if (itemRolled?.data?.data?.itemMods) {
+            if (itemRolled.data.data.itemMods.itemActivation?.isActive) {
                 rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
                 rollFormula += " + @activationMod"
                 partials.push({
@@ -162,7 +165,7 @@ export async function ageRollCheck({
     };
 
     // If no actor is selected, the checks inside this loop are not relevant
-    if (actor) {
+    if (actor && actorType === "char") {
 
         // Check if Item requires Weapon Group Proficiency
         if (hasWeaponGroupPenalty(itemRolled, actor?.data.data.wgroups)) {
@@ -395,22 +398,9 @@ function hasWeaponGroupPenalty(item, ownedGroups) {
 };
 
 async function getAgeRollOptions(itemRolled, data = {}) {
-    // Ve se item rolado e arma, poder ou null/outro, 
-
     const template = "/systems/age-system/templates/rolls/age-roll-settings.hbs"
     const type = itemRolled ? itemRolled.type : null;
-
-    if (data.selectAbl) {
-        const abilitiesPool = CONFIG.ageSystem.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
-        let abilitiesArray = []
-        for (const abl in abilitiesPool) {
-            if (Object.hasOwnProperty.call(abilitiesPool, abl)) {
-                const ablLocal = game.i18n.localize(abilitiesPool[abl]);
-                abilitiesArray.push({ability: abl, name: ablLocal});
-            };
-        };
-        data.abilitiesArray = sortObjArrayByName(abilitiesArray, "name");
-    };
+    if (data.selectAbl) data.abilities = data.actorType === "char" ? CONFIG.ageSystem.abilities : CONFIG.ageSystem.abilitiesOrg;
 
     const html = await renderTemplate(template, {
         ...data,
