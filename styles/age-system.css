@@ -1454,6 +1454,10 @@
   background-color: white;
   border-radius: 11px;
 }
+.age-system.stat-block .organization-sheet .derived-stats-table,
+.age-system.stat-block .organization-sheet .ability-table {
+  flex: 0 0 auto;
+}
 .age-system.stat-block .filler {
   flex: auto;
   background-color: white;
@@ -1466,6 +1470,9 @@
 .age-system.stat-block .stat-block-container {
   align-content: center;
   min-width: 100%;
+}
+.age-system.stat-block .single-char {
+  flex: 0 0 5px;
 }
 .age-system.sheet.char.stat-block .not-equiped {
   opacity: 0.4 !important;

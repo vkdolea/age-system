@@ -1,5 +1,5 @@
 {{!-- Colorset defined in the Actor Sheet Class --}}
-<form class="organization-sheet {{cssClass}} colorset-{{config.colorScheme}} colorset-selection" autocomplete="off">
+<form class="organization-sheet {{cssClass}} colorset-{{config.colorScheme}} colorset-selection flexcol" autocomplete="off">
     <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
     
     {{!-- Abilities and Focus --}}
@@ -63,6 +63,6 @@
 
     {{editor content=data.description target="data.description" button=true owner=owner editable=true}}
 
-    <div class="filler"></div>
+    {{!-- <div class="filler"></div> --}}
     <footer class="colorset-first-tier"></footer>
 </form>
