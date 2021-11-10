@@ -9,7 +9,7 @@
         {{#each data.abilities as |abl type|}}
         <li class="ability-row ability-box flexrow {{type}} feature-controls colorset-second-tier" data-abl-id="{{type}}">
             <div class="flexrow abl-value-box">
-                <input type="number" class="abl-value original" name="data.abilities.{{type}}.total" value="{{abl.value}}" data-dtype="Number" />
+                <input type="number" class="abl-value original" name="data.abilities.{{type}}.total" value="{{abl.total}}" data-dtype="Number" />
             </div>
             <div class="abl-name-focus flexrow">
                 <a class="abl-name roll-ability">{{localize (concat "age-system.org." type)}}</a>
