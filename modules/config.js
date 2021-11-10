@@ -27,6 +27,23 @@ ageSystem.abilitiesSettings.dage = {
     "will": "age-system.will",
 };
 
+// Organization Abilities
+ageSystem.abilitiesOrg = {
+    "might": "age-system.org.might",
+    "wealth": "age-system.org.wealth",
+    "influence": "age-system.org.influence",
+    "intrigue": "age-system.org.intrigue",
+    "phenomena": "age-system.org.phenomena",
+};
+
+// Organization scope
+ageSystem.orgScope = {
+    "local": "age-system.orgScope.local",
+    "regional": "age-system.orgScope.regional",
+    "national": "age-system.orgScope.national",
+    "international": "age-system.orgScope.international"
+};
+
 ageSystem.actionsToCast = {
     noAction: "age-system.noAction",
     minorAction: "age-system.minorAction",
@@ -230,6 +247,7 @@ ageSystem.actorIcons = {
     "vehicle": `${actorIconPath}chariot.svg`,
     "char": `${actorIconPath}sensousness.svg`,
     "spaceship": `${actorIconPath}rocket.svg`,
+    "organization": `${actorIconPath}barracks-tent.svg`
 }
 
 const uiElementsPath = "systems/age-system/resources/imgs/ui-elements/";
@@ -243,57 +261,57 @@ ageSystem.statusEffectsPath = AGEstatusEffectsPath;
 ageSystem.statusEffects = {
     expanse: [
     {
-        icon: `${AGEstatusEffectsPath}number.png`,
+        icon: `${AGEstatusEffectsPath}number.svg`,
         id: `num0`,
         label: `0`,
     },
     {
-        icon: `${AGEstatusEffectsPath}number-1.png`,
+        icon: `${AGEstatusEffectsPath}number-1.svg`,
         id: `num1`,
         label: `1`,
     },
     {
-        icon: `${AGEstatusEffectsPath}number-2.png`,
+        icon: `${AGEstatusEffectsPath}number-2.svg`,
         id: `num2`,
         label: `2`,
     },
     {
-        icon: `${AGEstatusEffectsPath}number-3.png`,
+        icon: `${AGEstatusEffectsPath}number-3.svg`,
         id: `num3`,
         label: `3`
     },
     {
-        icon: `${AGEstatusEffectsPath}number-4.png`,
+        icon: `${AGEstatusEffectsPath}number-4.svg`,
         id: `num4`,
         label: `4`
     },
     {
-        icon: `${AGEstatusEffectsPath}number-5.png`,
+        icon: `${AGEstatusEffectsPath}number-5.svg`,
         id: `num5`,
         label: `5`
     },
     {
-        icon: `${AGEstatusEffectsPath}number-6.png`,
+        icon: `${AGEstatusEffectsPath}number-6.svg`,
         id: `num6`,
         label: `6`
     },
     {
-        icon: `${AGEstatusEffectsPath}number-7.png`,
+        icon: `${AGEstatusEffectsPath}number-7.svg`,
         id: `num7`,
         label: `7`
     },
     {
-        icon: `${AGEstatusEffectsPath}number-8.png`,
+        icon: `${AGEstatusEffectsPath}number-8.svg`,
         id: `num8`,
         label: `8`
     },
     {
-        icon: `${AGEstatusEffectsPath}number-9.png`,
+        icon: `${AGEstatusEffectsPath}number-9.svg`,
         id: `num9`,
         label: `9`
     },
     {
-        icon: `${AGEstatusEffectsPath}number-10.png`,
+        icon: `${AGEstatusEffectsPath}number-10.svg`,
         id: `num10`,
         label: `10`
     },
@@ -686,5 +704,7 @@ ageSystem.ROLL_TYPE = {
     POWER: "powerActivation",
     ABILITY: 'ability',
     FOCUS: 'focus',
-    VEHICLE_ACTION: 'vehicle'
+    VEHICLE_ACTION: 'vehicle',
+    PLOT_ACTION: 'plotAction',
+    PLOT_DAMAGE: 'plotDamage'
 }

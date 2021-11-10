@@ -19,6 +19,7 @@ export async function ageRollCheck({
     moreParts = false}={}) {
 
     const ROLL_TYPE = CONFIG.ageSystem.ROLL_TYPE;
+    const actorType = actor?.type;
 
     let isToken = null;
     let actorId = null;
@@ -32,7 +33,7 @@ export async function ageRollCheck({
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
     if (!event.ctrlKey && event.altKey || selectAbl || event.type === "contextmenu") {
-        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN, selectAbl, rollVisibility});
+        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN, selectAbl, rollVisibility, actorType});
         if (extraOptions.cancelled) return;
         if (extraOptions.rollTN) rollTN = extraOptions.rollTN;
         if (extraOptions.selectedAbl) abl = extraOptions.selectedAbl;
@@ -71,7 +72,7 @@ export async function ageRollCheck({
     if (abl !== null && abl !== "no-abl") {
         const ablValue = actor.data.data.abilities[abl].total;
         rollFormula += " + @ability";
-        ablName = game.i18n.localize(`age-system.${abl}`);
+        ablName = actorType === "char" ? game.i18n.localize(`age-system.${abl}`) : game.i18n.localize(`age-system.org.${abl}`);
         rollData = {
             ability: ablValue,
             ablCode: abl,
@@ -99,26 +100,38 @@ export async function ageRollCheck({
         focusId = focusObj.id;
     }
 
-    // Adds Actor general Attack Bonus if rolltype = "attack"
-    if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK].includes(rollType) && actor.data.data.attackMod !== 0) {
-        rollFormula += " + @attackMod";
-        rollData.attackMod = actor.data.data.attackMod;
-        partials.push({
-            label: game.i18n.localize("age-system.bonus.attackMod"),
-            value: rollData.attackMod,
-        });
+    if (actorType === 'char') {
+        // Adds Actor general Attack Bonus if rolltype = "attack"
+        if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK].includes(rollType) && actor.data.data.attackMod !== 0) {
+            rollFormula += " + @attackMod";
+            rollData.attackMod = actor.data.data.attackMod;
+            partials.push({
+                label: game.i18n.localize("age-system.bonus.attackMod"),
+                value: rollData.attackMod,
+            });
+        }
+    
+        // Adds general roll bonus from Actor
+        if (actor?.data.data.testMod && actor?.data.data.testMod !== 0) {
+            rollFormula += " + @testMod";
+            rollData.testMod = actor.data.data.testMod;
+            partials.push({
+                label: game.i18n.localize("age-system.bonus.testMod"),
+                value: rollData.testMod,
+            });
+        }
+        
+        // Adds Handling bonus for Vehicles, if applicable
+        if (vehicleHandling) {
+            rollData.handling = vehicleHandling;
+            rollFormula += " + @handling";
+            partials.push({
+                label: game.i18n.localize("age-system.handling"),
+                value: vehicleHandling
+            });
+        }
     }
-
-    // Adds general roll bonus from Actor
-    if (actor?.data.data.testMod && actor?.data.data.testMod !== 0) {
-        rollFormula += " + @testMod";
-        rollData.testMod = actor.data.data.testMod;
-        partials.push({
-            label: game.i18n.localize("age-system.bonus.testMod"),
-            value: rollData.testMod,
-        });
-    }
-
+    
     // Adds user input roll mod
     if (rollUserMod) {
         rollData.rollMod = rollUserMod;
@@ -126,16 +139,6 @@ export async function ageRollCheck({
         partials.push({
             label: game.i18n.localize("age-system.setAgeRollMod"),
             value: rollUserMod
-        });
-    }
-
-    // Adds Handling bonus for Vehicles, if applicable
-    if (vehicleHandling) {
-        rollData.handling = vehicleHandling;
-        rollFormula += " + @handling";
-        partials.push({
-            label: game.i18n.localize("age-system.handling"),
-            value: vehicleHandling
         });
     }
 
@@ -147,8 +150,8 @@ export async function ageRollCheck({
         rollData.hasHealing = itemRolled.data.data.hasHealing;
         rollData.hasFatigue = itemRolled.data.data.hasFatigue;
         rollData.hasTest = itemRolled.data.data.hasTest;
-        if (itemRolled.data.data.itemMods) {
-            if (itemRolled.data.data.itemMods.itemActivation.isActive) {
+        if (itemRolled?.data?.data?.itemMods) {
+            if (itemRolled.data.data.itemMods.itemActivation?.isActive) {
                 rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
                 rollFormula += " + @activationMod"
                 partials.push({
@@ -162,7 +165,7 @@ export async function ageRollCheck({
     };
 
     // If no actor is selected, the checks inside this loop are not relevant
-    if (actor) {
+    if (actor && actorType === "char") {
 
         // Check if Item requires Weapon Group Proficiency
         if (hasWeaponGroupPenalty(itemRolled, actor?.data.data.wgroups)) {
@@ -274,6 +277,9 @@ export async function ageRollCheck({
         case ROLL_TYPE.FOCUS:
             flavor2 = `${ablName} (${focusObj.focusName})`;
             break;
+        case ROLL_TYPE.PLOT_ACTION:
+            flavor2 = `${game.i18n.localize("age-system.plotAction")}`;
+            flavor2 += ablName === undefined ? "" : ` | ${ablName}`;
         default:
             break;
     }
@@ -369,7 +375,7 @@ function hasWeaponGroupPenalty(item, ownedGroups) {
     // CASE 1 - Weapon Groups not in use or item rolled is not a weapon
     if (!hasWgroups || !["weapon"].includes(item?.type)) return false;
 
-    // CASE 2 - No item rolled, Actor is no expected to have Weapon Groups, Weapon Groups is not an Array
+    // CASE 2 - No item rolled, Actor is not expected to have Weapon Groups, Weapon Groups is not an Array
     if (!item || !ownedGroups || !Array.isArray(ownedGroups) ) return false;
 
     const itemWgroups = item?.data.data.wgroups;
@@ -395,22 +401,9 @@ function hasWeaponGroupPenalty(item, ownedGroups) {
 };
 
 async function getAgeRollOptions(itemRolled, data = {}) {
-    // Ve se item rolado e arma, poder ou null/outro, 
-
     const template = "/systems/age-system/templates/rolls/age-roll-settings.hbs"
     const type = itemRolled ? itemRolled.type : null;
-
-    if (data.selectAbl) {
-        const abilitiesPool = CONFIG.ageSystem.abilitiesSettings[game.settings.get("age-system", "abilitySelection")];
-        let abilitiesArray = []
-        for (const abl in abilitiesPool) {
-            if (Object.hasOwnProperty.call(abilitiesPool, abl)) {
-                const ablLocal = game.i18n.localize(abilitiesPool[abl]);
-                abilitiesArray.push({ability: abl, name: ablLocal});
-            };
-        };
-        data.abilitiesArray = sortObjArrayByName(abilitiesArray, "name");
-    };
+    if (data.selectAbl) data.abilities = data.actorType === "char" ? CONFIG.ageSystem.abilities : CONFIG.ageSystem.abilitiesOrg;
 
     const html = await renderTemplate(template, {
         ...data,
@@ -424,7 +417,10 @@ async function getAgeRollOptions(itemRolled, data = {}) {
             buttons: {
                 normal: {
                     label: game.i18n.localize("age-system.roll"),
-                    callback: html => resolve(_processAgeRollOptions(html[0].querySelector("form")))
+                    callback: html => {
+                        const fd = new FormDataExtended(html[0].querySelector("form"));
+                        resolve(fd.toObject())
+                    }
                 },
                 cancel: {
                     label: game.i18n.localize("age-system.cancel"),
@@ -438,25 +434,39 @@ async function getAgeRollOptions(itemRolled, data = {}) {
     });
 };
 
-function _processAgeRollOptions(form) {
+async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
+    const template = "/systems/age-system/templates/rolls/dmg-roll-settings.hbs";
+    const html = await renderTemplate(template, {
+        addFocus,
+        stuntDmg,
+        selectAbl: data.selectAbl,
+        abilities: data.actorType === "char" ? CONFIG.ageSystem.abilities : CONFIG.ageSystem.abilitiesOrg,
+        useFocus: data.actorType === "organization"
+    });
 
-    const modifiers = ["ageRollMod", "atkDmgTradeOff", "rollTN", "selectedAbl"];
-    let rollOptions = {}
-
-    for (let o = 0; o < modifiers.length; o++) {
-        const mod = modifiers[o];
-        if (form[mod]) {
-            if (mod === "selectedAbl") {
-                rollOptions[mod] = form[mod].value;
-            } else {
-                rollOptions[mod] = parseInt(form[mod].value)
-                if (!Number.isInteger(rollOptions[mod])) rollOptions[mod] = null;
-            }
+    return new Promise(resolve => {
+        const data = {
+            title: game.i18n.localize("age-system.damageOptions"),
+            content: html,
+            buttons: {
+                normal: {
+                    label: game.i18n.localize("age-system.roll"),
+                    callback: html => {
+                        const fd = new FormDataExtended(html[0].querySelector("form"));
+                        resolve(fd.toObject());
+                    }
+                },
+                cancel: {
+                    label: game.i18n.localize("age-system.cancel"),
+                    callback: html => resolve({cancelled: true}),
+                }
+            },
+            default: "normal",
+            close: () => resolve({cancelled: true}),
         }
-    }
-
-    return rollOptions
-}
+        new Dialog(data, null).render(true);
+    });
+};
 
 // Capture GM ID to whisper
 export function isGMroll(event) {
@@ -498,62 +508,6 @@ export function ageRollChecker(ageRoll, generateSP) {
 export function damageToString(damageMod) {
     return damageMod > 0 ? `+${damageMod}` : `${damageMod}`;
 };
-
-async function getDamageRollOptions(addFocus, stuntDmg) {
-    // Ve se item rolado e arma, poder ou null/outro, 
-
-    const template = "/systems/age-system/templates/rolls/dmg-roll-settings.hbs"
-    // const type = itemRolled ? itemRolled.type : null;
-
-    const html = await renderTemplate(template, {
-        addFocus,
-        stuntDmg
-        // ...data,
-        // itemType: type
-    });
-
-    const modifiers = ["setDmgExtraDice", "setDmgGeneralMod", "setStuntDamage", "addFocus", "stuntDieDmg"];
-    return new Promise(resolve => {
-        const data = {
-            title: game.i18n.localize("age-system.damageOptions"),
-            content: html,
-            buttons: {
-                normal: {
-                    label: game.i18n.localize("age-system.roll"),
-                    callback: html => resolve(_processDamageOptions(html[0].querySelector("form"), modifiers))
-                },
-                cancel: {
-                    label: game.i18n.localize("age-system.cancel"),
-                    callback: html => resolve({cancelled: true}),
-                }
-            },
-            default: "normal",
-            close: () => resolve({cancelled: true}),
-        }
-        new Dialog(data, null).render(true);
-    });
-};
-
-function _processDamageOptions(form, modifiers) {
-
-    // const modifiers = ["setDmgExtraDice", "setDmgGeneralMod", "setStuntDamage", "addFocus", "stuntDieDmg"];
-    let rollOptions = {}
-
-    for (let o = 0; o < modifiers.length; o++) {
-        const mod = modifiers[o];
-        const option = form[mod];
-        if (option) {
-            if (option.type === "checkbox") {
-                rollOptions[mod] = option.checked;
-            } else {
-                rollOptions[mod] = parseInt(option.value);
-                if (!Number.isInteger(rollOptions[mod])) rollOptions[mod] = null;
-            }
-        }
-    }
-
-    return rollOptions
-}
 
 // Vehicle Damage
 export async function vehicleDamage ({
@@ -662,6 +616,108 @@ export async function vehicleDamage ({
 
 }
 
+// Plot Damage (Organization)
+export async function plotDamage (actor) {
+    let formula = "2d6[2D6]";
+    let abl;
+    let rollData = {};
+
+    const dmgOpt = await getDamageRollOptions(null, null, {selectAbl: true, actorType: actor.type});
+    if (dmgOpt.cancelled) return;
+    abl = dmgOpt.selectedAbl;
+    const rollUserMod = dmgOpt.setDmgGeneralMod;
+    const stuntDamage = dmgOpt.setStuntDamage;
+    const dmgExtraDice = dmgOpt.setDmgExtraDice;
+    const atkDmgTradeOff = -Math.abs(Number(dmgOpt.atkDmgTradeOff));
+
+    if (abl && abl !== 'no-abl') {
+        rollData.ability = actor.data.data.abilities[abl].value;
+        formula += ` + @ability[${game.i18n.localize(`age-system.org.${abl}`)}]`;
+    }
+
+    if (rollUserMod) {
+        rollData.rollmod = rollUserMod
+        formula += ` + @rollmod[${game.i18n.localize("age-system.setRollGeneralMod")}]`;
+    }
+
+    // Adds specific Stunt Damage dice
+    if (stuntDamage && stuntDamage != 0) {
+        const stuntDmgDice = `${stuntDamage}D6`;
+        formula += ` + @stuntDmg[${game.i18n.localize("age-system.stunts")}, ${stuntDmgDice}]`;
+        rollData.stuntDmg = stuntDmgDice;
+    };
+
+    // Adds Extra Damage dice
+    if (dmgExtraDice && dmgExtraDice != 0) {
+        const extraDice = `${dmgExtraDice}D6`;
+        formula += ` + @extraDice[+${extraDice}]`;
+        rollData.extraDice = extraDice;
+    };
+
+    let dmgRoll = await new Roll(formula, rollData).evaluate({async: true});
+    
+    // Preparing custom damage chat card
+    let chatTemplate = "/systems/age-system/templates/rolls/damage-roll.hbs";
+    
+    const wGroupPenalty = hasWeaponGroupPenalty(null, null); //modificado
+    // dmgDesc.wGroupPenalty = wGroupPenalty;
+
+    rollData = {
+        ...rollData,
+        rawRollData: dmgRoll,
+        wGroupPenalty: wGroupPenalty,
+        finalValue: wGroupPenalty ? Math.floor(dmgRoll.total/2) : dmgRoll.total,
+        finalValue: dmgRoll.total,
+        diceTerms: dmgRoll.terms,
+        colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
+        flavor: actor.name,
+        flavor2: "structure damage",
+        user: game.user,
+        useInjury: undefined, //modificado
+        buttonVisibility: "hidden" //incluido
+    };
+
+    let chatData = {
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker(),
+        content: await renderTemplate(chatTemplate, rollData),
+        roll: dmgRoll,
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        flags: {
+            "age-system": {
+                type: "orgDamage",
+                damageData: {
+                    // ...dmgDesc,
+                    totalDamage: rollData.finalValue,
+                    attacker: actor.name,
+                    attackerId: actor.uuid,
+                    healthSys: undefined //modificado
+                }
+            }
+        }
+    };
+
+    // if (!chatData.sound) {
+    //     if (healthSys.type === 'mageInjury' || healthSys.type === 'mageVitality') {
+    //         chatData.sound = CONFIG.sounds.notification;
+    //     } else {
+    //         chatData.sound = CONFIG.sounds.dice;
+    //     }
+    // }
+    chatData.sound = CONFIG.sounds.dice;
+    ChatMessage.create(chatData);
+}
+
+// TODO - criar classe para construir o dano para Item, Organization, Spaceship e Vehicle e integrar as diferentes funções
+// Damage Builder
+export class DamageBuilder {
+
+    // Damage Options Dialog handler
+
+    // Damage
+
+}
+
 // Item damage
 export async function itemDamage({
     event = null,
@@ -697,9 +753,6 @@ export async function itemDamage({
     let constDmg = dmgDetails.extraValue;
     let dmgAbl = dmgDetails.dmgAbl
 
-    const isBlind = setBlind(event);
-    const audience = isGMroll(event);
-
     let damageFormula
     let rollData = {};
     if (healthSys.useInjury) {
@@ -707,7 +760,7 @@ export async function itemDamage({
         if (item?.data?.data?.damageInjury !== 0) baseDmg += item.data.data.damageInjury;
         damageFormula = `${baseDmg}[${game.i18n.localize("age-system.base")}]`;
     } else {
-        damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${game.i18n.localize("age-system.base")}, ${nrDice}d${diceSize}]` : "";
+        damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${nrDice}d${diceSize}]` : "";
         rollData.damageMod = constDmg;
         // Check if damage source has a non 0 portion on its parameters
         if (constDmg) {damageFormula = `${damageFormula} + @damageMod[${game.i18n.localize("age-system.base")}]`}
@@ -720,7 +773,7 @@ export async function itemDamage({
     };
 
     // Adds up Flavor text for item damage type
-    if (item.data.data.hasDamage) {
+    if (item?.data.data.hasDamage) {
         damageDesc += `${game.i18n.localize(`age-system.chatCard.rollDamage`)}`;
         const dmgType = game.i18n.localize(`age-system.${item.data.data.dmgType}`);
         const dmgSrc = game.i18n.localize(`age-system.${item.data.data.dmgSource}`);
@@ -730,12 +783,12 @@ export async function itemDamage({
     };
 
     // Add Healing Flavor text if applicable
-    if (item.data.data.hasHealing) {
+    if (item?.data.data.hasHealing) {
         damageDesc = `${game.i18n.localize(`age-system.item.healing`)}`;
         dmgDesc.isHealing = true;
     };
 
-    if (item.isOwned) {
+    if (item?.isOwned) {
         // Adds owner's Ability to damage
         // Fully added even on Injury Mode
         if (dmgAbl !== null && dmgAbl !== "no-abl") {
@@ -805,14 +858,14 @@ export async function itemDamage({
         };
 
         // Adds specific Stunt Damage dice
-        if (stuntDamage && stuntDamage !== 0) {
+        if (stuntDamage && stuntDamage != 0) {
             const stuntDmgDice = healthSys.useInjury ? stuntDamage : `${stuntDamage}D6`;
             damageFormula += ` + @stuntDmg[${game.i18n.localize("age-system.stunts")}, ${stuntDmgDice}]`;
             rollData.stuntDmg = stuntDmgDice;
         };
 
         // Adds Extra Damage dice
-        if (dmgExtraDice && dmgExtraDice !== 0) {
+        if (dmgExtraDice && dmgExtraDice != 0) {
             const extraDice = healthSys.useInjury ? dmgExtraDice : `${dmgExtraDice}D6`;
             damageFormula += ` + @extraDice[+${extraDice}]`;
             rollData.extraDice = extraDice;

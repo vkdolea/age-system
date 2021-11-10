@@ -2,8 +2,21 @@
 /**     Stat Block Style      **/
 /*******************************/
 
-.age-system.sheet.char.stat-block {
-    form.actor-sheet .filler {
+.age-system.stat-block {
+    .organization-sheet {
+        .derived-stats-table,
+        .ability-table {
+            flex: 0 0 auto
+        };
+        background-color: white;
+        border-radius: 11px;
+    }
+    img {
+        flex: 0 0 100px;
+        height: 100px;
+        border: none;
+    }
+    .filler {
         flex: auto;
         background-color: white;
     }
@@ -17,6 +30,12 @@
         align-content: center;
         min-width: 100%;
     }
+    .single-char {
+        flex: 0 0 5px;
+    }
+}
+.age-system.sheet.char.stat-block {
+
     .not-equiped {
         opacity: 0.4 !important;
     }

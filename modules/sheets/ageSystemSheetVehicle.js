@@ -1,6 +1,7 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
+import {isDropedItemValid} from "./helper.js";
 
 export default class ageSystemVehicleSheet extends ActorSheet {
     get isSynth() {
@@ -49,9 +50,6 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         this.actor.prepareData(); // Forcing updating sheet after opening, in case an Actor's operator is updated
         data.config = CONFIG.ageSystem;
         data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
-
-        // Sheet color
-        data.colorScheme = game.settings.get("age-system", "colorScheme");
 
         // return data;
         return {
@@ -148,6 +146,11 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         
         super.activateListeners(html);
     };
+
+    _onDropItemCreate(itemData) {
+        if (!isDropedItemValid(this.actor, itemData)) return false;
+        super._onDropItemCreate(itemData);
+    }
 
     _onRemovePassenger(event) {
         let update = {};

@@ -1,4 +1,18 @@
-<form>
+<form>    
+    {{#if selectAbl}}
+    <div class="form-group">
+        <label>Select Ability</label>
+        <select name="selectedAbl">
+            {{#select selectedAbl}}
+            <option value="no-abl">—</option>
+            {{#each abilities as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+    {{/if}}
+
     <div class="form-group">
         <label>{{localize "age-system.setStuntDmg"}}</label>
         <select name="setStuntDamage">
@@ -9,7 +23,8 @@
             {{/select}}
         </select>
     </div>
-        <div class="form-group">
+
+    <div class="form-group">
         <label>{{localize "age-system.setDmgExtraDice"}}</label>
         <select name="setDmgExtraDice">
             {{#select data.diceType}}
@@ -27,16 +42,22 @@
             {{/select}}
         </select>
     </div>
-        <div class="form-group">
+
+    <div class="form-group">
         <label>{{localize "age-system.setRollGeneralMod"}}</label>
         <input type="number" name="setDmgGeneralMod"/>
     </div>
+
     <div class="form-group">
         <label>{{localize "age-system.chatCard.addStuntDie"}}</label>
         <input type="number" name="stuntDieDmg" value="{{stuntDmg}}"/>
     </div>
+
+    {{#unless useFocus}}
     <div class="form-group">
         <input type="checkbox" name="addFocus" {{checked addFocus}}/>
         <label>{{localize "age-system.chatCard.addFocus"}}</label>
     </div>
+    {{/unless}}
+
 </form>

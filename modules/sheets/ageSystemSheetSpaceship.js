@@ -1,6 +1,7 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
+import {isDropedItemValid} from "./helper.js";
 
 export default class ageSpaceshipSheet extends ActorSheet {
     
@@ -49,9 +50,6 @@ export default class ageSpaceshipSheet extends ActorSheet {
         data.qualities = itemSorted.filter(i => i.data.quality === "quality" && i.data.type !== "weapon");
         data.flaws = itemSorted.filter(i => i.data.quality === "flaw" && i.data.type !== "weapon");
         data.weapon = itemSorted.filter(i => i.data.type === "weapon");
-
-        // Sheet color
-        data.colorScheme = game.settings.get("age-system", "colorScheme");
 
         // Check if sheet is from synthetic token - Passenger setup will not work for Synth
         data.notSynth = !(this.token && !this.token.data.actorLink);
@@ -150,6 +148,11 @@ export default class ageSpaceshipSheet extends ActorSheet {
 
         super.activateListeners(html);
     };
+
+    _onDropItemCreate(itemData) {
+        if (!isDropedItemValid(this.actor, itemData)) return false;
+        super._onDropItemCreate(itemData);
+    }
 
     _onRollDice(event){
         const messageData = {

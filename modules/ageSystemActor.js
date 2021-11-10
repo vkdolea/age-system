@@ -77,9 +77,7 @@ export class ageSystemActor extends Actor {
         const embeddedTypes = this.constructor.metadata.embedded || {};
         for ( let cls of Object.values(embeddedTypes) ) {
             const collection = cls.metadata.collection;
-            for ( let e of this[collection] ) {
-            e.prepareData();
-            }
+            for ( let e of this[collection] ) {e.prepareData()}
         }
         
         // Apply Item Modifiers to Actor before applying Active Effects!
@@ -106,23 +104,6 @@ export class ageSystemActor extends Actor {
                 break;
         }
     };
-
-    // Attempt to register Compact shee to GM Screen, but not successful... :-(
-        
-    // _onCreate(data, options, userId) {
-    //     super._onCreate(data, options, userId);
-    //     if (data.type === "char" && game.user.id === userId) {
-    //         const gmScreenFlag = {gmScreenSheetClass: `age-system.ageSystemSheetCharStatBlock`};
-    //         this.data.flags = {
-    //             ...this.data.flgas,
-    //             "gm-screen": gmScreenFlag
-    //         };
-    //         this._sheet.object.data.flags = {
-    //             ...this._sheet.object.data.flags,
-    //             "gm-screen": gmScreenFlag
-    //         }
-    //     }
-    // }
 
     _prepareBaseDataChar() {
 
@@ -324,9 +305,7 @@ export class ageSystemActor extends Actor {
         data.initiative = data.initiativeMod + data.abilities.dex.total - data.armor.penalty;
 
         // Calculate resources/currency
-        if (data.useCurrency) {
-            data.resources.mod = 0;
-        };
+        if (data.useCurrency) data.resources.mod = 0;
         data.resources.total = data.resources.base + Number(data.resources.mod);
     };
 
@@ -671,31 +650,6 @@ export class ageSystemActor extends Actor {
         this.update({"data.health.value": remainingHP});
         return summary
     }
-
-    // async handleConditions(condId, isChecked = null) {
-    //     if (["spaceship", "vehicle"].includes(this.type)) return null;
-    //     if (isChecked === null) isChecked = !this.data.data.conditions[condId];
-    //     const condEffects = this.effects.filter(c => c.data.flags?.["age-system"]?.type === "conditions" && c.data.flags?.["age-system"]?.name === condId);
-    //     // Condition not checked, and no related Effect is on - do nothing
-    //     if (!isChecked && condEffects.length < 1) return;
-    //     // Condition is checked and there is related Effect - do nothing
-    //     if (isChecked && condEffects.length === 1) return;
-    //     // Condition is not checked and there 1+ related Effects - delete everyting
-    //     if (!isChecked && condEffects.length > 0) {
-    //         for (let c = 0; c < condEffects.length; c++) {
-    //             const effect = condEffects[c];
-    //             const id = effect.data._id;
-    //             await this.effects.get(id).delete();
-    //         }
-    //         return
-    //     }
-    //     // Condition is checked and there is no related Effect - create new Active Effect
-    //     if (isChecked && condEffects.length < 1) {
-    //         const newEffect = CONFIG.statusEffects.filter(e => e.flags?.["age-system"]?.name === condId)[0];
-    //         newEffect["flags.core.statusId"] = newEffect.id;
-    //         await this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
-    //     }
-    // }
 
     async handleConditions(condId) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;

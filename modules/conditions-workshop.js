@@ -146,7 +146,7 @@ export default class ConditionsWorkshop extends Application {
     const newEffect = {
       icon: "icons/svg/aura.svg",
       label: "",
-      id: 'AGEcustom.' + this._makeId(20),
+      id: 'AGEcustom.' + foundry.utils.randomID(20),
       changes: [],
       flags: {
         "age-system": {
@@ -178,12 +178,15 @@ export default class ConditionsWorkshop extends Application {
   }
 
   _onEditImage(event) {
-    const current = event.currentTarget.src.replace(/http:\/\/.*?\//, '');
+    let path = event.currentTarget.src.toLowerCase();
+    let current
+    if (path.includes("https://")) current = path.replace(/https:\/\/.*?\//i, '');
+    if (path.includes("http://")) current = path.replace(/http:\/\/.*?\//i, '');
     const conditionId = event.currentTarget.closest('.individual-effects').dataset.conditionI;
     const condition = this._customEffects[conditionId];
     const fp = new FilePicker({
+      current,
       type: "image",
-      current: current,
       callback: path => {
         event.currentTarget.src = path;
         condition.icon = path;
@@ -238,16 +241,6 @@ export default class ConditionsWorkshop extends Application {
         break;
     }
     this._refresh();
-  }
-
-  _makeId(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
   }
 
   _onManageChange(ev) {

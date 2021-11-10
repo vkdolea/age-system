@@ -53,7 +53,7 @@
         {{#if data.config.healthSys.useVitality}}
         <span class="health flexrow flex-align-center">
             <input type="number" name="data.vitality.value" value="{{data.data.vitality.value}}" data-dtype="Number" />
-            <span>&nbsp/&nbsp</span>
+            <span class="single-char">&nbsp/&nbsp</span>
             {{#if (ne data.data.vitality.set data.data.vitality.max)}}
             <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="data.vitality.max" value="{{data.data.vitality.max}}" data-dtype="Number" />
             {{/if}}
@@ -63,7 +63,7 @@
         {{#unless data.config.healthSys.useInjury}}
         <span class="health flexrow flex-align-center">
             <input type="number" name="data.health.value" value="{{data.data.health.value}}" data-dtype="Number" />
-            <span>&nbsp/&nbsp</span>
+            <span class="single-char">&nbsp/&nbsp</span>
             {{#if (ne data.data.health.set data.data.health.max)}}
             <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="data.health.max" value="{{data.data.health.max}}" data-dtype="Number" />
             {{/if}}
@@ -76,11 +76,11 @@
         <span class="armor flexrow flex-align-center">
             <div>{{data.data.armor.impact}}{{#if data.config.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}{{/if}}</div>
             {{#if data.config.healthSys.useBallistic}}
-            <span>/</span>
+            <span class="single-char">/</span>
             <div>{{data.data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
             {{/if}}
             {{#if data.config.healthSys.useToughness}}
-            <span>+</span>
+            <span class="single-char">+</span>
             <input type="number" disabled class="main-value" name="data.armor.toughness.total" value="{{data.data.armor.toughness.total}}" data-dtype="Number" />
             {{/if}}
         </span>

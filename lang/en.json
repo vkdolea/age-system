@@ -2,6 +2,7 @@
     "ACTOR.TypeChar": "Character",
     "ACTOR.TypeVehicle": "Vehicle",
     "ACTOR.TypeSpaceship": "Spaceship",
+    "ACTOR.TypeOrganization": "Organization",
     "ITEM.TypeStunts": "Stunt",
     "ITEM.TypeEquipment": "Equipment",
     "ITEM.TypePower": "Power & Arcana",
@@ -122,7 +123,8 @@
             "charStatBlock": "AGE Character Stat Block",
             "vehicleStandard": "AGE Vehicle",
             "itemStandard": "AGE Item",
-            "spaceshipStandard": "AGE Spaceship"
+            "spaceshipStandard": "AGE Spaceship",
+            "orgStandard": "AGE Organization"
         },
         "sheetFull": "Full",
         "sheetBlock": "Block",
@@ -140,7 +142,11 @@
             "nonShipPartsOnShip": "Only Spaceship Features item type can be droped on Spaceships.",
             "healthSysNotMatching": "Health System from card and actual in use do not match.",
             "noValidTokensSelected": "No valid tokens selected.",
-            "repetedIconCondition": "Saving is not possible. Two or more conditions have the same icon selected."
+            "repetedIconCondition": "Saving is not possible. Two or more conditions have the same icon selected.",
+            "orgItem": "Only Focus can be added to Organizations",
+            "charFocusToOrg": "Character Focus can not be added to Organization",
+            "orgFocusToChar": "Organization Focus can not be added to Character",
+            "vehicleItem": "Vehicles can not receive Items"
         },
 
         "spaceship": {
@@ -260,6 +266,26 @@
             "backupVehicle": "backs up {vehicle}",
 
             "compRoll": "{compType} Roll"
+        },
+
+        "org": {
+            "might": "Might",
+            "wealth": "Wealth",
+            "influence": "Influence",
+            "intrigue": "Intrigue",
+            "phenomena": "Phenomena / Magic / Weird"
+        },
+        "orgFocus": "Org. Focus",
+        "combatRatings": "Combat Ratings",
+        "structure": "Structure",
+        "stability": "Stability",
+        "scope": "Scope",
+        "plotAction": "Plot Action",
+        "orgScope": {
+            "local": "Local",
+            "regional": "Regional",
+            "national": "National",
+            "international": "International"
         },
 
         "testThreshold": "Threshold",

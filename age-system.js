@@ -5,6 +5,7 @@ import ageSystemSheetCharacter from "./modules/sheets/ageSystemSheetCharacter.js
 import ageSystemSheetCharStatBlock from "./modules/sheets/ageSystemSheetCharStatBlock.js";
 import ageSystemSheetVehicle from "./modules/sheets/ageSystemSheetVehicle.js";
 import ageSystemSheetSpaceship from "./modules/sheets/ageSystemSheetSpaceship.js";
+import ageSystemSheetOrg from "./modules/sheets/ageSystemSheetOrg.js";
 import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageToken} from "./modules/ageToken.js";
@@ -65,6 +66,7 @@ Hooks.once("init", async function() {
             ageSystemSheetCharStatBlock,
             ageSystemSheetVehicle,
             ageSystemSheetSpaceship,
+            ageSystemSheetOrg,
             ageSystemSheetItem,
             AgeRoller,
             AgeTracker
@@ -98,6 +100,11 @@ Hooks.once("init", async function() {
         types: ["spaceship"],
         makeDefault: true,
         label: "age-system.SHEETS.spaceshipStandard"
+    });
+    Actors.registerSheet("age-system", ageSystemSheetOrg, {
+        types: ["organization"],
+        makeDefault: true,
+        label: "age-system.SHEETS.orgStandard"
     });
     
     Items.unregisterSheet("core", ItemSheet);
@@ -399,47 +406,4 @@ Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
 Hooks.on("renderChatMessage", (app, html, data) => {
     // Hide chat message when rolling to GM
     AgeChat.sortCustomAgeChatCards(app, html, data);
-});
-
-// Prevent Items to be created on non campatible Actor types
-Hooks.on("preCreateItem", (itemCreated, itemCreatedData, options, userId) => {
-    // Ensure this change occurs once
-    if (game.user.id !== userId) return;
-
-    const actor = itemCreated.actor;
-    const itemName = itemCreatedData.name
-    const itemType = itemCreatedData.type
-
-    if (!actor) return;
-
-    // Avoid dropping Item on Vehicle
-    if (actor.type === "vehicle") {
-        ui.notifications.warn(`Items can not be droped on Vehicle Actor type.`);
-        return options.temporary = true;
-    };
-
-    // Ensure only Spaceship Features are droped on Spaceships
-    if (actor.type === "spaceship" && itemType !== "shipfeatures") {
-        let warning = game.i18n.localize("age-system.WARNING.nonShipPartsOnShip");
-        ui.notifications.warn(warning);
-        return options.temporary = true;
-    }
-    
-    // Prevent adding spaceship features to Actors
-    if (actor.type === "char" && itemType === "shipfeatures") {
-        let warning = game.i18n.localize("age-system.WARNING.shipPartsOnChar");
-        ui.notifications.warn(warning);
-        return options.temporary = true;
-    }
-    
-    // Avoid Focus with repeated name on Actors
-    if (actor.type === "char" && itemType === "focus") {
-        const hasFocus = actor.items.filter(f => f.name === itemCreatedData.name && f.type === "focus");
-        if (hasFocus.length > 0) {
-            let warning = game.i18n.localize("age-system.WARNING.duplicatedFocus");
-            warning += `"${itemName.toUpperCase()}"`;
-            ui.notifications.warn(warning);
-            return options.temporary = true;
-        }
-    }
 });

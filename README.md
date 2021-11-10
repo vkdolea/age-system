@@ -74,6 +74,7 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 - [Sensuousness](https://game-icons.net/1x1/lorc/sensuousness.html) (Character icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Chariot](https://game-icons.net/1x1/cathelineau/chariot.html) (Vehicle icon), by [Cathelineau](his link reference is game-icons.net itself).
 - [Rocket](https://game-icons.net/1x1/lorc/rocket.html) (Spaceship icon), by [Lorc](https://lorcblog.blogspot.com/).
+- [Barracks Tent](https://game-icons.net/1x1/delapouite/barracks-tent.html) (Organization icon), by [Delapouite](https://delapouite.com/).
 - [Split Cross](https://game-icons.net/1x1/lorc/split-cross.html) (Stunt icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Embrace Energy](https://game-icons.net/1x1/lorc/embrassed-energy.html) (Power & Arcana icon), by [Lorc](https://lorcblog.blogspot.com/).
 - [Gift of Knowledge](https://game-icons.net/1x1/lorc/gift-of-knowledge.html) (Focus icon), by [Lorc](https://lorcblog.blogspot.com/).
@@ -88,7 +89,6 @@ Icons were used from [game-icons.net](https://game-icons.net). These icons were 
 
 ### Token Stats Icons
 Icons made by:
-- Counters by me!
 - [Delapouite](https://delapouite.com/), [DarkZaitev](http://darkzaitzev.deviantart.com/), [Lorc](https://lorcblog.blogspot.com/), [Skoll](https://game-icons.net),   from [game-icons.net](https://game-icons.net/).
 
 ### Localization
@@ -97,6 +97,16 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.9 [2021-11-10]
+### Added
+- Organization as Actor
+- Context menu (right-click) to access all Item types on both Character sheets (delete and edit options are only accessible that way)
+
+### Fixed
+- Some unauthorized items were able to be created on different Actor types (more than 1 focus with the same name, Spaceship Features could be created on Characters).
+- Fine tuning French translation.
+- Issue preventing from rolling Focus correctly when using context menu to add roll modifiers.
+
 ## 0.8.8 [2021-10-30]
 ### Added
 - Conditions Workshop, to create custom Conditions and Token Effect. Only GMs can access. To access Conditions Workshop, hover Age Roller icon and select the option in the right-hand side menu.

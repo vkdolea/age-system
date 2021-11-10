@@ -146,12 +146,16 @@ each(@colorsets, {
                     background-color: extract(extract(@color-list, @index), 1);
                     color: extract(extract(@color-list, @index), 4);
                 }
-                .editor {
-                    background-color: hsl(0, 0%, 100%);
-                }
             }
-
+            
         }
+
+        .char-sheet,
+        .organization-sheet {
+            .editor {
+                background-color: hsl(0, 0%, 100%);
+            }
+        };
 
         .vehicle-stats {
             img {

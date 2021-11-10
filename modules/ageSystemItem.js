@@ -112,9 +112,12 @@ export class ageSystemItem extends Item {
         }
 
         switch (itemType) {
-            case "focus": return this._prepareFocus(data);
-            case "power": return this._preparePower(data);
-            case "shipfeatures": return this._prepareShipFeatures(data);
+            case "focus": this._prepareFocus(data);
+                break;
+            case "power": this._preparePower(data);
+                break;
+            case "shipfeatures": this._prepareShipFeatures(data);
+                break;
         }
 
         this.prepareEmbeddedEntities();        
@@ -131,6 +134,10 @@ export class ageSystemItem extends Item {
                 }
             }
         }
+        const abilitiesOrg = Object.keys(CONFIG.ageSystem.abilitiesOrg);
+        const abilitiesChar = Object.keys(CONFIG.ageSystem.abilities);
+        const hasOrgAbl = abilitiesOrg.includes(data.useAbl)
+        if (data.isOrg === !hasOrgAbl) data.useAbl = data.isOrg ? abilitiesOrg[0] : abilitiesChar[0]; 
     }
 
     _preparePower(data) {
@@ -198,6 +205,10 @@ export class ageSystemItem extends Item {
                     break;
                 case "power":
                     rollType = ROLL_TYPE.POWER
+                    break
+                case "focus":
+                    rollType = ROLL_TYPE.FOCUS
+                    break
                 default:
                     break;
             }
@@ -268,8 +279,10 @@ export class ageSystemItem extends Item {
             itemId: this.id,
             owner: this.actor,
             ownerUuid: this.actor.uuid,
-            colorScheme: game.settings.get("age-system", "colorScheme"),
-            config: {wealthMode: game.settings.get("age-system", "wealthType")}
+            config: {
+                colorScheme: CONFIG.ageSystem.colorScheme,
+                wealthMode: game.settings.get("age-system", "wealthType")
+            }
         };
         const chatData = {
             user: game.user.id,
