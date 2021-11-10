@@ -760,7 +760,7 @@ export async function itemDamage({
         if (item?.data?.data?.damageInjury !== 0) baseDmg += item.data.data.damageInjury;
         damageFormula = `${baseDmg}[${game.i18n.localize("age-system.base")}]`;
     } else {
-        damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${game.i18n.localize("age-system.base")}, ${nrDice}d${diceSize}]` : "";
+        damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${nrDice}d${diceSize}]` : "";
         rollData.damageMod = constDmg;
         // Check if damage source has a non 0 portion on its parameters
         if (constDmg) {damageFormula = `${damageFormula} + @damageMod[${game.i18n.localize("age-system.base")}]`}
