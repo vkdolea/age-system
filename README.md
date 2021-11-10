@@ -97,6 +97,12 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.10 [2021-11-10]
+### Fixed
+- Organization image will fit sheet space and it will keep proportion.
+- Organization abilities now show up properly in character sheet.
+- Combat Ratings now fit evenly in the sheet.
+
 ## 0.8.9 [2021-11-10]
 ### Added
 - Organization as Actor
