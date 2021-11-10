@@ -1462,6 +1462,7 @@
   flex: 0 0 100px;
   height: 100px;
   border: none;
+  object-fit: contain;
 }
 .age-system.stat-block .filler {
   flex: auto;
