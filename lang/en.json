@@ -276,6 +276,17 @@
             "phenomena": "Phenomena / Magic / Weird"
         },
         "orgFocus": "Org. Focus",
+        "combatRatings": "Combat Rating",
+        "structure": "Structure",
+        "stability": "Stability",
+        "scope": "Scope",
+        "plotAction": "Plot Action",
+        "orgScope": {
+            "local": "Local",
+            "regional": "Regional",
+            "national": "National",
+            "international": "International"
+        },
 
         "testThreshold": "Threshold",
         "targetCurrent": "Target/Current",

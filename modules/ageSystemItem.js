@@ -279,8 +279,10 @@ export class ageSystemItem extends Item {
             itemId: this.id,
             owner: this.actor,
             ownerUuid: this.actor.uuid,
-            colorScheme: game.settings.get("age-system", "colorScheme"),
-            config: {wealthMode: game.settings.get("age-system", "wealthType")}
+            config: {
+                colorScheme: CONFIG.ageSystem.colorScheme,
+                wealthMode: game.settings.get("age-system", "wealthType")
+            }
         };
         const chatData = {
             user: game.user.id,

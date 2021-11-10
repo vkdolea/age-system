@@ -276,6 +276,17 @@
             "phenomena": "Fenômeno"
         },
         "orgFocus": "Foco de Org.",
+        "combatRatings": "Estatística de Combate",
+        "structure": "Estrutura",
+        "stability": "Estabilidade",
+        "scope": "Escopo",
+        "plotAction": "Ação Corporativa",
+        "orgScope": {
+            "local": "Local",
+            "regional": "Regional",
+            "national": "Nacional",
+            "international": "Internacional"
+        },
 
         "testThreshold": "Limiar",
         "targetCurrent": "Alvo/Atual",

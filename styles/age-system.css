@@ -1458,6 +1458,11 @@
 .age-system.stat-block .organization-sheet .ability-table {
   flex: 0 0 auto;
 }
+.age-system.stat-block img {
+  flex: 0 0 100px;
+  height: 100px;
+  border: none;
+}
 .age-system.stat-block .filler {
   flex: auto;
   background-color: white;

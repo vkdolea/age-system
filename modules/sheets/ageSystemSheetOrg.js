@@ -33,7 +33,7 @@ export default class ageSystemSheetOrg extends ActorSheet {
         
         const data = actorData.data;
         const focus = actorData.items.filter(f => f.type === "focus");
-
+        
         return {
             data,
             focus,
@@ -47,7 +47,8 @@ export default class ageSystemSheetOrg extends ActorSheet {
             owner: isOwner,
             editable: isEditable,
             title: this.title,
-            isGM: game.user.isGM
+            isGM: game.user.isGM,
+            ROLL_TYPE: CONFIG.ageSystem.ROLL_TYPE
         };
     };
     
@@ -62,9 +63,32 @@ export default class ageSystemSheetOrg extends ActorSheet {
             html.find(".roll-item")
                 .click(this._onRollItem.bind(this))
                 .contextmenu(this._onRollItem.bind(this));
+            html.find(".roll-plot")
+                .click(this._onRollPlot.bind(this))
+                .contextmenu(this._onRollPlot.bind(this));
         }
 
     };
+
+    _onRollPlot(event) {
+        event.preventDefault();
+        const rollType = event.currentTarget.dataset.rollType;
+        const ROLL_TYPE = CONFIG.ageSystem.ROLL_TYPE;
+        switch (rollType) {
+            case ROLL_TYPE.PLOT_ACTION:
+                Dice.ageRollCheck({
+                    event,
+                    actor: this.actor,
+                    selectAbl: true,
+                    rollType
+                })
+                break;
+            case ROLL_TYPE.PLOT_DAMAGE:
+                Dice.plotDamage(this.actor)
+            default:
+                break;
+        }
+    }
 
     _onRollItem(event) {
         event.preventDefault();

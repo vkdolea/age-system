@@ -1,20 +1,20 @@
-{{!-- Colorset defined in the Actor Sheet Class --}}
 <form class="organization-sheet {{cssClass}} colorset-{{config.colorScheme}} colorset-selection flexcol" autocomplete="off">
     <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
-    
+    <img src="{{actor.img}}" class="colorset-second-tier" data-edit="img" title="{{actor.name}}"/>
     {{!-- Abilities and Focus --}}
     <ul class="ability-table font-small-table column-width block-item">
         <li class="ability-row header">
             <span><strong>{{localize "age-system.abl"}}</strong>&nbsp({{localize "age-system.focus"}})</span>
         </li>
         {{#each data.abilities as |abl type|}}
-        {{log this}}
         <li class="ability-row ability-box flexrow {{type}} feature-controls colorset-second-tier" data-abl-id="{{type}}">
             <div class="flexrow abl-value-box">
                 <input type="number" class="abl-value original" name="data.abilities.{{type}}.total" value="{{abl.value}}" data-dtype="Number" />
             </div>
             <div class="abl-name-focus flexrow">
                 <a class="abl-name roll-ability">{{localize (concat "age-system.org." type)}}</a>
+                {{!-- &nbsp
+                <a class="abl-name roll-plot-damage"><i class="fa fa-bullseye" aria-hidden="true"></i></a> --}}
                 {{#each (focusbyabl ../focus type) as |item|}}
                 <div class="item-name focus-options feature-controls" data-item-id="{{item._id}}" data-roll-type="{{../../config.ROLL_TYPE.FOCUS}}">
                     <a class="item-name roll-item{{#if item.data.improved}} improved-focus{{/if}}">{{#if @first}}&nbsp({{else}}&nbsp{{/if}}{{item.name}}{{#if @last}}){{else}},{{/if}}</a>
@@ -31,25 +31,19 @@
             <span>{{localize "age-system.combatRatings"}}</span>
         </li>
         <li class="flexrow header">
-            <span class="speed">{{localize "age-system.structure"}}</span>
-            <span class="health">{{localize "age-system.stability"}}</span>
-            
+            <span>{{localize "age-system.structure"}}</span>
+            <span>{{localize "age-system.stability"}}</span>
+            <span>{{localize "age-system.scope"}}</span>
         </li>
         <li class="flexrow data body">
-            <span class="speed">
+            <span>
                 <input type="number" class="main-value" name="data.combat.structure" value="{{data.combat.structure}}" data-dtype="Number" />
             </span>
-            <span class="health flexrow flex-align-center">
-                <input type="number" name="data.combat.stability.value" value="{{data.combat.stability.value}}" data-dtype="Number" />
-                <span style="flex: 0 0 5px">&nbsp/&nbsp</span>
+               <input type="number" name="data.combat.stability.value" value="{{data.combat.stability.value}}" data-dtype="Number" />
+                <span class="single-char">/</span>
                 <input type="number" number-type="five-digits" name="data.combat.stability.max" value="{{data.combat.stability.max}}" data-dtype="Number" />
             </span>
-        </li>
-        <li class="header">
-            <span class="defense">{{localize "age-system.scope"}}</span>
-        </li>
-        <li>
-            <span class="defense flexrow flex-align-center">
+            <span class="flexrow flex-align-center">
                 <select name="data.scope">
                     {{#select data.data.scope}}
                     {{#each config.orgScope as |name scope|}}
@@ -59,10 +53,13 @@
                 </select>
             </span>
         </li>
+        {{!-- Plot Attack --}}
+        <li class="header">
+            {{localize "age-system.plotAction"}} <a class="roll-plot" data-roll-type="{{ROLL_TYPE.PLOT_ACTION}}"><i class="fas fa-dice"></i></a> <a class="roll-plot" data-roll-type="{{ROLL_TYPE.PLOT_DAMAGE}}"><i class="fas fa-fist-raised"></i></a>
+        </li>
     </ul>
 
-    {{editor content=data.description target="data.description" button=true owner=owner editable=true}}
 
-    {{!-- <div class="filler"></div> --}}
+    {{editor content=data.description target="data.description" button=true owner=owner editable=true}}
     <footer class="colorset-first-tier"></footer>
 </form>

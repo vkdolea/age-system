@@ -51,9 +51,6 @@ export default class ageSpaceshipSheet extends ActorSheet {
         data.flaws = itemSorted.filter(i => i.data.quality === "flaw" && i.data.type !== "weapon");
         data.weapon = itemSorted.filter(i => i.data.type === "weapon");
 
-        // Sheet color
-        data.colorScheme = game.settings.get("age-system", "colorScheme");
-
         // Check if sheet is from synthetic token - Passenger setup will not work for Synth
         data.notSynth = !(this.token && !this.token.data.actorLink);
         data.isSynth = !data.notSynth;

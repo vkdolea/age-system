@@ -1,13 +1,10 @@
-<form>
-    
+<form>  
     {{#if selectAbl}}
     <div class="form-group">
-        <label>Select Alternate Ability</label>
+        <label>Select Ability</label>
         <select name="selectedAbl">
             {{#select selectedAbl}}
             <option value="no-abl">—</option>
-            {{!-- {{#each abilitiesArray as |alternate|}}
-            <option value="{{alternate.ability}}">{{alternate.name}}</option> --}}
             {{#each abilities as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}

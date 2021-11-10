@@ -65,9 +65,6 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Setting which ability settings will be used
         data.config.wealthMode = game.settings.get("age-system", "wealthType");
 
-        // Sheet color
-        data.colorScheme = game.settings.get("age-system", "colorScheme");
-
         // Spacechip Features
         if (this.item.data.type === "shipfeatures") {
             data.config.featuresTypeLocal = [];

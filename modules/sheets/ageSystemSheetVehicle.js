@@ -51,9 +51,6 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         data.config = CONFIG.ageSystem;
         data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
 
-        // Sheet color
-        data.colorScheme = game.settings.get("age-system", "colorScheme");
-
         // return data;
         return {
             actor: this.object,

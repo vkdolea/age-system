@@ -32,6 +32,10 @@
                     "min": 0,
                     "max": 25,
                     "value": 25
+                },
+                "attack": {
+                    "abl": "might",
+                    "bonus": 0
                 }
             },
             "scope": "regional",

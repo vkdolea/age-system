@@ -116,9 +116,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         // Retrieve Health Mode (Health/Fortune)
         data.healthMode = game.settings.get("age-system", "healthMode");
 
-        // Sheet color
-        data.colorScheme = game.settings.get("age-system", "colorScheme");
-
         // Options Tab Preparation
         // Weapon Groups
         data.weaponGroups = ageSystem.weaponGroups;
@@ -230,7 +227,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
             new ContextMenu(html, ".item-card .main-data", this.itemContextMenu); // Elaborar
             html.find(".item-equip").click(this._onItemActivate.bind(this));
-            // html.find(".item-show").click(this._onItemShow.bind(this));
+            html.find(".item-card .main-data").click(this._onItemShow.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".conditions .item-name").click(this._onChangeCondition.bind(this));
