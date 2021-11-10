@@ -276,16 +276,16 @@
             "phenomena": "Fenómeno / Magia / Extraño"
         },
         "orgFocus": "Concentraciones Org.",
-        "combatRatings": "Combat Rating",
-        "structure": "Structure",
-        "stability": "Stability",
-        "scope": "Scope",
-        "plotAction": "Plot Action",
+        "combatRatings": "Combate",
+        "structure": "Estructura",
+        "stability": "Estabilidad",
+        "scope": "Alcance",
+        "plotAction": "Acciones Argumentales",
         "orgScope": {
             "local": "Local",
             "regional": "Regional",
-            "national": "National",
-            "international": "International"
+            "national": "Nacional",
+            "international": "Internacional"
         },
 
         "testThreshold": "Umbral Tarea",

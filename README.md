@@ -97,7 +97,7 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
-## 0.8.9 [2021-11-xx]
+## 0.8.9 [2021-11-10]
 ### Added
 - Organization as Actor
 - Context menu (right-click) to access all Item types on both Character sheets (delete and edit options are only accessible that way)

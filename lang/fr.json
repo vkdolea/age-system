@@ -276,6 +276,17 @@
             "phenomena": "Phénomène / Magie / Étrange"
         },
         "orgFocus": "Org. Focus",
+        "combatRatings": "Scores de combat",
+        "structure": "Structure",
+        "stability": "Stabilité",
+        "scope": "Champ d'action",
+        "plotAction": "Complot",
+        "orgScope": {
+            "local": "Local",
+            "regional": "Régional",
+            "national": "National",
+            "international": "International"
+        },
 		
 		"testThreshold": "Seuil de réussite",
 		"targetCurrent": "Cible/Actuel",
