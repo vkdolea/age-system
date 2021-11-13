@@ -1,4 +1,5 @@
 import ApplyDamageDialog from "./apply-damage.js";
+import {ageSystem} from "./config.js";
 
 export function addChatListeners(html) {
     html.on('click', '.roll-damage', chatDamageRoll);
@@ -11,6 +12,68 @@ export function addChatListeners(html) {
     html.on('click', '.roll-toughness-test', resistInjury);
     html.on('click', '.apply-injury', inflictInjury);
 };
+
+/**
+ * This function is used to hook into the Chat Log context menu to add additional options to each message
+ * These options make it easy to conveniently apply damage to controlled tokens based on the value of a Roll
+ *
+ * @param {HTMLElement} html    The Chat Message being rendered
+ * @param {object[]} options    The Array of Context Menu options
+ *
+ * @returns {object[]}          The extended options Array including new context choices
+ */
+ export const addChatMessageContextOptions = function(html, options) {
+    let canApply = li => {
+        const message = game.messages.get(li.data("messageId"));
+        const hasHealth = !ageSystem.healthSys.useInjury;
+        return message?.isRoll && message?.isContentVisible && canvas.tokens?.controlled.length && hasHealth;
+    };
+    options.push(
+    {
+        name: game.i18n.localize("age-system.item.healing"),
+        icon: '<i class="fa fa-heartbeat" aria-hidden="true"></i>',
+        condition: canApply,
+        callback: li => applyChatCardDamage(li, {isHealing: true, isNewHP: false})
+    },
+    {
+        name: game.i18n.localize("age-system.applyDamage"),
+        icon: '<i class="fa fa-crosshairs" aria-hidden="true"></i>',
+        condition: canApply,
+        callback: li => applyChatCardDamage(li, {isDamage: true})
+    });
+    return options;
+};
+
+/**
+ * Apply rolled dice damage to the token or tokens which are currently controlled.
+ * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
+ *
+ * @param {HTMLElement} li      The chat entry which contains the roll data
+ * @param {number} multiplier   A damage multiplier to apply to the rolled damage.
+ * @returns {Promise}
+ */
+function applyChatCardDamage(li, options) {
+    const message = game.messages.get(li.data("messageId"));
+    const roll = message.roll;
+    const total = message.data.flags?.["age-system"]?.damageData?.totalDamage ?? roll.total;
+    if (options.isHealing) {
+        return Promise.all(canvas.tokens.controlled.map(t => {
+          const a = t.actor;
+          return a.applyHPloss(total, options);
+        }));
+    }
+    if (options.isDamage) {
+        const damageData ={
+            healthSys: ageSystem.healthSys,
+            totalDamage: total,
+            dmgType: 'wound',
+            dmgSrc: 'impact',
+            isHealing: false,
+            wGroupPenalty: false
+        }
+        callApplyDamage(damageData);
+    }
+}
 
 export async function inflictInjury(event){
     event.preventDefault();
@@ -42,6 +105,11 @@ export async function applyDamageChat(event) {
     const cardId = card.dataset.messageId;
     const damageData = await game.messages.get(cardId).data.flags["age-system"].damageData;
     const cardHealthSys = damageData.healthSys;
+    if (!checkHealth(cardHealthSys, CONFIG.ageSystem.healthSys)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
+    callApplyDamage(damageData);
+}
+
+export async function callApplyDamage (damageData) {
     let targets = canvas.tokens.controlled;
     let nonChar = []
     if (nonChar !== []) {
@@ -55,8 +123,7 @@ export async function applyDamageChat(event) {
         }
     }
     if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.noValidTokensSelected"));
-    if (!checkHealth(cardHealthSys, CONFIG.ageSystem.healthSys)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
-    return new ApplyDamageDialog(targets, damageData, cardHealthSys.useInjury).render(true);
+    return new ApplyDamageDialog(targets, damageData, CONFIG.ageSystem.healthSys.useInjury).render(true);
 }
 
 export function checkHealth(card, game) {

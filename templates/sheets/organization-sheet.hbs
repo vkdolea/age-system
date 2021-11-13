@@ -39,11 +39,12 @@
             <span>
                 <input type="number" class="main-value" name="data.combat.structure" value="{{data.combat.structure}}" data-dtype="Number" />
             </span>
-            <span class="flexrow flex-align-center">
+            <input type="number" name="data.combat.stability.value" value="{{data.combat.stability.value}}" data-dtype="Number" />
+            {{!-- <span class="flexrow flex-align-center">
                 <input type="number" name="data.combat.stability.value" value="{{data.combat.stability.value}}" data-dtype="Number" />
                 <span class="single-char">/</span>
                 <input type="number" number-type="five-digits" name="data.combat.stability.max" value="{{data.combat.stability.max}}" data-dtype="Number" />
-            </span>
+            </span> --}}
             <span class="flexrow flex-align-center">
                 <select name="data.scope">
                     {{#select data.data.scope}}

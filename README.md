@@ -97,6 +97,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.11 [2021-11-13]
+### Added
+- Added context menu options on chats when right-clicking roll cards. Options added to Heal character and to Apply Damage to all selected tokens. This implementation will not be available if you are using Modern AGE (alternate damage: Injury). Note: you can also "heal" Organizations using this method, but damaging it is still not possible.
+
 ## 0.8.10 [2021-11-10]
 ### Fixed
 - Organization image will fit sheet space and it will keep proportion.

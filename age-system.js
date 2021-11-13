@@ -137,7 +137,24 @@ Hooks.once("init", async function() {
     preloadHandlebarsTemplates();
 
     // Register System Settings
-    Settings.registerSystemSettings();
+    await Settings.registerSystemSettings();
+
+        // Set Health System configuration
+        const hstype = await game.settings.get("age-system", "healthSys");
+        const HEALTH_SYS = {
+            type: hstype,
+            mode: await game.settings.get("age-system", "gameMode"),
+            healthName: `SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`,
+            useToughness: ![`basic`].includes(hstype),
+            useFortune: [`expanse`].includes(hstype),
+            useHealth: [`basic`, `mage`].includes(hstype),
+            useInjury: [`mageInjury`, `mageVitality`].includes(hstype),
+            useVitality: [`mageVitality`].includes(hstype),
+            useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
+            baseDamageTN: 13
+        };
+        CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
+        CONFIG.ageSystem.healthSys = HEALTH_SYS;
 
     // Useful concat Helper from Boilerplate system!
     Handlebars.registerHelper('concat', function() {
@@ -226,22 +243,11 @@ Hooks.once("init", async function() {
 });
 
 Hooks.once("setup", function() {
-    // Localize conditions
-    for (let c = 0; c < ageSystem.conditions.length; c++) {
-        const cond = ageSystem.conditions[c];
-        ageSystem.conditions[c].name = game.i18n.localize(ageSystem.conditions[c].name);
-        ageSystem.conditions[c].desc = game.i18n.localize(ageSystem.conditions[c].desc);
-    }
-
-    // Localize Abilities' name
     Setup.abilitiesName();
-
-    // Localize Effects Name and build object
     Setup.localizeAgeEffects();
 
-    // Localize Item modifier label
-    // Setup.localizeModifiers();
-
+    // Localize HealthSys Name
+    ageSystem.healthSys.healthName = game.i18n.localize('SETTINGS.healthModehealth');
 });
 
 Hooks.once("ready", async function() {
@@ -337,30 +343,6 @@ Hooks.once("ready", async function() {
         });
     }
 
-    // Select weapon damage type based on Ballistic armor
-    const useBallisticArmor = await game.settings.get("age-system", "useBallisticArmor");
-    CONFIG.ageSystem.settings = {
-        useBallistic: useBallisticArmor
-    };
-    CONFIG.ageSystem.damageSource = useBallisticArmor ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
-
-    // Set Health System configuration
-    const hstype = await game.settings.get("age-system", "healthSys");
-    const HEALTH_SYS = {
-        type: hstype,
-        mode: await game.settings.get("age-system", "gameMode"),
-        healthName: game.i18n.localize(`SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`),
-        useToughness: ![`basic`].includes(hstype),
-        useFortune: [`expanse`].includes(hstype),
-        useHealth: [`basic`, `mage`].includes(hstype),
-        useInjury: [`mageInjury`, `mageVitality`].includes(hstype),
-        useVitality: [`mageVitality`].includes(hstype),
-        useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
-        baseDamageTN: 13
-    };
-    CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
-    CONFIG.ageSystem.healthSys = HEALTH_SYS;
-
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on("hotbarDrop", (bar, data, slot) => createAgeMacro(data, slot));
 
@@ -381,29 +363,15 @@ Hooks.once("ready", async function() {
 
 });
 
-Hooks.on("createCompendium", () => {
-    ageSystem.itemCompendia = Settings.allCompendia("Item");
-})
-
 // If Compendia are updated, then compendiumList is gathered once again
 Hooks.on("renderCompendium", () => {
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.compendiumList(setCompendium);
 });
 
-Hooks.on("renderageSystemItemSheet", (app, html, data) => {
-    // Add item type on title bar
-    Setup.nameItemSheetWindow(app);
-});
-
-Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {
-    // Hide primary Abilities checkbox
-    Setup.hidePrimaryAblCheckbox(html);
-});
-
+Hooks.on("createCompendium", () => {ageSystem.itemCompendia = Settings.allCompendia("Item")})
+Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
+Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});
 Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
-
-Hooks.on("renderChatMessage", (app, html, data) => {
-    // Hide chat message when rolling to GM
-    AgeChat.sortCustomAgeChatCards(app, html, data);
-});
+Hooks.on("renderChatMessage", (app, html, data) => {AgeChat.sortCustomAgeChatCards(app, html, data)});
+Hooks.on("getChatLogEntryContext", AgeChat.addChatMessageContextOptions);

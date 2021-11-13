@@ -273,19 +273,19 @@
             "wealth": "Riqueza",
             "influence": "Influência",
             "intrigue": "Intriga",
-            "phenomena": "Fenômeno"
+            "phenomena": "Fenômeno / Magia / Estranho"
         },
         "orgFocus": "Foco de Org.",
         "combatRatings": "Estatística de Combate",
         "structure": "Estrutura",
         "stability": "Estabilidade",
         "scope": "Escopo",
-        "plotAction": "Ação Corporativa",
+        "plotAction": "Ação de Trama",
         "orgScope": {
             "local": "Local",
             "regional": "Regional",
             "national": "Nacional",
-            "international": "Internacional"
+            "international": "Mundial"
         },
 
         "testThreshold": "Limiar",

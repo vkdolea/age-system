@@ -640,14 +640,44 @@ export class ageSystemActor extends Actor {
         }
     }
 
-    applyHPloss (remainingHP) {
+    applyHPloss (newValue, {isHealing = false, isNewHP = true} = {}) {
+        const actorType = this.type;
+        let previousHP = null;
+        let updatePath = '';
+        let maxHP = Infinity;
+        switch (actorType) {
+            case 'char':
+                previousHP = this.data.data.health.value;
+                maxHP = this.data.data.health.set
+                updatePath = 'data.health.value';
+                break;
+            case 'organization':
+                previousHP = this.data.data.combat.stability.value;
+                updatePath = 'data.combat.stability.value';
+                break;
+            default: return false;
+        }
         const summary = {
-          name: this.name,
-          img: this.data.token.img,
-          previousHP: this.data.data.health.value,
-          newHP: remainingHP
+            name: this.name,
+            img: this.data.token.img,
+            previousHP,
+            isHealing
         };
-        this.update({"data.health.value": remainingHP});
+
+        if (isNewHP) {
+            summary.newHP = newValue
+        } else {
+            if (isHealing) {
+                const arr = [previousHP + newValue, maxHP];
+                summary.newHP = Math.min(...arr);
+            }
+            else {
+                const arr = [previousHP - newValue, 0];
+                summary.newHP = Math.max(...arr);
+            }
+        }
+
+        this.update({[updatePath]: summary.newHP});
         return summary
     }
 

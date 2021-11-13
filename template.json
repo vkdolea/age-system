@@ -29,8 +29,6 @@
             "combat": {
                 "structure": 5,
                 "stability": {
-                    "min": 0,
-                    "max": 25,
                     "value": 25
                 },
                 "attack": {

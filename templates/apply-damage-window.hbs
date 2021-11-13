@@ -17,6 +17,7 @@
                     <p>{{target.testMod}}</p>
                     {{/if}}
                 </div>
+                {{#if ../damageData.healthSys.useToughness}}
                 <div>
                     <p>{{localize "age-system.toughness"}}</p>
                     <p>{{target.data.data.armor.toughness.total}}</p>
@@ -25,6 +26,7 @@
                     <p>{{target.injuryMarks}}</p>
                     {{/if}}
                 </div>
+                {{/if}}
                 <div>
                     <p>{{localize "age-system.item.damage"}}</p>
                     {{#if ../useInjury}}
@@ -81,7 +83,25 @@
                     <div class="change-damage increase"><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
                 </div>
                 {{#if damageData.healthSys.useBallistic}}
-                <p>{{localize (concat "age-system." damageData.dmgType)}} | {{localize (concat "age-system." damageData.dmgSrc)}}</p>
+                {{!-- <p>{{localize (concat "age-system." damageData.dmgType)}} | {{localize (concat "age-system." damageData.dmgSrc)}}</p> --}}
+                <div>
+                    <div class="flexrow">
+                        <select name="handler.damageType" class="damage-type">
+                            {{#select handler.damageType}}
+                            {{#each config.damageType as |name type|}}
+                            <option value="{{type}}">{{localize name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                        <select name="handler.damageSource" class="damage-source">
+                            {{#select handler.damageSource}}
+                            {{#each config.damageSource as |name source|}}
+                            <option value="{{source}}">{{localize name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+                </div>
                 {{else}}
                 {{#if (eq damageData.dmgSrc 'penetrating')}}
                 <p>{{localize (concat "age-system.penetrating")}}</p>

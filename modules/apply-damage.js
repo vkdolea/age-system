@@ -1,4 +1,4 @@
-import * as Dice from "./dice.js";
+import {ageSystem} from "./config.js";
 
 export default class ApplyDamageDialog extends Application {
   constructor(targets, damageData, useInjury, options = {}) {
@@ -31,6 +31,7 @@ export default class ApplyDamageDialog extends Application {
     data.damageData = this.damageData;
     data.useInjury = this.useInjury;
     data.handler = this._handler;
+    data.config = ageSystem;
 
     data.radioB = {
       name: "handler.armorPenetration",
@@ -57,6 +58,20 @@ export default class ApplyDamageDialog extends Application {
       this._handler.armorPenetration = newValue;
       this.updateUI()
     });
+
+    // Modify Damage Type
+    html.find('select.damage-type').change(ev => {
+      const newValue = ev.currentTarget.value;
+      this._handler.damageType = newValue;
+      this.updateUI();
+    })
+
+    // Modify Damage Source
+    html.find('select.damage-source').change(ev => {
+      const newValue = ev.currentTarget.value;
+      this._handler.damageSource = newValue;
+      this.updateUI();
+    })
 
     // Change Basic Damage for all targets - using symbols ( - or +)
     html.find(".overall-dmg .change-damage").click(ev => {
@@ -139,7 +154,6 @@ export default class ApplyDamageDialog extends Application {
           } else {
             // Toughness Test
             if (actor.hasPlayerOwner && this._handler.letPlayerRoll) {
-              // Criar lógica aqui para enviar cartão para o jogador rolar Teste de Resistência - ou já rolar e aplicar
               this.promptPlayerToRoll(actor, h.injuryParts, h.totalDmg, applyInjury);
             } else {
               const card = await actor.toughnessTest(h.injuryParts, h.totalDmg, applyInjury);
@@ -262,6 +276,24 @@ export class DamageHandler {
 
   get armorPenetration() {
     return this._armorPenetration;
+  }
+
+  set damageType(value) {
+    this._damageType = value;
+    this._damageData.dmgType = value
+  }
+
+  get damageType() {
+    return this._damageType;
+  }
+
+  set damageSource(value) {
+    this._damageSource = value;
+    this._damageData.dmgSrc = value;
+  }
+
+  get damageSource() {
+    return this._damageSource;
   }
 
   set basicDamage(value) {
