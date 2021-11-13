@@ -55,7 +55,8 @@ export function addChatListeners(html) {
 function applyChatCardDamage(li, options) {
     const message = game.messages.get(li.data("messageId"));
     const roll = message.roll;
-    const total = message.data.flags?.["age-system"]?.damageData?.totalDamage ?? roll.total;
+    const cardDamageData = message.data.flags?.["age-system"]?.damageData;
+    const total = cardDamageData?.totalDamage ?? roll.total;
     if (options.isHealing) {
         return Promise.all(canvas.tokens.controlled.map(t => {
           const a = t.actor;
@@ -63,13 +64,19 @@ function applyChatCardDamage(li, options) {
         }));
     }
     if (options.isDamage) {
-        const damageData ={
-            healthSys: ageSystem.healthSys,
-            totalDamage: total,
-            dmgType: 'wound',
-            dmgSrc: 'impact',
-            isHealing: false,
-            wGroupPenalty: false
+        const cardHealthSys = cardDamageData?.healthSys.type;
+        let damageData;
+        if (cardHealthSys === ageSystem.healthSys.type) {
+            damageData = cardDamageData
+        } else {
+            damageData = {
+                healthSys: ageSystem.healthSys,
+                totalDamage: total,
+                dmgType: 'wound',
+                dmgSrc: 'impact',
+                isHealing: false,
+                wGroupPenalty: false
+            }
         }
         callApplyDamage(damageData);
     }
