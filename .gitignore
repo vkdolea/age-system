@@ -2,5 +2,4 @@
 .vscode/
 
 # Node Modules
-node_modules/
 age-system.lock
