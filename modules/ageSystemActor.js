@@ -615,7 +615,18 @@ export class ageSystemActor extends Actor {
         return toughTest;
     }
 
+    /**
+     * Apply a Injury Degree and applicable Injury Marks to the Actor.
+     * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
+     *
+     * @param {string} injuryDegree     The chat entry which contains the roll data
+     *
+     * @returns {object}                Object with relevant data to identify Actor and new Injury values
+     * @returns {false}                 If Injurty Alternate Damage is not in use or if Actor is not of applicable type
+     */
     async applyInjury (injuryDegree) {
+        if (!ageSystem.healthSys.useInjury) return false;
+        if (this.actor.type !== 'char') return false;
         // Identify correct path and new amount for that degree
         const updateDegree = `data.injury.degrees.${injuryDegree}`;
         const newDegree = this.data.data.injury.degrees[injuryDegree] + 1;
@@ -640,7 +651,7 @@ export class ageSystemActor extends Actor {
         }
     }
 
-    applyHPloss (newValue, {isHealing = false, isNewHP = true} = {}) {
+    applyHPchange (newValue, {isHealing = false, isNewHP = true} = {}) {
         const actorType = this.type;
         let previousHP = null;
         let updatePath = '';

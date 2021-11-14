@@ -49,8 +49,7 @@ export function addChatListeners(html) {
  * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
  *
  * @param {HTMLElement} li      The chat entry which contains the roll data
- * @param {number} multiplier   A damage multiplier to apply to the rolled damage.
- * @returns {Promise}
+ * @param {object} options      Options containing card's damage or healing definitions
  */
 function applyChatCardDamage(li, options) {
     const message = game.messages.get(li.data("messageId"));
@@ -60,11 +59,11 @@ function applyChatCardDamage(li, options) {
     if (options.isHealing) {
         return Promise.all(canvas.tokens.controlled.map(t => {
           const a = t.actor;
-          return a.applyHPloss(total, options);
+          return a.applyHPchange(total, options);
         }));
     }
     if (options.isDamage) {
-        const cardHealthSys = cardDamageData?.healthSys.type;
+        const cardHealthSys = cardDamageData?.healthSys?.type;
         let damageData;
         if (cardHealthSys === ageSystem.healthSys.type) {
             damageData = cardDamageData
@@ -82,6 +81,13 @@ function applyChatCardDamage(li, options) {
     }
 }
 
+/**
+ * Chat card listener to apply Injury to selected Actor when pressing specific button.
+ * 
+ *
+ * @param {Mouse Event} event   Chat card Mouse Click event
+ * @returns {Promisse}          Promisse applying Injury to Actor
+ */
 export async function inflictInjury(event){
     event.preventDefault();
     const b = event.currentTarget;
@@ -97,6 +103,7 @@ export async function inflictInjury(event){
     return actor.applyInjury(degree);
 }
 
+// Actor indicated by card will roll to resist Injury
 export async function resistInjury(event) {
     event.preventDefault();
     const card = event.target.closest(".chat-message");
@@ -106,16 +113,24 @@ export async function resistInjury(event) {
     return actor.toughnessTest(foundry.utils.deepClone(cardData.injuryParts), cardData.rollTN, cardData.autoApply);
 }
 
+// Apply Damage button will send all selected Actors [Character type only] to Apply Damage dialog window
 export async function applyDamageChat(event) {
     event.preventDefault();
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
     const damageData = await game.messages.get(cardId).data.flags["age-system"].damageData;
     const cardHealthSys = damageData.healthSys;
-    if (!checkHealth(cardHealthSys, CONFIG.ageSystem.healthSys)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
+    if (!checkHealth(cardHealthSys, ageSystem.healthSys)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
     callApplyDamage(damageData);
 }
 
+/**
+ * Call Apply Damage data containing all applicable Actors selected
+ *
+ * @param {object} damageData   All details from the damage to be applied to selected Actors
+ * 
+ * @returns {Application}       Apply Damage application is started to select damage details
+ */
 export async function callApplyDamage (damageData) {
     let targets = canvas.tokens.controlled;
     let nonChar = []
@@ -130,9 +145,17 @@ export async function callApplyDamage (damageData) {
         }
     }
     if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.noValidTokensSelected"));
-    return new ApplyDamageDialog(targets, damageData, CONFIG.ageSystem.healthSys.useInjury).render(true);
+    return new ApplyDamageDialog(targets, damageData, ageSystem.healthSys.useInjury).render(true);
 }
 
+/**
+ * Check if actual Game Settings and clicked Card with Apply Damage button has compatible parameters
+ *
+ * @param {string} card         Chat card damage parameters
+ * @param {string} game         Current in-use Game Settings health parameters
+ * 
+ * @returns {boolean}           TRUE if compatible, FALSE if not compatible
+ */
 export function checkHealth(card, game) {
     const attributes = ["useToughness", "useInjury", "useBallistic"];
     for (let a = 0; a < attributes.length; a++) {
@@ -142,6 +165,7 @@ export function checkHealth(card, game) {
     return true;
 }
 
+// Roll damage from a chat card, taking into consideration card's Actor, Item and button selected
 export async function chatDamageRoll(event) {
     event.preventDefault();
     let owner = null;
@@ -176,6 +200,7 @@ export async function chatDamageRoll(event) {
     itemSource.rollDamage(damageData);
 };
 
+// Roll Fatigue from chat card according to card's Actor and Item
 export async function chatFatigueRoll(event) {
     let owner = null;
     const card = event.currentTarget.closest(".feature-controls");
@@ -187,6 +212,7 @@ export async function chatFatigueRoll(event) {
     itemSource.roll(event, "fatigue");
 };
 
+// From and chat card, select to roll item's Attack or Damage
 export async function rollItemFromChat(event) {
     const classList = event.currentTarget.classList;
     const actorUuid = event.currentTarget.closest(".feature-controls").dataset.ownerUuid;
@@ -198,6 +224,13 @@ export async function rollItemFromChat(event) {
     if (classList.contains("attack")) item.roll(event);
 }
 
+/**
+ * Set properties of elements inside cards rendered on chat
+ *
+ * @param {object} chatCard         Chat card object containing the Message Data
+ * @param {jQueryObject} html       jObject of the chat card being processed
+ * @param {object} data             Data containing Message data
+ */
 export async function sortCustomAgeChatCards(chatCard, html, data) {
     // Add attribute type="button" to AGE buttons
     _buttonType(html.find(".age-system.item-chat-controls button"));
@@ -210,6 +243,11 @@ export async function sortCustomAgeChatCards(chatCard, html, data) {
     if (html.find(".item-chat-controls").length > 0) _handleItemCardButton(html);
 };
 
+/**
+ * Add attribute [type]="button" to chat buttons
+ *
+ * @param {HTMLelement} buttons     Array if all button elements inside the card
+ */
 function _buttonType(buttons) {
     for (let b = 0; b < buttons.length; b++) {
         const button = buttons[b];
@@ -217,6 +255,13 @@ function _buttonType(buttons) {
     }
 }
 
+/**
+ * Set visibility properties for buttons and blind-roll segments (blind-roll segments currently not used)
+ *
+ * @param {jQueryObject} html       jObject of the chat card being processed
+ * @param {object} chatCard         Chat card object containing the Message Data
+ * @param {object} chatData         Data containing Message data
+ */
 async function _handleAgeRollVisibility(html, chatCard, chatData){
     const element = html.find(".age-system.base-age-roll .feature-controls");
     for (let e = 0; e < element.length; e++) {
@@ -248,6 +293,7 @@ async function _handleAgeRollVisibility(html, chatCard, chatData){
     }
 }
 
+// Check if user has permission to use card button
 async function _handleItemCardButton(html){
     const sectionClass = `.item-chat-controls`
     const data = html.find(sectionClass);
@@ -260,6 +306,12 @@ async function _handleItemCardButton(html){
     }
 }
 
+/**
+ * Set visibility properties for buttons and blind-roll segments (blind-roll segments currently not used)
+ *
+ * @param {string} actorPerm        Permission the current user has for the Actor contained on a chat card
+ * @param {HTMLelement} element     Chat card HTML element to be be removed if User is not Actor owner or Observer
+ */
 function _permCheck(actorPerm, element) {
     if (!element) return
     const validPerm = [CONST.ENTITY_PERMISSIONS.OWNER];

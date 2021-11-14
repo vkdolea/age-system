@@ -75,7 +75,7 @@ export default class ApplyDamageDialog extends Application {
 
     // Change Basic Damage for all targets - using symbols ( - or +)
     html.find(".overall-dmg .change-damage").click(ev => {
-      let dmg = this._handler.basicDamage;
+      let dmg = Number(this._handler.basicDamage);
       const classes = ev.currentTarget.classList;
       if (classes.contains("increase")) dmg += 1;
       if (classes.contains("decrease")) dmg -= 1;
@@ -86,8 +86,8 @@ export default class ApplyDamageDialog extends Application {
     
     // Typing updates on input field for basic damage (all targets)
     html.find("input.basic-damage").change(ev => {
-      const value = ev.currentTarget.value
-      this._handler.basicDamage = value;
+      const value = Number(ev.currentTarget.value);
+      this._handler.basicDamage = Number(value);
       this.updateUI()
     })
 
@@ -115,9 +115,9 @@ export default class ApplyDamageDialog extends Application {
 
     // Typing updates on input field for individual target
     html.find(".targets .individual input.target-damage-mod").change(ev => {
-      const value = ev.currentTarget.value
+      const value = Number(ev.currentTarget.value);
       const i = ev.target.closest(".feature-controls").dataset.i;
-      this._handler.letPlayerRoll = value;
+      this._handler.harmedOnes[i].dmgMod = value;
       this.updateUI()
     })
 
@@ -150,7 +150,7 @@ export default class ApplyDamageDialog extends Application {
           let actor = await fromUuid(h.uuid);
           if (actor.documentName === "Token") actor = actor.actor;
           if (!this.useInjury) {
-            summary.push(actor.applyHPloss(h.remainingHP));
+            summary.push(actor.applyHPchange(h.remainingHP));
           } else {
             // Toughness Test
             if (actor.hasPlayerOwner && this._handler.letPlayerRoll) {
