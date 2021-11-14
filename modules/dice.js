@@ -343,7 +343,7 @@ export async function ageRollCheck({
 
     let chatData = {
         user: game.user.id,
-        speaker: ChatMessage.getSpeaker(),
+        speaker: {alias: game.user.name},
         content: await renderTemplate(chatTemplate, rollData),
         roll: ageRoll,
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
@@ -679,7 +679,7 @@ export async function plotDamage (actor) {
 
     let chatData = {
         user: game.user.id,
-        speaker: ChatMessage.getSpeaker(),
+        speaker: {alias: game.user.name},
         content: await renderTemplate(chatTemplate, rollData),
         roll: dmgRoll,
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
@@ -909,7 +909,7 @@ export async function itemDamage({
 
     let chatData = {
         user: game.user.id,
-        speaker: ChatMessage.getSpeaker(),
+        speaker: {alias: game.user.name},
         content: await renderTemplate(chatTemplate, rollData),
         roll: dmgRoll,
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
@@ -936,15 +936,6 @@ export async function itemDamage({
     }
     ChatMessage.create(chatData);
 };
-
-export function getActor() {
-    const speaker = ChatMessage.getSpeaker();
-    let actor;
-    if (speaker.token) actor = game.actors.tokens[speaker.token];
-    if (!actor) actor = game.actors.get(speaker.actor);
-    if (!actor) return false;
-    return actor;
-}
 
 export function injuryDegree(sd, marks) {
     if (sd === null | marks === null) return null;
