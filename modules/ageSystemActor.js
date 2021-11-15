@@ -73,6 +73,7 @@ export class ageSystemActor extends Actor {
     }
 
     /** @override */
+    // prepareEmbeddedDcouments() {
     prepareEmbeddedEntities() {
         const embeddedTypes = this.constructor.metadata.embedded || {};
         for ( let cls of Object.values(embeddedTypes) ) {
@@ -698,9 +699,13 @@ export class ageSystemActor extends Actor {
         
         if (effectsOn.length < 1) {
             // If there is no Effect on, create one
-            const newEffect = CONFIG.statusEffects.filter(e => e.id === condId)[0];
+            const newEffect = foundry.utils.deepClone(CONFIG.statusEffects.filter(e => e.id === condId)[0]);
             newEffect["flags.core.statusId"] = newEffect.id;
-            await this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
+            // if (newEffect?.flags?.["age-system"].conditionType !== 'custom') newEffect.label = game.i18n.localize(newEffect.label);
+            // delete newEffect.id;
+            // const cls = getDocumentClass("ActiveEffect");
+            // await cls.create(newEffect, {parent: this});
+            await this.createEmbeddedDocuments("ActiveEffect", [newEffect]); // remove this one to update to 0.9.x
         } else {
             // If there are Effects, delete everything
             for (let c = 0; c < effectsOn.length; c++) {

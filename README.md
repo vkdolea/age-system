@@ -97,6 +97,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.14 [2021-11-14]
+### Fixed
+- Copying Effects from "The Expanse" resulted in no effect being copied.
+
 ## 0.8.13 [2021-11-14]
 ### Fixed
 - Damage Inputs on Apply Damage window were note responding correctly to all buttons or manual inputs.

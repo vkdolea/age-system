@@ -77,7 +77,7 @@ export default class ConditionsWorkshop extends Application {
     const newEffects = foundry.utils.deepClone(CONFIG.ageSystem.statusEffects[origin]);
     for (let ef = 0; ef < newEffects.length; ef++) {
       newEffects[ef].label = game.i18n.localize(newEffects[ef].label);
-      newEffects[ef].id = newEffects[ef].id === `dead` ? `dead` : this._makeId(20);
+      newEffects[ef].id = newEffects[ef].id === `dead` ? `dead` : ('AGEcustom.' + foundry.utils.randomID(20));
       const newDesc = newEffects[ef].flags?.["age-system"]?.desc;
       const newFlags = {
         "age-system": {
