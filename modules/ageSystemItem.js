@@ -120,7 +120,8 @@ export class ageSystemItem extends Item {
                 break;
         }
 
-        this.prepareEmbeddedEntities();        
+        this.prepareEmbeddedEntities(); // Remove to prepare for 0.9.x  
+        // this.prepareEmbeddedDocuments();
     };
 
     _prepareFocus(data) {
