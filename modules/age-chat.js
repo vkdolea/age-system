@@ -99,7 +99,8 @@ export async function inflictInjury(event){
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
     const cardData = await game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
-    const actor = await fromUuid(cardData.actorId);
+    let actor = await fromUuid(cardData.actorId);
+    if (actor.documentName === "Token") actor = actor.actor;
     return actor.applyInjury(degree);
 }
 

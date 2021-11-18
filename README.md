@@ -97,6 +97,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.8.15 [2021-11-xx]
+### Fixed
+- Rules to apply damage reviewed for the different Modern AGE game modes.
+
 ## 0.8.14 [2021-11-14]
 ### Fixed
 - Copying Effects from "The Expanse" resulted in no effect being copied.

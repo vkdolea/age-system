@@ -222,7 +222,6 @@ export default class ApplyDamageDialog extends Application {
         }
       }
     }
-    // await ChatMessage.applyRollMode(chatData, 'roll');
     ChatMessage.create(chatData);
   }
 }
@@ -403,16 +402,12 @@ export class DamageHandler {
 
   useToughness(setting, type, source, mode) {
     if (!setting) return false;
-    if (mode === 'none') return true;
-    if (mode === 'gritty') {
-      if (['penetrating', 'impact'].includes(source) && ['stun'].includes(type)) return true;
+    switch (mode) {
+      case 'none': return true;
+      case 'gritty': return source === 'ballistic' ? false : ['stun'].includes(type);
+      case 'pulp': return source === 'ballistic' ? false : ['stun'].includes(type) || (['impact'].includes(source) && ['wound'].includes(type));
+      case 'cinematic': return !(['penetrating'].includes(source) && ['wound'].includes(type));
+      default: return false;
     }
-    if (mode === 'pulp') {
-      if (['penetrating', 'impact'].includes(source) && ['stun', 'wound'].includes(type)) return true;
-    }
-    if (mode === 'cinematic') {
-      if (!(['penetrating'].includes(source) && ['wound'].includes(type))) return true;
-    }
-    return false;
   }
 }
