@@ -271,12 +271,16 @@ Hooks.once("ready", async function() {
     if (!rollerFlag) await game.user.setFlag("age-system", "ageRollerPos", ageSystem.ageRollerPos);
     game.ageSystem.ageRoller.refresh();
 
+    // Safe copy of original Status Effects
+    ageSystem.statusEffects.original = foundry.utils.deepClone(CONFIG.statusEffects);
+
     // Define Token Icons and In Use Token Effects
     ageSystem.statusEffects.custom = await game.settings.get("age-system", "customTokenEffects");
     let inUseConditions = await game.settings.get("age-system", "inUseConditions");
     if (!['expanse', 'custom'].includes(inUseConditions)) inUseConditions = 'custom';
     ageSystem.inUseStatusEffects = inUseConditions;
     CONFIG.statusEffects = foundry.utils.deepClone(ageSystem.statusEffects[inUseConditions]);
+    
     // Changing a few control icons
     CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/pirate-grave.svg"
 
