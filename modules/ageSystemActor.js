@@ -627,7 +627,7 @@ export class ageSystemActor extends Actor {
      */
     async applyInjury (injuryDegree) {
         if (!ageSystem.healthSys.useInjury) return false;
-        if (this.actor.type !== 'char') return false;
+        if (this.type !== 'char') return false;
         // Identify correct path and new amount for that degree
         const updateDegree = `data.injury.degrees.${injuryDegree}`;
         const newDegree = this.data.data.injury.degrees[injuryDegree] + 1;
@@ -642,7 +642,7 @@ export class ageSystemActor extends Actor {
           [updateDegree]: newDegree,
           'data.injury.marks': newMarks
         });
-        // Returns a summary array
+        // Returns a summary object
         return {
           name: this.name,
           img: this.data.token.img,
