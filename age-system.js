@@ -284,34 +284,6 @@ Hooks.once("ready", async function() {
     // Changing a few control icons
     CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/pirate-grave.svg"
 
-    // Check if Dice so Nice is active to register Stunt Die option
-    if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {
-        import("/modules/dice-so-nice/DiceColors.js").then((diceColors) => {
-            
-            const colorset = diceColors.COLORSETS;
-            let colorChoices = {};
-            for (const type in colorset) {
-                if (colorset.hasOwnProperty(type)) {
-                    const colorCode = colorset[type].name;
-                    const colorName = colorset[type].description;
-                    const newChoice = {[colorCode]: colorName}
-                    colorChoices = {
-                    ...colorChoices,
-                    ...newChoice
-                    };
-                };
-            };
-            if (colorChoices !== {} && colorChoices) {
-                // After loading all modules, check if Dice so Nice is installed and add option to select Stunt Die colorset                
-                Settings.stuntSoNice(colorChoices);
-                // Identify if user has registered Dice so Nice Stunt Die option
-                const stuntSoNiceFlag = game.user.getFlag("age-system", "stuntSoNice");
-                if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);
-                if (!stuntSoNiceFlag) game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
-            };
-        });
-    };
-
     // Prepare Actors dependent on other Actors
     for(let e of game.postReadyPrepare){
         e.prepareData();
@@ -379,3 +351,24 @@ Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimar
 Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
 Hooks.on("renderChatMessage", (app, html, data) => {AgeChat.sortCustomAgeChatCards(app, html, data)});
 Hooks.on("getChatLogEntryContext", AgeChat.addChatMessageContextOptions);
+Hooks.once('diceSoNiceReady', (data) => { import('/modules/dice-so-nice/DiceColors.js').then((diceColors) => {
+    const colorset = diceColors.COLORSETS;
+    let colorChoices = {};
+    for (const type in colorset) {
+        if (colorset.hasOwnProperty(type)) {
+            const colorCode = colorset[type].name;
+            const colorName = colorset[type].description;
+            const newChoice = {[colorCode]: colorName}
+            colorChoices = {
+            ...colorChoices,
+            ...newChoice
+            };
+        };
+    };
+    // Register Stunt So Nice setting
+    Settings.stuntSoNice(colorChoices);
+    // Identify if user has registered Dice so Nice Stunt Die option
+    const stuntSoNiceFlag = game.user.getFlag("age-system", "stuntSoNice");
+    if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);
+    if (!stuntSoNiceFlag) game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
+}).catch((err) => console.error(err))});

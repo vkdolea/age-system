@@ -360,7 +360,12 @@ export async function ageRollCheck({
     // Configuration of Stunt Die if using Dice so Nice
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {
         const stuntDieColorset = game.settings.get("age-system", "stuntSoNice");
-        chatData.roll.terms[2].options.colorset = stuntDieColorset ? stuntDieColorset : "bronze";
+        chatData.roll.terms[2].options = {
+            colorset: stuntDieColorset ?? "bronze",
+            appearance: {
+                system: game.user.data.flags["dice-so-nice"]?.appearance?.global?.system ?? "standard"
+            }
+        }
     };
 
     if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;
