@@ -697,6 +697,7 @@ ageSystem.ROLL_TYPE = {
     ATTACK: "attack",
     MELEE_ATTACK: "meleeAttack",
     RANGED_ATTACK: "rangedAttack",
+    STUNT_ATTACK: 'stuntAttack',
     FATIGUE: "fatigue",
     TOUGHNESS: "toughness",
     TOUGHNESS_AUTO: "toughnessAuto",
@@ -706,5 +707,5 @@ ageSystem.ROLL_TYPE = {
     FOCUS: 'focus',
     VEHICLE_ACTION: 'vehicle',
     PLOT_ACTION: 'plotAction',
-    PLOT_DAMAGE: 'plotDamage'
+    PLOT_DAMAGE: 'plotDamage',
 }

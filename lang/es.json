@@ -243,13 +243,13 @@
         "coverRating": "Cobertura",
         "vehicleArmor": "Blindaje",
         
+
         "chatCard": {
             "rollGeneral": "tira {item}",
             "rollAttack": "ataca con {item}",
             "rollPower": "utiliza {item}",
 			"looseRoll": "tira dados",
-            "roll": "Tirar",
-            
+            "roll": "Tirar",            
             "rollFullDamage": "Daño Completo",
             "rollFullHealing": "Curación Completa",
             "rollDamage": "Daño",
@@ -259,12 +259,10 @@
             "addFocusSD": "+ Ambos",
             "addFocus": "+ Concen.",
             "addStuntDie": "+ Proeza",
-
             "maneuversVehicle": "maniobra {vehicle}",
 			"commandsVehicle": "ordena {vehicle}",
             "operatesVehicle": "opera {vehicle}",
             "backupVehicle": "respalda {vehicle}",
-
             "compRoll": "Tirada {compType}"
         },
 

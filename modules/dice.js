@@ -1,3 +1,4 @@
+import { ageSystem } from "./config.js";
 import { sortObjArrayByName } from "./setup.js";
 
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
@@ -16,9 +17,11 @@ export async function ageRollCheck({
     rollVisibility = false,
     flavor = null,
     flavor2 = null,
-    moreParts = false}={}) {
+    moreParts = false,
+    isStuntAttack = false,
+    extraSP = 0}={}) {
 
-    const ROLL_TYPE = CONFIG.ageSystem.ROLL_TYPE;
+    const ROLL_TYPE = ageSystem.ROLL_TYPE;
     const actorType = actor?.type;
 
     let isToken = null;
@@ -33,10 +36,12 @@ export async function ageRollCheck({
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
     if (!event.ctrlKey && event.altKey || selectAbl || event.type === "contextmenu") {
-        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN, selectAbl, rollVisibility, actorType});
+        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN, selectAbl, rollVisibility, actorType, rollType, ROLL_TYPE});
         if (extraOptions.cancelled) return;
         if (extraOptions.rollTN) rollTN = extraOptions.rollTN;
         if (extraOptions.selectedAbl) abl = extraOptions.selectedAbl;
+        if (extraOptions.stuntAttack) isStuntAttack = true;
+        if (extraOptions.extraSP) extraSP = extraOptions.extraSP;
         rollUserMod = extraOptions.ageRollMod;
         atkDmgTradeOff = -Math.abs(Number(extraOptions.atkDmgTradeOff));
     };
@@ -102,7 +107,7 @@ export async function ageRollCheck({
 
     if (actorType === 'char') {
         // Adds Actor general Attack Bonus if rolltype = "attack"
-        if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK].includes(rollType) && actor.data.data.attackMod !== 0) {
+        if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK, ROLL_TYPE.STUNT_ATTACK].includes(rollType) && actor.data.data.attackMod !== 0) {
             rollFormula += " + @attackMod";
             rollData.attackMod = actor.data.data.attackMod;
             partials.push({
@@ -243,21 +248,11 @@ export async function ageRollCheck({
         };
     }
 
-    // Define flavor and flavor2
-    // ATTACK: "attack",
-    // FATIGUE: "fatigue",
-    // MELEE_ATTACK: "meleeAttack",
-    // RANGE_ATTACK: "rangedAttack",
-    // TOUGHNESS: "toughness",
-    // TOUGHNESS_AUTO: "toughnessAuto",
-    // RESOURCES: "resources",
-    // POWER: "powerActivation",
-    // ABILITY: 'ability',
-    // FOCUS: 'focus'
     if (!flavor) flavor = actor?.name ?? game.user.name;
+    const stuntFlavor = game.i18n.localize("age-system.stuntAttack");
     switch (rollType) {
         case ROLL_TYPE.ATTACK || ROLL_TYPE.MELEE_ATTACK || RANGED_ATTACK:
-            flavor2 = `${game.i18n.localize("age-system.settings.attack")} | ${itemRolled.name}`;
+            flavor2 = `${isStuntAttack ? stuntFlavor : game.i18n.localize("age-system.settings.attack")} | ${itemRolled.name}`;
             break;
         case ROLL_TYPE.FATIGUE:
             flavor2 = game.i18n.localize("age-system.fatigue");
@@ -269,13 +264,13 @@ export async function ageRollCheck({
             flavor2 = resName;
             break;
         case ROLL_TYPE.POWER:
-            flavor2 = `${game.i18n.localize("age-system.power")} | ${itemRolled.name}`;
+            flavor2 = `${isStuntAttack ? stuntFlavor : game.i18n.localize("age-system.power")} | ${itemRolled.name}`;
             break;
         case ROLL_TYPE.ABILITY:
-            flavor2 = ablName;
+            flavor2 = `${isStuntAttack ? stuntFlavor + " | " : ""}${ablName}`;
             break;
         case ROLL_TYPE.FOCUS:
-            flavor2 = `${ablName} (${focusObj.focusName})`;
+            flavor2 = `${isStuntAttack ? stuntFlavor + " | " : ""}${ablName} (${focusObj.focusName})`;
             break;
         case ROLL_TYPE.PLOT_ACTION:
             flavor2 = `${game.i18n.localize("age-system.plotAction")}`;
@@ -283,6 +278,8 @@ export async function ageRollCheck({
         default:
             break;
     }
+    // Add Stunt Attack to Flavor2 if applicable
+    if (isStuntAttack && !flavor2) flavor2 = game.i18n.localize("age-system.stuntAttack");
 
     // Check for moreParts
     if (moreParts) {
@@ -316,7 +313,7 @@ export async function ageRollCheck({
 
     // Generate Stunt Points if doubles are rolled and total rolled is higher than TN or there is no TN set
     const generateSP = (rollTN && isSuccess) || !rollTN;
-    const rollSummary = ageRollChecker(ageRoll, generateSP)
+    const rollSummary = ageRollChecker(ageRoll, generateSP, isStuntAttack, extraSP)
     let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
     const injuryMarks = (rollType === ROLL_TYPE.TOUGHNESS) || (rollType === ROLL_TYPE.TOUGHNESS_AUTO) ? actor.data.data.injury.marks : null;
 
@@ -375,7 +372,7 @@ export async function ageRollCheck({
 
 // Check if the roll has Weapon Group penalty
 function hasWeaponGroupPenalty(item, ownedGroups) {
-    const hasWgroups = CONFIG.ageSystem.weaponGroups;
+    const hasWgroups = ageSystem.weaponGroups;
 
     // CASE 1 - Weapon Groups not in use or item rolled is not a weapon
     if (!hasWgroups || !["weapon"].includes(item?.type)) return false;
@@ -408,7 +405,7 @@ function hasWeaponGroupPenalty(item, ownedGroups) {
 async function getAgeRollOptions(itemRolled, data = {}) {
     const template = "/systems/age-system/templates/rolls/age-roll-settings.hbs"
     const type = itemRolled ? itemRolled.type : null;
-    if (data.selectAbl) data.abilities = data.actorType === "char" ? CONFIG.ageSystem.abilities : CONFIG.ageSystem.abilitiesOrg;
+    if (data.selectAbl) data.abilities = data.actorType === "char" ? ageSystem.abilities : ageSystem.abilitiesOrg;
 
     const html = await renderTemplate(template, {
         ...data,
@@ -445,7 +442,7 @@ async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
         addFocus,
         stuntDmg,
         selectAbl: data.selectAbl,
-        abilities: data.actorType === "char" ? CONFIG.ageSystem.abilities : CONFIG.ageSystem.abilitiesOrg,
+        abilities: data.actorType === "char" ? ageSystem.abilities : ageSystem.abilitiesOrg,
         useFocus: data.actorType === "organization"
     });
 
@@ -493,20 +490,21 @@ export function setBlind(event) {
 };
 
 // Code to identify Doubles and pass on dice summary     
-export function ageRollChecker(ageRoll, generateSP) {
+export function ageRollChecker(ageRoll, generateSP, isStuntAttack, extraSP = 0) {
     const die1 = ageRoll.dice[0].results[0].result;
     const die2 = ageRoll.dice[0].results[1].result;
     const die3 = ageRoll.dice[1].results[0].result;
     const diffFaces = new Set([die1, die2, die3]).size;
+    const hasDoubles = diffFaces < 3;
     const rollSummary = {
         dice: {
             d1: die1,
             d2: die2,
             d3: die3
         },
-        stunt: false
+        stunt: (hasDoubles || isStuntAttack || extraSP) && generateSP,
+        stuntPoints: (isStuntAttack ? ageSystem.stuntAttackPoints : 0) + (hasDoubles ? die3 : 0) + (isStuntAttack || hasDoubles ? extraSP : 0)
     };
-    if (diffFaces < 3 && generateSP) rollSummary.stunt = true;   
     return rollSummary
 };
 
@@ -750,7 +748,7 @@ export async function itemDamage({
         stuntDie = damageOptions.stuntDieDmg;
     };
     
-    const healthSys = CONFIG.ageSystem.healthSys;
+    const healthSys = ageSystem.healthSys;
     const dmgDetails = resistedDmg ? item.data.data.damageResisted : item.data.data;
 
     let nrDice = dmgDetails.nrDice;
@@ -944,7 +942,7 @@ export async function itemDamage({
 
 export function injuryDegree(sd, marks) {
     if (sd === null | marks === null) return null;
-    const mode = CONFIG.ageSystem.healthSys.type;
+    const mode = ageSystem.healthSys.type;
     const penalty = Math.floor(marks/3);
     let result = sd - penalty;
     if (mode === 'mageInjury') {

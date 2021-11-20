@@ -33,4 +33,16 @@
     {{/if}}
 
     <hr>
+
+    {{#if (ne rollType ROLL_TYPE.RESOURCES)}}
+    <div class="form-group">
+        <label>{{localize "age-system.settings.bonusStuntPoints"}}</label>
+        <input type="number" name="extraSP" value="{{extraSP}}" placeholder="0"/>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" name="stuntAttack" {{checked stuntAttack}}/>
+        <label>{{localize "age-system.stuntAttack"}}</label>
+    </div>
+    {{/if}}
+
 </form>

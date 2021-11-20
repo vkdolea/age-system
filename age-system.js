@@ -139,22 +139,25 @@ Hooks.once("init", async function() {
     // Register System Settings
     await Settings.registerSystemSettings();
 
-        // Set Health System configuration
-        const hstype = await game.settings.get("age-system", "healthSys");
-        const HEALTH_SYS = {
-            type: hstype,
-            mode: await game.settings.get("age-system", "gameMode"),
-            healthName: `SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`,
-            useToughness: ![`basic`].includes(hstype),
-            useFortune: [`expanse`].includes(hstype),
-            useHealth: [`basic`, `mage`].includes(hstype),
-            useInjury: [`mageInjury`, `mageVitality`].includes(hstype),
-            useVitality: [`mageVitality`].includes(hstype),
-            useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
-            baseDamageTN: 13
-        };
-        CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
-        CONFIG.ageSystem.healthSys = HEALTH_SYS;
+    // Register Stunt Attack Point generation
+    ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack");
+
+    // Set Health System configuration
+    const hstype = await game.settings.get("age-system", "healthSys");
+    const HEALTH_SYS = {
+        type: hstype,
+        mode: await game.settings.get("age-system", "gameMode"),
+        healthName: `SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`,
+        useToughness: ![`basic`].includes(hstype),
+        useFortune: [`expanse`].includes(hstype),
+        useHealth: [`basic`, `mage`].includes(hstype),
+        useInjury: [`mageInjury`, `mageVitality`].includes(hstype),
+        useVitality: [`mageVitality`].includes(hstype),
+        useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
+        baseDamageTN: 13
+    };
+    CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
+    CONFIG.ageSystem.healthSys = HEALTH_SYS;
 
     // Useful concat Helper from Boilerplate system!
     Handlebars.registerHelper('concat', function() {

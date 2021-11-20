@@ -39,7 +39,7 @@
                 </div>
                 <div class="flexrow roll-mod{{#if ageRollSummary.stunt}} stunted{{/if}}">
                     <div class="line-header">{{localize "age-system.settings.stuntPoints"}}</div>
-                    <div class="line-value">{{#if ageRollSummary.stunt}}{{ageRollSummary.dice.d3}}{{else}}-{{/if}}</div>
+                    <div class="line-value">{{#if ageRollSummary.stunt}}{{ageRollSummary.stuntPoints}}{{else}}-{{/if}}</div>
                 </div>
 
                 {{#each partials as |part key|}}

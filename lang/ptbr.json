@@ -20,6 +20,9 @@
     "SETTINGS.useConviction": "Usar Convicção",
     "SETTINGS.useConvictionHint": "Ativa bloco para gerenciamento de Convicção",
 
+    "SETTINGS.stuntAttack": "Ataque de Façanha",
+    "SETTINGS.stuntAttackHint": "Pontos de Façanha gerados em um Ataque de Façanha",
+    
     "SETTINGS.useFatigue": "Usar Fadiga",
     "SETTINGS.useFatigueHint": "Ativa bloco de Fadiga e suporte para cenário de Feitiços & Poderes",
 
@@ -243,13 +246,13 @@
         "coverRating": "Cobertura",
         "vehicleArmor": "Armadura",
         
+        "stuntAttack": "Ataque de Façanha",
         "chatCard": {
             "rollGeneral": "rola {item}",
             "rollAttack": "ataca com {item}",
             "rollPower": "utiliza {item}",
             "looseRoll": "rolou alguns dados",
-            "roll": "Rolar",
-            
+            "roll": "Rolar",            
             "rollFullDamage": "Dano Total",
             "rollFullHealing": "Cura Total",
             "rollDamage": "Dano",
@@ -259,12 +262,10 @@
             "addFocusSD": "Incluir Ambos",
             "addFocus": "Incluir Foco",
             "addStuntDie": "Incluir Façanha",
-
             "maneuversVehicle": "manobra {vehicle}",
             "commandsVehicle": "comanda {vehicle}",
             "operatesVehicle": "opera {vehicle}",
             "backupVehicle": "auxilia {vehicle}",
-
             "compRoll": "Rola {compType}"
         },
 
@@ -347,6 +348,7 @@
             "stunts": "Façanhas",
             "stunt": "Façanha",
             "stuntPoints": "Pontos de Façanha",
+            "bonusStuntPoints": "Pontos de Façanha Extra",
             "stuntPointsIndex": "PF",
             "attack": "Atacar",
             "equip": "Equipar",
