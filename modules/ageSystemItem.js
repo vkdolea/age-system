@@ -27,8 +27,8 @@ export class ageSystemItem extends Item {
     /** @override */
     prepareBaseData() {
         if (this.data.img === "icons/svg/item-bag.svg") {
-            if (!CONFIG.ageSystem.itemIcons[this.data.type]) this.data.img = "icons/svg/item-bag.svg";
-            this.data.img = CONFIG.ageSystem.itemIcons[this.data.type];
+            if (!ageSystem.itemIcons[this.data.type]) this.data.img = "icons/svg/item-bag.svg";
+            this.data.img = ageSystem.itemIcons[this.data.type];
         };
         if (!this.data.name) this.data.name = "New " + game.i18n.localize(this.data.type);
         
@@ -135,8 +135,8 @@ export class ageSystemItem extends Item {
                 }
             }
         }
-        const abilitiesOrg = Object.keys(CONFIG.ageSystem.abilitiesOrg);
-        const abilitiesChar = Object.keys(CONFIG.ageSystem.abilities);
+        const abilitiesOrg = Object.keys(ageSystem.abilitiesOrg);
+        const abilitiesChar = Object.keys(ageSystem.abilities);
         const hasOrgAbl = abilitiesOrg.includes(data.useAbl)
         if (data.isOrg === !hasOrgAbl) data.useAbl = data.isOrg ? abilitiesOrg[0] : abilitiesChar[0]; 
     }
@@ -189,12 +189,7 @@ export class ageSystemItem extends Item {
 
     // Roll item and check targetNumbers
     roll(event, rollType = null, targetNumber = null) {
-        /**Roll Type Possibilities
-         * - fatigue
-         * - attack
-         * - powerActivation
-         */
-        const ROLL_TYPE = CONFIG.ageSystem.ROLL_TYPE;
+        const ROLL_TYPE = ageSystem.ROLL_TYPE;
         const owner = this.actor;
         if (!owner) return false;
         let ablCode = (rollType === ROLL_TYPE.FATIGUE) ? this.data.data.ablFatigue : this.data.data.useAbl;
@@ -226,7 +221,7 @@ export class ageSystemItem extends Item {
                     targetNumber = this.data.data.targetNumber ? this.data.data.targetNumber : null;
                     break;
     
-                case ROLL_TYPE.ATTACK || ROLL_TYPE.RANGED_ATTACK || ROLL_TYPE.MELEE_ATTACK:
+                case ROLL_TYPE.ATTACK || ROLL_TYPE.RANGED_ATTACK || ROLL_TYPE.MELEE_ATTACK || ROLL_TYPE.STUNT_ATTACK:
                     const targets = game.user.targets;
                     if (targets.size === 0) break;
                     if (targets.size > 1) {
@@ -281,7 +276,7 @@ export class ageSystemItem extends Item {
             owner: this.actor,
             ownerUuid: this.actor.uuid,
             config: {
-                colorScheme: CONFIG.ageSystem.colorScheme,
+                colorScheme: ageSystem.colorScheme,
                 wealthMode: game.settings.get("age-system", "wealthType")
             }
         };

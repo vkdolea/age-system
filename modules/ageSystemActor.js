@@ -1,7 +1,6 @@
 import { ageSystem } from "./config.js";
 import * as Dice from "./dice.js";
 
-
 export class ageSystemActor extends Actor {
 
     /** @override */
@@ -32,7 +31,7 @@ export class ageSystemActor extends Actor {
         const actorData = this.data;
         const data = actorData.data;
         
-        if (this.data.img == CONST.DEFAULT_TOKEN) this.data.img = CONFIG.ageSystem.actorIcons[actorData.type];
+        if (this.data.img == CONST.DEFAULT_TOKEN) this.data.img = ageSystem.actorIcons[actorData.type];
 
         // Check if split Armor is in use
         data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
@@ -130,19 +129,19 @@ export class ageSystemActor extends Actor {
         if (data.fatigue.value < 0) {data.fatigue.value = 0};
         switch (data.fatigue.value) {
             case 0:
-                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.noFatigue);
+                data.fatigue.status = game.i18n.localize(ageSystem.fatigueConditions.noFatigue);
             break;
             case 1:
-                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.winded);
+                data.fatigue.status = game.i18n.localize(ageSystem.fatigueConditions.winded);
             break;
             case 2:
-                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.fatigued);
+                data.fatigue.status = game.i18n.localize(ageSystem.fatigueConditions.fatigued);
             break;
             case 3:
-                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.exhausted);
+                data.fatigue.status = game.i18n.localize(ageSystem.fatigueConditions.exhausted);
             break;
             case 4:
-                data.fatigue.status = game.i18n.localize(CONFIG.ageSystem.fatigueConditions.dying);
+                data.fatigue.status = game.i18n.localize(ageSystem.fatigueConditions.dying);
             break;            
                                             
             default:

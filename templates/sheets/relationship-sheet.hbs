@@ -11,9 +11,9 @@
                 {{!-- Item Image --}}
                 {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}} 
                 
-                <div class="flexrow" style="flex-wrap: wrap;">
+                <div class="flexcol">
                     {{!-- Bond --}}
-                    <div class="flexrow long-text flex-align-start" style="min-width: 100%;">
+                    <div class="flexrow long-text flex-align-start" style="width: 100%;">
                         <label>{{localize "age-system.relationshipBond"}}</label>
                         {{#if inChat}}
                         <p>{{data.data.shortDesc}}</p>
@@ -25,7 +25,11 @@
                     {{!-- Intensity --}}
                     <div class="flexrow flex-align-start">
                         <label>{{localize "age-system.relationshipIntensity"}}</label>
-                        <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensity" value="{{data.data.intensity}}"/>
+                        <div class="flexrow">
+                            <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensity" value="{{data.data.intensity}}"/>
+                            <span> / </span>
+                            <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensityMax" value="{{data.data.intensityMax}}"/>
+                        </div>
                     </div>
                 </div>
 

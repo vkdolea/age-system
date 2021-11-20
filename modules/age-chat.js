@@ -84,7 +84,6 @@ function applyChatCardDamage(li, options) {
 /**
  * Chat card listener to apply Injury to selected Actor when pressing specific button.
  * 
- *
  * @param {Mouse Event} event   Chat card Mouse Click event
  * @returns {Promisse}          Promisse applying Injury to Actor
  */
@@ -169,20 +168,24 @@ export function checkHealth(card, game) {
 // Roll damage from a chat card, taking into consideration card's Actor, Item and button selected
 export async function chatDamageRoll(event) {
     event.preventDefault();
-    let owner = null;
-    const classList = event.currentTarget.classList;
+    const cardId = card.dataset.messageId;
+    const cardData = cardId.data.flags["age-system"].ageroll;
     const card = event.type === "contextmenu" ? event.target.closest(".feature-controls") : event.currentTarget.closest(".feature-controls");
-    const actorId = card.dataset.actorId;
+    const classList = event.currentTarget.classList;
+    // const actorId = card.dataset.actorId;
+    const actorId = cardData.actorId
+    let owner = null;
     if (actorId) owner = game.actors.get(actorId) ?? await fromUuid(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
     owner = owner?.actor ?? owner;
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
-    const itemSource = owner.items.get(card.dataset.itemId);
+    // const itemSource = owner.items.get(card.dataset.itemId);
+    const itemSource = owner.items.get(cardData.itemId);
 
     let stuntDie = null;
     let addFocus = false;
     let resistedDamage = false;
     if (classList.contains('add-stunt-damage')) {
-        stuntDie = card.dataset.stuntDie;
+        stuntDie = cardData.stuntDie;
     };
     if (classList.contains('add-focus-damage')) {
         addFocus = true;
@@ -195,7 +198,7 @@ export async function chatDamageRoll(event) {
         event: event,
         stuntDie: stuntDie,
         addFocus: addFocus,
-        atkDmgTradeOff: card.dataset.atkdmgTrade,
+        atkDmgTradeOff: cardData.atkDmgTradeOff,
         resistedDmg: resistedDamage,
     };
     itemSource.rollDamage(damageData);

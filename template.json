@@ -627,7 +627,8 @@
         },
         "relationship": {
             "templates": ["description"],
-            "intensity": 1
+            "intensity": 1,
+            "intensityMax": 1
         },
         "honorifics": {
             "templates": ["description"]

@@ -359,11 +359,23 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         event.preventDefault();
         const e = event.currentTarget;
         const classList = e.classList;
-        let itemId = e.closest(".feature-controls").dataset.itemId;
+        const itemId = e.closest(".feature-controls").dataset.itemId;
         const item = this.actor.items.get(itemId);
-        const qtd = item.data.data.quantity;
-        if (classList.contains("add")) return item.update({"data.quantity": qtd+1});
-        if (classList.contains("remove") && qtd > 0) return item.update({"data.quantity": qtd-1});
+        const itemType = item.type
+        let qtd;
+        let updatePath;
+        switch (itemType) {
+            case 'relationship':
+                qtd = item.data.data.intensity;
+                updatePath = 'data.intensity';
+                break;
+            default:
+                qtd = item.data.data.quantity;
+                updatePath = 'data.quantity';
+                break;
+        }
+        if (classList.contains("add")) return item.update({[updatePath]: qtd+1});
+        if (classList.contains("remove") && qtd > 0) return item.update({[updatePath]: qtd-1});
     }
 
     _onToggleItemMod(event) {

@@ -1,3 +1,5 @@
+import { ageSystem } from "./config.js";
+
 const debouncedReload = debounce(() => window.location.reload(), 100)
 export const registerSystemSettings = async function() {
 
@@ -25,7 +27,7 @@ export const registerSystemSettings = async function() {
     },
     onChange: async ()=>{
       const newColor = await game.settings.get("age-system", "colorScheme");
-      CONFIG.ageSystem.colorScheme = newColor;
+      ageSystem.colorScheme = newColor;
       await game.user.setFlag("age-system", "colorScheme", newColor);
       if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
       game.ageSystem.ageRoller.refresh();
@@ -48,8 +50,8 @@ export const registerSystemSettings = async function() {
   });
 
   /**
- * Register Health System in use (Basic, The Expanse, MAGE, MAGE + Injury, MAGE + Injury + Vitality)
- */
+   * Register Health System in use (Basic, The Expanse, MAGE, MAGE + Injury, MAGE + Injury + Vitality)
+   */
     game.settings.register("age-system", "healthSys", {
     name: "SETTINGS.healthSys",
     hint: "SETTINGS.healthSysHint",
@@ -65,7 +67,20 @@ export const registerSystemSettings = async function() {
       // "mageVitality": "SETTINGS.healthSysmageVitality",
     },
     onChange: debouncedReload
-  });  
+  });
+  
+  /**
+   * Register Ability selection
+   */
+    game.settings.register("age-system", "stuntAttack", {
+    name: "SETTINGS.stuntAttack",
+    hint: "SETTINGS.stuntAttackHint",
+    scope: "world",
+    config: true,
+    default: 1,
+    type: Number,
+    onChange: () => ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack")
+  });
 
   /**
    * Register Ability selection
@@ -112,7 +127,7 @@ export const registerSystemSettings = async function() {
       "fortune": "SETTINGS.healthModefortune",
     },
     onChange: async () => {
-      CONFIG.ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`),
+      ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`),
       [...game.actors.contents, ...Object.values(game.actors.tokens)]
         .filter((o) => {
           return o.data.type === "char";
@@ -141,7 +156,7 @@ export const registerSystemSettings = async function() {
       "cinematic": "SETTINGS.gameModeCinematic",
     },
     onChange: async () => {
-      CONFIG.ageSystem.healthSys.mode = await game.settings.get("age-system", "healthMode"),
+      ageSystem.healthSys.mode = await game.settings.get("age-system", "healthMode"),
       [...game.actors.contents, ...Object.values(game.actors.tokens)]
         .filter((o) => {
           return o.data.type === "char";
@@ -341,24 +356,6 @@ export const registerSystemSettings = async function() {
     onChange: async () => {if (await game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
   });
 
-  // /**
-  //  * Damage Roll for Chat Option
-  //  */
-  // game.settings.register("age-system", "chatDmgRollOpt", {
-  //   name: "SETTINGS.chatDmgRollOpt",
-  //   hint: "SETTINGS.chatDmgRollOptHint",
-  //   scope: "client",
-  //   config: true,
-  //   default: "none",
-  //   type: String,
-  //   choices: {
-  //     "openOptions": "SETTINGS.chatDmgRollOptopenOptions",
-  //     "onAlt": "SETTINGS.chatDmgRollOptonAlt",
-  //     "onStunt": "SETTINGS.chatDmgRollOptonStunt"
-  //   },
-  //   onChange: () => game.user.setFlag("age-system", "chatDmgRollOpt", game.settings.get("age-system", "chatDmgRollOpt"))
-  // });
-
   /**
    * Let Observers roll (chat and sheet)
    */
@@ -391,7 +388,7 @@ export const registerSystemSettings = async function() {
     config: false,
     default: 'expanse', // Currently, the only valid values are 'custom' and 'expanse'
     type: String,
-    onChange: async () => CONFIG.ageSystem.inUseStatusEffects = await game.settings.get("age-system", "inUseConditions"),
+    onChange: async () => ageSystem.inUseStatusEffects = await game.settings.get("age-system", "inUseConditions"),
   })
   
   /**
@@ -445,8 +442,8 @@ export const loadCompendiaSettings = function() {
     config: true,
     default: "age-system.focus",
     type: String,
-    choices: CONFIG.ageSystem.itemCompendia,
-    onChange: async ()=>{CONFIG.ageSystem.focus = compendiumList(await game.settings.get("age-system", "masterFocusCompendium"))}
+    choices: ageSystem.itemCompendia,
+    onChange: async ()=>{ageSystem.focus = compendiumList(await game.settings.get("age-system", "masterFocusCompendium"))}
   });
 };
 
