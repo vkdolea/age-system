@@ -1,3 +1,4 @@
+import { ageSystem } from "./config.js";
 import { ageRollCheck } from "./dice.js";
 import ConditionsWorkshop from "./conditions-workshop.js";
 
@@ -14,6 +15,7 @@ export class AgeRoller extends Application {
 		const data = super.getData(options);
 		data.colorset = game.settings.get("age-system", "colorScheme");
 		data.isGM = game.user.isGM;
+		data.wikiLink = ageSystem.wiki;
 		return data;
 	}
 	

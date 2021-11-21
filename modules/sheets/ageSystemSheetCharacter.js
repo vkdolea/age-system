@@ -275,34 +275,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     }
 
     _onChangeMark(event) {
-        const data = this.actor.data.data;
-        const marks = data.injury.marks;
-        if (marks === 0) return false;
-        let updateData = {"data.injury.marks": marks-1};
-        if (data.injury.degrees.severe > 0) {
-            const expectedMarks = data.injury.degrees.light + data.injury.degrees.serious + data.injury.degrees.severe * data.injury.degrees.severeMult;
-            if (expectedMarks - (marks-1) === data.injury.degrees.severeMult) {
-                updateData = {
-                    ...updateData,
-                    "data.injury.degrees.severe": data.injury.degrees.severe-1
-                }
-            }
-        } else {
-            if (data.injury.degrees.serious > 0) {
-                updateData = {
-                    ...updateData,
-                    "data.injury.degrees.serious": data.injury.degrees.serious-1
-                }
-            } else {
-                if (data.injury.degrees.light > 0) {
-                    updateData = {
-                        ...updateData,
-                        "data.injury.degrees.light": data.injury.degrees.light-1
-                    }
-                }
-            }
-        }
-        return this.actor.update(updateData);
+        return this.actor.healMarks(1);
     }
 
     _onChangeInjury(event) {

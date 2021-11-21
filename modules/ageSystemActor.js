@@ -622,11 +622,12 @@ export class ageSystemActor extends Actor {
      * @param {string} injuryDegree     The chat entry which contains the roll data
      *
      * @returns {object}                Object with relevant data to identify Actor and new Injury values
-     * @returns {false}                 If Injurty Alternate Damage is not in use or if Actor is not of applicable type
+     * @returns {false}                 If Injury Alternate Damage is not in use or if Actor is not of applicable type
      */
     async applyInjury (injuryDegree) {
         if (!ageSystem.healthSys.useInjury) return false;
         if (this.type !== 'char') return false;
+        if (!['light', 'serious', 'severe'].includes(injuryDegree)) return false;
         // Identify correct path and new amount for that degree
         const updateDegree = `data.injury.degrees.${injuryDegree}`;
         const newDegree = this.data.data.injury.degrees[injuryDegree] + 1;
@@ -651,11 +652,62 @@ export class ageSystemActor extends Actor {
         }
     }
 
+    /**
+     * Heals a number of Injury Marks Character 
+     * @param {number} qtd  Quantity of Injury Marks to be healed
+     * @returns {boolean}   False if Character type or qtd is invalid, True otherwise
+     */
+    async healMarks (qtd) {
+        if (this.type !== 'char') return false
+        if (Number.isNaN(Number(qtd))) return false
+        qtd = Math.abs(Number(qtd));
+        for (let m = 0; m < qtd; m++) {
+            const data = this.data.data;
+            const marks = this.data.data.injury.marks;
+            if (marks === 0) return true
+            let updateData = {"data.injury.marks": marks-1};
+            if (data.injury.degrees.severe > 0) {
+                const expectedMarks = data.injury.degrees.light + data.injury.degrees.serious + data.injury.degrees.severe * data.injury.degrees.severeMult;
+                if (expectedMarks - (marks-1) === data.injury.degrees.severeMult) {
+                    updateData = {
+                        ...updateData,
+                        "data.injury.degrees.severe": data.injury.degrees.severe-1
+                    }
+                }
+            } else {
+                if (data.injury.degrees.serious > 0) {
+                    updateData = {
+                        ...updateData,
+                        "data.injury.degrees.serious": data.injury.degrees.serious-1
+                    }
+                } else {
+                    if (data.injury.degrees.light > 0) {
+                        updateData = {
+                            ...updateData,
+                            "data.injury.degrees.light": data.injury.degrees.light-1
+                        }
+                    }
+                }
+            }
+            await this.update(updateData);
+        }
+        return true
+    }
+
+    /**
+     * This function applies damage or healing to an Actor (Character or Organization only) and returns a summary with new values
+     * @param {number} newValue     Numeric value passed
+     * @param {boolean} isHealing   Identify if newValue's modulus will Sum or Subtract from current HP
+     * @param {boolean} isNewHP     Check new total Health will replace by newValue's modulus
+     * @returns 
+     */
     applyHPchange (newValue, {isHealing = false, isNewHP = true} = {}) {
         const actorType = this.type;
         let previousHP = null;
         let updatePath = '';
         let maxHP = Infinity;
+        newValue = Math.abs(newValue)
+        if (!isNewHP) newValue = isHealing ? newValue : -newValue;
         switch (actorType) {
             case 'char':
                 previousHP = this.data.data.health.value;
@@ -678,16 +730,15 @@ export class ageSystemActor extends Actor {
         if (isNewHP) {
             summary.newHP = newValue
         } else {
-            if (isHealing) {
+            if (newValue > 0) {
                 const arr = [previousHP + newValue, maxHP];
                 summary.newHP = Math.min(...arr);
             }
-            else {
+            if (newValue < 0) {
                 const arr = [previousHP - newValue, 0];
                 summary.newHP = Math.max(...arr);
             }
         }
-
         this.update({[updatePath]: summary.newHP});
         return summary
     }
