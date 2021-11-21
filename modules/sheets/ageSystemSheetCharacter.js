@@ -248,7 +248,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const rollData = {
             actor: this.actor,
             event,
-            flavor: `${this.actor.name} (${game.i18n.localize("age-system.toughness")})`,
             moreParts: [{
                 label: game.i18n.localize("age-system.toughness"),
                 value: this.actor.data.data.armor.toughness.total
