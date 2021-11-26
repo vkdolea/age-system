@@ -14,6 +14,9 @@
     "ITEM.TypeMembership": "Membership",
     "ITEM.TypeShipfeatures": "Spaceship Feature",
 
+    "SETTINGS.breatherSettings": "Breather Settings",
+    "SETTINGS.breatherSettingsHint": "Configure amount of hits recovered by a Breather",
+
     "SETTINGS.initiativeFocus": "Initiative Focus Name",
     "SETTINGS.initiativeFocusHint": "Type the name of Focus used in the Initiative roll - leave it in blank to disregard focus bonus to Initiative",
 
@@ -149,7 +152,8 @@
             "orgItem": "Only Focus can be added to Organizations",
             "charFocusToOrg": "Character Focus can not be added to Organization",
             "orgFocusToChar": "Organization Focus can not be added to Character",
-            "vehicleItem": "Vehicles can not receive Items"
+            "vehicleItem": "Vehicles can not receive Items",
+            "breatherAppliedAll": "Breather applied to all selected Characters"
         },
 
         "spaceship": {
@@ -443,6 +447,12 @@
         "fatigued": "Fatigued",
         "exhausted": "Exhausted",
         "dying": "Dying",
+
+        "breather": "Breather",
+        "constant": "Constant",
+        "ablSelect": "Select Ability",
+        "addLevel": "Add Level",
+        "autoApply": "Auto Apply",
 
         "powerPoints": "Power Points",
         "powerPointsIndex": "PP",

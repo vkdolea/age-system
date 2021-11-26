@@ -1,0 +1,33 @@
+<form>
+    <div class="form-group">
+        <label>{{localize "age-system.constant"}}</label>
+        <input type="number" name="k" value="{{k}}"/>
+    </div>
+
+    <div class="form-group">
+        <label>Select Ability</label>
+        <select name="abl">
+            {{#select abl}}
+            <option value="no-abl">—</option>
+            {{#each abilities as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "age-system.addLevel"}}</label>
+        <input type="checkbox" name="addLevel" {{checked addLevel}}/>
+        <p class="notes">If Injury is used, each 4 complete levels will restore 1 injury mark</p>
+    </div>
+
+    {{#unless settingMode}}
+    <hr>
+    <div class="form-group">
+        <label>{{localize "age-system.autoApply"}}</label>
+        <input type="checkbox" name="autoApply" {{checked autoApply}}/>
+    </div>
+    {{/unless}}
+
+</form>

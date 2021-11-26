@@ -189,6 +189,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".mark .change-injury").click(this._onChangeMark.bind(this));
             html.find(".refresh-injury-marks").click(this._onRefreshMarks.bind(this));
             html.find(".heal-all-injuries").click(this._onFullHeal.bind(this));
+            html.find(".roll-breather").click(this._onRollBreather.bind(this));
 
             // Enable field to be focused when selecting it
             const inputs = html.find("input");
@@ -243,12 +244,15 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         super._onDropItemCreate(itemData);
     }
 
+    _onRollBreather(ev) {
+        this.actor.breather(false)
+    }
+
     _onRollToughness(ev) {
         const event = new MouseEvent('contextmenu')
         const rollData = {
             actor: this.actor,
             event,
-            flavor: `${this.actor.name} (${game.i18n.localize("age-system.toughness")})`,
             moreParts: [{
                 label: game.i18n.localize("age-system.toughness"),
                 value: this.actor.data.data.armor.toughness.total
@@ -275,34 +279,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     }
 
     _onChangeMark(event) {
-        const data = this.actor.data.data;
-        const marks = data.injury.marks;
-        if (marks === 0) return false;
-        let updateData = {"data.injury.marks": marks-1};
-        if (data.injury.degrees.severe > 0) {
-            const expectedMarks = data.injury.degrees.light + data.injury.degrees.serious + data.injury.degrees.severe * data.injury.degrees.severeMult;
-            if (expectedMarks - (marks-1) === data.injury.degrees.severeMult) {
-                updateData = {
-                    ...updateData,
-                    "data.injury.degrees.severe": data.injury.degrees.severe-1
-                }
-            }
-        } else {
-            if (data.injury.degrees.serious > 0) {
-                updateData = {
-                    ...updateData,
-                    "data.injury.degrees.serious": data.injury.degrees.serious-1
-                }
-            } else {
-                if (data.injury.degrees.light > 0) {
-                    updateData = {
-                        ...updateData,
-                        "data.injury.degrees.light": data.injury.degrees.light-1
-                    }
-                }
-            }
-        }
-        return this.actor.update(updateData);
+        return this.actor.healMarks(1);
     }
 
     _onChangeInjury(event) {

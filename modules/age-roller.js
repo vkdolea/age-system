@@ -1,5 +1,7 @@
+import { ageSystem } from "./config.js";
 import { ageRollCheck } from "./dice.js";
 import ConditionsWorkshop from "./conditions-workshop.js";
+import { applyBreather } from "./breather.js";
 
 export class AgeRoller extends Application {
 	constructor(options = {}) {
@@ -14,6 +16,7 @@ export class AgeRoller extends Application {
 		const data = super.getData(options);
 		data.colorset = game.settings.get("age-system", "colorScheme");
 		data.isGM = game.user.isGM;
+		data.wikiLink = ageSystem.wiki;
 		return data;
 	}
 	
@@ -27,6 +30,7 @@ export class AgeRoller extends Application {
 		html.find("#age-roller-container").mouseenter(this._onShowOptions.bind(this));
 		html.find("#age-roller").hover(this._onShowOptions.bind(this));
 		html.find(".conditions-workshop").click(this.openConditionWorkshop.bind(this));
+		html.find(".breather-tokens").click(this.tokenBreather);
 
 		// Set position
 		let roller = document.getElementById("age-roller");
@@ -40,6 +44,10 @@ export class AgeRoller extends Application {
 	
 	refresh() {
 		this.render(true);
+	}
+
+	tokenBreather(ev) {
+		applyBreather('selfroll');
 	}
 
 	openConditionWorkshop(ev) {

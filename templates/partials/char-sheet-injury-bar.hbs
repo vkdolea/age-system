@@ -32,7 +32,7 @@
     </div>
 
     <div class="marks-box">
-        <div>{{localize "age-system.injuryMarks"}} <a><i class="fa fa-undo refresh-injury-marks" aria-hidden="true"></i></a></div>
+        <div> <a class="roll-breather feature-controls" title="{{localize "age-system.breather"}}"><i class="fas fa-medkit"></i></a> {{localize "age-system.injuryMarks"}} <a><i class="fa fa-undo refresh-injury-marks" aria-hidden="true"></i></a></div>
         <div class="flexrow marks-control">
             {{#unless (eq data.injury.degrees.severeMult 1)}}
             <div class="flexcol tracker-container">

@@ -708,4 +708,7 @@ ageSystem.ROLL_TYPE = {
     VEHICLE_ACTION: 'vehicle',
     PLOT_ACTION: 'plotAction',
     PLOT_DAMAGE: 'plotDamage',
-}
+};
+
+// Wiki website!
+ageSystem.wiki = 'https://github.com/vkdolea/age-system/wiki';

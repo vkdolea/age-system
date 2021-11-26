@@ -622,11 +622,12 @@ export class ageSystemActor extends Actor {
      * @param {string} injuryDegree     The chat entry which contains the roll data
      *
      * @returns {object}                Object with relevant data to identify Actor and new Injury values
-     * @returns {false}                 If Injurty Alternate Damage is not in use or if Actor is not of applicable type
+     * @returns {false}                 If Injury Alternate Damage is not in use or if Actor is not of applicable type
      */
     async applyInjury (injuryDegree) {
         if (!ageSystem.healthSys.useInjury) return false;
         if (this.type !== 'char') return false;
+        if (!['light', 'serious', 'severe'].includes(injuryDegree)) return false;
         // Identify correct path and new amount for that degree
         const updateDegree = `data.injury.degrees.${injuryDegree}`;
         const newDegree = this.data.data.injury.degrees[injuryDegree] + 1;
@@ -651,11 +652,62 @@ export class ageSystemActor extends Actor {
         }
     }
 
+    /**
+     * Heals a number of Injury Marks Character 
+     * @param {number} qtd  Quantity of Injury Marks to be healed
+     * @returns {boolean}   False if Character type or qtd is invalid, True otherwise
+     */
+    async healMarks (qtd) {
+        if (this.type !== 'char') return false
+        if (Number.isNaN(Number(qtd))) return false
+        qtd = Math.abs(Number(qtd));
+        for (let m = 0; m < qtd; m++) {
+            const data = this.data.data;
+            const marks = this.data.data.injury.marks;
+            if (marks === 0) return true
+            let updateData = {"data.injury.marks": marks-1};
+            if (data.injury.degrees.severe > 0) {
+                const expectedMarks = data.injury.degrees.light + data.injury.degrees.serious + data.injury.degrees.severe * data.injury.degrees.severeMult;
+                if (expectedMarks - (marks-1) === data.injury.degrees.severeMult) {
+                    updateData = {
+                        ...updateData,
+                        "data.injury.degrees.severe": data.injury.degrees.severe-1
+                    }
+                }
+            } else {
+                if (data.injury.degrees.serious > 0) {
+                    updateData = {
+                        ...updateData,
+                        "data.injury.degrees.serious": data.injury.degrees.serious-1
+                    }
+                } else {
+                    if (data.injury.degrees.light > 0) {
+                        updateData = {
+                            ...updateData,
+                            "data.injury.degrees.light": data.injury.degrees.light-1
+                        }
+                    }
+                }
+            }
+            await this.update(updateData);
+        }
+        return true
+    }
+
+    /**
+     * This function applies damage or healing to an Actor (Character or Organization only) and returns a summary with new values
+     * @param {number} newValue     Numeric value passed
+     * @param {boolean} isHealing   Identify if newValue's modulus will Sum or Subtract from current HP
+     * @param {boolean} isNewHP     Check new total Health will replace by newValue's modulus
+     * @returns 
+     */
     applyHPchange (newValue, {isHealing = false, isNewHP = true} = {}) {
         const actorType = this.type;
         let previousHP = null;
         let updatePath = '';
         let maxHP = Infinity;
+        newValue = Math.abs(newValue)
+        if (!isNewHP) newValue = isHealing ? newValue : -newValue;
         switch (actorType) {
             case 'char':
                 previousHP = this.data.data.health.value;
@@ -678,20 +730,84 @@ export class ageSystemActor extends Actor {
         if (isNewHP) {
             summary.newHP = newValue
         } else {
-            if (isHealing) {
+            if (newValue > 0) {
                 const arr = [previousHP + newValue, maxHP];
                 summary.newHP = Math.min(...arr);
             }
-            else {
+            if (newValue < 0) {
                 const arr = [previousHP - newValue, 0];
                 summary.newHP = Math.max(...arr);
             }
         }
-
         this.update({[updatePath]: summary.newHP});
         return summary
     }
 
+    /**
+     * Roll Breather on demand
+     * 
+     * @param {boolean} direct Ask user to review inputs
+     * @param {number} k Constant amount of Health recovered
+     * @param {boolean} addLevel Indicate if level is added to the Breather
+     * @param {string} abl String containing code for the Ability applicable to Breather
+     * @param {number} dice Quantity of D6 rolled for the Breather
+     * @param {boolean} autoApply Auto apply recovery after rolling Breather
+     * @param {string} rollMode Visivility instruction to chat card with breather
+     * @returns 
+     */
+    async breather(direct = true, {k=ageSystem.breather.k, addLevel=ageSystem.breather.addLevel, abl=ageSystem.breather.abl, autoApply=true, abilities=ageSystem.abilities, rollMode=null}={}) {
+        if (this.type !== 'char') return false;
+        const data = {
+            k,
+            addLevel,
+            abl,
+            autoApply,
+            abilities,
+        };
+
+        const options = direct ? data : await this.breatherSettings(data);
+        if (options.cancelled) return false;
+
+        let formula = `${options.k}`;
+        if (options.abl !== 'no-abl') formula += ` + ${Math.max(this.data.data.abilities[options.abl].total, 0)}`;
+        if (options.addLevel) formula += ageSystem.healthSys.useInjury ? ` + ${Math.floor(this.data.data.level/4)}` : ` + ${this.data.data.level}`;
+        let roll = await new Roll(formula).evaluate({async: true});
+		roll.toMessage({flavor: `${this.name} | ${game.i18n.localize("age-system.breather")}`}, {rollMode});
+        if (options.autoApply) this.applyHPchange(roll.total, {isHealing: true, isNewHP: false});
+    }
+
+    async breatherSettings(data) {
+        const template = "/systems/age-system/templates/rolls/breather-settings.hbs";
+        const html = await renderTemplate(template, data);
+        return new Promise(resolve => {
+            const data = {
+                title: game.i18n.localize("age-system.breather"),
+                content: html,
+                buttons: {
+                    normal: {
+                        icon: `<i class="fa fa-check" aria-hidden="true"></i>`,
+                        callback: html => {
+                            const fd = new FormDataExtended(html[0].querySelector("form"));
+                            resolve(fd.toObject())
+                        }
+                    },
+                    cancel: {
+                        icon: `<i class="fa fa-times" aria-hidden="true"></i>`,
+                        callback: html => resolve({cancelled: true}),
+                    }
+                },
+                default: "normal",
+                close: () => resolve({cancelled: true}),
+            }
+            new Dialog(data, null).render(true);
+        });
+    }
+
+    /**
+     * Check if there is an Active Effect for this Condition and take action: create if none, delete all if detected.
+     * @param {string} condId Condition unique Core ID
+     * @returns 
+     */
     async handleConditions(condId) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;
         const effectsOn = this.effects.filter(e => e.data.flags?.["age-system"]?.isCondition && e.data.flags?.core?.statusId === condId);

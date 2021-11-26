@@ -139,8 +139,9 @@ Hooks.once("init", async function() {
     // Register System Settings
     await Settings.registerSystemSettings();
 
-    // Register Stunt Attack Point generation
+    // Register Settings
     ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack");
+    ageSystem.breather = game.settings.get('age-system', 'breatherParam');
 
     // Set Health System configuration
     const hstype = await game.settings.get("age-system", "healthSys");
@@ -348,6 +349,7 @@ Hooks.on("renderCompendium", () => {
     ageSystem.focus = Settings.compendiumList(setCompendium);
 });
 
+Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatLog, content, userData))
 Hooks.on("createCompendium", () => {ageSystem.itemCompendia = Settings.allCompendia("Item")})
 Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
 Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});

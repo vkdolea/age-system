@@ -1,5 +1,7 @@
 import ApplyDamageDialog from "./apply-damage.js";
 import {ageSystem} from "./config.js";
+import ConditionsWorkshop from "./conditions-workshop.js";
+import { applyBreather } from "./breather.js";
 
 export function addChatListeners(html) {
     html.on('click', '.roll-damage', chatDamageRoll);
@@ -25,8 +27,7 @@ export function addChatListeners(html) {
  export const addChatMessageContextOptions = function(html, options) {
     let canApply = li => {
         const message = game.messages.get(li.data("messageId"));
-        const hasHealth = !ageSystem.healthSys.useInjury;
-        return message?.isRoll && message?.isContentVisible && canvas.tokens?.controlled.length && hasHealth;
+        return message?.isRoll && message?.isContentVisible && canvas.tokens?.controlled.length;
     };
     options.push(
     {
@@ -59,7 +60,7 @@ function applyChatCardDamage(li, options) {
     if (options.isHealing) {
         return Promise.all(canvas.tokens.controlled.map(t => {
           const a = t.actor;
-          return a.applyHPchange(total, options);
+          return ageSystem.healthSys.useInjury ? a.healMarks(total) : a.applyHPchange(total, options);
         }));
     }
     if (options.isDamage) {
@@ -132,28 +133,36 @@ export async function applyDamageChat(event) {
  * @returns {Application}       Apply Damage application is started to select damage details
  */
 export async function callApplyDamage (damageData) {
-    let targets = canvas.tokens.controlled;
-    let nonChar = []
-    if (nonChar !== []) {
-        for (let t = 0; t < targets.length; t++) {
-            const el = targets[t];
-            const actorType = el.actor?.type;
-            if (actorType !== 'char') nonChar.push(t);
-        }
-        for (let t = nonChar.length-1; t >= 0; t--) {
-            targets.splice(nonChar[t],1)
-        }
-    }
+    const targets = controlledTokenByType('char');
     if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.noValidTokensSelected"));
     return new ApplyDamageDialog(targets, damageData, ageSystem.healthSys.useInjury).render(true);
+}
+
+/**
+ * Filter the controlled actor types to match passed Type
+ * @param {string|array} type Valid actor type to be selected
+ * @returns {array}     Array with only the correct type of Actor
+ */
+export function controlledTokenByType(type) {
+    if (!Array.isArray(type)) type = [type];
+    let targets = canvas.tokens.controlled;
+    const nonChar = []
+    for (let t = 0; t < targets.length; t++) {
+        const el = targets[t];
+        const actorType = el.actor?.type;
+        if (!type.includes(actorType)) nonChar.push(t);
+    }
+    for (let t = nonChar.length-1; t >= 0; t--) {
+        targets.splice(nonChar[t],1)
+    }
+    return targets
 }
 
 /**
  * Check if actual Game Settings and clicked Card with Apply Damage button has compatible parameters
  *
  * @param {string} card         Chat card damage parameters
- * @param {string} game         Current in-use Game Settings health parameters
- * 
+ * @param {string} game         Current in-use Game Settings health parameters * 
  * @returns {boolean}           TRUE if compatible, FALSE if not compatible
  */
 export function checkHealth(card, game) {
@@ -168,9 +177,9 @@ export function checkHealth(card, game) {
 // Roll damage from a chat card, taking into consideration card's Actor, Item and button selected
 export async function chatDamageRoll(event) {
     event.preventDefault();
-    const cardId = card.dataset.messageId;
-    const cardData = cardId.data.flags["age-system"].ageroll;
-    const card = event.type === "contextmenu" ? event.target.closest(".feature-controls") : event.currentTarget.closest(".feature-controls");
+    const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
+    const cardId = message.dataset.messageId;
+    const cardData = game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
     const classList = event.currentTarget.classList;
     // const actorId = card.dataset.actorId;
     const actorId = cardData.actorId
@@ -185,7 +194,7 @@ export async function chatDamageRoll(event) {
     let addFocus = false;
     let resistedDamage = false;
     if (classList.contains('add-stunt-damage')) {
-        stuntDie = cardData.stuntDie;
+        stuntDie = cardData.ageRollSummary.stuntPoints;
     };
     if (classList.contains('add-focus-damage')) {
         addFocus = true;
@@ -321,4 +330,76 @@ function _permCheck(actorPerm, element) {
     const validPerm = [CONST.ENTITY_PERMISSIONS.OWNER];
     if (game.settings.get("age-system", "observerRoll")) validPerm.push(CONST.ENTITY_PERMISSIONS.OBSERVER);
     if (!validPerm.includes(actorPerm)) element.remove();
+}
+
+/**
+ * Listens to Chat Log commands and process all /a and /age commands
+ * @param {object} chatLog                      Chat Log content
+ * @param {string} content                      Text entry on chat textarea
+ * @param {object|userId, speaker} userData     Identify message sender
+ * @returns 
+ */
+export function ageCommand(chatLog, content, userData) {
+    const message = content.split(" ").map(i => i.trim());
+    
+    if (['/age', '/a'].includes(message[0])) {
+        const isGM = game.user.isGM;
+        const gmFeats = ['conditions', 'damage'];
+        const routine = message[1]
+        if (!isGM && gmFeats.includes(routine)) {
+            ui.notifications.error(`Only GMs can use the feature "${routine}"`);
+            return false
+        }
+        if (ageSystem.healthSys.useInjury && [].includes(routine)) {
+            ui.notifications.error(game.i18n.localize(`Health system not in use`));
+            return false
+        }
+        if (!ageSystem.healthSys.useInjury && ['injure'].includes(routine)) {
+            ui.notifications.error(game.i18n.localize(`Injury system not in use`));
+            return false
+        }
+
+        switch (routine) {
+            case 'help':
+            case 'wiki':
+                window.open(ageSystem.wiki, '_blank');
+                break;
+            case 'conditions':
+            case 'workshop':
+            case 'cw':
+                new ConditionsWorkshop().render(true);
+                break;
+            case 'damage':
+            case 'dmg':
+                callApplyDamage({
+                    healthSys: ageSystem.healthSys,
+                    totalDamage: Number.isNaN(Number(message[2])) ? 0 : message[2],
+                    dmgType: 'wound',
+                    dmgSrc: 'impact',
+                    isHealing: false,
+                    wGroupPenalty: false
+                });
+                break;
+            case 'heal':
+                const newValue = Number(message[2]);
+                if (!Number.isNaN(newValue)) controlledTokenByType(['char', 'organization']).map(t => {
+                    const a = t.actor;
+                    return ageSystem.healthSys.useInjury ? a.healMarks(newValue) : a.applyHPchange(newValue, {isHealing: true, isNewHP: false});
+                });
+                break;
+            case 'injure':
+            case 'inj':
+                const degree = message[2];
+                controlledTokenByType('char').map(t => t.actor.applyInjury(degree));
+                break;
+            case 'breather':
+            case 'b':
+                applyBreather('selfroll');
+                break;
+            default:
+                ui.notifications.error(game.i18n.format("CHAT.InvalidCommand", {command: routine}));
+                break;
+        }
+        return false
+    }
 }
