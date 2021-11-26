@@ -189,6 +189,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".mark .change-injury").click(this._onChangeMark.bind(this));
             html.find(".refresh-injury-marks").click(this._onRefreshMarks.bind(this));
             html.find(".heal-all-injuries").click(this._onFullHeal.bind(this));
+            html.find(".roll-breather").click(this._onRollBreather.bind(this));
 
             // Enable field to be focused when selecting it
             const inputs = html.find("input");
@@ -241,6 +242,10 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     _onDropItemCreate(itemData) {
         if (!isDropedItemValid(this.actor, itemData)) return false;
         super._onDropItemCreate(itemData);
+    }
+
+    _onRollBreather(ev) {
+        this.actor.breather(false)
     }
 
     _onRollToughness(ev) {

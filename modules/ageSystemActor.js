@@ -743,6 +743,71 @@ export class ageSystemActor extends Actor {
         return summary
     }
 
+    /**
+     * Roll Breather on demand
+     * 
+     * @param {boolean} direct Ask user to review inputs
+     * @param {number} k Constant amount of Health recovered
+     * @param {boolean} addLevel Indicate if level is added to the Breather
+     * @param {string} abl String containing code for the Ability applicable to Breather
+     * @param {number} dice Quantity of D6 rolled for the Breather
+     * @param {boolean} autoApply Auto apply recovery after rolling Breather
+     * @param {string} rollMode Visivility instruction to chat card with breather
+     * @returns 
+     */
+    async breather(direct = true, {k=ageSystem.breather.k, addLevel=ageSystem.breather.addLevel, abl=ageSystem.breather.abl, autoApply=true, abilities=ageSystem.abilities, rollMode=null}={}) {
+        if (this.type !== 'char') return false;
+        const data = {
+            k,
+            addLevel,
+            abl,
+            autoApply,
+            abilities,
+        };
+
+        const options = direct ? data : await this.breatherSettings(data);
+        if (options.cancelled) return false;
+
+        let formula = `${options.k}`;
+        if (options.abl !== 'no-abl') formula += ` + ${Math.max(this.data.data.abilities[options.abl].total, 0)}`;
+        if (options.addLevel) formula += ageSystem.healthSys.useInjury ? ` + ${Math.floor(this.data.data.level/4)}` : ` + ${this.data.data.level}`;
+        let roll = await new Roll(formula).evaluate({async: true});
+		roll.toMessage({flavor: `${this.name} | ${game.i18n.localize("age-system.breather")}`}, {rollMode});
+        if (options.autoApply) this.applyHPchange(roll.total, {isHealing: true, isNewHP: false});
+    }
+
+    async breatherSettings(data) {
+        const template = "/systems/age-system/templates/rolls/breather-settings.hbs";
+        const html = await renderTemplate(template, data);
+        return new Promise(resolve => {
+            const data = {
+                title: game.i18n.localize("age-system.breather"),
+                content: html,
+                buttons: {
+                    normal: {
+                        icon: `<i class="fa fa-check" aria-hidden="true"></i>`,
+                        callback: html => {
+                            const fd = new FormDataExtended(html[0].querySelector("form"));
+                            resolve(fd.toObject())
+                        }
+                    },
+                    cancel: {
+                        icon: `<i class="fa fa-times" aria-hidden="true"></i>`,
+                        callback: html => resolve({cancelled: true}),
+                    }
+                },
+                default: "normal",
+                close: () => resolve({cancelled: true}),
+            }
+            new Dialog(data, null).render(true);
+        });
+    }
+
+    /**
+     * Check if there is an Active Effect for this Condition and take action: create if none, delete all if detected.
+     * @param {string} condId Condition unique Core ID
+     * @returns 
+     */
     async handleConditions(condId) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;
         const effectsOn = this.effects.filter(e => e.data.flags?.["age-system"]?.isCondition && e.data.flags?.core?.statusId === condId);

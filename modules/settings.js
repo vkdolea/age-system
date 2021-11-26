@@ -1,12 +1,38 @@
 import { ageSystem } from "./config.js";
+import BreatherSettings from "./breather.js";
 
 const debouncedReload = debounce(() => window.location.reload(), 100)
 export const registerSystemSettings = async function() {
 
   /**
+   * Register Breather Parameters
+   */
+  game.settings.register("age-system", "breatherParam", {
+    scope: "world",
+    config: false,
+    default: {k: 5, kk: 10, addLevel: true, abl: 'cons'},
+    type: Object,
+    onChange: () => ageSystem.breather = game.settings.get("age-system", "breatherParam")
+  });
+
+  /**
+   * Breather Configuration
+   */
+  game.settings.registerMenu("age-system", "breather", {
+    name: "SETTINGS.breatherSettings",
+    hint: "SETTINGS.breatherSettingsHint",
+    icon: 'fas fa-medkit',
+    label: "SETTINGS.breatherSettings",
+    scope: "world",
+    config: true,
+    type: BreatherSettings,
+    restricted: true
+  });
+  
+  /**
    * Select color scheme
    */
-   game.settings.register("age-system", "colorScheme", {
+  game.settings.register("age-system", "colorScheme", {
     name: "SETTINGS.colorScheme",
     hint: "SETTINGS.colorSchemeHint",
     scope: "client",

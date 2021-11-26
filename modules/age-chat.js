@@ -1,6 +1,7 @@
 import ApplyDamageDialog from "./apply-damage.js";
 import {ageSystem} from "./config.js";
 import ConditionsWorkshop from "./conditions-workshop.js";
+import { applyBreather } from "./breather.js";
 
 export function addChatListeners(html) {
     html.on('click', '.roll-damage', chatDamageRoll);
@@ -142,7 +143,7 @@ export async function callApplyDamage (damageData) {
  * @param {string|array} type Valid actor type to be selected
  * @returns {array}     Array with only the correct type of Actor
  */
-function controlledTokenByType(type) {
+export function controlledTokenByType(type) {
     if (!Array.isArray(type)) type = [type];
     let targets = canvas.tokens.controlled;
     const nonChar = []
@@ -161,8 +162,7 @@ function controlledTokenByType(type) {
  * Check if actual Game Settings and clicked Card with Apply Damage button has compatible parameters
  *
  * @param {string} card         Chat card damage parameters
- * @param {string} game         Current in-use Game Settings health parameters
- * 
+ * @param {string} game         Current in-use Game Settings health parameters * 
  * @returns {boolean}           TRUE if compatible, FALSE if not compatible
  */
 export function checkHealth(card, game) {
@@ -177,9 +177,9 @@ export function checkHealth(card, game) {
 // Roll damage from a chat card, taking into consideration card's Actor, Item and button selected
 export async function chatDamageRoll(event) {
     event.preventDefault();
-    const cardId = card.dataset.messageId;
-    const cardData = cardId.data.flags["age-system"].ageroll;
-    const card = event.type === "contextmenu" ? event.target.closest(".feature-controls") : event.currentTarget.closest(".feature-controls");
+    const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
+    const cardId = message.dataset.messageId;
+    const cardData = game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
     const classList = event.currentTarget.classList;
     // const actorId = card.dataset.actorId;
     const actorId = cardData.actorId
@@ -194,7 +194,7 @@ export async function chatDamageRoll(event) {
     let addFocus = false;
     let resistedDamage = false;
     if (classList.contains('add-stunt-damage')) {
-        stuntDie = cardData.stuntDie;
+        stuntDie = cardData.ageRollSummary.stuntPoints;
     };
     if (classList.contains('add-focus-damage')) {
         addFocus = true;
@@ -361,15 +361,16 @@ export function ageCommand(chatLog, content, userData) {
 
         switch (routine) {
             case 'help':
-                window.open(ageSystem.wiki, '_blank');
-                break;
             case 'wiki':
                 window.open(ageSystem.wiki, '_blank');
                 break;
             case 'conditions':
+            case 'workshop':
+            case 'cw':
                 new ConditionsWorkshop().render(true);
                 break;
             case 'damage':
+            case 'dmg':
                 callApplyDamage({
                     healthSys: ageSystem.healthSys,
                     totalDamage: Number.isNaN(Number(message[2])) ? 0 : message[2],
@@ -387,8 +388,14 @@ export function ageCommand(chatLog, content, userData) {
                 });
                 break;
             case 'injure':
+            case 'inj':
                 const degree = message[2];
                 controlledTokenByType('char').map(t => t.actor.applyInjury(degree));
+                break;
+            case 'breather':
+            case 'b':
+                applyBreather('selfroll');
+                break;
             default:
                 ui.notifications.error(game.i18n.format("CHAT.InvalidCommand", {command: routine}));
                 break;

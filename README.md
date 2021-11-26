@@ -97,9 +97,14 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
-## 0.8.17 [2021-xx-xx]
+## 0.8.17 [2021-11-26]
 ### Added
-- Chat commands starting with "/a" or "/age" to damage or heal selected tokens, open Conditions Workshop, access wiki. Check [wiki](https://github.com/vkdolea/age-system/wiki/Chat-Commands) for more details.
+- You have a Breahter button on character sheet, close to Health/Fortune/Marks.
+- Hover AGE Roller to find the "Breather" option, so you can click it to send a Breather command to all of your selected tokens.
+- GMs can access System Settings to configure how effect is a Breather.
+
+### Fixed
+- Bug preventing damage output from chat cards.
 
 ## 0.8.16 [2021-11-20]
 ### Added
