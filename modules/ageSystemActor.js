@@ -773,7 +773,7 @@ export class ageSystemActor extends Actor {
         if (options.addLevel) formula += ageSystem.healthSys.useInjury ? ` + ${Math.floor(this.data.data.level/4)}` : ` + ${this.data.data.level}`;
         let roll = await new Roll(formula).evaluate({async: true});
 		roll.toMessage({flavor: `${this.name} | ${game.i18n.localize("age-system.breather")}`}, {rollMode});
-        if (options.autoApply) this.applyHPchange(roll.total, {isHealing: true, isNewHP: false});
+        if (options.autoApply) return ageSystem.healthSys.useInjury ? this.healMarks(roll.total) : this.applyHPchange(roll.total, {isHealing: true, isNewHP: false});
     }
 
     async breatherSettings(data) {

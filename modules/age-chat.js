@@ -160,7 +160,6 @@ export function controlledTokenByType(type) {
 
 /**
  * Check if actual Game Settings and clicked Card with Apply Damage button has compatible parameters
- *
  * @param {string} card         Chat card damage parameters
  * @param {string} game         Current in-use Game Settings health parameters * 
  * @returns {boolean}           TRUE if compatible, FALSE if not compatible
@@ -174,7 +173,9 @@ export function checkHealth(card, game) {
     return true;
 }
 
-// Roll damage from a chat card, taking into consideration card's Actor, Item and button selected
+/**
+ * Roll damage from a chat card, taking into consideration card's Actor, Item and button selected
+ */ 
 export async function chatDamageRoll(event) {
     event.preventDefault();
     const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
@@ -213,7 +214,9 @@ export async function chatDamageRoll(event) {
     itemSource.rollDamage(damageData);
 };
 
-// Roll Fatigue from chat card according to card's Actor and Item
+/**
+ * Roll Fatigue from chat card according to card's Actor and Item
+ */ 
 export async function chatFatigueRoll(event) {
     let owner = null;
     const card = event.currentTarget.closest(".feature-controls");
@@ -344,7 +347,7 @@ export function ageCommand(chatLog, content, userData) {
     
     if (['/age', '/a'].includes(message[0])) {
         const isGM = game.user.isGM;
-        const gmFeats = ['conditions', 'damage'];
+        const gmFeats = ['conditions', 'workshop', 'cw'];
         const routine = message[1]
         if (!isGM && gmFeats.includes(routine)) {
             ui.notifications.error(`Only GMs can use the feature "${routine}"`);

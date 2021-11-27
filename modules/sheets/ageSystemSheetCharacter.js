@@ -212,15 +212,14 @@ export default class ageSystemSheetCharacter extends ActorSheet {
                 .contextmenu(this._onRollResources.bind(this));
             html.find(".effect-active").click(this._onActiveEffect.bind(this));
             html.find(".roll-toughness").click(this._onRollToughness.bind(this));
-            let handler = ev => this._onDragStart(ev);
             
-            // Find all rollable items on the character sheet.
+            let handler = ev => this._onDragStart(ev);
+            // Set HMTL elements with class item-box as draggable elements.
             let items = html.find(".item-box");
             for (let i = 0; i < items.length; i++) {
                 const el = items[i];
-                if (el.draggable) {
-                    el.addEventListener("dragstart", handler, false);
-                }   
+                el.draggable = true;
+                el.addEventListener("dragstart", handler, false);
             }
         };
 
@@ -235,7 +234,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
             html.find(".wgroup-item").click(this._onWeaponGroupToggle.bind(this));
         }
-
         super.activateListeners(html);
     };
 
@@ -493,6 +491,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
     _onItemShow(event) {
         event.preventDefault();
+        if (event.detail != 1) return
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const item = this.actor.items.get(itemId);
         item.showItem(event.shiftKey);

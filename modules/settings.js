@@ -473,7 +473,7 @@ export const loadCompendiaSettings = function() {
   });
 };
 
-export function stuntSoNice(colorChoices) {
+export function stuntSoNice(colorChoices, systems) {
   /**
    * Select Dice so Nice effect for Stunt Die
    */
@@ -487,6 +487,18 @@ export function stuntSoNice(colorChoices) {
     choices: colorChoices,
     onChange:()=>{game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"))}
   });
+
+  // systems.splice(0, 0, 'none');
+  // game.settings.register("age-system", "stuntDieSystem", {
+  //   name: "SETTINGS.stuntSoNice",
+  //   hint: "SETTINGS.stuntSoNiceHint",
+  //   scope: "client",
+  //   config: false,
+  //   default: "none",
+  //   type: String,
+  //   choices: systems,
+  //   onChange:()=>{game.user.setFlag("age-system", "stuntDieSystem", game.settings.get("age-system", "stuntDieSystem"))}
+  // });
 };
 
 // Creates the Options object with all compendia in alphabetic order
