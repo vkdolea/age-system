@@ -142,6 +142,7 @@ Hooks.once("init", async function() {
     // Register Settings
     ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack");
     ageSystem.breather = game.settings.get('age-system', 'breatherParam');
+    ageSystem.autoConsumePP = game.settings.get('age-system', 'consumePP');
 
     // Set Health System configuration
     const hstype = await game.settings.get("age-system", "healthSys");

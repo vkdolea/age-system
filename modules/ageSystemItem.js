@@ -188,7 +188,7 @@ export class ageSystemItem extends Item {
     };
 
     // Roll item and check targetNumbers
-    roll(event, rollType = null, targetNumber = null) {
+    async roll(event, rollType = null, targetNumber = null) {
         const ROLL_TYPE = ageSystem.ROLL_TYPE;
         const owner = this.actor;
         if (!owner) return false;
@@ -249,6 +249,39 @@ export class ageSystemItem extends Item {
             rollTN: targetNumber,
             rollType
         }
+        
+        // Check if power is used and look for Power Points
+        if (rollType !== ROLL_TYPE.FATIGUE && this.type === 'power' && ageSystem.autoConsumePP) {
+            const owner = this.actor
+            if (!this.hasFatigue && owner) {
+                const cost = this.data.data.powerPointCostTotal;
+                const remainingPP = this.actor.data.data.powerPoints.value;
+                if (cost > remainingPP) {
+                    const castAnyway = await new Promise(resolve => {
+                        const data = {
+                            content: `<p>${game.i18n.format("age-system.rollWithoutPP", {name: owner.name, item: this.name})}</p>`,
+                            buttons: {
+                                normal: {
+                                    label: game.i18n.localize("age-system.roll"),
+                                    callback: html => resolve({roll: true})
+                                },
+                                cancel: {
+                                    label: game.i18n.localize("age-system.cancel"),
+                                    callback: html => resolve({roll: false}),
+                                }
+                            },
+                            default: "normal",
+                            close: () => resolve({cancelled: true}),
+                        }
+                        new Dialog(data, null).render(true);
+                    });
+                    if (!castAnyway.roll) return false;
+                } else {
+                    this.actor.update({"data.powerPoints.value": remainingPP - cost})
+                }
+            }
+        }
+
         Dice.ageRollCheck(rollData);
     };
 
@@ -284,7 +317,10 @@ export class ageSystemItem extends Item {
             user: game.user.id,
             speaker: ChatMessage.getSpeaker(),
             roll: false,
-            content: await renderTemplate(this.chatTemplate[this.type], cardData)
+            content: await renderTemplate(this.chatTemplate[this.type], cardData),
+            flags: {
+                "age-system": {messageData: cardData}
+            }
         };
         if (forceSelfRoll) {
             chatData.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;

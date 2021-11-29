@@ -316,13 +316,26 @@ export const registerSystemSettings = async function() {
    * Register if world will use Power Points
    */
   game.settings.register("age-system", "usePowerPoints", {
-      name: "SETTINGS.usePowerPoints",
-      hint: "SETTINGS.usePowerPointsHint",
-      scope: "world",
-      config: true,
-      default: true,
-      type: Boolean,
-      onChange: debouncedReload
+    name: "SETTINGS.usePowerPoints",
+    hint: "SETTINGS.usePowerPointsHint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean,
+    onChange: debouncedReload
+  });
+
+  /**
+  * Consume Power Points on roll
+  */
+  game.settings.register("age-system", "consumePP", {
+    name: "SETTINGS.consumePP",
+    hint: "SETTINGS.consumePPHint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange: () => ageSystem.autoConsumePP = game.settings.get("age-system", "consumePP")
   });
 
   /**

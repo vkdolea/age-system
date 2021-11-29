@@ -7,7 +7,7 @@
             <div class="individual flexrow feature-controls" data-i="{{i}}">
                 <div>
                     <p><strong>{{target.name}}</strong></p>
-                    <img class="item-image" src="{{target.img}}" title="{{target.name}}" width="75" height="75"/>
+                    <a><img class="item-image" src="{{target.img}}" title="{{target.name}}" width="75" height="75"/></a>
                 </div>
                 <div>
                     <p>{{localize "age-system.armor"}}</p>
@@ -28,6 +28,7 @@
                 </div>
                 {{/if}}
                 <div>
+                    {{#unless ../useInjury}}<strong>{{/unless}}
                     <p>{{localize "age-system.item.damage"}}</p>
                     {{#if ../useInjury}}
                     <p>{{target.totalDmg}}</p>
@@ -40,17 +41,20 @@
                         <input type="number" class="target-damage-mod damage-value" name="handler.harmedOnes.{{i}}.dmgMod" value="{{target.dmgMod}}" data-dtype="Number" />
                         <div class="change-damage increase"><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
                     </div>
+                    {{#unless ../useInjury}}</strong>{{/unless}}
                 </div>
                 <div>
                     {{#if ../useInjury}}
-                    <p>{{localize "age-system.toughnessTest"}}</p>
-                    <p>{{#if (gte target.dmgProtection 1)}}+{{/if}}{{target.dmgProtection}}</p>
-                    <p>{{localize "age-system.mod"}}</p>
-                    <div class="flexrow dmg-box toughness-test">
-                        <div class="change-toughness decrease"><a><i class="fa fa-minus-square" aria-hidden="true"></i></a></div>
-                        <input type="number" class="target-damage-mod damage-value" disabled name="handler.harmedOnes.{{i}}.toughMod" value="{{target.toughMod}}" data-dtype="Number" />
-                        <div class="change-toughness increase"><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
-                    </div>
+                    <strong>
+                        <p>{{localize "age-system.toughnessTest"}}</p>
+                        <p>{{#if (gte target.dmgProtection 1)}}+{{/if}}{{target.dmgProtection}}</p>
+                        <p>{{localize "age-system.mod"}}</p>
+                        <div class="flexrow dmg-box toughness-test">
+                            <div class="change-toughness decrease"><a><i class="fa fa-minus-square" aria-hidden="true"></i></a></div>
+                            <input type="number" class="target-damage-mod damage-value" disabled name="handler.harmedOnes.{{i}}.toughMod" value="{{target.toughMod}}" data-dtype="Number" />
+                            <div class="change-toughness increase"><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
+                        </div>
+                    </strong>
                     {{else}}
                     <p>{{../damageData.healthSys.healthName}}</p>
                     <p>{{target.data.data.health.value}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{target.remainingHP}}</p>

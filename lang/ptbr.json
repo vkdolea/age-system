@@ -14,6 +14,12 @@
     "ITEM.TypeMembership": "Filiação",
     "ITEM.TypeShipfeatures": "Atributo de Espaçonave",
 
+    "SETTINGS.consumePP": "Gastar Pontos de Poder ao usar Poder",
+    "SETTINGS.consumePPHint": "Irá deduzir automaticamente os Pontos de Poder necessários ao usar um Poder. Caso não haja pontos de poder o suficiente, uma mensagem de aviso é apresentada.",
+
+    "SETTINGS.breatherSettings": "Configuração do Descanso",
+    "SETTINGS.breatherSettingsHint": "Configura a quantidade de Saúde recuperada com Descanso",
+
     "SETTINGS.initiativeFocus": "Foco para Iniciativa",
     "SETTINGS.initiativeFocusHint": "Foco usado para rolar Iniciativa no comabate - deixe em branco para não usar um Foco na rolagem",
 
@@ -149,7 +155,8 @@
             "orgItem": "Apenas Foco pode ser adicionar a Organizações.",
             "charFocusToOrg": "Foco de Personagem não pode ser adicionado a Organizações.",
             "orgFocusToChar": "Foco de Organização não pode ser adicionar a Personagens.",
-            "vehicleItem": "Veículos não podem receber Items."
+            "vehicleItem": "Veículos não podem receber Items.",
+            "breatherAppliedAll": "Descanso aplicado a todos os Personagens selecionados."
         },
 
         "spaceship": {
@@ -444,6 +451,13 @@
         "exhausted": "Exausto",
         "dying": "Morrendo",
 
+        "breather": "Descanso",
+        "constant": "Constante",
+        "ablSelect": "Selecionar Habilidade",
+        "addLevel": "Adicionar Nível",
+        "autoApply": "Aplicar Automaticamente",
+
+        "rollWithoutPP": "{name} não possui pontos o bastante para usar {item}. Rolar mesmo assim?",
         "powerPoints": "Pontos de Poder",
         "powerPointsIndex": "PP",
         "name": "Nome",

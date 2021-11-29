@@ -52,6 +52,13 @@ export default class ApplyDamageDialog extends Application {
   activateListeners(html) {
     super.activateListeners(html)
 
+    // Open target sheet
+    html.find(".individual img.item-image").click(ev => {
+      const i = ev.target.closest(".feature-controls").dataset.i;
+      const targetId = this._handler.harmedOnes[i].uuid;
+      fromUuid(targetId).then(t => t.actor.sheet.render(true));
+    })
+
     // Modify Armor Penetration properties for all targets
     html.find(".armor-penetration input").click(ev => {
       const newValue = ev.currentTarget.value
