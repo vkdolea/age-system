@@ -1,5 +1,10 @@
+/**
+ * Macro to roll a Named item from selected token
+ * @param {string} itemName String with name item (case sensitive)
+ * @param {boolean} rollOptions False to directly, True to prompt user for roll settings
+ * @returns Item.roll() method
+ */
 export function rollOwnedItem(itemName, rollOptions = false) {
-
   // Identify if token is selected, otherwise select user's actor
   const speaker = ChatMessage.getSpeaker();
   let actor;
@@ -17,7 +22,7 @@ export function rollOwnedItem(itemName, rollOptions = false) {
     event = new MouseEvent('click', {});
   };
 
-  itemRolled.roll(event);
+  return itemRolled.roll(event);
 };
 
 /* -------------------------------------------- */
@@ -32,7 +37,7 @@ export function rollOwnedItem(itemName, rollOptions = false) {
  * @returns {Promise}
  */
 export async function createAgeMacro(data, slot) {
-  // if (data.type !== "weapon") return;
+  if (!['weapon', 'focus', 'power'].includes(data?.data?.type)) return;
   if (!("data" in data)) return ui.notifications.warn("You can only create macro buttons for owned Items");
   const item = data.data;
 

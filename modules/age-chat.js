@@ -18,10 +18,8 @@ export function addChatListeners(html) {
 /**
  * This function is used to hook into the Chat Log context menu to add additional options to each message
  * These options make it easy to conveniently apply damage to controlled tokens based on the value of a Roll
- *
  * @param {HTMLElement} html    The Chat Message being rendered
  * @param {object[]} options    The Array of Context Menu options
- *
  * @returns {object[]}          The extended options Array including new context choices
  */
  export const addChatMessageContextOptions = function(html, options) {
@@ -48,7 +46,6 @@ export function addChatListeners(html) {
 /**
  * Apply rolled dice damage to the token or tokens which are currently controlled.
  * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
- *
  * @param {HTMLElement} li      The chat entry which contains the roll data
  * @param {object} options      Options containing card's damage or healing definitions
  */
@@ -71,9 +68,9 @@ function applyChatCardDamage(li, options) {
         } else {
             damageData = {
                 healthSys: ageSystem.healthSys,
-                totalDamage: total,
-                dmgType: 'wound',
-                dmgSrc: 'impact',
+                totalDamage: cardDamageData?.totalDamage ?? total,
+                dmgType: cardDamageData?.dmgType ?? 'wound',
+                dmgSrc: cardDamageData?.dmgSrc ?? 'impact',
                 isHealing: false,
                 wGroupPenalty: false
             }
@@ -84,7 +81,6 @@ function applyChatCardDamage(li, options) {
 
 /**
  * Chat card listener to apply Injury to selected Actor when pressing specific button.
- * 
  * @param {Mouse Event} event   Chat card Mouse Click event
  * @returns {Promisse}          Promisse applying Injury to Actor
  */
@@ -119,17 +115,25 @@ export async function applyDamageChat(event) {
     event.preventDefault();
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
-    const damageData = await game.messages.get(cardId).data.flags["age-system"].damageData;
+    let damageData = await foundry.utils.deepClone(game.messages.get(cardId).data.flags["age-system"].damageData);
     const cardHealthSys = damageData.healthSys;
-    if (!checkHealth(cardHealthSys, ageSystem.healthSys)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
+    if (!checkHealth(cardHealthSys, ageSystem.healthSys)) {
+        damageData = {
+            healthSys: ageSystem.healthSys,
+            totalDamage: damageData.totalDamage,
+            dmgType: damageData.dmgType ?? 'wound',
+            dmgSrc: damageData.dmgSrc ?? 'impact',
+            isHealing: false,
+            wGroupPenalty: false
+        }
+        ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
+    };
     callApplyDamage(damageData);
 }
 
 /**
  * Call Apply Damage data containing all applicable Actors selected
- *
  * @param {object} damageData   All details from the damage to be applied to selected Actors
- * 
  * @returns {Application}       Apply Damage application is started to select damage details
  */
 export async function callApplyDamage (damageData) {
@@ -160,7 +164,6 @@ export function controlledTokenByType(type) {
 
 /**
  * Check if actual Game Settings and clicked Card with Apply Damage button has compatible parameters
- *
  * @param {string} card         Chat card damage parameters
  * @param {string} game         Current in-use Game Settings health parameters * 
  * @returns {boolean}           TRUE if compatible, FALSE if not compatible
@@ -174,34 +177,28 @@ export function checkHealth(card, game) {
     return true;
 }
 
-// Roll damage from a chat card, taking into consideration card's Actor, Item and button selected
+/**
+ * Roll damage from a chat card, taking into consideration card's Actor, Item and button selected
+ */ 
 export async function chatDamageRoll(event) {
     event.preventDefault();
     const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
     const cardId = message.dataset.messageId;
     const cardData = game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
     const classList = event.currentTarget.classList;
-    // const actorId = card.dataset.actorId;
     const actorId = cardData.actorId
     let owner = null;
-    if (actorId) owner = game.actors.get(actorId) ?? await fromUuid(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
+    if (actorId) owner = await fromUuid(actorId);
     owner = owner?.actor ?? owner;
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
-    // const itemSource = owner.items.get(card.dataset.itemId);
     const itemSource = owner.items.get(cardData.itemId);
 
     let stuntDie = null;
     let addFocus = false;
     let resistedDamage = false;
-    if (classList.contains('add-stunt-damage')) {
-        stuntDie = cardData.ageRollSummary.stuntPoints;
-    };
-    if (classList.contains('add-focus-damage')) {
-        addFocus = true;
-    };
-    if (classList.contains('resisted')) {
-        resistedDamage = true;
-    };
+    if (classList.contains('add-stunt-damage')) stuntDie = cardData.ageRollSummary.stuntDie;
+    if (classList.contains('add-focus-damage')) addFocus = true;
+    if (classList.contains('resisted')) resistedDamage = true;
 
     const damageData = {
         event: event,
@@ -213,24 +210,32 @@ export async function chatDamageRoll(event) {
     itemSource.rollDamage(damageData);
 };
 
-// Roll Fatigue from chat card according to card's Actor and Item
+/**
+ * Roll Fatigue from chat card according to card's Actor and Item
+ */ 
 export async function chatFatigueRoll(event) {
+    const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
+    const cardId = message.dataset.messageId;
+    const cardData = game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
+    const actorId = cardData.actorId;
+    
     let owner = null;
-    const card = event.currentTarget.closest(".feature-controls");
-    const actorId = card.dataset.actorId;
-    owner = await fromUuid(actorId) ?? game.actors.get(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
+    owner = await fromUuid(actorId)
     owner = owner?.actor ?? owner;
     if (!owner) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.originTokenMissing"));
-    const itemSource = owner.items.get(card.dataset.itemId);
+    const itemSource = owner.items.get(cardData.itemId);
     itemSource.roll(event, "fatigue");
 };
 
 // From and chat card, select to roll item's Attack or Damage
 export async function rollItemFromChat(event) {
     const classList = event.currentTarget.classList;
-    const actorUuid = event.currentTarget.closest(".feature-controls").dataset.ownerUuid;
-    const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
-    let owner = await fromUuid(actorUuid);
+    const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
+    const cardId = message.dataset.messageId;
+    const cardData = game.messages.get(cardId).data.flags["age-system"].messageData;
+
+    const itemId = cardData.itemId;
+    let owner = await fromUuid(cardData.ownerUuid);
     owner = owner?.actor ?? owner;
     const item = owner.items.get(itemId);
     if (classList.contains("damage")) item.rollDamage({event});
@@ -239,7 +244,6 @@ export async function rollItemFromChat(event) {
 
 /**
  * Set properties of elements inside cards rendered on chat
- *
  * @param {object} chatCard         Chat card object containing the Message Data
  * @param {jQueryObject} html       jObject of the chat card being processed
  * @param {object} data             Data containing Message data
@@ -344,7 +348,7 @@ export function ageCommand(chatLog, content, userData) {
     
     if (['/age', '/a'].includes(message[0])) {
         const isGM = game.user.isGM;
-        const gmFeats = ['conditions', 'damage'];
+        const gmFeats = ['conditions', 'workshop', 'cw'];
         const routine = message[1]
         if (!isGM && gmFeats.includes(routine)) {
             ui.notifications.error(`Only GMs can use the feature "${routine}"`);

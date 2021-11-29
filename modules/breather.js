@@ -53,7 +53,6 @@ export default class BreatherSettings extends FormApplication {
 
 /**
  * Apply Breather function to all select Character tokens
- * 
  * @param {string} rollMode String indicating breather card privacy
  */
  export async function applyBreather(rollMode=null) {

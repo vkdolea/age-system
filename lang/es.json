@@ -14,12 +14,18 @@
     "ITEM.TypeMembership": "Afiliaciones",
 	"ITEM.TypeShipfeatures": "Características Nave",
 
+    "SETTINGS.breatherSettings": "Configuración Descanso",
+    "SETTINGS.breatherSettingsHint": "Configurar cantidad de puntos recuperados con un Descanso",
+    
     "SETTINGS.initiativeFocus": "Nombre Concentración Iniciativa",
     "SETTINGS.initiativeFocusHint": "Escribe el nombre de la Concentración a utilizar en tiradas de iniciativa - dejar vacío para ignorar el bonificador",
     
     "SETTINGS.useConviction": "Usar Convicción",
     "SETTINGS.useConvictionHint": "Activar bloque para gestión de Convicción",
 
+    "SETTINGS.stuntAttack": "Ataque Proeza",
+    "SETTINGS.stuntAttackHint": "Puntos de Proeza generados por un Ataque Proeza",
+    
     "SETTINGS.useFatigue": "Usar Fatiga",
     "SETTINGS.useFatigueHint": "Activar bloque Fatiga y soporte en Conjuros y Poderes",
 
@@ -146,7 +152,8 @@
             "orgItem": "Sólo puedes añadir Concentraciones a la Organización",
             "charFocusToOrg": "La Concentración para PJs no se puede añadir a la Organización",
             "orgFocusToChar": "La Concentración para Organizaciones no se puede añadir al PJ",
-            "vehicleItem": "Los Vehículos no pueden recibir Objetos"
+            "vehicleItem": "Los Vehículos no pueden recibir Objetos",
+            "breatherAppliedAll": "Descanso aplicado a todos los PJs seleccionados"
         },
 
         "spaceship": {
@@ -243,7 +250,7 @@
         "coverRating": "Cobertura",
         "vehicleArmor": "Blindaje",
         
-
+        "stuntAttack": "Ataque Proeza",
         "chatCard": {
             "rollGeneral": "tira {item}",
             "rollAttack": "ataca con {item}",
@@ -345,6 +352,7 @@
             "stunts": "Proezas",
             "stunt": "Proeza",
             "stuntPoints": "Puntos Proeza",
+            "bonusStuntPoints": "Bono Puntos Proeza",
             "stuntPointsIndex": "PPro",
             "attack": "Ataque",
             "equip": "Equipar",
@@ -440,6 +448,12 @@
         "exhausted": "Exhausto",
         "dying": "Moribundo",
 
+        "breather": "Descanso",
+        "constant": "Constante",
+        "ablSelect": "Selec. Habilidad",
+        "addLevel": "Añadir Nivel",
+        "autoApply": "Auto Aplicar",
+        
         "powerPoints": "Puntos Poder",
         "powerPointsIndex": "PP",
         "name": "Nombre",

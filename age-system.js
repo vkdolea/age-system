@@ -142,6 +142,7 @@ Hooks.once("init", async function() {
     // Register Settings
     ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack");
     ageSystem.breather = game.settings.get('age-system', 'breatherParam');
+    ageSystem.autoConsumePP = game.settings.get('age-system', 'consumePP');
 
     // Set Health System configuration
     const hstype = await game.settings.get("age-system", "healthSys");
@@ -371,7 +372,7 @@ Hooks.once('diceSoNiceReady', (data) => { import('/modules/dice-so-nice/DiceColo
         };
     };
     // Register Stunt So Nice setting
-    Settings.stuntSoNice(colorChoices);
+    Settings.stuntSoNice(colorChoices, Object.keys(game.dice3d.box.dicefactory.systems));
     // Identify if user has registered Dice so Nice Stunt Die option
     const stuntSoNiceFlag = game.user.getFlag("age-system", "stuntSoNice");
     if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);

@@ -14,6 +14,9 @@
     "ITEM.TypeMembership": "Membership",
     "ITEM.TypeShipfeatures": "Spaceship Feature",
 
+    "SETTINGS.consumePP": "Consume Power Points on roll",
+    "SETTINGS.consumePPHint": "If enabled, Points necessary to user a Power will be deducted from Character's total. A message will appear if not enough points are available.",
+    
     "SETTINGS.breatherSettings": "Breather Settings",
     "SETTINGS.breatherSettingsHint": "Configure amount of hits recovered by a Breather",
 
@@ -251,6 +254,7 @@
         "vehicleArmor": "Armor",
         
         "stuntAttack": "Stunt Attack",
+        "stuntStack": "Stack SP on Doubles",
         "chatCard": {
             "rollGeneral": "{actor} rolls {item}",
             "rollAttack": "{actor} attacks with {item}",
@@ -454,6 +458,7 @@
         "addLevel": "Add Level",
         "autoApply": "Auto Apply",
 
+        "rollWithoutPP": "{name} doesn't have enough points to use {item}. Roll it anyway?",
         "powerPoints": "Power Points",
         "powerPointsIndex": "PP",
         "name": "Name",
