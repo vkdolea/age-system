@@ -13,7 +13,8 @@
 /** Fantasy Blue Colors **/
 @fantasy-blue: #0f4f5b;
 @fantasy-blue-high: #000000;
-@fantasy-blue-mid: #c1cbd3;
+// @fantasy-blue-mid: #c1cbd3;
+@fantasy-blue-mid: #91b6d4;
 @fantasy-blue-font: #ffffff;
 @fantasy-blue-light-font: #dbdada;
 @fantasy-blue-list: @fantasy-blue, @fantasy-blue-high, @fantasy-blue-mid, @fantasy-blue-font, @fantasy-blue-light-font;
@@ -47,7 +48,7 @@
 @select-one-high: #4d627a;
 @select-one-mid: #768d9f;
 @select-one-font: #e7ccc3;
-@select-one-light-font: #360808;
+@select-one-light-font: #610808;
 @select-one-list: @select-one, @select-one-high, @select-one-mid, @select-one-font, @select-one-light-font;
 
 /** This is The Grey **/
@@ -104,12 +105,45 @@
 /*******************************/
 
 each(@colorsets, {
-    // .window-app.sheet.char.colorset-@{value} .window-content,
-    // .window-app.sheet.vehicle.colorset-@{value} .window-content,
-    // .window-app.sheet.spaceship.colorset-@{value} .window-content {
-    //     background-color: fade(extract(extract(@color-list, @index), 3), 60%);
-    // }
+    .window-app.sheet.char-sheet-alt.colorset-@{value} .window-content,
+    .window-app.sheet.char.colorset-@{value} .window-content,
+    .window-app.sheet.vehicle.colorset-@{value} .window-content,
+    .window-app.sheet.spaceship.colorset-@{value} .window-content {
+        background-image: none;
+        background-color: fade(extract(extract(@color-list, @index), 3), 60%) !important;
+    }
+
+    
     .colorset-@{value} {
+        // From char-sheet-alt
+        aside {
+            border-radius: 5px;
+            border: 5px outset extract(extract(@color-list, @index), 2);
+        }
+        .metal-background {
+            background: linear-gradient(90deg, extract(extract(@color-list, @index), 1) 5%, extract(extract(@color-list, @index), 3) 50%, extract(extract(@color-list, @index), 1) 95%);
+        }
+        .top-banner {
+            // background: linear-gradient(0deg, extract(extract(@color-list, @index), 1) 5%, extract(extract(@color-list, @index), 3) 50%, extract(extract(@color-list, @index), 1) 95%);
+            border: 5px outset extract(extract(@color-list, @index), 2);
+        }
+        .resource {
+            .values {
+                background-color: extract(extract(@color-list, @index), 1);
+                color: extract(extract(@color-list, @index), 4);
+            };
+        }
+        .sheet-main-content nav a {
+            background: radial-gradient(closest-side, extract(extract(@color-list, @index), 3), extract(extract(@color-list, @index), 1));
+        };
+        .sheet-main-content nav a.active {
+            background: radial-gradient(closest-side, extract(extract(@color-list, @index), 3) 60%, extract(extract(@color-list, @index), 1)) !important;
+        }
+
+        .thin-border {
+            border: thin solid extract(extract(@color-list, @index), 5);
+        }
+
         .colorset-first-tier {
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);

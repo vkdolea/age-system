@@ -1,0 +1,267 @@
+<form class="actor-sheet char-sheet-alt {{cssClass}} flexrow" autocomplete="off">
+
+    <aside class="sidebar metal-background colorset-first-tier">
+        <img src="{{data.config.logo.modernAGE}}" alt="" style="border: none;">
+        <img class="actor-picture" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+        <ul>
+
+            {{!-- Health / Fortune --}}
+            <li class="resource colorset-third-tier">
+                <div class="title">
+                    <a class="roll-breather feature-controls"><i class="fas fa-medkit"></i></a>
+                    {{data.config.healthSys.healthName}}
+                </div>
+                <div class="values flexrow">
+                    <input class="value-data" type="number" name="data.health.value" value="{{data.data.health.value}}" data-dtype="Number" />
+                    <input class="value-data" type="number" name="data.health.set" value="{{data.data.health.set}}" data-dtype="Number" />
+                    {{#if (ne data.data.health.set data.data.health.max)}}
+                    <input class="value-data bonus" type="number" class="colorset-second-tier" disabled name="data.health.max" value="{{data.data.health.max}}" data-dtype="Number" />
+                    {{/if}}
+                </div>
+                <div class="labels flexrow">
+                    <label>Current</label>
+                    <label>{{localize "age-system.maximum"}}</label>
+                    {{#if (ne data.data.health.set data.data.health.max)}}
+                    <label for="">Bonus</label>
+                    {{/if}}
+                </div>
+            </li>
+
+            {{!-- Power Points --}}
+            <li class="resource colorset-third-tier">
+                <div class="title">{{localize "age-system.powerPoints"}}</div>
+                <div class="values flexrow">
+                    <input class="value-data" type="number" name="data.powerPoints.value" value="{{data.data.powerPoints.value}}" data-dtype="Number" />
+                    <input class="value-data" type="number" name="data.powerPoints.set" value="{{data.data.powerPoints.set}}" data-dtype="Number" />
+                    {{#if (ne data.data.powerPoints.set data.data.powerPoints.max)}}
+                    <input class="value-data bonus" type="number" class="colorset-second-tier" disabled name="data.powerPoints.max" value="{{data.powerPoints.max}}" data-dtype="Number" />
+                    {{/if}}
+                </div>
+                <div class="labels flexrow">
+                    <label>Current</label>
+                    <label>{{localize "age-system.maximum"}}</label>
+                    {{#if (ne data.data.powerPoints.set data.data.powerPoints.max)}}
+                    <label for="">Bonus</label>
+                    {{/if}}
+                </div>
+            </li>
+
+            {{!-- Defense --}}
+            <li class="resource colorset-third-tier">
+                <div class="title">{{localize "age-system.defense"}}</div>
+                <div class="values flexrow">
+                    <input class="value-data" disabled type="number" name="data.defense.total" value="{{data.data.defense.total}}" data-dtype="Number" />
+                    <div class="values-options flexcol">
+                        <div class="flexrow">
+                            <input class="value-data" type="number" name="data.defense.base" value="{{data.data.defense.base}}" data-dtype="Number" />
+                            <label>{{localize "age-system.base"}}</label>
+                        </div>
+                        <div class="flexrow">
+                            <input class="value-data" type="number" name="data.defense.gameModeBonus" value="{{data.data.defense.gameModeBonus}}" data-dtype="Number" />
+                            <label>{{localize "age-system.gameModeBonus"}}</label>
+                        </div>
+                        <div class="flexrow">
+                            <input class="value-data" disabled type="number" name="data.armor.toughness.mod" value="{{data.data.armor.toughness.mod}}" data-dtype="Number" />
+                            <label>{{localize "age-system.mod"}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="labels flexrow">
+                    <label>{{localize "age-system.total"}}</label>
+                    <label>{{localize "age-system.mod"}}</label>
+                </div>
+            </li>
+
+            {{!-- Armor --}}
+            <li class="resource colorset-third-tier">
+                <div class="title">{{localize "age-system.armor"}}</div>
+                <div class="values flexrow">
+                    <input class="value-data" disabled type="number" name="data.armor.impact" value="{{data.data.armor.impact}}" data-dtype="Number" />
+                    {{#if data.config.healthSys.useBallistic}}
+                    <input class="value-data" disabled type="number" name="data.armor.ballistic" value="{{data.data.armor.ballistic}}" data-dtype="Number" />
+                    {{/if}}
+                    <input class="value-data" disabled type="number" name="data.armor.penalty" value="{{data.data.armor.penalty}}" data-dtype="Number" />
+                </div>
+                <div class="labels flexrow">
+                    {{#if data.config.healthSys.useBallistic}}
+                    <label>{{localize "age-system.impact"}}</label>
+                    <label>{{localize "age-system.ballistic"}}</label>
+                    {{else}}
+                    <label>{{localize "age-system.total"}}</label>
+                    {{/if}}
+                    <label for="">{{localize "age-system.armorPenalty"}}</label>
+                </div>
+            </li>
+
+            {{#if data.config.healthSys.useToughness}}
+            {{!-- Toughness --}}
+            <li class="resource colorset-third-tier">
+                <div class="title">
+                    {{#if data.config.healthSys.useInjury}}
+                    <a class="roll-toughness feature-controls"><i class="fas fa-dice"></i></a>
+                    {{/if}}
+                    {{localize "age-system.toughness"}}</div>
+                <div class="values flexrow">
+                    <input class="value-data" disabled type="number" name="data.armor.toughness.total" value="{{data.data.armor.toughness.total}}" data-dtype="Number" />
+                    <div class="values-options flexcol">
+                        <div class="flexrow">
+                            <input class="value-data" type="number" name="data.armor.toughness.gameModeBonus" value="{{data.data.armor.toughness.gameModeBonus}}" data-dtype="Number" />
+                            <label>{{localize "age-system.gameModeBonus"}}</label>
+                        </div>
+                        <div class="flexrow">
+                            <input class="value-data" disabled type="number" name="data.armor.toughness.mod" value="{{data.data.armor.toughness.mod}}" data-dtype="Number" />
+                            <label>{{localize "age-system.mod"}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="labels flexrow">
+                    <label>{{localize "age-system.total"}}</label>
+                    <label>{{localize "age-system.mod"}}</label>
+                </div>
+            </li>
+            {{/if}}
+
+            {{!-- Conviction --}}
+            {{#if data.data.useConviction}}
+            <li class="resource colorset-third-tier">
+                <div class="title">{{localize "age-system.conviction"}}</div>
+                <div class="values flexrow">
+                    <input class="value-data" type="number" name="data.conviction.value" value="{{data.data.conviction.value}}" data-dtype="Number" />
+                    <input class="value-data" type="number" name="data.conviction.set" value="{{data.data.conviction.set}}" data-dtype="Number" />
+                    {{#if (ne data.data.powerPoints.set data.data.powerPoints.max)}}
+                    <input class="value-data bonus" type="number" class="colorset-second-tier" disabled name="data.conviction.max" value="{{data.conviction.max}}" data-dtype="Number" />
+                    {{/if}}
+                </div>
+                <div class="labels flexrow">
+                    <label>Current</label>
+                    <label>{{localize "age-system.maximum"}}</label>
+                    {{#if (ne data.data.conviction.set data.data.conviction.max)}}
+                    <label for="">Bonus</label>
+                    {{/if}}
+                </div>
+            </li>
+            {{/if}}
+
+        </ul>
+    </aside>
+
+    <div class="second-column flexcol">
+        <header class="top-banner colorset-first-tier flexrow">
+            <div class="char-details">
+                <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder={{localize "age-system.name"}}/>
+                <div class="sub-details flexrow">
+                    <div class="short-input">
+                        <input type="text" name="data.age" value="{{data.data.age}}">
+                        <label for="">{{localize "age-system.age"}}</label>
+                    </div>
+
+                    <div class="short-input">
+                        <input type="text" name="data.height" value="{{data.data.height}}">
+                        <label for="">{{localize "age-system.height"}}</label>
+                    </div>
+
+                    <div class="short-input"> 
+                        <input type="text" name="data.weight" value="{{data.data.weight}}">  
+                        <label for="">{{localize "age-system.weight"}}</label>
+                    </div>
+
+                    <div>
+                        <input type="text" name="data.ancestry" value="{{data.data.ancestry}}"> 
+                        <label for="">{{localize (concat "SETTINGS.ancestryOpt" data.ancestry)}}</label>
+                    </div>                
+                </div>
+                
+                <div class="sub-details flexrow">
+
+                    <div>
+                        <input type="text" name="data.background" value="{{data.data.background}}">
+                        <label for="">{{localize "age-system.background"}}</label>
+                    </div>
+                    
+                    <div>
+                        <input type="text" name="data.socialClass" value="{{data.data.socialClass}}">
+                        <label for="">{{localize "age-system.socialClass"}}</label>
+                    </div>
+                    
+                    <div>
+                        <input type="text" name="data.profession" value="{{data.data.profession}}">          
+                        <label for="">{{localize (concat "SETTINGS.occ" data.occupation)}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="resource colorset-third-tier at-header">
+                <div class="title">{{localize "age-system.level"}}</div>
+                <div class="values">
+                    <input class="value-data" type="number" name="data.level" value="{{data.data.level}}" data-dtype="Number" />
+                </div>
+                
+                <div class="labels flexcol">
+                    <div class="flexrow exp sub-details">
+                        <input type="number" name="data.xp.value" value="{{data.data.xp.value}}" data-dtype="Number" />
+                        <span>/</span>
+                        <input type="number" name="data.xp.next" value="{{data.data.xp.next}}" data-dtype="Number" />
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="sheet-main-content metal-background">
+            <nav class="add-sheet-tabs tabs flexrow" data-group="primary">
+                <a class="char" data-tab="main">{{localize "age-system.charMain"}}</a>
+                <a class="char" data-tab="persona">{{localize "age-system.charPersona"}}</a>
+                <a class="char" data-tab="social">Social</a>
+                <a class="char" data-tab="equip">{{localize "ITEM.TypeEquipment"}}</a>
+                <a class="char" data-tab="talents">{{localize "age-system.talent"}}</a>
+                <a class="char" data-tab="powers">{{localize "age-system.power"}}</a>
+                <a class="char" data-tab="effects">{{localize "age-system.charEffects"}}</a>
+                <a class="char" data-tab="options"><i class="fa fa-cog" aria-hidden="true"></i></a>
+            </nav>
+
+            <section class="sheet-tab-section">
+
+                {{!-- Main Tab --}}
+                <div class="tab main" data-group="primary" data-tab="main">
+                    {{> "systems/age-system/templates/partials/char-sheet-alt-main.hbs"}}
+                </div>
+
+                {{!-- Persona Tab --}}
+                <div class="tab persona" data-group="primary" data-tab="persona">
+                    {{> "systems/age-system/templates/partials/char-sheet-alt-persona.hbs"}}
+                </div>
+
+                {{!-- Persona Tab --}}
+                <div class="tab social" data-group="primary" data-tab="social">
+                    {{> "systems/age-system/templates/partials/char-sheet-alt-social.hbs"}}
+                </div>
+
+                {{!-- Equip Tab --}}
+                <div class="tab equip" data-group="primary" data-tab="equip">
+                    {{> "systems/age-system/templates/partials/char-sheet-alt-equip.hbs"}}
+                </div>
+
+                {{!-- Talents Tab --}}
+                <div class="tab talents" data-group="primary" data-tab="talents">
+                    {{> "systems/age-system/templates/partials/char-sheet-alt-talents.hbs"}}
+                </div>
+
+                {{!-- Powers Tab --}}
+                <div class="tab powers" data-group="primary" data-tab="powers">
+                    {{> "systems/age-system/templates/partials/char-sheet-alt-powers.hbs"}}
+                </div>
+
+                {{!-- Effects Tab --}}
+                <div class="tab effects" data-group="primary" data-tab="effects">
+                    {{> "systems/age-system/templates/partials/char-sheet-alt-effects.hbs"}}
+                </div>
+
+                {{!-- Options Tab --}}
+                <div class="tab options" data-group="primary" data-tab="options">
+                    Options
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+    
+</form>

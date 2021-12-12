@@ -1,0 +1,46 @@
+{{!-- Main Tab --}}
+{{!-- <section class="char-main-section">
+    {{> "systems/age-system/templates/partials/play-aid-bar.hbs"}}
+</section> --}}
+<section class="char-main-section flexrow">
+    <ul class="abilities-column flexrow">
+        {{!-- Attributes' Blocks --}}
+        {{#each data.config.abilities as |name type|}}
+        <li class="ability-box box {{type}} {{#if (isempty ../data.focus type)}}no-focus{{/if}}">
+            <div class="abl-header flexrow colorset-first-tier feature-controls" data-abl-id="{{type}}">
+                <div class="abl-name">
+                    <label class="roll-ability feature-controls" data-abl-id="{{type}}" for="data.abilities.{{type}}.value"><a>{{name}}</a></label>
+                </div>
+                <input type="checkbox" name="data.abilities.{{type}}.primary" {{#with (lookup ../data.data.abilities [type])~}}{{#if primary}}checked{{/if}}{{/with}} class="primary-secondary" />
+                <input type="checkbox" name="data.abilities.{{type}}.lastUp" {{#with (lookup ../data.data.abilities [type])~}}{{#if lastUp}}checked{{/if}}{{/with}} class="last-up" />
+                {{!-- Value with modifiers applied --}}
+                <input type="number" class="abl-value total colorset-second-tier" disabled name="data.abilities.{{type}}.total" value="{{#with (lookup ../data.data.abilities [type])~}}{{total}}{{/with}}" data-dtype="Number" />
+                <input type="number" class="abl-value original" name="data.abilities.{{type}}.value" value="{{#with (lookup ../data.data.abilities [type])~}}{{value}}{{/with}}" data-dtype="Number" />
+            </div>
+            <p class="owned-focus">
+                {{#each ../data.focus as |item|}}
+                {{#if (eq item.data.useAbl type)}}
+                <a class="item-name item-box focus-options feature-controls colorset-third-tier roll-item{{#if item.data.improved}} improved-focus{{/if}}" data-item-id="{{item._id}}" data-roll-type="{{../../data.config.ROLL_TYPE.FOCUS}}">
+                    {{item.name}}
+                </a>
+                {{/if}}
+                {{/each}}
+            </p>
+        </li>
+        {{/each}}
+    </ul>
+
+    <ul class="fav-items resource item-group">
+        <li class="header colorset-first-tier">
+            Favourite Items
+        </li>
+        {{#each data.item as |item|}}
+        {{#if item.data.flag.age-system.stared}}
+        <li>
+            Mais um aqui
+        </li>
+        {{/if}}
+        {{/each}}
+    </ul>
+
+</section>

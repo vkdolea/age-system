@@ -712,3 +712,9 @@ ageSystem.ROLL_TYPE = {
 
 // Wiki website!
 ageSystem.wiki = 'https://github.com/vkdolea/age-system/wiki';
+
+// Logos
+const pathLogo = `systems/age-system/resources/logo/`
+ageSystem.logo = {
+    modernAGE: `${pathLogo}modern-age.png`
+}

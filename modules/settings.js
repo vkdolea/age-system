@@ -37,7 +37,7 @@ export const registerSystemSettings = async function() {
     hint: "SETTINGS.colorSchemeHint",
     scope: "client",
     config: true,
-    default: "the-grey",
+    default: "fantasy-blue",
     type: String,
     choices: {
       "modern-blue": "SETTINGS.colorModernBlue",
@@ -51,27 +51,19 @@ export const registerSystemSettings = async function() {
       "red-warrior": "SETTINGS.colorRedWarrior",
       "never-dead": "SETTINGS.colorNeverDead"
     },
-    onChange: async ()=>{
-      const newColor = await game.settings.get("age-system", "colorScheme");
+    onChange: ()=>{
+      const newColor = game.settings.get("age-system", "colorScheme")
       ageSystem.colorScheme = newColor;
-      await game.user.setFlag("age-system", "colorScheme", newColor);
-      if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
+      game.user.setFlag("age-system", "colorScheme", newColor);
       game.ageSystem.ageRoller.refresh();
+      if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
       [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents].forEach((o) => {
         if (o) {
-          o.update({});
-          if (o.sheet != null && o.sheet._state >= 0) o.sheet.render()
+          // o.update({});
+          // if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.close();
         };
       });
-
-      // const newColor = game.settings.get("age-system", "colorScheme");
-      // game.user.setFlag("age-system", "colorScheme", newColor);
-      // [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents]
-      // .forEach((o) => {
-      //   o.update({});
-      //   if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
-      // });
-      // if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
     },
   });
 
@@ -181,8 +173,8 @@ export const registerSystemSettings = async function() {
       "pulp": "SETTINGS.gameModePulp",
       "cinematic": "SETTINGS.gameModeCinematic",
     },
-    onChange: async () => {
-      ageSystem.healthSys.mode = await game.settings.get("age-system", "healthMode"),
+    onChange: () => {
+      ageSystem.healthSys.mode = game.settings.get("age-system", "healthMode"),
       [...game.actors.contents, ...Object.values(game.actors.tokens)]
         .filter((o) => {
           return o.data.type === "char";

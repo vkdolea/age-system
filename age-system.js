@@ -2,6 +2,7 @@
 import {ageSystem} from "./modules/config.js";
 import ageSystemSheetItem from "./modules/sheets/ageSystemSheetItem.js";
 import ageSystemSheetCharacter from "./modules/sheets/ageSystemSheetCharacter.js";
+import ageSystemSheetCharAlt from "./modules/sheets/ageSystemSheetCharAlt.js";
 import ageSystemSheetCharStatBlock from "./modules/sheets/ageSystemSheetCharStatBlock.js";
 import ageSystemSheetVehicle from "./modules/sheets/ageSystemSheetVehicle.js";
 import ageSystemSheetSpaceship from "./modules/sheets/ageSystemSheetSpaceship.js";
@@ -28,6 +29,13 @@ async function preloadHandlebarsTemplates() {
         `${path}active-bonuses.hbs`,
         `${path}bonus-desc-sheet.hbs`,
         `${path}bonuses-sheet.hbs`,
+        `${path}char-sheet-alt-main.hbs`,
+        `${path}char-sheet-alt-persona.hbs`,
+        `${path}char-sheet-alt-social.hbs`,
+        `${path}char-sheet-alt-equip.hbs`,
+        `${path}char-sheet-alt-talents.hbs`,
+        `${path}char-sheet-alt-powers.hbs`,
+        `${path}char-sheet-alt-effects.hbs`,
         `${path}char-sheet-nav-bar.hbs`,
         `${path}char-sheet-tab-main.hbs`,
         `${path}char-sheet-injury-bar.hbs`,
@@ -63,6 +71,7 @@ Hooks.once("init", async function() {
     game.ageSystem = {
         applications: {
             ageSystemSheetCharacter,
+            ageSystemSheetCharAlt,
             ageSystemSheetCharStatBlock,
             ageSystemSheetVehicle,
             ageSystemSheetSpaceship,
@@ -86,6 +95,10 @@ Hooks.once("init", async function() {
         types: ["char"],
         makeDefault: true,
         label: "age-system.SHEETS.charStandard"
+    });
+    Actors.registerSheet("age-system", ageSystemSheetCharAlt, {
+        types: ["char"],
+        label: "age-system.SHEETS.charStatAlt"
     });
     Actors.registerSheet("age-system", ageSystemSheetCharStatBlock, {
         types: ["char"],
@@ -217,6 +230,13 @@ Hooks.once("init", async function() {
     Handlebars.registerHelper('haswgroup', function(wGroup, groupArray) {
         if (!groupArray === []) return false;
         return groupArray.includes(wGroup) ? true : false;
+    });
+
+    // Handlebar to itentify if array is empty
+    Handlebars.registerHelper('isempty', function(array, abl) {
+        if (!Array.isArray(array)) return false;
+        array = array.filter(f => f.data.useAbl === abl)
+        return array.length === 0 ? true : false;
     });
 
     // Handlebar to build damage summary on chat card
@@ -378,3 +398,5 @@ Hooks.once('diceSoNiceReady', (data) => { import('/modules/dice-so-nice/DiceColo
     if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);
     if (!stuntSoNiceFlag) game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
 }).catch((err) => console.error(err))});
+Hooks.on('renderActorSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));
+Hooks.on('renderItemSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));

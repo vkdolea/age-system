@@ -1458,6 +1458,368 @@
   padding-top: 2px;
   padding-bottom: 2px;
 }
+/*********************************/
+/**    Alternate Char Sheet     **/
+/*********************************/
+.age-system.sheet.char-sheet-alt .actor-sheet {
+  flex-wrap: nowrap;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  /********************/
+  /**  Resource Box  **/
+  /********************/
+  /**********************/
+}
+.age-system.sheet.char-sheet-alt .actor-sheet ol,
+.age-system.sheet.char-sheet-alt .actor-sheet ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .actor-picture {
+  border: none;
+  max-height: 200px;
+  width: 180px;
+  object-fit: contain;
+  margin: auto;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .second-column {
+  min-width: 474px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .resource,
+.age-system.sheet.char-sheet-alt .actor-sheet .box {
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .resource {
+  border-radius: 10px;
+  margin-top: 6px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border: 1px solid black;
+  text-align: center;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .resource hr {
+  margin: 0;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .title {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 0.8rem;
+  padding: 2px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .values {
+  align-items: center;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box {
+  padding: 2px 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .main-data {
+  align-items: center;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .item-image {
+  border: none;
+  flex: 0 0 2rem;
+  height: 2rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .item-name {
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 5px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .controls {
+  max-width: fit-content;
+  align-items: center;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .controls .arrow-control {
+  font-size: 0.5rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .controls * {
+  margin-left: 2px;
+  max-width: fit-content;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .values-options {
+  font-size: 0.7rem;
+  justify-items: center;
+  max-width: fit-content;
+  margin: 0 auto;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .values-options .value-data {
+  margin: auto 0;
+  border-radius: 4px;
+  width: 1rem;
+  font-size: 0.7rem;
+  height: 1rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .values-options label {
+  padding-left: 4px;
+  text-align: left;
+  height: 1rem;
+  margin: auto 0;
+  font-variant: all-petite-caps;
+  max-width: fit-content;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .value-data {
+  flex: 0 0 auto;
+  margin: 4px auto;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.9rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .labels {
+  margin: auto;
+  font-size: 0.75rem;
+  font-variant: all-petite-caps;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .short-input {
+  flex: 0 0 3rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet aside {
+  flex: 0 0 190px;
+  height: 100%;
+  padding: 4px;
+  padding-bottom: 10px;
+  transition: all 0.5s ease;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet header.top-banner {
+  margin-top: 10px;
+  flex: 0 0 110px;
+  min-width: 210px;
+  padding: 4px;
+  padding-bottom: 10px;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  transition: all 0.5s ease;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content {
+  padding: 4px 0 0 4px;
+  min-width: 210px;
+  margin: 0 5px 5px 0;
+  border-bottom-right-radius: 10px;
+  transition: all 0.5s ease;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav {
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav a {
+  margin: 0 4px;
+  padding: 0 4px;
+  max-width: fit-content;
+  font-variant: all-petite-caps;
+  height: 20px;
+  border-radius: 5px;
+  vertical-align: middle;
+  -webkit-box-shadow: 1px 1px 3px 1px #000000;
+  box-shadow: 1px 1px 3px 1px #000000;
+  font-weight: 600;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .owned-focus .item-name,
+.age-system.sheet.char-sheet-alt .actor-sheet .conditions .tooltip-container {
+  padding: 0 5px;
+  margin: 3px 1px;
+  border-radius: 15px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .ability-box {
+  flex: 0 0 200px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  border: thin solid black;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .ability-box:last-of-type {
+  margin-bottom: 0;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header {
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header .abl-name {
+  text-align: left;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header .abl-name label {
+  width: fit-content;
+  padding-left: 5px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header input[type="number"] {
+  border-radius: 0;
+  flex: 0 0 30px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header input[type="number"].original {
+  background-color: silver;
+  border-top-right-radius: 10px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header input[type="checkbox"] {
+  flex: 0 0 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .owned-focus {
+  line-height: 1.1rem;
+  margin: 0.2rem 0;
+  font-size: 0.8rem;
+  text-align: justify;
+  padding: 0 4px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .no-focus .owned-focus {
+  margin: 0;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .no-focus .abl-header {
+  border-radius: 10px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .no-focus .abl-header input[type="number"].original {
+  border-bottom-right-radius: 10px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .improved-focus {
+  text-decoration: underline;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .persona {
+  padding-right: 4px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .persona .editor.editor {
+  text-align: left;
+  height: auto !important;
+  min-height: 150px;
+  max-height: 400px;
+  padding: 4px;
+  border-radius: 0 0 10px 10px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .persona .editor.editor .tox.tox-tinymce {
+  min-height: 140px !important;
+  max-height: 390px !important;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .free-text {
+  resize: none !important;
+  border-radius: 0 0 10px 10px;
+  padding: 4px;
+  border: none;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .item-group {
+  height: max-content;
+  margin: 0 5px 10px 5px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .item-group li:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .item-group li:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .abilities-column {
+  flex: 0 0 200px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-details {
+  flex-wrap: nowrap;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-details .charname {
+  margin-bottom: 10px;
+  color: white;
+  font-size: 2rem;
+  height: 2.4rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-details .sub-details > div {
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-details .sub-details input {
+  font-size: 0.7rem;
+  height: 0.8rem;
+  border-bottom: 1px solid black !important;
+  color: white !important;
+  padding-bottom: 4px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .char-details .sub-details label {
+  flex: 0 0 0.6rem;
+  font-size: 0.5rem;
+  text-transform: uppercase;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .at-header {
+  flex: 0 0 100px;
+  margin: auto 4px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .at-header .exp {
+  align-items: center;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .at-header .exp input {
+  color: inherit;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .at-header .exp span {
+  flex: 0 0 5px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .container-tooltip-text {
+  visibility: hidden;
+  width: 300px;
+  text-align: left;
+  border-radius: 5px;
+  padding: 4px;
+  opacity: 0.9;
+  /* Position the tooltip */
+  position: fixed;
+  z-index: 10;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .container-tooltip-text .effect-changes {
+  margin-top: 4px;
+  font-size: 12px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .tooltip-container:hover .container-tooltip-text {
+  visibility: visible;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet a.item-equip.not-equiped,
+.age-system.sheet.char-sheet-alt .actor-sheet .inactive {
+  opacity: 0.3;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .item-box,
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .header {
+  justify-content: space-evenly;
+  padding: 2px 5px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .effect-name {
+  flex: 0 0 25%;
+  text-align: left;
+  align-items: center;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .effect-key {
+  flex: 0 0 30%;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .effect-operation {
+  flex: 0 0 15%;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .effect-value {
+  flex: 0 0 15%;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .effect-add {
+  flex: 0 0 10%;
+  padding-right: 4px;
+  text-align: center;
+  font-size: 0.7rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .mod-name {
+  flex: 0 0 30%;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .mod-value {
+  flex: 0 0 40%;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .mod-value .icon {
+  flex: 0 0 30%;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .mod-value .value-numeric {
+  flex: 0 0 70%;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .mod-source.mod-source {
+  flex: 0 0 30%;
+}
 /*******************************/
 /**     Stat Block Style      **/
 /*******************************/
@@ -2263,6 +2625,36 @@
 /*******************************/
 /**     Color Style Rules     **/
 /*******************************/
+.window-app.sheet.char-sheet-alt.colorset-modern-blue .window-content,
+.window-app.sheet.char.colorset-modern-blue .window-content,
+.window-app.sheet.vehicle.colorset-modern-blue .window-content,
+.window-app.sheet.spaceship.colorset-modern-blue .window-content {
+  background-image: none;
+  background-color: rgba(185, 219, 235, 0.6) !important;
+}
+.colorset-modern-blue aside {
+  border-radius: 5px;
+  border: 5px outset #35A5CA;
+}
+.colorset-modern-blue .metal-background {
+  background: linear-gradient(90deg, #007DAD 5%, #B9DBEB 50%, #007DAD 95%);
+}
+.colorset-modern-blue .top-banner {
+  border: 5px outset #35A5CA;
+}
+.colorset-modern-blue .resource .values {
+  background-color: #007DAD;
+  color: #ffffff;
+}
+.colorset-modern-blue .sheet-main-content nav a {
+  background: radial-gradient(closest-side, #B9DBEB, #007DAD);
+}
+.colorset-modern-blue .sheet-main-content nav a.active {
+  background: radial-gradient(closest-side, #B9DBEB 60%, #007DAD) !important;
+}
+.colorset-modern-blue .thin-border {
+  border: thin solid #231F20;
+}
 .colorset-modern-blue .colorset-first-tier {
   background-color: #007DAD;
   color: #ffffff;
@@ -2430,12 +2822,42 @@
 .colorset-modern-blue .shipfeatures .mod-card {
   border: solid #B9DBEB 1px;
 }
+.window-app.sheet.char-sheet-alt.colorset-fantasy-blue .window-content,
+.window-app.sheet.char.colorset-fantasy-blue .window-content,
+.window-app.sheet.vehicle.colorset-fantasy-blue .window-content,
+.window-app.sheet.spaceship.colorset-fantasy-blue .window-content {
+  background-image: none;
+  background-color: rgba(145, 182, 212, 0.6) !important;
+}
+.colorset-fantasy-blue aside {
+  border-radius: 5px;
+  border: 5px outset #000000;
+}
+.colorset-fantasy-blue .metal-background {
+  background: linear-gradient(90deg, #0f4f5b 5%, #91b6d4 50%, #0f4f5b 95%);
+}
+.colorset-fantasy-blue .top-banner {
+  border: 5px outset #000000;
+}
+.colorset-fantasy-blue .resource .values {
+  background-color: #0f4f5b;
+  color: #ffffff;
+}
+.colorset-fantasy-blue .sheet-main-content nav a {
+  background: radial-gradient(closest-side, #91b6d4, #0f4f5b);
+}
+.colorset-fantasy-blue .sheet-main-content nav a.active {
+  background: radial-gradient(closest-side, #91b6d4 60%, #0f4f5b) !important;
+}
+.colorset-fantasy-blue .thin-border {
+  border: thin solid #dbdada;
+}
 .colorset-fantasy-blue .colorset-first-tier {
   background-color: #0f4f5b;
   color: #ffffff;
 }
 .colorset-fantasy-blue .colorset-second-tier {
-  background-color: #c1cbd3;
+  background-color: #91b6d4;
   color: #0f4f5b;
 }
 .colorset-fantasy-blue .colorset-third-tier {
@@ -2497,7 +2919,7 @@
   background-color: #ffffff;
 }
 .colorset-fantasy-blue .char-sheet input.colorset-second-tier {
-  background-color: #c1cbd3 !important;
+  background-color: #91b6d4 !important;
   color: #0f4f5b !important;
 }
 .colorset-fantasy-blue .focus img,
@@ -2534,7 +2956,7 @@
 .colorset-fantasy-blue .membership .item-card-stats,
 .colorset-fantasy-blue .relationship .item-card-stats,
 .colorset-fantasy-blue .shipfeatures .item-card-stats {
-  background-color: #c1cbd3;
+  background-color: #91b6d4;
 }
 .colorset-fantasy-blue .focus .item-card-stats input.data-entry,
 .colorset-fantasy-blue .power .item-card-stats input.data-entry,
@@ -2570,7 +2992,7 @@
 .colorset-fantasy-blue .membership nav .item,
 .colorset-fantasy-blue .relationship nav .item,
 .colorset-fantasy-blue .shipfeatures nav .item {
-  background-color: #c1cbd3;
+  background-color: #91b6d4;
   color: #0f4f5b;
 }
 .colorset-fantasy-blue .focus nav .item.active,
@@ -2595,7 +3017,37 @@
 .colorset-fantasy-blue .membership .mod-card,
 .colorset-fantasy-blue .relationship .mod-card,
 .colorset-fantasy-blue .shipfeatures .mod-card {
-  border: solid #c1cbd3 1px;
+  border: solid #91b6d4 1px;
+}
+.window-app.sheet.char-sheet-alt.colorset-dragon-red .window-content,
+.window-app.sheet.char.colorset-dragon-red .window-content,
+.window-app.sheet.vehicle.colorset-dragon-red .window-content,
+.window-app.sheet.spaceship.colorset-dragon-red .window-content {
+  background-image: none;
+  background-color: rgba(224, 190, 177, 0.6) !important;
+}
+.colorset-dragon-red aside {
+  border-radius: 5px;
+  border: 5px outset #979899;
+}
+.colorset-dragon-red .metal-background {
+  background: linear-gradient(90deg, #810207 5%, #e0beb1 50%, #810207 95%);
+}
+.colorset-dragon-red .top-banner {
+  border: 5px outset #979899;
+}
+.colorset-dragon-red .resource .values {
+  background-color: #810207;
+  color: #ffffff;
+}
+.colorset-dragon-red .sheet-main-content nav a {
+  background: radial-gradient(closest-side, #e0beb1, #810207);
+}
+.colorset-dragon-red .sheet-main-content nav a.active {
+  background: radial-gradient(closest-side, #e0beb1 60%, #810207) !important;
+}
+.colorset-dragon-red .thin-border {
+  border: thin solid #000000;
 }
 .colorset-dragon-red .colorset-first-tier {
   background-color: #810207;
@@ -2764,6 +3216,36 @@
 .colorset-dragon-red .shipfeatures .mod-card {
   border: solid #e0beb1 1px;
 }
+.window-app.sheet.char-sheet-alt.colorset-folded-purple .window-content,
+.window-app.sheet.char.colorset-folded-purple .window-content,
+.window-app.sheet.vehicle.colorset-folded-purple .window-content,
+.window-app.sheet.spaceship.colorset-folded-purple .window-content {
+  background-image: none;
+  background-color: rgba(207, 204, 222, 0.6) !important;
+}
+.colorset-folded-purple aside {
+  border-radius: 5px;
+  border: 5px outset #625b68;
+}
+.colorset-folded-purple .metal-background {
+  background: linear-gradient(90deg, #565183 5%, #cfccde 50%, #565183 95%);
+}
+.colorset-folded-purple .top-banner {
+  border: 5px outset #625b68;
+}
+.colorset-folded-purple .resource .values {
+  background-color: #565183;
+  color: #ffffff;
+}
+.colorset-folded-purple .sheet-main-content nav a {
+  background: radial-gradient(closest-side, #cfccde, #565183);
+}
+.colorset-folded-purple .sheet-main-content nav a.active {
+  background: radial-gradient(closest-side, #cfccde 60%, #565183) !important;
+}
+.colorset-folded-purple .thin-border {
+  border: thin solid #000000;
+}
 .colorset-folded-purple .colorset-first-tier {
   background-color: #565183;
   color: #ffffff;
@@ -2930,6 +3412,36 @@
 .colorset-folded-purple .relationship .mod-card,
 .colorset-folded-purple .shipfeatures .mod-card {
   border: solid #cfccde 1px;
+}
+.window-app.sheet.char-sheet-alt.colorset-ronin-green .window-content,
+.window-app.sheet.char.colorset-ronin-green .window-content,
+.window-app.sheet.vehicle.colorset-ronin-green .window-content,
+.window-app.sheet.spaceship.colorset-ronin-green .window-content {
+  background-image: none;
+  background-color: rgba(194, 245, 170, 0.6) !important;
+}
+.colorset-ronin-green aside {
+  border-radius: 5px;
+  border: 5px outset #92b65f;
+}
+.colorset-ronin-green .metal-background {
+  background: linear-gradient(90deg, #155f0e 5%, #c2f5aa 50%, #155f0e 95%);
+}
+.colorset-ronin-green .top-banner {
+  border: 5px outset #92b65f;
+}
+.colorset-ronin-green .resource .values {
+  background-color: #155f0e;
+  color: #ffffff;
+}
+.colorset-ronin-green .sheet-main-content nav a {
+  background: radial-gradient(closest-side, #c2f5aa, #155f0e);
+}
+.colorset-ronin-green .sheet-main-content nav a.active {
+  background: radial-gradient(closest-side, #c2f5aa 60%, #155f0e) !important;
+}
+.colorset-ronin-green .thin-border {
+  border: thin solid #000000;
 }
 .colorset-ronin-green .colorset-first-tier {
   background-color: #155f0e;
@@ -3098,6 +3610,36 @@
 .colorset-ronin-green .shipfeatures .mod-card {
   border: solid #c2f5aa 1px;
 }
+.window-app.sheet.char-sheet-alt.colorset-select-one .window-content,
+.window-app.sheet.char.colorset-select-one .window-content,
+.window-app.sheet.vehicle.colorset-select-one .window-content,
+.window-app.sheet.spaceship.colorset-select-one .window-content {
+  background-image: none;
+  background-color: rgba(118, 141, 159, 0.6) !important;
+}
+.colorset-select-one aside {
+  border-radius: 5px;
+  border: 5px outset #4d627a;
+}
+.colorset-select-one .metal-background {
+  background: linear-gradient(90deg, #273249 5%, #768d9f 50%, #273249 95%);
+}
+.colorset-select-one .top-banner {
+  border: 5px outset #4d627a;
+}
+.colorset-select-one .resource .values {
+  background-color: #273249;
+  color: #e7ccc3;
+}
+.colorset-select-one .sheet-main-content nav a {
+  background: radial-gradient(closest-side, #768d9f, #273249);
+}
+.colorset-select-one .sheet-main-content nav a.active {
+  background: radial-gradient(closest-side, #768d9f 60%, #273249) !important;
+}
+.colorset-select-one .thin-border {
+  border: thin solid #610808;
+}
 .colorset-select-one .colorset-first-tier {
   background-color: #273249;
   color: #e7ccc3;
@@ -3108,7 +3650,7 @@
 }
 .colorset-select-one .colorset-third-tier {
   background-color: #4d627a;
-  color: #360808;
+  color: #610808;
 }
 .colorset-select-one input.colorset-first-tier {
   background-color: #273249;
@@ -3214,7 +3756,7 @@
 .colorset-select-one .membership .item-card-stats input.data-entry,
 .colorset-select-one .relationship .item-card-stats input.data-entry,
 .colorset-select-one .shipfeatures .item-card-stats input.data-entry {
-  color: #360808;
+  color: #610808;
 }
 .colorset-select-one .focus .item-card-desc,
 .colorset-select-one .power .item-card-desc,
@@ -3264,6 +3806,36 @@
 .colorset-select-one .relationship .mod-card,
 .colorset-select-one .shipfeatures .mod-card {
   border: solid #768d9f 1px;
+}
+.window-app.sheet.char-sheet-alt.colorset-the-grey .window-content,
+.window-app.sheet.char.colorset-the-grey .window-content,
+.window-app.sheet.vehicle.colorset-the-grey .window-content,
+.window-app.sheet.spaceship.colorset-the-grey .window-content {
+  background-image: none;
+  background-color: rgba(180, 182, 179, 0.6) !important;
+}
+.colorset-the-grey aside {
+  border-radius: 5px;
+  border: 5px outset #6b6a6a;
+}
+.colorset-the-grey .metal-background {
+  background: linear-gradient(90deg, #3d3e3f 5%, #b4b6b3 50%, #3d3e3f 95%);
+}
+.colorset-the-grey .top-banner {
+  border: 5px outset #6b6a6a;
+}
+.colorset-the-grey .resource .values {
+  background-color: #3d3e3f;
+  color: #ccc9c9;
+}
+.colorset-the-grey .sheet-main-content nav a {
+  background: radial-gradient(closest-side, #b4b6b3, #3d3e3f);
+}
+.colorset-the-grey .sheet-main-content nav a.active {
+  background: radial-gradient(closest-side, #b4b6b3 60%, #3d3e3f) !important;
+}
+.colorset-the-grey .thin-border {
+  border: thin solid #000000;
 }
 .colorset-the-grey .colorset-first-tier {
   background-color: #3d3e3f;
@@ -3432,6 +4004,36 @@
 .colorset-the-grey .shipfeatures .mod-card {
   border: solid #b4b6b3 1px;
 }
+.window-app.sheet.char-sheet-alt.colorset-red-warrior .window-content,
+.window-app.sheet.char.colorset-red-warrior .window-content,
+.window-app.sheet.vehicle.colorset-red-warrior .window-content,
+.window-app.sheet.spaceship.colorset-red-warrior .window-content {
+  background-image: none;
+  background-color: rgba(209, 99, 91, 0.6) !important;
+}
+.colorset-red-warrior aside {
+  border-radius: 5px;
+  border: 5px outset #b22126;
+}
+.colorset-red-warrior .metal-background {
+  background: linear-gradient(90deg, #751119 5%, #d1635b 50%, #751119 95%);
+}
+.colorset-red-warrior .top-banner {
+  border: 5px outset #b22126;
+}
+.colorset-red-warrior .resource .values {
+  background-color: #751119;
+  color: #f7b755;
+}
+.colorset-red-warrior .sheet-main-content nav a {
+  background: radial-gradient(closest-side, #d1635b, #751119);
+}
+.colorset-red-warrior .sheet-main-content nav a.active {
+  background: radial-gradient(closest-side, #d1635b 60%, #751119) !important;
+}
+.colorset-red-warrior .thin-border {
+  border: thin solid #c7c691;
+}
 .colorset-red-warrior .colorset-first-tier {
   background-color: #751119;
   color: #f7b755;
@@ -3598,6 +4200,36 @@
 .colorset-red-warrior .relationship .mod-card,
 .colorset-red-warrior .shipfeatures .mod-card {
   border: solid #d1635b 1px;
+}
+.window-app.sheet.char-sheet-alt.colorset-never-dead .window-content,
+.window-app.sheet.char.colorset-never-dead .window-content,
+.window-app.sheet.vehicle.colorset-never-dead .window-content,
+.window-app.sheet.spaceship.colorset-never-dead .window-content {
+  background-image: none;
+  background-color: rgba(238, 221, 205, 0.6) !important;
+}
+.colorset-never-dead aside {
+  border-radius: 5px;
+  border: 5px outset #58705a;
+}
+.colorset-never-dead .metal-background {
+  background: linear-gradient(90deg, #663322 5%, #eeddcd 50%, #663322 95%);
+}
+.colorset-never-dead .top-banner {
+  border: 5px outset #58705a;
+}
+.colorset-never-dead .resource .values {
+  background-color: #663322;
+  color: #bb8755;
+}
+.colorset-never-dead .sheet-main-content nav a {
+  background: radial-gradient(closest-side, #eeddcd, #663322);
+}
+.colorset-never-dead .sheet-main-content nav a.active {
+  background: radial-gradient(closest-side, #eeddcd 60%, #663322) !important;
+}
+.colorset-never-dead .thin-border {
+  border: thin solid #29241f;
 }
 .colorset-never-dead .colorset-first-tier {
   background-color: #663322;
@@ -3929,10 +4561,10 @@ body *:not(i, .fa, .far, .fas) {
   background: none;
 }
 .age-opacity-hover {
-  opacity: 0.4;
+  opacity: 0.6;
 }
 .age-opacity-hover:hover {
-  opacity: 0.6;
+  opacity: 0.9;
 }
 .age-system .opacity-high {
   opacity: 0.2;
