@@ -328,7 +328,7 @@
 .age-system.item .membership .not-equiped,
 .age-system.item .shipfeatures .not-equiped,
 .age-system.item .vehicle .not-equiped {
-  opacity: 0.3;
+  opacity: 0.4;
 }
 .age-system.item .focus .item-card-stats,
 .age-system.item .power .item-card-stats,
@@ -862,7 +862,7 @@
 .age-system.item .membership .mod-card .mod-item.mod-item .mod-controls .inactive,
 .age-system.item .shipfeatures .mod-card .mod-item.mod-item .mod-controls .inactive,
 .age-system.item .vehicle .mod-card .mod-item.mod-item .mod-controls .inactive {
-  opacity: 0.2;
+  opacity: 0.4;
 }
 .age-system.item .focus .mod-card input[type="number"],
 .age-system.item .power .mod-card input[type="number"],
@@ -1552,6 +1552,9 @@
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .arrow-control {
   font-size: 0.5rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .stacked-icons {
+  font-size: 0.6rem;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .mods-section {
   flex: 0 0 40%;
@@ -4461,6 +4464,9 @@
 /*******************************/
 /**   AGE Roller Interface    **/
 /*******************************/
+a:hover {
+  box-shadow: none;
+}
 #age-roller {
   position: absolute;
   width: 52px;

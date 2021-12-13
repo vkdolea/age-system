@@ -1,7 +1,7 @@
 <form class="actor-sheet char-sheet-alt {{cssClass}} flexrow" autocomplete="off">
 
     <aside class="sidebar metal-background colorset-first-tier">
-        <img src="{{data.config.logo.modernAGE}}" alt="" style="border: none;">
+        {{!-- <img src="{{data.config.logo.modernAGE}}" alt="" style="border: none;"> --}}
         <img class="actor-picture" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
         <ul>
             {{#if data.config.healthSys.useInjury}}
@@ -282,7 +282,7 @@
                 <a class="char" data-tab="main">{{localize "age-system.charMain"}}</a>
                 <a class="char" data-tab="persona">{{localize "age-system.charPersona"}}</a>
                 <a class="char" data-tab="stunts">{{localize "age-system.stuntsContainer"}}</a>
-                <a class="char" data-tab="social">Social</a>
+                <a class="char" data-tab="social">{{localize "age-system.social"}}</a>
                 <a class="char" data-tab="equip">{{localize "ITEM.TypeEquipment"}}</a>
                 <a class="char" data-tab="talents">{{localize "age-system.talent"}}</a>
                 <a class="char" data-tab="powers">{{localize "age-system.power"}}</a>

@@ -715,6 +715,45 @@ ageSystem.wiki = 'https://github.com/vkdolea/age-system/wiki';
 
 // Logos
 const pathLogo = `systems/age-system/resources/logo/`
-ageSystem.logo = {
-    modernAGE: `${pathLogo}modern-age.png`
+ageSystem.greenRonin = {
+    modernAGE: {
+        logo: `${pathLogo}modern-age.png`,
+        site: `https://modernagerpg.com`
+    },
+    fantasyAGE: {
+        logo: `${pathLogo}fantasy-age.png`,
+        site: `https://greenronin.com/fantasyage/`
+    },
+    titansgrave: {
+        logo: `${pathLogo}titansgrave.png`,
+        site: `https://titansgraverpg.com`
+    },
+    dragonAGE: {
+        logo: `${pathLogo}dragonAGE.png`,
+        site: `https://greenronin.com/dragonagerpg/`
+    },
+    lazaurs: {
+        logo: `${pathLogo}lazarus.png`,
+        site: ``
+    },
+    bluerose: {
+        logo: `${pathLogo}bluerose.png`,
+        site: `https://blueroserpg.com`
+    },
+    freeport: {
+        logo: `${pathLogo}freeport.png`,
+        site: `https://greenronin.com/freeport/`
+    },
+    lostcitadel: {
+        logo: `${pathLogo}lostcitadel.png`,
+        site: `https://lostcitadelrpg.com`
+    },
+    // agesystem: {
+    //     logo: `${pathLogo}agesystem.png`,
+    //     site: `https://greenroninstore.com/collections/age-system`
+    // },
+    // threefold: {
+    //     logo: `${pathLogo}threefold.png`,
+    //     site: `https://greenroninstore.com/products/threefold`
+    // }
 }

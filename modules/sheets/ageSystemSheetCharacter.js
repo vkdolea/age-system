@@ -145,7 +145,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         let buttons = super._getHeaderButtons();
 
         const sheet = this.actor.getFlag('core', 'sheetClass');
-        const isFull = sheet === undefined || sheet === 'age-system.ageSystemSheetCharacter';
+        const isFull = sheet === undefined || sheet === 'age-system.ageSystemSheetCharAlt';
 
         buttons = [
             {
@@ -163,7 +163,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         event.preventDefault()
         let newSheet = 'age-system.ageSystemSheetCharStatBlock'
         const original = this.actor.getFlag('core', 'sheetClass') || Object.values(CONFIG.Actor.sheetClasses['char']).filter(s => s.default)[0].id
-        if (original != 'age-system.ageSystemSheetCharacter') newSheet = 'age-system.ageSystemSheetCharacter'
+        if (original != 'age-system.ageSystemSheetCharAlt') newSheet = 'age-system.ageSystemSheetCharAlt'
         this.actor.openSheet(newSheet)
     }
     

@@ -22,6 +22,7 @@ export class AgeRoller extends Application {
 	
 	activateListeners(html) {
 		super.activateListeners(html);
+		html.find('li').hover(t => t.currentTarget.classList.toggle('colorset-third-tier'));
 		html.find("#age-roller img").click(this._onClick.bind(this));
 		html.find("#age-roller img").contextmenu(this._onRightClick.bind(this));
 		html.find("#age-roller-drag").contextmenu(this._onResetPosition.bind(this));
@@ -31,6 +32,7 @@ export class AgeRoller extends Application {
 		html.find("#age-roller").hover(this._onShowOptions.bind(this));
 		html.find(".conditions-workshop").click(this.openConditionWorkshop.bind(this));
 		html.find(".breather-tokens").click(this.tokenBreather);
+		html.find('.roll').click(this._onSpecialRoll.bind(this));
 
 		// Set position
 		let roller = document.getElementById("age-roller");
@@ -44,6 +46,15 @@ export class AgeRoller extends Application {
 	
 	refresh() {
 		this.render(true);
+	}
+
+	async _onSpecialRoll(ev) {
+		ev.preventDefault();
+		const type = ev.currentTarget.dataset.roll;
+		let formula = '1d6 + 1d6*10'
+		if (type === 'd666') formula += ' + 1d6*100'
+		let roll = await new Roll(formula).evaluate({async: true});
+		return roll.toMessage({flavor: type}, {rollMode: ev.shiftKey ? "blindroll" : ""});
 	}
 
 	tokenBreather(ev) {
