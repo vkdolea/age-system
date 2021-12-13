@@ -254,6 +254,7 @@
         "vehicleArmor": "Armadura",
         
         "stuntAttack": "Ataque de Façanha",
+        "stuntStack": "PF Acumula ao Rolar Duplas",
         "chatCard": {
             "rollGeneral": "rola {item}",
             "rollAttack": "ataca com {item}",
@@ -426,7 +427,7 @@
         "armorPenalty": "Penal",
 
         "injury": "Ferimento",
-        "injuryMarks": "Marcadores",
+        "injuryMarks": "Marcas",
         "injuryDegree": "Grau",
         "injuryLight": "Leve",
         "injurySerious": "Sério",
@@ -638,6 +639,8 @@
         "addEffectTop": "Adicionar efeito no topo",
         "addEffectBottom": "Adicionar efeito ao fim",
         "saveClose": "Salvar & Fechar",
-        "copyEffectsExpanse": "Copiar efeitos de \"The Expanse\""
+        "copyEffectsExpanse": "Copiar efeitos de \"The Expanse\"",
+
+        "social": "Social"
     }
 }

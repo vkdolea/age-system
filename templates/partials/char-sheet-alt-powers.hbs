@@ -1,0 +1,17 @@
+{{!-- Powers Tab --}}
+<section class="powers-section">
+
+    {{!-- Powers --}}
+    <ul class="powers resource item-group">
+        <li class="title colorset-first-tier">
+            {{localize "age-system.extraordinaryPowers"}}
+        </li>
+        {{#each data.power as |item|}}
+        {{> "systems/age-system/templates/partials/itemcontrols/power.hbs" item=this config=../data.config}}
+        {{#unless @last}}
+        <hr>
+        {{/unless}}
+        {{/each}}
+    </ul>
+
+</section>

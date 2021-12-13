@@ -1,0 +1,36 @@
+{{!-- Social Tab --}}
+<section class="social-section">
+
+    {{!-- Relationship --}}
+    <ul class="resource item-group">
+        <li class="title colorset-first-tier">
+            {{localize "age-system.relationshipContainer"}}
+        </li>
+        {{#each data.relationship as |item|}}
+        {{> "systems/age-system/templates/partials/itemcontrols/relationship.hbs" item=this config=../data.config}}
+        {{/each}}
+    </ul>
+
+    <div>
+        {{!-- Honorifics --}}
+        <ul class="resource item-group">
+            <li class="title colorset-first-tier">
+                {{localize "age-system.honorificsContainer"}}
+            </li>
+            {{#each data.honorifics as |item|}}
+            {{> "systems/age-system/templates/partials/itemcontrols/honorifics.hbs" item=this config=../data.config}}
+            {{/each}}
+        </ul>
+
+        {{!-- Membership --}}
+        <ul class="resource item-group">
+            <li class="title colorset-first-tier">
+                {{localize "age-system.membershipContainer"}}
+            </li>
+            {{#each data.membership as |item|}}
+            {{> "systems/age-system/templates/partials/itemcontrols/membership.hbs" item=this config=../data.config}}
+            {{/each}}
+        </ul>
+    </div>
+
+</section>

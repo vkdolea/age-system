@@ -395,7 +395,8 @@
             },
             "description": {
                 "shortDesc": "",
-                "longDesc": ""
+                "longDesc": "",
+                "favorite": false
             },
             "bonuses": {
                 "itemMods": {

@@ -123,10 +123,9 @@ export class ageSystemActor extends Actor {
         data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
 
         // Ensure Fatigue has valid Values and creates Status text
-        data.fatigue.status = "";
-        data.fatigue.value = Math.abs(data.fatigue.entered);
-        if (data.fatigue.value > data.fatigue.max) {data.fatigue.value = data.fatigue.max};
-        if (data.fatigue.value < 0) {data.fatigue.value = 0};
+        if (data.fatigue.entered > data.fatigue.max) data.fatigue.entered = data.fatigue.max;
+        if (data.fatigue.entered < 0) data.fatigue.entered = 0;
+        data.fatigue.value = data.fatigue.entered;
         switch (data.fatigue.value) {
             case 0:
                 data.fatigue.status = game.i18n.localize(ageSystem.fatigueConditions.noFatigue);

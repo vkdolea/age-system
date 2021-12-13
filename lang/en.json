@@ -14,7 +14,7 @@
     "ITEM.TypeMembership": "Membership",
     "ITEM.TypeShipfeatures": "Spaceship Feature",
 
-    "SETTINGS.consumePP": "Consume Power Points on roll",
+    "SETTINGS.consumePP": "Consume Power/Mana/Kana/Spell Points on roll",
     "SETTINGS.consumePPHint": "If enabled, Points necessary to user a Power will be deducted from Character's total. A message will appear if not enough points are available.",
     
     "SETTINGS.breatherSettings": "Breather Settings",
@@ -639,6 +639,8 @@
         "addEffectTop": "Add new effect on top",
         "addEffectBottom": "Add new effect at bottom",
         "saveClose": "Save & Close",
-        "copyEffectsExpanse": "Copy effects from The Expanse"
+        "copyEffectsExpanse": "Copy effects from The Expanse",
+
+        "social": "Social"
     }
 }

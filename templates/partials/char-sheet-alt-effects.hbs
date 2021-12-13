@@ -1,0 +1,128 @@
+{{!-- Talents Tab --}}
+<section class="effects-section">
+
+    {{!-- Conditions Block --}}
+    <ul class="resource item-group conditions">
+        <li class="title colorset-first-tier">
+            {{localize "age-system.conditionsName"}}
+        </li>
+        <li class="colorset-third-tier">
+            {{#each data.conditions as |condition|}}
+            <span class="tooltip-container flexrow feature-controls {{#if condition.active}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-condition-id="{{condition.id}}">
+                <a class="item-name item-box condition-label">{{condition.label}}</a>
+                <span class="container-tooltip-text colorset-second-tier">
+                    {{#if (ne condition.flags.age-system.desc "")}}
+                    <span><b>{{condition.label}}:</b> {{condition.flags.age-system.desc}}</span>
+                    {{/if}}
+                    {{#if condition.changes}}
+                    <em>
+                    <ul class="effect-changes">
+                        <b>{{localize "EFFECT.TabEffects"}}</b>
+                        {{#each condition.changes as |change|}}
+                        <li>
+                            <span>
+                                {{#if change.key}}{{change.key}}{{else}}-{{/if}} ({{effectModeName change.mode}}, {{#if change.key}}{{change.value}}{{else}}-{{/if}})
+                            </span>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    </em>
+                    {{/if}}
+                </span>
+            </span>
+            {{/each}}
+        </li>
+    </ul>
+
+    {{!-- Active Effects Block --}}
+    <ul class="resource item-group custom-effects">
+        <li class="title colorset-first-tier">{{localize "age-system.custom"}}</li>
+        <li class="flexrow header colorset-first-tier">
+            <span class="effect-name">{{localize "age-system.name"}}</span>
+            <span class="effect-key">{{localize "age-system.key"}}</span>
+            <span class="effect-operation">{{localize "age-system.operation"}}</span>
+            <span class="effect-value">{{localize "age-system.value"}}</span>
+            <span class="effect-add"><a><i class="fa fa-plus-circle" aria-hidden="true"></i></a></span>
+        </li>
+        {{#each data.effects as |effect|}}
+        <li class="flexrow colorset-third-tier item-box feature-controls" data-effect-id="{{effect._id}}">
+            <div class="effect-name flexrow">
+                <img class="item-image" src="{{effect.icon}}">
+                {{#if (ne effect.flags.age-system.conditionType "custom")}}
+                <span>{{localize effect.label}}</span>
+                {{else}}
+                <span>{{effect.label}}</span>
+                {{/if}}
+            </div>
+            {{#if effect.changes}}
+            <div class="flexcol effect-key">
+                {{#each effect.changes as |change|}}
+                <span>{{#if change.key}}{{ageffect change.key ../../data.config.ageEffectsOptions}}{{else}}-{{/if}}</span>
+                {{/each}}
+            </div>
+            <div class="flexcol effect-operation">
+                {{#each effect.changes as |change|}}
+                <span>{{effectModeName change.mode}}</span>
+                {{/each}}
+            </div>
+            <div class="flexcol effect-value">
+                {{#each effect.changes as |change|}}
+                <span>{{#if change.key}}{{change.value}}{{else}}-{{/if}}</span>
+                {{/each}}
+            </div>
+            {{else}}
+            <div class="flexcol effect-key"><span>{{localize "age-system.rof.none"}}</span></div>
+            <div class="flexcol effect-operation"><span>{{localize "age-system.rof.none"}}</span></div>
+            <div class="flexcol effect-value"><span>{{localize "age-system.rof.none"}}</span></div>
+            {{/if}}
+            <div class="effect-add">
+                {{#unless (and effect.flags.age-system (ne effect.flags.age-system.conditionType ../inUseStatusEffects))}}
+                <a class="effect-active icon {{#if effect.disabled}}inactive{{/if}}"><i class="fas fa-power-off"></i></a>
+                <a class="effect-edit icon"><i class="fas fa-edit"></i></a>
+                {{/unless}}
+                <a class="effect-remove icon"><i class="fas fa-trash"></i></a>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+
+    {{!-- Item Modifiers Block --}}
+    <ul class="item-group resource modifiers">
+        <li class="title colorset-first-tier">{{localize "age-system.itemMod"}}</li>
+        <li class="header flexrow colorset-first-tier">
+            <span class="mod-name">{{localize "age-system.type"}}</span>
+            <div class="mod-value flexrow">
+                <span class="value-numeric">{{localize "age-system.value"}}</span>
+                <span class="icon">{{localize "age-system.control"}}</span>
+            </div>
+            <span class="mod-source">{{localize "age-system.source"}}</span>
+        </li>
+        {{#each itemMods as |items modType|}}
+        <li class="flexrow colorset-third-tier item-box">
+            <div class="mod-name flexrow">
+                <span>{{localize (concat "age-system.bonus." modType)}}</span>
+            </div>
+            <div class="flexcol mod-value">
+                {{#each items as |item|}}
+                <div class="flexrow value-box">
+                    {{#if (eq modType "focus")}}
+                    <span class="number">{{#with (lookup item.data.itemMods [modType])~}}{{name}}, {{value}}{{/with}}</span>
+                    {{else}}
+                    <span class="value-numeric">{{#with (lookup item.data.itemMods [modType])~}}{{value}}{{/with}}</span>
+                    {{/if}}
+                    {{#with (lookup item.data.itemMods [modType])~}}
+                    <span class="icon"><a class="mod-active icon {{#unless isActive}}inactive{{/unless}}" data-mod-type="{{modType}}" data-item-id="{{item._id}}"><i class="fas fa-power-off"></i></a></span>
+                    {{/with}}
+                </div>
+                {{/each}}
+            </div>
+            <div class="flexcol mod-source">
+                {{#each items as |item|}}
+                <span class="item-edit" data-item-id={{item._id}}><a>{{item.name}}</a></span>
+                {{/each}}
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+
+</section>

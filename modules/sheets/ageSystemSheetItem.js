@@ -168,12 +168,16 @@ export default class ageSystemItemSheet extends ItemSheet {
                 const b = bonusList[mod];
                 if (!b.selected) {
                     const modName = game.i18n.localize(`age-system.bonus.${mod}`);
-                    const updatePath = `data.itemMods.${mod}.selected`;
+                    const selectPath = `data.itemMods.${mod}.selected`;
+                    const activePath = `data.itemMods.${mod}.isActive`;
                     bonusOptions = {
                         ...bonusOptions,
                         [mod]: {
                             label: modName,
-                            callback: () => this.item.update({[updatePath]: true})
+                            callback: () => this.item.update({
+                                [selectPath]: true,
+                                [activePath]: true
+                            })
                         }
                     }
                 }

@@ -1,4 +1,4 @@
-<form class="{{cssClass}} colorset-{{colorset}}" autocomplete="off">
+<form class="{{cssClass}} age-system colorset-{{colorset}}" autocomplete="off">
 	<div id="age-roller-container">
 		<div id="age-roller" class="flexcol age-opacity-hover">
 			<div id="age-roller-drag"></div>
@@ -6,18 +6,21 @@
 		</div>
 		<div id="age-roller-options">
 			<ul>
-				{{!-- <li class="age-opacity-hover colorset-second-tier">
-					Advanced Test
-				</li class="age-opacity-hover"> --}}
-				<li class="age-opacity-hover colorset-second-tier breather-tokens">
+				<li class="colorset-second-tier roll" data-roll="d666">
+					d666
+				</li>
+				<li class="colorset-second-tier roll" data-roll="d66">
+					d66
+				</li>
+				<li class="colorset-second-tier breather-tokens">
 					{{localize "age-system.breather"}}
 				</li>
 				{{#if isGM}}
-				<li class="age-opacity-hover colorset-second-tier conditions-workshop">
+				<li class="colorset-second-tier conditions-workshop">
 					{{localize "age-system.conditionsWorkshop"}}
 				</li>
 				{{/if}}
-				<li class="age-opacity-hover colorset-second-tier">
+				<li class="colorset-second-tier">
 					<a href="{{wikiLink}}">wiki</a>
 				</li>
 			</ul>

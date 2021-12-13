@@ -97,6 +97,16 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.9.0 [2021-12-12]
+### Added
+- New Character sheet, totally overhauled. Old sheet can be acessed by accessing "Sheet" -> "This Sheet" -> "Legacy".
+- Added option on Age Roller to roll d66 and d666.
+
+### Changed
+- When Item Modifier is added to an Item, the Modifier will be actived by default.
+- Opacity from button to turn Modifiers on/off is increased to improve its visibility.
+- Breather can now accept formulas
+
 ## 0.8.18 [2021-11-28]
 ### Added
 - Styling changes on Apply Damage window to highlight applicable damage or toughness test

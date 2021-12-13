@@ -1,3 +1,5 @@
+import { ageSystem } from "./config.js";
+
 // Not in use, but maybe in the future...
 export function localizeConfig(toLocalize, noSort) {
 
@@ -114,4 +116,14 @@ export function sortObjArrayByName(nameArray, nameKey) {
         }
         return 0;
     });
+}
+
+/**
+ * Add customization do Actor Sheet
+ * @param {object} sheet Sheet configuration data
+ * @param {jQuery Object} html jQuery object whith sheet
+ * @param {object} data data used to render sheet
+ */
+export function prepSheet (sheet, html, data) {
+    html.addClass(`colorset-${ageSystem.colorScheme}`)
 }

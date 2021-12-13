@@ -1,0 +1,98 @@
+{{!-- Equip Tab --}}
+<section class="equip-section flexrow">
+
+    {{!-- Weapons --}}
+    <ul class="weapons-group resource item-group">
+        <li class="title colorset-first-tier">
+            {{localize "age-system.weaponContainer"}}
+        </li>
+        {{#if data.weaponGroups}}
+        <li class="owned-wgroups colorset-second-tier">
+            <label class="wgroup">{{localize "SETTINGS.weaponGroups"}}:</label>
+            {{#each actor.data.data.wgroups as |wgroup|}}
+            <span>&nbsp{{wgroup}}{{#if @last}}{{else}},{{/if}}</span>
+            {{/each}}
+        </li>
+        <hr>
+        {{/if}}
+        {{#each data.weapon as |item|}}
+        {{> "systems/age-system/templates/partials/itemcontrols/weapon.hbs" item=this config=../data.config}}
+        {{#unless @last}}
+        <hr>
+        {{/unless}}
+        {{/each}}
+    </ul>
+
+    <div>
+        {{!-- Resource --}}
+        {{#if (or data.data.useIncome data.data.useResources)}}
+        <div class="resource colorset-third-tier">
+            <div class="title">
+                <a class="roll-resources feature-controls"><i class="fas fa-dice"></i></a>
+                {{#if data.data.useResources}}{{localize "SETTINGS.wealthTypeResources"}}{{/if}}{{#if data.data.useIncome}}{{localize "SETTINGS.wealthTypeIncome"}}{{/if}}
+            </div>
+            <div class="values flexrow">
+                <input class="value-data" disabled type="number" name="data.resources.total" value="{{data.data.resources.total}}" data-dtype="Number" />
+                <div class="values-options mods-section flexcol">
+                    <div class="flexrow">
+                        <input class="value-data" type="number" name="data.resources.base" value="{{data.data.resources.base}}" data-dtype="Number" />
+                        <label>{{localize "age-system.base"}}</label>
+                    </div>
+                    <div class="flexrow">
+                        <input class="value-data" type="number" name="data.resources.mod" value="{{data.data.resources.mod}}" data-dtype="Number" />
+                        <label>{{localize "age-system.mod"}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="labels flexrow">
+                <label>{{localize "age-system.total"}}</label>
+                <label class="mods-section">{{localize "age-system.mod"}}</label>
+            </div>
+        </div>
+        {{/if}}
+
+        {{!-- Coins --}}
+        {{#if data.data.useCoins}}
+        <div class="resource colorset-third-tier">
+            <div class="title">{{localize "age-system.coins"}}</div>
+            <div class="values flexrow">
+                <input class="value-data" type="number" name="data.gp" value="{{data.data.gp}}" data-dtype="Number" />
+                <input class="value-data" type="number" name="data.sp" value="{{data.data.sp}}" data-dtype="Number" />
+                <input class="value-data" type="number" name="data.cp" value="{{data.data.cp}}" data-dtype="Number" />
+            </div>
+            <div class="labels flexrow">
+                <label>{{localize "age-system.gp"}}</label>
+                <label>{{localize "age-system.sp"}}</label>
+                <label>{{localize "age-system.cp"}}</label>
+            </div>
+        </div>
+        {{/if}}
+
+        {{!-- Currency --}}
+        {{#if data.data.useCurrency}}
+        <div class="resource colorset-third-tier">
+            <div class="title">{{localize "SETTINGS.wealthTypeCurrency"}}</div>
+            <div class="values flexrow">
+                <input class="value-data" type="number" name="data.resources.base" value="{{data.data.resources.base}}" data-dtype="Number" />
+            </div>
+            <div class="labels flexrow">
+                <label>{{localize "age-system.total"}}</label>
+            </div>
+        </div>
+        {{/if}}
+
+        {{!-- General Equipment --}}
+        <ul class="general-equip-group resource item-group">
+            <li class="title colorset-first-tier">
+                {{localize "age-system.equipmentContainer"}}
+            </li>
+            {{#each data.equipment as |item|}}
+            {{> "systems/age-system/templates/partials/itemcontrols/equipment.hbs" item=this config=../data.config}}
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
+            {{/each}}
+        </ul>
+    </div>
+
+</section>

@@ -14,6 +14,9 @@
     "ITEM.TypeMembership": "Afiliaciones",
 	"ITEM.TypeShipfeatures": "Características Nave",
 
+    "SETTINGS.consumePP": "Consume Power/Mana/Kana/Spell Points on roll",
+    "SETTINGS.consumePPHint": "If enabled, Points necessary to user a Power will be deducted from Character's total. A message will appear if not enough points are available.",
+
     "SETTINGS.breatherSettings": "Configuración Descanso",
     "SETTINGS.breatherSettingsHint": "Configurar cantidad de puntos recuperados con un Descanso",
     
@@ -251,6 +254,7 @@
         "vehicleArmor": "Blindaje",
         
         "stuntAttack": "Ataque Proeza",
+        "stuntStack": "Stack SP on Doubles",
         "chatCard": {
             "rollGeneral": "tira {item}",
             "rollAttack": "ataca con {item}",
@@ -454,6 +458,7 @@
         "addLevel": "Añadir Nivel",
         "autoApply": "Auto Aplicar",
         
+        "rollWithoutPP": "{name} doesn't have enough points to use {item}. Roll it anyway?",
         "powerPoints": "Puntos Poder",
         "powerPointsIndex": "PP",
         "name": "Nombre",

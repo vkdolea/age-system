@@ -55,6 +55,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.honorifics = itemSorted.filter(i => i.type === "honorifics");
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
+        data.favorite = itemSorted.filter(i => i.data.favorite);
 
         // Sorting Modifiers per Type/Item
         const modList = {}
@@ -144,7 +145,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         let buttons = super._getHeaderButtons();
 
         const sheet = this.actor.getFlag('core', 'sheetClass');
-        const isFull = sheet === undefined || sheet === 'age-system.ageSystemSheetCharacter';
+        const isFull = sheet === undefined || sheet === 'age-system.ageSystemSheetCharAlt';
 
         buttons = [
             {
@@ -162,7 +163,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         event.preventDefault()
         let newSheet = 'age-system.ageSystemSheetCharStatBlock'
         const original = this.actor.getFlag('core', 'sheetClass') || Object.values(CONFIG.Actor.sheetClasses['char']).filter(s => s.default)[0].id
-        if (original != 'age-system.ageSystemSheetCharacter') newSheet = 'age-system.ageSystemSheetCharacter'
+        if (original != 'age-system.ageSystemSheetCharAlt') newSheet = 'age-system.ageSystemSheetCharAlt'
         this.actor.openSheet(newSheet)
     }
     
@@ -227,7 +228,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
             new ContextMenu(html, ".item-card .main-data", this.itemContextMenu); // Elaborar
             html.find(".item-equip").click(this._onItemActivate.bind(this));
-            html.find(".item-card .main-data").click(this._onItemShow.bind(this));
+            html.find(".item-card .main-data").click(this._onItemEdit.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".conditions .item-name").click(this._onChangeCondition.bind(this));
@@ -420,6 +421,10 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const itemToToggle = this.actor.getEmbeddedDocument("Item", itemId);
         const itemType = itemToToggle.type;
+        if (event.currentTarget.classList.contains('favorite')) {
+            const toggleFav = !itemToToggle.data.data.favorite;
+            return itemToToggle.update({"data.favorite": toggleFav});
+        }
         if (itemType === "power" || itemType === "talent") {
             const toggleAct = !itemToToggle.data.data.activate;
             itemToToggle.update({"data.activate": toggleAct});
