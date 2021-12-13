@@ -1,0 +1,14 @@
+{{!-- Stunts Tab --}}
+<section class="social-section">
+
+    {{!-- Stunts --}}
+    <ul class="resource item-group">
+        <li class="title colorset-first-tier">
+            {{localize "age-system.stuntsContainer"}}
+        </li>
+        {{#each data.stunts as |item|}}
+        {{> "systems/age-system/templates/partials/itemcontrols/stunts.hbs" item=this config=../data.config}}
+        {{/each}}
+    </ul>
+
+</section>

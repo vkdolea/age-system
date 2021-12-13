@@ -2,25 +2,22 @@
 /**    Alternate Char Sheet     **/
 /*********************************/
 
-// .age-system form.actor-sheet.grid-area {
-//     display: grid;
-//     grid-template-columns: 190px auto;
-//     grid-template-rows: 120px auto;
-//     grid-template-areas: 
-//         "sidebar" "top-banner"
-//         "common-data" "main-content";
-// }
 .age-system.sheet.char-sheet-alt .actor-sheet {
     flex-wrap: nowrap;
     text-align: center;
     ol,
-    ul {
+    ul,
+    .list {
         list-style: none;
         margin: 0;
         padding: 0;
     }
     text-decoration: none;
     box-sizing: border-box;
+    input[type="checkbox"] {
+        height: 12px;
+        width: 12px;
+    }
 
     .actor-picture {
         border: none;
@@ -44,7 +41,7 @@
     .resource {
         hr {margin: 0}
         border-radius: 10px;
-        margin-top: 6px;
+        margin-bottom: 6px;
         margin-left: 4px;
         margin-right: 4px;
         border: 1px solid black;
@@ -58,8 +55,11 @@
     }
     .values {
         align-items: center;
+        flex-wrap: nowrap;
+        padding: 0 4px
     }
-    li.item-box {
+    li.item-box,
+    .list-item.item-box {
         padding: 2px 5px;
         .main-data {
             align-items: center;
@@ -79,20 +79,29 @@
         .controls {
             max-width: fit-content;
             align-items: center;
-            .arrow-control {
-                font-size: .5rem;
-            }
             * {
                 margin-left: 2px;
                 max-width: fit-content;
             }
         }
     }
+    .arrow-control {
+        font-size: .5rem;
+    }
+    .mods-section {
+        flex: 0 0 40%;
+    }
     .values-options {
         font-size: .7rem;
         justify-items: center;
-        max-width: fit-content;
         margin: 0 auto;
+        padding-right: 4px;
+        div:not(:last-child) .value-data {
+           margin-bottom: 1px;
+        }
+        > div {
+            justify-content: center;
+        }
         .value-data {
             margin: auto 0;
             border-radius: 4px;
@@ -111,14 +120,36 @@
 
     }
     .value-data {
-        flex: 0 0 auto;
-        margin: 4px auto;
-        border-radius: 50%;
+        flex: 0 1 auto;
+        margin: 4px 2px;
+        border-radius: 5px;
         border: 1px solid black;
         background-color: rgba(255,255,255,0.5);
-        width: 2rem;
         height: 2rem;
         font-size: .9rem;
+    }
+    .injury {
+        .labels div {
+            font-size: .6rem;
+        }
+        .mark {
+            display: block;
+            position: relative;
+        }
+        .tracker-container {
+            position: absolute;
+            top: 12px;
+            left: 30px
+        }
+        .severe-injury-tracker {
+            border-radius: 50%;
+            border: solid 2px;
+            width: 4px;
+            max-width: 4px;
+            height: 4px;
+            max-height: 4px;
+            margin-bottom: 2px;
+        }
     }
     .labels {
         margin: auto;
@@ -130,6 +161,19 @@
     }
     /**********************/
 
+    // Aid Bar
+    .general-aid-bar {
+        .title {
+            padding: 0 4px;
+            min-width: max-content !important;
+        }
+        .list-item:first-child {
+            padding-left: 4px;
+        }
+        .list-item:last-child {
+            padding-right: 4px;
+        }
+    }
     aside {
         flex: 0 0 190px;
         // height: 750px;
@@ -159,9 +203,10 @@
     }
 
     .sheet-main-content nav {
-        justify-content: space-between;
+        justify-content: center;
         text-align: center;
         margin-bottom: 10px;
+        row-gap: 5px;
         a {
             margin: 0 4px;
             padding: 0 4px;
@@ -177,10 +222,13 @@
     }
 
     .owned-focus .item-name,
+    .select-options,
     .conditions .tooltip-container {
         padding: 0 5px;
         margin: 3px 1px;
         border-radius: 15px;
+        font-variant: all-petite-caps;
+        text-align: center
     };
     .char-main-section {
         .ability-box {
@@ -262,16 +310,18 @@
     }
 
     .item-group {
-        li:first-child {
+        li:first-child,
+        .list-item:first-child {
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         };
-        li:last-child {
+        li:last-child,
+        .list-item:last-child {
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
         }
         height: max-content;
-        margin: 0 5px 10px 5px;
+        // margin: 0 5px 10px 5px;
     }
 
     .abilities-column {
@@ -309,6 +359,9 @@
     .at-header {
         flex: 0 0 100px;
         margin: auto 4px;
+        .value-data {
+            max-width: fit-content;
+        }
         .exp {
             align-items: center;
             input {

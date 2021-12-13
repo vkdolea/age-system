@@ -9,7 +9,7 @@ export default class ageSystemSheetCharAlt extends ageSystemSheetCharacter {
         return mergeObject(super.defaultOptions, {
             // resizable: false,
             // width: 800,
-            // height: 650,
+            height: 900,
             classes: ["age-system", "sheet", "char-sheet-alt"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",

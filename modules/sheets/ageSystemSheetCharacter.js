@@ -55,6 +55,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.honorifics = itemSorted.filter(i => i.type === "honorifics");
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
+        data.favorite = itemSorted.filter(i => i.data.favorite);
 
         // Sorting Modifiers per Type/Item
         const modList = {}
@@ -420,6 +421,10 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const itemToToggle = this.actor.getEmbeddedDocument("Item", itemId);
         const itemType = itemToToggle.type;
+        if (event.currentTarget.classList.contains('favorite')) {
+            const toggleFav = !itemToToggle.data.data.favorite;
+            return itemToToggle.update({"data.favorite": toggleFav});
+        }
         if (itemType === "power" || itemType === "talent") {
             const toggleAct = !itemToToggle.data.data.activate;
             itemToToggle.update({"data.activate": toggleAct});

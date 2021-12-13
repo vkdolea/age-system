@@ -1472,10 +1472,15 @@
   /**********************/
 }
 .age-system.sheet.char-sheet-alt .actor-sheet ol,
-.age-system.sheet.char-sheet-alt .actor-sheet ul {
+.age-system.sheet.char-sheet-alt .actor-sheet ul,
+.age-system.sheet.char-sheet-alt .actor-sheet .list {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet input[type="checkbox"] {
+  height: 12px;
+  width: 12px;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .actor-picture {
   border: none;
@@ -1493,7 +1498,7 @@
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .resource {
   border-radius: 10px;
-  margin-top: 6px;
+  margin-bottom: 6px;
   margin-left: 4px;
   margin-right: 4px;
   border: 1px solid black;
@@ -1510,41 +1515,58 @@
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .values {
   align-items: center;
+  flex-wrap: nowrap;
+  padding: 0 4px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box {
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box,
+.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box {
   padding: 2px 5px;
   justify-content: space-between;
   align-items: center;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .main-data {
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .main-data,
+.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box .main-data {
   align-items: center;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .item-image {
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .item-image,
+.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box .item-image {
   border: none;
   flex: 0 0 2rem;
   height: 2rem;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .item-name {
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .item-name,
+.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box .item-name {
   align-items: flex-start;
   text-align: left;
   margin-left: 5px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .controls {
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .controls,
+.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box .controls {
   max-width: fit-content;
   align-items: center;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .controls .arrow-control {
-  font-size: 0.5rem;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .controls * {
+.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .controls *,
+.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box .controls * {
   margin-left: 2px;
   max-width: fit-content;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .arrow-control {
+  font-size: 0.5rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .mods-section {
+  flex: 0 0 40%;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .values-options {
   font-size: 0.7rem;
   justify-items: center;
-  max-width: fit-content;
   margin: 0 auto;
+  padding-right: 4px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .values-options div:not(:last-child) .value-data {
+  margin-bottom: 1px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .values-options > div {
+  justify-content: center;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .values-options .value-data {
   margin: auto 0;
@@ -1562,14 +1584,34 @@
   max-width: fit-content;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .value-data {
-  flex: 0 0 auto;
-  margin: 4px auto;
-  border-radius: 50%;
+  flex: 0 1 auto;
+  margin: 4px 2px;
+  border-radius: 5px;
   border: 1px solid black;
   background-color: rgba(255, 255, 255, 0.5);
-  width: 2rem;
   height: 2rem;
   font-size: 0.9rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .injury .labels div {
+  font-size: 0.6rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .injury .mark {
+  display: block;
+  position: relative;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .injury .tracker-container {
+  position: absolute;
+  top: 12px;
+  left: 30px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .injury .severe-injury-tracker {
+  border-radius: 50%;
+  border: solid 2px;
+  width: 4px;
+  max-width: 4px;
+  height: 4px;
+  max-height: 4px;
+  margin-bottom: 2px;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .labels {
   margin: auto;
@@ -1578,6 +1620,16 @@
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .short-input {
   flex: 0 0 3rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .general-aid-bar .title {
+  padding: 0 4px;
+  min-width: max-content !important;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .general-aid-bar .list-item:first-child {
+  padding-left: 4px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .general-aid-bar .list-item:last-child {
+  padding-right: 4px;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet aside {
   flex: 0 0 190px;
@@ -1604,9 +1656,10 @@
   transition: all 0.5s ease;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav {
-  justify-content: space-between;
+  justify-content: center;
   text-align: center;
   margin-bottom: 10px;
+  row-gap: 5px;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav a {
   margin: 0 4px;
@@ -1621,10 +1674,13 @@
   font-weight: 600;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .owned-focus .item-name,
+.age-system.sheet.char-sheet-alt .actor-sheet .select-options,
 .age-system.sheet.char-sheet-alt .actor-sheet .conditions .tooltip-container {
   padding: 0 5px;
   margin: 3px 1px;
   border-radius: 15px;
+  font-variant: all-petite-caps;
+  text-align: center;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .ability-box {
   flex: 0 0 200px;
@@ -1703,13 +1759,14 @@
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .item-group {
   height: max-content;
-  margin: 0 5px 10px 5px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .item-group li:first-child {
+.age-system.sheet.char-sheet-alt .actor-sheet .item-group li:first-child,
+.age-system.sheet.char-sheet-alt .actor-sheet .item-group .list-item:first-child {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .item-group li:last-child {
+.age-system.sheet.char-sheet-alt .actor-sheet .item-group li:last-child,
+.age-system.sheet.char-sheet-alt .actor-sheet .item-group .list-item:last-child {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -1744,6 +1801,9 @@
 .age-system.sheet.char-sheet-alt .actor-sheet .at-header {
   flex: 0 0 100px;
   margin: auto 4px;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .at-header .value-data {
+  max-width: fit-content;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .at-header .exp {
   align-items: center;

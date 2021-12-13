@@ -25,17 +25,27 @@ import * as migrations from "./modules/migration.js";
 async function preloadHandlebarsTemplates() {
     const path = `systems/age-system/templates/partials/`;
     const templatePaths = [
+        `${path}itemcontrols/equipment.hbs`,
+        `${path}itemcontrols/honorifics.hbs`,
+        `${path}itemcontrols/membership.hbs`,
+        `${path}itemcontrols/power.hbs`,
+        `${path}itemcontrols/relationship.hbs`,
+        `${path}itemcontrols/stunts.hbs`,
+        `${path}itemcontrols/talent.hbs`,
+        `${path}itemcontrols/weapon.hbs`,
         `${path}ability-focus-select.hbs`,
         `${path}active-bonuses.hbs`,
         `${path}bonus-desc-sheet.hbs`,
         `${path}bonuses-sheet.hbs`,
         `${path}char-sheet-alt-main.hbs`,
         `${path}char-sheet-alt-persona.hbs`,
+        `${path}char-sheet-alt-stunts.hbs`,
         `${path}char-sheet-alt-social.hbs`,
         `${path}char-sheet-alt-equip.hbs`,
         `${path}char-sheet-alt-talents.hbs`,
         `${path}char-sheet-alt-powers.hbs`,
         `${path}char-sheet-alt-effects.hbs`,
+        `${path}char-sheet-alt-options.hbs`,
         `${path}char-sheet-nav-bar.hbs`,
         `${path}char-sheet-tab-main.hbs`,
         `${path}char-sheet-injury-bar.hbs`,
@@ -93,12 +103,12 @@ Hooks.once("init", async function() {
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("age-system", ageSystemSheetCharacter, {
         types: ["char"],
-        makeDefault: true,
-        label: "age-system.SHEETS.charStandard"
+        label: "Legacy"
     });
     Actors.registerSheet("age-system", ageSystemSheetCharAlt, {
         types: ["char"],
-        label: "age-system.SHEETS.charStatAlt"
+        makeDefault: true,
+        label: "age-system.SHEETS.charStandard"
     });
     Actors.registerSheet("age-system", ageSystemSheetCharStatBlock, {
         types: ["char"],
