@@ -641,6 +641,7 @@
         "saveClose": "Save & Close",
         "copyEffectsExpanse": "Copy effects from The Expanse",
 
-        "social": "Social"
+        "social": "Social",
+        "quickAccess": "Quick Access"
     }
 }

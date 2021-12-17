@@ -32,7 +32,7 @@
                 {{#if data.data.useResources}}{{localize "SETTINGS.wealthTypeResources"}}{{/if}}{{#if data.data.useIncome}}{{localize "SETTINGS.wealthTypeIncome"}}{{/if}}
             </div>
             <div class="values flexrow">
-                <input class="value-data" disabled type="number" name="data.resources.total" value="{{data.data.resources.total}}" data-dtype="Number" />
+                <input class="value-data circle" disabled type="number" name="data.resources.total" value="{{data.data.resources.total}}" data-dtype="Number" />
                 <div class="values-options mods-section flexcol">
                     <div class="flexrow">
                         <input class="value-data" type="number" name="data.resources.base" value="{{data.data.resources.base}}" data-dtype="Number" />
@@ -44,9 +44,8 @@
                     </div>
                 </div>
             </div>
-            <div class="labels flexrow">
-                <label>{{localize "age-system.total"}}</label>
-                <label class="mods-section">{{localize "age-system.mod"}}</label>
+            <div class="labels">
+                <label>{{localize "age-system.total"}} / {{localize "age-system.mod"}}</label>
             </div>
         </div>
         {{/if}}

@@ -311,7 +311,8 @@ export class ageSystemItem extends Item {
             config: {
                 colorScheme: ageSystem.colorScheme,
                 wealthMode: game.settings.get("age-system", "wealthType")
-            }
+            },
+            cssClass: `colorset-${ageSystem.colorScheme}`
         };
         const chatData = {
             user: game.user.id,

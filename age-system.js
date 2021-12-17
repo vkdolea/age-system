@@ -167,23 +167,6 @@ Hooks.once("init", async function() {
     ageSystem.breather = game.settings.get('age-system', 'breatherParam');
     ageSystem.autoConsumePP = game.settings.get('age-system', 'consumePP');
 
-    // Set Health System configuration
-    const hstype = await game.settings.get("age-system", "healthSys");
-    const HEALTH_SYS = {
-        type: hstype,
-        mode: await game.settings.get("age-system", "gameMode"),
-        healthName: `SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`,
-        useToughness: ![`basic`].includes(hstype),
-        useFortune: [`expanse`].includes(hstype),
-        useHealth: [`basic`, `mage`].includes(hstype),
-        useInjury: [`mageInjury`, `mageVitality`].includes(hstype),
-        useVitality: [`mageVitality`].includes(hstype),
-        useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
-        baseDamageTN: 13
-    };
-    CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
-    CONFIG.ageSystem.healthSys = HEALTH_SYS;
-
     // Useful concat Helper from Boilerplate system!
     Handlebars.registerHelper('concat', function() {
         let outStr = '';
@@ -281,8 +264,22 @@ Hooks.once("setup", function() {
     Setup.abilitiesName();
     Setup.localizeAgeEffects();
 
-    // Localize HealthSys Name
-    ageSystem.healthSys.healthName = game.i18n.localize('SETTINGS.healthModehealth');
+    // Set Health System configuration
+    const hstype = game.settings.get("age-system", "healthSys");
+    const HEALTH_SYS = {
+        type: hstype,
+        mode: game.settings.get("age-system", "gameMode"),
+        healthName: game.i18n.localize(`SETTINGS.healthMode${game.settings.get("age-system", "healthMode")}`),
+        useToughness: ![`basic`].includes(hstype),
+        useFortune: [`expanse`].includes(hstype),
+        useHealth: [`basic`, `mage`].includes(hstype),
+        useInjury: [`mageInjury`, `mageVitality`].includes(hstype),
+        useVitality: [`mageVitality`].includes(hstype),
+        useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
+        baseDamageTN: 13
+    };
+    CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
+    CONFIG.ageSystem.healthSys = HEALTH_SYS;
 });
 
 Hooks.once("ready", async function() {

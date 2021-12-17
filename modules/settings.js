@@ -144,8 +144,9 @@ export const registerSystemSettings = async function() {
       "health": "SETTINGS.healthModehealth",
       "fortune": "SETTINGS.healthModefortune",
     },
-    onChange: async () => {
-      ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${await game.settings.get("age-system", "healthMode")}`),
+    // onChange: debouncedReload
+    onChange: () => {
+      ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${game.settings.get("age-system", "healthMode")}`),
       [...game.actors.contents, ...Object.values(game.actors.tokens)]
         .filter((o) => {
           return o.data.type === "char";
