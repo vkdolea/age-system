@@ -97,6 +97,19 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.9.1 [2021-12-17]
+### Added
+- "Favourite Equipment" renamed as "Quick Access". Items are now sorted by item type. A header will indicate which item type is listed.
+
+### Changed
+- Attack to Damage Trade Off: the value informed is added to Attack roll (if negative, it is subtracted). The oposite operation goes to damage total.
+- When changing tabs from character sheet, the selected tab will have bigger font size.
+- Added silver shadows around tabs' names, to improve contrast.
+- Updated Spanish and French translation.
+
+### Fixed
+- Health/Fortune labels were not display correctly on character sheet.
+
 ## 0.9.0 [2021-12-12]
 ### Added
 - New Character sheet, totally overhauled. Old sheet can be acessed by accessing "Sheet" -> "This Sheet" -> "Legacy".

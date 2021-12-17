@@ -14,9 +14,9 @@
     "ITEM.TypeMembership": "Afiliaciones",
 	"ITEM.TypeShipfeatures": "Características Nave",
 
-    "SETTINGS.consumePP": "Consume Power/Mana/Kana/Spell Points on roll",
-    "SETTINGS.consumePPHint": "If enabled, Points necessary to user a Power will be deducted from Character's total. A message will appear if not enough points are available.",
-
+    "SETTINGS.consumePP": "Consumir Puntos Poder en las tiradas",
+    "SETTINGS.consumePPHint": "Si se activa, los Puntos necesarios para lanzar un poder serán restados del Total del personaje automáticamente. Se mostrará un mensaje de aviso en caso de no disponer de puntos suficientes.",
+    
     "SETTINGS.breatherSettings": "Configuración Descanso",
     "SETTINGS.breatherSettingsHint": "Configurar cantidad de puntos recuperados con un Descanso",
     
@@ -67,7 +67,7 @@
     "SETTINGS.colorRoninGreen": "Verde Ronin",
     "SETTINGS.colorExpandedBlue": "The Expanse",
     "SETTINGS.colorFoldedPurple": "Púrpura",
-	"SETTINGS.colorSelectOne": "Selecciona Uno",
+	"SETTINGS.colorSelectOne": "Exclusivo",
     "SETTINGS.colorTheGrey": "Gris",
     "SETTINGS.colorRedWarrior": "Guerrero Rojo",
     "SETTINGS.colorNeverDead": "No Muerto",
@@ -254,7 +254,7 @@
         "vehicleArmor": "Blindaje",
         
         "stuntAttack": "Ataque Proeza",
-        "stuntStack": "Stack SP on Doubles",
+        "stuntStack": "Apilar PPro en Dobles",
         "chatCard": {
             "rollGeneral": "tira {item}",
             "rollAttack": "ataca con {item}",
@@ -316,23 +316,23 @@
             "deafened": "Sordo",
             "deafenedDesc": "El personaje no puede oir y automáticamente falla tiradas de atributo relaccionadas con el sonido, como Percepción (Escuchar).",
             "exhausted": "Exhausto",
-            "exhaustedDesc": "El personaje esta severamente fatigado. Su velocidad se reduce a la mitad y no puede realizar las acciones Cargar o Correr. Si recibe un estado adicional de fatigado o exhausto se convierte en Indefenso.",
+            "exhaustedDesc": "El personaje esta severamente fatigado. Su velocidad se reduce a la mitad y no puede realizar las acciones Carga o Correr. Si recibe un estado adicional de fatigado o exhausto se convierte en Indefenso.",
             "fatigued": "Fatigado",
-            "fatiguedDesc": "El personaje esta cansado y no puede realizar las acciones Cargar o Correr. Si recibe un estado adicional de fatigado se convierte en Exhausto.",
+            "fatiguedDesc": "El personaje esta cansado y no puede realizar las acciones Carga o Correr. Si recibe un estado adicional de fatigado se convierte en Exhausto.",
             "freefalling": "Sin Gravedad",
             "freefallingDesc": "El personaje se encuentra sin peso en un entorno de microgravedad o caída libre. Se puede desplazar sólo utilizando asideros, una superficie donde empujarse, o algún tipo de empuje. Una vez en movimiento, se continua con la misma velocidad y trayectoria hasta que se actúe para frenar o cambiar el mismo.",
             "helpless": "Indefenso",
             "helplessDesc": "El personaje es incapaz de hacer nada. No puede efectuar ninguna acción.",
             "hindered": "Obstruido",
-            "hinderedDesc": "La velocidad del personaje se reduce a la mitad (redondeado para abajo) y no puede realizar las acciones Cargar o Correr.",
+            "hinderedDesc": "La velocidad del personaje se reduce a la mitad (redondeado para abajo) y no puede realizar las acciones Carga o Correr.",
             "prone": "Derribado",
-            "proneDesc": "El personaje esta en el suelo. No puede realizar las acciones de Cargar o Correr, ya que sólo puede arrastrase. Levantarse requiere una acción de Mover gastando la mitad de la velocidad disponible. Los ataques Melé tienen un bono +1 y a distancia una penalización -1 contra los personajes en el suelo.",
+            "proneDesc": "El personaje esta en el suelo. No puede realizar las acciones de Carga o Correr, ya que sólo puede arrastrase. Levantarse requiere una acción de Mover gastando la mitad de la velocidad disponible. Los ataques Melé tienen un bono +1 y a distancia una penalización -1 contra los personajes en el suelo.",
             "restrained": "Retenido",
             "restrainedDesc": "La velocidad del personaje es 0 y no se puede mover. El estado Retenido puede impedir ciertas acciones adicionalmente, según la naturaleza del agarre ejercido.",
             "injured": "Tocado",
-            "injuredDesc": "El personaje ha sufrido daño. Tiene una penalización -1 en todas las tiradas y se encuentra fatigado, incapáz de realizar las acciones de Cargar o Correr. Un personaje ya tocado que recibe un estado adicional igual pasa a estar Herido.",
+            "injuredDesc": "El personaje ha sufrido daño. Tiene una penalización -1 en todas las tiradas y se encuentra fatigado, incapáz de realizar las acciones de Carga o Correr. Un personaje ya tocado que recibe un estado adicional igual pasa a estar Herido.",
             "wounded": "Herido",
-            "woundedDesc": "El personaje esta tocado de gravedad. Tiene una penalización -2 en todas las tiradas y se encuentra exhausto, su velocidad se reduce a la mitad y es incapáz de realizar las acciones de Cargar o Correr. Un personaje ya tocado que recibe un estado adicional igual o tocado pasa a estar Moribundo.",
+            "woundedDesc": "El personaje esta tocado de gravedad. Tiene una penalización -2 en todas las tiradas y se encuentra exhausto, su velocidad se reduce a la mitad y es incapáz de realizar las acciones de Carga o Correr. Un personaje ya tocado que recibe un estado adicional igual o tocado pasa a estar Moribundo.",
             "unconscious": "Inconsciente",
             "unconsciousDesc": "El personaje no tiene consciencia de donde se encuentra ni del paso del tiempo. El personaje es derribado y se encuentra indefenso, incapaz de realizar acciones.",
             "dying": "Moribundo",
@@ -458,7 +458,7 @@
         "addLevel": "Añadir Nivel",
         "autoApply": "Auto Aplicar",
         
-        "rollWithoutPP": "{name} doesn't have enough points to use {item}. Roll it anyway?",
+        "rollWithoutPP": "{name} no dispone de suficientes puntos para usar {item}. ¿Tirar igualmente?",
         "powerPoints": "Puntos Poder",
         "powerPointsIndex": "PP",
         "name": "Nombre",
@@ -639,6 +639,9 @@
         "addEffectTop": "Añadir nuevo efecto superior",
         "addEffectBottom": "Añadir nuevo efecto inferior",
         "saveClose": "Guardar & Salir",
-        "copyEffectsExpanse": "Copiar efectos desde The Expanse"
+        "copyEffectsExpanse": "Copiar efectos desde The Expanse",
+        
+        "social": "Social",
+        "quickAccess": "Acesso Rápido"
     }
 }

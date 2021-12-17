@@ -4,7 +4,7 @@
     <div class="resource item-list colorset-third-tier">
         <div class="title">{{localize "age-system.testThreshold"}}</div>
         <div class="values flexrow">
-            <input class="value-data" type="number" name="data.advTestThreshold" value="{{data.data.advTestThreshold}}" data-dtype="Number" />
+            <input class="value-data circle" type="number" name="data.advTestThreshold" value="{{data.data.advTestThreshold}}" data-dtype="Number" />
         </div>
         <div class="labels flexrow">
             <label>{{localize "age-system.total"}}</label>
@@ -15,8 +15,8 @@
     <div class="resource item-list colorset-third-tier">
         <div class="title">{{localize "age-system.allOutAttack"}}</div>
         <div class="values flexrow">
-            <input class="value-data" type="number" name="data.allOutAttack.dmgBonus" value="{{data.data.allOutAttack.dmgBonus}}" data-dtype="Number" />
-            <input class="value-data" type="number" name="data.allOutAttack.defensePenalty" value="{{data.data.allOutAttack.defensePenalty}}" data-dtype="Number" />
+            <input class="value-data circle" type="number" name="data.allOutAttack.dmgBonus" value="{{data.data.allOutAttack.dmgBonus}}" data-dtype="Number" />
+            <input class="value-data circle" type="number" name="data.allOutAttack.defensePenalty" value="{{data.data.allOutAttack.defensePenalty}}" data-dtype="Number" />
             <input type="checkbox" name="data.allOutAttack.active" {{checked data.data.allOutAttack.active}} class="checkbox"/>
         </div>
         <div class="labels flexrow">
@@ -28,7 +28,7 @@
     <div class="resource item-list colorset-third-tier feature-controls" data-guardup-active="{{data.data.guardUp.active}}">
         <div class="title">{{localize "age-system.defendManeuver"}}</div>
         <div class="values flexrow">
-            <input class="value-data" type="number" name="data.defend.defenseBonus" value="{{data.data.defend.defenseBonus}}" data-dtype="Number" />
+            <input class="value-data circle" type="number" name="data.defend.defenseBonus" value="{{data.data.defend.defenseBonus}}" data-dtype="Number" />
             <input type="checkbox" class="defend-maneuver" name="data.defend.active" {{checked data.data.defend.active}} class="checkbox"/>
         </div>
         <div class="labels flexrow">
@@ -40,8 +40,8 @@
     <div class="resource item-list colorset-third-tier feature-controls" data-defend-active="{{data.data.defend.active}}">
         <div class="title">{{localize "age-system.guardUp"}}</div>
         <div class="values flexrow">
-            <input class="value-data" type="number" name="data.guardUp.defenseBonus" value="{{data.data.guardUp.defenseBonus}}" data-dtype="Number" />
-            <input class="value-data" type="number" name="data.guardUp.testPenalty" value="{{data.data.guardUp.testPenalty}}" data-dtype="Number" />
+            <input class="value-data circle" type="number" name="data.guardUp.defenseBonus" value="{{data.data.guardUp.defenseBonus}}" data-dtype="Number" />
+            <input class="value-data circle" type="number" name="data.guardUp.testPenalty" value="{{data.data.guardUp.testPenalty}}" data-dtype="Number" />
             <input type="checkbox" class="guardup-maneuver" name="data.guardUp.active" {{checked data.data.guardUp.active}} class="checkbox"/>
         </div>
         <div class="labels flexrow">
@@ -85,8 +85,8 @@
             <div class="resource item-list colorset-third-tier">
                 <div class="title">{{localize "age-system.initiative"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data" disabled type="number" name="data.initiative" value="{{data.data.initiative}}" data-dtype="Number" />
-                    <input class="value-data" type="number" name="data.initiativeMod" value="{{data.data.initiativeMod}}" data-dtype="Number" />
+                    <input class="value-data circle" disabled type="number" name="data.initiative" value="{{data.data.initiative}}" data-dtype="Number" />
+                    <input class="value-data circle" type="number" name="data.initiativeMod" value="{{data.data.initiativeMod}}" data-dtype="Number" />
                 </div>
                 <div class="labels flexrow">
                     <label>{{localize "age-system.total"}}</label>
@@ -98,7 +98,7 @@
             <div class="resource item-list colorset-third-tier">
                 <div class="title">{{localize "age-system.aim"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data" type="number" name="data.aim.value" value="{{data.data.aim.value}}" data-dtype="Number" />
+                    <input class="value-data circle" type="number" name="data.aim.value" value="{{data.data.aim.value}}" data-dtype="Number" />
                     <input type="checkbox" name="data.aim.active" {{checked data.data.aim.active}} class="checkbox"/>
                 </div>
                 <div class="labels flexrow">
@@ -109,38 +109,82 @@
         </div>
 
         <ul class="resource item-group favourite">
-            <li class="header colorset-first-tier">
-                Favourite Items
+            <li class="header title colorset-first-tier">
+                {{localize "age-system.quickAccess"}}
             </li>
-            {{#each data.favorite as |item|}}
+            {{#if data.favWeapon}}
+            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeWeapon"}}</li>
+            {{#each data.favWeapon as |item|}}
             <li>
-                {{#if (eq item.type "equipment")}}
-                {{> "systems/age-system/templates/partials/itemcontrols/equipment.hbs" item=this config=../data.config}}
-                {{/if}}
-                {{#if (eq item.type "weapon")}}
                 {{> "systems/age-system/templates/partials/itemcontrols/weapon.hbs" item=this config=../data.config}}
-                {{/if}}
-                {{#if (eq item.type "power")}}
-                {{> "systems/age-system/templates/partials/itemcontrols/power.hbs" item=this config=../data.config}}
-                {{/if}}
-                {{#if (eq item.type "talent")}}
-                {{> "systems/age-system/templates/partials/itemcontrols/talent.hbs" item=this config=../data.config}}
-                {{/if}}
-                {{#if (eq item.type "stunts")}}
-                {{> "systems/age-system/templates/partials/itemcontrols/stunts.hbs" item=this config=../data.config}}
-                {{/if}}
-                {{#if (eq item.type "relationship")}}
-                {{> "systems/age-system/templates/partials/itemcontrols/relationship.hbs" item=this config=../data.config}}
-                {{/if}}
-                {{#if (eq item.type "honorifics")}}
-                {{> "systems/age-system/templates/partials/itemcontrols/honorifics.hbs" item=this config=../data.config}}
-                {{/if}}
-                {{#if (eq item.type "membership")}}
-                {{> "systems/age-system/templates/partials/itemcontrols/membership.hbs" item=this config=../data.config}}
-                {{/if}}
             </li>
             {{/each}}
+            {{/if}}
+
+            {{#if data.favPower}}
+            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypePower"}}</li>
+            {{#each data.favPower as |item|}}
+            <li>
+                {{> "systems/age-system/templates/partials/itemcontrols/power.hbs" item=this config=../data.config}}
+            </li>
+            {{/each}}
+            {{/if}}
+
+            {{#if data.favEquip}}
+            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeEquipment"}}</li>
+            {{#each data.favEquip as |item|}}
+            <li>
+                {{> "systems/age-system/templates/partials/itemcontrols/equipment.hbs" item=this config=../data.config}}
+            </li>
+            {{/each}}
+            {{/if}}
+
+            {{#if data.favStunt}}
+            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeStunts"}}</li>
+            {{#each data.favStunt as |item|}}
+            <li>
+                {{> "systems/age-system/templates/partials/itemcontrols/stunts.hbs" item=this config=../data.config}}
+            </li>
+            {{/each}}
+            {{/if}}
+
+            {{#if data.favTalent}}
+            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeTalent"}}</li>
+            {{#each data.favTalent as |item|}}
+            <li>
+                {{> "systems/age-system/templates/partials/itemcontrols/talent.hbs" item=this config=../data.config}}
+            </li>
+            {{/each}}
+            {{/if}}
+
+            {{#if data.favRelation}}
+            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeRelationship"}}</li>
+            {{#each data.favRelation as |item|}}
+            <li>
+                {{> "systems/age-system/templates/partials/itemcontrols/relationship.hbs" item=this config=../data.config}}
+            </li>
+            {{/each}}
+            {{/if}}
+            
+            {{#if data.favHonor}}
+            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeHonorifics"}}</li>
+            {{#each data.favHonor as |item|}}
+            <li>
+                {{> "systems/age-system/templates/partials/itemcontrols/honorifics.hbs" item=this config=../data.config}}
+            </li>
+            {{/each}}
+            {{/if}}
+
+            {{#if data.favMembership}}
+            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeMembership"}}</li>
+            {{#each data.favMembership as |item|}}
+            <li>
+                {{> "systems/age-system/templates/partials/itemcontrols/membership.hbs" item=this config=../data.config}}
+            </li>
+            {{/each}}
+            {{/if}}
         </ul>
+
     </div>
 
 </section>

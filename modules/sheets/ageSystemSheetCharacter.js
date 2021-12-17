@@ -39,7 +39,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
         // const data = super.getData();
-        data.config = CONFIG.ageSystem;
+        data.config = ageSystem;
 
         // Order itens into alphabetic order
         const itemSorted = sortObjArrayByName(data.items, "name");
@@ -55,7 +55,15 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.honorifics = itemSorted.filter(i => i.type === "honorifics");
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
-        data.favorite = itemSorted.filter(i => i.data.favorite);
+        // Groups of Fav Item
+        data.favWeapon = data.weapon.filter(i => i.data.favorite);
+        data.favPower = data.power.filter(i => i.data.favorite);
+        data.favEquip = data.equipment.filter(i => i.data.favorite);
+        data.favStunt = data.stunts.filter(i => i.data.favorite);
+        data.favTalent = data.talent.filter(i => i.data.favorite);
+        data.favRelation = data.relationship.filter(i => i.data.favorite);
+        data.favHonor = data.honorifics.filter(i => i.data.favorite);
+        data.favMembership = data.membership.filter(i => i.data.favorite);
 
         // Sorting Modifiers per Type/Item
         const modList = {}

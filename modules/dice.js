@@ -29,7 +29,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         if (extraOptions.extraSP) extraSP = extraOptions.extraSP;
         if (extraOptions.stackSP !== undefined) stackSP = extraOptions.stackSP;
         rollUserMod = extraOptions.ageRollMod;
-        atkDmgTradeOff = -Math.abs(Number(extraOptions.atkDmgTradeOff));
+        atkDmgTradeOff = extraOptions.atkDmgTradeOff;
     };
 
     // Set roll mode
@@ -637,7 +637,7 @@ export async function plotDamage (actor) {
     const rollUserMod = dmgOpt.setDmgGeneralMod;
     const stuntDamage = dmgOpt.setStuntDamage;
     const dmgExtraDice = dmgOpt.setDmgExtraDice;
-    const atkDmgTradeOff = -Math.abs(Number(dmgOpt.atkDmgTradeOff));
+    const atkDmgTradeOff = Number(dmgOpt.atkDmgTradeOff);
 
     if (abl && abl !== 'no-abl') {
         rollData.ability = actor.data.data.abilities[abl].value;
@@ -809,7 +809,7 @@ export async function itemDamage({
         // Check if Attack to Damage Trade Off is applied
         if (atkDmgTradeOff) {
             damageFormula = `${damageFormula} + @atkDmgTradeOff[${game.i18n.localize("age-system.penaltyToDamage")}]`;
-            rollData.atkDmgTradeOff = healthSys.useInjury ? Math.ceil(Math.abs(atkDmgTradeOff)/3) : Math.abs(atkDmgTradeOff);
+            rollData.atkDmgTradeOff = healthSys.useInjury ? Math.ceil(-atkDmgTradeOff/3) : (-atkDmgTradeOff);
         }
 
         // Check if Focus adds to damage and adds it

@@ -1478,6 +1478,10 @@
   margin: 0;
   padding: 0;
 }
+.age-system.sheet.char-sheet-alt .actor-sheet .list-sub-header {
+  font-variant: all-petite-caps;
+  font-weight: 600;
+}
 .age-system.sheet.char-sheet-alt .actor-sheet input[type="checkbox"] {
   height: 12px;
   width: 12px;
@@ -1514,6 +1518,7 @@
   padding: 2px;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .values {
+  justify-content: space-around;
   align-items: center;
   flex-wrap: nowrap;
   padding: 0 4px;
@@ -1557,12 +1562,11 @@
   font-size: 0.6rem;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .mods-section {
-  flex: 0 0 40%;
+  flex: 0 0 30%;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .values-options {
   font-size: 0.7rem;
   justify-items: center;
-  margin: 0 auto;
   padding-right: 4px;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .values-options div:not(:last-child) .value-data {
@@ -1570,6 +1574,7 @@
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .values-options > div {
   justify-content: center;
+  width: max-content;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .values-options .value-data {
   margin: auto 0;
@@ -1588,12 +1593,16 @@
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .value-data {
   flex: 0 1 auto;
-  margin: 4px 2px;
+  margin: 4px auto;
   border-radius: 5px;
   border: 1px solid black;
   background-color: rgba(255, 255, 255, 0.5);
   height: 2rem;
   font-size: 0.9rem;
+}
+.age-system.sheet.char-sheet-alt .actor-sheet .value-data.circle {
+  width: 2rem;
+  border-radius: 50%;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .injury .labels div {
   font-size: 0.6rem;
@@ -1660,16 +1669,24 @@
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav {
   justify-content: center;
+  align-items: center;
   text-align: center;
   margin-bottom: 10px;
   row-gap: 5px;
 }
+.age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav a.active {
+  font-size: 1.2rem;
+  height: 1.4rem;
+  line-height: 100%;
+}
 .age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav a {
+  text-shadow: 1px 0px 1px silver, -1px 0px 1px silver, 1px 0px 1px silver, 0px 1px 1px silver, 0px -1px 1px silver;
+  font-size: 1rem;
   margin: 0 4px;
   padding: 0 4px;
   max-width: fit-content;
   font-variant: all-petite-caps;
-  height: 20px;
+  height: 1.2rem;
   border-radius: 5px;
   vertical-align: middle;
   -webkit-box-shadow: 1px 1px 3px 1px #000000;
@@ -3701,7 +3718,7 @@
   background: radial-gradient(closest-side, #768d9f 60%, #273249) !important;
 }
 .colorset-select-one .thin-border {
-  border: thin solid #610808;
+  border: thin solid #290000;
 }
 .colorset-select-one .colorset-first-tier {
   background-color: #273249;
@@ -3713,7 +3730,7 @@
 }
 .colorset-select-one .colorset-third-tier {
   background-color: #4d627a;
-  color: #610808;
+  color: #290000;
 }
 .colorset-select-one input.colorset-first-tier {
   background-color: #273249;
@@ -3819,7 +3836,7 @@
 .colorset-select-one .membership .item-card-stats input.data-entry,
 .colorset-select-one .relationship .item-card-stats input.data-entry,
 .colorset-select-one .shipfeatures .item-card-stats input.data-entry {
-  color: #610808;
+  color: #290000;
 }
 .colorset-select-one .focus .item-card-desc,
 .colorset-select-one .power .item-card-desc,

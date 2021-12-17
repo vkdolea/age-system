@@ -12,6 +12,10 @@
         margin: 0;
         padding: 0;
     }
+    .list-sub-header {
+        font-variant: all-petite-caps;
+        font-weight: 600;
+    }
     text-decoration: none;
     box-sizing: border-box;
     input[type="checkbox"] {
@@ -54,6 +58,7 @@
         padding: 2px;
     }
     .values {
+        justify-content: space-around;
         align-items: center;
         flex-wrap: nowrap;
         padding: 0 4px
@@ -92,18 +97,19 @@
         font-size: .6rem;
     }
     .mods-section {
-        flex: 0 0 40%;
+        flex: 0 0 30%;
     }
     .values-options {
         font-size: .7rem;
         justify-items: center;
-        margin: 0 auto;
+        // margin: 0 auto;
         padding-right: 4px;
         div:not(:last-child) .value-data {
            margin-bottom: 1px;
         }
         > div {
             justify-content: center;
+            width: max-content;
         }
         .value-data {
             margin: auto 0;
@@ -124,12 +130,17 @@
     }
     .value-data {
         flex: 0 1 auto;
-        margin: 4px 2px;
+        // margin: 4px 2px;
+        margin: 4px auto;
         border-radius: 5px;
         border: 1px solid black;
         background-color: rgba(255,255,255,0.5);
         height: 2rem;
         font-size: .9rem;
+    }
+    .value-data.circle {
+        width: 2rem;
+        border-radius: 50%;
     }
     .injury {
         .labels div {
@@ -207,15 +218,23 @@
 
     .sheet-main-content nav {
         justify-content: center;
+        align-items: center;
         text-align: center;
         margin-bottom: 10px;
         row-gap: 5px;
+        a.active {
+            font-size: 1.2rem;
+            height: 1.4rem;
+            line-height: 100%;
+        }
         a {
+            text-shadow: 1px 0px 1px silver, -1px 0px 1px silver, 1px 0px 1px silver,  0px 1px 1px silver, 0px -1px 1px silver;
+            font-size: 1rem;
             margin: 0 4px;
             padding: 0 4px;
             max-width: fit-content;
             font-variant: all-petite-caps;
-            height: 20px;
+            height: 1.2rem;
             border-radius: 5px;
             vertical-align: middle;
             -webkit-box-shadow: 1px 1px 3px 1px #000000; 
