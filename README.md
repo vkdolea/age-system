@@ -97,6 +97,10 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.9.2 [2021-12-17]
+### Fixed
+- Removed test code from character sheet
+
 ## 0.9.1 [2021-12-17]
 ### Added
 - "Favourite Equipment" renamed as "Quick Access". Items are now sorted by item type. A header will indicate which item type is listed.
