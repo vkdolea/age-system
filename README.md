@@ -97,6 +97,11 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.10.0 [2021-12-xx]
+### Added
+- Updated for FoundryVTT v9
+- Added floating numbers over token to reflect damage and healing.
+
 ## 0.9.2 [2021-12-17]
 ### Fixed
 - Removed test code from character sheet

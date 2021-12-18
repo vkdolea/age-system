@@ -120,7 +120,7 @@ export class ageSystemItem extends Item {
                 break;
         }
 
-        this.prepareEmbeddedEntities(); // Remove to prepare for 0.9.x  
+        // this.prepareEmbeddedEntities(); // Remove to prepare for 0.9.x  
         // this.prepareEmbeddedDocuments();
     };
 
@@ -154,7 +154,8 @@ export class ageSystemItem extends Item {
         if (this.actor?.data) {
             if ((data.itemForceAbl !== "") && (data.itemForceAbl !== "no-abl")) data.itemForce += this.actor.data.data.abilities[data.itemForceAbl].total;
             data.itemForce += data.useFocusActor.value;
-            data.powerPointCostTotal += this.actor.data.data.armor.strain;
+            const strain = this.actor.data.data.armor.strain
+            data.powerPointCostTotal += strain ? strain : 0;
         };
 
         // Calculate Fatigue TN if it is not a manual input
@@ -277,7 +278,7 @@ export class ageSystemItem extends Item {
                     });
                     if (!castAnyway.roll) return false;
                 } else {
-                    this.actor.update({"data.powerPoints.value": remainingPP - cost})
+                    this.actor.update({"data.powerPoints.value": remainingPP - cost}, {value: -cost, type: 'power'})
                 }
             }
         }

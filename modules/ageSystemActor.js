@@ -5,7 +5,11 @@ export class ageSystemActor extends Actor {
 
     /** @override */
     prepareData() {
-        super.prepareData();
+        // super.prepareData();
+        this.data.reset(); // super.prepareData();
+        this.prepareBaseData();
+        this.prepareEmbeddedDocuments();
+        this.prepareDerivedData();
         // Sorting Items for final data preparation
         const items = this.items;
         // First prepare Focus
@@ -17,7 +21,7 @@ export class ageSystemActor extends Actor {
             items.forEach(i => {
                 if (["weapon", "power"].includes(i.data.type)) i.prepareData()
             })
-
+            
             // Calculate Initiative based on Focus (if set on System Settings)
             const initiativeFocus = game.settings.get("age-system", "initiativeFocus");
             if (initiativeFocus) {
@@ -72,8 +76,8 @@ export class ageSystemActor extends Actor {
     }
 
     /** @override */
-    // prepareEmbeddedDcouments() {
-    prepareEmbeddedEntities() {
+    prepareEmbeddedDocuments() {
+        // super.prepareEmbeddedDocuments()
         const embeddedTypes = this.constructor.metadata.embedded || {};
         for ( let cls of Object.values(embeddedTypes) ) {
             const collection = cls.metadata.collection;
@@ -170,9 +174,16 @@ export class ageSystemActor extends Actor {
         const type = this.data.type;
 
         switch (type) {
-            case "char": return this._charItemModifiers();
-            case "spaceship": return this._spaceshipItemModifiers();
-            case "vehicle": return;
+            case "char":
+                this._charItemModifiers();
+                break;
+            case "spaceship":
+                this._spaceshipItemModifiers();
+                break;
+            case "vehicle": 
+                break;
+            default:
+                break;
         }
     }
 
@@ -501,7 +512,7 @@ export class ageSystemActor extends Actor {
             }
             return 0;
         });
-        const   newWpnObj = {};
+        const newWpnObj = {};
         for (let w = 0; w < wArray.length; w++) {
             // const element = wArray[w];
             let wKey = String(w);
@@ -637,17 +648,23 @@ export class ageSystemActor extends Actor {
         let newMarks = (injuryDegree === 'severe') ? this.data.data.injury.degrees.severeMult : 1;
         newMarks += this.data.data.injury.marks;
         // Update Actor's injuries and marks
-        await this.update({
-          [updateDegree]: newDegree,
-          'data.injury.marks': newMarks
-        });
+        await this.update(
+            {
+                [updateDegree]: newDegree,
+                'data.injury.marks': newMarks
+            },
+            {
+                value: game.i18n.localize(`age-system.${injuryDegree}InjuryInflicted`),
+                type: 'injury'
+            }
+        );
         // Returns a summary object
         return {
-          name: this.name,
-          img: this.data.token.img,
-          degree: injuryDegree,
-          totalInjuries,
-          newMarks
+            name: this.name,
+            img: this.data.token.img,
+            degree: injuryDegree,
+            totalInjuries,
+            newMarks
         }
     }
 
@@ -656,40 +673,43 @@ export class ageSystemActor extends Actor {
      * @param {number} qtd  Quantity of Injury Marks to be healed
      * @returns {boolean}   False if Character type or qtd is invalid, True otherwise
      */
-    async healMarks (qtd) {
+    healMarks (qtd) {
         if (this.type !== 'char') return false
         if (Number.isNaN(Number(qtd))) return false
         qtd = Math.abs(Number(qtd));
+        let totalHealed = 0
+        const injuries = foundry.utils.deepClone(this.data.data.injury);
+        const marks = injuries.marks;
+        if (marks === 0) return true
+
         for (let m = 0; m < qtd; m++) {
-            const data = this.data.data;
-            const marks = this.data.data.injury.marks;
-            if (marks === 0) return true
-            let updateData = {"data.injury.marks": marks-1};
-            if (data.injury.degrees.severe > 0) {
-                const expectedMarks = data.injury.degrees.light + data.injury.degrees.serious + data.injury.degrees.severe * data.injury.degrees.severeMult;
-                if (expectedMarks - (marks-1) === data.injury.degrees.severeMult) {
-                    updateData = {
-                        ...updateData,
-                        "data.injury.degrees.severe": data.injury.degrees.severe-1
-                    }
+            injuries.marks -= 1;
+            if (injuries.degrees.severe > 0) {
+                totalHealed += 1;
+                const expectedMarks = injuries.degrees.light + injuries.degrees.serious + injuries.degrees.severe * injuries.degrees.severeMult;
+                if (expectedMarks - (injuries.marks) === injuries.degrees.severeMult) {
+                    injuries.degrees.severe -= 1
                 }
             } else {
-                if (data.injury.degrees.serious > 0) {
-                    updateData = {
-                        ...updateData,
-                        "data.injury.degrees.serious": data.injury.degrees.serious-1
-                    }
+                if (injuries.degrees.serious > 0) {
+                    totalHealed += 1;
+                    injuries.degrees.serious -= 1;
                 } else {
-                    if (data.injury.degrees.light > 0) {
-                        updateData = {
-                            ...updateData,
-                            "data.injury.degrees.light": data.injury.degrees.light-1
-                        }
+                    if (injuries.degrees.light > 0) {
+                        totalHealed += 1;
+                        injuries.degrees.light -= 1;
                     }
                 }
             }
-            await this.update(updateData);
+            if (injuries.marks === 0) break;
         }
+        const updateData = {
+            "data.injury.marks": injuries.marks,
+            "data.injury.degrees.light": injuries.degrees.light,
+            "data.injury.degrees.serious": injuries.degrees.serious,
+            "data.injury.degrees.severe": injuries.degrees.severe,
+        }
+        this.update(updateData, {value: totalHealed, type: 'numeric'});
         return true
     }
 
@@ -738,7 +758,8 @@ export class ageSystemActor extends Actor {
                 summary.newHP = Math.max(...arr);
             }
         }
-        this.update({[updatePath]: summary.newHP});
+        const deltaHP = summary.newHP - summary.previousHP
+        this.update({[updatePath]: summary.newHP}, {value: deltaHP, type: 'numeric'});
         return summary
     }
 
@@ -802,6 +823,43 @@ export class ageSystemActor extends Actor {
         });
     }
 
+    /** @inheritdoc */
+    _onUpdate(data, options, userId) {
+        super._onUpdate(data, options, userId);
+        this._displayScrollingText(options.value, options.type);
+    }
+
+    _displayScrollingText(value, type) {
+        if ( !value ) return;
+        if (type !== 'injury') value = value.signedString();
+
+        let color;
+        switch (type) {
+            case 'injury':
+                color = 'damage'
+                break;
+            case 'numeric':
+                color = value < 0 ? "damage" : "healing";
+                break;
+            case 'power':
+                color = "power"
+            default:
+                break;
+        }
+
+        const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
+        for ( let t of tokens ) {
+            t.hud.createScrollingText(value, {
+                anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+                fontSize: 30,
+                fill: ageSystem.tokenTextColors[color],
+                stroke: 0x000000,
+                strokeThickness: 4,
+                jitter: 0.25
+            });   
+        }
+    }
+
     /**
      * Check if there is an Active Effect for this Condition and take action: create if none, delete all if detected.
      * @param {string} condId Condition unique Core ID
@@ -815,19 +873,19 @@ export class ageSystemActor extends Actor {
             // If there is no Effect on, create one
             const newEffect = foundry.utils.deepClone(CONFIG.statusEffects.filter(e => e.id === condId)[0]);
             newEffect["flags.core.statusId"] = newEffect.id;
-            // if (newEffect?.flags?.["age-system"].conditionType !== 'custom') newEffect.label = game.i18n.localize(newEffect.label);
-            // delete newEffect.id;
+            if (newEffect?.flags?.["age-system"].conditionType !== 'custom') newEffect.label = game.i18n.localize(newEffect.label);
+            delete newEffect.id;
             // const cls = getDocumentClass("ActiveEffect");
             // await cls.create(newEffect, {parent: this});
             await this.createEmbeddedDocuments("ActiveEffect", [newEffect]); // remove this one to update to 0.9.x
         } else {
             // If there are Effects, delete everything
+            const toDelete = [];
             for (let c = 0; c < effectsOn.length; c++) {
                 const effect = effectsOn[c];
-                const id = effect.data._id;
-                await this.effects.get(id).delete();
+                toDelete.push(effect.id);
             }
-            return
+            this.deleteEmbeddedDocuments("ActiveEffect", toDelete);
         }
     }
 

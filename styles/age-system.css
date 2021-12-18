@@ -105,6 +105,32 @@
   object-fit: contain;
   margin-right: 4px;
 }
+.age-system.item .focus nav.add-sheet-tabs.tabs > a,
+.age-system.item .power nav.add-sheet-tabs.tabs > a,
+.age-system.item .talent nav.add-sheet-tabs.tabs > a,
+.age-system.item .weapon nav.add-sheet-tabs.tabs > a,
+.age-system.item .equipment nav.add-sheet-tabs.tabs > a,
+.age-system.item .stunts nav.add-sheet-tabs.tabs > a,
+.age-system.item .honorifics nav.add-sheet-tabs.tabs > a,
+.age-system.item .relationship nav.add-sheet-tabs.tabs > a,
+.age-system.item .membership nav.add-sheet-tabs.tabs > a,
+.age-system.item .shipfeatures nav.add-sheet-tabs.tabs > a,
+.age-system.item .vehicle nav.add-sheet-tabs.tabs > a {
+  flex: 1 0 auto;
+}
+.age-system.item .focus nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .power nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .talent nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .weapon nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .equipment nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .stunts nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .honorifics nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .relationship nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .membership nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .shipfeatures nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .vehicle nav.add-sheet-tabs.tabs > a:last-child {
+  padding-right: 1px;
+}
 .age-system.item .focus .power-type-control,
 .age-system.item .power .power-type-control,
 .age-system.item .talent .power-type-control,
@@ -1668,6 +1694,7 @@
   transition: all 0.5s ease;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav {
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   text-align: center;

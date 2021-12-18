@@ -511,8 +511,8 @@ export function stuntSoNice(colorChoices, systems) {
 export function allCompendia(docType) {
   let list = {};
   game.packs.map(e => {
-    if (e.metadata.entity === docType) { // Remove to prepare for 0.9.x
-    // if (e.metadata.type === docType) {
+    // if (e.metadata.entity === docType) { // Remove to prepare for 0.9.x
+    if (e.metadata.type === docType) {
       const newItem = {[`${e.metadata.package}.${e.metadata.name}`]: e.metadata.label};
       list = {
         ...list,

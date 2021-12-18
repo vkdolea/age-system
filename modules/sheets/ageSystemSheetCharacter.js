@@ -375,7 +375,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     _onChangeCondition(event) {
         const isChecked = null;
         const condId = event.currentTarget.closest(".feature-controls").dataset.conditionId;
-        return this.actor.handleConditions(condId);
+        this.actor.handleConditions(condId);
     }
 
     _onTooltipHover(event){
