@@ -4528,7 +4528,7 @@
 }
 .colorset-expanded-blue .resource .values {
   background-color: #005971;
-  color: #fbffff;
+  color: #dde2e2;
 }
 .colorset-expanded-blue .sheet-main-content nav a {
   background: radial-gradient(closest-side, #e6e7e8, #005971);
@@ -4537,11 +4537,11 @@
   background: radial-gradient(closest-side, #e6e7e8 60%, #005971) !important;
 }
 .colorset-expanded-blue .thin-border {
-  border: thin solid #fbffff;
+  border: thin solid #dde2e2;
 }
 .colorset-expanded-blue .colorset-first-tier {
   background-color: #005971;
-  color: #fbffff;
+  color: #dde2e2;
 }
 .colorset-expanded-blue .colorset-second-tier {
   background-color: #e6e7e8;
@@ -4549,11 +4549,11 @@
 }
 .colorset-expanded-blue .colorset-third-tier {
   background-color: #112339;
-  color: #fbffff;
+  color: #dde2e2;
 }
 .colorset-expanded-blue input.colorset-first-tier {
   background-color: #005971;
-  color: #fbffff;
+  color: #dde2e2;
 }
 .colorset-expanded-blue #age-tracker .full-box {
   background-color: #005971 !important;
@@ -4564,7 +4564,7 @@
 .colorset-expanded-blue .char-sheet .age-header label,
 .colorset-expanded-blue .char-sheet .persona label {
   background-color: #005971;
-  color: #fbffff;
+  color: #dde2e2;
 }
 .colorset-expanded-blue .char-sheet .editor,
 .colorset-expanded-blue .organization-sheet .editor {
@@ -4597,7 +4597,7 @@
 }
 .colorset-expanded-blue .roll-mod.stunted {
   background-color: #005971;
-  color: #fbffff;
+  color: #dde2e2;
 }
 .colorset-expanded-blue .char-sheet .item-container img {
   border: 1px solid #005971;
@@ -4655,7 +4655,7 @@
 .colorset-expanded-blue .membership .item-card-stats input.data-entry,
 .colorset-expanded-blue .relationship .item-card-stats input.data-entry,
 .colorset-expanded-blue .shipfeatures .item-card-stats input.data-entry {
-  color: #fbffff;
+  color: #dde2e2;
 }
 .colorset-expanded-blue .focus .item-card-desc,
 .colorset-expanded-blue .power .item-card-desc,

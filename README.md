@@ -1,7 +1,7 @@
 # Unofficial AGE System for FVTT
 Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
 
-<img src="https://imgur.com/5k8i0Fy.png"/>
+<img src="https://i.imgur.com/RFWhhxO.jpg"/>
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/vkdolea)
 
