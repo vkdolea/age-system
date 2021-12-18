@@ -37,7 +37,7 @@
                     <div class="mark">
                         <input type="number" class="value-data circle" name="data.injury.marks" disabled value="{{data.data.injury.marks}}" data-dtype="Number" />
                         {{#unless (eq data.injury.degrees.severeMult 1)}}
-                        <div class="flexcol tracker-container">
+                        <div class="flexrow tracker-container">
                             {{#each data.data.injury.marksArray as |tracker|}}
                             {{#if tracker}}
                             <div class="severe-injury-tracker colorset-third-tier"></div>

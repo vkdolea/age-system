@@ -99,8 +99,12 @@ Icons made by:
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
 ## 0.10.0 [2021-12-xx]
 ### Added
-- Updated for FoundryVTT v9
+- Updated for FoundryVTT v9.
 - Added floating numbers over token to reflect damage and healing.
+- "Expanded Blue" colorset included.
+
+### Fixed
+- Correct armor text displays when rolling Toughness Test from chat card.
 
 ## 0.9.2 [2021-12-17]
 ### Fixed

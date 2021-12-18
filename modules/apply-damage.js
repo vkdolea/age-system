@@ -367,14 +367,14 @@ export class DamageHandler {
     if (this._useBallistic && this._damageSource === 'ballistic') {
       dmgProtection += ballisticArmor;
       armorDesc = {
-        label: game.i18n.localize("age-system.ballisticArmor"),
+        label: game.i18n.localize("age-system.bonus.ballisticArmor"),
         value: ballisticArmor
       }
     } 
     if (this._useBallistic && this._damageSource === 'impact') {
       dmgProtection += impactArmor;
       armorDesc = {
-        label: game.i18n.localize("age-system.impactArmor"),
+        label: game.i18n.localize("age-system.bonus.impactArmor"),
         value: impactArmor
       }
     }

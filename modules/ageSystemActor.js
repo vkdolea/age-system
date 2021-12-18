@@ -713,6 +713,12 @@ export class ageSystemActor extends Actor {
         return true
     }
 
+    refreshMarks() {
+        const data = this.data.data.injury.degrees;
+        const marks = data.light + data.serious + data.severe * data.severeMult
+        return this.update({"data.injury.marks": marks});
+    }
+
     /**
      * This function applies damage or healing to an Actor (Character or Organization only) and returns a summary with new values
      * @param {number} newValue     Numeric value passed

@@ -44,7 +44,7 @@ export const registerSystemSettings = async function() {
       "fantasy-blue": "SETTINGS.colorFantasyBlue",
       "dragon-red": "SETTINGS.colorDragonRed",
       "ronin-green": "SETTINGS.colorRoninGreen",
-      // "expanded-blue": "SETTINGS.colorExpandedBlue",
+      "expanded-blue": "SETTINGS.colorExpandedBlue",
       "folded-purple": "SETTINGS.colorFoldedPurple",
       "select-one": "SETTINGS.colorSelectOne",
       "the-grey": "SETTINGS.colorTheGrey",
@@ -181,8 +181,8 @@ export const registerSystemSettings = async function() {
           return o.data.type === "char";
         })
         .forEach((o) => {
-          o.update({});
-          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+          o.prepareData();
+          o.refreshMarks()
         });
     },
   });

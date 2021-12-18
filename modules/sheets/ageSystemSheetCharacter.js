@@ -280,9 +280,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     }
 
     _onRefreshMarks(event) {
-        const data = this.actor.data.data.injury.degrees;
-        const marks = data.light + data.serious + data.severe * data.severeMult
-        return this.actor.update({"data.injury.marks": marks});
+        return this.actor.refreshMarks();
     }
 
     _onChangeMark(event) {
@@ -581,7 +579,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
     itemContextMenu = [
         {
-            name: game.i18n.localize("age-system.chatCard.roll"),
+            name: game.i18n.localize("age-system.showOnChat"),
             icon: '<i class="far fa-eye"></i>',
             callback: e => {
                 const data = e[0].closest(".feature-controls").dataset;
