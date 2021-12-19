@@ -51,7 +51,7 @@
     "initiative": "3d6 + @initiative",
     "gridDistance": 2,
     "gridUnits": "yd",
-    "minimumCoreVersion": "9.236",
+    "minimumCoreVersion": "0.8.5",
     "compatibleCoreVersion": "9.236",
     "url": "https://github.com/vkdolea/age-system",
     "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",

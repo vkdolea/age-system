@@ -713,6 +713,7 @@ export class ageSystemActor extends Actor {
         return true
     }
 
+    // Recalculate Injury Marks based on each Injury Degree and Game Mode (Gritty, Pulp or Cinematic)
     refreshMarks() {
         const data = this.data.data.injury.degrees;
         const marks = data.light + data.serious + data.severe * data.severeMult
@@ -850,11 +851,13 @@ export class ageSystemActor extends Actor {
             case 'power':
                 color = "power"
             default:
+                color = 'power'
                 break;
         }
 
         const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
         for ( let t of tokens ) {
+            if (!t?.hud?.createScrollingText) continue;
             t.hud.createScrollingText(value, {
                 anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
                 fontSize: 30,
@@ -881,9 +884,7 @@ export class ageSystemActor extends Actor {
             newEffect["flags.core.statusId"] = newEffect.id;
             if (newEffect?.flags?.["age-system"].conditionType !== 'custom') newEffect.label = game.i18n.localize(newEffect.label);
             delete newEffect.id;
-            // const cls = getDocumentClass("ActiveEffect");
-            // await cls.create(newEffect, {parent: this});
-            await this.createEmbeddedDocuments("ActiveEffect", [newEffect]); // remove this one to update to 0.9.x
+            await this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
         } else {
             // If there are Effects, delete everything
             const toDelete = [];

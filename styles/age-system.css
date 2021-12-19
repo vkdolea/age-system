@@ -1870,7 +1870,7 @@
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .container-tooltip-text {
   visibility: hidden;
-  width: 300px;
+  max-width: 600px;
   text-align: left;
   border-radius: 5px;
   padding: 4px;
