@@ -52,7 +52,7 @@
     "gridDistance": 2,
     "gridUnits": "yd",
     "minimumCoreVersion": "0.8.5",
-    "compatibleCoreVersion": "9.236",
+    "compatibleCoreVersion": "0.8.9",
     "url": "https://github.com/vkdolea/age-system",
     "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",
     "download": "https://github.com/vkdolea/age-system/archive/0.10.0.zip",
