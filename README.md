@@ -1,7 +1,7 @@
 # Unofficial AGE System for FVTT
 Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
 
-<img src="https://imgur.com/5k8i0Fy.png"/>
+<img src="https://i.imgur.com/RFWhhxO.jpg"/>
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/vkdolea)
 
@@ -97,6 +97,15 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
+## 0.10.0 [2021-12-19]
+### Added
+- FoundryVTT v9 and 0.8.5+ compatible.
+- Added floating numbers over token to reflect damage and healing.
+- "Expanded Blue" colorset included.
+
+### Fixed
+- Correct armor text displays when rolling Toughness Test from chat card.
+
 ## 0.9.2 [2021-12-17]
 ### Fixed
 - Removed test code from character sheet

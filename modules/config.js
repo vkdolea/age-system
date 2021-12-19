@@ -710,6 +710,13 @@ ageSystem.ROLL_TYPE = {
     PLOT_DAMAGE: 'plotDamage',
 };
 
+// Scrolling text colors
+ageSystem.tokenTextColors = {
+    damage: 0xFF0000,
+    healing: 0x00FF00,
+    power: 0x0000FF
+}
+
 // Wiki website!
 ageSystem.wiki = 'https://github.com/vkdolea/age-system/wiki';
 

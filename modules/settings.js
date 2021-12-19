@@ -44,7 +44,7 @@ export const registerSystemSettings = async function() {
       "fantasy-blue": "SETTINGS.colorFantasyBlue",
       "dragon-red": "SETTINGS.colorDragonRed",
       "ronin-green": "SETTINGS.colorRoninGreen",
-      // "expanded-blue": "SETTINGS.colorExpandedBlue",
+      "expanded-blue": "SETTINGS.colorExpandedBlue",
       "folded-purple": "SETTINGS.colorFoldedPurple",
       "select-one": "SETTINGS.colorSelectOne",
       "the-grey": "SETTINGS.colorTheGrey",
@@ -59,8 +59,6 @@ export const registerSystemSettings = async function() {
       if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
       [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents].forEach((o) => {
         if (o) {
-          // o.update({});
-          // if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
           if (o.sheet != null && o.sheet._state > 0) o.sheet.close();
         };
       });
@@ -181,8 +179,8 @@ export const registerSystemSettings = async function() {
           return o.data.type === "char";
         })
         .forEach((o) => {
-          o.update({});
-          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+          o.prepareData();
+          o.refreshMarks()
         });
     },
   });
@@ -511,8 +509,8 @@ export function stuntSoNice(colorChoices, systems) {
 export function allCompendia(docType) {
   let list = {};
   game.packs.map(e => {
-    if (e.metadata.entity === docType) { // Remove to prepare for 0.9.x
-    // if (e.metadata.type === docType) {
+    const packType = e.metadata.type ? e.metadata.type : e.metadata.entity; // e.metadata.entity required to keep compatibility for versions 0.8.x
+    if (packType === docType) {
       const newItem = {[`${e.metadata.package}.${e.metadata.name}`]: e.metadata.label};
       list = {
         ...list,
@@ -525,7 +523,7 @@ export function allCompendia(docType) {
 
 // Creates a list of entries in the Compendium (name and _id)
 export function compendiumList(compendiumName) {
-  let dataList = [];
+  let dataList = [{_id: "", name: ""}];
   if ([null, undefined, false, ""].includes(compendiumName)) return dataList;
   let dataPack = game.packs.get(compendiumName);
   if (!dataPack?.index) return dataList;

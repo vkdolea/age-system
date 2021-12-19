@@ -105,6 +105,32 @@
   object-fit: contain;
   margin-right: 4px;
 }
+.age-system.item .focus nav.add-sheet-tabs.tabs > a,
+.age-system.item .power nav.add-sheet-tabs.tabs > a,
+.age-system.item .talent nav.add-sheet-tabs.tabs > a,
+.age-system.item .weapon nav.add-sheet-tabs.tabs > a,
+.age-system.item .equipment nav.add-sheet-tabs.tabs > a,
+.age-system.item .stunts nav.add-sheet-tabs.tabs > a,
+.age-system.item .honorifics nav.add-sheet-tabs.tabs > a,
+.age-system.item .relationship nav.add-sheet-tabs.tabs > a,
+.age-system.item .membership nav.add-sheet-tabs.tabs > a,
+.age-system.item .shipfeatures nav.add-sheet-tabs.tabs > a,
+.age-system.item .vehicle nav.add-sheet-tabs.tabs > a {
+  flex: 1 0 auto;
+}
+.age-system.item .focus nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .power nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .talent nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .weapon nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .equipment nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .stunts nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .honorifics nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .relationship nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .membership nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .shipfeatures nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item .vehicle nav.add-sheet-tabs.tabs > a:last-child {
+  padding-right: 1px;
+}
 .age-system.item .focus .power-type-control,
 .age-system.item .power .power-type-control,
 .age-system.item .talent .power-type-control,
@@ -1612,9 +1638,12 @@
   position: relative;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .injury .tracker-container {
+  justify-content: center;
   position: absolute;
-  top: 12px;
-  left: 30px;
+  top: 27px;
+  left: 11px;
+  column-gap: 2px;
+  width: 16px;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .injury .severe-injury-tracker {
   border-radius: 50%;
@@ -1668,6 +1697,7 @@
   transition: all 0.5s ease;
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav {
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -1840,7 +1870,7 @@
 }
 .age-system.sheet.char-sheet-alt .actor-sheet .container-tooltip-text {
   visibility: hidden;
-  width: 300px;
+  max-width: 600px;
   text-align: left;
   border-radius: 5px;
   padding: 4px;
@@ -2700,6 +2730,7 @@
 /** This is The Grey **/
 /** Red Warrior **/
 /** Never Dead **/
+/** Expanded Blue **/
 /** Color Template **/
 /** Game Mode Colors **/
 /*******************************/
@@ -4477,6 +4508,203 @@
 .colorset-never-dead .relationship .mod-card,
 .colorset-never-dead .shipfeatures .mod-card {
   border: solid #eeddcd 1px;
+}
+.window-app.sheet.char-sheet-alt.colorset-expanded-blue .window-content,
+.window-app.sheet.char.colorset-expanded-blue .window-content,
+.window-app.sheet.vehicle.colorset-expanded-blue .window-content,
+.window-app.sheet.spaceship.colorset-expanded-blue .window-content {
+  background-image: none;
+  background-color: rgba(230, 231, 232, 0.6) !important;
+}
+.colorset-expanded-blue aside {
+  border-radius: 5px;
+  border: 5px outset #112339;
+}
+.colorset-expanded-blue .metal-background {
+  background: linear-gradient(90deg, #005971 5%, #e6e7e8 50%, #005971 95%);
+}
+.colorset-expanded-blue .top-banner {
+  border: 5px outset #112339;
+}
+.colorset-expanded-blue .resource .values {
+  background-color: #005971;
+  color: #dde2e2;
+}
+.colorset-expanded-blue .sheet-main-content nav a {
+  background: radial-gradient(closest-side, #e6e7e8, #005971);
+}
+.colorset-expanded-blue .sheet-main-content nav a.active {
+  background: radial-gradient(closest-side, #e6e7e8 60%, #005971) !important;
+}
+.colorset-expanded-blue .thin-border {
+  border: thin solid #dde2e2;
+}
+.colorset-expanded-blue .colorset-first-tier {
+  background-color: #005971;
+  color: #dde2e2;
+}
+.colorset-expanded-blue .colorset-second-tier {
+  background-color: #e6e7e8;
+  color: #005971;
+}
+.colorset-expanded-blue .colorset-third-tier {
+  background-color: #112339;
+  color: #dde2e2;
+}
+.colorset-expanded-blue input.colorset-first-tier {
+  background-color: #005971;
+  color: #dde2e2;
+}
+.colorset-expanded-blue #age-tracker .full-box {
+  background-color: #005971 !important;
+}
+.colorset-expanded-blue #age-tracker .comp-checkbox {
+  border-color: #005971 !important;
+}
+.colorset-expanded-blue .char-sheet .age-header label,
+.colorset-expanded-blue .char-sheet .persona label {
+  background-color: #005971;
+  color: #dde2e2;
+}
+.colorset-expanded-blue .char-sheet .editor,
+.colorset-expanded-blue .organization-sheet .editor {
+  background-color: hsl(0, 0%, 100%);
+}
+.colorset-expanded-blue .vehicle-stats img {
+  border: 2px solid #005971;
+}
+.colorset-expanded-blue .vehicle-stats .editor {
+  background-color: #ffffff;
+}
+.colorset-expanded-blue .stats-block.losses .loss-checkbox {
+  border-color: #005971;
+}
+.colorset-expanded-blue .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #005971;
+}
+.colorset-expanded-blue fieldset {
+  border-color: #005971;
+}
+.colorset-expanded-blue #age-tracker-drag:hover,
+.colorset-expanded-blue #age-roller-drag:hover {
+  background-color: #005971;
+}
+.colorset-expanded-blue .dice-show.trait-test i:last-of-type {
+  color: #005971;
+}
+.colorset-expanded-blue .roll-mod {
+  border-bottom: 1px solid #005971;
+}
+.colorset-expanded-blue .roll-mod.stunted {
+  background-color: #005971;
+  color: #dde2e2;
+}
+.colorset-expanded-blue .char-sheet .item-container img {
+  border: 1px solid #005971;
+}
+.colorset-expanded-blue .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-expanded-blue .char-sheet input.colorset-second-tier {
+  background-color: #e6e7e8 !important;
+  color: #005971 !important;
+}
+.colorset-expanded-blue .focus img,
+.colorset-expanded-blue .power img,
+.colorset-expanded-blue .talent img,
+.colorset-expanded-blue .weapon img,
+.colorset-expanded-blue .equipment img,
+.colorset-expanded-blue .stunts img,
+.colorset-expanded-blue .honorifics img,
+.colorset-expanded-blue .membership img,
+.colorset-expanded-blue .relationship img,
+.colorset-expanded-blue .shipfeatures img {
+  border: 1px solid #005971;
+}
+.colorset-expanded-blue .focus label,
+.colorset-expanded-blue .power label,
+.colorset-expanded-blue .talent label,
+.colorset-expanded-blue .weapon label,
+.colorset-expanded-blue .equipment label,
+.colorset-expanded-blue .stunts label,
+.colorset-expanded-blue .honorifics label,
+.colorset-expanded-blue .membership label,
+.colorset-expanded-blue .relationship label,
+.colorset-expanded-blue .shipfeatures label {
+  color: #005971;
+}
+.colorset-expanded-blue .focus .item-card-stats,
+.colorset-expanded-blue .power .item-card-stats,
+.colorset-expanded-blue .talent .item-card-stats,
+.colorset-expanded-blue .weapon .item-card-stats,
+.colorset-expanded-blue .equipment .item-card-stats,
+.colorset-expanded-blue .stunts .item-card-stats,
+.colorset-expanded-blue .honorifics .item-card-stats,
+.colorset-expanded-blue .membership .item-card-stats,
+.colorset-expanded-blue .relationship .item-card-stats,
+.colorset-expanded-blue .shipfeatures .item-card-stats {
+  background-color: #e6e7e8;
+}
+.colorset-expanded-blue .focus .item-card-stats input.data-entry,
+.colorset-expanded-blue .power .item-card-stats input.data-entry,
+.colorset-expanded-blue .talent .item-card-stats input.data-entry,
+.colorset-expanded-blue .weapon .item-card-stats input.data-entry,
+.colorset-expanded-blue .equipment .item-card-stats input.data-entry,
+.colorset-expanded-blue .stunts .item-card-stats input.data-entry,
+.colorset-expanded-blue .honorifics .item-card-stats input.data-entry,
+.colorset-expanded-blue .membership .item-card-stats input.data-entry,
+.colorset-expanded-blue .relationship .item-card-stats input.data-entry,
+.colorset-expanded-blue .shipfeatures .item-card-stats input.data-entry {
+  color: #dde2e2;
+}
+.colorset-expanded-blue .focus .item-card-desc,
+.colorset-expanded-blue .power .item-card-desc,
+.colorset-expanded-blue .talent .item-card-desc,
+.colorset-expanded-blue .weapon .item-card-desc,
+.colorset-expanded-blue .equipment .item-card-desc,
+.colorset-expanded-blue .stunts .item-card-desc,
+.colorset-expanded-blue .honorifics .item-card-desc,
+.colorset-expanded-blue .membership .item-card-desc,
+.colorset-expanded-blue .relationship .item-card-desc,
+.colorset-expanded-blue .shipfeatures .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-expanded-blue .focus nav .item,
+.colorset-expanded-blue .power nav .item,
+.colorset-expanded-blue .talent nav .item,
+.colorset-expanded-blue .weapon nav .item,
+.colorset-expanded-blue .equipment nav .item,
+.colorset-expanded-blue .stunts nav .item,
+.colorset-expanded-blue .honorifics nav .item,
+.colorset-expanded-blue .membership nav .item,
+.colorset-expanded-blue .relationship nav .item,
+.colorset-expanded-blue .shipfeatures nav .item {
+  background-color: #e6e7e8;
+  color: #005971;
+}
+.colorset-expanded-blue .focus nav .item.active,
+.colorset-expanded-blue .power nav .item.active,
+.colorset-expanded-blue .talent nav .item.active,
+.colorset-expanded-blue .weapon nav .item.active,
+.colorset-expanded-blue .equipment nav .item.active,
+.colorset-expanded-blue .stunts nav .item.active,
+.colorset-expanded-blue .honorifics nav .item.active,
+.colorset-expanded-blue .membership nav .item.active,
+.colorset-expanded-blue .relationship nav .item.active,
+.colorset-expanded-blue .shipfeatures nav .item.active {
+  background-color: #ffffff;
+}
+.colorset-expanded-blue .focus .mod-card,
+.colorset-expanded-blue .power .mod-card,
+.colorset-expanded-blue .talent .mod-card,
+.colorset-expanded-blue .weapon .mod-card,
+.colorset-expanded-blue .equipment .mod-card,
+.colorset-expanded-blue .stunts .mod-card,
+.colorset-expanded-blue .honorifics .mod-card,
+.colorset-expanded-blue .membership .mod-card,
+.colorset-expanded-blue .relationship .mod-card,
+.colorset-expanded-blue .shipfeatures .mod-card {
+  border: solid #e6e7e8 1px;
 }
 /*******************************/
 /**   AGE Roller Interface    **/

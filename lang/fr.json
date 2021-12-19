@@ -65,7 +65,7 @@
     "SETTINGS.colorFantasyBlue": "Fantasy Blue",
     "SETTINGS.colorDragonRed": "Dragon Red",
     "SETTINGS.colorRoninGreen": "Ronin Green",
-    "SETTINGS.colorExpandedBlue": "The Expanse",
+    "SETTINGS.colorExpandedBlue": "Expanded Blue",
     "SETTINGS.colorFoldedPurple": "Folded Purple",
 	"SETTINGS.colorSelectOne": "Select One",
     "SETTINGS.colorTheGrey": "The Grey",
@@ -642,6 +642,7 @@
         "copyEffectsExpanse": "Copie les effets de The Expanse",
 
         "social": "Social",
-        "quickAccess": "Accès Rapide"
+        "quickAccess": "Accès Rapide",
+        "showOnChat": "Afficher sur le chat"
     }
 }

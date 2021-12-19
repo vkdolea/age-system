@@ -93,9 +93,9 @@ Hooks.once("init", async function() {
         dice: Dice,
         migrations: migrations,
         rollOwnedItem,
-        entities: {
+        documents: {
             ageSystemActor,
-            ageToken,
+            // ageToken,
             ageSystemItem
         }
     };
@@ -150,10 +150,10 @@ Hooks.once("init", async function() {
 
     // Define extra data for Age System (Actors, Items, ActiveEffectConfig)
     CONFIG.Actor.documentClass = ageSystemActor;
-    CONFIG.Token.objectClass = ageToken;
     CONFIG.Item.documentClass = ageSystemItem;
     CONFIG.ageSystem = ageSystem;
     // Saving this customization for a later implementation
+    // CONFIG.Token.objectClass = ageToken;
     // CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;
 
     // Load partials for Handlebars

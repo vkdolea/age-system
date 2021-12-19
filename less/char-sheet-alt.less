@@ -151,9 +151,12 @@
             position: relative;
         }
         .tracker-container {
+            justify-content: center;
             position: absolute;
-            top: 12px;
-            left: 30px
+            top: 27px;
+            left: 11px;
+            column-gap: 2px;
+            width: 16px;
         }
         .severe-injury-tracker {
             border-radius: 50%;
@@ -217,6 +220,7 @@
     }
 
     .sheet-main-content nav {
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         text-align: center;
@@ -403,7 +407,7 @@
       
     .container-tooltip-text {
         visibility: hidden;
-        width: 300px;
+        max-width: 600px;
         text-align: left;
         border-radius: 5px;
         padding: 4px;
