@@ -399,6 +399,7 @@
                 "favorite": false
             },
             "bonuses": {
+                "modifiers": [],
                 "itemMods": {
                     "itemDamage": {
                         "value": 0,

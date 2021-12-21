@@ -1,5 +1,5 @@
 import {ageSystem} from "../config.js";
-import { sortObjArrayByName } from "../setup.js";
+import { modifiersList, sortObjArrayByName } from "../setup.js";
 
 export default class ageSystemItemSheet extends ItemSheet {
     constructor(...args) {
@@ -65,7 +65,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Setting which ability settings will be used
         data.config.wealthMode = game.settings.get("age-system", "wealthType");
 
-        // Spacechip Features
+        // Spaceship Features
         if (this.item.data.type === "shipfeatures") {
             data.config.featuresTypeLocal = [];
             for (let f = 0; f < data.config.featuresType.length; f++) {
@@ -89,6 +89,10 @@ export default class ageSystemItemSheet extends ItemSheet {
         
         data.displayIsOrg = !this.item.isOwned;
 
+        // Modifiers Dropdown List
+        data.modifiersList = modifiersList()
+        console.log(data)
+
         return data;
     };
     
@@ -98,6 +102,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         if (this.isEditable) {
             
             html.find("a.add-bonus").click(this._onAddBonus.bind(this));
+            html.find(".add-modifier").click(this._onAddModifier.bind(this));
             html.find(".mod-controls a.remove").click(this._onRemoveBonus.bind(this));
             html.find(".mod-controls a.toggle").click(this._onToggleBonus.bind(this));
 
@@ -127,6 +132,10 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         super.activateListeners(html);
     };
+
+    _onAddModifier(e) {
+        this.item.newModifier();
+    }
 
     async _onWeaponGroupToggle(event) {
         event.preventDefault();

@@ -5,11 +5,11 @@ export function localizeConfig(toLocalize, noSort) {
 
     // Localize and sort CONFIG objects
     for ( let o of toLocalize ) {
-        const localized = Object.entries(CONFIG.ageSystem[o]).map(e => {
+        const localized = Object.entries(ageSystem[o]).map(e => {
             return [e[0], game.i18n.localize(e[1])];
         });
         if ( !noSort.includes(o) ) localized.sort((a, b) => a[1].localeCompare(b[1]));
-        CONFIG.ageSystem[o] = localized.reduce((obj, e) => {
+        ageSystem[o] = localized.reduce((obj, e) => {
             obj[e[0]] = e[1];
             return obj;
         }, {});
@@ -21,18 +21,18 @@ export function localizeAgeEffects() {
 
     // Localize and sort CONFIG objects
     for ( let o of toLocalize ) {
-        const localized = Object.entries(CONFIG.ageSystem[o]).map(e => {
+        const localized = Object.entries(ageSystem[o]).map(e => {
             const label = game.i18n.localize(e[1].label);
             const mask = e[1].mask;
             return [e[0], {label, mask}];
         });
-        CONFIG.ageSystem[o] = localized.reduce((obj, e) => {
+        ageSystem[o] = localized.reduce((obj, e) => {
             obj[e[0]] = e[1];
             return obj;
         }, {});
     }
 
-    const originalEffects = CONFIG.ageSystem[toLocalize];
+    const originalEffects = ageSystem[toLocalize];
     let options = [];
     for (const e in originalEffects) {
         if (Object.hasOwnProperty.call(originalEffects, e)) {
@@ -45,18 +45,18 @@ export function localizeAgeEffects() {
         }
     }
     options = sortObjArrayByName(options, 0);
-    CONFIG.ageSystem.ageEffectsOptions = options;
+    ageSystem.ageEffectsOptions = options;
 }
 
 export function abilitiesName() {
     // Capture what is the ability set to be used
     const settingAblOption = game.settings.get("age-system", "abilitySelection");
-    const ablOptions = CONFIG.ageSystem.abilitiesSettings;
-    const orgAbl = CONFIG.ageSystem.abilitiesOrg;
+    const ablOptions = ageSystem.abilitiesSettings;
+    const orgAbl = ageSystem.abilitiesOrg;
     const ablType = [ablOptions["main"], ablOptions["dage"], orgAbl];
 
-    CONFIG.ageSystem.abilities = localizeObj(ablOptions[settingAblOption], true);
-    CONFIG.ageSystem.abilitiesOrg = localizeObj(orgAbl, false);
+    ageSystem.abilities = localizeObj(ablOptions[settingAblOption], true);
+    ageSystem.abilitiesOrg = localizeObj(orgAbl, false);
 }
 
 function localizeObj(source, sort = false) {
@@ -126,4 +126,64 @@ export function sortObjArrayByName(nameArray, nameKey) {
  */
 export function prepSheet (sheet, html, data) {
     html.addClass(`colorset-${ageSystem.colorScheme}`)
+}
+
+/**
+ * Creates a list with modifiers and labels in alphabetic order
+ * @reuturn Object with list
+ */
+export function modifiersList() {
+    const possible = foundry.utils.deepClone(ageSystem.modifiers);
+    
+    const armorMods = possible.armorMods[ageSystem.healthSys.type];
+    const ablMods = possible.ablMods[game.settings.get("age-system", "abilitySelection")];
+    const mods = possible.generalMods.concat(armorMods, ablMods);
+    if (!ageSystem.healthSys.useInjury) mods.push(possible.others[0]);
+    if (game.settings.get("age-system", "useConviction")) mods.push(possible.others[1]);
+
+    const modsObj = {};
+    for (let m = 0; m < mods.length; m++) {
+        const k = mods[m];
+        if (!possible.modeToLocalize.includes(k)) {
+            modsObj[k] = `age-system.bonus.${k}`
+        } else {
+            switch (k) {
+                case 'impactArmor':
+                    modsObj[k] = ageSystem.healthSys.type === 'mage' ? `age-system.bonus.impactArmor` : `age-system.armor`
+                    break;
+                case 'powerForce':
+                    modsObj[k] = `age-system.bonus.${k}` // Add logics afterwards
+                    break;
+                case 'maxPowerPoints':
+                    modsObj[k] = `age-system.bonus.${k}` // Add logics afterwards
+                    break;
+                case 'maxHealth':
+                    modsObj[k] = `age-system.bonus.${k}` // Add logics afterwards
+                    // modsObj[k] = ageSystem.healthSys.useHealth ? `age-system.bonus.maxHealth` : `age-system.bonus.maxFortune`
+                    break;            
+                default:
+                    break;
+            }
+        }
+        
+    }
+
+    return localizeObj(modsObj)
+}
+
+/**
+ * Localize object of strings and sort alphabetically if requested
+ * @param {object} toLocalize Object with strings to localize
+ * @param {boolean} sorted Indicate if object must be sorted by alphabetic order
+ * @returns Localized object
+ */
+export function localizeObj(toLocalize, sorted = true) {
+    const localized = Object.entries(toLocalize).map(e => {
+        return [e[0], game.i18n.localize(e[1])];
+    });
+    if (sorted) localized.sort((a, b) => a[1].localeCompare(b[1]));
+    return localized.reduce((obj, e) => {
+        obj[e[0]] = e[1];
+        return obj;
+    }, {});
 }
