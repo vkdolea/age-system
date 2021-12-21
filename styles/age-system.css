@@ -1704,13 +1704,7 @@
   margin-bottom: 10px;
   row-gap: 5px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav a.active {
-  font-size: 1.2rem;
-  height: 1.4rem;
-  line-height: 100%;
-}
 .age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav a {
-  text-shadow: 1px 0px 1px silver, -1px 0px 1px silver, 1px 0px 1px silver, 0px 1px 1px silver, 0px -1px 1px silver;
   font-size: 1rem;
   margin: 0 4px;
   padding: 0 4px;
@@ -2758,10 +2752,12 @@
   color: #ffffff;
 }
 .colorset-modern-blue .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #B9DBEB, #007DAD);
+  background-color: #35A5CA;
+  color: #231F20;
 }
 .colorset-modern-blue .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #B9DBEB 60%, #007DAD) !important;
+  background-color: #007DAD;
+  color: #ffffff;
 }
 .colorset-modern-blue .thin-border {
   border: thin solid #231F20;
@@ -2955,10 +2951,12 @@
   color: #ffffff;
 }
 .colorset-fantasy-blue .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #91b6d4, #0f4f5b);
+  background-color: #000000;
+  color: #dbdada;
 }
 .colorset-fantasy-blue .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #91b6d4 60%, #0f4f5b) !important;
+  background-color: #0f4f5b;
+  color: #ffffff;
 }
 .colorset-fantasy-blue .thin-border {
   border: thin solid #dbdada;
@@ -3152,10 +3150,12 @@
   color: #ffffff;
 }
 .colorset-dragon-red .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #e0beb1, #810207);
+  background-color: #979899;
+  color: #000000;
 }
 .colorset-dragon-red .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #e0beb1 60%, #810207) !important;
+  background-color: #810207;
+  color: #ffffff;
 }
 .colorset-dragon-red .thin-border {
   border: thin solid #000000;
@@ -3349,10 +3349,12 @@
   color: #ffffff;
 }
 .colorset-folded-purple .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #cfccde, #565183);
+  background-color: #625b68;
+  color: #000000;
 }
 .colorset-folded-purple .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #cfccde 60%, #565183) !important;
+  background-color: #565183;
+  color: #ffffff;
 }
 .colorset-folded-purple .thin-border {
   border: thin solid #000000;
@@ -3546,10 +3548,12 @@
   color: #ffffff;
 }
 .colorset-ronin-green .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #c2f5aa, #155f0e);
+  background-color: #92b65f;
+  color: #000000;
 }
 .colorset-ronin-green .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #c2f5aa 60%, #155f0e) !important;
+  background-color: #155f0e;
+  color: #ffffff;
 }
 .colorset-ronin-green .thin-border {
   border: thin solid #000000;
@@ -3743,10 +3747,12 @@
   color: #e7ccc3;
 }
 .colorset-select-one .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #768d9f, #273249);
+  background-color: #4d627a;
+  color: #290000;
 }
 .colorset-select-one .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #768d9f 60%, #273249) !important;
+  background-color: #273249;
+  color: #e7ccc3;
 }
 .colorset-select-one .thin-border {
   border: thin solid #290000;
@@ -3940,10 +3946,12 @@
   color: #ccc9c9;
 }
 .colorset-the-grey .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #b4b6b3, #3d3e3f);
+  background-color: #6b6a6a;
+  color: #000000;
 }
 .colorset-the-grey .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #b4b6b3 60%, #3d3e3f) !important;
+  background-color: #3d3e3f;
+  color: #ccc9c9;
 }
 .colorset-the-grey .thin-border {
   border: thin solid #000000;
@@ -4137,10 +4145,12 @@
   color: #f7b755;
 }
 .colorset-red-warrior .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #d1635b, #751119);
+  background-color: #b22126;
+  color: #c7c691;
 }
 .colorset-red-warrior .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #d1635b 60%, #751119) !important;
+  background-color: #751119;
+  color: #f7b755;
 }
 .colorset-red-warrior .thin-border {
   border: thin solid #c7c691;
@@ -4334,10 +4344,12 @@
   color: #bb8755;
 }
 .colorset-never-dead .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #eeddcd, #663322);
+  background-color: #58705a;
+  color: #29241f;
 }
 .colorset-never-dead .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #eeddcd 60%, #663322) !important;
+  background-color: #663322;
+  color: #bb8755;
 }
 .colorset-never-dead .thin-border {
   border: thin solid #29241f;
@@ -4531,10 +4543,12 @@
   color: #dde2e2;
 }
 .colorset-expanded-blue .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #e6e7e8, #005971);
+  background-color: #112339;
+  color: #dde2e2;
 }
 .colorset-expanded-blue .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #e6e7e8 60%, #005971) !important;
+  background-color: #005971;
+  color: #dde2e2;
 }
 .colorset-expanded-blue .thin-border {
   border: thin solid #dde2e2;

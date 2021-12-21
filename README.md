@@ -97,7 +97,14 @@ Icons made by:
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.
 
 ## [Change log](https://github.com/vkdolea/age-system/wiki/Release-Notes)
-## 0.10.1 [2021-12-21]
+## 0.10.2 [2021-12-21]
+### Changed
+- Buttons to select character sheet tabs have different colors to tell from active / inactive.
+
+### Fixed
+- Targeting a token to attack using weapon is working again as expected.
+
+## 0.10.2 [2021-12-21]
 ### Fixed
 - Issue preventing world from loading data on start up.
 

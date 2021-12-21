@@ -701,6 +701,7 @@ ageSystem.ROLL_TYPE = {
     POWER: "powerActivation",
     ABILITY: 'ability',
     FOCUS: 'focus',
+    TALENT: 'talent',
     VEHICLE_ACTION: 'vehicle',
     PLOT_ACTION: 'plotAction',
     PLOT_DAMAGE: 'plotDamage',
