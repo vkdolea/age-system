@@ -164,6 +164,21 @@ export class ageSystemItem extends Item {
 
     _prepareShipFeatures(data) {};
 
+    /** Adds a new Modifier to item */
+    newModifier() {
+        if (!Array.isArray(this.modifiers)) return false;
+        const mods = foundry.utils.deepClone(this.modifiers);
+        const newMod = {
+            type: "",
+            formula: "",
+            flavor: "",
+            isActive: true,
+            conditions: []
+        }
+        mods.push(newMod);
+        return this.update({"data.modifiers": mods});
+    }
+
     // Rolls damage for the item
     rollDamage({
         event = null,

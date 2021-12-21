@@ -285,7 +285,7 @@ export const registerSystemSettings = async function() {
     hint: "SETTINGS.useConvictionHint",
     scope: "world",
     config: true,
-    default: true,
+    default: false,
     type: Boolean,
     onChange: debouncedReload
   });
@@ -298,7 +298,7 @@ export const registerSystemSettings = async function() {
     hint: "SETTINGS.useFatigueHint",
     scope: "world",
     config: true,
-    default: true,
+    default: false,
     type: Boolean,
     onChange: debouncedReload
   });

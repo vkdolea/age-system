@@ -145,11 +145,7 @@ ageSystem.damageType = {
     stun: "age-system.stun",
     wound: "age-system.wound"
 };
-// ageSystem.damageSource = {
-//     impact: "age-system.impact",
-//     ballistic: "age-system.ballistic",
-//     penetrating: "age-system.penetrating",
-// };
+
 ageSystem.damageSourceOpts = {
     useBallistic: {
         impact: "age-system.impact",
@@ -763,4 +759,22 @@ ageSystem.greenRonin = {
     //     logo: `${pathLogo}threefold.png`,
     //     site: `https://greenroninstore.com/products/threefold`
     // }
+}
+
+// List of Mods Per setup
+ageSystem.modifiers = {
+    others: ["maxHealth", "maxConviction"],
+    armorMods: {
+        expanse: ["impactArmor", 'toughness'],
+        mage: ["impactArmor", "ballisticArmor", "toughness"],
+        basic: ["impactArmor"]
+    },
+    ablMods: {
+        main: ["acc", "comm", "cons", "dex", "fight", "int", "per", "str", "will"],
+        dage: ["comm", "cons", "cunn", "dex", "magic", "per", "str", "will"]
+    },
+    generalMods: ["powerForce", "aimMnv", "armorPenalty", "itemDamage", "testMod", "attackMod", "actorDamage", "itemActivation", "focus", "defense", "speed",
+        "armorStrain", "defendMnv", "guardupMnv", "allOutAtkMnv", "maxPowerPoints"
+    ],
+    modeToLocalize: ["impactArmor", "powerForce", "maxPowerPoints", "maxHealth"]
 }
