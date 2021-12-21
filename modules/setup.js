@@ -59,18 +59,6 @@ export function abilitiesName() {
     ageSystem.abilitiesOrg = localizeObj(orgAbl, false);
 }
 
-function localizeObj(source, sort = false) {
-    const localized = Object.entries(source).map(e => {
-        return [e[0], game.i18n.localize(e[1])];
-    });
-    if ( sort ) localized.sort((a, b) => a[1].localeCompare(b[1])); // All entries are sorted
-    source = localized.reduce((obj, e) => {
-        obj[e[0]] = e[1];
-        return obj;
-    }, {});
-    return source
-}
-
 // Hide checkboxes to select Primary Abilities
 export function hidePrimaryAblCheckbox(html) {
     const primaryAblShow = game.settings.get("age-system", "primaryAbl");
@@ -168,7 +156,7 @@ export function modifiersList() {
         
     }
 
-    return localizeObj(modsObj)
+    return localizeObj(modsObj, true)
 }
 
 /**
