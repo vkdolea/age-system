@@ -62,6 +62,11 @@ export default class ageSystemItemSheet extends ItemSheet {
         data.item = data.document;
         data.config = CONFIG.ageSystem;
         
+        // Fetch localized name for Item Type
+        const i = this.item.type.toLowerCase();
+        const itemType = i[0].toUpperCase() + i.slice(1);
+        data.localType = game.i18n.localize(`ITEM.Type${itemType}`)
+        
         // Setting which ability settings will be used
         data.config.wealthMode = game.settings.get("age-system", "wealthType");
 
@@ -91,7 +96,7 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Modifiers Dropdown List
         data.modifiersList = modifiersList()
-        console.log(data)
+        console.log(this.item.data.data.modifiers)
 
         return data;
     };
@@ -101,10 +106,10 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         if (this.isEditable) {
             
-            html.find("a.add-bonus").click(this._onAddBonus.bind(this));
+            html.find("a.add-bonus").click(this._onAddModifier.bind(this));
             html.find(".add-modifier").click(this._onAddModifier.bind(this));
-            html.find(".mod-controls a.remove").click(this._onRemoveBonus.bind(this));
-            html.find(".mod-controls a.toggle").click(this._onToggleBonus.bind(this));
+            html.find(".mod-controls a.remove").click(this._onRemoveModifier.bind(this));
+            html.find(".mod-controls a.toggle").click(this._onToggleModifier.bind(this));
 
             if (this.item.data.type === "focus") {
                 if (this.item.isOwned) {
@@ -134,7 +139,21 @@ export default class ageSystemItemSheet extends ItemSheet {
     };
 
     _onAddModifier(e) {
-        this.item.newModifier();
+        return this.item.newModifier();
+    }
+
+    _onRemoveModifier(e) {
+        const i = e.currentTarget.closest(".feature-controls").dataset.modIndex;
+        const modifiers = foundry.utils.deepClone(this.item.data.data.modifiers);
+        modifiers.splice(i, 1);
+        return this.item.update({"data.modifiers": modifiers});
+    }
+
+    _onToggleModifier(event) {
+        const i = event.currentTarget.closest(".feature-controls").dataset.modIndex;
+        const modifiers = foundry.utils.deepClone(this.item.data.data.modifiers);
+        modifiers[i].isActive = !modifiers[i].isActive;
+        return this.item.update({"data.modifiers": modifiers});
     }
 
     async _onWeaponGroupToggle(event) {
@@ -150,62 +169,64 @@ export default class ageSystemItemSheet extends ItemSheet {
         }
         return this.item.update({"data.wgroups": wgroups});
     }
-    
-    _onToggleBonus(event) {
-        const modType = event.currentTarget.closest(".feature-controls").dataset.modType;
-        const isActivePath = `data.itemMods.${modType}.isActive`;
-        const isActive = this.item.data.data.itemMods[modType].isActive;
-        this.item.update({[isActivePath]: !isActive});
-    }
+   
 
-    _onRemoveBonus(event){
-        const modType = event.currentTarget.closest(".feature-controls").dataset.modType;
-        const modPath = `data.itemMods.${modType}`;
-        const selectedPath = modPath + ".selected";
-        const isActivePath = modPath + ".isActive";
-        this.item.update({
-            [selectedPath]: false,
-            [isActivePath]: false
-        });
-    };
 
-    async _onAddBonus(event) {
-        const bonusList = this.item.data.data.itemMods;
-        let bonusOptions = {};
-        for (const mod in bonusList) {
-            if (Object.hasOwnProperty.call(bonusList, mod)) {
-                const b = bonusList[mod];
-                if (!b.selected) {
-                    const modName = game.i18n.localize(`age-system.bonus.${mod}`);
-                    const selectPath = `data.itemMods.${mod}.selected`;
-                    const activePath = `data.itemMods.${mod}.isActive`;
-                    bonusOptions = {
-                        ...bonusOptions,
-                        [mod]: {
-                            label: modName,
-                            callback: () => this.item.update({
-                                [selectPath]: true,
-                                [activePath]: true
-                            })
-                        }
-                    }
-                }
-            }
-        }
-        if (bonusOptions === {}) return;
-        const template = `systems/age-system/templates/bonus-select-form.hbs`;
-        const html = await renderTemplate(template, {bonusOptions, item: this.item})
-        return new Promise(resolve => {
-            const data = {
-                title: false,
-                content: html,
-                buttons: bonusOptions,
-                default: "cancel",
-                close: () => resolve({cancelled: true}),
-            }
-            new Dialog(data, {classes: ["age-system-dialog", "bonus-select", "dialog"]}).render(true);
-        });
-    }
+    // _onToggleBonus(event) {
+    //     const modType = event.currentTarget.closest(".feature-controls").dataset.modType;
+    //     const isActivePath = `data.itemMods.${modType}.isActive`;
+    //     const isActive = this.item.data.data.itemMods[modType].isActive;
+    //     this.item.update({[isActivePath]: !isActive});
+    // }
+
+    // _onRemoveBonus(event){
+    //     const modType = event.currentTarget.closest(".feature-controls").dataset.modType;
+    //     const modPath = `data.itemMods.${modType}`;
+    //     const selectedPath = modPath + ".selected";
+    //     const isActivePath = modPath + ".isActive";
+    //     this.item.update({
+    //         [selectedPath]: false,
+    //         [isActivePath]: false
+    //     });
+    // };
+
+    // async _onAddBonus(event) {
+    //     const bonusList = this.item.data.data.itemMods;
+    //     let bonusOptions = {};
+    //     for (const mod in bonusList) {
+    //         if (Object.hasOwnProperty.call(bonusList, mod)) {
+    //             const b = bonusList[mod];
+    //             if (!b.selected) {
+    //                 const modName = game.i18n.localize(`age-system.bonus.${mod}`);
+    //                 const selectPath = `data.itemMods.${mod}.selected`;
+    //                 const activePath = `data.itemMods.${mod}.isActive`;
+    //                 bonusOptions = {
+    //                     ...bonusOptions,
+    //                     [mod]: {
+    //                         label: modName,
+    //                         callback: () => this.item.update({
+    //                             [selectPath]: true,
+    //                             [activePath]: true
+    //                         })
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     if (bonusOptions === {}) return;
+    //     const template = `systems/age-system/templates/bonus-select-form.hbs`;
+    //     const html = await renderTemplate(template, {bonusOptions, item: this.item})
+    //     return new Promise(resolve => {
+    //         const data = {
+    //             title: false,
+    //             content: html,
+    //             buttons: bonusOptions,
+    //             default: "cancel",
+    //             close: () => resolve({cancelled: true}),
+    //         }
+    //         new Dialog(data, {classes: ["age-system-dialog", "bonus-select", "dialog"]}).render(true);
+    //     });
+    // }
 
     _onToggleDamage(event) {
         const toggleDmg = !this.item.data.data.causeDamage;

@@ -272,9 +272,9 @@ each(@colorsets, {
         .membership,
         .relationship,
         .shipfeatures {
-            img {
-                border: 1px solid extract(extract(@color-list, @index), 1);
-            }
+            // img {
+            //     border: 1px solid extract(extract(@color-list, @index), 1);
+            // }
     
             label {
                 color: extract(extract(@color-list, @index), 1);
@@ -289,15 +289,15 @@ each(@colorsets, {
                 background-color: #ffffff;
             };
             // Tabs Nav Control  
-            nav {
-                .item {
-                    background-color: extract(extract(@color-list, @index), 3);
-                    color: extract(extract(@color-list, @index), 1);
-                }
-                .item.active {
-                    background-color: #ffffff;
-                }
-            }
+            // nav {
+            //     .item {
+            //         background-color: extract(extract(@color-list, @index), 3);
+            //         color: extract(extract(@color-list, @index), 1);
+            //     }
+            //     .item.active {
+            //         background-color: #ffffff;
+            //     }
+            // }
             // Modificator Cards
             .mod-card {
                 border: solid extract(extract(@color-list, @index), 3) 1px;

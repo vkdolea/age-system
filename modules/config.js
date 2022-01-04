@@ -778,4 +778,4 @@ ageSystem.modifiers = {
         "armorStrain", "defendMnv", "guardupMnv", "allOutAtkMnv", "maxPowerPoints"
     ],
     modeToLocalize: ["impactArmor", "powerForce", "maxPowerPoints", "maxHealth"]
-}
+};

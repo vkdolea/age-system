@@ -1,8 +1,31 @@
 /*********************************/
 /**    Alternate Char Sheet     **/
 /*********************************/
-
-.age-system.sheet.char-sheet-alt .actor-sheet {
+.age-system {
+    .sheet-main-content nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 10px;
+        row-gap: 5px;
+        a {
+            // text-shadow: 1px 0px 1px silver, -1px 0px 1px silver, 1px 0px 1px silver,  0px 1px 1px silver, 0px -1px 1px silver;
+            font-size: 1rem;
+            margin: 0 4px;
+            padding: 0 4px;
+            max-width: fit-content;
+            font-variant: all-petite-caps;
+            height: 1.2rem;
+            border-radius: 5px;
+            vertical-align: middle;
+            -webkit-box-shadow: 1px 1px 3px 1px #000000; 
+            box-shadow: 1px 1px 3px 1px #000000;
+            font-weight: 600;
+        }
+    }
+}
+.age-system.sheet {
     flex-wrap: nowrap;
     text-align: center;
     ol,
@@ -219,29 +242,6 @@
         transition: all 0.5s ease;
     }
 
-    .sheet-main-content nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        margin-bottom: 10px;
-        row-gap: 5px;
-        a {
-            // text-shadow: 1px 0px 1px silver, -1px 0px 1px silver, 1px 0px 1px silver,  0px 1px 1px silver, 0px -1px 1px silver;
-            font-size: 1rem;
-            margin: 0 4px;
-            padding: 0 4px;
-            max-width: fit-content;
-            font-variant: all-petite-caps;
-            height: 1.2rem;
-            border-radius: 5px;
-            vertical-align: middle;
-            -webkit-box-shadow: 1px 1px 3px 1px #000000; 
-            box-shadow: 1px 1px 3px 1px #000000;
-            font-weight: 600;
-        }
-    }
-
     .owned-focus .item-name,
     .select-options,
     .conditions .tooltip-container {
@@ -402,11 +402,11 @@
       
     .container-tooltip-text {
         visibility: hidden;
+        opacity: 0;
         max-width: 600px;
         text-align: left;
         border-radius: 5px;
         padding: 4px;
-        opacity: 0.9;
         
         /* Position the tooltip */
         position: fixed;
@@ -419,6 +419,8 @@
     }
     .tooltip-container:hover .container-tooltip-text {
         visibility: visible;
+        opacity: .95;
+        transition: all 0.4s ease;
     }
 
     a.item-equip.not-equiped,

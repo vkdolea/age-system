@@ -38,6 +38,18 @@ export class ageSystemItem extends Item {
 
         data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
         data.nameLowerCase = itemData.name.toLowerCase();
+
+        // Confirm if data.modifiers is an Array
+        const mods = data.modifiers;
+        if (typeof mods === "object") {
+            const newArr = []
+            for (const k in mods) {
+                if (Object.hasOwnProperty.call(mods, k)) {
+                    newArr.push(mods[k]);
+                }
+            }
+            data.modifiers = newArr;
+        }
         
         // Adding common data for Power and Weapon
         if (["power", "weapon"].includes(itemType)) {
@@ -166,14 +178,14 @@ export class ageSystemItem extends Item {
 
     /** Adds a new Modifier to item */
     newModifier() {
-        if (!Array.isArray(this.modifiers)) return false;
-        const mods = foundry.utils.deepClone(this.modifiers);
+        if (!Array.isArray(this.data.data.modifiers)) return false;
+        const mods = foundry.utils.deepClone(this.data.data.modifiers);
         const newMod = {
             type: "",
             formula: "",
             flavor: "",
             isActive: true,
-            conditions: []
+            conditions: {}
         }
         mods.push(newMod);
         return this.update({"data.modifiers": mods});
