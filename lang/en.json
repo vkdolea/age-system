@@ -643,6 +643,8 @@
 
         "social": "Social",
         "quickAccess": "Quick Access",
-        "showOnChat": "Show on chat"
+        "showOnChat": "Show on chat",
+
+        "requirement": "Requirement"
     }
 }

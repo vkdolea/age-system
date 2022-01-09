@@ -763,13 +763,14 @@ export async function itemDamage({
     let dmgAbl = dmgDetails.dmgAbl
 
     let damageFormula
-    let rollData = {};
+    let rollData = {...item.actor.actorRollData()};
     if (healthSys.useInjury) {
         let baseDmg = healthSys.baseDamageTN;
         if (item?.data?.data?.damageInjury !== 0) baseDmg += item.data.data.damageInjury;
         damageFormula = `${baseDmg}[${game.i18n.localize("age-system.base")}]`;
     } else {
-        damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${nrDice}d${diceSize}]` : "";
+        // damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${nrDice}d${diceSize}]` : "";
+        damageFormula = `${dmgDetails.damageFormula}`;
         rollData.damageMod = constDmg;
         // Check if damage source has a non 0 portion on its parameters
         if (constDmg) {damageFormula = `${damageFormula} + @damageMod[${game.i18n.localize("age-system.base")}]`}
@@ -896,6 +897,29 @@ export async function itemDamage({
     };
 
     let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
+
+    // Add extra data to identified dice rolled withing paranthesis
+    // if (dmgRoll._dice.length > 0) {
+    //     const rolled = [];
+    //     let sum = 0
+    //     for (let i = 0; i < dmgRoll._dice.length; i++) {
+    //         const e = dmgRoll._dice[i].results;
+    //         for (let k = 0; k < e.length; k++) {
+    //             const d = e[k].result;
+    //             rolled.push(d);
+    //             sum += d;
+    //         }
+    //     }
+    //     dmgRoll.terms[0].options.dmgDice = {
+    //         dice: rolled,
+    //         extra: dmgRoll.terms[0].total - sum
+    //     };
+    // }
+    // Programatically add flavor to missing terms
+    for (let t = 0; t < dmgRoll.terms.length; t++) {
+        const term = dmgRoll.terms[t];
+        if (!term.options.flavor) term.options.flavor = term.formula
+    }
     
     // Preparing custom damage chat card
     let chatTemplate = "/systems/age-system/templates/rolls/damage-roll.hbs";

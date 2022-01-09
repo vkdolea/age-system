@@ -375,7 +375,8 @@
                 "diceType": "6",
                 "extraValue": 0,
                 "dmgAbl": "str",
-                "damageInjury": 1
+                "damageInjury": 1,
+                "rollFormula": "1d6"
             },
             "hardItem": {
                 "weight": 0,
@@ -595,6 +596,7 @@
             "range": 2,
             "rangeMax": 2,
             "rof": "none",
+            "ranged": false,
             "wgroups": []
         },
         "power": {
@@ -617,11 +619,32 @@
                 "extraValue": 0,
                 "dmgAbl": "int",
                 "damageInjury": 1
-            }
+            },
+            "requirement": ""
         },
         "talent": {
             "templates": ["description", "bonuses"],
-            "activate": false
+            "activate": false,
+            "tier1": {
+                "desc": "",
+                "isActive": true
+            },
+            "tier2": {
+                "desc": "",
+                "isActive": true
+            },
+            "tier3": {
+                "desc": "",
+                "isActive": true
+            },
+            "tier4": {
+                "desc": "",
+                "isActive": true
+            },
+            "tier5": {
+                "desc": "",
+                "isActive": true
+            }
         },
         "stunts": {
             "templates": ["description"],

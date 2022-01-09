@@ -1,24 +1,32 @@
 /*******************************/
 /**        Item Sheet         **/
 /*******************************/
-.age-system.sheet.item .item-name {
+.age-system.sheet .itemname {
   font-size: 1.4rem;
   padding-left: 6px;
   text-align: left;
   margin-bottom: 0.2rem;
 }
-.age-system.sheet.item .item-summary {
-  font-size: 0.7rem;
+.age-system.sheet .item-summary {
+  font-size: 0.8rem;
   margin-left: 0.2rem;
   margin-bottom: auto;
   flex: 0 0 fit-content;
   height: fit-content;
 }
-.age-system.sheet.item .item-summary select,
-.age-system.sheet.item .item-summary input {
+.age-system.sheet .item-summary select,
+.age-system.sheet .item-summary input {
   font-size: 0.7rem !important;
 }
-.age-system.sheet.item .item-summary li {
+.age-system.sheet .item-summary .two-lines {
+  height: 1.8rem;
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet .item-summary label.two-lines {
+  line-height: 2.4;
+}
+.age-system.sheet .item-summary li {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -26,34 +34,31 @@
   margin-bottom: 0.1rem;
   width: 12rem;
 }
-.age-system.sheet.item .item-summary li * {
+.age-system.sheet .item-summary li > *:first-child {
+  border-radius: 5px 0 0 5px;
+}
+.age-system.sheet .item-summary li > *:last-child {
+  border-radius: 0 5px 5px 0;
+  background-color: silver;
+  color: black;
+}
+.age-system.sheet .item-summary li * {
   height: 0.9rem;
   text-align: center;
 }
-.age-system.sheet.item .item-summary li > * {
+.age-system.sheet .item-summary li > * {
   width: -webkit-fill-available;
 }
-.age-system.sheet.item .item-summary li label {
+.age-system.sheet .item-summary li label {
   flex: 0 0 5rem;
   text-align: left;
   padding-left: 4px;
 }
-.age-system.sheet.item .editor.editor {
-  text-align: left;
-  min-height: 175px;
-  max-height: 175px;
-  padding: 4px;
-  border-radius: 10px;
-}
-.age-system.sheet.item .editor.editor .tox.tox-tinymce {
-  min-height: 140px !important;
-  max-height: 390px !important;
-}
-.age-system.sheet.item .page-ref {
+.age-system.sheet .page-ref {
   max-width: 100px;
   height: 0.9rem;
 }
-.age-system.sheet.item .card-title {
+.age-system.sheet .card-title {
   border-radius: 10px 10px 0 0;
   width: 100%;
   text-align: center;
@@ -62,23 +67,23 @@
   height: 1.5rem;
   line-height: 1.8;
 }
-.age-system.sheet.item img.img-change {
+.age-system.sheet img.img-change {
   flex: 0 0 4rem;
   height: 4rem;
   margin: auto 0;
 }
-.age-system.sheet.item .item-box {
+.age-system.sheet .item-box {
   padding: 0.2rem;
   row-gap: 0.2rem;
   column-gap: 0.2rem;
 }
-.age-system.sheet.item select[name="data.useAbl"] {
+.age-system.sheet select[name="data.useAbl"] {
   max-width: fit-content;
 }
-.age-system.sheet.item input[name="data.useFocus"] {
+.age-system.sheet input[name="data.useFocus"] {
   min-width: 10rem;
 }
-.age-system.sheet.item .header-input {
+.age-system.sheet .header-input {
   text-align: center;
   border-radius: 5px;
   border-bottom: 1px solid;
@@ -86,13 +91,14 @@
   font-size: 0.9rem;
   height: 0.9rem;
 }
-.age-system.sheet.item .label-under {
+.age-system.sheet .label-under {
   font-variant: all-petite-caps;
   font-size: 0.8rem;
   text-align: center;
+  width: -webkit-fill-available;
 }
-.age-system.sheet.item .minimum-length {
-  flex: 0 0 fit-content;
+.age-system.sheet .minimum-length {
+  max-width: fit-content;
 }
 /*******************************/
 /**    Default Char Sheet     **/
@@ -635,6 +641,33 @@
 /*********************************/
 /**    Alternate Char Sheet     **/
 /*********************************/
+.age-system .mouse-to-pointer:hover {
+  cursor: pointer;
+}
+.age-system .modificators-table .mod-type {
+  flex: 0 0 200px;
+}
+.age-system .modificators-table .mod-value {
+  flex: 0 0 100px;
+}
+.age-system .modificators-table .mod-controls {
+  flex: 0 0 50px;
+}
+.age-system .editor.editor {
+  text-align: left;
+  height: auto !important;
+  min-height: 150px;
+  max-height: 400px;
+  padding: 4px;
+  border-radius: 0 0 10px 10px;
+}
+.age-system .editor.editor .tox.tox-tinymce {
+  min-height: 140px !important;
+  max-height: 390px !important;
+}
+.age-system p .item-box {
+  line-height: 1.5;
+}
 .age-system .sheet-main-content nav {
   flex-wrap: wrap;
   justify-content: center;
@@ -681,7 +714,7 @@
   height: 12px;
   width: 12px;
 }
-.age-system.sheet .actor-picture {
+.age-system.sheet .document-picture {
   border: none;
   max-height: 200px;
   width: 180px;
@@ -705,6 +738,9 @@
 }
 .age-system.sheet .resource hr {
   margin: 0;
+}
+.age-system.sheet .resource label {
+  background: none;
 }
 .age-system.sheet .title {
   text-transform: uppercase;
@@ -931,18 +967,6 @@
 .age-system.sheet .persona {
   padding-right: 4px;
 }
-.age-system.sheet .persona .editor.editor {
-  text-align: left;
-  height: auto !important;
-  min-height: 150px;
-  max-height: 400px;
-  padding: 4px;
-  border-radius: 0 0 10px 10px;
-}
-.age-system.sheet .persona .editor.editor .tox.tox-tinymce {
-  min-height: 140px !important;
-  max-height: 390px !important;
-}
 .age-system.sheet .free-text {
   resize: none !important;
   border-radius: 0 0 10px 10px;
@@ -951,6 +975,9 @@
 }
 .age-system.sheet .item-group {
   height: max-content;
+}
+.age-system.sheet .item-group li {
+  align-items: center;
 }
 .age-system.sheet .item-group li:first-child,
 .age-system.sheet .item-group .list-item:first-child {
@@ -962,32 +989,43 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+.age-system.sheet .item-group .extra-input {
+  flex: 0 0 fit-content;
+}
+.age-system.sheet .item-group .minimal-input {
+  flex: 0 0 1.5rem;
+}
+.age-system.sheet .item-group.condensed-data li label {
+  flex: 0 0 100px;
+}
 .age-system.sheet .abilities-column {
   flex: 0 0 200px;
 }
-.age-system.sheet .char-details {
+.age-system.sheet .header-details {
   flex-wrap: nowrap;
 }
-.age-system.sheet .char-details .charname {
+.age-system.sheet .header-details .charname,
+.age-system.sheet .header-details .itemname {
   margin-bottom: 10px;
-  color: white;
+  color: silver;
   font-size: 2rem;
   height: 2.4rem;
 }
-.age-system.sheet .char-details .sub-details > div {
+.age-system.sheet .sub-details > div:not(.flexrow) {
   display: flex;
   flex-direction: column;
 }
-.age-system.sheet .char-details .sub-details input {
-  font-size: 0.7rem;
-  height: 0.8rem;
+.age-system.sheet .sub-details input,
+.age-system.sheet .sub-details select {
+  font-size: 0.8rem;
+  height: 0.9rem;
   border-bottom: 1px solid black !important;
-  color: white !important;
+  color: silver !important;
   padding-bottom: 4px;
 }
-.age-system.sheet .char-details .sub-details label {
-  flex: 0 0 0.6rem;
-  font-size: 0.5rem;
+.age-system.sheet .sub-details label {
+  flex: 0 0 0.7rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
 }
 .age-system.sheet .at-header {
@@ -1891,6 +1929,10 @@
   border-radius: 5px;
   border: 5px outset #35A5CA;
 }
+.colorset-modern-blue .item-summary label {
+  background-color: #35A5CA;
+  color: #231F20;
+}
 .colorset-modern-blue .metal-background {
   background: linear-gradient(90deg, #007DAD 5%, #B9DBEB 50%, #007DAD 95%);
 }
@@ -1939,7 +1981,6 @@
   background-color: #007DAD;
   color: #ffffff;
 }
-.colorset-modern-blue .char-sheet .editor,
 .colorset-modern-blue .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -1981,18 +2022,6 @@
 .colorset-modern-blue .char-sheet input.colorset-second-tier {
   background-color: #B9DBEB !important;
   color: #007DAD !important;
-}
-.colorset-modern-blue .focus label,
-.colorset-modern-blue .power label,
-.colorset-modern-blue .talent label,
-.colorset-modern-blue .weapon label,
-.colorset-modern-blue .equipment label,
-.colorset-modern-blue .stunts label,
-.colorset-modern-blue .honorifics label,
-.colorset-modern-blue .membership label,
-.colorset-modern-blue .relationship label,
-.colorset-modern-blue .shipfeatures label {
-  color: #007DAD;
 }
 .colorset-modern-blue .focus .item-card-stats,
 .colorset-modern-blue .power .item-card-stats,
@@ -2053,6 +2082,10 @@
   border-radius: 5px;
   border: 5px outset #000000;
 }
+.colorset-fantasy-blue .item-summary label {
+  background-color: #000000;
+  color: #dbdada;
+}
 .colorset-fantasy-blue .metal-background {
   background: linear-gradient(90deg, #0f4f5b 5%, #91b6d4 50%, #0f4f5b 95%);
 }
@@ -2101,7 +2134,6 @@
   background-color: #0f4f5b;
   color: #ffffff;
 }
-.colorset-fantasy-blue .char-sheet .editor,
 .colorset-fantasy-blue .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -2143,18 +2175,6 @@
 .colorset-fantasy-blue .char-sheet input.colorset-second-tier {
   background-color: #91b6d4 !important;
   color: #0f4f5b !important;
-}
-.colorset-fantasy-blue .focus label,
-.colorset-fantasy-blue .power label,
-.colorset-fantasy-blue .talent label,
-.colorset-fantasy-blue .weapon label,
-.colorset-fantasy-blue .equipment label,
-.colorset-fantasy-blue .stunts label,
-.colorset-fantasy-blue .honorifics label,
-.colorset-fantasy-blue .membership label,
-.colorset-fantasy-blue .relationship label,
-.colorset-fantasy-blue .shipfeatures label {
-  color: #0f4f5b;
 }
 .colorset-fantasy-blue .focus .item-card-stats,
 .colorset-fantasy-blue .power .item-card-stats,
@@ -2215,6 +2235,10 @@
   border-radius: 5px;
   border: 5px outset #979899;
 }
+.colorset-dragon-red .item-summary label {
+  background-color: #979899;
+  color: #000000;
+}
 .colorset-dragon-red .metal-background {
   background: linear-gradient(90deg, #810207 5%, #e0beb1 50%, #810207 95%);
 }
@@ -2263,7 +2287,6 @@
   background-color: #810207;
   color: #ffffff;
 }
-.colorset-dragon-red .char-sheet .editor,
 .colorset-dragon-red .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -2305,18 +2328,6 @@
 .colorset-dragon-red .char-sheet input.colorset-second-tier {
   background-color: #e0beb1 !important;
   color: #810207 !important;
-}
-.colorset-dragon-red .focus label,
-.colorset-dragon-red .power label,
-.colorset-dragon-red .talent label,
-.colorset-dragon-red .weapon label,
-.colorset-dragon-red .equipment label,
-.colorset-dragon-red .stunts label,
-.colorset-dragon-red .honorifics label,
-.colorset-dragon-red .membership label,
-.colorset-dragon-red .relationship label,
-.colorset-dragon-red .shipfeatures label {
-  color: #810207;
 }
 .colorset-dragon-red .focus .item-card-stats,
 .colorset-dragon-red .power .item-card-stats,
@@ -2377,6 +2388,10 @@
   border-radius: 5px;
   border: 5px outset #625b68;
 }
+.colorset-folded-purple .item-summary label {
+  background-color: #625b68;
+  color: #000000;
+}
 .colorset-folded-purple .metal-background {
   background: linear-gradient(90deg, #565183 5%, #cfccde 50%, #565183 95%);
 }
@@ -2425,7 +2440,6 @@
   background-color: #565183;
   color: #ffffff;
 }
-.colorset-folded-purple .char-sheet .editor,
 .colorset-folded-purple .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -2467,18 +2481,6 @@
 .colorset-folded-purple .char-sheet input.colorset-second-tier {
   background-color: #cfccde !important;
   color: #565183 !important;
-}
-.colorset-folded-purple .focus label,
-.colorset-folded-purple .power label,
-.colorset-folded-purple .talent label,
-.colorset-folded-purple .weapon label,
-.colorset-folded-purple .equipment label,
-.colorset-folded-purple .stunts label,
-.colorset-folded-purple .honorifics label,
-.colorset-folded-purple .membership label,
-.colorset-folded-purple .relationship label,
-.colorset-folded-purple .shipfeatures label {
-  color: #565183;
 }
 .colorset-folded-purple .focus .item-card-stats,
 .colorset-folded-purple .power .item-card-stats,
@@ -2539,6 +2541,10 @@
   border-radius: 5px;
   border: 5px outset #92b65f;
 }
+.colorset-ronin-green .item-summary label {
+  background-color: #92b65f;
+  color: #000000;
+}
 .colorset-ronin-green .metal-background {
   background: linear-gradient(90deg, #155f0e 5%, #c2f5aa 50%, #155f0e 95%);
 }
@@ -2587,7 +2593,6 @@
   background-color: #155f0e;
   color: #ffffff;
 }
-.colorset-ronin-green .char-sheet .editor,
 .colorset-ronin-green .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -2629,18 +2634,6 @@
 .colorset-ronin-green .char-sheet input.colorset-second-tier {
   background-color: #c2f5aa !important;
   color: #155f0e !important;
-}
-.colorset-ronin-green .focus label,
-.colorset-ronin-green .power label,
-.colorset-ronin-green .talent label,
-.colorset-ronin-green .weapon label,
-.colorset-ronin-green .equipment label,
-.colorset-ronin-green .stunts label,
-.colorset-ronin-green .honorifics label,
-.colorset-ronin-green .membership label,
-.colorset-ronin-green .relationship label,
-.colorset-ronin-green .shipfeatures label {
-  color: #155f0e;
 }
 .colorset-ronin-green .focus .item-card-stats,
 .colorset-ronin-green .power .item-card-stats,
@@ -2701,6 +2694,10 @@
   border-radius: 5px;
   border: 5px outset #4d627a;
 }
+.colorset-select-one .item-summary label {
+  background-color: #4d627a;
+  color: #290000;
+}
 .colorset-select-one .metal-background {
   background: linear-gradient(90deg, #273249 5%, #768d9f 50%, #273249 95%);
 }
@@ -2749,7 +2746,6 @@
   background-color: #273249;
   color: #e7ccc3;
 }
-.colorset-select-one .char-sheet .editor,
 .colorset-select-one .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -2791,18 +2787,6 @@
 .colorset-select-one .char-sheet input.colorset-second-tier {
   background-color: #768d9f !important;
   color: #273249 !important;
-}
-.colorset-select-one .focus label,
-.colorset-select-one .power label,
-.colorset-select-one .talent label,
-.colorset-select-one .weapon label,
-.colorset-select-one .equipment label,
-.colorset-select-one .stunts label,
-.colorset-select-one .honorifics label,
-.colorset-select-one .membership label,
-.colorset-select-one .relationship label,
-.colorset-select-one .shipfeatures label {
-  color: #273249;
 }
 .colorset-select-one .focus .item-card-stats,
 .colorset-select-one .power .item-card-stats,
@@ -2863,6 +2847,10 @@
   border-radius: 5px;
   border: 5px outset #6b6a6a;
 }
+.colorset-the-grey .item-summary label {
+  background-color: #6b6a6a;
+  color: #000000;
+}
 .colorset-the-grey .metal-background {
   background: linear-gradient(90deg, #3d3e3f 5%, #b4b6b3 50%, #3d3e3f 95%);
 }
@@ -2911,7 +2899,6 @@
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
-.colorset-the-grey .char-sheet .editor,
 .colorset-the-grey .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -2953,18 +2940,6 @@
 .colorset-the-grey .char-sheet input.colorset-second-tier {
   background-color: #b4b6b3 !important;
   color: #3d3e3f !important;
-}
-.colorset-the-grey .focus label,
-.colorset-the-grey .power label,
-.colorset-the-grey .talent label,
-.colorset-the-grey .weapon label,
-.colorset-the-grey .equipment label,
-.colorset-the-grey .stunts label,
-.colorset-the-grey .honorifics label,
-.colorset-the-grey .membership label,
-.colorset-the-grey .relationship label,
-.colorset-the-grey .shipfeatures label {
-  color: #3d3e3f;
 }
 .colorset-the-grey .focus .item-card-stats,
 .colorset-the-grey .power .item-card-stats,
@@ -3025,6 +3000,10 @@
   border-radius: 5px;
   border: 5px outset #b22126;
 }
+.colorset-red-warrior .item-summary label {
+  background-color: #b22126;
+  color: #c7c691;
+}
 .colorset-red-warrior .metal-background {
   background: linear-gradient(90deg, #751119 5%, #d1635b 50%, #751119 95%);
 }
@@ -3073,7 +3052,6 @@
   background-color: #751119;
   color: #f7b755;
 }
-.colorset-red-warrior .char-sheet .editor,
 .colorset-red-warrior .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -3115,18 +3093,6 @@
 .colorset-red-warrior .char-sheet input.colorset-second-tier {
   background-color: #d1635b !important;
   color: #751119 !important;
-}
-.colorset-red-warrior .focus label,
-.colorset-red-warrior .power label,
-.colorset-red-warrior .talent label,
-.colorset-red-warrior .weapon label,
-.colorset-red-warrior .equipment label,
-.colorset-red-warrior .stunts label,
-.colorset-red-warrior .honorifics label,
-.colorset-red-warrior .membership label,
-.colorset-red-warrior .relationship label,
-.colorset-red-warrior .shipfeatures label {
-  color: #751119;
 }
 .colorset-red-warrior .focus .item-card-stats,
 .colorset-red-warrior .power .item-card-stats,
@@ -3187,6 +3153,10 @@
   border-radius: 5px;
   border: 5px outset #58705a;
 }
+.colorset-never-dead .item-summary label {
+  background-color: #58705a;
+  color: #29241f;
+}
 .colorset-never-dead .metal-background {
   background: linear-gradient(90deg, #663322 5%, #eeddcd 50%, #663322 95%);
 }
@@ -3235,7 +3205,6 @@
   background-color: #663322;
   color: #bb8755;
 }
-.colorset-never-dead .char-sheet .editor,
 .colorset-never-dead .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -3277,18 +3246,6 @@
 .colorset-never-dead .char-sheet input.colorset-second-tier {
   background-color: #eeddcd !important;
   color: #663322 !important;
-}
-.colorset-never-dead .focus label,
-.colorset-never-dead .power label,
-.colorset-never-dead .talent label,
-.colorset-never-dead .weapon label,
-.colorset-never-dead .equipment label,
-.colorset-never-dead .stunts label,
-.colorset-never-dead .honorifics label,
-.colorset-never-dead .membership label,
-.colorset-never-dead .relationship label,
-.colorset-never-dead .shipfeatures label {
-  color: #663322;
 }
 .colorset-never-dead .focus .item-card-stats,
 .colorset-never-dead .power .item-card-stats,
@@ -3349,6 +3306,10 @@
   border-radius: 5px;
   border: 5px outset #112339;
 }
+.colorset-expanded-blue .item-summary label {
+  background-color: #112339;
+  color: #dde2e2;
+}
 .colorset-expanded-blue .metal-background {
   background: linear-gradient(90deg, #005971 5%, #e6e7e8 50%, #005971 95%);
 }
@@ -3397,7 +3358,6 @@
   background-color: #005971;
   color: #dde2e2;
 }
-.colorset-expanded-blue .char-sheet .editor,
 .colorset-expanded-blue .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -3439,18 +3399,6 @@
 .colorset-expanded-blue .char-sheet input.colorset-second-tier {
   background-color: #e6e7e8 !important;
   color: #005971 !important;
-}
-.colorset-expanded-blue .focus label,
-.colorset-expanded-blue .power label,
-.colorset-expanded-blue .talent label,
-.colorset-expanded-blue .weapon label,
-.colorset-expanded-blue .equipment label,
-.colorset-expanded-blue .stunts label,
-.colorset-expanded-blue .honorifics label,
-.colorset-expanded-blue .membership label,
-.colorset-expanded-blue .relationship label,
-.colorset-expanded-blue .shipfeatures label {
-  color: #005971;
 }
 .colorset-expanded-blue .focus .item-card-stats,
 .colorset-expanded-blue .power .item-card-stats,
@@ -3823,6 +3771,9 @@ body *:not(i, .fa, .far, .fas) {
 .age-system-dialog .apply-damage-window .dmg-box {
   align-items: baseline;
   justify-content: center;
+}
+.age-system *:disabled {
+  cursor: not-allowed;
 }
 .age-system input,
 .age-system select {

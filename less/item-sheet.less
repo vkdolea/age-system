@@ -3,11 +3,9 @@
 /*******************************/
 
 // General
-.age-system.sheet.item {
-    // .abl-focus-box {
-    //     border-bottom: 1px groove;
-    // }
-    .item-name {
+.age-system.sheet {
+
+    .itemname {
         // font-variant: small-caps;
         font-size: 1.4rem;
         padding-left: 6px;
@@ -16,9 +14,7 @@
         // text-shadow: 1px 1px whitesmoke;
     }
     .item-summary {
-        // border: 1px solid;
-        // border-radius: 5px;
-        font-size: .7rem;
+        font-size: .8rem;
         margin-left: .2rem;
         margin-bottom: auto;
         flex: 0 0 fit-content;
@@ -27,7 +23,21 @@
         input {
             font-size: .7rem !important;
         }
+        .two-lines {
+            height: 1.8rem;
+            display: flex;
+            flex-direction: column;
+        }
+        label.two-lines {line-height: 2.4;}
         li {
+            >*:first-child {
+                border-radius: 5px 0 0 5px;
+            };
+            >*:last-child {
+                border-radius: 0 5px 5px 0;
+                background-color: silver;
+                color: black;
+            }
             * {
                 height: .9rem;
                 text-align: center;
@@ -47,18 +57,6 @@
                 padding-left: 4px;
                 // font-size: .8rem;
             }
-        }
-    }
-    .editor.editor {
-        text-align: left;
-        // height: auto !important;
-        min-height: 175px;
-        max-height: 175px;
-        padding: 4px;
-        border-radius: 10px;
-        .tox.tox-tinymce {
-            min-height: 140px !important;
-            max-height: 390px !important;
         }
     }
     .page-ref {
@@ -102,8 +100,9 @@
         font-variant: all-petite-caps;
         font-size: .8rem;
         text-align: center;
+        width: -webkit-fill-available;
     }
     .minimum-length {
-        flex: 0 0 fit-content;
+        max-width: fit-content;
     }
 };

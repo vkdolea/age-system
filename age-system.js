@@ -368,7 +368,6 @@ Hooks.once("ready", async function() {
     //     ui.notifications.error(warning, {permanent: true});
     // }
     migrations.migrateWorld();
-
 });
 
 // If Compendia are updated, then compendiumList is gathered once again

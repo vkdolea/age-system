@@ -2,6 +2,37 @@
 /**    Alternate Char Sheet     **/
 /*********************************/
 .age-system {
+    .mouse-to-pointer:hover {
+        cursor: pointer;
+    }
+    .modificators-table{
+        .mod-type {
+            flex: 0 0 200px;
+        }
+        .mod-value {
+            flex: 0 0 100px;
+        };
+        .mod-controls {
+            flex: 0 0 50px;
+        }
+    };
+    .editor.editor {
+        text-align: left;
+        height: auto !important;
+        min-height: 150px;
+        max-height: 400px;
+        padding: 4px;
+        border-radius: 0 0 10px 10px;
+        .tox.tox-tinymce {
+            min-height: 140px !important;
+            max-height: 390px !important;
+        }
+    }
+
+    p .item-box {
+        line-height: 1.5;
+    }
+    
     .sheet-main-content nav {
         flex-wrap: wrap;
         justify-content: center;
@@ -46,7 +77,7 @@
         width: 12px;
     }
 
-    .actor-picture {
+    .document-picture {
         border: none;
         max-height: 200px;
         width: 180px;
@@ -73,6 +104,7 @@
         margin-right: 4px;
         border: 1px solid black;
         text-align: center;
+        label {background: none;}
     }    
     .title {
         text-transform: uppercase;
@@ -310,18 +342,6 @@
 
     .persona {
         padding-right: 4px;
-        .editor.editor {
-            text-align: left;
-            height: auto !important;
-            min-height: 150px;
-            max-height: 400px;
-            padding: 4px;
-            border-radius: 0 0 10px 10px;
-            .tox.tox-tinymce {
-                min-height: 140px !important;
-                max-height: 390px !important;
-            }
-        }
     }
     .free-text {
         resize: none !important;
@@ -331,6 +351,7 @@
     }
 
     .item-group {
+        li {align-items: center;}
         li:first-child,
         .list-item:first-child {
             border-top-left-radius: 10px;
@@ -343,37 +364,52 @@
         }
         height: max-content;
         // margin: 0 5px 10px 5px;
+        .extra-input {
+            flex: 0 0 fit-content;
+        }
+        .minimal-input {
+            flex: 0 0 1.5rem;
+        }
+    }
+    .item-group.condensed-data {
+        li {
+            label {
+                flex: 0 0 100px;
+            }
+        }
     }
 
     .abilities-column {
         flex: 0 0 200px;
     }
 
-    .char-details {
-        .charname {
+    .header-details {
+        .charname,
+        .itemname {
             margin-bottom: 10px;
-            color: white;
+            color: silver;
             font-size: 2rem;
             height: 2.4rem;
         }
         flex-wrap: nowrap;
-        .sub-details {
-            >div{
-                display: flex;
-                flex-direction: column;
-            }
-            input {
-                font-size: 0.7rem;
-                height: 0.8rem;
-                border-bottom: 1px solid black !important;
-                color: white !important;
-                padding-bottom: 4px;
-            };
-            label {
-                flex: 0 0 0.6rem;
-                font-size: 0.5rem;
-                text-transform: uppercase;
-            }
+    }
+    .sub-details {
+        >div:not(.flexrow){
+            display: flex;
+            flex-direction: column;
+        }
+        input,
+        select {
+            font-size: 0.8rem;
+            height: 0.9rem;
+            border-bottom: 1px solid black !important;
+            color: silver !important;
+            padding-bottom: 4px;
+        };
+        label {
+            flex: 0 0 0.7rem;
+            font-size: 0.6rem;
+            text-transform: uppercase;
         }
     }
 

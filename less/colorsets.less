@@ -128,6 +128,12 @@ each(@colorsets, {
             border-radius: 5px;
             border: 5px outset extract(extract(@color-list, @index), 2);
         }
+        .item-summary {
+            label {
+                background-color: extract(extract(@color-list, @index), 2);
+                color: extract(extract(@color-list, @index), 5);
+            }
+        }
         .metal-background {
             background: linear-gradient(90deg, extract(extract(@color-list, @index), 1) 5%, extract(extract(@color-list, @index), 3) 50%, extract(extract(@color-list, @index), 1) 95%);
         }
@@ -193,7 +199,7 @@ each(@colorsets, {
             
         }
 
-        .char-sheet,
+        // .char-sheet,
         .organization-sheet {
             .editor {
                 background-color: hsl(0, 0%, 100%);
@@ -276,9 +282,9 @@ each(@colorsets, {
             //     border: 1px solid extract(extract(@color-list, @index), 1);
             // }
     
-            label {
-                color: extract(extract(@color-list, @index), 1);
-            };
+            // label {
+            //     color: extract(extract(@color-list, @index), 1);
+            // };
             .item-card-stats {
                 background-color: extract(extract(@color-list, @index), 3);
                 input.data-entry {

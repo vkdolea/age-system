@@ -12,8 +12,8 @@ export default class ageSystemItemSheet extends ItemSheet {
             //     this.options.width = this.position.width = "410";
             //     break;
             case "weapon":
-                this.options.width = this.position.width = "920";
-                this.options.height = this.position.height = "550";
+                this.options.width = this.position.width = "700";
+                this.options.height = this.position.height = "460";
                 break;
             case "talent":
                 this.options.width = this.position.width = "400";
@@ -27,8 +27,8 @@ export default class ageSystemItemSheet extends ItemSheet {
                 this.options.height = this.position.height = "300";
                 break;
             case "power":
-                this.options.width = this.position.width = "468";
-                this.options.height = this.position.height = "600";
+                this.options.width = this.position.width = "700";
+                this.options.height = this.position.height = "460";
                 break;  
             default:
                 break;
@@ -96,7 +96,12 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Modifiers Dropdown List
         data.modifiersList = modifiersList()
-        console.log(this.item.data.data.modifiers)
+
+        // Check if PDFoundry is active
+        if (game.modules.get("pdfoundry").active) ageSystem.pdfoundryOn = true;
+
+        // Check if Use Fatigue setting is TRUE
+        data.fatigueSet = game.settings.get("age-system", "useFatigue");
 
         return data;
     };
@@ -110,6 +115,7 @@ export default class ageSystemItemSheet extends ItemSheet {
             html.find(".add-modifier").click(this._onAddModifier.bind(this));
             html.find(".mod-controls a.remove").click(this._onRemoveModifier.bind(this));
             html.find(".mod-controls a.toggle").click(this._onToggleModifier.bind(this));
+            html.find(".toggle-feature").click(this._onToggleFeature.bind(this));
 
             if (this.item.data.type === "focus") {
                 if (this.item.isOwned) {
@@ -117,26 +123,54 @@ export default class ageSystemItemSheet extends ItemSheet {
                 };
             };
 
-            if (this.item.data.type === "power") {
-                html.find(".toggle-damage").click(this._onToggleDamage.bind(this));
-                html.find(".toggle-healing").click(this._onToggleHealing.bind(this));
-                html.find(".toggle-fatigue").click(this._onToggleFatigue.bind(this));
-                html.find(".toggle-resist").click(this._onToggleResistTest.bind(this));
-            };
-
             // Enable field to be focused when selecting it
             const inputs = html.find("input");
             inputs.focus(ev => ev.currentTarget.select());
 
         };
+        html.find(".find-reference").click(this._onOpenPDF.bind(this));
 
         // Actions by sheet owner only
         if (this.item.isOwner) {
             html.find(".wgroup-item").click(this._onWeaponGroupToggle.bind(this));
         };
 
+        // Add class to TinyMCE
+        const editor = html.find(".editor");
+        for (let i = 0; i < editor.length; i++) {editor[i].classList += ' values'}
+        
+        // Add colorset class to entity-link inside TinyMCE editor
+        const entityLink = html.find("a.entity-link");
+        for (let i = 0; i < entityLink.length; i++) {entityLink[i].classList += ` colorset-second-tier`}
+
         super.activateListeners(html);
     };
+
+    _onOpenPDF(e) {
+        const ref = e.currentTarget.closest('.feature-controls').dataset.reference;
+        if (reference == "") return false;
+        const regex = new RegExp('([0-9]+)|([a-zA-Z]+)','g');
+        const splittedArray = ref.match(regex);
+
+        const code = splittedArray[0];
+        const page = Number(splittedArray[1]);
+        
+        if (ui.PDFoundry) {
+            ui.PDFoundry.openPDFByCode(code, { page });
+        } else {
+            ui.notifications.warn('PDFoundry must be installed to use source links.');
+        }
+    }
+
+    _onToggleFeature(e) {
+        const feature = e.currentTarget.dataset.feature;
+        const value = !this.item.data.data[feature];
+        const updatePath = "data." + feature;
+        const update = {[updatePath]: value};
+        if (value && feature === "causeHealing") update["data.causeDamage"] = false
+        if (value && feature === "causeDamage") update["data.causeHealing"] = false
+        return this.item.update(update);
+    }
 
     _onAddModifier(e) {
         return this.item.newModifier();
@@ -169,88 +203,6 @@ export default class ageSystemItemSheet extends ItemSheet {
         }
         return this.item.update({"data.wgroups": wgroups});
     }
-   
-
-
-    // _onToggleBonus(event) {
-    //     const modType = event.currentTarget.closest(".feature-controls").dataset.modType;
-    //     const isActivePath = `data.itemMods.${modType}.isActive`;
-    //     const isActive = this.item.data.data.itemMods[modType].isActive;
-    //     this.item.update({[isActivePath]: !isActive});
-    // }
-
-    // _onRemoveBonus(event){
-    //     const modType = event.currentTarget.closest(".feature-controls").dataset.modType;
-    //     const modPath = `data.itemMods.${modType}`;
-    //     const selectedPath = modPath + ".selected";
-    //     const isActivePath = modPath + ".isActive";
-    //     this.item.update({
-    //         [selectedPath]: false,
-    //         [isActivePath]: false
-    //     });
-    // };
-
-    // async _onAddBonus(event) {
-    //     const bonusList = this.item.data.data.itemMods;
-    //     let bonusOptions = {};
-    //     for (const mod in bonusList) {
-    //         if (Object.hasOwnProperty.call(bonusList, mod)) {
-    //             const b = bonusList[mod];
-    //             if (!b.selected) {
-    //                 const modName = game.i18n.localize(`age-system.bonus.${mod}`);
-    //                 const selectPath = `data.itemMods.${mod}.selected`;
-    //                 const activePath = `data.itemMods.${mod}.isActive`;
-    //                 bonusOptions = {
-    //                     ...bonusOptions,
-    //                     [mod]: {
-    //                         label: modName,
-    //                         callback: () => this.item.update({
-    //                             [selectPath]: true,
-    //                             [activePath]: true
-    //                         })
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     if (bonusOptions === {}) return;
-    //     const template = `systems/age-system/templates/bonus-select-form.hbs`;
-    //     const html = await renderTemplate(template, {bonusOptions, item: this.item})
-    //     return new Promise(resolve => {
-    //         const data = {
-    //             title: false,
-    //             content: html,
-    //             buttons: bonusOptions,
-    //             default: "cancel",
-    //             close: () => resolve({cancelled: true}),
-    //         }
-    //         new Dialog(data, {classes: ["age-system-dialog", "bonus-select", "dialog"]}).render(true);
-    //     });
-    // }
-
-    _onToggleDamage(event) {
-        const toggleDmg = !this.item.data.data.causeDamage;
-        this.item.update({"data.causeDamage": toggleDmg}).then(changed => {
-            if (toggleDmg === true) this.item.update({"data.causeHealing": false});
-        });
-    };
-
-    _onToggleHealing(event) {
-        const toggleHealing = !this.item.data.data.causeHealing;
-        this.item.update({"data.causeHealing": toggleHealing}).then(changed => {
-            if (toggleHealing === true) this.item.update({"data.causeDamage": false});
-        });
-    };
-
-    _onToggleFatigue(event) {
-        const toggleFtg = !this.item.data.data.useFatigue;
-        this.item.update({"data.useFatigue": toggleFtg});
-    };
-    
-    _onToggleResistTest(event) {
-        const toggleTest = !this.item.data.data.hasTest;
-        this.item.update({"data.hasTest": toggleTest});
-    };
     
     // Adds an * in front of the owned Focus name whenever the user types a name of another owned Focus
     // => Actors are not allowed to have more than 1 Focus with the same name

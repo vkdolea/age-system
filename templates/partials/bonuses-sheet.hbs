@@ -1,13 +1,13 @@
 <section class="flexrow modificators-table">
-    <ul class="mod-card">
-        <li class="mod-item header flexrow colorset-first-tier">
+    <ul class="resource item-group custom-effects">
+        <li class="header flexrow colorset-first-tier">
             <p class="mod-type">{{localize "age-system.type"}}</p>
             <p class="mod-value">{{localize "age-system.value"}}</p>
             <p class="mod-controls"><a class="add-bonus"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></p>
         </li>
         {{#each data.data.modifiers as |mod i|}}
-        <li class="mod-item flexrow feature-controls colorset-third-tier" data-mod-index="{{i}}">
-            <select name="data.modifiers.{{i}}.type">
+        <li class="item-box flexrow feature-controls colorset-third-tier" data-mod-index="{{i}}">
+            <select class="mod-type" name="data.modifiers.{{i}}.type">
                 {{#select mod.type}}
                 <option value="">-</option>
                 {{#each ../modifiersList as |modType name|}}
@@ -16,7 +16,7 @@
                 {{/select}}
             </select>
             <div class="mod-value">
-                <input type="text" class="mod"  name="data.modifiers.{{i}}.conditions.focus" value="{{mod.conditions.focus}}" placeholder="{{localize "age-system.focus"}}" {{#unless (or (eq mod.type "focus") (eq mod.type "powerForce"))}}style="display: none"{{/unless}}/>
+                <input type="text" class="mod" name="data.modifiers.{{i}}.conditions.focus" value="{{mod.conditions.focus}}" placeholder="{{localize "age-system.focus"}}" {{#unless (or (eq mod.type "focus") (eq mod.type "powerForce"))}}style="display: none"{{/unless}}/>
                 <input type="text" class="mod" name="data.modifiers.{{i}}.formula" value="{{mod.formula}}"/>
             </div>
             <div class="mod-controls">

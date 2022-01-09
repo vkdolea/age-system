@@ -12,14 +12,20 @@ export class ageSystemActor extends Actor {
         this.prepareDerivedData();
         // Sorting Items for final data preparation
         const items = this.items;
-        // First prepare Focus
         if (this.data.type === 'char') {
+            // First prepare Focus
             items.forEach(i => {
-                if (i.data.type === "focus") i.prepareData()
+                if (i.data.type === "focus") {
+                    i.prepareData();
+                    if(i.sheet?.rendered) i.sheet.render(false);
+                }
             })
             // Then prepare other item types which require further prep
             items.forEach(i => {
-                if (["weapon", "power"].includes(i.data.type)) i.prepareData()
+                if (["weapon", "power"].includes(i.data.type)) {
+                    i.prepareData()
+                    if(i.sheet?.rendered) i.sheet.render(false);
+                }
             })
             
             // Calculate Initiative based on Focus (if set on System Settings)
@@ -904,4 +910,25 @@ export class ageSystemActor extends Actor {
         await this.setFlag('core', 'sheetClass', newSheet)
         this.sheet.render(true)
     }
+
+    // Data to add Character ref. into rolls
+    actorRollData() {
+        if (!this.data) return null;
+        if (this.type !== 'char') return null;
+        const data = this.data.data;
+        const charData = {
+            acc: data.abilities.acc.total ?? 0,
+            comm: data.abilities.comm.total ?? 0,
+            dex: data.abilities.dex.total ?? 0,
+            fight: data.abilities.fight.total  ?? 0,
+            int: data.abilities.int.total ?? 0,
+            per: data.abilities.per.total ?? 0,
+            str: data.abilities.str.total ?? 0,
+            will: data.abilities.will.total ?? 0,
+            magic: data.abilities.magic.total ?? 0,
+            cunn: data.abilities.cunn.total ?? 0,
+            level: data.level ?? 0
+        }
+        return charData;
+    };
 };
