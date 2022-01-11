@@ -639,6 +639,15 @@
   padding-bottom: 2px;
 }
 /*********************************/
+/**    Item Specific Rules      **/
+/*********************************/
+.age-system .talent .main .editor.editor {
+  max-height: 150px;
+}
+.age-system .stunts .editor.editor {
+  max-height: 150px;
+}
+/*********************************/
 /**    Alternate Char Sheet     **/
 /*********************************/
 .age-system .mouse-to-pointer:hover {
@@ -713,6 +722,8 @@
 .age-system.sheet input[type="checkbox"] {
   height: 12px;
   width: 12px;
+  max-height: 12px;
+  max-width: 12px;
 }
 .age-system.sheet .document-picture {
   border: none;
@@ -3625,6 +3636,13 @@ body *:not(i, .fa, .far, .fas) {
 .age-system .opacity-low {
   opacity: 0.5;
 }
+.age-system input:focus,
+.age-system select:focus,
+.age-system input:hover:not(:disabled),
+.age-system select:hover,
+.age-system nav a:hover:not(.active) {
+  box-shadow: 0 0 5px silver !important;
+}
 .age-system-dialog.bonus-select button.dialog-button {
   flex: 0 0 45%;
 }
@@ -3771,9 +3789,6 @@ body *:not(i, .fa, .far, .fas) {
 .age-system-dialog .apply-damage-window .dmg-box {
   align-items: baseline;
   justify-content: center;
-}
-.age-system *:disabled {
-  cursor: not-allowed;
 }
 .age-system input,
 .age-system select {

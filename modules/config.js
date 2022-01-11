@@ -779,3 +779,7 @@ ageSystem.modifiers = {
     ],
     modeToLocalize: ["impactArmor", "powerForce", "maxPowerPoints", "maxHealth"]
 };
+
+// Talent Degrees
+ageSystem.mageDegrees = ['age-system.novice', 'age-system.expert', 'age-system.master', 'age-system.grandmaster', 'age-system.apex']
+ageSystem.fageDegrees = ['age-system.novice', 'age-system.journeyman', 'age-system.master', 'age-system.grandmaster', 'age-system.apex']

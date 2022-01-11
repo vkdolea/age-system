@@ -1,0 +1,38 @@
+<form class="{{cssClass}} age-system item relationship colorset-selection" autocomplete="off">
+
+    <div class="sheet-content item-stats membership">
+        <div class="flexcol">
+            {{#if inChat}}
+            <div class="item-card-title colorset-first-tier" type="text">{{name}}</div>
+            {{else}}
+            <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
+            {{/if}}
+            <div class="item-card-stats flexrow">
+
+                {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}}
+                
+                {{!-- Rank Desc --}}
+                <div class="flexcol long-text">
+                    <label>{{localize "age-system.membershipPosition"}}</label>
+                    {{#if inChat}}
+                    <p>{{data.data.shortDesc}}</p>
+                    {{else}}
+                    <input name="data.shortDesc" type="text" text-type="long" value="{{data.data.shortDesc}}" placeholder="{{localize "age-system.membershipPosition"}}" style="text-align: center";/>
+                    {{/if}}
+                </div>
+
+                {{!-- Rank --}}
+                <div class="flexcol" style="max-width: fit-content;">
+                    <label>{{localize "age-system.rank"}}</label>
+                    <input type="number" {{#if inChat}}disabled{{/if}} name="data.rank" value="{{data.data.rank}}"/>
+                </div>
+
+            </div>
+        </div>
+        <div class="item-card-desc">
+            <label>{{localize "age-system.item.desc"}}</label>
+            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+        </div>
+    </div>
+    
+</form>

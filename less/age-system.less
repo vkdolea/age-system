@@ -92,6 +92,17 @@ body *:not(i, .fa, .far, .fas) {
     }
 }
 
+// Override box color
+.age-system {
+    input:focus,
+    select:focus,
+    input:hover:not(:disabled),
+    select:hover,
+    nav a:hover:not(.active) {
+        box-shadow: 0 0 5px silver !important;
+    }
+}
+
 // Buttons Styling for age-system-dialog Dialog boxes
 .age-system-dialog.bonus-select {
     button.dialog-button {
@@ -262,9 +273,6 @@ body *:not(i, .fa, .far, .fas) {
 }
 
 .age-system {
-    *:disabled {
-        cursor: not-allowed;
-    }
     // Removing some FoundryVTT core styling
     input,
     select {
@@ -333,7 +341,7 @@ body *:not(i, .fa, .far, .fas) {
 
     .flex-justify-between {
         justify-content: space-between;
-    };
+    };  
 
     .flex-justify-around {
         justify-content: space-around;

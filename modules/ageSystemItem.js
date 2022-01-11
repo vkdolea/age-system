@@ -269,7 +269,7 @@ export class ageSystemItem extends Item {
         }
         const abilitiesOrg = Object.keys(ageSystem.abilitiesOrg);
         const abilitiesChar = Object.keys(ageSystem.abilities);
-        const hasOrgAbl = abilitiesOrg.includes(data.useAbl)
+        const hasOrgAbl = abilitiesOrg.includes(data.useAbl);
         if (data.isOrg === !hasOrgAbl) data.useAbl = data.isOrg ? abilitiesOrg[0] : abilitiesChar[0]; 
     }
 

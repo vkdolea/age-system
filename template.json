@@ -397,7 +397,8 @@
             "description": {
                 "shortDesc": "",
                 "longDesc": "",
-                "favorite": false
+                "favorite": false,
+                "reference": ""
             },
             "bonuses": {
                 "modifiers": [],
@@ -587,6 +588,7 @@
             "templates": ["description", "activation"],
             "improved": false,
             "isOrg": false,
+            "type": "charFocus",
             "initialValue": 2
         },
         "weapon": {
@@ -624,31 +626,37 @@
         },
         "talent": {
             "templates": ["description", "bonuses"],
+            "requirement": "",
+            "degree": "",
+            "type": "talent",
             "activate": false,
-            "tier1": {
+            "degree0": {
                 "desc": "",
                 "isActive": true
             },
-            "tier2": {
+            "degree1": {
                 "desc": "",
                 "isActive": true
             },
-            "tier3": {
+            "degree2": {
                 "desc": "",
                 "isActive": true
             },
-            "tier4": {
+            "degree3": {
                 "desc": "",
                 "isActive": true
             },
-            "tier5": {
+            "degree4": {
                 "desc": "",
                 "isActive": true
             }
         },
         "stunts": {
             "templates": ["description"],
-            "stuntPoints": 1
+            "stuntPoints": 1,
+            "stuntPointsMax": 1,
+            "costType": "fixed",
+            "type": ""
         },
         "relationship": {
             "templates": ["description"],

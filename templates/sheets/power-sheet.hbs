@@ -1,5 +1,4 @@
-<form class="{{cssClass}} age-system item weapon flexrow no-flexwrap" autocomplete="off">
-{{log this}}
+<form class="{{cssClass}} age-system item power flexrow no-flexwrap" autocomplete="off">
     <aside class="sidebar metal-background colorset-first-tier">
         <img class="document-picture" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
         <ul class="item-summary">
@@ -80,7 +79,7 @@
 
             {{!-- Page Ref --}}
             <li class="feature-controls" data-reference="{{data.data.reference}}">
-                <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">Reference</label>
+                <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
                 <input type="text" name="data.reference" {{#if inChat}}disabled{{/if}} value="{{data.data.reference}}" placeholder="Page Ref." data-dtype="String"/>
             </li>
         </ul>
@@ -107,9 +106,10 @@
 
             <section class="sheet-tab-section">
                 {{!-- Main Tab --}}
-                <div class="tab main colorset-third-tier resource" data-group="primary" data-tab="main">
-                    <label class="title">{{localize "age-system.item.desc"}}</label>
-                    {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+                <div class="tab main" data-group="primary" data-tab="main">
+                    <ul class="resource colorset-first-tier item-box"><li>
+                        {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+                    </li></ul>
                 </div>
 
                 {{!-- Bonuses Tab --}}
@@ -139,8 +139,8 @@
                             </p>
                         </li>
 
-                        {{!-- Power Force Ability --}}
                         <li class="colorset-third-tier flexrow">
+                            {{!-- Power Force Ability --}}
                             <label>{{localize "age-system.item.force"}}</label>
                             <span class="minimal-input">{{data.data.itemForce}}</span>
                             <select name="data.itemForceAbl" class="extra-input">
@@ -151,17 +151,16 @@
                                 {{/each}}
                                 {{/select}}
                             </select>
-                        {{!-- </li> --}}
 
-                        {{#unless (and data.data.inputFatigueTN data.data.useFatigue fatigueSet)}}
-                        {{!-- <li class="colorset-third-tier flexrow"> --}}
+                            {{#unless (and data.data.inputFatigueTN data.data.useFatigue fatigueSet)}}
+                            {{!-- Power Point Cost --}}
                             <label>{{localize "age-system.powerPoints"}}</label>
                             <input type="text" class="minimal-input" name="data.powerPointCost" value="{{data.data.powerPointCost}}" data-dtype="Number" />
                             {{#if (ne data.data.powerPointCost data.data.powerPointCostTotal)}}
                             <span class="extra-input">({{data.data.powerPointCostTotal}})</span>
                             {{/if}}
+                            {{/unless}}
                         </li>
-                        {{/unless}}
 
                         {{#if (and data.data.useFatigue fatigueSet)}}
                         {{!-- Fatigue Ability --}}

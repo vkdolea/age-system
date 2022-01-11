@@ -263,6 +263,7 @@ Hooks.once("init", async function() {
 Hooks.once("setup", function() {
     Setup.abilitiesName();
     Setup.localizeAgeEffects();
+    ageSystem.talentDegrees = Setup.localizeObj(ageSystem.mageDegrees);
 
     // Set Health System configuration
     const hstype = game.settings.get("age-system", "healthSys");

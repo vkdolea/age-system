@@ -8,28 +8,42 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Expand the default size of different item sheet
         const itemType = this.object.data.type;
         switch (itemType) {
-            // case "focus":
-            //     this.options.width = this.position.width = "410";
-            //     break;
-            case "weapon":
-                this.options.width = this.position.width = "700";
-                this.options.height = this.position.height = "460";
+            case "focus":
+                this.options.height = this.position.height = "352";
+                this.options.resizable = false;
                 break;
+            case "weapon":
+            //     this.options.width = this.position.width = "700";
+            //     this.options.height = this.position.height = "460";
+            //     break;
             case "talent":
-                this.options.width = this.position.width = "400";
-                this.options.height = this.position.height = "500";
+                // this.options.width = this.position.width = "400";
+                this.options.height = this.position.height = "545";
                 break;          
             case "stunts":
-                this.options.width = this.position.width = "300";
+                // this.options.width = this.position.width = "300";
+                this.options.height = this.position.height = "352";
+                this.options.resizable = false;
                 break;             
             case "relationship":
-                this.options.width = this.position.width = "600";
-                this.options.height = this.position.height = "300";
+                // this.options.width = this.position.width = "600";
+                this.options.height = this.position.height = "352";
+                this.options.resizable = false;
                 break;
-            case "power":
-                this.options.width = this.position.width = "700";
-                this.options.height = this.position.height = "460";
-                break;  
+            case "membership":
+                // this.options.width = this.position.width = "600";
+                this.options.height = this.position.height = "352";
+                this.options.resizable = false;
+                break;
+            case "honorifics":
+                // this.options.width = this.position.width = "600";
+                this.options.height = this.position.height = "352";
+                this.options.resizable = false;
+                break;
+            // case "power":
+            //     this.options.width = this.position.width = "700";
+            //     this.options.height = this.position.height = "460";
+            //     break;  
             default:
                 break;
         };
@@ -38,8 +52,8 @@ export default class ageSystemItemSheet extends ItemSheet {
     static get defaultOptions() {        
         
         return mergeObject(super.defaultOptions, {
-            height: 450,
-            width: 500,
+            height: 460,
+            width: 700,
             classes: ["age-system", "sheet", "item", "colorset-second-tier"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",

@@ -1,34 +1,60 @@
-<form class="{{cssClass}} age-system item stunts colorset-selection" autocomplete="off">
-
-    <div class="sheet-content item-stats stunts">
-        <div class="flexcol">
-            {{#if inChat}}
-            <div class="item-card-title colorset-first-tier" type="text">{{name}}</div>
-            {{else}}
-            <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
-            {{/if}}
-            
-            <div class="item-card-stats flexrow flex-justify-start flex-align-center">
-                {{!-- Item Image --}}
-                {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}} 
-
-                {{!-- Cost --}}
-                <div class="flexcol">
-                    <label>{{localize "age-system.settings.stuntPoints"}}</label>
-                    {{#if inChat}}
-                    <input name="data.stuntPoints" disabled type="number" value="{{data.data.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
-                    {{else}}
-                    <input name="data.stuntPoints" type="number" value="{{data.data.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
-                    {{/if}}
+<form class="{{cssClass}} age-system item stunts flexrow no-flexwrap" autocomplete="off">
+    <aside class="sidebar metal-background colorset-first-tier">
+        <img class="document-picture" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <ul class="item-summary">
+            {{!-- Stunt Cost --}}
+            <li>
+                <label>{{localize "age-system.settings.stuntPoints"}}</label>
+                {{#if (eq data.data.costType "variable")}}
+                <div class="flexrow">
+                    <input type="number" value="{{data.data.stuntPoints}}" name="data.stuntPoints" data-dtype="Number" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
+                    /
+                    <input type="number" value="{{data.data.stuntPointsMax}}" name="data.stuntPointsMax" data-dtype="Number" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
                 </div>
+                {{else}}
+                <input name="data.stuntPoints" type="number" value="{{data.data.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
+                {{/if}}
+            </li>
+
+            {{!-- Cost Type --}}
+            <li>
+                <label>{{localize "age-system.item.cost"}}</label>
+                <select name="data.costType">
+                {{#select data.data.costType}}
+                    <option value="fixed">{{localize "age-system.fixed"}}</option>
+                    <option value="variable">{{localize "age-system.variable"}}</option>
+                {{/select}}
+                </select>
+            </li>
+
+            {{!-- Stunt Type --}}
+            <li>
+                <label>{{localize "age-system.type"}} </label>
+                <input type="text" name="data.type" value="{{data.data.type}}" placeholder="{{localize "age-system.type"}}" data-dtype="String"/>
+            </li>
+
+            {{!-- Page Ref --}}
+            <li class="feature-controls" data-reference="{{data.data.reference}}">
+                <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
+                <input type="text" name="data.reference" {{#if inChat}}disabled{{/if}} value="{{data.data.reference}}" placeholder="Page Ref." data-dtype="String"/>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="second-column flexcol">
+        <header class="top-banner colorset-first-tier flexrow">
+            <div class="header-details">
+                <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
             </div>
-        </div>
-        <div class="item-card-desc">
-            
-            {{!-- Description --}}
-            <label>{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+        </header>
+        
+        <div class="sheet-main-content metal-background">
+            <ul class="resource colorset-first-tier item-group">
+                <li class="title colorset-third-tier">
+                    <label>{{localize "age-system.item.desc"}}</label>
+                </li>
+                <li>{{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}</li>
+            </ul>
         </div>
     </div>
-    
 </form>
