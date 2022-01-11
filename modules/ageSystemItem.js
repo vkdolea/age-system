@@ -218,42 +218,8 @@ export class ageSystemItem extends Item {
             //     data.dmgFormula = `${data.nrDice}d${data.diceType}+` + Roll.safeEval(`${dmgBonus} + ${data.extraValue} + ${actorAblDmg}`);
             // }
             const completeFormula = `${data.damageFormula ? data.damageFormula : 0} + ${dmgBonus} + ${actorAblDmg}`;
-            // Remove Flavor from formula
-            const replacedData = Roll.replaceFormulaData(completeFormula, game.actors && this.isOwned ? actorRollData(this.actor) : {}, 0)
-            const reducedFormula = replacedData.replace(/\[(.[^\]]*)\]/g, '');
-            
-            const testRoll = new Roll(reducedFormula);
-            let detFormula = "";
-            let nonDetFormula = "";
-            const terms = testRoll.terms;
-            for (let t = 0; t < terms.length; t++) {
-                const e = terms[t];
-                if (!e.isDeterministic) {
-                    if (t !== 0) nonDetFormula += `${terms[t-1].formula}`;
-                    nonDetFormula += `${e.formula}`;
-                    detFormula += "0";
-                }
-                if (e.isDeterministic) detFormula += `${e.formula}`;
-            }
-            let cte = Roll.safeEval(detFormula)
-            if (cte === 0) cte = "";
-            if (cte > 0) cte = "+" + cte;
-            data.dmgFormula = `${nonDetFormula}${cte}`;
+            data.dmgFormula = Dice.prepareFormula(completeFormula, this.actor, this)
         }
-        
-        // Evaluate Range
-        // if (this.type === 'weapon') {
-        //     if (this.actor?.data?.data) {
-        //         const rangeFormula = Roll.replaceFormulaData(`${data.range}`, game.actors && this.isOwned ? actorRollData(this.actor) : {}, 0);
-        //         data.rangeCalc = Roll.safeEval(rangeFormula);
-    
-        //         const rangeMaxFormula = Roll.replaceFormulaData(`${data.rangeMax}`, game.actors && this.isOwned ? actorRollData(this.actor) : {}, 0);
-        //         data.rangeMaxCalc = Roll.safeEval(rangeMaxFormula);
-        //     } else {
-        //         data.rangeCalc = data.range;
-        //         data.rangeMaxCalc = data.rangeMax;
-        //     }
-        // }
     }
 
     _prepareFocus(data) {
@@ -305,7 +271,8 @@ export class ageSystemItem extends Item {
             formula: "",
             flavor: "",
             isActive: true,
-            conditions: {}
+            conditions: {},
+            itemId: this.id
         }
         mods.push(newMod);
         return this.update({"data.modifiers": mods});

@@ -1,6 +1,39 @@
 import { ageSystem } from "./config.js";
 import { sortObjArrayByName } from "./setup.js";
 
+/**
+ * Helper to evaluate formula to display item damage or Add variable attributes from Modifiers
+ * @param {String} rawFormula Formula to be safe-evaluated
+ * @param {AgeSystemActor} actor Actor about to roll
+ * @param {AgeSystemItem} item Item owning rolling formula
+ * @param {Boolean} detOnly Evaluate deterministic only
+ * @returns Formula String
+ */
+export function prepareFormula (rawFormula, actor, item, detOnly = false) {
+    const replacedData = Roll.replaceFormulaData(rawFormula, (game.actors && (item?.isOwned || actor?.data?.type === "char")) ? actor.actorRollData() : {}, 0)
+    const reducedFormula = replacedData.replace(/\[(.[^\]]*)\]/g, '');
+    const testRoll = new Roll(reducedFormula);
+    let detFormula = "";
+    let nonDetFormula = "";
+    const terms = testRoll.terms;
+    for (let t = 0; t < terms.length; t++) {
+        const e = terms[t];
+        if (!e.isDeterministic) {
+            if (t !== 0) nonDetFormula += `${terms[t-1].formula}`;
+            nonDetFormula += `${e.formula}`;
+            detFormula += "0";
+        }
+        if (e.isDeterministic) detFormula += `${e.formula}`;
+    }
+    let cte = Roll.safeEval(detFormula)
+    if (!detOnly) {
+        if (cte === 0) cte = "";
+        if (cte > 0) cte = "+" + cte;
+    }
+    const newFormula = detOnly ? `${cte}` : `${nonDetFormula}${cte}`;
+    return newFormula
+}
+
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
 export async function ageRollCheck({event = null, actor = null, abl = null, itemRolled = null, rollTN = null, rollUserMod = null, atkDmgTradeOff = null,
     hasTest = false, rollType = null, vehicleHandling = false, selectAbl = false, rollVisibility = false, flavor = null, flavor2 = null, moreParts = false,
@@ -802,9 +835,9 @@ export async function itemDamage({
         // Adds owner's Ability to damage
         // Fully added even on Injury Mode
         if (dmgAbl !== null && dmgAbl !== "no-abl") {
-            const ablMod = item.actor.data.data.abilities[dmgAbl].total;
-            damageFormula = `${damageFormula} + @abilityMod[${game.i18n.localize("age-system." + dmgAbl)}]`;
-            rollData.abilityMod = ablMod;
+            // const ablMod = item.actor.data.data.abilities[dmgAbl].total;
+            damageFormula = `${damageFormula} + @${dmgAbl}[${game.i18n.localize("age-system." + dmgAbl)}]`;
+            // rollData.abilityMod = ablMod;
         }
 
         // Check if Attack to Damage Trade Off is applied
@@ -831,8 +864,8 @@ export async function itemDamage({
         // Check if Item has Mod to add to its own Damage
         if (item.data.data.itemMods.itemDamage.isActive) {
             const itemDmg = item.data.data.itemMods.itemDamage.value;
-            damageFormula = `${damageFormula} + @itemBonus[${game.i18n.localize("age-system.itemDmgMod")}]`;
-            rollData.itemBonus = itemDmg;
+            damageFormula = `${damageFormula} + ${itemBonus}[${game.i18n.localize("age-system.itemDmgMod")}]`;
+            // rollData.itemBonus = itemDmg;
         };
 
         // Adds user Damage input
@@ -844,8 +877,8 @@ export async function itemDamage({
         // Check if item onwer has items which adds up to general damage
         if (item.actor.data.data.ownedBonus != null && item.actor.data.data.ownedBonus.actorDamage) {
             const actorDmgMod = item.actor.data.data.ownedBonus.actorDamage.totalMod;
-            damageFormula = `${damageFormula} + @generalDmgMod[${game.i18n.localize("age-system.itemDmgMod")}]`;
-            rollData.generalDmgMod = actorDmgMod;
+            damageFormula = `${damageFormula} + (${generalDmgMod})[${game.i18n.localize("age-system.itemDmgMod")}]`;
+            // rollData.generalDmgMod = actorDmgMod;
         };
 
         // Adds extra damage for All-Out Attack maneuver
@@ -883,8 +916,8 @@ export async function itemDamage({
 
         // Adds Actor Damage Bonus
         if (actorDmgMod !== 0) {
-            damageFormula += ` + @actorDmgMod[${game.i18n.localize("age-system.bonus.actorDamage")}]`;
-            rollData.actorDmgMod = actorDmgMod;
+            damageFormula += ` + (${actorDmgMod})[${game.i18n.localize("age-system.bonus.actorDamage")}]`;
+            // rollData.actorDmgMod = actorDmgMod;
         };
 
     };
@@ -898,24 +931,6 @@ export async function itemDamage({
 
     let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
 
-    // Add extra data to identified dice rolled withing paranthesis
-    // if (dmgRoll._dice.length > 0) {
-    //     const rolled = [];
-    //     let sum = 0
-    //     for (let i = 0; i < dmgRoll._dice.length; i++) {
-    //         const e = dmgRoll._dice[i].results;
-    //         for (let k = 0; k < e.length; k++) {
-    //             const d = e[k].result;
-    //             rolled.push(d);
-    //             sum += d;
-    //         }
-    //     }
-    //     dmgRoll.terms[0].options.dmgDice = {
-    //         dice: rolled,
-    //         extra: dmgRoll.terms[0].total - sum
-    //     };
-    // }
-    // Programatically add flavor to missing terms
     for (let t = 0; t < dmgRoll.terms.length; t++) {
         const term = dmgRoll.terms[t];
         if (!term.options.flavor) term.options.flavor = term.formula

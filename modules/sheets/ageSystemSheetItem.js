@@ -40,10 +40,10 @@ export default class ageSystemItemSheet extends ItemSheet {
                 this.options.height = this.position.height = "352";
                 this.options.resizable = false;
                 break;
-            // case "power":
-            //     this.options.width = this.position.width = "700";
-            //     this.options.height = this.position.height = "460";
-            //     break;  
+            case "power":
+                // this.options.width = this.position.width = "700";
+                this.options.height = this.position.height = "480";
+                break;  
             default:
                 break;
         };

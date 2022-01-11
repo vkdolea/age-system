@@ -12,6 +12,7 @@ export class ageSystemActor extends Actor {
         this.prepareDerivedData();
         // Sorting Items for final data preparation
         const items = this.items;
+        // this._preparePostModCharData();
         if (this.data.type === 'char') {
             // First prepare Focus
             items.forEach(i => {
@@ -196,84 +197,36 @@ export class ageSystemActor extends Actor {
     _charItemModifiers() {
         const mods = {};
         this.items.forEach(i => {
-            if (i.data.data.itemMods && (i.data.data.equiped || i.data.data.activate)) {
-                const itemMod = i.data.data.itemMods;
-                for (const modKey in itemMod) {
-                    if (Object.hasOwnProperty.call(itemMod, modKey)) {
-                        const modObj = itemMod[modKey];
-                        const focusElement = modKey === "focus" ? {name: modObj.name, value: modObj.value} : null;
-                        if (modObj.selected && modObj.isActive) {
-                            if (mods.hasOwnProperty(modKey)) {
-                                if (focusElement) {
-                                    mods[modKey].push(focusElement);
-                                } else {
-                                    mods[modKey] += modObj.value;
-                                }
-                            } else {
-                                mods[modKey] = focusElement ? [focusElement] : modObj.value;
-                            }
-                        }
+            if (i.data.data.modifiers.length && (i.data.data.equiped || i.data.data.activate)) {
+                const modifiers = i.data.data.modifiers;
+                for (let m = 0; m < modifiers.length; m++) {
+                    const modObj = modifiers[m];
+                    const modKey = modObj.type;
+                    let namedElement = null
+                    if (['focus'].includes(modObj.type)) {
+                        namedElement = {
+                            // type: modObj.type,
+                            name: modObj.conditions.focus,
+                            formula: modObj.formula
+                        };
                     }
+                    if (modObj.isActive) {
+                        if (mods.hasOwnProperty(modKey)) {
+                            if (namedElement) {
+                                mods[modKey].push(namedElement);
+                            } else {
+                                mods[modKey] += ` + ${modObj.formula}`;
+                            }
+                        } else {
+                            mods[modKey] = namedElement ? [namedElement] : `${modObj.formula}`;
+                        }
+                    }   
                 }
             }
         });
-        this.data.data["ownedMods"] = mods;
-
-        // Applying modifiers to Actor data
         const actorData = this.data;
-        const data = actorData.data
-
-        // Armor Penalty & Strain
-        data.armor.penalty = Math.max(mods.armorPenalty ?? 0, 0);
-        data.armor.strain = Math.max(mods.armorStrain ?? 0, 0)
-
-        // Actor Damage
-        data.dmgMod = mods.actorDamage ?? 0;
-
-        // Actor All Tests
-        data.testMod = mods.testMod ?? 0;
-
-        // Actor All Attacks Mod
-        data.attackMod = mods.attackMod ?? 0;
-
-        // Defense
-        data.defense.mod = mods.defense ?? 0;
-
-        // Impact Armor
-        data.armor.impact = mods.impactArmor ?? 0;
-
-        // Ballistic Armor
-        data.armor.ballistic = mods.ballisticArmor ?? 0;
-
-        // Toughness
-        data.armor.toughness.mod = mods.toughness ?? 0;
-
-        // Speed
-        data.speed.mod = mods.speed ?? 0;
-
-        // Defend Maneuver (bonus to Defense)
-        data.defend.mod = mods.defendMnv ?? 0;
-
-        // Guard Up Maneuver
-        data.guardUp.mod = mods.guardupMnv ?? 0;
-
-        // All Out Attack
-        data.allOutAttack.mod = mods.allOutAtkMnv ?? 0;
-
-        // Max Health
-        data.health.mod = mods.maxHealth ?? 0;
-
-        // Max Conviction
-        data.conviction.mod = mods.maxConviction ?? 0;
-
-        // Max Power Points
-        data.powerPoints.mod = mods.maxPowerPoints ?? 0;
-
-        // Power Force
-        // This bonus must be treated on each Item
-
-        // Aim Maneuver
-        data.aim.mod = mods.aimMnv ?? 0;
+        const data = actorData.data;
+        data["ownedMods"] = mods;
 
         // Applying Abilities mods
         const settingAbls = ageSystem.abilities;
@@ -292,7 +245,64 @@ export class ageSystemActor extends Actor {
         const actorData = this.data;
         const data = actorData.data;
 
-        // Calculate total Defense
+        const mods = this.data.data.ownedMods;
+        const variables = foundry.utils.deepClone(this.actorRollData());
+
+        // Armor Penalty & Strain
+        data.armor.penalty = Math.max(mods?.armorPenalty ?? 0, 0);
+        data.armor.strain = Math.max(mods?.armorStrain ?? 0, 0)
+
+        // Actor Damage
+        // data.dmgMod = mods?.actorDamage ?? 0;
+        data.dmgMod = Dice.prepareFormula(mods?.actorDamage ?? "0", this, null, true);
+
+        // Actor All Tests
+        data.testMod = mods?.testMod ?? 0;
+
+        // Actor All Attacks Mod
+        data.attackMod = mods?.attackMod ?? 0;
+
+        // Defense
+        data.defense.mod = Roll.safeEval(mods?.defense ?? "0", variables);
+
+        // Impact Armor
+        data.armor.impact = Roll.safeEval(mods?.impactArmor ?? "0", variables);
+
+        // Ballistic Armor
+        // data.armor.ballistic = Roll.safeEval(mods?.ballisticArmor ?? "0", variables);
+        data.armor.ballistic = Dice.prepareFormula(mods?.ballisticArmor ?? "0", this, null, true);
+
+        // Toughness
+        data.armor.toughness.mod = Roll.safeEval(mods?.toughness ?? "0", variables);
+
+        // Speed
+        data.speed.mod = Roll.safeEval(mods?.speed ?? "0", variables);
+
+        // Defend Maneuver (bonus to Defense)
+        data.defend.mod = Roll.safeEval(mods?.defendMnv ?? "0", variables);
+
+        // Guard Up Maneuver
+        data.guardUp.mod = Roll.safeEval(mods?.guardupMnv ?? "0", variables);
+
+        // All Out Attack
+        data.allOutAttack.mod = mods?.allOutAtkMnv ?? 0;
+
+        // Max Health
+        data.health.mod = Roll.safeEval(mods?.maxHealth ?? "0", variables);
+
+        // Max Conviction
+        data.conviction.mod = Roll.safeEval(mods?.maxConviction ?? "0", variables);
+
+        // Max Power Points
+        data.powerPoints.mod = Roll.safeEval(mods?.powerPoints ?? "0", variables);
+
+        // Power Force
+        // This bonus must be treated on each Item
+
+        // Aim Maneuver
+        data.aim.mod = Roll.safeEval(mods?.aimMnv ?? "0", variables);
+
+       // Calculate total Defense
         data.defense.total = 0;
         if (data.defend.active) {data.defense.total += Number(data.defend.defenseBonus)};
         if (data.guardUp.active) {data.defense.total += Number(data.guardUp.defenseBonus)};
