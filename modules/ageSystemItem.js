@@ -227,10 +227,12 @@ export class ageSystemItem extends Item {
         if (this.isOwned && this.actor?.data) {
             const focusBonus = this.actor.data.data.ownedMods?.focus;
             if (focusBonus) {
+                let valueFormula = `${data.finalValue}`;
                 for (let f = 0; f < focusBonus.length; f++) {
-                    const bonus = focusBonus[f];
-                    if (data.nameLowerCase === bonus.name.toLowerCase()) data.finalValue += bonus.value;
+                    const m = focusBonus[f];
+                    if (data.nameLowerCase === m.name.toLowerCase()) valueFormula += `+ ${m.formula}`;
                 }
+                data.finalValue = Dice.prepareFormula(valueFormula, this.actor, this, true);
             }
         }
         const abilitiesOrg = Object.keys(ageSystem.abilitiesOrg);
@@ -244,8 +246,17 @@ export class ageSystemItem extends Item {
         if (!useFatigue) data.useFatigue = false;
 
         // Calculate Item Force
+        // data.itemForce = 10;
         data.itemForce = 10;
-        if (data.itemMods.powerForce.isActive && data.itemMods.powerForce.selected) data.itemForce += data.itemMods.powerForce.value;
+        let itemForce = "0"
+        const singleForceMod = data.modifiers ? data.modifiers.filter(i => i.type === 'powerForce') : [];
+        if (singleForceMod.length) {
+            for (let i = 0; i < singleForceMod.length; i++) {
+                const m = singleForceMod[i];
+                if (m.formula) itemForce += ` + ${m.formula}` 
+            };
+            data.itemForce += Number(Dice.prepareFormula(itemForce, this.actor, this, true));
+        }
         
         // Calculate derived data
         data.powerPointCostTotal = data.powerPointCost;
