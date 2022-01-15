@@ -553,7 +553,7 @@
             "ballisticArmor": "Ballistic Armor",
             "defendMnv": "Defend Maneuver",
             "guardupMnv": "Guard Up Maneuver",
-            "allOutAtkMnv": "All-Out Attack Damage",
+            "allOutAtk": "All-Out Attack Damage",
             "maxHealth": "Max Health/Fortune",
             "maxConviction": "Max Conviction",
             "maxPowerPoints": "Max PP",
@@ -656,6 +656,9 @@
         "reference": "Reference",
         "fixed": "Fixed",
         "variable": "Variable",
-        "charFocus": "PC Focus"
+        "charFocus": "PC Focus",
+        "invalidModformula": "Invalid - review formula",
+        "invalidModnodice": "Error - only operations with numbers and @attr are valid",
+        "invalidModnumber": "Only numbers are valid"
     }
 }

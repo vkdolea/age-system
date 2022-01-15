@@ -12,8 +12,16 @@
 /**    Alternate Char Sheet     **/
 /*********************************/
 .age-system {
+    
     .mouse-to-pointer:hover {
         cursor: pointer;
+    }
+    .formula-error {
+        font-size: .7rem;
+        font-variant: all-petite-caps;
+        border-radius: 5px;
+        background-color: brown;
+        color: silver;
     }
     .modificators-table{
         .mod-type {
@@ -484,6 +492,21 @@
     a.item-equip.not-equiped,
     .inactive {
         opacity: 0.3;
+    }
+
+    .modifiers {
+        li.header {
+            padding: 1px 5px;
+        }
+        .mod-name {
+            flex: 0 0 100px;
+        };
+        .icon {
+            flex: 0 0 25px;
+        };
+        .mod-source {
+            flex: 0 0 150px;
+        }
     }
 
     .custom-effects {

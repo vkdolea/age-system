@@ -122,7 +122,6 @@ export default class ageSystemItemSheet extends ItemSheet {
     
     
     activateListeners(html) {
-
         if (this.isEditable) {
             
             html.find("a.add-bonus").click(this._onAddModifier.bind(this));
@@ -155,7 +154,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         
         // Add colorset class to entity-link inside TinyMCE editor
         const entityLink = html.find("a.entity-link");
-        for (let i = 0; i < entityLink.length; i++) {entityLink[i].classList += ` colorset-second-tier`}
+        for (let i = 0; i < entityLink.length; i++) {entityLink[i].classList += ` colorset-second-tier`};
 
         super.activateListeners(html);
     };
@@ -187,14 +186,13 @@ export default class ageSystemItemSheet extends ItemSheet {
     }
 
     _onAddModifier(e) {
-        return this.item.newModifier();
+        return this.item._newModifier();
     }
 
     _onRemoveModifier(e) {
         const i = e.currentTarget.closest(".feature-controls").dataset.modIndex;
-        const modifiers = foundry.utils.deepClone(this.item.data.data.modifiers);
-        modifiers.splice(i, 1);
-        return this.item.update({"data.modifiers": modifiers});
+        const path = `data.modifiers.-=${i}`;
+        return this.item.update({[path]: null})
     }
 
     _onToggleModifier(event) {

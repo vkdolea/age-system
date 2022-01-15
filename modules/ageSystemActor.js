@@ -197,42 +197,57 @@ export class ageSystemActor extends Actor {
     _charItemModifiers() {
         const mods = {};
         this.items.forEach(i => {
-            if (i.data.data.modifiers?.length && (i.data.data.equiped || i.data.data.activate)) {
-                const modifiers = i.data.data.modifiers;
-                for (let m = 0; m < modifiers.length; m++) {
-                    const modObj = modifiers[m];
-                    const modKey = modObj.type;
-                    let namedElement = null
-                    if (['focus'].includes(modObj.type)) {
-                        namedElement = {
-                            // type: modObj.type,
-                            name: modObj.conditions.focus,
-                            formula: modObj.formula
-                        };
-                    }
-                    if (modObj.isActive) {
-                        if (mods.hasOwnProperty(modKey)) {
-                            if (namedElement) {
-                                mods[modKey].push(namedElement);
-                            } else {
-                                mods[modKey] += ` + ${modObj.formula}`;
-                            }
+            const iMods = i.data.data.modifiersByType;
+            const active = i.data.data.activate || i.data.data.equiped;
+            if (iMods !== {} && active) {
+                for (const k in iMods) {
+                    if (Object.hasOwnProperty.call(iMods, k)) {
+                        if (mods[k]) {
+                            mods[k] = [...mods[k], ...iMods[k]];
                         } else {
-                            mods[modKey] = namedElement ? [namedElement] : `${modObj.formula}`;
+                            mods[k] = iMods[k]
                         }
-                    }   
+                    }
                 }
             }
+            // if (i.data.data.modifiers?.length && (i.data.data.equiped || i.data.data.activate)) {
+            //     const modifiers = i.data.data.modifiers;
+            //     for (let m = 0; m < modifiers.length; m++) {
+            //         const modObj = modifiers[m];
+            //         const modKey = modObj.type;
+            //         let namedElement = null
+            //         if (['focus'].includes(modObj.type)) {
+            //             namedElement = {
+            //                 // type: modObj.type,
+            //                 name: modObj.conditions.focus,
+            //                 formula: modObj.formula
+            //             };
+            //         }
+            //         if (modObj.isActive) {
+            //             if (mods.hasOwnProperty(modKey)) {
+            //                 if (namedElement) {
+            //                     mods[modKey].push(namedElement);
+            //                 } else {
+            //                     mods[modKey] += ` + ${modObj.formula}`;
+            //                 }
+            //             } else {
+            //                 mods[modKey] = namedElement ? [namedElement] : `${modObj.formula}`;
+            //             }
+            //         }   
+            //     }
+            // }
         });
         const actorData = this.data;
         const data = actorData.data;
         data["ownedMods"] = mods;
+        return
 
         // Applying Abilities mods
         const settingAbls = ageSystem.abilities;
         for (const ablKey in settingAbls) {
             if (settingAbls.hasOwnProperty(ablKey)) {
-                data.abilities[ablKey].mod = mods[ablKey] ?? 0;
+                // data.abilities[ablKey].mod = /^-?\d+$/.test(mods[ablKey]) ? Number(mods[ablKey]) : 0;
+                data.abilities[ablKey].mod = Roll.safeEval(mods[ablKey] ?? "0");
                 data.abilities[ablKey].total = data.abilities[ablKey].mod + data.abilities[ablKey].value
             };
         };
@@ -277,7 +292,7 @@ export class ageSystemActor extends Actor {
 
         // Actor Damage
         // data.dmgMod = mods?.actorDamage ?? 0;
-        data.dmgMod = Dice.prepareFormula(mods?.actorDamage ?? "0", this, null, true);
+        data.dmgModTotal = `${data.dmgMod} + ${Dice.prepareFormula(mods?.actorDamage ?? "0", this, null, true)}`;
 
         // Actor All Tests
         // data.testMod = mods?.testMod ?? 0;

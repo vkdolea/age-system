@@ -553,7 +553,7 @@
             "ballisticArmor": "Armadura Balas",
             "defendMnv": "Maniobra Defensa",
             "guardupMnv": "Maniobra Guardia",
-            "allOutAtkMnv": "Daño Ataque Total",
+            "allOutAtk": "Daño Ataque Total",
             "maxHealth": "Salud Max",
             "maxConviction": "Convicción Max",
             "maxPowerPoints": "PP Max",

@@ -401,7 +401,7 @@
                 "reference": ""
             },
             "bonuses": {
-                "modifiers": [],
+                "modifiers": {},
                 "itemMods": {
                     "itemDamage": {
                         "value": 0,

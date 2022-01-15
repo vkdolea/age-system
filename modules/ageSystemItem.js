@@ -40,17 +40,51 @@ export class ageSystemItem extends Item {
         data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
         data.nameLowerCase = itemData.name.toLowerCase();
 
-        // Confirm if data.modifiers is an Array
-        const mods = data.modifiers;
-        if (typeof mods === "object") {
-            const newArr = []
-            for (const k in mods) {
-                if (Object.hasOwnProperty.call(mods, k)) {
-                    newArr.push(mods[k]);
+        // Validate each Modifier formula based on ftype and create Arrays by type
+        const rawMods = data.modifiers;
+        data.modifiersByType = {}
+        for (const k in rawMods) {
+            if (Object.hasOwnProperty.call(rawMods, k)) {
+                rawMods[k] = this.evalMod(rawMods[k]);
+                if (rawMods[k].type !== "") {
+                    if (data.modifiersByType[rawMods[k].type]) {
+                        data.modifiersByType[rawMods[k].type].push(rawMods[k]);
+                    } else {
+                        data.modifiersByType[rawMods[k].type] = [rawMods[k]];
+                    }
                 }
             }
-            data.modifiers = newArr;
         }
+        
+        // Rebuild Modifiers Object
+        // if (data.modifiers) data.modifiers = this._rebuildModifiers();
+
+        // const mods = data.modifiers;
+        // if (typeof mods === "array") {
+        //     mods.map(e => e = this.evalMods(e))
+        // };
+
+        // // Confirm if data.modifiers is an Array
+        // if (typeof mods === "object") {
+        //     // const newArr = []
+        //     for (const k in mods) {
+        //         if (Object.hasOwnProperty.call(mods, k)) {
+        //             mods[k] = this.evalMod(mods[k]);
+        //             // newArr.push(mods[k]);
+        //         }
+        //     }
+        //     // data.modifiers = newArr;
+        // }
+        // if (typeof mods === "object") {
+        //     const newArr = []
+        //     for (const k in mods) {
+        //         if (Object.hasOwnProperty.call(mods, k)) {
+        //             // mods[k] = this.evalMod(mods[k]);
+        //             newArr.push(mods[k]);
+        //         }
+        //     }
+        //     data.modifiers = newArr;
+        // }
         
         // Adding common data for Power and Weapon
         if (["power", "weapon"].includes(itemType)) {
@@ -138,16 +172,22 @@ export class ageSystemItem extends Item {
                     }
                     if (e.isDeterministic) detFormula += `${e.formula}`;
                 }
-                let cte = Roll.safeEval(detFormula)
-                if (cte === 0) cte = "";
-                if (cte > 0) cte = "+" + cte;
-                data.dmgFormula = `${nonDetFormula}${cte}`;
+                // let cte = Roll.safeEval(detFormula)
+                let cte = Dice.quickEval(detFormula)
+                if (cte !== null) {
+                    if (cte === 0) cte = "";
+                    if (cte > 0) cte = "+" + cte;
+                    data.dmgFormula = `${nonDetFormula}${cte}`;
+                } else {
+                    ui.notifications.warn(game.i18n.localize("age-system.WARNING.damageFormulaError"), {permanent: true});
+                    data.dmgFormula = "!Error";
+                }
 
                 if (actor && this.type === 'weapon') {
-                    const rangeFormula = Roll.replaceFormulaData(`${data.range}`, this.isOwned ? this.actor.actorRollData() : {}, 0);
+                    const rangeFormula = Roll.replaceFormulaData(`${data.range}`, this.isOwned ? this.actor.actorRollData() : {}, 0) ?? "0";
                     data.rangeCalc = Roll.safeEval(rangeFormula);
         
-                    const rangeMaxFormula = Roll.replaceFormulaData(`${data.rangeMax}`, this.isOwned ? this.actor.actorRollData() : {}, 0);
+                    const rangeMaxFormula = Roll.replaceFormulaData(`${data.rangeMax}`, this.isOwned ? this.actor.actorRollData() : {}, 0) ?? "0";
                     data.rangeMaxCalc = Roll.safeEval(rangeMaxFormula);
                 } else {
                     data.rangeCalc = data.range;
@@ -255,7 +295,7 @@ export class ageSystemItem extends Item {
                 const m = singleForceMod[i];
                 if (m.formula) itemForce += ` + ${m.formula}` 
             };
-            data.itemForce += Number(Dice.prepareFormula(itemForce, this.actor, this, true));
+            data.itemForce = Number(data.itemForce) + Number(Dice.prepareFormula(itemForce, this.actor, this, true));
         }
         
         // Calculate derived data
@@ -273,21 +313,82 @@ export class ageSystemItem extends Item {
 
     _prepareShipFeatures(data) {};
 
-    /** Adds a new Modifier to item */
-    newModifier() {
-        if (!Array.isArray(this.data.data.modifiers)) return false;
-        const mods = foundry.utils.deepClone(this.data.data.modifiers);
+    /**
+     * Adds a new object inside Modifiers object
+     * @returns Promise to update Item with new Modifier slot
+     */
+    _newModifier() {
+        const modifiers = foundry.utils.deepClone(this.data.data.modifiers);
+        const keys = [];
+        for (const k in modifiers) {
+            if (Object.hasOwnProperty.call(modifiers, k)) {
+                keys.push(k)
+            }
+        }
+
+        let modName
+        do {
+            modName = foundry.utils.randomID(20);
+        } while (keys.includes(modName));
+        const path = `data.modifiers.${modName}`
+
         const newMod = {
             type: "",
-            formula: "",
+            formula: "0",
             flavor: "",
             isActive: true,
+            valid: true,
             conditions: {},
-            itemId: this.id
+            // itemId: this.id,
+            // itemName: this.name,
+            ftype: "",
+            key: modName,
         }
-        mods.push(newMod);
-        return this.update({"data.modifiers": mods});
+        return this.update({[path]: newMod});
     }
+
+    evalMod(m) {
+        if (m.type === "") return m
+        m.ftype = ageSystem.modkeys[m.type].dtype;
+        switch (m.ftype) {
+            case "nodice":
+                // Remove all dice pools
+                // TODO - also remove modifiers from dice pools
+                let reg = /[0-9]+d[0-9]+/g;
+                m.formula = m.formula.replaceAll(reg, "");
+                reg = /d[0-9]+/g;
+                m.formula = m.formula.replaceAll(reg, "");
+                break;
+
+            case "number":
+                if(Number.isNaN(Number(m.formula))) m.formula = "0";
+                break;
+        
+            case "formula":
+                // m.formula = "complete-formula"
+                break;
+            default:
+                break;
+        }
+        m.itemId = this.id;
+        m.itemName = this.name;
+        m.valid = Roll.validate(m.formula);
+        if (!m.valid) m.isActive = false;
+        return m
+    }
+
+    // _rebuildModifiers() {
+    //     const mods = foundry.utils.deepClone(this.data.data.modifiers);
+    //     const modArr = Object.entries(mods).map(e => {
+    //         return [e[0], e[1]];
+    //     });
+    //     let i = 0;
+    //     return modArr.reduce((obj, e) => {
+    //         obj[i] = e[1];
+    //         i++;
+    //         return obj;
+    //     }, {});
+    // }
 
     // Rolls damage for the item
     rollDamage({
@@ -307,7 +408,7 @@ export class ageSystemItem extends Item {
             // resistedDmg: resistedDmg,
             ...arguments[0],
             item: this,
-            actorDmgMod: this.actor ? this.actor.data.data.dmgMod : 0,
+            actorDmgMod: this.actor ? this.actor.data.data.dmgModTotal : 0,
             actorWgroups: this.actor.data.data.wgroups
         };
         return Dice.itemDamage(damageData);
@@ -412,16 +513,16 @@ export class ageSystemItem extends Item {
     };
 
     chatTemplate = {
-        "weapon": "systems/age-system/templates/sheets/weapon-sheet.hbs",
-        "focus": "systems/age-system/templates/sheets/focus-sheet.hbs",
-        "stunts": "systems/age-system/templates/sheets/stunts-sheet.hbs",
-        "talent": "systems/age-system/templates/sheets/talent-sheet.hbs",
-        "equipment": "systems/age-system/templates/sheets/equipment-sheet.hbs",
-        "power": "systems/age-system/templates/sheets/power-sheet.hbs",
-        "relationship": "systems/age-system/templates/sheets/relationship-sheet.hbs",
-        "honorifics": "systems/age-system/templates/sheets/honorifics-sheet.hbs",
-        "membership": "systems/age-system/templates/sheets/membership-sheet.hbs",
-        "shipfeatures": "systems/age-system/templates/sheets/shipfeatures-sheet.hbs"
+        "weapon": "systems/age-system/templates/sheets/chat/weapon-sheet.hbs",
+        "focus": "systems/age-system/templates/sheets/chat/focus-sheet.hbs",
+        "stunts": "systems/age-system/templates/sheets/chat/stunts-sheet.hbs",
+        "talent": "systems/age-system/templates/sheets/chat/talent-sheet.hbs",
+        "equipment": "systems/age-system/templates/sheets/chat/equipment-sheet.hbs",
+        "power": "systems/age-system/templates/sheets/chat/power-sheet.hbs",
+        "relationship": "systems/age-system/templates/sheets/chat/relationship-sheet.hbs",
+        "honorifics": "systems/age-system/templates/sheets/chat/honorifics-sheet.hbs",
+        "membership": "systems/age-system/templates/sheets/chat/membership-sheet.hbs",
+        "shipfeatures": "systems/age-system/templates/sheets/chat/shipfeatures-sheet.hbs"
     };
 
     async showItem(forceSelfRoll = false) {

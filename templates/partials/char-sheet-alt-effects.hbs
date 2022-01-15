@@ -91,37 +91,41 @@
         <li class="title colorset-first-tier">{{localize "age-system.itemMod"}}</li>
         <li class="header flexrow colorset-first-tier">
             <span class="mod-name">{{localize "age-system.type"}}</span>
-            <div class="mod-value flexrow">
-                <span class="value-numeric">{{localize "age-system.value"}}</span>
-                <span class="icon">{{localize "age-system.control"}}</span>
-            </div>
+            <span class="mod-value">{{localize "age-system.value"}}</span>
             <span class="mod-source">{{localize "age-system.source"}}</span>
         </li>
-        {{#each itemMods as |items modType|}}
-        <li class="flexrow colorset-third-tier item-box">
-            <div class="mod-name flexrow">
-                <span>{{localize (concat "age-system.bonus." modType)}}</span>
-            </div>
-            <div class="flexcol mod-value">
-                {{#each items as |item|}}
-                <div class="flexrow value-box">
-                    {{#if (eq modType "focus")}}
-                    <span class="number">{{#with (lookup item.data.itemMods [modType])~}}{{name}}, {{value}}{{/with}}</span>
-                    {{else}}
-                    <span class="value-numeric">{{#with (lookup item.data.itemMods [modType])~}}{{value}}{{/with}}</span>
-                    {{/if}}
-                    {{#with (lookup item.data.itemMods [modType])~}}
-                    <span class="icon"><a class="mod-active icon {{#unless isActive}}inactive{{/unless}}" data-mod-type="{{modType}}" data-item-id="{{item._id}}"><i class="fas fa-power-off"></i></a></span>
-                    {{/with}}
-                </div>
+        {{#each itemMods as |modGroup modType|}}
+        <li class="flexrow colorset-third-tier">
+            <span class="mod-name">{{localize (concat "age-system.bonus." modType)}}</span>
+            <ul class="modifier-item-details">
+                {{#each modGroup as |mod|}}
+                <li class="flexrow">
+                    <div class="flexcol mod-value">
+                        <div class="flexrow value-box">
+                            {{#if mod.valid}}
+                            {{#if (eq modType "focus")}}
+                            <span class="number">{{mod.conditions.focus}}, {{mod.formula}}</span>
+                            {{else}}
+                            <span class="value-numeric">{{mod.formula}}</span>
+                            {{/if}}
+                            <span class="icon"><a class="mod-active icon {{#unless mod.isActive}}inactive{{/unless}}" data-key="{{mod.key}}" data-item-id="{{mod.itemId}}"><i class="fas fa-power-off"></i></a></span>
+                            {{else}}
+                            <div class="formula-error">
+                                <span><i class="fa fa-times" aria-hidden="true"></i> {{localize (concat "age-system.invalidMod" mod.ftype)}}</span>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="flexcol mod-source">
+                        <span class="item-edit" data-item-id={{mod.itemId}}><a>{{mod.itemName}}</a></span>
+                    </div>
+                </li>
                 {{/each}}
-            </div>
-            <div class="flexcol mod-source">
-                {{#each items as |item|}}
-                <span class="item-edit" data-item-id={{item._id}}><a>{{item.name}}</a></span>
-                {{/each}}
-            </div>
+            </ul>
         </li>
+        {{#unless @last}}
+        <hr>
+        {{/unless}}
         {{/each}}
     </ul>
 

@@ -10,6 +10,7 @@ import { sortObjArrayByName } from "./setup.js";
  * @returns Formula String
  */
 export function prepareFormula (rawFormula, actor, item, detOnly = false) {
+    if (!rawFormula) return detOnly ? 0 : "0";
     const replacedData = Roll.replaceFormulaData(rawFormula, (game.actors && (item?.isOwned || actor?.data?.type === "char")) ? actor.actorRollData() : {}, 0)
     const reducedFormula = replacedData.replace(/\[(.[^\]]*)\]/g, '');
     const testRoll = new Roll(reducedFormula);
@@ -25,14 +26,28 @@ export function prepareFormula (rawFormula, actor, item, detOnly = false) {
         }
         if (e.isDeterministic) detFormula += `${e.formula}`;
     }
-    let cte = Roll.safeEval(detFormula)
+    // let cte = Roll.safeEval(detFormula)
+    let cte = quickEval(detFormula)
     if (!detOnly) {
         if (cte === 0) cte = "";
         if (cte > 0) cte = "+" + cte;
     }
-    const newFormula = detOnly ? `${cte}` : `${nonDetFormula}${cte}`;
+    const newFormula = detOnly ? cte : `${nonDetFormula}${cte}`;
     return newFormula
 }
+
+export function quickEval(expression) {
+    let result;
+    try {
+      const src = 'with (sandbox) { return ' + expression + '}';
+      const evl = new Function('sandbox', src);
+      result = evl(Roll.MATH_PROXY);
+    } catch {
+      result = undefined;
+    }
+    if ( !Number.isNumeric(result) ) result = undefined;
+    return result;
+};
 
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
 export async function ageRollCheck({event = null, actor = null, abl = null, itemRolled = null, rollTN = null, rollUserMod = null, atkDmgTradeOff = null,
