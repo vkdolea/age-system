@@ -553,7 +553,7 @@
             "ballisticArmor": "Armure balistique",
             "defendMnv": "Manœuvre : Défense",
             "guardupMnv": "Manœuvre : Se protéger",
-            "allOutAtkMnv": "dégâts attaque totale",
+            "allOutAtk": "dégâts attaque totale",
             "maxHealth": "Santé Max",
             "maxConviction": "Conviction Max",
             "maxPowerPoints": "PM Max",
@@ -643,6 +643,22 @@
 
         "social": "Social",
         "quickAccess": "Accès Rapide",
-        "showOnChat": "Afficher sur le chat"
+        "showOnChat": "Afficher sur le chat",
+
+        "requirement": "Prérequis",
+        "novice": "Novice",
+        "expert": "Expert",
+        "journeyman": "Initié",
+        "master": "Maître",
+        "grandmaster": "Grand Maître",
+        "apex": "Apex",
+        "item.spec": "Spécialisation",
+        "reference": "Référence",
+        "fixed": "Réparé",
+        "variable": "Variable",
+        "charFocus": "Compétence PJ",
+        "invalidModformula": "Invalide - revoir la formule",
+        "invalidModnodice": "Erreur - seul les operations avec des nombres et @attr sont valides",
+        "invalidModnumber": "Seul les nombres sont valides"
     }
 }

@@ -8,6 +8,9 @@
         </li>
         {{#each data.relationship as |item|}}
         {{> "systems/age-system/templates/partials/itemcontrols/relationship.hbs" item=this config=../data.config}}
+        {{#unless @last}}
+        <hr>
+        {{/unless}}
         {{/each}}
     </ul>
 
@@ -19,6 +22,9 @@
             </li>
             {{#each data.honorifics as |item|}}
             {{> "systems/age-system/templates/partials/itemcontrols/honorifics.hbs" item=this config=../data.config}}
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
             {{/each}}
         </ul>
 
@@ -29,6 +35,9 @@
             </li>
             {{#each data.membership as |item|}}
             {{> "systems/age-system/templates/partials/itemcontrols/membership.hbs" item=this config=../data.config}}
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
             {{/each}}
         </ul>
     </div>

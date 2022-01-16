@@ -1,5 +1,5 @@
 {{!-- Weapon Details --}}
-<li class="item-box item-card flexrow feature-controls colorset-third-tier" draggable="true" data-item-id="{{item._id}}" data-roll-type="{{../data.config.ROLL_TYPE.ATTACK}}">
+<li class="item-box item-card flexrow feature-controls colorset-third-tier" draggable="true" data-item-id="{{item._id}}" data-roll-type="{{config.ROLL_TYPE.ATTACK}}">
     <div class="main-data flexrow">
         <img class="item-image" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
         <a class="item-show item-name">{{item.name}}{{#if (ne item.data.quantity 1)}} ({{item.data.quantity}}){{/if}}</a>

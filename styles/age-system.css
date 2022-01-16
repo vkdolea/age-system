@@ -1,29 +1,131 @@
 /*******************************/
 /**        Item Sheet         **/
 /*******************************/
+.age-system.sheet .itemname {
+  font-size: 1.4rem;
+  padding-left: 6px;
+  text-align: left;
+  margin-bottom: 0.2rem;
+}
+.age-system.sheet .item-summary {
+  font-size: 0.8rem;
+  margin-left: 0.2rem;
+  margin-bottom: auto;
+  flex: 0 0 fit-content;
+  height: fit-content;
+}
+.age-system.sheet .item-summary select,
+.age-system.sheet .item-summary input {
+  font-size: 0.7rem !important;
+}
+.age-system.sheet .item-summary .two-lines {
+  height: 1.8rem;
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet .item-summary label.two-lines {
+  line-height: 2.4;
+}
+.age-system.sheet .item-summary li {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: 0.1rem;
+  width: 12rem;
+}
+.age-system.sheet .item-summary li > *:first-child {
+  border-radius: 5px 0 0 5px;
+}
+.age-system.sheet .item-summary li > *:last-child {
+  border-radius: 0 5px 5px 0;
+  background-color: silver;
+  color: black;
+}
+.age-system.sheet .item-summary li * {
+  height: 0.9rem;
+  text-align: center;
+}
+.age-system.sheet .item-summary li > * {
+  width: -webkit-fill-available;
+}
+.age-system.sheet .item-summary li label {
+  flex: 0 0 5rem;
+  text-align: left;
+  padding-left: 4px;
+}
+.age-system.sheet .page-ref {
+  max-width: 100px;
+  height: 0.9rem;
+}
+.age-system.sheet .card-title {
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+  height: 1.5rem;
+  line-height: 1.8;
+}
+.age-system.sheet img.img-change {
+  flex: 0 0 4rem;
+  height: 4rem;
+  margin: auto 0;
+}
+.age-system.sheet .item-box {
+  padding: 0.2rem;
+  row-gap: 0.2rem;
+  column-gap: 0.2rem;
+}
+.age-system.sheet select[name="data.useAbl"] {
+  max-width: fit-content;
+}
+.age-system.sheet input[name="data.useFocus"] {
+  min-width: 10rem;
+}
+.age-system.sheet .header-input {
+  text-align: center;
+  border-radius: 5px;
+  border-bottom: 1px solid;
+  min-height: 1.2rem !important;
+  font-size: 0.9rem;
+  height: 0.9rem;
+}
+.age-system.sheet .label-under {
+  font-variant: all-petite-caps;
+  font-size: 0.8rem;
+  text-align: center;
+  width: -webkit-fill-available;
+}
+.age-system.sheet .minimum-length {
+  max-width: fit-content;
+}
+/*******************************/
+/**        Item Sheet         **/
+/*******************************/
 .age-system.item-chat-controls {
   margin-top: 6px;
 }
-.age-system.item body input {
+.age-system.item.item-to-chat body input {
   text-align: center;
 }
-.age-system.item .damage-dice-field {
+.age-system.item.item-to-chat .damage-dice-field {
   flex-wrap: nowrap;
   margin: auto;
   vertical-align: middle;
 }
-.age-system.item .damage-dice-field .dice-size {
+.age-system.item.item-to-chat .damage-dice-field .dice-size {
   max-width: 50px;
   height: 26px;
 }
-.age-system.item .damage-dice-field input {
+.age-system.item.item-to-chat .damage-dice-field input {
   max-width: 30px;
 }
-.age-system.item .damage-dice-field span {
+.age-system.item.item-to-chat .damage-dice-field span {
   height: 26px;
   padding-top: 4px;
 }
-.age-system.item .item-box {
+.age-system.item.item-to-chat .item-box {
   flex: 0 0 120px;
   text-align: center;
   align-items: center;
@@ -33,917 +135,917 @@
   border-radius: 5px;
   padding: 4px;
 }
-.age-system.item .item-box p {
+.age-system.item.item-to-chat .item-box p {
   margin: 0px;
   font-size: 12px;
 }
-.age-system.item .options-container {
+.age-system.item.item-to-chat .options-container {
   padding: 4px;
 }
-.age-system.item .options-container .header {
+.age-system.item.item-to-chat .options-container .header {
   border-radius: 10px;
 }
-.age-system.item .options-container .header p {
+.age-system.item.item-to-chat .options-container .header p {
   margin: auto;
   text-align: center;
 }
-.age-system.item .sheet-content {
+.age-system.item.item-to-chat .sheet-content {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
-.age-system.item .sheet-content .editor {
+.age-system.item.item-to-chat .sheet-content .editor {
   height: 100%;
 }
-.age-system.item .fill-card {
+.age-system.item.item-to-chat .fill-card {
   text-align: left;
   width: fit-content;
 }
-.age-system.item .fill-card i.fas {
+.age-system.item.item-to-chat .fill-card i.fas {
   margin-left: 2px;
 }
-.age-system.item .focus label.part-desc.part-desc,
-.age-system.item .power label.part-desc.part-desc,
-.age-system.item .talent label.part-desc.part-desc,
-.age-system.item .weapon label.part-desc.part-desc,
-.age-system.item .equipment label.part-desc.part-desc,
-.age-system.item .stunts label.part-desc.part-desc,
-.age-system.item .honorifics label.part-desc.part-desc,
-.age-system.item .relationship label.part-desc.part-desc,
-.age-system.item .membership label.part-desc.part-desc,
-.age-system.item .shipfeatures label.part-desc.part-desc,
-.age-system.item .vehicle label.part-desc.part-desc,
-.age-system.item .focus .part-desc-value.part-desc-value,
-.age-system.item .power .part-desc-value.part-desc-value,
-.age-system.item .talent .part-desc-value.part-desc-value,
-.age-system.item .weapon .part-desc-value.part-desc-value,
-.age-system.item .equipment .part-desc-value.part-desc-value,
-.age-system.item .stunts .part-desc-value.part-desc-value,
-.age-system.item .honorifics .part-desc-value.part-desc-value,
-.age-system.item .relationship .part-desc-value.part-desc-value,
-.age-system.item .membership .part-desc-value.part-desc-value,
-.age-system.item .shipfeatures .part-desc-value.part-desc-value,
-.age-system.item .vehicle .part-desc-value.part-desc-value {
+.age-system.item.item-to-chat .focus label.part-desc.part-desc,
+.age-system.item.item-to-chat .power label.part-desc.part-desc,
+.age-system.item.item-to-chat .talent label.part-desc.part-desc,
+.age-system.item.item-to-chat .weapon label.part-desc.part-desc,
+.age-system.item.item-to-chat .equipment label.part-desc.part-desc,
+.age-system.item.item-to-chat .stunts label.part-desc.part-desc,
+.age-system.item.item-to-chat .honorifics label.part-desc.part-desc,
+.age-system.item.item-to-chat .relationship label.part-desc.part-desc,
+.age-system.item.item-to-chat .membership label.part-desc.part-desc,
+.age-system.item.item-to-chat .shipfeatures label.part-desc.part-desc,
+.age-system.item.item-to-chat .vehicle label.part-desc.part-desc,
+.age-system.item.item-to-chat .focus .part-desc-value.part-desc-value,
+.age-system.item.item-to-chat .power .part-desc-value.part-desc-value,
+.age-system.item.item-to-chat .talent .part-desc-value.part-desc-value,
+.age-system.item.item-to-chat .weapon .part-desc-value.part-desc-value,
+.age-system.item.item-to-chat .equipment .part-desc-value.part-desc-value,
+.age-system.item.item-to-chat .stunts .part-desc-value.part-desc-value,
+.age-system.item.item-to-chat .honorifics .part-desc-value.part-desc-value,
+.age-system.item.item-to-chat .relationship .part-desc-value.part-desc-value,
+.age-system.item.item-to-chat .membership .part-desc-value.part-desc-value,
+.age-system.item.item-to-chat .shipfeatures .part-desc-value.part-desc-value,
+.age-system.item.item-to-chat .vehicle .part-desc-value.part-desc-value {
   max-width: none;
   flex: 0 0 50%;
   text-align: center;
   margin-bottom: 2px;
 }
-.age-system.item .focus img,
-.age-system.item .power img,
-.age-system.item .talent img,
-.age-system.item .weapon img,
-.age-system.item .equipment img,
-.age-system.item .stunts img,
-.age-system.item .honorifics img,
-.age-system.item .relationship img,
-.age-system.item .membership img,
-.age-system.item .shipfeatures img,
-.age-system.item .vehicle img {
+.age-system.item.item-to-chat .focus img,
+.age-system.item.item-to-chat .power img,
+.age-system.item.item-to-chat .talent img,
+.age-system.item.item-to-chat .weapon img,
+.age-system.item.item-to-chat .equipment img,
+.age-system.item.item-to-chat .stunts img,
+.age-system.item.item-to-chat .honorifics img,
+.age-system.item.item-to-chat .relationship img,
+.age-system.item.item-to-chat .membership img,
+.age-system.item.item-to-chat .shipfeatures img,
+.age-system.item.item-to-chat .vehicle img {
   min-height: 60px;
   max-width: 60px;
   object-fit: contain;
   margin-right: 4px;
 }
-.age-system.item .focus nav.add-sheet-tabs.tabs > a,
-.age-system.item .power nav.add-sheet-tabs.tabs > a,
-.age-system.item .talent nav.add-sheet-tabs.tabs > a,
-.age-system.item .weapon nav.add-sheet-tabs.tabs > a,
-.age-system.item .equipment nav.add-sheet-tabs.tabs > a,
-.age-system.item .stunts nav.add-sheet-tabs.tabs > a,
-.age-system.item .honorifics nav.add-sheet-tabs.tabs > a,
-.age-system.item .relationship nav.add-sheet-tabs.tabs > a,
-.age-system.item .membership nav.add-sheet-tabs.tabs > a,
-.age-system.item .shipfeatures nav.add-sheet-tabs.tabs > a,
-.age-system.item .vehicle nav.add-sheet-tabs.tabs > a {
+.age-system.item.item-to-chat .focus nav.add-sheet-tabs.tabs > a,
+.age-system.item.item-to-chat .power nav.add-sheet-tabs.tabs > a,
+.age-system.item.item-to-chat .talent nav.add-sheet-tabs.tabs > a,
+.age-system.item.item-to-chat .weapon nav.add-sheet-tabs.tabs > a,
+.age-system.item.item-to-chat .equipment nav.add-sheet-tabs.tabs > a,
+.age-system.item.item-to-chat .stunts nav.add-sheet-tabs.tabs > a,
+.age-system.item.item-to-chat .honorifics nav.add-sheet-tabs.tabs > a,
+.age-system.item.item-to-chat .relationship nav.add-sheet-tabs.tabs > a,
+.age-system.item.item-to-chat .membership nav.add-sheet-tabs.tabs > a,
+.age-system.item.item-to-chat .shipfeatures nav.add-sheet-tabs.tabs > a,
+.age-system.item.item-to-chat .vehicle nav.add-sheet-tabs.tabs > a {
   flex: 1 0 auto;
 }
-.age-system.item .focus nav.add-sheet-tabs.tabs > a:last-child,
-.age-system.item .power nav.add-sheet-tabs.tabs > a:last-child,
-.age-system.item .talent nav.add-sheet-tabs.tabs > a:last-child,
-.age-system.item .weapon nav.add-sheet-tabs.tabs > a:last-child,
-.age-system.item .equipment nav.add-sheet-tabs.tabs > a:last-child,
-.age-system.item .stunts nav.add-sheet-tabs.tabs > a:last-child,
-.age-system.item .honorifics nav.add-sheet-tabs.tabs > a:last-child,
-.age-system.item .relationship nav.add-sheet-tabs.tabs > a:last-child,
-.age-system.item .membership nav.add-sheet-tabs.tabs > a:last-child,
-.age-system.item .shipfeatures nav.add-sheet-tabs.tabs > a:last-child,
-.age-system.item .vehicle nav.add-sheet-tabs.tabs > a:last-child {
+.age-system.item.item-to-chat .focus nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item.item-to-chat .power nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item.item-to-chat .talent nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item.item-to-chat .weapon nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item.item-to-chat .equipment nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item.item-to-chat .stunts nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item.item-to-chat .honorifics nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item.item-to-chat .relationship nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item.item-to-chat .membership nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item.item-to-chat .shipfeatures nav.add-sheet-tabs.tabs > a:last-child,
+.age-system.item.item-to-chat .vehicle nav.add-sheet-tabs.tabs > a:last-child {
   padding-right: 1px;
 }
-.age-system.item .focus .power-type-control,
-.age-system.item .power .power-type-control,
-.age-system.item .talent .power-type-control,
-.age-system.item .weapon .power-type-control,
-.age-system.item .equipment .power-type-control,
-.age-system.item .stunts .power-type-control,
-.age-system.item .honorifics .power-type-control,
-.age-system.item .relationship .power-type-control,
-.age-system.item .membership .power-type-control,
-.age-system.item .shipfeatures .power-type-control,
-.age-system.item .vehicle .power-type-control {
+.age-system.item.item-to-chat .focus .power-type-control,
+.age-system.item.item-to-chat .power .power-type-control,
+.age-system.item.item-to-chat .talent .power-type-control,
+.age-system.item.item-to-chat .weapon .power-type-control,
+.age-system.item.item-to-chat .equipment .power-type-control,
+.age-system.item.item-to-chat .stunts .power-type-control,
+.age-system.item.item-to-chat .honorifics .power-type-control,
+.age-system.item.item-to-chat .relationship .power-type-control,
+.age-system.item.item-to-chat .membership .power-type-control,
+.age-system.item.item-to-chat .shipfeatures .power-type-control,
+.age-system.item.item-to-chat .vehicle .power-type-control {
   display: grid;
   grid-template-columns: 20px 20px;
   grid-template-rows: 30px 30px;
   grid-template-areas: "damage heal" "resist fatigue";
 }
-.age-system.item .focus .power-type-control .toggle-damage,
-.age-system.item .power .power-type-control .toggle-damage,
-.age-system.item .talent .power-type-control .toggle-damage,
-.age-system.item .weapon .power-type-control .toggle-damage,
-.age-system.item .equipment .power-type-control .toggle-damage,
-.age-system.item .stunts .power-type-control .toggle-damage,
-.age-system.item .honorifics .power-type-control .toggle-damage,
-.age-system.item .relationship .power-type-control .toggle-damage,
-.age-system.item .membership .power-type-control .toggle-damage,
-.age-system.item .shipfeatures .power-type-control .toggle-damage,
-.age-system.item .vehicle .power-type-control .toggle-damage {
+.age-system.item.item-to-chat .focus .power-type-control .toggle-damage,
+.age-system.item.item-to-chat .power .power-type-control .toggle-damage,
+.age-system.item.item-to-chat .talent .power-type-control .toggle-damage,
+.age-system.item.item-to-chat .weapon .power-type-control .toggle-damage,
+.age-system.item.item-to-chat .equipment .power-type-control .toggle-damage,
+.age-system.item.item-to-chat .stunts .power-type-control .toggle-damage,
+.age-system.item.item-to-chat .honorifics .power-type-control .toggle-damage,
+.age-system.item.item-to-chat .relationship .power-type-control .toggle-damage,
+.age-system.item.item-to-chat .membership .power-type-control .toggle-damage,
+.age-system.item.item-to-chat .shipfeatures .power-type-control .toggle-damage,
+.age-system.item.item-to-chat .vehicle .power-type-control .toggle-damage {
   grid-area: damage;
   justify-self: stretch;
 }
-.age-system.item .focus .power-type-control .toggle-healing,
-.age-system.item .power .power-type-control .toggle-healing,
-.age-system.item .talent .power-type-control .toggle-healing,
-.age-system.item .weapon .power-type-control .toggle-healing,
-.age-system.item .equipment .power-type-control .toggle-healing,
-.age-system.item .stunts .power-type-control .toggle-healing,
-.age-system.item .honorifics .power-type-control .toggle-healing,
-.age-system.item .relationship .power-type-control .toggle-healing,
-.age-system.item .membership .power-type-control .toggle-healing,
-.age-system.item .shipfeatures .power-type-control .toggle-healing,
-.age-system.item .vehicle .power-type-control .toggle-healing {
+.age-system.item.item-to-chat .focus .power-type-control .toggle-healing,
+.age-system.item.item-to-chat .power .power-type-control .toggle-healing,
+.age-system.item.item-to-chat .talent .power-type-control .toggle-healing,
+.age-system.item.item-to-chat .weapon .power-type-control .toggle-healing,
+.age-system.item.item-to-chat .equipment .power-type-control .toggle-healing,
+.age-system.item.item-to-chat .stunts .power-type-control .toggle-healing,
+.age-system.item.item-to-chat .honorifics .power-type-control .toggle-healing,
+.age-system.item.item-to-chat .relationship .power-type-control .toggle-healing,
+.age-system.item.item-to-chat .membership .power-type-control .toggle-healing,
+.age-system.item.item-to-chat .shipfeatures .power-type-control .toggle-healing,
+.age-system.item.item-to-chat .vehicle .power-type-control .toggle-healing {
   grid-area: heal;
   justify-self: stretch;
 }
-.age-system.item .focus .power-type-control .toggle-resist,
-.age-system.item .power .power-type-control .toggle-resist,
-.age-system.item .talent .power-type-control .toggle-resist,
-.age-system.item .weapon .power-type-control .toggle-resist,
-.age-system.item .equipment .power-type-control .toggle-resist,
-.age-system.item .stunts .power-type-control .toggle-resist,
-.age-system.item .honorifics .power-type-control .toggle-resist,
-.age-system.item .relationship .power-type-control .toggle-resist,
-.age-system.item .membership .power-type-control .toggle-resist,
-.age-system.item .shipfeatures .power-type-control .toggle-resist,
-.age-system.item .vehicle .power-type-control .toggle-resist {
+.age-system.item.item-to-chat .focus .power-type-control .toggle-resist,
+.age-system.item.item-to-chat .power .power-type-control .toggle-resist,
+.age-system.item.item-to-chat .talent .power-type-control .toggle-resist,
+.age-system.item.item-to-chat .weapon .power-type-control .toggle-resist,
+.age-system.item.item-to-chat .equipment .power-type-control .toggle-resist,
+.age-system.item.item-to-chat .stunts .power-type-control .toggle-resist,
+.age-system.item.item-to-chat .honorifics .power-type-control .toggle-resist,
+.age-system.item.item-to-chat .relationship .power-type-control .toggle-resist,
+.age-system.item.item-to-chat .membership .power-type-control .toggle-resist,
+.age-system.item.item-to-chat .shipfeatures .power-type-control .toggle-resist,
+.age-system.item.item-to-chat .vehicle .power-type-control .toggle-resist {
   grid-area: resist;
   justify-self: stretch;
 }
-.age-system.item .focus .power-type-control .toggle-fatigue,
-.age-system.item .power .power-type-control .toggle-fatigue,
-.age-system.item .talent .power-type-control .toggle-fatigue,
-.age-system.item .weapon .power-type-control .toggle-fatigue,
-.age-system.item .equipment .power-type-control .toggle-fatigue,
-.age-system.item .stunts .power-type-control .toggle-fatigue,
-.age-system.item .honorifics .power-type-control .toggle-fatigue,
-.age-system.item .relationship .power-type-control .toggle-fatigue,
-.age-system.item .membership .power-type-control .toggle-fatigue,
-.age-system.item .shipfeatures .power-type-control .toggle-fatigue,
-.age-system.item .vehicle .power-type-control .toggle-fatigue {
+.age-system.item.item-to-chat .focus .power-type-control .toggle-fatigue,
+.age-system.item.item-to-chat .power .power-type-control .toggle-fatigue,
+.age-system.item.item-to-chat .talent .power-type-control .toggle-fatigue,
+.age-system.item.item-to-chat .weapon .power-type-control .toggle-fatigue,
+.age-system.item.item-to-chat .equipment .power-type-control .toggle-fatigue,
+.age-system.item.item-to-chat .stunts .power-type-control .toggle-fatigue,
+.age-system.item.item-to-chat .honorifics .power-type-control .toggle-fatigue,
+.age-system.item.item-to-chat .relationship .power-type-control .toggle-fatigue,
+.age-system.item.item-to-chat .membership .power-type-control .toggle-fatigue,
+.age-system.item.item-to-chat .shipfeatures .power-type-control .toggle-fatigue,
+.age-system.item.item-to-chat .vehicle .power-type-control .toggle-fatigue {
   grid-area: fatigue;
   justify-self: stretch;
 }
-.age-system.item .focus input[name="data.shortDesc"].long-text,
-.age-system.item .power input[name="data.shortDesc"].long-text,
-.age-system.item .talent input[name="data.shortDesc"].long-text,
-.age-system.item .weapon input[name="data.shortDesc"].long-text,
-.age-system.item .equipment input[name="data.shortDesc"].long-text,
-.age-system.item .stunts input[name="data.shortDesc"].long-text,
-.age-system.item .honorifics input[name="data.shortDesc"].long-text,
-.age-system.item .relationship input[name="data.shortDesc"].long-text,
-.age-system.item .membership input[name="data.shortDesc"].long-text,
-.age-system.item .shipfeatures input[name="data.shortDesc"].long-text,
-.age-system.item .vehicle input[name="data.shortDesc"].long-text {
+.age-system.item.item-to-chat .focus input[name="data.shortDesc"].long-text,
+.age-system.item.item-to-chat .power input[name="data.shortDesc"].long-text,
+.age-system.item.item-to-chat .talent input[name="data.shortDesc"].long-text,
+.age-system.item.item-to-chat .weapon input[name="data.shortDesc"].long-text,
+.age-system.item.item-to-chat .equipment input[name="data.shortDesc"].long-text,
+.age-system.item.item-to-chat .stunts input[name="data.shortDesc"].long-text,
+.age-system.item.item-to-chat .honorifics input[name="data.shortDesc"].long-text,
+.age-system.item.item-to-chat .relationship input[name="data.shortDesc"].long-text,
+.age-system.item.item-to-chat .membership input[name="data.shortDesc"].long-text,
+.age-system.item.item-to-chat .shipfeatures input[name="data.shortDesc"].long-text,
+.age-system.item.item-to-chat .vehicle input[name="data.shortDesc"].long-text {
   max-width: 100%;
   width: 100%;
 }
-.age-system.item .focus .damage-formula p.in-chat-text,
-.age-system.item .power .damage-formula p.in-chat-text,
-.age-system.item .talent .damage-formula p.in-chat-text,
-.age-system.item .weapon .damage-formula p.in-chat-text,
-.age-system.item .equipment .damage-formula p.in-chat-text,
-.age-system.item .stunts .damage-formula p.in-chat-text,
-.age-system.item .honorifics .damage-formula p.in-chat-text,
-.age-system.item .relationship .damage-formula p.in-chat-text,
-.age-system.item .membership .damage-formula p.in-chat-text,
-.age-system.item .shipfeatures .damage-formula p.in-chat-text,
-.age-system.item .vehicle .damage-formula p.in-chat-text {
+.age-system.item.item-to-chat .focus .damage-formula p.in-chat-text,
+.age-system.item.item-to-chat .power .damage-formula p.in-chat-text,
+.age-system.item.item-to-chat .talent .damage-formula p.in-chat-text,
+.age-system.item.item-to-chat .weapon .damage-formula p.in-chat-text,
+.age-system.item.item-to-chat .equipment .damage-formula p.in-chat-text,
+.age-system.item.item-to-chat .stunts .damage-formula p.in-chat-text,
+.age-system.item.item-to-chat .honorifics .damage-formula p.in-chat-text,
+.age-system.item.item-to-chat .relationship .damage-formula p.in-chat-text,
+.age-system.item.item-to-chat .membership .damage-formula p.in-chat-text,
+.age-system.item.item-to-chat .shipfeatures .damage-formula p.in-chat-text,
+.age-system.item.item-to-chat .vehicle .damage-formula p.in-chat-text {
   white-space: nowrap;
 }
-.age-system.item .focus p.in-chat-text,
-.age-system.item .power p.in-chat-text,
-.age-system.item .talent p.in-chat-text,
-.age-system.item .weapon p.in-chat-text,
-.age-system.item .equipment p.in-chat-text,
-.age-system.item .stunts p.in-chat-text,
-.age-system.item .honorifics p.in-chat-text,
-.age-system.item .relationship p.in-chat-text,
-.age-system.item .membership p.in-chat-text,
-.age-system.item .shipfeatures p.in-chat-text,
-.age-system.item .vehicle p.in-chat-text {
+.age-system.item.item-to-chat .focus p.in-chat-text,
+.age-system.item.item-to-chat .power p.in-chat-text,
+.age-system.item.item-to-chat .talent p.in-chat-text,
+.age-system.item.item-to-chat .weapon p.in-chat-text,
+.age-system.item.item-to-chat .equipment p.in-chat-text,
+.age-system.item.item-to-chat .stunts p.in-chat-text,
+.age-system.item.item-to-chat .honorifics p.in-chat-text,
+.age-system.item.item-to-chat .relationship p.in-chat-text,
+.age-system.item.item-to-chat .membership p.in-chat-text,
+.age-system.item.item-to-chat .shipfeatures p.in-chat-text,
+.age-system.item.item-to-chat .vehicle p.in-chat-text {
   margin: 0px;
 }
-.age-system.item .focus section.sheet-tab-section,
-.age-system.item .power section.sheet-tab-section,
-.age-system.item .talent section.sheet-tab-section,
-.age-system.item .weapon section.sheet-tab-section,
-.age-system.item .equipment section.sheet-tab-section,
-.age-system.item .stunts section.sheet-tab-section,
-.age-system.item .honorifics section.sheet-tab-section,
-.age-system.item .relationship section.sheet-tab-section,
-.age-system.item .membership section.sheet-tab-section,
-.age-system.item .shipfeatures section.sheet-tab-section,
-.age-system.item .vehicle section.sheet-tab-section {
+.age-system.item.item-to-chat .focus section.sheet-tab-section,
+.age-system.item.item-to-chat .power section.sheet-tab-section,
+.age-system.item.item-to-chat .talent section.sheet-tab-section,
+.age-system.item.item-to-chat .weapon section.sheet-tab-section,
+.age-system.item.item-to-chat .equipment section.sheet-tab-section,
+.age-system.item.item-to-chat .stunts section.sheet-tab-section,
+.age-system.item.item-to-chat .honorifics section.sheet-tab-section,
+.age-system.item.item-to-chat .relationship section.sheet-tab-section,
+.age-system.item.item-to-chat .membership section.sheet-tab-section,
+.age-system.item.item-to-chat .shipfeatures section.sheet-tab-section,
+.age-system.item.item-to-chat .vehicle section.sheet-tab-section {
   height: 100%;
   border-radius: 0px 0px 10px 10px;
 }
-.age-system.item .focus .item-card-title,
-.age-system.item .power .item-card-title,
-.age-system.item .talent .item-card-title,
-.age-system.item .weapon .item-card-title,
-.age-system.item .equipment .item-card-title,
-.age-system.item .stunts .item-card-title,
-.age-system.item .honorifics .item-card-title,
-.age-system.item .relationship .item-card-title,
-.age-system.item .membership .item-card-title,
-.age-system.item .shipfeatures .item-card-title,
-.age-system.item .vehicle .item-card-title {
+.age-system.item.item-to-chat .focus .item-card-title,
+.age-system.item.item-to-chat .power .item-card-title,
+.age-system.item.item-to-chat .talent .item-card-title,
+.age-system.item.item-to-chat .weapon .item-card-title,
+.age-system.item.item-to-chat .equipment .item-card-title,
+.age-system.item.item-to-chat .stunts .item-card-title,
+.age-system.item.item-to-chat .honorifics .item-card-title,
+.age-system.item.item-to-chat .relationship .item-card-title,
+.age-system.item.item-to-chat .membership .item-card-title,
+.age-system.item.item-to-chat .shipfeatures .item-card-title,
+.age-system.item.item-to-chat .vehicle .item-card-title {
   border-radius: 10px 10px 0px 0px;
   text-transform: uppercase;
   border: none;
   padding: 4px;
 }
-.age-system.item .focus input[name="name"],
-.age-system.item .power input[name="name"],
-.age-system.item .talent input[name="name"],
-.age-system.item .weapon input[name="name"],
-.age-system.item .equipment input[name="name"],
-.age-system.item .stunts input[name="name"],
-.age-system.item .honorifics input[name="name"],
-.age-system.item .relationship input[name="name"],
-.age-system.item .membership input[name="name"],
-.age-system.item .shipfeatures input[name="name"],
-.age-system.item .vehicle input[name="name"] {
+.age-system.item.item-to-chat .focus input[name="name"],
+.age-system.item.item-to-chat .power input[name="name"],
+.age-system.item.item-to-chat .talent input[name="name"],
+.age-system.item.item-to-chat .weapon input[name="name"],
+.age-system.item.item-to-chat .equipment input[name="name"],
+.age-system.item.item-to-chat .stunts input[name="name"],
+.age-system.item.item-to-chat .honorifics input[name="name"],
+.age-system.item.item-to-chat .relationship input[name="name"],
+.age-system.item.item-to-chat .membership input[name="name"],
+.age-system.item.item-to-chat .shipfeatures input[name="name"],
+.age-system.item.item-to-chat .vehicle input[name="name"] {
   padding-left: 10px;
   min-width: 100%;
 }
-.age-system.item .focus label,
-.age-system.item .power label,
-.age-system.item .talent label,
-.age-system.item .weapon label,
-.age-system.item .equipment label,
-.age-system.item .stunts label,
-.age-system.item .honorifics label,
-.age-system.item .relationship label,
-.age-system.item .membership label,
-.age-system.item .shipfeatures label,
-.age-system.item .vehicle label {
+.age-system.item.item-to-chat .focus label,
+.age-system.item.item-to-chat .power label,
+.age-system.item.item-to-chat .talent label,
+.age-system.item.item-to-chat .weapon label,
+.age-system.item.item-to-chat .equipment label,
+.age-system.item.item-to-chat .stunts label,
+.age-system.item.item-to-chat .honorifics label,
+.age-system.item.item-to-chat .relationship label,
+.age-system.item.item-to-chat .membership label,
+.age-system.item.item-to-chat .shipfeatures label,
+.age-system.item.item-to-chat .vehicle label {
   font-weight: 500;
   border: none;
   margin-right: 4px;
   max-width: fit-content;
   white-space: nowrap;
 }
-.age-system.item .focus .flexcol > label,
-.age-system.item .power .flexcol > label,
-.age-system.item .talent .flexcol > label,
-.age-system.item .weapon .flexcol > label,
-.age-system.item .equipment .flexcol > label,
-.age-system.item .stunts .flexcol > label,
-.age-system.item .honorifics .flexcol > label,
-.age-system.item .relationship .flexcol > label,
-.age-system.item .membership .flexcol > label,
-.age-system.item .shipfeatures .flexcol > label,
-.age-system.item .vehicle .flexcol > label {
+.age-system.item.item-to-chat .focus .flexcol > label,
+.age-system.item.item-to-chat .power .flexcol > label,
+.age-system.item.item-to-chat .talent .flexcol > label,
+.age-system.item.item-to-chat .weapon .flexcol > label,
+.age-system.item.item-to-chat .equipment .flexcol > label,
+.age-system.item.item-to-chat .stunts .flexcol > label,
+.age-system.item.item-to-chat .honorifics .flexcol > label,
+.age-system.item.item-to-chat .relationship .flexcol > label,
+.age-system.item.item-to-chat .membership .flexcol > label,
+.age-system.item.item-to-chat .shipfeatures .flexcol > label,
+.age-system.item.item-to-chat .vehicle .flexcol > label {
   margin-right: 0px;
 }
-.age-system.item .focus .flexcol > input,
-.age-system.item .power .flexcol > input,
-.age-system.item .talent .flexcol > input,
-.age-system.item .weapon .flexcol > input,
-.age-system.item .equipment .flexcol > input,
-.age-system.item .stunts .flexcol > input,
-.age-system.item .honorifics .flexcol > input,
-.age-system.item .relationship .flexcol > input,
-.age-system.item .membership .flexcol > input,
-.age-system.item .shipfeatures .flexcol > input,
-.age-system.item .vehicle .flexcol > input {
+.age-system.item.item-to-chat .focus .flexcol > input,
+.age-system.item.item-to-chat .power .flexcol > input,
+.age-system.item.item-to-chat .talent .flexcol > input,
+.age-system.item.item-to-chat .weapon .flexcol > input,
+.age-system.item.item-to-chat .equipment .flexcol > input,
+.age-system.item.item-to-chat .stunts .flexcol > input,
+.age-system.item.item-to-chat .honorifics .flexcol > input,
+.age-system.item.item-to-chat .relationship .flexcol > input,
+.age-system.item.item-to-chat .membership .flexcol > input,
+.age-system.item.item-to-chat .shipfeatures .flexcol > input,
+.age-system.item.item-to-chat .vehicle .flexcol > input {
   text-align: center;
 }
-.age-system.item .focus .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .power .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .talent .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .weapon .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .equipment .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .stunts .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .honorifics .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .relationship .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .membership .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .shipfeatures .flexcol div.item-card-stats.active-mod-container,
-.age-system.item .vehicle .flexcol div.item-card-stats.active-mod-container {
+.age-system.item.item-to-chat .focus .flexcol div.item-card-stats.active-mod-container,
+.age-system.item.item-to-chat .power .flexcol div.item-card-stats.active-mod-container,
+.age-system.item.item-to-chat .talent .flexcol div.item-card-stats.active-mod-container,
+.age-system.item.item-to-chat .weapon .flexcol div.item-card-stats.active-mod-container,
+.age-system.item.item-to-chat .equipment .flexcol div.item-card-stats.active-mod-container,
+.age-system.item.item-to-chat .stunts .flexcol div.item-card-stats.active-mod-container,
+.age-system.item.item-to-chat .honorifics .flexcol div.item-card-stats.active-mod-container,
+.age-system.item.item-to-chat .relationship .flexcol div.item-card-stats.active-mod-container,
+.age-system.item.item-to-chat .membership .flexcol div.item-card-stats.active-mod-container,
+.age-system.item.item-to-chat .shipfeatures .flexcol div.item-card-stats.active-mod-container,
+.age-system.item.item-to-chat .vehicle .flexcol div.item-card-stats.active-mod-container {
   padding-top: 0px;
 }
-.age-system.item .focus .not-equiped,
-.age-system.item .power .not-equiped,
-.age-system.item .talent .not-equiped,
-.age-system.item .weapon .not-equiped,
-.age-system.item .equipment .not-equiped,
-.age-system.item .stunts .not-equiped,
-.age-system.item .honorifics .not-equiped,
-.age-system.item .relationship .not-equiped,
-.age-system.item .membership .not-equiped,
-.age-system.item .shipfeatures .not-equiped,
-.age-system.item .vehicle .not-equiped {
+.age-system.item.item-to-chat .focus .not-equiped,
+.age-system.item.item-to-chat .power .not-equiped,
+.age-system.item.item-to-chat .talent .not-equiped,
+.age-system.item.item-to-chat .weapon .not-equiped,
+.age-system.item.item-to-chat .equipment .not-equiped,
+.age-system.item.item-to-chat .stunts .not-equiped,
+.age-system.item.item-to-chat .honorifics .not-equiped,
+.age-system.item.item-to-chat .relationship .not-equiped,
+.age-system.item.item-to-chat .membership .not-equiped,
+.age-system.item.item-to-chat .shipfeatures .not-equiped,
+.age-system.item.item-to-chat .vehicle .not-equiped {
   opacity: 0.4;
 }
-.age-system.item .focus .item-card-stats,
-.age-system.item .power .item-card-stats,
-.age-system.item .talent .item-card-stats,
-.age-system.item .weapon .item-card-stats,
-.age-system.item .equipment .item-card-stats,
-.age-system.item .stunts .item-card-stats,
-.age-system.item .honorifics .item-card-stats,
-.age-system.item .relationship .item-card-stats,
-.age-system.item .membership .item-card-stats,
-.age-system.item .shipfeatures .item-card-stats,
-.age-system.item .vehicle .item-card-stats {
+.age-system.item.item-to-chat .focus .item-card-stats,
+.age-system.item.item-to-chat .power .item-card-stats,
+.age-system.item.item-to-chat .talent .item-card-stats,
+.age-system.item.item-to-chat .weapon .item-card-stats,
+.age-system.item.item-to-chat .equipment .item-card-stats,
+.age-system.item.item-to-chat .stunts .item-card-stats,
+.age-system.item.item-to-chat .honorifics .item-card-stats,
+.age-system.item.item-to-chat .relationship .item-card-stats,
+.age-system.item.item-to-chat .membership .item-card-stats,
+.age-system.item.item-to-chat .shipfeatures .item-card-stats,
+.age-system.item.item-to-chat .vehicle .item-card-stats {
   flex-wrap: wrap;
   padding: 10px;
   padding-bottom: 6px;
 }
-.age-system.item .focus .item-card-stats .modbox,
-.age-system.item .power .item-card-stats .modbox,
-.age-system.item .talent .item-card-stats .modbox,
-.age-system.item .weapon .item-card-stats .modbox,
-.age-system.item .equipment .item-card-stats .modbox,
-.age-system.item .stunts .item-card-stats .modbox,
-.age-system.item .honorifics .item-card-stats .modbox,
-.age-system.item .relationship .item-card-stats .modbox,
-.age-system.item .membership .item-card-stats .modbox,
-.age-system.item .shipfeatures .item-card-stats .modbox,
-.age-system.item .vehicle .item-card-stats .modbox {
+.age-system.item.item-to-chat .focus .item-card-stats .modbox,
+.age-system.item.item-to-chat .power .item-card-stats .modbox,
+.age-system.item.item-to-chat .talent .item-card-stats .modbox,
+.age-system.item.item-to-chat .weapon .item-card-stats .modbox,
+.age-system.item.item-to-chat .equipment .item-card-stats .modbox,
+.age-system.item.item-to-chat .stunts .item-card-stats .modbox,
+.age-system.item.item-to-chat .honorifics .item-card-stats .modbox,
+.age-system.item.item-to-chat .relationship .item-card-stats .modbox,
+.age-system.item.item-to-chat .membership .item-card-stats .modbox,
+.age-system.item.item-to-chat .shipfeatures .item-card-stats .modbox,
+.age-system.item.item-to-chat .vehicle .item-card-stats .modbox {
   padding: 4px;
 }
-.age-system.item .focus .item-card-stats > *,
-.age-system.item .power .item-card-stats > *,
-.age-system.item .talent .item-card-stats > *,
-.age-system.item .weapon .item-card-stats > *,
-.age-system.item .equipment .item-card-stats > *,
-.age-system.item .stunts .item-card-stats > *,
-.age-system.item .honorifics .item-card-stats > *,
-.age-system.item .relationship .item-card-stats > *,
-.age-system.item .membership .item-card-stats > *,
-.age-system.item .shipfeatures .item-card-stats > *,
-.age-system.item .vehicle .item-card-stats > * {
+.age-system.item.item-to-chat .focus .item-card-stats > *,
+.age-system.item.item-to-chat .power .item-card-stats > *,
+.age-system.item.item-to-chat .talent .item-card-stats > *,
+.age-system.item.item-to-chat .weapon .item-card-stats > *,
+.age-system.item.item-to-chat .equipment .item-card-stats > *,
+.age-system.item.item-to-chat .stunts .item-card-stats > *,
+.age-system.item.item-to-chat .honorifics .item-card-stats > *,
+.age-system.item.item-to-chat .relationship .item-card-stats > *,
+.age-system.item.item-to-chat .membership .item-card-stats > *,
+.age-system.item.item-to-chat .shipfeatures .item-card-stats > *,
+.age-system.item.item-to-chat .vehicle .item-card-stats > * {
   margin-bottom: 4px;
   margin-left: 1px;
   margin-right: 1px;
 }
-.age-system.item .focus .item-card-stats select[name="data.testAbl"],
-.age-system.item .power .item-card-stats select[name="data.testAbl"],
-.age-system.item .talent .item-card-stats select[name="data.testAbl"],
-.age-system.item .weapon .item-card-stats select[name="data.testAbl"],
-.age-system.item .equipment .item-card-stats select[name="data.testAbl"],
-.age-system.item .stunts .item-card-stats select[name="data.testAbl"],
-.age-system.item .honorifics .item-card-stats select[name="data.testAbl"],
-.age-system.item .relationship .item-card-stats select[name="data.testAbl"],
-.age-system.item .membership .item-card-stats select[name="data.testAbl"],
-.age-system.item .shipfeatures .item-card-stats select[name="data.testAbl"],
-.age-system.item .vehicle .item-card-stats select[name="data.testAbl"],
-.age-system.item .focus .item-card-stats select[name="data.useAbl"],
-.age-system.item .power .item-card-stats select[name="data.useAbl"],
-.age-system.item .talent .item-card-stats select[name="data.useAbl"],
-.age-system.item .weapon .item-card-stats select[name="data.useAbl"],
-.age-system.item .equipment .item-card-stats select[name="data.useAbl"],
-.age-system.item .stunts .item-card-stats select[name="data.useAbl"],
-.age-system.item .honorifics .item-card-stats select[name="data.useAbl"],
-.age-system.item .relationship .item-card-stats select[name="data.useAbl"],
-.age-system.item .membership .item-card-stats select[name="data.useAbl"],
-.age-system.item .shipfeatures .item-card-stats select[name="data.useAbl"],
-.age-system.item .vehicle .item-card-stats select[name="data.useAbl"],
-.age-system.item .focus .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .power .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .talent .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .weapon .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .equipment .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .stunts .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .honorifics .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .relationship .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .membership .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .shipfeatures .item-card-stats select[name="data.itemForceAbl"],
-.age-system.item .vehicle .item-card-stats select[name="data.itemForceAbl"] {
+.age-system.item.item-to-chat .focus .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .power .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .talent .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .weapon .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .equipment .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .stunts .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .honorifics .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .relationship .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .membership .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .vehicle .item-card-stats select[name="data.testAbl"],
+.age-system.item.item-to-chat .focus .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .power .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .talent .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .weapon .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .equipment .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .stunts .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .honorifics .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .relationship .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .membership .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .vehicle .item-card-stats select[name="data.useAbl"],
+.age-system.item.item-to-chat .focus .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item.item-to-chat .power .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item.item-to-chat .talent .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item.item-to-chat .weapon .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item.item-to-chat .equipment .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item.item-to-chat .stunts .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item.item-to-chat .honorifics .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item.item-to-chat .relationship .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item.item-to-chat .membership .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats select[name="data.itemForceAbl"],
+.age-system.item.item-to-chat .vehicle .item-card-stats select[name="data.itemForceAbl"] {
   text-align: center;
 }
-.age-system.item .focus .item-card-stats input[name="data.useFocus"],
-.age-system.item .power .item-card-stats input[name="data.useFocus"],
-.age-system.item .talent .item-card-stats input[name="data.useFocus"],
-.age-system.item .weapon .item-card-stats input[name="data.useFocus"],
-.age-system.item .equipment .item-card-stats input[name="data.useFocus"],
-.age-system.item .stunts .item-card-stats input[name="data.useFocus"],
-.age-system.item .honorifics .item-card-stats input[name="data.useFocus"],
-.age-system.item .relationship .item-card-stats input[name="data.useFocus"],
-.age-system.item .membership .item-card-stats input[name="data.useFocus"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.useFocus"],
-.age-system.item .vehicle .item-card-stats input[name="data.useFocus"],
-.age-system.item .focus .item-card-stats input[name="data.testFocus"],
-.age-system.item .power .item-card-stats input[name="data.testFocus"],
-.age-system.item .talent .item-card-stats input[name="data.testFocus"],
-.age-system.item .weapon .item-card-stats input[name="data.testFocus"],
-.age-system.item .equipment .item-card-stats input[name="data.testFocus"],
-.age-system.item .stunts .item-card-stats input[name="data.testFocus"],
-.age-system.item .honorifics .item-card-stats input[name="data.testFocus"],
-.age-system.item .relationship .item-card-stats input[name="data.testFocus"],
-.age-system.item .membership .item-card-stats input[name="data.testFocus"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.testFocus"],
-.age-system.item .vehicle .item-card-stats input[name="data.testFocus"] {
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.useFocus"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.testFocus"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.testFocus"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.testFocus"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.testFocus"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.testFocus"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.testFocus"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.testFocus"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.testFocus"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.testFocus"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.testFocus"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.testFocus"] {
   min-width: 140px;
   max-width: 250px;
   text-align: center;
 }
-.age-system.item .focus .item-card-stats input[name="data.cost"],
-.age-system.item .power .item-card-stats input[name="data.cost"],
-.age-system.item .talent .item-card-stats input[name="data.cost"],
-.age-system.item .weapon .item-card-stats input[name="data.cost"],
-.age-system.item .equipment .item-card-stats input[name="data.cost"],
-.age-system.item .stunts .item-card-stats input[name="data.cost"],
-.age-system.item .honorifics .item-card-stats input[name="data.cost"],
-.age-system.item .relationship .item-card-stats input[name="data.cost"],
-.age-system.item .membership .item-card-stats input[name="data.cost"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.cost"],
-.age-system.item .vehicle .item-card-stats input[name="data.cost"] {
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.cost"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.cost"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.cost"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.cost"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.cost"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.cost"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.cost"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.cost"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.cost"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.cost"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.cost"] {
   max-width: 60px;
   min-width: 60px;
   text-align: center;
 }
-.age-system.item .focus .item-card-stats input[type="checkbox"],
-.age-system.item .power .item-card-stats input[type="checkbox"],
-.age-system.item .talent .item-card-stats input[type="checkbox"],
-.age-system.item .weapon .item-card-stats input[type="checkbox"],
-.age-system.item .equipment .item-card-stats input[type="checkbox"],
-.age-system.item .stunts .item-card-stats input[type="checkbox"],
-.age-system.item .honorifics .item-card-stats input[type="checkbox"],
-.age-system.item .relationship .item-card-stats input[type="checkbox"],
-.age-system.item .membership .item-card-stats input[type="checkbox"],
-.age-system.item .shipfeatures .item-card-stats input[type="checkbox"],
-.age-system.item .vehicle .item-card-stats input[type="checkbox"] {
+.age-system.item.item-to-chat .focus .item-card-stats input[type="checkbox"],
+.age-system.item.item-to-chat .power .item-card-stats input[type="checkbox"],
+.age-system.item.item-to-chat .talent .item-card-stats input[type="checkbox"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[type="checkbox"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[type="checkbox"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[type="checkbox"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[type="checkbox"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[type="checkbox"],
+.age-system.item.item-to-chat .membership .item-card-stats input[type="checkbox"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[type="checkbox"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[type="checkbox"] {
   margin: 0px;
   margin-top: 1px;
   width: 16px;
   height: 16px;
 }
-.age-system.item .focus .item-card-stats input[name="data.targetNumber"],
-.age-system.item .power .item-card-stats input[name="data.targetNumber"],
-.age-system.item .talent .item-card-stats input[name="data.targetNumber"],
-.age-system.item .weapon .item-card-stats input[name="data.targetNumber"],
-.age-system.item .equipment .item-card-stats input[name="data.targetNumber"],
-.age-system.item .stunts .item-card-stats input[name="data.targetNumber"],
-.age-system.item .honorifics .item-card-stats input[name="data.targetNumber"],
-.age-system.item .relationship .item-card-stats input[name="data.targetNumber"],
-.age-system.item .membership .item-card-stats input[name="data.targetNumber"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.targetNumber"],
-.age-system.item .vehicle .item-card-stats input[name="data.targetNumber"],
-.age-system.item .focus .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .power .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .talent .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .weapon .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .equipment .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .stunts .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .honorifics .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .relationship .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .membership .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .vehicle .item-card-stats input[name="data.powerPointCost"],
-.age-system.item .focus .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .power .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .talent .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .weapon .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .equipment .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .stunts .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .honorifics .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .relationship .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .membership .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .vehicle .item-card-stats input[name="data.fatigueTN"],
-.age-system.item .focus .item-card-stats input[name="data.minStr"],
-.age-system.item .power .item-card-stats input[name="data.minStr"],
-.age-system.item .talent .item-card-stats input[name="data.minStr"],
-.age-system.item .weapon .item-card-stats input[name="data.minStr"],
-.age-system.item .equipment .item-card-stats input[name="data.minStr"],
-.age-system.item .stunts .item-card-stats input[name="data.minStr"],
-.age-system.item .honorifics .item-card-stats input[name="data.minStr"],
-.age-system.item .relationship .item-card-stats input[name="data.minStr"],
-.age-system.item .membership .item-card-stats input[name="data.minStr"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.minStr"],
-.age-system.item .vehicle .item-card-stats input[name="data.minStr"],
-.age-system.item .focus .item-card-stats input[name="data.weight"],
-.age-system.item .power .item-card-stats input[name="data.weight"],
-.age-system.item .talent .item-card-stats input[name="data.weight"],
-.age-system.item .weapon .item-card-stats input[name="data.weight"],
-.age-system.item .equipment .item-card-stats input[name="data.weight"],
-.age-system.item .stunts .item-card-stats input[name="data.weight"],
-.age-system.item .honorifics .item-card-stats input[name="data.weight"],
-.age-system.item .relationship .item-card-stats input[name="data.weight"],
-.age-system.item .membership .item-card-stats input[name="data.weight"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.weight"],
-.age-system.item .vehicle .item-card-stats input[name="data.weight"],
-.age-system.item .focus .item-card-stats input[name="data.capacity"],
-.age-system.item .power .item-card-stats input[name="data.capacity"],
-.age-system.item .talent .item-card-stats input[name="data.capacity"],
-.age-system.item .weapon .item-card-stats input[name="data.capacity"],
-.age-system.item .equipment .item-card-stats input[name="data.capacity"],
-.age-system.item .stunts .item-card-stats input[name="data.capacity"],
-.age-system.item .honorifics .item-card-stats input[name="data.capacity"],
-.age-system.item .relationship .item-card-stats input[name="data.capacity"],
-.age-system.item .membership .item-card-stats input[name="data.capacity"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.capacity"],
-.age-system.item .vehicle .item-card-stats input[name="data.capacity"],
-.age-system.item .focus .item-card-stats input[name="data.quantity"],
-.age-system.item .power .item-card-stats input[name="data.quantity"],
-.age-system.item .talent .item-card-stats input[name="data.quantity"],
-.age-system.item .weapon .item-card-stats input[name="data.quantity"],
-.age-system.item .equipment .item-card-stats input[name="data.quantity"],
-.age-system.item .stunts .item-card-stats input[name="data.quantity"],
-.age-system.item .honorifics .item-card-stats input[name="data.quantity"],
-.age-system.item .relationship .item-card-stats input[name="data.quantity"],
-.age-system.item .membership .item-card-stats input[name="data.quantity"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.quantity"],
-.age-system.item .vehicle .item-card-stats input[name="data.quantity"],
-.age-system.item .focus .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .power .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .talent .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .weapon .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .equipment .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .stunts .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .honorifics .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .relationship .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .membership .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .vehicle .item-card-stats input[name="data.stuntPoints"],
-.age-system.item .focus .item-card-stats input[name="data.initialValue"],
-.age-system.item .power .item-card-stats input[name="data.initialValue"],
-.age-system.item .talent .item-card-stats input[name="data.initialValue"],
-.age-system.item .weapon .item-card-stats input[name="data.initialValue"],
-.age-system.item .equipment .item-card-stats input[name="data.initialValue"],
-.age-system.item .stunts .item-card-stats input[name="data.initialValue"],
-.age-system.item .honorifics .item-card-stats input[name="data.initialValue"],
-.age-system.item .relationship .item-card-stats input[name="data.initialValue"],
-.age-system.item .membership .item-card-stats input[name="data.initialValue"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.initialValue"],
-.age-system.item .vehicle .item-card-stats input[name="data.initialValue"],
-.age-system.item .focus .item-card-stats input[name="data.extraValue"],
-.age-system.item .power .item-card-stats input[name="data.extraValue"],
-.age-system.item .talent .item-card-stats input[name="data.extraValue"],
-.age-system.item .weapon .item-card-stats input[name="data.extraValue"],
-.age-system.item .equipment .item-card-stats input[name="data.extraValue"],
-.age-system.item .stunts .item-card-stats input[name="data.extraValue"],
-.age-system.item .honorifics .item-card-stats input[name="data.extraValue"],
-.age-system.item .relationship .item-card-stats input[name="data.extraValue"],
-.age-system.item .membership .item-card-stats input[name="data.extraValue"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.extraValue"],
-.age-system.item .vehicle .item-card-stats input[name="data.extraValue"],
-.age-system.item .focus .item-card-stats input[name="data.nrDice"],
-.age-system.item .power .item-card-stats input[name="data.nrDice"],
-.age-system.item .talent .item-card-stats input[name="data.nrDice"],
-.age-system.item .weapon .item-card-stats input[name="data.nrDice"],
-.age-system.item .equipment .item-card-stats input[name="data.nrDice"],
-.age-system.item .stunts .item-card-stats input[name="data.nrDice"],
-.age-system.item .honorifics .item-card-stats input[name="data.nrDice"],
-.age-system.item .relationship .item-card-stats input[name="data.nrDice"],
-.age-system.item .membership .item-card-stats input[name="data.nrDice"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.nrDice"],
-.age-system.item .vehicle .item-card-stats input[name="data.nrDice"],
-.age-system.item .focus .item-card-stats input[name="data.intensity"],
-.age-system.item .power .item-card-stats input[name="data.intensity"],
-.age-system.item .talent .item-card-stats input[name="data.intensity"],
-.age-system.item .weapon .item-card-stats input[name="data.intensity"],
-.age-system.item .equipment .item-card-stats input[name="data.intensity"],
-.age-system.item .stunts .item-card-stats input[name="data.intensity"],
-.age-system.item .honorifics .item-card-stats input[name="data.intensity"],
-.age-system.item .relationship .item-card-stats input[name="data.intensity"],
-.age-system.item .membership .item-card-stats input[name="data.intensity"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.intensity"],
-.age-system.item .vehicle .item-card-stats input[name="data.intensity"],
-.age-system.item .focus .item-card-stats input[name="data.intensityMax"],
-.age-system.item .power .item-card-stats input[name="data.intensityMax"],
-.age-system.item .talent .item-card-stats input[name="data.intensityMax"],
-.age-system.item .weapon .item-card-stats input[name="data.intensityMax"],
-.age-system.item .equipment .item-card-stats input[name="data.intensityMax"],
-.age-system.item .stunts .item-card-stats input[name="data.intensityMax"],
-.age-system.item .honorifics .item-card-stats input[name="data.intensityMax"],
-.age-system.item .relationship .item-card-stats input[name="data.intensityMax"],
-.age-system.item .membership .item-card-stats input[name="data.intensityMax"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.intensityMax"],
-.age-system.item .vehicle .item-card-stats input[name="data.intensityMax"],
-.age-system.item .focus .item-card-stats input[name="data.rank"],
-.age-system.item .power .item-card-stats input[name="data.rank"],
-.age-system.item .talent .item-card-stats input[name="data.rank"],
-.age-system.item .weapon .item-card-stats input[name="data.rank"],
-.age-system.item .equipment .item-card-stats input[name="data.rank"],
-.age-system.item .stunts .item-card-stats input[name="data.rank"],
-.age-system.item .honorifics .item-card-stats input[name="data.rank"],
-.age-system.item .relationship .item-card-stats input[name="data.rank"],
-.age-system.item .membership .item-card-stats input[name="data.rank"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.rank"],
-.age-system.item .vehicle .item-card-stats input[name="data.rank"] {
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.targetNumber"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.powerPointCost"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.fatigueTN"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.minStr"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.weight"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.capacity"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.quantity"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.stuntPoints"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.initialValue"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.extraValue"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.nrDice"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.intensity"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.intensityMax"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.rank"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.rank"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.rank"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.rank"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.rank"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.rank"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.rank"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.rank"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.rank"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.rank"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.rank"] {
   max-width: 30px;
   min-width: 30px;
   text-align: center;
 }
-.age-system.item .focus .item-card-stats input[name="data.range"],
-.age-system.item .power .item-card-stats input[name="data.range"],
-.age-system.item .talent .item-card-stats input[name="data.range"],
-.age-system.item .weapon .item-card-stats input[name="data.range"],
-.age-system.item .equipment .item-card-stats input[name="data.range"],
-.age-system.item .stunts .item-card-stats input[name="data.range"],
-.age-system.item .honorifics .item-card-stats input[name="data.range"],
-.age-system.item .relationship .item-card-stats input[name="data.range"],
-.age-system.item .membership .item-card-stats input[name="data.range"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.range"],
-.age-system.item .vehicle .item-card-stats input[name="data.range"],
-.age-system.item .focus .item-card-stats input[name="data.rangeMax"],
-.age-system.item .power .item-card-stats input[name="data.rangeMax"],
-.age-system.item .talent .item-card-stats input[name="data.rangeMax"],
-.age-system.item .weapon .item-card-stats input[name="data.rangeMax"],
-.age-system.item .equipment .item-card-stats input[name="data.rangeMax"],
-.age-system.item .stunts .item-card-stats input[name="data.rangeMax"],
-.age-system.item .honorifics .item-card-stats input[name="data.rangeMax"],
-.age-system.item .relationship .item-card-stats input[name="data.rangeMax"],
-.age-system.item .membership .item-card-stats input[name="data.rangeMax"],
-.age-system.item .shipfeatures .item-card-stats input[name="data.rangeMax"],
-.age-system.item .vehicle .item-card-stats input[name="data.rangeMax"] {
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.range"],
+.age-system.item.item-to-chat .focus .item-card-stats input[name="data.rangeMax"],
+.age-system.item.item-to-chat .power .item-card-stats input[name="data.rangeMax"],
+.age-system.item.item-to-chat .talent .item-card-stats input[name="data.rangeMax"],
+.age-system.item.item-to-chat .weapon .item-card-stats input[name="data.rangeMax"],
+.age-system.item.item-to-chat .equipment .item-card-stats input[name="data.rangeMax"],
+.age-system.item.item-to-chat .stunts .item-card-stats input[name="data.rangeMax"],
+.age-system.item.item-to-chat .honorifics .item-card-stats input[name="data.rangeMax"],
+.age-system.item.item-to-chat .relationship .item-card-stats input[name="data.rangeMax"],
+.age-system.item.item-to-chat .membership .item-card-stats input[name="data.rangeMax"],
+.age-system.item.item-to-chat .shipfeatures .item-card-stats input[name="data.rangeMax"],
+.age-system.item.item-to-chat .vehicle .item-card-stats input[name="data.rangeMax"] {
   max-width: 60px;
   min-width: 60px;
   text-align: center;
 }
-.age-system.item .focus .item-card-stats span:last-of-type,
-.age-system.item .power .item-card-stats span:last-of-type,
-.age-system.item .talent .item-card-stats span:last-of-type,
-.age-system.item .weapon .item-card-stats span:last-of-type,
-.age-system.item .equipment .item-card-stats span:last-of-type,
-.age-system.item .stunts .item-card-stats span:last-of-type,
-.age-system.item .honorifics .item-card-stats span:last-of-type,
-.age-system.item .relationship .item-card-stats span:last-of-type,
-.age-system.item .membership .item-card-stats span:last-of-type,
-.age-system.item .shipfeatures .item-card-stats span:last-of-type,
-.age-system.item .vehicle .item-card-stats span:last-of-type {
+.age-system.item.item-to-chat .focus .item-card-stats span:last-of-type,
+.age-system.item.item-to-chat .power .item-card-stats span:last-of-type,
+.age-system.item.item-to-chat .talent .item-card-stats span:last-of-type,
+.age-system.item.item-to-chat .weapon .item-card-stats span:last-of-type,
+.age-system.item.item-to-chat .equipment .item-card-stats span:last-of-type,
+.age-system.item.item-to-chat .stunts .item-card-stats span:last-of-type,
+.age-system.item.item-to-chat .honorifics .item-card-stats span:last-of-type,
+.age-system.item.item-to-chat .relationship .item-card-stats span:last-of-type,
+.age-system.item.item-to-chat .membership .item-card-stats span:last-of-type,
+.age-system.item.item-to-chat .shipfeatures .item-card-stats span:last-of-type,
+.age-system.item.item-to-chat .vehicle .item-card-stats span:last-of-type {
   max-width: 25px;
   text-align: center;
 }
-.age-system.item .focus .item-card-stats div.power-type-control,
-.age-system.item .power .item-card-stats div.power-type-control,
-.age-system.item .talent .item-card-stats div.power-type-control,
-.age-system.item .weapon .item-card-stats div.power-type-control,
-.age-system.item .equipment .item-card-stats div.power-type-control,
-.age-system.item .stunts .item-card-stats div.power-type-control,
-.age-system.item .honorifics .item-card-stats div.power-type-control,
-.age-system.item .relationship .item-card-stats div.power-type-control,
-.age-system.item .membership .item-card-stats div.power-type-control,
-.age-system.item .shipfeatures .item-card-stats div.power-type-control,
-.age-system.item .vehicle .item-card-stats div.power-type-control {
+.age-system.item.item-to-chat .focus .item-card-stats div.power-type-control,
+.age-system.item.item-to-chat .power .item-card-stats div.power-type-control,
+.age-system.item.item-to-chat .talent .item-card-stats div.power-type-control,
+.age-system.item.item-to-chat .weapon .item-card-stats div.power-type-control,
+.age-system.item.item-to-chat .equipment .item-card-stats div.power-type-control,
+.age-system.item.item-to-chat .stunts .item-card-stats div.power-type-control,
+.age-system.item.item-to-chat .honorifics .item-card-stats div.power-type-control,
+.age-system.item.item-to-chat .relationship .item-card-stats div.power-type-control,
+.age-system.item.item-to-chat .membership .item-card-stats div.power-type-control,
+.age-system.item.item-to-chat .shipfeatures .item-card-stats div.power-type-control,
+.age-system.item.item-to-chat .vehicle .item-card-stats div.power-type-control {
   max-width: fit-content;
 }
-.age-system.item .focus .item-card-stats div.power-type-control a,
-.age-system.item .power .item-card-stats div.power-type-control a,
-.age-system.item .talent .item-card-stats div.power-type-control a,
-.age-system.item .weapon .item-card-stats div.power-type-control a,
-.age-system.item .equipment .item-card-stats div.power-type-control a,
-.age-system.item .stunts .item-card-stats div.power-type-control a,
-.age-system.item .honorifics .item-card-stats div.power-type-control a,
-.age-system.item .relationship .item-card-stats div.power-type-control a,
-.age-system.item .membership .item-card-stats div.power-type-control a,
-.age-system.item .shipfeatures .item-card-stats div.power-type-control a,
-.age-system.item .vehicle .item-card-stats div.power-type-control a {
+.age-system.item.item-to-chat .focus .item-card-stats div.power-type-control a,
+.age-system.item.item-to-chat .power .item-card-stats div.power-type-control a,
+.age-system.item.item-to-chat .talent .item-card-stats div.power-type-control a,
+.age-system.item.item-to-chat .weapon .item-card-stats div.power-type-control a,
+.age-system.item.item-to-chat .equipment .item-card-stats div.power-type-control a,
+.age-system.item.item-to-chat .stunts .item-card-stats div.power-type-control a,
+.age-system.item.item-to-chat .honorifics .item-card-stats div.power-type-control a,
+.age-system.item.item-to-chat .relationship .item-card-stats div.power-type-control a,
+.age-system.item.item-to-chat .membership .item-card-stats div.power-type-control a,
+.age-system.item.item-to-chat .shipfeatures .item-card-stats div.power-type-control a,
+.age-system.item.item-to-chat .vehicle .item-card-stats div.power-type-control a {
   margin-top: 30%;
   margin-bottom: 50%;
 }
-.age-system.item .focus .item-card-stats div.flexrow,
-.age-system.item .power .item-card-stats div.flexrow,
-.age-system.item .talent .item-card-stats div.flexrow,
-.age-system.item .weapon .item-card-stats div.flexrow,
-.age-system.item .equipment .item-card-stats div.flexrow,
-.age-system.item .stunts .item-card-stats div.flexrow,
-.age-system.item .honorifics .item-card-stats div.flexrow,
-.age-system.item .relationship .item-card-stats div.flexrow,
-.age-system.item .membership .item-card-stats div.flexrow,
-.age-system.item .shipfeatures .item-card-stats div.flexrow,
-.age-system.item .vehicle .item-card-stats div.flexrow {
+.age-system.item.item-to-chat .focus .item-card-stats div.flexrow,
+.age-system.item.item-to-chat .power .item-card-stats div.flexrow,
+.age-system.item.item-to-chat .talent .item-card-stats div.flexrow,
+.age-system.item.item-to-chat .weapon .item-card-stats div.flexrow,
+.age-system.item.item-to-chat .equipment .item-card-stats div.flexrow,
+.age-system.item.item-to-chat .stunts .item-card-stats div.flexrow,
+.age-system.item.item-to-chat .honorifics .item-card-stats div.flexrow,
+.age-system.item.item-to-chat .relationship .item-card-stats div.flexrow,
+.age-system.item.item-to-chat .membership .item-card-stats div.flexrow,
+.age-system.item.item-to-chat .shipfeatures .item-card-stats div.flexrow,
+.age-system.item.item-to-chat .vehicle .item-card-stats div.flexrow {
   margin-right: 4px;
 }
-.age-system.item .focus .item-card-stats div,
-.age-system.item .power .item-card-stats div,
-.age-system.item .talent .item-card-stats div,
-.age-system.item .weapon .item-card-stats div,
-.age-system.item .equipment .item-card-stats div,
-.age-system.item .stunts .item-card-stats div,
-.age-system.item .honorifics .item-card-stats div,
-.age-system.item .relationship .item-card-stats div,
-.age-system.item .membership .item-card-stats div,
-.age-system.item .shipfeatures .item-card-stats div,
-.age-system.item .vehicle .item-card-stats div {
+.age-system.item.item-to-chat .focus .item-card-stats div,
+.age-system.item.item-to-chat .power .item-card-stats div,
+.age-system.item.item-to-chat .talent .item-card-stats div,
+.age-system.item.item-to-chat .weapon .item-card-stats div,
+.age-system.item.item-to-chat .equipment .item-card-stats div,
+.age-system.item.item-to-chat .stunts .item-card-stats div,
+.age-system.item.item-to-chat .honorifics .item-card-stats div,
+.age-system.item.item-to-chat .relationship .item-card-stats div,
+.age-system.item.item-to-chat .membership .item-card-stats div,
+.age-system.item.item-to-chat .shipfeatures .item-card-stats div,
+.age-system.item.item-to-chat .vehicle .item-card-stats div {
   flex-wrap: nowrap;
   align-items: center;
 }
-.age-system.item .focus .mod-card,
-.age-system.item .power .mod-card,
-.age-system.item .talent .mod-card,
-.age-system.item .weapon .mod-card,
-.age-system.item .equipment .mod-card,
-.age-system.item .stunts .mod-card,
-.age-system.item .honorifics .mod-card,
-.age-system.item .relationship .mod-card,
-.age-system.item .membership .mod-card,
-.age-system.item .shipfeatures .mod-card,
-.age-system.item .vehicle .mod-card {
+.age-system.item.item-to-chat .focus .mod-card,
+.age-system.item.item-to-chat .power .mod-card,
+.age-system.item.item-to-chat .talent .mod-card,
+.age-system.item.item-to-chat .weapon .mod-card,
+.age-system.item.item-to-chat .equipment .mod-card,
+.age-system.item.item-to-chat .stunts .mod-card,
+.age-system.item.item-to-chat .honorifics .mod-card,
+.age-system.item.item-to-chat .relationship .mod-card,
+.age-system.item.item-to-chat .membership .mod-card,
+.age-system.item.item-to-chat .shipfeatures .mod-card,
+.age-system.item.item-to-chat .vehicle .mod-card {
   margin: 4px;
   padding: 4px;
   border: none;
 }
-.age-system.item .focus .mod-card .mod-item.mod-item,
-.age-system.item .power .mod-card .mod-item.mod-item,
-.age-system.item .talent .mod-card .mod-item.mod-item,
-.age-system.item .weapon .mod-card .mod-item.mod-item,
-.age-system.item .equipment .mod-card .mod-item.mod-item,
-.age-system.item .stunts .mod-card .mod-item.mod-item,
-.age-system.item .honorifics .mod-card .mod-item.mod-item,
-.age-system.item .relationship .mod-card .mod-item.mod-item,
-.age-system.item .membership .mod-card .mod-item.mod-item,
-.age-system.item .shipfeatures .mod-card .mod-item.mod-item,
-.age-system.item .vehicle .mod-card .mod-item.mod-item {
+.age-system.item.item-to-chat .focus .mod-card .mod-item.mod-item,
+.age-system.item.item-to-chat .power .mod-card .mod-item.mod-item,
+.age-system.item.item-to-chat .talent .mod-card .mod-item.mod-item,
+.age-system.item.item-to-chat .weapon .mod-card .mod-item.mod-item,
+.age-system.item.item-to-chat .equipment .mod-card .mod-item.mod-item,
+.age-system.item.item-to-chat .stunts .mod-card .mod-item.mod-item,
+.age-system.item.item-to-chat .honorifics .mod-card .mod-item.mod-item,
+.age-system.item.item-to-chat .relationship .mod-card .mod-item.mod-item,
+.age-system.item.item-to-chat .membership .mod-card .mod-item.mod-item,
+.age-system.item.item-to-chat .shipfeatures .mod-card .mod-item.mod-item,
+.age-system.item.item-to-chat .vehicle .mod-card .mod-item.mod-item {
   border-radius: 10px;
   justify-content: center;
   align-items: center;
   margin-bottom: 4px;
   text-align: center;
 }
-.age-system.item .focus .mod-card .mod-item.mod-item input.mod,
-.age-system.item .power .mod-card .mod-item.mod-item input.mod,
-.age-system.item .talent .mod-card .mod-item.mod-item input.mod,
-.age-system.item .weapon .mod-card .mod-item.mod-item input.mod,
-.age-system.item .equipment .mod-card .mod-item.mod-item input.mod,
-.age-system.item .stunts .mod-card .mod-item.mod-item input.mod,
-.age-system.item .honorifics .mod-card .mod-item.mod-item input.mod,
-.age-system.item .relationship .mod-card .mod-item.mod-item input.mod,
-.age-system.item .membership .mod-card .mod-item.mod-item input.mod,
-.age-system.item .shipfeatures .mod-card .mod-item.mod-item input.mod,
-.age-system.item .vehicle .mod-card .mod-item.mod-item input.mod {
+.age-system.item.item-to-chat .focus .mod-card .mod-item.mod-item input.mod,
+.age-system.item.item-to-chat .power .mod-card .mod-item.mod-item input.mod,
+.age-system.item.item-to-chat .talent .mod-card .mod-item.mod-item input.mod,
+.age-system.item.item-to-chat .weapon .mod-card .mod-item.mod-item input.mod,
+.age-system.item.item-to-chat .equipment .mod-card .mod-item.mod-item input.mod,
+.age-system.item.item-to-chat .stunts .mod-card .mod-item.mod-item input.mod,
+.age-system.item.item-to-chat .honorifics .mod-card .mod-item.mod-item input.mod,
+.age-system.item.item-to-chat .relationship .mod-card .mod-item.mod-item input.mod,
+.age-system.item.item-to-chat .membership .mod-card .mod-item.mod-item input.mod,
+.age-system.item.item-to-chat .shipfeatures .mod-card .mod-item.mod-item input.mod,
+.age-system.item.item-to-chat .vehicle .mod-card .mod-item.mod-item input.mod {
   color: inherit !important;
 }
-.age-system.item .focus .mod-card .mod-item.mod-item p,
-.age-system.item .power .mod-card .mod-item.mod-item p,
-.age-system.item .talent .mod-card .mod-item.mod-item p,
-.age-system.item .weapon .mod-card .mod-item.mod-item p,
-.age-system.item .equipment .mod-card .mod-item.mod-item p,
-.age-system.item .stunts .mod-card .mod-item.mod-item p,
-.age-system.item .honorifics .mod-card .mod-item.mod-item p,
-.age-system.item .relationship .mod-card .mod-item.mod-item p,
-.age-system.item .membership .mod-card .mod-item.mod-item p,
-.age-system.item .shipfeatures .mod-card .mod-item.mod-item p,
-.age-system.item .vehicle .mod-card .mod-item.mod-item p {
+.age-system.item.item-to-chat .focus .mod-card .mod-item.mod-item p,
+.age-system.item.item-to-chat .power .mod-card .mod-item.mod-item p,
+.age-system.item.item-to-chat .talent .mod-card .mod-item.mod-item p,
+.age-system.item.item-to-chat .weapon .mod-card .mod-item.mod-item p,
+.age-system.item.item-to-chat .equipment .mod-card .mod-item.mod-item p,
+.age-system.item.item-to-chat .stunts .mod-card .mod-item.mod-item p,
+.age-system.item.item-to-chat .honorifics .mod-card .mod-item.mod-item p,
+.age-system.item.item-to-chat .relationship .mod-card .mod-item.mod-item p,
+.age-system.item.item-to-chat .membership .mod-card .mod-item.mod-item p,
+.age-system.item.item-to-chat .shipfeatures .mod-card .mod-item.mod-item p,
+.age-system.item.item-to-chat .vehicle .mod-card .mod-item.mod-item p {
   text-align: center;
 }
-.age-system.item .focus .mod-card .mod-item.mod-item .mod-type,
-.age-system.item .power .mod-card .mod-item.mod-item .mod-type,
-.age-system.item .talent .mod-card .mod-item.mod-item .mod-type,
-.age-system.item .weapon .mod-card .mod-item.mod-item .mod-type,
-.age-system.item .equipment .mod-card .mod-item.mod-item .mod-type,
-.age-system.item .stunts .mod-card .mod-item.mod-item .mod-type,
-.age-system.item .honorifics .mod-card .mod-item.mod-item .mod-type,
-.age-system.item .relationship .mod-card .mod-item.mod-item .mod-type,
-.age-system.item .membership .mod-card .mod-item.mod-item .mod-type,
-.age-system.item .shipfeatures .mod-card .mod-item.mod-item .mod-type,
-.age-system.item .vehicle .mod-card .mod-item.mod-item .mod-type {
+.age-system.item.item-to-chat .focus .mod-card .mod-item.mod-item .mod-type,
+.age-system.item.item-to-chat .power .mod-card .mod-item.mod-item .mod-type,
+.age-system.item.item-to-chat .talent .mod-card .mod-item.mod-item .mod-type,
+.age-system.item.item-to-chat .weapon .mod-card .mod-item.mod-item .mod-type,
+.age-system.item.item-to-chat .equipment .mod-card .mod-item.mod-item .mod-type,
+.age-system.item.item-to-chat .stunts .mod-card .mod-item.mod-item .mod-type,
+.age-system.item.item-to-chat .honorifics .mod-card .mod-item.mod-item .mod-type,
+.age-system.item.item-to-chat .relationship .mod-card .mod-item.mod-item .mod-type,
+.age-system.item.item-to-chat .membership .mod-card .mod-item.mod-item .mod-type,
+.age-system.item.item-to-chat .shipfeatures .mod-card .mod-item.mod-item .mod-type,
+.age-system.item.item-to-chat .vehicle .mod-card .mod-item.mod-item .mod-type {
   flex: 0 0 30%;
 }
-.age-system.item .focus .mod-card .mod-item.mod-item .mod-value,
-.age-system.item .power .mod-card .mod-item.mod-item .mod-value,
-.age-system.item .talent .mod-card .mod-item.mod-item .mod-value,
-.age-system.item .weapon .mod-card .mod-item.mod-item .mod-value,
-.age-system.item .equipment .mod-card .mod-item.mod-item .mod-value,
-.age-system.item .stunts .mod-card .mod-item.mod-item .mod-value,
-.age-system.item .honorifics .mod-card .mod-item.mod-item .mod-value,
-.age-system.item .relationship .mod-card .mod-item.mod-item .mod-value,
-.age-system.item .membership .mod-card .mod-item.mod-item .mod-value,
-.age-system.item .shipfeatures .mod-card .mod-item.mod-item .mod-value,
-.age-system.item .vehicle .mod-card .mod-item.mod-item .mod-value {
+.age-system.item.item-to-chat .focus .mod-card .mod-item.mod-item .mod-value,
+.age-system.item.item-to-chat .power .mod-card .mod-item.mod-item .mod-value,
+.age-system.item.item-to-chat .talent .mod-card .mod-item.mod-item .mod-value,
+.age-system.item.item-to-chat .weapon .mod-card .mod-item.mod-item .mod-value,
+.age-system.item.item-to-chat .equipment .mod-card .mod-item.mod-item .mod-value,
+.age-system.item.item-to-chat .stunts .mod-card .mod-item.mod-item .mod-value,
+.age-system.item.item-to-chat .honorifics .mod-card .mod-item.mod-item .mod-value,
+.age-system.item.item-to-chat .relationship .mod-card .mod-item.mod-item .mod-value,
+.age-system.item.item-to-chat .membership .mod-card .mod-item.mod-item .mod-value,
+.age-system.item.item-to-chat .shipfeatures .mod-card .mod-item.mod-item .mod-value,
+.age-system.item.item-to-chat .vehicle .mod-card .mod-item.mod-item .mod-value {
   flex: 0 0 50%;
 }
-.age-system.item .focus .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .power .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .talent .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .weapon .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .equipment .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .stunts .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .honorifics .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .relationship .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .membership .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .shipfeatures .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .vehicle .mod-card .mod-item.mod-item .mod-value input[type="text"],
-.age-system.item .focus .mod-card .mod-item.mod-item .mod-value input[type="number"],
-.age-system.item .power .mod-card .mod-item.mod-item .mod-value input[type="number"],
-.age-system.item .talent .mod-card .mod-item.mod-item .mod-value input[type="number"],
-.age-system.item .weapon .mod-card .mod-item.mod-item .mod-value input[type="number"],
-.age-system.item .equipment .mod-card .mod-item.mod-item .mod-value input[type="number"],
-.age-system.item .stunts .mod-card .mod-item.mod-item .mod-value input[type="number"],
-.age-system.item .honorifics .mod-card .mod-item.mod-item .mod-value input[type="number"],
-.age-system.item .relationship .mod-card .mod-item.mod-item .mod-value input[type="number"],
-.age-system.item .membership .mod-card .mod-item.mod-item .mod-value input[type="number"],
-.age-system.item .shipfeatures .mod-card .mod-item.mod-item .mod-value input[type="number"],
-.age-system.item .vehicle .mod-card .mod-item.mod-item .mod-value input[type="number"] {
+.age-system.item.item-to-chat .focus .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .power .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .talent .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .weapon .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .equipment .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .stunts .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .honorifics .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .relationship .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .membership .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .shipfeatures .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .vehicle .mod-card .mod-item.mod-item .mod-value input[type="text"],
+.age-system.item.item-to-chat .focus .mod-card .mod-item.mod-item .mod-value input[type="number"],
+.age-system.item.item-to-chat .power .mod-card .mod-item.mod-item .mod-value input[type="number"],
+.age-system.item.item-to-chat .talent .mod-card .mod-item.mod-item .mod-value input[type="number"],
+.age-system.item.item-to-chat .weapon .mod-card .mod-item.mod-item .mod-value input[type="number"],
+.age-system.item.item-to-chat .equipment .mod-card .mod-item.mod-item .mod-value input[type="number"],
+.age-system.item.item-to-chat .stunts .mod-card .mod-item.mod-item .mod-value input[type="number"],
+.age-system.item.item-to-chat .honorifics .mod-card .mod-item.mod-item .mod-value input[type="number"],
+.age-system.item.item-to-chat .relationship .mod-card .mod-item.mod-item .mod-value input[type="number"],
+.age-system.item.item-to-chat .membership .mod-card .mod-item.mod-item .mod-value input[type="number"],
+.age-system.item.item-to-chat .shipfeatures .mod-card .mod-item.mod-item .mod-value input[type="number"],
+.age-system.item.item-to-chat .vehicle .mod-card .mod-item.mod-item .mod-value input[type="number"] {
   margin: 2px 0;
 }
-.age-system.item .focus .mod-card .mod-item.mod-item .mod-controls,
-.age-system.item .power .mod-card .mod-item.mod-item .mod-controls,
-.age-system.item .talent .mod-card .mod-item.mod-item .mod-controls,
-.age-system.item .weapon .mod-card .mod-item.mod-item .mod-controls,
-.age-system.item .equipment .mod-card .mod-item.mod-item .mod-controls,
-.age-system.item .stunts .mod-card .mod-item.mod-item .mod-controls,
-.age-system.item .honorifics .mod-card .mod-item.mod-item .mod-controls,
-.age-system.item .relationship .mod-card .mod-item.mod-item .mod-controls,
-.age-system.item .membership .mod-card .mod-item.mod-item .mod-controls,
-.age-system.item .shipfeatures .mod-card .mod-item.mod-item .mod-controls,
-.age-system.item .vehicle .mod-card .mod-item.mod-item .mod-controls {
+.age-system.item.item-to-chat .focus .mod-card .mod-item.mod-item .mod-controls,
+.age-system.item.item-to-chat .power .mod-card .mod-item.mod-item .mod-controls,
+.age-system.item.item-to-chat .talent .mod-card .mod-item.mod-item .mod-controls,
+.age-system.item.item-to-chat .weapon .mod-card .mod-item.mod-item .mod-controls,
+.age-system.item.item-to-chat .equipment .mod-card .mod-item.mod-item .mod-controls,
+.age-system.item.item-to-chat .stunts .mod-card .mod-item.mod-item .mod-controls,
+.age-system.item.item-to-chat .honorifics .mod-card .mod-item.mod-item .mod-controls,
+.age-system.item.item-to-chat .relationship .mod-card .mod-item.mod-item .mod-controls,
+.age-system.item.item-to-chat .membership .mod-card .mod-item.mod-item .mod-controls,
+.age-system.item.item-to-chat .shipfeatures .mod-card .mod-item.mod-item .mod-controls,
+.age-system.item.item-to-chat .vehicle .mod-card .mod-item.mod-item .mod-controls {
   flex: 0 0 20%;
 }
-.age-system.item .focus .mod-card .mod-item.mod-item .mod-controls i,
-.age-system.item .power .mod-card .mod-item.mod-item .mod-controls i,
-.age-system.item .talent .mod-card .mod-item.mod-item .mod-controls i,
-.age-system.item .weapon .mod-card .mod-item.mod-item .mod-controls i,
-.age-system.item .equipment .mod-card .mod-item.mod-item .mod-controls i,
-.age-system.item .stunts .mod-card .mod-item.mod-item .mod-controls i,
-.age-system.item .honorifics .mod-card .mod-item.mod-item .mod-controls i,
-.age-system.item .relationship .mod-card .mod-item.mod-item .mod-controls i,
-.age-system.item .membership .mod-card .mod-item.mod-item .mod-controls i,
-.age-system.item .shipfeatures .mod-card .mod-item.mod-item .mod-controls i,
-.age-system.item .vehicle .mod-card .mod-item.mod-item .mod-controls i {
+.age-system.item.item-to-chat .focus .mod-card .mod-item.mod-item .mod-controls i,
+.age-system.item.item-to-chat .power .mod-card .mod-item.mod-item .mod-controls i,
+.age-system.item.item-to-chat .talent .mod-card .mod-item.mod-item .mod-controls i,
+.age-system.item.item-to-chat .weapon .mod-card .mod-item.mod-item .mod-controls i,
+.age-system.item.item-to-chat .equipment .mod-card .mod-item.mod-item .mod-controls i,
+.age-system.item.item-to-chat .stunts .mod-card .mod-item.mod-item .mod-controls i,
+.age-system.item.item-to-chat .honorifics .mod-card .mod-item.mod-item .mod-controls i,
+.age-system.item.item-to-chat .relationship .mod-card .mod-item.mod-item .mod-controls i,
+.age-system.item.item-to-chat .membership .mod-card .mod-item.mod-item .mod-controls i,
+.age-system.item.item-to-chat .shipfeatures .mod-card .mod-item.mod-item .mod-controls i,
+.age-system.item.item-to-chat .vehicle .mod-card .mod-item.mod-item .mod-controls i {
   width: fit-content;
 }
-.age-system.item .focus .mod-card .mod-item.mod-item .mod-controls .inactive,
-.age-system.item .power .mod-card .mod-item.mod-item .mod-controls .inactive,
-.age-system.item .talent .mod-card .mod-item.mod-item .mod-controls .inactive,
-.age-system.item .weapon .mod-card .mod-item.mod-item .mod-controls .inactive,
-.age-system.item .equipment .mod-card .mod-item.mod-item .mod-controls .inactive,
-.age-system.item .stunts .mod-card .mod-item.mod-item .mod-controls .inactive,
-.age-system.item .honorifics .mod-card .mod-item.mod-item .mod-controls .inactive,
-.age-system.item .relationship .mod-card .mod-item.mod-item .mod-controls .inactive,
-.age-system.item .membership .mod-card .mod-item.mod-item .mod-controls .inactive,
-.age-system.item .shipfeatures .mod-card .mod-item.mod-item .mod-controls .inactive,
-.age-system.item .vehicle .mod-card .mod-item.mod-item .mod-controls .inactive {
+.age-system.item.item-to-chat .focus .mod-card .mod-item.mod-item .mod-controls .inactive,
+.age-system.item.item-to-chat .power .mod-card .mod-item.mod-item .mod-controls .inactive,
+.age-system.item.item-to-chat .talent .mod-card .mod-item.mod-item .mod-controls .inactive,
+.age-system.item.item-to-chat .weapon .mod-card .mod-item.mod-item .mod-controls .inactive,
+.age-system.item.item-to-chat .equipment .mod-card .mod-item.mod-item .mod-controls .inactive,
+.age-system.item.item-to-chat .stunts .mod-card .mod-item.mod-item .mod-controls .inactive,
+.age-system.item.item-to-chat .honorifics .mod-card .mod-item.mod-item .mod-controls .inactive,
+.age-system.item.item-to-chat .relationship .mod-card .mod-item.mod-item .mod-controls .inactive,
+.age-system.item.item-to-chat .membership .mod-card .mod-item.mod-item .mod-controls .inactive,
+.age-system.item.item-to-chat .shipfeatures .mod-card .mod-item.mod-item .mod-controls .inactive,
+.age-system.item.item-to-chat .vehicle .mod-card .mod-item.mod-item .mod-controls .inactive {
   opacity: 0.4;
 }
-.age-system.item .focus .mod-card input[type="number"],
-.age-system.item .power .mod-card input[type="number"],
-.age-system.item .talent .mod-card input[type="number"],
-.age-system.item .weapon .mod-card input[type="number"],
-.age-system.item .equipment .mod-card input[type="number"],
-.age-system.item .stunts .mod-card input[type="number"],
-.age-system.item .honorifics .mod-card input[type="number"],
-.age-system.item .relationship .mod-card input[type="number"],
-.age-system.item .membership .mod-card input[type="number"],
-.age-system.item .shipfeatures .mod-card input[type="number"],
-.age-system.item .vehicle .mod-card input[type="number"] {
+.age-system.item.item-to-chat .focus .mod-card input[type="number"],
+.age-system.item.item-to-chat .power .mod-card input[type="number"],
+.age-system.item.item-to-chat .talent .mod-card input[type="number"],
+.age-system.item.item-to-chat .weapon .mod-card input[type="number"],
+.age-system.item.item-to-chat .equipment .mod-card input[type="number"],
+.age-system.item.item-to-chat .stunts .mod-card input[type="number"],
+.age-system.item.item-to-chat .honorifics .mod-card input[type="number"],
+.age-system.item.item-to-chat .relationship .mod-card input[type="number"],
+.age-system.item.item-to-chat .membership .mod-card input[type="number"],
+.age-system.item.item-to-chat .shipfeatures .mod-card input[type="number"],
+.age-system.item.item-to-chat .vehicle .mod-card input[type="number"] {
   max-width: 40px;
   min-width: 40px;
   text-align: center;
 }
-.age-system.item .focus .item-card-desc,
-.age-system.item .power .item-card-desc,
-.age-system.item .talent .item-card-desc,
-.age-system.item .weapon .item-card-desc,
-.age-system.item .equipment .item-card-desc,
-.age-system.item .stunts .item-card-desc,
-.age-system.item .honorifics .item-card-desc,
-.age-system.item .relationship .item-card-desc,
-.age-system.item .membership .item-card-desc,
-.age-system.item .shipfeatures .item-card-desc,
-.age-system.item .vehicle .item-card-desc {
+.age-system.item.item-to-chat .focus .item-card-desc,
+.age-system.item.item-to-chat .power .item-card-desc,
+.age-system.item.item-to-chat .talent .item-card-desc,
+.age-system.item.item-to-chat .weapon .item-card-desc,
+.age-system.item.item-to-chat .equipment .item-card-desc,
+.age-system.item.item-to-chat .stunts .item-card-desc,
+.age-system.item.item-to-chat .honorifics .item-card-desc,
+.age-system.item.item-to-chat .relationship .item-card-desc,
+.age-system.item.item-to-chat .membership .item-card-desc,
+.age-system.item.item-to-chat .shipfeatures .item-card-desc,
+.age-system.item.item-to-chat .vehicle .item-card-desc {
   height: 100%;
   padding: 4px 10px;
   border-radius: 0px 0px 10px 10px;
 }
-.age-system.item .focus .item-card-desc div.editor.editor,
-.age-system.item .power .item-card-desc div.editor.editor,
-.age-system.item .talent .item-card-desc div.editor.editor,
-.age-system.item .weapon .item-card-desc div.editor.editor,
-.age-system.item .equipment .item-card-desc div.editor.editor,
-.age-system.item .stunts .item-card-desc div.editor.editor,
-.age-system.item .honorifics .item-card-desc div.editor.editor,
-.age-system.item .relationship .item-card-desc div.editor.editor,
-.age-system.item .membership .item-card-desc div.editor.editor,
-.age-system.item .shipfeatures .item-card-desc div.editor.editor,
-.age-system.item .vehicle .item-card-desc div.editor.editor {
+.age-system.item.item-to-chat .focus .item-card-desc div.editor.editor,
+.age-system.item.item-to-chat .power .item-card-desc div.editor.editor,
+.age-system.item.item-to-chat .talent .item-card-desc div.editor.editor,
+.age-system.item.item-to-chat .weapon .item-card-desc div.editor.editor,
+.age-system.item.item-to-chat .equipment .item-card-desc div.editor.editor,
+.age-system.item.item-to-chat .stunts .item-card-desc div.editor.editor,
+.age-system.item.item-to-chat .honorifics .item-card-desc div.editor.editor,
+.age-system.item.item-to-chat .relationship .item-card-desc div.editor.editor,
+.age-system.item.item-to-chat .membership .item-card-desc div.editor.editor,
+.age-system.item.item-to-chat .shipfeatures .item-card-desc div.editor.editor,
+.age-system.item.item-to-chat .vehicle .item-card-desc div.editor.editor {
   height: 90%;
 }
-.age-system.item .focus .item-card-desc label:last-of-type,
-.age-system.item .power .item-card-desc label:last-of-type,
-.age-system.item .talent .item-card-desc label:last-of-type,
-.age-system.item .weapon .item-card-desc label:last-of-type,
-.age-system.item .equipment .item-card-desc label:last-of-type,
-.age-system.item .stunts .item-card-desc label:last-of-type,
-.age-system.item .honorifics .item-card-desc label:last-of-type,
-.age-system.item .relationship .item-card-desc label:last-of-type,
-.age-system.item .membership .item-card-desc label:last-of-type,
-.age-system.item .shipfeatures .item-card-desc label:last-of-type,
-.age-system.item .vehicle .item-card-desc label:last-of-type {
+.age-system.item.item-to-chat .focus .item-card-desc label:last-of-type,
+.age-system.item.item-to-chat .power .item-card-desc label:last-of-type,
+.age-system.item.item-to-chat .talent .item-card-desc label:last-of-type,
+.age-system.item.item-to-chat .weapon .item-card-desc label:last-of-type,
+.age-system.item.item-to-chat .equipment .item-card-desc label:last-of-type,
+.age-system.item.item-to-chat .stunts .item-card-desc label:last-of-type,
+.age-system.item.item-to-chat .honorifics .item-card-desc label:last-of-type,
+.age-system.item.item-to-chat .relationship .item-card-desc label:last-of-type,
+.age-system.item.item-to-chat .membership .item-card-desc label:last-of-type,
+.age-system.item.item-to-chat .shipfeatures .item-card-desc label:last-of-type,
+.age-system.item.item-to-chat .vehicle .item-card-desc label:last-of-type {
   margin-top: 4px;
 }
 /*******************************/
@@ -1485,218 +1587,52 @@
   padding-bottom: 2px;
 }
 /*********************************/
+/**    Item Specific Rules      **/
+/*********************************/
+.age-system .talent .main .editor.editor {
+  max-height: 150px;
+}
+.age-system .stunts .editor.editor {
+  max-height: 150px;
+}
+/*********************************/
 /**    Alternate Char Sheet     **/
 /*********************************/
-.age-system.sheet.char-sheet-alt .actor-sheet {
-  flex-wrap: nowrap;
-  text-align: center;
-  text-decoration: none;
-  box-sizing: border-box;
-  /********************/
-  /**  Resource Box  **/
-  /********************/
-  /**********************/
+.age-system .mouse-to-pointer:hover {
+  cursor: pointer;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet ol,
-.age-system.sheet.char-sheet-alt .actor-sheet ul,
-.age-system.sheet.char-sheet-alt .actor-sheet .list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .list-sub-header {
-  font-variant: all-petite-caps;
-  font-weight: 600;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet input[type="checkbox"] {
-  height: 12px;
-  width: 12px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .actor-picture {
-  border: none;
-  max-height: 200px;
-  width: 180px;
-  object-fit: contain;
-  margin: auto;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .second-column {
-  min-width: 474px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .resource,
-.age-system.sheet.char-sheet-alt .actor-sheet .box {
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .resource {
-  border-radius: 10px;
-  margin-bottom: 6px;
-  margin-left: 4px;
-  margin-right: 4px;
-  border: 1px solid black;
-  text-align: center;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .resource hr {
-  margin: 0;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .title {
-  text-transform: uppercase;
-  font-weight: bolder;
-  font-size: 0.8rem;
-  padding: 2px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .values {
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: nowrap;
-  padding: 0 4px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box,
-.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box {
-  padding: 2px 5px;
-  justify-content: space-between;
-  align-items: center;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .main-data,
-.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box .main-data {
-  align-items: center;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .item-image,
-.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box .item-image {
-  border: none;
-  flex: 0 0 2rem;
-  height: 2rem;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .item-name,
-.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box .item-name {
-  align-items: flex-start;
-  text-align: left;
-  margin-left: 5px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .controls,
-.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box .controls {
-  max-width: fit-content;
-  align-items: center;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet li.item-box .controls *,
-.age-system.sheet.char-sheet-alt .actor-sheet .list-item.item-box .controls * {
-  margin-left: 2px;
-  max-width: fit-content;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .arrow-control {
-  font-size: 0.5rem;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .stacked-icons {
-  font-size: 0.6rem;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .mods-section {
-  flex: 0 0 30%;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .values-options {
+.age-system .formula-error {
   font-size: 0.7rem;
-  justify-items: center;
-  padding-right: 4px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .values-options div:not(:last-child) .value-data {
-  margin-bottom: 1px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .values-options > div {
-  justify-content: center;
-  width: max-content;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .values-options .value-data {
-  margin: auto 0;
-  border-radius: 4px;
-  width: 1rem;
-  font-size: 0.7rem;
-  height: 1rem;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .values-options label {
-  padding-left: 4px;
-  text-align: left;
-  height: 1rem;
-  margin: auto 0;
   font-variant: all-petite-caps;
-  max-width: fit-content;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .value-data {
-  flex: 0 1 auto;
-  margin: 4px auto;
   border-radius: 5px;
-  border: 1px solid black;
-  background-color: rgba(255, 255, 255, 0.5);
-  height: 2rem;
-  font-size: 0.9rem;
+  background-color: brown;
+  color: silver;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .value-data.circle {
-  width: 2rem;
-  border-radius: 50%;
+.age-system .modificators-table .mod-type {
+  flex: 0 0 200px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .injury .labels div {
-  font-size: 0.6rem;
+.age-system .modificators-table .mod-value {
+  flex: 0 0 100px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .injury .mark {
-  display: block;
-  position: relative;
+.age-system .modificators-table .mod-controls {
+  flex: 0 0 50px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .injury .tracker-container {
-  justify-content: center;
-  position: absolute;
-  top: 27px;
-  left: 11px;
-  column-gap: 2px;
-  width: 16px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .injury .severe-injury-tracker {
-  border-radius: 50%;
-  border: solid 2px;
-  width: 4px;
-  max-width: 4px;
-  height: 4px;
-  max-height: 4px;
-  margin-bottom: 2px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .labels {
-  margin: auto;
-  font-size: 0.75rem;
-  font-variant: all-petite-caps;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .short-input {
-  flex: 0 0 3rem;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .general-aid-bar .title {
-  padding: 0 4px;
-  min-width: max-content !important;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .general-aid-bar .list-item:first-child {
-  padding-left: 4px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .general-aid-bar .list-item:last-child {
-  padding-right: 4px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet aside {
-  flex: 0 0 190px;
-  height: 100%;
+.age-system .editor.editor {
+  text-align: left;
+  height: auto !important;
+  min-height: 150px;
+  max-height: 400px;
   padding: 4px;
-  padding-bottom: 10px;
-  transition: all 0.5s ease;
+  border-radius: 0 0 10px 10px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet header.top-banner {
-  margin-top: 10px;
-  flex: 0 0 110px;
-  min-width: 210px;
-  padding: 4px;
-  padding-bottom: 10px;
-  border-left: none;
-  border-radius: 0 5px 5px 0;
-  transition: all 0.5s ease;
+.age-system .editor.editor .tox.tox-tinymce {
+  min-height: 140px !important;
+  max-height: 390px !important;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content {
-  padding: 4px 0 0 4px;
-  min-width: 210px;
-  margin: 0 5px 5px 0;
-  border-bottom-right-radius: 10px;
-  transition: all 0.5s ease;
+.age-system p .item-box {
+  line-height: 1.5;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav {
+.age-system .sheet-main-content nav {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -1704,13 +1640,7 @@
   margin-bottom: 10px;
   row-gap: 5px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav a.active {
-  font-size: 1.2rem;
-  height: 1.4rem;
-  line-height: 100%;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .sheet-main-content nav a {
-  text-shadow: 1px 0px 1px silver, -1px 0px 1px silver, 1px 0px 1px silver, 0px 1px 1px silver, 0px -1px 1px silver;
+.age-system .sheet-main-content nav a {
   font-size: 1rem;
   margin: 0 4px;
   padding: 0 4px;
@@ -1723,211 +1653,453 @@
   box-shadow: 1px 1px 3px 1px #000000;
   font-weight: 600;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .owned-focus .item-name,
-.age-system.sheet.char-sheet-alt .actor-sheet .select-options,
-.age-system.sheet.char-sheet-alt .actor-sheet .conditions .tooltip-container {
+.age-system.sheet {
+  flex-wrap: nowrap;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  /********************/
+  /**  Resource Box  **/
+  /********************/
+  /**********************/
+}
+.age-system.sheet ol,
+.age-system.sheet ul,
+.age-system.sheet .list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.age-system.sheet .list-sub-header {
+  font-variant: all-petite-caps;
+  font-weight: 600;
+}
+.age-system.sheet input[type="checkbox"] {
+  height: 12px;
+  width: 12px;
+  max-height: 12px;
+  max-width: 12px;
+}
+.age-system.sheet .document-picture {
+  border: none;
+  max-height: 200px;
+  width: 180px;
+  object-fit: contain;
+  margin: auto;
+}
+.age-system.sheet .second-column {
+  min-width: 474px;
+}
+.age-system.sheet .resource,
+.age-system.sheet .box {
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+.age-system.sheet .resource {
+  border-radius: 10px;
+  margin-bottom: 6px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border: 1px solid black;
+  text-align: center;
+}
+.age-system.sheet .resource input,
+.age-system.sheet .resource select {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 2px;
+}
+.age-system.sheet .resource hr {
+  margin: 0;
+}
+.age-system.sheet .resource label {
+  background: none;
+}
+.age-system.sheet .title {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 0.8rem;
+  padding: 2px;
+}
+.age-system.sheet .values {
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0 4px;
+}
+.age-system.sheet li.item-box,
+.age-system.sheet .list-item.item-box {
+  padding: 2px 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+.age-system.sheet li.item-box .main-data,
+.age-system.sheet .list-item.item-box .main-data {
+  align-items: center;
+}
+.age-system.sheet li.item-box .item-image,
+.age-system.sheet .list-item.item-box .item-image {
+  border: none;
+  flex: 0 0 2rem;
+  height: 2rem;
+}
+.age-system.sheet li.item-box .item-name,
+.age-system.sheet .list-item.item-box .item-name {
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 5px;
+}
+.age-system.sheet li.item-box .controls,
+.age-system.sheet .list-item.item-box .controls {
+  max-width: fit-content;
+  align-items: center;
+}
+.age-system.sheet li.item-box .controls *,
+.age-system.sheet .list-item.item-box .controls * {
+  margin-left: 2px;
+  max-width: fit-content;
+}
+.age-system.sheet .arrow-control {
+  font-size: 0.5rem;
+}
+.age-system.sheet .stacked-icons {
+  font-size: 0.6rem;
+}
+.age-system.sheet .mods-section {
+  flex: 0 0 30%;
+}
+.age-system.sheet .values-options {
+  font-size: 0.7rem;
+  justify-items: center;
+  padding-right: 4px;
+}
+.age-system.sheet .values-options div:not(:last-child) .value-data {
+  margin-bottom: 1px;
+}
+.age-system.sheet .values-options > div {
+  justify-content: center;
+  width: max-content;
+}
+.age-system.sheet .values-options .value-data {
+  margin: auto 0;
+  border-radius: 4px;
+  width: 1rem;
+  font-size: 0.7rem;
+  height: 1rem;
+}
+.age-system.sheet .values-options label {
+  padding-left: 4px;
+  text-align: left;
+  height: 1rem;
+  margin: auto 0;
+  font-variant: all-petite-caps;
+  max-width: fit-content;
+}
+.age-system.sheet .value-data {
+  flex: 0 1 auto;
+  margin: 4px auto;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 2rem;
+  font-size: 0.9rem;
+}
+.age-system.sheet .value-data.circle {
+  width: 2rem;
+  border-radius: 50%;
+}
+.age-system.sheet .injury .labels div {
+  font-size: 0.6rem;
+}
+.age-system.sheet .injury .mark {
+  display: block;
+  position: relative;
+}
+.age-system.sheet .injury .tracker-container {
+  justify-content: center;
+  position: absolute;
+  top: 27px;
+  left: 11px;
+  column-gap: 2px;
+  width: 16px;
+}
+.age-system.sheet .injury .severe-injury-tracker {
+  border-radius: 50%;
+  border: solid 2px;
+  width: 4px;
+  max-width: 4px;
+  height: 4px;
+  max-height: 4px;
+  margin-bottom: 2px;
+}
+.age-system.sheet .labels {
+  margin: auto;
+  font-size: 0.75rem;
+  font-variant: all-petite-caps;
+}
+.age-system.sheet .short-input {
+  flex: 0 0 3rem;
+}
+.age-system.sheet .general-aid-bar .title {
+  padding: 0 4px;
+  min-width: max-content !important;
+}
+.age-system.sheet .general-aid-bar .list-item:first-child {
+  padding-left: 4px;
+}
+.age-system.sheet .general-aid-bar .list-item:last-child {
+  padding-right: 4px;
+}
+.age-system.sheet aside {
+  flex: 0 0 190px;
+  height: 100%;
+  padding: 4px;
+  padding-bottom: 10px;
+  transition: all 0.5s ease;
+}
+.age-system.sheet header.top-banner {
+  margin-top: 10px;
+  flex: 0 0 110px;
+  min-width: 210px;
+  padding: 4px;
+  padding-bottom: 10px;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  transition: all 0.5s ease;
+}
+.age-system.sheet .sheet-main-content {
+  padding: 4px 0 0 4px;
+  min-width: 210px;
+  margin: 0 5px 5px 0;
+  border-bottom-right-radius: 10px;
+  transition: all 0.5s ease;
+}
+.age-system.sheet .owned-focus .item-name,
+.age-system.sheet .select-options,
+.age-system.sheet .conditions .tooltip-container {
   padding: 0 5px;
   margin: 3px 1px;
   border-radius: 15px;
   font-variant: all-petite-caps;
   text-align: center;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .ability-box {
+.age-system.sheet .char-main-section .ability-box {
   flex: 0 0 200px;
   margin-bottom: 5px;
   border-radius: 10px;
   border: thin solid black;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .ability-box:last-of-type {
+.age-system.sheet .char-main-section .ability-box:last-of-type {
   margin-bottom: 0;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header {
+.age-system.sheet .char-main-section .abl-header {
   justify-content: space-between;
   align-items: center;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header .abl-name {
+.age-system.sheet .char-main-section .abl-header .abl-name {
   text-align: left;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header .abl-name label {
+.age-system.sheet .char-main-section .abl-header .abl-name label {
   width: fit-content;
   padding-left: 5px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header input[type="number"] {
+.age-system.sheet .char-main-section .abl-header input[type="number"] {
   border-radius: 0;
   flex: 0 0 30px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header input[type="number"].original {
+.age-system.sheet .char-main-section .abl-header input[type="number"].original {
   background-color: silver;
   border-top-right-radius: 10px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .abl-header input[type="checkbox"] {
+.age-system.sheet .char-main-section .abl-header input[type="checkbox"] {
   flex: 0 0 12px;
   height: 12px;
   border-radius: 50%;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .owned-focus {
+.age-system.sheet .char-main-section .owned-focus {
   line-height: 1.1rem;
   margin: 0.2rem 0;
   font-size: 0.8rem;
   text-align: justify;
   padding: 0 4px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .no-focus .owned-focus {
+.age-system.sheet .char-main-section .no-focus .owned-focus {
   margin: 0;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .no-focus .abl-header {
+.age-system.sheet .char-main-section .no-focus .abl-header {
   border-radius: 10px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .no-focus .abl-header input[type="number"].original {
+.age-system.sheet .char-main-section .no-focus .abl-header input[type="number"].original {
   border-bottom-right-radius: 10px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-main-section .improved-focus {
+.age-system.sheet .char-main-section .improved-focus {
   text-decoration: underline;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .persona {
+.age-system.sheet .persona {
   padding-right: 4px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .persona .editor.editor {
-  text-align: left;
-  height: auto !important;
-  min-height: 150px;
-  max-height: 400px;
-  padding: 4px;
-  border-radius: 0 0 10px 10px;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .persona .editor.editor .tox.tox-tinymce {
-  min-height: 140px !important;
-  max-height: 390px !important;
-}
-.age-system.sheet.char-sheet-alt .actor-sheet .free-text {
+.age-system.sheet .free-text {
   resize: none !important;
   border-radius: 0 0 10px 10px;
   padding: 4px;
   border: none;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .item-group {
+.age-system.sheet .item-group {
   height: max-content;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .item-group li:first-child,
-.age-system.sheet.char-sheet-alt .actor-sheet .item-group .list-item:first-child {
+.age-system.sheet .item-group li {
+  align-items: center;
+}
+.age-system.sheet .item-group li:first-child,
+.age-system.sheet .item-group .list-item:first-child {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .item-group li:last-child,
-.age-system.sheet.char-sheet-alt .actor-sheet .item-group .list-item:last-child {
+.age-system.sheet .item-group li:last-child,
+.age-system.sheet .item-group .list-item:last-child {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .abilities-column {
+.age-system.sheet .item-group .extra-input {
+  flex: 0 0 fit-content;
+}
+.age-system.sheet .item-group .minimal-input {
+  flex: 0 0 1.5rem;
+}
+.age-system.sheet .item-group.condensed-data li label {
+  flex: 0 0 100px;
+}
+.age-system.sheet .abilities-column {
   flex: 0 0 200px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-details {
+.age-system.sheet .header-details {
   flex-wrap: nowrap;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-details .charname {
+.age-system.sheet .header-details .charname,
+.age-system.sheet .header-details .itemname {
   margin-bottom: 10px;
-  color: white;
+  color: silver;
   font-size: 2rem;
   height: 2.4rem;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-details .sub-details > div {
+.age-system.sheet .sub-details > div:not(.flexrow) {
   display: flex;
   flex-direction: column;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-details .sub-details input {
-  font-size: 0.7rem;
-  height: 0.8rem;
+.age-system.sheet .sub-details input,
+.age-system.sheet .sub-details select {
+  font-size: 0.8rem;
+  height: 0.9rem;
   border-bottom: 1px solid black !important;
-  color: white !important;
+  color: silver !important;
   padding-bottom: 4px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .char-details .sub-details label {
-  flex: 0 0 0.6rem;
-  font-size: 0.5rem;
+.age-system.sheet .sub-details label {
+  flex: 0 0 0.7rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .at-header {
+.age-system.sheet .at-header {
   flex: 0 0 100px;
   margin: auto 4px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .at-header .value-data {
+.age-system.sheet .at-header .value-data {
   max-width: fit-content;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .at-header .exp {
+.age-system.sheet .at-header .exp {
   align-items: center;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .at-header .exp input {
-  color: inherit;
+.age-system.sheet .at-header .exp input {
+  font-size: 0.8rem;
+  height: 1rem;
+  border-bottom: 1px solid black !important;
+  padding-bottom: 4px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .at-header .exp span {
+.age-system.sheet .at-header .exp span {
   flex: 0 0 5px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .tooltip-container {
+.age-system.sheet .tooltip-container {
   position: relative;
   display: inline-block;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .container-tooltip-text {
+.age-system.sheet .container-tooltip-text {
   visibility: hidden;
+  opacity: 0;
   max-width: 600px;
   text-align: left;
   border-radius: 5px;
   padding: 4px;
-  opacity: 0.9;
   /* Position the tooltip */
   position: fixed;
   z-index: 10;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .container-tooltip-text .effect-changes {
+.age-system.sheet .container-tooltip-text .effect-changes {
   margin-top: 4px;
   font-size: 12px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .tooltip-container:hover .container-tooltip-text {
+.age-system.sheet .tooltip-container:hover .container-tooltip-text {
   visibility: visible;
+  opacity: 0.95;
+  transition: all 0.4s ease;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet a.item-equip.not-equiped,
-.age-system.sheet.char-sheet-alt .actor-sheet .inactive {
+.age-system.sheet a.item-equip.not-equiped,
+.age-system.sheet .inactive {
   opacity: 0.3;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .item-box,
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .header {
+.age-system.sheet .modifiers .extra-margin {
+  margin: 4px 0;
+}
+.age-system.sheet .modifiers li.header {
+  padding: 1px 5px;
+}
+.age-system.sheet .modifiers li .mod-name {
+  flex: 0 0 100px;
+}
+.age-system.sheet .modifiers .icon {
+  flex: 0 0 25px;
+}
+.age-system.sheet .modifiers .mod-source {
+  flex: 0 0 150px;
+}
+.age-system.sheet .custom-effects .item-box,
+.age-system.sheet .custom-effects .header {
   justify-content: space-evenly;
   padding: 2px 5px;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .effect-name {
+.age-system.sheet .custom-effects .effect-name {
   flex: 0 0 25%;
   text-align: left;
   align-items: center;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .effect-key {
+.age-system.sheet .custom-effects .effect-key {
   flex: 0 0 30%;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .effect-operation {
+.age-system.sheet .custom-effects .effect-operation {
   flex: 0 0 15%;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .effect-value {
+.age-system.sheet .custom-effects .effect-value {
   flex: 0 0 15%;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .effect-add {
+.age-system.sheet .custom-effects .effect-add {
   flex: 0 0 10%;
   padding-right: 4px;
   text-align: center;
   font-size: 0.7rem;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .mod-name {
+.age-system.sheet .custom-effects .mod-name {
   flex: 0 0 30%;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .mod-value {
+.age-system.sheet .custom-effects .mod-value {
   flex: 0 0 40%;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .mod-value .icon {
+.age-system.sheet .custom-effects .mod-value .icon {
   flex: 0 0 30%;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .mod-value .value-numeric {
+.age-system.sheet .custom-effects .mod-value .value-numeric {
   flex: 0 0 70%;
 }
-.age-system.sheet.char-sheet-alt .actor-sheet .custom-effects .mod-source.mod-source {
+.age-system.sheet .custom-effects .mod-source.mod-source {
   flex: 0 0 30%;
 }
 /*******************************/
@@ -2747,6 +2919,10 @@
   border-radius: 5px;
   border: 5px outset #35A5CA;
 }
+.colorset-modern-blue .item-summary label {
+  background-color: #35A5CA;
+  color: #231F20;
+}
 .colorset-modern-blue .metal-background {
   background: linear-gradient(90deg, #007DAD 5%, #B9DBEB 50%, #007DAD 95%);
 }
@@ -2758,10 +2934,12 @@
   color: #ffffff;
 }
 .colorset-modern-blue .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #B9DBEB, #007DAD);
+  background-color: #35A5CA;
+  color: #231F20;
 }
 .colorset-modern-blue .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #B9DBEB 60%, #007DAD) !important;
+  background-color: #007DAD;
+  color: #ffffff;
 }
 .colorset-modern-blue .thin-border {
   border: thin solid #231F20;
@@ -2793,7 +2971,6 @@
   background-color: #007DAD;
   color: #ffffff;
 }
-.colorset-modern-blue .char-sheet .editor,
 .colorset-modern-blue .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -2836,30 +3013,6 @@
   background-color: #B9DBEB !important;
   color: #007DAD !important;
 }
-.colorset-modern-blue .focus img,
-.colorset-modern-blue .power img,
-.colorset-modern-blue .talent img,
-.colorset-modern-blue .weapon img,
-.colorset-modern-blue .equipment img,
-.colorset-modern-blue .stunts img,
-.colorset-modern-blue .honorifics img,
-.colorset-modern-blue .membership img,
-.colorset-modern-blue .relationship img,
-.colorset-modern-blue .shipfeatures img {
-  border: 1px solid #007DAD;
-}
-.colorset-modern-blue .focus label,
-.colorset-modern-blue .power label,
-.colorset-modern-blue .talent label,
-.colorset-modern-blue .weapon label,
-.colorset-modern-blue .equipment label,
-.colorset-modern-blue .stunts label,
-.colorset-modern-blue .honorifics label,
-.colorset-modern-blue .membership label,
-.colorset-modern-blue .relationship label,
-.colorset-modern-blue .shipfeatures label {
-  color: #007DAD;
-}
 .colorset-modern-blue .focus .item-card-stats,
 .colorset-modern-blue .power .item-card-stats,
 .colorset-modern-blue .talent .item-card-stats,
@@ -2896,31 +3049,6 @@
 .colorset-modern-blue .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-modern-blue .focus nav .item,
-.colorset-modern-blue .power nav .item,
-.colorset-modern-blue .talent nav .item,
-.colorset-modern-blue .weapon nav .item,
-.colorset-modern-blue .equipment nav .item,
-.colorset-modern-blue .stunts nav .item,
-.colorset-modern-blue .honorifics nav .item,
-.colorset-modern-blue .membership nav .item,
-.colorset-modern-blue .relationship nav .item,
-.colorset-modern-blue .shipfeatures nav .item {
-  background-color: #B9DBEB;
-  color: #007DAD;
-}
-.colorset-modern-blue .focus nav .item.active,
-.colorset-modern-blue .power nav .item.active,
-.colorset-modern-blue .talent nav .item.active,
-.colorset-modern-blue .weapon nav .item.active,
-.colorset-modern-blue .equipment nav .item.active,
-.colorset-modern-blue .stunts nav .item.active,
-.colorset-modern-blue .honorifics nav .item.active,
-.colorset-modern-blue .membership nav .item.active,
-.colorset-modern-blue .relationship nav .item.active,
-.colorset-modern-blue .shipfeatures nav .item.active {
-  background-color: #ffffff;
-}
 .colorset-modern-blue .focus .mod-card,
 .colorset-modern-blue .power .mod-card,
 .colorset-modern-blue .talent .mod-card,
@@ -2944,6 +3072,10 @@
   border-radius: 5px;
   border: 5px outset #000000;
 }
+.colorset-fantasy-blue .item-summary label {
+  background-color: #000000;
+  color: #dbdada;
+}
 .colorset-fantasy-blue .metal-background {
   background: linear-gradient(90deg, #0f4f5b 5%, #91b6d4 50%, #0f4f5b 95%);
 }
@@ -2955,10 +3087,12 @@
   color: #ffffff;
 }
 .colorset-fantasy-blue .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #91b6d4, #0f4f5b);
+  background-color: #000000;
+  color: #dbdada;
 }
 .colorset-fantasy-blue .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #91b6d4 60%, #0f4f5b) !important;
+  background-color: #0f4f5b;
+  color: #ffffff;
 }
 .colorset-fantasy-blue .thin-border {
   border: thin solid #dbdada;
@@ -2990,7 +3124,6 @@
   background-color: #0f4f5b;
   color: #ffffff;
 }
-.colorset-fantasy-blue .char-sheet .editor,
 .colorset-fantasy-blue .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -3033,30 +3166,6 @@
   background-color: #91b6d4 !important;
   color: #0f4f5b !important;
 }
-.colorset-fantasy-blue .focus img,
-.colorset-fantasy-blue .power img,
-.colorset-fantasy-blue .talent img,
-.colorset-fantasy-blue .weapon img,
-.colorset-fantasy-blue .equipment img,
-.colorset-fantasy-blue .stunts img,
-.colorset-fantasy-blue .honorifics img,
-.colorset-fantasy-blue .membership img,
-.colorset-fantasy-blue .relationship img,
-.colorset-fantasy-blue .shipfeatures img {
-  border: 1px solid #0f4f5b;
-}
-.colorset-fantasy-blue .focus label,
-.colorset-fantasy-blue .power label,
-.colorset-fantasy-blue .talent label,
-.colorset-fantasy-blue .weapon label,
-.colorset-fantasy-blue .equipment label,
-.colorset-fantasy-blue .stunts label,
-.colorset-fantasy-blue .honorifics label,
-.colorset-fantasy-blue .membership label,
-.colorset-fantasy-blue .relationship label,
-.colorset-fantasy-blue .shipfeatures label {
-  color: #0f4f5b;
-}
 .colorset-fantasy-blue .focus .item-card-stats,
 .colorset-fantasy-blue .power .item-card-stats,
 .colorset-fantasy-blue .talent .item-card-stats,
@@ -3093,31 +3202,6 @@
 .colorset-fantasy-blue .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-fantasy-blue .focus nav .item,
-.colorset-fantasy-blue .power nav .item,
-.colorset-fantasy-blue .talent nav .item,
-.colorset-fantasy-blue .weapon nav .item,
-.colorset-fantasy-blue .equipment nav .item,
-.colorset-fantasy-blue .stunts nav .item,
-.colorset-fantasy-blue .honorifics nav .item,
-.colorset-fantasy-blue .membership nav .item,
-.colorset-fantasy-blue .relationship nav .item,
-.colorset-fantasy-blue .shipfeatures nav .item {
-  background-color: #91b6d4;
-  color: #0f4f5b;
-}
-.colorset-fantasy-blue .focus nav .item.active,
-.colorset-fantasy-blue .power nav .item.active,
-.colorset-fantasy-blue .talent nav .item.active,
-.colorset-fantasy-blue .weapon nav .item.active,
-.colorset-fantasy-blue .equipment nav .item.active,
-.colorset-fantasy-blue .stunts nav .item.active,
-.colorset-fantasy-blue .honorifics nav .item.active,
-.colorset-fantasy-blue .membership nav .item.active,
-.colorset-fantasy-blue .relationship nav .item.active,
-.colorset-fantasy-blue .shipfeatures nav .item.active {
-  background-color: #ffffff;
-}
 .colorset-fantasy-blue .focus .mod-card,
 .colorset-fantasy-blue .power .mod-card,
 .colorset-fantasy-blue .talent .mod-card,
@@ -3141,6 +3225,10 @@
   border-radius: 5px;
   border: 5px outset #979899;
 }
+.colorset-dragon-red .item-summary label {
+  background-color: #979899;
+  color: #000000;
+}
 .colorset-dragon-red .metal-background {
   background: linear-gradient(90deg, #810207 5%, #e0beb1 50%, #810207 95%);
 }
@@ -3152,10 +3240,12 @@
   color: #ffffff;
 }
 .colorset-dragon-red .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #e0beb1, #810207);
+  background-color: #979899;
+  color: #000000;
 }
 .colorset-dragon-red .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #e0beb1 60%, #810207) !important;
+  background-color: #810207;
+  color: #ffffff;
 }
 .colorset-dragon-red .thin-border {
   border: thin solid #000000;
@@ -3187,7 +3277,6 @@
   background-color: #810207;
   color: #ffffff;
 }
-.colorset-dragon-red .char-sheet .editor,
 .colorset-dragon-red .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -3230,30 +3319,6 @@
   background-color: #e0beb1 !important;
   color: #810207 !important;
 }
-.colorset-dragon-red .focus img,
-.colorset-dragon-red .power img,
-.colorset-dragon-red .talent img,
-.colorset-dragon-red .weapon img,
-.colorset-dragon-red .equipment img,
-.colorset-dragon-red .stunts img,
-.colorset-dragon-red .honorifics img,
-.colorset-dragon-red .membership img,
-.colorset-dragon-red .relationship img,
-.colorset-dragon-red .shipfeatures img {
-  border: 1px solid #810207;
-}
-.colorset-dragon-red .focus label,
-.colorset-dragon-red .power label,
-.colorset-dragon-red .talent label,
-.colorset-dragon-red .weapon label,
-.colorset-dragon-red .equipment label,
-.colorset-dragon-red .stunts label,
-.colorset-dragon-red .honorifics label,
-.colorset-dragon-red .membership label,
-.colorset-dragon-red .relationship label,
-.colorset-dragon-red .shipfeatures label {
-  color: #810207;
-}
 .colorset-dragon-red .focus .item-card-stats,
 .colorset-dragon-red .power .item-card-stats,
 .colorset-dragon-red .talent .item-card-stats,
@@ -3290,31 +3355,6 @@
 .colorset-dragon-red .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-dragon-red .focus nav .item,
-.colorset-dragon-red .power nav .item,
-.colorset-dragon-red .talent nav .item,
-.colorset-dragon-red .weapon nav .item,
-.colorset-dragon-red .equipment nav .item,
-.colorset-dragon-red .stunts nav .item,
-.colorset-dragon-red .honorifics nav .item,
-.colorset-dragon-red .membership nav .item,
-.colorset-dragon-red .relationship nav .item,
-.colorset-dragon-red .shipfeatures nav .item {
-  background-color: #e0beb1;
-  color: #810207;
-}
-.colorset-dragon-red .focus nav .item.active,
-.colorset-dragon-red .power nav .item.active,
-.colorset-dragon-red .talent nav .item.active,
-.colorset-dragon-red .weapon nav .item.active,
-.colorset-dragon-red .equipment nav .item.active,
-.colorset-dragon-red .stunts nav .item.active,
-.colorset-dragon-red .honorifics nav .item.active,
-.colorset-dragon-red .membership nav .item.active,
-.colorset-dragon-red .relationship nav .item.active,
-.colorset-dragon-red .shipfeatures nav .item.active {
-  background-color: #ffffff;
-}
 .colorset-dragon-red .focus .mod-card,
 .colorset-dragon-red .power .mod-card,
 .colorset-dragon-red .talent .mod-card,
@@ -3338,6 +3378,10 @@
   border-radius: 5px;
   border: 5px outset #625b68;
 }
+.colorset-folded-purple .item-summary label {
+  background-color: #625b68;
+  color: #000000;
+}
 .colorset-folded-purple .metal-background {
   background: linear-gradient(90deg, #565183 5%, #cfccde 50%, #565183 95%);
 }
@@ -3349,10 +3393,12 @@
   color: #ffffff;
 }
 .colorset-folded-purple .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #cfccde, #565183);
+  background-color: #625b68;
+  color: #000000;
 }
 .colorset-folded-purple .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #cfccde 60%, #565183) !important;
+  background-color: #565183;
+  color: #ffffff;
 }
 .colorset-folded-purple .thin-border {
   border: thin solid #000000;
@@ -3384,7 +3430,6 @@
   background-color: #565183;
   color: #ffffff;
 }
-.colorset-folded-purple .char-sheet .editor,
 .colorset-folded-purple .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -3427,30 +3472,6 @@
   background-color: #cfccde !important;
   color: #565183 !important;
 }
-.colorset-folded-purple .focus img,
-.colorset-folded-purple .power img,
-.colorset-folded-purple .talent img,
-.colorset-folded-purple .weapon img,
-.colorset-folded-purple .equipment img,
-.colorset-folded-purple .stunts img,
-.colorset-folded-purple .honorifics img,
-.colorset-folded-purple .membership img,
-.colorset-folded-purple .relationship img,
-.colorset-folded-purple .shipfeatures img {
-  border: 1px solid #565183;
-}
-.colorset-folded-purple .focus label,
-.colorset-folded-purple .power label,
-.colorset-folded-purple .talent label,
-.colorset-folded-purple .weapon label,
-.colorset-folded-purple .equipment label,
-.colorset-folded-purple .stunts label,
-.colorset-folded-purple .honorifics label,
-.colorset-folded-purple .membership label,
-.colorset-folded-purple .relationship label,
-.colorset-folded-purple .shipfeatures label {
-  color: #565183;
-}
 .colorset-folded-purple .focus .item-card-stats,
 .colorset-folded-purple .power .item-card-stats,
 .colorset-folded-purple .talent .item-card-stats,
@@ -3487,31 +3508,6 @@
 .colorset-folded-purple .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-folded-purple .focus nav .item,
-.colorset-folded-purple .power nav .item,
-.colorset-folded-purple .talent nav .item,
-.colorset-folded-purple .weapon nav .item,
-.colorset-folded-purple .equipment nav .item,
-.colorset-folded-purple .stunts nav .item,
-.colorset-folded-purple .honorifics nav .item,
-.colorset-folded-purple .membership nav .item,
-.colorset-folded-purple .relationship nav .item,
-.colorset-folded-purple .shipfeatures nav .item {
-  background-color: #cfccde;
-  color: #565183;
-}
-.colorset-folded-purple .focus nav .item.active,
-.colorset-folded-purple .power nav .item.active,
-.colorset-folded-purple .talent nav .item.active,
-.colorset-folded-purple .weapon nav .item.active,
-.colorset-folded-purple .equipment nav .item.active,
-.colorset-folded-purple .stunts nav .item.active,
-.colorset-folded-purple .honorifics nav .item.active,
-.colorset-folded-purple .membership nav .item.active,
-.colorset-folded-purple .relationship nav .item.active,
-.colorset-folded-purple .shipfeatures nav .item.active {
-  background-color: #ffffff;
-}
 .colorset-folded-purple .focus .mod-card,
 .colorset-folded-purple .power .mod-card,
 .colorset-folded-purple .talent .mod-card,
@@ -3535,6 +3531,10 @@
   border-radius: 5px;
   border: 5px outset #92b65f;
 }
+.colorset-ronin-green .item-summary label {
+  background-color: #92b65f;
+  color: #000000;
+}
 .colorset-ronin-green .metal-background {
   background: linear-gradient(90deg, #155f0e 5%, #c2f5aa 50%, #155f0e 95%);
 }
@@ -3546,10 +3546,12 @@
   color: #ffffff;
 }
 .colorset-ronin-green .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #c2f5aa, #155f0e);
+  background-color: #92b65f;
+  color: #000000;
 }
 .colorset-ronin-green .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #c2f5aa 60%, #155f0e) !important;
+  background-color: #155f0e;
+  color: #ffffff;
 }
 .colorset-ronin-green .thin-border {
   border: thin solid #000000;
@@ -3581,7 +3583,6 @@
   background-color: #155f0e;
   color: #ffffff;
 }
-.colorset-ronin-green .char-sheet .editor,
 .colorset-ronin-green .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -3624,30 +3625,6 @@
   background-color: #c2f5aa !important;
   color: #155f0e !important;
 }
-.colorset-ronin-green .focus img,
-.colorset-ronin-green .power img,
-.colorset-ronin-green .talent img,
-.colorset-ronin-green .weapon img,
-.colorset-ronin-green .equipment img,
-.colorset-ronin-green .stunts img,
-.colorset-ronin-green .honorifics img,
-.colorset-ronin-green .membership img,
-.colorset-ronin-green .relationship img,
-.colorset-ronin-green .shipfeatures img {
-  border: 1px solid #155f0e;
-}
-.colorset-ronin-green .focus label,
-.colorset-ronin-green .power label,
-.colorset-ronin-green .talent label,
-.colorset-ronin-green .weapon label,
-.colorset-ronin-green .equipment label,
-.colorset-ronin-green .stunts label,
-.colorset-ronin-green .honorifics label,
-.colorset-ronin-green .membership label,
-.colorset-ronin-green .relationship label,
-.colorset-ronin-green .shipfeatures label {
-  color: #155f0e;
-}
 .colorset-ronin-green .focus .item-card-stats,
 .colorset-ronin-green .power .item-card-stats,
 .colorset-ronin-green .talent .item-card-stats,
@@ -3684,31 +3661,6 @@
 .colorset-ronin-green .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-ronin-green .focus nav .item,
-.colorset-ronin-green .power nav .item,
-.colorset-ronin-green .talent nav .item,
-.colorset-ronin-green .weapon nav .item,
-.colorset-ronin-green .equipment nav .item,
-.colorset-ronin-green .stunts nav .item,
-.colorset-ronin-green .honorifics nav .item,
-.colorset-ronin-green .membership nav .item,
-.colorset-ronin-green .relationship nav .item,
-.colorset-ronin-green .shipfeatures nav .item {
-  background-color: #c2f5aa;
-  color: #155f0e;
-}
-.colorset-ronin-green .focus nav .item.active,
-.colorset-ronin-green .power nav .item.active,
-.colorset-ronin-green .talent nav .item.active,
-.colorset-ronin-green .weapon nav .item.active,
-.colorset-ronin-green .equipment nav .item.active,
-.colorset-ronin-green .stunts nav .item.active,
-.colorset-ronin-green .honorifics nav .item.active,
-.colorset-ronin-green .membership nav .item.active,
-.colorset-ronin-green .relationship nav .item.active,
-.colorset-ronin-green .shipfeatures nav .item.active {
-  background-color: #ffffff;
-}
 .colorset-ronin-green .focus .mod-card,
 .colorset-ronin-green .power .mod-card,
 .colorset-ronin-green .talent .mod-card,
@@ -3732,6 +3684,10 @@
   border-radius: 5px;
   border: 5px outset #4d627a;
 }
+.colorset-select-one .item-summary label {
+  background-color: #4d627a;
+  color: #290000;
+}
 .colorset-select-one .metal-background {
   background: linear-gradient(90deg, #273249 5%, #768d9f 50%, #273249 95%);
 }
@@ -3743,10 +3699,12 @@
   color: #e7ccc3;
 }
 .colorset-select-one .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #768d9f, #273249);
+  background-color: #4d627a;
+  color: #290000;
 }
 .colorset-select-one .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #768d9f 60%, #273249) !important;
+  background-color: #273249;
+  color: #e7ccc3;
 }
 .colorset-select-one .thin-border {
   border: thin solid #290000;
@@ -3778,7 +3736,6 @@
   background-color: #273249;
   color: #e7ccc3;
 }
-.colorset-select-one .char-sheet .editor,
 .colorset-select-one .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -3821,30 +3778,6 @@
   background-color: #768d9f !important;
   color: #273249 !important;
 }
-.colorset-select-one .focus img,
-.colorset-select-one .power img,
-.colorset-select-one .talent img,
-.colorset-select-one .weapon img,
-.colorset-select-one .equipment img,
-.colorset-select-one .stunts img,
-.colorset-select-one .honorifics img,
-.colorset-select-one .membership img,
-.colorset-select-one .relationship img,
-.colorset-select-one .shipfeatures img {
-  border: 1px solid #273249;
-}
-.colorset-select-one .focus label,
-.colorset-select-one .power label,
-.colorset-select-one .talent label,
-.colorset-select-one .weapon label,
-.colorset-select-one .equipment label,
-.colorset-select-one .stunts label,
-.colorset-select-one .honorifics label,
-.colorset-select-one .membership label,
-.colorset-select-one .relationship label,
-.colorset-select-one .shipfeatures label {
-  color: #273249;
-}
 .colorset-select-one .focus .item-card-stats,
 .colorset-select-one .power .item-card-stats,
 .colorset-select-one .talent .item-card-stats,
@@ -3881,31 +3814,6 @@
 .colorset-select-one .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-select-one .focus nav .item,
-.colorset-select-one .power nav .item,
-.colorset-select-one .talent nav .item,
-.colorset-select-one .weapon nav .item,
-.colorset-select-one .equipment nav .item,
-.colorset-select-one .stunts nav .item,
-.colorset-select-one .honorifics nav .item,
-.colorset-select-one .membership nav .item,
-.colorset-select-one .relationship nav .item,
-.colorset-select-one .shipfeatures nav .item {
-  background-color: #768d9f;
-  color: #273249;
-}
-.colorset-select-one .focus nav .item.active,
-.colorset-select-one .power nav .item.active,
-.colorset-select-one .talent nav .item.active,
-.colorset-select-one .weapon nav .item.active,
-.colorset-select-one .equipment nav .item.active,
-.colorset-select-one .stunts nav .item.active,
-.colorset-select-one .honorifics nav .item.active,
-.colorset-select-one .membership nav .item.active,
-.colorset-select-one .relationship nav .item.active,
-.colorset-select-one .shipfeatures nav .item.active {
-  background-color: #ffffff;
-}
 .colorset-select-one .focus .mod-card,
 .colorset-select-one .power .mod-card,
 .colorset-select-one .talent .mod-card,
@@ -3929,6 +3837,10 @@
   border-radius: 5px;
   border: 5px outset #6b6a6a;
 }
+.colorset-the-grey .item-summary label {
+  background-color: #6b6a6a;
+  color: #000000;
+}
 .colorset-the-grey .metal-background {
   background: linear-gradient(90deg, #3d3e3f 5%, #b4b6b3 50%, #3d3e3f 95%);
 }
@@ -3940,10 +3852,12 @@
   color: #ccc9c9;
 }
 .colorset-the-grey .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #b4b6b3, #3d3e3f);
+  background-color: #6b6a6a;
+  color: #000000;
 }
 .colorset-the-grey .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #b4b6b3 60%, #3d3e3f) !important;
+  background-color: #3d3e3f;
+  color: #ccc9c9;
 }
 .colorset-the-grey .thin-border {
   border: thin solid #000000;
@@ -3975,7 +3889,6 @@
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
-.colorset-the-grey .char-sheet .editor,
 .colorset-the-grey .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -4018,30 +3931,6 @@
   background-color: #b4b6b3 !important;
   color: #3d3e3f !important;
 }
-.colorset-the-grey .focus img,
-.colorset-the-grey .power img,
-.colorset-the-grey .talent img,
-.colorset-the-grey .weapon img,
-.colorset-the-grey .equipment img,
-.colorset-the-grey .stunts img,
-.colorset-the-grey .honorifics img,
-.colorset-the-grey .membership img,
-.colorset-the-grey .relationship img,
-.colorset-the-grey .shipfeatures img {
-  border: 1px solid #3d3e3f;
-}
-.colorset-the-grey .focus label,
-.colorset-the-grey .power label,
-.colorset-the-grey .talent label,
-.colorset-the-grey .weapon label,
-.colorset-the-grey .equipment label,
-.colorset-the-grey .stunts label,
-.colorset-the-grey .honorifics label,
-.colorset-the-grey .membership label,
-.colorset-the-grey .relationship label,
-.colorset-the-grey .shipfeatures label {
-  color: #3d3e3f;
-}
 .colorset-the-grey .focus .item-card-stats,
 .colorset-the-grey .power .item-card-stats,
 .colorset-the-grey .talent .item-card-stats,
@@ -4078,31 +3967,6 @@
 .colorset-the-grey .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-the-grey .focus nav .item,
-.colorset-the-grey .power nav .item,
-.colorset-the-grey .talent nav .item,
-.colorset-the-grey .weapon nav .item,
-.colorset-the-grey .equipment nav .item,
-.colorset-the-grey .stunts nav .item,
-.colorset-the-grey .honorifics nav .item,
-.colorset-the-grey .membership nav .item,
-.colorset-the-grey .relationship nav .item,
-.colorset-the-grey .shipfeatures nav .item {
-  background-color: #b4b6b3;
-  color: #3d3e3f;
-}
-.colorset-the-grey .focus nav .item.active,
-.colorset-the-grey .power nav .item.active,
-.colorset-the-grey .talent nav .item.active,
-.colorset-the-grey .weapon nav .item.active,
-.colorset-the-grey .equipment nav .item.active,
-.colorset-the-grey .stunts nav .item.active,
-.colorset-the-grey .honorifics nav .item.active,
-.colorset-the-grey .membership nav .item.active,
-.colorset-the-grey .relationship nav .item.active,
-.colorset-the-grey .shipfeatures nav .item.active {
-  background-color: #ffffff;
-}
 .colorset-the-grey .focus .mod-card,
 .colorset-the-grey .power .mod-card,
 .colorset-the-grey .talent .mod-card,
@@ -4126,6 +3990,10 @@
   border-radius: 5px;
   border: 5px outset #b22126;
 }
+.colorset-red-warrior .item-summary label {
+  background-color: #b22126;
+  color: #c7c691;
+}
 .colorset-red-warrior .metal-background {
   background: linear-gradient(90deg, #751119 5%, #d1635b 50%, #751119 95%);
 }
@@ -4137,10 +4005,12 @@
   color: #f7b755;
 }
 .colorset-red-warrior .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #d1635b, #751119);
+  background-color: #b22126;
+  color: #c7c691;
 }
 .colorset-red-warrior .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #d1635b 60%, #751119) !important;
+  background-color: #751119;
+  color: #f7b755;
 }
 .colorset-red-warrior .thin-border {
   border: thin solid #c7c691;
@@ -4172,7 +4042,6 @@
   background-color: #751119;
   color: #f7b755;
 }
-.colorset-red-warrior .char-sheet .editor,
 .colorset-red-warrior .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -4215,30 +4084,6 @@
   background-color: #d1635b !important;
   color: #751119 !important;
 }
-.colorset-red-warrior .focus img,
-.colorset-red-warrior .power img,
-.colorset-red-warrior .talent img,
-.colorset-red-warrior .weapon img,
-.colorset-red-warrior .equipment img,
-.colorset-red-warrior .stunts img,
-.colorset-red-warrior .honorifics img,
-.colorset-red-warrior .membership img,
-.colorset-red-warrior .relationship img,
-.colorset-red-warrior .shipfeatures img {
-  border: 1px solid #751119;
-}
-.colorset-red-warrior .focus label,
-.colorset-red-warrior .power label,
-.colorset-red-warrior .talent label,
-.colorset-red-warrior .weapon label,
-.colorset-red-warrior .equipment label,
-.colorset-red-warrior .stunts label,
-.colorset-red-warrior .honorifics label,
-.colorset-red-warrior .membership label,
-.colorset-red-warrior .relationship label,
-.colorset-red-warrior .shipfeatures label {
-  color: #751119;
-}
 .colorset-red-warrior .focus .item-card-stats,
 .colorset-red-warrior .power .item-card-stats,
 .colorset-red-warrior .talent .item-card-stats,
@@ -4275,31 +4120,6 @@
 .colorset-red-warrior .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-red-warrior .focus nav .item,
-.colorset-red-warrior .power nav .item,
-.colorset-red-warrior .talent nav .item,
-.colorset-red-warrior .weapon nav .item,
-.colorset-red-warrior .equipment nav .item,
-.colorset-red-warrior .stunts nav .item,
-.colorset-red-warrior .honorifics nav .item,
-.colorset-red-warrior .membership nav .item,
-.colorset-red-warrior .relationship nav .item,
-.colorset-red-warrior .shipfeatures nav .item {
-  background-color: #d1635b;
-  color: #751119;
-}
-.colorset-red-warrior .focus nav .item.active,
-.colorset-red-warrior .power nav .item.active,
-.colorset-red-warrior .talent nav .item.active,
-.colorset-red-warrior .weapon nav .item.active,
-.colorset-red-warrior .equipment nav .item.active,
-.colorset-red-warrior .stunts nav .item.active,
-.colorset-red-warrior .honorifics nav .item.active,
-.colorset-red-warrior .membership nav .item.active,
-.colorset-red-warrior .relationship nav .item.active,
-.colorset-red-warrior .shipfeatures nav .item.active {
-  background-color: #ffffff;
-}
 .colorset-red-warrior .focus .mod-card,
 .colorset-red-warrior .power .mod-card,
 .colorset-red-warrior .talent .mod-card,
@@ -4323,6 +4143,10 @@
   border-radius: 5px;
   border: 5px outset #58705a;
 }
+.colorset-never-dead .item-summary label {
+  background-color: #58705a;
+  color: #29241f;
+}
 .colorset-never-dead .metal-background {
   background: linear-gradient(90deg, #663322 5%, #eeddcd 50%, #663322 95%);
 }
@@ -4334,10 +4158,12 @@
   color: #bb8755;
 }
 .colorset-never-dead .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #eeddcd, #663322);
+  background-color: #58705a;
+  color: #29241f;
 }
 .colorset-never-dead .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #eeddcd 60%, #663322) !important;
+  background-color: #663322;
+  color: #bb8755;
 }
 .colorset-never-dead .thin-border {
   border: thin solid #29241f;
@@ -4369,7 +4195,6 @@
   background-color: #663322;
   color: #bb8755;
 }
-.colorset-never-dead .char-sheet .editor,
 .colorset-never-dead .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -4412,30 +4237,6 @@
   background-color: #eeddcd !important;
   color: #663322 !important;
 }
-.colorset-never-dead .focus img,
-.colorset-never-dead .power img,
-.colorset-never-dead .talent img,
-.colorset-never-dead .weapon img,
-.colorset-never-dead .equipment img,
-.colorset-never-dead .stunts img,
-.colorset-never-dead .honorifics img,
-.colorset-never-dead .membership img,
-.colorset-never-dead .relationship img,
-.colorset-never-dead .shipfeatures img {
-  border: 1px solid #663322;
-}
-.colorset-never-dead .focus label,
-.colorset-never-dead .power label,
-.colorset-never-dead .talent label,
-.colorset-never-dead .weapon label,
-.colorset-never-dead .equipment label,
-.colorset-never-dead .stunts label,
-.colorset-never-dead .honorifics label,
-.colorset-never-dead .membership label,
-.colorset-never-dead .relationship label,
-.colorset-never-dead .shipfeatures label {
-  color: #663322;
-}
 .colorset-never-dead .focus .item-card-stats,
 .colorset-never-dead .power .item-card-stats,
 .colorset-never-dead .talent .item-card-stats,
@@ -4472,31 +4273,6 @@
 .colorset-never-dead .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-never-dead .focus nav .item,
-.colorset-never-dead .power nav .item,
-.colorset-never-dead .talent nav .item,
-.colorset-never-dead .weapon nav .item,
-.colorset-never-dead .equipment nav .item,
-.colorset-never-dead .stunts nav .item,
-.colorset-never-dead .honorifics nav .item,
-.colorset-never-dead .membership nav .item,
-.colorset-never-dead .relationship nav .item,
-.colorset-never-dead .shipfeatures nav .item {
-  background-color: #eeddcd;
-  color: #663322;
-}
-.colorset-never-dead .focus nav .item.active,
-.colorset-never-dead .power nav .item.active,
-.colorset-never-dead .talent nav .item.active,
-.colorset-never-dead .weapon nav .item.active,
-.colorset-never-dead .equipment nav .item.active,
-.colorset-never-dead .stunts nav .item.active,
-.colorset-never-dead .honorifics nav .item.active,
-.colorset-never-dead .membership nav .item.active,
-.colorset-never-dead .relationship nav .item.active,
-.colorset-never-dead .shipfeatures nav .item.active {
-  background-color: #ffffff;
-}
 .colorset-never-dead .focus .mod-card,
 .colorset-never-dead .power .mod-card,
 .colorset-never-dead .talent .mod-card,
@@ -4520,6 +4296,10 @@
   border-radius: 5px;
   border: 5px outset #112339;
 }
+.colorset-expanded-blue .item-summary label {
+  background-color: #112339;
+  color: #dde2e2;
+}
 .colorset-expanded-blue .metal-background {
   background: linear-gradient(90deg, #005971 5%, #e6e7e8 50%, #005971 95%);
 }
@@ -4531,10 +4311,12 @@
   color: #dde2e2;
 }
 .colorset-expanded-blue .sheet-main-content nav a {
-  background: radial-gradient(closest-side, #e6e7e8, #005971);
+  background-color: #112339;
+  color: #dde2e2;
 }
 .colorset-expanded-blue .sheet-main-content nav a.active {
-  background: radial-gradient(closest-side, #e6e7e8 60%, #005971) !important;
+  background-color: #005971;
+  color: #dde2e2;
 }
 .colorset-expanded-blue .thin-border {
   border: thin solid #dde2e2;
@@ -4566,7 +4348,6 @@
   background-color: #005971;
   color: #dde2e2;
 }
-.colorset-expanded-blue .char-sheet .editor,
 .colorset-expanded-blue .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
@@ -4609,30 +4390,6 @@
   background-color: #e6e7e8 !important;
   color: #005971 !important;
 }
-.colorset-expanded-blue .focus img,
-.colorset-expanded-blue .power img,
-.colorset-expanded-blue .talent img,
-.colorset-expanded-blue .weapon img,
-.colorset-expanded-blue .equipment img,
-.colorset-expanded-blue .stunts img,
-.colorset-expanded-blue .honorifics img,
-.colorset-expanded-blue .membership img,
-.colorset-expanded-blue .relationship img,
-.colorset-expanded-blue .shipfeatures img {
-  border: 1px solid #005971;
-}
-.colorset-expanded-blue .focus label,
-.colorset-expanded-blue .power label,
-.colorset-expanded-blue .talent label,
-.colorset-expanded-blue .weapon label,
-.colorset-expanded-blue .equipment label,
-.colorset-expanded-blue .stunts label,
-.colorset-expanded-blue .honorifics label,
-.colorset-expanded-blue .membership label,
-.colorset-expanded-blue .relationship label,
-.colorset-expanded-blue .shipfeatures label {
-  color: #005971;
-}
 .colorset-expanded-blue .focus .item-card-stats,
 .colorset-expanded-blue .power .item-card-stats,
 .colorset-expanded-blue .talent .item-card-stats,
@@ -4667,31 +4424,6 @@
 .colorset-expanded-blue .membership .item-card-desc,
 .colorset-expanded-blue .relationship .item-card-desc,
 .colorset-expanded-blue .shipfeatures .item-card-desc {
-  background-color: #ffffff;
-}
-.colorset-expanded-blue .focus nav .item,
-.colorset-expanded-blue .power nav .item,
-.colorset-expanded-blue .talent nav .item,
-.colorset-expanded-blue .weapon nav .item,
-.colorset-expanded-blue .equipment nav .item,
-.colorset-expanded-blue .stunts nav .item,
-.colorset-expanded-blue .honorifics nav .item,
-.colorset-expanded-blue .membership nav .item,
-.colorset-expanded-blue .relationship nav .item,
-.colorset-expanded-blue .shipfeatures nav .item {
-  background-color: #e6e7e8;
-  color: #005971;
-}
-.colorset-expanded-blue .focus nav .item.active,
-.colorset-expanded-blue .power nav .item.active,
-.colorset-expanded-blue .talent nav .item.active,
-.colorset-expanded-blue .weapon nav .item.active,
-.colorset-expanded-blue .equipment nav .item.active,
-.colorset-expanded-blue .stunts nav .item.active,
-.colorset-expanded-blue .honorifics nav .item.active,
-.colorset-expanded-blue .membership nav .item.active,
-.colorset-expanded-blue .relationship nav .item.active,
-.colorset-expanded-blue .shipfeatures nav .item.active {
   background-color: #ffffff;
 }
 .colorset-expanded-blue .focus .mod-card,
@@ -4883,6 +4615,22 @@ body *:not(i, .fa, .far, .fas) {
 .age-system .opacity-low {
   opacity: 0.5;
 }
+.age-system input:focus,
+.age-system select:focus,
+.age-system input:hover:not(:disabled),
+.age-system select:hover,
+.age-system nav a:hover:not(.active),
+.age-system span.toggle-condition:hover {
+  box-shadow: 0 0 5px silver !important;
+}
+.age-system hr {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, rgba(240, 240, 240, 0.05), #8c8b8b, rgba(240, 240, 240, 0.05));
+  background-image: -moz-linear-gradient(left, rgba(240, 240, 240, 0.05), #8c8b8b, rgba(240, 240, 240, 0.05));
+  background-image: -ms-linear-gradient(left, rgba(240, 240, 240, 0.05), #8c8b8b, rgba(240, 240, 240, 0.05));
+  background-image: -o-linear-gradient(left, rgba(240, 240, 240, 0.05), #8c8b8b, rgba(240, 240, 240, 0.05));
+}
 .age-system-dialog.bonus-select button.dialog-button {
   flex: 0 0 45%;
 }
@@ -5068,6 +4816,10 @@ body *:not(i, .fa, .far, .fas) {
 .age-system .flexrow {
   display: flex;
   flex-direction: row;
+}
+.age-system .flex-gap {
+  column-gap: 0.2rem;
+  row-gap: 0.2rem;
 }
 .age-system .no-flexwrap {
   flex-wrap: nowrap;

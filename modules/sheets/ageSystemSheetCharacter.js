@@ -65,24 +65,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.favHonor = data.honorifics.filter(i => i.data.favorite);
         data.favMembership = data.membership.filter(i => i.data.favorite);
 
-        // Sorting Modifiers per Type/Item
-        const modList = {}
-        for (let i = 0; i < itemSorted.length; i++) {
-            const item = itemSorted[i];
-            const itemMods = item.data.itemMods
-            if (itemMods && (item.data.equiped || item.data.activate)) {
-                for (const m in itemMods) {
-                    if (Object.hasOwnProperty.call(itemMods, m)) {
-                        const mData = itemMods[m];
-                        if (mData.selected) {
-                            if (!modList[m]) modList[m] = [];
-                            modList[m].push(item)
-                        }
-                    }
-                }
-            }
-        }
-
         // Sort Conditions alphabetically
         data.conditions = foundry.utils.deepClone(CONFIG.statusEffects).filter(e => e.flags?.["age-system"]?.isCondition);
         for (let i = 0; i < data.conditions.length; i++) {
@@ -135,7 +117,8 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             actor: this.object,
             cssClass: isEditable ? "editable" : "locked",
             data: data,
-            itemMods: modList,
+            itemMods: this.object.data.data.ownedMods,
+            // modListType: modListType,
             effects: data.effects,
             items: data.items,
             limited: this.object.limited,
@@ -363,10 +346,10 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     _onToggleItemMod(event) {
         const data = event.currentTarget.dataset;
         const itemId = data.itemId;
-        const modType = data.modType;
+        const key = data.key;
         const item = this.actor.items.get(itemId);
-        const active = item.data.data.itemMods[modType].isActive;
-        const dataPath = `data.itemMods.${modType}.isActive`;
+        const active = item.data.data.modifiers[key].isActive;
+        const dataPath = `data.modifiers.${key}.isActive`;
         return item.update({[dataPath]: !active});
     }
 

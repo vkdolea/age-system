@@ -108,7 +108,7 @@
 
         </div>
 
-        <ul class="resource item-group favourite">
+        <ul class="resource item-group favourite colorset-third-tier">
             <li class="header title colorset-first-tier">
                 {{localize "age-system.quickAccess"}}
             </li>
@@ -118,6 +118,9 @@
             <li>
                 {{> "systems/age-system/templates/partials/itemcontrols/weapon.hbs" item=this config=../data.config}}
             </li>
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
             {{/each}}
             {{/if}}
 
@@ -127,6 +130,9 @@
             <li>
                 {{> "systems/age-system/templates/partials/itemcontrols/power.hbs" item=this config=../data.config}}
             </li>
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
             {{/each}}
             {{/if}}
 
@@ -136,6 +142,9 @@
             <li>
                 {{> "systems/age-system/templates/partials/itemcontrols/equipment.hbs" item=this config=../data.config}}
             </li>
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
             {{/each}}
             {{/if}}
 
@@ -145,6 +154,9 @@
             <li>
                 {{> "systems/age-system/templates/partials/itemcontrols/stunts.hbs" item=this config=../data.config}}
             </li>
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
             {{/each}}
             {{/if}}
 
@@ -154,6 +166,9 @@
             <li>
                 {{> "systems/age-system/templates/partials/itemcontrols/talent.hbs" item=this config=../data.config}}
             </li>
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
             {{/each}}
             {{/if}}
 
@@ -163,6 +178,9 @@
             <li>
                 {{> "systems/age-system/templates/partials/itemcontrols/relationship.hbs" item=this config=../data.config}}
             </li>
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
             {{/each}}
             {{/if}}
             
@@ -172,6 +190,9 @@
             <li>
                 {{> "systems/age-system/templates/partials/itemcontrols/honorifics.hbs" item=this config=../data.config}}
             </li>
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
             {{/each}}
             {{/if}}
 
@@ -181,6 +202,9 @@
             <li>
                 {{> "systems/age-system/templates/partials/itemcontrols/membership.hbs" item=this config=../data.config}}
             </li>
+            {{#unless @last}}
+            <hr>
+            {{/unless}}
             {{/each}}
             {{/if}}
         </ul>

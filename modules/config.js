@@ -641,41 +641,47 @@ ageSystem.statusEffects = {
 ]};
 
 ageSystem.ageEffectsKeys = {
-    "testMod": {label: "age-system.bonus.testMod", mask: "data.testMod"},
-    "attackMod": {label: "age-system.bonus.attackMod", mask: "data.attackMod"},
-    "actorDamage": {label: "age-system.bonus.actorDamage", mask: "data.dmgMod"},
-    "acc": {label: "age-system.bonus.acc", mask: "data.abilities.acc.total"},
-    "comm": {label: "age-system.bonus.comm", mask: "data.abilities.comm.total"},
-    "cons": {label: "age-system.bonus.cons", mask:"data.abilities.cons.total"},
-    "cunn": {label: "age-system.bonus.cunn", mask: "data.abilities.cunn.total"},
-    "dex": {label: "age-system.bonus.dex", mask: "data.abilities.dex.total"},
-    "fight": {label: "age-system.bonus.fight", mask: "data.abilities.fight.total"},
-    "int": {label: "age-system.bonus.int", mask: "data.abilities.int.total"},
-    "magic": {label: "age-system.bonus.magic", mask: "data.abilities.magic.total"},
-    "per": {label: "age-system.bonus.per", mask: "data.abilities.per.total"},
-    "str": {label: "age-system.bonus.str", mask: "data.abilities.str.total"},
-    "will": {label: "age-system.bonus.will", mask: "data.abilities.total"},
-    "defense": {label: "age-system.bonus.defense", mask: "data.defense.total"},
-    "impactArmor": {label: "age-system.bonus.impactArmor", mask: "data.armor.impact"},
-    "ballisticArmor": {label: "age-system.bonus.ballisticArmor", mask: "data.armor.ballistic"},
-    "defendMnv": {label: "age-system.bonus.defendMnv", mask: "data.defend.total"},
-    "guardupMnv": {label: "age-system.bonus.guardupMnv", mask: "data.guardUp.total"},
-    "allOutAtk": {label: "age-system.bonus.allOutAtkMnv", mask: "data.allOutAttack.total"},
-    "maxHealth": {label: "age-system.bonus.maxHealth", mask: "data.health.max"},
-    "maxConviction": {label: "age-system.bonus.maxConviction", mask: "data.conviction.max"},
-    "maxPowerPoints": {label: "age-system.bonus.maxPowerPoints", mask: "data.powerPoints.max"},
-    "aimMnv": {label: "age-system.bonus.aimMnv", mask: "data.aim.total"},
-    "armorPenalty": {label: "age-system.bonus.armorPenalty", mask: "data.armor.penalty"},
-    "armorStrain": {label: "age-system.bonus.armorStrain", mask: "data.armor.strain"},
-    "speed": {label: "age-system.bonus.speed", mask: "data.speed.total"},
-    "toughness": {label: "age-system.bonus.toughness", mask: "data.armor.toughness.total"},
+    "testMod": {label: "age-system.bonus.testMod", mask: "data.testMod", dtype: 'nodice'},
+    "attackMod": {label: "age-system.bonus.attackMod", mask: "data.attackMod", dtype: 'nodice'},
+    "actorDamage": {label: "age-system.bonus.actorDamage", mask: "data.dmgMod", dtype: 'formula'},
+    "acc": {label: "age-system.bonus.acc", mask: "data.abilities.acc.total", dtype: 'number'},
+    "comm": {label: "age-system.bonus.comm", mask: "data.abilities.comm.total", dtype: 'number'},
+    "cons": {label: "age-system.bonus.cons", mask:"data.abilities.cons.total", dtype: 'number'},
+    "cunn": {label: "age-system.bonus.cunn", mask: "data.abilities.cunn.total", dtype: 'number'},
+    "dex": {label: "age-system.bonus.dex", mask: "data.abilities.dex.total", dtype: 'number'},
+    "fight": {label: "age-system.bonus.fight", mask: "data.abilities.fight.total", dtype: 'number'},
+    "int": {label: "age-system.bonus.int", mask: "data.abilities.int.total", dtype: 'number'},
+    "magic": {label: "age-system.bonus.magic", mask: "data.abilities.magic.total", dtype: 'number'},
+    "per": {label: "age-system.bonus.per", mask: "data.abilities.per.total", dtype: 'number'},
+    "str": {label: "age-system.bonus.str", mask: "data.abilities.str.total", dtype: 'number'},
+    "will": {label: "age-system.bonus.will", mask: "data.abilities.will.total", dtype: 'number'},
+    "defense": {label: "age-system.bonus.defense", mask: "data.defense.total", dtype: 'nodice'},
+    "impactArmor": {label: "age-system.bonus.impactArmor", mask: "data.armor.impact", dtype: 'nodice'},
+    "ballisticArmor": {label: "age-system.bonus.ballisticArmor", mask: "data.armor.ballistic", dtype: 'nodice'},
+    "defendMnv": {label: "age-system.bonus.defendMnv", mask: "data.defend.total", dtype: 'nodice'},
+    "guardupMnv": {label: "age-system.bonus.guardupMnv", mask: "data.guardUp.total", dtype: 'nodice'},
+    "allOutAtkMnv": {label: "age-system.bonus.allOutAtkMnv", mask: "data.allOutAttack.total", dtype: 'formula'},
+    "maxHealth": {label: "age-system.bonus.maxHealth", mask: "data.health.max", dtype: 'nodice'},
+    "maxConviction": {label: "age-system.bonus.maxConviction", mask: "data.conviction.max", dtype: 'nodice'},
+    "maxPowerPoints": {label: "age-system.bonus.maxPowerPoints", mask: "data.powerPoints.max", dtype: 'nodice'},
+    "aimMnv": {label: "age-system.bonus.aimMnv", mask: "data.aim.total", dtype: 'nodice'},
+    "armorPenalty": {label: "age-system.bonus.armorPenalty", mask: "data.armor.penalty", dtype: 'nodice'},
+    "armorStrain": {label: "age-system.bonus.armorStrain", mask: "data.armor.strain", dtype: 'nodice'},
+    "speed": {label: "age-system.bonus.speed", mask: "data.speed.total", dtype: 'nodice'},
+    "toughness": {label: "age-system.bonus.toughness", mask: "data.armor.toughness.total", dtype: 'nodice'},
 }
 
 ageSystem.itemEffectsKeys = {
-    "powerForce": {label: "age-system.bonus.powerForce", mask: ""},
-    "focus": {label: "age-system.bonus.focusValue", mask: ""},
-    "itemDamage": {label: "age-system.bonus.itemAtk", mask: ""},
-    "itemActivation": {label: "age-system.bonus.generalDmg", mask: ""}
+    "powerForce": {label: "age-system.bonus.powerForce", mask: "", dtype: 'nodice'},
+    "focus": {label: "age-system.bonus.focusValue", mask: "", dtype: 'nodice'},
+    "itemDamage": {label: "age-system.bonus.itemAtk", mask: "", dtype: 'formula'},
+    "itemActivation": {label: "age-system.bonus.generalDmg", mask: "", dtype: 'nodice'}
+}
+
+// Collection of all mod keys
+ageSystem.modkeys = {
+    ...ageSystem.ageEffectsKeys,
+    ...ageSystem.itemEffectsKeys,
 }
 
 // Age Tracker & Roller Initial Positions
@@ -701,6 +707,7 @@ ageSystem.ROLL_TYPE = {
     POWER: "powerActivation",
     ABILITY: 'ability',
     FOCUS: 'focus',
+    TALENT: 'talent',
     VEHICLE_ACTION: 'vehicle',
     PLOT_ACTION: 'plotAction',
     PLOT_DAMAGE: 'plotDamage',
@@ -777,4 +784,8 @@ ageSystem.modifiers = {
         "armorStrain", "defendMnv", "guardupMnv", "allOutAtkMnv", "maxPowerPoints"
     ],
     modeToLocalize: ["impactArmor", "powerForce", "maxPowerPoints", "maxHealth"]
-}
+};
+
+// Talent Degrees
+ageSystem.mageDegrees = ['age-system.novice', 'age-system.expert', 'age-system.master', 'age-system.grandmaster', 'age-system.apex']
+ageSystem.fageDegrees = ['age-system.novice', 'age-system.journeyman', 'age-system.master', 'age-system.grandmaster', 'age-system.apex']

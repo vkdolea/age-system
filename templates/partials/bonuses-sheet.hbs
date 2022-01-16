@@ -1,26 +1,36 @@
-<div class="flexrow modificators-table">
-    <ul class="mod-card">
-        <li class="mod-item header flexrow colorset-first-tier">
+<section class="flexrow modificators-table">
+    <ul class="resource item-group custom-effects">
+        <li class="header flexrow colorset-first-tier">
             <p class="mod-type">{{localize "age-system.type"}}</p>
             <p class="mod-value">{{localize "age-system.value"}}</p>
             <p class="mod-controls"><a class="add-bonus"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></p>
         </li>
-        {{#each data.data.itemMods as |mod|}}
-        {{#if mod.selected}}
-        <li class="mod-item flexrow feature-controls colorset-third-tier" data-mod-type="{{@key}}">
-            <p class="mod-type">{{localize (concat "age-system.bonus." @key)}}</p>
+        {{#each data.data.modifiers as |mod i|}}
+        <li class="item-box flexrow feature-controls colorset-third-tier" data-mod-index="{{i}}">
+            <select class="mod-type" name="data.modifiers.{{i}}.type">
+                {{#select mod.type}}
+                <option value="">-</option>
+                {{#each ../modifiersList as |modType name|}}
+                <option value="{{name}}">{{modType}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
             <div class="mod-value">
-                {{#if (eq @key "focus")}}
-                <input type="text" class="mod"  name="data.itemMods.{{@key}}.name" value="{{mod.name}}" placeholder="{{localize "age-system.focus"}}" data-dtype="String" />
-                {{/if}}
-                <input type="number" class="mod" name="data.itemMods.{{@key}}.value" value="{{mod.value}}" data-dtype="Number" />
+                <input type="text" class="mod" name="data.modifiers.{{i}}.conditions.focus" value="{{mod.conditions.focus}}" placeholder="{{localize "age-system.focus"}}" {{#unless (or (eq mod.type "focus") (eq mod.type "powerForceAll"))}}style="display: none"{{/unless}}/>
+                <input type="text" class="mod" name="data.modifiers.{{i}}.formula" value="{{mod.formula}}"/>
+                {{#unless mod.valid}}
+                <div class="formula-error">
+                    <span><i class="fa fa-times" aria-hidden="true"></i> {{localize (concat "age-system.invalidMod" mod.ftype)}}</span>
+                </div>
+                {{/unless}}
             </div>
             <div class="mod-controls">
                 <a class="toggle {{#unless mod.isActive}}inactive{{/unless}}"><i class="fas fa-power-off"></i></a>
+                {{!-- Added this line to update database when powering on/off effects --}}
+                <input type="checkbox" name="data.modifiers.{{i}}.isActive" {{checked mod.isActive}} class="checkbox" style="position: absolute; display: none;"/>
                 <a class="remove"><i class="fa fa-trash"></i></a>
             </div>
         </li>
-        {{/if}}
         {{/each}}
     </ul>
-</div>
+</section>

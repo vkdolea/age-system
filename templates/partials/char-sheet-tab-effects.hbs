@@ -57,43 +57,45 @@
     </div>
 
     {{!-- Item Modifiers Block --}}
-    <div class="actor-items">
-        <ul class="item-container modifiers">
-            <li class="top-row colorset-first-tier">{{localize "age-system.itemMod"}}</li>
-            <li class="flexrow header colorset-first-tier">
-                <p class="mod-name">{{localize "age-system.type"}}</p>
-                <div class="mod-value flexrow">
-                    <p class="value">{{localize "age-system.value"}}</p>
-                    <p class="icon">{{localize "age-system.control"}}</p>
-                </div>
-                <p class="mod-source">{{localize "age-system.source"}}</p>
-            </li>
-            {{#each itemMods as |items modType|}}
-            <li class="flexrow colorset-third-tier elements">
-                <div class="mod-name flexrow">
-                    <p>{{localize (concat "age-system.bonus." modType)}}</p>
-                </div>
-                <div class="flexcol mod-value">
-                    {{#each items as |item|}}
-                    <div class="flexrow value-data">
-                        {{#if (eq modType "focus")}}
-                        <p class="value">{{#with (lookup item.data.itemMods [modType])~}}{{name}}, {{value}}{{/with}}</p>
-                        {{else}}
-                        <p class="value">{{#with (lookup item.data.itemMods [modType])~}}{{value}}{{/with}}</p>
-                        {{/if}}
-                        {{#with (lookup item.data.itemMods [modType])~}}
-                        <p class="icon"><a class="mod-active icon {{#unless isActive}}inactive{{/unless}}" data-mod-type="{{modType}}" data-item-id="{{item._id}}"><i class="fas fa-power-off"></i></a></p>
-                        {{/with}}
+    <ul class="item-group resource modifiers colorset-third-tier">
+        <li class="title colorset-first-tier">{{localize "age-system.itemMod"}}</li>
+        <li class="header flexrow colorset-first-tier">
+            <span class="mod-name">{{localize "age-system.type"}}</span>
+            <span class="mod-value">{{localize "age-system.value"}}</span>
+            <span class="mod-source">{{localize "age-system.source"}}</span>
+        </li>
+        {{#each itemMods as |modGroup modType|}}
+        {{#unless @first}}
+        <hr>
+        {{/unless}}
+        <li class="flexrow extra-margin">
+            <span class="mod-name">{{localize (concat "age-system.bonus." modType)}}</span>
+            <ul class="modifier-item-details">
+                {{#each modGroup.parts as |mod|}}
+                <li class="flexrow">
+                    <div class="flexcol mod-value">
+                        <div class="flexrow value-box">
+                            {{#if mod.valid}}
+                            {{#if (eq modType "focus")}}
+                            <span class="number">{{mod.conditions.focus}}, {{mod.formula}}</span>
+                            {{else}}
+                            <span class="value-numeric">{{mod.formula}}</span>
+                            {{/if}}
+                            <span class="icon"><a class="mod-active icon {{#unless mod.isActive}}inactive{{/unless}}" data-key="{{mod.key}}" data-item-id="{{mod.itemId}}"><i class="fas fa-power-off"></i></a></span>
+                            {{else}}
+                            <div class="formula-error">
+                                <span><i class="fa fa-times" aria-hidden="true"></i> {{localize (concat "age-system.invalidMod" mod.ftype)}}</span>
+                            </div>
+                            {{/if}}
+                        </div>
                     </div>
-                    {{/each}}
-                </div>
-                <div class="flexcol mod-source">
-                    {{#each items as |item|}}
-                    <p class="item-edit" data-item-id={{item._id}}><a>{{item.name}}</a></p>
-                    {{/each}}
-                </div>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
+                    <div class="flexcol mod-source">
+                        <span class="item-edit" data-item-id={{mod.itemId}}><a>{{mod.itemName}}</a></span>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+        </li>
+        {{/each}}
+    </ul>
 </div>

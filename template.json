@@ -375,7 +375,8 @@
                 "diceType": "6",
                 "extraValue": 0,
                 "dmgAbl": "str",
-                "damageInjury": 1
+                "damageInjury": 1,
+                "damageFormula": "1d6"
             },
             "hardItem": {
                 "weight": 0,
@@ -396,10 +397,11 @@
             "description": {
                 "shortDesc": "",
                 "longDesc": "",
-                "favorite": false
+                "favorite": false,
+                "reference": ""
             },
             "bonuses": {
-                "modifiers": [],
+                "modifiers": {},
                 "itemMods": {
                     "itemDamage": {
                         "value": 0,
@@ -595,6 +597,7 @@
             "range": 2,
             "rangeMax": 2,
             "rof": "none",
+            "ranged": false,
             "wgroups": []
         },
         "power": {
@@ -616,16 +619,44 @@
                 "diceType": "6",
                 "extraValue": 0,
                 "dmgAbl": "int",
-                "damageInjury": 1
-            }
+                "damageInjury": 1,
+                "damageFormula": "1d6"
+            },
+            "requirement": ""
         },
         "talent": {
             "templates": ["description", "bonuses"],
-            "activate": false
+            "requirement": "",
+            "degree": "",
+            "type": "talent",
+            "activate": false,
+            "degree0": {
+                "desc": "",
+                "isActive": true
+            },
+            "degree1": {
+                "desc": "",
+                "isActive": true
+            },
+            "degree2": {
+                "desc": "",
+                "isActive": true
+            },
+            "degree3": {
+                "desc": "",
+                "isActive": true
+            },
+            "degree4": {
+                "desc": "",
+                "isActive": true
+            }
         },
         "stunts": {
             "templates": ["description"],
-            "stuntPoints": 1
+            "stuntPoints": 1,
+            "stuntPointsMax": 1,
+            "costType": "fixed",
+            "type": ""
         },
         "relationship": {
             "templates": ["description"],

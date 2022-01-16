@@ -553,7 +553,7 @@
             "ballisticArmor": "Armadura Balas",
             "defendMnv": "Maniobra Defensa",
             "guardupMnv": "Maniobra Guardia",
-            "allOutAtkMnv": "Daño Ataque Total",
+            "allOutAtk": "Daño Ataque Total",
             "maxHealth": "Salud Max",
             "maxConviction": "Convicción Max",
             "maxPowerPoints": "PP Max",
@@ -643,6 +643,22 @@
         
         "social": "Social",
         "quickAccess": "Acesso Rápido",
-        "showOnChat": "Mostrar en el chat"
+        "showOnChat": "Mostrar en el chat",
+
+        "requirement": "Requisitos",
+        "novice": "Aprendiz",
+        "expert": "Experto",
+        "journeyman": "Oficial",
+        "master": "Maestro",
+        "grandmaster": "Gran Maestro",
+        "apex": "Cima",
+        "item.spec": "Especialización",
+        "reference": "Referencia",
+        "fixed": "Fijo",
+        "variable": "Variable",
+        "charFocus": "Concentración PJ",
+        "invalidModformula": "Inválido - revisa la formula",
+        "invalidModnodice": "Error - sólo operaciones con números y @attr son válidas",
+        "invalidModnumber": "Sólo números son válidos"
     }
 }

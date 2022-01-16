@@ -643,6 +643,22 @@
 
         "social": "Social",
         "quickAccess": "Quick Access",
-        "showOnChat": "Show on chat"
+        "showOnChat": "Show on chat",
+
+        "requirement": "Requirement",
+        "novice": "Novice",
+        "expert": "Expert",
+        "journeyman": "Journeyman",
+        "master": "Master",
+        "grandmaster": "Grandmaster",
+        "apex": "Apex",
+        "item.spec": "Specialization",
+        "reference": "Reference",
+        "fixed": "Fixed",
+        "variable": "Variable",
+        "charFocus": "PC Focus",
+        "invalidModformula": "Invalid - review formula",
+        "invalidModnodice": "Error - only operations with numbers and @attr are valid",
+        "invalidModnumber": "Only numbers are valid"
     }
 }

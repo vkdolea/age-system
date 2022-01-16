@@ -128,11 +128,16 @@ each(@colorsets, {
             border-radius: 5px;
             border: 5px outset extract(extract(@color-list, @index), 2);
         }
+        .item-summary {
+            label {
+                background-color: extract(extract(@color-list, @index), 2);
+                color: extract(extract(@color-list, @index), 5);
+            }
+        }
         .metal-background {
             background: linear-gradient(90deg, extract(extract(@color-list, @index), 1) 5%, extract(extract(@color-list, @index), 3) 50%, extract(extract(@color-list, @index), 1) 95%);
         }
         .top-banner {
-            // background: linear-gradient(0deg, extract(extract(@color-list, @index), 1) 5%, extract(extract(@color-list, @index), 3) 50%, extract(extract(@color-list, @index), 1) 95%);
             border: 5px outset extract(extract(@color-list, @index), 2);
         }
         .resource {
@@ -142,10 +147,12 @@ each(@colorsets, {
             };
         }
         .sheet-main-content nav a {
-            background: radial-gradient(closest-side, extract(extract(@color-list, @index), 3), extract(extract(@color-list, @index), 1));
+            background-color: extract(extract(@color-list, @index), 2);
+            color: extract(extract(@color-list, @index), 5);
         };
         .sheet-main-content nav a.active {
-            background: radial-gradient(closest-side, extract(extract(@color-list, @index), 3) 60%, extract(extract(@color-list, @index), 1)) !important;
+            background-color: extract(extract(@color-list, @index), 1);
+            color: extract(extract(@color-list, @index), 4);
         }
 
         .thin-border {
@@ -192,7 +199,7 @@ each(@colorsets, {
             
         }
 
-        .char-sheet,
+        // .char-sheet,
         .organization-sheet {
             .editor {
                 background-color: hsl(0, 0%, 100%);
@@ -271,13 +278,13 @@ each(@colorsets, {
         .membership,
         .relationship,
         .shipfeatures {
-            img {
-                border: 1px solid extract(extract(@color-list, @index), 1);
-            }
+            // img {
+            //     border: 1px solid extract(extract(@color-list, @index), 1);
+            // }
     
-            label {
-                color: extract(extract(@color-list, @index), 1);
-            };
+            // label {
+            //     color: extract(extract(@color-list, @index), 1);
+            // };
             .item-card-stats {
                 background-color: extract(extract(@color-list, @index), 3);
                 input.data-entry {
@@ -288,15 +295,15 @@ each(@colorsets, {
                 background-color: #ffffff;
             };
             // Tabs Nav Control  
-            nav {
-                .item {
-                    background-color: extract(extract(@color-list, @index), 3);
-                    color: extract(extract(@color-list, @index), 1);
-                }
-                .item.active {
-                    background-color: #ffffff;
-                }
-            }
+            // nav {
+            //     .item {
+            //         background-color: extract(extract(@color-list, @index), 3);
+            //         color: extract(extract(@color-list, @index), 1);
+            //     }
+            //     .item.active {
+            //         background-color: #ffffff;
+            //     }
+            // }
             // Modificator Cards
             .mod-card {
                 border: solid extract(extract(@color-list, @index), 3) 1px;

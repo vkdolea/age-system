@@ -1,192 +1,277 @@
-<form class="{{cssClass}} age-system item power colorset-selection" autocomplete="off">
-
-    <div class="sheet-content item-stats power">
-        <div class="flexcol">
-            {{#if inChat}}
-            <div class="item-card-title colorset-first-tier">{{name}}</div>
-            {{else}}
-            <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
+<form class="{{cssClass}} age-system item power flexrow no-flexwrap" autocomplete="off">
+    <aside class="sidebar metal-background colorset-first-tier">
+        <img class="document-picture" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <ul class="item-summary">
+            {{!-- Requirement --}}
+            <li>
+                <label>{{localize "age-system.requirement"}}</label>
+                <input type="text" name="data.requirement" value="{{data.data.requirement}}">
+            </li>
+            {{#if (or data.data.hasDamage data.data.hasHealing)}}
+            {{!-- Base Damage --}}
+            <li>
+                <label>{{localize "age-system.item.damage"}}</label>
+                <input type="text" value="{{data.data.dmgFormula}}" disabled>
+            </li>
+            {{#if data.data.hasDamage}}
+            {{#if config.healthSys.useBallistic}}
+            <li>
+                <label>{{localize "age-system.type"}}</label>
+                <input type="text" value="{{localize (concat "age-system." data.data.dmgType)}}" disabled>
+            </li>
             {{/if}}
-            <div class="item-card-stats flex-justify-center flex-align-start flexrow">
-                {{!-- Item Image --}}
-                {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}} 
+            <li>
+                <label>{{localize "age-system.source"}}</label>
+                <input type="text" value="{{localize (concat "age-system." data.data.dmgSource)}}" disabled>
+            </li>
+            {{/if}}
+            {{/if}}
 
-                {{#if (ne inChat true)}}
-                {{!-- Select Damage and Fatigue Options --}}
-                <div class="power-type-control">
-                    <a class="toggle-damage colorset-second-tier {{#unless data.data.hasDamage}}not-equiped{{/unless}}" title="{{localize "age-system.rollDamage"}}">
-                        <div class="flexrow flex-justify-center flex-align-center">
-                            <i class="fas fa-fist-raised"></i>
-                        </div>
-                    </a>
-    
-                    <a class="toggle-healing colorset-second-tier {{#unless data.data.hasHealing}}not-equiped{{/unless}}" title="{{localize "age-system.rollHealing"}}">
-                        <div class="flexrow flex-justify-center flex-align-center">
-                            <i class="fa fa-heartbeat"></i>
-                        </div>
-                    </a>
+            {{#unless data.data.inputFatigueTN}}
+            {{!-- Total Power Point Cost --}}
+            <li>
+                <label>{{localize "age-system.powerPointsIndex"}}</label>
+                <input type="text" value="{{data.data.powerPointCostTotal}}" disabled>
+            </li>
+            {{/unless}}
 
-                    <a class="toggle-resist colorset-second-tier {{#unless data.data.hasTest}}not-equiped{{/unless}}" title="{{localize "age-system.item.testResist"}}">
-                        <div class="flexrow flex-justify-center flex-align-center">
-                            <i class="far fa-dot-circle"></i>
-                        </div>
-                    </a>
+            {{#if (and fatigueSet data.data.useFatigue)}}
+            {{!-- Fatigue TN --}}
+            <li>
+                <label>{{localize "age-system.fatigueTN"}}</label>
+                <input type="number" value="{{data.data.fatigueTN}}" {{#unless data.data.inputFatigueTN}}disabled{{/unless}} name="data.fatigueTN">
+            </li>
+            {{/if}}
 
-                    <a class="toggle-fatigue flexrow use-fatigue-true colorset-second-tier {{#unless data.data.hasFatigue}}not-equiped{{/unless}}" title="{{localize "age-system.rollFatigue"}}">
-                        <div class="flexrow flex-justify-center flex-align-center">
-                            <i class="fas fa-head-side-cough"></i>
-                        </div>
-                    </a>
+            {{!-- Cast Time --}}
+            <li>
+                <label>{{localize "age-system.item.cast"}}</label>
+                <select name="data.castTime" class="data-input">
+                {{#select data.data.castTime}}
+                    {{#each config.actionsToCast as |actionsToCast|}}
+                    <option value="{{@key}}">{{localize actionsToCast}}</option>
+                    {{/each}}
+                {{/select}}
+                </select>
+            </li>
+
+            {{!-- Target Number --}}
+            <li>
+                <label>{{localize "age-system.targetNumber"}} </label>
+                <input type="number" name="data.targetNumber" value="{{data.data.targetNumber}}" data-dtype="Number" />
+            </li>
+
+            {{!-- Power Force --}}
+            <li>
+                <label>{{localize "age-system.item.force"}}</label>
+                <input type="number" disabled value="{{data.data.itemForce}}" data-dtype="Number" />
+            </li>
+
+            {{#if data.data.hasTest}}
+            <li>
+                <label class="two-lines">{{localize "age-system.item.testResist"}}</label>
+                <div class="two-lines">
+                    <input type="text" disabled value="{{localize (concat "age-system." data.data.testAbl)}}"/>
+                    <input type="text" disabled value="{{data.data.testFocus}}" data-dtype="String" />
                 </div>
-                {{/if}}
-                
-                {{!-- Ability/Focus to activate the power --}}
-                {{> "systems/age-system/templates/partials/ability-focus-select.hbs"}}
+            </li>
+            {{/if}}
 
-                {{!-- Power Point Cost --}}
-                {{#unless (and data.data.inputFatigueTN data.data.hasFatigue)}}
-                {{#unless (and inChat data.data.hasFatigue)}}
-                <div class="flexcol">
-                    <label>{{localize "age-system.powerPointsIndex"}}</label>
-                    {{#if inChat}}
-                    <div>{{data.data.powerPointCostTotal}}</div>
-                    {{else}}
-                    <div class="flexrow">
-                        <input type="text" name="data.powerPointCost" value="{{data.data.powerPointCost}}" data-dtype="Number" />
-                        {{#if (ne data.data.powerPointCost data.data.powerPointCostTotal)}}
-                        <div>({{data.data.powerPointCostTotal}})</div>
+            {{!-- Page Ref --}}
+            <li class="feature-controls" data-reference="{{data.data.reference}}">
+                <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
+                <input type="text" name="data.reference" {{#if inChat}}disabled{{/if}} value="{{data.data.reference}}" placeholder="Page Ref." data-dtype="String"/>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="second-column flexcol">
+        <header class="top-banner colorset-first-tier flexrow">
+            <div class="header-details">
+                <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
+                <div class="sub-details flexrow">
+                    {{> "systems/age-system/templates/partials/ability-focus-select.hbs"}}
+                </div>
+            </div>
+        </header>
+        
+        <div class="sheet-main-content metal-background">
+
+            {{!-- Sheet Tab Navigation --}}
+            <nav class="add-sheet-tabs tabs" data-group="primary">
+                <a class="item" data-tab="main">{{localize "age-system.item.desc"}}</a>
+                <a class="item" data-tab="bonus">{{localize "age-system.itemMod"}}</a>
+                <a class="item" data-tab="options"><i class="fa fa-cog" aria-hidden="true"></i></a>
+            </nav>
+
+            <section class="sheet-tab-section">
+                {{!-- Main Tab --}}
+                <div class="tab main" data-group="primary" data-tab="main">
+                    <ul class="resource colorset-first-tier item-box"><li>
+                        {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+                    </li></ul>
+                </div>
+
+                {{!-- Bonuses Tab --}}
+                <div class="tab bonus" data-group="primary" data-tab="bonus">
+                    {{> "systems/age-system/templates/partials/bonuses-sheet.hbs"}}
+                </div>
+
+                {{!-- Options Tab --}}
+                <div class="tab options-section" data-group="primary" data-tab="options">
+
+                    {{!-- More Options --}}
+                    <ul class="resource item-group condensed-data">
+                        <li class="title colorset-first-tier">
+                            {{localize "age-system.charOptions"}}
+                        </li>
+                        <li class="colorset-third-tier flexrow">
+                            <p>
+                                <a class="select-options toggle-feature item-name item-box {{#if data.data.hasTest}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="hasTest">{{localize "age-system.item.resistedEffect"}}</a>
+                                <a class="select-options toggle-feature item-name item-box {{#if data.data.causeDamage}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="causeDamage">{{localize "age-system.item.damage"}}</a>
+                                <a class="select-options toggle-feature item-name item-box {{#if data.data.causeHealing}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="causeHealing">{{localize "age-system.item.healing"}}</a>
+                                {{#if fatigueSet}}
+                                <a class="select-options toggle-feature item-name item-box {{#if data.data.useFatigue}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="useFatigue">{{localize "age-system.useFatigue"}}</a>
+                                {{#if data.data.useFatigue}}
+                                <a class="select-options toggle-feature item-name item-box {{#if data.data.inputFatigueTN}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="inputFatigueTN">{{localize "age-system.inputFatigueTN"}}</a>
+                                {{/if}}
+                                {{/if}}
+                            </p>
+                        </li>
+
+                        <li class="colorset-third-tier flexrow">
+                            {{!-- Power Force Ability --}}
+                            <label>{{localize "age-system.item.force"}}</label>
+                            <span class="minimal-input">{{data.data.itemForce}}</span>
+                            <select name="data.itemForceAbl" class="extra-input">
+                                {{#select data.data.itemForceAbl}}
+                                <option value="no-abl">—</option>
+                                {{#each config.abilities as |name type|}}
+                                <option value="{{type}}">{{localize name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+
+                            {{#unless (and data.data.inputFatigueTN data.data.useFatigue fatigueSet)}}
+                            {{!-- Power Point Cost --}}
+                            <label>{{localize "age-system.powerPoints"}}</label>
+                            <input type="text" class="minimal-input" name="data.powerPointCost" value="{{data.data.powerPointCost}}" data-dtype="Number" />
+                            {{#if (ne data.data.powerPointCost data.data.powerPointCostTotal)}}
+                            <span class="extra-input">({{data.data.powerPointCostTotal}})</span>
+                            {{/if}}
+                            {{/unless}}
+                        </li>
+
+                        {{#if (and data.data.useFatigue fatigueSet)}}
+                        {{!-- Fatigue Ability --}}
+                        <li class="colorset-third-tier flexrow">
+                            <label for="">{{localize "age-system.ablFatigue"}}</label>
+                            <select name="data.ablFatigue">
+                                {{#select data.data.ablFatigue}}
+                                <option value="no-abl">—</option>
+                                {{#each config.abilities as |name type|}}
+                                <option value="{{type}}">{{localize name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </li>
                         {{/if}}
-                    </div>
+
+                        {{#if data.data.hasTest}}
+                        <li class="colorset-third-tier flexrow">
+                            <label>{{localize "age-system.item.testResist"}}</label>
+                            {{!-- Ability to Resist Power --}}
+                            <select name="data.testAbl" class="extra-input">
+                                {{#select data.data.testAbl}}
+                                {{#each config.abilities as |name type|}}
+                                <option value="{{type}}">{{localize name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                            {{!-- Focus to Resist Power --}}
+                            <input name="data.testFocus" type="text" value="{{data.data.testFocus}}" placeholder="{{localize "age-system.focus"}}" list="{{item.type}}-{{item._id}}-list-resist"/>
+                            <datalist id="{{item.type}}-{{item._id}}-list-resist">
+                                <option value=""></option>
+                                {{#each config.focus as |focus|}}
+                                <option value="{{focus.name}}"></option>
+                                {{/each}}
+                            </datalist>
+                        </li>
+                        {{/if}}
+
+                    </ul>
+
+                    {{#if (or data.data.hasDamage data.data.hasHealing)}}
+                    {{!-- Damage Definition --}}
+                    <ul class="resource item-group condensed-data">
+                        <li class="title colorset-first-tier">
+                            {{localize "age-system.item.damage"}}
+                        </li>
+                        <li class="colorset-third-tier flexrow">
+                            <label>{{localize "age-system.formula"}}</label>
+                            {{#if config.healthSys.useInjury}}
+                            <input type="text" name="data.damageInjury" value="{{data.data.damageInjury}}"/>
+                            {{else}}
+                            <input type="text" name="data.damageFormula" value="{{data.data.damageFormula}}"/>
+                            {{/if}}
+                            <div class="extra-input">
+                                <span>+<select name="data.dmgAbl">
+                                    {{#select data.data.dmgAbl}}
+                                    <option value="no-abl">—</option>
+                                    {{#each config.abilities as |name type|}}
+                                    <option value="{{type}}">{{localize name}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select></span>
+                            </div>
+                        </li>
+                        {{#if data.data.hasTest}}
+                        {{!-- Damage if Resisted --}}
+                        <li class="colorset-third-tier flexrow">
+                            <label>{{localize "age-system.item.resistedEffect"}}</label>
+                            {{#if config.healthSys.useInjury}}
+                            <input type="text" name="data.damageResisted.damageInjury" value="{{data.data.damageResisted.damageInjury}}"/>
+                            {{else}}
+                            <input type="text" name="data.damageResisted.damageFormula" value="{{data.data.damageResisted.damageFormula}}"/>
+                            {{/if}}
+                            <div class="extra-input">
+                                <span>+<select name="data.damageResisted.dmgAbl">
+                                    {{#select data.data.damageResisted.dmgAbl}}
+                                    <option value="no-abl">—</option>
+                                    {{#each config.abilities as |name type|}}
+                                    <option value="{{type}}">{{localize name}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select></span>
+                            </div>
+                        </li>
+                        {{/if}}
+
+                        {{#if data.data.hasDamage}}
+                        <li class="colorset-third-tier flexrow">
+                            <label class="colorset-third-tier">{{localize "age-system.type"}}</label>
+                            {{#if config.healthSys.useBallistic}}
+                            <select name="data.dmgType">
+                                {{#select data.data.dmgType}}
+                                {{#each config.damageType as |name type|}}
+                                <option value="{{type}}">{{localize name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                            {{/if}}
+                            <select name="data.dmgSource">
+                                {{#select data.data.dmgSource}}
+                                {{#each config.damageSource as |name source|}}
+                                <option value="{{source}}">{{localize name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </li>
+                        {{/if}}
+                    </ul>
                     {{/if}}
                 </div>
-                {{/unless}}
-                {{/unless}}
-
-                {{!-- Fatigue Setup --}}
-                {{#if data.data.useFatigue}}
-                {{#if (ne inChat true)}}       
-                <div class="flexcol use-fatigue-true">
-                    <label class="use-fatigue">{{localize "age-system.ablFatigue"}}</label>
-                    <select name="data.ablFatigue" class="data-input">
-                        {{#select data.data.ablFatigue}}
-                        {{#each config.abilities as |name type|}}
-                        <option value="{{type}}">{{localize name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-                <div class="flexcol use-fatigue-true">
-                    <label class="use-fatigue">{{localize "age-system.inputFatigueTN"}}</label>
-                    <input class="use-fatigue" type="checkbox" name="data.inputFatigueTN" {{checked data.data.inputFatigueTN}} class="checkbox"/>
-                </div>
-                {{/if}}
-                <div class="flexcol use-fatigue-true">
-                    <label class="use-fatigue">{{localize "age-system.fatigueTN"}}</label>
-                    <input class="use-fatigue" type="number" {{#unless data.data.inputFatigueTN}}disabled{{/unless}} name="data.fatigueTN" value="{{data.data.fatigueTN}}" data-dtype="Number" />                   
-                </div>
-                {{/if}}
-
-                {{!-- Casting Time --}}
-                <div class="flexcol">
-                    <label>{{localize "age-system.item.cast"}} </label>
-                    {{#if inChat}}
-                    <div>{{localize (concat "age-system." data.data.castTime)}}</div>
-                    {{else}}
-                    <select name="data.castTime" class="data-input">
-                    {{#select data.data.castTime}}
-                        {{#each config.actionsToCast as |actionsToCast|}}
-                        <option value="{{@key}}">{{localize actionsToCast}}</option>
-                        {{/each}}
-                    {{/select}}
-                    </select>
-                    {{/if}}
-                </div>
-
-                {{!-- Power Target Number --}}
-                <div class="flexcol">
-                    <label>{{localize "age-system.targetNumber"}} </label>
-                    {{#if inChat}}
-                    <div class="data-input">{{data.data.targetNumber}}</div>
-                    {{else}}
-                    <input type="number" class="data-input" name="data.targetNumber" value="{{data.data.targetNumber}}" data-dtype="Number" />
-                    {{/if}}
-                </div>
-
-                {{!-- Power Force --}}
-                <div class="flexcol">
-                    <label>{{localize "age-system.item.force"}}</label>
-                    <span class="data-input">{{data.data.itemForce}}</span>
-                    {{#if (ne inChat true)}}
-                    {{!-- Ability to activate item --}}
-                    <div class="flexcol">
-                        <select name="data.itemForceAbl" class="data-input">
-                            {{#select data.data.itemForceAbl}}
-                            {{#each config.abilities as |name type|}}
-                            <option value="{{type}}">{{localize name}}</option>
-                            {{/each}}
-                            {{/select}}
-                        </select>
-                    </div>
-                    {{/if}}             
-                </div>
-
-                {{!-- Resist Test --}}
-                {{#if data.data.hasTest}}
-                {{#if inChat}}
-                <div class="flexcol flex-align-center">
-                    <label style="white-space: nowrap;">{{localize "age-system.item.testResist"}}</label>
-                    <p style="white-space: nowrap;">{{localize (concat "age-system." data.data.testAbl)}} ({{data.data.testFocus}})</p>
-                </div>
-                {{else}}
-                <div class="flexcol">
-                    <label>{{localize "age-system.item.testResist"}}</label>
-                    {{!-- Ability to Resist Power --}}
-                    <select name="data.testAbl" class="data-input">
-                        {{#select data.data.testAbl}}
-                        {{#each config.abilities as |name type|}}
-                        <option value="{{type}}">{{localize name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                    {{!-- Focus to Resist Power --}}
-                    <input name="data.testFocus" class="data-input" type="text" value="{{data.data.testFocus}}" placeholder="{{localize "age-system.focus"}}" list="{{item.type}}-{{item._id}}-list"/>
-                    <datalist id="{{item.type}}-{{item._id}}-list">
-                        <option value=""></option>
-                        {{#each config.focus as |focus|}}
-                        <option value="{{focus.name}}"></option>
-                        {{/each}}
-                    </datalist>
-                </div>
-                {{/if}}
-                {{/if}}
-
-                {{!-- Power Damage/Heal --}}
-                {{#if (or data.data.causeDamage data.data.causeHealing)}}
-                {{> "systems/age-system/templates/partials/dmg-block-sheet.hbs"}}
-                {{/if}}
-
-            </div>
-
-            {{!-- Active Bonuses --}}
-            {{> "systems/age-system/templates/partials/active-bonuses.hbs"}}
-
-            {{#if inChat}}
-            {{!-- Description --}}
-            <div class="item-card-desc">
-                <label>{{localize "age-system.item.desc"}}</label>
-                {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
-            </div>
-            {{/if}}
-
+            </section>
         </div>
-
-        {{#if (ne inChat true)}}
-        {{!-- Tab Control --}}
-        {{> "systems/age-system/templates/partials/bonus-desc-sheet.hbs"}}
-        {{/if}}
-
     </div>
 </form>
-{{#if inChat}}
-    {{> "systems/age-system/templates/partials/item-card-buttons.hbs"}}
-{{/if}}

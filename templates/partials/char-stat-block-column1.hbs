@@ -100,7 +100,7 @@
     {{#each (equippedwpn data.weapon) as |item|}}
     <li class="item-name item-box feature-controls flexrow body colorset-second-tier" data-item-id="{{item._id}}">
         <a class="weapon-name item-show">{{item.name}}{{#if (ne item.data.quantity 1)}} ({{item.data.quantity}}){{/if}}</a>
-        <a class="weapon-attack roll-item">{{#if (gte item.data.atkRollMod 0)}}+{{/if}}{{item.data.atkRollMod}}</a>
+        <a class="weapon-attack roll-item">{{item.data.atkRollMod}}</a>
         <a class="weapon-damage roll-damage">{{item.data.dmgFormula}}</a>
     </li>
     {{/each}}

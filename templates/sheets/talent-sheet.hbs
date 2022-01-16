@@ -1,47 +1,115 @@
-<form class="{{cssClass}} age-system item colorset-selection" autocomplete="off">
+<form class="{{cssClass}} age-system item talent flexrow no-flexwrap" autocomplete="off">
+{{log this}}
+    <aside class="sidebar metal-background colorset-first-tier">
+        <img class="document-picture" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <ul class="item-summary">
+            {{!-- Talent Degree --}}
+            <li>
+                <label>{{localize "age-system.talentDegree"}}</label>
+                <select name="data.degree">
+                {{#select data.data.degree}}
+                    {{#each config.talentDegrees as |degree|}}
+                    <option value="{{@key}}">{{degree}}</option>
+                    {{/each}}
+                {{/select}}
+                </select>
+            </li>
 
-    <div class="sheet-content item-stats talent">
-        <div class="flexcol">
-            {{#if inChat}}
-            <div class="item-card-title colorset-first-tier" type="text">{{name}}</div>
-            {{else}}
-            <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
-            {{/if}}
-            <div class="item-card-stats flexrow">
-                
-                {{!-- Item Image --}}
-                {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}} 
-                
-                {{!-- Degree Level --}}
-                <div class="flexcol">
-                    <label>{{localize "age-system.talentDegree"}}</label>
-                    {{#if inChat}}
-                    <div class="data-input">{{data.data.shortDesc}}</div>
-                    {{else}}
-                    <input type="text" name="data.shortDesc" value="{{data.data.shortDesc}}" placeholder="{{localize "age-system.talentDegree"}}" />
-                    {{/if}}
+            {{!-- Type (Talent/Specialization) --}}
+            <li>
+                <label>{{localize "age-system.type"}} </label>
+                <select name="data.type">
+                {{#select data.data.type}}
+                    <option value="talent">{{localize "ITEM.TypeTalent"}}</option>
+                    <option value="spec">{{localize "age-system.item.spec"}}</option>
+                {{/select}}
+                </select>
+            </li>
+
+            {{!-- Page Ref --}}
+            <li class="feature-controls" data-reference="{{data.data.reference}}">
+                <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
+                <input type="text" name="data.reference" {{#if inChat}}disabled{{/if}} value="{{data.data.reference}}" placeholder="Page Ref." data-dtype="String"/>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="second-column flexcol">
+        <header class="top-banner colorset-first-tier flexrow">
+            <div class="header-details">
+                <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
+                <div class="sub-details">
+                    {{!-- Requirement --}}
+                    <input type="text" name="data.requirement" value="{{data.data.requirement}}">
+                    <label>{{localize "age-system.requirement"}}</label>
                 </div>
             </div>
-            
-            {{!-- Active Bonuses --}}
-            {{> "systems/age-system/templates/partials/active-bonuses.hbs"}}
-            
+        </header>
+        
+        <div class="sheet-main-content metal-background">
 
-            {{#if inChat}}
-            {{!-- Description --}}
-            <div class="item-card-desc">
-                <label>{{localize "age-system.item.desc"}}</label>
-                {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
-            </div>
-            {{/if}}
+            {{!-- Sheet Tab Navigation --}}
+            <nav class="add-sheet-tabs tabs" data-group="primary">
+                <a class="item" data-tab="main">{{localize "age-system.item.desc"}}</a>
+                <a class="item" data-tab="bonus">{{localize "age-system.itemMod"}}</a>
+                {{!-- <a class="item" data-tab="options"><i class="fa fa-cog" aria-hidden="true"></i></a> --}}
+            </nav>
 
+            <section class="sheet-tab-section">
+                {{!-- Main Tab --}}
+                <div class="tab main" data-group="primary" data-tab="main">
+                    <div class="flexrow flex-gap">
+                        <ul class="resource colorset-first-tier item-box"><li>
+                            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+                        </li></ul>
+
+                        <ul class="resource colorset-first-tier item-group">
+                            <li class="title colorset-third-tier">
+                                <label>{{config.talentDegrees.[0]}}</label>
+                            </li>
+                            <li>{{editor content=data.data.degree0.desc target="data.degree0.desc" button=true owner=owner editable=true}}</li>
+                        </ul>
+                    </div>
+                    <div class="flexrow flex-gap">
+                        <ul class="resource colorset-first-tier item-group">
+                            <li class="title colorset-third-tier">
+                                <label>{{config.talentDegrees.[1]}}</label>
+                            </li>
+                            <li>{{editor content=data.data.degree1.desc target="data.degree1.desc" button=true owner=owner editable=true}}</li>
+                        </ul>
+
+                        <ul class="resource colorset-first-tier item-group">
+                            <li class="title colorset-third-tier">
+                                <label>{{config.talentDegrees.[2]}}</label>
+                            </li>
+                            <li>{{editor content=data.data.degree2.desc target="data.degree2.desc" button=true owner=owner editable=true}}</li>
+                        </ul>
+                    </div>
+                    <div class="flexrow flex-gap">
+                        <ul class="resource colorset-first-tier item-group">
+                            <li class="title colorset-third-tier">
+                                <label>{{config.talentDegrees.[3]}}</label>
+                            </li>
+                            <li>{{editor content=data.data.degree3.desc target="data.degree3.desc" button=true owner=owner editable=true}}</li>
+                        </ul>
+
+                        <ul class="resource colorset-first-tier item-group">
+                            <li class="title colorset-third-tier">
+                                <label>{{config.talentDegrees.[4]}}</label>
+                            </li>
+                            <li>{{editor content=data.data.degree4.desc target="data.degree4.desc" button=true owner=owner editable=true}}</li>
+                        </ul>
+                    </div>
+
+
+                </div>
+
+                {{!-- Bonuses Tab --}}
+                <div class="tab bonus" data-group="primary" data-tab="bonus">
+                    {{> "systems/age-system/templates/partials/bonuses-sheet.hbs"}}
+                </div>
+
+            </section>
         </div>
-
-        {{#if inChat}}
-        {{else}}
-        {{!-- Tab Control --}}
-        {{> "systems/age-system/templates/partials/bonus-desc-sheet.hbs"}}
-        {{/if}}
-
     </div>
 </form>

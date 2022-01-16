@@ -263,6 +263,7 @@ Hooks.once("init", async function() {
 Hooks.once("setup", function() {
     Setup.abilitiesName();
     Setup.localizeAgeEffects();
+    ageSystem.talentDegrees = Setup.localizeObj(ageSystem.mageDegrees);
 
     // Set Health System configuration
     const hstype = game.settings.get("age-system", "healthSys");
@@ -329,7 +330,7 @@ Hooks.once("ready", async function() {
 
     // Register Weapon Groups (if any)
     const userGroups = game.settings.get("age-system", "weaponGroups");
-    if (!userGroups) {
+    if (userGroups.length === 0) {
         ageSystem.weaponGroups = null;
     } else {
         ageSystem.weaponGroups = userGroups.split(`;`);
@@ -357,7 +358,7 @@ Hooks.once("ready", async function() {
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.8.8";
+    const NEEDS_MIGRATION_VERSION = "0.11.0";
     // const COMPATIBLE_MIGRATION_VERSION = "0.8.7";
     const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;
@@ -368,7 +369,6 @@ Hooks.once("ready", async function() {
     //     ui.notifications.error(warning, {permanent: true});
     // }
     migrations.migrateWorld();
-
 });
 
 // If Compendia are updated, then compendiumList is gathered once again

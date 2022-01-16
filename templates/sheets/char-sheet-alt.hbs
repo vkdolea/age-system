@@ -1,8 +1,8 @@
-<form class="actor-sheet char-sheet-alt {{cssClass}} flexrow" autocomplete="off">
+<form class="actor-sheet {{cssClass}} flexrow no-flexwrap" autocomplete="off">
 
     <aside class="sidebar metal-background colorset-first-tier">
         {{!-- <img src="{{data.config.greenRonin.fantasyAGE.logo}}" style="border: none;"> --}}
-        <img class="actor-picture" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+        <img class="document-picture" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
         <ul>
             {{#if data.config.healthSys.useInjury}}
             {{!-- Injury --}}
@@ -237,7 +237,7 @@
 
     <div class="second-column flexcol">
         <header class="top-banner colorset-first-tier flexrow">
-            <div class="char-details">
+            <div class="header-details">
                 <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder={{localize "age-system.name"}}/>
                 <div class="sub-details flexrow">
                     <div class="short-input">
@@ -286,7 +286,7 @@
                     <input class="value-data circle" type="number" name="data.level" value="{{data.data.level}}" data-dtype="Number" />
                 </div>    
                 <div class="labels flexcol">
-                    <div class="flexrow exp sub-details">
+                    <div class="flexrow exp">
                         <input type="number" name="data.xp.value" value="{{data.data.xp.value}}" data-dtype="Number" />
                         <span>/</span>
                         <input type="number" name="data.xp.next" value="{{data.data.xp.next}}" data-dtype="Number" />

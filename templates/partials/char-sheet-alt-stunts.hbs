@@ -2,12 +2,15 @@
 <section class="social-section">
 
     {{!-- Stunts --}}
-    <ul class="resource item-group">
+    <ul class="resource item-group colorset-third-tier">
         <li class="title colorset-first-tier">
             {{localize "age-system.stuntsContainer"}}
         </li>
         {{#each data.stunts as |item|}}
         {{> "systems/age-system/templates/partials/itemcontrols/stunts.hbs" item=this config=../data.config}}
+        {{#unless @last}}
+        <hr>
+        {{/unless}}
         {{/each}}
     </ul>
 

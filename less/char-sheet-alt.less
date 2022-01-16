@@ -1,8 +1,80 @@
 /*********************************/
+/**    Item Specific Rules      **/
+/*********************************/
+.age-system {
+    .talent .main .editor.editor {max-height: 150px;}
+    .stunts .editor.editor {
+        max-height: 150px;
+    };
+}
+
+/*********************************/
 /**    Alternate Char Sheet     **/
 /*********************************/
+.age-system {
+    
+    .mouse-to-pointer:hover {
+        cursor: pointer;
+    }
+    .formula-error {
+        font-size: .7rem;
+        font-variant: all-petite-caps;
+        border-radius: 5px;
+        background-color: brown;
+        color: silver;
+    }
+    .modificators-table{
+        .mod-type {
+            flex: 0 0 200px;
+        }
+        .mod-value {
+            flex: 0 0 100px;
+        };
+        .mod-controls {
+            flex: 0 0 50px;
+        }
+    };
+    .editor.editor {
+        text-align: left;
+        height: auto !important;
+        min-height: 150px;
+        max-height: 400px;
+        padding: 4px;
+        border-radius: 0 0 10px 10px;
+        .tox.tox-tinymce {
+            min-height: 140px !important;
+            max-height: 390px !important;
+        }
+    }
 
-.age-system.sheet.char-sheet-alt .actor-sheet {
+    p .item-box {
+        line-height: 1.5;
+    }
+    
+    .sheet-main-content nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 10px;
+        row-gap: 5px;
+        a {
+            // text-shadow: 1px 0px 1px silver, -1px 0px 1px silver, 1px 0px 1px silver,  0px 1px 1px silver, 0px -1px 1px silver;
+            font-size: 1rem;
+            margin: 0 4px;
+            padding: 0 4px;
+            max-width: fit-content;
+            font-variant: all-petite-caps;
+            height: 1.2rem;
+            border-radius: 5px;
+            vertical-align: middle;
+            -webkit-box-shadow: 1px 1px 3px 1px #000000; 
+            box-shadow: 1px 1px 3px 1px #000000;
+            font-weight: 600;
+        }
+    }
+}
+.age-system.sheet {
     flex-wrap: nowrap;
     text-align: center;
     ol,
@@ -21,9 +93,11 @@
     input[type="checkbox"] {
         height: 12px;
         width: 12px;
+        max-height: 12px;
+        max-width: 12px;
     }
 
-    .actor-picture {
+    .document-picture {
         border: none;
         max-height: 200px;
         width: 180px;
@@ -43,6 +117,13 @@
         box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
     }
     .resource {
+        input,
+        select {
+            border-radius: 10px;
+            background-color: rgba(255,255,255,0.5);
+            // color: silver;
+            margin: 2px;
+        }
         hr {margin: 0}
         border-radius: 10px;
         margin-bottom: 6px;
@@ -50,6 +131,7 @@
         margin-right: 4px;
         border: 1px solid black;
         text-align: center;
+        label {background: none;}
     }    
     .title {
         text-transform: uppercase;
@@ -219,34 +301,6 @@
         transition: all 0.5s ease;
     }
 
-    .sheet-main-content nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        margin-bottom: 10px;
-        row-gap: 5px;
-        a.active {
-            font-size: 1.2rem;
-            height: 1.4rem;
-            line-height: 100%;
-        }
-        a {
-            text-shadow: 1px 0px 1px silver, -1px 0px 1px silver, 1px 0px 1px silver,  0px 1px 1px silver, 0px -1px 1px silver;
-            font-size: 1rem;
-            margin: 0 4px;
-            padding: 0 4px;
-            max-width: fit-content;
-            font-variant: all-petite-caps;
-            height: 1.2rem;
-            border-radius: 5px;
-            vertical-align: middle;
-            -webkit-box-shadow: 1px 1px 3px 1px #000000; 
-            box-shadow: 1px 1px 3px 1px #000000;
-            font-weight: 600;
-        }
-    }
-
     .owned-focus .item-name,
     .select-options,
     .conditions .tooltip-container {
@@ -315,18 +369,6 @@
 
     .persona {
         padding-right: 4px;
-        .editor.editor {
-            text-align: left;
-            height: auto !important;
-            min-height: 150px;
-            max-height: 400px;
-            padding: 4px;
-            border-radius: 0 0 10px 10px;
-            .tox.tox-tinymce {
-                min-height: 140px !important;
-                max-height: 390px !important;
-            }
-        }
     }
     .free-text {
         resize: none !important;
@@ -336,6 +378,7 @@
     }
 
     .item-group {
+        li {align-items: center;}
         li:first-child,
         .list-item:first-child {
             border-top-left-radius: 10px;
@@ -348,37 +391,52 @@
         }
         height: max-content;
         // margin: 0 5px 10px 5px;
+        .extra-input {
+            flex: 0 0 fit-content;
+        }
+        .minimal-input {
+            flex: 0 0 1.5rem;
+        }
+    }
+    .item-group.condensed-data {
+        li {
+            label {
+                flex: 0 0 100px;
+            }
+        }
     }
 
     .abilities-column {
         flex: 0 0 200px;
     }
 
-    .char-details {
-        .charname {
+    .header-details {
+        .charname,
+        .itemname {
             margin-bottom: 10px;
-            color: white;
+            color: silver;
             font-size: 2rem;
             height: 2.4rem;
         }
         flex-wrap: nowrap;
-        .sub-details {
-            >div{
-                display: flex;
-                flex-direction: column;
-            }
-            input {
-                font-size: 0.7rem;
-                height: 0.8rem;
-                border-bottom: 1px solid black !important;
-                color: white !important;
-                padding-bottom: 4px;
-            };
-            label {
-                flex: 0 0 0.6rem;
-                font-size: 0.5rem;
-                text-transform: uppercase;
-            }
+    }
+    .sub-details {
+        >div:not(.flexrow){
+            display: flex;
+            flex-direction: column;
+        }
+        input,
+        select {
+            font-size: 0.8rem;
+            height: 0.9rem;
+            border-bottom: 1px solid black !important;
+            color: silver !important;
+            padding-bottom: 4px;
+        };
+        label {
+            flex: 0 0 0.7rem;
+            font-size: 0.6rem;
+            text-transform: uppercase;
         }
     }
 
@@ -391,7 +449,10 @@
         .exp {
             align-items: center;
             input {
-                color: inherit;
+                font-size: 0.8rem;
+                height: 1rem;
+                border-bottom: 1px solid black !important;
+                padding-bottom: 4px;
             }
             span {
                 flex: 0 0 5px;        
@@ -407,11 +468,11 @@
       
     .container-tooltip-text {
         visibility: hidden;
+        opacity: 0;
         max-width: 600px;
         text-align: left;
         border-radius: 5px;
         padding: 4px;
-        opacity: 0.9;
         
         /* Position the tooltip */
         position: fixed;
@@ -424,11 +485,32 @@
     }
     .tooltip-container:hover .container-tooltip-text {
         visibility: visible;
+        opacity: .95;
+        transition: all 0.4s ease;
     }
 
     a.item-equip.not-equiped,
     .inactive {
         opacity: 0.3;
+    }
+
+    .modifiers {
+        .extra-margin {
+            margin: 4px 0;
+        }
+        li.header {
+            padding: 1px 5px;
+        }
+        li
+        .mod-name {
+            flex: 0 0 100px;
+        };
+        .icon {
+            flex: 0 0 25px;
+        };
+        .mod-source {
+            flex: 0 0 150px;
+        }
     }
 
     .custom-effects {

@@ -1,44 +1,45 @@
-<form class="{{cssClass}} age-system item relationship colorset-selection" autocomplete="off">
+<form class="{{cssClass}} age-system item relationship flexrow no-flexwrap" autocomplete="off">
+    <aside class="sidebar metal-background colorset-first-tier">
+        <img class="document-picture" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <ul class="item-summary">
 
-    <div class="sheet-content item-stats relationship">
-        <div class="flexcol">
-            {{#if inChat}}
-            <div class="item-card-title colorset-first-tier" type="text">{{name}}</div>
-            {{else}}
-            <input name="name" class="item-card-title colorset-first-tier" type="text" value="{{item.name}}" placeholder="{{localize "age-system.item.name"}}"/>
-            {{/if}}
-            <div class="item-card-stats flexrow">
-                {{!-- Item Image --}}
-                {{> "systems/age-system/templates/partials/item-image-sheet-card.hbs"}} 
-                
-                <div class="flexcol">
-                    {{!-- Bond --}}
-                    <div class="flexrow long-text flex-align-start" style="width: 100%;">
-                        <label>{{localize "age-system.relationshipBond"}}</label>
-                        {{#if inChat}}
-                        <p>{{data.data.shortDesc}}</p>
-                        {{else}}
-                        <input name="data.shortDesc" class="long-text" type="text" text-type="long" value="{{data.data.shortDesc}}" placeholder="{{localize "age-system.relationshipBond"}}"/>
-                        {{/if}}
-                    </div>
-
-                    {{!-- Intensity --}}
-                    <div class="flexrow flex-align-start">
-                        <label>{{localize "age-system.relationshipIntensity"}}</label>
-                        <div class="flexrow">
-                            <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensity" value="{{data.data.intensity}}"/>
-                            <span> / </span>
-                            <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensityMax" value="{{data.data.intensityMax}}"/>
-                        </div>
-                    </div>
+            {{!-- Intensity --}}
+            <li>
+                <label>{{localize "age-system.relationshipIntensity"}}</label>
+                <div class="flexrow">
+                    <input type="number" name="data.intensity" value="{{data.data.intensity}}"/>
+                    <span> / </span>
+                    <input type="number" name="data.intensityMax" value="{{data.data.intensityMax}}"/>
                 </div>
+            </li>
 
+            {{!-- Page Ref --}}
+            <li class="feature-controls" data-reference="{{data.data.reference}}">
+                <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
+                <input type="text" name="data.reference" {{#if inChat}}disabled{{/if}} value="{{data.data.reference}}" placeholder="Page Ref." data-dtype="String"/>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="second-column flexcol">
+        <header class="top-banner colorset-first-tier flexrow">
+            <div class="header-details">
+                <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
+                <div class="sub-details">
+                    {{!-- Relationship Bond --}}
+                    <input type="text" name="data.shortDesc" value="{{data.data.shorDesc}}">
+                    <label>{{localize "age-system.relationshipBond"}}</label>
+                </div>
             </div>
-        </div>
-        <div class="item-card-desc">
-            <label>{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+        </header>
+        
+        <div class="sheet-main-content metal-background">
+            <ul class="resource colorset-first-tier item-group">
+                <li class="title colorset-third-tier">
+                    <label>{{localize "age-system.item.desc"}}</label>
+                </li>
+                <li>{{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}</li>
+            </ul>
         </div>
     </div>
-    
 </form>
