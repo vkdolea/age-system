@@ -221,7 +221,7 @@ export class ageSystemActor extends Actor {
                 mPack.badMods = [];
                 for (let i = 0; i < mPack.parts.length; i++) {
                     const p = mPack.parts[i];
-                    if (p.valid) {
+                    if (p.valid && p.isActive) {
                         if (mPack.totalFormula !== "") mPack.totalFormula += " + ";
                         mPack.totalFormula += `${p.formula}`;
                     } else {
@@ -246,6 +246,15 @@ export class ageSystemActor extends Actor {
                 data.abilities[ablKey].total = data.abilities[ablKey].mod + data.abilities[ablKey].value
             };
         };
+
+        // Recalculate all Mods to ensure contribution from Abilities are updated
+        const recalcMod = data.ownedMods;
+        for (const k in recalcMod) {
+            if (Object.hasOwnProperty.call(recalcMod, k)) {
+                const mGroup = recalcMod[k];
+                mGroup.formParts = Dice.resumeFormula(mGroup.totalFormula, foundry.utils.deepClone(this.actorRollData()));
+            }
+        }
 
         this._preparePostModCharData();
 
