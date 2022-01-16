@@ -8,7 +8,7 @@
         </li>
         <li class="colorset-third-tier">
             {{#each data.conditions as |condition|}}
-            <span class="tooltip-container flexrow feature-controls {{#if condition.active}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-condition-id="{{condition.id}}">
+            <span class="tooltip-container flexrow feature-controls toggle-condition {{#if condition.active}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-condition-id="{{condition.id}}">
                 <a class="item-name item-box condition-label">{{condition.label}}</a>
                 <span class="container-tooltip-text colorset-second-tier">
                     {{#if (ne condition.flags.age-system.desc "")}}
@@ -87,7 +87,7 @@
     </ul>
 
     {{!-- Item Modifiers Block --}}
-    <ul class="item-group resource modifiers">
+    <ul class="item-group resource modifiers colorset-third-tier">
         <li class="title colorset-first-tier">{{localize "age-system.itemMod"}}</li>
         <li class="header flexrow colorset-first-tier">
             <span class="mod-name">{{localize "age-system.type"}}</span>
@@ -95,10 +95,13 @@
             <span class="mod-source">{{localize "age-system.source"}}</span>
         </li>
         {{#each itemMods as |modGroup modType|}}
-        <li class="flexrow colorset-third-tier">
+        {{#unless @first}}
+        <hr>
+        {{/unless}}
+        <li class="flexrow extra-margin">
             <span class="mod-name">{{localize (concat "age-system.bonus." modType)}}</span>
             <ul class="modifier-item-details">
-                {{#each modGroup as |mod|}}
+                {{#each modGroup.parts as |mod|}}
                 <li class="flexrow">
                     <div class="flexcol mod-value">
                         <div class="flexrow value-box">
@@ -123,10 +126,6 @@
                 {{/each}}
             </ul>
         </li>
-        {{#unless @last}}
-        <hr>
-        {{/unless}}
         {{/each}}
     </ul>
-
 </section>

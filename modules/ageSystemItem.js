@@ -56,36 +56,6 @@ export class ageSystemItem extends Item {
             }
         }
         
-        // Rebuild Modifiers Object
-        // if (data.modifiers) data.modifiers = this._rebuildModifiers();
-
-        // const mods = data.modifiers;
-        // if (typeof mods === "array") {
-        //     mods.map(e => e = this.evalMods(e))
-        // };
-
-        // // Confirm if data.modifiers is an Array
-        // if (typeof mods === "object") {
-        //     // const newArr = []
-        //     for (const k in mods) {
-        //         if (Object.hasOwnProperty.call(mods, k)) {
-        //             mods[k] = this.evalMod(mods[k]);
-        //             // newArr.push(mods[k]);
-        //         }
-        //     }
-        //     // data.modifiers = newArr;
-        // }
-        // if (typeof mods === "object") {
-        //     const newArr = []
-        //     for (const k in mods) {
-        //         if (Object.hasOwnProperty.call(mods, k)) {
-        //             // mods[k] = this.evalMod(mods[k]);
-        //             newArr.push(mods[k]);
-        //         }
-        //     }
-        //     data.modifiers = newArr;
-        // }
-        
         // Adding common data for Power and Weapon
         if (["power", "weapon"].includes(itemType)) {
             data.useFocusActorId = data.useFocus && this.actor?.data ? this.actor.checkFocus(data.useFocus).id : null;
@@ -108,93 +78,9 @@ export class ageSystemItem extends Item {
                 }
 
             };
+
             // Evaluate Attack and Damage modifier
-            if (data.hasDamage || data.hasHealing) {
-                const actor = this.actor?.data?.data;
-                const useFocus = actor ? this.actor.checkFocus(this.data.data.useFocus) : null;
-                const mode = game.settings.get("age-system", "healthSys");
-                const useInjury = [`mageInjury`, `mageVitality`].includes(mode);
-
-                // Attack Mod
-                let atkBonus = useFocus ? useFocus.value : 0;
-                atkBonus += actor ? actor.abilities[data.useAbl].total ?? 0 : 0;
-                const atkBonusActor = ["testMod", "attackMod"];
-                if (actor?.ownedBonus) {
-                    for (let am = 0; am < atkBonusActor.length; am++) {
-                        const modName = atkBonusActor[am];
-                        if (actor.ownedBonus[modName]) atkBonus += actor.ownedBonus[modName].value;
-                    };
-                };
-                const atkBonusItem = ["itemActivation"];
-                for (let am = 0; am < atkBonusItem.length; am++) {
-                    const modName = atkBonusItem[am];
-                    if (data.itemMods[modName].selected && data.itemMods[modName].isActive) atkBonus += data.itemMods[modName].value;
-                };
-                data.atkRollMod = atkBonus;
-
-                // Damage Formula
-                let dmgBonus = 0;
-                const dmgBonusActor = ["actorDamage"];
-                if (actor?.ownedBonus) {
-                    for (let am = 0; am < dmgBonusActor.length; am++) {
-                        const modName = dmgBonusActor[am];
-                        if (actor.ownedBonus[modName]) dmgBonus += actor.ownedBonus[modName].value;
-                    };
-                };
-                const dmgBonusItem = ["itemDamage"];
-                for (let am = 0; am < dmgBonusItem.length; am++) {
-                    const modName = dmgBonusItem[am];
-                    if (data.itemMods[modName].selected && data.itemMods[modName].isActive) dmgBonus += data.itemMods[modName].value;
-                };
-                const abl = data.dmgAbl === "no-abl" ? null : data.dmgAbl;
-                let actorAblDmg = 0;
-                actorAblDmg += this.actor?.data?.data?.abilities?.[abl]?.total ?? 0;
-                let completeFormula = ``;
-                if (useInjury) {
-                    completeFormula = `13 + ${data.damageInjury ? data.damageInjury : 0} + ${dmgBonus} + ${actorAblDmg}`;
-                } else {
-                    completeFormula = `${data.damageFormula ? data.damageFormula : 0} + ${dmgBonus} + ${actorAblDmg}`;
-                }
-                // Remove Flavor from formula
-                const replacedData = Roll.replaceFormulaData(completeFormula, this.isOwned ? this.actor.actorRollData() : {}, 0)
-                const reducedFormula = replacedData.replace(/\[(.[^\]]*)\]/g, '');
-                
-                const testRoll = new Roll(reducedFormula);
-                let detFormula = "";
-                let nonDetFormula = "";
-                const terms = testRoll.terms;
-                for (let t = 0; t < terms.length; t++) {
-                    const e = terms[t];
-                    if (!e.isDeterministic) {
-                        if (t !== 0) nonDetFormula += `${terms[t-1].formula}`;
-                        nonDetFormula += `${e.formula}`;
-                        detFormula += "0";
-                    }
-                    if (e.isDeterministic) detFormula += `${e.formula}`;
-                }
-                // let cte = Roll.safeEval(detFormula)
-                let cte = Dice.quickEval(detFormula)
-                if (cte !== null) {
-                    if (cte === 0) cte = "";
-                    if (cte > 0) cte = "+" + cte;
-                    data.dmgFormula = `${nonDetFormula}${cte}`;
-                } else {
-                    ui.notifications.warn(game.i18n.localize("age-system.WARNING.damageFormulaError"), {permanent: true});
-                    data.dmgFormula = "!Error";
-                }
-
-                if (actor && this.type === 'weapon') {
-                    const rangeFormula = Roll.replaceFormulaData(`${data.range}`, this.isOwned ? this.actor.actorRollData() : {}, 0) ?? "0";
-                    data.rangeCalc = Roll.safeEval(rangeFormula);
-        
-                    const rangeMaxFormula = Roll.replaceFormulaData(`${data.rangeMax}`, this.isOwned ? this.actor.actorRollData() : {}, 0) ?? "0";
-                    data.rangeMaxCalc = Roll.safeEval(rangeMaxFormula);
-                } else {
-                    data.rangeCalc = data.range;
-                    data.rangeMaxCalc = data.rangeMax;
-                }
-            }
-
+            if (data.hasDamage || data.hasHealing) this._postPrepareData(data)
         }
 
         switch (itemType) {
@@ -205,76 +91,147 @@ export class ageSystemItem extends Item {
             case "shipfeatures": this._prepareShipFeatures(data);
                 break;
         }
-
-        
         this.prepareEmbeddedDocuments();
     };
 
     _postPrepareData(data) {
-        // Evaluate Attack and Damage modifier
+        // Evaluate Attack and Damage formula to represent on Item sheet or stat block
+        const actor = this.actor?.data?.data;
         if (data.hasDamage || data.hasHealing) {
-            const actor = this.actor?.data?.data;
             const useFocus = actor ? this.actor.checkFocus(this.data.data.useFocus) : null;
             const mode = game.settings.get("age-system", "healthSys");
             const useInjury = [`mageInjury`, `mageVitality`].includes(mode);
 
-            // Attack Mod
-            let atkBonus = useFocus ? useFocus.value : 0;
-            atkBonus += actor ? actor.abilities[data.useAbl].total ?? 0 : 0;
+            // Attack Mod - Actor Scope
+            const atkBonuses = [];
+            if (useFocus) atkBonuses.push(useFocus.value);
+            const actorAbl = actor?.abilities?.[data.useAbl]?.total;
+            if (actorAbl) atkBonuses.push(actor.abilities[data.useAbl].total);
             const atkBonusActor = ["testMod", "attackMod"];
             if (actor?.ownedBonus) {
                 for (let am = 0; am < atkBonusActor.length; am++) {
                     const modName = atkBonusActor[am];
-                    if (actor.ownedBonus[modName]) atkBonus += actor.ownedBonus[modName].value;
+                    if (actor.ownedBonus[modName]) atkBonuses.push(actor.ownedBonus[modName].totalFormula);
                 };
             };
-            const atkBonusItem = ["itemActivation"];
-            for (let am = 0; am < atkBonusItem.length; am++) {
-                const modName = atkBonusItem[am];
-                if (data.itemMods[modName].selected && data.itemMods[modName].isActive) atkBonus += data.itemMods[modName].value;
-            };
-            data.atkRollMod = atkBonus;
 
-            // Damage Formula
-            let dmgBonus = 0;
+            // Attack Mod - Item Scope
+            const atkBonusItem = ["itemActivation"];
+            const itemRollMod = [];
+            if (data.modifiersByType) {
+                for (let a = 0; a < atkBonusItem.length; a++) {
+                    const modName = atkBonusItem[a];
+                    const mods = data.modifiersByType[modName]
+                    if (mods) {
+                        for (let i = 0; i < mods.length; i++) {
+                            const m = mods[i];
+                            if (m.valid && m.isActive) itemRollMod.push(m.formula);
+                        }
+                    } 
+                };
+            }
+            let itemRollModFormula = "";
+            for (let i = 0; i < itemRollMod.length; i++) {
+                const p = itemRollMod[i];
+                if (i > 0) itemRollModFormula += " + ";
+                itemRollModFormula += p;
+                atkBonuses.push(p)
+            }
+            // Bonus to Roll item (Ability/Focus test)
+            data.itemRollMod = itemRollModFormula;
+            let atkBonus = ""
+            for (let i = 0; i < atkBonuses.length; i++) {
+                const p = atkBonuses[i];
+                if (i > 0) atkBonus += " + ";
+                atkBonus += p;
+            }
+            const attkPartials = Dice.resumeFormula(atkBonus, this.actor?.actorRollData() ?? {});
+            data.atkRollMod = attkPartials ? attkPartials.shortFormula : "0";
+
+            // Item Base Damage
+            const dmgBonusArr = []
+            if (data.damageFormula) dmgBonusArr.push(data.damageFormula);
+            // Damage Formula - Actor Scope
+            if (data.dmgAbl !== "no-abl") {
+                if (this.actor?.data?.data?.abilities?.[data.dmgAbl]?.total) dmgBonusArr.push(this.actor.data.data.abilities[data.dmgAbl].total)
+            }
             const dmgBonusActor = ["actorDamage"];
             if (actor?.ownedBonus) {
                 for (let am = 0; am < dmgBonusActor.length; am++) {
                     const modName = dmgBonusActor[am];
-                    if (actor.ownedBonus[modName]) dmgBonus += actor.ownedBonus[modName].value;
+                    if (actor.ownedBonus[modName]) dmgBonusArr.push(actor.ownedBonus[modName].totalFormula);
                 };
             };
+            // Damage Parts - Item Scope
+            const dmgBonusItemArr = []
             const dmgBonusItem = ["itemDamage"];
-            for (let am = 0; am < dmgBonusItem.length; am++) {
-                const modName = dmgBonusItem[am];
-                if (data.itemMods[modName].selected && data.itemMods[modName].isActive) dmgBonus += data.itemMods[modName].value;
-            };
-            const abl = data.dmgAbl === "no-abl" ? null : data.dmgAbl;
-            let actorAblDmg = 0;
-            actorAblDmg += this.actor?.data?.data?.abilities?.[abl]?.total ?? 0;
-            // if (useInjury) {
-            //     data.dmgFormula = Roll.safeEval(`13 + ${data.damageInjury} + ${dmgBonus} + ${actorAblDmg}`);
-            // } else {
-            //     data.dmgFormula = `${data.nrDice}d${data.diceType}+` + Roll.safeEval(`${dmgBonus} + ${data.extraValue} + ${actorAblDmg}`);
-            // }
-            const completeFormula = `${data.damageFormula ? data.damageFormula : 0} + ${dmgBonus} + ${actorAblDmg}`;
-            data.dmgFormula = Dice.prepareFormula(completeFormula, this.actor, this)
+            if (data.modifiersByType) {
+                for (let a = 0; a < dmgBonusItem.length; a++) {
+                    const modName = dmgBonusItem[a];
+                    const mods = data.modifiersByType[modName]
+                    if (mods) {
+                        for (let i = 0; i < mods.length; i++) {
+                            const m = mods[i];
+                            if (m.valid && m.isActive) {
+                                dmgBonusItemArr.push(m.formula);
+                            }
+                        }
+                    } 
+                };
+            }
+            let itemDmgModFormula = "";
+            for (let i = 0; i < dmgBonusItemArr.length; i++) {
+                const p = dmgBonusItemArr[i];
+                if (i > 0) itemDmgModFormula += " + ";
+                itemDmgModFormula += p;
+                dmgBonusArr.push(p)
+            }
+            let dmgBonus = ""
+            for (let i = 0; i < dmgBonusArr.length; i++) {
+                const p = dmgBonusArr[i];
+                if (i > 0) dmgBonus += " + ";
+                dmgBonus += p;
+            }
+            const dmgPartials = Dice.resumeFormula(dmgBonus, this.actor?.actorRollData() ?? {});
+            data.itemDmgMod = itemDmgModFormula ? itemDmgModFormula : "0";
+            data.dmgFormula = dmgPartials ? dmgPartials.shortFormula : 0;
+        }
+
+        if (actor && this.type === 'weapon') {
+            const rangeParts = Dice.resumeFormula(`${data.range}`, this.actor?.actorRollData() ?? {});
+            data.rangeCalc = rangeParts ? rangeParts.detValue : "";
+
+            const rangeMaxParts = Dice.resumeFormula(`${data.rangeMax}`, this.actor?.actorRollData() ?? {});
+            data.rangeMaxCalc = rangeMaxParts ? rangeMaxParts.detValue : "";
+        } else {
+            data.rangeCalc = data.range;
+            data.rangeMaxCalc = data.rangeMax;
         }
     }
 
     _prepareFocus(data) {
-        data.finalValue = data.improved ? data.initialValue + 1 : data.initialValue;
+        const focusParts = [];
+        if (data.initialValue) focusParts.push(data.initialValue);
+        if (data.improved) focusParts.push("1");
+        // data.finalValue = data.improved ? data.initialValue + 1 : data.initialValue;
         if (this.isOwned && this.actor?.data) {
-            const focusBonus = this.actor.data.data.ownedMods?.focus;
-            if (focusBonus) {
-                let valueFormula = `${data.finalValue}`;
+            const focusBonus = this.actor.data.data.modifiersByType?.focus?.parts;
+            if (focusBonus?.length) {
                 for (let f = 0; f < focusBonus.length; f++) {
                     const m = focusBonus[f];
-                    if (data.nameLowerCase === m.name.toLowerCase()) valueFormula += `+ ${m.formula}`;
+                    if (data.nameLowerCase === m.conditions.focus.toLowerCase()) focusParts.push(m.formula);
                 }
-                data.finalValue = Dice.prepareFormula(valueFormula, this.actor, this, true);
             }
         }
+        let focusFormula = "";
+        for (let i = 0; i < focusParts.length; i++) {
+            const p = focusParts[i];
+            if (i > 0) focusFormula += " + "
+            focusFormula += `${p}`
+        }
+        const partial = Dice.resumeFormula(focusFormula, this.actor?.actorRollData() ?? {});
+        data.finalValue = partial ? partial.detValue : 0;
+
         const abilitiesOrg = Object.keys(ageSystem.abilitiesOrg);
         const abilitiesChar = Object.keys(ageSystem.abilities);
         const hasOrgAbl = abilitiesOrg.includes(data.useAbl);
@@ -287,25 +244,39 @@ export class ageSystemItem extends Item {
 
         // Calculate Item Force
         // data.itemForce = 10;
-        data.itemForce = 10;
-        let itemForce = "0"
-        const singleForceMod = data.modifiers ? data.modifiers.filter(i => i.type === 'powerForce') : [];
-        if (singleForceMod.length) {
-            for (let i = 0; i < singleForceMod.length; i++) {
-                const m = singleForceMod[i];
-                if (m.formula) itemForce += ` + ${m.formula}` 
-            };
-            data.itemForce = Number(data.itemForce) + Number(Dice.prepareFormula(itemForce, this.actor, this, true));
+        const itemForceBonus = []
+
+        // Item Force bonus - Actor Scope
+        if (this.actor?.data) {
+            const abl = this.actor?.data?.data?.abilities?.[data?.itemForceAbl]?.total;
+            if (data.itemForceAbl !== "no-abl" && abl) itemForceBonus.push(this.actor.data.data.abilities[data.itemForceAbl].total)
         }
         
-        // Calculate derived data
+        // Identify Bonus to Increase only this Power Item Force
+        const thisPFmods = data.modifiersByType?.['powerForce'];
+        if (thisPFmods) {
+            const validMods = thisPFmods.filter(i => i.valid && i.isActive);
+            if (validMods.length) {
+                for (let i = 0; i < validMods.length; i++) {
+                    const m = validMods[i];
+                    itemForceBonus.push(m.formula)
+                }
+            }
+        }
+
+        let itemForceBonusFormula = "10";
+        for (let i = 0; i < itemForceBonus.length; i++) {
+            const b = itemForceBonus[i];
+            itemForceBonusFormula += ` + ${b}`            
+        }
+        const itemForcePartials = Dice.resumeFormula(itemForceBonusFormula, this.actor?.actorRollData() ?? {});
+        data.itemForceBonus = itemForcePartials ? itemForcePartials.detValue : 0;
+        data.itemForce = data.itemForceBonus;
+        
+        // Calculate Power Points and Strain
         data.powerPointCostTotal = data.powerPointCost;
-        if (this.actor?.data) {
-            if ((data.itemForceAbl !== "") && (data.itemForceAbl !== "no-abl")) data.itemForce += this.actor.data.data.abilities[data.itemForceAbl].total;
-            data.itemForce += data.useFocusActor.value;
-            const strain = this.actor.data.data.armor.strain
-            data.powerPointCostTotal += strain ? strain : 0;
-        };
+        const strain = this?.actor?.data?.data?.armor?.strain
+        data.powerPointCostTotal += strain ? strain : 0;
 
         // Calculate Fatigue TN if it is not a manual input
         if (data.inputFatigueTN === false) data.fatigueTN = 9 + Math.floor(Number(data.powerPointCost)/2);
@@ -339,8 +310,6 @@ export class ageSystemItem extends Item {
             isActive: true,
             valid: true,
             conditions: {},
-            // itemId: this.id,
-            // itemName: this.name,
             ftype: "",
             key: modName,
         }
@@ -365,8 +334,8 @@ export class ageSystemItem extends Item {
                 break;
         
             case "formula":
-                // m.formula = "complete-formula"
                 break;
+
             default:
                 break;
         }
@@ -376,19 +345,6 @@ export class ageSystemItem extends Item {
         if (!m.valid) m.isActive = false;
         return m
     }
-
-    // _rebuildModifiers() {
-    //     const mods = foundry.utils.deepClone(this.data.data.modifiers);
-    //     const modArr = Object.entries(mods).map(e => {
-    //         return [e[0], e[1]];
-    //     });
-    //     let i = 0;
-    //     return modArr.reduce((obj, e) => {
-    //         obj[i] = e[1];
-    //         i++;
-    //         return obj;
-    //     }, {});
-    // }
 
     // Rolls damage for the item
     rollDamage({
@@ -408,7 +364,7 @@ export class ageSystemItem extends Item {
             // resistedDmg: resistedDmg,
             ...arguments[0],
             item: this,
-            actorDmgMod: this.actor ? this.actor.data.data.dmgModTotal : 0,
+            actorDmgMod: this.actor ? this.actor.data.data.dmgMod : 0,
             actorWgroups: this.actor.data.data.wgroups
         };
         return Dice.itemDamage(damageData);
@@ -526,6 +482,7 @@ export class ageSystemItem extends Item {
     };
 
     async showItem(forceSelfRoll = false) {
+        return ui.notifications.warn("Show item cards on chat is currently unavailable. Await until next version"); // Remove when chat cards are working again
         const rollMode = game.settings.get("core", "rollMode");       
         const cardData = {
             inChat: true,

@@ -65,31 +65,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.favHonor = data.honorifics.filter(i => i.data.favorite);
         data.favMembership = data.membership.filter(i => i.data.favorite);
 
-        const modList = [];
-        const modListType = []
-        // Sorting Modifiers per Type/Item
-        // for (let i = 0; i < itemSorted.length; i++) {
-        //     const item = itemSorted[i];
-        //     const itemMods = item.data.modifiers
-        //     if (itemMods.length && (item.data.equiped || item.data.activate)) {
-        //         for (let m = 0; m < itemMods.length; m++) {
-        //             if (!modList[m]) modList[m] = [];
-        //             modList[m].push(item)
-        //         }
-        //     }
-        // };
-        // for (const k in modList) {
-        //     const itemM = modList[k].data.data.modifiers;
-        //     for (let i = 0; i < itemM.length; i++) {
-        //         const m = itemM[i];
-        //         if (modListType[m.type]) {
-        //             modListType[m.type] = [m]
-        //         } else {
-        //             modListType[m.type].push(m)
-        //         }
-        //     }
-        // }
-
         // Sort Conditions alphabetically
         data.conditions = foundry.utils.deepClone(CONFIG.statusEffects).filter(e => e.flags?.["age-system"]?.isCondition);
         for (let i = 0; i < data.conditions.length; i++) {
@@ -142,8 +117,8 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             actor: this.object,
             cssClass: isEditable ? "editable" : "locked",
             data: data,
-            itemMods: data.data.ownedMods,
-            modListType: modListType,
+            itemMods: this.object.data.data.ownedMods,
+            // modListType: modListType,
             effects: data.effects,
             items: data.items,
             limited: this.object.limited,

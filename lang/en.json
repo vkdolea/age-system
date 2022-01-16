@@ -553,7 +553,7 @@
             "ballisticArmor": "Ballistic Armor",
             "defendMnv": "Defend Maneuver",
             "guardupMnv": "Guard Up Maneuver",
-            "allOutAtk": "All-Out Attack Damage",
+            "allOutAtkMnv": "All-Out Attack Damage",
             "maxHealth": "Max Health/Fortune",
             "maxConviction": "Max Conviction",
             "maxPowerPoints": "Max PP",

@@ -16,7 +16,7 @@
                 {{/select}}
             </select>
             <div class="mod-value">
-                <input type="text" class="mod" name="data.modifiers.{{i}}.conditions.focus" value="{{mod.conditions.focus}}" placeholder="{{localize "age-system.focus"}}" {{#unless (or (eq mod.type "focus") (eq mod.type "powerForce"))}}style="display: none"{{/unless}}/>
+                <input type="text" class="mod" name="data.modifiers.{{i}}.conditions.focus" value="{{mod.conditions.focus}}" placeholder="{{localize "age-system.focus"}}" {{#unless (or (eq mod.type "focus") (eq mod.type "powerForceAll"))}}style="display: none"{{/unless}}/>
                 <input type="text" class="mod" name="data.modifiers.{{i}}.formula" value="{{mod.formula}}"/>
                 {{#unless mod.valid}}
                 <div class="formula-error">

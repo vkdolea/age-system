@@ -2,38 +2,37 @@ import { ageSystem } from "./config.js";
 import { sortObjArrayByName } from "./setup.js";
 
 /**
- * Helper to evaluate formula to display item damage or Add variable attributes from Modifiers
- * @param {String} rawFormula Formula to be safe-evaluated
- * @param {AgeSystemActor} actor Actor about to roll
- * @param {AgeSystemItem} item Item owning rolling formula
- * @param {Boolean} detOnly Evaluate deterministic only
- * @returns Formula String
+ * Helper function to reduce a Formula
+ * @param {String} formula Formula String to be reduced to dice components and a single constant value
+ * @param {Object} data Object containing definition for all /@attr/ declared on Formula String
+ * @returns {Object} Object with parts.shortFormula, parts.nonDet, parts.det, parts.detValue
  */
-export function prepareFormula (rawFormula, actor, item, detOnly = false) {
-    if (!rawFormula) return detOnly ? 0 : "0";
-    const replacedData = Roll.replaceFormulaData(rawFormula, (game.actors && (item?.isOwned || actor?.data?.type === "char")) ? actor.actorRollData() : {}, 0)
-    const reducedFormula = replacedData.replace(/\[(.[^\]]*)\]/g, '');
-    const testRoll = new Roll(reducedFormula);
-    let detFormula = "";
-    let nonDetFormula = "";
-    const terms = testRoll.terms;
+export function resumeFormula(formula, data = {}) {
+    if (!formula) return null
+    const simRoll = new Roll(formula, data);
+    const terms = simRoll.terms;
+    const parts = {
+        det: "",
+        nonDet: ""
+    };
     for (let t = 0; t < terms.length; t++) {
         const e = terms[t];
+        let f = e.formula;
+        if (e.flavor) f = f.replace(`[${e.flavor}]`, '');
         if (!e.isDeterministic) {
-            if (t !== 0) nonDetFormula += `${terms[t-1].formula}`;
-            nonDetFormula += `${e.formula}`;
-            detFormula += "0";
+            if (t !== 0) parts.nonDet += `${terms[t-1].formula}`;
+            parts.nonDet += `${f}`;
+            parts.det += "0";
         }
-        if (e.isDeterministic) detFormula += `${e.formula}`;
+        if (e.isDeterministic) parts.det += `${f}`;
     }
-    // let cte = Roll.safeEval(detFormula)
-    let cte = quickEval(detFormula)
-    if (!detOnly) {
-        if (cte === 0) cte = "";
-        if (cte > 0) cte = "+" + cte;
-    }
-    const newFormula = detOnly ? cte : `${nonDetFormula}${cte}`;
-    return newFormula
+    parts.detValue = quickEval(parts.det);
+    parts.shortFormula = `${parts.nonDet}`;
+    if (parts.detValue) {
+        if (parts.detValue > 0) parts.shortFormula += `+`;
+        parts.shortFormula += `${parts.detValue}`;
+    };
+    return parts;
 }
 
 export function quickEval(expression) {
@@ -141,7 +140,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
 
     if (actorType === 'char') {
         // Adds Actor general Attack Bonus if rolltype = "attack"
-        if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK, ROLL_TYPE.STUNT_ATTACK].includes(rollType) && actor.data.data.attackMod !== 0) {
+        if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK, ROLL_TYPE.STUNT_ATTACK].includes(rollType) && actor.data.data.attackMod != 0) {
             rollFormula += " + @attackMod";
             rollData.attackMod = actor.data.data.attackMod;
             partials.push({
@@ -151,7 +150,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         }
     
         // Adds general roll bonus from Actor
-        if (actor?.data.data.testMod && actor?.data.data.testMod !== 0) {
+        if (actor?.data.data.testMod && actor?.data.data.testMod != 0) {
             rollFormula += " + @testMod";
             rollData.testMod = actor.data.data.testMod;
             partials.push({

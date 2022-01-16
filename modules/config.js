@@ -660,7 +660,7 @@ ageSystem.ageEffectsKeys = {
     "ballisticArmor": {label: "age-system.bonus.ballisticArmor", mask: "data.armor.ballistic", dtype: 'nodice'},
     "defendMnv": {label: "age-system.bonus.defendMnv", mask: "data.defend.total", dtype: 'nodice'},
     "guardupMnv": {label: "age-system.bonus.guardupMnv", mask: "data.guardUp.total", dtype: 'nodice'},
-    "allOutAtk": {label: "age-system.bonus.allOutAtk", mask: "data.allOutAttack.total", dtype: 'formula'},
+    "allOutAtkMnv": {label: "age-system.bonus.allOutAtkMnv", mask: "data.allOutAttack.total", dtype: 'formula'},
     "maxHealth": {label: "age-system.bonus.maxHealth", mask: "data.health.max", dtype: 'nodice'},
     "maxConviction": {label: "age-system.bonus.maxConviction", mask: "data.conviction.max", dtype: 'nodice'},
     "maxPowerPoints": {label: "age-system.bonus.maxPowerPoints", mask: "data.powerPoints.max", dtype: 'nodice'},
@@ -781,7 +781,7 @@ ageSystem.modifiers = {
         dage: ["comm", "cons", "cunn", "dex", "magic", "per", "str", "will"]
     },
     generalMods: ["powerForce", "aimMnv", "armorPenalty", "itemDamage", "testMod", "attackMod", "actorDamage", "itemActivation", "focus", "defense", "speed",
-        "armorStrain", "defendMnv", "guardupMnv", "allOutAtk", "maxPowerPoints"
+        "armorStrain", "defendMnv", "guardupMnv", "allOutAtkMnv", "maxPowerPoints"
     ],
     modeToLocalize: ["impactArmor", "powerForce", "maxPowerPoints", "maxHealth"]
 };

@@ -1099,10 +1099,13 @@
 .age-system.sheet .inactive {
   opacity: 0.3;
 }
+.age-system.sheet .modifiers .extra-margin {
+  margin: 4px 0;
+}
 .age-system.sheet .modifiers li.header {
   padding: 1px 5px;
 }
-.age-system.sheet .modifiers .mod-name {
+.age-system.sheet .modifiers li .mod-name {
   flex: 0 0 100px;
 }
 .age-system.sheet .modifiers .icon {
@@ -3668,7 +3671,8 @@ body *:not(i, .fa, .far, .fas) {
 .age-system select:focus,
 .age-system input:hover:not(:disabled),
 .age-system select:hover,
-.age-system nav a:hover:not(.active) {
+.age-system nav a:hover:not(.active),
+.age-system span.toggle-condition:hover {
   box-shadow: 0 0 5px silver !important;
 }
 .age-system hr {

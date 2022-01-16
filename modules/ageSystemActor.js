@@ -195,6 +195,7 @@ export class ageSystemActor extends Actor {
     }
 
     _charItemModifiers() {
+        // Create Actor data with Modifiers from all Active/Equiped Items
         const mods = {};
         this.items.forEach(i => {
             const iMods = i.data.data.modifiersByType;
@@ -203,51 +204,45 @@ export class ageSystemActor extends Actor {
                 for (const k in iMods) {
                     if (Object.hasOwnProperty.call(iMods, k)) {
                         if (mods[k]) {
-                            mods[k] = [...mods[k], ...iMods[k]];
+                            mods[k].parts = [...mods[k].parts, ...iMods[k]];
                         } else {
-                            mods[k] = iMods[k]
+                            mods[k] = {parts: iMods[k]};
                         }
                     }
                 }
             }
-            // if (i.data.data.modifiers?.length && (i.data.data.equiped || i.data.data.activate)) {
-            //     const modifiers = i.data.data.modifiers;
-            //     for (let m = 0; m < modifiers.length; m++) {
-            //         const modObj = modifiers[m];
-            //         const modKey = modObj.type;
-            //         let namedElement = null
-            //         if (['focus'].includes(modObj.type)) {
-            //             namedElement = {
-            //                 // type: modObj.type,
-            //                 name: modObj.conditions.focus,
-            //                 formula: modObj.formula
-            //             };
-            //         }
-            //         if (modObj.isActive) {
-            //             if (mods.hasOwnProperty(modKey)) {
-            //                 if (namedElement) {
-            //                     mods[modKey].push(namedElement);
-            //                 } else {
-            //                     mods[modKey] += ` + ${modObj.formula}`;
-            //                 }
-            //             } else {
-            //                 mods[modKey] = namedElement ? [namedElement] : `${modObj.formula}`;
-            //             }
-            //         }   
-            //     }
-            // }
         });
+
+        // Calculate total Formula for Each Modifier
+        for (const mtype in mods) {
+            if (Object.hasOwnProperty.call(mods, mtype)) {
+                const mPack = mods[mtype];
+                mPack.totalFormula = "";
+                mPack.badMods = [];
+                for (let i = 0; i < mPack.parts.length; i++) {
+                    const p = mPack.parts[i];
+                    if (p.valid) {
+                        if (mPack.totalFormula !== "") mPack.totalFormula += " + ";
+                        mPack.totalFormula += `${p.formula}`;
+                    } else {
+                        mPack.badMods.push(i)
+                    };
+                    if (i === mPack.parts.length - 1) {
+                        mPack.formParts = Dice.resumeFormula(mPack.totalFormula, foundry.utils.deepClone(this.actorRollData()));
+                    }
+                }
+            }
+        }
+
         const actorData = this.data;
         const data = actorData.data;
         data["ownedMods"] = mods;
-        return
 
         // Applying Abilities mods
         const settingAbls = ageSystem.abilities;
         for (const ablKey in settingAbls) {
             if (settingAbls.hasOwnProperty(ablKey)) {
-                // data.abilities[ablKey].mod = /^-?\d+$/.test(mods[ablKey]) ? Number(mods[ablKey]) : 0;
-                data.abilities[ablKey].mod = Roll.safeEval(mods[ablKey] ?? "0");
+                data.abilities[ablKey].mod = mods[ablKey]?.formParts?.detValue ?? 0;
                 data.abilities[ablKey].total = data.abilities[ablKey].mod + data.abilities[ablKey].value
             };
         };
@@ -261,93 +256,68 @@ export class ageSystemActor extends Actor {
         const data = actorData.data;
 
         const mods = this.data.data.ownedMods;
-        const variables = foundry.utils.deepClone(this.actorRollData());
 
         // Armor Penalty & Strain
-        data.armor.penalty = Math.max(mods?.armorPenalty ?? 0, 0);
-        data.armor.strain = Math.max(mods?.armorStrain ?? 0, 0)
+        data.armor.penalty = Math.max(mods?.armorPenalty?.formParts?.detValue ?? 0, 0);
+        data.armor.strain = Math.max(mods?.armorStrain?.formParts?.detValue ?? 0, 0)
 
-        // const updateMods = [
-        //     ["dmgMod", 'actorDamage'],
-        //     ['testMod', 'testMod'],
-        //     ['attackMod', 'attackMod'],
-        //     ['defense.mod', 'defense'],
-        //     ['armor.impact', 'impactAmor'],
-        //     ['armor.ballistic', 'ballisticArmor'],
-        //     ['armor.toughness.mod', 'toughness'],
-        //     ['speed.mod', 'speed'],
-        //     ['defendmod', 'defendMnv'],
-        //     ['guardUp.mod', 'guardupMnv'],
-        //     // ['allOutAttack.mod', 'allOutAtkMnv'],
-        //     ['health.mod', 'maxHealth'],
-        //     ['conviction.mod', 'maxConviction'],
-        //     ['powerPoints.mod', 'powerPoints'],
-        //     ['aim.mod', 'aimMnv']
-        // ];
-
-        // for (let i = 0; i < updateMods.length; i++) {
-        //     const u = updateMods[i];
-        //     data[u[0]] = Dice.prepareFormula(mods[u[1]] ? mods[u[1]] : "0" ?? "0", this, null, true);
-        // }
-
-        // Actor Damage
-        // data.dmgMod = mods?.actorDamage ?? 0;
-        data.dmgModTotal = `${data.dmgMod} + ${Dice.prepareFormula(mods?.actorDamage ?? "0", this, null, true)}`;
+        // All damage delt by Actor
+        data.dmgMod = mods?.actorDamage?.totalFormula ?? "0";
 
         // Actor All Tests
-        // data.testMod = mods?.testMod ?? 0;
-        data.testMod = Dice.prepareFormula(mods?.testMod ?? "0", this, null, true);
+        data.testMod = mods?.testMod?.totalFormula ?? "0";
+        // data.testMod = Dice.prepareFormula(mods?.testMod ?? "0", this, null, true);
 
         // Actor All Attacks Mod
-        // data.attackMod = mods?.attackMod ?? 0;
-        data.attackMod = Dice.prepareFormula(mods?.attackMod ?? "0", this, null, true);
+        data.attackMod = mods?.attackMod?.totalFormula ?? "0";
+        // data.attackMod = Dice.prepareFormula(mods?.attackMod ?? "0", this, null, true);
 
         // Defense
-        // data.defense.mod = Roll.safeEval(mods?.defense ?? "0", variables);
-        data.defense.mod = Dice.prepareFormula(mods?.defense ?? "0", this, null, true);
+        data.defense.mod = mods?.defense?.formParts?.detValue ?? 0;
+        // data.defense.mod = Dice.prepareFormula(mods?.defense ?? "0", this, null, true);
 
         // Impact Armor
-        // data.armor.impact = Roll.safeEval(mods?.impactArmor ?? "0", variables);
-        data.armor.impact = Dice.prepareFormula(mods?.impactArmor ?? "0", this, null, true);
+        data.armor.impact = mods?.impactArmor?.formParts?.detValue ?? 0;
+        // data.armor.impact = Dice.prepareFormula(mods?.impactArmor ?? "0", this, null, true);
 
         // Ballistic Armor
-        // data.armor.ballistic = Roll.safeEval(mods?.ballisticArmor ?? "0", variables);
-        data.armor.ballistic = Dice.prepareFormula(mods?.ballisticArmor ?? "0", this, null, true);
+        data.armor.ballistic = mods?.ballisticArmor?.formParts?.detValue ?? 0;
+        // data.armor.ballistic = Dice.prepareFormula(mods?.ballisticArmor ?? "0", this, null, true);
 
         // Toughness
-        // data.armor.toughness.mod = Roll.safeEval(mods?.toughness ?? "0", variables);
-        data.armor.toughness.mod = Dice.prepareFormula(mods?.toughness ?? "0", this, null, true);
+        data.armor.toughness.mod = mods?.toughness?.formParts?.detValue ?? 0;
+        // data.armor.toughness.mod = Dice.prepareFormula(mods?.toughness ?? "0", this, null, true);
 
         // Speed
-        // data.speed.mod = Roll.safeEval(mods?.speed ?? "0", variables);
-        data.speed.mod = Dice.prepareFormula(mods?.speed ?? "0", this, null, true);
+        data.speed.mod = mods?.speed?.formParts?.detValue ?? 0;
+        // data.speed.mod = Dice.prepareFormula(mods?.speed ?? "0", this, null, true);
 
         // Defend Maneuver (bonus to Defense)
-        // data.defend.mod = Roll.safeEval(mods?.defendMnv ?? "0", variables);
-        data.defend.mod = Dice.prepareFormula(mods?.defendMnv ?? "0", this, null, true);
+        data.defend.mod = mods?.defendMnv?.formParts?.detValue ?? 0;
+        // data.defend.mod = Dice.prepareFormula(mods?.defendMnv ?? "0", this, null, true);
 
         // Guard Up Maneuver
-        // data.guardUp.mod = Roll.safeEval(mods?.guardupMnv ?? "0", variables);
-        data.guardUp.mod = Dice.prepareFormula(mods?.guardupMnv ?? "0", this, null, true);
+        data.guardUp.mod = mods?.guardupMnv?.formParts?.detValue ?? 0;
+        // data.guardUp.mod = Dice.prepareFormula(mods?.guardupMnv ?? "0", this, null, true);
 
         // All Out Attack
-        data.allOutAttack.mod = mods?.allOutAtkMnv ?? 0;
+        data.allOutAttack.mod = mods?.allOutAtkMnv?.formParts?.detValue ?? 0;
 
         // Max Health
-        // data.health.mod = Roll.safeEval(mods?.maxHealth ?? "0", variables);
-        data.health.mod = Dice.prepareFormula(mods?.maxHealth ?? "0", this, null, true);
+        data.health.mod = mods?.maxHealth?.formParts?.detValue ?? 0;
+        // data.health.mod = Dice.prepareFormula(mods?.maxHealth ?? "0", this, null, true);
 
         // Max Conviction
-        // data.conviction.mod = Roll.safeEval(mods?.maxConviction ?? "0", variables);
-        data.conviction.mod = Dice.prepareFormula(mods?.maxConviction ?? "0", this, null, true);
+        data.conviction.mod = mods?.maxConviction?.formParts?.detValue ?? 0;
+        // data.conviction.mod = Dice.prepareFormula(mods?.maxConviction ?? "0", this, null, true);
 
         // Max Power Points
-        // data.powerPoints.mod = Roll.safeEval(mods?.powerPoints ?? "0", variables);
-        data.powerPoints.mod = Dice.prepareFormula(mods?.powerPoints ?? "0", this, null, true);
+        data.powerPoints.mod = mods?.powerPoints?.formParts?.detValue ?? 0;
+        // data.powerPoints.mod = Dice.prepareFormula(mods?.powerPoints ?? "0", this, null, true);
 
         // Aim Maneuver
-        // data.aim.mod = Roll.safeEval(mods?.aimMnv ?? "0", variables);
-        data.aim.mod = Dice.prepareFormula(mods?.aimMnv ?? "0", this, null, true);
+        data.aim.mod = mods?.aimMnv?.formParts?.detValue ?? 0;
+        // data.aim.mod = Dice.prepareFormula(mods?.aimMnv ?? "0", this, null, true);
 
         // Power Force
         // This bonus must be treated on each Item

@@ -50,7 +50,7 @@ export const migrateWorld = async function() {
   // Migrate World Compendium Packs
   for ( let p of game.packs ) {
     if ( p.metadata.package !== "world" ) continue;
-    if ( !["Actor", "Item", "Scene"].includes(p.metadata.entity) ) continue;
+    if ( !["Actor", "Item", "Scene"].includes(p.metadata.type) ) continue;
     await migrateCompendium(p);
   }
 
@@ -102,13 +102,13 @@ export async function removeToughHealthBallistic() {
 }
 
 /**
- * Apply migration rules to all Entities within a single Compendium pack
+ * Apply migration rules to all Documents within a single Compendium pack
  * @param pack
  * @return {Promise}
  */
 export const migrateCompendium = async function(pack) {
-  const entity = pack.metadata.entity;
-  if ( !["Actor", "Item", "Scene"].includes(entity) ) return;
+  const type = pack.metadata.type;
+  if ( !["Actor", "Item", "Scene"].includes(type) ) return;
 
   // Unlock the pack for editing
   const wasLocked = pack.locked;
@@ -122,7 +122,7 @@ export const migrateCompendium = async function(pack) {
   for ( let doc of documents ) {
     let updateData = {};
     try {
-      switch (entity) {
+      switch (type) {
         case "Actor":
           updateData = migrateActorData(doc.data);
           break;
@@ -137,19 +137,19 @@ export const migrateCompendium = async function(pack) {
       // Save the entry, if data was changed
       if ( foundry.utils.isObjectEmpty(updateData) ) continue;
       await doc.update(updateData);
-      console.log(`Migrated ${entity} entity ${doc.name} in Compendium ${pack.collection}`);
+      console.log(`Migrated ${type} document ${doc.name} in Compendium ${pack.collection}`);
     }
 
     // Handle migration failures
     catch(err) {
-      err.message = `Failed age-system system migration for entity ${doc.name} in pack ${pack.collection}: ${err.message}`;
+      err.message = `Failed age-system system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
       console.error(err);
     }
   }
 
   // Apply the original locked status for the pack
   await pack.configure({locked: wasLocked});
-  console.log(`Migrated all ${entity} documents from Compendium ${pack.collection}`);
+  console.log(`Migrated all ${type} documents from Compendium ${pack.collection}`);
 };
 
 /* -------------------------------------------- */
@@ -223,22 +223,25 @@ export const migrateItemData = function(item) {
   // _addItemAttackMod(item, updateData);
   if (isNewerVersion("0.7.0", lastMigrationVer)) _adjustFocusInitialValue(item, updateData); // Do not execute if last migration was 0.7.0 or earlier
   if (isNewerVersion("0.7.5", lastMigrationVer)) _addSelectedFieldForMods(item, updateData);
+  if (isNewerVersion("0.11.0", lastMigrationVer)) {
+    _weaponRanged(item, updateData);
+    _itemDamage(item, updateData);
+    _populateItemModifiers(item, updateData);
+  }
   return updateData;
 };
-
 /* -------------------------------------------- */
 
 /**
- * Migrate a single Item entity to incorporate latest data model changes
+ * Migrate a single Effect Document to incorporate latest data model changes
  * @param effect
  */
- export const migrateEffectData = function(effect) {
+export const migrateEffectData = function(effect) {
   const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
   const updateData = {};
   if (isNewerVersion("0.8.8", lastMigrationVer)) _addEffectFlags(effect, updateData); // Do not execute if last migration was 0.8.8 or earlier
   return updateData;
 };
-
 /* -------------------------------------------- */
 
 /**
@@ -283,24 +286,6 @@ export const migrateSceneData = async function(scene) {
 
       // Migrate Actor Data
       t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
-      
-      // Migrate Items
-      // if (t.actorData.items) {
-      //   token.actor.items.forEach(async (i) => {
-      //     const updates = migrateItemData(i.data)
-      //     await i.update(updates);
-      //     console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
-      //   });
-      // };
-  
-      // // Migrate Effects, version 0.8.8
-      // if (t.actorData.effects) {
-      //   token.actor.effects.forEach(async (e) => {
-      //     const updates = migrateEffectData(e.data ?? e)
-      //     await e.update(updates);
-      //     console.log(`Migrated Active Effect named ${e.id} from token ${token.data.name}`);
-      //   });
-      // };
     }
     return t;
   });
@@ -533,6 +518,94 @@ function _addItemForceAbl(item, updateData) {
  function _adjustFocusInitialValue(item, updateData) {
   if (item.type !== "focus") return updateData;
   if (item.data.improved) updateData["data.initialValue"] = item.data.initialValue - 1;
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Set ranged to TRUE (as standard is FALSE) for old items
+ * @private
+ */
+ function _weaponRanged(item, updateData) {
+  if (item.type !== 'weapon') return updateData;
+  updateData["data.ranged"] = true;
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Set ranged to TRUE (as standard is FALSE) for old items
+ * @private
+ */
+ function _itemDamage(item, updateData) {
+  if (!['weapon', 'power'].includes(item.type)) return updateData;
+  let formula = ""
+  let first = true;
+  if (item.data.nrDice && item.data.diceType) {
+    formula += `${item.data.nrDice}d${item.data.diceType}`;
+    first = false
+  }
+  if (item.data.extraValue) {
+    if (!first && item.data.extraValue > 0) formula += `+`;
+    formula += `${item.data.extraValue}`
+  }
+  updateData["data.damageFormula"] = formula;
+
+  // Resisted Damage
+  if (item.data.damageResisted) {
+    formula = ""
+    first = true;
+    if (item.data.damageResisted.nrDice && item.data.damageResisted.diceType) {
+      formula += `${item.data.damageResisted.nrDice}d${item.data.damageResisted.diceType}`;
+      first = false
+    }
+    if (item.data.damageResisted.extraValue) {
+      if (!first && item.data.damageResisted.extraValue > 0) formula += `+`;
+      formula += `${item.data.damageResisted.extraValue}`
+    }
+    updateData["data.damageResisted.damageFormula"] = formula;
+  }
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Populate Migration object on Item based on former itemMods
+ * @private
+ */
+ function _populateItemModifiers(item, updateData) {
+  if (!['equipment', 'weapon', 'power', 'talent'].includes(item.type)) return updateData;
+  const itemMods = item.data.itemMods;
+  const mods = {};
+  const keys = []
+
+  for (const k in itemMods) {
+    if (Object.hasOwnProperty.call(itemMods, k)) {
+      const m = itemMods[k];
+      if (m.selected) {
+        let modKey
+        do {
+          modKey = foundry.utils.randomID(20);
+        } while (keys.includes(modKey));
+        
+        mods[modKey] = {
+          type: k,
+          formula: `${m.value}`,
+          flavor: "",
+          isActive: m.isActive,
+          conditions: {focus: m.name ? m.name : ""},
+          key: modKey,
+          // The following data will be recalculated, anyway...
+          ftype: CONFIG.ageSystem.modkeys[k].dtype,
+          valid: true,
+          itemId: item._id,
+          itemName: item.name
+        }
+      }
+    }
+  }
+  
+  updateData['data.modifiers'] = mods;
   return updateData
 }
 /* -------------------------------------------- */

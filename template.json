@@ -376,7 +376,7 @@
                 "extraValue": 0,
                 "dmgAbl": "str",
                 "damageInjury": 1,
-                "rollFormula": "1d6"
+                "damageFormula": "1d6"
             },
             "hardItem": {
                 "weight": 0,
@@ -588,7 +588,6 @@
             "templates": ["description", "activation"],
             "improved": false,
             "isOrg": false,
-            "type": "charFocus",
             "initialValue": 2
         },
         "weapon": {
@@ -620,7 +619,8 @@
                 "diceType": "6",
                 "extraValue": 0,
                 "dmgAbl": "int",
-                "damageInjury": 1
+                "damageInjury": 1,
+                "damageFormula": "1d6"
             },
             "requirement": ""
         },
