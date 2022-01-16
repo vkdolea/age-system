@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.11.1 [2022-01-16]
+### Fixed
+- Bug preventing PDFoundry to open PDFs on "Reference" field from Item sheets.
+
 ## 0.11.0 [2022-01-16]
 ### Added
 - All items have a "Reference" field on sidebar. Here it is expected to add a page number configures on PDFoundry. Clicking on field's title will open your PDF on corresponding page, as long as [PDFoundry](https://foundryvtt.com/packages/pdfoundry) modules is installed.

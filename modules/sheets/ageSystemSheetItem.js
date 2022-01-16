@@ -161,7 +161,7 @@ export default class ageSystemItemSheet extends ItemSheet {
 
     _onOpenPDF(e) {
         const ref = e.currentTarget.closest('.feature-controls').dataset.reference;
-        if (reference == "") return false;
+        if (ref == "") return false;
         const regex = new RegExp('([0-9]+)|([a-zA-Z]+)','g');
         const splittedArray = ref.match(regex);
 
