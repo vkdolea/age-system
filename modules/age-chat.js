@@ -306,7 +306,7 @@ async function _handleAgeRollVisibility(html, chatCard, chatData){
         }
         _permCheck(actor?.permission, el.querySelector(`.age-chat-buttons-grid`)); // to be removed in the future
         _permCheck(actor?.permission, el.querySelector(`.age-chat-buttons.grid`));
-        if (!game.user.isGM) el.querySelector(".gm-only").remove();
+        if (!game.user.isGM) el.querySelector(".gm-only")?.remove();
     }
 }
 
