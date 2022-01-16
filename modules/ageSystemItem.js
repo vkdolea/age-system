@@ -319,18 +319,18 @@ export class ageSystemItem extends Item {
     evalMod(m) {
         if (m.type === "") return m
         m.ftype = ageSystem.modkeys[m.type].dtype;
+        let validFormula = true;
         switch (m.ftype) {
             case "nodice":
-                // Remove all dice pools
-                // TODO - also remove modifiers from dice pools
-                let reg = /[0-9]+d[0-9]+/g;
-                m.formula = m.formula.replaceAll(reg, "");
-                reg = /d[0-9]+/g;
-                m.formula = m.formula.replaceAll(reg, "");
+                // Check formula for Dice Terms
+                const tempRoll = new Roll(m.formula);
+                tempRoll.terms.map(term => {
+                    if (term instanceof DiceTerm) validFormula = false
+                });
                 break;
 
             case "number":
-                if(Number.isNaN(Number(m.formula))) m.formula = "0";
+                if (Number.isNaN(Number(m.formula))) validFormula = false;
                 break;
         
             case "formula":
@@ -341,7 +341,7 @@ export class ageSystemItem extends Item {
         }
         m.itemId = this.id;
         m.itemName = this.name;
-        m.valid = Roll.validate(m.formula);
+        m.valid = Roll.validate(m.formula) && validFormula;
         if (!m.valid) m.isActive = false;
         return m
     }

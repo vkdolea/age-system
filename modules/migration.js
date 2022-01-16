@@ -528,7 +528,14 @@ function _addItemForceAbl(item, updateData) {
  */
  function _weaponRanged(item, updateData) {
   if (item.type !== 'weapon') return updateData;
-  updateData["data.ranged"] = true;
+  const meleeDist = {
+    min: false,
+    max: false
+  }
+  if (!item.data.range || item.data.range <= 2) meleeDist.min = true
+  if (!item.data.rangeMax || item.data.rangeMax === item.data.range) meleeDist.max = true;
+  const isRanged = meleeDist.min && meleeDist.max ? false : true;
+  updateData["data.ranged"] = isRanged;
   return updateData
 }
 /* -------------------------------------------- */

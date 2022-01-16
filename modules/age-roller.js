@@ -33,6 +33,7 @@ export class AgeRoller extends Application {
 		html.find(".conditions-workshop").click(this.openConditionWorkshop.bind(this));
 		html.find(".breather-tokens").click(this.tokenBreather);
 		html.find('.roll').click(this._onSpecialRoll.bind(this));
+		html.find('.roll').contextmenu(this._onSpecialRoll.bind(this));
 
 		// Set position
 		let roller = document.getElementById("age-roller");
@@ -51,10 +52,11 @@ export class AgeRoller extends Application {
 	async _onSpecialRoll(ev) {
 		ev.preventDefault();
 		const type = ev.currentTarget.dataset.roll;
-		let formula = '1d6 + 1d6*10'
-		if (type === 'd666') formula += ' + 1d6*100'
+		let formula = "";
+		if (type === 'd666') formula += '1d6*100 + '
+		formula += '1d6*10 + 1d6'
 		let roll = await new Roll(formula).evaluate({async: true});
-		return roll.toMessage({flavor: type}, {rollMode: ev.shiftKey ? "blindroll" : ""});
+		return roll.toMessage({flavor: type}, {rollMode: (ev.shiftKey || ev.type === "contextmenu") ? "selfroll" : ""});
 	}
 
 	tokenBreather(ev) {
