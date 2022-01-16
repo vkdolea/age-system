@@ -1,6 +1,7 @@
-{{!-- Stunts Tab --}}
+{{!-- Options Tab --}}
 <section class="options-section">    
 
+    {{#if data.weaponGroups}}
     <ul class="resource item-group">
         <li class="title colorset-first-tier">
             {{localize "SETTINGS.weaponGroups"}}
@@ -15,5 +16,6 @@
             </p>
         </li>
     </ul>
+    {{/if}}
 
 </section>

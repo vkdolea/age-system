@@ -330,7 +330,7 @@ Hooks.once("ready", async function() {
 
     // Register Weapon Groups (if any)
     const userGroups = game.settings.get("age-system", "weaponGroups");
-    if (!userGroups) {
+    if (userGroups.length === 0) {
         ageSystem.weaponGroups = null;
     } else {
         ageSystem.weaponGroups = userGroups.split(`;`);

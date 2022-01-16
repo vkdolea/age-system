@@ -275,58 +275,45 @@ export class ageSystemActor extends Actor {
 
         // Actor All Tests
         data.testMod = mods?.testMod?.totalFormula ?? "0";
-        // data.testMod = Dice.prepareFormula(mods?.testMod ?? "0", this, null, true);
 
         // Actor All Attacks Mod
         data.attackMod = mods?.attackMod?.totalFormula ?? "0";
-        // data.attackMod = Dice.prepareFormula(mods?.attackMod ?? "0", this, null, true);
 
         // Defense
         data.defense.mod = mods?.defense?.formParts?.detValue ?? 0;
-        // data.defense.mod = Dice.prepareFormula(mods?.defense ?? "0", this, null, true);
 
         // Impact Armor
         data.armor.impact = mods?.impactArmor?.formParts?.detValue ?? 0;
-        // data.armor.impact = Dice.prepareFormula(mods?.impactArmor ?? "0", this, null, true);
 
         // Ballistic Armor
         data.armor.ballistic = mods?.ballisticArmor?.formParts?.detValue ?? 0;
-        // data.armor.ballistic = Dice.prepareFormula(mods?.ballisticArmor ?? "0", this, null, true);
 
         // Toughness
         data.armor.toughness.mod = mods?.toughness?.formParts?.detValue ?? 0;
-        // data.armor.toughness.mod = Dice.prepareFormula(mods?.toughness ?? "0", this, null, true);
 
         // Speed
         data.speed.mod = mods?.speed?.formParts?.detValue ?? 0;
-        // data.speed.mod = Dice.prepareFormula(mods?.speed ?? "0", this, null, true);
 
         // Defend Maneuver (bonus to Defense)
         data.defend.mod = mods?.defendMnv?.formParts?.detValue ?? 0;
-        // data.defend.mod = Dice.prepareFormula(mods?.defendMnv ?? "0", this, null, true);
 
         // Guard Up Maneuver
         data.guardUp.mod = mods?.guardupMnv?.formParts?.detValue ?? 0;
-        // data.guardUp.mod = Dice.prepareFormula(mods?.guardupMnv ?? "0", this, null, true);
 
         // All Out Attack
         data.allOutAttack.mod = mods?.allOutAtkMnv?.formParts?.detValue ?? 0;
 
         // Max Health
         data.health.mod = mods?.maxHealth?.formParts?.detValue ?? 0;
-        // data.health.mod = Dice.prepareFormula(mods?.maxHealth ?? "0", this, null, true);
 
         // Max Conviction
         data.conviction.mod = mods?.maxConviction?.formParts?.detValue ?? 0;
-        // data.conviction.mod = Dice.prepareFormula(mods?.maxConviction ?? "0", this, null, true);
 
         // Max Power Points
         data.powerPoints.mod = mods?.powerPoints?.formParts?.detValue ?? 0;
-        // data.powerPoints.mod = Dice.prepareFormula(mods?.powerPoints ?? "0", this, null, true);
 
         // Aim Maneuver
         data.aim.mod = mods?.aimMnv?.formParts?.detValue ?? 0;
-        // data.aim.mod = Dice.prepareFormula(mods?.aimMnv ?? "0", this, null, true);
 
         // Power Force
         // This bonus must be treated on each Item

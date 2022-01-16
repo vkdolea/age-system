@@ -482,7 +482,7 @@ export class ageSystemItem extends Item {
     };
 
     async showItem(forceSelfRoll = false) {
-        return ui.notifications.warn("Show item cards on chat is currently unavailable. Await until next version"); // Remove when chat cards are working again
+        // return ui.notifications.warn("Show item cards on chat is currently unavailable. Await until next version"); // Remove when chat cards are working again
         const rollMode = game.settings.get("core", "rollMode");       
         const cardData = {
             inChat: true,
@@ -496,7 +496,7 @@ export class ageSystemItem extends Item {
                 colorScheme: ageSystem.colorScheme,
                 wealthMode: game.settings.get("age-system", "wealthType")
             },
-            cssClass: `colorset-${ageSystem.colorScheme}`
+            cssClass: `colorset-${ageSystem.colorScheme} item-to-chat`
         };
         const chatData = {
             user: game.user.id,
