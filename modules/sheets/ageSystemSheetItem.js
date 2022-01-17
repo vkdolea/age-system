@@ -111,9 +111,6 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Modifiers Dropdown List
         data.modifiersList = modifiersList()
 
-        // Check if PDFoundry is active
-        if (game.modules.get("pdfoundry").active) ageSystem.pdfoundryOn = true;
-
         // Check if Use Fatigue setting is TRUE
         data.fatigueSet = game.settings.get("age-system", "useFatigue");
 
