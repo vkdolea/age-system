@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.11.2 [2022-01-16]
+### Added
+- Talent Degrees were "lost" during migration. Added a second migration to try to identify Talent Degree and set it automatically. Also, old Degrees will be added on new "Requirements" field of each Talent.
+
 ## 0.11.1 [2022-01-16]
 ### Fixed
 - Bug preventing PDFoundry to open PDFs on "Reference" field from Item sheets.
