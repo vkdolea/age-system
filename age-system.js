@@ -361,6 +361,9 @@ Hooks.once("ready", async function() {
             // names must be equal
             return 0;
         });
+
+        // Check if PDFoundry is active
+        if (game.modules.get("pdfoundry")?.active) ageSystem.pdfoundryOn = true;
     }
 
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to

@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.11.3 [2022-01-17]
+### Fixed
+- If PDFoundry wasn't installed, Item sheets wouldn't open.
+- Focus and Talent data was loged on console whenever sheet was rendered.
+
 ## 0.11.2 [2022-01-16]
 ### Added
 - Talent Degrees were "lost" during migration. Added a second migration to try to identify Talent Degree and set it automatically. Also, old Degrees will be added on new "Requirements" field of each Talent.
