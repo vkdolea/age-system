@@ -17,7 +17,7 @@ export default class ageSystemItemSheet extends ItemSheet {
             //     this.options.height = this.position.height = "460";
             //     break;
             case "talent":
-                // this.options.width = this.position.width = "400";
+                this.options.width = this.position.width = "900";
                 this.options.height = this.position.height = "545";
                 break;          
             case "stunts":

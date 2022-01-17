@@ -239,6 +239,13 @@ Hooks.once("init", async function() {
         return op === `+` ? `` : op;
     });
 
+    // Handlebar to select Talent Degree
+    Handlebars.registerHelper('tdegree', function(value) {
+        value = Number(value);
+        if (isNaN(value)) return ""
+        return ageSystem.talentDegrees[value];
+    });
+
     // Handlebar helper to compare 2 data
     Handlebars.registerHelper("when",function(operand_1, operator, operand_2, options) {
         let operators = {
@@ -263,7 +270,11 @@ Hooks.once("init", async function() {
 Hooks.once("setup", function() {
     Setup.abilitiesName();
     Setup.localizeAgeEffects();
-    ageSystem.talentDegrees = Setup.localizeObj(ageSystem.mageDegrees);
+    const talentDegrees = foundry.utils.deepClone(ageSystem.mageDegrees);
+    for (let i = 0; i < talentDegrees.length; i++) {
+        talentDegrees[i] = game.i18n.localize(talentDegrees[i]);
+    }
+    ageSystem.talentDegrees = talentDegrees;
 
     // Set Health System configuration
     const hstype = game.settings.get("age-system", "healthSys");
@@ -358,7 +369,7 @@ Hooks.once("ready", async function() {
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.11.0";
+    const NEEDS_MIGRATION_VERSION = "0.11.2";
     // const COMPATIBLE_MIGRATION_VERSION = "0.8.7";
     const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;

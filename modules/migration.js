@@ -228,6 +228,7 @@ export const migrateItemData = function(item) {
     _itemDamage(item, updateData);
     _populateItemModifiers(item, updateData);
   }
+  if (isNewerVersion("0.11.2", lastMigrationVer)) _talentDegree(item, updateData);
   return updateData;
 };
 /* -------------------------------------------- */
@@ -613,6 +614,50 @@ function _addItemForceAbl(item, updateData) {
   }
   
   updateData['data.modifiers'] = mods;
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
+ * Try to identify Talent Degree and save old data on "Requirements" field
+ * @private
+ */
+ function _talentDegree(item, updateData) {
+  if (item.type !== 'talent') return updateData;
+  if (item.data.degree !== "") return updateData
+  const prevDegree = item.data.shortDesc;
+  if (!prevDegree) return updateData
+  if (prevDegree.trim() === "") return updateData
+  const prevDegreeLC = prevDegree.toLowerCase();
+
+  let tdMA = foundry.utils.deepClone(CONFIG.ageSystem.mageDegrees);
+  let tdFA = foundry.utils.deepClone(CONFIG.ageSystem.fageDegrees);
+  let matches = false;
+  let newDegree = "";
+  for (let i = 0; i < tdMA.length; i++) {
+    tdMA[i] = game.i18n.localize(tdMA[i].toLowerCase());
+    tdFA[i] = game.i18n.localize(tdFA[i].toLowerCase());
+  }
+  for (let i = 0; i < tdMA.length; i++) {
+    if (!matches && prevDegreeLC == tdMA[i].toLowerCase()) {
+      matches = true;
+      newDegree = i
+    }
+    if (!matches && prevDegreeLC == tdFA[i].toLowerCase()) {
+      matches = true;
+      newDegree = i
+    }
+  }
+
+  if (newDegree !== "") { 
+    updateData['data.degree'] = newDegree;
+  } else {
+    updateData['data.degree'] = 0;
+  }
+  let req = item.data.requirement;
+  req = req === "" ? `${game.i18n.localize('age-system.talentDegree')}: ${item.data.shortDesc}` : ref += ` | ${game.i18n.localize('age-system.talentDegree')}: ${item.data.shortDesc}`
+  updateData['data.requirement'] = req;
+
   return updateData
 }
 /* -------------------------------------------- */
