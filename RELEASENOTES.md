@@ -1,5 +1,11 @@
 # Release Notes
 
+## 0.11.4 [2022-01-18]
+### Fixed
+- Ability box (main tab) size deteriotes the bigger the "Quick Access" box get.
+- When hovering "Reference" field with PDFoundry installed, cursor will change for a pointer.
+- Fixed styling issue on Spaceship Features sheet.
+
 ## 0.11.3 [2022-01-17]
 ### Fixed
 - If PDFoundry wasn't installed, Item sheets wouldn't open.

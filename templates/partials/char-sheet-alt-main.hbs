@@ -52,7 +52,7 @@
 </div>
 
 <section class="char-main-section flexrow">
-    <ul class="abilities-column flexrow">
+    <ul class="abilities-column">
         {{!-- Attributes' Blocks --}}
         {{#each data.config.abilities as |name type|}}
         <li class="ability-box box {{type}} {{#if (isempty ../data.focus type)}}no-focus{{/if}}">
