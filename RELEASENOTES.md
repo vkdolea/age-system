@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.11.6 [2022-01-19]
+### Fixed
+- Remove damage component from weapon/arcana from previous damage setup.
+
 ## 0.11.5 [2022-01-19]
 ### Fixed
 - Talent on Legacy sheet now show correctly Degree and changes color when it is flaged as Specialization.

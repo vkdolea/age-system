@@ -752,13 +752,6 @@ export async function plotDamage (actor) {
         }
     };
 
-    // if (!chatData.sound) {
-    //     if (healthSys.type === 'mageInjury' || healthSys.type === 'mageVitality') {
-    //         chatData.sound = CONFIG.sounds.notification;
-    //     } else {
-    //         chatData.sound = CONFIG.sounds.dice;
-    //     }
-    // }
     chatData.sound = CONFIG.sounds.dice;
     ChatMessage.create(chatData);
 }
@@ -802,10 +795,6 @@ export async function itemDamage({
     
     const healthSys = ageSystem.healthSys;
     const dmgDetails = resistedDmg ? item.data.data.damageResisted : item.data.data;
-
-    let nrDice = dmgDetails.nrDice;
-    let diceSize = dmgDetails.diceType;
-    let constDmg = dmgDetails.extraValue;
     let dmgAbl = dmgDetails.dmgAbl
 
     let damageFormula
@@ -814,13 +803,7 @@ export async function itemDamage({
         let baseDmg = healthSys.baseDamageTN;
         if (item?.data?.data?.damageInjury !== 0) baseDmg += item.data.data.damageInjury;
         damageFormula = `${baseDmg}[${game.i18n.localize("age-system.base")}]`;
-    } else {
-        // damageFormula = nrDice > 0 ? `${nrDice}d${diceSize}[${nrDice}d${diceSize}]` : "";
-        damageFormula = `${dmgDetails.damageFormula}`;
-        rollData.damageMod = constDmg;
-        // Check if damage source has a non 0 portion on its parameters
-        if (constDmg) {damageFormula = `${damageFormula} + @damageMod[${game.i18n.localize("age-system.base")}]`}
-    };
+    } else damageFormula = `${dmgDetails.damageFormula}`;
     
     let damageDesc = "";
     const dmgDesc = {
