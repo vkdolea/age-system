@@ -82,7 +82,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     // Set roll mode
     // const rMode = setBlind(event);
     const rollMode = event.shiftKey ? "blindroll" : "roll";
-    let rollData = {};
+    let rollData = {...actor?.actorRollData()};
     let partials = [];
     rollData.abilityName = "...";
     
@@ -112,6 +112,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         rollFormula += " + @ability";
         ablName = actorType === "char" ? game.i18n.localize(`age-system.${abl}`) : game.i18n.localize(`age-system.org.${abl}`);
         rollData = {
+            ...rollData,
             ability: ablValue,
             ablCode: abl,
             focusId: null,
@@ -188,15 +189,13 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         rollData.hasHealing = itemRolled.data.data.hasHealing;
         rollData.hasFatigue = itemRolled.data.data.hasFatigue;
         rollData.hasTest = itemRolled.data.data.hasTest;
-        if (itemRolled?.data?.data?.itemMods) {
-            if (itemRolled.data.data.itemMods.itemActivation?.isActive) {
-                rollData.activationMod = itemRolled.data.data.itemMods.itemActivation.value
-                rollFormula += " + @activationMod"
-                partials.push({
-                    label: game.i18n.localize("age-system.activationMod"),
-                    value: rollData.activationMod
-                });
-            }
+        const iUseMod = itemRolled?.data?.data?.activateMod
+        if (iUseMod) {
+            rollFormula += ` + ${iUseMod}`
+            partials.push({
+                label: game.i18n.localize("age-system.activationMod"),
+                value: iUseMod
+            });
         }
     } else {
         rollData.itemId = null;
@@ -848,11 +847,15 @@ export async function itemDamage({
     if (item?.isOwned) {
         // Adds owner's Ability to damage
         // Fully added even on Injury Mode
-        if (dmgAbl !== null && dmgAbl !== "no-abl") {
-            // const ablMod = item.actor.data.data.abilities[dmgAbl].total;
-            damageFormula = `${damageFormula} + @${dmgAbl}[${game.i18n.localize("age-system." + dmgAbl)}]`;
-            // rollData.abilityMod = ablMod;
-        }
+        if (dmgAbl !== null && dmgAbl !== "no-abl") damageFormula = `${damageFormula} + @${dmgAbl}[${game.i18n.localize("age-system." + dmgAbl)}]`;
+        
+        // Check if item onwer has items which adds up to general damage
+        const aDmg = item?.actor?.data?.data?.dmgMod;
+        if (aDmg != 0) damageFormula = `${damageFormula} + ${aDmg}`;
+
+        // Check if Item has Mod to add to its own Damage
+        const iDmg = item?.data?.data?.itemDmgMod;
+        if (iDmg != 0) damageFormula = `${damageFormula} + ${iDmg}`;
 
         // Check if Attack to Damage Trade Off is applied
         if (atkDmgTradeOff) {
@@ -875,24 +878,10 @@ export async function itemDamage({
             rollData.stuntDieDmg = healthSys.useInjury ? 1 : stuntDie;
         }
 
-        // Check if Item has Mod to add to its own Damage
-        if (item.data.data.itemMods.itemDamage.isActive) {
-            const itemDmg = item.data.data.itemMods.itemDamage.value;
-            damageFormula = `${damageFormula} + ${itemBonus}[${game.i18n.localize("age-system.itemDmgMod")}]`;
-            // rollData.itemBonus = itemDmg;
-        };
-
         // Adds user Damage input
         if (dmgGeneralMod && dmgGeneralMod !== 0) {
             damageFormula += ` + @optMod[${game.i18n.localize("age-system.setRollGeneralMod")}]`;
             rollData.optMod = dmgGeneralMod;
-        };
-        
-        // Check if item onwer has items which adds up to general damage
-        if (item.actor.data.data.ownedBonus != null && item.actor.data.data.ownedBonus.actorDamage) {
-            const actorDmgMod = item.actor.data.data.ownedBonus.actorDamage.totalMod;
-            damageFormula = `${damageFormula} + (${generalDmgMod})[${game.i18n.localize("age-system.itemDmgMod")}]`;
-            // rollData.generalDmgMod = actorDmgMod;
         };
 
         // Adds extra damage for All-Out Attack maneuver
@@ -926,12 +915,6 @@ export async function itemDamage({
             const extraDice = healthSys.useInjury ? dmgExtraDice : `${dmgExtraDice}D6`;
             damageFormula += ` + @extraDice[+${extraDice}]`;
             rollData.extraDice = extraDice;
-        };
-
-        // Adds Actor Damage Bonus
-        if (actorDmgMod !== 0) {
-            damageFormula += ` + (${actorDmgMod})[${game.i18n.localize("age-system.bonus.actorDamage")}]`;
-            // rollData.actorDmgMod = actorDmgMod;
         };
 
     };

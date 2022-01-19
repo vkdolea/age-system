@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.11.5 [2022-01-19]
+### Fixed
+- Talent on Legacy sheet now show correctly Degree and changes color when it is flaged as Specialization.
+- Modifiers fixed: item activation, actor damage, item damage.
+
 ## 0.11.4 [2022-01-18]
 ### Fixed
 - Ability box (main tab) size deteriotes the bigger the "Quick Access" box get.

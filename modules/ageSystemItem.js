@@ -137,6 +137,7 @@ export class ageSystemItem extends Item {
                 itemRollModFormula += p;
                 atkBonuses.push(p)
             }
+            data.activateMod = itemRollModFormula;
             // Bonus to Roll item (Ability/Focus test)
             data.itemRollMod = itemRollModFormula;
             let atkBonus = ""
@@ -183,7 +184,7 @@ export class ageSystemItem extends Item {
             for (let i = 0; i < dmgBonusItemArr.length; i++) {
                 const p = dmgBonusItemArr[i];
                 if (i > 0) itemDmgModFormula += " + ";
-                itemDmgModFormula += p;
+                itemDmgModFormula += `${p}`;    
                 dmgBonusArr.push(p)
             }
             let dmgBonus = ""
