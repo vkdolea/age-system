@@ -369,6 +369,10 @@ Hooks.once("ready", async function() {
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on("hotbarDrop", (bar, data, slot) => createAgeMacro(data, slot));
 
+    // Log core version
+    ageSystem.coreVersion = game.world.data.coreVersion;
+    ageSystem.systemVersion = game.world.data.systemVersion
+
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
