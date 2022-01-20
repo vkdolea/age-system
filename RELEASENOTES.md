@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.11.8 [2022-01-20]
+### Fixed
+- Hotfix on item preparation routines, FVTT v9.
+
 ## 0.11.7 [2022-01-20]
 ### Fixed
 - Compatibility issue solved on Item preparation with FoundryVTT version 0.8.x. which prevented items from displaying correct data/rolls.
