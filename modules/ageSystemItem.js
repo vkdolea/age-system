@@ -91,7 +91,10 @@ export class ageSystemItem extends Item {
             case "shipfeatures": this._prepareShipFeatures(data);
                 break;
         }
-        this.prepareEmbeddedDocuments();
+        
+        // Adds support to FoundryVTT 0.8.x
+        if (isNewerVersion(ageSystem.coreVersion, "0.8.9")) this.prepareEmbeddedDocuments();
+        else this.prepareEmbeddedEntities();
     };
 
     _postPrepareData(data) {

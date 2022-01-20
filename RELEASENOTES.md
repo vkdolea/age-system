@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.11.7 [2022-01-20]
+### Fixed
+- Compatibility issue solved on Item preparation with FoundryVTT version 0.8.x. which prevented items from displaying correct data/rolls.
+- Compatibility issue solved on formula preview evalulation with FoundryVTT version 0.8.x.
+
 ## 0.11.6 [2022-01-19]
 ### Fixed
 - Remove damage component from weapon/arcana from previous damage setup.

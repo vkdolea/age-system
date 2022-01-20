@@ -19,8 +19,12 @@ export function resumeFormula(formula, data = {}) {
         const e = terms[t];
         let f = e.formula;
         if (e.flavor) f = f.replace(`[${e.flavor}]`, '');
+        // Compatibility with 0.8.x
+        if (!isNewerVersion(ageSystem.coreVersion, "0.8.9")) {
+            e.isDeterministic = e instanceof Die || e instanceof ParentheticalTerm ? false : true
+        }
         if (!e.isDeterministic) {
-            if (t !== 0) parts.nonDet += `${terms[t-1].formula}`;
+            if (t != 0) parts.nonDet += `${terms[t-1].formula}`;
             parts.nonDet += `${f}`;
             parts.det += "0";
         }

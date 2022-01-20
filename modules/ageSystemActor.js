@@ -257,7 +257,6 @@ export class ageSystemActor extends Actor {
         }
 
         this._preparePostModCharData();
-
     }
 
     _preparePostModCharData() {
