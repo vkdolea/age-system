@@ -61,14 +61,14 @@
             </li>
             {{else}}
             {{!-- Health / Fortune --}}
-            <li class="resource colorset-third-tier">
+            <li class="resource colorset-third-tier feature-controls" data-mode="{{data.data.gameMode.selected}}" data-local="sidebar">
                 <div class="title">
                     <a class="roll-breather feature-controls"><i class="fas fa-medkit"></i></a>
                     {{data.config.healthSys.healthName}}
                 </div>
                 <div class="values flexrow">
                     <input class="value-data circle" type="number" name="data.health.value" value="{{data.data.health.value}}" data-dtype="Number" />
-                    <input class="value-data circle" type="number" name="data.health.set" value="{{data.data.health.set}}" data-dtype="Number" />
+                    <input class="value-data circle game-mode-details" data-detail="health" type="number" name="data.health.set" value="{{data.data.health.set}}" data-dtype="Number" />
                     {{#if (ne data.data.health.set data.data.health.max)}}
                     <input class="value-data circle bonus" type="number" class="colorset-second-tier" disabled name="data.health.max" value="{{data.data.health.max}}" data-dtype="Number" />
                     {{/if}}
@@ -115,7 +115,7 @@
                             <label>{{localize "age-system.base"}}</label>
                         </div>
                         <div class="flexrow">
-                            <input class="value-data" type="number" name="data.defense.gameModeBonus" value="{{data.data.defense.gameModeBonus}}" data-dtype="Number" />
+                            <input class="value-data game-mode-details" type="number" data-details="defense" name="data.defense.gameModeBonus" value="{{data.data.defense.gameModeBonus}}" data-dtype="Number" />
                             <label>{{localize "age-system.gameModeBonus"}}</label>
                         </div>
                         <div class="flexrow">
@@ -183,7 +183,7 @@
                     <input class="value-data circle" disabled type="number" name="data.armor.toughness.total" value="{{data.data.armor.toughness.total}}" data-dtype="Number" />
                     <div class="values-options mods-section flexcol">
                         <div class="flexrow">
-                            <input class="value-data" type="number" name="data.armor.toughness.gameModeBonus" value="{{data.data.armor.toughness.gameModeBonus}}" data-dtype="Number" />
+                            <input class="value-data game-mode-details" data-details="toughness" type="number" name="data.armor.toughness.gameModeBonus" value="{{data.data.armor.toughness.gameModeBonus}}" data-dtype="Number" />
                             <label>{{localize "age-system.gameModeBonus"}}</label>
                         </div>
                         <div class="flexrow">

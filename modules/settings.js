@@ -167,20 +167,21 @@ export const registerSystemSettings = async function() {
     default: "pulp",
     type: String,
     choices: {
-      "none": "SETTINGS.gameModeNone",
-      "gritty": "SETTINGS.gameModeGritty",
-      "pulp": "SETTINGS.gameModePulp",
-      "cinematic": "SETTINGS.gameModeCinematic",
+      "none": "SETTINGS.gameModenone",
+      "gritty": "SETTINGS.gameModegritty",
+      "pulp": "SETTINGS.gameModepulp",
+      "cinematic": "SETTINGS.gameModecinematic",
     },
     onChange: () => {
-      ageSystem.healthSys.mode = game.settings.get("age-system", "healthMode"),
+      ageSystem.healthSys.mode = game.settings.get("age-system", "gameMode"),
       [...game.actors.contents, ...Object.values(game.actors.tokens)]
         .filter((o) => {
           return o.data.type === "char";
         })
         .forEach((o) => {
           o.prepareData();
-          o.refreshMarks()
+          o.refreshMarks();
+          o.sheet.render(false);
         });
     },
   });

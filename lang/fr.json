@@ -72,12 +72,12 @@
     "SETTINGS.colorRedWarrior": "Red Warrior",
     "SETTINGS.colorNeverDead": "Never Dead",
 
-    "SETTINGS.gameMode": "Sélectionner le mode de jeu si besoin",
+    "SETTINGS.gameMode": "Mode de Jeu",
     "SETTINGS.gameModeHint": "Sélectionner le mode de jeu (comme indiqué dans Modern AGE) ou aucun si le réglage n’existe pas",
-    "SETTINGS.gameModeNone": "Aucun",
-    "SETTINGS.gameModeGritty": "Gritty",
-    "SETTINGS.gameModePulp": "Pulp",
-    "SETTINGS.gameModeCinematic": "Cinématique",
+    "SETTINGS.gameModenone": "Aucun",
+    "SETTINGS.gameModegritty": "Gritty",
+    "SETTINGS.gameModepulp": "Pulp",
+    "SETTINGS.gameModecinematic": "Cinématique",
 
     "SETTINGS.occupation": "Options concernant l'activité",
     "SETTINGS.occupationHint": "Sélectionner la meilleure option pour le monde utilisé",

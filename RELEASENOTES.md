@@ -1,5 +1,13 @@
 # Release Notes
 
+## 0.11.9 [2022-01-23]
+### Added
+- Updated Character template to add future support to multiple Health values for different game modes and a Modifier to add penality for test using an Ability, but without reducing Ability total.
+
+### Fixed
+- Modifiers not showing up correctly on Item sheet when using Injury mode.
+- Weapon/Power damage not showing correctly on Item/Block sheet when using Injury mode.
+
 ## 0.11.8 [2022-01-20]
 ### Fixed
 - Hotfix on item preparation routines, FVTT v9.

@@ -154,7 +154,10 @@ export class ageSystemItem extends Item {
 
             // Item Base Damage
             const dmgBonusArr = []
-            if (data.damageFormula) dmgBonusArr.push(data.damageFormula);
+            let baseDamage = 0;
+            if (useInjury) baseDamage = data.damageInjury;
+            else if (data.damageFormula) baseDamage = data.damageFormula;
+            dmgBonusArr.push(baseDamage);
             // Damage Formula - Actor Scope
             if (data.dmgAbl !== "no-abl") {
                 if (this.actor?.data?.data?.abilities?.[data.dmgAbl]?.total) dmgBonusArr.push(this.actor.data.data.abilities[data.dmgAbl].total)

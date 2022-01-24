@@ -116,6 +116,24 @@ export class ageSystemActor extends Actor {
         }
     };
 
+    _configureCharGameMode(mode) {
+        if (this.type != 'char') return;
+        const actorData = this.data;
+        const data = actorData.data;
+
+        if (data.gameMode.specs[mode] === {}) {
+            data.gameMode.specs[mode] = {
+                health: data.health.set,
+                defense: data.defense.gameModeBonus,
+                toughness: data.armor.toughness.gameModeBonus
+            }
+        } else {
+            data.health.set = data.gameMode.specs[mode].health;
+            data.defense.gameModeBonus = data.gameMode.specs[mode].defense;
+            data.armor.toughness.gameModeBonus = data.gameMode.specs[mode].toughness;
+        }
+    }
+
     _prepareBaseDataChar() {
 
         const actorData = this.data;
@@ -132,6 +150,10 @@ export class ageSystemActor extends Actor {
 
         // Check if Power Points is in use
         data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
+
+        // Check Game Mode and select correct Health / Defense / Toughness to use
+        // if (!data.gameMode.override) data.gameMode.selected = ageSystem.healthSys.mode;
+        // this._configureCharGameMode(data.gameMode.selected);
 
         // Ensure Fatigue has valid Values and creates Status text
         if (data.fatigue.entered > data.fatigue.max) data.fatigue.entered = data.fatigue.max;
@@ -829,7 +851,7 @@ export class ageSystemActor extends Actor {
         let formula = `${options.k}`;
         if (options.abl !== 'no-abl') formula += ` + ${Math.max(this.data.data.abilities[options.abl].total, 0)}`;
         if (options.addLevel) formula += ageSystem.healthSys.useInjury ? ` + ${Math.floor(this.data.data.level/4)}` : ` + ${this.data.data.level}`;
-        let roll = await new Roll(formula).evaluate({async: true});
+        let roll = await new Roll(formula, this.actorRollData()).evaluate({async: true});
 		roll.toMessage({flavor: `${this.name} | ${game.i18n.localize("age-system.breather")}`}, {rollMode});
         if (options.autoApply) return ageSystem.healthSys.useInjury ? this.healMarks(roll.total) : this.applyHPchange(roll.total, {isHealing: true, isNewHP: false});
     }

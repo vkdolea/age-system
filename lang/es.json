@@ -72,12 +72,12 @@
     "SETTINGS.colorRedWarrior": "Guerrero Rojo",
     "SETTINGS.colorNeverDead": "No Muerto",
 
-    "SETTINGS.gameMode": "Selecciona estilo de juego, si aplica",
+    "SETTINGS.gameMode": "Estilo de Juego",
     "SETTINGS.gameModeHint": "Selecciona el estilo de juego (según Modern AGE) o ninguno en caso de que la ambientación no lo utilice",
-    "SETTINGS.gameModeNone": "Ninguno",
-    "SETTINGS.gameModeGritty": "Descarnado",
-    "SETTINGS.gameModePulp": "Pulp",
-    "SETTINGS.gameModeCinematic": "Cinemático",
+    "SETTINGS.gameModenone": "Ninguno",
+    "SETTINGS.gameModegritty": "Descarnado",
+    "SETTINGS.gameModepulp": "Pulp",
+    "SETTINGS.gameModecinematic": "Cinemático",
 
     "SETTINGS.occupation": "Opción Ocupación",
     "SETTINGS.occupationHint": "Selecciona el nombre que mejor cuadra con la ambientación del mundo",

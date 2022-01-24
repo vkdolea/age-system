@@ -11,7 +11,7 @@ import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageToken} from "./modules/ageToken.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
-import { createAgeMacro } from "./modules/macros.js";
+import { createAgeMacro, removeDoubledMods } from "./modules/macros.js";
 import { rollOwnedItem } from "./modules/macros.js";
 import { AgeRoller } from "./modules/age-roller.js";
 import { AgeTracker } from "./modules/age-tracker.js";
@@ -93,6 +93,7 @@ Hooks.once("init", async function() {
         dice: Dice,
         migrations: migrations,
         rollOwnedItem,
+        // removeDoubledMods, // to be used in cases users has migration problems
         documents: {
             ageSystemActor,
             // ageToken,

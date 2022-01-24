@@ -7,8 +7,8 @@
             {{localize "age-system.weaponContainer"}}
         </li>
         {{#if data.weaponGroups}}
-        <li class="owned-wgroups colorset-second-tier">
-            <label class="wgroup">{{localize "SETTINGS.weaponGroups"}}:</label>
+        <li class="owned-wgroups colorset-second-tier labels">
+            <label class="wgroup"><strong>{{localize "SETTINGS.weaponGroups"}}:</strong></label>
             {{#each actor.data.data.wgroups as |wgroup|}}
             <span>&nbsp{{wgroup}}{{#if @last}}{{else}},{{/if}}</span>
             {{/each}}
