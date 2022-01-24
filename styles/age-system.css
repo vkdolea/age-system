@@ -2592,6 +2592,10 @@
 .age-system.sheet .short-input {
   flex: 0 0 3rem;
 }
+.age-system.sheet .multiple-selection {
+  text-align: left;
+  padding-left: 0.2rem;
+}
 .age-system.sheet .general-aid-bar .title {
   padding: 0 4px;
   min-width: max-content !important;
@@ -5374,7 +5378,7 @@ body *:not(i, .fa, .far, .fas) {
 .age-system select:hover,
 .age-system nav a:hover:not(.active),
 .age-system span.toggle-condition:hover,
-.age-system .mouse-to-pointer:hover {
+.age-system .mouse-to-pointer:hover:not(:disabled) {
   box-shadow: 0 0 5px silver !important;
 }
 .age-system hr {

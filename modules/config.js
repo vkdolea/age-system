@@ -774,6 +774,7 @@ ageSystem.modifiers = {
     armorMods: {
         expanse: ["impactArmor", 'toughness'],
         mage: ["impactArmor", "ballisticArmor", "toughness"],
+        mageInjury: ["impactArmor", "ballisticArmor", "toughness"],
         basic: ["impactArmor"]
     },
     ablMods: {

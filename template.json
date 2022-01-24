@@ -258,57 +258,100 @@
                 "acc": {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
                 },
                 "comm": {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
                 },
                 "cons":  {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
                 },
                 "dex":  {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
                 },
                 "fight":  {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
                 },
                 "int":  {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
                 },
                 "per":  {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
                 },
                 "str":  {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
                 },
                 "will":  {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
                 },
                 "magic":  {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
                 },
                 "cunn":  {
                     "value": 0,
                     "primary": false,
-                    "lastUp": false
+                    "lastUp": false,
+                    "testMod": 0,
+                    "advances": 0
+                }
+            },
+            "gameMode": {
+                "overrideMode": false,
+                "selected": "pulp",
+                "specs": {
+                    "gritty": {
+                        "health": 15,
+                        "defense": 0,
+                        "toughness": 0
+                    },
+                    "pulp": {
+                        "health": 20,
+                        "defense": 0,
+                        "toughness": 0
+                    },
+                    "cinematic": {
+                        "health": 25,
+                        "defense": 0,
+                        "toughness": 0
+                    }
                 }
             },
             "health": {

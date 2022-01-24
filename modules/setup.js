@@ -137,7 +137,7 @@ export function modifiersList() {
         } else {
             switch (k) {
                 case 'impactArmor':
-                    modsObj[k] = ageSystem.healthSys.type === 'mage' ? `age-system.bonus.impactArmor` : `age-system.armor`
+                    modsObj[k] = ['mage', 'mageInjury'].includes(ageSystem.healthSys.type) ? `age-system.bonus.impactArmor` : `age-system.armor`
                     break;
                 case 'powerForce':
                     modsObj[k] = `age-system.bonus.${k}` // Add logics afterwards

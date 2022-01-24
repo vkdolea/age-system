@@ -182,6 +182,11 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".refresh-injury-marks").click(this._onRefreshMarks.bind(this));
             html.find(".heal-all-injuries").click(this._onFullHeal.bind(this));
             html.find(".roll-breather").click(this._onRollBreather.bind(this));
+            /**
+             * Code to be used to make the adjustment on Health/Defense/Toughness for different Game Modes
+             */
+            // html.find(".game-mode-details").change(this._onAdjustHealth.bind(this));
+            // html.find(".game-mode .override").click(this._onLockGameMode.bind(this));
 
             // Enable field to be focused when selecting it
             const inputs = html.find("input");
@@ -228,6 +233,36 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         }
         super.activateListeners(html);
     };
+
+    _onAdjustHealth(ev) {
+        const actorMode = this.actor.data.data.gameMode;
+        const value = Number(ev.currentTarget.value);
+        const detail = ev.currentTarget.dataset.detail;
+        const mode = actorMode.selected;
+        const updatePath = `data.gameMode.specs.${mode}.${detail}`;
+        let usePath =""
+        switch (detail) {
+            case "health":
+                usePath = "data.health.set";
+                break;
+            case "defense":
+                usePath = "data.defense.gameModeBonus";
+                break;
+            case "toughness":
+                usePath = "data.armor.toughness.gameModeBonus";
+                break;   
+            default: return
+        }
+        return this.actor.update({
+            [updatePath]: value,
+            // [usePath]: value
+        });
+    }
+
+    _onLockGameMode(ev) {
+        const override = this.actor.data.data.gameMode.override;
+        return this.actor.update({"data.gameMode.override": !override});
+    }
 
     _onDropItemCreate(itemData) {
         if (!isDropedItemValid(this.actor, itemData)) return false;

@@ -18,4 +18,44 @@
     </ul>
     {{/if}}
 
+    {{!-- Control individual overrides for Game Mode (Gritty / Pulp / Cinematic) --}}
+    {{#if false}}
+    {{#if (ne data.config.healthSys.mode 'none')}}
+    <ul class="resource item-group colorset-third-tier game-mode">
+        <li class="title colorset-first-tier">
+            <span>
+                {{localize "SETTINGS.gameMode"}}
+                <a class="override">
+                    {{#if data.data.gameMode.override}}
+                    <i class="fa fa-unlock-alt" aria-hidden="true" title="Override game mode"></i>
+                    {{else}}
+                    <i class="fa fa-lock" aria-hidden="true" title="Do not override game mode"></i>
+                    {{/if}}
+                </a>
+            </span>
+        </li>
+        <li class="labels colorset-second-tier"><strong>World Setting: <em>{{localize (concat "SETTINGS.gameMode" data.config.healthSys.mode)}}</em></strong></li>
+        <li class="title header flexrow">
+            <span class="name">{{localize "age-system.gameModeBonus"}}</span>
+            <span>{{data.config.healthSys.healthName}}</span>
+            <span>{{localize "age-system.defense"}}</span>
+            <span>{{localize "age-system.toughness"}}</span>
+        </li>
+        {{#each data.data.gameMode.specs as |mode|}}
+        {{#if (ne @key 'none')}}
+        <li class="colorset-third-tier flexrow">
+            <div class="name multiple-selection">
+                <input type="radio" {{#if ../data.data.gameMode.override}}class="mouse-to-pointer"{{else}}disabled{{/if}} name="data.gameMode.selected" value="{{@key}}" {{#if (eq ../data.data.gameMode.selected @key)}}checked{{/if}}>
+                <label>{{localize (concat "SETTINGS.gameMode" @key)}}</label>
+            </div>
+            <input type="number" name="data.gameMode.specs.{{@key}}.health" value="{{mode.health}}" data-dtype="Number" />
+            <input type="number" name="data.gameMode.specs.{{@key}}.defense" value="{{mode.defense}}" data-dtype="Number" />
+            <input type="number" name="data.gameMode.specs.{{@key}}.toughness" value="{{mode.toughness}}" data-dtype="Number" />
+        </li>
+        {{/if}}
+        {{/each}}
+    </ul>
+    {{/if}}
+    {{/if}}
+
 </section>

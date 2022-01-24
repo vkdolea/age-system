@@ -72,12 +72,12 @@
     "SETTINGS.colorRedWarrior": "Guerreiro Vermelho",
     "SETTINGS.colorNeverDead": "Nunca Morto",
 
-    "SETTINGS.gameMode": "Selecione o modo de jogo, se houver",
+    "SETTINGS.gameMode": "Modo de Jogo",
     "SETTINGS.gameModeHint": "Selecione o estilo de jogo (de acordo com Modern AGE) ou nenhum se o cenário não o usa",
-    "SETTINGS.gameModeNone": "Nenhum",
-    "SETTINGS.gameModeGritty": "Sombrio",
-    "SETTINGS.gameModePulp": "Pulp",
-    "SETTINGS.gameModeCinematic": "Cinematográfico",
+    "SETTINGS.gameModenone": "Nenhum",
+    "SETTINGS.gameModegritty": "Sombrio",
+    "SETTINGS.gameModepulp": "Pulp",
+    "SETTINGS.gameModecinematic": "Cinematográfico",
 
     "SETTINGS.occupation": "Opção de Profissão",
     "SETTINGS.occupationHint": "Selecione a melhor opção que se adapta à atmosfera do cenário",
