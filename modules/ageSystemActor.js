@@ -643,6 +643,11 @@ export class ageSystemActor extends Actor {
         Dice.vehicleDamage(damageData);
     };
 
+    /**
+     * Retrieve object with Focus details if Actor owns focus matching the name informed
+     * @param {string} namedFocus String with Focus name to be checked in actor inventory
+     * @returns Object with focusName {string}, focusItem {ageSystemItem}, id {string} and value {number}.
+     */
     checkFocus(namedFocus) {
         if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null, id: null, value: 0}
 

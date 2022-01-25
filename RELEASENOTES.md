@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.11.10 [2022-01-25]
+### Fixed
+- Modifier with Focus bonus wasn't applying correctly on Actor owned focus.
+- Focus bonus wasn't added to Powerforce/Spellpower value.
+
 ## 0.11.9 [2022-01-23]
 ### Added
 - Updated Character template to add future support to multiple Health values for different game modes and a Modifier to add penality for test using an Ability, but without reducing Ability total.
