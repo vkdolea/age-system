@@ -80,7 +80,7 @@ export class ageSystemItem extends Item {
             };
 
             // Evaluate Attack and Damage modifier
-            if (data.hasDamage || data.hasHealing) this._postPrepareData(data)
+            if (data.hasDamage || data.hasHealing) this.prepareDamageData(data)
         }
 
         switch (itemType) {
@@ -97,7 +97,7 @@ export class ageSystemItem extends Item {
         else this.prepareEmbeddedEntities();
     };
 
-    _postPrepareData(data) {
+    prepareDamageData(data) {
         // Evaluate Attack and Damage formula to represent on Item sheet or stat block
         const actor = this.actor?.data?.data;
         if (data.hasDamage || data.hasHealing) {
@@ -222,7 +222,7 @@ export class ageSystemItem extends Item {
         if (data.improved) focusParts.push("1");
         // data.finalValue = data.improved ? data.initialValue + 1 : data.initialValue;
         if (this.isOwned && this.actor?.data) {
-            const focusBonus = this.actor.data.data.modifiersByType?.focus?.parts;
+            const focusBonus = this.actor.data.data.ownedMods?.focus?.parts;
             if (focusBonus?.length) {
                 for (let f = 0; f < focusBonus.length; f++) {
                     const m = focusBonus[f];
@@ -253,10 +253,14 @@ export class ageSystemItem extends Item {
         // data.itemForce = 10;
         const itemForceBonus = []
 
-        // Item Force bonus - Actor Scope
+        // Actor Scope
         if (this.actor?.data) {
+            // Item Force bonus
             const abl = this.actor?.data?.data?.abilities?.[data?.itemForceAbl]?.total;
             if (data.itemForceAbl !== "no-abl" && abl) itemForceBonus.push(this.actor.data.data.abilities[data.itemForceAbl].total)
+
+            // Focus Bonus
+            if (data.useFocus) itemForceBonus.push(this.actor.checkFocus(data.useFocus).value)
         }
         
         // Identify Bonus to Increase only this Power Item Force
