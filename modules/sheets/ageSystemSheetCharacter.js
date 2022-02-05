@@ -185,8 +185,8 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             /**
              * Code to be used to make the adjustment on Health/Defense/Toughness for different Game Modes
              */
-            // html.find(".game-mode-details").change(this._onAdjustHealth.bind(this));
-            // html.find(".game-mode .override").click(this._onLockGameMode.bind(this));
+            html.find(".game-mode-details").change(this._onAdjustHealth.bind(this));
+            html.find(".game-mode .override").click(this._onLockGameMode.bind(this));
 
             // Enable field to be focused when selecting it
             const inputs = html.find("input");
@@ -240,28 +240,14 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const detail = ev.currentTarget.dataset.detail;
         const mode = actorMode.selected;
         const updatePath = `data.gameMode.specs.${mode}.${detail}`;
-        let usePath =""
-        switch (detail) {
-            case "health":
-                usePath = "data.health.set";
-                break;
-            case "defense":
-                usePath = "data.defense.gameModeBonus";
-                break;
-            case "toughness":
-                usePath = "data.armor.toughness.gameModeBonus";
-                break;   
-            default: return
-        }
-        return this.actor.update({
-            [updatePath]: value,
-            // [usePath]: value
-        });
+        return this.actor.update({[updatePath]: value});
     }
 
     _onLockGameMode(ev) {
+        const updateData = {};
         const override = this.actor.data.data.gameMode.override;
-        return this.actor.update({"data.gameMode.override": !override});
+        updateData["data.gameMode.override"] = !override;
+        return this.actor.update(updateData);
     }
 
     _onDropItemCreate(itemData) {

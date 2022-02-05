@@ -275,7 +275,8 @@ export const registerSystemSettings = async function() {
     scope: "world",
     config: false,
     type: String,
-    default: 0
+    default: 0,
+    onChange: () => ageSystem.lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion")
   });
 
   /**

@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.12.0 [2022-02-05]
+### Added
+- Support to store Max Health, Defense and Toughness for different game modes (Gritty, Pulp, Cinematic) when using Modern AGE rules.
+
+### Changed
+- Only players with Owner of a given token will be able to see floating numbers when receiving damage/healing. Other users will see floating question marks.
+- Focuses are aligned to left margin on character sheet Main tab.
+
+### Fixed
+- French and Spanish translation issue on Focus sheet.
+
 ## 0.11.10 [2022-01-25]
 ### Fixed
 - Modifier with Focus bonus wasn't applying correctly on Actor owned focus.

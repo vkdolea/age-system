@@ -338,17 +338,26 @@
                 "selected": "pulp",
                 "specs": {
                     "gritty": {
+                        "healthCur": 15,
                         "health": 15,
                         "defense": 0,
                         "toughness": 0
                     },
                     "pulp": {
+                        "healthCur": 15,
                         "health": 20,
                         "defense": 0,
                         "toughness": 0
                     },
                     "cinematic": {
+                        "healthCur": 15,
                         "health": 25,
+                        "defense": 0,
+                        "toughness": 0
+                    },
+                    "none": {
+                        "healthCur": 15,
+                        "health": 10,
                         "defense": 0,
                         "toughness": 0
                     }
@@ -356,8 +365,9 @@
             },
             "health": {
                 "min": 0,
-                "value": 35,
-                "set": 35
+                "value": 15,
+                "set": 15,
+                "max": 15
             },
             "powerPoints": {
                 "min": 0,

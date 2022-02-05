@@ -163,13 +163,11 @@ export const migrateCompendium = async function(pack) {
  * @return {Object}       The updateData to apply
  */
 export const migrateActorData = function(actor) {
+  const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
   const updateData = {};
 
   // Actor Data Updates
-  // _addActorConditions(actor, updateData);
-  // _addVehicleCustomDmg(actor, updateData);
-  // _addActorMods(actor, updateData);
-  // _addActorPersonaFields(actor, updateData);
+  if(isNewerVersion("0.12.0", lastMigrationVer)) _updateModeHealth(actor, updateData);
   
   // Migrate Owned Effects
   if (actor.effects) { // Rever essa função!!!!
@@ -215,14 +213,7 @@ export const migrateActorData = function(actor) {
 export const migrateItemData = function(item) {
   const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
   const updateData = {};
-  // _addItemModSpeed(item, updateData);
-  // _addItemValidResistedDmgAbl(item, updateData);
-  // _addExtraPowerData(item, updateData);
-  // _addItemForceAbl(item, updateData);
-  // _addItemModTest(item, updateData);
-  // _addItemAttackMod(item, updateData);
   if (isNewerVersion("0.7.0", lastMigrationVer)) _adjustFocusInitialValue(item, updateData); // Do not execute if last migration was 0.7.0 or earlier
-  if (isNewerVersion("0.7.5", lastMigrationVer)) _addSelectedFieldForMods(item, updateData);
   if (isNewerVersion("0.11.0", lastMigrationVer)) {
     _weaponRanged(item, updateData);
     _itemDamage(item, updateData);
@@ -298,6 +289,22 @@ export const migrateSceneData = async function(scene) {
 /* -------------------------------------------- */
 
 /**
+ * Update Game Mode table with in use Health / Defense / Toughness 
+ * @private
+ */
+function _updateModeHealth(actor, updateData) {
+  if (actor.type !== "char") return updateData;
+  const mode = CONFIG.ageSystem.healthSys.mode;
+  const path = `data.gameMode.specs.${mode}`;
+  updateData[`${path}.health`] = actor._source.data.health.set;
+  updateData[`${path}.defense`] = actor._source.data.defense.gameModeBonus;
+  updateData[`${path}.toughness`] = actor._source.data.armor.toughness.gameModeBonus;
+  
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
  * Add Effects flags for version 0.8.8
  * @private
  */
@@ -311,203 +318,6 @@ export const migrateSceneData = async function(scene) {
       }
     };
   }
-  return updateData
-}
-/* -------------------------------------------- */
-
-/**
- * Add actor conditions
- * @private
- */
-function _addActorConditions(actor, updateData) {
-  if (actor.type !== "char") return updateData;
-  
-  const conditions = ["blinded", "deafened", "exhausted", "fatigued", "freefalling", "helpless", "hindered",
-  "prone", "restrained", "injured", "wounded", "unconscious", "dying"];
-
-  // Add Conditions - added a fix for previous migration, when 'data.conditions' was created as an Array
-  if (actor.data.conditions) {
-    let checked = 0;
-    if (typeof actor.data.conditions === "object") {
-      let complete = true;
-      for (let c = 0; c < conditions.length; c++) {
-        const condition = conditions[c];
-        checked = condition ? checked+1 : checked;
-        if (!actor.data.conditions.hasOwnProperty(condition) && !["hindred", "hindered"].includes(condition)) complete = false;
-      }
-      if (complete && (checked > 6)) {
-        conditions.forEach(c => {
-          const updatePath = `data.conditions.${c}`;
-          updateData[updatePath] = false;
-        })
-      }
-      if (complete) return updateData;
-    } else {
-      delete actor.data.conditions;
-    };
-  }
-  
-  if (!actor.data.conditions) {
-    updateData["data.conditions"] = {};
-    for (let c = 0; c < conditions.length; c++) {
-      const cond = conditions[c];
-      const condString = `data.conditions.${cond}`;
-      udpateData[condString] = false;    
-    }
-  };
-
-  if (actor.data.conditions.hasOwnProperty("hindred")) {
-    updateData["data.conditions.hindered"] = actor.data.conditions.hindred;
-    updateData["data.conditions.-=hindred"] = null;
-  }
-
-  return updateData
-}
-/* -------------------------------------------- */
-
-/**
- * Add vehicle custom damage
- * @private
- */
-function _addVehicleCustomDmg(actor, updateData) {
-  if (actor.type !== "vehicle") return updateData;
-
-  if (!actor.data.hasOwnProperty('customSideswipeDmg')) updateData["data.customSideswipeDmg"] = 1;
-  if (!actor.data.hasOwnProperty('customCollisionDmg')) updateData["data.customCollisionDmg"] = 1;
-
-  return updateData
-}
-/* -------------------------------------------- */
-
-/**
- * Add Actor attack, test and damage modifier field
- * @private
- */
- function _addActorMods(actor, updateData) {
-  if (actor.type !== "char") return updateData;
-
-  if (!actor.data.hasOwnProperty('dmgMod')) updateData["data.dmgMod"] = 0;
-  if (!actor.data.hasOwnProperty('testMod')) updateData["data.testMod"] = 0;
-  if (!actor.data.hasOwnProperty('attackMod')) updateData["data.attackMod"] = 0;
-
-  return updateData;
-}
-/* -------------------------------------------- */
-
-/**
- * Add extra Persona data fields for Player Character (bio and secretNote)
- * @private
- */
- function _addActorPersonaFields(actor, updateData) {
-  if (!actor.data.hasOwnProperty('gmNotes')) updateData['data.gmNotes'] = "";
-  
-  if (actor.type !== "char") return updateData;
-  if (!actor.data.hasOwnProperty('traits')) updateData['data.traits'] = "";
-  if (!actor.data.hasOwnProperty('secretNote')) updateData['data.secretNote'] = "";
-  if (!actor.data.hasOwnProperty('language')) updateData['data.language'] = "";
-
-  return updateData;
-}
-
-/**
- * Add Speed Modificator option to item
- * @private
- */
-function _addItemModSpeed(item, updateData) {
-  if (!item.data.itemMods) return updateData;
-  if (item.data.itemMods.hasOwnProperty("speed")) return updateData;
-
-  updateData["data.itemMods.speed"] = {};
-  updateData["data.itemMods.speed.isActive"] = false;
-  updateData["data.itemMods.speed.selected"] = false;
-  updateData["data.itemMods.speed.value"] = 0;
-
-  return updateData
-}
-/* -------------------------------------------- */
-
-/**
- * Add Test Modificator option to item
- * @private
- */
- function _addItemModTest(item, updateData) {
-  if (!item.data.itemMods) return updateData;
-  if (item.data.itemMods.hasOwnProperty("testMod")) return updateData;
-
-  // updateData["data.itemMods.testMod"] = {};
-  updateData["data.itemMods.testMod.isActive"] = false;
-  updateData["data.itemMods.testMod.selected"] = false;
-  updateData["data.itemMods.testMod.value"] = 0;
-
-  return updateData
-}
-/* -------------------------------------------- */
-
-/**
- * Add Attack Modificator option to item
- * @private
- */
- function _addItemAttackMod(item, updateData) {
-  if (!item.data.itemMods) return updateData;
-  if (item.data.itemMods.hasOwnProperty("attackMod")) return updateData;
-
-  // updateData["data.itemMods.attackMod"] = {};
-  updateData["data.itemMods.attackMod.isActive"] = false;
-  updateData["data.itemMods.attackMod.selected"] = false;
-  updateData["data.itemMods.attackMod.value"] = 0;
-
-  return updateData
-}
-/* -------------------------------------------- */
-
-/**
- * Add extra Power elements to address resist Test
- * and half damage when spell is resisted
- * @private
- */
-function _addExtraPowerData(item, updateData) {
-  if (item.type !== "power") return updateData;
-  if (item.data.hasOwnProperty("ablFatigue")) return updateData;
-
-  updateData["data.causeHealing"] = false;
-  updateData["data.ablFatigue"] = "will";
-  updateData["data.hasTest"] = false;
-  updateData["data.testAbl"] = "will";
-  updateData["data.testFocus"] = "";
-  updateData["data.damageResisted"] = {};
-  updateData["data.damageResisted.nrDice"] = 1;
-  updateData["data.damageResisted.diceType"] = 6;
-  updateData["data.damageResisted.extraValue"] = 0;
-  updateData["data.damageResisted.dmgAbl"] = "will";
-
-  return updateData;
-}
-
-/**
- * Fix imported values for Ability to Resist Power
- * @private
- */
-function _addItemValidResistedDmgAbl(item, updateData) {
-  if (item.type !== "power") return updateData;
-  if (item.data.hasOwnProperty("damageResisted")) {
-    if (!item.data.damageResisted.hasOwnProperty("dmgAbl")) {
-      updateData["data.damageResisted.dmgAbl"] = "will";  
-    }
-  }
-  return updateData;
-}
-/* -------------------------------------------- */
-
-/**
- * Add itemForceAbl field for powers
- * @private
- */
-function _addItemForceAbl(item, updateData) {
-  if (item.type !== "power") return updateData;
-  if (item.data.hasOwnProperty("itemForceAbl")) return updateData;
-
-  updateData["data.itemForceAbl"] = "will";
-
   return updateData
 }
 /* -------------------------------------------- */
@@ -542,7 +352,7 @@ function _addItemForceAbl(item, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Set ranged to TRUE (as standard is FALSE) for old items
+ * Calculated Damage formula based on previous data template
  * @private
  */
  function _itemDamage(item, updateData) {
@@ -590,7 +400,7 @@ function _addItemForceAbl(item, updateData) {
   for (const k in itemMods) {
     if (Object.hasOwnProperty.call(itemMods, k)) {
       const m = itemMods[k];
-      if (m.selected) {
+      if (m.selected ?? m.value) {
         let modKey
         do {
           modKey = foundry.utils.randomID(20);
@@ -660,64 +470,4 @@ function _addItemForceAbl(item, updateData) {
 
   return updateData
 }
-/* -------------------------------------------- */
-
-/**
- * Add the @selected field for Item Mods and set to true if Mod is active
- * @private
- */
-function _addSelectedFieldForMods(item, updateData) {
-  if (!item.data.hasOwnProperty("itemMods")) return updateData;
-  const itemMods = item.data.itemMods;
-  for (const m in itemMods) {
-    if (Object.hasOwnProperty.call(itemMods, m)) {
-      const mod = itemMods[m];
-      const updatePath = `data.itemMods.${m}.selected`;
-      if (mod.isActive || mod.value != 0 || mod.name) updateData[updatePath] = true;
-    }
-  }
-  return updateData
-}
-
-// Codes to active Mods - some users reported mods disappeard from their items after version 0.7.0
-/** 
-* Search Actor Directory and selects all Item Mods which are active or have non falsy value
-*/
-export async function actorDirectoryOwnedItemsModsOn() {
-  game.actors.map(async (a) => {
-    const items = a.items;
-    items.map(async (i) => {
-      await itemModsOn(i);
-    });
-  });
-};
-
-/** 
-* Turns all item Mods with value !=
-*/
-export async function itemDirectoryModsOn() {
-  game.items.map(async (i) => {
-    await itemModsOn(i);
-  });
-};
-
-/** 
-* Turns all item Mods with value !=
-*/
-export async function itemModsOn(item) {
-  const mods = item.data.data.itemMods;
-  if (!mods) return
-  const updates = {};
-  if (mods) {
-    for (const key in mods) {
-      if (Object.hasOwnProperty.call(key, mods)) {
-        if (mods[key].isActive || mods[key].value != 0) {
-          const path = `data.itemMods.${key}.selected`;
-          updates[path] = true;
-        };
-      }
-    }
-    await i.update(updates);
-  };
-};
 /* -------------------------------------------- */

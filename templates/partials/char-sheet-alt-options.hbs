@@ -19,7 +19,6 @@
     {{/if}}
 
     {{!-- Control individual overrides for Game Mode (Gritty / Pulp / Cinematic) --}}
-    {{#if false}}
     {{#if (ne data.config.healthSys.mode 'none')}}
     <ul class="resource item-group colorset-third-tier game-mode">
         <li class="title colorset-first-tier">
@@ -36,15 +35,15 @@
         </li>
         <li class="labels colorset-second-tier"><strong>World Setting: <em>{{localize (concat "SETTINGS.gameMode" data.config.healthSys.mode)}}</em></strong></li>
         <li class="title header flexrow">
-            <span class="name">{{localize "age-system.gameModeBonus"}}</span>
+            <span class="name" style="flex-grow: 1.5;">{{localize "age-system.gameModeBonus"}}</span>
             <span>{{data.config.healthSys.healthName}}</span>
             <span>{{localize "age-system.defense"}}</span>
             <span>{{localize "age-system.toughness"}}</span>
         </li>
         {{#each data.data.gameMode.specs as |mode|}}
         {{#if (ne @key 'none')}}
-        <li class="colorset-third-tier flexrow">
-            <div class="name multiple-selection">
+        <li class="colorset-third-tier flexrow {{#if (ne ../data.data.gameMode.selected @key)}}opacity-low{{/if}}">
+            <div class="name multiple-selection" style="flex-grow: 1.5;">
                 <input type="radio" {{#if ../data.data.gameMode.override}}class="mouse-to-pointer"{{else}}disabled{{/if}} name="data.gameMode.selected" value="{{@key}}" {{#if (eq ../data.data.gameMode.selected @key)}}checked{{/if}}>
                 <label>{{localize (concat "SETTINGS.gameMode" @key)}}</label>
             </div>
@@ -55,7 +54,6 @@
         {{/if}}
         {{/each}}
     </ul>
-    {{/if}}
     {{/if}}
 
 </section>

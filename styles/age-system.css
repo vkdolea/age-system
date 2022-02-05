@@ -2678,8 +2678,11 @@
   line-height: 1.1rem;
   margin: 0.2rem 0;
   font-size: 0.8rem;
-  text-align: justify;
+  text-align: left;
   padding: 0 4px;
+}
+.age-system.sheet .char-main-section .owned-focus a {
+  text-align: center;
 }
 .age-system.sheet .char-main-section .no-focus .owned-focus {
   margin: 0;
