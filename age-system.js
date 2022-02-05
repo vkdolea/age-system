@@ -297,6 +297,9 @@ Hooks.once("setup", function() {
     };
     CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
     CONFIG.ageSystem.healthSys = HEALTH_SYS;
+    
+    // Indicates Migration Version
+    CONFIG.ageSystem.lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion")
 });
 
 Hooks.once("ready", async function() {
@@ -377,7 +380,7 @@ Hooks.once("ready", async function() {
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.11.2";
+    const NEEDS_MIGRATION_VERSION = "0.12.0";
     // const COMPATIBLE_MIGRATION_VERSION = "0.8.7";
     const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;

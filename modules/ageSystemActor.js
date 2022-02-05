@@ -5,14 +5,12 @@ export class ageSystemActor extends Actor {
 
     /** @override */
     prepareData() {
-        // super.prepareData();
-        this.data.reset(); // super.prepareData();
+        this.data.reset();
         this.prepareBaseData();
         this.prepareEmbeddedDocuments();
         this.prepareDerivedData();
         // Sorting Items for final data preparation
         const items = this.items;
-        // this._preparePostModCharData();
         if (this.data.type === 'char') {
             // First prepare Focus
             items.forEach(i => {
@@ -116,24 +114,6 @@ export class ageSystemActor extends Actor {
         }
     };
 
-    _configureCharGameMode(mode) {
-        if (this.type != 'char') return;
-        const actorData = this.data;
-        const data = actorData.data;
-
-        if (data.gameMode.specs[mode] === {}) {
-            data.gameMode.specs[mode] = {
-                health: data.health.set,
-                defense: data.defense.gameModeBonus,
-                toughness: data.armor.toughness.gameModeBonus
-            }
-        } else {
-            data.health.set = data.gameMode.specs[mode].health;
-            data.defense.gameModeBonus = data.gameMode.specs[mode].defense;
-            data.armor.toughness.gameModeBonus = data.gameMode.specs[mode].toughness;
-        }
-    }
-
     _prepareBaseDataChar() {
 
         const actorData = this.data;
@@ -151,9 +131,10 @@ export class ageSystemActor extends Actor {
         // Check if Power Points is in use
         data.usePowerPoints = game.settings.get("age-system", "usePowerPoints");
 
-        // Check Game Mode and select correct Health / Defense / Toughness to use
-        // if (!data.gameMode.override) data.gameMode.selected = ageSystem.healthSys.mode;
-        // this._configureCharGameMode(data.gameMode.selected);
+        /**************************/
+        /**    Configure MODE    **/
+        /**************************/
+        if (this.type === 'char') this._configureCharGameMode();
 
         // Ensure Fatigue has valid Values and creates Status text
         if (data.fatigue.entered > data.fatigue.max) data.fatigue.entered = data.fatigue.max;
@@ -198,6 +179,20 @@ export class ageSystemActor extends Actor {
         data.injury.marksArray = marksArray;
 
     };
+
+    _configureCharGameMode() {
+        const actorData = this.data;
+        const data = actorData.data;
+        const gmode = data.gameMode;
+        
+        // Check Game Mode and select correct Health / Defense / Toughness to use
+        if (!gmode.override) gmode.selected = ageSystem.healthSys.mode;
+        const m = gmode.selected
+        
+        data.health.set = gmode.specs[m].health;
+        data.defense.gameModeBonus = gmode.specs[m].defense;
+        data.armor.toughness.gameModeBonus = gmode.specs[m].toughness;
+    }
 
     applyItemModifiers() {
         const type = this.data.type;
@@ -686,9 +681,7 @@ export class ageSystemActor extends Actor {
     /**
      * Apply a Injury Degree and applicable Injury Marks to the Actor.
      * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
-     *
      * @param {string} injuryDegree     The chat entry which contains the roll data
-     *
      * @returns {object}                Object with relevant data to identify Actor and new Injury values
      * @returns {false}                 If Injury Alternate Damage is not in use or if Actor is not of applicable type
      */
@@ -916,6 +909,8 @@ export class ageSystemActor extends Actor {
         const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
         for ( let t of tokens ) {
             if (!t?.hud?.createScrollingText) continue;
+            // If player isn't token Onwer, display question marks instead of value
+            if (!t.document.isOwner) value = "???";
             t.hud.createScrollingText(value, {
                 anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
                 fontSize: 30,
