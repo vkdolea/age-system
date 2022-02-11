@@ -235,10 +235,10 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     };
 
     _onAdjustHealth(ev) {
-        const actorMode = this.actor.data.data.gameMode;
-        const value = Number(ev.currentTarget.value);
         const detail = ev.currentTarget.dataset.detail;
+        const actorMode = this.actor.data.data.gameMode;
         const mode = actorMode.selected;
+        const value = Number(ev.currentTarget.value);
         const updatePath = `data.gameMode.specs.${mode}.${detail}`;
         return this.actor.update({[updatePath]: value});
     }

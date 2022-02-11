@@ -1,0 +1,34 @@
+<form class="game-settings-window feature-controls">
+    <h1>{{localize "SETTINGS.advSettings"}}</h1>
+    {{#each advSettings as |setting|}}
+    {{#with (lookup ../settings [setting])~}}
+    <div class="form-group">
+        <label>{{name}}</label>
+        <div class="form-fields">
+            {{#if (eq type 'String')}}
+            {{#if isSelect}}
+            <select name="{{key}}">
+                {{#select value}}
+                {{#each choices as |name type|}}
+                <option value="{{type}}">{{localize name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            {{else}}
+            <input type="text" name="{{key}}" value="{{value}}" data-dtype="{{type}}">
+            {{/if}}
+            {{/if}}
+            {{#if (eq type 'Boolean')}}
+            <input type="checkbox" name="{{key}}" data-dtype="Boolean">
+            {{/if}}
+        </div>
+        <p class="notes">{{hint}}</p>
+    </div>
+    {{/with}}
+    {{/each}}
+</form>
+<hr>
+<footer class="sheet-footer flexrow">
+    <button type="button">{{localize "age-system.cancel"}}</button>
+    <button type="button" class="accept-settings">{{localize "age-system.saveSettings"}}</button>
+</footer>

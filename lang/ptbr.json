@@ -14,6 +14,12 @@
     "ITEM.TypeMembership": "Filiação",
     "ITEM.TypeShipfeatures": "Atributo de Espaçonave",
 
+    "SETTINGS.quicksetting": "Configuração Rápida",
+    "SETTINGS.quicksettingHint": "Selecione rapidamente todas a Configurações AGE Avançadas",
+
+    "SETTINGS.advSettings": "Configuração AGE Avançada",
+    "SETTINGS.advSettingsHint": "Ajuste minuciosamente todas as configurações para deixar sua campanha única",
+
     "SETTINGS.consumePP": "Gastar Pontos de Poder ao usar Poder",
     "SETTINGS.consumePPHint": "Irá deduzir automaticamente os Pontos de Poder necessários ao usar um Poder. Caso não haja pontos de poder o suficiente, uma mensagem de aviso é apresentada.",
 
@@ -659,6 +665,22 @@
         "charFocus": "Foco de Personagem",
         "invalidModformula": "Fórmula inválida - revise-a",
         "invalidModnodice": "Fórmula inválida - apenas operações com números e @attr são válidas",
-        "invalidModnumber": "Apenas números são válidos"
+        "invalidModnumber": "Apenas números são válidos",
+
+        "selectGameSetting": "Selecione uma Ambientação",
+        "saveSettings": "Salvar Definições",
+
+        "presets": {
+            "dage": "Dragon AGE",
+            "dageHint": "Como visto em jogos eletrônicos",
+            "fage": "Fantasy AGE",
+            "fageHint": "Freeport, Titansgrave, Lost Citadel",
+            "expanse": "The Expanse RPG",
+            "expanseHint": "Como visto na série de livros",
+            "mage": "Modern AGE",
+            "mageHint": "Threefold, World of Lazarus",
+            "brose": "Blue Rose AGE",
+            "broseHint": "Ambientação de Fantasia Romântica"
+        }
     }
 }

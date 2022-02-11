@@ -14,6 +14,12 @@
     "ITEM.TypeMembership": "Membership",
     "ITEM.TypeShipfeatures": "Spaceship Feature",
 
+    "SETTINGS.quicksetting": "Quick AGE Settings",
+    "SETTINGS.quicksettingHint": "Quick setup all Advanced Settings according to a setting preset",
+
+    "SETTINGS.advSettings": "Advanced AGE Settings",
+    "SETTINGS.advSettingsHint": "Fine tune all possible settings to make your game unique",
+
     "SETTINGS.consumePP": "Consume Power/Mana/Kana/Spell Points on roll",
     "SETTINGS.consumePPHint": "If enabled, Points necessary to user a Power will be deducted from Character's total. A message will appear if not enough points are available.",
     
@@ -659,6 +665,22 @@
         "charFocus": "PC Focus",
         "invalidModformula": "Invalid - review formula",
         "invalidModnodice": "Error - only operations with numbers and @attr are valid",
-        "invalidModnumber": "Only numbers are valid"
+        "invalidModnumber": "Only numbers are valid",
+
+        "selectGameSetting": "Select Game Setting",
+        "saveSettings": "Save Settings",
+
+        "presets": {
+            "dage": "Dragon AGE",
+            "dageHint": "As seen in the video game series",
+            "fage": "Fantasy AGE",
+            "fageHint": "Freeport, Titansgrave, Lost Citadel",
+            "expanse": "The Expanse RPG",
+            "expanseHint": "As seem on the book series",
+            "mage": "Modern AGE",
+            "mageHint": "Threefold, World of Lazarus",
+            "brose": "Blue Rose AGE",
+            "broseHint": "The Romantic Fantasy setting"
+        }
     }
 }

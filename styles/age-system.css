@@ -2406,7 +2406,8 @@
   box-shadow: 1px 1px 3px 1px #000000;
   font-weight: 600;
 }
-.age-system.sheet {
+.age-system.sheet,
+.age-system.dialog {
   flex-wrap: nowrap;
   text-align: center;
   text-decoration: none;
@@ -2417,37 +2418,47 @@
   /**********************/
 }
 .age-system.sheet ol,
+.age-system.dialog ol,
 .age-system.sheet ul,
-.age-system.sheet .list {
+.age-system.dialog ul,
+.age-system.sheet .list,
+.age-system.dialog .list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.age-system.sheet .list-sub-header {
+.age-system.sheet .list-sub-header,
+.age-system.dialog .list-sub-header {
   font-variant: all-petite-caps;
   font-weight: 600;
 }
-.age-system.sheet input[type="checkbox"] {
+.age-system.sheet .sheet-main-content input[type="checkbox"],
+.age-system.dialog .sheet-main-content input[type="checkbox"] {
   height: 12px;
   width: 12px;
   max-height: 12px;
   max-width: 12px;
 }
-.age-system.sheet .document-picture {
+.age-system.sheet .document-picture,
+.age-system.dialog .document-picture {
   border: none;
   max-height: 200px;
   width: 180px;
   object-fit: contain;
   margin: auto;
 }
-.age-system.sheet .second-column {
+.age-system.sheet .second-column,
+.age-system.dialog .second-column {
   min-width: 474px;
 }
 .age-system.sheet .resource,
-.age-system.sheet .box {
+.age-system.dialog .resource,
+.age-system.sheet .box,
+.age-system.dialog .box {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
-.age-system.sheet .resource {
+.age-system.sheet .resource,
+.age-system.dialog .resource {
   border-radius: 10px;
   margin-bottom: 6px;
   margin-left: 4px;
@@ -2456,90 +2467,116 @@
   text-align: center;
 }
 .age-system.sheet .resource input,
-.age-system.sheet .resource select {
+.age-system.dialog .resource input,
+.age-system.sheet .resource select,
+.age-system.dialog .resource select {
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.5);
   margin: 2px;
 }
-.age-system.sheet .resource hr {
+.age-system.sheet .resource hr,
+.age-system.dialog .resource hr {
   margin: 0;
 }
-.age-system.sheet .resource label {
+.age-system.sheet .resource label,
+.age-system.dialog .resource label {
   background: none;
 }
-.age-system.sheet .title {
+.age-system.sheet .title,
+.age-system.dialog .title {
   text-transform: uppercase;
   font-weight: bolder;
   font-size: 0.8rem;
   padding: 2px;
 }
-.age-system.sheet .values {
+.age-system.sheet .values,
+.age-system.dialog .values {
   justify-content: space-around;
   align-items: center;
   flex-wrap: nowrap;
   padding: 0 4px;
 }
 .age-system.sheet li.item-box,
-.age-system.sheet .list-item.item-box {
+.age-system.dialog li.item-box,
+.age-system.sheet .list-item.item-box,
+.age-system.dialog .list-item.item-box {
   padding: 2px 5px;
   justify-content: space-between;
   align-items: center;
 }
 .age-system.sheet li.item-box .main-data,
-.age-system.sheet .list-item.item-box .main-data {
+.age-system.dialog li.item-box .main-data,
+.age-system.sheet .list-item.item-box .main-data,
+.age-system.dialog .list-item.item-box .main-data {
   align-items: center;
 }
 .age-system.sheet li.item-box .item-image,
-.age-system.sheet .list-item.item-box .item-image {
+.age-system.dialog li.item-box .item-image,
+.age-system.sheet .list-item.item-box .item-image,
+.age-system.dialog .list-item.item-box .item-image {
   border: none;
   flex: 0 0 2rem;
   height: 2rem;
 }
 .age-system.sheet li.item-box .item-name,
-.age-system.sheet .list-item.item-box .item-name {
+.age-system.dialog li.item-box .item-name,
+.age-system.sheet .list-item.item-box .item-name,
+.age-system.dialog .list-item.item-box .item-name {
   align-items: flex-start;
   text-align: left;
   margin-left: 5px;
 }
 .age-system.sheet li.item-box .controls,
-.age-system.sheet .list-item.item-box .controls {
+.age-system.dialog li.item-box .controls,
+.age-system.sheet .list-item.item-box .controls,
+.age-system.dialog .list-item.item-box .controls {
   max-width: fit-content;
   align-items: center;
 }
 .age-system.sheet li.item-box .controls *,
-.age-system.sheet .list-item.item-box .controls * {
+.age-system.dialog li.item-box .controls *,
+.age-system.sheet .list-item.item-box .controls *,
+.age-system.dialog .list-item.item-box .controls * {
   margin-left: 2px;
   max-width: fit-content;
 }
-.age-system.sheet .arrow-control {
+.age-system.sheet .arrow-control,
+.age-system.dialog .arrow-control {
   font-size: 0.5rem;
 }
-.age-system.sheet .stacked-icons {
+.age-system.sheet .stacked-icons,
+.age-system.dialog .stacked-icons {
   font-size: 0.6rem;
 }
-.age-system.sheet .mods-section {
+.age-system.sheet .mods-section,
+.age-system.dialog .mods-section {
   flex: 0 0 30%;
 }
-.age-system.sheet .values-options {
+.age-system.sheet .values-options,
+.age-system.dialog .values-options {
   font-size: 0.7rem;
   justify-items: center;
   padding-right: 4px;
 }
-.age-system.sheet .values-options div:not(:last-child) .value-data {
+.age-system.sheet .values-options div:not(:last-child) .value-data,
+.age-system.dialog .values-options div:not(:last-child) .value-data {
   margin-bottom: 1px;
 }
-.age-system.sheet .values-options > div {
+.age-system.sheet .values-options > div,
+.age-system.dialog .values-options > div {
   justify-content: center;
   width: max-content;
 }
-.age-system.sheet .values-options .value-data {
+.age-system.sheet .values-options .value-data,
+.age-system.dialog .values-options .value-data {
   margin: auto 0;
   border-radius: 4px;
   width: 1rem;
   font-size: 0.7rem;
   height: 1rem;
 }
-.age-system.sheet .values-options label {
+.age-system.sheet .values-options label,
+.age-system.dialog .values-options label {
   padding-left: 4px;
   text-align: left;
   height: 1rem;
@@ -2547,7 +2584,8 @@
   font-variant: all-petite-caps;
   max-width: fit-content;
 }
-.age-system.sheet .value-data {
+.age-system.sheet .value-data,
+.age-system.dialog .value-data {
   flex: 0 1 auto;
   margin: 4px auto;
   border-radius: 5px;
@@ -2556,18 +2594,22 @@
   height: 2rem;
   font-size: 0.9rem;
 }
-.age-system.sheet .value-data.circle {
+.age-system.sheet .value-data.circle,
+.age-system.dialog .value-data.circle {
   width: 2rem;
   border-radius: 50%;
 }
-.age-system.sheet .injury .labels div {
+.age-system.sheet .injury .labels div,
+.age-system.dialog .injury .labels div {
   font-size: 0.6rem;
 }
-.age-system.sheet .injury .mark {
+.age-system.sheet .injury .mark,
+.age-system.dialog .injury .mark {
   display: block;
   position: relative;
 }
-.age-system.sheet .injury .tracker-container {
+.age-system.sheet .injury .tracker-container,
+.age-system.dialog .injury .tracker-container {
   justify-content: center;
   position: absolute;
   top: 27px;
@@ -2575,7 +2617,8 @@
   column-gap: 2px;
   width: 16px;
 }
-.age-system.sheet .injury .severe-injury-tracker {
+.age-system.sheet .injury .severe-injury-tracker,
+.age-system.dialog .injury .severe-injury-tracker {
   border-radius: 50%;
   border: solid 2px;
   width: 4px;
@@ -2584,36 +2627,44 @@
   max-height: 4px;
   margin-bottom: 2px;
 }
-.age-system.sheet .labels {
+.age-system.sheet .labels,
+.age-system.dialog .labels {
   margin: auto;
   font-size: 0.75rem;
   font-variant: all-petite-caps;
 }
-.age-system.sheet .short-input {
+.age-system.sheet .short-input,
+.age-system.dialog .short-input {
   flex: 0 0 3rem;
 }
-.age-system.sheet .multiple-selection {
+.age-system.sheet .multiple-selection,
+.age-system.dialog .multiple-selection {
   text-align: left;
   padding-left: 0.2rem;
 }
-.age-system.sheet .general-aid-bar .title {
+.age-system.sheet .general-aid-bar .title,
+.age-system.dialog .general-aid-bar .title {
   padding: 0 4px;
   min-width: max-content !important;
 }
-.age-system.sheet .general-aid-bar .list-item:first-child {
+.age-system.sheet .general-aid-bar .list-item:first-child,
+.age-system.dialog .general-aid-bar .list-item:first-child {
   padding-left: 4px;
 }
-.age-system.sheet .general-aid-bar .list-item:last-child {
+.age-system.sheet .general-aid-bar .list-item:last-child,
+.age-system.dialog .general-aid-bar .list-item:last-child {
   padding-right: 4px;
 }
-.age-system.sheet aside {
+.age-system.sheet aside,
+.age-system.dialog aside {
   flex: 0 0 190px;
   height: 100%;
   padding: 4px;
   padding-bottom: 10px;
   transition: all 0.5s ease;
 }
-.age-system.sheet header.top-banner {
+.age-system.sheet header.top-banner,
+.age-system.dialog header.top-banner {
   margin-top: 10px;
   flex: 0 0 110px;
   min-width: 210px;
@@ -2623,7 +2674,8 @@
   border-radius: 0 5px 5px 0;
   transition: all 0.5s ease;
 }
-.age-system.sheet .sheet-main-content {
+.age-system.sheet .sheet-main-content,
+.age-system.dialog .sheet-main-content {
   padding: 4px 0 0 4px;
   min-width: 210px;
   margin: 0 5px 5px 0;
@@ -2631,159 +2683,202 @@
   transition: all 0.5s ease;
 }
 .age-system.sheet .owned-focus .item-name,
+.age-system.dialog .owned-focus .item-name,
 .age-system.sheet .select-options,
-.age-system.sheet .conditions .tooltip-container {
+.age-system.dialog .select-options,
+.age-system.sheet .conditions .tooltip-container,
+.age-system.dialog .conditions .tooltip-container {
   padding: 0 5px;
   margin: 3px 1px;
   border-radius: 15px;
   font-variant: all-petite-caps;
   text-align: center;
 }
-.age-system.sheet .char-main-section .ability-box {
+.age-system.sheet .char-main-section .ability-box,
+.age-system.dialog .char-main-section .ability-box {
   flex: 0 0 200px;
   margin-bottom: 5px;
   border-radius: 10px;
   border: thin solid black;
 }
-.age-system.sheet .char-main-section .ability-box:last-of-type {
+.age-system.sheet .char-main-section .ability-box:last-of-type,
+.age-system.dialog .char-main-section .ability-box:last-of-type {
   margin-bottom: 0;
 }
-.age-system.sheet .char-main-section .abl-header {
+.age-system.sheet .char-main-section .abl-header,
+.age-system.dialog .char-main-section .abl-header {
   justify-content: space-between;
   align-items: center;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.age-system.sheet .char-main-section .abl-header .abl-name {
+.age-system.sheet .char-main-section .abl-header .abl-name,
+.age-system.dialog .char-main-section .abl-header .abl-name {
   text-align: left;
 }
-.age-system.sheet .char-main-section .abl-header .abl-name label {
+.age-system.sheet .char-main-section .abl-header .abl-name label,
+.age-system.dialog .char-main-section .abl-header .abl-name label {
   width: fit-content;
   padding-left: 5px;
 }
-.age-system.sheet .char-main-section .abl-header input[type="number"] {
+.age-system.sheet .char-main-section .abl-header input[type="number"],
+.age-system.dialog .char-main-section .abl-header input[type="number"] {
   border-radius: 0;
   flex: 0 0 30px;
 }
-.age-system.sheet .char-main-section .abl-header input[type="number"].original {
+.age-system.sheet .char-main-section .abl-header input[type="number"].original,
+.age-system.dialog .char-main-section .abl-header input[type="number"].original {
   background-color: silver;
   border-top-right-radius: 10px;
 }
-.age-system.sheet .char-main-section .abl-header input[type="checkbox"] {
+.age-system.sheet .char-main-section .abl-header input[type="checkbox"],
+.age-system.dialog .char-main-section .abl-header input[type="checkbox"] {
   flex: 0 0 12px;
   height: 12px;
   border-radius: 50%;
 }
-.age-system.sheet .char-main-section .owned-focus {
+.age-system.sheet .char-main-section .owned-focus,
+.age-system.dialog .char-main-section .owned-focus {
   line-height: 1.1rem;
   margin: 0.2rem 0;
   font-size: 0.8rem;
   text-align: left;
   padding: 0 4px;
 }
-.age-system.sheet .char-main-section .owned-focus a {
+.age-system.sheet .char-main-section .owned-focus a,
+.age-system.dialog .char-main-section .owned-focus a {
   text-align: center;
 }
-.age-system.sheet .char-main-section .no-focus .owned-focus {
+.age-system.sheet .char-main-section .no-focus .owned-focus,
+.age-system.dialog .char-main-section .no-focus .owned-focus {
   margin: 0;
 }
-.age-system.sheet .char-main-section .no-focus .abl-header {
+.age-system.sheet .char-main-section .no-focus .abl-header,
+.age-system.dialog .char-main-section .no-focus .abl-header {
   border-radius: 10px;
 }
-.age-system.sheet .char-main-section .no-focus .abl-header input[type="number"].original {
+.age-system.sheet .char-main-section .no-focus .abl-header input[type="number"].original,
+.age-system.dialog .char-main-section .no-focus .abl-header input[type="number"].original {
   border-bottom-right-radius: 10px;
 }
-.age-system.sheet .char-main-section .improved-focus {
+.age-system.sheet .char-main-section .improved-focus,
+.age-system.dialog .char-main-section .improved-focus {
   text-decoration: underline;
 }
-.age-system.sheet .persona {
+.age-system.sheet .persona,
+.age-system.dialog .persona {
   padding-right: 4px;
 }
-.age-system.sheet .free-text {
+.age-system.sheet .free-text,
+.age-system.dialog .free-text {
   resize: none !important;
   border-radius: 0 0 10px 10px;
   padding: 4px;
   border: none;
 }
-.age-system.sheet .item-group {
+.age-system.sheet .item-group,
+.age-system.dialog .item-group {
   height: max-content;
 }
-.age-system.sheet .item-group li {
+.age-system.sheet .item-group li,
+.age-system.dialog .item-group li {
   align-items: center;
 }
 .age-system.sheet .item-group li:first-child,
-.age-system.sheet .item-group .list-item:first-child {
+.age-system.dialog .item-group li:first-child,
+.age-system.sheet .item-group .list-item:first-child,
+.age-system.dialog .item-group .list-item:first-child {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 .age-system.sheet .item-group li:last-child,
-.age-system.sheet .item-group .list-item:last-child {
+.age-system.dialog .item-group li:last-child,
+.age-system.sheet .item-group .list-item:last-child,
+.age-system.dialog .item-group .list-item:last-child {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.age-system.sheet .item-group .extra-input {
+.age-system.sheet .item-group .extra-input,
+.age-system.dialog .item-group .extra-input {
   flex: 0 0 fit-content;
 }
-.age-system.sheet .item-group .minimal-input {
+.age-system.sheet .item-group .minimal-input,
+.age-system.dialog .item-group .minimal-input {
   flex: 0 0 1.5rem;
 }
-.age-system.sheet .item-group.condensed-data li label {
+.age-system.sheet .item-group.condensed-data li label,
+.age-system.dialog .item-group.condensed-data li label {
   flex: 0 0 100px;
 }
-.age-system.sheet .abilities-column {
+.age-system.sheet .abilities-column,
+.age-system.dialog .abilities-column {
   flex: 0 0 200px;
 }
-.age-system.sheet .header-details {
+.age-system.sheet .header-details,
+.age-system.dialog .header-details {
   flex-wrap: nowrap;
 }
 .age-system.sheet .header-details .charname,
-.age-system.sheet .header-details .itemname {
+.age-system.dialog .header-details .charname,
+.age-system.sheet .header-details .itemname,
+.age-system.dialog .header-details .itemname {
   margin-bottom: 10px;
   color: silver;
   font-size: 2rem;
   height: 2.4rem;
 }
-.age-system.sheet .sub-details > div:not(.flexrow) {
+.age-system.sheet .sub-details > div:not(.flexrow),
+.age-system.dialog .sub-details > div:not(.flexrow) {
   display: flex;
   flex-direction: column;
 }
 .age-system.sheet .sub-details input,
-.age-system.sheet .sub-details select {
+.age-system.dialog .sub-details input,
+.age-system.sheet .sub-details select,
+.age-system.dialog .sub-details select {
   font-size: 0.9rem;
   height: 1.4rem;
   border-bottom: 1px solid black !important;
   color: silver !important;
   padding-bottom: 4px;
 }
-.age-system.sheet .sub-details label {
+.age-system.sheet .sub-details label,
+.age-system.dialog .sub-details label {
   flex: 0 0 0.7rem;
   font-size: 0.6rem;
   text-transform: uppercase;
 }
-.age-system.sheet .at-header {
+.age-system.sheet .at-header,
+.age-system.dialog .at-header {
   flex: 0 0 100px;
   margin: auto 4px;
 }
-.age-system.sheet .at-header .value-data {
+.age-system.sheet .at-header .value-data,
+.age-system.dialog .at-header .value-data {
   max-width: fit-content;
 }
-.age-system.sheet .at-header .exp {
+.age-system.sheet .at-header .exp,
+.age-system.dialog .at-header .exp {
   align-items: center;
 }
-.age-system.sheet .at-header .exp input {
+.age-system.sheet .at-header .exp input,
+.age-system.dialog .at-header .exp input {
   font-size: 0.8rem;
   height: 1rem;
   border-bottom: 1px solid black !important;
   padding-bottom: 4px;
 }
-.age-system.sheet .at-header .exp span {
+.age-system.sheet .at-header .exp span,
+.age-system.dialog .at-header .exp span {
   flex: 0 0 5px;
 }
-.age-system.sheet .tooltip-container {
+.age-system.sheet .tooltip-container,
+.age-system.dialog .tooltip-container {
   position: relative;
   display: inline-block;
 }
-.age-system.sheet .container-tooltip-text {
+.age-system.sheet .container-tooltip-text,
+.age-system.dialog .container-tooltip-text {
   visibility: hidden;
   opacity: 0;
   max-width: 600px;
@@ -2794,72 +2889,93 @@
   position: fixed;
   z-index: 10;
 }
-.age-system.sheet .container-tooltip-text .effect-changes {
+.age-system.sheet .container-tooltip-text .effect-changes,
+.age-system.dialog .container-tooltip-text .effect-changes {
   margin-top: 4px;
   font-size: 12px;
 }
-.age-system.sheet .tooltip-container:hover .container-tooltip-text {
+.age-system.sheet .tooltip-container:hover .container-tooltip-text,
+.age-system.dialog .tooltip-container:hover .container-tooltip-text {
   visibility: visible;
   opacity: 0.95;
   transition: all 0.4s ease;
 }
 .age-system.sheet a.item-equip.not-equiped,
-.age-system.sheet .inactive {
+.age-system.dialog a.item-equip.not-equiped,
+.age-system.sheet .inactive,
+.age-system.dialog .inactive {
   opacity: 0.3;
 }
-.age-system.sheet .modifiers .extra-margin {
+.age-system.sheet .modifiers .extra-margin,
+.age-system.dialog .modifiers .extra-margin {
   margin: 4px 0;
 }
-.age-system.sheet .modifiers li.header {
+.age-system.sheet .modifiers li.header,
+.age-system.dialog .modifiers li.header {
   padding: 1px 5px;
 }
-.age-system.sheet .modifiers li .mod-name {
+.age-system.sheet .modifiers li .mod-name,
+.age-system.dialog .modifiers li .mod-name {
   flex: 0 0 100px;
 }
-.age-system.sheet .modifiers .icon {
+.age-system.sheet .modifiers .icon,
+.age-system.dialog .modifiers .icon {
   flex: 0 0 25px;
 }
-.age-system.sheet .modifiers .mod-source {
+.age-system.sheet .modifiers .mod-source,
+.age-system.dialog .modifiers .mod-source {
   flex: 0 0 150px;
 }
 .age-system.sheet .custom-effects .item-box,
-.age-system.sheet .custom-effects .header {
+.age-system.dialog .custom-effects .item-box,
+.age-system.sheet .custom-effects .header,
+.age-system.dialog .custom-effects .header {
   justify-content: space-evenly;
   padding: 2px 5px;
 }
-.age-system.sheet .custom-effects .effect-name {
+.age-system.sheet .custom-effects .effect-name,
+.age-system.dialog .custom-effects .effect-name {
   flex: 0 0 25%;
   text-align: left;
   align-items: center;
 }
-.age-system.sheet .custom-effects .effect-key {
+.age-system.sheet .custom-effects .effect-key,
+.age-system.dialog .custom-effects .effect-key {
   flex: 0 0 30%;
 }
-.age-system.sheet .custom-effects .effect-operation {
+.age-system.sheet .custom-effects .effect-operation,
+.age-system.dialog .custom-effects .effect-operation {
   flex: 0 0 15%;
 }
-.age-system.sheet .custom-effects .effect-value {
+.age-system.sheet .custom-effects .effect-value,
+.age-system.dialog .custom-effects .effect-value {
   flex: 0 0 15%;
 }
-.age-system.sheet .custom-effects .effect-add {
+.age-system.sheet .custom-effects .effect-add,
+.age-system.dialog .custom-effects .effect-add {
   flex: 0 0 10%;
   padding-right: 4px;
   text-align: center;
   font-size: 0.7rem;
 }
-.age-system.sheet .custom-effects .mod-name {
+.age-system.sheet .custom-effects .mod-name,
+.age-system.dialog .custom-effects .mod-name {
   flex: 0 0 30%;
 }
-.age-system.sheet .custom-effects .mod-value {
+.age-system.sheet .custom-effects .mod-value,
+.age-system.dialog .custom-effects .mod-value {
   flex: 0 0 40%;
 }
-.age-system.sheet .custom-effects .mod-value .icon {
+.age-system.sheet .custom-effects .mod-value .icon,
+.age-system.dialog .custom-effects .mod-value .icon {
   flex: 0 0 30%;
 }
-.age-system.sheet .custom-effects .mod-value .value-numeric {
+.age-system.sheet .custom-effects .mod-value .value-numeric,
+.age-system.dialog .custom-effects .mod-value .value-numeric {
   flex: 0 0 70%;
 }
-.age-system.sheet .custom-effects .mod-source.mod-source {
+.age-system.sheet .custom-effects .mod-source.mod-source,
+.age-system.dialog .custom-effects .mod-source.mod-source {
   flex: 0 0 30%;
 }
 /*******************************/
@@ -5351,6 +5467,35 @@ a:hover {
 body *:not(i, .fa, .far, .fas) {
   font-family: "Roboto" !important;
 }
+/**************************/
+/**  AGE Settings Style  **/
+/**************************/
+#quick-settings,
+#adv-settings {
+  text-align: left;
+}
+#quick-settings img,
+#adv-settings img {
+  object-fit: contain;
+  padding: 6px;
+  border: none;
+}
+#quick-settings input,
+#adv-settings input,
+#quick-settings select,
+#adv-settings select {
+  border: 1px solid var(--color-border-light-tertiary);
+}
+#quick-settings input:hover,
+#adv-settings input:hover,
+#quick-settings input:focus,
+#adv-settings input:focus,
+#quick-settings select:hover,
+#adv-settings select:hover,
+#quick-settings select:focus,
+#adv-settings select:focus {
+  box-shadow: 0 0 5px var(--color-shadow-primary) !important;
+}
 /*---------Background---------------------*/
 .window-app.sheet.char .window-content,
 .window-app.sheet.vehicle .window-content,
@@ -5374,6 +5519,9 @@ body *:not(i, .fa, .far, .fas) {
 }
 .age-system .opacity-low {
   opacity: 0.5;
+}
+.age-system .mouse-to-pointer {
+  cursor: pointer;
 }
 .age-system input:focus,
 .age-system select:focus,

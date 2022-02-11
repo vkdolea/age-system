@@ -1,5 +1,16 @@
 # Release Notes
 
+## 0.12.1 [2022-02-xx]
+### Added
+- Quick AGE Settings menu created to set all Advanced AGE Settings to fit a specific game system.
+- Created an Advanced AGE Settings for advanced users to customize how the system works.
+
+### Changed
+- System license is now Apache 2.0 instead of MIT.
+
+### Fixed
+- Defense MODE and Toughness MODE values on sidebar can now be changed correctly.
+
 ## 0.12.0 [2022-02-05]
 ### Added
 - Support to store Max Health, Defense and Toughness for different game modes (Gritty, Pulp, Cinematic) when using Modern AGE rules.

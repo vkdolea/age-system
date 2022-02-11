@@ -1,0 +1,47 @@
+<form class="game-settings-window feature-controls">
+    <h1>{{localize "age-system.selectGameSetting"}}</h1>
+    <div class="flexrow">
+        {{#each presets as |preset|}}
+        <div class="flexrow flex-justify-between resource {{#if (ne preset.name ../config.preset)}}opacity-low{{/if}} colorset-second-tier">
+            <a><img src="{{preset.img}}" alt="{{localize preset.label}}" class="game-preset" data-preset="{{preset.name}}"/></a>
+            <p class="notes colorset-second-tier" style="background: none;">{{localize preset.hint}} <a href="{{preset.link}}" title="{{preset.link}}"><i class="colorset-third-tier fas fa-external-link-alt" style="background: none;"></i></a></p>
+        </div>
+        {{/each}}
+    </div>
+    {{!-- User Defined Settings --}}
+    {{#if currentPreset.settings.user}}
+    {{#each currentPreset.settings.user as |setting|}}
+    {{#with (lookup ../settings [setting])~}}
+    <div class="form-group">
+        <label>{{name}}</label>
+        <div class="form-fields">
+            {{#if (eq type 'String')}}
+            {{#if isSelect}}
+            <select name="{{key}}">
+                {{#select value}}
+                {{#each choices as |name type|}}
+                {{#unless (and (eq ../key 'gameMode') (eq type 'none'))}}
+                <option value="{{type}}">{{localize name}}</option>
+                {{/unless}}
+                {{/each}}
+                {{/select}}
+            </select>
+            {{else}}
+            <input type="text" name="{{key}}" value="{{value}}" data-dtype="{{type}}">
+            {{/if}}
+            {{/if}}
+            {{#if (eq type 'Boolean')}}
+            <input type="checkbox" name="{{key}}" data-dtype="Boolean">
+            {{/if}}
+        </div>
+        <p class="notes">{{hint}}</p>
+    </div>
+    {{/with}}
+    {{/each}}
+    {{/if}}
+</form>
+<hr>
+<footer class="sheet-footer flexrow">
+    <button type="button" class="close">{{localize "age-system.cancel"}}</button>
+    <button type="button" class="accept-settings">{{localize "age-system.saveSettings"}}</button>
+</footer>
