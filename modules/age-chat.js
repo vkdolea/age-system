@@ -25,7 +25,7 @@ export function addChatListeners(html) {
  export const addChatMessageContextOptions = function(html, options) {
     let canApply = li => {
         const message = game.messages.get(li.data("messageId"));
-        return message?.isRoll && message?.isContentVisible && canvas.tokens?.controlled.length;
+        return message?.isRoll && message?.isContentVisible && (ageSystem.useTargeted ? game.user.targets.size : canvas.tokens?.controlled.length);
     };
     options.push(
     {
@@ -149,7 +149,13 @@ export async function callApplyDamage (damageData) {
  */
 export function controlledTokenByType(type) {
     if (!Array.isArray(type)) type = [type];
-    let targets = canvas.tokens.controlled;
+    let targets = []
+    if (ageSystem.useTargeted) {
+        const t = game.user.targets;
+        for (let i of t.values()) targets.push(i)
+    } else {
+        targets = canvas.tokens.controlled;
+    }
     const nonChar = []
     for (let t = 0; t < targets.length; t++) {
         const el = targets[t];

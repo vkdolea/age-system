@@ -35,7 +35,7 @@ export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter
     activateListeners(html) {
         super.activateListeners(html);
         if (this.isEditable) {
-            new ContextMenu(html, ".item-show", this.itemContextMenu);
+            new ContextMenu(html, ".item-edit", this.itemContextMenu);
         }
     };
 }

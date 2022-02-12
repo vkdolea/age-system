@@ -36,6 +36,7 @@ export function resumeFormula(formula, data = {}) {
         if (parts.detValue > 0) parts.shortFormula += `+`;
         parts.shortFormula += `${parts.detValue}`;
     };
+    if (!parts.shortFormula) parts.shortFormula = "+0";
     return parts;
 }
 

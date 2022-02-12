@@ -739,7 +739,7 @@ ageSystem.greenRonin = {
         site: `https://titansgraverpg.com`
     },
     dragonAGE: {
-        logo: `${pathLogo}dragonAGE.png`,
+        logo: `${pathLogo}dragon-age.png`,
         site: `https://greenronin.com/dragonagerpg/`
     },
     lazaurs: {
@@ -757,6 +757,10 @@ ageSystem.greenRonin = {
     lostcitadel: {
         logo: `${pathLogo}lostcitadel.png`,
         site: `https://lostcitadelrpg.com`
+    },
+    expanse: {
+        logo: `${pathLogo}expanse.png`,
+        site: `https://greenroninstore.com/collections/the-expanse-rpg`
     },
     // agesystem: {
     //     logo: `${pathLogo}agesystem.png`,
@@ -788,5 +792,156 @@ ageSystem.modifiers = {
 };
 
 // Talent Degrees
-ageSystem.mageDegrees = ['age-system.novice', 'age-system.expert', 'age-system.master', 'age-system.grandmaster', 'age-system.apex']
-ageSystem.fageDegrees = ['age-system.novice', 'age-system.journeyman', 'age-system.master', 'age-system.grandmaster', 'age-system.apex']
+ageSystem.mageDegrees = ['age-system.novice', 'age-system.expert', 'age-system.master', 'age-system.grandmaster', 'age-system.apex'];
+ageSystem.fageDegrees = ['age-system.novice', 'age-system.journeyman', 'age-system.master', 'age-system.grandmaster', 'age-system.apex'];
+
+// Game Settings
+ageSystem.gameSettingsChoices = {
+    dage: 'Dragon AGE',
+    fage: 'Fantasy AGE',
+    expanse: 'The Expanse',
+    mage: 'Modern AGE',
+    brose: 'Blue Rose'
+};
+
+// Advanced Settings
+ageSystem.advSettings = [
+    'healthSys',
+    'healthMode',
+    'gameMode',
+    'abilitySelection',
+    'primaryAbl',
+    'occupation',
+    'ancestryOpt',
+    'wealthType',
+    'stuntAttack',
+    'usePowerPoints',
+    'useFatigue',
+    'useConviction',
+    'complication',
+    'serendipity',
+    'weaponGroups',
+]
+
+ageSystem.gameSettings = {
+    dage: {
+        name: "dage",
+        label: "age-system.presets.dage",
+        hint: "age-system.presets.dageHint",
+        img: ageSystem.greenRonin.dragonAGE.logo,
+        link: ageSystem.greenRonin.dragonAGE.site,
+        settings: {
+            defined: {
+                healthSys: 'basic',
+                healthMode: 'health',
+                abilitySelection: 'dage',
+                primaryAbl: true,
+                gameMode: 'none',
+                wealthType: 'coins',
+                occupation: 'class',
+                ancestryOpt: 'race',
+                useConviction: false,
+                usePowerPoints: true,
+                complication: 'none',
+                serendipity: false
+            },
+            user: ['weaponGroups']
+        }
+    },
+    fage: {
+        name: "fage",
+        label: "age-system.presets.fage",
+        hint: "age-system.presets.fageHint",
+        img: ageSystem.greenRonin.fantasyAGE.logo,
+        link: ageSystem.greenRonin.fantasyAGE.site,
+        settings: {
+            defined: {
+                healthSys: 'basic',
+                healthMode: 'health',
+                abilitySelection: 'main',
+                primaryAbl: true,
+                gameMode: false,
+                wealthType: 'coins',
+                occupation: 'class',
+                ancestryOpt: 'race',
+                useConviction: false,
+                usePowerPoints: true,
+                complication: 'none',
+                serendipity: false
+            },
+            user: ['weaponGroups']
+        }
+    },
+    expanse: {
+        name: "expanse",
+        label: "age-system.presets.expanse",
+        hint: "age-system.presets.expanseHint",
+        img: ageSystem.greenRonin.expanse.logo,
+        link: ageSystem.greenRonin.expanse.site,
+        settings: {
+            defined: {
+                healthSys: 'expanse',
+                healthMode: 'fortune',
+                abilitySelection: 'main',
+                primaryAbl: false,
+                gameMode: false,
+                weaponGroups: "",
+                wealthType: 'income',
+                occupation: 'profession',
+                ancestryOpt: 'origin',
+                useConviction: false,
+                usePowerPoints: false,
+                complication: 'chrun',
+                serendipity: false
+            }
+        }
+    },
+    mage: {
+        name: "mage",
+        label: "age-system.presets.mage",
+        hint: "age-system.presets.mageHint",
+        img: ageSystem.greenRonin.modernAGE.logo,
+        link: ageSystem.greenRonin.modernAGE.site,
+        settings: {
+            defined: {
+                healthSys: 'mage',
+                healthMode: 'health',
+                abilitySelection: 'main',
+                primaryAbl: false,
+                weaponGroups: "",
+                wealthType: 'resources',
+                occupation: 'profession',
+                ancestryOpt: 'ancestry',
+                complication: 'none',
+                serendipity: false,
+                stuntAttack: 2
+            },
+            user: ['gameMode', 'useConviction', 'usePowerPoints']
+        }
+    },
+    brose: {
+        name: "brose",
+        label: "age-system.presets.brose",
+        hint: "age-system.presets.broseHint",
+        img: ageSystem.greenRonin.bluerose.logo,
+        link: ageSystem.greenRonin.bluerose.site,
+        settings: {
+            defined: {
+                healthSys: 'basic',
+                healthMode: 'health',
+                abilitySelection: 'main',
+                primaryAbl: true,
+                gameMode: false,
+                wealthType: 'coins',
+                occupation: 'class',
+                ancestryOpt: 'race',
+                useConviction: true,
+                usePowerPoints: false,
+                complication: 'none',
+                serendipity: false
+            },
+            user: ['weaponGroups']
+        }
+    },
+
+}

@@ -1,5 +1,6 @@
 import { ageSystem } from "./config.js";
 import BreatherSettings from "./breather.js";
+import { AdvancedSettings, QuickSettings } from "./settings-helper.js";
 
 const debouncedReload = debounce(() => window.location.reload(), 100)
 export const registerSystemSettings = async function() {
@@ -29,6 +30,34 @@ export const registerSystemSettings = async function() {
     restricted: true
   });
   
+  /**
+   * Quick setup to select game settings
+   */
+   game.settings.registerMenu("age-system", "quicksetting", {
+    name: "SETTINGS.quicksetting",
+    hint: "SETTINGS.quicksettingHint",
+    icon: 'fas fa-child',
+    label: "SETTINGS.quicksetting",
+    scope: "world",
+    config: true,
+    type: QuickSettings,
+    restricted: true
+  });
+
+  /**
+   * Advanced game settings
+   */
+   game.settings.registerMenu("age-system", "advSetting", {
+    name: "SETTINGS.advSettings",
+    hint: "SETTINGS.advSettingsHint",
+    icon: 'fas fa-capsules',
+    label: "SETTINGS.advSettings",
+    scope: "world",
+    config: true,
+    type: AdvancedSettings,
+    restricted: true
+  });
+
   /**
    * Select color scheme
    */
@@ -66,13 +95,52 @@ export const registerSystemSettings = async function() {
   });
 
   /**
+   * Register World's Initiative Focus
+   */
+   game.settings.register("age-system", "initiativeFocus", {
+    name: "SETTINGS.initiativeFocus",
+    hint: "SETTINGS.initiativeFocusHint",
+    scope: "world",
+    config: true,
+    default: "",
+    type: String,
+    onChange: debouncedReload
+  });
+
+  /**
+   * Use Targeted system to apply Damage/Healing instead of Controlled
+   */
+   game.settings.register("age-system", "useTargeted", {
+    name: "SETTINGS.useTargeted",
+    hint: "SETTINGS.useTargetedHint",
+    scope: "client",
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange: () => CONFIG.ageSystem.useTargeted = game.settings.get("age-system", "useTargeted")
+  });
+  
+  /**
+   * Register Ability selection
+   */
+    game.settings.register("age-system", "stuntAttack", {
+    name: "SETTINGS.stuntAttack",
+    hint: "SETTINGS.stuntAttackHint",
+    scope: "world",
+    config: false,
+    default: 1,
+    type: Number,
+    onChange: () => ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack")
+  });
+
+  /**
    * Register Health System in use (Basic, The Expanse, MAGE, MAGE + Injury, MAGE + Injury + Vitality)
    */
-    game.settings.register("age-system", "healthSys", {
+   game.settings.register("age-system", "healthSys", {
     name: "SETTINGS.healthSys",
     hint: "SETTINGS.healthSysHint",
     scope: "world",
-    config: true,
+    config: false,
     default: "basic",
     type: String,
     choices: {
@@ -84,19 +152,6 @@ export const registerSystemSettings = async function() {
     },
     onChange: debouncedReload
   });
-  
-  /**
-   * Register Ability selection
-   */
-    game.settings.register("age-system", "stuntAttack", {
-    name: "SETTINGS.stuntAttack",
-    hint: "SETTINGS.stuntAttackHint",
-    scope: "world",
-    config: true,
-    default: 1,
-    type: Number,
-    onChange: () => ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack")
-  });
 
   /**
    * Register Ability selection
@@ -105,7 +160,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.abilitySelection",
     hint: "SETTINGS.abilitySelectionHint",
     scope: "world",
-    config: true,
+    config: false,
     default: "main",
     type: String,
     choices: {
@@ -122,7 +177,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.primaryAbl",
     hint: "SETTINGS.primaryAblHint",
     scope: "world",
-    config: true,
+    config: false,
     default: false,
     type: Boolean,
     onChange: debouncedReload
@@ -135,7 +190,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.healthMode",
     hint: "SETTINGS.healthModeHint",
     scope: "world",
-    config: true,
+    config: false,
     default: "health",
     type: String,
     choices: {
@@ -163,7 +218,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.gameMode",
     hint: "SETTINGS.gameModeHint",
     scope: "world",
-    config: true,
+    config: false,
     default: "pulp",
     type: String,
     choices: {
@@ -187,26 +242,13 @@ export const registerSystemSettings = async function() {
   });
 
   /**
-   * Register World's Initiative Focus
-   */
-   game.settings.register("age-system", "initiativeFocus", {
-    name: "SETTINGS.initiativeFocus",
-    hint: "SETTINGS.initiativeFocusHint",
-    scope: "world",
-    config: true,
-    default: "",
-    type: String,
-    onChange: debouncedReload
-  });
-
-  /**
    * Configure Weapon Groups
    */
    game.settings.register("age-system", "weaponGroups", {
     name: "SETTINGS.weaponGroups",
     hint: "SETTINGS.weaponGroupsHint",
     scope: "world",
-    config: true,
+    config: false,
     default: "",
     type: String,
     onChange: debouncedReload
@@ -219,7 +261,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.wealthType",
     hint: "SETTINGS.wealthTypeHint",
     scope: "world",
-    config: true,
+    config: false,
     default: "resources",
     type: String,
     choices: {
@@ -238,7 +280,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.occupation",
     hint: "SETTINGS.occupationHint",
     scope: "world",
-    config: true,
+    config: false,
     default: "profession",
     type: String,
     choices: {
@@ -255,7 +297,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.ancestryOpt",
     hint: "SETTINGS.ancestryOptHint",
     scope: "world",
-    config: true,
+    config: false,
     default: "ancestry",
     type: String,
     choices: {
@@ -286,7 +328,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.useConviction",
     hint: "SETTINGS.useConvictionHint",
     scope: "world",
-    config: true,
+    config: false,
     default: false,
     type: Boolean,
     onChange: debouncedReload
@@ -299,7 +341,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.useFatigue",
     hint: "SETTINGS.useFatigueHint",
     scope: "world",
-    config: true,
+    config: false,
     default: false,
     type: Boolean,
     onChange: debouncedReload
@@ -312,7 +354,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.usePowerPoints",
     hint: "SETTINGS.usePowerPointsHint",
     scope: "world",
-    config: true,
+    config: false,
     default: true,
     type: Boolean,
     onChange: debouncedReload
@@ -338,7 +380,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.complication",
     hint: "SETTINGS.complicationHint",
     scope: "world",
-    config: true,
+    config: false,
     default: "none",
     type: String,
     choices: {
@@ -369,7 +411,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.serendipity",
     hint: "SETTINGS.serendipityHint",
     scope: "world",
-    config: true,
+    config: false,
     default: false,
     type: Boolean,
     onChange: () => game.ageSystem.ageTracker.refresh()
@@ -413,7 +455,7 @@ export const registerSystemSettings = async function() {
 
   
   /**
-   * Register which Conditios set is used
+   * Register which Conditions set is used
    */
   game.settings.register("age-system", "inUseConditions", {
     scope: "world",

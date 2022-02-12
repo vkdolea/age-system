@@ -61,6 +61,26 @@ body *:not(i, .fa, .far, .fas) {
     font-family: "Roboto" !important;
 }
 
+/**************************/
+/**  AGE Settings Style  **/
+/**************************/
+
+#quick-settings,
+#adv-settings {
+    text-align: left;
+    img {
+        object-fit: contain;
+        padding: 6px;
+        border: none;
+    }
+    input, select {border: 1px solid var(--color-border-light-tertiary);}
+    
+    input:hover,
+    input:focus,
+    select:hover,
+    select:focus {box-shadow: 0 0 5px var(--color-shadow-primary) !important;}
+}
+
 /*---------Background---------------------*/
 // .window-app.journal-sheet .window-content,
 .window-app.sheet.char .window-content,
@@ -95,6 +115,7 @@ body *:not(i, .fa, .far, .fas) {
 
 // Override box color
 .age-system {
+    .mouse-to-pointer {cursor: pointer;}
     input:focus,
     select:focus,
     input:hover:not(:disabled),
