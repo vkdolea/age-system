@@ -1,15 +1,19 @@
 # Release Notes
 
-## 0.12.1 [2022-02-xx]
+## 0.12.1 [2022-02-12]
 ### Added
 - Quick AGE Settings menu created to set all Advanced AGE Settings to fit a specific game system.
 - Created an Advanced AGE Settings for advanced users to customize how the system works.
+- Added optional setting to apply damaged/healing on Targeted tokens instead of Controlled tokens.
 
 ### Changed
 - System license is now Apache 2.0 instead of MIT.
 
 ### Fixed
 - Defense MODE and Toughness MODE values on sidebar can now be changed correctly.
+- When damage or to hit bonus of weapon/power was equal to Zero, nothing appeared on block sheet. Now *+0* will appear instead.
+- Clicking an Item name on Block Sheet will now open item sheet.
+- Injury bar has consistent proportion when using stat block sheet.
 
 ## 0.12.0 [2022-02-05]
 ### Added

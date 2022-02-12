@@ -45,7 +45,7 @@ export const registerSystemSettings = async function() {
   });
 
   /**
-   * Quick setup to select game settings
+   * Advanced game settings
    */
    game.settings.registerMenu("age-system", "advSetting", {
     name: "SETTINGS.advSettings",
@@ -95,9 +95,48 @@ export const registerSystemSettings = async function() {
   });
 
   /**
+   * Register World's Initiative Focus
+   */
+   game.settings.register("age-system", "initiativeFocus", {
+    name: "SETTINGS.initiativeFocus",
+    hint: "SETTINGS.initiativeFocusHint",
+    scope: "world",
+    config: true,
+    default: "",
+    type: String,
+    onChange: debouncedReload
+  });
+
+  /**
+   * Use Targeted system to apply Damage/Healing instead of Controlled
+   */
+   game.settings.register("age-system", "useTargeted", {
+    name: "SETTINGS.useTargeted",
+    hint: "SETTINGS.useTargetedHint",
+    scope: "client",
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange: () => CONFIG.ageSystem.useTargeted = game.settings.get("age-system", "useTargeted")
+  });
+  
+  /**
+   * Register Ability selection
+   */
+    game.settings.register("age-system", "stuntAttack", {
+    name: "SETTINGS.stuntAttack",
+    hint: "SETTINGS.stuntAttackHint",
+    scope: "world",
+    config: false,
+    default: 1,
+    type: Number,
+    onChange: () => ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack")
+  });
+
+  /**
    * Register Health System in use (Basic, The Expanse, MAGE, MAGE + Injury, MAGE + Injury + Vitality)
    */
-    game.settings.register("age-system", "healthSys", {
+   game.settings.register("age-system", "healthSys", {
     name: "SETTINGS.healthSys",
     hint: "SETTINGS.healthSysHint",
     scope: "world",
@@ -112,19 +151,6 @@ export const registerSystemSettings = async function() {
       // "mageVitality": "SETTINGS.healthSysmageVitality",
     },
     onChange: debouncedReload
-  });
-  
-  /**
-   * Register Ability selection
-   */
-    game.settings.register("age-system", "stuntAttack", {
-    name: "SETTINGS.stuntAttack",
-    hint: "SETTINGS.stuntAttackHint",
-    scope: "world",
-    config: false,
-    default: 1,
-    type: Number,
-    onChange: () => ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack")
   });
 
   /**
@@ -213,19 +239,6 @@ export const registerSystemSettings = async function() {
           o.sheet.render(false);
         });
     },
-  });
-
-  /**
-   * Register World's Initiative Focus
-   */
-   game.settings.register("age-system", "initiativeFocus", {
-    name: "SETTINGS.initiativeFocus",
-    hint: "SETTINGS.initiativeFocusHint",
-    scope: "world",
-    config: true,
-    default: "",
-    type: String,
-    onChange: debouncedReload
   });
 
   /**

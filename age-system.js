@@ -297,6 +297,9 @@ Hooks.once("setup", function() {
     };
     CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
     CONFIG.ageSystem.healthSys = HEALTH_SYS;
+
+    // Target/Controlled option to damage/heal
+    CONFIG.ageSystem.useTargeted = game.settings.get("age-system", "useTargeted");
     
     // Indicates Migration Version
     CONFIG.ageSystem.lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion")
