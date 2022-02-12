@@ -147,11 +147,13 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Add class to TinyMCE
         const editor = html.find(".editor");
-        for (let i = 0; i < editor.length; i++) {editor[i].classList += ' values'}
+        for (let i = 0; i < editor.length; i++) editor[i].classList.add('values');
         
         // Add colorset class to entity-link inside TinyMCE editor
         const entityLink = html.find("a.entity-link");
-        for (let i = 0; i < entityLink.length; i++) {entityLink[i].classList += ` colorset-second-tier`};
+        const inlineRoll = html.find("a.inline-roll");
+        const insideMCE = [...entityLink, ...inlineRoll];
+        for (let i = 0; i < insideMCE.length; i++) insideMCE[i].classList.add(`colorset-second-tier`);
 
         super.activateListeners(html);
     };

@@ -14,6 +14,15 @@
     "ITEM.TypeMembership": "Afiliaciones",
 	"ITEM.TypeShipfeatures": "Características Nave",
 
+    "SETTINGS.useTargeted": "Utilizar el Objetivo para aplicar daño y curación.",
+    "SETTINGS.useTargetedHint": "En vez de utilizar las tarjetas del chat y los comandos para aplicar daño y curación en los Tokens controlados, aplicarlo mediante los Tokens en el Objetivo",
+
+    "SETTINGS.quicksetting": "Configuración rápida AGE",
+    "SETTINGS.quicksettingHint": "Activa rápidamente los valores preconfigurados para la ambientación desde Configuración Avanzada",
+
+    "SETTINGS.advSettings": "Opciones Avanzadas AGE",
+    "SETTINGS.advSettingsHint": "Ajusta todos los valores de configuración para personalizar tu partida",
+
     "SETTINGS.consumePP": "Consumir Puntos Poder en las tiradas",
     "SETTINGS.consumePPHint": "Si se activa, los Puntos necesarios para lanzar un poder serán restados del Total del personaje automáticamente. Se mostrará un mensaje de aviso en caso de no disponer de puntos suficientes.",
     
@@ -659,6 +668,24 @@
         "charFocus": "Concentración PJ",
         "invalidModformula": "Inválido - revisa la formula",
         "invalidModnodice": "Error - sólo operaciones con números y @attr son válidas",
-        "invalidModnumber": "Sólo números son válidos"
+        "invalidModnumber": "Sólo números son válidos",
+
+        "selectGameSetting": "Selecciona Configuración de Partida",
+        "saveSettings": "Grabar Configuración",
+
+        "dage": "Dragon AGE",
+        "dageHint": "Basado en los videojuegos",
+
+        "fage": "Fantasy AGE",
+        "fageHint": "Freeport, Titansgrave, Lost Citadel",
+
+        "expanse": "The Expanse RPG",
+        "expanseHint": "Basado en las novelas",
+
+        "mage": "Modern AGE",
+        "mageHint": "Threefold, Mundo de Lazarus",
+
+        "brose": "Blue Rose AGE",
+        "broseHint": "Ambientación de Fantasía Romántica" 
     }
 }

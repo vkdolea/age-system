@@ -231,14 +231,38 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
             html.find(".wgroup-item").click(this._onWeaponGroupToggle.bind(this));
         }
+
+        // Add colorset class to entity-link inside TinyMCE editor
+        const entityLink = html.find("a.entity-link");
+        const inlineRoll = html.find("a.inline-roll");
+        const insideMCE = [...entityLink, ...inlineRoll];
+        for (let i = 0; i < insideMCE.length; i++) insideMCE[i].classList.add(`colorset-second-tier`);
+        
         super.activateListeners(html);
     };
 
+    // /**
+    //  * @override
+    //  * Activate a named TinyMCE text editor
+    //  * @param {string} name             The named data field which the editor modifies.
+    //  * @param {object} options          TinyMCE initialization options passed to TextEditor.create
+    //  * @param {string} initialContent   Initial text content for the editor area.
+    //  */
+    // activateEditor(name, options={}, initialContent="") {
+    //     const mceCss = "/systems/age-system/styles/age-system-tinymce.css";
+    //     if (!options.content_css) {
+    //         options.content_css = [mceCss];
+    //     } else {
+    //         options.content_css.push(mceCss);
+    //     };
+    //     super.activateEditor(name, options, initialContent);
+    // }
+
     _onAdjustHealth(ev) {
-        const actorMode = this.actor.data.data.gameMode;
-        const value = Number(ev.currentTarget.value);
         const detail = ev.currentTarget.dataset.detail;
+        const actorMode = this.actor.data.data.gameMode;
         const mode = actorMode.selected;
+        const value = Number(ev.currentTarget.value);
         const updatePath = `data.gameMode.specs.${mode}.${detail}`;
         return this.actor.update({[updatePath]: value});
     }

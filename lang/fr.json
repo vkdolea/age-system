@@ -14,6 +14,15 @@
     "ITEM.TypeMembership": "Affiliation",
 	"ITEM.TypeSpaceshipfeatures": "Fonctionnalité Vaisseau spatial",
 
+    "SETTINGS.useTargeted": "Utiliser le ciblage de token pour appliquer les dommages et les soins.",
+    "SETTINGS.useTargetedHint": "Au lieu d'appliquer les dégâts ou les soins à partir des commandes et des boîtes de dialogue aux jetons contrôlés, appliquez-les aux jetons ciblés",
+
+    "SETTINGS.quicksetting": "Paramétrage rapide de AGE",
+    "SETTINGS.quicksettingHint": "Configure rapidement tous les  paramètres avancés en fonction du Paramètrage préselectionné",
+
+    "SETTINGS.advSettings": "Options avancées de AGE",
+    "SETTINGS.advSettingsHint": "Configure en détail tous les paramétrages possibles pour une partie sur-mesure.",
+
     "SETTINGS.consumePP": "Utilise les Points de Magie/Pouvoir/Mana sur le jet de dés",
     "SETTINGS.consumePPHint": "Si activé, les points nécessaires à l'utilisation d'un pouvoir seront déduits du total disponible du personnage. Un message apparaîtra s'il n'y a pas assez de points disponibles.",
     
@@ -659,6 +668,24 @@
         "charFocus": "Compétence PJ",
         "invalidModformula": "Invalide - revoir la formule",
         "invalidModnodice": "Erreur - seul les operations avec des nombres et @attr sont valides",
-        "invalidModnumber": "Seul les nombres sont valides"
+        "invalidModnumber": "Seul les nombres sont valides",
+
+        "selectGameSetting": "Sélection du type de jeu",
+        "saveSettings": "Sauvegarde des paramètres",
+
+        "dage": "Dragon AGE",
+        "dageHint": "Comme vu dans la série de jeux vidéo",
+
+        "fage": "Fantasy AGE",
+        "fageHint": "Freeport, Titansgrave, Lost Citadel",
+
+        "expanse": "The Expanse RPG",
+        "expanseHint": "Comme vu dans les livres",
+
+        "mage": "Modern AGE",
+        "mageHint": "Threefold, World of Lazarus",
+
+        "brose": "Blue Rose AGE",
+        "broseHint": "Un monde de Fantasy romantique"
     }
 }

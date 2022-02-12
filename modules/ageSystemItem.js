@@ -150,7 +150,7 @@ export class ageSystemItem extends Item {
                 atkBonus += p;
             }
             const attkPartials = Dice.resumeFormula(atkBonus, this.actor?.actorRollData() ?? {});
-            data.atkRollMod = attkPartials ? attkPartials.shortFormula : "0";
+            data.atkRollMod = attkPartials ? attkPartials.shortFormula : "+0";
 
             // Item Base Damage
             const dmgBonusArr = []
