@@ -535,9 +535,6 @@
         "operation": "Operaciones",
         "key": "Clave",
         "bonus": {
-            "type": "Tipo",
-            "value": "Valor",
-            "active": "Activo",
             "acc": "Precisión",
             "comm":"Comunicación",
             "cons":"Constitución",
@@ -554,7 +551,6 @@
             "testMod": "Todas Tiradas",
             "actorDamage": "Todo Daño",
             "attackMod": "Bono Ataque",
-            "charAbl": "Atributo",
             "focus": "Concentración",
             "defense": "Defensa",
             "toughness": "Dureza",
@@ -563,16 +559,18 @@
             "defendMnv": "Maniobra Defensa",
             "guardupMnv": "Maniobra Guardia",
             "allOutAtk": "Daño Ataque Total",
-            "maxHealth": "Salud Max",
             "maxConviction": "Convicción Max",
-            "maxPowerPoints": "PP Max",
-            "powerForce": "Fuerza Poder",
             "aimMnv": "Apuntar",
             "armorPenalty": "Penalizador Armadura",
             "speed": "Velocidad",
-            "armorStrain": "Estrés Armadura"
+            "armorStrain": "Estrés Armadura",
+            
+            "active": "Activo",
+            "charAbl": "Atributo",
+            "type": "Tipo",
+            "value": "Valor"
         },
-
+        
         "stuntsContainer": "Proezas",
         "equipmentContainer": "Equipo",
         "item": {
