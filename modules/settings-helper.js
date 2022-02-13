@@ -80,6 +80,7 @@ export class QuickSettings extends FormApplication {
         game.settings.set("age-system", setting, value)
       }
     }
+    this.close();
   }
 
   onSelectPreset(ev) {
@@ -88,9 +89,7 @@ export class QuickSettings extends FormApplication {
     this.render(false)
   }
 
-  _updateObject(event, data) {
-    console.log('t')
-  }
+  _updateObject(event, data) {}
 }
 
 export class AdvancedSettings extends FormApplication {
@@ -165,6 +164,7 @@ export class AdvancedSettings extends FormApplication {
         game.settings.set("age-system", setting, value)
       }
     }
+    this.close();
   }
 
   _updateObject(event, data) {}

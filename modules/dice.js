@@ -114,6 +114,8 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     let ablName;
     if (abl !== null && abl !== "no-abl") {
         const ablValue = actor.data.data.abilities[abl].total;
+        const ablTestMod = actor.data.data.abilities?.[abl]?.testMod ?? 0;
+        const ablTestModLabel = game.i18n.localize(`age-system.bonus.${abl}Test`);
         rollFormula += " + @ability";
         ablName = actorType === "char" ? game.i18n.localize(`age-system.${abl}`) : game.i18n.localize(`age-system.org.${abl}`);
         rollData = {
@@ -121,11 +123,16 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
             ability: ablValue,
             ablCode: abl,
             focusId: null,
-            abilityName: ablName
+            abilityName: ablName,
+            [ablTestModLabel]: ablTestMod
         };
         partials.push({
             label: rollData.abilityName,
             value: ablValue
+        });
+        if (ablTestMod) partials.push({
+            label: ablTestModLabel,
+            value: ablTestMod
         });
     };
 

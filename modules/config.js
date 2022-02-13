@@ -645,16 +645,27 @@ ageSystem.ageEffectsKeys = {
     "attackMod": {label: "age-system.bonus.attackMod", mask: "data.attackMod", dtype: 'nodice'},
     "actorDamage": {label: "age-system.bonus.actorDamage", mask: "data.dmgMod", dtype: 'formula'},
     "acc": {label: "age-system.bonus.acc", mask: "data.abilities.acc.total", dtype: 'number'},
+    "accTest": {label: "age-system.bonus.accTest", mask: "data.abilities.acc.testMod", dtype: 'number'},
     "comm": {label: "age-system.bonus.comm", mask: "data.abilities.comm.total", dtype: 'number'},
+    "commTest": {label: "age-system.bonus.commTest", mask: "data.abilities.comm.testMod", dtype: 'number'},
     "cons": {label: "age-system.bonus.cons", mask:"data.abilities.cons.total", dtype: 'number'},
+    "consTest": {label: "age-system.bonus.consTest", mask:"data.abilities.cons.testMod", dtype: 'number'},
     "cunn": {label: "age-system.bonus.cunn", mask: "data.abilities.cunn.total", dtype: 'number'},
+    "cunnTest": {label: "age-system.bonus.cunnTest", mask: "data.abilities.cunn.testMod", dtype: 'number'},
     "dex": {label: "age-system.bonus.dex", mask: "data.abilities.dex.total", dtype: 'number'},
+    "dexTest": {label: "age-system.bonus.dexTest", mask: "data.abilities.dex.testMod", dtype: 'number'},
     "fight": {label: "age-system.bonus.fight", mask: "data.abilities.fight.total", dtype: 'number'},
+    "fightTest": {label: "age-system.bonus.fightTest", mask: "data.abilities.fight.testMod", dtype: 'number'},
     "int": {label: "age-system.bonus.int", mask: "data.abilities.int.total", dtype: 'number'},
+    "intTest": {label: "age-system.bonus.intTest", mask: "data.abilities.int.testMod", dtype: 'number'},
     "magic": {label: "age-system.bonus.magic", mask: "data.abilities.magic.total", dtype: 'number'},
+    "magicTest": {label: "age-system.bonus.magicTest", mask: "data.abilities.magic.testMod", dtype: 'number'},
     "per": {label: "age-system.bonus.per", mask: "data.abilities.per.total", dtype: 'number'},
+    "perTest": {label: "age-system.bonus.perTest", mask: "data.abilities.per.testMod", dtype: 'number'},
     "str": {label: "age-system.bonus.str", mask: "data.abilities.str.total", dtype: 'number'},
+    "strTest": {label: "age-system.bonus.strTest", mask: "data.abilities.str.testMod", dtype: 'number'},
     "will": {label: "age-system.bonus.will", mask: "data.abilities.will.total", dtype: 'number'},
+    "willTest": {label: "age-system.bonus.willTest", mask: "data.abilities.will.testMod", dtype: 'number'},
     "defense": {label: "age-system.bonus.defense", mask: "data.defense.total", dtype: 'nodice'},
     "impactArmor": {label: "age-system.bonus.impactArmor", mask: "data.armor.impact", dtype: 'nodice'},
     "ballisticArmor": {label: "age-system.bonus.ballisticArmor", mask: "data.armor.ballistic", dtype: 'nodice'},
@@ -673,10 +684,31 @@ ageSystem.ageEffectsKeys = {
 
 ageSystem.itemEffectsKeys = {
     "powerForce": {label: "age-system.bonus.powerForce", mask: "", dtype: 'nodice'},
-    "focus": {label: "age-system.bonus.focusValue", mask: "", dtype: 'nodice'},
-    "itemDamage": {label: "age-system.bonus.itemAtk", mask: "", dtype: 'formula'},
-    "itemActivation": {label: "age-system.bonus.generalDmg", mask: "", dtype: 'nodice'}
+    "focus": {label: "age-system.bonus.focusValue", mask: "", dtype: 'nodice', hasOption: true},
+    "itemDamage": {label: "age-system.bonus.generalDmg", mask: "", dtype: 'formula'},
+    "itemActivation": {label: "age-system.bonus.itemAtk", mask: "", dtype: 'nodice'},
+    "allPowerForce": {label: "age-system.bonus.allPowerForce", mask: "", dtype: 'nodice'},
+    "focusPowerForce": {label: "age-system.bonus.focusPowerForce", mask: "", dtype: 'nodice', hasOption: true},
 }
+
+// List of Mods Per setup
+ageSystem.modifiers = {
+    others: ["maxHealth", "maxConviction"],
+    armorMods: {
+        expanse: ["impactArmor", 'toughness'],
+        mage: ["impactArmor", "ballisticArmor", "toughness"],
+        mageInjury: ["impactArmor", "ballisticArmor", "toughness"],
+        basic: ["impactArmor"]
+    },
+    ablMods: {
+        main: ["acc", "comm", "cons", "dex", "fight", "int", "per", "str", "will", "accTest", "commTest", "consTest", "dexTest", "fightTest", "intTest", "perTest", "strTest", "willTest"],
+        dage: ["comm", "cons", "cunn", "dex", "magic", "per", "str", "will", "commTest", "consTest", "cunnTest", "dexTest", "magicTest", "perTest", "strTest", "willTest"]
+    },
+    generalMods: ["powerForce", "aimMnv", "armorPenalty", "itemDamage", "testMod", "attackMod", "actorDamage", "itemActivation", "focus", "defense", "speed",
+        "armorStrain", "defendMnv", "guardupMnv", "allOutAtkMnv", "maxPowerPoints", "allPowerForce", "focusPowerForce"
+    ],
+    modeToLocalize: ["impactArmor", "powerForce", "maxPowerPoints", "maxHealth"]
+};
 
 // Collection of all mod keys
 ageSystem.modkeys = {
@@ -771,25 +803,6 @@ ageSystem.greenRonin = {
     //     site: `https://greenroninstore.com/products/threefold`
     // }
 }
-
-// List of Mods Per setup
-ageSystem.modifiers = {
-    others: ["maxHealth", "maxConviction"],
-    armorMods: {
-        expanse: ["impactArmor", 'toughness'],
-        mage: ["impactArmor", "ballisticArmor", "toughness"],
-        mageInjury: ["impactArmor", "ballisticArmor", "toughness"],
-        basic: ["impactArmor"]
-    },
-    ablMods: {
-        main: ["acc", "comm", "cons", "dex", "fight", "int", "per", "str", "will"],
-        dage: ["comm", "cons", "cunn", "dex", "magic", "per", "str", "will"]
-    },
-    generalMods: ["powerForce", "aimMnv", "armorPenalty", "itemDamage", "testMod", "attackMod", "actorDamage", "itemActivation", "focus", "defense", "speed",
-        "armorStrain", "defendMnv", "guardupMnv", "allOutAtkMnv", "maxPowerPoints"
-    ],
-    modeToLocalize: ["impactArmor", "powerForce", "maxPowerPoints", "maxHealth"]
-};
 
 // Talent Degrees
 ageSystem.mageDegrees = ['age-system.novice', 'age-system.expert', 'age-system.master', 'age-system.grandmaster', 'age-system.apex'];

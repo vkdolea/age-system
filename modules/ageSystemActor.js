@@ -261,6 +261,7 @@ export class ageSystemActor extends Actor {
             if (settingAbls.hasOwnProperty(ablKey)) {
                 data.abilities[ablKey].mod = mods[ablKey]?.formParts?.detValue ?? 0;
                 data.abilities[ablKey].total = data.abilities[ablKey].mod + data.abilities[ablKey].value
+                data.abilities[ablKey].testMod = mods[`${ablKey}Test`]?.formParts?.detValue ?? 0;
             };
         };
 

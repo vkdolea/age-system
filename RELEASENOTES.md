@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.12.2 [2022-02-xx]
+
+### Fixed
+- Saving changes on Quick AGE Settings or Adavance AGE Settings window will no close them accordingly or reset the world, depending on settings changed.
+
 ## 0.12.1 [2022-02-12]
 ### Added
 - Quick AGE Settings menu created to set all Advanced AGE Settings to fit a specific game system.
