@@ -12,7 +12,7 @@
     "ITEM.TypeRelationship": "Relation",
     "ITEM.TypeHonorifics": "Titre",
     "ITEM.TypeMembership": "Affiliation",
-	"ITEM.TypeSpaceshipfeatures": "Fonctionnalité Vaisseau spatial",
+	"ITEM.TypeShipfeatures": "Fonctionnalité Vaisseau spatial",
 
     "SETTINGS.useTargeted": "Utiliser le ciblage de token pour appliquer les dommages et les soins.",
     "SETTINGS.useTargetedHint": "Au lieu d'appliquer les dégâts ou les soins à partir des commandes et des boîtes de dialogue aux jetons contrôlés, appliquez-les aux jetons ciblés",
@@ -673,19 +673,17 @@
         "selectGameSetting": "Sélection du type de jeu",
         "saveSettings": "Sauvegarde des paramètres",
 
-        "dage": "Dragon AGE",
-        "dageHint": "Comme vu dans la série de jeux vidéo",
-
-        "fage": "Fantasy AGE",
-        "fageHint": "Freeport, Titansgrave, Lost Citadel",
-
-        "expanse": "The Expanse RPG",
-        "expanseHint": "Comme vu dans les livres",
-
-        "mage": "Modern AGE",
-        "mageHint": "Threefold, World of Lazarus",
-
-        "brose": "Blue Rose AGE",
-        "broseHint": "Un monde de Fantasy romantique"
+        "presets": {
+            "dage": "Dragon AGE",
+            "dageHint": "Comme vu dans la série de jeux vidéo",
+            "fage": "Fantasy AGE",
+            "fageHint": "Freeport, Titansgrave, Lost Citadel",
+            "expanse": "The Expanse RPG",
+            "expanseHint": "Comme vu dans les livres",
+            "mage": "Modern AGE",
+            "mageHint": "Threefold, World of Lazarus",
+            "brose": "Blue Rose AGE",
+            "broseHint": "Un monde de Fantasy romantique"
+        }
     }
 }

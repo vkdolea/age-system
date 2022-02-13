@@ -673,19 +673,17 @@
         "selectGameSetting": "Selecciona Configuración de Partida",
         "saveSettings": "Grabar Configuración",
 
-        "dage": "Dragon AGE",
-        "dageHint": "Basado en los videojuegos",
-
-        "fage": "Fantasy AGE",
-        "fageHint": "Freeport, Titansgrave, Lost Citadel",
-
-        "expanse": "The Expanse RPG",
-        "expanseHint": "Basado en las novelas",
-
-        "mage": "Modern AGE",
-        "mageHint": "Threefold, Mundo de Lazarus",
-
-        "brose": "Blue Rose AGE",
-        "broseHint": "Ambientación de Fantasía Romántica" 
+        "presets": {
+            "dage": "Dragon AGE",
+            "dageHint": "Basado en los videojuegos",
+            "fage": "Fantasy AGE",
+            "fageHint": "Freeport, Titansgrave, Lost Citadel",
+            "expanse": "The Expanse RPG",
+            "expanseHint": "Basado en las novelas",
+            "mage": "Modern AGE",
+            "mageHint": "Threefold, Mundo de Lazarus",
+            "brose": "Blue Rose AGE",
+            "broseHint": "Ambientación de Fantasía Romántica" 
+        }
     }
 }
