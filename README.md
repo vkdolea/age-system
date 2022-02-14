@@ -60,27 +60,30 @@ A few items have a "Modifiers" section. Modifiers will only apply when the item 
 The checkbox must be checked to have the mod active in the item.
 Bonuses for maneuvers are on top of the normal bonuses granted by the maneuver.
 Here the description of each one of the Modifiers:
-1. **This Item Damage:** adds damage when using damage roll for tha particular item (useful only for Weapon and Power & Arcana).
-2. **All Damage:** adds the damage to all types of damage rolls.
-3. **This Item Activation:** add a bonus to all use rolls for that item (using the dice icon to roll).
-3. **Defense:** value added to owners' Defense stats.
+1. **Damage (this item):** adds damage when using damage roll for tha particular item (useful only for Weapon and Power & Arcana).
+2. **Damage (all):** adds the damage to all types of damage rolls.
+3. **Tests (this item):** add a bonus to all use rolls for that item (using the dice icon to roll).
+3. **Test (all):** general bonus adding to all tests, except for attack/damage rolls.
 4. **Impact Armor:** adds to Impact Armor. *When Ballistic armor is not used, Impact Armor is the mod to use to add into Armor.*
 5. **Ballistic Armor:** mod ading to Ballistic armor.
 6. **Toughness:** value added to Toughness stats.
 7. **Defend Maneuver:** the value here adds to the bonus granted by the Defend maneuver.
 8. **Guard Up Maneuver:** this mod adds up to the Guard Up bonus.
 9. **All-Out Attack:** bonus to damage caused by All-Out Attack.
-10. **Max Health:** added to character's maximum Health.
+10. **Max Health or Max Fortune:** added to character's maximum Health/Fortune.
 11. **Max Conviction:** added to character's maximum Conviction.
-12. **Max PP:** added to character's maximum Power Points.
-13. **Power Force:** added to item's Power Force. Only useful for Power & Arcana.
-14. **Aim:** extra bonus added to attack rolls when Aim maneuver is used, besides the standard value.
-15. **Ability Names:** these are play bonuses to the specific Ability.
-16. **Speed:** adds to Speed Mod field.
-17. **Focus:** adds bonus to Focus maching the name, as long as the character has the given Focus on its character sheet.
-18. **Attack Bonus:** adds to attack rolls.
-19. **All Test:** general bonus adding to all tests, except for attack/damage rolls.
-20. **Armor Strain:** this is the extra Power/Spell/Magic Points necessary to cast a spell when wearing the item bearing this mod.
+12. **Max Power Points:** added to character's maximum Power Points.
+13. **Power Force (this item):** added to item's Power Force. Only useful for Power & Arcana.
+14. **Power Force (all):** added to Power Force from every single Power & Arcana.
+15. **Power Force (Focus):** added to Power Force from every single Power & Arcana using the informed Focus.
+16. **Aim:** extra bonus added to attack rolls when Aim maneuver is used, besides the standard value.
+17. **Ability Names:** these bonuses apply to specific Ability.
+17. **Ability Names (test only):** these are applied only to Ability tests (no impact on damage/derived calculation).
+19. **Speed:** adds to Speed Mod field.
+20. **Focus:** adds bonus to Focus maching the name, as long as the character has the given Focus on its character sheet.
+21. **Attack Bonus:** adds to attack rolls.
+22. **Defense:** value added to owners' Defense stats.
+23. **Armor Strain:** this is the extra Power/Spell/Magic Points necessary to cast a spell when wearing the item bearing this mod.
 
 ## Credits
 ### Icons

@@ -1,6 +1,6 @@
 # Release Notes
 
-## 0.12.2 [2022-02-xx]
+## 0.12.2 [2022-02-12]
 
 ### Added
 - New mods added: Force Power (all), Force Power (Focus) and one for each Ability (test only).
