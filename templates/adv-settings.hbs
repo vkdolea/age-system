@@ -5,7 +5,6 @@
     <div class="form-group">
         <label>{{name}}</label>
         <div class="form-fields">
-            {{#if (eq type 'String')}}
             {{#if isSelect}}
             <select name="{{key}}">
                 {{#select value}}
@@ -15,11 +14,11 @@
                 {{/select}}
             </select>
             {{else}}
-            <input type="text" name="{{key}}" value="{{value}}" data-dtype="{{type}}">
-            {{/if}}
-            {{/if}}
             {{#if (eq type 'Boolean')}}
-            <input type="checkbox" name="{{key}}" data-dtype="Boolean">
+            <input type="checkbox" name="{{key}}" {{#if value}}checked{{/if}} data-dtype="Boolean">
+            {{else}}
+            <input type="{{#if (eq type 'String')}}text{{else}}number{{/if}}" name="{{key}}" value="{{value}}" data-dtype="{{type}}">
+            {{/if}}
             {{/if}}
         </div>
         <p class="notes">{{hint}}</p>
@@ -29,6 +28,6 @@
 </form>
 <hr>
 <footer class="sheet-footer flexrow">
-    <button type="button">{{localize "age-system.cancel"}}</button>
+    <button type="button" class="close">{{localize "age-system.cancel"}}</button>
     <button type="button" class="accept-settings">{{localize "age-system.saveSettings"}}</button>
 </footer>

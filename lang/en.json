@@ -705,6 +705,8 @@
             "mageHint": "Threefold, World of Lazarus",
             "brose": "Blue Rose AGE",
             "broseHint": "The Romantic Fantasy setting"
-        }
+        },
+
+        "worldSetting": "World Mode"
     }
 }

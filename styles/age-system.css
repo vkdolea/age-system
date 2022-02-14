@@ -5485,7 +5485,7 @@ body *:not(i, .fa, .far, .fas) {
 #adv-settings input,
 #quick-settings select,
 #adv-settings select {
-  border: 1px solid var(--color-border-light-tertiary);
+  border: 1px solid #7a7971;
 }
 #quick-settings input:hover,
 #adv-settings input:hover,
@@ -5495,7 +5495,7 @@ body *:not(i, .fa, .far, .fas) {
 #adv-settings select:hover,
 #quick-settings select:focus,
 #adv-settings select:focus {
-  box-shadow: 0 0 5px var(--color-shadow-primary) !important;
+  box-shadow: 0 0 5px red !important;
 }
 /*---------Background---------------------*/
 .window-app.sheet.char .window-content,
