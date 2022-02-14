@@ -75,10 +75,10 @@
                 </div>
                 <div class="labels flexrow">
                     <label>Current</label>
-                    <label>{{localize "age-system.maximum"}}</label>
                     {{#if (ne data.data.health.set data.data.health.max)}}
-                    <label for="">Bonus</label>
+                    <label for="">-</label>
                     {{/if}}
+                    <label>{{localize "age-system.maximum"}}</label>
                 </div>
             </li>
             {{/if}}
@@ -91,15 +91,15 @@
                     <input class="value-data circle" type="number" name="data.powerPoints.value" value="{{data.data.powerPoints.value}}" data-dtype="Number" />
                     <input class="value-data circle" type="number" name="data.powerPoints.set" value="{{data.data.powerPoints.set}}" data-dtype="Number" />
                     {{#if (ne data.data.powerPoints.set data.data.powerPoints.max)}}
-                    <input class="value-data circle bonus" type="number" class="colorset-second-tier" disabled name="data.powerPoints.max" value="{{data.powerPoints.max}}" data-dtype="Number" />
+                    <input class="value-data circle bonus" type="number" class="colorset-second-tier" disabled name="data.powerPoints.max" value="{{data.data.powerPoints.max}}" data-dtype="Number" />
                     {{/if}}
                 </div>
                 <div class="labels flexrow">
                     <label>Current</label>
-                    <label>{{localize "age-system.maximum"}}</label>
                     {{#if (ne data.data.powerPoints.set data.data.powerPoints.max)}}
-                    <label for="">Bonus</label>
+                    <label for="">-</label>
                     {{/if}}
+                    <label>{{localize "age-system.maximum"}}</label>
                 </div>
             </li>
             {{/if}}

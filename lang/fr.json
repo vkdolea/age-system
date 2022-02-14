@@ -12,7 +12,7 @@
     "ITEM.TypeRelationship": "Relation",
     "ITEM.TypeHonorifics": "Titre",
     "ITEM.TypeMembership": "Affiliation",
-	"ITEM.TypeSpaceshipfeatures": "Fonctionnalité Vaisseau spatial",
+	"ITEM.TypeShipfeatures": "Fonctionnalité Vaisseau spatial",
 
     "SETTINGS.useTargeted": "Utiliser le ciblage de token pour appliquer les dommages et les soins.",
     "SETTINGS.useTargetedHint": "Au lieu d'appliquer les dégâts ou les soins à partir des commandes et des boîtes de dialogue aux jetons contrôlés, appliquez-les aux jetons ciblés",
@@ -535,17 +535,14 @@
         "operation": "Opération",
         "key": "Clé",
         "bonus": {
-            "type": "Type",
-            "value": "Valeur",
-            "active": "Actif",
             "acc": "Précision",
             "comm":"Communication",
             "cons":"Constitution",
-            "cunn": "Ruse (DAGE)",
+            "cunn": "Ruse",
             "dex": "Dextérité",
             "fight": "Combat",
             "int": "Intelligence",
-            "magic": "Magie (DAGE)",
+            "magic": "Magie",
             "per": "Perception",
             "str": "Force",
             "will": "Volonté",
@@ -554,7 +551,6 @@
             "testMod": "Tous les jets",
             "actorDamage": "Tous les dommages",
             "attackMod": "Bonus d'attaque",
-            "charAbl": "Caractéristique",
             "focus": "Compétence",
             "defense": "Défense",
             "toughness": "Résistance",
@@ -563,14 +559,16 @@
             "defendMnv": "Manœuvre : Défense",
             "guardupMnv": "Manœuvre : Se protéger",
             "allOutAtk": "dégâts attaque totale",
-            "maxHealth": "Santé Max",
             "maxConviction": "Conviction Max",
-            "maxPowerPoints": "PM Max",
-            "powerForce": "Puissance magique",
             "aimMnv": "Viser",
             "armorPenalty": "Pénalité d'armure",
 			"speed": "Rapidité",
-            "armorStrain": "Fatigue d'armure"
+            "armorStrain": "Fatigue d'armure",
+            
+            "active": "Actif",
+            "charAbl": "Caractéristique",
+            "type": "Type",
+            "value": "Valeur"
         },
 
         "stuntsContainer": "Prouesses",
@@ -673,19 +671,17 @@
         "selectGameSetting": "Sélection du type de jeu",
         "saveSettings": "Sauvegarde des paramètres",
 
-        "dage": "Dragon AGE",
-        "dageHint": "Comme vu dans la série de jeux vidéo",
-
-        "fage": "Fantasy AGE",
-        "fageHint": "Freeport, Titansgrave, Lost Citadel",
-
-        "expanse": "The Expanse RPG",
-        "expanseHint": "Comme vu dans les livres",
-
-        "mage": "Modern AGE",
-        "mageHint": "Threefold, World of Lazarus",
-
-        "brose": "Blue Rose AGE",
-        "broseHint": "Un monde de Fantasy romantique"
+        "presets": {
+            "dage": "Dragon AGE",
+            "dageHint": "Comme vu dans la série de jeux vidéo",
+            "fage": "Fantasy AGE",
+            "fageHint": "Freeport, Titansgrave, Lost Citadel",
+            "expanse": "The Expanse RPG",
+            "expanseHint": "Comme vu dans les livres",
+            "mage": "Modern AGE",
+            "mageHint": "Threefold, World of Lazarus",
+            "brose": "Blue Rose AGE",
+            "broseHint": "Un monde de Fantasy romantique"
+        }
     }
 }

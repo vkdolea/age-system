@@ -42,6 +42,7 @@ export class QuickSettings extends FormApplication {
 
       // Update setting data
       const s = foundry.utils.deepClone(setting);
+      s.namespace = s.namespace || s.module; // 0.8.9 compatibility
       s.id = `${s.namespace}.${s.key}`;
       s.name = game.i18n.localize(s.name);
       s.hint = game.i18n.localize(s.hint);
@@ -80,6 +81,7 @@ export class QuickSettings extends FormApplication {
         game.settings.set("age-system", setting, value)
       }
     }
+    this.close();
   }
 
   onSelectPreset(ev) {
@@ -88,9 +90,7 @@ export class QuickSettings extends FormApplication {
     this.render(false)
   }
 
-  _updateObject(event, data) {
-    console.log('t')
-  }
+  _updateObject(event, data) {}
 }
 
 export class AdvancedSettings extends FormApplication {
@@ -133,6 +133,7 @@ export class AdvancedSettings extends FormApplication {
 
       // Update setting data
       const s = foundry.utils.deepClone(setting);
+      s.namespace = s.namespace || s.module; // 0.8.9 compatibility
       s.id = `${s.namespace}.${s.key}`;
       s.name = game.i18n.localize(s.name);
       s.hint = game.i18n.localize(s.hint);
@@ -165,6 +166,7 @@ export class AdvancedSettings extends FormApplication {
         game.settings.set("age-system", setting, value)
       }
     }
+    this.close();
   }
 
   _updateObject(event, data) {}

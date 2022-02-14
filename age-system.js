@@ -273,14 +273,12 @@ Hooks.once("init", async function() {
 });
 
 Hooks.once("setup", function() {
-    Setup.abilitiesName();
-    Setup.localizeAgeEffects();
     const talentDegrees = foundry.utils.deepClone(ageSystem.mageDegrees);
     for (let i = 0; i < talentDegrees.length; i++) {
         talentDegrees[i] = game.i18n.localize(talentDegrees[i]);
     }
     ageSystem.talentDegrees = talentDegrees;
-
+    
     // Set Health System configuration
     const hstype = game.settings.get("age-system", "healthSys");
     const HEALTH_SYS = {
@@ -297,6 +295,10 @@ Hooks.once("setup", function() {
     };
     CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
     CONFIG.ageSystem.healthSys = HEALTH_SYS;
+    
+    // Specific Localization
+    Setup.abilitiesName();
+    Setup.localizeAgeEffects();
 
     // Target/Controlled option to damage/heal
     CONFIG.ageSystem.useTargeted = game.settings.get("age-system", "useTargeted");

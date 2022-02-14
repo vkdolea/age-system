@@ -255,12 +255,32 @@ export class ageSystemItem extends Item {
 
         // Actor Scope
         if (this.actor?.data) {
-            // Item Force bonus
+            const actor = this.actor.data.data;
+
+            // Ability bonus
             const abl = this.actor?.data?.data?.abilities?.[data?.itemForceAbl]?.total;
             if (data.itemForceAbl !== "no-abl" && abl) itemForceBonus.push(this.actor.data.data.abilities[data.itemForceAbl].total)
 
             // Focus Bonus
             if (data.useFocus) itemForceBonus.push(this.actor.checkFocus(data.useFocus).value)
+
+            // General 'allPowerForce' bonus
+            const actorForceBonus = ["allPowerForce"];
+            if (this.actor.data.data?.ownedMods) {
+                for (let am = 0; am < actorForceBonus.length; am++) {
+                    const modName = actorForceBonus[am];
+                    if (actor.ownedMods[modName]) itemForceBonus.push(actor.ownedMods[modName].totalFormula);
+                };
+            };
+
+            // Instances of 'focusPowerForce' mods
+            const focusPowerForce = actor?.ownedMods?.['focusPowerForce']?.parts;
+            if (focusPowerForce?.length) {
+                for (let f = 0; f < focusPowerForce.length; f++) {
+                    const m = focusPowerForce[f];
+                    if (m.conditions.focus.toLowerCase() === data.useFocus.toLowerCase() || m.isValid) itemForceBonus.push(m.formula);
+                }
+            }
         }
         
         // Identify Bonus to Increase only this Power Item Force

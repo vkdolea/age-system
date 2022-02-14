@@ -261,6 +261,7 @@ export class ageSystemActor extends Actor {
             if (settingAbls.hasOwnProperty(ablKey)) {
                 data.abilities[ablKey].mod = mods[ablKey]?.formParts?.detValue ?? 0;
                 data.abilities[ablKey].total = data.abilities[ablKey].mod + data.abilities[ablKey].value
+                data.abilities[ablKey].testMod = mods[`${ablKey}Test`]?.formParts?.detValue ?? 0;
             };
         };
 
@@ -326,7 +327,7 @@ export class ageSystemActor extends Actor {
         data.conviction.mod = mods?.maxConviction?.formParts?.detValue ?? 0;
 
         // Max Power Points
-        data.powerPoints.mod = mods?.powerPoints?.formParts?.detValue ?? 0;
+        data.powerPoints.mod = mods?.maxPowerPoints?.formParts?.detValue ?? 0;
 
         // Aim Maneuver
         data.aim.mod = mods?.aimMnv?.formParts?.detValue ?? 0;

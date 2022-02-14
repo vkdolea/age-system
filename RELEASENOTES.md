@@ -1,5 +1,19 @@
 # Release Notes
 
+## 0.12.2 [2022-02-12]
+
+### Added
+- New mods added: Force Power (all), Force Power (Focus) and one for each Ability (test only).
+
+### Changed
+- A few mods now have a new name, so its behaviour is more clear tho users.
+
+### Fixed
+- Saving changes on Quick AGE Settings or Adavance AGE Settings window will no close them accordingly or reset the world, depending on settings changed.
+- Stunt Points setting and check boxes now show up properly.
+- Fixed localizations missing strings.
+- Max Power Points bonuses were not correct added on character stats.
+
 ## 0.12.1 [2022-02-12]
 ### Added
 - Quick AGE Settings menu created to set all Advanced AGE Settings to fit a specific game system.

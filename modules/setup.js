@@ -146,7 +146,7 @@ export function modifiersList() {
                     modsObj[k] = `age-system.bonus.${k}` // Add logics afterwards
                     break;
                 case 'maxHealth':
-                    modsObj[k] = `age-system.bonus.${k}` // Add logics afterwards
+                    modsObj[k] = game.settings.get("age-system", "healthMode") === 'health' ? `age-system.bonus.maxHealth` : `age-system.bonus.maxFortune`  // Add logics afterwards
                     // modsObj[k] = ageSystem.healthSys.useHealth ? `age-system.bonus.maxHealth` : `age-system.bonus.maxFortune`
                     break;            
                 default:
