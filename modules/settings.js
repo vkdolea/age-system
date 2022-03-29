@@ -24,7 +24,6 @@ export const registerSystemSettings = async function() {
     hint: "SETTINGS.breatherSettingsHint",
     icon: 'fas fa-medkit',
     label: "SETTINGS.breatherSettings",
-    scope: "world",
     config: true,
     type: BreatherSettings,
     restricted: true
@@ -38,7 +37,6 @@ export const registerSystemSettings = async function() {
     hint: "SETTINGS.quicksettingHint",
     icon: 'fas fa-child',
     label: "SETTINGS.quicksetting",
-    scope: "world",
     config: true,
     type: QuickSettings,
     restricted: true
@@ -52,7 +50,6 @@ export const registerSystemSettings = async function() {
     hint: "SETTINGS.advSettingsHint",
     icon: 'fas fa-capsules',
     label: "SETTINGS.advSettings",
-    scope: "world",
     config: true,
     type: AdvancedSettings,
     restricted: true

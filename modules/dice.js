@@ -116,7 +116,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         const ablValue = actor.data.data.abilities[abl].total;
         const ablTestMod = actor.data.data.abilities?.[abl]?.testMod ?? 0;
         const ablTestModLabel = game.i18n.localize(`age-system.bonus.${abl}Test`);
-        rollFormula += " + @ability";
+        rollFormula += ` + @ability + @abilityTestOnly`;
         ablName = actorType === "char" ? game.i18n.localize(`age-system.${abl}`) : game.i18n.localize(`age-system.org.${abl}`);
         rollData = {
             ...rollData,
@@ -124,7 +124,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
             ablCode: abl,
             focusId: null,
             abilityName: ablName,
-            [ablTestModLabel]: ablTestMod
+            abilityTestOnly: ablTestMod
         };
         partials.push({
             label: rollData.abilityName,
@@ -919,7 +919,7 @@ export async function itemDamage({
     };
 
     // Adds +2 damage if Health System is Modern AGE and game Setting is 'pulp' or 'cinematic'
-    if (['mage', 'mageInjury', 'mageVitality'].includes(healthSys.type) && ['pulp', 'cinematic'].includes(healthSys.mode)) {
+    if (['mage', 'mageInjury', 'mageVitality'].includes(healthSys.type) && ['pulp', 'cinematic'].includes(healthSys.mode) && !item?.data.data.hasHealing) {
         const modeDamage = healthSys.useInjury ? 1 : 2;
         damageFormula += ` + @modeDamage[${game.i18n.localize(`SETTINGS.gameMode${healthSys.mode}`)}]`;
         rollData.modeDamage = modeDamage;

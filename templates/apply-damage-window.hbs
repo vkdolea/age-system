@@ -118,7 +118,7 @@
                 <h3>{{localize "age-system.armorPiercing"}}</h3>
                 {{radioBoxes radioB.name radioB.choices radioB.options}}
             </div>
-            <button type="button" class="apply-damage">
+            <button type="button" class="apply-damage default-button">
                 {{#if useInjury}}
                 {{localize "age-system.toughnessTest"}}
                 {{else}}
@@ -126,7 +126,7 @@
                 {{/if}}
             </button>
             {{#if useInjury}}
-            <button type="button" class="apply-damage apply-all">
+            <button type="button" class="apply-damage apply-all default-button">
                 {{localize "age-system.autoApplyAll"}}
             </button>
             <div class="form-group flexrow">
