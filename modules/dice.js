@@ -919,7 +919,7 @@ export async function itemDamage({
     };
 
     // Adds +2 damage if Health System is Modern AGE and game Setting is 'pulp' or 'cinematic'
-    if (['mage', 'mageInjury', 'mageVitality'].includes(healthSys.type) && ['pulp', 'cinematic'].includes(healthSys.mode)) {
+    if (['mage', 'mageInjury', 'mageVitality'].includes(healthSys.type) && ['pulp', 'cinematic'].includes(healthSys.mode) && !item?.data.data.hasHealing) {
         const modeDamage = healthSys.useInjury ? 1 : 2;
         damageFormula += ` + @modeDamage[${game.i18n.localize(`SETTINGS.gameMode${healthSys.mode}`)}]`;
         rollData.modeDamage = modeDamage;
