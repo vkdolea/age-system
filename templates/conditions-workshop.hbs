@@ -77,12 +77,12 @@
                 {{radioBoxes radioB.name radioB.choices radioB.options}}
             </div>
             {{#if (eq inUseConditions 'custom')}}
-            <button class="add-effect" data-position="top">{{localize "age-system.addEffectTop"}}</button>
-            <button class="add-effect" data-position="bottom">{{localize "age-system.addEffectBottom"}}</button>
-            <button class="copy-effects" data-origin="expanse" >{{localize "age-system.copyEffectsExpanse"}}</button>
+            <button class="default-button add-effect" data-position="top">{{localize "age-system.addEffectTop"}}</button>
+            <button class="default-button add-effect" data-position="bottom">{{localize "age-system.addEffectBottom"}}</button>
+            <button class="default-button copy-effects" data-origin="expanse" >{{localize "age-system.copyEffectsExpanse"}}</button>
             {{/if}}
             <hr>
-            <button class="save-close">{{localize "age-system.saveClose"}}</button>
+            <button class="default-button save-close">{{localize "age-system.saveClose"}}</button>
         </div>
     </div>
 

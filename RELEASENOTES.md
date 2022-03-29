@@ -1,7 +1,15 @@
 # Release Notes
 
-## 0.12.2 [2022-02-12]
+## 0.12.3 [2022-03-29]
 
+### Changed
+- Buttons restyled to follow Foundry standard.
+
+### Fixed
+- Ability test mods now apply to Ability tests as expected.
+- Error preventing to add Focus on character/organization sheet if another item type has the same name.
+
+## 0.12.2 [2022-02-12]
 ### Added
 - New mods added: Force Power (all), Force Power (Focus) and one for each Ability (test only).
 
