@@ -181,8 +181,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             rollFormula += " + 2D6";
             messageData.flavor += ` | +2D6`;
         }
-        const roll = new Roll(rollFormula).roll();
-        return roll.toMessage(messageData);
+        return new Roll(rollFormula).toMessage(messageData);
     }
 
     _onRemoveFeature(event) {

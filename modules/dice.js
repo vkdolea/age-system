@@ -625,7 +625,7 @@ export async function vehicleDamage ({
     // Adds Ram Damage
     if (addRam) {
         damageFormula += ` + @ramDamage`;
-        rollData.ramDamage = ` + ${vehicle.data.data.ramDmg}d6`;
+        rollData.ramDamage = `${vehicle.data.data.ramDmg}d6`;
         messageData.flavor += ` | ${game.i18n.localize("age-system.ram")}`;
     };
 
