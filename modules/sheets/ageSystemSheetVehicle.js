@@ -181,7 +181,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             if (speaker.token) user = game.actors.tokens[speaker.token];
             if (!user) user = game.actors.get(speaker.actor);
             conductorData = user;
-            if (user.data.type != "char") return false;
+            if (user?.data.type != "char") return false;
         } else {
             conductorData = vehicleData.passengers.filter(p => p.isConductor === true)[0];
             if (conductorData.isToken) user = game.actors.tokens[conductorData.id];

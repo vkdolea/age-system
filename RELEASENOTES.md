@@ -1,7 +1,12 @@
 # Release Notes
 
-## 0.12.3 [2022-03-29]
+## 0.12.4 [2022-04-16]
+### Fixed
+- Hull and Damage rolsl from Spaceships now work as expected.
+- Removed an extra "+" when rolling Vehicle damage with RAM.
+- Error thrown when trying to roll Vehicle maneuver without a driver or Token selected.
 
+## 0.12.3 [2022-03-29]
 ### Changed
 - Buttons restyled to follow Foundry standard.
 
