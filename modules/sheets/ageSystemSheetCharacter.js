@@ -57,14 +57,14 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
         // Groups of Fav Item
-        data.favWeapon = data.weapon.filter(i => i.favorite);
+        data.favWeapon = data.weapon.filter(i => i.system.favorite);
         data.favPower = data.power.filter(i => i.favorite);
-        data.favEquip = data.equipment.filter(i => i.favorite);
-        data.favStunt = data.stunts.filter(i => i.favorite);
-        data.favTalent = data.talent.filter(i => i.favorite);
-        data.favRelation = data.relationship.filter(i => i.favorite);
-        data.favHonor = data.honorifics.filter(i => i.favorite);
-        data.favMembership = data.membership.filter(i => i.favorite);
+        data.favEquip = data.equipment.filter(i => i.system.favorite);
+        data.favStunt = data.stunts.filter(i => i.system.favorite);
+        data.favTalent = data.talent.filter(i => i.system.favorite);
+        data.favRelation = data.relationship.filter(i => i.system.favorite);
+        data.favHonor = data.honorifics.filter(i => i.system.favorite);
+        data.favMembership = data.membership.filter(i => i.system.favorite);
 
         // Sort Conditions alphabetically
         data.conditions = foundry.utils.deepClone(CONFIG.statusEffects).filter(e => e.flags?.["age-system"]?.isCondition);

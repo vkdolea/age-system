@@ -170,8 +170,8 @@ export default class ApplyDamageDialog extends Application {
                 name: actor.name,
                 img: actor.data.token.img,
                 degree,
-                totalInjuries: foundry.utils.deepClone(actor.data.data.injury.degrees),
-                newMarks: actor.data.data.injury.marks
+                totalInjuries: foundry.utils.deepClone(actor.system.injury.degrees),
+                newMarks: actor.system.injury.marks
               });
             }
           };
@@ -248,20 +248,20 @@ export class DamageHandler {
     let harmedOnes = [];
     for (let t = 0; t < targets.length; t++) {
       const h = targets[t];
-      const data = foundry.utils.deepClone(h.actor.data);
+      const data = foundry.utils.deepClone(h.actor);
       harmedOnes.push({
         name: h.actor.name,
-        img: h.data.img,
-        uuid: h.data.actorLink ? h.actor.uuid : h.document.uuid,
+        img: h.document.texture.src,
+        uuid: h.document.actorLink ? h.actor.uuid : h.document.uuid,
         data,
         dmgMod: 0,
         remainingHP: 0,
         damage: 0,
         ignoreDmg: false,
-        autoInjury: !data.document.hasPlayerOwner,
-        injuryMarks: data.data.injury.marks,
-        injurySDpenalty: Math.floor(data.data.injury.marks/3),
-        testMod: data.data.ownedMods?.testMod ? data.data.ownedMods.testMod : 0,
+        autoInjury: !data.hasPlayerOwner,
+        injuryMarks: data.system.injury.marks,
+        injurySDpenalty: Math.floor(data.system.injury.marks/3),
+        testMod: data.system.ownedMods?.testMod ? data.system.ownedMods.testMod : 0,
         toughMod: 0
       })
     }
@@ -328,12 +328,13 @@ export class DamageHandler {
   damage(h, d) {
     let ap = this.armorPenetration;
     let injuryParts = [];
+    const hData = h.data.system;
     if (ap === "none") ap = 1;
     if (ap === "half") ap = 0.5;
     if (ap === "ignore") ap = 0;
-    const impactArmor = Math.floor(h.data.data.armor.impact * ap);
-    const ballisticArmor = Math.floor(h.data.data.armor.ballistic * ap);
-    const toughness = h.data.data.armor.toughness.total > 0 ? h.data.data.armor.toughness.total : 0;
+    const impactArmor = Math.floor(hData.armor.impact * ap);
+    const ballisticArmor = Math.floor(hData.armor.ballistic * ap);
+    const toughness = hData.armor.toughness.total > 0 ? hData.armor.toughness.total : 0;
     const applyToughness = this.useToughness(d.healthSys.useToughness, this._damageType, this._damageSource, d.healthSys.mode);
     const totalDmg = Number(this.basicDamage) + Number(h.dmgMod);
     
@@ -392,11 +393,11 @@ export class DamageHandler {
     if (reducedDmg < 0) reducedDmg = 0;
 
     if (h.ignoreDmg) {
-      h.remainingHP = h.data.data.health.value;
+      h.remainingHP = hData.health.value;
       h.totalDmg = 0;
       h.dmgProtection = dmgProtection;
     } else {
-      h.remainingHP = h.data.data.health.value - reducedDmg;
+      h.remainingHP = hData.health.value - reducedDmg;
       if (h.remainingHP < 0) h.remainingHP = 0;
       h.damage = reducedDmg
       h.totalDmg = Number(totalDmg);

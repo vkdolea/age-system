@@ -338,7 +338,7 @@ export class ageSystemItem extends Item {
         do {
             modName = foundry.utils.randomID(20);
         } while (keys.includes(modName));
-        const path = `data.modifiers.${modName}`
+        const path = `system.modifiers.${modName}`
 
         const newMod = {
             type: "",
@@ -502,7 +502,7 @@ export class ageSystemItem extends Item {
                     });
                     if (!castAnyway.roll) return false;
                 } else {
-                    actor.update({"data.powerPoints.value": remainingPP - cost}, {value: -cost, type: 'power'})
+                    actor.update({"system.powerPoints.value": remainingPP - cost}, {value: -cost, type: 'power'})
                 }
             }
         }

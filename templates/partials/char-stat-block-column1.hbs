@@ -124,7 +124,7 @@
             <span class="quality-label colorset-second-tier">{{localize "age-system.equipment"}}:</span>
             {{#each (carriedequip items) as |item|}}
             <span class="item-name feature-controls" data-item-id="{{item._id}}">
-                <span class="item-name">&nbsp<a class="item-control item-equip {{#unless item.system.equiped}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i> </a><a class="item-edit">{{item.name}}{{#if (ne item.data.quantity 1)}} ({{item.data.quantity}}){{/if}}</a>{{#if @last}}.{{else}},{{/if}}</span>
+                <span class="item-name">&nbsp<a class="item-control item-equip {{#unless item.system.equiped}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i> </a><a class="item-edit">{{item.name}}{{#if (ne item.system.quantity 1)}} ({{item.system.quantity}}){{/if}}</a>{{#if @last}}.{{else}},{{/if}}</span>
             </span>
             {{/each}}
         </p>
@@ -150,7 +150,7 @@
             <span class="quality-label colorset-second-tier">{{localize "age-system.talent"}}:</span>
             {{#each data.talent as |item|}}
             <span class="item-name feature-controls" data-item-id="{{item._id}}">
-                <span class="item-name item-edit">&nbsp<a class="item-control item-equip {{#unless item.system.activate}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i></a> <a class="item-show">{{item.name}}{{#if item.data.shortDesc}} ({{item.data.shortDesc}}){{/if}}</a>{{#if @last}}.{{else}},{{/if}}</span>
+                <span class="item-name item-edit">&nbsp<a class="item-control item-equip {{#unless item.system.activate}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i></a> <a class="item-show">{{item.name}}{{#if item.system.shortDesc}} ({{item.system.shortDesc}}){{/if}}</a>{{#if @last}}.{{else}},{{/if}}</span>
             </span>
             {{/each}}
         </p>

@@ -713,7 +713,7 @@ export class ageSystemActor extends Actor {
         if (this.type !== 'char') return false;
         if (!['light', 'serious', 'severe'].includes(injuryDegree)) return false;
         // Identify correct path and new amount for that degree
-        const updateDegree = `data.injury.degrees.${injuryDegree}`;
+        const updateDegree = `system.injury.degrees.${injuryDegree}`;
         const newDegree = this.system.injury.degrees[injuryDegree] + 1;
         // Carries totalInjuries to summary
         const totalInjuries = foundry.utils.deepClone(this.system.injury.degrees);
@@ -725,7 +725,7 @@ export class ageSystemActor extends Actor {
         await this.update(
             {
                 [updateDegree]: newDegree,
-                'data.injury.marks': newMarks
+                'system.injury.marks': newMarks
             },
             {
                 value: game.i18n.localize(`age-system.${injuryDegree}InjuryInflicted`),
@@ -778,10 +778,10 @@ export class ageSystemActor extends Actor {
             if (injuries.marks === 0) break;
         }
         const updateData = {
-            "data.injury.marks": injuries.marks,
-            "data.injury.degrees.light": injuries.degrees.light,
-            "data.injury.degrees.serious": injuries.degrees.serious,
-            "data.injury.degrees.severe": injuries.degrees.severe,
+            "system.injury.marks": injuries.marks,
+            "system.injury.degrees.light": injuries.degrees.light,
+            "system.injury.degrees.serious": injuries.degrees.serious,
+            "system.injury.degrees.severe": injuries.degrees.severe,
         }
         this.update(updateData, {value: totalHealed, type: 'numeric'});
         return true
@@ -791,7 +791,7 @@ export class ageSystemActor extends Actor {
     refreshMarks() {
         const data = this.system.injury.degrees;
         const marks = data.light + data.serious + data.severe * data.severeMult
-        return this.update({"data.injury.marks": marks});
+        return this.update({"system.injury.marks": marks});
     }
 
     /**
@@ -813,17 +813,17 @@ export class ageSystemActor extends Actor {
             case 'char':
                 previousHP = charData.health.value;
                 maxHP = charData.health.set
-                updatePath = 'data.health.value';
+                updatePath = 'system.health.value';
                 break;
             case 'organization':
                 previousHP = charData.combat.stability.value;
-                updatePath = 'data.combat.stability.value';
+                updatePath = 'system.combat.stability.value';
                 break;
             default: return false;
         }
         const summary = {
             name: this.name,
-            img: this.token.img,
+            img: this.isToken ? this.parent.texture.src : this.prototypeToken.texture.src,
             previousHP,
             isHealing
         };
