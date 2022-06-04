@@ -2376,7 +2376,7 @@
   min-height: 150px;
   max-height: 400px;
   padding: 4px;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 5px 5px;
 }
 .age-system .editor.editor .tox.tox-tinymce {
   min-height: 140px !important;
@@ -2459,7 +2459,7 @@
 }
 .age-system.sheet .resource,
 .age-system.dialog .resource {
-  border-radius: 10px;
+  border-radius: 5px;
   margin-bottom: 6px;
   margin-left: 4px;
   margin-right: 4px;
@@ -2470,7 +2470,7 @@
 .age-system.dialog .resource input,
 .age-system.sheet .resource select,
 .age-system.dialog .resource select {
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.5);
   margin: 2px;
 }
@@ -2698,7 +2698,7 @@
 .age-system.dialog .char-main-section .ability-box {
   flex: 0 0 200px;
   margin-bottom: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: thin solid black;
 }
 .age-system.sheet .char-main-section .ability-box:last-of-type,
@@ -2709,8 +2709,8 @@
 .age-system.dialog .char-main-section .abl-header {
   justify-content: space-between;
   align-items: center;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .age-system.sheet .char-main-section .abl-header .abl-name,
 .age-system.dialog .char-main-section .abl-header .abl-name {
@@ -2729,7 +2729,7 @@
 .age-system.sheet .char-main-section .abl-header input[type="number"].original,
 .age-system.dialog .char-main-section .abl-header input[type="number"].original {
   background-color: silver;
-  border-top-right-radius: 10px;
+  border-top-right-radius: 5px;
 }
 .age-system.sheet .char-main-section .abl-header input[type="checkbox"],
 .age-system.dialog .char-main-section .abl-header input[type="checkbox"] {
@@ -2755,11 +2755,11 @@
 }
 .age-system.sheet .char-main-section .no-focus .abl-header,
 .age-system.dialog .char-main-section .no-focus .abl-header {
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .age-system.sheet .char-main-section .no-focus .abl-header input[type="number"].original,
 .age-system.dialog .char-main-section .no-focus .abl-header input[type="number"].original {
-  border-bottom-right-radius: 10px;
+  border-bottom-right-radius: 5px;
 }
 .age-system.sheet .char-main-section .improved-focus,
 .age-system.dialog .char-main-section .improved-focus {
@@ -2772,7 +2772,7 @@
 .age-system.sheet .free-text,
 .age-system.dialog .free-text {
   resize: none !important;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 5px 5px;
   padding: 4px;
   border: none;
 }
@@ -2788,15 +2788,15 @@
 .age-system.dialog .item-group li:first-child,
 .age-system.sheet .item-group .list-item:first-child,
 .age-system.dialog .item-group .list-item:first-child {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .age-system.sheet .item-group li:last-child,
 .age-system.dialog .item-group li:last-child,
 .age-system.sheet .item-group .list-item:last-child,
 .age-system.dialog .item-group .list-item:last-child {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .age-system.sheet .item-group .extra-input,
 .age-system.dialog .item-group .extra-input {
@@ -3790,7 +3790,7 @@
 .window-app.sheet.vehicle.colorset-modern-blue .window-content,
 .window-app.sheet.spaceship.colorset-modern-blue .window-content {
   background-image: none;
-  background-color: rgba(185, 219, 235, 0.6) !important;
+  background: none;
 }
 .colorset-modern-blue aside {
   border-radius: 5px;
@@ -3801,7 +3801,10 @@
   color: #231F20;
 }
 .colorset-modern-blue .metal-background {
-  background: linear-gradient(90deg, #007DAD 5%, #B9DBEB 50%, #007DAD 95%);
+  background: none;
+}
+.colorset-modern-blue .sheet-main-content {
+  background-color: rgba(185, 219, 235, 0.6) !important;
 }
 .colorset-modern-blue .top-banner {
   border: 5px outset #35A5CA;
@@ -3943,7 +3946,7 @@
 .window-app.sheet.vehicle.colorset-fantasy-blue .window-content,
 .window-app.sheet.spaceship.colorset-fantasy-blue .window-content {
   background-image: none;
-  background-color: rgba(145, 182, 212, 0.6) !important;
+  background: none;
 }
 .colorset-fantasy-blue aside {
   border-radius: 5px;
@@ -3954,7 +3957,10 @@
   color: #dbdada;
 }
 .colorset-fantasy-blue .metal-background {
-  background: linear-gradient(90deg, #0f4f5b 5%, #91b6d4 50%, #0f4f5b 95%);
+  background: none;
+}
+.colorset-fantasy-blue .sheet-main-content {
+  background-color: rgba(145, 182, 212, 0.6) !important;
 }
 .colorset-fantasy-blue .top-banner {
   border: 5px outset #000000;
@@ -4096,7 +4102,7 @@
 .window-app.sheet.vehicle.colorset-dragon-red .window-content,
 .window-app.sheet.spaceship.colorset-dragon-red .window-content {
   background-image: none;
-  background-color: rgba(224, 190, 177, 0.6) !important;
+  background: none;
 }
 .colorset-dragon-red aside {
   border-radius: 5px;
@@ -4107,7 +4113,10 @@
   color: #000000;
 }
 .colorset-dragon-red .metal-background {
-  background: linear-gradient(90deg, #810207 5%, #e0beb1 50%, #810207 95%);
+  background: none;
+}
+.colorset-dragon-red .sheet-main-content {
+  background-color: rgba(224, 190, 177, 0.6) !important;
 }
 .colorset-dragon-red .top-banner {
   border: 5px outset #979899;
@@ -4249,7 +4258,7 @@
 .window-app.sheet.vehicle.colorset-folded-purple .window-content,
 .window-app.sheet.spaceship.colorset-folded-purple .window-content {
   background-image: none;
-  background-color: rgba(207, 204, 222, 0.6) !important;
+  background: none;
 }
 .colorset-folded-purple aside {
   border-radius: 5px;
@@ -4260,7 +4269,10 @@
   color: #000000;
 }
 .colorset-folded-purple .metal-background {
-  background: linear-gradient(90deg, #565183 5%, #cfccde 50%, #565183 95%);
+  background: none;
+}
+.colorset-folded-purple .sheet-main-content {
+  background-color: rgba(207, 204, 222, 0.6) !important;
 }
 .colorset-folded-purple .top-banner {
   border: 5px outset #625b68;
@@ -4402,7 +4414,7 @@
 .window-app.sheet.vehicle.colorset-ronin-green .window-content,
 .window-app.sheet.spaceship.colorset-ronin-green .window-content {
   background-image: none;
-  background-color: rgba(194, 245, 170, 0.6) !important;
+  background: none;
 }
 .colorset-ronin-green aside {
   border-radius: 5px;
@@ -4413,7 +4425,10 @@
   color: #000000;
 }
 .colorset-ronin-green .metal-background {
-  background: linear-gradient(90deg, #155f0e 5%, #c2f5aa 50%, #155f0e 95%);
+  background: none;
+}
+.colorset-ronin-green .sheet-main-content {
+  background-color: rgba(194, 245, 170, 0.6) !important;
 }
 .colorset-ronin-green .top-banner {
   border: 5px outset #92b65f;
@@ -4555,7 +4570,7 @@
 .window-app.sheet.vehicle.colorset-select-one .window-content,
 .window-app.sheet.spaceship.colorset-select-one .window-content {
   background-image: none;
-  background-color: rgba(118, 141, 159, 0.6) !important;
+  background: none;
 }
 .colorset-select-one aside {
   border-radius: 5px;
@@ -4566,7 +4581,10 @@
   color: #290000;
 }
 .colorset-select-one .metal-background {
-  background: linear-gradient(90deg, #273249 5%, #768d9f 50%, #273249 95%);
+  background: none;
+}
+.colorset-select-one .sheet-main-content {
+  background-color: rgba(118, 141, 159, 0.6) !important;
 }
 .colorset-select-one .top-banner {
   border: 5px outset #4d627a;
@@ -4708,7 +4726,7 @@
 .window-app.sheet.vehicle.colorset-the-grey .window-content,
 .window-app.sheet.spaceship.colorset-the-grey .window-content {
   background-image: none;
-  background-color: rgba(180, 182, 179, 0.6) !important;
+  background: none;
 }
 .colorset-the-grey aside {
   border-radius: 5px;
@@ -4719,7 +4737,10 @@
   color: #000000;
 }
 .colorset-the-grey .metal-background {
-  background: linear-gradient(90deg, #3d3e3f 5%, #b4b6b3 50%, #3d3e3f 95%);
+  background: none;
+}
+.colorset-the-grey .sheet-main-content {
+  background-color: rgba(180, 182, 179, 0.6) !important;
 }
 .colorset-the-grey .top-banner {
   border: 5px outset #6b6a6a;
@@ -4861,7 +4882,7 @@
 .window-app.sheet.vehicle.colorset-red-warrior .window-content,
 .window-app.sheet.spaceship.colorset-red-warrior .window-content {
   background-image: none;
-  background-color: rgba(209, 99, 91, 0.6) !important;
+  background: none;
 }
 .colorset-red-warrior aside {
   border-radius: 5px;
@@ -4872,7 +4893,10 @@
   color: #c7c691;
 }
 .colorset-red-warrior .metal-background {
-  background: linear-gradient(90deg, #751119 5%, #d1635b 50%, #751119 95%);
+  background: none;
+}
+.colorset-red-warrior .sheet-main-content {
+  background-color: rgba(209, 99, 91, 0.6) !important;
 }
 .colorset-red-warrior .top-banner {
   border: 5px outset #b22126;
@@ -5014,7 +5038,7 @@
 .window-app.sheet.vehicle.colorset-never-dead .window-content,
 .window-app.sheet.spaceship.colorset-never-dead .window-content {
   background-image: none;
-  background-color: rgba(238, 221, 205, 0.6) !important;
+  background: none;
 }
 .colorset-never-dead aside {
   border-radius: 5px;
@@ -5025,7 +5049,10 @@
   color: #29241f;
 }
 .colorset-never-dead .metal-background {
-  background: linear-gradient(90deg, #663322 5%, #eeddcd 50%, #663322 95%);
+  background: none;
+}
+.colorset-never-dead .sheet-main-content {
+  background-color: rgba(238, 221, 205, 0.6) !important;
 }
 .colorset-never-dead .top-banner {
   border: 5px outset #58705a;
@@ -5167,7 +5194,7 @@
 .window-app.sheet.vehicle.colorset-expanded-blue .window-content,
 .window-app.sheet.spaceship.colorset-expanded-blue .window-content {
   background-image: none;
-  background-color: rgba(230, 231, 232, 0.6) !important;
+  background: none;
 }
 .colorset-expanded-blue aside {
   border-radius: 5px;
@@ -5178,7 +5205,10 @@
   color: #dde2e2;
 }
 .colorset-expanded-blue .metal-background {
-  background: linear-gradient(90deg, #005971 5%, #e6e7e8 50%, #005971 95%);
+  background: none;
+}
+.colorset-expanded-blue .sheet-main-content {
+  background-color: rgba(230, 231, 232, 0.6) !important;
 }
 .colorset-expanded-blue .top-banner {
   border: 5px outset #112339;

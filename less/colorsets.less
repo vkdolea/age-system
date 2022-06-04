@@ -118,7 +118,8 @@ each(@colorsets, {
     .window-app.sheet.vehicle.colorset-@{value} .window-content,
     .window-app.sheet.spaceship.colorset-@{value} .window-content {
         background-image: none;
-        background-color: fade(extract(extract(@color-list, @index), 3), 60%) !important;
+        // background-color: fade(extract(extract(@color-list, @index), 3), 60%) !important;
+        background: none;
     }
 
     
@@ -135,7 +136,11 @@ each(@colorsets, {
             }
         }
         .metal-background {
-            background: linear-gradient(90deg, extract(extract(@color-list, @index), 1) 5%, extract(extract(@color-list, @index), 3) 50%, extract(extract(@color-list, @index), 1) 95%);
+            // background: linear-gradient(90deg, extract(extract(@color-list, @index), 1) 5%, extract(extract(@color-list, @index), 3) 50%, extract(extract(@color-list, @index), 1) 95%);
+            background: none;
+        }
+        .sheet-main-content {
+            background-color: fade(extract(extract(@color-list, @index), 3), 60%) !important
         }
         .top-banner {
             border: 5px outset extract(extract(@color-list, @index), 2);

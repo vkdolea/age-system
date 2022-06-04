@@ -1,8 +1,13 @@
 # Release Notes
 
+## 0.12.5 [2022-05-xx]
+### Fixed
+- Added a cleaner background on character/item sheets.
+- Reduced border radius on boxes inside character sheet.
+
 ## 0.12.4 [2022-04-16]
 ### Fixed
-- Hull and Damage rolsl from Spaceships now work as expected.
+- Hull and Damage rolls from Spaceships now work as expected.
 - Removed an extra "+" when rolling Vehicle damage with RAM.
 - Error thrown when trying to roll Vehicle maneuver without a driver or Token selected.
 
