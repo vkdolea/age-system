@@ -30,7 +30,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         if (dragData.type == "char") {
             let passengers = duplicate(this.actor.data.data.passengers);
             passengers.push({id: dragData.id, isToken: dragData.isToken});
-            this.actor.update({"data.passengers" : passengers})
+            this.actor.update({"system.passengers" : passengers})
         }
         else return super._onDrop(event);
         // else return false;
