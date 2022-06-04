@@ -9,7 +9,7 @@
         <li class="colorset-third-tier flexrow">
             <p>
                 {{#each data.weaponGroups as |wgroup|}}
-                <a class="feature-controls select-options item-name wgroup-item item-box {{#if (haswgroup wgroup ../actor.data.data.wgroups)}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-wgroup-id="{{wgroup}}">
+                <a class="feature-controls select-options item-name wgroup-item item-box {{#if (haswgroup wgroup ../actor.data.system.wgroups)}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-wgroup-id="{{wgroup}}">
                     {{wgroup}}
                 </a>
                 {{/each}}
@@ -25,7 +25,7 @@
             <span>
                 {{localize "SETTINGS.gameMode"}}
                 <a class="override">
-                    {{#if data.data.gameMode.override}}
+                    {{#if data.system.gameMode.override}}
                     <i class="fa fa-unlock-alt" aria-hidden="true" title="Override game mode"></i>
                     {{else}}
                     <i class="fa fa-lock" aria-hidden="true" title="Do not override game mode"></i>
@@ -40,16 +40,16 @@
             <span>{{localize "age-system.defense"}}</span>
             <span>{{localize "age-system.toughness"}}</span>
         </li>
-        {{#each data.data.gameMode.specs as |mode|}}
+        {{#each data.system.gameMode.specs as |mode|}}
         {{#if (ne @key 'none')}}
-        <li class="colorset-third-tier flexrow {{#if (ne ../data.data.gameMode.selected @key)}}opacity-low{{/if}}">
+        <li class="colorset-third-tier flexrow {{#if (ne ../data.system.gameMode.selected @key)}}opacity-low{{/if}}">
             <div class="name multiple-selection" style="flex-grow: 1.5;">
-                <input type="radio" {{#if ../data.data.gameMode.override}}class="mouse-to-pointer"{{else}}disabled{{/if}} name="data.gameMode.selected" value="{{@key}}" {{#if (eq ../data.data.gameMode.selected @key)}}checked{{/if}}>
+                <input type="radio" {{#if ../data.system.gameMode.override}}class="mouse-to-pointer"{{else}}disabled{{/if}} name="system.gameMode.selected" value="{{@key}}" {{#if (eq ../data.system.gameMode.selected @key)}}checked{{/if}}>
                 <label>{{localize (concat "SETTINGS.gameMode" @key)}}</label>
             </div>
-            <input type="number" name="data.gameMode.specs.{{@key}}.health" value="{{mode.health}}" data-dtype="Number" />
-            <input type="number" name="data.gameMode.specs.{{@key}}.defense" value="{{mode.defense}}" data-dtype="Number" />
-            <input type="number" name="data.gameMode.specs.{{@key}}.toughness" value="{{mode.toughness}}" data-dtype="Number" />
+            <input type="number" name="system.gameMode.specs.{{@key}}.health" value="{{mode.health}}" data-dtype="Number" />
+            <input type="number" name="system.gameMode.specs.{{@key}}.defense" value="{{mode.defense}}" data-dtype="Number" />
+            <input type="number" name="system.gameMode.specs.{{@key}}.toughness" value="{{mode.toughness}}" data-dtype="Number" />
         </li>
         {{/if}}
         {{/each}}

@@ -13,15 +13,15 @@
                 <div class="flexcol" style="flex-wrap: wrap;">
                     <label>{{localize "age-system.type"}}</label>
                     {{#if inChat}}
-                    <p>{{data.data.shortDesc}}</p>
+                    <p>{{data.system.shortDesc}}</p>
                     {{else}}
-                    <input name="data.shortDesc" class="long-text" type="text" text-type="long" value="{{data.data.shortDesc}}" placeholder="{{localize "age-system.type"}}"/>
+                    <input name="system.shortDesc" class="long-text" type="text" text-type="long" value="{{data.system.shortDesc}}" placeholder="{{localize "age-system.type"}}"/>
                     {{/if}}
                 </div>
         </div>
         <div class="item-card-desc">
             <label>{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+            {{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
         
         </div>
     </div>

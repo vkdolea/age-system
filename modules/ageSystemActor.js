@@ -5,42 +5,44 @@ export class ageSystemActor extends Actor {
 
     /** @override */
     prepareData() {
-        this.data.reset();
+        // this.reset();
         this.prepareBaseData();
         this.prepareEmbeddedDocuments();
         this.prepareDerivedData();
         // Sorting Items for final data preparation
-        const items = this.items;
-        if (this.data.type === 'char') {
-            // First prepare Focus
-            items.forEach(i => {
-                if (i.data.type === "focus") {
-                    i.prepareData();
-                    if(i.sheet?.rendered) i.sheet.render(false);
-                }
-            })
-            // Then prepare other item types which require further prep
-            items.forEach(i => {
-                if (["weapon", "power"].includes(i.data.type)) {
-                    i.prepareData()
-                    if(i.sheet?.rendered) i.sheet.render(false);
-                }
-            })
+        // const items = this.items;
+        // if (this.type === 'char') {
+        //     // First prepare Focus
+        //     items.forEach(i => {
+        //         if (i.system.type === "focus") {
+        //             i.prepareData();
+        //             if(i.sheet?.rendered) i.sheet.render(false);
+        //         }
+        //     })
+        //     // Then prepare other item types which require further prep
+        //     items.forEach(i => {
+        //         if (["weapon", "power"].includes(i.system.type)) {
+        //             i.prepareData()
+        //             if(i.sheet?.rendered) i.sheet.render(false);
+        //         }
+        //     })
             
-            // Calculate Initiative based on Focus (if set on System Settings)
-            const initiativeFocus = game.settings.get("age-system", "initiativeFocus");
-            if (initiativeFocus) {
-                const init = this.checkFocus(initiativeFocus);
-                this.data.data.initiative += init.value;
-            }
-        }
+        //     // Calculate Initiative based on Focus (if set on System Settings)
+        //     const initiativeFocus = game.settings.get("age-system", "initiativeFocus");
+        //     if (initiativeFocus) {
+        //         const init = this.checkFocus(initiativeFocus);
+        //         this.system.initiative += init.value;
+        //     }
+        // }
     }
 
     prepareBaseData() {
-        const actorData = this.data;
-        const data = actorData.data;
+        // const actorData = this.data;
+        // const data = actorData.data;
+        const actorData = this;
+        const data = actorData.system;
         
-        if (this.data.img == CONST.DEFAULT_TOKEN) this.data.img = ageSystem.actorIcons[actorData.type];
+        if (actorData.img == CONST.DEFAULT_TOKEN) actorData.img = ageSystem.actorIcons[actorData.type];
 
         // Check if split Armor is in use
         data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
@@ -84,9 +86,10 @@ export class ageSystemActor extends Actor {
     prepareEmbeddedDocuments() {
         // super.prepareEmbeddedDocuments()
         const embeddedTypes = this.constructor.metadata.embedded || {};
-        for ( let cls of Object.values(embeddedTypes) ) {
-            const collection = cls.metadata.collection;
-            for ( let e of this[collection] ) {e.prepareData()}
+        for ( const collectionName of Object.values(embeddedTypes) ) {
+          for ( let e of this[collectionName] ) {
+            e.prepareData();
+          }
         }
         
         // Apply Item Modifiers to Actor before applying Active Effects!
@@ -96,8 +99,10 @@ export class ageSystemActor extends Actor {
     }
 
     prepareDerivedData() {
-        const actorData = this.data;
+        // const actorData = this.data;
         // const data = actorData.data;
+        const actorData = this;
+        const data = actorData.system;
 
         switch (actorData.type) {
             case "char":
@@ -116,8 +121,10 @@ export class ageSystemActor extends Actor {
 
     _prepareBaseDataChar() {
 
-        const actorData = this.data;
-        const data = actorData.data;
+        // const actorData = this.data;
+        // const data = actorData.data;
+        const actorData = this;
+        const data = actorData.system;
         
         // Check if Conviction is in use
         data.useConviction = game.settings.get("age-system", "useConviction");
@@ -181,8 +188,10 @@ export class ageSystemActor extends Actor {
     };
 
     _configureCharGameMode() {
-        const actorData = this.data;
-        const data = actorData.data;
+        // const actorData = this.data;
+        // const data = actorData.data;
+        const actorData = this;
+        const data = actorData.system;
         const gmode = data.gameMode;
         
         // Check Game Mode and select correct Health / Defense / Toughness to use
@@ -195,7 +204,7 @@ export class ageSystemActor extends Actor {
     }
 
     applyItemModifiers() {
-        const type = this.data.type;
+        const type = this.type;
 
         switch (type) {
             case "char":
@@ -215,8 +224,8 @@ export class ageSystemActor extends Actor {
         // Create Actor data with Modifiers from all Active/Equiped Items
         const mods = {};
         this.items.forEach(i => {
-            const iMods = i.data.data.modifiersByType;
-            const active = i.data.data.activate || i.data.data.equiped;
+            const iMods = i.system.modifiersByType;
+            const active = i.system.activate || i.system.equiped;
             if (iMods !== {} && active) {
                 for (const k in iMods) {
                     if (Object.hasOwnProperty.call(iMods, k)) {
@@ -251,8 +260,10 @@ export class ageSystemActor extends Actor {
             }
         }
 
-        const actorData = this.data;
-        const data = actorData.data;
+        // const actorData = this.data;
+        // const data = actorData.data;
+        const actorData = this;
+        const data = actorData.system;
         data["ownedMods"] = mods;
 
         // Applying Abilities mods
@@ -278,10 +289,12 @@ export class ageSystemActor extends Actor {
     }
 
     _preparePostModCharData() {
-        const actorData = this.data;
-        const data = actorData.data;
+        // const actorData = this.data;
+        // const data = actorData.data;
+        const actorData = this;
+        const data = actorData.system;
 
-        const mods = this.data.data.ownedMods;
+        const mods = data.ownedMods;
 
         // Armor Penalty & Strain
         data.armor.penalty = Math.max(mods?.armorPenalty?.formParts?.detValue ?? 0, 0);
@@ -372,15 +385,17 @@ export class ageSystemActor extends Actor {
     }
 
     _spaceshipItemModifiers() {
-        const actorData = this.data;
-        const data = actorData.data;
+        // const actorData = this.data;
+        // const data = actorData.data;
+        const actorData = this;
+        const data = actorData.system;
 
         // Items With Mod
-        const ownedItems = actorData.items.filter(i => i.data.type !== "special" && i.data.type !== "rollable" && i.data.type !== "weapon");
+        const ownedItems = actorData.items.filter(i => i.type !== "special" && i.type !== "rollable" && i.type !== "weapon");
         let bonuses = {};
         ownedItems.map(f => {
-            const item = f.data.data;
-            const dataType = item.type;
+            const item = f.system;
+            const dataType = f.type;
             if (!bonuses[dataType]) {
                 bonuses = {
                     ...bonuses,
@@ -394,8 +409,10 @@ export class ageSystemActor extends Actor {
     }
 
     _prepareBaseDataVehicle() {
-        const actorData = this.data;
-        const data = actorData.data;
+        // const actorData = this.data;
+        // const data = actorData.data;
+        const actorData = this;
+        const data = actorData.system;
 
         data.defenseTotal = 10;
         let invalidPassengers = [];
@@ -408,14 +425,14 @@ export class ageSystemActor extends Actor {
                 if (!pData) {
                     invalidPassengers.push(pi);
                 } else {
-                    p.name = pData.data.name;
-                    p.picture = pData.data.token.img;
+                    p.name = pData.name;
+                    p.picture = pData.token.img;
                 };
                 if (p.id === data.conductor && pData) {
                     p.isConductor = true;
-                    const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
+                    const defenseAbl = pData.system.abilities[data.handling.useAbl].total;
                     const defenseFocus = this.checkFocus(data.handling.useFocus);
-                    const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.data.data.initialValue;
+                    const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.system.initialValue;
                     data.defenseTotal += defenseAbl + defenseValue;
                 } else {
                     p.isConductor = false;
@@ -438,8 +455,10 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareBaseDataSpaceship() {
-        const actorData = this.data;
-        const data = actorData.data;
+        // const actorData = this.data;
+        // const data = actorData.data;
+        const actorData = this;
+        const data = actorData.system;
         this.sortPassengers();
 
         data.pob = data.passengers.length;
@@ -502,8 +521,10 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareDerivedDataSpaceship() {
-        const actorData = this.data;
-        const data = actorData.data;
+        // const actorData = this.data;
+        // const data = actorData.data;
+        const actorData = this;
+        const data = actorData.system;
 
         data.hull.baseMod = this._addSizeMod(data.sizeNumeric, data.itemMods.hullMod);
         data.hull.total = this._addHullPlatingLoss(data.hull.baseMod, data.itemMods.hullPlating);
@@ -521,7 +542,7 @@ export class ageSystemActor extends Actor {
     }
 
     _addSizeMod(size, mod) {
-        if (!mod) return this.data.data.hull.base;
+        if (!mod) return this.system.hull.base;
         let newSize = size + mod;
         if (newSize < 1) newSize = 1;
         if (newSize > ageSystem.spaceshipHull.length) newSize = ageSystem.spaceshipHull.length;
@@ -530,7 +551,7 @@ export class ageSystemActor extends Actor {
     }
 
     _addHullPlatingLoss(hull, plating) {
-        const hullLoss = -this.data.data.losses.normal.hull.actual;
+        const hullLoss = -this.system.losses.normal.hull.actual;
         if (Math.abs(hullLoss) === 0 && !plating) return hull;
         if (!plating) plating = 0;
         const platLoss = hullLoss + Number(plating);
@@ -575,7 +596,8 @@ export class ageSystemActor extends Actor {
 
     // TODO - testar essa função, que ainda está em desuso
     sortPassengers() {
-        const data = this.data.data;
+        // const data = this.data.data;
+        const data = this.system;
         const passengers = data.passengers;
         let invalidPassengers = [];
         for (let pi = 0; pi < passengers.length; pi++) {
@@ -588,14 +610,14 @@ export class ageSystemActor extends Actor {
                     invalidPassengers.push(pi);
                     // TODO - a partir daqui deve ser feita a avaliação (veículo/espaçonave) para avaliar as funções especiais de cada veículo
                 } else {
-                    p.name = pData.data.name;
-                    p.picture = pData.data.token.img;
+                    p.name = pData.name;
+                    p.picture = pData.token.img;
                 };
                 if (p.id === data.conductor && pData) {
                     p.isConductor = true;
-                    const defenseAbl = pData.data.data.abilities[data.handling.useAbl].total;
+                    const defenseAbl = pData.system.abilities[data.handling.useAbl].total;
                     const defenseFocus = this.checkFocus(data.handling.useFocus);
-                    const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.data.data.initialValue;
+                    const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.system.initialValue;
                     data.defenseTotal += defenseAbl + defenseValue;
                 } else {
                     p.isConductor = false;
@@ -626,7 +648,7 @@ export class ageSystemActor extends Actor {
 
     rollVehicleDamage(damageData) {
         const operator = this._vehicleOperator(damageData.operatorData);
-        const vehicleUseFocus = this.data.data.handling.useFocus
+        const vehicleUseFocus = this.system.handling.useFocus
         const useFocus = operator ? operator.checkFocus(vehicleUseFocus) : null;
 
         damageData = {
@@ -647,7 +669,7 @@ export class ageSystemActor extends Actor {
     checkFocus(namedFocus) {
         if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null, id: null, value: 0}
 
-        const ownedFoci = this.data.items.filter(a => a.type === "focus");
+        const ownedFoci = this.items.filter(a => a.type === "focus");
         const expectedFocus = namedFocus.toLowerCase();
         const validFocus = ownedFoci.filter(c => c.name.toLowerCase() === expectedFocus);
         if (validFocus.length < 1) {
@@ -655,14 +677,14 @@ export class ageSystemActor extends Actor {
         } else {
             const focusId = validFocus[0].id;
             const focus = this.items.get(focusId);
-            return {focusName: namedFocus, focusItem: focus, id: focusId, focusAbl: focus.data.data.useAbl, value: focus.data.data.finalValue}
+            return {focusName: namedFocus, focusItem: focus, id: focusId, focusAbl: focus.system.useAbl, value: focus.system.finalValue}
         };
     }
 
     async toughnessTest (parts, rollTN, applyInjury = false) {
         parts.push({
             label: game.i18n.localize("age-system.injuryMarks"),
-            value: -this.data.data.injury.marks
+            value: -this.system.injury.marks
         });
         const rollData = {
           actor: this,
@@ -692,13 +714,13 @@ export class ageSystemActor extends Actor {
         if (!['light', 'serious', 'severe'].includes(injuryDegree)) return false;
         // Identify correct path and new amount for that degree
         const updateDegree = `data.injury.degrees.${injuryDegree}`;
-        const newDegree = this.data.data.injury.degrees[injuryDegree] + 1;
+        const newDegree = this.system.injury.degrees[injuryDegree] + 1;
         // Carries totalInjuries to summary
-        const totalInjuries = foundry.utils.deepClone(this.data.data.injury.degrees);
+        const totalInjuries = foundry.utils.deepClone(this.system.injury.degrees);
         totalInjuries[injuryDegree] = newDegree;
         // Calculate new marks
-        let newMarks = (injuryDegree === 'severe') ? this.data.data.injury.degrees.severeMult : 1;
-        newMarks += this.data.data.injury.marks;
+        let newMarks = (injuryDegree === 'severe') ? this.systeminjury.degrees.severeMult : 1;
+        newMarks += this.system.injury.marks;
         // Update Actor's injuries and marks
         await this.update(
             {
@@ -713,7 +735,7 @@ export class ageSystemActor extends Actor {
         // Returns a summary object
         return {
             name: this.name,
-            img: this.data.token.img,
+            img: this.token.img,
             degree: injuryDegree,
             totalInjuries,
             newMarks
@@ -730,7 +752,7 @@ export class ageSystemActor extends Actor {
         if (Number.isNaN(Number(qtd))) return false
         qtd = Math.abs(Number(qtd));
         let totalHealed = 0
-        const injuries = foundry.utils.deepClone(this.data.data.injury);
+        const injuries = foundry.utils.deepClone(this.system.injury);
         const marks = injuries.marks;
         if (marks === 0) return true
 
@@ -767,7 +789,7 @@ export class ageSystemActor extends Actor {
 
     // Recalculate Injury Marks based on each Injury Degree and Game Mode (Gritty, Pulp or Cinematic)
     refreshMarks() {
-        const data = this.data.data.injury.degrees;
+        const data = this.system.injury.degrees;
         const marks = data.light + data.serious + data.severe * data.severeMult
         return this.update({"data.injury.marks": marks});
     }
@@ -781,6 +803,7 @@ export class ageSystemActor extends Actor {
      */
     applyHPchange (newValue, {isHealing = false, isNewHP = true} = {}) {
         const actorType = this.type;
+        const charData = this.system;
         let previousHP = null;
         let updatePath = '';
         let maxHP = Infinity;
@@ -788,19 +811,19 @@ export class ageSystemActor extends Actor {
         if (!isNewHP) newValue = isHealing ? newValue : -newValue;
         switch (actorType) {
             case 'char':
-                previousHP = this.data.data.health.value;
-                maxHP = this.data.data.health.set
+                previousHP = charData.health.value;
+                maxHP = charData.health.set
                 updatePath = 'data.health.value';
                 break;
             case 'organization':
-                previousHP = this.data.data.combat.stability.value;
+                previousHP = charData.combat.stability.value;
                 updatePath = 'data.combat.stability.value';
                 break;
             default: return false;
         }
         const summary = {
             name: this.name,
-            img: this.data.token.img,
+            img: this.token.img,
             previousHP,
             isHealing
         };
@@ -848,8 +871,9 @@ export class ageSystemActor extends Actor {
         if (options.cancelled) return false;
 
         let formula = `${options.k}`;
-        if (options.abl !== 'no-abl') formula += ` + ${Math.max(this.data.data.abilities[options.abl].total, 0)}`;
-        if (options.addLevel) formula += ageSystem.healthSys.useInjury ? ` + ${Math.floor(this.data.data.level/4)}` : ` + ${this.data.data.level}`;
+        const charData = this.system;
+        if (options.abl !== 'no-abl') formula += ` + ${Math.max(charData.abilities[options.abl].total, 0)}`;
+        if (options.addLevel) formula += ageSystem.healthSys.useInjury ? ` + ${Math.floor(charData.level/4)}` : ` + ${charData.level}`;
         let roll = await new Roll(formula, this.actorRollData()).evaluate({async: true});
 		roll.toMessage({flavor: `${this.name} | ${game.i18n.localize("age-system.breather")}`}, {rollMode});
         if (options.autoApply) return ageSystem.healthSys.useInjury ? this.healMarks(roll.total) : this.applyHPchange(roll.total, {isHealing: true, isNewHP: false});
@@ -930,7 +954,7 @@ export class ageSystemActor extends Actor {
      */
     async handleConditions(condId) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;
-        const effectsOn = this.effects.filter(e => e.data.flags?.["age-system"]?.isCondition && e.data.flags?.core?.statusId === condId);
+        const effectsOn = this.effects.filter(e => e.flags?.["age-system"]?.isCondition && e.flags?.core?.statusId === condId);
         
         if (effectsOn.length < 1) {
             // If there is no Effect on, create one
@@ -961,9 +985,9 @@ export class ageSystemActor extends Actor {
 
     // Data to add Character ref. into rolls
     actorRollData() {
-        if (!this.data) return null;
+        if (!this) return null;
         if (this.type !== 'char') return null;
-        const data = this.data.data;
+        const data = this.system;
         const charData = {
             acc: data.abilities.acc.total ?? 0,
             comm: data.abilities.comm.total ?? 0,

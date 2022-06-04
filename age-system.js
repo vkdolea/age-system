@@ -267,8 +267,8 @@ Hooks.once("init", async function() {
     game.postReadyPrepare = [];
 
     // Log core version
-    ageSystem.coreVersion = game.world.data.coreVersion;
-    ageSystem.systemVersion = game.world.data.systemVersion
+    ageSystem.coreVersion = game.world.coreVersion;
+    ageSystem.systemVersion = game.world.systemVersion
 
 });
 

@@ -16,9 +16,9 @@
                 <div class="flexcol">
                     <label>{{localize "age-system.settings.stuntPoints"}}</label>
                     {{#if inChat}}
-                    <input name="data.stuntPoints" disabled type="number" value="{{data.data.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
+                    <input name="system.stuntPoints" disabled type="number" value="{{data.system.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
                     {{else}}
-                    <input name="data.stuntPoints" type="number" value="{{data.data.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
+                    <input name="system.stuntPoints" type="number" value="{{data.system.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
                     {{/if}}
                 </div>
             </div>
@@ -27,7 +27,7 @@
             
             {{!-- Description --}}
             <label>{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+            {{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
         </div>
     </div>
     

@@ -30,7 +30,7 @@ export function newItemData(actor, itemData) {
                 if (itemType === 'focus') {
                     const focusItems = actor.items.filter(f => f.type === "focus");
                     const hasFocus = focusItems.filter(f => f.name.toLowerCase() === itemName.toLowerCase());
-                    if (item.data.isOrg) {
+                    if (item.isOrg) {
                         warning.push({index: i, warn: game.i18n.localize("age-system.WARNING.orgFocusToChar")});
                     } else if (hasFocus.length > 0) {
                         warning.push({index: i, warn: game.i18n.localize("age-system.WARNING.duplicatedFocus") + `"${itemName.toUpperCase()}"`});
@@ -40,7 +40,7 @@ export function newItemData(actor, itemData) {
             case "organization":
                 if (itemType !== 'focus') {
                     warning.push({index: i, warn: game.i18n.localize("age-system.WARNING.orgItem")});
-                } else if (!item.data.isOrg) {
+                } else if (!item.isOrg) {
                     warning.push({index: i, warn: game.i18n.localize("age-system.WARNING.charFocusToOrg")});
                 } else {
                     const hasFocus = actor.items.filter(f => f.name.toLowerCase() === itemName.toLowerCase());

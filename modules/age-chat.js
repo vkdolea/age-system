@@ -294,7 +294,8 @@ async function _handleAgeRollVisibility(html, chatCard, chatData){
         let actor;
         if (actorId) actor = game.actors.get(actorId) ?? await fromUuid(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
         actor = actor?.actor ?? actor;
-        const isBlind = chatCard.data.blind;
+        // const isBlind = chatCard.data.blind;
+        const isBlind = chatCard.blind;
         const whisperTo = chatData.message.whisper;
         const author = chatData.author.id;
         const userId = game.user.id;

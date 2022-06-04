@@ -6,7 +6,7 @@ import {newItemData} from "./helper.js";
 
 export default class ageSystemVehicleSheet extends ActorSheet {
     get isSynth() {
-        return (this.token && !this.token.data.actorLink);
+        return (this.token && !this.token.actorLink);
     }  
     
     get observerRoll () {
@@ -25,16 +25,16 @@ export default class ageSystemVehicleSheet extends ActorSheet {
     }
     
     get template() {
-        return `systems/age-system/templates/sheets/${this.actor.data.type}-sheet.hbs`;
+        return `systems/age-system/templates/sheets/${this.actor.type}-sheet.hbs`;
     }
 
     // From MooMan
     async _onDrop(event) {
         let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
         if (dragData.type == "char") {
-            let passengers = duplicate(this.actor.data.data.passengers);
+            let passengers = duplicate(this.actor.system.passengers);
             passengers.push({id: dragData.id, isToken: dragData.isToken});
-            this.actor.update({"data.passengers" : passengers})
+            this.actor.update({"system.passengers" : passengers})
         }
         else return super._onDrop(event);
         // else return false;
@@ -46,11 +46,11 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         const isEditable = this.isEditable;
     
         // Copy actor data to a safe copy
-        const data = this.actor.data.toObject(false);
+        const data = this.actor.toObject(false);
 
         this.actor.prepareData(); // Forcing updating sheet after opening, in case an Actor's operator is updated
         data.config = CONFIG.ageSystem;
-        data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
+        data.passengers = sortObjArrayByName(this.actor.system.passengers, "name");
 
         // return data;
         return {
@@ -111,7 +111,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
                 if (!alreadyOnboard) {
                     passengerList.push(passengerData);
-                    this.actor.update({"data.passengers" : passengerList})
+                    this.actor.update({"system.passengers" : passengerList})
                 }
             } else {
                 const warning = game.i18n.localize("age-system.WARNING.vehicleIsNotPassenger");
@@ -159,13 +159,13 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         let passengerKey = event.currentTarget.closest(".feature-controls").dataset.passengerKey;
         passengerKey = Number(passengerKey);
         const crew = this.object.data.data.passengers;
-        if (crew[passengerKey].isConductor) update = {"data.conductor": ""}
+        if (crew[passengerKey].isConductor) update = {"system.conductor": ""}
         crew.splice(passengerKey, 1);
-        this.actor.update({...update, "data.passengers": crew});
+        this.actor.update({...update, "system.passengers": crew});
     };
 
     _onRollManeuver(event) {
-        const vehicleData = this.actor.data.data;
+        const vehicleData = this.actor.system;
         let conductorId;
         if (event.currentTarget.classList.contains("is-synth")) {
             conductorId = "synth-vehicle";
@@ -202,7 +202,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             abl: handlingUseAbl,
             flavor: user.name,
             flavor2: game.i18n.format("age-system.chatCard.maneuversVehicle",{vehicle: this.actor.name}),
-            vehicleHandling: this.actor.data.data.handling.mod,
+            vehicleHandling: vehicleData.handling.mod,
             itemRolled: handlingFocusItem.id === null ? handlingFocusItem.focusName : handlingFocusItem.focusItem,
             rollType: ageSystem.ROLL_TYPE.VEHICLE_ACTION
         }
@@ -211,13 +211,14 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
     _onVehicleDamage(event) {
         event.preventDefault();
+        const actorData = this.actor.system;
         const e = event.currentTarget;
         const addRam = e.classList.contains('add-ram') ? true : false;
         const isCollision = e.closest(".feature-controls").classList.contains('collision');
         const damageSource = isCollision ? 'collision' : 'sideswipe';
         const qtdDice = e.closest(".feature-controls").dataset.qtdDice;
-        const operatorId = this.actor.data.data.conductor;
-        const operatorData = operatorId ? this.actor.data.data.passengers.filter(p => p.id === operatorId)[0] : null;
+        const operatorId = actorData.conductor;
+        const operatorData = operatorId ? actorData.passengers.filter(p => p.id === operatorId)[0] : null;
         const damageData = {event: event, qtdDice, addRam, operatorData, damageSource};
         return this.actor.rollVehicleDamage(damageData);
     };

@@ -15,8 +15,8 @@
                     {{!-- Feature Type Selection --}}
                     <div class="flexcol feature-type">
                         <label class="part-desc">{{localize "age-system.spaceship.featuresType"}}</label>
-                        <select name="data.type">
-                        {{#select data.data.type}}
+                        <select name="system.type">
+                        {{#select data.system.type}}
                             {{#each config.featuresTypeLocal as |feature|}}
                             <option value="{{feature.key}}">{{feature.name}}</option>
                             {{/each}}
@@ -25,46 +25,46 @@
                     </div>
                 </div>
 
-                {{#if (eq data.data.type "sensorMod")}}
+                {{#if (eq data.system.type "sensorMod")}}
                 <div class="flexrow feature-details">
                     <label class="part-desc">{{localize "age-system.spaceship.sensorMod"}}</label>
-                    <input class="part-desc-value" type="number" {{#if inChat}}disabled{{/if}} name="data.sensorMod" value="{{data.data.sensorMod}}" data-dtype="Number" />
+                    <input class="part-desc-value" type="number" {{#if inChat}}disabled{{/if}} name="system.sensorMod" value="{{data.system.sensorMod}}" data-dtype="Number" />
                 </div>
                 {{/if}}
 
-                {{#if (eq data.data.type "maneuverSizeStep")}}
+                {{#if (eq data.system.type "maneuverSizeStep")}}
                 <div class="flexrow feature-details">
                     <label class="part-desc">{{localize "age-system.spaceship.maneuverSizeStep"}}</label>
-                    <input class="part-desc-value" type="number" {{#if inChat}}disabled{{/if}} name="data.maneuverSizeStep" value="{{data.data.maneuverSizeStep}}" data-dtype="Number" />
+                    <input class="part-desc-value" type="number" {{#if inChat}}disabled{{/if}} name="system.maneuverSizeStep" value="{{data.system.maneuverSizeStep}}" data-dtype="Number" />
                 </div>
                 {{/if}}
 
-                {{#if (eq data.data.type "juiceMod")}}
+                {{#if (eq data.system.type "juiceMod")}}
                 <div class="flexrow feature-details">
                     <label class="part-desc">{{localize "age-system.spaceship.juiceMod"}}</label>
-                    <input class="part-desc-value" type="number" {{#if inChat}}disabled{{/if}} name="data.juiceMod" value="{{data.data.juiceMod}}" data-dtype="Number" />
+                    <input class="part-desc-value" type="number" {{#if inChat}}disabled{{/if}} name="system.juiceMod" value="{{data.system.juiceMod}}" data-dtype="Number" />
                 </div>
                 {{/if}}
 
-                {{#if (eq data.data.type "hullPlating")}}
+                {{#if (eq data.system.type "hullPlating")}}
                 <div class="flexrow feature-details">
                     <label class="part-desc">{{localize "age-system.spaceship.hullPlating"}}</label>
-                    <input class="part-desc-value" type="number" {{#if inChat}}disabled{{/if}} name="data.hullPlating" value="{{data.data.hullPlating}}" data-dtype="Number" />
+                    <input class="part-desc-value" type="number" {{#if inChat}}disabled{{/if}} name="system.hullPlating" value="{{data.system.hullPlating}}" data-dtype="Number" />
                 </div>
                 {{/if}}
 
-                {{#if (eq data.data.type "hullMod")}}
+                {{#if (eq data.system.type "hullMod")}}
                 <div class="flexrow feature-details">
                     <label class="part-desc">{{localize "age-system.spaceship.hullMod"}}</label>
-                    <input class="part-desc-value" type="number" {{#if inChat}}disabled{{/if}} name="data.hullMod" value="{{data.data.hullMod}}" data-dtype="Number" />
+                    <input class="part-desc-value" type="number" {{#if inChat}}disabled{{/if}} name="system.hullMod" value="{{data.system.hullMod}}" data-dtype="Number" />
                 </div>
                 {{/if}}
 
-                {{#if (eq data.data.type "rollable")}}
+                {{#if (eq data.system.type "rollable")}}
                 <div class="flexrow feature-details">
                     <label class="part-desc">{{localize "age-system.abl"}}</label>
-                    <select class="part-desc-value" name="data.useAbl" class="data-input">
-                        {{#select data.data.useAbl}}
+                    <select class="part-desc-value" name="system.useAbl" class="data-input">
+                        {{#select data.system.useAbl}}
                         {{#each config.abilities as |name type|}}
                         <option value="{{type}}">{{localize name}}</option>
                         {{/each}}
@@ -74,7 +74,7 @@
                 
                 <div class="flexrow feature-details">
                     <label class="part-desc">{{localize "age-system.focus"}}</label>
-                    <input class="part-desc-value" name="data.useFocus" class="data-input" type="text" value="{{data.data.useFocus}}" placeholder="Focus Name" list="{{item.type}}-{{item.id}}-list"/>
+                    <input class="part-desc-value" name="system.useFocus" class="data-input" type="text" value="{{data.system.useFocus}}" placeholder="Focus Name" list="{{item.type}}-{{item.id}}-list"/>
                     <datalist id="{{item.type}}-{{item.id}}-list">
                         <option value=""></option>
                         {{#each config.focus as |focus|}}
@@ -84,17 +84,17 @@
                 </div>
                 {{/if}}
 
-                {{#if (eq data.data.type "weapon")}}
+                {{#if (eq data.system.type "weapon")}}
                 <div class="flexrow feature-details">
                     <label class="part-desc">{{localize "age-system.item.damage"}}</label>
-                    <input class="part-desc-value" name="data.damage" class="data-input" type="text" value="{{data.data.damage}}" placeholder="{{localize "age-system.formulaExample"}}"/>
+                    <input class="part-desc-value" name="system.damage" class="data-input" type="text" value="{{data.system.damage}}" placeholder="{{localize "age-system.formulaExample"}}"/>
                 </div>
                 {{/if}}
 
                 <div class="flexrow feature-details">
                     <label class="part-desc">{{localize "age-system.spaceship.qualityType"}}</label>
-                    <select class="part-desc-value" name="data.quality" class="data-input">
-                        {{#select data.data.quality}}
+                    <select class="part-desc-value" name="system.quality" class="data-input">
+                        {{#select data.system.quality}}
                         <option value="quality">{{localize "age-system.spaceship.quality"}}</option>
                         <option value="flaw">{{localize "age-system.spaceship.flaw"}}</option>
                         {{/select}}
@@ -107,7 +107,7 @@
         {{!-- Description --}}
         <div class="item-card-desc">
             <label>{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+            {{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
         </div>
     </div>
 </form>

@@ -16,9 +16,9 @@
                     <div class="flexrow long-text flex-align-start" style="width: 100%;">
                         <label>{{localize "age-system.relationshipBond"}}</label>
                         {{#if inChat}}
-                        <p>{{data.data.shortDesc}}</p>
+                        <p>{{data.system.shortDesc}}</p>
                         {{else}}
-                        <input name="data.shortDesc" class="long-text" type="text" text-type="long" value="{{data.data.shortDesc}}" placeholder="{{localize "age-system.relationshipBond"}}"/>
+                        <input name="system.shortDesc" class="long-text" type="text" text-type="long" value="{{data.system.shortDesc}}" placeholder="{{localize "age-system.relationshipBond"}}"/>
                         {{/if}}
                     </div>
 
@@ -26,9 +26,9 @@
                     <div class="flexrow flex-align-start">
                         <label>{{localize "age-system.relationshipIntensity"}}</label>
                         <div class="flexrow">
-                            <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensity" value="{{data.data.intensity}}"/>
+                            <input type="number" {{#if inChat}}disabled{{/if}} name="system.intensity" value="{{data.system.intensity}}"/>
                             <span> / </span>
-                            <input type="number" {{#if inChat}}disabled{{/if}} name="data.intensityMax" value="{{data.data.intensityMax}}"/>
+                            <input type="number" {{#if inChat}}disabled{{/if}} name="system.intensityMax" value="{{data.system.intensityMax}}"/>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
         </div>
         <div class="item-card-desc">
             <label>{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+            {{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
         </div>
     </div>
     

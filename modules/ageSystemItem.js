@@ -6,35 +6,35 @@ export class ageSystemItem extends Item {
 
     // Check if Item can cause damage
     get hasDamage() {
-        const type = this.data.type;
+        const type = this.type;
         if (type === "weapon") {return true};
-        if (type === "power" && this.data.data.causeDamage === true) {return true};
+        if (type === "power" && this.system.causeDamage === true) {return true};
         return false;
     };
 
     // Check if Item heals
     get hasHealing() {
-        const type = this.data.type;
-        if (type === "power" && this.data.data.causeHealing === true) {return true};
+        const type = this.type;
+        if (type === "power" && this.system.causeHealing === true) {return true};
         return false;
     }
 
     // Check if Item requires Fatigue roll to be used
     get hasFatigue() {
-        if (this.data.type === "power" && this.data.data.useFatigue) {return game.settings.get("age-system", "useFatigue")};
+        if (this.type === "power" && this.system.useFatigue) {return game.settings.get("age-system", "useFatigue")};
         return false;
     };
     
     /** @override */
     prepareBaseData() {
-        if (this.data.img === "icons/svg/item-bag.svg") {
-            if (!ageSystem.itemIcons[this.data.type]) this.data.img = "icons/svg/item-bag.svg";
-            this.data.img = ageSystem.itemIcons[this.data.type];
+        if (this.img === "icons/svg/item-bag.svg") {
+            if (!ageSystem.itemIcons[this.type]) this.img = "icons/svg/item-bag.svg";
+            this.img = ageSystem.itemIcons[this.type];
         };
-        if (!this.data.name) this.data.name = "New " + game.i18n.localize(this.data.type);
+        if (!this.name) this.name = "New " + game.i18n.localize(this.type);
         
-        const itemData = this.data;
-        const data = itemData.data;
+        const itemData = this;
+        const data = itemData.system;
         const itemType = itemData.type;
 
         data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
@@ -59,21 +59,22 @@ export class ageSystemItem extends Item {
         // Adding common data for Power and Weapon
         if (["power", "weapon"].includes(itemType)) {
             data.useFocusActorId = data.useFocus && this.actor?.data ? this.actor.checkFocus(data.useFocus).id : null;
-            data.useFocusActor = this.actor?.data ? this.actor.checkFocus(data.useFocus) : null;
+            data.useFocusActor = this.actor ? this.actor.checkFocus(data.useFocus) : null;
             data.hasDamage = this.hasDamage;
             data.hasHealing = this.hasHealing;
             data.hasFatigue = this.hasFatigue;
 
             // Adds value to represent portion added to dice on damage roll
-            if (this.isOwned && this.actor?.data) {
+            if (this.isOwned && this.actor) {
+                const actorData = this.actor.system;
                 if (data.dmgAbl) {
                     if (data.dmgAbl !== "no-abl") {
-                        data.ablDamageValue = this.actor.data.data.abilities[data.dmgAbl].total;
+                        data.ablDamageValue = actorData.abilities[data.dmgAbl].total;
                     }
                 }
                 if (data.damageResisted) {
                     if (data.damageResisted.dmgAbl !== "no-abl") {
-                        data.damageResisted.ablDamageValue = this.actor.data.data.abilities[data.damageResisted.dmgAbl].total;
+                        data.damageResisted.ablDamageValue = actorData.abilities[data.damageResisted.dmgAbl].total;
                     }                
                 }
 
@@ -92,16 +93,17 @@ export class ageSystemItem extends Item {
                 break;
         }
         
-        // Adds support to FoundryVTT 0.8.x
-        if (isNewerVersion(ageSystem.coreVersion, "0.8.9")) this.prepareEmbeddedDocuments();
-        else this.prepareEmbeddedEntities();
+        // // Adds support to FoundryVTT 0.8.x
+        // if (isNewerVersion(ageSystem.coreVersion, "0.8.9")) this.prepareEmbeddedDocuments();
+        // else this.prepareEmbeddedEntities();
+        // this.prepareEmbeddedEntities();
     };
 
     prepareDamageData(data) {
         // Evaluate Attack and Damage formula to represent on Item sheet or stat block
-        const actor = this.actor?.data?.data;
+        const actor = this.actor?.system;
         if (data.hasDamage || data.hasHealing) {
-            const useFocus = actor ? this.actor.checkFocus(this.data.data.useFocus) : null;
+            const useFocus = actor ? this.actor.checkFocus(data.useFocus) : null;
             const mode = game.settings.get("age-system", "healthSys");
             const useInjury = [`mageInjury`, `mageVitality`].includes(mode);
 
@@ -160,7 +162,7 @@ export class ageSystemItem extends Item {
             dmgBonusArr.push(baseDamage);
             // Damage Formula - Actor Scope
             if (data.dmgAbl !== "no-abl") {
-                if (this.actor?.data?.data?.abilities?.[data.dmgAbl]?.total) dmgBonusArr.push(this.actor.data.data.abilities[data.dmgAbl].total)
+                if (actor?.abilities?.[data.dmgAbl]?.total) dmgBonusArr.push(actor.abilities[data.dmgAbl].total)
             }
             const dmgBonusActor = ["actorDamage"];
             if (actor?.ownedBonus) {
@@ -218,11 +220,13 @@ export class ageSystemItem extends Item {
 
     _prepareFocus(data) {
         const focusParts = [];
+        const actor = this.actor;
+        const actorData = actor?.system;
         if (data.initialValue) focusParts.push(data.initialValue);
         if (data.improved) focusParts.push("1");
         // data.finalValue = data.improved ? data.initialValue + 1 : data.initialValue;
-        if (this.isOwned && this.actor?.data) {
-            const focusBonus = this.actor.data.data.ownedMods?.focus?.parts;
+        if (this.isOwned && actorData) {
+            const focusBonus = actorData.ownedMods?.focus?.parts;
             if (focusBonus?.length) {
                 for (let f = 0; f < focusBonus.length; f++) {
                     const m = focusBonus[f];
@@ -236,7 +240,7 @@ export class ageSystemItem extends Item {
             if (i > 0) focusFormula += " + "
             focusFormula += `${p}`
         }
-        const partial = Dice.resumeFormula(focusFormula, this.actor?.actorRollData() ?? {});
+        const partial = Dice.resumeFormula(focusFormula, actor?.actorRollData() ?? {});
         data.finalValue = partial ? partial.detValue : 0;
 
         const abilitiesOrg = Object.keys(ageSystem.abilitiesOrg);
@@ -254,27 +258,28 @@ export class ageSystemItem extends Item {
         const itemForceBonus = []
 
         // Actor Scope
-        if (this.actor?.data) {
-            const actor = this.actor.data.data;
+        const actor = this.actor;
+        const actorData = actor?.system;
+        if (actor) {
 
             // Ability bonus
-            const abl = this.actor?.data?.data?.abilities?.[data?.itemForceAbl]?.total;
-            if (data.itemForceAbl !== "no-abl" && abl) itemForceBonus.push(this.actor.data.data.abilities[data.itemForceAbl].total)
+            const abl = actorData?.abilities?.[data?.itemForceAbl]?.total;
+            if (data.itemForceAbl !== "no-abl" && abl) itemForceBonus.push(actorData.abilities[data.itemForceAbl].total)
 
             // Focus Bonus
-            if (data.useFocus) itemForceBonus.push(this.actor.checkFocus(data.useFocus).value)
+            if (data.useFocus) itemForceBonus.push(actor.checkFocus(data.useFocus).value)
 
             // General 'allPowerForce' bonus
             const actorForceBonus = ["allPowerForce"];
-            if (this.actor.data.data?.ownedMods) {
+            if (actorData?.ownedMods) {
                 for (let am = 0; am < actorForceBonus.length; am++) {
                     const modName = actorForceBonus[am];
-                    if (actor.ownedMods[modName]) itemForceBonus.push(actor.ownedMods[modName].totalFormula);
+                    if (actorData.ownedMods[modName]) itemForceBonus.push(actorData.ownedMods[modName].totalFormula);
                 };
             };
 
             // Instances of 'focusPowerForce' mods
-            const focusPowerForce = actor?.ownedMods?.['focusPowerForce']?.parts;
+            const focusPowerForce = actorData?.ownedMods?.['focusPowerForce']?.parts;
             if (focusPowerForce?.length) {
                 for (let f = 0; f < focusPowerForce.length; f++) {
                     const m = focusPowerForce[f];
@@ -300,13 +305,13 @@ export class ageSystemItem extends Item {
             const b = itemForceBonus[i];
             itemForceBonusFormula += ` + ${b}`            
         }
-        const itemForcePartials = Dice.resumeFormula(itemForceBonusFormula, this.actor?.actorRollData() ?? {});
+        const itemForcePartials = Dice.resumeFormula(itemForceBonusFormula, actor?.actorRollData() ?? {});
         data.itemForceBonus = itemForcePartials ? itemForcePartials.detValue : 0;
         data.itemForce = data.itemForceBonus;
         
         // Calculate Power Points and Strain
         data.powerPointCostTotal = data.powerPointCost;
-        const strain = this?.actor?.data?.data?.armor?.strain
+        const strain = actorData?.armor?.strain
         data.powerPointCostTotal += strain ? strain : 0;
 
         // Calculate Fatigue TN if it is not a manual input
@@ -320,7 +325,8 @@ export class ageSystemItem extends Item {
      * @returns Promise to update Item with new Modifier slot
      */
     _newModifier() {
-        const modifiers = foundry.utils.deepClone(this.data.data.modifiers);
+        const itemData = this.system
+        const modifiers = foundry.utils.deepClone(itemData.modifiers);
         const keys = [];
         for (const k in modifiers) {
             if (Object.hasOwnProperty.call(modifiers, k)) {
@@ -385,7 +391,11 @@ export class ageSystemItem extends Item {
         atkDmgTradeOff = 0,
         resistedDmg = false}={}) {
 
-        if (!this.data.data.hasDamage && !this.data.data.hasHealing) return false;
+        const itemData = this.system;
+        const actor = this.actor;
+        const actorData = actor?.system;
+
+        if (!itemData.hasDamage && !itemData.hasHealing) return false;
 
         const damageData = {
             // event: event,
@@ -395,8 +405,8 @@ export class ageSystemItem extends Item {
             // resistedDmg: resistedDmg,
             ...arguments[0],
             item: this,
-            actorDmgMod: this.actor ? this.actor.data.data.dmgMod : 0,
-            actorWgroups: this.actor.data.data.wgroups
+            actorDmgMod: actor ? actorData.dmgMod : 0,
+            actorWgroups: actorData.wgroups
         };
         return Dice.itemDamage(damageData);
     };
@@ -404,9 +414,11 @@ export class ageSystemItem extends Item {
     // Roll item and check targetNumbers
     async roll(event, rollType = null, targetNumber = null) {
         const ROLL_TYPE = ageSystem.ROLL_TYPE;
-        const owner = this.actor;
-        if (!owner) return false;
-        let ablCode = (rollType === ROLL_TYPE.FATIGUE) ? this.data.data.ablFatigue : this.data.data.useAbl;
+        const actor = this.actor;
+        const actorData = actor?.system;
+        const itemData = this.system;
+        if (!actor) return false;
+        let ablCode = (rollType === ROLL_TYPE.FATIGUE) ? itemData.ablFatigue : itemData.useAbl;
 
         if (rollType === null) {
             switch (this.type) {
@@ -427,12 +439,12 @@ export class ageSystemItem extends Item {
         if (targetNumber === null) {
             switch (rollType) {
                 case ROLL_TYPE.FATIGUE:
-                    ablCode = this.data.data.ablFatigue;
-                    targetNumber = this.data.data.fatigueTN ? this.data.data.fatigueTN : null;
+                    ablCode = itemData.ablFatigue;
+                    targetNumber = itemData.fatigueTN ? itemData.fatigueTN : null;
                     break;
                 
                 case ROLL_TYPE.POWER:
-                    targetNumber = this.data.data.targetNumber ? this.data.data.targetNumber : null;
+                    targetNumber = itemData.targetNumber ? itemData.targetNumber : null;
                     break;
     
                 case ROLL_TYPE.ATTACK || ROLL_TYPE.RANGED_ATTACK || ROLL_TYPE.MELEE_ATTACK || ROLL_TYPE.STUNT_ATTACK:
@@ -446,7 +458,7 @@ export class ageSystemItem extends Item {
                     } else {
                         const targetId = targets.ids[0];
                         const targetToken = canvas.tokens.placeables.find(t => t.data._id === targetId);
-                        targetNumber = targetToken.actor.data.data.defense.total;
+                        targetNumber = targetToken.actor.system.defense.total;
                     }
                     break;
         
@@ -457,7 +469,7 @@ export class ageSystemItem extends Item {
 
         const rollData = {
             event: event,
-            actor: owner,
+            actor: actor,
             abl: ablCode,
             itemRolled: this,
             rollTN: targetNumber,
@@ -466,14 +478,13 @@ export class ageSystemItem extends Item {
         
         // Check if power is used and look for Power Points
         if (rollType !== ROLL_TYPE.FATIGUE && this.type === 'power' && ageSystem.autoConsumePP) {
-            const owner = this.actor
-            if (!this.hasFatigue && owner) {
-                const cost = this.data.data.powerPointCostTotal;
-                const remainingPP = this.actor.data.data.powerPoints.value;
+            if (!this.hasFatigue && actor) {
+                const cost = itemData.powerPointCostTotal;
+                const remainingPP = actorData?.powerPoints.value;
                 if (cost > remainingPP) {
                     const castAnyway = await new Promise(resolve => {
                         const data = {
-                            content: `<p>${game.i18n.format("age-system.rollWithoutPP", {name: owner.name, item: this.name})}</p>`,
+                            content: `<p>${game.i18n.format("age-system.rollWithoutPP", {name: actor.name, item: this.name})}</p>`,
                             buttons: {
                                 normal: {
                                     label: game.i18n.localize("age-system.roll"),
@@ -491,7 +502,7 @@ export class ageSystemItem extends Item {
                     });
                     if (!castAnyway.roll) return false;
                 } else {
-                    this.actor.update({"data.powerPoints.value": remainingPP - cost}, {value: -cost, type: 'power'})
+                    actor.update({"data.powerPoints.value": remainingPP - cost}, {value: -cost, type: 'power'})
                 }
             }
         }
@@ -514,13 +525,15 @@ export class ageSystemItem extends Item {
 
     async showItem(forceSelfRoll = false) {
         // return ui.notifications.warn("Show item cards on chat is currently unavailable. Await until next version"); // Remove when chat cards are working again
+        const item = this;
+        const itemData = this.system;
         const rollMode = game.settings.get("core", "rollMode");       
         const cardData = {
             inChat: true,
-            name: this.data.name,
-            data: this.data,
-            item: this,
-            itemId: this.id,
+            name: item.name,
+            data: item.system,
+            item: item,
+            itemId: item.id,
             owner: this.actor,
             ownerUuid: this.actor.uuid,
             config: {
@@ -533,7 +546,7 @@ export class ageSystemItem extends Item {
             user: game.user.id,
             speaker: ChatMessage.getSpeaker(),
             roll: false,
-            content: await renderTemplate(this.chatTemplate[this.type], cardData),
+            content: await renderTemplate(item.chatTemplate[item.type], cardData),
             flags: {
                 "age-system": {messageData: cardData}
             }

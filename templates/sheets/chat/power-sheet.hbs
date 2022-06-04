@@ -14,25 +14,25 @@
                 {{#if (ne inChat true)}}
                 {{!-- Select Damage and Fatigue Options --}}
                 <div class="power-type-control">
-                    <a class="toggle-damage colorset-second-tier {{#unless data.data.hasDamage}}not-equiped{{/unless}}" title="{{localize "age-system.rollDamage"}}">
+                    <a class="toggle-damage colorset-second-tier {{#unless data.system.hasDamage}}not-equiped{{/unless}}" title="{{localize "age-system.rollDamage"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="fas fa-fist-raised"></i>
                         </div>
                     </a>
     
-                    <a class="toggle-healing colorset-second-tier {{#unless data.data.hasHealing}}not-equiped{{/unless}}" title="{{localize "age-system.rollHealing"}}">
+                    <a class="toggle-healing colorset-second-tier {{#unless data.system.hasHealing}}not-equiped{{/unless}}" title="{{localize "age-system.rollHealing"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="fa fa-heartbeat"></i>
                         </div>
                     </a>
 
-                    <a class="toggle-resist colorset-second-tier {{#unless data.data.hasTest}}not-equiped{{/unless}}" title="{{localize "age-system.item.testResist"}}">
+                    <a class="toggle-resist colorset-second-tier {{#unless data.system.hasTest}}not-equiped{{/unless}}" title="{{localize "age-system.item.testResist"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="far fa-dot-circle"></i>
                         </div>
                     </a>
 
-                    <a class="toggle-fatigue flexrow use-fatigue-true colorset-second-tier {{#unless data.data.hasFatigue}}not-equiped{{/unless}}" title="{{localize "age-system.rollFatigue"}}">
+                    <a class="toggle-fatigue flexrow use-fatigue-true colorset-second-tier {{#unless data.system.hasFatigue}}not-equiped{{/unless}}" title="{{localize "age-system.rollFatigue"}}">
                         <div class="flexrow flex-justify-center flex-align-center">
                             <i class="fas fa-head-side-cough"></i>
                         </div>
@@ -44,17 +44,17 @@
                 {{> "systems/age-system/templates/partials/ability-focus-select.hbs"}}
 
                 {{!-- Power Point Cost --}}
-                {{#unless (and data.data.inputFatigueTN data.data.hasFatigue)}}
-                {{#unless (and inChat data.data.hasFatigue)}}
+                {{#unless (and data.system.inputFatigueTN data.system.hasFatigue)}}
+                {{#unless (and inChat data.system.hasFatigue)}}
                 <div class="flexcol">
                     <label>{{localize "age-system.powerPointsIndex"}}</label>
                     {{#if inChat}}
-                    <div>{{data.data.powerPointCostTotal}}</div>
+                    <div>{{data.system.powerPointCostTotal}}</div>
                     {{else}}
                     <div class="flexrow">
-                        <input type="text" name="data.powerPointCost" value="{{data.data.powerPointCost}}" data-dtype="Number" />
-                        {{#if (ne data.data.powerPointCost data.data.powerPointCostTotal)}}
-                        <div>({{data.data.powerPointCostTotal}})</div>
+                        <input type="text" name="system.powerPointCost" value="{{data.system.powerPointCost}}" data-dtype="Number" />
+                        {{#if (ne data.system.powerPointCost data.system.powerPointCostTotal)}}
+                        <div>({{data.system.powerPointCostTotal}})</div>
                         {{/if}}
                     </div>
                     {{/if}}
@@ -63,12 +63,12 @@
                 {{/unless}}
 
                 {{!-- Fatigue Setup --}}
-                {{#if data.data.useFatigue}}
+                {{#if data.system.useFatigue}}
                 {{#if (ne inChat true)}}       
                 <div class="flexcol use-fatigue-true">
                     <label class="use-fatigue">{{localize "age-system.ablFatigue"}}</label>
-                    <select name="data.ablFatigue" class="data-input">
-                        {{#select data.data.ablFatigue}}
+                    <select name="system.ablFatigue" class="data-input">
+                        {{#select data.system.ablFatigue}}
                         {{#each config.abilities as |name type|}}
                         <option value="{{type}}">{{localize name}}</option>
                         {{/each}}
@@ -77,12 +77,12 @@
                 </div>
                 <div class="flexcol use-fatigue-true">
                     <label class="use-fatigue">{{localize "age-system.inputFatigueTN"}}</label>
-                    <input class="use-fatigue" type="checkbox" name="data.inputFatigueTN" {{checked data.data.inputFatigueTN}} class="checkbox"/>
+                    <input class="use-fatigue" type="checkbox" name="system.inputFatigueTN" {{checked data.system.inputFatigueTN}} class="checkbox"/>
                 </div>
                 {{/if}}
                 <div class="flexcol use-fatigue-true">
                     <label class="use-fatigue">{{localize "age-system.fatigueTN"}}</label>
-                    <input class="use-fatigue" type="number" {{#unless data.data.inputFatigueTN}}disabled{{/unless}} name="data.fatigueTN" value="{{data.data.fatigueTN}}" data-dtype="Number" />                   
+                    <input class="use-fatigue" type="number" {{#unless data.system.inputFatigueTN}}disabled{{/unless}} name="system.fatigueTN" value="{{data.system.fatigueTN}}" data-dtype="Number" />                   
                 </div>
                 {{/if}}
 
@@ -90,10 +90,10 @@
                 <div class="flexcol">
                     <label>{{localize "age-system.item.cast"}} </label>
                     {{#if inChat}}
-                    <div>{{localize (concat "age-system." data.data.castTime)}}</div>
+                    <div>{{localize (concat "age-system." data.system.castTime)}}</div>
                     {{else}}
-                    <select name="data.castTime" class="data-input">
-                    {{#select data.data.castTime}}
+                    <select name="system.castTime" class="data-input">
+                    {{#select data.system.castTime}}
                         {{#each config.actionsToCast as |actionsToCast|}}
                         <option value="{{@key}}">{{localize actionsToCast}}</option>
                         {{/each}}
@@ -108,19 +108,19 @@
                     {{#if inChat}}
                     <div class="data-input">{{data.data.targetNumber}}</div>
                     {{else}}
-                    <input type="number" class="data-input" name="data.targetNumber" value="{{data.data.targetNumber}}" data-dtype="Number" />
+                    <input type="number" class="data-input" name="system.targetNumber" value="{{data.system.targetNumber}}" data-dtype="Number" />
                     {{/if}}
                 </div>
 
                 {{!-- Power Force --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.force"}}</label>
-                    <span class="data-input">{{data.data.itemForce}}</span>
+                    <span class="data-input">{{data.system.itemForce}}</span>
                     {{#if (ne inChat true)}}
                     {{!-- Ability to activate item --}}
                     <div class="flexcol">
-                        <select name="data.itemForceAbl" class="data-input">
-                            {{#select data.data.itemForceAbl}}
+                        <select name="system.itemForceAbl" class="data-input">
+                            {{#select data.system.itemForceAbl}}
                             {{#each config.abilities as |name type|}}
                             <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
@@ -131,25 +131,25 @@
                 </div>
 
                 {{!-- Resist Test --}}
-                {{#if data.data.hasTest}}
+                {{#if data.system.hasTest}}
                 {{#if inChat}}
                 <div class="flexcol flex-align-center">
                     <label style="white-space: nowrap;">{{localize "age-system.item.testResist"}}</label>
-                    <p style="white-space: nowrap;">{{localize (concat "age-system." data.data.testAbl)}} ({{data.data.testFocus}})</p>
+                    <p style="white-space: nowrap;">{{localize (concat "age-system." data.system.testAbl)}} ({{data.system.testFocus}})</p>
                 </div>
                 {{else}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.testResist"}}</label>
                     {{!-- Ability to Resist Power --}}
-                    <select name="data.testAbl" class="data-input">
-                        {{#select data.data.testAbl}}
+                    <select name="system.testAbl" class="data-input">
+                        {{#select data.system.testAbl}}
                         {{#each config.abilities as |name type|}}
                         <option value="{{type}}">{{localize name}}</option>
                         {{/each}}
                         {{/select}}
                     </select>
                     {{!-- Focus to Resist Power --}}
-                    <input name="data.testFocus" class="data-input" type="text" value="{{data.data.testFocus}}" placeholder="{{localize "age-system.focus"}}" list="{{item.type}}-{{item._id}}-list-resist"/>
+                    <input name="system.testFocus" class="data-input" type="text" value="{{data.system.testFocus}}" placeholder="{{localize "age-system.focus"}}" list="{{item.type}}-{{item._id}}-list-resist"/>
                     <datalist id="{{item.type}}-{{item._id}}-list-resist">
                         <option value=""></option>
                         {{#each config.focus as |focus|}}
@@ -161,7 +161,7 @@
                 {{/if}}
 
                 {{!-- Power Damage/Heal --}}
-                {{#if (or data.data.causeDamage data.data.causeHealing)}}
+                {{#if (or data.system.causeDamage data.system.causeHealing)}}
                 {{> "systems/age-system/templates/partials/dmg-block-sheet.hbs"}}
                 {{/if}}
 
@@ -174,7 +174,7 @@
             {{!-- Description --}}
             <div class="item-card-desc">
                 <label>{{localize "age-system.item.desc"}}</label>
-                {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+                {{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
             </div>
             {{/if}}
 

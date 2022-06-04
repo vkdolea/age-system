@@ -17,7 +17,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
     }
     
     get template() {
-        return `systems/age-system/templates/sheets/${this.actor.data.type}-sheet.hbs`;
+        return `systems/age-system/templates/sheets/${this.actor.type}-sheet.hbs`;
     }
     
     get observerRoll () {
@@ -42,10 +42,10 @@ export default class ageSpaceshipSheet extends ActorSheet {
         const isEditable = this.isEditable;
     
         // Copy actor data to a safe copy
-        const data = this.actor.data.toObject(false);
+        const data = this.actor.toObject(false);
         // const data = super.getData();
         data.config = CONFIG.ageSystem;
-        data.passengers = sortObjArrayByName(this.actor.data.data.passengers, "name");
+        data.passengers = sortObjArrayByName(this.actor.system.passengers, "name");
 
         const itemSorted = sortObjArrayByName(data.items, "name");
         data.qualities = itemSorted.filter(i => i.data.quality === "quality" && i.data.type !== "weapon");
@@ -119,13 +119,13 @@ export default class ageSpaceshipSheet extends ActorSheet {
                 let actor
                 // if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data.id].actor;
                 if (!actor) actor = this.actor;
-                if (passenger.data.type === "char") {
+                if (passenger.type === "char") {
     
                     const passengerData = {
                         id : passenger.id,
                         isToken : passenger.isToken
                     };
-                    const passengerList = actor.data.data.passengers;
+                    const passengerList = actor.system.passengers;
                     let alreadyOnboard = false;
                     passengerList.map( p => {
                         if (p.id === passengerData.id) {
@@ -138,7 +138,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
     
                     if (!alreadyOnboard) {
                         passengerList.push(passengerData);
-                        actor.update({"data.passengers" : passengerList});
+                        actor.update({"system.passengers" : passengerList});
                     }
                 } else {
                     const warning = game.i18n.localize("age-system.WARNING.vehicleIsNotPassenger");
@@ -157,6 +157,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
     }
 
     _onRollDice(event){
+        const actorData = this.actor?.system;
         const messageData = {
             rollMode: event.shiftKey ? "blindroll" : "roll",
             flavor: `${this.actor.name}`,
@@ -165,11 +166,11 @@ export default class ageSpaceshipSheet extends ActorSheet {
         if (event.currentTarget.classList.contains("roll-damage")) {
             const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
             const item = this.actor.items.get(itemId);
-            rollFormula = item.data.data.damage;
+            rollFormula = item.system.damage;
             messageData.flavor += ` | ${item.name}`;
         }
         if (event.currentTarget.classList.contains("roll-hull")) {
-            rollFormula = this.actor.data.data.hull.total;
+            rollFormula = actorData.hull.total;
             messageData.flavor += ` | ${game.i18n.localize("age-system.spaceship.hull")}`;
         }
 
@@ -198,16 +199,17 @@ export default class ageSpaceshipSheet extends ActorSheet {
     _onEquipChange(event) {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const itemToToggle = this.actor.items.get(itemId);
-        const toggleEqp = !itemToToggle.data.data.isActive;
-        itemToToggle.update({"data.isActive": toggleEqp});
+        const toggleEqp = !itemToToggle.system.isActive;
+        itemToToggle.update({"system.isActive": toggleEqp});
     }
 
     _onChangeLoss(event) {
+        const actorData = this.actor.system;
         const lossSev = event.currentTarget.closest(".feature-controls").dataset.lossSev;
         const lossType = event.currentTarget.closest(".feature-controls").dataset.lossType;
         let lossValue = event.currentTarget.dataset.boxNumber;
         lossValue = Number(lossValue) + 1;
-        const currentLoss = this.actor.data.data.losses[lossSev][lossType].actual;
+        const currentLoss = actorData.losses[lossSev][lossType].actual;
         let newLoss
         if (lossValue > currentLoss) {
             newLoss = lossValue;
@@ -215,12 +217,12 @@ export default class ageSpaceshipSheet extends ActorSheet {
             newLoss = lossValue - 1;
         }
 
-        const updatePath = `data.losses.${lossSev}.${lossType}.actual`; 
+        const updatePath = `system.losses.${lossSev}.${lossType}.actual`; 
         this.actor.update({[updatePath]: newLoss});
     }
 
     _onRollManeuver(event) {
-        const vehicleData = this.actor.data.data;
+        const vehicleData = this.actor.system;
         const datum = {}
         const isSystemBox = event.currentTarget.dataset.sysBox;
         if (isSystemBox) {
@@ -282,7 +284,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         rollData.flavor2 = game.i18n.format(flavorText, parts);
         rollData.rollType = ageSystem.ROLL_TYPE.VEHICLE_ACTION;
 
-        const system = this.actor.data.data.systems[datum.sysName]
+        const system = vehicleData.systems[datum.sysName]
         if (system) {
             rollData.moreParts.push({
                 value: system.total,
@@ -298,8 +300,8 @@ export default class ageSpaceshipSheet extends ActorSheet {
         let passengerKey = event.currentTarget.closest(".feature-controls").dataset.passengerKey;
         passengerKey = Number(passengerKey);
         const crew = this.object.data.data.passengers;
-        if (crew[passengerKey].isConductor) update = {"data.conductor": ""}
+        if (crew[passengerKey].isConductor) update = {"system.conductor": ""}
         crew.splice(passengerKey, 1);
-        this.actor.update({...update, "data.passengers": crew});
+        this.actor.update({...update, "system.passengers": crew});
     };
 };

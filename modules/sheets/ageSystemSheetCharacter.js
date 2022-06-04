@@ -21,7 +21,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     }
 
     get template() {
-        return `systems/age-system/templates/sheets/${this.actor.data.type}-sheet.hbs`;
+        return `systems/age-system/templates/sheets/${this.actor.type}-sheet.hbs`;
     }
 
     get observerRoll () {
@@ -36,7 +36,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const isEditable = this.isEditable;
     
         // Copy actor data to a safe copy
-        const data = this.actor.data.toObject(false);
+        const data = this.actor.toObject(false);
         data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
         // const data = super.getData();
@@ -57,14 +57,14 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.relationship = itemSorted.filter(i => i.type === "relationship");
         data.membership = itemSorted.filter(i => i.type === "membership");
         // Groups of Fav Item
-        data.favWeapon = data.weapon.filter(i => i.data.favorite);
-        data.favPower = data.power.filter(i => i.data.favorite);
-        data.favEquip = data.equipment.filter(i => i.data.favorite);
-        data.favStunt = data.stunts.filter(i => i.data.favorite);
-        data.favTalent = data.talent.filter(i => i.data.favorite);
-        data.favRelation = data.relationship.filter(i => i.data.favorite);
-        data.favHonor = data.honorifics.filter(i => i.data.favorite);
-        data.favMembership = data.membership.filter(i => i.data.favorite);
+        data.favWeapon = data.weapon.filter(i => i.favorite);
+        data.favPower = data.power.filter(i => i.favorite);
+        data.favEquip = data.equipment.filter(i => i.favorite);
+        data.favStunt = data.stunts.filter(i => i.favorite);
+        data.favTalent = data.talent.filter(i => i.favorite);
+        data.favRelation = data.relationship.filter(i => i.favorite);
+        data.favHonor = data.honorifics.filter(i => i.favorite);
+        data.favMembership = data.membership.filter(i => i.favorite);
 
         // Sort Conditions alphabetically
         data.conditions = foundry.utils.deepClone(CONFIG.statusEffects).filter(e => e.flags?.["age-system"]?.isCondition);
@@ -118,7 +118,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             actor: this.object,
             cssClass: isEditable ? "editable" : "locked",
             data: data,
-            itemMods: this.object.data.data.ownedMods,
+            itemMods: this.object.system.ownedMods,
             // modListType: modListType,
             effects: data.effects,
             items: data.items,
@@ -260,18 +260,20 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     // }
 
     _onAdjustHealth(ev) {
+        const actorData = this.actor.system;
         const detail = ev.currentTarget.dataset.detail;
-        const actorMode = this.actor.data.data.gameMode;
+        const actorMode = actorData.gameMode;
         const mode = actorMode.selected;
         const value = Number(ev.currentTarget.value);
-        const updatePath = `data.gameMode.specs.${mode}.${detail}`;
+        const updatePath = `system.gameMode.specs.${mode}.${detail}`;
         return this.actor.update({[updatePath]: value});
     }
 
     _onLockGameMode(ev) {
+        const actorData = this.actor.system;
         const updateData = {};
-        const override = this.actor.data.data.gameMode.override;
-        updateData["data.gameMode.override"] = !override;
+        const override = actorData.gameMode.override;
+        updateData["system.gameMode.override"] = !override;
         return this.actor.update(updateData);
     }
 
@@ -286,13 +288,14 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     }
 
     _onRollToughness(ev) {
+        const actorData = this.actor.system;
         const event = new MouseEvent('contextmenu')
         const rollData = {
             actor: this.actor,
             event,
             moreParts: [{
                 label: game.i18n.localize("age-system.toughness"),
-                value: this.actor.data.data.armor.toughness.total
+                value: actorData.armor.toughness.total
             }],
             rollType: ageSystem.ROLL_TYPE.TOUGHNESS
         }
@@ -301,10 +304,10 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
     _onFullHeal() {
         const updateData = {
-            "data.injury.degrees.light": 0,
-            "data.injury.degrees.serious": 0,
-            "data.injury.degrees.severe": 0,
-            "data.injury.marks": 0,
+            "system.injury.degrees.light": 0,
+            "system.injury.degrees.serious": 0,
+            "system.injury.degrees.severe": 0,
+            "system.injury.marks": 0,
         }
         return this.actor.update(updateData);
     }
@@ -319,7 +322,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
     _onChangeInjury(event) {
         event.preventDefault();
-        const data = this.actor.data.data;
+        const data = this.actor.system;
         const e = event.currentTarget;
         const classList = e.classList;
         const supEl = event.currentTarget.closest('.arrow-control');
@@ -332,12 +335,12 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         if (!parameter) return false;
 
         const qtd = data.injury.degrees[parameter]
-        const updatePath = `data.injury.degrees.${parameter}`;
+        const updatePath = `system.injury.degrees.${parameter}`;
 
         if (classList.contains("add")) {
             return this.actor.update({
                 [updatePath]: qtd+1,
-                "data.injury.marks": data.injury.marks + marks
+                "system.injury.marks": data.injury.marks + marks
             });
         }
         if (classList.contains("remove") && qtd > 0) {
@@ -348,15 +351,16 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             }
             return this.actor.update({
                 [updatePath]: qtd-1,
-                "data.injury.marks": data.injury.marks - marks
+                "system.injury.marks": data.injury.marks - marks
             });
         } 
     };
 
     async _onWeaponGroupToggle(event) {
+        const actorData = this.actor.system;
         event.preventDefault();
         const wgroupId = event.currentTarget.closest(".feature-controls").dataset.wgroupId.trim();
-        const wgroups = await this.actor.data.data.wgroups;
+        const wgroups = await actorData.wgroups;
         const hasGroup = wgroups.includes(wgroupId);
         if (hasGroup) {
             const pos = wgroups.indexOf(wgroupId);
@@ -364,7 +368,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         } else {
             wgroups.push(wgroupId);
         }
-        return this.actor.update({"data.wgroups": wgroups});
+        return this.actor.update({"system.wgroups": wgroups});
     }
 
     _onChangeQuantity(event) {
@@ -378,12 +382,12 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         let updatePath;
         switch (itemType) {
             case 'relationship':
-                qtd = item.data.data.intensity;
-                updatePath = 'data.intensity';
+                qtd = item.system.intensity;
+                updatePath = 'system.intensity';
                 break;
             default:
-                qtd = item.data.data.quantity;
-                updatePath = 'data.quantity';
+                qtd = item.system.quantity;
+                updatePath = 'system.quantity';
                 break;
         }
         if (classList.contains("add")) return item.update({[updatePath]: qtd+1});
@@ -391,17 +395,18 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     }
 
     _onToggleItemMod(event) {
+        const actorData = this.actor.system;
         const data = event.currentTarget.dataset;
         const itemId = data.itemId;
         const key = data.key;
         const item = this.actor.items.get(itemId);
-        const active = item.data.data.modifiers[key].isActive;
-        const dataPath = `data.modifiers.${key}.isActive`;
+        const active = actorData.modifiers[key].isActive;
+        const dataPath = `system.modifiers.${key}.isActive`;
         return item.update({[dataPath]: !active});
     }
 
     _onChangeCondition(event) {
-        const isChecked = null;
+        // const isChecked = null;
         const condId = event.currentTarget.closest(".feature-controls").dataset.conditionId;
         this.actor.handleConditions(condId);
     }
@@ -457,16 +462,17 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const itemToToggle = this.actor.getEmbeddedDocument("Item", itemId);
         const itemType = itemToToggle.type;
+        const itemData = itemToToggle.system;
         if (event.currentTarget.classList.contains('favorite')) {
-            const toggleFav = !itemToToggle.data.data.favorite;
-            return itemToToggle.update({"data.favorite": toggleFav});
+            const toggleFav = !itemData.favorite;
+            return itemToToggle.update({"system.favorite": toggleFav});
         }
         if (itemType === "power" || itemType === "talent") {
-            const toggleAct = !itemToToggle.data.data.activate;
-            itemToToggle.update({"data.activate": toggleAct});
+            const toggleAct = !itemData.activate;
+            itemToToggle.update({"system.activate": toggleAct});
         } else {
-            const toggleEqp = !itemToToggle.data.data.equiped;
-            itemToToggle.update({"data.equiped": toggleEqp});
+            const toggleEqp = !itemData.equiped;
+            itemToToggle.update({"system.equiped": toggleEqp});
         };
     };
 
@@ -480,14 +486,15 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     };
 
     _onLastUpSelect(ev) {
+        const actorData = this.actor.system;
         const abl = ev.currentTarget.closest(".feature-controls").dataset.ablId;
         let actorAbls = {
             data: {
                 abilities: {}
             }
         };
-        for (const ablKey in this.actor.data.data.abilities) {
-            if (Object.hasOwnProperty.call(this.actor.data.data.abilities, ablKey)) {
+        for (const ablKey in actorData.abilities) {
+            if (Object.hasOwnProperty.call(actorData.abilities, ablKey)) {
                 actorAbls.data.abilities[ablKey] = {"lastUp": false};                
             };
         };
@@ -496,18 +503,20 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     };
 
     _onDefendSelect(event) {
+        const actorData = this.actor.system;
         const guardupStatus = event.currentTarget.closest(".feature-controls").dataset.guardupActive;
-        const defendStatus = this.actor.data.data.defend.active;
+        const defendStatus = actorData.defend.active;
         if (guardupStatus && !defendStatus) {
-            this.actor.update({"data.guardUp.active": false});
+            this.actor.update({"system.guardUp.active": false});
         };
     };
 
     _onGuardUpSelect(event) {
+        const actorData = this.actor.system;
         const defendStatus = event.currentTarget.closest(".feature-controls").dataset.defendActive;
-        const guardupStatus = this.actor.data.data.guardUp.active;
+        const guardupStatus = actorData.guardUp.active;
         if (!guardupStatus && defendStatus) {
-            this.actor.update({"data.defend.active": false});
+            this.actor.update({"system.defend.active": false});
         };
     };
 

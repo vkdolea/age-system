@@ -16,12 +16,12 @@
                 <div class="flexcol">
                     <label>{{localize "age-system.abl"}}</label>
                     {{#if inChat}}
-                    <div name="data.useAbl" class="data-input">{{localize (concat "age-system." data.data.useAbl)}}</div>
+                    <div name="system.useAbl" class="data-input">{{localize (concat "age-system." data.system.useAbl)}}</div>
                     {{else}}
-                    <select name="data.useAbl" class="data-input">
-                        {{#select data.data.useAbl}}
+                    <select name="system.useAbl" class="data-input">
+                        {{#select data.system.useAbl}}
                         
-                        {{#if data.data.isOrg}}
+                        {{#if data.system.isOrg}}
                         {{#each config.abilitiesOrg as |name type|}}
                         <option value="{{type}}">{{localize name}}</option>
                         {{/each}}
@@ -41,14 +41,14 @@
                 {{!-- Improved Focus --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.improvedFocus"}}</label>
-                    <input type="checkbox" {{#if inChat}}disabled{{/if}} name="data.improved" {{checked data.data.improved}} class="checkbox"/>
+                    <input type="checkbox" {{#if inChat}}disabled{{/if}} name="system.improved" {{checked data.system.improved}} class="checkbox"/>
                 </div>
 
                 {{#if displayIsOrg}}
                 {{!-- Is Organization Focus --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.orgFocus"}}</label>
-                    <input type="checkbox" name="data.isOrg" {{checked data.data.isOrg}} class="checkbox"/>
+                    <input type="checkbox" name="system.isOrg" {{checked data.system.isOrg}} class="checkbox"/>
                 </div>
                 {{/if}}
 
@@ -57,21 +57,21 @@
                 {{!-- Focus Initial Value --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.focusInput"}}</label>
-                    <input type="number" name="data.initialValue" value="{{data.data.initialValue}}" class="checkbox"/>
+                    <input type="number" name="system.initialValue" value="{{data.system.initialValue}}" class="checkbox"/>
                 </div>
                 {{/if}}
 
                 {{!-- Focus Final Value --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.total"}}</label>
-                    <input type="number" disabled name="data.finalValue" value="{{data.data.finalValue}}" class="checkbox"/>
+                    <input type="number" disabled name="system.finalValue" value="{{data.system.finalValue}}" class="checkbox"/>
                 </div>
 
             </div>
         </div>
         <div class="item-card-desc">
             <label>{{localize "age-system.item.desc"}}</label>
-            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+            {{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
         </div>
     </div>
     
