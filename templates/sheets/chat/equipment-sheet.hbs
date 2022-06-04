@@ -20,12 +20,12 @@
                 {{!-- Quantity --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.quantity"}}</label>
-                    <input type="number" {{#if inChat}}disabled{{/if}} name="data.quantity" value="{{data.data.quantity}}" data-dtype="Number" />
+                    <input type="number" {{#if inChat}}disabled{{/if}} name="system.quantity" value="{{data.system.quantity}}" data-dtype="Number" />
                 </div>                
                 {{!-- Weight --}}
                 <div class="flexcol">
                     <label>{{localize "age-system.item.weight"}}</label>
-                    <input type="text" {{#if inChat}}disabled{{/if}} name="data.weight" value="{{data.data.weight}}" data-dtype="Number" />
+                    <input type="text" {{#if inChat}}disabled{{/if}} name="system.weight" value="{{data.system.weight}}" data-dtype="Number" />
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
             {{!-- Description --}}
             <div class="item-card-desc">
                 <label>{{localize "age-system.item.desc"}}</label>
-                {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=editable}}
+                {{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=editable}}
             </div>
             {{/if}}
 
