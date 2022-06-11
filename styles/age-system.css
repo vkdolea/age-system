@@ -3786,7 +3786,6 @@
 /**     Color Style Rules     **/
 /*******************************/
 .window-app.sheet.char-sheet-alt.colorset-modern-blue .window-content,
-.window-app.sheet.char.colorset-modern-blue .window-content,
 .window-app.sheet.vehicle.colorset-modern-blue .window-content,
 .window-app.sheet.spaceship.colorset-modern-blue .window-content {
   background-image: none;
@@ -3942,7 +3941,6 @@
   border: solid #B9DBEB 1px;
 }
 .window-app.sheet.char-sheet-alt.colorset-fantasy-blue .window-content,
-.window-app.sheet.char.colorset-fantasy-blue .window-content,
 .window-app.sheet.vehicle.colorset-fantasy-blue .window-content,
 .window-app.sheet.spaceship.colorset-fantasy-blue .window-content {
   background-image: none;
@@ -4098,7 +4096,6 @@
   border: solid #91b6d4 1px;
 }
 .window-app.sheet.char-sheet-alt.colorset-dragon-red .window-content,
-.window-app.sheet.char.colorset-dragon-red .window-content,
 .window-app.sheet.vehicle.colorset-dragon-red .window-content,
 .window-app.sheet.spaceship.colorset-dragon-red .window-content {
   background-image: none;
@@ -4254,7 +4251,6 @@
   border: solid #e0beb1 1px;
 }
 .window-app.sheet.char-sheet-alt.colorset-folded-purple .window-content,
-.window-app.sheet.char.colorset-folded-purple .window-content,
 .window-app.sheet.vehicle.colorset-folded-purple .window-content,
 .window-app.sheet.spaceship.colorset-folded-purple .window-content {
   background-image: none;
@@ -4410,7 +4406,6 @@
   border: solid #cfccde 1px;
 }
 .window-app.sheet.char-sheet-alt.colorset-ronin-green .window-content,
-.window-app.sheet.char.colorset-ronin-green .window-content,
 .window-app.sheet.vehicle.colorset-ronin-green .window-content,
 .window-app.sheet.spaceship.colorset-ronin-green .window-content {
   background-image: none;
@@ -4566,7 +4561,6 @@
   border: solid #c2f5aa 1px;
 }
 .window-app.sheet.char-sheet-alt.colorset-select-one .window-content,
-.window-app.sheet.char.colorset-select-one .window-content,
 .window-app.sheet.vehicle.colorset-select-one .window-content,
 .window-app.sheet.spaceship.colorset-select-one .window-content {
   background-image: none;
@@ -4722,7 +4716,6 @@
   border: solid #768d9f 1px;
 }
 .window-app.sheet.char-sheet-alt.colorset-the-grey .window-content,
-.window-app.sheet.char.colorset-the-grey .window-content,
 .window-app.sheet.vehicle.colorset-the-grey .window-content,
 .window-app.sheet.spaceship.colorset-the-grey .window-content {
   background-image: none;
@@ -4878,7 +4871,6 @@
   border: solid #b4b6b3 1px;
 }
 .window-app.sheet.char-sheet-alt.colorset-red-warrior .window-content,
-.window-app.sheet.char.colorset-red-warrior .window-content,
 .window-app.sheet.vehicle.colorset-red-warrior .window-content,
 .window-app.sheet.spaceship.colorset-red-warrior .window-content {
   background-image: none;
@@ -5034,7 +5026,6 @@
   border: solid #d1635b 1px;
 }
 .window-app.sheet.char-sheet-alt.colorset-never-dead .window-content,
-.window-app.sheet.char.colorset-never-dead .window-content,
 .window-app.sheet.vehicle.colorset-never-dead .window-content,
 .window-app.sheet.spaceship.colorset-never-dead .window-content {
   background-image: none;
@@ -5190,7 +5181,6 @@
   border: solid #eeddcd 1px;
 }
 .window-app.sheet.char-sheet-alt.colorset-expanded-blue .window-content,
-.window-app.sheet.char.colorset-expanded-blue .window-content,
 .window-app.sheet.vehicle.colorset-expanded-blue .window-content,
 .window-app.sheet.spaceship.colorset-expanded-blue .window-content {
   background-image: none;

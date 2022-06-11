@@ -1,9 +1,10 @@
 # Release Notes
 
-## 0.12.5 [2022-05-xx]
+## 0.12.5 [2022-06-11]
 ### Fixed
 - Added a cleaner background on character/item sheets.
 - Reduced border radius on boxes inside character sheet.
+- Updated Dice so Nice compatibility.
 
 ## 0.12.4 [2022-04-16]
 ### Fixed
