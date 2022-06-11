@@ -2,7 +2,7 @@
     "id": "age-system",
     "title": "AGE System (unofficial)",
     "description": "Unofficial AGE System implementation for most of AGE subsystems",
-    "version": "0.12.4",
+    "version": "0.12.5",
     "compatibility": {
         "minimum": 10,
         "verified": 10,

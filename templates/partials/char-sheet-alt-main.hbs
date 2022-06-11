@@ -4,7 +4,7 @@
     <div class="resource item-list colorset-third-tier">
         <div class="title">{{localize "age-system.testThreshold"}}</div>
         <div class="values flexrow">
-            <input class="value-data circle" type="number" name="system.advTestThreshold" value="{{data.system.advTestThreshold}}" data-dtype="Number" />
+            <input class="value-data circle" type="number" name="system.advTestThreshold" value="{{system.advTestThreshold}}" data-dtype="Number" />
         </div>
         <div class="labels flexrow">
             <label>{{localize "age-system.total"}}</label>
@@ -15,9 +15,9 @@
     <div class="resource item-list colorset-third-tier">
         <div class="title">{{localize "age-system.allOutAttack"}}</div>
         <div class="values flexrow">
-            <input class="value-data circle" type="number" name="system.allOutAttack.dmgBonus" value="{{data.system.allOutAttack.dmgBonus}}" data-dtype="Number" />
-            <input class="value-data circle" type="number" name="system.allOutAttack.defensePenalty" value="{{data.system.allOutAttack.defensePenalty}}" data-dtype="Number" />
-            <input type="checkbox" name="system.allOutAttack.active" {{checked data.system.allOutAttack.active}} class="checkbox"/>
+            <input class="value-data circle" type="number" name="system.allOutAttack.dmgBonus" value="{{system.allOutAttack.dmgBonus}}" data-dtype="Number" />
+            <input class="value-data circle" type="number" name="system.allOutAttack.defensePenalty" value="{{system.allOutAttack.defensePenalty}}" data-dtype="Number" />
+            <input type="checkbox" name="system.allOutAttack.active" {{checked system.allOutAttack.active}} class="checkbox"/>
         </div>
         <div class="labels flexrow">
             <label>{{localize "age-system.item.damage"}}/{{localize "age-system.armorPenalty"}}</label>
@@ -25,11 +25,11 @@
     </div>
 
     {{!-- Defend --}}
-    <div class="resource item-list colorset-third-tier feature-controls" data-guardup-active="{{data.system.guardUp.active}}">
+    <div class="resource item-list colorset-third-tier feature-controls" data-guardup-active="{{system.guardUp.active}}">
         <div class="title">{{localize "age-system.defendManeuver"}}</div>
         <div class="values flexrow">
-            <input class="value-data circle" type="number" name="system.defend.defenseBonus" value="{{data.system.defend.defenseBonus}}" data-dtype="Number" />
-            <input type="checkbox" class="defend-maneuver" name="system.defend.active" {{checked data.system.defend.active}} class="checkbox"/>
+            <input class="value-data circle" type="number" name="system.defend.defenseBonus" value="{{system.defend.defenseBonus}}" data-dtype="Number" />
+            <input type="checkbox" class="defend-maneuver" name="system.defend.active" {{checked system.defend.active}} class="checkbox"/>
         </div>
         <div class="labels flexrow">
             <label>{{localize "age-system.defense"}}</label>
@@ -37,12 +37,12 @@
     </div>
 
     {{!-- Guard Up --}}
-    <div class="resource item-list colorset-third-tier feature-controls" data-defend-active="{{data.system.defend.active}}">
+    <div class="resource item-list colorset-third-tier feature-controls" data-defend-active="{{system.defend.active}}">
         <div class="title">{{localize "age-system.guardUp"}}</div>
         <div class="values flexrow">
-            <input class="value-data circle" type="number" name="system.guardUp.defenseBonus" value="{{data.system.guardUp.defenseBonus}}" data-dtype="Number" />
-            <input class="value-data circle" type="number" name="system.guardUp.testPenalty" value="{{data.system.guardUp.testPenalty}}" data-dtype="Number" />
-            <input type="checkbox" class="guardup-maneuver" name="system.guardUp.active" {{checked data.system.guardUp.active}} class="checkbox"/>
+            <input class="value-data circle" type="number" name="system.guardUp.defenseBonus" value="{{system.guardUp.defenseBonus}}" data-dtype="Number" />
+            <input class="value-data circle" type="number" name="system.guardUp.testPenalty" value="{{system.guardUp.testPenalty}}" data-dtype="Number" />
+            <input type="checkbox" class="guardup-maneuver" name="system.guardUp.active" {{checked system.guardUp.active}} class="checkbox"/>
         </div>
         <div class="labels flexrow">
             <label>{{localize "age-system.defense"}}/{{localize "age-system.armorPenalty"}}</label>
@@ -60,11 +60,11 @@
                 <div class="abl-name">
                     <label class="roll-ability feature-controls" data-abl-id="{{type}}" for="data.abilities.{{type}}.value"><a>{{name}}</a></label>
                 </div>
-                <input type="checkbox" name="system.abilities.{{type}}.primary" {{#with (lookup ../data.system.abilities [type])~}}{{#if primary}}checked{{/if}}{{/with}} class="primary-secondary" />
-                <input type="checkbox" name="system.abilities.{{type}}.lastUp" {{#with (lookup ../data.system.abilities [type])~}}{{#if lastUp}}checked{{/if}}{{/with}} class="last-up" />
+                <input type="checkbox" name="system.abilities.{{type}}.primary" {{#with (lookup ../system.abilities [type])~}}{{#if primary}}checked{{/if}}{{/with}} class="primary-secondary" />
+                <input type="checkbox" name="system.abilities.{{type}}.lastUp" {{#with (lookup ../system.abilities [type])~}}{{#if lastUp}}checked{{/if}}{{/with}} class="last-up" />
                 {{!-- Value with modifiers applied --}}
-                <input type="number" class="abl-value total colorset-second-tier" disabled name="system.abilities.{{type}}.total" value="{{#with (lookup ../data.system.abilities [type])~}}{{total}}{{/with}}" data-dtype="Number" />
-                <input type="number" class="abl-value original" name="system.abilities.{{type}}.value" value="{{#with (lookup ../data.system.abilities [type])~}}{{value}}{{/with}}" data-dtype="Number" />
+                <input type="number" class="abl-value total colorset-second-tier" disabled name="system.abilities.{{type}}.total" value="{{#with (lookup ../system.abilities [type])~}}{{total}}{{/with}}" data-dtype="Number" />
+                <input type="number" class="abl-value original" name="system.abilities.{{type}}.value" value="{{#with (lookup ../system.abilities [type])~}}{{value}}{{/with}}" data-dtype="Number" />
             </div>
             <p class="owned-focus">
                 {{#each ../data.focus as |item|}}
@@ -85,8 +85,8 @@
             <div class="resource item-list colorset-third-tier">
                 <div class="title">{{localize "age-system.initiative"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data circle" disabled type="number" name="system.initiative" value="{{data.system.initiative}}" data-dtype="Number" />
-                    <input class="value-data circle" type="number" name="system.initiativeMod" value="{{data.system.initiativeMod}}" data-dtype="Number" />
+                    <input class="value-data circle" disabled type="number" name="system.initiative" value="{{system.initiative}}" data-dtype="Number" />
+                    <input class="value-data circle" type="number" name="system.initiativeMod" value="{{system.initiativeMod}}" data-dtype="Number" />
                 </div>
                 <div class="labels flexrow">
                     <label>{{localize "age-system.total"}}</label>
@@ -98,8 +98,8 @@
             <div class="resource item-list colorset-third-tier">
                 <div class="title">{{localize "age-system.aim"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data circle" type="number" name="system.aim.value" value="{{data.system.aim.value}}" data-dtype="Number" />
-                    <input type="checkbox" name="system.aim.active" {{checked data.system.aim.active}} class="checkbox"/>
+                    <input class="value-data circle" type="number" name="system.aim.value" value="{{system.aim.value}}" data-dtype="Number" />
+                    <input type="checkbox" name="system.aim.active" {{checked system.aim.active}} class="checkbox"/>
                 </div>
                 <div class="labels flexrow">
                     <label>{{localize "age-system.mod"}}</label>

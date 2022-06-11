@@ -5,14 +5,14 @@
             {{!-- Stunt Cost --}}
             <li>
                 <label>{{localize "age-system.settings.stuntPoints"}}</label>
-                {{#if (eq data.system.costType "variable")}}
+                {{#if (eq system.costType "variable")}}
                 <div class="flexrow">
-                    <input type="number" value="{{data.system.stuntPoints}}" name="system.stuntPoints" data-dtype="Number" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
+                    <input type="number" value="{{system.stuntPoints}}" name="system.stuntPoints" data-dtype="Number" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
                     /
-                    <input type="number" value="{{data.system.stuntPointsMax}}" name="system.stuntPointsMax" data-dtype="Number" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
+                    <input type="number" value="{{system.stuntPointsMax}}" name="system.stuntPointsMax" data-dtype="Number" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
                 </div>
                 {{else}}
-                <input name="system.stuntPoints" type="number" value="{{data.system.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
+                <input name="system.stuntPoints" type="number" value="{{system.stuntPoints}}" placeholder="{{localize "age-system.settings.stuntPointsIndex"}}"/>
                 {{/if}}
             </li>
 
@@ -20,7 +20,7 @@
             <li>
                 <label>{{localize "age-system.item.cost"}}</label>
                 <select name="system.costType">
-                {{#select data.system.costType}}
+                {{#select system.costType}}
                     <option value="fixed">{{localize "age-system.fixed"}}</option>
                     <option value="variable">{{localize "age-system.variable"}}</option>
                 {{/select}}
@@ -30,13 +30,13 @@
             {{!-- Stunt Type --}}
             <li>
                 <label>{{localize "age-system.type"}} </label>
-                <input type="text" name="system.type" value="{{data.system.type}}" placeholder="{{localize "age-system.type"}}" data-dtype="String"/>
+                <input type="text" name="system.type" value="{{system.type}}" placeholder="{{localize "age-system.type"}}" data-dtype="String"/>
             </li>
 
             {{!-- Page Ref --}}
-            <li class="feature-controls" data-reference="{{data.system.reference}}">
+            <li class="feature-controls" data-reference="{{system.reference}}">
                 <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
-                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{data.system.reference}}" placeholder="Page Ref." data-dtype="String"/>
+                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{system.reference}}" placeholder="Page Ref." data-dtype="String"/>
             </li>
         </ul>
     </aside>
@@ -53,7 +53,7 @@
                 <li class="title colorset-third-tier">
                     <label>{{localize "age-system.item.desc"}}</label>
                 </li>
-                <li>{{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=true}}</li>
+                <li>{{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true}}</li>
             </ul>
         </div>
     </div>

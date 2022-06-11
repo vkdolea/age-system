@@ -6,7 +6,7 @@
         <img class="vehicle-image" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
         <div class="vehicle-desc">
             <label class="colorset-second-tier desc">{{localize "age-system.item.desc"}}</label>
-            {{editor data.system.description target="system.description" button=true owner=owner editable=true}}
+            {{editor system.description target="system.description" button=true owner=owner editable=true}}
         </div>
     </div>
 
@@ -19,7 +19,7 @@
             <div class="flexrow conductor-selection">
                 <label class="conductor">{{localize "age-system.conductor"}}</label>
                 <select class="conductor" name="system.conductor">
-                    {{#select data.system.conductor}}
+                    {{#select system.conductor}}
                     <option value="">{{localize "age-system.noAction"}}</option>
                     <option value="synth-vehicle">Token</option>
                     {{#each data.passengers as |passenger|}}
@@ -36,13 +36,13 @@
                     <a class="roll-maneuver"><i class="fas fa-dice"></i></a>
                 </div>
                 <select name="system.handling.useAbl" class="data-input">
-                    {{#select data.system.handling.useAbl}}
+                    {{#select system.handling.useAbl}}
                     {{#each data.config.abilities as |name type|}}
                     <option value="{{type}}">{{localize name}}</option>
                     {{/each}}
                     {{/select}}
                 </select>
-                <input type="text" name="system.handling.useFocus" value="{{data.system.handling.useFocus}}" list="{{name}}-{{actor.id}}-list" placeholder="{{localize "age-system.focus"}}">
+                <input type="text" name="system.handling.useFocus" value="{{system.handling.useFocus}}" list="{{name}}-{{actor.id}}-list" placeholder="{{localize "age-system.focus"}}">
                 <datalist id="{{name}}-{{actor.id}}-list">
                     <option value=""></option>
                     {{#each data.config.focus as |focus|}}
@@ -56,7 +56,7 @@
                     <label>{{localize "age-system.velocity"}}</label>
                     <div class="flexrow no-flexwrap">
                         <select name="system.velocity.category">
-                            {{#select data.system.velocity.category}}
+                            {{#select system.velocity.category}}
                             {{#each data.config.velocityCategory as |category|}}
                             <option value="{{@key}}">{{localize (concat "age-system." @key)}}</option>
                             {{/each}}
@@ -64,18 +64,18 @@
                             {{/select}}
                         </select>    
                         <span>/</span>
-                        <input type="number" name="system.velocity.catMod" value="{{data.system.velocity.catMod}}" data-dtype="Number">
+                        <input type="number" name="system.velocity.catMod" value="{{system.velocity.catMod}}" data-dtype="Number">
                     </div>
                 </div>
 
                 <div class="flexcol flex-align-center">
                     <label>{{localize "age-system.handling"}}</label>
-                    <input type="number" name="system.handling.mod" value="{{data.system.handling.mod}}" data-dtype="Number">
+                    <input type="number" name="system.handling.mod" value="{{system.handling.mod}}" data-dtype="Number">
                 </div>
 
                 <div class="flexcol flex-align-center">
                     <label>{{localize "age-system.item.cost"}}</label>
-                    <input type="text" name="system.cost" value="{{data.system.cost}}" data-dtype="Number">
+                    <input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number">
                 </div>
 
             </div>
@@ -83,28 +83,28 @@
             <div class="flexrow">
                 <div class="flexcol flex-align-center">
                     <label>{{localize "age-system.defense"}}</label>
-                    <input type="number" disabled name="system.defenseTotal" value="{{data.system.defenseTotal}}" data-dtype="Number">
+                    <input type="number" disabled name="system.defenseTotal" value="{{system.defenseTotal}}" data-dtype="Number">
                 </div>
 
                 <div class="flexcol flex-align-center">
                     <label>{{localize "age-system.hull"}}</label>
-                    <input type="number" name="system.hull" value="{{data.system.hull}}" data-dtype="Number">
+                    <input type="number" name="system.hull" value="{{system.hull}}" data-dtype="Number">
                 </div>
 
                 <div class="flexcol flex-align-center">
                     <label>{{localize "age-system.vehicleArmor"}}</label>
-                    <input type="number" name="system.armorRating" value="{{data.system.armorRating}}" data-dtype="Number">
+                    <input type="number" name="system.armorRating" value="{{system.armorRating}}" data-dtype="Number">
                 </div>
 
                 <div class="flexcol flex-align-center">
                     <label>{{localize "age-system.coverRating"}}</label>
-                    <input type="number" name="system.coverRating" value="{{data.system.coverRating}}" data-dtype="Number">
+                    <input type="number" name="system.coverRating" value="{{system.coverRating}}" data-dtype="Number">
                 </div>
 
                 <div class="flexcol flex-align-center">
                     <label>{{localize "age-system.ram"}}</label>
                     <div class="flexrow flex-align-center">
-                        <input type="number" name="system.ramDmg" value="{{data.system.ramDmg}}" data-dtype="Number">
+                        <input type="number" name="system.ramDmg" value="{{system.ramDmg}}" data-dtype="Number">
                         <span>{{localize "age-system.settings.d6"}}</span>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                     <p class="feature-controls">{{localize "age-system.sideswipe"}}</p>
                 </li>
                 {{#each data.config.velocityCategory as |velocity|}}
-                <li class="flexrow collision {{#if (eq ../data.system.velocity.category @key)}}highlight{{/if}}">
+                <li class="flexrow collision {{#if (eq ../system.velocity.category @key)}}highlight{{/if}}">
                     <p class="velocity">{{localize (concat "age-system." @key)}}</p>
                     <p class="feature-controls" data-qtd-dice="{{velocity.colDmg}}">
                         <a class="roll-vehicle-dmg">{{velocity.colDmg}}</a>
@@ -136,15 +136,15 @@
                     </p>
                 </li>
                 {{/each}}
-                <li class="flexrow flex-align-center {{#if (eq data.system.velocity.category "velCustom")}}highlight{{/if}}">
+                <li class="flexrow flex-align-center {{#if (eq system.velocity.category "velCustom")}}highlight{{/if}}">
                     <p class="velocity">{{localize "age-system.velCustom"}}</p>
-                    <p class="feature-controls flexrow flex-align-center flex-justify-center custom-velocity collision" data-qtd-dice="{{data.system.customCollisionDmg}}d6">
-                        <input type="number" name="system.customCollisionDmg" value="{{data.system.customCollisionDmg}}" data-dtype="Number">
+                    <p class="feature-controls flexrow flex-align-center flex-justify-center custom-velocity collision" data-qtd-dice="{{system.customCollisionDmg}}d6">
+                        <input type="number" name="system.customCollisionDmg" value="{{system.customCollisionDmg}}" data-dtype="Number">
                         <a class="roll-vehicle-dmg">{{localize "age-system.settings.d6"}} </a>
                         <a class="roll-vehicle-dmg add-ram"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
                     </p>
-                    <p class="feature-controls flexrow flex-align-center flex-justify-center custom-velocity" data-qtd-dice="{{data.system.customSideswipeDmg}}d6">
-                        <input type="number" name="system.customSideswipeDmg" value="{{data.system.customSideswipeDmg}}" data-dtype="Number">
+                    <p class="feature-controls flexrow flex-align-center flex-justify-center custom-velocity" data-qtd-dice="{{system.customSideswipeDmg}}d6">
+                        <input type="number" name="system.customSideswipeDmg" value="{{system.customSideswipeDmg}}" data-dtype="Number">
                         <a class="roll-vehicle-dmg">{{localize "age-system.settings.d6"}} </a>
                         <a class="roll-vehicle-dmg add-ram"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
                     </p>
@@ -155,7 +155,7 @@
 
     {{!-- Passengers --}}
     <div class="passenger-container stats-block colorset-second-tier">
-        <h2>{{localize "age-system.passengers"}} [{{data.system.pob}} / <input type="number" name="system.capacity" value="{{data.system.capacity}}" data-dtype="Number">]</h2>
+        <h2>{{localize "age-system.passengers"}} [{{system.pob}} / <input type="number" name="system.capacity" value="{{system.capacity}}" data-dtype="Number">]</h2>
         <div class="passenger-list">
             <ol>
                 {{#each data.passengers as |passenger|}}
@@ -178,7 +178,7 @@
     {{!-- GM Secret Notes --}}
     <div class="stats-block gm-secret-notes colorset-third-tier">
         <h2 class="">{{localize "age-system.gmNotes"}}</h2>
-        <textarea class="free-text" name="system.gmNotes" cols="30" rows="10">{{data.system.gmNotes}}</textarea>
+        <textarea class="free-text" name="system.gmNotes" cols="30" rows="10">{{system.gmNotes}}</textarea>
     </div>
     {{/if}} 
 </form>

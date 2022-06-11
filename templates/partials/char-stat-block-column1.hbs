@@ -8,8 +8,8 @@
     <li class="ability-row ability-box flexrow {{type}} feature-controls colorset-second-tier" data-abl-id="{{type}}">
         <div class="flexrow abl-value-box">
             {{!-- Value with modifiers applied --}}
-            <input type="number" class="abl-value total colorset-second-tier" disabled name="system.abilities.{{type}}.total" value="{{#with (lookup ../data.system.abilities [type])~}}{{total}}{{/with}}" data-dtype="Number" />
-            <input type="number" class="abl-value original" name="system.abilities.{{type}}.value" value="{{#with (lookup ../data.system.abilities [type])~}}{{value}}{{/with}}" data-dtype="Number" />
+            <input type="number" class="abl-value total colorset-second-tier" disabled name="system.abilities.{{type}}.total" value="{{#with (lookup ../system.abilities [type])~}}{{total}}{{/with}}" data-dtype="Number" />
+            <input type="number" class="abl-value original" name="system.abilities.{{type}}.value" value="{{#with (lookup ../system.abilities [type])~}}{{value}}{{/with}}" data-dtype="Number" />
         </div>
         <div class="abl-name-focus flexrow">
             <a class="abl-name roll-ability">{{name}}</a>
@@ -48,40 +48,40 @@
     </li>
     <li class="flexrow data body">
         <span class="speed">
-            <input type="number" disabled class="main-value" name="system.speed.total" value="{{data.system.speed.total}}" data-dtype="Number" />
+            <input type="number" disabled class="main-value" name="system.speed.total" value="{{system.speed.total}}" data-dtype="Number" />
         </span>
         {{#if data.config.healthSys.useVitality}}
         <span class="health flexrow flex-align-center">
-            <input type="number" name="system.vitality.value" value="{{data.system.vitality.value}}" data-dtype="Number" />
+            <input type="number" name="system.vitality.value" value="{{system.vitality.value}}" data-dtype="Number" />
             <span class="single-char">&nbsp/&nbsp</span>
-            {{#if (ne data.system.vitality.set data.system.vitality.max)}}
-            <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="system.vitality.max" value="{{data.system.vitality.max}}" data-dtype="Number" />
+            {{#if (ne system.vitality.set system.vitality.max)}}
+            <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="system.vitality.max" value="{{system.vitality.max}}" data-dtype="Number" />
             {{/if}}
-            <input type="number" number-type="five-digits" name="system.vitality.set" value="{{data.system.vitality.set}}" data-dtype="Number" />
+            <input type="number" number-type="five-digits" name="system.vitality.set" value="{{system.vitality.set}}" data-dtype="Number" />
         </span>
         {{/if}}
         {{#unless data.config.healthSys.useInjury}}
         <span class="health flexrow flex-align-center">
-            <input type="number" name="system.health.value" value="{{data.system.health.value}}" data-dtype="Number" />
+            <input type="number" name="system.health.value" value="{{system.health.value}}" data-dtype="Number" />
             <span class="single-char">&nbsp/&nbsp</span>
-            {{#if (ne data.system.health.set data.system.health.max)}}
-            <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="system.health.max" value="{{data.system.health.max}}" data-dtype="Number" />
+            {{#if (ne system.health.set system.health.max)}}
+            <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="system.health.max" value="{{system.health.max}}" data-dtype="Number" />
             {{/if}}
-            <input type="number" number-type="five-digits" name="system.health.set" value="{{data.system.health.set}}" data-dtype="Number" />
+            <input type="number" number-type="five-digits" name="system.health.set" value="{{system.health.set}}" data-dtype="Number" />
         </span>
         {{/unless}}
         <span class="defense">
-            <input type="number" disabled class="main-value" name="system.defense.total" value="{{data.system.defense.total}}" data-dtype="Number" />
+            <input type="number" disabled class="main-value" name="system.defense.total" value="{{system.defense.total}}" data-dtype="Number" />
         </span>
         <span class="armor flexrow flex-align-center">
-            <div>{{data.system.armor.impact}}{{#if data.config.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}{{/if}}</div>
+            <div>{{system.armor.impact}}{{#if data.config.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}{{/if}}</div>
             {{#if data.config.healthSys.useBallistic}}
             <span class="single-char">/</span>
-            <div>{{data.system.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
+            <div>{{system.armor.ballistic}}{{localize "age-system.ballisticIndex"}}</div>
             {{/if}}
             {{#if data.config.healthSys.useToughness}}
             <span class="single-char">+</span>
-            <input type="number" disabled class="main-value" name="system.armor.toughness.total" value="{{data.system.armor.toughness.total}}" data-dtype="Number" />
+            <input type="number" disabled class="main-value" name="system.armor.toughness.total" value="{{system.armor.toughness.total}}" data-dtype="Number" />
             {{/if}}
         </span>
     </li>

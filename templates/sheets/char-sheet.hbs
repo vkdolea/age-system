@@ -11,44 +11,44 @@
                 <div class="age-header">  
                     <div class="flexrow">
                         <label for="">{{localize "age-system.age"}}</label>
-                        <input type="text" name="system.age" value="{{data.system.age}}">
+                        <input type="text" name="system.age" value="{{system.age}}">
 
                         <label for="">{{localize "age-system.height"}}</label>
-                        <input type="text" name="system.height" value="{{data.system.height}}">
+                        <input type="text" name="system.height" value="{{system.height}}">
                         
                         <label for="">{{localize "age-system.weight"}}</label>
-                        <input type="text" name="system.weight" value="{{data.system.weight}}">  
+                        <input type="text" name="system.weight" value="{{system.weight}}">  
 
                     </div>
 
                     <div class="flexrow">
                         <label for="">{{localize "age-system.background"}}</label>
-                        <input type="text" name="system.background" value="{{data.system.background}}">
+                        <input type="text" name="system.background" value="{{system.background}}">
                         
                         <label for="">{{localize (concat "SETTINGS.ancestryOpt" data.ancestry)}}</label>
-                        <input type="text" name="system.ancestry" value="{{data.system.ancestry}}"> 
+                        <input type="text" name="system.ancestry" value="{{system.ancestry}}"> 
                     </div>
                     
                     <div class="flexrow">
                         <label for="">{{localize "age-system.socialClass"}}</label>
-                        <input type="text" name="system.socialClass" value="{{data.system.socialClass}}">
+                        <input type="text" name="system.socialClass" value="{{system.socialClass}}">
                     </div>
                     
                     <div class="flexrow">
                         <label for="">{{localize (concat "SETTINGS.occ" data.occupation)}}</label>
-                        <input type="text" name="system.profession" value="{{data.system.profession}}">          
+                        <input type="text" name="system.profession" value="{{system.profession}}">          
                     </div>
 
                     {{!-- Level / XP block --}}
                     <div class="flexrow level-xp">
                         <label for="">{{localize "age-system.level"}}</label>
-                        <input type="number" name="system.level" value="{{data.system.level}}" data-dtype="Number" />
+                        <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number" />
 
                         <label>{{localize "age-system.currentLevel"}}</label>
-                        <input type="number" number-type="five-digits" name="system.xp.value" value="{{data.system.xp.value}}" data-dtype="Number" />
+                        <input type="number" number-type="five-digits" name="system.xp.value" value="{{system.xp.value}}" data-dtype="Number" />
                             
                         <label>{{localize "age-system.nextLevel"}}</label>
-                        <input type="number" number-type="five-digits" name="system.xp.next" value="{{data.system.xp.next}}" data-dtype="Number" />
+                        <input type="number" number-type="five-digits" name="system.xp.next" value="{{system.xp.next}}" data-dtype="Number" />
 
                     </div>
                 </div>

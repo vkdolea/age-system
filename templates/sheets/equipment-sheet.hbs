@@ -9,17 +9,17 @@
             {{!-- Quantity --}}
             <li>
                 <label>{{localize "age-system.item.quantity"}}</label>
-                <input type="number" {{#if inChat}}disabled{{/if}} name="system.quantity" value="{{data.system.quantity}}" data-dtype="Number"/>
+                <input type="number" {{#if inChat}}disabled{{/if}} name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
             </li>
             {{!-- Weight --}}
             <li>
                 <label>{{localize "age-system.item.weight"}}</label>
-                <input type="number" {{#if inChat}}disabled{{/if}} name="system.weight" value="{{data.system.weight}}" data-dtype="Number"/>
+                <input type="number" {{#if inChat}}disabled{{/if}} name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
             </li>
             {{!-- Page Ref --}}
-            <li class="feature-controls" data-reference="{{data.system.reference}}">
+            <li class="feature-controls" data-reference="{{system.reference}}">
                 <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
-                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{data.system.reference}}" placeholder="Page Ref." data-dtype="String"/>
+                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{system.reference}}" placeholder="Page Ref." data-dtype="String"/>
             </li>
         </ul>
     </aside>
@@ -44,7 +44,7 @@
                 {{!-- Main Tab --}}
                 <div class="tab main" data-group="primary" data-tab="main">
                     <ul class="resource colorset-first-tier item-box"><li>
-                        {{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
+                        {{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
                     </li></ul>
                 </div>
 

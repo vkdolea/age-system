@@ -1,9 +1,9 @@
 {{!-- Active Bonuses --}}
-{{#if data.system.hasModificators}}
+{{#if system.hasModificators}}
 <div class="flexrol flex-align-center item-card-stats active-mod-container">
     <hr>
     <div class="flexrow" style="flex-wrap: wrap;">
-        {{#each data.system.itemMods as |item|}}
+        {{#each system.itemMods as |item|}}
         {{#if item.isActive}}
             <div class="flexcol modbox">
                 <label>{{localize (concat "age-system.bonus." @key)}}</label>

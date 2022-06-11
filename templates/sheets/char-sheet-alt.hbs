@@ -15,31 +15,31 @@
                 </div>
                 <div class="values flexrow">
                     <div class="degree">
-                        <input type="number" class="value-data circle" name="system.injury.degrees.light" disabled value="{{data.system.injury.degrees.light}}" data-dtype="Number" />
+                        <input type="number" class="value-data circle" name="system.injury.degrees.light" disabled value="{{system.injury.degrees.light}}" data-dtype="Number" />
                         <div class="flexrow arrow-control light">
                             <a><i class="fa fa-chevron-up change-injury add" aria-hidden="true"></i></a>
                             <a><i class="fa fa-chevron-down change-injury remove" aria-hidden="true"></i></a>
                         </div>
                     </div>
                     <div class="degree">
-                        <input type="number" class="value-data circle" name="system.injury.degrees.serious" disabled value="{{data.system.injury.degrees.serious}}" data-dtype="Number" />
+                        <input type="number" class="value-data circle" name="system.injury.degrees.serious" disabled value="{{system.injury.degrees.serious}}" data-dtype="Number" />
                         <div class="flexrow arrow-control serious">
                             <a><i class="fa fa-chevron-up change-injury add" aria-hidden="true"></i></a>
                             <a><i class="fa fa-chevron-down change-injury remove" aria-hidden="true"></i></a>
                         </div>
                     </div>
                     <div class="degree">
-                        <input type="number" class="value-data circle" name="system.injury.degrees.severe" disabled value="{{data.system.injury.degrees.severe}}" data-dtype="Number" />
+                        <input type="number" class="value-data circle" name="system.injury.degrees.severe" disabled value="{{system.injury.degrees.severe}}" data-dtype="Number" />
                         <div class="flexrow arrow-control severe">
                             <a><i class="fa fa-chevron-up change-injury add" aria-hidden="true"></i></a>
                             <a><i class="fa fa-chevron-down change-injury remove" aria-hidden="true"></i></a>
                         </div>
                     </div>
                     <div class="mark">
-                        <input type="number" class="value-data circle" name="system.injury.marks" disabled value="{{data.system.injury.marks}}" data-dtype="Number" />
+                        <input type="number" class="value-data circle" name="system.injury.marks" disabled value="{{system.injury.marks}}" data-dtype="Number" />
                         {{#unless (eq data.injury.degrees.severeMult 1)}}
                         <div class="flexrow tracker-container">
-                            {{#each data.system.injury.marksArray as |tracker|}}
+                            {{#each system.injury.marksArray as |tracker|}}
                             {{#if tracker}}
                             <div class="severe-injury-tracker colorset-third-tier"></div>
                             {{/if}}
@@ -62,21 +62,21 @@
             </li>
             {{else}}
             {{!-- Health / Fortune --}}
-            <li class="resource colorset-third-tier feature-controls" data-mode="{{data.system.gameMode.selected}}" data-local="sidebar">
+            <li class="resource colorset-third-tier feature-controls" data-mode="{{system.gameMode.selected}}" data-local="sidebar">
                 <div class="title">
                     <a class="roll-breather feature-controls"><i class="fas fa-medkit"></i></a>
                     {{data.config.healthSys.healthName}}
                 </div>
                 <div class="values flexrow">
-                    <input class="value-data circle game-mode-details" data-detail="healthCur" type="number" name="system.health.value" value="{{data.system.health.value}}" data-dtype="Number" />
-                    <input class="value-data circle game-mode-details" data-detail="health" type="number" name="system.health.set" value="{{data.system.health.set}}" data-dtype="Number" />
-                    {{#if (ne data.system.health.set data.system.health.max)}}
-                    <input class="value-data circle bonus" type="number" class="colorset-second-tier" disabled name="system.health.max" value="{{data.system.health.max}}" data-dtype="Number" />
+                    <input class="value-data circle game-mode-details" data-detail="healthCur" type="number" name="system.health.value" value="{{system.health.value}}" data-dtype="Number" />
+                    <input class="value-data circle game-mode-details" data-detail="health" type="number" name="system.health.set" value="{{system.health.set}}" data-dtype="Number" />
+                    {{#if (ne system.health.set system.health.max)}}
+                    <input class="value-data circle bonus" type="number" class="colorset-second-tier" disabled name="system.health.max" value="{{system.health.max}}" data-dtype="Number" />
                     {{/if}}
                 </div>
                 <div class="labels flexrow">
                     <label>Current</label>
-                    {{#if (ne data.system.health.set data.system.health.max)}}
+                    {{#if (ne system.health.set system.health.max)}}
                     <label for="">-</label>
                     {{/if}}
                     <label>{{localize "age-system.maximum"}}</label>
@@ -85,19 +85,19 @@
             {{/if}}
 
             {{!-- Power Points --}}
-            {{#if data.system.usePowerPoints}}
+            {{#if system.usePowerPoints}}
             <li class="resource colorset-third-tier">
                 <div class="title">{{localize "age-system.powerPoints"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data circle" type="number" name="system.powerPoints.value" value="{{data.system.powerPoints.value}}" data-dtype="Number" />
-                    <input class="value-data circle" type="number" name="system.powerPoints.set" value="{{data.system.powerPoints.set}}" data-dtype="Number" />
-                    {{#if (ne data.system.powerPoints.set data.system.powerPoints.max)}}
-                    <input class="value-data circle bonus" type="number" class="colorset-second-tier" disabled name="system.powerPoints.max" value="{{data.system.powerPoints.max}}" data-dtype="Number" />
+                    <input class="value-data circle" type="number" name="system.powerPoints.value" value="{{system.powerPoints.value}}" data-dtype="Number" />
+                    <input class="value-data circle" type="number" name="system.powerPoints.set" value="{{system.powerPoints.set}}" data-dtype="Number" />
+                    {{#if (ne system.powerPoints.set system.powerPoints.max)}}
+                    <input class="value-data circle bonus" type="number" class="colorset-second-tier" disabled name="system.powerPoints.max" value="{{system.powerPoints.max}}" data-dtype="Number" />
                     {{/if}}
                 </div>
                 <div class="labels flexrow">
                     <label>Current</label>
-                    {{#if (ne data.system.powerPoints.set data.system.powerPoints.max)}}
+                    {{#if (ne system.powerPoints.set system.powerPoints.max)}}
                     <label for="">-</label>
                     {{/if}}
                     <label>{{localize "age-system.maximum"}}</label>
@@ -109,18 +109,18 @@
             <li class="resource colorset-third-tier">
                 <div class="title">{{localize "age-system.defense"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data circle" disabled type="number" name="system.defense.total" value="{{data.system.defense.total}}" data-dtype="Number" />
+                    <input class="value-data circle" disabled type="number" name="system.defense.total" value="{{system.defense.total}}" data-dtype="Number" />
                     <div class="values-options mods-section flexcol">
                         <div class="flexrow">
-                            <input class="value-data" type="number" name="system.defense.base" value="{{data.system.defense.base}}" data-dtype="Number" />
+                            <input class="value-data" type="number" name="system.defense.base" value="{{system.defense.base}}" data-dtype="Number" />
                             <label>{{localize "age-system.base"}}</label>
                         </div>
                         <div class="flexrow">
-                            <input class="value-data game-mode-details" type="number" data-detail="defense" name="system.defense.gameModeBonus" value="{{data.system.defense.gameModeBonus}}" data-dtype="Number" />
+                            <input class="value-data game-mode-details" type="number" data-detail="defense" name="system.defense.gameModeBonus" value="{{system.defense.gameModeBonus}}" data-dtype="Number" />
                             <label>{{localize "age-system.gameModeBonus"}}</label>
                         </div>
                         <div class="flexrow">
-                            <input class="value-data" disabled type="number" name="system.armor.toughness.mod" value="{{data.system.armor.toughness.mod}}" data-dtype="Number" />
+                            <input class="value-data" disabled type="number" name="system.armor.toughness.mod" value="{{system.armor.toughness.mod}}" data-dtype="Number" />
                             <label>{{localize "age-system.mod"}}</label>
                         </div>
                     </div>
@@ -134,14 +134,14 @@
             <li class="resource colorset-third-tier">
                 <div class="title">{{localize "age-system.speed"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data circle" disabled type="number" name="system.speed.total" value="{{data.system.speed.total}}" data-dtype="Number" />
+                    <input class="value-data circle" disabled type="number" name="system.speed.total" value="{{system.speed.total}}" data-dtype="Number" />
                     <div class="values-options mods-section flexcol">
                         <div class="flexrow">
-                            <input class="value-data" type="number" name="system.speed.base" value="{{data.system.speed.base}}" data-dtype="Number" />
+                            <input class="value-data" type="number" name="system.speed.base" value="{{system.speed.base}}" data-dtype="Number" />
                             <label>{{localize "age-system.base"}}</label>
                         </div>
                         <div class="flexrow">
-                            <input class="value-data" disabled type="number" name="system.speed.mod" value="{{data.system.speed.mod}}" data-dtype="Number" />
+                            <input class="value-data" disabled type="number" name="system.speed.mod" value="{{system.speed.mod}}" data-dtype="Number" />
                             <label>{{localize "age-system.mod"}}</label>
                         </div>
                     </div>
@@ -155,11 +155,11 @@
             <li class="resource colorset-third-tier">
                 <div class="title">{{localize "age-system.armor"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data circle" disabled type="number" name="system.armor.impact" value="{{data.system.armor.impact}}" data-dtype="Number" />
+                    <input class="value-data circle" disabled type="number" name="system.armor.impact" value="{{system.armor.impact}}" data-dtype="Number" />
                     {{#if data.config.healthSys.useBallistic}}
-                    <input class="value-data circle" disabled type="number" name="system.armor.ballistic" value="{{data.system.armor.ballistic}}" data-dtype="Number" />
+                    <input class="value-data circle" disabled type="number" name="system.armor.ballistic" value="{{system.armor.ballistic}}" data-dtype="Number" />
                     {{/if}}
-                    <input class="value-data circle" disabled type="number" name="system.armor.penalty" value="{{data.system.armor.penalty}}" data-dtype="Number" />
+                    <input class="value-data circle" disabled type="number" name="system.armor.penalty" value="{{system.armor.penalty}}" data-dtype="Number" />
                 </div>
                 <div class="labels flexrow">
                     {{#if data.config.healthSys.useBallistic}}
@@ -181,14 +181,14 @@
                     {{/if}}
                     {{localize "age-system.toughness"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data circle" disabled type="number" name="system.armor.toughness.total" value="{{data.system.armor.toughness.total}}" data-dtype="Number" />
+                    <input class="value-data circle" disabled type="number" name="system.armor.toughness.total" value="{{system.armor.toughness.total}}" data-dtype="Number" />
                     <div class="values-options mods-section flexcol">
                         <div class="flexrow">
-                            <input class="value-data game-mode-details" data-detail="toughness" type="number" name="system.armor.toughness.gameModeBonus" value="{{data.system.armor.toughness.gameModeBonus}}" data-dtype="Number" />
+                            <input class="value-data game-mode-details" data-detail="toughness" type="number" name="system.armor.toughness.gameModeBonus" value="{{system.armor.toughness.gameModeBonus}}" data-dtype="Number" />
                             <label>{{localize "age-system.gameModeBonus"}}</label>
                         </div>
                         <div class="flexrow">
-                            <input class="value-data" disabled type="number" name="system.armor.toughness.mod" value="{{data.system.armor.toughness.mod}}" data-dtype="Number" />
+                            <input class="value-data" disabled type="number" name="system.armor.toughness.mod" value="{{system.armor.toughness.mod}}" data-dtype="Number" />
                             <label>{{localize "age-system.mod"}}</label>
                         </div>
                     </div>
@@ -199,34 +199,34 @@
             </li>
             {{/if}}
 
-            {{#if data.system.useFatigue}}
+            {{#if system.useFatigue}}
             {{!-- Fatigue --}}
             <li class="resource colorset-third-tier">
                 <div class="title">{{localize "age-system.fatigue"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data circle" type="number" name="system.fatigue.entered" min="0" max="{{data.system.fatigue.max}}" value="{{data.system.fatigue.entered}}" data-dtype="Number" />
+                    <input class="value-data circle" type="number" name="system.fatigue.entered" min="0" max="{{system.fatigue.max}}" value="{{system.fatigue.entered}}" data-dtype="Number" />
                 </div>
                 <div class="labels flexrow">
-                    <label>{{data.system.fatigue.status}}</label>
+                    <label>{{system.fatigue.status}}</label>
                 </div>
             </li>
             {{/if}}
 
-            {{#if data.system.useConviction}}
+            {{#if system.useConviction}}
             {{!-- Conviction --}}
             <li class="resource colorset-third-tier">
                 <div class="title">{{localize "age-system.conviction"}}</div>
                 <div class="values flexrow">
-                    <input class="value-data circle" type="number" name="system.conviction.value" value="{{data.system.conviction.value}}" data-dtype="Number" />
-                    <input class="value-data circle" type="number" name="system.conviction.set" value="{{data.system.conviction.set}}" data-dtype="Number" />
-                    {{#if (ne data.system.conviction.set data.system.conviction.max)}}
-                    <input class="value-data circle bonus" type="number" class="colorset-second-tier" disabled name="system.conviction.max" value="{{data.system.conviction.max}}" data-dtype="Number" />
+                    <input class="value-data circle" type="number" name="system.conviction.value" value="{{system.conviction.value}}" data-dtype="Number" />
+                    <input class="value-data circle" type="number" name="system.conviction.set" value="{{system.conviction.set}}" data-dtype="Number" />
+                    {{#if (ne system.conviction.set system.conviction.max)}}
+                    <input class="value-data circle bonus" type="number" class="colorset-second-tier" disabled name="system.conviction.max" value="{{system.conviction.max}}" data-dtype="Number" />
                     {{/if}}
                 </div>
                 <div class="labels flexrow">
                     <label></label>
                     <label>{{localize "age-system.maximum"}}</label>
-                    {{#if (ne data.system.conviction.set data.system.conviction.max)}}
+                    {{#if (ne system.conviction.set system.conviction.max)}}
                     <label>{{localize "age-system.total"}}</label>
                     {{/if}}
                 </div>
@@ -242,22 +242,22 @@
                 <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder={{localize "age-system.name"}}/>
                 <div class="sub-details flexrow">
                     <div class="short-input">
-                        <input type="text" name="system.age" value="{{data.system.age}}">
+                        <input type="text" name="system.age" value="{{system.age}}">
                         <label for="">{{localize "age-system.age"}}</label>
                     </div>
 
                     <div class="short-input">
-                        <input type="text" name="system.height" value="{{data.system.height}}">
+                        <input type="text" name="system.height" value="{{system.height}}">
                         <label for="">{{localize "age-system.height"}}</label>
                     </div>
 
                     <div class="short-input"> 
-                        <input type="text" name="system.weight" value="{{data.system.weight}}">  
+                        <input type="text" name="system.weight" value="{{system.weight}}">  
                         <label for="">{{localize "age-system.weight"}}</label>
                     </div>
 
                     <div>
-                        <input type="text" name="system.ancestry" value="{{data.system.ancestry}}"> 
+                        <input type="text" name="system.ancestry" value="{{system.ancestry}}"> 
                         <label for="">{{localize (concat "SETTINGS.ancestryOpt" data.ancestry)}}</label>
                     </div>                
                 </div>
@@ -265,17 +265,17 @@
                 <div class="sub-details flexrow">
 
                     <div>
-                        <input type="text" name="system.background" value="{{data.system.background}}">
+                        <input type="text" name="system.background" value="{{system.background}}">
                         <label for="">{{localize "age-system.background"}}</label>
                     </div>
                     
                     <div>
-                        <input type="text" name="system.socialClass" value="{{data.system.socialClass}}">
+                        <input type="text" name="system.socialClass" value="{{system.socialClass}}">
                         <label for="">{{localize "age-system.socialClass"}}</label>
                     </div>
                     
                     <div>
-                        <input type="text" name="system.profession" value="{{data.system.profession}}">          
+                        <input type="text" name="system.profession" value="{{system.profession}}">          
                         <label for="">{{localize (concat "SETTINGS.occ" data.occupation)}}</label>
                     </div>
                 </div>
@@ -284,13 +284,13 @@
             <div class="resource colorset-third-tier at-header">
                 <div class="title">{{localize "age-system.level"}}</div>
                 <div class="values">
-                    <input class="value-data circle" type="number" name="system.level" value="{{data.system.level}}" data-dtype="Number" />
+                    <input class="value-data circle" type="number" name="system.level" value="{{system.level}}" data-dtype="Number" />
                 </div>    
                 <div class="labels flexcol">
                     <div class="flexrow exp">
-                        <input type="number" name="system.xp.value" value="{{data.system.xp.value}}" data-dtype="Number" />
+                        <input type="number" name="system.xp.value" value="{{system.xp.value}}" data-dtype="Number" />
                         <span>/</span>
-                        <input type="number" name="system.xp.next" value="{{data.system.xp.next}}" data-dtype="Number" />
+                        <input type="number" name="system.xp.next" value="{{system.xp.next}}" data-dtype="Number" />
                     </div>
                 </div>
             </div>

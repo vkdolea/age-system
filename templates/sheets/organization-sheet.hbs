@@ -42,7 +42,7 @@
             <input type="number" name="system.combat.stability.value" value="{{data.combat.stability.value}}" data-dtype="Number" />
             <span class="flexrow flex-align-center">
                 <select name="system.scope">
-                    {{#select data.system.scope}}
+                    {{#select system.scope}}
                     {{#each config.orgScope as |name scope|}}
                     <option value="{{scope}}">{{localize name}}</option>
                     {{/each}}
@@ -57,6 +57,6 @@
     </ul>
 
 
-    {{editor data.system.description target="system.description" button=true owner=owner editable=true}}
+    {{editor system.description target="system.description" button=true owner=owner editable=true}}
     <footer class="colorset-first-tier"></footer>
 </form>

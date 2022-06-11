@@ -5,67 +5,67 @@
             {{!-- Base Damage --}}
             <li>
                 <label>{{localize "age-system.item.damage"}}</label>
-                <input type="text" value="{{data.system.dmgFormula}}" disabled>
+                <input type="text" value="{{system.dmgFormula}}" disabled>
             </li>
-            {{#if data.system.hasDamage}}
+            {{#if system.hasDamage}}
             {{#if config.healthSys.useBallistic}}
             <li>
                 <label>{{localize "age-system.type"}}</label>
-                <input type="text" value="{{localize (concat "age-system." data.system.dmgType)}}" disabled>
+                <input type="text" value="{{localize (concat "age-system." system.dmgType)}}" disabled>
             </li>
             {{/if}}
             <li>
                 <label>{{localize "age-system.source"}}</label>
-                <input type="text" value="{{localize (concat "age-system." data.system.dmgSource)}}" disabled>
+                <input type="text" value="{{localize (concat "age-system." system.dmgSource)}}" disabled>
             </li>
             {{/if}}
             {{!-- Minimum Strenght --}}
             <li>
                 <label>{{localize "age-system.item.minStr"}}</label>
-                <input name="system.minStr" type="text" {{#if inChat}}disabled{{/if}} value="{{data.system.minStr}}" placeholder="-" data-dtype="String"/>
+                <input name="system.minStr" type="text" {{#if inChat}}disabled{{/if}} value="{{system.minStr}}" placeholder="-" data-dtype="String"/>
             </li>
             {{!-- Purchase Block --}}
             <li>
                 {{> "systems/age-system/templates/partials/cost-resource-block.hbs"}}
             </li>
-            {{#if data.system.ranged}}
+            {{#if system.ranged}}
             {{!-- Range --}}
             <li>
                 <label>{{localize "age-system.item.range"}} ({{localize "age-system.item.yards"}})</label>                    
                 <div class="flexrow">
-                    <input type="text" disabled value="{{data.system.rangeCalc}}" data-dtype="String" />
+                    <input type="text" disabled value="{{system.rangeCalc}}" data-dtype="String" />
                     /
-                    <input type="text" disabled value="{{data.system.rangeMaxCalc}}" data-dtype="String" />
+                    <input type="text" disabled value="{{system.rangeMaxCalc}}" data-dtype="String" />
                 </div>
             </li>
             {{/if}}
-            {{#if data.system.reloadable}}
+            {{#if system.reloadable}}
             {{!-- ROF --}}
             <li>
                 <label>{{localize "age-system.rof.rof"}}</label>
                 <select name="system.rof">
-                    {{#select data.system.rof}}
+                    {{#select system.rof}}
                     {{#each config.rof as |rof|}}
                     <option value="{{@key}}">{{localize rof}}</option>
                     {{/each}}
                     {{/select}}
                 </select>             
             </li>
-            {{#unless (or (eq data.system.rof "none") (eq data.system.rof "singleShot"))}}
+            {{#unless (or (eq system.rof "none") (eq system.rof "singleShot"))}}
             {{!-- Capacity --}}
             <li>
                 <label>{{localize "age-system.item.capacity"}}</label>
-                <input type="text" {{#if inChat}}disabled{{/if}} name="system.capacity" value="{{data.system.capacity}}" data-dtype="Number" />                    
+                <input type="text" {{#if inChat}}disabled{{/if}} name="system.capacity" value="{{system.capacity}}" data-dtype="Number" />                    
             </li>
             {{/unless}}
             {{!-- Reload --}}
             <li>
                 <label>{{localize "age-system.item.reload"}}</label>
                 {{#if inChat}}
-                <div>{{localize (concat "age-system." data.system.reload)}}</div>
+                <div>{{localize (concat "age-system." system.reload)}}</div>
                 {{else}}
                 <select name="system.reload" {{#if inChat}}disabled{{/if}}>
-                    {{#select data.system.reload}}
+                    {{#select system.reload}}
                     {{#each config.reloadDuration as |reloadDuration|}}
                     <option value="{{@key}}">{{localize reloadDuration}}</option>
                     {{/each}}
@@ -77,17 +77,17 @@
             {{!-- Quantity --}}
             <li>
                 <label>{{localize "age-system.item.quantity"}}</label>
-                <input type="number" {{#if inChat}}disabled{{/if}} name="system.quantity" value="{{data.system.quantity}}" data-dtype="Number"/>
+                <input type="number" {{#if inChat}}disabled{{/if}} name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
             </li>
             {{!-- Weight --}}
             <li>
                 <label>{{localize "age-system.item.weight"}}</label>
-                <input type="number" {{#if inChat}}disabled{{/if}} name="system.weight" value="{{data.system.weight}}" data-dtype="Number"/>
+                <input type="number" {{#if inChat}}disabled{{/if}} name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
             </li>
             {{!-- Page Ref --}}
-            <li class="feature-controls" data-reference="{{data.system.reference}}">
+            <li class="feature-controls" data-reference="{{system.reference}}">
                 <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
-                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{data.system.reference}}" placeholder="Page Ref." data-dtype="String"/>
+                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{system.reference}}" placeholder="Page Ref." data-dtype="String"/>
             </li>
         </ul>
     </aside>
@@ -115,7 +115,7 @@
                 {{!-- Main Tab --}}
                 <div class="tab main" data-group="primary" data-tab="main">
                     <ul class="resource colorset-first-tier item-box"><li>
-                        {{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
+                        {{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
                     </li></ul>
                 </div>
 
@@ -135,13 +135,13 @@
                         <li class="colorset-third-tier flexrow">
                             <label>{{localize "age-system.formula"}}</label>
                             {{#if config.healthSys.useInjury}}
-                            <input type="text" name="system.damageInjury" value="{{data.system.damageInjury}}"/>
+                            <input type="text" name="system.damageInjury" value="{{system.damageInjury}}"/>
                             {{else}}
-                            <input type="text" name="system.damageFormula" value="{{data.system.damageFormula}}"/>
+                            <input type="text" name="system.damageFormula" value="{{system.damageFormula}}"/>
                             {{/if}}
                             <div class="extra-input">
                                 <span>+<select name="system.dmgAbl">
-                                    {{#select data.system.dmgAbl}}
+                                    {{#select system.dmgAbl}}
                                     <option value="no-abl">—</option>
                                     {{#each config.abilities as |name type|}}
                                     <option value="{{type}}">{{localize name}}</option>
@@ -154,7 +154,7 @@
                             <label class="colorset-third-tier">{{localize "age-system.type"}}</label>
                             {{#if config.healthSys.useBallistic}}
                             <select name="system.dmgType">
-                                {{#select data.system.dmgType}}
+                                {{#select system.dmgType}}
                                 {{#each config.damageType as |name type|}}
                                 <option value="{{type}}">{{localize name}}</option>
                                 {{/each}}
@@ -162,7 +162,7 @@
                             </select>
                             {{/if}}
                             <select name="system.dmgSource">
-                                {{#select data.system.dmgSource}}
+                                {{#select system.dmgSource}}
                                 {{#each config.damageSource as |name source|}}
                                 <option value="{{source}}">{{localize name}}</option>
                                 {{/each}}
@@ -194,19 +194,19 @@
                         </li>
                         <li class="colorset-third-tier flexrow">
                             <p>
-                                <a class="select-options toggle-feature item-name item-box {{#if data.system.ranged}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="ranged">Ranged</a>
-                                <a class="select-options toggle-feature item-name item-box {{#if data.system.reloadable}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="reloadable">Reloadable</a>
+                                <a class="select-options toggle-feature item-name item-box {{#if system.ranged}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="ranged">Ranged</a>
+                                <a class="select-options toggle-feature item-name item-box {{#if system.reloadable}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="reloadable">Reloadable</a>
                             </p>
                         </li>
-                        {{#if data.system.ranged}}
+                        {{#if system.ranged}}
                         <li class="colorset-third-tier flexrow">
                             <div class="flexrow flex-align-center">
                                 <label>{{localize "age-system.item.range"}}</label>
-                                <input type="text" name="system.range" value="{{data.system.range}}" data-dtype="String" />
+                                <input type="text" name="system.range" value="{{system.range}}" data-dtype="String" />
                             </div>
                             <div class="flexrow flex-align-center">
                                 <label>{{localize "age-system.item.range"}} ({{localize "age-system.maximum"}})</label>
-                                <input type="text" name="system.rangeMax" value="{{data.system.rangeMax}}" data-dtype="String" />
+                                <input type="text" name="system.rangeMax" value="{{system.rangeMax}}" data-dtype="String" />
                             </div>
                         </li>
                         {{/if}}

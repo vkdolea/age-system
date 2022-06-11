@@ -6,13 +6,13 @@
             {{!-- Rank --}}
             <li>
                 <label>{{localize "age-system.rank"}}</label>
-                <input type="number" {{#if inChat}}disabled{{/if}} name="system.rank" value="{{data.system.rank}}"/>
+                <input type="number" {{#if inChat}}disabled{{/if}} name="system.rank" value="{{system.rank}}"/>
             </li>
 
             {{!-- Page Ref --}}
-            <li class="feature-controls" data-reference="{{data.system.reference}}">
+            <li class="feature-controls" data-reference="{{system.reference}}">
                 <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
-                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{data.system.reference}}" placeholder="Page Ref." data-dtype="String"/>
+                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{system.reference}}" placeholder="Page Ref." data-dtype="String"/>
             </li>
         </ul>
     </aside>
@@ -23,7 +23,7 @@
                 <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
                 <div class="sub-details">
                     {{!-- Membership Position --}}
-                    <input type="text" name="system.shortDesc" value="{{data.system.shorDesc}}">
+                    <input type="text" name="system.shortDesc" value="{{system.shorDesc}}">
                     <label>{{localize "age-system.membershipPosition"}}</label>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <li class="title colorset-third-tier">
                     <label>{{localize "age-system.item.desc"}}</label>
                 </li>
-                <li>{{editor data.system.longDesc target="system.longDesc" button=true owner=owner editable=true}}</li>
+                <li>{{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true}}</li>
             </ul>
         </div>
     </div>

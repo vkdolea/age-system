@@ -5,7 +5,7 @@
             <p class="mod-value">{{localize "age-system.value"}}</p>
             <p class="mod-controls"><a class="add-bonus"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></p>
         </li>
-        {{#each data.system.modifiers as |mod i|}}
+        {{#each system.modifiers as |mod i|}}
         <li class="item-box flexrow feature-controls colorset-third-tier" data-mod-index="{{i}}">
             <select class="mod-type" name="system.modifiers.{{i}}.type">
                 {{#select mod.type}}

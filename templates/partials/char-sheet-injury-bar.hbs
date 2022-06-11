@@ -6,7 +6,7 @@
         <div class="flexrow injury-degrees">
             <div class="flexrow degree no-flexwrap">
                 <div>{{localize "age-system.injuryLight"}}</div>
-                <input type="number" name="system.injury.degrees.light" disabled value="{{data.system.injury.degrees.light}}" data-dtype="Number" />
+                <input type="number" name="system.injury.degrees.light" disabled value="{{system.injury.degrees.light}}" data-dtype="Number" />
                 <div class="flexcol arrow-control light">
                     <a><i class="fa fa-chevron-up change-injury add" aria-hidden="true"></i></a>
                     <a><i class="fa fa-chevron-down change-injury remove" aria-hidden="true"></i></a>
@@ -14,7 +14,7 @@
             </div>
             <div class="flexrow degree no-flexwrap">
                 <div>{{localize "age-system.injurySerious"}}</div>
-                <input type="number" name="system.injury.degrees.serious" disabled value="{{data.system.injury.degrees.serious}}" data-dtype="Number" />
+                <input type="number" name="system.injury.degrees.serious" disabled value="{{system.injury.degrees.serious}}" data-dtype="Number" />
                 <div class="flexcol arrow-control serious">
                     <a><i class="fa fa-chevron-up change-injury add" aria-hidden="true"></i></a>
                     <a><i class="fa fa-chevron-down change-injury remove" aria-hidden="true"></i></a>
@@ -22,7 +22,7 @@
             </div>
             <div class="flexrow degree no-flexwrap">
                 <div>{{localize "age-system.injurySevere"}}</div>
-                <input type="number" name="system.injury.degrees.severe" disabled value="{{data.system.injury.degrees.severe}}" data-dtype="Number" />
+                <input type="number" name="system.injury.degrees.severe" disabled value="{{system.injury.degrees.severe}}" data-dtype="Number" />
                 <div class="flexcol arrow-control severe">
                     <a><i class="fa fa-chevron-up change-injury add" aria-hidden="true"></i></a>
                     <a><i class="fa fa-chevron-down change-injury remove" aria-hidden="true"></i></a>
@@ -36,14 +36,14 @@
         <div class="flexrow marks-control">
             {{#unless (eq data.injury.degrees.severeMult 1)}}
             <div class="flexcol tracker-container">
-                {{#each data.system.injury.marksArray as |tracker|}}
+                {{#each system.injury.marksArray as |tracker|}}
                 {{#if tracker}}
                 <div class="severe-injury-tracker"></div>
                 {{/if}}
                 {{/each}}
             </div>
             {{/unless}}
-            <input type="number" name="system.injury.marks" disabled value="{{data.system.injury.marks}}" data-dtype="Number" />
+            <input type="number" name="system.injury.marks" disabled value="{{system.injury.marks}}" data-dtype="Number" />
             <div class="flexcol arrow-control mark">
                 {{!-- <a><i class="fa fa-chevron-up change-injury add" aria-hidden="true"></i></a> --}}
                 <a><i class="fa fa-chevron-down change-injury remove" aria-hidden="true"></i></a>

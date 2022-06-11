@@ -2,47 +2,47 @@
 
 <div class="flexrow container">
     <label for="">{{localize "age-system.drive.drive"}}</label>
-    <input type="text" name="system.drive.name" value="{{data.system.drive.name}}">          
+    <input type="text" name="system.drive.name" value="{{system.drive.name}}">          
 
     <label for="">{{localize "age-system.drive.quality"}}</label>
-    <input type="text" name="system.drive.quality" value="{{data.system.drive.quality}}">          
+    <input type="text" name="system.drive.quality" value="{{system.drive.quality}}">          
 
     <label for="">{{localize "age-system.drive.downfall"}}</label>
-    <input type="text" name="system.drive.downfall" value="{{data.system.drive.downfall}}">          
+    <input type="text" name="system.drive.downfall" value="{{system.drive.downfall}}">          
 </div>
 
 <div class="flexrow goals-language">
     <div class="flexcol goals container">
         <label>{{localize "age-system.goals"}}</label>
-        <textarea class="free-text" name="system.goals">{{data.system.goals}}</textarea>
+        <textarea class="free-text" name="system.goals">{{system.goals}}</textarea>
     </div>
     <div class="spacer"></div>
     <div class="flexcol language container">
         <label>{{localize "age-system.language"}}</label>
-        <textarea class="free-text" name="system.language">{{data.system.language}}</textarea>
+        <textarea class="free-text" name="system.language">{{system.language}}</textarea>
     </div>
 </div>
 
 <div class="flexcol features container">
     <label for="">{{localize "age-system.features"}}</label>
-    <textarea class="free-text" name="system.traits">{{data.system.traits}}</textarea>
+    <textarea class="free-text" name="system.traits">{{system.traits}}</textarea>
 </div>
 
 {{#if isGM}}
 <div class="flexcol secret-note container">
     <label for="">{{localize "age-system.gmNotes"}}</label>
-    <textarea class="free-text" name="system.gmNotes">{{data.system.gmNotes}}</textarea>
+    <textarea class="free-text" name="system.gmNotes">{{system.gmNotes}}</textarea>
 </div>
 {{/if}}
 
 {{#if owner}}
 <div class="flexcol secret-note container">
     <label for="">{{localize "age-system.secretNote"}}</label>
-    <textarea class="free-text" name="system.secretNote">{{data.system.secretNote}}</textarea>
+    <textarea class="free-text" name="system.secretNote">{{system.secretNote}}</textarea>
 </div>
 {{/if}}
 
 <div class="flexcol bio container">
     <label for="">{{localize "age-system.bio"}}</label>
-    {{editor data.system.features target="system.features" button=true owner=owner editable=editable}}
+    {{editor system.features target="system.features" button=true owner=owner editable=editable}}
 </div>
