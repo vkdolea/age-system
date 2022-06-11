@@ -411,8 +411,10 @@ Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimar
 Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
 Hooks.on("renderChatMessage", (app, html, data) => {AgeChat.sortCustomAgeChatCards(app, html, data)});
 Hooks.on("getChatLogEntryContext", AgeChat.addChatMessageContextOptions);
-Hooks.once('diceSoNiceReady', (data) => { import('/modules/dice-so-nice/DiceColors.js').then((diceColors) => {
-    const colorset = diceColors.COLORSETS;
+Hooks.on('renderActorSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));
+Hooks.on('renderItemSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));
+Hooks.once('diceSoNiceReady', () => {
+    const colorset = game.dice3d.exports.COLORSETS;
     let colorChoices = {};
     for (const type in colorset) {
         if (colorset.hasOwnProperty(type)) {
@@ -431,6 +433,4 @@ Hooks.once('diceSoNiceReady', (data) => { import('/modules/dice-so-nice/DiceColo
     const stuntSoNiceFlag = game.user.getFlag("age-system", "stuntSoNice");
     if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);
     if (!stuntSoNiceFlag) game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
-}).catch((err) => console.error(err))});
-Hooks.on('renderActorSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));
-Hooks.on('renderItemSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));
+});
