@@ -8,10 +8,14 @@
     };
 }
 
+
+
 /*********************************/
 /**    Alternate Char Sheet     **/
 /*********************************/
+@big-border-radius: 5px;
 .age-system {
+    
     
     .mouse-to-pointer:hover {
         cursor: pointer;
@@ -40,7 +44,7 @@
         min-height: 150px;
         max-height: 400px;
         padding: 4px;
-        border-radius: 0 0 10px 10px;
+        border-radius: 0 0 @big-border-radius @big-border-radius;
         .tox.tox-tinymce {
             min-height: 140px !important;
             max-height: 390px !important;
@@ -120,13 +124,13 @@
     .resource {
         input,
         select {
-            border-radius: 10px;
+            border-radius: @big-border-radius;
             background-color: rgba(255,255,255,0.5);
             // color: silver;
             margin: 2px;
         }
         hr {margin: 0}
-        border-radius: 10px;
+        border-radius: @big-border-radius;
         margin-bottom: 6px;
         margin-left: 4px;
         margin-right: 4px;
@@ -319,7 +323,7 @@
         .ability-box {
             flex: 0 0 200px;
             margin-bottom: 5px;
-            border-radius: 10px;
+            border-radius: @big-border-radius;
             border: thin solid black;
         };
         .ability-box:last-of-type {
@@ -328,8 +332,8 @@
         .abl-header {
             justify-content: space-between;
             align-items: center;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border-top-left-radius: @big-border-radius;
+            border-top-right-radius: @big-border-radius;
             .abl-name {
                 text-align: left;
                 label {
@@ -343,7 +347,7 @@
             }
             input[type="number"].original {
                 background-color: silver;
-                border-top-right-radius: 10px;
+                border-top-right-radius: @big-border-radius;
             }
             input[type="checkbox"] {
                 flex: 0 0 12px;
@@ -362,9 +366,9 @@
         .no-focus {
             .owned-focus {margin: 0};
             .abl-header {
-                border-radius: 10px;
+                border-radius: @big-border-radius;
                 input[type="number"].original {
-                    border-bottom-right-radius: 10px;
+                    border-bottom-right-radius: @big-border-radius;
                 }
             }
         }
@@ -378,7 +382,7 @@
     }
     .free-text {
         resize: none !important;
-        border-radius: 0 0 10px 10px;
+        border-radius: 0 0 @big-border-radius @big-border-radius;
         padding: 4px;
         border: none;
     }
@@ -387,13 +391,13 @@
         li {align-items: center;}
         li:first-child,
         .list-item:first-child {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border-top-left-radius: @big-border-radius;
+            border-top-right-radius: @big-border-radius;
         };
         li:last-child,
         .list-item:last-child {
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: @big-border-radius;
+            border-bottom-right-radius: @big-border-radius;
         }
         height: max-content;
         // margin: 0 5px 10px 5px;
