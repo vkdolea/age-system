@@ -112,14 +112,15 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         // Weapon Groups
         data.weaponGroups = ageSystem.weaponGroups;
 
+        this.enrichText(this.object.system);
 
         // Return template data
         return {
             actor: this.object,
             cssClass: isEditable ? "editable" : "locked",
             data: data,
+            system: data.system,
             itemMods: this.object.system.ownedMods,
-            // modListType: modListType,
             effects: data.effects,
             items: data.items,
             limited: this.object.limited,
@@ -132,6 +133,14 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             inUseStatusEffects: ageSystem.inUseStatusEffects
         };
     };
+
+    async enrichText(actorData) {
+        const richHTML = ['features']
+        for (let i = 0; i < richHTML.length; i++) {
+            const e = actorData[richHTML[i]];
+            if (e) actorData[richHTML[i]] = await TextEditor.enrichHTML(e, {async: true});
+        }
+    }
 
     _getHeaderButtons() {
         let buttons = super._getHeaderButtons();
@@ -238,7 +247,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const inlineRoll = html.find("a.inline-roll");
         const insideMCE = [...entityLink, ...inlineRoll];
         for (let i = 0; i < insideMCE.length; i++) insideMCE[i].classList.add(`colorset-second-tier`);
-        
+       
         super.activateListeners(html);
     };
 

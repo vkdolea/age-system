@@ -114,8 +114,20 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Check if Use Fatigue setting is TRUE
         data.fatigueSet = game.settings.get("age-system", "useFatigue");
 
-        return data;
+        data.system = data.data.system;
+        // Enrich HTML text
+        this.enrichText(data.system);
+
+        return data
     };
+
+    async enrichText(itemData) {
+        const richHTML = ['longDesc', 'degree0.desc', 'degree1.desc', 'degree2.desc', 'degree3.desc', 'degree4.desc']
+        for (let i = 0; i < richHTML.length; i++) {
+            const e = itemData[richHTML[i]];
+            if (e) itemData[richHTML[i]] = await TextEditor.enrichHTML(e, {async: true});
+        }
+    }
     
     
     activateListeners(html) {
