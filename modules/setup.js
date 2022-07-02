@@ -48,6 +48,7 @@ export function localizeAgeEffects() {
     ageSystem.ageEffectsOptions = options;
 }
 
+// Select which Ability setting is used
 export function abilitiesName() {
     // Capture what is the ability set to be used
     const settingAblOption = game.settings.get("age-system", "abilitySelection");
@@ -84,9 +85,9 @@ export function hidePrimaryAblCheckbox(html) {
 
 export function nameItemSheetWindow(ageSystemItemSheet) {
     // Add item type in the title bar within brackets
-    const i = ageSystemItemSheet.item.type.toLowerCase();
+    const i = ageSystemItemSheet.object.type.toLowerCase();
     const itemType = i[0].toUpperCase() + i.slice(1);
-    const itemWindowId = ageSystemItemSheet.actor ? `actor-${ageSystemItemSheet.actor.id}-item-${ageSystemItemSheet.item.id}` : `item-${ageSystemItemSheet.item.id}`;
+    const itemWindowId = ageSystemItemSheet.actor ? `ageSystemItemSheet-Actor-${ageSystemItemSheet.actor.id}-Item-${ageSystemItemSheet.item.id}` : `ageSystemItemSheet-Item-${ageSystemItemSheet.item.id}`;
     let itemWindow = document.getElementById(itemWindowId);
     let windowHeader = itemWindow.children[0].firstElementChild;
     windowHeader.textContent += ` [${game.i18n.localize("ITEM.Type" + itemType)}]`;
@@ -107,13 +108,25 @@ export function sortObjArrayByName(nameArray, nameKey) {
 }
 
 /**
- * Add customization do Actor Sheet
+ * Add customization to Actor Sheet
  * @param {object} sheet Sheet configuration data
  * @param {jQuery Object} html jQuery object whith sheet
  * @param {object} data data used to render sheet
  */
-export function prepSheet (sheet, html, data) {
+export async function prepSheet (sheet, html, data) {
+    // Add color customization
     html.addClass(`colorset-${ageSystem.colorScheme}`)
+    
+    // Enrich HMTL text
+    const els = $(`div.editor-content`);
+    for (let i = 0; i < els.length; i++) {
+        els[i].innerHTML = await TextEditor.enrichHTML(els[i].innerHTML, {async: true});
+        // Add colorset class to content-link inside TinyMCE editor
+        const contentLink = els[i].querySelectorAll("a.content-link");
+        const inlineRoll = els[i].querySelectorAll("a.inline-roll");
+        const insideMCE = [...contentLink, ...inlineRoll];
+        for (let i = 0; i < insideMCE.length; i++) insideMCE[i].classList.add(`colorset-second-tier`);   
+    }
 }
 
 /**

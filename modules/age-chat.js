@@ -51,8 +51,8 @@ export function addChatListeners(html) {
  */
 function applyChatCardDamage(li, options) {
     const message = game.messages.get(li.data("messageId"));
-    const roll = message.roll;
-    const cardDamageData = message.data.flags?.["age-system"]?.damageData;
+    const roll = message.rolls[0];
+    const cardDamageData = message.flags?.["age-system"]?.damageData;
     const total = cardDamageData?.totalDamage ?? roll.total;
     if (options.isHealing) {
         return Promise.all(canvas.tokens.controlled.map(t => {

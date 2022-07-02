@@ -2496,6 +2496,13 @@
   flex-wrap: nowrap;
   padding: 0 4px;
 }
+.age-system.sheet .editor.values,
+.age-system.dialog .editor.values {
+  justify-content: flex-start;
+  align-items: normal;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
 .age-system.sheet li.item-box,
 .age-system.dialog li.item-box,
 .age-system.sheet .list-item.item-box,

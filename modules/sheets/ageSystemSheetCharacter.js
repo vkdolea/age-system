@@ -112,8 +112,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         // Weapon Groups
         data.weaponGroups = ageSystem.weaponGroups;
 
-        this.enrichText(this.object.system);
-
         // Return template data
         return {
             actor: this.object,
@@ -133,14 +131,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             inUseStatusEffects: ageSystem.inUseStatusEffects
         };
     };
-
-    async enrichText(actorData) {
-        const richHTML = ['features']
-        for (let i = 0; i < richHTML.length; i++) {
-            const e = actorData[richHTML[i]];
-            if (e) actorData[richHTML[i]] = await TextEditor.enrichHTML(e, {async: true});
-        }
-    }
 
     _getHeaderButtons() {
         let buttons = super._getHeaderButtons();
@@ -242,11 +232,11 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".wgroup-item").click(this._onWeaponGroupToggle.bind(this));
         }
 
-        // Add colorset class to entity-link inside TinyMCE editor
-        const entityLink = html.find("a.entity-link");
-        const inlineRoll = html.find("a.inline-roll");
-        const insideMCE = [...entityLink, ...inlineRoll];
-        for (let i = 0; i < insideMCE.length; i++) insideMCE[i].classList.add(`colorset-second-tier`);
+        // // Add colorset class to entity-link inside TinyMCE editor
+        // const entityLink = html.find("a.entity-link");
+        // const inlineRoll = html.find("a.inline-roll");
+        // const insideMCE = [...entityLink, ...inlineRoll];
+        // for (let i = 0; i < insideMCE.length; i++) insideMCE[i].classList.add(`colorset-second-tier`);
        
         super.activateListeners(html);
     };

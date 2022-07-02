@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.13.0 [2022-xx-xx]
+### Changed
+- System updated to run on Foundry VTT v10. *Not compatible to earlier versions!*
+
 ## 0.12.5 [2022-06-11]
 ### Fixed
 - Added a cleaner background on character/item sheets.
