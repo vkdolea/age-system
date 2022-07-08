@@ -83,13 +83,13 @@ export function hidePrimaryAblCheckbox(html) {
     }
 };
 
-export function nameItemSheetWindow(ageSystemItemSheet) {
-    // Add item type in the title bar within brackets
-    const i = ageSystemItemSheet.object.type.toLowerCase();
+// Add item type in the title bar within brackets
+export function nameItemSheetWindow(itemWindow) {
+    const i = itemWindow.object.type.toLowerCase();
     const itemType = i[0].toUpperCase() + i.slice(1);
-    const itemWindowId = ageSystemItemSheet.actor ? `ageSystemItemSheet-Actor-${ageSystemItemSheet.actor.id}-Item-${ageSystemItemSheet.item.id}` : `ageSystemItemSheet-Item-${ageSystemItemSheet.item.id}`;
-    let itemWindow = document.getElementById(itemWindowId);
-    let windowHeader = itemWindow.children[0].firstElementChild;
+    const appId = itemWindow.appId;
+    const window = document.querySelector(`div[data-appid='${appId}']`);
+    const windowHeader = window.children[0].firstElementChild;
     windowHeader.textContent += ` [${game.i18n.localize("ITEM.Type" + itemType)}]`;
 };
 
