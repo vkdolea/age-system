@@ -10,35 +10,33 @@ export class ageSystemActor extends Actor {
         this.prepareEmbeddedDocuments();
         this.prepareDerivedData();
         // Sorting Items for final data preparation
-        // const items = this.items;
-        // if (this.type === 'char') {
-        //     // First prepare Focus
-        //     items.forEach(i => {
-        //         if (i.system.type === "focus") {
-        //             i.prepareData();
-        //             if(i.sheet?.rendered) i.sheet.render(false);
-        //         }
-        //     })
-        //     // Then prepare other item types which require further prep
-        //     items.forEach(i => {
-        //         if (["weapon", "power"].includes(i.system.type)) {
-        //             i.prepareData()
-        //             if(i.sheet?.rendered) i.sheet.render(false);
-        //         }
-        //     })
+        const items = this.items;
+        if (this.type === 'char') {
+            // First prepare Focus
+            items.forEach(i => {
+                if (i.system.type === "focus") {
+                    i.prepareData();
+                    if(i.sheet?.rendered) i.sheet.render(false);
+                }
+            })
+            // Then prepare other item types which require further prep
+            items.forEach(i => {
+                if (["weapon", "power"].includes(i.system.type)) {
+                    i.prepareData()
+                    if(i.sheet?.rendered) i.sheet.render(false);
+                }
+            })
             
-        //     // Calculate Initiative based on Focus (if set on System Settings)
-        //     const initiativeFocus = game.settings.get("age-system", "initiativeFocus");
-        //     if (initiativeFocus) {
-        //         const init = this.checkFocus(initiativeFocus);
-        //         this.system.initiative += init.value;
-        //     }
-        // }
+            // Calculate Initiative based on Focus (if set on System Settings)
+            const initiativeFocus = game.settings.get("age-system", "initiativeFocus");
+            if (initiativeFocus) {
+                const init = this.checkFocus(initiativeFocus);
+                this.system.initiative += init.value;
+            }
+        }
     }
 
     prepareBaseData() {
-        // const actorData = this.data;
-        // const data = actorData.data;
         const actorData = this;
         const data = actorData.system;
         
@@ -99,8 +97,6 @@ export class ageSystemActor extends Actor {
     }
 
     prepareDerivedData() {
-        // const actorData = this.data;
-        // const data = actorData.data;
         const actorData = this;
         const data = actorData.system;
 
@@ -120,9 +116,6 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareBaseDataChar() {
-
-        // const actorData = this.data;
-        // const data = actorData.data;
         const actorData = this;
         const data = actorData.system;
         
@@ -188,8 +181,6 @@ export class ageSystemActor extends Actor {
     };
 
     _configureCharGameMode() {
-        // const actorData = this.data;
-        // const data = actorData.data;
         const actorData = this;
         const data = actorData.system;
         const gmode = data.gameMode;
@@ -260,8 +251,6 @@ export class ageSystemActor extends Actor {
             }
         }
 
-        // const actorData = this.data;
-        // const data = actorData.data;
         const actorData = this;
         const data = actorData.system;
         data["ownedMods"] = mods;
@@ -289,8 +278,6 @@ export class ageSystemActor extends Actor {
     }
 
     _preparePostModCharData() {
-        // const actorData = this.data;
-        // const data = actorData.data;
         const actorData = this;
         const data = actorData.system;
 
@@ -385,8 +372,6 @@ export class ageSystemActor extends Actor {
     }
 
     _spaceshipItemModifiers() {
-        // const actorData = this.data;
-        // const data = actorData.data;
         const actorData = this;
         const data = actorData.system;
 
@@ -409,8 +394,6 @@ export class ageSystemActor extends Actor {
     }
 
     _prepareBaseDataVehicle() {
-        // const actorData = this.data;
-        // const data = actorData.data;
         const actorData = this;
         const data = actorData.system;
 
@@ -455,8 +438,6 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareBaseDataSpaceship() {
-        // const actorData = this.data;
-        // const data = actorData.data;
         const actorData = this;
         const data = actorData.system;
         this.sortPassengers();
@@ -521,22 +502,16 @@ export class ageSystemActor extends Actor {
     };
 
     _prepareDerivedDataSpaceship() {
-        // const actorData = this.data;
-        // const data = actorData.data;
         const actorData = this;
         const data = actorData.system;
 
         data.hull.baseMod = this._addSizeMod(data.sizeNumeric, data.itemMods.hullMod);
         data.hull.total = this._addHullPlatingLoss(data.hull.baseMod, data.itemMods.hullPlating);
-
-        data.systems.sensors.total = this._addSensorBonus(data.systems.sensors.base, data.systems.sensors.mod, data.itemMods.sensorMod);
-
-        // data.juiceMod
-
+        data.systems.sensors.total = this._addSensorBonus(data.systems.sensors.base, data.systems.sensors.mod, data.itemMods?.sensorMod);
     };
 
     _addSensorBonus(base, mod, bonus) {
-        const sensorLoss = -this.data.data.losses.normal.sensors.actual;
+        const sensorLoss = -this.system.losses.normal.sensors.actual;
         if (!bonus) bonus = 0;
         return base + mod + bonus + sensorLoss;
     }
@@ -596,7 +571,6 @@ export class ageSystemActor extends Actor {
 
     // TODO - testar essa função, que ainda está em desuso
     sortPassengers() {
-        // const data = this.data.data;
         const data = this.system;
         const passengers = data.passengers;
         let invalidPassengers = [];
@@ -891,7 +865,7 @@ export class ageSystemActor extends Actor {
                         icon: `<i class="fa fa-check" aria-hidden="true"></i>`,
                         callback: html => {
                             const fd = new FormDataExtended(html[0].querySelector("form"));
-                            resolve(fd.toObject())
+                            resolve(fd.object)
                         }
                     },
                     cancel: {

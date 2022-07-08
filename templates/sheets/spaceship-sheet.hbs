@@ -3,8 +3,8 @@
     <input name="name" class="spaceship-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
     <div class="flexrow image-description">
         <img class="ship-image" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
-        <div class="ship-desc">
-            <label class="colorset-second-tier desc">{{localize "age-system.item.desc"}}</label>
+        <div class="ship-desc colorset-second-tier stats-block">
+            <h2>{{localize "age-system.item.desc"}}</h2>
             {{editor system.description target="system.description" button=true owner=owner editable=true}}
         </div>
     </div>
@@ -45,7 +45,7 @@
                     {{/each}}
                     {{/select}}
                 </select>
-                <input name="system.systems.{{sysName}}.useFocus" class="system-focus" type="text" value="{{system.useFocus}}" placeholder="{{localize "age-system.focus"}}" list="{{../this.actor.data.type}}-{{../this.actor.id}}-list"/>
+                <input name="system.systems.{{sysName}}.useFocus" class="system-focus" type="text" value="{{system.useFocus}}" placeholder="{{localize "age-system.focus"}}" list="{{../this.actor.type}}-{{../this.actor.id}}-list"/>
             </li>
             {{/each}}
         </ul>

@@ -338,8 +338,8 @@ async function _handleItemCardButton(html){
  */
 function _permCheck(actorPerm, element) {
     if (!element) return
-    const validPerm = [CONST.ENTITY_PERMISSIONS.OWNER];
-    if (game.settings.get("age-system", "observerRoll")) validPerm.push(CONST.ENTITY_PERMISSIONS.OBSERVER);
+    const validPerm = [CONST.DOCUMENT_PERMISSION_LEVELS.OWNER];
+    if (game.settings.get("age-system", "observerRoll")) validPerm.push(CONST.DOCUMENT_PERMISSION_LEVELS.OBSERVER);
     if (!validPerm.includes(actorPerm)) element.remove();
 }
 

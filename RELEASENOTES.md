@@ -2,7 +2,8 @@
 
 ## 0.13.0 [2022-xx-xx]
 ### Changed
-- System updated to run on Foundry VTT v10. *Not compatible to earlier versions!*
+- System updated to run on Foundry VTT v10.
+- *Removed compatibility to FoundryVTT 0.8.x and FoundryVTT v9.*
 
 ## 0.12.5 [2022-06-11]
 ### Fixed

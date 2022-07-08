@@ -4,8 +4,8 @@
     <input name="name" class="vehicle-name colorset-first-tier" type="text" value="{{actor.name}}" placeholder="{{localize "age-system.item.name"}}"/>
     <div class="flexrow image-description">
         <img class="vehicle-image" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
-        <div class="vehicle-desc">
-            <label class="colorset-second-tier desc">{{localize "age-system.item.desc"}}</label>
+        <div class="colorset-second-tier stats-block">
+            <h2>{{localize "age-system.item.desc"}}</h2>
             {{editor system.description target="system.description" button=true owner=owner editable=true}}
         </div>
     </div>
@@ -155,7 +155,11 @@
 
     {{!-- Passengers --}}
     <div class="passenger-container stats-block colorset-second-tier">
-        <h2>{{localize "age-system.passengers"}} [{{system.pob}} / <input type="number" name="system.capacity" value="{{system.capacity}}" data-dtype="Number">]</h2>
+        <h2>
+            <span>
+                {{localize "age-system.passengers"}} [{{system.pob}} / <input type="number" name="system.capacity" value="{{system.capacity}}" data-dtype="Number">]
+            </span>
+        </h2>
         <div class="passenger-list">
             <ol>
                 {{#each data.passengers as |passenger|}}

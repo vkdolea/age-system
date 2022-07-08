@@ -57,6 +57,7 @@
             height: 190px;
         }
         .vehicle-desc {
+            flex: auto;
             p {
                 margin: 7px 0;
                 height: auto;
@@ -130,19 +131,19 @@
             max-height: 20px;
         }
 
-        input[name="data.handling.mod"],
-        input[name="data.ramDmg"],
-        input[name="data.hull"],
-        input[name="data.defenseTotal"],
-        input[name="data.cost"],
-        input[name="data.velocity.catMod"],
-        input[name="data.armorRating"],
-        input[name="data.coverRating"] {
+        input[name="system.handling.mod"],
+        input[name="system.ramDmg"],
+        input[name="system.hull"],
+        input[name="system.defenseTotal"],
+        input[name="system.cost"],
+        input[name="system.velocity.catMod"],
+        input[name="system.armorRating"],
+        input[name="system.coverRating"] {
             max-width: 35px;
             max-height: 20px;
         }
 
-        input[name="data.cost"] {
+        input[name="system.cost"] {
             max-width: 60px;
         }
         input[type="checkbox"] {
@@ -152,9 +153,9 @@
             height: 16px;
         }
     
-        // input[name="data.conductor"],
-        input[name="data.handling.useFocus"],
-        select[name="data.handling.useAbl"] {
+        // input[name="system.conductor"],
+        input[name="system.handling.useFocus"],
+        select[name="system.handling.useAbl"] {
             // max-width: 285px;
             max-height: 20px;
         }
@@ -203,10 +204,13 @@
         max-height: auto;
         height: 100%;
         
-        input[name="data.capacity"] {
-            max-height: 16px;
-            max-width: 30px;
-            border: none;
+        span {
+            display: inline-block;
+            input[name="system.capacity"] {
+                max-height: 16px;
+                max-width: 60px;
+                border: none;
+            }
         }
     }
     .passenger-list {

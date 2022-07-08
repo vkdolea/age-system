@@ -1,6 +1,5 @@
 import {ageSystem} from "./config.js";
 import * as Dice from "./dice.js";
-// import { actorRollData } from "./dice.js";
 
 export class ageSystemItem extends Item {
 
@@ -32,11 +31,9 @@ export class ageSystemItem extends Item {
             this.img = ageSystem.itemIcons[this.type];
         };
         if (!this.name) this.name = "New " + game.i18n.localize(this.type);
-        
         const itemData = this;
         const data = itemData.system;
         const itemType = itemData.type;
-
         data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
         data.nameLowerCase = itemData.name.toLowerCase();
 
@@ -58,7 +55,7 @@ export class ageSystemItem extends Item {
         
         // Adding common data for Power and Weapon
         if (["power", "weapon"].includes(itemType)) {
-            data.useFocusActorId = data.useFocus && this.actor?.data ? this.actor.checkFocus(data.useFocus).id : null;
+            data.useFocusActorId = data.useFocus && this.actor?.system ? this.actor.checkFocus(data.useFocus).id : null;
             data.useFocusActor = this.actor ? this.actor.checkFocus(data.useFocus) : null;
             data.hasDamage = this.hasDamage;
             data.hasHealing = this.hasHealing;
@@ -77,7 +74,6 @@ export class ageSystemItem extends Item {
                         data.damageResisted.ablDamageValue = actorData.abilities[data.damageResisted.dmgAbl].total;
                     }                
                 }
-
             };
 
             // Evaluate Attack and Damage modifier
@@ -92,11 +88,6 @@ export class ageSystemItem extends Item {
             case "shipfeatures": this._prepareShipFeatures(data);
                 break;
         }
-        
-        // // Adds support to FoundryVTT 0.8.x
-        // if (isNewerVersion(ageSystem.coreVersion, "0.8.9")) this.prepareEmbeddedDocuments();
-        // else this.prepareEmbeddedEntities();
-        // this.prepareEmbeddedEntities();
     };
 
     prepareDamageData(data) {
@@ -224,7 +215,6 @@ export class ageSystemItem extends Item {
         const actorData = actor?.system;
         if (data.initialValue) focusParts.push(data.initialValue);
         if (data.improved) focusParts.push("1");
-        // data.finalValue = data.improved ? data.initialValue + 1 : data.initialValue;
         if (this.isOwned && actorData) {
             const focusBonus = actorData.ownedMods?.focus?.parts;
             if (focusBonus?.length) {

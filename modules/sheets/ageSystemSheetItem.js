@@ -50,7 +50,6 @@ export default class ageSystemItemSheet extends ItemSheet {
     };
    
     static get defaultOptions() {        
-        
         return mergeObject(super.defaultOptions, {
             height: 460,
             width: 700,
@@ -113,32 +112,17 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Check if Use Fatigue setting is TRUE
         data.fatigueSet = game.settings.get("age-system", "useFatigue");
-
         data.system = data.data.system;
-        // Enrich HTML text
-        this.enrichText(data.system);
-
         return data
-    };
-
-    async enrichText(itemData) {
-        const richHTML = ['longDesc', 'degree0.desc', 'degree1.desc', 'degree2.desc', 'degree3.desc', 'degree4.desc']
-        for (let i = 0; i < richHTML.length; i++) {
-            const e = itemData[richHTML[i]];
-            if (e) itemData[richHTML[i]] = await TextEditor.enrichHTML(e, {async: true});
-        }
-    }
-    
+    };    
     
     activateListeners(html) {
         if (this.isEditable) {
-            
             html.find("a.add-bonus").click(this._onAddModifier.bind(this));
             html.find(".add-modifier").click(this._onAddModifier.bind(this));
             html.find(".mod-controls a.remove").click(this._onRemoveModifier.bind(this));
             html.find(".mod-controls a.toggle").click(this._onToggleModifier.bind(this));
             html.find(".toggle-feature").click(this._onToggleFeature.bind(this));
-
             if (this.item.type === "focus") {
                 if (this.item.isOwned) {
                     html.find(".item-card-title").keyup(this._onOwnedFocusNameChange.bind(this));
@@ -160,12 +144,6 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Add class to TinyMCE
         const editor = html.find(".editor");
         for (let i = 0; i < editor.length; i++) editor[i].classList.add('values');
-        
-        // Add colorset class to entity-link inside TinyMCE editor
-        const entityLink = html.find("a.entity-link");
-        const inlineRoll = html.find("a.inline-roll");
-        const insideMCE = [...entityLink, ...inlineRoll];
-        for (let i = 0; i < insideMCE.length; i++) insideMCE[i].classList.add(`colorset-second-tier`);
 
         super.activateListeners(html);
     };

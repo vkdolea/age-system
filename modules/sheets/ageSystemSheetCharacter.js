@@ -231,32 +231,9 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
             html.find(".wgroup-item").click(this._onWeaponGroupToggle.bind(this));
         }
-
-        // // Add colorset class to entity-link inside TinyMCE editor
-        // const entityLink = html.find("a.entity-link");
-        // const inlineRoll = html.find("a.inline-roll");
-        // const insideMCE = [...entityLink, ...inlineRoll];
-        // for (let i = 0; i < insideMCE.length; i++) insideMCE[i].classList.add(`colorset-second-tier`);
        
         super.activateListeners(html);
     };
-
-    // /**
-    //  * @override
-    //  * Activate a named TinyMCE text editor
-    //  * @param {string} name             The named data field which the editor modifies.
-    //  * @param {object} options          TinyMCE initialization options passed to TextEditor.create
-    //  * @param {string} initialContent   Initial text content for the editor area.
-    //  */
-    // activateEditor(name, options={}, initialContent="") {
-    //     const mceCss = "/systems/age-system/styles/age-system-tinymce.css";
-    //     if (!options.content_css) {
-    //         options.content_css = [mceCss];
-    //     } else {
-    //         options.content_css.push(mceCss);
-    //     };
-    //     super.activateEditor(name, options, initialContent);
-    // }
 
     _onAdjustHealth(ev) {
         const actorData = this.actor.system;
@@ -399,7 +376,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const itemId = data.itemId;
         const key = data.key;
         const item = this.actor.items.get(itemId);
-        const active = actorData.modifiers[key].isActive;
+        const active = item.system.modifiers[key].isActive;
         const dataPath = `system.modifiers.${key}.isActive`;
         return item.update({[dataPath]: !active});
     }
@@ -534,7 +511,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const rollType = event.currentTarget.closest(".feature-controls").dataset.rollType
         const itemRolled = this.actor.items.get(itemId);
-        if (itemRolled.data.type === "focus" && event.button !== 0) return
+        if (itemRolled.system.type === "focus" && event.button !== 0) return
         itemRolled.roll(event, rollType);
     };
 

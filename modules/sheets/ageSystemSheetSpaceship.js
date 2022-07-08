@@ -28,7 +28,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
     async _onDrop(event) {
         let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
         if (dragData.type == "char") {
-            let passengers = duplicate(this.actor.data.data.passengers);
+            let passengers = duplicate(this.actor.system.passengers);
             passengers.push({id: dragData.id, isToken: dragData.isToken});
             this.actor.update({"system.passengers" : passengers})
         }
@@ -48,9 +48,9 @@ export default class ageSpaceshipSheet extends ActorSheet {
         data.passengers = sortObjArrayByName(this.actor.system.passengers, "name");
 
         const itemSorted = sortObjArrayByName(data.items, "name");
-        data.qualities = itemSorted.filter(i => i.data.quality === "quality" && i.data.type !== "weapon");
-        data.flaws = itemSorted.filter(i => i.data.quality === "flaw" && i.data.type !== "weapon");
-        data.weapon = itemSorted.filter(i => i.data.type === "weapon");
+        data.qualities = itemSorted.filter(i => i.quality === "quality" && i.type !== "weapon");
+        data.flaws = itemSorted.filter(i => i.quality === "flaw" && i.type !== "weapon");
+        data.weapon = itemSorted.filter(i => i.type === "weapon");
 
         // Check if sheet is from synthetic token - Passenger setup will not work for Synth
         data.notSynth = !(this.token && !this.token.data.actorLink);
@@ -61,6 +61,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             actor: this.object,
             cssClass: isEditable ? "editable" : "locked",
             data: data,
+            system: data.system,
             effects: data.effects,
             items: data.items,
             limited: this.object.limited,
@@ -299,7 +300,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
         let update = {};
         let passengerKey = event.currentTarget.closest(".feature-controls").dataset.passengerKey;
         passengerKey = Number(passengerKey);
-        const crew = this.object.data.data.passengers;
+        const crew = this.object.system.passengers;
         if (crew[passengerKey].isConductor) update = {"system.conductor": ""}
         crew.splice(passengerKey, 1);
         this.actor.update({...update, "system.passengers": crew});

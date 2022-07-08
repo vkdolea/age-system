@@ -202,17 +202,17 @@ Hooks.once("init", async function() {
 
     // Handlebar returning array with Focus for a given Ability
     Handlebars.registerHelper('focusbyabl', function(focus, abl) {
-        return focus.filter(f => f.data.useAbl === abl)
+        return focus.filter(f => f.system.useAbl === abl)
     });
 
     // Handlebar returning array with equiped weapon
     Handlebars.registerHelper('equippedwpn', function(weapons) {
-        return weapons.filter(f => f.data.equiped === true)
+        return weapons.filter(f => f.system.equiped === true)
     });
 
     // Handlebar returning array with active Power dealing damage
     Handlebars.registerHelper('dmgpower', function(powers) {
-        return powers.filter(p => p.data.activate === true && (p.data.hasDamage || p.data.hasHealing))
+        return powers.filter(p => p.system.activate === true && (p.system.hasDamage || p.system.hasHealing))
     });
 
     // Handlebar returning all carried itens
@@ -229,7 +229,7 @@ Hooks.once("init", async function() {
     // Handlebar to itentify if array is empty
     Handlebars.registerHelper('isempty', function(array, abl) {
         if (!Array.isArray(array)) return false;
-        array = array.filter(f => f.data.useAbl === abl)
+        array = array.filter(f => f.system.useAbl === abl)
         return array.length === 0 ? true : false;
     });
 

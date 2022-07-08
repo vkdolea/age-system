@@ -20,7 +20,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             // height: 560,
             height: 755,
             resizable: false,
-            classes: ["age-system", "sheet", "vehicle"/*, `colorset-${ageSystem.colorScheme}`*/]
+            classes: ["age-system", "sheet", "vehicle"]
         });
     }
     
@@ -28,7 +28,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         return `systems/age-system/templates/sheets/${this.actor.type}-sheet.hbs`;
     }
 
-    // From MooMan
+    // Manage data when Actor is droped on Vehicle sheet
     async _onDrop(event) {
         let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
         if (dragData.type == "char") {
@@ -63,7 +63,8 @@ export default class ageSystemVehicleSheet extends ActorSheet {
             options: this.options,
             owner: isOwner,
             title: this.title,
-            isGM: game.user.isGM
+            isGM: game.user.isGM,
+            system: data.system
         };
     };
 
@@ -98,7 +99,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
                     id : passenger.id,
                     isToken : passenger.isToken
                 };
-                const passengerList = this.actor.data.data.passengers;
+                const passengerList = this.actor.system.passengers;
                 let alreadyOnboard = false;
                 passengerList.map( p => {
                     if (p.id === passengerData.id) {
@@ -158,7 +159,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         let update = {};
         let passengerKey = event.currentTarget.closest(".feature-controls").dataset.passengerKey;
         passengerKey = Number(passengerKey);
-        const crew = this.object.data.data.passengers;
+        const crew = this.object.system.passengers;
         if (crew[passengerKey].isConductor) update = {"system.conductor": ""}
         crew.splice(passengerKey, 1);
         this.actor.update({...update, "system.passengers": crew});

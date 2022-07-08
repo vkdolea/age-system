@@ -140,8 +140,8 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     // Check if item rolled is Focus and prepare its data
     let focusId = null
     let focusObj = null
-    if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.data?.data.useFocus) {
-        focusObj = actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled);
+    if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.system?.useFocus) {
+        focusObj = actor.checkFocus(itemRolled?.system?.useFocus || itemRolled.name || itemRolled);
         rollFormula += " + @focus";
         rollData.focusName = focusObj.focusName;
         rollData.focus = focusObj.value;
@@ -198,11 +198,11 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     // Also checks if Item has Activation Mod
     if (itemRolled !== null && typeof(itemRolled) !== "string") {
         rollData.itemId = itemRolled.id;
-        rollData.hasDamage = itemRolled.data.data.hasDamage;
-        rollData.hasHealing = itemRolled.data.data.hasHealing;
-        rollData.hasFatigue = itemRolled.data.data.hasFatigue;
-        rollData.hasTest = itemRolled.data.data.hasTest;
-        const iUseMod = itemRolled?.data?.data?.activateMod
+        rollData.hasDamage = itemRolled.system.hasDamage;
+        rollData.hasHealing = itemRolled.system.hasHealing;
+        rollData.hasFatigue = itemRolled.system.hasFatigue;
+        rollData.hasTest = itemRolled.system.hasTest;
+        const iUseMod = itemRolled?.system?.activateMod
         if (iUseMod) {
             rollFormula += ` + ${iUseMod}`
             partials.push({
@@ -236,7 +236,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
                 label: game.i18n.localize("age-system.aim"),
                 value: rollData.aim
             });
-            if (itemRolled?.data?.type === "weapon") await actor.update({"data.aim.active": false});
+            if (itemRolled?.type === "weapon") await actor.update({"system.aim.active": false});
         };
         
         // Adds penalty for Attack which is converted to damage Bonus and pass info to chat Message
@@ -425,7 +425,7 @@ function hasWeaponGroupPenalty(item, ownedGroups) {
     // CASE 2 - No item rolled, Actor is not expected to have Weapon Groups, Weapon Groups is not an Array
     if (!item || !ownedGroups || !Array.isArray(ownedGroups) ) return false;
 
-    const itemWgroups = item?.data.data.wgroups;
+    const itemWgroups = item?.system.wgroups;
     
     // CASE 3 - Item's Weapon Groups is not an Array
     if (!Array.isArray(itemWgroups)) return false;
@@ -467,7 +467,7 @@ async function getAgeRollOptions(itemRolled, data = {}) {
                     label: game.i18n.localize("age-system.roll"),
                     callback: html => {
                         const fd = new FormDataExtended(html[0].querySelector("form"));
-                        resolve(fd.toObject())
+                        resolve(fd.object)
                     }
                 },
                 cancel: {
@@ -501,7 +501,7 @@ async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
                     label: game.i18n.localize("age-system.roll"),
                     callback: html => {
                         const fd = new FormDataExtended(html[0].querySelector("form"));
-                        resolve(fd.toObject());
+                        resolve(fd.object);
                     }
                 },
                 cancel: {
@@ -626,7 +626,7 @@ export async function vehicleDamage ({
     // Adds Ram Damage
     if (addRam) {
         damageFormula += ` + @ramDamage`;
-        rollData.ramDamage = `${vehicle.data.data.ramDmg}d6`;
+        rollData.ramDamage = `${vehicle.system.ramDmg}d6`;
         messageData.flavor += ` | ${game.i18n.localize("age-system.ram")}`;
     };
 
@@ -807,17 +807,17 @@ export async function itemDamage({
     };
     
     const healthSys = ageSystem.healthSys;
-    const dmgDetails = resistedDmg ? item.data.data.damageResisted : item.data.data;
+    const dmgDetails = resistedDmg ? item.system.damageResisted : item.system;
     let dmgAbl = dmgDetails.dmgAbl
 
     let damageFormula
     let rollData = {...item.actor.actorRollData()};
     if (healthSys.useInjury) {
-        let baseDmg = item?.data?.data?.hasHealing ? "" : `${healthSys.baseDamageTN}`;
-        if (item?.data?.data?.damageInjury != 0) {
-            baseDmg = baseDmg ? `${baseDmg} + ${item.data.data.damageInjury}` : `${item.data.data.damageInjury}`;
+        let baseDmg = item?.system?.hasHealing ? "" : `${healthSys.baseDamageTN}`;
+        if (item?.system?.damageInjury != 0) {
+            baseDmg = baseDmg ? `${baseDmg} + ${item.system.damageInjury}` : `${item.system.damageInjury}`;
         } else {
-            baseDmg = baseDmg ? `${item.data.data.damageInjury}` : `0`;
+            baseDmg = baseDmg ? `${item.system.damageInjury}` : `0`;
         }
         damageFormula = `(${baseDmg})[${baseDmg}, ${game.i18n.localize("age-system.base")}]`;
     } else damageFormula = `${dmgDetails.damageFormula}`;
@@ -829,17 +829,17 @@ export async function itemDamage({
     };
 
     // Adds up Flavor text for item damage type
-    if (item?.data.data.hasDamage) {
+    if (item?.system.hasDamage) {
         damageDesc += `${game.i18n.localize(`age-system.chatCard.rollDamage`)}`;
-        const dmgType = game.i18n.localize(`age-system.${item.data.data.dmgType}`);
-        const dmgSrc = game.i18n.localize(`age-system.${item.data.data.dmgSource}`);
-        dmgDesc.dmgType = item.data.data.dmgType;
-        dmgDesc.dmgSrc = item.data.data.dmgSource;
+        const dmgType = game.i18n.localize(`age-system.${item.system.dmgType}`);
+        const dmgSrc = game.i18n.localize(`age-system.${item.system.dmgSource}`);
+        dmgDesc.dmgType = item.system.dmgType;
+        dmgDesc.dmgSrc = item.system.dmgSource;
         if (healthSys.useBallistic) damageDesc += ` | ${dmgType} | ${dmgSrc}`;
     };
 
     // Add Healing Flavor text if applicable
-    if (item?.data.data.hasHealing) {
+    if (item?.system.hasHealing) {
         damageDesc = `${game.i18n.localize(`age-system.item.healing`)}`;
         dmgDesc.isHealing = true;
     };
@@ -854,7 +854,7 @@ export async function itemDamage({
         if (aDmg != 0) damageFormula = `${damageFormula} + ${aDmg}`;
 
         // Check if Item has Mod to add to its own Damage
-        const iDmg = item?.data?.data?.itemDmgMod;
+        const iDmg = item?.system?.itemDmgMod;
         if (iDmg != 0) damageFormula = `${damageFormula} + ${iDmg}`;
 
         // Check if Attack to Damage Trade Off is applied
@@ -864,9 +864,9 @@ export async function itemDamage({
         }
 
         // Check if Focus adds to damage and adds it
-        if (addFocus === true && item.data.data.useFocus) {
+        if (addFocus === true && item.system.useFocus) {
             const actor = item.actor;
-            const focusData = actor.checkFocus(item.data.data.useFocus);
+            const focusData = actor.checkFocus(item.system.useFocus);
             damageFormula = `${damageFormula} + @focus[${focusData.focusName}]`;
             rollData.focus = healthSys.useInjury ? Math.ceil(focusData.value/3) : focusData.value;
         }
@@ -885,8 +885,8 @@ export async function itemDamage({
         };
 
         // Adds extra damage for All-Out Attack maneuver
-        if (item.actor.data.data.allOutAttack.active) {
-            let allOutAttackMod = item.actor.data.data.allOutAttack.dmgBonus;
+        if (item.actor.system.allOutAttack.active) {
+            let allOutAttackMod = item.actor.system.allOutAttack.dmgBonus;
             if (healthSys.useInjury) allOutAttackMod = Math.ceil(allOutAttackMod/3);
             damageFormula = `${damageFormula} + @allOutAttack[${game.i18n.localize("age-system.allOutAttack")}]`;
             rollData.allOutAttack = allOutAttackMod;
@@ -920,7 +920,7 @@ export async function itemDamage({
     };
 
     // Adds +2 damage if Health System is Modern AGE and game Setting is 'pulp' or 'cinematic'
-    if (['mage', 'mageInjury', 'mageVitality'].includes(healthSys.type) && ['pulp', 'cinematic'].includes(healthSys.mode) && !item?.data.data.hasHealing) {
+    if (['mage', 'mageInjury', 'mageVitality'].includes(healthSys.type) && ['pulp', 'cinematic'].includes(healthSys.mode) && !item?.system.hasHealing) {
         const modeDamage = healthSys.useInjury ? 1 : 2;
         damageFormula += ` + @modeDamage[${game.i18n.localize(`SETTINGS.gameMode${healthSys.mode}`)}]`;
         rollData.modeDamage = modeDamage;
