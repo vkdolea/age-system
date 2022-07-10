@@ -58,7 +58,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.membership = itemSorted.filter(i => i.type === "membership");
         // Groups of Fav Item
         data.favWeapon = data.weapon.filter(i => i.system.favorite);
-        data.favPower = data.power.filter(i => i.favorite);
+        data.favPower = data.power.filter(i => i.system.favorite);
         data.favEquip = data.equipment.filter(i => i.system.favorite);
         data.favStunt = data.stunts.filter(i => i.system.favorite);
         data.favTalent = data.talent.filter(i => i.system.favorite);
@@ -511,7 +511,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const rollType = event.currentTarget.closest(".feature-controls").dataset.rollType
         const itemRolled = this.actor.items.get(itemId);
-        if (itemRolled.system.type === "focus" && event.button !== 0) return
+        if (itemRolled.type === "focus" && event.button !== 0) return
         itemRolled.roll(event, rollType);
     };
 

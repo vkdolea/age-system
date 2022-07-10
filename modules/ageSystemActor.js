@@ -907,17 +907,19 @@ export class ageSystemActor extends Actor {
 
         const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
         for ( let t of tokens ) {
-            if (!t?.hud?.createScrollingText) continue;
             // If player isn't token Onwer, display question marks instead of value
-            if (!t.document.isOwner) value = "???";
-            t.hud.createScrollingText(value, {
-                anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
-                fontSize: 30,
-                fill: ageSystem.tokenTextColors[color],
-                stroke: 0x000000,
-                strokeThickness: 4,
-                jitter: 0.25
-            });   
+            if (t.visible || t.renderable) {
+                if (!t.isOwner) value = "???";
+                canvas.interface.createScrollingText(t.center, value, {
+                    anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+                    distance: 2*t.h,
+                    fontSize: 30,
+                    fill: ageSystem.tokenTextColors[color],
+                    stroke: 0x000000,
+                    strokeThickness: 4,
+                    jitter: 0.25
+                });
+            }
         }
     }
 
@@ -967,7 +969,7 @@ export class ageSystemActor extends Actor {
             comm: data.abilities.comm.total ?? 0,
             cons: data.abilities.cons.total ?? 0,
             dex: data.abilities.dex.total ?? 0,
-            fight: data.abilities.fight.total  ?? 0,
+            fight: data.abilities.fight.total ?? 0,
             int: data.abilities.int.total ?? 0,
             per: data.abilities.per.total ?? 0,
             str: data.abilities.str.total ?? 0,

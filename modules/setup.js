@@ -110,7 +110,7 @@ export function sortObjArrayByName(nameArray, nameKey) {
 /**
  * Add customization to Actor Sheet
  * @param {object} sheet Sheet configuration data
- * @param {jQuery Object} html jQuery object whith sheet
+ * @param {jQuery Object} html jQuery object whithin sheet
  * @param {object} data data used to render sheet
  */
 export async function prepSheet (sheet, html, data) {
@@ -118,14 +118,18 @@ export async function prepSheet (sheet, html, data) {
     html.addClass(`colorset-${ageSystem.colorScheme}`)
     
     // Enrich HMTL text
+    enrichTinyMCE(html);
+}
+
+/**
+ * Enrich TinyMCE editor text and add class on Content Links and inline rolls
+ * @param {jQuery Object} html jQuery object with fields to be enriched
+ */
+export async function enrichTinyMCE(html) {
+    // Enrich HMTL text
     const els = $(`div.editor-content`);
     for (let i = 0; i < els.length; i++) {
         els[i].innerHTML = await TextEditor.enrichHTML(els[i].innerHTML, {async: true});
-        // Add colorset class to content-link inside TinyMCE editor
-        const contentLink = els[i].querySelectorAll("a.content-link");
-        const inlineRoll = els[i].querySelectorAll("a.inline-roll");
-        const insideMCE = [...contentLink, ...inlineRoll];
-        for (let i = 0; i < insideMCE.length; i++) insideMCE[i].classList.add(`colorset-second-tier`);   
     }
 }
 

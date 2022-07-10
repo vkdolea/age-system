@@ -37,9 +37,9 @@ export function rollOwnedItem(itemName, rollOptions = false) {
  * @returns {Promise}
  */
 export async function createAgeMacro(data, slot) {
-  if (!['weapon', 'focus', 'power'].includes(data?.data?.type)) return;
-  if (!("data" in data)) return ui.notifications.warn("You can only create macro buttons for owned Items");
-  const item = data.data;
+  const item = await fromUuid(data.uuid);
+  if (!['weapon', 'focus', 'power'].includes(item?.type)) return;
+  if (!item.isOwned) return ui.notifications.warn("You can only create macro buttons for owned Items");
 
   // Create the macro command
   const command = `game.ageSystem.rollOwnedItem("${item.name}", true);\n\n/*Change second argument to false to skip Roll Options*/`;

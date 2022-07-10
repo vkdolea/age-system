@@ -510,7 +510,8 @@ export class ageSystemItem extends Item {
         "relationship": "systems/age-system/templates/sheets/chat/relationship-sheet.hbs",
         "honorifics": "systems/age-system/templates/sheets/chat/honorifics-sheet.hbs",
         "membership": "systems/age-system/templates/sheets/chat/membership-sheet.hbs",
-        "shipfeatures": "systems/age-system/templates/sheets/chat/shipfeatures-sheet.hbs"
+        "shipfeatures": "systems/age-system/templates/sheets/chat/shipfeatures-sheet.hbs",
+        "item-to-chat": "systems/age-system/templates/sheets/chat/item-to-chat.hbs"
     };
 
     async showItem(forceSelfRoll = false) {
@@ -521,7 +522,7 @@ export class ageSystemItem extends Item {
         const cardData = {
             inChat: true,
             name: item.name,
-            data: item.system,
+            system: item.system,
             item: item,
             itemId: item.id,
             owner: this.actor,
@@ -530,13 +531,12 @@ export class ageSystemItem extends Item {
                 colorScheme: ageSystem.colorScheme,
                 wealthMode: game.settings.get("age-system", "wealthType")
             },
-            cssClass: `colorset-${ageSystem.colorScheme} item-to-chat`
+            cssClass: `age-system colorset-${ageSystem.colorScheme} item-to-chat`
         };
         const chatData = {
             user: game.user.id,
             speaker: ChatMessage.getSpeaker(),
-            roll: false,
-            content: await renderTemplate(item.chatTemplate[item.type], cardData),
+            content: await renderTemplate(item.chatTemplate["item-to-chat"], cardData),
             flags: {
                 "age-system": {messageData: cardData}
             }

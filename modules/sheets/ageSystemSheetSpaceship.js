@@ -48,12 +48,12 @@ export default class ageSpaceshipSheet extends ActorSheet {
         data.passengers = sortObjArrayByName(this.actor.system.passengers, "name");
 
         const itemSorted = sortObjArrayByName(data.items, "name");
-        data.qualities = itemSorted.filter(i => i.quality === "quality" && i.type !== "weapon");
-        data.flaws = itemSorted.filter(i => i.quality === "flaw" && i.type !== "weapon");
-        data.weapon = itemSorted.filter(i => i.type === "weapon");
+        data.qualities = itemSorted.filter(i => i.system.quality === "quality" && i.system.type !== "weapon");
+        data.flaws = itemSorted.filter(i => i.system.quality === "flaw" && i.system.type !== "weapon");
+        data.weapon = itemSorted.filter(i => i.system.type === "weapon");
 
         // Check if sheet is from synthetic token - Passenger setup will not work for Synth
-        data.notSynth = !(this.token && !this.token.data.actorLink);
+        data.notSynth = !(this.token && !this.token.actorLink);
         data.isSynth = !data.notSynth;
 
         // return data;

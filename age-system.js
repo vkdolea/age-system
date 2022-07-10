@@ -408,7 +408,7 @@ Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatL
 Hooks.on("createCompendium", () => {ageSystem.itemCompendia = Settings.allCompendia("Item")})
 Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
 Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});
-Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
+Hooks.on("renderChatLog", (app, html, data) => {    AgeChat.addChatListeners(html)});
 Hooks.on("renderChatMessage", (app, html, data) => {AgeChat.sortCustomAgeChatCards(app, html, data)});
 Hooks.on("getChatLogEntryContext", AgeChat.addChatMessageContextOptions);
 Hooks.on('renderActorSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));

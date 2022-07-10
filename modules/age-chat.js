@@ -94,7 +94,7 @@ export async function inflictInjury(event){
     if (!degree) return
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
-    const cardData = await game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
+    const cardData = await game.messages.get(cardId).flags["age-system"].ageroll.rollData;
     let actor = await fromUuid(cardData.actorId);
     if (actor.documentName === "Token") actor = actor.actor;
     return actor.applyInjury(degree);
@@ -105,7 +105,7 @@ export async function resistInjury(event) {
     event.preventDefault();
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
-    const cardData = await game.messages.get(cardId).data.flags["age-system"].toughnessTestCard;
+    const cardData = await game.messages.get(cardId).flags["age-system"].toughnessTestCard;
     const actor = await fromUuid(cardData.actorUuid);
     return actor.toughnessTest(foundry.utils.deepClone(cardData.injuryParts), cardData.rollTN, cardData.autoApply);
 }
@@ -115,7 +115,7 @@ export async function applyDamageChat(event) {
     event.preventDefault();
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
-    let damageData = await foundry.utils.deepClone(game.messages.get(cardId).data.flags["age-system"].damageData);
+    let damageData = await foundry.utils.deepClone(game.messages.get(cardId).flags["age-system"].damageData);
     const cardHealthSys = damageData.healthSys;
     if (!checkHealth(cardHealthSys, ageSystem.healthSys)) {
         damageData = {
@@ -190,7 +190,7 @@ export async function chatDamageRoll(event) {
     event.preventDefault();
     const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
     const cardId = message.dataset.messageId;
-    const cardData = game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
+    const cardData = game.messages.get(cardId).flags["age-system"].ageroll.rollData;
     const classList = event.currentTarget.classList;
     const actorId = cardData.actorId
     let owner = null;
@@ -222,7 +222,7 @@ export async function chatDamageRoll(event) {
 export async function chatFatigueRoll(event) {
     const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
     const cardId = message.dataset.messageId;
-    const cardData = game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
+    const cardData = game.messages.get(cardId).flags["age-system"].ageroll.rollData;
     const actorId = cardData.actorId;
     
     let owner = null;
@@ -238,7 +238,7 @@ export async function rollItemFromChat(event) {
     const classList = event.currentTarget.classList;
     const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
     const cardId = message.dataset.messageId;
-    const cardData = game.messages.get(cardId).data.flags["age-system"].messageData;
+    const cardData = game.messages.get(cardId).flags["age-system"].messageData;
 
     const itemId = cardData.itemId;
     let owner = await fromUuid(cardData.ownerUuid);
@@ -294,7 +294,6 @@ async function _handleAgeRollVisibility(html, chatCard, chatData){
         let actor;
         if (actorId) actor = game.actors.get(actorId) ?? await fromUuid(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
         actor = actor?.actor ?? actor;
-        // const isBlind = chatCard.data.blind;
         const isBlind = chatCard.blind;
         const whisperTo = chatData.message.whisper;
         const author = chatData.author.id;

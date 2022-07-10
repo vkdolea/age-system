@@ -167,16 +167,34 @@ each(@colorsets, {
         .colorset-first-tier {
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);
+
+            a.content-link,
+            a.inline-roll {
+                background-color: extract(extract(@color-list, @index), 3);
+                color: extract(extract(@color-list, @index), 1);
+            }
         };    
         
         .colorset-second-tier {
             background-color: extract(extract(@color-list, @index), 3);
             color: extract(extract(@color-list, @index), 1);
+
+            a.content-link,
+            a.inline-roll {
+                background-color: extract(extract(@color-list, @index), 2);
+                color: extract(extract(@color-list, @index), 5);
+            }
         };
         
         .colorset-third-tier {
             background-color: extract(extract(@color-list, @index), 2);
             color: extract(extract(@color-list, @index), 5);
+
+            a.content-link,
+            a.inline-roll {
+                background-color: extract(extract(@color-list, @index), 1);
+                color: extract(extract(@color-list, @index), 4);
+            }
         };
     
         input.colorset-first-tier {
@@ -283,13 +301,6 @@ each(@colorsets, {
         .membership,
         .relationship,
         .shipfeatures {
-            // img {
-            //     border: 1px solid extract(extract(@color-list, @index), 1);
-            // }
-    
-            // label {
-            //     color: extract(extract(@color-list, @index), 1);
-            // };
             .item-card-stats {
                 background-color: extract(extract(@color-list, @index), 3);
                 input.data-entry {
@@ -299,17 +310,6 @@ each(@colorsets, {
             .item-card-desc {
                 background-color: #ffffff;
             };
-            // Tabs Nav Control  
-            // nav {
-            //     .item {
-            //         background-color: extract(extract(@color-list, @index), 3);
-            //         color: extract(extract(@color-list, @index), 1);
-            //     }
-            //     .item.active {
-            //         background-color: #ffffff;
-            //     }
-            // }
-            // Modificator Cards
             .mod-card {
                 border: solid extract(extract(@color-list, @index), 3) 1px;
             }

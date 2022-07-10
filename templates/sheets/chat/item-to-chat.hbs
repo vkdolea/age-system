@@ -1,0 +1,117 @@
+<form class="{{cssClass}} age-system flexcol" autocomplete="off">
+    <span class="item-type colorset-third-tier">{{item.type}}</span>
+    <div class="flexrow item-identification colorset-first-tier">
+        <img src="{{item.img}}"/>
+        <ul class="flexcol">
+            <li>{{item.name}}</li>
+            
+            {{!-- Power or Weapon --}}
+            {{#if (or (eq item.type "weapon") (eq item.type "power"))}}
+            <li>{{localize (concat "age-system." system.useAbl)}} ({{system.useFocus}})</li>
+            {{/if}}
+            {{#if (or system.hasDamage system.hasHealing)}}
+            <li>{{system.damageFormula}}</li>
+            {{/if}}
+            
+            {{!-- Stunt --}}
+            {{#if (eq item.type "stunts")}}
+            <li>{{system.stuntPoints}}{{#if (eq system.costType "variable")}}+{{/if}} {{localize "age-system.settings.stuntPointsIndex"}}</li>
+            <li>{{system.type}}</li>
+            {{/if}}
+
+            {{!-- Focus --}}
+            {{#if (eq item.type "focus")}}
+            <li>{{localize (concat "age-system." system.useAbl)}}</li>
+            <li>{{#if (gte system.finalValue 1)}}+{{/if}}{{system.finalValue}} {{#if system.improved}}({{localize "age-system.improvedFocus"}}){{/if}}</li>
+            {{/if}}
+
+            {{!-- Membership --}}
+            {{#if (eq item.type "membership")}}
+            <li>{{system.shortDesc}}</li>
+            <li>{{localize "age-system.rank"}} {{system.rank}}</li>
+            {{/if}}
+
+            {{!-- Talent --}}
+            {{#if (eq item.type "talent")}}
+            {{#if (eq system.type "spec")}}
+            <li>{{localize "age-system.item.spec"}}</li>
+            {{/if}}
+            <li>{{tdegree system.degree}}</li>
+            {{/if}}
+
+            {{!-- Relationship --}}
+            {{#if (eq item.type "relationship")}}
+            <li>{{system.shortDesc}}</li>
+            {{/if}}
+
+            {{!-- Spaceship Feature --}}
+            {{#if (eq item.type "relationship")}}
+            <li>{{localize (concat "age-system.spaceship." system.type)}} [{{localize "age-system.spaceship." system.quality}}]</li>
+            <li >
+                {{#if (eq item.system.type "sensorMod")}}
+                {{item.system.sensorMod}}
+                {{/if}}
+                {{#if (eq item.system.type "maneuverSizeMod")}}
+                {{item.system.maneuverSizeStep}}
+                {{/if}}
+                {{#if (eq item.system.type "juiceMod")}}
+                {{item.system.juiceMod}}
+                {{/if}}
+                {{#if (eq item.system.type "hullPlating")}}
+                {{item.system.hullPlating}}
+                {{/if}}
+                {{#if (eq item.system.type "hullMod")}}
+                {{item.system.hullMod}}
+                {{/if}}
+                {{#if (eq item.system.type "weapon")}}
+                {{item.system.damage}}
+                {{/if}}
+            </li>
+            {{/if}}
+
+            {{!-- Honorifics doesn't require extra fields --}}
+        </div>
+    </div>
+    {{#if system.longDesc}}
+    <div class="colorset-first-tier">
+        <hr>
+    </div>
+    <div class="item-desc colorset-first-tier">
+        {{editor system.longDesc target="system.longDesc" button=true owner=owner editable=false}}
+    </div>
+    {{/if}}
+    <div class="footer colorset-third-tier flexrow">
+        {{!-- Footer Notes for Power --}}
+        {{#if (eq item.type "power")}}
+        <span>{{localize (concat "age-system." system.useAbl)}} ({{system.useFocus}})</span>
+        <span>{{localize "age-system.targetNumber"}} {{system.targetNumber}}</span>
+        <span>{{localize "age-system.item.force"}} {{system.itemForce}}</span>
+        {{#if item.useFatigue}}
+        <span>{{localize "age-system.inputFatigueTN"}} {{system.fatigueTN}}</span>
+        {{else}}
+        <span>{{localize "age-system.powerPointsIndex"}} {{system.powerPointCost}}</span>
+        {{/if}}
+        {{/if}}
+        
+        {{!-- Footer Notes for Weapons --}}
+        {{#if (eq item.type "weapon")}}
+        <span>{{localize "age-system.item.minStr"}} {{system.minStr}}</span>
+        {{#if system.ranged}}
+        <span>{{localize "age-system.item.range"}}</span>
+        {{/if}}
+        {{/if}}
+
+        {{!-- Footer Notes for Talent --}}
+        {{#if (eq item.type "talent")}}
+        <span>{{localize "age-system.requirement"}}: {{system.requirement}}</span>
+        {{/if}}
+
+        {{!-- Footer for Relationship --}}
+        {{#if (eq item.type "relationship")}}
+        <span>{{localize "age-system.relationshipIntensity"}} {{system.intensity}}/{{system.intensityMax}}</span>
+        {{/if}}
+    </div>
+</form>
+{{#if (or (eq item.type "weapon") (eq item.type "power"))}}
+{{> "systems/age-system/templates/partials/item-card-buttons.hbs"}}
+{{/if}}
