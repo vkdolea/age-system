@@ -102,10 +102,10 @@ Hooks.once("init", async function() {
     };
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("age-system", ageSystemSheetCharacter, {
-        types: ["char"],
-        label: "Legacy"
-    });
+    // Actors.registerSheet("age-system", ageSystemSheetCharacter, {
+    //     types: ["char"],
+    //     label: "Legacy"
+    // });
     Actors.registerSheet("age-system", ageSystemSheetCharAlt, {
         types: ["char"],
         makeDefault: true,

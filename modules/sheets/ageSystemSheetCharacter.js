@@ -116,7 +116,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             cssClass: isEditable ? "editable" : "locked",
             data: data,
             system: data.system,
-            itemMods: this.object.system.ownedMods,
             effects: data.effects,
             items: data.items,
             limited: this.object.limited,

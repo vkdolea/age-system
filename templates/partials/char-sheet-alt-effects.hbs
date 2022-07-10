@@ -94,7 +94,7 @@
             <span class="mod-value">{{localize "age-system.value"}}</span>
             <span class="mod-source">{{localize "age-system.source"}}</span>
         </li>
-        {{#each itemMods as |modGroup modType|}}
+        {{#each system.ownedMods as |modGroup modType|}}
         {{#unless @first}}
         <hr>
         {{/unless}}

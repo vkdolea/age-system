@@ -4,6 +4,7 @@
 ### Changed
 - System updated to run on Foundry VTT v10.
 - *Removed compatibility to FoundryVTT 0.8.x and FoundryVTT v9.*
+- *Removed support to Legacy character sheet.*
 - New item chat cards for all items.
 - Spaceship Features item sheet redesigned.
 
