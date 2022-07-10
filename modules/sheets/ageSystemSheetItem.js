@@ -12,7 +12,7 @@ export default class ageSystemItemSheet extends ItemSheet {
                 this.options.height = this.position.height = "352";
                 this.options.resizable = false;
                 break;
-            case "weapon":
+            // case "weapon":
             //     this.options.width = this.position.width = "700";
             //     this.options.height = this.position.height = "460";
             //     break;
@@ -22,6 +22,10 @@ export default class ageSystemItemSheet extends ItemSheet {
                 break;          
             case "stunts":
                 // this.options.width = this.position.width = "300";
+                this.options.height = this.position.height = "352";
+                this.options.resizable = false;
+                break;        
+            case "shipfeatures":
                 this.options.height = this.position.height = "352";
                 this.options.resizable = false;
                 break;             
