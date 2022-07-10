@@ -38,8 +38,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         // Copy actor data to a safe copy
         const data = this.actor.toObject(false);
         data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-
-        // const data = super.getData();
         data.config = ageSystem;
 
         // Order itens into alphabetic order
@@ -51,7 +49,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.focus = itemSorted.filter(i => i.type === "focus");
         data.stunts = itemSorted.filter(i => i.type === "stunts");
         // Order Stunts by stunt points, lowest to highest
-        data.stunts = data.stunts.sort((a, b) => a.data.stuntPoints - b.data.stuntPoints);
+        data.stunts = data.stunts.sort((a, b) => a.system.stuntPoints - b.system.stuntPoints);
         data.equipment = itemSorted.filter(i => i.type === "equipment");
         data.honorifics = itemSorted.filter(i => i.type === "honorifics");
         data.relationship = itemSorted.filter(i => i.type === "relationship");

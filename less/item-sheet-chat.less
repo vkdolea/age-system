@@ -25,7 +25,7 @@
         img {
             height: 45px;
             flex: 0 0 auto;
-            border: 1px solid silver;
+            border: 1px solid;
             border-radius: 4px;
         }
         ul {
@@ -35,9 +35,20 @@
             font-variant-caps: small-caps;
             :not(li:first-child) {
                 font-style: italic;
-                font-size: 10px;
+                font-size: 12px;
             }
         }
+    }
+    .mod-box {
+        font-variant-caps: all-petite-caps;
+        font-size: 12px;
+        .mod-desc {
+            justify-content: space-between;
+            span {
+                max-width: fit-content;
+            };
+            padding: 0 4px;
+        };
     }
     .item-desc {
         padding: 0 4px;
@@ -54,9 +65,10 @@
         justify-content: center;
         span {
             margin-left: 2px;
-            font-size: 10px;
+            font-size: 11px;
+            font-variant-caps: all-petite-caps;
             flex: 0 0 auto;
-            border-left: 1px solid silver;
+            border-left: 1px solid;
             padding-left: 2px;
         };
         span:first-of-type {

@@ -66,10 +66,6 @@ export default class ageSystemItemSheet extends ItemSheet {
         return `systems/age-system/templates/sheets/${this.item.type}-sheet.hbs`;
     };
 
-    // get hasWgroups() {
-    //     return this.item.data.data.wgroups ? true : false;
-    // };
-
     getData(options) {
         const data = super.getData(options);
         data.item = data.document;

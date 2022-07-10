@@ -72,6 +72,22 @@
             {{!-- Honorifics doesn't require extra fields --}}
         </div>
     </div>
+
+    {{!-- Modifiers section --}}
+    <div class="mod-box">
+        {{#each system.modifiersByType as |modGroup modType|}}
+        {{#each modGroup as |mod|}}
+        {{#if (and mod.isActive mod.valid)}}
+        <div class="flexrow mod-desc colorset-first-tier">
+            <span class="mod-name">{{localize (concat "age-system.bonus." modType)}}{{#if (or (eq modType "focus") (eq modType "focusPowerForce"))}} | {{mod.conditions.focus}}{{/if}}</span>
+            <span class="formula">{{mod.formula}}</span>
+        </div>
+        {{/if}}
+        {{/each}}
+        {{/each}}
+    </div>
+
+    {{!-- Description Section --}}
     {{#if system.longDesc}}
     <div class="colorset-first-tier">
         <hr>
@@ -86,8 +102,8 @@
         <span>{{localize (concat "age-system." system.useAbl)}} ({{system.useFocus}})</span>
         <span>{{localize "age-system.targetNumber"}} {{system.targetNumber}}</span>
         <span>{{localize "age-system.item.force"}} {{system.itemForce}}</span>
-        {{#if item.useFatigue}}
-        <span>{{localize "age-system.inputFatigueTN"}} {{system.fatigueTN}}</span>
+        {{#if system.useFatigue}}
+        <span>{{localize "age-system.fatigue"}} {{system.fatigueTN}}</span>
         {{else}}
         <span>{{localize "age-system.powerPointsIndex"}} {{system.powerPointCost}}</span>
         {{/if}}

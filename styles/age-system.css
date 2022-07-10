@@ -125,7 +125,7 @@
 .age-system.item-to-chat .item-identification img {
   height: 45px;
   flex: 0 0 auto;
-  border: 1px solid silver;
+  border: 1px solid;
   border-radius: 4px;
 }
 .age-system.item-to-chat .item-identification ul {
@@ -136,7 +136,18 @@
 }
 .age-system.item-to-chat .item-identification ul :not(li:first-child) {
   font-style: italic;
-  font-size: 10px;
+  font-size: 12px;
+}
+.age-system.item-to-chat .mod-box {
+  font-variant-caps: all-petite-caps;
+  font-size: 12px;
+}
+.age-system.item-to-chat .mod-box .mod-desc {
+  justify-content: space-between;
+  padding: 0 4px;
+}
+.age-system.item-to-chat .mod-box .mod-desc span {
+  max-width: fit-content;
 }
 .age-system.item-to-chat .item-desc {
   padding: 0 4px;
@@ -154,9 +165,10 @@
 }
 .age-system.item-to-chat .footer span {
   margin-left: 2px;
-  font-size: 10px;
+  font-size: 11px;
+  font-variant-caps: all-petite-caps;
   flex: 0 0 auto;
-  border-left: 1px solid silver;
+  border-left: 1px solid;
   padding-left: 2px;
 }
 .age-system.item-to-chat .footer span:first-of-type {
@@ -2534,7 +2546,7 @@
   border: 5px outset #979899;
 }
 .colorset-dragon-red .resource .values {
-  background-color: #810207;
+  background-color: #83272a;
   color: #ffffff;
 }
 .colorset-dragon-red .sheet-main-content nav a {
@@ -2542,24 +2554,24 @@
   color: #000000;
 }
 .colorset-dragon-red .sheet-main-content nav a.active {
-  background-color: #810207;
+  background-color: #83272a;
   color: #ffffff;
 }
 .colorset-dragon-red .thin-border {
   border: thin solid #000000;
 }
 .colorset-dragon-red .colorset-first-tier {
-  background-color: #810207;
+  background-color: #83272a;
   color: #ffffff;
 }
 .colorset-dragon-red .colorset-first-tier a.content-link,
 .colorset-dragon-red .colorset-first-tier a.inline-roll {
   background-color: #e0beb1;
-  color: #810207;
+  color: #83272a;
 }
 .colorset-dragon-red .colorset-second-tier {
   background-color: #e0beb1;
-  color: #810207;
+  color: #83272a;
 }
 .colorset-dragon-red .colorset-second-tier a.content-link,
 .colorset-dragon-red .colorset-second-tier a.inline-roll {
@@ -2572,65 +2584,65 @@
 }
 .colorset-dragon-red .colorset-third-tier a.content-link,
 .colorset-dragon-red .colorset-third-tier a.inline-roll {
-  background-color: #810207;
+  background-color: #83272a;
   color: #ffffff;
 }
 .colorset-dragon-red input.colorset-first-tier {
-  background-color: #810207;
+  background-color: #83272a;
   color: #ffffff;
 }
 .colorset-dragon-red #age-tracker .full-box {
-  background-color: #810207 !important;
+  background-color: #83272a !important;
 }
 .colorset-dragon-red #age-tracker .comp-checkbox {
-  border-color: #810207 !important;
+  border-color: #83272a !important;
 }
 .colorset-dragon-red .char-sheet .age-header label,
 .colorset-dragon-red .char-sheet .persona label {
-  background-color: #810207;
+  background-color: #83272a;
   color: #ffffff;
 }
 .colorset-dragon-red .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-dragon-red .vehicle-stats img {
-  border: 2px solid #810207;
+  border: 2px solid #83272a;
 }
 .colorset-dragon-red .vehicle-stats .editor {
   background-color: #ffffff;
 }
 .colorset-dragon-red .stats-block.losses .loss-checkbox {
-  border-color: #810207;
+  border-color: #83272a;
 }
 .colorset-dragon-red .stats-block.losses .loss-checkbox.full-box.full-box {
-  background: #810207;
+  background: #83272a;
 }
 .colorset-dragon-red fieldset {
-  border-color: #810207;
+  border-color: #83272a;
 }
 .colorset-dragon-red #age-tracker-drag:hover,
 .colorset-dragon-red #age-roller-drag:hover {
-  background-color: #810207;
+  background-color: #83272a;
 }
 .colorset-dragon-red .dice-show.trait-test i:last-of-type {
-  color: #810207;
+  color: #83272a;
 }
 .colorset-dragon-red .roll-mod {
-  border-bottom: 1px solid #810207;
+  border-bottom: 1px solid #83272a;
 }
 .colorset-dragon-red .roll-mod.stunted {
-  background-color: #810207;
+  background-color: #83272a;
   color: #ffffff;
 }
 .colorset-dragon-red .char-sheet .item-container img {
-  border: 1px solid #810207;
+  border: 1px solid #83272a;
 }
 .colorset-dragon-red .char-sheet input {
   background-color: #ffffff;
 }
 .colorset-dragon-red .char-sheet input.colorset-second-tier {
   background-color: #e0beb1 !important;
-  color: #810207 !important;
+  color: #83272a !important;
 }
 .colorset-dragon-red .focus .item-card-stats,
 .colorset-dragon-red .power .item-card-stats,
