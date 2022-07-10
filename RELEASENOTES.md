@@ -4,6 +4,11 @@
 ### Changed
 - System updated to run on Foundry VTT v10.
 - *Removed compatibility to FoundryVTT 0.8.x and FoundryVTT v9.*
+- New item chat cards for all items
+
+### Fixed
+- Power description on Stat Block sheet now will show buttons for inline rolls and content linked.
+- Clicking to equip/activate Talent or Specialization on Stat Block view will not open Talent/Specialization sheet.
 
 ## 0.12.5 [2022-06-11]
 ### Fixed

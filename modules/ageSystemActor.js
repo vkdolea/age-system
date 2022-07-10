@@ -21,7 +21,7 @@ export class ageSystemActor extends Actor {
             })
             // Then prepare other item types which require further prep
             items.forEach(i => {
-                if (["weapon", "power"].includes(i.system.type)) {
+                if (["weapon", "power"].includes(i.type)) {
                     i.prepareData()
                     if(i.sheet?.rendered) i.sheet.render(false);
                 }
