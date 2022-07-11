@@ -12,8 +12,8 @@ export class QuickSettings extends FormApplication {
       resizable: false,
       minimizable: false,
       width: '700',
-      height: 'auto',
-      title: game.i18n.localize('SETTINGS.quickSettings'),
+      height: '400',
+      title: game.i18n.localize('SETTINGS.quicksetting'),
       classes: ["age-system", "dialog", `colorset-${ageSystem.colorScheme}`],
       resizable: false,
       closeOnSubmit: false,
@@ -69,8 +69,8 @@ export class QuickSettings extends FormApplication {
   }
 
   onLoadSettings(ev) {
-    if (!this.config.preset) this.close();
-    const fd = new FormDataExtended(this.form).toObject();
+    if (!this.config.preset) return this.close();
+    const fd = new FormDataExtended(this.form).object;
     const sets = {
       ...ageSystem.gameSettings[this.config.preset].settings.defined,
       ...fd
@@ -159,7 +159,7 @@ export class AdvancedSettings extends FormApplication {
   }
 
   onLoadSettings(ev) {
-    const sets = new FormDataExtended(this.form).toObject();
+    const sets = new FormDataExtended(this.form).object;
     for (const setting in sets) {
       if (Object.hasOwnProperty.call(sets, setting)) {
         const value = sets[setting];

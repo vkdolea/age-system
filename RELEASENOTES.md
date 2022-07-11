@@ -1,6 +1,6 @@
 # Release Notes
 
-## 0.13.0 [2022-xx-xx]
+## 1.0.0 [2022-xx-xx]
 ### Changed
 - System updated to run on Foundry VTT v10.
 - *Removed compatibility to FoundryVTT 0.8.x and FoundryVTT v9.*
@@ -9,8 +9,9 @@
 - Spaceship Features item sheet redesigned.
 
 ### Fixed
-- Power description on Stat Block sheet now will show buttons for inline rolls and content linked.
-- Clicking to equip/activate Talent or Specialization on Stat Block view will not open Talent/Specialization sheet.
+- Power description on Stat Block sheet now will show buttons for inline rolls and content links.
+- Using a power with 0 base damage running *Modern AGE (alternate damage: Injury)* won't output wrong calculation.
+- *Quick AGE Settings* window restyled to fully show buttons; localized name on title; clicking *Save Settings" without selecting an option will close the window and won't return an error.
 
 ## 0.12.5 [2022-06-11]
 ### Fixed

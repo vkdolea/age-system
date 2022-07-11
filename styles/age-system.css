@@ -4064,6 +4064,11 @@ body *:not(i, .fa, .far, .fas) {
 #adv-settings select:focus {
   box-shadow: 0 0 5px red !important;
 }
+#quick-settings .sheet-footer,
+#adv-settings .sheet-footer {
+  height: 35px;
+  max-height: 35px;
+}
 /*---------Background---------------------*/
 .window-app.sheet.char .window-content,
 .window-app.sheet.vehicle .window-content,

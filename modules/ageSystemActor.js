@@ -643,10 +643,10 @@ export class ageSystemActor extends Actor {
     checkFocus(namedFocus) {
         if (!namedFocus || namedFocus == "") return {focusName: null, focusItem: null, id: null, value: 0}
 
-        const ownedFoci = this.items.filter(a => a.type === "focus");
+        const ownedFoci = this.items?.filter(a => a.type === "focus");
         const expectedFocus = namedFocus.toLowerCase();
-        const validFocus = ownedFoci.filter(c => c.name.toLowerCase() === expectedFocus);
-        if (validFocus.length < 1) {
+        const validFocus = ownedFoci?.filter(c => c.name.toLowerCase() === expectedFocus);
+        if (!validFocus ?? validFocus.length < 1) {
             return {focusName: namedFocus, focusItem: false, id: null, value: 0}
         } else {
             const focusId = validFocus[0].id;
@@ -693,7 +693,7 @@ export class ageSystemActor extends Actor {
         const totalInjuries = foundry.utils.deepClone(this.system.injury.degrees);
         totalInjuries[injuryDegree] = newDegree;
         // Calculate new marks
-        let newMarks = (injuryDegree === 'severe') ? this.systeminjury.degrees.severeMult : 1;
+        let newMarks = (injuryDegree === 'severe') ? this.system.injury.degrees.severeMult : 1;
         newMarks += this.system.injury.marks;
         // Update Actor's injuries and marks
         await this.update(

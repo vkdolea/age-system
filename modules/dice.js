@@ -813,11 +813,11 @@ export async function itemDamage({
     let damageFormula
     let rollData = {...item.actor.actorRollData()};
     if (healthSys.useInjury) {
-        let baseDmg = item?.system?.hasHealing ? "" : `${healthSys.baseDamageTN}`;
+        let baseDmg = item?.system?.hasHealing ? null : `${healthSys.baseDamageTN}`;
         if (item?.system?.damageInjury != 0) {
             baseDmg = baseDmg ? `${baseDmg} + ${item.system.damageInjury}` : `${item.system.damageInjury}`;
         } else {
-            baseDmg = baseDmg ? `${item.system.damageInjury}` : `0`;
+            baseDmg = baseDmg ? `${baseDmg}` : `0`;
         }
         damageFormula = `(${baseDmg})[${baseDmg}, ${game.i18n.localize("age-system.base")}]`;
     } else damageFormula = `${dmgDetails.damageFormula}`;
