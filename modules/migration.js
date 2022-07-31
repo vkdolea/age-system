@@ -175,37 +175,10 @@ export const migrateActorData = function(actor, source={}) {
   // Migrate Owned Effects
   const effects = migrateEffects(actor)
   if (effects.length > 0) updateData.effects = effects;
-  // if (actor.effects) {
-  //   const effects = actor.effects.reduce((arr, e) => {
-  //     // Migrate the Owned Effect
-  //     const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
-  //     let effectUpdate = migrateEffectData(effectData);
-  //     // Update the Owned Effect
-  //     if ( !foundry.utils.isEmpty(effectUpdate) ) {
-  //       effectUpdate._id = effectData._id;
-  //       arr.push(foundry.utils.expandObject(effectUpdate));
-  //     }
-  //     return arr;
-  //   }, []);
-  //   if (effects.length > 0) updateData.effects = effects;
-  // }
 
   // Migrate Owned Items
   const items = migrateItems(actor);
   if ( items.length > 0 ) updateData.items = items;
-  // if ( !actor.items ) return updateData;
-  // const items = actor.items.reduce((arr, i) => {
-  //   // Migrate the Owned Item
-  //   const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
-  //   let itemUpdate = migrateItemData(itemData);
-  //   // Update the Owned Item
-  //   if ( !foundry.utils.isEmpty(itemUpdate) ) {
-  //     itemUpdate._id = itemData._id;
-  //     arr.push(foundry.utils.expandObject(itemUpdate));
-  //   }
-  //   return arr;
-  // }, []);
-  // if ( items.length > 0 ) updateData.items = items;
   return updateData;
 };
 /* -------------------------------------------- */
