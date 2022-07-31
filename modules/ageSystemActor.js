@@ -646,13 +646,13 @@ export class ageSystemActor extends Actor {
         const ownedFoci = this.items?.filter(a => a.type === "focus");
         const expectedFocus = namedFocus.toLowerCase();
         const validFocus = ownedFoci?.filter(c => c.name.toLowerCase() === expectedFocus);
-        if (!validFocus ?? validFocus.length < 1) {
-            return {focusName: namedFocus, focusItem: false, id: null, value: 0}
-        } else {
+        if (validFocus?.length > 0) {
             const focusId = validFocus[0].id;
             const focus = this.items.get(focusId);
             return {focusName: namedFocus, focusItem: focus, id: focusId, focusAbl: focus.system.useAbl, value: focus.system.finalValue}
-        };
+        } else {
+            return {focusName: namedFocus, focusItem: false, id: null, value: 0}
+        }
     }
 
     async toughnessTest (parts, rollTN, applyInjury = false) {
