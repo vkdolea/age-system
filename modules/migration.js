@@ -8,7 +8,7 @@ export const migrateWorld = async function() {
   // Migrate World Actors
   for ( let a of game.actors ) {
     try {
-      const updateData = migrateActorData(a.toObject());
+      const updateData = migrateActorData(a.toObject(), a._source);
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Actor document ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
@@ -127,8 +127,8 @@ export const migrateCompendium = async function(pack) {
     try {
       switch (documentName) {
         case "Actor":
-          updateData = migrateActorData(doc.toObject());
-          break;
+          updateData = migrateActorData(doc.toObject(), doc._source);
+          break;0
         case "Item":
           updateData = migrateItemData(doc.toObject());
           break;
@@ -165,46 +165,86 @@ export const migrateCompendium = async function(pack) {
  * @param {Actor} actor   The actor to Update
  * @return {Object}       The updateData to apply
  */
-export const migrateActorData = function(actor) {
+export const migrateActorData = function(actor, source={}) {
   const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
   const updateData = {};
 
   // Actor Data Updates
-  if(isNewerVersion("0.12.0", lastMigrationVer)) _updateModeHealth(actor, updateData);
+  if(isNewerVersion("0.12.0", lastMigrationVer)) _updateModeHealth(actor, source, updateData);
   
   // Migrate Owned Effects
-  if (actor.effects) {
-    const effects = actor.effects.reduce((arr, e) => {
-      // Migrate the Owned Effect
-      const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
-      let effectUpdate = migrateEffectData(effectData);
-      // Update the Owned Effect
-      if ( !foundry.utils.isEmpty(effectUpdate) ) {
-        effectUpdate._id = effectData._id;
-        arr.push(effectUpdate);
-      }
-      return arr;
-    }, []);
-    if (effects.length > 0) updateData.effects = effects;
-  }
+  const effects = migrateEffects(actor)
+  if (effects.length > 0) updateData.effects = effects;
+  // if (actor.effects) {
+  //   const effects = actor.effects.reduce((arr, e) => {
+  //     // Migrate the Owned Effect
+  //     const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
+  //     let effectUpdate = migrateEffectData(effectData);
+  //     // Update the Owned Effect
+  //     if ( !foundry.utils.isEmpty(effectUpdate) ) {
+  //       effectUpdate._id = effectData._id;
+  //       arr.push(foundry.utils.expandObject(effectUpdate));
+  //     }
+  //     return arr;
+  //   }, []);
+  //   if (effects.length > 0) updateData.effects = effects;
+  // }
 
   // Migrate Owned Items
-  if ( !actor.items ) return updateData;
-  const items = actor.items.reduce((arr, i) => {
-    // Migrate the Owned Item
-    const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
-    let itemUpdate = migrateItemData(itemData);
-    // Update the Owned Item
-    if ( !isEmpty(itemUpdate) ) {
-      itemUpdate._id = itemData._id;
-      arr.push(itemUpdate);
-    }
-    return arr;
-  }, []);
+  const items = migrateItems(actor);
   if ( items.length > 0 ) updateData.items = items;
+  // if ( !actor.items ) return updateData;
+  // const items = actor.items.reduce((arr, i) => {
+  //   // Migrate the Owned Item
+  //   const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
+  //   let itemUpdate = migrateItemData(itemData);
+  //   // Update the Owned Item
+  //   if ( !foundry.utils.isEmpty(itemUpdate) ) {
+  //     itemUpdate._id = itemData._id;
+  //     arr.push(foundry.utils.expandObject(itemUpdate));
+  //   }
+  //   return arr;
+  // }, []);
+  // if ( items.length > 0 ) updateData.items = items;
   return updateData;
 };
 /* -------------------------------------------- */
+
+/**
+ * Migrate Effects
+ * @param {object} parent         Data of parent being migrated
+ * @returns {object[]}            Updates to apply on the embedded effects
+ */
+const migrateEffects = function(parent) {
+  if (!parent.effects) return {}
+  return parent.effects.reduce((arr, e) => {
+    const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
+    let effectUpdate = migrateEffectData(effectData);
+    if ( !foundry.utils.isEmpty(effectUpdate) ) {
+      effectUpdate._id = effectData._id;
+      arr.push(foundry.utils.expandObject(effectUpdate));
+    }
+    return arr;
+  }, []);
+}
+
+/**
+ * Migrate Item
+ * @param {object} parent         Data of parent being migrated
+ * @returns {object[]}            Updates to apply on the embedded Items
+ */
+ const migrateItems = function(parent) {
+  if (!parent.items) return {}
+  return parent.items.reduce((arr, i) => {
+    const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
+    let itemUpdate = migrateItemData(itemData);
+    if ( !foundry.utils.isEmpty(itemUpdate) ) {
+      itemUpdate._id = itemData._id;
+      arr.push(foundry.utils.expandObject(itemUpdate));
+    }
+    return arr;
+  }, []);
+}
 
 /**
  * Migrate a single Item document to incorporate latest data model changes
@@ -257,7 +297,8 @@ export const migrateSceneData = async function(scene) {
     else if ( !t.actorLink ) {
       const actorData = duplicate(t.actorData);
       actorData.type = token.actor?.type;
-      const update = migrateActorData(actorData);
+      const tokenSource = game.actors.get(t.actorId)._source;
+      const update = migrateActorData(actorData, tokenSource);
       ["items", "effects"].forEach(embeddedName => {
         if (!update[embeddedName]?.length) return;
         const updates = new Map(update[embeddedName].map(u => [u._id, u]));
@@ -331,13 +372,16 @@ export const migrateSceneData = async function(scene) {
  * Update Game Mode table with in use Health / Defense / Toughness 
  * @private
  */
-function _updateModeHealth(actor, updateData) {
+function _updateModeHealth(actor, source, updateData) {
   if (actor.type !== "char") return updateData;
   const mode = CONFIG.ageSystem.healthSys.mode;
   const path = `system.gameMode.specs.${mode}`;
-  updateData[`${path}.health`] = actor._source.system.health.set;
-  updateData[`${path}.defense`] = actor._source.system.defense.gameModeBonus;
-  updateData[`${path}.toughness`] = actor._source.system.armor.toughness.gameModeBonus;
+  // updateData[`${path}.health`] = actor._source.system.health.set;
+  // updateData[`${path}.defense`] = actor._source.system.defense.gameModeBonus;
+  // updateData[`${path}.toughness`] = actor._source.system.armor.toughness.gameModeBonus;
+  updateData[`${path}.health`] = source.system.health.set;
+  updateData[`${path}.defense`] = source.system.defense.gameModeBonus;
+  updateData[`${path}.toughness`] = source.system.armor.toughness.gameModeBonus;
   
   return updateData
 }
@@ -435,14 +479,13 @@ function _updateModeHealth(actor, updateData) {
  */
  function _populateItemModifiers(item, updateData) {
   if (!['equipment', 'weapon', 'power', 'talent'].includes(item.type)) return updateData;
-  const itemMods = item.system.itemMods ?? item.data.itemMods;
+  const itemMods = item.system ? item.system.itemMods : item.data.itemMods;
   const mods = {};
   const keys = []
 
   for (const k in itemMods) {
     if (Object.hasOwnProperty.call(itemMods, k)) {
       const m = itemMods[k];
-      // if (m.selected ?? m.value) {
       if (m.value) {
         let modKey
         do {
