@@ -1,14 +1,9 @@
 {
     "id": "age-system",
+    "name": "age-system",
     "title": "AGE System (unofficial)",
     "description": "Unofficial AGE System implementation for most of AGE subsystems",
     "version": "1.0.0",
-    "compatibility": {
-        "minimum": 10.265,
-        "verified": 10.276,
-        "maximum": 10.276
-    },    
-    "templateVersion": 5,
     "authors": [
 		{
 			"name": "VK Dolea",
@@ -55,6 +50,11 @@
     "initiative": "3d6 + @initiative",
     "gridDistance": 2,
     "gridUnits": "yd",
+    "compatibility": {
+        "minimum": "10",
+        "verified": "10.276",
+        "maximum": "10"
+    },
     "url": "https://github.com/vkdolea/age-system",
     "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",
     "download": "https://github.com/vkdolea/age-system/archive/1.0.0.zip",
