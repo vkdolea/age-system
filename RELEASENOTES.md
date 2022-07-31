@@ -1,6 +1,6 @@
 # Release Notes
 
-## 1.0.0 [2022-xx-xx]
+## 1.0.0 [2022-08-xx]
 ### Changed
 - System updated to run on Foundry VTT v10.
 - *Removed compatibility to FoundryVTT 0.8.x and FoundryVTT v9.*
@@ -10,8 +10,8 @@
 
 ### Fixed
 - Power description on Stat Block sheet now will show buttons for inline rolls and content links.
-- Using a power with 0 base damage running *Modern AGE (alternate damage: Injury)* won't output wrong calculation.
-- *Quick AGE Settings* window restyled to fully show buttons; localized name on title; clicking *Save Settings" without selecting an option will close the window and won't return an error.
+- Using a power with 0 base damage when using *Modern AGE (alternate damage: Injury)* won't output wrong calculation.
+- *Quick AGE Settings* window restyled to fully show buttons; localized name on title; clicking *Save Settings* without selecting an option will close the window and won't return an error.
 
 ## 0.12.5 [2022-06-11]
 ### Fixed
