@@ -277,6 +277,18 @@ export const migrateSceneData = async function(scene) {
         const updates = new Map(update[embeddedName].map(u => [u._id, u]));
         t.actorData[embeddedName].forEach(original => {
           const update = updates.get(original._id);
+          if (original.data) { // Addresses issue on migrating Item/Effects owned by synthetic tokens
+            switch (embeddedName) {
+              case 'items':
+                original.system = original.data;
+                break;
+            
+              case 'effects':
+                mergeObject(original, original.data);
+                break;
+            }
+            delete original.data;
+          }
           if (update) mergeObject(original, update);
         });
         delete update[embeddedName];
@@ -284,55 +296,7 @@ export const migrateSceneData = async function(scene) {
 
       mergeObject(t.actorData, update);
     }
-    return t;
-  //   const t = token.toObject();
-  //   if (!t.actorLink && game.actors.has(t.actorId) && (t.actorData.system || t.actorData.effects || t.actorData.items)) {
-  //     // Migrate Actor Data
-  //     try {
-  //       t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
-  //       // const upData = await foundry.utils.deepClone(migrateActorData(t.actorData));
-  //       // if (upData.data) {
-  //       //   upData.system = upData.data;
-  //       //   delete upData.data;
-  //       // }
-  //       // t.actorData = foundry.utils.mergeObject(t.actorData, upData);
-  //       // Migrate Items
-  //       if (t.actorData.items) {
-  //         token.actor.items.forEach(async (i) => {
-  //             const updates = migrateItemData(i)
-  //             await i.update(updates);
-  //             console.log(`Migrated ${i.type} document ${i.name} from token ${token.name}`);
-              
-  //           });
-  //         };
-    
-  //       // // Migrate Effects, version 0.8.8
-  //       if (t.actorData.effects) {
-  //         token.actor.effects.forEach(async (e) => {
-  //           const updates = migrateEffectData(e)
-  //           await e.update(updates);
-  //           console.log(`Migrated Active Effect named ${e.id} from token ${token.name}`);
-  //         });
-  //       };
-  //     } catch (err) {
-  //       err.message = `Failed AGE System migration for token ${t.name}: ${err.message}`;
-  //       console.error(err);
-  //       console.log(t)
-  //     }
-  //   }
-
-  //   if (!t.actorId || t.actorLink || !t.actorData.system || !t.actorData.effects || !t.actorData.items) {
-  //     t.actorData = {};
-  //   } else if ( !game.actors.has(t.actorId) ){
-  //     t.actorId = null;
-  //     t.actorData = {};
-  //   } else if ( !t.actorLink ) {
-
-  //     // Migrate Actor Data
-  //     t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
-  //   }
-  //   return t;
-    
+    return t;    
   });
   return {tokens};
 };
@@ -349,9 +313,6 @@ function _updateModeHealth(actor, source, updateData) {
   if (actor.type !== "char") return updateData;
   const mode = CONFIG.ageSystem.healthSys.mode;
   const path = `system.gameMode.specs.${mode}`;
-  // updateData[`${path}.health`] = actor._source.system.health.set;
-  // updateData[`${path}.defense`] = actor._source.system.defense.gameModeBonus;
-  // updateData[`${path}.toughness`] = actor._source.system.armor.toughness.gameModeBonus;
   updateData[`${path}.health`] = source.system.health.set;
   updateData[`${path}.defense`] = source.system.defense.gameModeBonus;
   updateData[`${path}.toughness`] = source.system.armor.toughness.gameModeBonus;

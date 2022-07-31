@@ -2049,6 +2049,9 @@
 /*******************************/
 /**       AGE Roll Card       **/
 /*******************************/
+#chat-log .chat-message .message-content .age-system.base-age-roll h3 {
+  border-bottom: none;
+}
 #chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons {
   margin-top: 4px;
 }
