@@ -376,7 +376,7 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.speed.total",
+            key: "system.speed.total",
             mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
             value: "0.5"
         }]
@@ -417,7 +417,7 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.speed.total",
+            key: "system.speed.total",
             mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
             value: "0.5"
         }]
@@ -434,7 +434,7 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.testMod",
+            key: "system.testMod",
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: "-1"
         }]
@@ -451,12 +451,12 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.speed.total",
+            key: "system.speed.total",
             mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
             value: "0.5"
         },
         {
-            key: "data.testMod",
+            key: "system.testMod",
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: "-2"
         }]
@@ -485,7 +485,7 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.speed.total",
+            key: "system.speed.total",
             mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
             value: "0"
         }]
@@ -502,7 +502,7 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.speed.total",
+            key: "system.speed.total",
             mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
             value: "0"
         }]

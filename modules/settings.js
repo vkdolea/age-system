@@ -2,7 +2,7 @@ import { ageSystem } from "./config.js";
 import BreatherSettings from "./breather.js";
 import { AdvancedSettings, QuickSettings } from "./settings-helper.js";
 
-const debouncedReload = foundry.utils.debouncedReload();
+const debouncedReload = debounce(() => window.location.reload(), 250);
 export const registerSystemSettings = async function() {
 
   /**
@@ -194,6 +194,7 @@ export const registerSystemSettings = async function() {
       "health": "SETTINGS.healthModehealth",
       "fortune": "SETTINGS.healthModefortune",
     },
+    // onChange: debouncedReload
     onChange: () => {
       ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${game.settings.get("age-system", "healthMode")}`),
       [...game.actors.contents, ...Object.values(game.actors.tokens)]

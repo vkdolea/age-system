@@ -165,7 +165,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     
         // Adds general roll bonus from Actor
         if (actorData?.testMod && actorData?.testMod != 0) {
-            rollFormula += " + @testMod";
+            rollFormula += ` + ${actorData.testMod}`;
             rollData.testMod = actorData.testMod;
             partials.push({
                 label: game.i18n.localize("age-system.bonus.testMod"),
