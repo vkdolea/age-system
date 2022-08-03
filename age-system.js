@@ -195,7 +195,7 @@ Hooks.once("init", async function() {
     Handlebars.registerHelper('ageffect', function(mask, options) {
         for (let o = 0; o < options.length; o++) {
             const e = options[o];
-            if (e[1] === mask) return e[0]
+            if (e[1] == mask) return e[0];
         }
         return `${mask} (${game.i18n.localize("age-system.custom")})`;
     });
