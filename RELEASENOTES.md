@@ -12,7 +12,7 @@
 - Power description on Stat Block sheet now will show buttons for inline rolls and content links.
 - Using a power with 0 base damage when using *Modern AGE (alternate damage: Injury)* won't output wrong calculation.
 - *Quick AGE Settings* window restyled to fully show buttons; localized name on title; clicking *Save Settings* without selecting an option will close the window and won't return an error.
-- Modifiers Test (All) and Attack (All) now have consistent evaluation when an Active Effect is also adding to these numbers.
+- Modifiers Test (All), Attack (All) and Damage (all) now have consistent evaluation when an Active Effect is also adding to these numbers.
 
 ## 0.12.5 [2022-06-11]
 ### Fixed

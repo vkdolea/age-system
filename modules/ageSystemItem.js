@@ -104,10 +104,10 @@ export class ageSystemItem extends Item {
             const actorAbl = actor?.abilities?.[data.useAbl]?.total;
             if (actorAbl) atkBonuses.push(actor.abilities[data.useAbl].total);
             const atkBonusActor = ["testMod", "attackMod"];
-            if (actor?.ownedBonus) {
+            if (actor) {
                 for (let am = 0; am < atkBonusActor.length; am++) {
                     const modName = atkBonusActor[am];
-                    if (actor.ownedBonus[modName]) atkBonuses.push(actor.ownedBonus[modName].totalFormula);
+                    if (actor[modName]) atkBonuses.push(actor[modName]);
                 };
             };
 
@@ -155,11 +155,11 @@ export class ageSystemItem extends Item {
             if (data.dmgAbl !== "no-abl") {
                 if (actor?.abilities?.[data.dmgAbl]?.total) dmgBonusArr.push(actor.abilities[data.dmgAbl].total)
             }
-            const dmgBonusActor = ["actorDamage"];
-            if (actor?.ownedBonus) {
+            const dmgBonusActor = ["dmgMod"];
+            if (actor) {
                 for (let am = 0; am < dmgBonusActor.length; am++) {
                     const modName = dmgBonusActor[am];
-                    if (actor.ownedBonus[modName]) dmgBonusArr.push(actor.ownedBonus[modName].totalFormula);
+                    if (actor[modName]) dmgBonusArr.push(actor[modName]);
                 };
             };
             // Damage Parts - Item Scope
@@ -511,6 +511,7 @@ export class ageSystemItem extends Item {
         "honorifics": "systems/age-system/templates/sheets/chat/honorifics-sheet.hbs",
         "membership": "systems/age-system/templates/sheets/chat/membership-sheet.hbs",
         "shipfeatures": "systems/age-system/templates/sheets/chat/shipfeatures-sheet.hbs",
+
         "item-to-chat": "systems/age-system/templates/sheets/chat/item-to-chat.hbs"
     };
 

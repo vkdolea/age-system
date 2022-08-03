@@ -415,7 +415,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     _onActiveEffect(event){
         const effectId = event.currentTarget.closest(".feature-controls").dataset.effectId;
         const effect = this.actor.effects.get(effectId);
-        const isDisabled = effect.data.disabled;
+        const isDisabled = effect.disabled;
         effect.update({"disabled": !isDisabled})
     }
 
@@ -462,16 +462,16 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const actorData = this.actor.system;
         const abl = ev.currentTarget.closest(".feature-controls").dataset.ablId;
         let actorAbls = {
-            data: {
+            system: {
                 abilities: {}
             }
         };
         for (const ablKey in actorData.abilities) {
             if (Object.hasOwnProperty.call(actorData.abilities, ablKey)) {
-                actorAbls.data.abilities[ablKey] = {"lastUp": false};                
+                actorAbls.system.abilities[ablKey] = {"lastUp": false};                
             };
         };
-        actorAbls.data.abilities[abl].lastUp = true;
+        actorAbls.system.abilities[abl].lastUp = true;
         this.actor.update(actorAbls);
     };
 

@@ -60,6 +60,13 @@ export const migrateWorld = async function() {
   // Migrate Game Settings
   const settingsUpdates = await migrateSettings();
 
+  // Migrate Chat Messagens
+  for (let m of game.messages) {
+    const updateData = await migrateMessage(m);
+    if (updateData != {}) console.log(`Migrating ChatMessage document ${m._id}`);
+    await m.update(updateData, {enforceTypes: false});
+  }
+
   // Set the migration as complete
   await game.settings.set("age-system", "systemMigrationVersion", game.system.version);
   if (settingsUpdates !== []) {
@@ -92,6 +99,21 @@ export async function migrateSettings() {
     if (!diff) migData.push(newData)
     if (newHealthSys !== healthSys) updateSettings.push(newData)
   };
+
+  if (isNewerVersion("1.0.0", lastMigrationVer)) { // Do not execute if last migration version was 1.0.0 or earlier
+    // Migrate Custom Token Status
+    const te = game.settings.get("age-system", "customTokenEffects");
+    for (let e = 0; e < te.length; e++) {
+      const changes = te[e].changes;
+      if (changes) {
+        for (let c = 0; c < changes.length; c++) {
+          const k = changes[c];
+          if (k.key.includes('data.')) te[e].changes[c].key = k.key.replace("data.", "system.")
+        }
+      }
+    }
+    await game.settings.set("age-system", "customTokenEffects", te);
+  }
   
   await game.settings.set("age-system", "settingsMigrationData", migData);
   return updateSettings;
@@ -156,8 +178,23 @@ export const migrateCompendium = async function(pack) {
 };
 
 /* -------------------------------------------- */
-/*  Document Type Migration Helpers               */
+/*  Document Type Migration Helpers             */
 /* -------------------------------------------- */
+
+
+/**
+ * Migrate data of Chat Message document to incorporate latest system changes
+ * Return an Object of updateData to be applied
+ * @param {ChatMessage} message   The message to Update
+ * @return {Object}               The udpateData to apply
+ */
+export const migrateMessage = function(message) {
+  const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
+  const updateData = {};
+
+  if (isNewerVersion("1.0.0", lastMigrationVer)) _adjustRollsArray(message, updateData); // Do not execute if last migration was 1.0.0 or earlier
+  return updateData;
+}
 
 /**
  * Migrate a single Actor document to incorporate latest data model changes
@@ -303,6 +340,22 @@ export const migrateSceneData = async function(scene) {
 
 /* -------------------------------------------- */
 /*  Low level migration utilities
+/* -------------------------------------------- */
+
+/**
+ * Remove invalid terms from Rolls array
+ * @private
+ */
+ function _adjustRollsArray(message, updateData) {
+  let roll = foundry.utils.deepClone(message._source.rolls);
+  
+  for (let i = 0; i < roll.length; i++) {
+    if (!(roll[i] === false)) roll.splice(i)
+  }
+  updateData["rolls"] = roll;
+
+  return updateData
+}
 /* -------------------------------------------- */
 
 /**

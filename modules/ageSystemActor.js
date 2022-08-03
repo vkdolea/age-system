@@ -292,11 +292,11 @@ export class ageSystemActor extends Actor {
 
         // Actor All Tests
         const testModFormula = mods?.testMod?.totalFormula;
-        data.testMod = testModFormula ? Dice.resumeFormula(mods?.testMod?.totalFormula, this.actorRollData()).detValue : "0";
+        data.testMod = testModFormula ? Dice.resumeFormula(mods?.testMod?.totalFormula, this.actorRollData()).detValue : 0;
 
         // Actor All Attacks Mod
         const attkModFormula = mods?.attackMod?.totalFormula;
-        data.attackMod = attkModFormula ? Dice.resumeFormula(mods?.attackMod?.totalFormula, this.actorRollData()).detValue : "0";
+        data.attackMod = attkModFormula ? Dice.resumeFormula(mods?.attackMod?.totalFormula, this.actorRollData()).detValue : 0;
 
         // Defense
         data.defense.mod = mods?.defense?.formParts?.detValue ?? 0;
