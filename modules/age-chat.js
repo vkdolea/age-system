@@ -259,7 +259,7 @@ export async function sortCustomAgeChatCards(chatCard, html, data) {
     _buttonType(html.find(".age-system.item-chat-controls button"));
     _buttonType(html.find("button.age-button"));
 
-    // Toggle chat card visibility of AGE Roll Cards
+    // Toggle chat card visibility of AGE Roll Cards 
     if (html.find(".base-age-roll").length > 0) _handleAgeRollVisibility(html, chatCard, data);
 
     // Check permission level to show and roll chat buttons when rolling item card
@@ -292,7 +292,9 @@ async function _handleAgeRollVisibility(html, chatCard, chatData){
         const data = el.dataset;
         const actorId = data.actorId;
         let actor;
-        if (actorId) actor = game.actors.get(actorId) ?? await fromUuid(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
+        if (actorId) {
+            actor = actorId.startsWith("Actor.") ? await fromUuid(actorId) : game.actors.get(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
+        }
         actor = actor?.actor ?? actor;
         const isBlind = chatCard.blind;
         const whisperTo = chatData.message.whisper;
