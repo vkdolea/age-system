@@ -224,7 +224,6 @@ export async function chatFatigueRoll(event) {
     const cardId = message.dataset.messageId;
     const cardData = game.messages.get(cardId).flags["age-system"].ageroll.rollData;
     const actorId = cardData.actorId;
-    
     let owner = null;
     owner = await fromUuid(actorId)
     owner = owner?.actor ?? owner;
