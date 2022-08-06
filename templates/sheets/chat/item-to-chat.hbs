@@ -77,10 +77,10 @@
     <div class="mod-box">
         {{#each system.modifiersByType as |modGroup modType|}}
         {{#each modGroup as |mod|}}
-        {{#if (and mod.isActive mod.valid)}}
+        {{#if mod.valid}}
         <div class="flexrow mod-desc colorset-first-tier">
-            <span class="mod-name">{{localize (concat "age-system.bonus." modType)}}{{#if (or (eq modType "focus") (eq modType "focusPowerForce"))}} | {{mod.conditions.focus}}{{/if}}</span>
-            <span class="formula">{{mod.formula}}</span>
+            <span class="mod-name {{#unless mod.isActive}} opacity-low{{/unless}}">{{localize (concat "age-system.bonus." modType)}}{{#if (or (eq modType "focus") (eq modType "focusPowerForce"))}} | {{mod.conditions.focus}}{{/if}}</span>
+            <span class="formula {{#unless mod.isActive}} opacity-low{{/unless}}">{{mod.formula}}</span>
         </div>
         {{/if}}
         {{/each}}
