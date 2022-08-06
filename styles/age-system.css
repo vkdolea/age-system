@@ -164,12 +164,11 @@
   justify-content: center;
 }
 .age-system.item-to-chat .footer span {
-  margin-left: 2px;
-  font-size: 11px;
+  font-size: 12px;
   font-variant-caps: all-petite-caps;
   flex: 0 0 auto;
   border-left: 1px solid;
-  padding-left: 2px;
+  padding: 0 4px;
 }
 .age-system.item-to-chat .footer span:first-of-type {
   margin-left: 0;

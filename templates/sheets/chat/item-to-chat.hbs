@@ -45,7 +45,7 @@
             {{/if}}
 
             {{!-- Spaceship Feature --}}
-            {{#if (eq item.type "relationship")}}
+            {{#if (eq item.type "shipfeatures")}}
             <li>{{localize (concat "age-system.spaceship." system.type)}} [{{localize "age-system.spaceship." system.quality}}]</li>
             <li >
                 {{#if (eq item.system.type "sensorMod")}}
@@ -113,7 +113,7 @@
         {{#if (eq item.type "weapon")}}
         <span>{{localize "age-system.item.minStr"}} {{system.minStr}}</span>
         {{#if system.ranged}}
-        <span>{{localize "age-system.item.range"}}</span>
+        <span>{{localize "age-system.item.range"}} {{system.range}} - {{system.rangeMax}}</span>
         {{/if}}
         {{/if}}
 
