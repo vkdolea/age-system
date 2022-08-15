@@ -2,6 +2,7 @@ import { ageSystem } from "./config.js";
 import { ageRollCheck } from "./dice.js";
 import ConditionsWorkshop from "./conditions-workshop.js";
 import { applyBreather } from "./breather.js";
+import AgeImporter from "./age-importer.js";
 
 export class AgeRoller extends Application {
 	constructor(options = {}) {
@@ -31,6 +32,7 @@ export class AgeRoller extends Application {
 		html.find("#age-roller-container").mouseenter(this._onShowOptions.bind(this));
 		html.find("#age-roller").hover(this._onShowOptions.bind(this));
 		html.find(".conditions-workshop").click(this.openConditionWorkshop.bind(this));
+		html.find(".age-importer").click(this.openAgeImporter.bind(this));
 		html.find(".breather-tokens").click(this.tokenBreather);
 		html.find('.roll').click(this._onSpecialRoll.bind(this));
 		html.find('.roll').contextmenu(this._onSpecialRoll.bind(this));
@@ -65,6 +67,10 @@ export class AgeRoller extends Application {
 
 	openConditionWorkshop(ev) {
 		return new ConditionsWorkshop().render(true);
+	}
+
+	openAgeImporter(ev) {
+		return new AgeImporter().render(true);
 	}
 
 	_onHideOptions(ev) {

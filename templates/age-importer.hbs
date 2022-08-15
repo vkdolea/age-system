@@ -1,0 +1,19 @@
+<div class="age-importer flexrow feature-controls">
+    <div class="parser-text flexcol">
+        <h2 class="title">Parser</h2>
+        <textarea class="text-to-import">{{importingText}}</textarea>
+    </div>
+    <div class="options">
+        <h2>{{localize "age-system.settings.options"}}</h2>
+        <div>
+            <span>{{importingAbilities}}</span>
+        </div>
+        <div class="flexcol">
+            <h3>{{localize "age-system.mode"}}</h3>
+            {{radioBoxes radioB.name radioB.choices radioB.options}}
+        </div>
+        <button type="button" class="default-button start-importing">
+            Import
+        </button>
+    </div>
+</div>

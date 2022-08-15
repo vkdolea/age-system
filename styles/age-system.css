@@ -4147,6 +4147,17 @@ body *:not(i, .fa, .far, .fas) {
   margin-right: 4px;
   border: none;
 }
+.age-system-dialog .age-importer .title {
+  flex: 0 0 auto;
+}
+.age-system-dialog .age-importer .text-to-import {
+  width: 100%;
+  resize: none !important;
+}
+.age-system-dialog .age-importer .options {
+  flex: 0 0 290px;
+  margin-left: 10px;
+}
 .age-system-dialog .conditions-workshop .individual-effects img {
   height: 124px;
   width: 124px;
