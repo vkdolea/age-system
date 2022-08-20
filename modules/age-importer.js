@@ -1,4 +1,5 @@
 import {ageSystem} from "./config.js";
+import * as Dice from "./dice.js";
 
 export default class AgeImporter extends Application {
   constructor(options = {}) {
@@ -6,9 +7,13 @@ export default class AgeImporter extends Application {
 
     this._packList = [];
     this._importingAbilities = game.settings.get("age-system", "abilitySelection");
-    this._modeOptions = {'expanse': "The Expanse", 'mage': "Modern AGE", 'fage': "Fantasy AGE", 'dage': "Dragon AGE"};
-    this._modeSelected = null;
     this._importingText = ""
+    
+    // Currently available only for Modern AGE
+    this._modeOptions = {'mage': "Modern AGE"};
+    this._modeSelected = 'mage';
+    // this._modeOptions = {'expanse': "The Expanse", 'mage': "Modern AGE", 'fage': "Fantasy AGE", 'dage': "Dragon AGE"};
+    // this._modeSelected = null;
   }
 
   static get defaultOptions() {
@@ -73,6 +78,7 @@ export default class AgeImporter extends Application {
 
 export class AgeParser {
   constructor (text, ageSetting, options = {}) {
+    if (!text) return null;
     // Compêndio com Items (suportar vários? pastas?)
     this._modeSelected = ageSetting;
     this._text = text;
@@ -80,7 +86,7 @@ export class AgeParser {
     const block = text.split('\n');
     // Object containing actor and item data parsed
     this.data = {
-      items: {}
+      items: []
     };
     this._getName(block);
     this._getAbilities()
@@ -88,7 +94,149 @@ export class AgeParser {
     this._getAttacks(this.text, ageSetting);
     this._getThreat(this.text)
     this._getSpecialQualities(this.text, ageSetting);
+    this._getItems();
+
+    this._createActor();
+
     console.log(this.data)
+  }
+
+  async _createItems(actor) {
+    // Look at Compendium or Item Directory for Items with same name as Attack/Equipment/Stunt
+
+    // Create documents from "Focus"
+    await actor.createEmbeddedDocuments('Item', this.data.focus);
+
+    // Create documents from "Equipment" section
+    await actor.createEmbeddedDocuments('Item', this.data.items);
+
+    // Add Armor
+    const armor = await actor.createEmbeddedDocuments('Item', [{
+      name: game.i18n.localize("age-system.armor"),
+      type: 'equipment',
+      img: 'icons/svg/shield.svg',
+      system: {equiped: true, favorite: true}
+    }]);
+    await armor[0]._newModifier({type: 'impactArmor', formula: this.data.armor.impactArmor});
+    await armor[0]._newModifier({type: 'ballisticArmor', formula: this.data.armor.ballisticArmor})
+
+    // Create Weapons from "Attacks"
+    const attks = this.data.attacks;
+    for (let a = 0; a < attks.length; a++) {
+      const attk = attks[a];
+      const newAttk = await actor.createEmbeddedDocuments('Item', [{
+        name: attk.name,
+        type: 'weapon',
+        system: {
+          favorite: true,
+          equiped: true,
+          useAbl: 'no-abl',
+          useFocus: '',
+          dmgType: "wound",
+          dmgSource: "impact",
+          dmgAbl: "no-abl",
+          damageInjury: 1, // TODO - elaborate formula to fill in this data
+          damageFormula: `${attk.dmg}`
+        }
+      }]);
+      newAttk[0]._newModifier({type: 'itemActivation', formula: attk.toHit, flavor: 'To Hit'})
+    }
+    actor.sheet.render(true);
+  }
+
+  async _createActor() {
+    const data = this.data;
+    const healthMax = data.gameMode.specs[game.settings.get("age-system", "gameMode")].health;
+
+    // Organize data to create new Actor
+    const actorData = {
+      name: data.name,
+      type: 'char',
+      flags: {
+        core: {sheetClass: "age-system.ageSystemSheetCharStatBlock"}
+      },
+      system: {
+        abilities: data.abilities,
+        gameMode: data.gameMode,
+        health: {
+          value: healthMax
+        }
+      }
+    }
+
+    // Creates new Actor
+    return game.actors.documentClass.createDocuments([actorData]).then(a => this._createItems(a[0]))
+  }
+
+  _getItems() {
+    // Localized names
+    const equipLocal = game.i18n.localize("age-system.equipment").toLowerCase();
+    const talentLocal = game.i18n.localize("age-system.talentPlural").toLowerCase();
+    const stuntLocal = game.i18n.localize("age-system.setting.stunt").toLowerCase();
+    const favoredStuntLocal = game.i18n.localize("age-system.favoredStunts").toLowerCase();
+
+    // Item Type definition
+    const feats = this.data.features;
+    const items = {};
+    const toRemove = [];
+    
+    // Save Equipment, Talent and Stunt on separate arrays
+    for (let f = 0; f < feats.length; f++) {
+      const ft = feats[f];
+      const title = ft.name.toLowerCase()
+      if (title === equipLocal || title === talentLocal || title === favoredStuntLocal) {
+        toRemove.push(f);
+        switch (ft.name.toLowerCase()) {
+          case equipLocal: items.equipment = ft.desc.split(',');
+            break;
+          
+          case talentLocal: items.talent = ft.desc.split(',');
+            break;
+  
+          case favoredStuntLocal: items.stunts = ft.desc.split(',');
+            break;
+        }
+      }
+    }
+
+    // Remove features already treated
+    for (let i = toRemove.length-1; i > -1; i--) {
+      const r = toRemove[i];
+      feats.splice(r, 1);
+    }
+
+    // Try to identify if imported data has specific stunts
+    // English version
+    // const startsWith = `Stunt—`.toLowerCase();
+
+    // Other Special Qualities as Powers
+    const power = [];
+    if (feats.length) {
+      for (let f = 0; f < feats.length; f++) {
+        const p = feats[f];
+        power.push({
+          name: p.name.trim(),
+          type: 'power',
+          system: {
+            favorite: true,
+            activate: true,
+            longDesc: `<p>${p.desc.trim()}</p>`
+          }
+        })
+      }
+    }
+    if (power.length) this.data.items.push(...power);
+
+    // Create Array with data to create Items on Actor
+    for (const key in items) {
+      if (Object.hasOwnProperty.call(items, key)) {
+        const e = items[key];
+        for (let i = 0; i < e.length; i++) {
+          e[i] = {name: e[i].trim(), type: key, system: {favorite: true, equiped: true, activate: true}};
+        }
+        this.data.items.push(...e)
+      }
+    }
   }
 
   _getThreat(text) {
@@ -101,6 +249,11 @@ export class AgeParser {
     this.text = text.substring(0, text.length-size);
   }
 
+  /**
+   * Extract Special Qualities from imported data and store array at this.data.features
+   * @param {String} text Imported text without the 'Threat' string sequence
+   * @param {*} mode AGE setting selected by user
+   */
   _getSpecialQualities(text, mode) {
     const features = []
     let rawFeatures;
@@ -118,26 +271,35 @@ export class AgeParser {
       if (i < featArr.length-1) {
         const pos2 = text.indexOf(featArr[i+1]);
         features.push({
-          name: f.substring(0, f.length-1),
-          desc: text.substring(pos1 + size, pos2)
+          name: this.removeLineBreake(f.substring(0, f.length-1)),
+          desc: this.removeLineBreake(text.substring(pos1 + size, pos2))
         })
       } else {
         features.push({
-          name: f.substring(0, f.length-1),
-          desc: text.substring(pos1 + size)
+          name: this.removeLineBreake(f.substring(0, f.length-1)),
+          desc: this.removeLineBreake(text.substring(pos1 + size))
         })
       }
     }
     this.data.features = features;
   }
 
+  removeLineBreake(str){
+    return str.replaceAll(`\n`, ` `).trim();
+  }
+
   _getAttacks(text, mode) {
     const attacks = [];
     let attksTable;
     if (mode === "mage") {
-      const start = `Weapon Attack Roll Damage*\n`;
+      let start = `Weapon Attack Roll Damage*\n`;
+      let startIndex = text.indexOf(start);
+      if (startIndex < 0) {
+        start = `Weapon Attack Roll Damage\n`;
+        startIndex = text.indexOf(start);
+      };
       const end = `\nSpecial Qualities`;
-      attksTable = text.substring(text.indexOf(start) + start.length, text.indexOf(end)).split('\n');
+      attksTable = text.substring(startIndex + start.length, text.indexOf(end)).split('\n');
       attksTable.pop(); // Removes note at bottom of attacks' table
     }
 
@@ -149,11 +311,15 @@ export class AgeParser {
 
     // Go through attksTable and identify attacks
     for (let a = 0; a < attksTable.length; a++) {
-      const attk = attksTable[a].split(' ');
+      const str = attksTable[a];
+      const atkData = str.match(/ \+0?[0-9].|\-0?[0-9].|0|\- /);
+      const dmgStr = str.substring(atkData['index'] + atkData[0].length).trim();
+      const formulaEval = Dice.resumeFormula(dmgStr, {});
+      const dmg = formulaEval.shortFormula === "+0" ? `${formulaEval.shortFormula}[${dmgStr}]` : dmgStr;
       attacks.push({
-        dmg: attk.pop(),
-        toHit: attk.pop(),
-        name: attk.join(' ')
+        name: str.substring(0, atkData['index']).trim(),
+        toHit: atkData[0].trim(),
+        dmg: dmg
       })
     }
     
@@ -167,63 +333,86 @@ export class AgeParser {
     if (mode === 'expanse') r = `(?<=AR \\+ TOU\n).*(?=\n)`; //incluir Localização
     if (['dage', 'fage'].includes(mode)) r = `(?<=Defense Armor Rating\n).*(?=\n)`; //incluir Localização
     if (!r) return null;
-    let protoText = text.match(r)[0];
+    let protoText = text.match(r)[0].trim().replaceAll("+ ", "+");
     
-    // Logic to ensure "+" has a white space on its left
-    const wsArr = []
+    // Logic to ensure "+" has a white space on its left and none to its right
+    const wsLeft = [];
     for (let i = protoText.length-1; i > 0; i--) {
       const e = protoText[i];
-      if (e === "+" && protoText[i-1] != " ") wsArr.push(i)
+      if (e === "+" && protoText[i-1] != " ") wsLeft.push(i);
     }
-    for (let c = 0; c < wsArr.length; c++) {
-      const el = wsArr[c];
-      protoText = protoText.slice(0, el-1) + " " + protoText.slice(el, protoText.length);
+    for (let c = 0; c < wsLeft.length; c++) {
+      const el = wsLeft[c];
+      protoText = protoText.slice(0, el) + " " + protoText.slice(el, protoText.length);
     }
-    const data = protoText.split(" ");
+    let data = protoText.split(" ");
 
     // Modern AGE logics
     if (mode === 'mage') {
-
+      // Initialize Game Mode object
+      const gameMode = {
+        specs: {
+          gritty: {},
+          pulp: {},
+          cinematic: {},
+          none: {}
+        }
+      }
       // Toughness
-      const cons = this.data.abilities.cons;
-      const toughness = {
-        cinematic: Number(data.pop()) - cons,
-        pulp: Number(data.pop()) - cons,
-        gritty: Number(data.pop()) - cons
-      };
-      this.data.toughness = toughness;
+      const cons = this.data.abilities.cons.value;
+      this._populateMageMods(data, gameMode, 'toughness', cons);
 
-      // Armor Rating (Ballistic and Impact)
-      const totalArmor = data.pop().split('/');
+      // Armor Rating (Ballistic and Impact), including logics to identify when xI/yB data is missing
+      const armorArr = data[data.length-1];
+      const totalArmor = armorArr.includes('/') ? data.pop().split('/') : ['0I', '0B'];
       const armor = {
-        ballistic: Number(totalArmor.pop().slice(0, -1)),
-        impact: Number(totalArmor.pop().slice(0, -1))
+        ballisticArmor: totalArmor.pop().slice(0, -1),
+        impactArmor: totalArmor.pop().slice(0, -1)
       }
       this.data.armor = armor;
 
       // Defense
-      const dex = this.data.abilities.dex;
-      const defense = {
-        cinematic: Number(data.pop()) - dex,
-        pulp: Number(data.pop()) - dex,
-        gritty: Number(data.pop()) - dex
-      }
-      this.data.defense = defense
+      const dex = this.data.abilities.dex.value
+      const baseDef = 10;
+      this._populateMageMods(data, gameMode, 'defense', baseDef + dex);
 
       // Health
-      const health = {
-        cinematic: Number(data.pop()),
-        pulp: Number(data.pop()),
-        gritty: Number(data.pop())
-      }
-      this.data.health = health
+      this._populateMageMods(data, gameMode, 'health');
 
       // Speed and different movement
-      const speedMod = Number(data[0]) - dex;
+      const baseSpeed = Number(data[0]) - dex;
       data.splice(0, 1);
-      this.data.speed = speedMod;
-      this.data.speedOthers = data.length ? data.join(' ') : null;
+      this.data.speed = {base: baseSpeed};
+      this.data.flags = {
+        "age-system": {
+          importData: {speedOthers: data.length ? data.join(' ') : null}
+        }
+      };
+      this.data.gameMode = gameMode;
     }
+  }
+
+  /**
+   * Helper function to parse text to fetch Actor's Speed, Health, Defense and Armor
+   * @param {Array} dataArr Array containing Speed, Health, Defense and Armor data
+   * @param {String} gameMode Game Mode ID to be used to set Current Health
+   * @param {String} type Derived data to be looked (Speed, Health, Defense or Armor)
+   * @param {Number} offset Adjustment to be made os derived data
+   * @returns {Array} Array containing remaining data to be parsed
+   */
+  _populateMageMods(dataArr, gameMode, type, offset = 0) {
+    const modes = ['cinematic', 'pulp', 'gritty'];
+    for (let m = 0; m < modes.length; m++) {
+      const mode = modes[m];
+      const v = Number(dataArr.pop()) - offset;
+      gameMode.specs[mode][type] = v;
+      if (type === 'health') gameMode.specs[mode].healthCur = v;
+      if (mode === 'gritty') {
+        gameMode.specs.none[type] = v;
+        if (type === 'health') gameMode.specs.none.healthCur = v;
+      }
+    }
+    return dataArr;
   }
 
   /**
@@ -272,7 +461,7 @@ export class AgeParser {
         const noLineBreak = ablM[0].replace('\n', '').trim();
         const whiteSpace = noLineBreak.indexOf(" ");
         const abilityValue = Number(noLineBreak.slice(0, whiteSpace));
-        abilities[a] = abilityValue;
+        abilities[a] = {value: abilityValue};
 
         // Focuses
         if (hasFocus) {
@@ -282,12 +471,15 @@ export class AgeParser {
             const e = fociArr[f].trim();
             // Identify if there is modified Focus
             const mod = e.lastIndexOf('+');
-            const value = mod < 0 ? null : Number(e.slice(mod, e.length));
-            const name = mod > 0 ? e.slice(0, mod).trim() : e;
+            const value = mod < 0 ? 2 : Number(e.slice(mod, e.length));
+            const name = mod > 0 ? e.slice(0, mod) : e;
             focus.push({
-              name: name,
-              value: value,
-              abl: a
+              name: name.trim(),
+              type: 'focus',
+              system: {
+                initialValue: value,
+                useAbl: a
+              }
             })
           }
         }
@@ -295,193 +487,6 @@ export class AgeParser {
     }
     
     this.data.abilities = abilities;
-    this.data.items.focus = focus;
-  }
-}
-
-export class DamageHandler {
-  constructor(targets, damageData) {
-    const healthSys = damageData.healthSys;
-    this._damageData = damageData
-    this._useBallistic = healthSys.useBallistic;
-    this._useInjury = healthSys.useInjury;
-    this._basicDamage = damageData.totalDamage;
-    this._armorPenetration = "none";
-    this._damageType = damageData.dmgType;
-    this._damageSource = damageData.dmgSrc;
-    this._letPlayerRoll = true;
-
-    let harmedOnes = [];
-    for (let t = 0; t < targets.length; t++) {
-      const h = targets[t];
-      const data = foundry.utils.deepClone(h.actor);
-      harmedOnes.push({
-        name: h.actor.name,
-        img: h.document.texture.src,
-        uuid: h.document.actorLink ? h.actor.uuid : h.document.uuid,
-        data,
-        dmgMod: 0,
-        remainingHP: 0,
-        damage: 0,
-        ignoreDmg: false,
-        autoInjury: !data.hasPlayerOwner,
-        injuryMarks: data.system.injury.marks,
-        injurySDpenalty: Math.floor(data.system.injury.marks/3),
-        testMod: data.system.ownedMods?.testMod ? data.system.ownedMods.testMod : 0,
-        toughMod: 0
-      })
-    }
-    this._harmedOnes = harmedOnes.map(harmed => this.damage(harmed, this._damageData));
-  }
-
-  set harmedOnes(value) {
-    this._harmedOnes = value;
-  }
-
-  get harmedOnes() {
-    return this._harmedOnes.map(harmed => this.damage(harmed, this._damageData));
-  }
-
-  set armorPenetration(value) {
-    this._armorPenetration = value;
-  }
-
-  get armorPenetration() {
-    return this._armorPenetration;
-  }
-
-  set damageType(value) {
-    this._damageType = value;
-    this._damageData.dmgType = value
-  }
-
-  get damageType() {
-    return this._damageType;
-  }
-
-  set damageSource(value) {
-    this._damageSource = value;
-    this._damageData.dmgSrc = value;
-  }
-
-  get damageSource() {
-    return this._damageSource;
-  }
-
-  set basicDamage(value) {
-    this._basicDamage = value;
-  }
-
-  get basicDamage() {
-    return this._basicDamage;
-  }
-
-  get armorPenetrationMult() {
-    const ap = this.armorPenetration;
-    if (ap === "half") return 0.5;
-    if (ap === "ignore") return 0;
-    return 1;
-  }
-
-  set letPlayerRoll(value) {
-    this._letPlayerRoll = value;
-  }
-
-  get letPlayerRoll() {
-    return this._letPlayerRoll;
-  }
-
-  damage(h, d) {
-    let ap = this.armorPenetration;
-    let injuryParts = [];
-    const hData = h.data.system;
-    if (ap === "none") ap = 1;
-    if (ap === "half") ap = 0.5;
-    if (ap === "ignore") ap = 0;
-    const impactArmor = Math.floor(hData.armor.impact * ap);
-    const ballisticArmor = Math.floor(hData.armor.ballistic * ap);
-    const toughness = hData.armor.toughness.total > 0 ? hData.armor.toughness.total : 0;
-    const applyToughness = this.useToughness(d.healthSys.useToughness, this._damageType, this._damageSource, d.healthSys.mode);
-    const totalDmg = Number(this.basicDamage) + Number(h.dmgMod);
-    
-    let dmgProtection
-    if (this._useInjury) {
-      dmgProtection = applyToughness ? toughness : Math.ceil(toughness/2);
-      injuryParts.push({
-        label: game.i18n.localize("age-system.toughness"),
-        value: dmgProtection
-      })
-
-      dmgProtection += h.toughMod;
-      if (h.toughMod !== 0) injuryParts.push({
-        label: game.i18n.localize("age-system.mod"),
-        value: h.toughMod
-      })
-
-      dmgProtection -= h.injuryMarks;
-      // Injury Marks is not sent to chat card: when prompting for Toughness Roll, character will first check for current Marks and them apply to roll
-
-      dmgProtection += h.testMod;
-      if (h.testMod) injuryParts.push({
-        label: game.i18n.localize("age-system.bonus.testMod"),
-        value: h.testMod
-      })
-    } else {
-      dmgProtection = applyToughness ? toughness : 0;
-    }
-
-    let armorDesc
-    if (this._useBallistic && this._damageSource === 'ballistic') {
-      dmgProtection += ballisticArmor;
-      armorDesc = {
-        label: game.i18n.localize("age-system.bonus.ballisticArmor"),
-        value: ballisticArmor
-      }
-    } 
-    if (this._useBallistic && this._damageSource === 'impact') {
-      dmgProtection += impactArmor;
-      armorDesc = {
-        label: game.i18n.localize("age-system.bonus.impactArmor"),
-        value: impactArmor
-      }
-    }
-    
-    if (!this._useBallistic && this._damageSource !== 'penetrating') {
-      dmgProtection += impactArmor;
-      armorDesc = {
-        label: game.i18n.localize("age-system.armor"),
-        value: impactArmor
-      } 
-    }
-    if (armorDesc) injuryParts.push(armorDesc);
-
-    let reducedDmg = totalDmg - dmgProtection;
-    if (reducedDmg < 0) reducedDmg = 0;
-
-    if (h.ignoreDmg) {
-      h.remainingHP = hData.health.value;
-      h.totalDmg = 0;
-      h.dmgProtection = dmgProtection;
-    } else {
-      h.remainingHP = hData.health.value - reducedDmg;
-      if (h.remainingHP < 0) h.remainingHP = 0;
-      h.damage = reducedDmg
-      h.totalDmg = Number(totalDmg);
-      h.dmgProtection = dmgProtection;
-      h.injuryParts = injuryParts;
-    }
-
-    return h;
-  }
-
-  useToughness(setting, type, source, mode) {
-    if (!setting) return false;
-    switch (mode) {
-      case 'none': return true;
-      case 'gritty': return source === 'ballistic' ? false : ['stun'].includes(type);
-      case 'pulp': return source === 'ballistic' ? false : ['stun'].includes(type) || (['impact'].includes(source) && ['wound'].includes(type));
-      case 'cinematic': return !(['penetrating'].includes(source) && ['wound'].includes(type));
-      default: return false;
-    }
+    this.data.focus = focus;
   }
 }

@@ -1142,7 +1142,7 @@
 }
 .age-system.sheet .char-main-section .no-focus .owned-focus,
 .age-system.dialog .char-main-section .no-focus .owned-focus {
-  margin: 0;
+  display: none;
 }
 .age-system.sheet .char-main-section .no-focus .abl-header,
 .age-system.dialog .char-main-section .no-focus .abl-header {
@@ -4147,7 +4147,7 @@ body *:not(i, .fa, .far, .fas) {
   margin-right: 4px;
   border: none;
 }
-.age-system-dialog .age-importer .title {
+.age-system-dialog .age-importer .min-height {
   flex: 0 0 auto;
 }
 .age-system-dialog .age-importer .text-to-import {

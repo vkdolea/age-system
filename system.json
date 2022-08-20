@@ -51,8 +51,8 @@
     "gridUnits": "yd",
     "initiative": "3d6 + @initiative",
     "compatibility": {
-        "minimum": "10",
-        "verified": "10.277",
+        "minimum": "10.277",
+        "verified": "10.278",
         "maximum": "10"
     },
     "url": "https://github.com/vkdolea/age-system",

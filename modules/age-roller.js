@@ -18,6 +18,10 @@ export class AgeRoller extends Application {
 		data.colorset = game.settings.get("age-system", "colorScheme");
 		data.isGM = game.user.isGM;
 		data.wikiLink = ageSystem.wiki;
+
+		// AGE Importer only available in English so far
+		data.language = game.settings.get("core", "language");
+		data.reqLang = ['en'].includes(data.language);
 		return data;
 	}
 	

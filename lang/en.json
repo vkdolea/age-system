@@ -709,6 +709,11 @@
 
         "worldSetting": "World Mode",
 
-        "ageImporter": "AGE Importer"
+        "ageImporter": "AGE Importer",
+        "ageImporterInstruction": "Copy whole status block, from name header to Threat field and paste on text area below. Select AGE Setting which the status block belongs and start importing.",
+        "createCharacter": "Create Character",
+        "talentPlural": "Talents",
+        "stuntPlural": "Stunts",
+        "favoredStunts": "Favored Stunts"
     }
 }

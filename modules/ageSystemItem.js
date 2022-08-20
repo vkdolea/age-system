@@ -312,9 +312,11 @@ export class ageSystemItem extends Item {
 
     /**
      * Adds a new object inside Modifiers object
+     * @param {Object} object.type Modifier type
+     * @param {Object} object.formula Modifier value to be used
      * @returns Promise to update Item with new Modifier slot
      */
-    _newModifier() {
+    _newModifier({type = "", formula = "0", flavor = ""}) {
         const itemData = this.system
         const modifiers = foundry.utils.deepClone(itemData.modifiers);
         const keys = [];
@@ -331,9 +333,9 @@ export class ageSystemItem extends Item {
         const path = `system.modifiers.${modName}`
 
         const newMod = {
-            type: "",
-            formula: "0",
-            flavor: "",
+            type: type,
+            formula: formula,
+            flavor: flavor,
             isActive: true,
             valid: true,
             conditions: {},

@@ -1,6 +1,9 @@
 # Release Notes
 
 ## 1.0.0 [2022-08-xx]
+### Added
+- Experimental "AGE Importer", accessable by AGE Roller menu. Currently works only for Modern AGE stat blocks in English. A new Actor is created using the text pasted, including detected items. Fine tuning expected in the next versions.
+
 ### Changed
 - System updated to run on Foundry VTT v10.
 - *Removed compatibility to FoundryVTT 0.8.x and FoundryVTT v9.*
