@@ -56,10 +56,12 @@
             </li>
 
             {{!-- Target Number --}}
+            {{#if system.hasRoll}}
             <li>
                 <label>{{localize "age-system.targetNumber"}} </label>
                 <input type="number" name="system.targetNumber" value="{{system.targetNumber}}" data-dtype="Number" />
             </li>
+            {{/if}}
 
             {{!-- Power Force --}}
             <li>
@@ -89,9 +91,11 @@
         <header class="top-banner colorset-first-tier flexrow">
             <div class="header-details">
                 <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
+                {{#if system.hasRoll}}
                 <div class="sub-details flexrow">
                     {{> "systems/age-system/templates/partials/ability-focus-select.hbs"}}
                 </div>
+                {{/if}}
             </div>
         </header>
         
@@ -127,6 +131,7 @@
                         </li>
                         <li class="colorset-third-tier flexrow">
                             <p>
+                                <a class="select-options toggle-feature item-name item-box {{#if system.hasRoll}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="hasRoll">{{localize "age-system.rollable"}}</a>
                                 <a class="select-options toggle-feature item-name item-box {{#if system.hasTest}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="hasTest">{{localize "age-system.item.resistedEffect"}}</a>
                                 <a class="select-options toggle-feature item-name item-box {{#if system.causeDamage}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="causeDamage">{{localize "age-system.item.damage"}}</a>
                                 <a class="select-options toggle-feature item-name item-box {{#if system.causeHealing}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-feature="causeHealing">{{localize "age-system.item.healing"}}</a>
@@ -183,6 +188,7 @@
                             {{!-- Ability to Resist Power --}}
                             <select name="system.testAbl" class="extra-input">
                                 {{#select system.testAbl}}
+                                <option value="no-abl">-</option>
                                 {{#each config.abilities as |name type|}}
                                 <option value="{{type}}">{{localize name}}</option>
                                 {{/each}}

@@ -47,6 +47,7 @@
                             {{#select system.useAbl}}
                             
                             {{#if system.isOrg}}
+                            <option value="no-abl">-</option>
                             {{#each config.abilitiesOrg as |name type|}}
                             <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
@@ -54,6 +55,7 @@
                             {{else}}
 
                             {{#each config.abilities as |name type|}}
+                            <option value="no-abl">-</option>
                             <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/if}}

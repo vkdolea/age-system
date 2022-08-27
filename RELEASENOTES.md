@@ -5,11 +5,12 @@
 - Experimental "AGE Importer", accessable by AGE Roller menu. Currently works only for Modern AGE stat blocks in English. A new Actor is created using the text pasted, including detected items. Fine tuning expected in the next versions.
 
 ### Changed
+- Power item have now an option to indicate if it is "rollable" or not to cover for NPC characteristics without a dice requirement ("Special Features" or "Special Qualities" depending on the AGE setting used).
+- New item chat cards for all items.
+- Spaceship Features item sheet redesigned.
 - System updated to run on Foundry VTT v10.
 - *Removed compatibility to FoundryVTT 0.8.x and FoundryVTT v9.*
 - *Removed support to Legacy character sheet.*
-- New item chat cards for all items.
-- Spaceship Features item sheet redesigned.
 
 ### Fixed
 - Power description on Stat Block sheet now will show buttons for inline rolls and content links.

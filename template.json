@@ -675,7 +675,8 @@
                 "damageInjury": 1,
                 "damageFormula": "1d6"
             },
-            "requirement": ""
+            "requirement": "",
+            "hasRoll": true
         },
         "talent": {
             "templates": ["description", "bonuses"],

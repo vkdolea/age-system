@@ -5,7 +5,9 @@
         <a class="item-show item-name">{{item.name}}</a>
     </div>
     <div class="controls flexrow">
+        {{#if item.system.hasRoll}}
         <a class="item-control roll-item" title="{{localize "age-system.settings.attack"}}"><i class="fas fa-dice"></i></a>
+        {{/if}}
         {{#if item.system.causeDamage}}                            
         <a class="item-control roll-damage" title="{{localize "age-system.rollDamage"}}"><i class="fas fa-fist-raised"></i></a>
         {{/if}}

@@ -707,6 +707,17 @@
             "broseHint": "Ambientação de Fantasia Romântica"
         },
 
-        "worldSetting": "Modo Configurado"
+        "worldSetting": "Modo Configurado",
+
+        "ageImporter": "AGE Importer",
+        "ageImporterInstruction": "Copie todo o bloco de estatísticas, da linha contendo o nome até o campo Ameaça e cole no campo abaixo. Selecione o Cenário AGE ao qual o bloco de estatísticas pertence e clique no botão.",
+        "clickHelp": "Clique aqui para ver ajuda.",
+        "createCharacter": "Gerar Personagem",
+        "talentPlural": "Talentos",
+        "stuntPlural": "Façanhas",
+        "favoredStunts": "Façanhas Favoritas",
+        "specialFeatures": "Características Especiais",
+        "threat": "Ameaça",
+        "rollable": "Possui Rolagem"
     }
 }

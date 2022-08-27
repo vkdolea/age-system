@@ -6,7 +6,7 @@
             <li>{{item.name}}</li>
             
             {{!-- Power or Weapon --}}
-            {{#if (or (eq item.type "weapon") (eq item.type "power"))}}
+            {{#if (or (eq item.type "weapon") (and system.hasRoll (eq item.type "power")))}}
             <li>{{localize (concat "age-system." system.useAbl)}} ({{system.useFocus}})</li>
             {{/if}}
             {{#if (or system.hasDamage system.hasHealing)}}
@@ -99,13 +99,17 @@
     <div class="footer colorset-third-tier flexrow">
         {{!-- Footer Notes for Power --}}
         {{#if (eq item.type "power")}}
+        {{#if system.hasRoll}}
         <span>{{localize (concat "age-system." system.useAbl)}} ({{system.useFocus}})</span>
         <span>{{localize "age-system.targetNumber"}} {{system.targetNumber}}</span>
+        {{/if}}
         <span>{{localize "age-system.item.force"}} {{system.itemForce}}</span>
         {{#if system.useFatigue}}
         <span>{{localize "age-system.fatigue"}} {{system.fatigueTN}}</span>
         {{else}}
+        {{#if system.powerPointCost}}
         <span>{{localize "age-system.powerPointsIndex"}} {{system.powerPointCost}}</span>
+        {{/if}}
         {{/if}}
         {{/if}}
         
