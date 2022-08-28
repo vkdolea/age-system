@@ -395,6 +395,7 @@ export class AgeParser {
         core: {sheetClass: "age-system.ageSystemSheetCharStatBlock"}
       },
       system: {
+        threat: data.threat,
         abilities: data.abilities,
         gameMode: data.gameMode,
         health: {

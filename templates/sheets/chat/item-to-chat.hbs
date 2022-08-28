@@ -7,7 +7,9 @@
             
             {{!-- Power or Weapon --}}
             {{#if (or (eq item.type "weapon") (and system.hasRoll (eq item.type "power")))}}
+            {{#unless (eq system.useAbl "no-abl")}}
             <li>{{localize (concat "age-system." system.useAbl)}} ({{system.useFocus}})</li>
+            {{/unless}}
             {{/if}}
             {{#if (or system.hasDamage system.hasHealing)}}
             <li>{{system.damageFormula}}</li>

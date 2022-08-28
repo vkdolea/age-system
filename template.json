@@ -158,6 +158,7 @@
             "customCollisionDmg": 1
         },
         "char": {
+            "threat": "",
             "dmgMod": 0,
             "testMod": 0,
             "attackMod": 0,

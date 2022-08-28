@@ -1,6 +1,6 @@
 # Release Notes
 
-## 1.0.0 [2022-08-xx]
+## 1.0.0 [2022-08-31]
 ### Added
 - Experimental "AGE Importer", accessable by AGE Roller menu. Currently works only for Modern AGE stat blocks in English. A new Actor is created using the text pasted, including detected items. Fine tuning expected in the next versions.
 
