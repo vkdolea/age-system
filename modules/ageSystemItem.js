@@ -409,6 +409,7 @@ export class ageSystemItem extends Item {
         const actor = this.actor;
         const actorData = actor?.system;
         const itemData = this.system;
+        if (itemData.type === "power" && !itemData.system.hasRoll) return false
         if (!actor) return false;
         let ablCode = (rollType === ROLL_TYPE.FATIGUE) ? itemData.ablFatigue : itemData.useAbl;
 

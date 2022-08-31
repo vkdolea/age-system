@@ -3,6 +3,7 @@
 ## 1.0.0 [2022-08-31]
 ### Added
 - Experimental "AGE Importer", accessable by AGE Roller menu. Currently works only for Modern AGE stat blocks in English. A new Actor is created using the text pasted, including detected items. Fine tuning expected in the next versions.
+- Support to core function to create macros to display item sheet if the particular Item doesn't have a roll feature.
 
 ### Changed
 - Power item have now an option to indicate if it is "rollable" or not to cover for NPC characteristics without a dice requirement ("Special Features" or "Special Qualities" depending on the AGE setting used).

@@ -826,7 +826,7 @@
 .age-system.sheet .document-picture,
 .age-system.dialog .document-picture {
   border: none;
-  max-height: 200px;
+  height: 194px;
   width: 180px;
   object-fit: contain;
   margin: auto;

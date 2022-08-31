@@ -1,5 +1,5 @@
 {{!-- Talent Details --}}
-<li class="item-box item-card flexrow feature-controls colorset-{{#if (eq item.system.type "talent")}}third{{else}}second{{/if}}-tier" draggable="true" data-item-id="{{item._id}}">
+<li class="item-box drag-to-macro item-card flexrow feature-controls colorset-{{#if (eq item.system.type "talent")}}third{{else}}second{{/if}}-tier" draggable="true" data-item-id="{{item._id}}">
     <div class="main-data flexrow">
         <img class="item-image" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
         <a class="item-show item-name">{{item.name}} ({{tdegree item.system.degree}})</a>

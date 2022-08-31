@@ -209,7 +209,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             
             let handler = ev => this._onDragStart(ev);
             // Set HMTL elements with class item-box as draggable elements.
-            let items = html.find(".item-box");
+            let items = html.find(".drag-to-macro");
             for (let i = 0; i < items.length; i++) {
                 const el = items[i];
                 el.draggable = true;

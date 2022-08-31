@@ -32,14 +32,16 @@ export function rollOwnedItem(itemName, rollOptions = false) {
 /**
  * Create a Macro from an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
- * @param {Object} data     The dropped data
+ * @param {Object} item     The dropped Item
  * @param {number} slot     The hotbar slot to use
  * @returns {Promise}
  */
-export async function createAgeMacro(data, slot) {
-  const item = await fromUuid(data.uuid);
-  if (!['weapon', 'focus', 'power'].includes(item?.type)) return;
-  if (!item.isOwned) return ui.notifications.warn("You can only create macro buttons for owned Items");
+export async function createAgeMacro(item, slot) {
+  if (!item) return true;
+  if (!item.isOwned) {
+    ui.notifications.warn("You can only create macro buttons for owned Items");
+    return true
+  }
 
   // Create the macro command
   const command = `game.ageSystem.rollOwnedItem("${item.name}", true);\n\n/*Change second argument to false to skip Roll Options*/`;
@@ -50,7 +52,7 @@ export async function createAgeMacro(data, slot) {
       type: "script",
       img: item.img,
       command: command,
-      flags: { "ageSystem.itemMacro": true }
+      flags: { "age-system.itemMacro": true }
     });
   }
   if (game.user.getHotbarMacros()[slot-1].macro) {

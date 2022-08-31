@@ -14,7 +14,7 @@
         <div class="abl-name-focus flexrow">
             <a class="abl-name roll-ability">{{name}}</a>
             {{#each (focusbyabl ../data.focus type) as |item|}}
-            <div class="item-name focus-options feature-controls" data-item-id="{{item._id}}" data-roll-type="{{../../data.config.ROLL_TYPE.FOCUS}}">
+            <div class="item-name drag-to-macro focus-options feature-controls" data-item-id="{{item._id}}" data-roll-type="{{../../data.config.ROLL_TYPE.FOCUS}}">
                 <a class="item-name roll-item{{#if item.system.improved}} improved-focus{{/if}}">{{#if @first}}&nbsp({{else}}&nbsp{{/if}}{{item.name}}{{#if @last}}){{else}},{{/if}}</a>
             </div>
             {{/each}}
@@ -98,14 +98,14 @@
         <span class="weapon-damage">{{localize "age-system.item.damage"}}</span>
     </li>
     {{#each (equippedwpn data.weapon) as |item|}}
-    <li class="item-name item-box feature-controls flexrow body colorset-second-tier" data-item-id="{{item._id}}">
+    <li class="item-name drag-to-macro feature-controls flexrow body colorset-second-tier" data-item-id="{{item._id}}">
         <a class="weapon-name item-edit">{{item.name}}{{#if (ne item.system.quantity 1)}} ({{item.system.quantity}}){{/if}}</a>
         <a class="weapon-attack roll-item">{{item.system.atkRollMod}}</a>
         <a class="weapon-damage roll-damage">{{item.system.dmgFormula}}</a>
     </li>
     {{/each}}
     {{#each (dmgpower data.power) as |item|}}
-    <li class="item-name item-box feature-controls flexrow body colorset-second-tier" data-item-id="{{item._id}}">
+    <li class="item-name drag-to-macro feature-controls flexrow body colorset-second-tier" data-item-id="{{item._id}}">
         <a class="weapon-name item-edit">{{item.name}}{{#if item.system.hasHealing}} <i class="fa fa-heartbeat"></i>{{/if}}</a>
         <a class="weapon-attack roll-item">{{item.system.atkRollMod}}</a>
         <a class="weapon-damage roll-damage">{{item.system.dmgFormula}}</a>
@@ -123,7 +123,7 @@
         <p>
             <span class="quality-label colorset-second-tier">{{localize "age-system.equipment"}}:</span>
             {{#each (carriedequip items) as |item|}}
-            <span class="item-name feature-controls" data-item-id="{{item._id}}">
+            <span class="item-name drag-to-macro feature-controls" data-item-id="{{item._id}}">
                 <span class="item-name">&nbsp<a class="item-control item-equip {{#unless item.system.equiped}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i> </a><a class="item-edit">{{item.name}}{{#if (ne item.system.quantity 1)}} ({{item.system.quantity}}){{/if}}</a>{{#if @last}}.{{else}},{{/if}}</span>
             </span>
             {{/each}}
@@ -136,7 +136,7 @@
         <p>
             <span class="quality-label colorset-second-tier">{{localize "age-system.settings.stunts"}}:</span>
             {{#each data.stunts as |item|}}
-            <span class="item-name feature-controls" data-item-id="{{item._id}}">
+            <span class="item-name drag-to-macro feature-controls" data-item-id="{{item._id}}">
                 <a class="item-name item-edit">&nbsp[{{item.system.stuntPoints}} {{localize "age-system.settings.stuntPointsIndex"}}] {{item.name}}{{#if @last}}.{{else}},{{/if}}</a>
             </span>
             {{/each}}
@@ -149,7 +149,7 @@
         <p>
             <span class="quality-label colorset-second-tier">{{localize "age-system.talent"}}:</span>
             {{#each data.talent as |item|}}
-            <span class="item-name feature-controls" data-item-id="{{item._id}}">
+            <span class="item-name drag-to-macro feature-controls" data-item-id="{{item._id}}">
                 <span class="item-name">&nbsp<a class="item-control item-equip {{#unless item.system.activate}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i></a> <a class="item-show item-edit">{{item.name}}{{#if item.system.shortDesc}} ({{item.system.shortDesc}}){{/if}}</a>{{#if @last}}.{{else}},{{/if}}</span>
             </span>
             {{/each}}
@@ -159,7 +159,7 @@
 
     {{!-- Powers --}}
     {{#each data.power as |item|}}
-    <li class="item-box description body feature-controls" data-item-id="{{item._id}}">
+    <li class="item-box drag-to-macro description body feature-controls" data-item-id="{{item._id}}">
         <label class="quality-label colorset-second-tier">
             <a class="item-control item-equip {{#unless item.system.activate}} not-equiped{{/unless}}" title="{{localize "age-system.settings.equip"}}"><i class="fas fa-shield-alt"></i></a> <a class="item-edit">{{item.name}}</a>
             {{#if item.system.hasRoll}}
