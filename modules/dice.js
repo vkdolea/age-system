@@ -10,7 +10,7 @@ import { sortObjArrayByName } from "./setup.js";
 export function resumeFormula(formula, data = {}) {
     if (!formula) return null
     const simRoll = new Roll(formula, data);
-    const terms = simRoll.terms;
+    const terms = simRoll.terms;    
     const parts = {
         det: "",
         nonDet: ""
@@ -60,6 +60,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
 
     const ROLL_TYPE = ageSystem.ROLL_TYPE;
     const actorType = actor?.type;
+    const actorData = actor?.system;
 
     let isToken = null;
     let actorId = null;
@@ -98,7 +99,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     let resName;
     if (rollType === ROLL_TYPE.RESOURCES) {
         rollFormula += " + @resources"
-        rollData.resources = actor.data.data.resources.total;
+        rollData.resources = actorData.resources.total;
         // rollData.resourcesRoll = resourceRoll;
         const resSelected = game.settings.get("age-system", "wealthType");
         resName = game.i18n.localize(`age-system.${resSelected}`)
@@ -113,8 +114,8 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     // Check if Ability is used
     let ablName;
     if (abl !== null && abl !== "no-abl") {
-        const ablValue = actor.data.data.abilities[abl].total;
-        const ablTestMod = actor.data.data.abilities?.[abl]?.testMod ?? 0;
+        const ablValue = actorData.abilities[abl].total;
+        const ablTestMod = actorData.abilities?.[abl]?.testMod ?? 0;
         const ablTestModLabel = game.i18n.localize(`age-system.bonus.${abl}Test`);
         rollFormula += ` + @ability + @abilityTestOnly`;
         ablName = actorType === "char" ? game.i18n.localize(`age-system.${abl}`) : game.i18n.localize(`age-system.org.${abl}`);
@@ -139,8 +140,8 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     // Check if item rolled is Focus and prepare its data
     let focusId = null
     let focusObj = null
-    if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.data?.data.useFocus) {
-        focusObj = actor.checkFocus(itemRolled.data?.data.useFocus || itemRolled.name || itemRolled);
+    if (itemRolled?.type === "focus" || typeof(itemRolled) === "string" || itemRolled?.system?.useFocus) {
+        focusObj = actor.checkFocus(itemRolled?.system?.useFocus || itemRolled.name || itemRolled);
         rollFormula += " + @focus";
         rollData.focusName = focusObj.focusName;
         rollData.focus = focusObj.value;
@@ -153,9 +154,9 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
 
     if (actorType === 'char') {
         // Adds Actor general Attack Bonus if rolltype = "attack"
-        if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK, ROLL_TYPE.STUNT_ATTACK].includes(rollType) && actor.data.data.attackMod != 0) {
+        if ([ROLL_TYPE.ATTACK, ROLL_TYPE.RANGED_ATTACK, ROLL_TYPE.MELEE_ATTACK, ROLL_TYPE.STUNT_ATTACK].includes(rollType) && actorData.attackMod != 0) {
             rollFormula += " + @attackMod";
-            rollData.attackMod = actor.data.data.attackMod;
+            rollData.attackMod = actorData.attackMod;
             partials.push({
                 label: game.i18n.localize("age-system.bonus.attackMod"),
                 value: rollData.attackMod,
@@ -163,9 +164,9 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         }
     
         // Adds general roll bonus from Actor
-        if (actor?.data.data.testMod && actor?.data.data.testMod != 0) {
-            rollFormula += " + @testMod";
-            rollData.testMod = actor.data.data.testMod;
+        if (actorData?.testMod && actorData?.testMod != 0) {
+            rollFormula += ` + ${actorData.testMod}`;
+            rollData.testMod = actorData.testMod;
             partials.push({
                 label: game.i18n.localize("age-system.bonus.testMod"),
                 value: rollData.testMod,
@@ -197,11 +198,11 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     // Also checks if Item has Activation Mod
     if (itemRolled !== null && typeof(itemRolled) !== "string") {
         rollData.itemId = itemRolled.id;
-        rollData.hasDamage = itemRolled.data.data.hasDamage;
-        rollData.hasHealing = itemRolled.data.data.hasHealing;
-        rollData.hasFatigue = itemRolled.data.data.hasFatigue;
-        rollData.hasTest = itemRolled.data.data.hasTest;
-        const iUseMod = itemRolled?.data?.data?.activateMod
+        rollData.hasDamage = itemRolled.system.hasDamage;
+        rollData.hasHealing = itemRolled.system.hasHealing;
+        rollData.hasFatigue = itemRolled.system.hasFatigue;
+        rollData.hasTest = itemRolled.system.hasTest;
+        const iUseMod = itemRolled?.system?.activateMod
         if (iUseMod) {
             rollFormula += ` + ${iUseMod}`
             partials.push({
@@ -217,7 +218,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     if (actor && actorType === "char") {
 
         // Check if Item requires Weapon Group Proficiency
-        if (hasWeaponGroupPenalty(itemRolled, actor?.data.data.wgroups)) {
+        if (hasWeaponGroupPenalty(itemRolled, actorData?.wgroups)) {
             rollData.wgroup = -2;
             rollFormula += " + @wgroup";
             partials.push({
@@ -227,7 +228,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         };
 
         // Check if AIM is active - this bonus will apply to all rolls when it is active
-        const aim = actor.data.data.aim;
+        const aim = actorData.aim;
         if (aim.active && !(rollType === ROLL_TYPE.RESOURCES)) {
             rollData.aim = aim.value + aim.mod;
             rollFormula += " + @aim";
@@ -235,7 +236,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
                 label: game.i18n.localize("age-system.aim"),
                 value: rollData.aim
             });
-            if (itemRolled?.data?.type === "weapon") await actor.update({"data.aim.active": false});
+            if (itemRolled?.type === "weapon") await actor.update({"system.aim.active": false});
         };
         
         // Adds penalty for Attack which is converted to damage Bonus and pass info to chat Message
@@ -249,7 +250,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         }
         
         // Adds Armor Penalty if it is a Dexterity Check
-        const armor = actor.data.data.armor;
+        const armor = actorData.armor;
         if (armor.penalty > 0 && abl === "dex") {
             rollData.armorPenalty = -armor.penalty;
             rollFormula += " + @armorPenalty";
@@ -264,7 +265,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         rollData.usingFatigue = usingFatigue;
         
         // Check for Fatigue penalties
-        const fatigue = actor.data.data.fatigue;
+        const fatigue = actorData.fatigue;
         
         // Apply Fatigue penalties, if in use
         if (usingFatigue) {
@@ -280,7 +281,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         
         // Check Guard Up penalties
         // Here it checks if Guard Up and Defend are checked - when both are checked, the rule is use none
-        const guardUp = actor.data.data.guardUp;
+        const guardUp = actorData.guardUp;
         if (guardUp.active && !(rollType === ROLL_TYPE.RESOURCES)) {
             rollData.guardUp = -guardUp.testPenalty;
             rollData.guardUpActive = true;
@@ -359,7 +360,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     const generateSP = (rollTN && isSuccess) || !rollTN;
     const rollSummary = ageRollChecker(ageRoll, generateSP, isStuntAttack, extraSP, stackSP)
     let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
-    const injuryMarks = (rollType === ROLL_TYPE.TOUGHNESS) || (rollType === ROLL_TYPE.TOUGHNESS_AUTO) ? actor.data.data.injury.marks : null;
+    const injuryMarks = (rollType === ROLL_TYPE.TOUGHNESS) || (rollType === ROLL_TYPE.TOUGHNESS_AUTO) ? actorData.injury.marks : null;
 
     rollData = {
         ...rollData,
@@ -424,7 +425,7 @@ function hasWeaponGroupPenalty(item, ownedGroups) {
     // CASE 2 - No item rolled, Actor is not expected to have Weapon Groups, Weapon Groups is not an Array
     if (!item || !ownedGroups || !Array.isArray(ownedGroups) ) return false;
 
-    const itemWgroups = item?.data.data.wgroups;
+    const itemWgroups = item?.system.wgroups;
     
     // CASE 3 - Item's Weapon Groups is not an Array
     if (!Array.isArray(itemWgroups)) return false;
@@ -466,7 +467,7 @@ async function getAgeRollOptions(itemRolled, data = {}) {
                     label: game.i18n.localize("age-system.roll"),
                     callback: html => {
                         const fd = new FormDataExtended(html[0].querySelector("form"));
-                        resolve(fd.toObject())
+                        resolve(fd.object)
                     }
                 },
                 cancel: {
@@ -500,7 +501,7 @@ async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
                     label: game.i18n.localize("age-system.roll"),
                     callback: html => {
                         const fd = new FormDataExtended(html[0].querySelector("form"));
-                        resolve(fd.toObject());
+                        resolve(fd.object);
                     }
                 },
                 cancel: {
@@ -625,7 +626,7 @@ export async function vehicleDamage ({
     // Adds Ram Damage
     if (addRam) {
         damageFormula += ` + @ramDamage`;
-        rollData.ramDamage = `${vehicle.data.data.ramDmg}d6`;
+        rollData.ramDamage = `${vehicle.system.ramDmg}d6`;
         messageData.flavor += ` | ${game.i18n.localize("age-system.ram")}`;
     };
 
@@ -698,7 +699,7 @@ export async function plotDamage (actor) {
     const atkDmgTradeOff = Number(dmgOpt.atkDmgTradeOff);
 
     if (abl && abl !== 'no-abl') {
-        rollData.ability = actor.data.data.abilities[abl].value;
+        rollData.ability = actorData.abilities[abl].value;
         formula += ` + @ability[${game.i18n.localize(`age-system.org.${abl}`)}]`;
     }
 
@@ -806,17 +807,17 @@ export async function itemDamage({
     };
     
     const healthSys = ageSystem.healthSys;
-    const dmgDetails = resistedDmg ? item.data.data.damageResisted : item.data.data;
+    const dmgDetails = resistedDmg ? item.system.damageResisted : item.system;
     let dmgAbl = dmgDetails.dmgAbl
 
     let damageFormula
     let rollData = {...item.actor.actorRollData()};
     if (healthSys.useInjury) {
-        let baseDmg = item?.data?.data?.hasHealing ? "" : `${healthSys.baseDamageTN}`;
-        if (item?.data?.data?.damageInjury != 0) {
-            baseDmg = baseDmg ? `${baseDmg} + ${item.data.data.damageInjury}` : `${item.data.data.damageInjury}`;
+        let baseDmg = item?.system?.hasHealing ? null : `${healthSys.baseDamageTN}`;
+        if (item?.system?.damageInjury != 0) {
+            baseDmg = baseDmg ? `${baseDmg} + ${item.system.damageInjury}` : `${item.system.damageInjury}`;
         } else {
-            baseDmg = baseDmg ? `${item.data.data.damageInjury}` : `0`;
+            baseDmg = baseDmg ? `${baseDmg}` : `0`;
         }
         damageFormula = `(${baseDmg})[${baseDmg}, ${game.i18n.localize("age-system.base")}]`;
     } else damageFormula = `${dmgDetails.damageFormula}`;
@@ -828,17 +829,17 @@ export async function itemDamage({
     };
 
     // Adds up Flavor text for item damage type
-    if (item?.data.data.hasDamage) {
+    if (item?.system.hasDamage) {
         damageDesc += `${game.i18n.localize(`age-system.chatCard.rollDamage`)}`;
-        const dmgType = game.i18n.localize(`age-system.${item.data.data.dmgType}`);
-        const dmgSrc = game.i18n.localize(`age-system.${item.data.data.dmgSource}`);
-        dmgDesc.dmgType = item.data.data.dmgType;
-        dmgDesc.dmgSrc = item.data.data.dmgSource;
+        const dmgType = game.i18n.localize(`age-system.${item.system.dmgType}`);
+        const dmgSrc = game.i18n.localize(`age-system.${item.system.dmgSource}`);
+        dmgDesc.dmgType = item.system.dmgType;
+        dmgDesc.dmgSrc = item.system.dmgSource;
         if (healthSys.useBallistic) damageDesc += ` | ${dmgType} | ${dmgSrc}`;
     };
 
     // Add Healing Flavor text if applicable
-    if (item?.data.data.hasHealing) {
+    if (item?.system.hasHealing) {
         damageDesc = `${game.i18n.localize(`age-system.item.healing`)}`;
         dmgDesc.isHealing = true;
     };
@@ -849,11 +850,11 @@ export async function itemDamage({
         if (dmgAbl !== null && dmgAbl !== "no-abl") damageFormula = `${damageFormula} + @${dmgAbl}[${game.i18n.localize("age-system." + dmgAbl)}]`;
         
         // Check if item onwer has items which adds up to general damage
-        const aDmg = item?.actor?.data?.data?.dmgMod;
+        const aDmg = item?.actor?.system?.dmgMod;
         if (aDmg != 0) damageFormula = `${damageFormula} + ${aDmg}`;
 
         // Check if Item has Mod to add to its own Damage
-        const iDmg = item?.data?.data?.itemDmgMod;
+        const iDmg = item?.system?.itemDmgMod;
         if (iDmg != 0) damageFormula = `${damageFormula} + ${iDmg}`;
 
         // Check if Attack to Damage Trade Off is applied
@@ -863,9 +864,9 @@ export async function itemDamage({
         }
 
         // Check if Focus adds to damage and adds it
-        if (addFocus === true && item.data.data.useFocus) {
+        if (addFocus === true && item.system.useFocus) {
             const actor = item.actor;
-            const focusData = actor.checkFocus(item.data.data.useFocus);
+            const focusData = actor.checkFocus(item.system.useFocus);
             damageFormula = `${damageFormula} + @focus[${focusData.focusName}]`;
             rollData.focus = healthSys.useInjury ? Math.ceil(focusData.value/3) : focusData.value;
         }
@@ -884,8 +885,8 @@ export async function itemDamage({
         };
 
         // Adds extra damage for All-Out Attack maneuver
-        if (item.actor.data.data.allOutAttack.active) {
-            let allOutAttackMod = item.actor.data.data.allOutAttack.dmgBonus;
+        if (item.actor.system.allOutAttack.active) {
+            let allOutAttackMod = item.actor.system.allOutAttack.dmgBonus;
             if (healthSys.useInjury) allOutAttackMod = Math.ceil(allOutAttackMod/3);
             damageFormula = `${damageFormula} + @allOutAttack[${game.i18n.localize("age-system.allOutAttack")}]`;
             rollData.allOutAttack = allOutAttackMod;
@@ -919,7 +920,7 @@ export async function itemDamage({
     };
 
     // Adds +2 damage if Health System is Modern AGE and game Setting is 'pulp' or 'cinematic'
-    if (['mage', 'mageInjury', 'mageVitality'].includes(healthSys.type) && ['pulp', 'cinematic'].includes(healthSys.mode) && !item?.data.data.hasHealing) {
+    if (['mage', 'mageInjury', 'mageVitality'].includes(healthSys.type) && ['pulp', 'cinematic'].includes(healthSys.mode) && !item?.system.hasHealing) {
         const modeDamage = healthSys.useInjury ? 1 : 2;
         damageFormula += ` + @modeDamage[${game.i18n.localize(`SETTINGS.gameMode${healthSys.mode}`)}]`;
         rollData.modeDamage = modeDamage;

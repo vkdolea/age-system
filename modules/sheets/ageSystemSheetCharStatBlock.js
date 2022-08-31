@@ -20,7 +20,7 @@ export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter
     }
 
     get template() {
-        return `systems/age-system/templates/sheets/${this.actor.data.type}-stat-block.hbs`;
+        return `systems/age-system/templates/sheets/${this.actor.type}-stat-block.hbs`;
     }
 
     /* -------------------------------------------- */
@@ -33,6 +33,7 @@ export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter
     };
     
     activateListeners(html) {
+        $(`a.editor-edit`).hide(); // Used this code to remove the possibility to edit Powers on Stat Block view
         super.activateListeners(html);
         if (this.isEditable) {
             new ContextMenu(html, ".item-edit", this.itemContextMenu);

@@ -376,7 +376,7 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.speed.total",
+            key: "system.speed.total",
             mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
             value: "0.5"
         }]
@@ -417,7 +417,7 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.speed.total",
+            key: "system.speed.total",
             mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
             value: "0.5"
         }]
@@ -434,7 +434,7 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.testMod",
+            key: "system.testMod",
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: "-1"
         }]
@@ -451,12 +451,12 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.speed.total",
+            key: "system.speed.total",
             mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
             value: "0.5"
         },
         {
-            key: "data.testMod",
+            key: "system.testMod",
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: "-2"
         }]
@@ -485,7 +485,7 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.speed.total",
+            key: "system.speed.total",
             mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
             value: "0"
         }]
@@ -502,7 +502,7 @@ ageSystem.statusEffects = {
             }
         },
         changes: [{
-            key: "data.speed.total",
+            key: "system.speed.total",
             mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
             value: "0"
         }]
@@ -641,45 +641,45 @@ ageSystem.statusEffects = {
 ]};
 
 ageSystem.ageEffectsKeys = {
-    "testMod": {label: "age-system.bonus.testMod", mask: "data.testMod", dtype: 'nodice'},
-    "attackMod": {label: "age-system.bonus.attackMod", mask: "data.attackMod", dtype: 'nodice'},
-    "actorDamage": {label: "age-system.bonus.actorDamage", mask: "data.dmgMod", dtype: 'formula'},
-    "acc": {label: "age-system.bonus.acc", mask: "data.abilities.acc.total", dtype: 'number'},
-    "accTest": {label: "age-system.bonus.accTest", mask: "data.abilities.acc.testMod", dtype: 'number'},
-    "comm": {label: "age-system.bonus.comm", mask: "data.abilities.comm.total", dtype: 'number'},
-    "commTest": {label: "age-system.bonus.commTest", mask: "data.abilities.comm.testMod", dtype: 'number'},
-    "cons": {label: "age-system.bonus.cons", mask:"data.abilities.cons.total", dtype: 'number'},
-    "consTest": {label: "age-system.bonus.consTest", mask:"data.abilities.cons.testMod", dtype: 'number'},
-    "cunn": {label: "age-system.bonus.cunn", mask: "data.abilities.cunn.total", dtype: 'number'},
-    "cunnTest": {label: "age-system.bonus.cunnTest", mask: "data.abilities.cunn.testMod", dtype: 'number'},
-    "dex": {label: "age-system.bonus.dex", mask: "data.abilities.dex.total", dtype: 'number'},
-    "dexTest": {label: "age-system.bonus.dexTest", mask: "data.abilities.dex.testMod", dtype: 'number'},
-    "fight": {label: "age-system.bonus.fight", mask: "data.abilities.fight.total", dtype: 'number'},
-    "fightTest": {label: "age-system.bonus.fightTest", mask: "data.abilities.fight.testMod", dtype: 'number'},
-    "int": {label: "age-system.bonus.int", mask: "data.abilities.int.total", dtype: 'number'},
-    "intTest": {label: "age-system.bonus.intTest", mask: "data.abilities.int.testMod", dtype: 'number'},
-    "magic": {label: "age-system.bonus.magic", mask: "data.abilities.magic.total", dtype: 'number'},
-    "magicTest": {label: "age-system.bonus.magicTest", mask: "data.abilities.magic.testMod", dtype: 'number'},
-    "per": {label: "age-system.bonus.per", mask: "data.abilities.per.total", dtype: 'number'},
-    "perTest": {label: "age-system.bonus.perTest", mask: "data.abilities.per.testMod", dtype: 'number'},
-    "str": {label: "age-system.bonus.str", mask: "data.abilities.str.total", dtype: 'number'},
-    "strTest": {label: "age-system.bonus.strTest", mask: "data.abilities.str.testMod", dtype: 'number'},
-    "will": {label: "age-system.bonus.will", mask: "data.abilities.will.total", dtype: 'number'},
-    "willTest": {label: "age-system.bonus.willTest", mask: "data.abilities.will.testMod", dtype: 'number'},
-    "defense": {label: "age-system.bonus.defense", mask: "data.defense.total", dtype: 'nodice'},
-    "impactArmor": {label: "age-system.bonus.impactArmor", mask: "data.armor.impact", dtype: 'nodice'},
-    "ballisticArmor": {label: "age-system.bonus.ballisticArmor", mask: "data.armor.ballistic", dtype: 'nodice'},
-    "defendMnv": {label: "age-system.bonus.defendMnv", mask: "data.defend.total", dtype: 'nodice'},
-    "guardupMnv": {label: "age-system.bonus.guardupMnv", mask: "data.guardUp.total", dtype: 'nodice'},
-    "allOutAtkMnv": {label: "age-system.bonus.allOutAtkMnv", mask: "data.allOutAttack.total", dtype: 'formula'},
-    "maxHealth": {label: "age-system.bonus.maxHealth", mask: "data.health.max", dtype: 'nodice'},
-    "maxConviction": {label: "age-system.bonus.maxConviction", mask: "data.conviction.max", dtype: 'nodice'},
-    "maxPowerPoints": {label: "age-system.bonus.maxPowerPoints", mask: "data.powerPoints.max", dtype: 'nodice'},
-    "aimMnv": {label: "age-system.bonus.aimMnv", mask: "data.aim.total", dtype: 'nodice'},
-    "armorPenalty": {label: "age-system.bonus.armorPenalty", mask: "data.armor.penalty", dtype: 'nodice'},
-    "armorStrain": {label: "age-system.bonus.armorStrain", mask: "data.armor.strain", dtype: 'nodice'},
-    "speed": {label: "age-system.bonus.speed", mask: "data.speed.total", dtype: 'nodice'},
-    "toughness": {label: "age-system.bonus.toughness", mask: "data.armor.toughness.total", dtype: 'nodice'},
+    "testMod": {label: "age-system.bonus.testMod", mask: "system.testMod", dtype: 'nodice'},
+    "attackMod": {label: "age-system.bonus.attackMod", mask: "system.attackMod", dtype: 'nodice'},
+    "actorDamage": {label: "age-system.bonus.actorDamage", mask: "system.dmgMod", dtype: 'formula'},
+    "acc": {label: "age-system.bonus.acc", mask: "system.abilities.acc.total", dtype: 'number'},
+    "accTest": {label: "age-system.bonus.accTest", mask: "system.abilities.acc.testMod", dtype: 'number'},
+    "comm": {label: "age-system.bonus.comm", mask: "system.abilities.comm.total", dtype: 'number'},
+    "commTest": {label: "age-system.bonus.commTest", mask: "system.abilities.comm.testMod", dtype: 'number'},
+    "cons": {label: "age-system.bonus.cons", mask:"system.abilities.cons.total", dtype: 'number'},
+    "consTest": {label: "age-system.bonus.consTest", mask:"system.abilities.cons.testMod", dtype: 'number'},
+    "cunn": {label: "age-system.bonus.cunn", mask: "system.abilities.cunn.total", dtype: 'number'},
+    "cunnTest": {label: "age-system.bonus.cunnTest", mask: "system.abilities.cunn.testMod", dtype: 'number'},
+    "dex": {label: "age-system.bonus.dex", mask: "system.abilities.dex.total", dtype: 'number'},
+    "dexTest": {label: "age-system.bonus.dexTest", mask: "system.abilities.dex.testMod", dtype: 'number'},
+    "fight": {label: "age-system.bonus.fight", mask: "system.abilities.fight.total", dtype: 'number'},
+    "fightTest": {label: "age-system.bonus.fightTest", mask: "system.abilities.fight.testMod", dtype: 'number'},
+    "int": {label: "age-system.bonus.int", mask: "system.abilities.int.total", dtype: 'number'},
+    "intTest": {label: "age-system.bonus.intTest", mask: "system.abilities.int.testMod", dtype: 'number'},
+    "magic": {label: "age-system.bonus.magic", mask: "system.abilities.magic.total", dtype: 'number'},
+    "magicTest": {label: "age-system.bonus.magicTest", mask: "system.abilities.magic.testMod", dtype: 'number'},
+    "per": {label: "age-system.bonus.per", mask: "system.abilities.per.total", dtype: 'number'},
+    "perTest": {label: "age-system.bonus.perTest", mask: "system.abilities.per.testMod", dtype: 'number'},
+    "str": {label: "age-system.bonus.str", mask: "system.abilities.str.total", dtype: 'number'},
+    "strTest": {label: "age-system.bonus.strTest", mask: "system.abilities.str.testMod", dtype: 'number'},
+    "will": {label: "age-system.bonus.will", mask: "system.abilities.will.total", dtype: 'number'},
+    "willTest": {label: "age-system.bonus.willTest", mask: "system.abilities.will.testMod", dtype: 'number'},
+    "defense": {label: "age-system.bonus.defense", mask: "system.defense.total", dtype: 'nodice'},
+    "impactArmor": {label: "age-system.bonus.impactArmor", mask: "system.armor.impact", dtype: 'nodice'},
+    "ballisticArmor": {label: "age-system.bonus.ballisticArmor", mask: "system.armor.ballistic", dtype: 'nodice'},
+    "defendMnv": {label: "age-system.bonus.defendMnv", mask: "system.defend.total", dtype: 'nodice'},
+    "guardupMnv": {label: "age-system.bonus.guardupMnv", mask: "system.guardUp.total", dtype: 'nodice'},
+    "allOutAtkMnv": {label: "age-system.bonus.allOutAtkMnv", mask: "system.allOutAttack.total", dtype: 'formula'},
+    "maxHealth": {label: "age-system.bonus.maxHealth", mask: "system.health.max", dtype: 'nodice'},
+    "maxConviction": {label: "age-system.bonus.maxConviction", mask: "system.conviction.max", dtype: 'nodice'},
+    "maxPowerPoints": {label: "age-system.bonus.maxPowerPoints", mask: "system.powerPoints.max", dtype: 'nodice'},
+    "aimMnv": {label: "age-system.bonus.aimMnv", mask: "system.aim.total", dtype: 'nodice'},
+    "armorPenalty": {label: "age-system.bonus.armorPenalty", mask: "system.armor.penalty", dtype: 'nodice'},
+    "armorStrain": {label: "age-system.bonus.armorStrain", mask: "system.armor.strain", dtype: 'nodice'},
+    "speed": {label: "age-system.bonus.speed", mask: "system.speed.total", dtype: 'nodice'},
+    "toughness": {label: "age-system.bonus.toughness", mask: "system.armor.toughness.total", dtype: 'nodice'},
 }
 
 ageSystem.itemEffectsKeys = {

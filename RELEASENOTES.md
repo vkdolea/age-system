@@ -1,5 +1,24 @@
 # Release Notes
 
+## 1.0.0 [2022-08-31]
+### Added
+- Experimental "AGE Importer", accessable by AGE Roller menu. Currently works only for Modern AGE stat blocks in English. A new Actor is created using the text pasted, including detected items. Fine tuning expected in the next versions.
+- Support to core function to create macros to display item sheet if the particular Item doesn't have a roll feature.
+
+### Changed
+- Power item have now an option to indicate if it is "rollable" or not to cover for NPC characteristics without a dice requirement ("Special Features" or "Special Qualities" depending on the AGE setting used).
+- New item chat cards for all items.
+- Spaceship Features item sheet redesigned.
+- System updated to run on Foundry VTT v10.
+- *Removed compatibility to FoundryVTT 0.8.x and FoundryVTT v9.*
+- *Removed support to Legacy character sheet.*
+
+### Fixed
+- Power description on Stat Block sheet now will show buttons for inline rolls and content links.
+- Using a power with 0 base damage when using *Modern AGE (alternate damage: Injury)* won't output wrong calculation.
+- *Quick AGE Settings* window restyled to fully show buttons; localized name on title; clicking *Save Settings* without selecting an option will close the window and won't return an error.
+- Modifiers Test (All), Attack (All) and Damage (all) now have consistent evaluation when an Active Effect is also adding to these numbers.
+
 ## 0.12.5 [2022-06-11]
 ### Fixed
 - Added a cleaner background on character/item sheets.

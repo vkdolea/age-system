@@ -3,13 +3,13 @@
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function() {
-  ui.notifications.info(`Applying AGE System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
+  ui.notifications.info(`Applying AGE System Migration for version ${game.system.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
 
   // Migrate World Actors
-  for ( let a of game.actors.contents ) {
+  for ( let a of game.actors ) {
     try {
-      const updateData = migrateActorData(a.data);
-      if ( !foundry.utils.isObjectEmpty(updateData) ) {
+      const updateData = migrateActorData(a.toObject(), a._source);
+      if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Actor document ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
       }
@@ -20,10 +20,10 @@ export const migrateWorld = async function() {
   }
 
   // Migrate World Items
-  for ( let i of game.items.contents ) {
+  for ( let i of game.items ) {
     try {
-      const updateData = migrateItemData(i.data);
-      if ( !foundry.utils.isObjectEmpty(updateData) ) {
+      const updateData = migrateItemData(i.toObject());
+      if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Item document ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
       }
@@ -34,12 +34,15 @@ export const migrateWorld = async function() {
   }
 
   // Migrate Actor Override Tokens
-  for ( let s of game.scenes.contents ) {
+  for ( let s of game.scenes ) {
     try {
-      const updateData = await migrateSceneData(s.data);
-      if ( !foundry.utils.isObjectEmpty(updateData) ) {
+      const updateData = await migrateSceneData(s);
+      if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Scene document ${s.name}`);
-        // await s.update(updateData, {enforceTypes: false});
+        await s.update(updateData, {enforceTypes: false});
+        // If we do not do this, then synthetic token actors remain in cache
+        // with the un-updated actorData.
+        s.tokens.forEach(t => t._actor = null);
       }
     } catch(err) {
       err.message = `Failed AGE System migration for Scene ${s.name}: ${err.message}`;
@@ -50,22 +53,29 @@ export const migrateWorld = async function() {
   // Migrate World Compendium Packs
   for ( let p of game.packs ) {
     if ( p.metadata.package !== "world" ) continue;
-    if ( !["Actor", "Item", "Scene"].includes(p.metadata.type) ) continue;
+    if ( !["Actor", "Item", "Scene"].includes(p.documentName) ) continue;
     await migrateCompendium(p);
   }
 
   // Migrate Game Settings
   const settingsUpdates = await migrateSettings();
 
+  // Migrate Chat Messagens
+  for (let m of game.messages) {
+    const updateData = await migrateMessage(m);
+    if (updateData != {}) console.log(`Migrating ChatMessage document ${m._id}`);
+    await m.update(updateData, {enforceTypes: false});
+  }
+
   // Set the migration as complete
-  await game.settings.set("age-system", "systemMigrationVersion", game.system.data.version);
+  await game.settings.set("age-system", "systemMigrationVersion", game.system.version);
   if (settingsUpdates !== []) {
     for (let s = 0; s < settingsUpdates.length; s++) {
       const setting = settingsUpdates[s];
       game.settings.set("age-system", setting.key, setting.value);
     }
   }
-  ui.notifications.info(`AGE System Migration to version ${game.system.data.version} completed!`, {permanent: true});
+  ui.notifications.info(`AGE System Migration to version ${game.system.version} completed!`, {permanent: true});
 };
 
 /* -------------------------------------------- */
@@ -89,6 +99,21 @@ export async function migrateSettings() {
     if (!diff) migData.push(newData)
     if (newHealthSys !== healthSys) updateSettings.push(newData)
   };
+
+  if (isNewerVersion("1.0.0", lastMigrationVer)) { // Do not execute if last migration version was 1.0.0 or earlier
+    // Migrate Custom Token Status
+    const te = game.settings.get("age-system", "customTokenEffects");
+    for (let e = 0; e < te.length; e++) {
+      const changes = te[e].changes;
+      if (changes) {
+        for (let c = 0; c < changes.length; c++) {
+          const k = changes[c];
+          if (k.key.includes('data.')) te[e].changes[c].key = k.key.replace("data.", "system.")
+        }
+      }
+    }
+    await game.settings.set("age-system", "customTokenEffects", te);
+  }
   
   await game.settings.set("age-system", "settingsMigrationData", migData);
   return updateSettings;
@@ -107,8 +132,8 @@ export async function removeToughHealthBallistic() {
  * @return {Promise}
  */
 export const migrateCompendium = async function(pack) {
-  const type = pack.metadata.type;
-  if ( !["Actor", "Item", "Scene"].includes(type) ) return;
+  const documentName = pack.documentName;
+  if ( !["Actor", "Item", "Scene"].includes(documentName) ) return;
 
   // Unlock the pack for editing
   const wasLocked = pack.locked;
@@ -122,22 +147,22 @@ export const migrateCompendium = async function(pack) {
   for ( let doc of documents ) {
     let updateData = {};
     try {
-      switch (type) {
+      switch (documentName) {
         case "Actor":
-          updateData = migrateActorData(doc.data);
-          break;
+          updateData = migrateActorData(doc.toObject(), doc._source);
+          break;0
         case "Item":
-          updateData = migrateItemData(doc.data);
+          updateData = migrateItemData(doc.toObject());
           break;
         case "Scene":
-          updateData = await migrateSceneData(doc.data);
+          updateData = await migrateSceneData(doc.toObject());
           break;
       }
 
       // Save the entry, if data was changed
-      if ( foundry.utils.isObjectEmpty(updateData) ) continue;
+      if ( foundry.utils.isEmpty(updateData) ) continue;
       await doc.update(updateData);
-      console.log(`Migrated ${type} document ${doc.name} in Compendium ${pack.collection}`);
+      console.log(`Migrated ${documentName} document ${doc.name} in Compendium ${pack.collection}`);
     }
 
     // Handle migration failures
@@ -153,61 +178,86 @@ export const migrateCompendium = async function(pack) {
 };
 
 /* -------------------------------------------- */
-/*  Entity Type Migration Helpers               */
+/*  Document Type Migration Helpers             */
 /* -------------------------------------------- */
 
+
 /**
- * Migrate a single Actor entity to incorporate latest data model changes
+ * Migrate data of Chat Message document to incorporate latest system changes
+ * Return an Object of updateData to be applied
+ * @param {ChatMessage} message   The message to Update
+ * @return {Object}               The udpateData to apply
+ */
+export const migrateMessage = function(message) {
+  const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
+  const updateData = {};
+
+  if (isNewerVersion("1.0.0", lastMigrationVer)) _adjustRollsArray(message, updateData); // Do not execute if last migration was 1.0.0 or earlier
+  return updateData;
+}
+
+/**
+ * Migrate a single Actor document to incorporate latest data model changes
  * Return an Object of updateData to be applied
  * @param {Actor} actor   The actor to Update
  * @return {Object}       The updateData to apply
  */
-export const migrateActorData = function(actor) {
+export const migrateActorData = function(actor, source={}) {
   const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
   const updateData = {};
 
   // Actor Data Updates
-  if(isNewerVersion("0.12.0", lastMigrationVer)) _updateModeHealth(actor, updateData);
+  if(isNewerVersion("0.12.0", lastMigrationVer)) _updateModeHealth(actor, source, updateData);
   
   // Migrate Owned Effects
-  if (actor.effects) { // Rever essa função!!!!
-    const effects = actor.effects.reduce((arr, e) => {
-      // Migrate the Owned Effect
-      let effectUpdate = migrateEffectData(e.data ?? e);
-  
-      // Update the Owned Effect
-      if ( !isObjectEmpty(effectUpdate) ) {
-        effectUpdate._id = e.id;
-        // effectUpdate._id = e._id;
-        arr.push(effectUpdate);
-      }
-  
-      return arr;
-    }, []);
-    if (effects.length > 0) updateData.effects = effects;
-  }
+  const effects = migrateEffects(actor)
+  if (effects.length > 0) updateData.effects = effects;
 
   // Migrate Owned Items
-  if ( !actor.items ) return updateData;
-  const items = actor.items.reduce((arr, i) => {
-    // Migrate the Owned Item
-    let itemUpdate = migrateItemData(i.data.data ? i.data : i);
-
-    // Update the Owned Item
-    if ( !isObjectEmpty(itemUpdate) ) {
-      itemUpdate._id = i.data.data ? i.id : i._id;
-      arr.push(itemUpdate);
-    }
-
-    return arr;
-  }, []);
+  const items = migrateItems(actor);
   if ( items.length > 0 ) updateData.items = items;
   return updateData;
 };
 /* -------------------------------------------- */
 
 /**
- * Migrate a single Item entity to incorporate latest data model changes
+ * Migrate Effects
+ * @param {object} parent         Data of parent being migrated
+ * @returns {object[]}            Updates to apply on the embedded effects
+ */
+const migrateEffects = function(parent) {
+  if (!parent.effects) return {}
+  return parent.effects.reduce((arr, e) => {
+    const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
+    let effectUpdate = migrateEffectData(effectData);
+    if ( !foundry.utils.isEmpty(effectUpdate) ) {
+      effectUpdate._id = effectData._id;
+      arr.push(foundry.utils.expandObject(effectUpdate));
+    }
+    return arr;
+  }, []);
+}
+
+/**
+ * Migrate Item
+ * @param {object} parent         Data of parent being migrated
+ * @returns {object[]}            Updates to apply on the embedded Items
+ */
+ const migrateItems = function(parent) {
+  if (!parent.items) return {}
+  return parent.items.reduce((arr, i) => {
+    const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
+    let itemUpdate = migrateItemData(itemData);
+    if ( !foundry.utils.isEmpty(itemUpdate) ) {
+      itemUpdate._id = itemData._id;
+      arr.push(foundry.utils.expandObject(itemUpdate));
+    }
+    return arr;
+  }, []);
+}
+
+/**
+ * Migrate a single Item document to incorporate latest data model changes
  * @param item
  */
 export const migrateItemData = function(item) {
@@ -215,8 +265,8 @@ export const migrateItemData = function(item) {
   const updateData = {};
   if (isNewerVersion("0.7.0", lastMigrationVer)) _adjustFocusInitialValue(item, updateData); // Do not execute if last migration was 0.7.0 or earlier
   if (isNewerVersion("0.11.0", lastMigrationVer)) {
-    _weaponRanged(item, updateData);
-    _itemDamage(item, updateData);
+    if (item.type === "weapon" ) _weaponRanged(item, updateData);
+    if (["weapon", "power"].includes(item.type)) _itemDamage(item, updateData);
     _populateItemModifiers(item, updateData);
   }
   if (isNewerVersion("0.11.2", lastMigrationVer)) _talentDegree(item, updateData);
@@ -237,49 +287,53 @@ export const migrateEffectData = function(effect) {
 /* -------------------------------------------- */
 
 /**
- * Migrate a single Scene entity to incorporate changes to the data model of it's actor data overrides
+ * Migrate a single Scene document to incorporate changes to the data model of it's actor data overrides
  * Return an Object of updateData to be applied
  * @param {Object} scene  The Scene data to Update
  * @return {Object}       The updateData to apply
  */
 export const migrateSceneData = async function(scene) {
-  const tokens = scene.tokens.map(async (token) => {
-    const t = token.toJSON();
-
-    if (!t.actorLink && game.actors.has(t.actorId) && (t.actorData.data || t.actorData.effects || t.actorData.items)) {
-      // Migrate Actor Data
-      t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
-
-      // Migrate Items
-      if (t.actorData.items) {
-        token.actor.items.forEach(async (i) => {
-          const updates = migrateItemData(i.data)
-          await i.update(updates);
-          console.log(`Migrated ${i.data.type} document ${i.name} from token ${token.data.name}`);
-        });
-      };
-  
-      // // Migrate Effects, version 0.8.8
-      if (t.actorData.effects) {
-        token.actor.effects.forEach(async (e) => {
-          const updates = migrateEffectData(e.data ?? e)
-          await e.update(updates);
-          console.log(`Migrated Active Effect named ${e.id} from token ${token.data.name}`);
-        });
-      };
-    }
-
-    if (!t.actorId || t.actorLink || !t.actorData.data || !t.actorData.effects || !t.actorData.items) {
+  const tokens = scene.tokens.map(token => {
+    const t = token.toObject();
+    const update = {};
+    if ( Object.keys(update).length ) foundry.utils.mergeObject(t, update);
+    if ( !t.actorId || t.actorLink ) {
       t.actorData = {};
-    } else if ( !game.actors.has(t.actorId) ){
+    }
+    else if ( !game.actors.has(t.actorId) ) {
       t.actorId = null;
       t.actorData = {};
-    } else if ( !t.actorLink ) {
-
-      // Migrate Actor Data
-      t.actorData = foundry.utils.mergeObject(t.actorData, migrateActorData(t.actorData));
     }
-    return t;
+    else if ( !t.actorLink ) {
+      const actorData = duplicate(t.actorData);
+      actorData.type = token.actor?.type;
+      const tokenSource = game.actors.get(t.actorId)._source;
+      const update = migrateActorData(actorData, tokenSource);
+      ["items", "effects"].forEach(embeddedName => {
+        if (!update[embeddedName]?.length) return;
+        const updates = new Map(update[embeddedName].map(u => [u._id, u]));
+        t.actorData[embeddedName].forEach(original => {
+          const update = updates.get(original._id);
+          if (original.data) { // Addresses issue on migrating Item/Effects owned by synthetic tokens
+            switch (embeddedName) {
+              case 'items':
+                original.system = original.data;
+                break;
+            
+              case 'effects':
+                mergeObject(original, original.data);
+                break;
+            }
+            delete original.data;
+          }
+          if (update) mergeObject(original, update);
+        });
+        delete update[embeddedName];
+      });
+
+      mergeObject(t.actorData, update);
+    }
+    return t;    
   });
   return {tokens};
 };
@@ -289,16 +343,32 @@ export const migrateSceneData = async function(scene) {
 /* -------------------------------------------- */
 
 /**
+ * Remove invalid terms from Rolls array
+ * @private
+ */
+ function _adjustRollsArray(message, updateData) {
+  let roll = foundry.utils.deepClone(message._source.rolls);
+  
+  for (let i = 0; i < roll.length; i++) {
+    if (!(roll[i] === false)) roll.splice(i)
+  }
+  updateData["rolls"] = roll;
+
+  return updateData
+}
+/* -------------------------------------------- */
+
+/**
  * Update Game Mode table with in use Health / Defense / Toughness 
  * @private
  */
-function _updateModeHealth(actor, updateData) {
+function _updateModeHealth(actor, source, updateData) {
   if (actor.type !== "char") return updateData;
   const mode = CONFIG.ageSystem.healthSys.mode;
-  const path = `data.gameMode.specs.${mode}`;
-  updateData[`${path}.health`] = actor._source.data.health.set;
-  updateData[`${path}.defense`] = actor._source.data.defense.gameModeBonus;
-  updateData[`${path}.toughness`] = actor._source.data.armor.toughness.gameModeBonus;
+  const path = `system.gameMode.specs.${mode}`;
+  updateData[`${path}.health`] = source.system.health.set;
+  updateData[`${path}.defense`] = source.system.defense.gameModeBonus;
+  updateData[`${path}.toughness`] = source.system.armor.toughness.gameModeBonus;
   
   return updateData
 }
@@ -328,7 +398,8 @@ function _updateModeHealth(actor, updateData) {
  */
  function _adjustFocusInitialValue(item, updateData) {
   if (item.type !== "focus") return updateData;
-  if (item.data.improved) updateData["data.initialValue"] = item.data.initialValue - 1;
+  const itemData = item.system ?? item.data;
+  if (itemData.improved) updateData["system.initialValue"] = itemData.initialValue - 1;
   return updateData
 }
 /* -------------------------------------------- */
@@ -339,14 +410,15 @@ function _updateModeHealth(actor, updateData) {
  */
  function _weaponRanged(item, updateData) {
   if (item.type !== 'weapon') return updateData;
+  const itemData = item.system ?? item.data;
   const meleeDist = {
     min: false,
     max: false
   }
-  if (!item.data.range || item.data.range <= 2) meleeDist.min = true
-  if (!item.data.rangeMax || item.data.rangeMax === item.data.range) meleeDist.max = true;
+  if (!itemData.range || itemData.range <= 2) meleeDist.min = true
+  if (!itemData.rangeMax || itemData.rangeMax === itemData.range) meleeDist.max = true;
   const isRanged = meleeDist.min && meleeDist.max ? false : true;
-  updateData["data.ranged"] = isRanged;
+  updateData["system.ranged"] = isRanged;
   return updateData
 }
 /* -------------------------------------------- */
@@ -359,29 +431,30 @@ function _updateModeHealth(actor, updateData) {
   if (!['weapon', 'power'].includes(item.type)) return updateData;
   let formula = ""
   let first = true;
-  if (item.data.nrDice && item.data.diceType) {
-    formula += `${item.data.nrDice}d${item.data.diceType}`;
+  const itemData = item.system ?? item.data;
+  if (itemData.nrDice && itemData.diceType) {
+    formula += `${itemData.nrDice}d${itemData.diceType}`;
     first = false
   }
-  if (item.data.extraValue) {
-    if (!first && item.data.extraValue > 0) formula += `+`;
-    formula += `${item.data.extraValue}`
+  if (itemData.extraValue) {
+    if (!first && itemData.extraValue > 0) formula += `+`;
+    formula += `${itemData.extraValue}`
   }
-  updateData["data.damageFormula"] = formula;
+  updateData["system.damageFormula"] = formula;
 
   // Resisted Damage
-  if (item.data.damageResisted) {
+  if (itemData.damageResisted) {
     formula = ""
     first = true;
-    if (item.data.damageResisted.nrDice && item.data.damageResisted.diceType) {
-      formula += `${item.data.damageResisted.nrDice}d${item.data.damageResisted.diceType}`;
+    if (itemData.damageResisted.nrDice && itemData.damageResisted.diceType) {
+      formula += `${itemData.damageResisted.nrDice}d${itemData.damageResisted.diceType}`;
       first = false
     }
-    if (item.data.damageResisted.extraValue) {
-      if (!first && item.data.damageResisted.extraValue > 0) formula += `+`;
-      formula += `${item.data.damageResisted.extraValue}`
+    if (itemData.damageResisted.extraValue) {
+      if (!first && itemData.damageResisted.extraValue > 0) formula += `+`;
+      formula += `${itemData.damageResisted.extraValue}`
     }
-    updateData["data.damageResisted.damageFormula"] = formula;
+    updateData["system.damageResisted.damageFormula"] = formula;
   }
   return updateData
 }
@@ -393,14 +466,14 @@ function _updateModeHealth(actor, updateData) {
  */
  function _populateItemModifiers(item, updateData) {
   if (!['equipment', 'weapon', 'power', 'talent'].includes(item.type)) return updateData;
-  const itemMods = item.data.itemMods;
+  const itemMods = item.system ? item.system.itemMods : item.data.itemMods;
   const mods = {};
   const keys = []
 
   for (const k in itemMods) {
     if (Object.hasOwnProperty.call(itemMods, k)) {
       const m = itemMods[k];
-      if (m.selected ?? m.value) {
+      if (m.value) {
         let modKey
         do {
           modKey = foundry.utils.randomID(20);
@@ -423,7 +496,7 @@ function _updateModeHealth(actor, updateData) {
     }
   }
   
-  updateData['data.modifiers'] = mods;
+  updateData['system.modifiers'] = mods;
   return updateData
 }
 /* -------------------------------------------- */
@@ -433,9 +506,10 @@ function _updateModeHealth(actor, updateData) {
  * @private
  */
  function _talentDegree(item, updateData) {
+  const itemData = item.system ?? item.data;
   if (item.type !== 'talent') return updateData;
-  if (item.data.degree !== "") return updateData
-  const prevDegree = item.data.shortDesc;
+  if (itemData.degree !== "") return updateData
+  const prevDegree = itemData.shortDesc;
   if (!prevDegree) return updateData
   if (prevDegree.trim() === "") return updateData
   const prevDegreeLC = prevDegree.toLowerCase();
@@ -460,13 +534,13 @@ function _updateModeHealth(actor, updateData) {
   }
 
   if (newDegree !== "") { 
-    updateData['data.degree'] = newDegree;
+    updateData['system.degree'] = newDegree;
   } else {
-    updateData['data.degree'] = 0;
+    updateData['system.degree'] = 0;
   }
-  let req = item.data.requirement;
-  req = req === "" ? `${game.i18n.localize('age-system.talentDegree')}: ${item.data.shortDesc}` : ref += ` | ${game.i18n.localize('age-system.talentDegree')}: ${item.data.shortDesc}`
-  updateData['data.requirement'] = req;
+  let req = itemData.requirement;
+  req = req === "" ? `${game.i18n.localize('age-system.talentDegree')}: ${itemData.shortDesc}` : ref += ` | ${game.i18n.localize('age-system.talentDegree')}: ${itemData.shortDesc}`
+  updateData['system.requirement'] = req;
 
   return updateData
 }

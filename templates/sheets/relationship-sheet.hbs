@@ -7,16 +7,16 @@
             <li>
                 <label>{{localize "age-system.relationshipIntensity"}}</label>
                 <div class="flexrow">
-                    <input type="number" name="data.intensity" value="{{data.data.intensity}}"/>
+                    <input type="number" name="system.intensity" value="{{system.intensity}}"/>
                     <span> / </span>
-                    <input type="number" name="data.intensityMax" value="{{data.data.intensityMax}}"/>
+                    <input type="number" name="system.intensityMax" value="{{system.intensityMax}}"/>
                 </div>
             </li>
 
             {{!-- Page Ref --}}
-            <li class="feature-controls" data-reference="{{data.data.reference}}">
+            <li class="feature-controls" data-reference="{{system.reference}}">
                 <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
-                <input type="text" name="data.reference" {{#if inChat}}disabled{{/if}} value="{{data.data.reference}}" placeholder="Page Ref." data-dtype="String"/>
+                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{system.reference}}" placeholder="Page Ref." data-dtype="String"/>
             </li>
         </ul>
     </aside>
@@ -27,7 +27,7 @@
                 <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
                 <div class="sub-details">
                     {{!-- Relationship Bond --}}
-                    <input type="text" name="data.shortDesc" value="{{data.data.shorDesc}}">
+                    <input type="text" name="system.shortDesc" value="{{system.shortDesc}}">
                     <label>{{localize "age-system.relationshipBond"}}</label>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <li class="title colorset-third-tier">
                     <label>{{localize "age-system.item.desc"}}</label>
                 </li>
-                <li>{{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}</li>
+                <li>{{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true}}</li>
             </ul>
         </div>
     </div>

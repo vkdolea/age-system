@@ -102,10 +102,10 @@ Hooks.once("init", async function() {
     };
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("age-system", ageSystemSheetCharacter, {
-        types: ["char"],
-        label: "Legacy"
-    });
+    // Actors.registerSheet("age-system", ageSystemSheetCharacter, {
+    //     types: ["char"],
+    //     label: "Legacy"
+    // });
     Actors.registerSheet("age-system", ageSystemSheetCharAlt, {
         types: ["char"],
         makeDefault: true,
@@ -195,24 +195,24 @@ Hooks.once("init", async function() {
     Handlebars.registerHelper('ageffect', function(mask, options) {
         for (let o = 0; o < options.length; o++) {
             const e = options[o];
-            if (e[1] === mask) return e[0]
+            if (e[1] == mask) return e[0];
         }
         return `${mask} (${game.i18n.localize("age-system.custom")})`;
     });
 
     // Handlebar returning array with Focus for a given Ability
     Handlebars.registerHelper('focusbyabl', function(focus, abl) {
-        return focus.filter(f => f.data.useAbl === abl)
+        return focus.filter(f => f.system.useAbl === abl)
     });
 
     // Handlebar returning array with equiped weapon
     Handlebars.registerHelper('equippedwpn', function(weapons) {
-        return weapons.filter(f => f.data.equiped === true)
+        return weapons.filter(f => f.system.equiped === true)
     });
 
     // Handlebar returning array with active Power dealing damage
     Handlebars.registerHelper('dmgpower', function(powers) {
-        return powers.filter(p => p.data.activate === true && (p.data.hasDamage || p.data.hasHealing))
+        return powers.filter(p => p.system.activate === true && (p.system.hasDamage || p.system.hasHealing))
     });
 
     // Handlebar returning all carried itens
@@ -229,7 +229,7 @@ Hooks.once("init", async function() {
     // Handlebar to itentify if array is empty
     Handlebars.registerHelper('isempty', function(array, abl) {
         if (!Array.isArray(array)) return false;
-        array = array.filter(f => f.data.useAbl === abl)
+        array = array.filter(f => f.system.useAbl === abl)
         return array.length === 0 ? true : false;
     });
 
@@ -267,8 +267,8 @@ Hooks.once("init", async function() {
     game.postReadyPrepare = [];
 
     // Log core version
-    ageSystem.coreVersion = game.world.data.coreVersion;
-    ageSystem.systemVersion = game.world.data.systemVersion
+    ageSystem.coreVersion = game.world.coreVersion;
+    ageSystem.systemVersion = game.world.systemVersion
 
 });
 
@@ -380,21 +380,23 @@ Hooks.once("ready", async function() {
     if (game.modules.get("pdfoundry")?.active) ageSystem.pdfoundryOn = true;
 
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-    Hooks.on("hotbarDrop", (bar, data, slot) => createAgeMacro(data, slot));
+    Hooks.on("hotbarDrop", (bar, data, slot) => {
+        if (data === {}) return false;
+        const item = fromUuidSync(data.uuid);
+        const itemType = item.type;
+        const rollTypes = ['weapon', 'focus'];
+        let hasRoll = rollTypes.includes(itemType)
+        if (!hasRoll && itemType === 'power') hasRoll = item.system.hasRoll;
+        if (hasRoll) createAgeMacro(item, slot);
+        return !hasRoll;
+    });
 
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
-    const NEEDS_MIGRATION_VERSION = "0.12.0";
-    // const COMPATIBLE_MIGRATION_VERSION = "0.8.7";
+    const NEEDS_MIGRATION_VERSION = "1.0.0";
     const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;
-
-    // Perform the migration
-    // if ( currentVersion && isNewerVersion(COMPATIBLE_MIGRATION_VERSION, currentVersion) ) {
-    //     const warning = `Your AGE System data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.`;
-    //     ui.notifications.error(warning, {permanent: true});
-    // }
     migrations.migrateWorld();
 });
 
@@ -408,7 +410,7 @@ Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatL
 Hooks.on("createCompendium", () => {ageSystem.itemCompendia = Settings.allCompendia("Item")})
 Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
 Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});
-Hooks.on("renderChatLog", (app, html, data) => AgeChat.addChatListeners(html));
+Hooks.on("renderChatLog", (app, html, data) => {    AgeChat.addChatListeners(html)});
 Hooks.on("renderChatMessage", (app, html, data) => {AgeChat.sortCustomAgeChatCards(app, html, data)});
 Hooks.on("getChatLogEntryContext", AgeChat.addChatMessageContextOptions);
 Hooks.on('renderActorSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));

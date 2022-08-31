@@ -158,6 +158,7 @@
             "customCollisionDmg": 1
         },
         "char": {
+            "threat": "",
             "dmgMod": 0,
             "testMod": 0,
             "attackMod": 0,
@@ -675,7 +676,8 @@
                 "damageInjury": 1,
                 "damageFormula": "1d6"
             },
-            "requirement": ""
+            "requirement": "",
+            "hasRoll": true
         },
         "talent": {
             "templates": ["description", "bonuses"],

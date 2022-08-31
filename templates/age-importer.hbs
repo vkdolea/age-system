@@ -1,0 +1,20 @@
+<div class="age-importer flexrow feature-controls">
+    <div class="parser-text flexcol">
+        <h2 class="min-height">{{localize "age-system.ageImporter"}}</h2>
+        <p class="min-height">{{localize "age-system.ageImporterInstruction"}} <i><a title="AGE Importer wiki" href="https://github.com/vkdolea/age-system/wiki/AGE-Importer">{{localize "age-system.clickHelp"}}</a></i></p>
+        <textarea class="text-to-import">{{importingText}}</textarea>
+    </div>
+    <div class="options">
+        <h2>{{localize "age-system.settings.options"}}</h2>
+        {{!-- <div>
+            <span>{{importingAbilities}}</span>
+        </div> --}}
+        <div class="flexcol">
+            <h3>{{localize "age-system.selectGameSetting"}}</h3>
+            {{radioBoxes radioB.name radioB.choices radioB.options}}
+        </div>
+        <button type="button" class="default-button start-importing">
+            {{localize "age-system.createCharacter"}}
+        </button>
+    </div>
+</div>

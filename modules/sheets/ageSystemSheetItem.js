@@ -6,13 +6,13 @@ export default class ageSystemItemSheet extends ItemSheet {
         super(...args);
     
         // Expand the default size of different item sheet
-        const itemType = this.object.data.type;
+        const itemType = this.object.type;
         switch (itemType) {
             case "focus":
                 this.options.height = this.position.height = "352";
                 this.options.resizable = false;
                 break;
-            case "weapon":
+            // case "weapon":
             //     this.options.width = this.position.width = "700";
             //     this.options.height = this.position.height = "460";
             //     break;
@@ -22,6 +22,10 @@ export default class ageSystemItemSheet extends ItemSheet {
                 break;          
             case "stunts":
                 // this.options.width = this.position.width = "300";
+                this.options.height = this.position.height = "352";
+                this.options.resizable = false;
+                break;        
+            case "shipfeatures":
                 this.options.height = this.position.height = "352";
                 this.options.resizable = false;
                 break;             
@@ -50,7 +54,6 @@ export default class ageSystemItemSheet extends ItemSheet {
     };
    
     static get defaultOptions() {        
-        
         return mergeObject(super.defaultOptions, {
             height: 460,
             width: 700,
@@ -64,12 +67,8 @@ export default class ageSystemItemSheet extends ItemSheet {
     };
 
     get template() {
-        return `systems/age-system/templates/sheets/${this.item.data.type}-sheet.hbs`;
+        return `systems/age-system/templates/sheets/${this.item.type}-sheet.hbs`;
     };
-
-    // get hasWgroups() {
-    //     return this.item.data.data.wgroups ? true : false;
-    // };
 
     getData(options) {
         const data = super.getData(options);
@@ -85,7 +84,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         data.config.wealthMode = game.settings.get("age-system", "wealthType");
 
         // Spaceship Features
-        if (this.item.data.type === "shipfeatures") {
+        if (this.item.type === "shipfeatures") {
             data.config.featuresTypeLocal = [];
             for (let f = 0; f < data.config.featuresType.length; f++) {
                 const feat = data.config.featuresType[f];
@@ -101,7 +100,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Weapon Groups
         data.weaponGroups = ageSystem.weaponGroups;
         // Does it have Options tab?
-        data.hasOptionsTab = (['weapon'].includes(this.item.data.type) && data.weaponGroups);
+        data.hasOptionsTab = (['weapon'].includes(this.item.type) && data.weaponGroups);
 
         // Active Effects if item owner is a Character
         if (this.item.actor?.type === "char") data.actorEffects = this.item.actor.effects;
@@ -113,21 +112,18 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Check if Use Fatigue setting is TRUE
         data.fatigueSet = game.settings.get("age-system", "useFatigue");
-
-        return data;
-    };
-    
+        data.system = data.data.system;
+        return data
+    };    
     
     activateListeners(html) {
         if (this.isEditable) {
-            
             html.find("a.add-bonus").click(this._onAddModifier.bind(this));
             html.find(".add-modifier").click(this._onAddModifier.bind(this));
             html.find(".mod-controls a.remove").click(this._onRemoveModifier.bind(this));
             html.find(".mod-controls a.toggle").click(this._onToggleModifier.bind(this));
             html.find(".toggle-feature").click(this._onToggleFeature.bind(this));
-
-            if (this.item.data.type === "focus") {
+            if (this.item.type === "focus") {
                 if (this.item.isOwned) {
                     html.find(".item-card-title").keyup(this._onOwnedFocusNameChange.bind(this));
                 };
@@ -148,12 +144,6 @@ export default class ageSystemItemSheet extends ItemSheet {
         // Add class to TinyMCE
         const editor = html.find(".editor");
         for (let i = 0; i < editor.length; i++) editor[i].classList.add('values');
-        
-        // Add colorset class to entity-link inside TinyMCE editor
-        const entityLink = html.find("a.entity-link");
-        const inlineRoll = html.find("a.inline-roll");
-        const insideMCE = [...entityLink, ...inlineRoll];
-        for (let i = 0; i < insideMCE.length; i++) insideMCE[i].classList.add(`colorset-second-tier`);
 
         super.activateListeners(html);
     };
@@ -175,13 +165,15 @@ export default class ageSystemItemSheet extends ItemSheet {
     }
 
     _onToggleFeature(e) {
+        const item = this.item;
+        const itemData = item.system;
         const feature = e.currentTarget.dataset.feature;
-        const value = !this.item.data.data[feature];
-        const updatePath = "data." + feature;
+        const value = !itemData[feature];
+        const updatePath = "system." + feature;
         const update = {[updatePath]: value};
-        if (value && feature === "causeHealing") update["data.causeDamage"] = false
-        if (value && feature === "causeDamage") update["data.causeHealing"] = false
-        return this.item.update(update);
+        if (value && feature === "causeHealing") update["system.causeDamage"] = false
+        if (value && feature === "causeDamage") update["system.causeHealing"] = false
+        return item.update(update);
     }
 
     _onAddModifier(e) {
@@ -190,21 +182,25 @@ export default class ageSystemItemSheet extends ItemSheet {
 
     _onRemoveModifier(e) {
         const i = e.currentTarget.closest(".feature-controls").dataset.modIndex;
-        const path = `data.modifiers.-=${i}`;
+        const path = `system.modifiers.-=${i}`;
         return this.item.update({[path]: null})
     }
 
     _onToggleModifier(event) {
+        const item = this.item;
+        const itemData = item.system;
         const i = event.currentTarget.closest(".feature-controls").dataset.modIndex;
-        const modifiers = foundry.utils.deepClone(this.item.data.data.modifiers);
+        const modifiers = foundry.utils.deepClone(itemData.modifiers);
         modifiers[i].isActive = !modifiers[i].isActive;
-        return this.item.update({"data.modifiers": modifiers});
+        return item.update({"system.modifiers": modifiers});
     }
 
     async _onWeaponGroupToggle(event) {
         event.preventDefault();
+        const item = this.item;
+        const itemData = item.system;
         const wgroupId = event.currentTarget.closest(".feature-controls").dataset.wgroupId.trim();
-        const wgroups = await this.item.data.data.wgroups;
+        const wgroups = await itemData.wgroups;
         const hasGroup = wgroups.includes(wgroupId);
         if (hasGroup) {
             const pos = wgroups.indexOf(wgroupId);
@@ -212,7 +208,7 @@ export default class ageSystemItemSheet extends ItemSheet {
         } else {
             wgroups.push(wgroupId);
         }
-        return this.item.update({"data.wgroups": wgroups});
+        return item.update({"system.wgroups": wgroups});
     }
     
     // Adds an * in front of the owned Focus name whenever the user types a name of another owned Focus
@@ -229,7 +225,7 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         for (let i = 0; i < ownedFoci.length; i++) {
             const e = ownedFoci[i];
-            const eName = e.data.data.nameLowerCase;
+            const eName = e.system.nameLowerCase;
             const eId = e.id;
             if (eId !== itemId && eName === typedLowerCase) {
                 nameField.value = "*" + typedEntry;

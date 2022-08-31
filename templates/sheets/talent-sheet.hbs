@@ -5,8 +5,8 @@
             {{!-- Talent Degree --}}
             <li>
                 <label>{{localize "age-system.talentDegree"}}</label>
-                <select name="data.degree">
-                {{#select data.data.degree}}
+                <select name="system.degree">
+                {{#select system.degree}}
                     {{#each config.talentDegrees as |degree|}}
                     <option value="{{@key}}">{{degree}}</option>
                     {{/each}}
@@ -17,8 +17,8 @@
             {{!-- Type (Talent/Specialization) --}}
             <li>
                 <label>{{localize "age-system.type"}} </label>
-                <select name="data.type">
-                {{#select data.data.type}}
+                <select name="system.type">
+                {{#select system.type}}
                     <option value="talent">{{localize "ITEM.TypeTalent"}}</option>
                     <option value="spec">{{localize "age-system.item.spec"}}</option>
                 {{/select}}
@@ -26,9 +26,9 @@
             </li>
 
             {{!-- Page Ref --}}
-            <li class="feature-controls" data-reference="{{data.data.reference}}">
+            <li class="feature-controls" data-reference="{{system.reference}}">
                 <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
-                <input type="text" name="data.reference" {{#if inChat}}disabled{{/if}} value="{{data.data.reference}}" placeholder="Page Ref." data-dtype="String"/>
+                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{system.reference}}" placeholder="Page Ref." data-dtype="String"/>
             </li>
         </ul>
     </aside>
@@ -39,7 +39,7 @@
                 <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
                 <div class="sub-details">
                     {{!-- Requirement --}}
-                    <input type="text" name="data.requirement" value="{{data.data.requirement}}">
+                    <input type="text" name="system.requirement" value="{{system.requirement}}">
                     <label>{{localize "age-system.requirement"}}</label>
                 </div>
             </div>
@@ -59,14 +59,14 @@
                 <div class="tab main" data-group="primary" data-tab="main">
                     <div class="flexrow flex-gap">
                         <ul class="resource colorset-first-tier item-box"><li>
-                            {{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}
+                            {{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
                         </li></ul>
 
                         <ul class="resource colorset-first-tier item-group">
                             <li class="title colorset-third-tier">
                                 <label>{{config.talentDegrees.[0]}}</label>
                             </li>
-                            <li>{{editor content=data.data.degree0.desc target="data.degree0.desc" button=true owner=owner editable=true}}</li>
+                            <li>{{editor system.degree0.desc target="system.degree0.desc" button=true owner=owner editable=true}}</li>
                         </ul>
                     </div>
                     <div class="flexrow flex-gap">
@@ -74,14 +74,14 @@
                             <li class="title colorset-third-tier">
                                 <label>{{config.talentDegrees.[1]}}</label>
                             </li>
-                            <li>{{editor content=data.data.degree1.desc target="data.degree1.desc" button=true owner=owner editable=true}}</li>
+                            <li>{{editor system.degree1.desc target="system.degree1.desc" button=true owner=owner editable=true}}</li>
                         </ul>
 
                         <ul class="resource colorset-first-tier item-group">
                             <li class="title colorset-third-tier">
                                 <label>{{config.talentDegrees.[2]}}</label>
                             </li>
-                            <li>{{editor content=data.data.degree2.desc target="data.degree2.desc" button=true owner=owner editable=true}}</li>
+                            <li>{{editor system.degree2.desc target="system.degree2.desc" button=true owner=owner editable=true}}</li>
                         </ul>
                     </div>
                     <div class="flexrow flex-gap">
@@ -89,14 +89,14 @@
                             <li class="title colorset-third-tier">
                                 <label>{{config.talentDegrees.[3]}}</label>
                             </li>
-                            <li>{{editor content=data.data.degree3.desc target="data.degree3.desc" button=true owner=owner editable=true}}</li>
+                            <li>{{editor system.degree3.desc target="system.degree3.desc" button=true owner=owner editable=true}}</li>
                         </ul>
 
                         <ul class="resource colorset-first-tier item-group">
                             <li class="title colorset-third-tier">
                                 <label>{{config.talentDegrees.[4]}}</label>
                             </li>
-                            <li>{{editor content=data.data.degree4.desc target="data.degree4.desc" button=true owner=owner editable=true}}</li>
+                            <li>{{editor system.degree4.desc target="system.degree4.desc" button=true owner=owner editable=true}}</li>
                         </ul>
                     </div>
 

@@ -2,7 +2,7 @@ import { ageSystem } from "./config.js";
 import BreatherSettings from "./breather.js";
 import { AdvancedSettings, QuickSettings } from "./settings-helper.js";
 
-const debouncedReload = debounce(() => window.location.reload(), 100)
+const debouncedReload = debounce(() => window.location.reload(), 250);
 export const registerSystemSettings = async function() {
 
   /**

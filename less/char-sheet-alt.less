@@ -14,7 +14,8 @@
 /**    Alternate Char Sheet     **/
 /*********************************/
 @big-border-radius: 5px;
-.age-system {
+.age-system.char-sheet-alt,
+.age-system.item {
     
     
     .mouse-to-pointer:hover {
@@ -104,7 +105,8 @@
 
     .document-picture {
         border: none;
-        max-height: 200px;
+        height: 194px;
+        // max-height: 200px;
         width: 180px;
         object-fit: contain;
         margin: auto;
@@ -148,6 +150,12 @@
         justify-content: space-around;
         align-items: center;
         flex-wrap: nowrap;
+        padding: 0 4px
+    }
+    .editor.values {
+        justify-content: flex-start;
+        align-items: normal;
+        flex-wrap: wrap;
         padding: 0 4px
     }
     li.item-box,
@@ -364,7 +372,9 @@
             a {text-align: center;};
         }
         .no-focus {
-            .owned-focus {margin: 0};
+            .owned-focus {
+                display: none;
+            };
             .abl-header {
                 border-radius: @big-border-radius;
                 input[type="number"].original {

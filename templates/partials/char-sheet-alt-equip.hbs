@@ -9,7 +9,7 @@
         {{#if data.weaponGroups}}
         <li class="owned-wgroups colorset-second-tier labels">
             <label class="wgroup"><strong>{{localize "SETTINGS.weaponGroups"}}:</strong></label>
-            {{#each actor.data.data.wgroups as |wgroup|}}
+            {{#each actor.system.wgroups as |wgroup|}}
             <span>&nbsp{{wgroup}}{{#if @last}}{{else}},{{/if}}</span>
             {{/each}}
         </li>
@@ -25,21 +25,21 @@
 
     <div>
         {{!-- Resource --}}
-        {{#if (or data.data.useIncome data.data.useResources)}}
+        {{#if (or system.useIncome system.useResources)}}
         <div class="resource colorset-third-tier">
             <div class="title">
                 <a class="roll-resources feature-controls"><i class="fas fa-dice"></i></a>
-                {{#if data.data.useResources}}{{localize "SETTINGS.wealthTypeResources"}}{{/if}}{{#if data.data.useIncome}}{{localize "SETTINGS.wealthTypeIncome"}}{{/if}}
+                {{#if system.useResources}}{{localize "SETTINGS.wealthTypeResources"}}{{/if}}{{#if system.useIncome}}{{localize "SETTINGS.wealthTypeIncome"}}{{/if}}
             </div>
             <div class="values flexrow">
-                <input class="value-data circle" disabled type="number" name="data.resources.total" value="{{data.data.resources.total}}" data-dtype="Number" />
+                <input class="value-data circle" disabled type="number" name="system.resources.total" value="{{system.resources.total}}" data-dtype="Number" />
                 <div class="values-options mods-section flexcol">
                     <div class="flexrow">
-                        <input class="value-data" type="number" name="data.resources.base" value="{{data.data.resources.base}}" data-dtype="Number" />
+                        <input class="value-data" type="number" name="system.resources.base" value="{{system.resources.base}}" data-dtype="Number" />
                         <label>{{localize "age-system.base"}}</label>
                     </div>
                     <div class="flexrow">
-                        <input class="value-data" type="number" name="data.resources.mod" value="{{data.data.resources.mod}}" data-dtype="Number" />
+                        <input class="value-data" type="number" name="system.resources.mod" value="{{system.resources.mod}}" data-dtype="Number" />
                         <label>{{localize "age-system.mod"}}</label>
                     </div>
                 </div>
@@ -51,13 +51,13 @@
         {{/if}}
 
         {{!-- Coins --}}
-        {{#if data.data.useCoins}}
+        {{#if system.useCoins}}
         <div class="resource colorset-third-tier">
             <div class="title">{{localize "age-system.coins"}}</div>
             <div class="values flexrow">
-                <input class="value-data" type="number" name="data.gp" value="{{data.data.gp}}" data-dtype="Number" />
-                <input class="value-data" type="number" name="data.sp" value="{{data.data.sp}}" data-dtype="Number" />
-                <input class="value-data" type="number" name="data.cp" value="{{data.data.cp}}" data-dtype="Number" />
+                <input class="value-data" type="number" name="system.gp" value="{{system.gp}}" data-dtype="Number" />
+                <input class="value-data" type="number" name="system.sp" value="{{system.sp}}" data-dtype="Number" />
+                <input class="value-data" type="number" name="system.cp" value="{{system.cp}}" data-dtype="Number" />
             </div>
             <div class="labels flexrow">
                 <label>{{localize "age-system.gp"}}</label>
@@ -68,11 +68,11 @@
         {{/if}}
 
         {{!-- Currency --}}
-        {{#if data.data.useCurrency}}
+        {{#if system.useCurrency}}
         <div class="resource colorset-third-tier">
             <div class="title">{{localize "SETTINGS.wealthTypeCurrency"}}</div>
             <div class="values flexrow">
-                <input class="value-data" type="number" name="data.resources.base" value="{{data.data.resources.base}}" data-dtype="Number" />
+                <input class="value-data" type="number" name="system.resources.base" value="{{system.resources.base}}" data-dtype="Number" />
             </div>
             <div class="labels flexrow">
                 <label>{{localize "age-system.total"}}</label>

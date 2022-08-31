@@ -51,8 +51,8 @@ export function addChatListeners(html) {
  */
 function applyChatCardDamage(li, options) {
     const message = game.messages.get(li.data("messageId"));
-    const roll = message.roll;
-    const cardDamageData = message.data.flags?.["age-system"]?.damageData;
+    const roll = message.rolls[0];
+    const cardDamageData = message.flags?.["age-system"]?.damageData;
     const total = cardDamageData?.totalDamage ?? roll.total;
     if (options.isHealing) {
         return Promise.all(canvas.tokens.controlled.map(t => {
@@ -94,7 +94,7 @@ export async function inflictInjury(event){
     if (!degree) return
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
-    const cardData = await game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
+    const cardData = await game.messages.get(cardId).flags["age-system"].ageroll.rollData;
     let actor = await fromUuid(cardData.actorId);
     if (actor.documentName === "Token") actor = actor.actor;
     return actor.applyInjury(degree);
@@ -105,7 +105,7 @@ export async function resistInjury(event) {
     event.preventDefault();
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
-    const cardData = await game.messages.get(cardId).data.flags["age-system"].toughnessTestCard;
+    const cardData = await game.messages.get(cardId).flags["age-system"].toughnessTestCard;
     const actor = await fromUuid(cardData.actorUuid);
     return actor.toughnessTest(foundry.utils.deepClone(cardData.injuryParts), cardData.rollTN, cardData.autoApply);
 }
@@ -115,7 +115,7 @@ export async function applyDamageChat(event) {
     event.preventDefault();
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
-    let damageData = await foundry.utils.deepClone(game.messages.get(cardId).data.flags["age-system"].damageData);
+    let damageData = await foundry.utils.deepClone(game.messages.get(cardId).flags["age-system"].damageData);
     const cardHealthSys = damageData.healthSys;
     if (!checkHealth(cardHealthSys, ageSystem.healthSys)) {
         damageData = {
@@ -190,7 +190,7 @@ export async function chatDamageRoll(event) {
     event.preventDefault();
     const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
     const cardId = message.dataset.messageId;
-    const cardData = game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
+    const cardData = game.messages.get(cardId).flags["age-system"].ageroll.rollData;
     const classList = event.currentTarget.classList;
     const actorId = cardData.actorId
     let owner = null;
@@ -222,9 +222,8 @@ export async function chatDamageRoll(event) {
 export async function chatFatigueRoll(event) {
     const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
     const cardId = message.dataset.messageId;
-    const cardData = game.messages.get(cardId).data.flags["age-system"].ageroll.rollData;
+    const cardData = game.messages.get(cardId).flags["age-system"].ageroll.rollData;
     const actorId = cardData.actorId;
-    
     let owner = null;
     owner = await fromUuid(actorId)
     owner = owner?.actor ?? owner;
@@ -238,7 +237,7 @@ export async function rollItemFromChat(event) {
     const classList = event.currentTarget.classList;
     const message = event.type === "contextmenu" ? event.target.closest(".chat-message") : event.currentTarget.closest(".chat-message");
     const cardId = message.dataset.messageId;
-    const cardData = game.messages.get(cardId).data.flags["age-system"].messageData;
+    const cardData = game.messages.get(cardId).flags["age-system"].messageData;
 
     const itemId = cardData.itemId;
     let owner = await fromUuid(cardData.ownerUuid);
@@ -259,7 +258,7 @@ export async function sortCustomAgeChatCards(chatCard, html, data) {
     _buttonType(html.find(".age-system.item-chat-controls button"));
     _buttonType(html.find("button.age-button"));
 
-    // Toggle chat card visibility of AGE Roll Cards
+    // Toggle chat card visibility of AGE Roll Cards 
     if (html.find(".base-age-roll").length > 0) _handleAgeRollVisibility(html, chatCard, data);
 
     // Check permission level to show and roll chat buttons when rolling item card
@@ -292,9 +291,11 @@ async function _handleAgeRollVisibility(html, chatCard, chatData){
         const data = el.dataset;
         const actorId = data.actorId;
         let actor;
-        if (actorId) actor = game.actors.get(actorId) ?? await fromUuid(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
+        if (actorId) {
+            actor = actorId.startsWith("Actor.") ? await fromUuid(actorId) : game.actors.get(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
+        }
         actor = actor?.actor ?? actor;
-        const isBlind = chatCard.data.blind;
+        const isBlind = chatCard.blind;
         const whisperTo = chatData.message.whisper;
         const author = chatData.author.id;
         const userId = game.user.id;
@@ -337,8 +338,8 @@ async function _handleItemCardButton(html){
  */
 function _permCheck(actorPerm, element) {
     if (!element) return
-    const validPerm = [CONST.ENTITY_PERMISSIONS.OWNER];
-    if (game.settings.get("age-system", "observerRoll")) validPerm.push(CONST.ENTITY_PERMISSIONS.OBSERVER);
+    const validPerm = [CONST.DOCUMENT_PERMISSION_LEVELS.OWNER];
+    if (game.settings.get("age-system", "observerRoll")) validPerm.push(CONST.DOCUMENT_PERMISSION_LEVELS.OBSERVER);
     if (!validPerm.includes(actorPerm)) element.remove();
 }
 

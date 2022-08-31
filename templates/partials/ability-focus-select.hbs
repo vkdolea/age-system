@@ -2,15 +2,16 @@
 {{#if inChat}}
 <div class="flexcol flex-align-center">
     <label style="white-space: nowrap;">{{localize "age-system.abl"}} ({{localize "age-system.focus"}})</label>
-    <p style="white-space: nowrap;">{{localize (concat "age-system." data.data.useAbl)}} ({{data.data.useFocus}})</p>
+    <p style="white-space: nowrap;">{{localize (concat "age-system." system.useAbl)}} ({{system.useFocus}})</p>
 </div>
 {{else}}
 
 <div class="flexrow flex-gap">
     {{!-- Ability to activate item --}}
     <div class="flexcol minimum-length">
-        <select name="data.useAbl" class="header-input">
-            {{#select data.data.useAbl}}
+        <select name="system.useAbl" class="header-input">
+            {{#select system.useAbl}}
+            <option value="no-abl">-</option>
             {{#each config.abilities as |name type|}}
             <option value="{{type}}">{{localize name}}</option>
             {{/each}}
@@ -21,7 +22,7 @@
 
     {{!-- Focus used to activate the power --}}
     <div class="flexcol">
-        <input name="data.useFocus" class="header-input" type="text" value="{{data.data.useFocus}}" placeholder="Focus Name" list="{{item.type}}-{{item.id}}-list"/>
+        <input name="system.useFocus" class="header-input" type="text" value="{{system.useFocus}}" placeholder="Focus Name" list="{{item.type}}-{{item.id}}-list"/>
         <datalist id="{{item.type}}-{{item.id}}-list">
             <option value=""></option>
             {{#each config.focus as |focus|}}

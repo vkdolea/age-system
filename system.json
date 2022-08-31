@@ -1,10 +1,9 @@
 {
+    "id": "age-system",
     "name": "age-system",
     "title": "AGE System (unofficial)",
     "description": "Unofficial AGE System implementation for most of AGE subsystems",
-    "version": "0.12.5",
-    "templateVersion": 5,
-    "author": "VK Dolea",
+    "version": "1.0.0",
     "authors": [
 		{
 			"name": "VK Dolea",
@@ -48,14 +47,22 @@
         }
     ],
     "socket": false,
-    "initiative": "3d6 + @initiative",
     "gridDistance": 2,
     "gridUnits": "yd",
-    "minimumCoreVersion": "9",
-    "compatibleCoreVersion": "9",
+    "initiative": "3d6 + @initiative",
+    "compatibility": {
+        "minimum": "10.278",
+        "verified": "10.283",
+        "maximum": "10"
+    },
+    "minimumCoreVersion": "10.278",
+    "compatibleCoreVersion": "10.283",
     "url": "https://github.com/vkdolea/age-system",
     "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",
-    "download": "https://github.com/vkdolea/age-system/archive/0.12.5.zip",
+    "download": "https://github.com/vkdolea/age-system/archive/1.0.0.zip",
     "bugs": "https://github.com/vkdolea/age-system/issues",
-    "readme": "https://github.com/vkdolea/age-system/blob/prep-release/README.md"
+    "readme": "https://github.com/vkdolea/age-system/blob/prep-release/README.md",
+    "flags": {
+        "needsMigrationVersion": "0.12.5"
+    }
 }

@@ -11,7 +11,7 @@
                 </div>
                 <div>
                     <p>{{localize "age-system.armor"}}</p>
-                    <p>{{target.data.data.armor.impact}}{{#if ../damageData.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}/{{target.data.data.armor.ballistic}}{{localize "age-system.ballisticIndex"}}{{/if}}</p>
+                    <p>{{target.data.system.armor.impact}}{{#if ../damageData.healthSys.useBallistic}}{{localize "age-system.impactIndex"}}/{{target.data.system.armor.ballistic}}{{localize "age-system.ballisticIndex"}}{{/if}}</p>
                     {{#if useInjury}}
                     <p>{{localize "age-system.bonus.testMod"}}</p>
                     <p>{{target.testMod}}</p>
@@ -20,7 +20,7 @@
                 {{#if ../damageData.healthSys.useToughness}}
                 <div>
                     <p>{{localize "age-system.toughness"}}</p>
-                    <p>{{target.data.data.armor.toughness.total}}</p>
+                    <p>{{target.data.system.armor.toughness.total}}</p>
                     {{#if ../useInjury}}
                     <p>{{localize "age-system.injuryMarks"}}</p>
                     <p>{{target.injuryMarks}}</p>
@@ -57,7 +57,7 @@
                     </strong>
                     {{else}}
                     <p>{{../damageData.healthSys.healthName}}</p>
-                    <p>{{target.data.data.health.value}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{target.remainingHP}}</p>
+                    <p>{{target.data.system.health.value}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{target.remainingHP}}</p>
                     {{/if}}
                 </div>
                 <div class="form-group">

@@ -5,19 +5,19 @@
             {{!-- Initial Value --}}
             <li>
                 <label>{{localize "age-system.focusInput"}}</label>
-                <input type="number" name="data.initialValue" value="{{data.data.initialValue}}" class="checkbox"/>
+                <input type="number" name="system.initialValue" value="{{system.initialValue}}" class="checkbox"/>
             </li>
             {{!-- Focus Final Value --}}
             <li>
                 <label>{{localize "age-system.total"}}</label>
-                <input type="number" disabled name="data.finalValue" value="{{data.data.finalValue}}" class="checkbox"/>
+                <input type="number" disabled name="system.finalValue" value="{{system.finalValue}}" class="checkbox"/>
             </li>
             {{#if displayIsOrg}}
             {{!-- Is Organization Focus --}}
             <li>
                 <label>{{localize "age-system.orgFocus"}}</label>
                 <div class="flexcol flex-justify-around flex-align-center">
-                    <input type="checkbox" name="data.isOrg" {{checked data.data.isOrg}} class="checkbox"/>
+                    <input type="checkbox" name="system.isOrg" {{checked system.isOrg}} class="checkbox"/>
                 </div>
             </li>
             {{/if}}
@@ -25,13 +25,13 @@
             <li>
                 <label>{{localize "age-system.improvedFocus"}}</label>
                 <div class="flexcol flex-justify-around flex-align-center">
-                    <input type="checkbox" {{#if inChat}}disabled{{/if}} name="data.improved" {{checked data.data.improved}} class="checkbox"/>
+                    <input type="checkbox" {{#if inChat}}disabled{{/if}} name="system.improved" {{checked system.improved}} class="checkbox"/>
                 </div>
             </li>
             {{!-- Page Ref --}}
-            <li class="feature-controls" data-reference="{{data.data.reference}}">
+            <li class="feature-controls" data-reference="{{system.reference}}">
                 <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
-                <input type="text" name="data.reference" {{#if inChat}}disabled{{/if}} value="{{data.data.reference}}" placeholder="Page Ref." data-dtype="String"/>
+                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{system.reference}}" placeholder="Page Ref." data-dtype="String"/>
             </li>
         </ul>
     </aside>
@@ -43,10 +43,11 @@
                 {{!-- Ability to activate item --}}
                 <div class="sub-details flexrow">
                     <div class="flexcol minimum-length">
-                        <select name="data.useAbl" class="header-input">
-                            {{#select data.data.useAbl}}
+                        <select name="system.useAbl" class="header-input">
+                            {{#select system.useAbl}}
                             
-                            {{#if data.data.isOrg}}
+                            {{#if system.isOrg}}
+                            <option value="no-abl">-</option>
                             {{#each config.abilitiesOrg as |name type|}}
                             <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
@@ -54,6 +55,7 @@
                             {{else}}
 
                             {{#each config.abilities as |name type|}}
+                            <option value="no-abl">-</option>
                             <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/if}}
@@ -71,7 +73,7 @@
                 <li class="title colorset-third-tier">
                     <label>{{localize "age-system.item.desc"}}</label>
                 </li>
-                <li>{{editor content=data.data.longDesc target="data.longDesc" button=true owner=owner editable=true}}</li>
+                <li>{{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true}}</li>
             </ul>
         </div>
     </div>

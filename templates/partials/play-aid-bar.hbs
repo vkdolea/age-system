@@ -4,13 +4,13 @@
     {{!-- Advancement Points Log --}}
     <div class="flexcol flex-align-center">
         <label>{{localize "age-system.advPoints"}}</label>
-        <input type="number" name="data.xp.advPoints" value="{{data.data.xp.advPoints}}" data-dtype="Number" />
+        <input type="number" name="system.xp.advPoints" value="{{system.xp.advPoints}}" data-dtype="Number" />
     </div>
 
     {{!-- Threshold Tracker --}}
     <div class="flexcol flex-align-center">
         <label>{{localize "age-system.testThreshold"}}</label>
-        <input type="number" name="data.advTestThreshold" value="{{data.data.advTestThreshold}}" data-dtype="Number" />
+        <input type="number" name="system.advTestThreshold" value="{{system.advTestThreshold}}" data-dtype="Number" />
     </div>
     {{/unless}}
 
@@ -19,9 +19,9 @@
         <label>{{localize "age-system.aim"}}</label>
         <div class="flexrow no-flexwrap">
             {{#unless isBlock}}
-            <input type="number" name="data.aim.value" value="{{data.data.aim.value}}" data-dtype="Number" />
+            <input type="number" name="system.aim.value" value="{{system.aim.value}}" data-dtype="Number" />
             {{/unless}}
-            <input type="checkbox" name="data.aim.active" {{checked data.data.aim.active}} class="checkbox"/>
+            <input type="checkbox" name="system.aim.active" {{checked system.aim.active}} class="checkbox"/>
         </div>
     </div>
 
@@ -30,37 +30,37 @@
         <label>{{localize "age-system.allOutAttack"}}</label>
         <div class="flexrow no-flexwrap">
             {{#unless isBlock}}
-            <input type="number" name="data.allOutAttack.dmgBonus" value="{{data.data.allOutAttack.dmgBonus}}" data-dtype="Number" />
+            <input type="number" name="system.allOutAttack.dmgBonus" value="{{system.allOutAttack.dmgBonus}}" data-dtype="Number" />
             <div>+</div>
-            <input type="number" name="data.allOutAttack.defensePenalty" value="{{data.data.allOutAttack.defensePenalty}}" data-dtype="Number" />
+            <input type="number" name="system.allOutAttack.defensePenalty" value="{{system.allOutAttack.defensePenalty}}" data-dtype="Number" />
             <div>-</div>
             {{/unless}}
-            <input type="checkbox" name="data.allOutAttack.active" {{checked data.data.allOutAttack.active}} class="checkbox"/>
+            <input type="checkbox" name="system.allOutAttack.active" {{checked system.allOutAttack.active}} class="checkbox"/>
         </div>
     </div>
 
     {{!-- Defend Maneuver Control --}}
-    <div class="flexcol flex-align-center feature-controls" data-guardup-active="{{data.data.guardUp.active}}">
+    <div class="flexcol flex-align-center feature-controls" data-guardup-active="{{system.guardUp.active}}">
         <label>{{localize "age-system.defendManeuver"}}</label>
         <div class="flexrow no-flexwrap">
             {{#unless isBlock}}
-            <input type="number" name="data.defend.defenseBonus" value="{{data.data.defend.defenseBonus}}" data-dtype="Number" />
+            <input type="number" name="system.defend.defenseBonus" value="{{system.defend.defenseBonus}}" data-dtype="Number" />
             {{/unless}}
-            <input type="checkbox" name="data.defend.active" class="defend-maneuver" {{checked data.data.defend.active}} class="checkbox"/>
+            <input type="checkbox" name="system.defend.active" class="defend-maneuver" {{checked system.defend.active}} class="checkbox"/>
         </div>
     </div>
 
     {{!-- Guard Up Maneuver Control --}}
-    <div class="flexcol flex-align-center feature-controls" data-defend-active="{{data.data.defend.active}}">
+    <div class="flexcol flex-align-center feature-controls" data-defend-active="{{system.defend.active}}">
         <label>{{localize "age-system.guardUp"}}</label>
         <div class="flexrow no-flexwrap">
             {{#unless isBlock}}
-            <input type="number" name="data.guardUp.defenseBonus" value="{{data.data.guardUp.defenseBonus}}" data-dtype="Number" />
+            <input type="number" name="system.guardUp.defenseBonus" value="{{system.guardUp.defenseBonus}}" data-dtype="Number" />
             <div>+</div>
-            <input type="number" name="data.guardUp.testPenalty" value="{{data.data.guardUp.testPenalty}}" data-dtype="Number" />
+            <input type="number" name="system.guardUp.testPenalty" value="{{system.guardUp.testPenalty}}" data-dtype="Number" />
             <div>-</div>
             {{/unless}}
-            <input type="checkbox" class="guardup-maneuver" name="data.guardUp.active" {{checked data.data.guardUp.active}} class="checkbox"/>
+            <input type="checkbox" class="guardup-maneuver" name="system.guardUp.active" {{checked system.guardUp.active}} class="checkbox"/>
         </div>
     </div>
 
@@ -69,8 +69,8 @@
     <div class="flexcol flex-align-center">
         <label>{{localize "age-system.initiative"}}</label>
         <div class="flexrow no-flexwrap">
-            <input type="number" disabled name="data.initiative" value="{{data.data.initiative}}" data-dtype="Number" />
-            <input type="number" name="data.initiativeMod" value="{{data.data.initiativeMod}}" data-dtype="Number" />
+            <input type="number" disabled name="system.initiative" value="{{system.initiative}}" data-dtype="Number" />
+            <input type="number" name="system.initiativeMod" value="{{system.initiativeMod}}" data-dtype="Number" />
             <label>{{localize "age-system.mod"}}</label>
         </div>
     </div>

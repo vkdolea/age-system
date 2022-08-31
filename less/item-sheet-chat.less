@@ -4,342 +4,410 @@
 
 // Exclusivelly for chat cards
 .age-system.item-chat-controls {margin-top: 6px;}
+
 // General
-.age-system.item.item-to-chat,
-.age-system.item .item-to-chat {
+.age-system.item-to-chat{
     // font-variant: small-caps;
 
-    body {
-        input {
-            text-align: center;
-        };
-    };
-
-    .damage-dice-field {
-        flex-wrap: nowrap;
-        margin: auto;
-        vertical-align: middle;
-
-        .dice-size {
-            max-width: 50px;
-            height: 26px;
-        };
-
-        input {
-            max-width: 30px;
-        };
-
-        span {
-            height: 26px;
-            padding-top: 4px;
-        };
-    };
-
-    .item-box {
-        flex: 0 0 120px;
+    .item-type {
+        height: 20px;
+        min-height: 20px;
+        padding-top: 2px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
         text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+    };
+    .item-identification {
+        padding: 4px;
         align-items: center;
-        margin: auto;
-        margin-top: 4px;
-        min-width: 150px;
-        border-radius: 5px;
-        padding: 4px;
-        p {
-            margin: 0px;
-            font-size: 12px;
-        }
-    }
-    .options-container {
-        padding: 4px;
-        .header {
-            border-radius: 10px;
-            p {
-                margin: auto;
-                text-align: center;
-            }
-        }
-    }
-
-    .sheet-content {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        .editor {
-            height: 100%;
-        };
-    };
-
-    .fill-card {
-        text-align: left;
-        width: fit-content;
-        i.fas {
-            margin-left: 2px;
-        };
-    };
-
-    .focus,
-    .power,
-    .talent,
-    .weapon,
-    .equipment,
-    .stunts,
-    .honorifics,
-    .relationship,
-    .membership,
-    .shipfeatures,
-    .vehicle {
-        label.part-desc.part-desc,
-        .part-desc-value.part-desc-value {
-            max-width: none;
-            flex: 0 0 50%;
-            text-align: center;
-            margin-bottom: 2px;
-        }
-
         img {
-            min-height: 60px;
-            max-width: 60px;
-            object-fit: contain;
-            margin-right: 4px;
+            height: 45px;
+            flex: 0 0 auto;
+            border: 1px solid;
+            border-radius: 4px;
         }
-
-        nav.add-sheet-tabs.tabs {
-            >a {
-                flex: 1 0 auto;
-            };
-            >a:last-child {
-                padding-right: 1px; //Go figure...!?
-            }
-        }
-
-        .power-type-control {
-            display: grid;
-            grid-template-columns: 20px 20px;
-            grid-template-rows: 30px 30px;
-            grid-template-areas:
-                "damage heal"
-                "resist fatigue";
-            .toggle-damage {
-                grid-area: damage;
-                justify-self: stretch;
-            }
-            .toggle-healing {
-                grid-area: heal;
-                justify-self: stretch;
-            }
-            .toggle-resist {
-                grid-area: resist;
-                justify-self: stretch;
-            }
-            .toggle-fatigue {
-                grid-area: fatigue;
-                justify-self: stretch;
+        ul {
+            padding-left: 6px;
+            margin: 0;
+            list-style: none;
+            font-variant-caps: small-caps;
+            :not(li:first-child) {
+                font-style: italic;
+                font-size: 12px;
             }
         }
-
-        input[name="data.shortDesc"].long-text {
-            max-width: 100%;
-            width: 100%;
-        }
-
-        .damage-formula {
-            p.in-chat-text {
-                white-space: nowrap;
-            }
-        }
-        p.in-chat-text {
-            margin: 0px;
-        }
-
-        section.sheet-tab-section {
-            height: 100%;
-            border-radius: 0px 0px 10px 10px;
-        }
-
-        .item-card-title {           
-            border-radius: 10px 10px 0px 0px;
-            text-transform: uppercase;
-            border: none;
-            padding: 4px;
-        };
-
-        input[name="name"] {
-            padding-left: 10px;
-            min-width: 100%;
-        };
-
-        label {
-            // font-variant-caps: small-caps;
-            font-weight: 500;
-            border: none;
-            margin-right: 4px;
-            max-width: fit-content;
-            white-space: nowrap;
-        };
-
-        .flexcol {
-            >label {
-                margin-right: 0px;
-            }
-            >input {
-                text-align: center;
-            }
-            div.item-card-stats.active-mod-container {
-                padding-top: 0px;
-            }
-        }
-
-        .not-equiped {
-            opacity: 0.4;
-        }
-        .item-card-stats {
-            flex-wrap: wrap;
-            padding: 10px;
-            padding-bottom: 6px;
-
-            .modbox {
-                padding: 4px;
-            }
-
-            > * {
-                margin-bottom: 4px;
-                margin-left: 1px;
-                margin-right: 1px;
-            };
-            
-            select[name="data.testAbl"],
-            select[name="data.useAbl"],
-            select[name="data.itemForceAbl"] {
-                text-align: center;
-            }
-
-            input[name="data.useFocus"],
-            input[name="data.testFocus"] {
-                min-width: 140px;
-                max-width: 250px;
-                text-align: center;
-            };
-            
-            input[name="data.cost"] {
-                max-width: 60px;
-                min-width: 60px;
-                text-align: center;
-            }
-
-            input[type="checkbox"] {
-                margin: 0px;
-                margin-top: 1px;
-                width: 16px;
-                height: 16px;
-            }
-
-            input[name="data.targetNumber"],
-            input[name="data.powerPointCost"],
-            input[name="data.fatigueTN"],
-            input[name="data.minStr"],
-            input[name="data.weight"],
-            input[name="data.capacity"],
-            input[name="data.quantity"],
-            input[name="data.stuntPoints"],
-            input[name="data.initialValue"],
-            input[name="data.extraValue"],
-            input[name="data.nrDice"],
-            input[name="data.intensity"],
-            input[name="data.intensityMax"],
-            input[name="data.rank"] {
-                max-width: 30px;
-                min-width: 30px;
-                text-align: center;
-            };
-
-            input[name="data.range"],
-            input[name="data.rangeMax"] {
-                max-width: 60px;
-                min-width: 60px;
-                text-align: center;
-            }
-
-            span:last-of-type {
-                max-width: 25px;
-                text-align: center;
-            };
-
-            div.power-type-control {
-                a {
-                    margin-top: 30%;
-                    margin-bottom: 50%;
-                }
+    }
+    .mod-box {
+        font-variant-caps: all-petite-caps;
+        font-size: 12px;
+        .mod-desc {
+            justify-content: space-between;
+            span {
                 max-width: fit-content;
-            }
-
-            div.flexrow {
-                margin-right: 4px;
             };
-
-            div {
-                flex-wrap: nowrap;
-                align-items: center;
-            };
+            padding: 0 4px;
         };
-
-        .mod-card {
-            margin: 4px;
-            padding: 4px;
-            border: none;
-            .mod-item.mod-item {
-                border-radius: 10px;
-                justify-content: center;
-                align-items: center;
-                margin-bottom: 4px;
-                text-align: center;
-                input.mod {
-                    color: inherit !important;
-                }
-                p {
-                    text-align: center;
-                };
-                .mod-type {
-                    flex: 0 0 30%;
-                }
-                .mod-value {
-                    flex: 0 0 50%;
-                    input[type="text"],
-                    input[type="number"]{
-                        margin: 2px 0;
-                    }
-                }
-                .mod-controls {
-                    flex: 0 0 20%;
-                    i {
-                        width: fit-content;
-                    }
-                    .inactive {
-                        opacity: 0.4;
-                    }
-                }
-            }
-
-            input[type="number"] {
-                max-width: 40px;
-                min-width: 40px;
-                text-align: center;
-            }
+    }
+    .item-desc {
+        padding: 0 4px;
+        .editor {
+            max-height: 300px;
+        }
+    }
+    .footer {
+        height: 20px;
+        min-height: 20px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        align-items: center;
+        justify-content: center;
+        span {
+            font-size: 12px;
+            font-variant-caps: all-petite-caps;
+            flex: 0 0 auto;
+            border-left: 1px solid;
+            padding: 0 4px;
         };
+        span:first-of-type {
+            margin-left: 0;
+            border-left: none;
+            padding-left: 0;
+        }
+    }
 
-        .item-card-desc {
-            height: 100%;
-            padding: 4px 10px;
-            border-radius: 0px 0px 10px 10px;
+    // body {
+    //     input {
+    //         text-align: center;
+    //     };
+    // };
 
-            div.editor.editor {
-                height: 90%;
-            };
+    // .damage-dice-field {
+    //     flex-wrap: nowrap;
+    //     margin: auto;
+    //     vertical-align: middle;
 
-            label:last-of-type {
-                margin-top: 4px;
-            };
+    //     .dice-size {
+    //         max-width: 50px;
+    //         height: 26px;
+    //     };
+
+    //     input {
+    //         max-width: 30px;
+    //     };
+
+    //     span {
+    //         height: 26px;
+    //         padding-top: 4px;
+    //     };
+    // };
+
+    // .item-box {
+    //     flex: 0 0 120px;
+    //     text-align: center;
+    //     align-items: center;
+    //     margin: auto;
+    //     margin-top: 4px;
+    //     min-width: 150px;
+    //     border-radius: 5px;
+    //     padding: 4px;
+    //     p {
+    //         margin: 0px;
+    //         font-size: 12px;
+    //     }
+    // }
+    // .options-container {
+    //     padding: 4px;
+    //     .header {
+    //         border-radius: 10px;
+    //         p {
+    //             margin: auto;
+    //             text-align: center;
+    //         }
+    //     }
+    // }
+
+    // .sheet-content {
+    //     height: 100%;
+    //     display: flex;
+    //     flex-direction: column;
+    //     .editor {
+    //         height: 100%;
+    //     };
+    // };
+
+    // .fill-card {
+    //     text-align: left;
+    //     width: fit-content;
+    //     i.fas {
+    //         margin-left: 2px;
+    //     };
+    // };
+
+    // .focus,
+    // .power,
+    // .talent,
+    // .weapon,
+    // .equipment,
+    // .stunts,
+    // .honorifics,
+    // .relationship,
+    // .membership,
+    // .shipfeatures,
+    // .vehicle {
+    //     label.part-desc.part-desc,
+    //     .part-desc-value.part-desc-value {
+    //         max-width: none;
+    //         flex: 0 0 50%;
+    //         text-align: center;
+    //         margin-bottom: 2px;
+    //     }
+
+    //     img {
+    //         min-height: 60px;
+    //         max-width: 60px;
+    //         object-fit: contain;
+    //         margin-right: 4px;
+    //     }
+
+    //     nav.add-sheet-tabs.tabs {
+    //         >a {
+    //             flex: 1 0 auto;
+    //         };
+    //         >a:last-child {
+    //             padding-right: 1px; //Go figure...!?
+    //         }
+    //     }
+
+    //     .power-type-control {
+    //         display: grid;
+    //         grid-template-columns: 20px 20px;
+    //         grid-template-rows: 30px 30px;
+    //         grid-template-areas:
+    //             "damage heal"
+    //             "resist fatigue";
+    //         .toggle-damage {
+    //             grid-area: damage;
+    //             justify-self: stretch;
+    //         }
+    //         .toggle-healing {
+    //             grid-area: heal;
+    //             justify-self: stretch;
+    //         }
+    //         .toggle-resist {
+    //             grid-area: resist;
+    //             justify-self: stretch;
+    //         }
+    //         .toggle-fatigue {
+    //             grid-area: fatigue;
+    //             justify-self: stretch;
+    //         }
+    //     }
+
+    //     input[name="system.shortDesc"].long-text {
+    //         max-width: 100%;
+    //         width: 100%;
+    //     }
+
+    //     .damage-formula {
+    //         p.in-chat-text {
+    //             white-space: nowrap;
+    //         }
+    //     }
+    //     p.in-chat-text {
+    //         margin: 0px;
+    //     }
+
+    //     section.sheet-tab-section {
+    //         height: 100%;
+    //         border-radius: 0px 0px 10px 10px;
+    //     }
+
+    //     .item-card-title {           
+    //         border-radius: 10px 10px 0px 0px;
+    //         text-transform: uppercase;
+    //         border: none;
+    //         padding: 4px;
+    //     };
+
+    //     input[name="name"] {
+    //         padding-left: 10px;
+    //         min-width: 100%;
+    //     };
+
+    //     label {
+    //         // font-variant-caps: small-caps;
+    //         font-weight: 500;
+    //         border: none;
+    //         margin-right: 4px;
+    //         max-width: fit-content;
+    //         white-space: nowrap;
+    //     };
+
+    //     .flexcol {
+    //         >label {
+    //             margin-right: 0px;
+    //         }
+    //         >input {
+    //             text-align: center;
+    //         }
+    //         div.item-card-stats.active-mod-container {
+    //             padding-top: 0px;
+    //         }
+    //     }
+
+    //     .not-equiped {
+    //         opacity: 0.4;
+    //     }
+    //     .item-card-stats {
+    //         flex-wrap: wrap;
+    //         padding: 10px;
+    //         padding-bottom: 6px;
+
+    //         .modbox {
+    //             padding: 4px;
+    //         }
+
+    //         > * {
+    //             margin-bottom: 4px;
+    //             margin-left: 1px;
+    //             margin-right: 1px;
+    //         };
+            
+    //         select[name="system.testAbl"],
+    //         select[name="system.useAbl"],
+    //         select[name="system.itemForceAbl"] {
+    //             text-align: center;
+    //         }
+
+    //         input[name="system.useFocus"],
+    //         input[name="system.testFocus"] {
+    //             min-width: 140px;
+    //             max-width: 250px;
+    //             text-align: center;
+    //         };
+            
+    //         input[name="system.cost"] {
+    //             max-width: 60px;
+    //             min-width: 60px;
+    //             text-align: center;
+    //         }
+
+    //         input[type="checkbox"] {
+    //             margin: 0px;
+    //             margin-top: 1px;
+    //             width: 16px;
+    //             height: 16px;
+    //         }
+
+    //         input[name="system.targetNumber"],
+    //         input[name="system.powerPointCost"],
+    //         input[name="system.fatigueTN"],
+    //         input[name="system.minStr"],
+    //         input[name="system.weight"],
+    //         input[name="system.capacity"],
+    //         input[name="system.quantity"],
+    //         input[name="system.stuntPoints"],
+    //         input[name="system.initialValue"],
+    //         input[name="system.extraValue"],
+    //         input[name="system.nrDice"],
+    //         input[name="system.intensity"],
+    //         input[name="system.intensityMax"],
+    //         input[name="system.rank"] {
+    //             max-width: 30px;
+    //             min-width: 30px;
+    //             text-align: center;
+    //         };
+
+    //         input[name="system.range"],
+    //         input[name="system.rangeMax"] {
+    //             max-width: 60px;
+    //             min-width: 60px;
+    //             text-align: center;
+    //         }
+
+    //         span:last-of-type {
+    //             max-width: 25px;
+    //             text-align: center;
+    //         };
+
+    //         div.power-type-control {
+    //             a {
+    //                 margin-top: 30%;
+    //                 margin-bottom: 50%;
+    //             }
+    //             max-width: fit-content;
+    //         }
+
+    //         div.flexrow {
+    //             margin-right: 4px;
+    //         };
+
+    //         div {
+    //             flex-wrap: nowrap;
+    //             align-items: center;
+    //         };
+    //     };
+
+    //     .mod-card {
+    //         margin: 4px;
+    //         padding: 4px;
+    //         border: none;
+    //         .mod-item.mod-item {
+    //             border-radius: 10px;
+    //             justify-content: center;
+    //             align-items: center;
+    //             margin-bottom: 4px;
+    //             text-align: center;
+    //             input.mod {
+    //                 color: inherit !important;
+    //             }
+    //             p {
+    //                 text-align: center;
+    //             };
+    //             .mod-type {
+    //                 flex: 0 0 30%;
+    //             }
+    //             .mod-value {
+    //                 flex: 0 0 50%;
+    //                 input[type="text"],
+    //                 input[type="number"]{
+    //                     margin: 2px 0;
+    //                 }
+    //             }
+    //             .mod-controls {
+    //                 flex: 0 0 20%;
+    //                 i {
+    //                     width: fit-content;
+    //                 }
+    //                 .inactive {
+    //                     opacity: 0.4;
+    //                 }
+    //             }
+    //         }
+
+    //         input[type="number"] {
+    //             max-width: 40px;
+    //             min-width: 40px;
+    //             text-align: center;
+    //         }
+    //     };
+
+    //     .item-card-desc {
+    //         height: 100%;
+    //         padding: 4px 10px;
+    //         border-radius: 0px 0px 10px 10px;
+
+    //         div.editor.editor {
+    //             height: 90%;
+    //         };
+
+    //         label:last-of-type {
+    //             margin-top: 4px;
+    //         };
 
             
-        };
-    };
+    //     };
+    // };
 };

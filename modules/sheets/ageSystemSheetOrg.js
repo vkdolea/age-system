@@ -20,7 +20,7 @@ export default class ageSystemSheetOrg extends ActorSheet {
     }
 
     get template() {
-        return `systems/age-system/templates/sheets/${this.actor.data.type}-sheet.hbs`;
+        return `systems/age-system/templates/sheets/${this.actor.type}-sheet.hbs`;
     }
 
     /* -------------------------------------------- */
@@ -28,10 +28,10 @@ export default class ageSystemSheetOrg extends ActorSheet {
     getData(options) {
         const isOwner = this.document.isOwner;
         const isEditable = this.isEditable;
-        const actorData = this.actor.data.toObject(false);
+        const actorData = this.actor.toObject(false);
         actorData.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
         
-        const data = actorData.data;
+        const data = actorData.system;
         const focus = actorData.items.filter(f => f.type === "focus");
         
         return {
@@ -95,7 +95,7 @@ export default class ageSystemSheetOrg extends ActorSheet {
         const itemId = event.currentTarget.closest(".feature-controls").dataset.itemId;
         const rollType = event.currentTarget.closest(".feature-controls").dataset.rollType
         const itemRolled = this.actor.items.get(itemId);
-        if (itemRolled.data.type === "focus" && event.button !== 0) return
+        if (itemRolled.type === "focus" && event.button !== 0) return
         itemRolled.roll(event, rollType);
     };
 

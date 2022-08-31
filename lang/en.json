@@ -707,6 +707,17 @@
             "broseHint": "The Romantic Fantasy setting"
         },
 
-        "worldSetting": "World Mode"
+        "worldSetting": "World Mode",
+
+        "ageImporter": "AGE Importer",
+        "ageImporterInstruction": "Copy whole status block, from name header to Threat field and paste on text area below. Select AGE Setting which the status block belongs and start importing.",
+        "clickHelp": "Click here for help.",
+        "createCharacter": "Create Character",
+        "talentPlural": "Talents",
+        "stuntPlural": "Stunts",
+        "favoredStunts": "Favored Stunts",
+        "specialFeatures": "Special Features",
+        "threat": "Threat",
+        "rollable": "Rollable"
     }
 }
