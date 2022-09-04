@@ -14,7 +14,7 @@ export class ageSystemActor extends Actor {
         if (this.type === 'char') {
             // First prepare Focus
             items.forEach(i => {
-                if (i.system.type === "focus") {
+                if (i.type === "focus") {
                     i.prepareData();
                     if(i.sheet?.rendered) i.sheet.render(false);
                 }

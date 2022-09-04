@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.0.2 [2022-09-03]
+### Fixed
+- Focus Modifiers are now calculated correctly.
+
 ## 1.0.1 [2022-09-03]
 ### Fixed
 - Bug preventing creating new modifiers on Items.
