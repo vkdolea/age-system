@@ -316,7 +316,7 @@ export class ageSystemItem extends Item {
      * @param {Object} object.formula Modifier value to be used
      * @returns Promise to update Item with new Modifier slot
      */
-    _newModifier({type = "", formula = "0", flavor = ""}) {
+    _newModifier({type = "", formula = "0", flavor = ""}={}) {
         const itemData = this.system
         const modifiers = foundry.utils.deepClone(itemData.modifiers);
         const keys = [];
