@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.0.3 [2022-09-xx]
+### Fixed
+- Deprecation warning when using Dice so Nice module.
+
 ## 1.0.2 [2022-09-03]
 ### Fixed
 - Focus Modifiers are now calculated correctly.
