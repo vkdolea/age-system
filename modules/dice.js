@@ -405,7 +405,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         chatData.roll.terms[2].options = {
             colorset: stuntDieColorset ?? "bronze",
             appearance: {
-                system: game.user.data.flags["dice-so-nice"]?.appearance?.global?.system ?? "standard"
+                system: game.user.flags["dice-so-nice"]?.appearance?.global?.system ?? "standard"
             }
         }
     };

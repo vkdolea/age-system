@@ -1,8 +1,7 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
-// import {isDropedItemValid} from "./helper.js";
-import {newItemData} from "./helper.js";
+import {dropChar, newItemData} from "./helper.js";
 
 export default class ageSpaceshipSheet extends ActorSheet {
     
@@ -24,16 +23,8 @@ export default class ageSpaceshipSheet extends ActorSheet {
         return game.settings.get("age-system", "observerRoll");
     }
 
-    // From MooMan
     async _onDrop(event) {
-        let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
-        if (dragData.type == "char") {
-            let passengers = duplicate(this.actor.system.passengers);
-            passengers.push({id: dragData.id, isToken: dragData.isToken});
-            this.actor.update({"system.passengers" : passengers})
-        }
-        else return super._onDrop(event);
-        // else return false;
+        return dropChar(event, this.actor) ? null : super._onDrop(event);
     }
 
     getData() {
@@ -111,41 +102,6 @@ export default class ageSpaceshipSheet extends ActorSheet {
         // Actions by sheet owner only
         if (this.actor.isOwner) {
             html.find(".remove-passenger").click(this._onRemovePassenger.bind(this));
-            html.on("drop", ".passenger.stats-block", ev => {
-                ev.target.classList.remove("dragover")
-                const dragData = JSON.parse(ev.originalEvent.dataTransfer.getData("text/plain"))
-                const passenger = game.actors.get(dragData.id);
-                if (!passenger) return;
-                // const actor = this.actor;
-                let actor
-                // if (this.actor.isToken) actor = game.actors.tokens[this.actor.token.data.id].actor;
-                if (!actor) actor = this.actor;
-                if (passenger.type === "char") {
-    
-                    const passengerData = {
-                        id : passenger.id,
-                        isToken : passenger.isToken
-                    };
-                    const passengerList = actor.system.passengers;
-                    let alreadyOnboard = false;
-                    passengerList.map( p => {
-                        if (p.id === passengerData.id) {
-                            alreadyOnboard = true;
-                            const parts = {name: p.name, id: p.id};
-                            let warning = game.i18n.format("age-system.WARNING.alreadyOnboard", parts);
-                            ui.notifications.warn(warning);
-                        }
-                    });
-    
-                    if (!alreadyOnboard) {
-                        passengerList.push(passengerData);
-                        actor.update({"system.passengers" : passengerList});
-                    }
-                } else {
-                    const warning = game.i18n.localize("age-system.WARNING.vehicleIsNotPassenger");
-                    ui.notifications.warn(warning);
-                }
-            })
         };
 
         super.activateListeners(html);

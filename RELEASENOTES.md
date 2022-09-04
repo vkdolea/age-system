@@ -1,5 +1,13 @@
 # Release Notes
 
+## 1.0.3 [2022-09-04]
+### Fixed
+- Deprecation warning when using Dice so Nice module.
+- Proportion of Item image on character sheet and chat cards.
+- Passengers list is update correctly for Spacheship and Vehicles.
+- Rolling maneuvers from Vehicles now return the expected data from Condutor.
+- Removed extra "-" from dropdown menu to select Ability on Focus item sheet.
+
 ## 1.0.2 [2022-09-03]
 ### Fixed
 - Focus Modifiers are now calculated correctly.

@@ -124,9 +124,11 @@
 }
 .age-system.item-to-chat .item-identification img {
   height: 45px;
+  width: 45px;
   flex: 0 0 auto;
   border: 1px solid;
   border-radius: 4px;
+  object-fit: contain;
 }
 .age-system.item-to-chat .item-identification ul {
   padding-left: 6px;
@@ -908,6 +910,7 @@
   border: none;
   flex: 0 0 2rem;
   height: 2rem;
+  object-fit: contain;
 }
 .age-system.sheet li.item-box .item-name,
 .age-system.dialog li.item-box .item-name,
