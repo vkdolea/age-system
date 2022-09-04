@@ -3,7 +3,7 @@
     "name": "age-system",
     "title": "AGE System (unofficial)",
     "description": "Unofficial AGE System implementation for most of AGE subsystems",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "authors": [
 		{
 			"name": "VK Dolea",
@@ -53,13 +53,13 @@
     "compatibility": {
         "minimum": "10.278",
         "verified": "10.284",
-        "maximum": "10"
+        "maximum": 10
     },
     "minimumCoreVersion": "10.278",
     "compatibleCoreVersion": "10.284",
     "url": "https://github.com/vkdolea/age-system",
     "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",
-    "download": "https://github.com/vkdolea/age-system/archive/1.0.2.zip",
+    "download": "https://github.com/vkdolea/age-system/archive/1.0.3.zip",
     "bugs": "https://github.com/vkdolea/age-system/issues",
     "readme": "https://github.com/vkdolea/age-system/blob/prep-release/README.md",
     "flags": {

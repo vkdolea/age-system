@@ -400,37 +400,36 @@ export class ageSystemActor extends Actor {
         const data = actorData.system;
 
         data.defenseTotal = 10;
-        let invalidPassengers = [];
-        for (let pi = 0; pi < data.passengers.length; pi++) {
-            const p = data.passengers[pi];
-            if (!game.actors) {
-                game.postReadyPrepare.push(this);
-            } else {
-                const pData = p.isToken ? game.actors.tokens[p.id] : game.actors.get(p.id);
-                if (!pData) {
-                    invalidPassengers.push(pi);
-                } else {
-                    p.name = pData.name;
-                    p.picture = pData.token.img;
-                };
-                if (p.id === data.conductor && pData) {
-                    p.isConductor = true;
-                    const defenseAbl = pData.system.abilities[data.handling.useAbl].total;
-                    const defenseFocus = this.checkFocus(data.handling.useFocus);
-                    const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.system.initialValue;
-                    data.defenseTotal += defenseAbl + defenseValue;
-                } else {
-                    p.isConductor = false;
-                }
-            }
-        }
-        // Remove passengers whose sheets/tokens are not valid anymore
-        for (let ip = 0; ip < invalidPassengers.length; ip++) {
-            const i = invalidPassengers[ip];
-            data.passengers.splice(i, 1);
-        };
-
-        //this.sortPassengers();
+        this.sortPassengers();
+        // let invalidPassengers = [];
+        // for (let pi = 0; pi < data.passengers.length; pi++) {
+        //     const p = data.passengers[pi];
+        //     if (!game.actors) {
+        //         game.postReadyPrepare.push(this);
+        //     } else {
+        //         const pData = p.isToken ? game.actors.tokens[p.id] : game.actors.get(p.id);
+        //         if (!pData) {
+        //             invalidPassengers.push(pi);
+        //         } else {
+        //             p.name = pData.name;
+        //             p.picture = pData.prototypeToken.texture.src;
+        //         };
+        //         if (p.id === data.conductor && pData) {
+        //             p.isConductor = true;
+        //             const defenseAbl = pData.system.abilities[data.handling.useAbl].total;
+        //             const defenseFocus = this.checkFocus(data.handling.useFocus);
+        //             const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.system.initialValue;
+        //             data.defenseTotal += defenseAbl + defenseValue;
+        //         } else {
+        //             p.isConductor = false;
+        //         }
+        //     }
+        // }
+        // // Remove passengers whose sheets/tokens are not valid anymore
+        // for (let ip = 0; ip < invalidPassengers.length; ip++) {
+        //     const i = invalidPassengers[ip];
+        //     data.passengers.splice(i, 1);
+        // };
         data.pob = data.passengers.length;
 
     };
@@ -571,7 +570,7 @@ export class ageSystemActor extends Actor {
         return newWpnObj;
     }
 
-    // TODO - testar essa função, que ainda está em desuso
+    // Função em uso para Spaceship
     sortPassengers() {
         const data = this.system;
         const passengers = data.passengers;
@@ -584,20 +583,22 @@ export class ageSystemActor extends Actor {
                 const pData = p.isToken ? game.actors.tokens[p.id] : game.actors.get(p.id);
                 if (!pData) {
                     invalidPassengers.push(pi);
-                    // TODO - a partir daqui deve ser feita a avaliação (veículo/espaçonave) para avaliar as funções especiais de cada veículo
                 } else {
                     p.name = pData.name;
-                    p.picture = pData.token.img;
+                    p.picture = pData.prototypeToken.texture.src;
                 };
-                if (p.id === data.conductor && pData) {
-                    p.isConductor = true;
-                    const defenseAbl = pData.system.abilities[data.handling.useAbl].total;
-                    const defenseFocus = this.checkFocus(data.handling.useFocus);
-                    const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.system.initialValue;
-                    data.defenseTotal += defenseAbl + defenseValue;
-                } else {
-                    p.isConductor = false;
-                }
+                // Prepare Vehicle derived data
+                if (this.type === 'vehicle') {
+                    if (p.id === data.conductor && pData) {
+                        p.isConductor = true;
+                        const defenseAbl = pData.system.abilities[data.handling.useAbl].total;
+                        const defenseFocus = pData.checkFocus(data.handling.useFocus);
+                        const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.system.initialValue;
+                        data.defenseTotal += defenseAbl + defenseValue;
+                    } else {
+                        p.isConductor = false;
+                    }
+                };
             }
         }
         // Remove passengers whose sheets/tokens are not valid anymore

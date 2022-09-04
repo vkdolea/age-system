@@ -62,4 +62,36 @@ export function newItemData(actor, itemData) {
         }
     }
     return itemData;
+};
+
+export function dropChar(event, vehicle) {
+    const dragData = JSON.parse(event.dataTransfer.getData("text/plain"))
+    const data = fromUuidSync(dragData.uuid);
+    if (data.documentName === "Actor") {
+        if (data.type === "char") {
+            const passengerData = {
+                id : data.id,
+                isToken : data.isToken
+            };
+            const passengerList = vehicle.system.passengers;
+            let alreadyOnboard = false;
+            passengerList.map( p => {
+                if (p.id === passengerData.id) {
+                    alreadyOnboard = true;
+                    const parts = {name: p.name, id: p.id};
+                    let warning = game.i18n.format("age-system.WARNING.alreadyOnboard", parts);
+                    ui.notifications.warn(warning);
+                }
+            });
+
+            if (!alreadyOnboard) {
+                passengerList.push(passengerData);
+                vehicle.update({"system.passengers" : passengerList});
+            }
+        } else {
+            const warning = game.i18n.localize("age-system.WARNING.vehicleIsNotPassenger");
+            ui.notifications.warn(warning);
+        }
+    } else return false;
+    return true;
 }
