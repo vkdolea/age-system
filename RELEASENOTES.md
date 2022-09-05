@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.0.4 [2022-09-05]
+- Fixed issue preventing Modifiers to be deleted from Items owned by Unlinked Actors.
+
 ## 1.0.3 [2022-09-04]
 ### Fixed
 - Deprecation warning when using Dice so Nice module.
