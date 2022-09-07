@@ -109,6 +109,7 @@ Icons made by:
 - [Delapouite](https://delapouite.com/), [DarkZaitev](http://darkzaitzev.deviantart.com/), [Lorc](https://lorcblog.blogspot.com/), [Skoll](https://game-icons.net),   from [game-icons.net](https://game-icons.net/).
 
 ### Localization
+Do you want to help with localization? Take a look at [this wiki entry!](https://github.com/vkdolea/age-system/wiki/Localization)
 - **French**: by Discord users *Imposator#8090* & *Abdanck#2003*.
 - **Brazilian Portuguese**: by Discord user *Leandro_Soares#9067* and me.
 - **Spanish**: by Discord user *ForjaSalvaje#2419*.

@@ -718,6 +718,11 @@
         "favoredStunts": "Façanhas Favoritas",
         "specialFeatures": "Características Especiais",
         "threat": "Ameaça",
-        "rollable": "Possui Rolagem"
+        "rollable": "Possui Rolagem",
+        "export": "Exportar",
+        "import": "Importar",
+        "invalidFileContent": "O conteúdo do arquivo não é válido",
+        "customEffects": "Efeitos Personalizados",
+        "customEffectsSet": "Conjunto de Efeitos Personalizados"
     }
 }

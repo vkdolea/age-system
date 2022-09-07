@@ -718,6 +718,11 @@
         "favoredStunts": "Favored Stunts",
         "specialFeatures": "Special Features",
         "threat": "Threat",
-        "rollable": "Rollable"
+        "rollable": "Rollable",
+        "export": "Export",
+        "import": "Import",
+        "invalidFileContent": "File content is not valid",
+        "customEffects": "Custom Effects",
+        "customEffectsSet": "Custom Effects set"
     }
 }

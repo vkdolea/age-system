@@ -83,6 +83,13 @@
             {{/if}}
             <hr>
             <button class="default-button save-close">{{localize "age-system.saveClose"}}</button>
+            {{#if (eq inUseConditions 'custom')}}
+            <hr>
+            <div class="flexrow">
+                <button class="default-button export">{{localize "age-system.export"}}</button>
+                <button class="default-button import">{{localize "age-system.import"}}</button>
+            </div>
+            {{/if}}
         </div>
     </div>
 
