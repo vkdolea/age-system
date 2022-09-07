@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.1.0 [2022-09-07]
+### Added
+- Conditons Workshop now has the ability to Export and Import you custom effects to a json file. This gives the ability to save effects from one world and migrate to a brand new world.
+
 ## 1.0.4 [2022-09-05]
 - Fixed issue preventing Modifiers to be deleted from Items owned by Unlinked Actors.
 

@@ -67,9 +67,64 @@ export default class ConditionsWorkshop extends Application {
       html.find('.add-effect').click(this._onAddEffect.bind(this));
       html.find('.change-order').click(this._onOrderEffect.bind(this));
       html.find('.copy-effects').click(this._onCopyToCustom.bind(this));
+      html.find('.export').click(this._onSaveToFile.bind(this));
+      html.find('.import').click(this._onReadFromFile.bind(this));
     }
     html.find('.in-use-condition input').change(this._onInUseConditionsSwap.bind(this));
     html.find('.save-close').click(this._onCloseWorkshop.bind(this));
+  }
+
+  _onSaveToFile(ev) {
+    const fileName = `fvtt-${game.system.id}-custom-effects-${game.world.id}.json`;
+    const effects = game.settings.get("age-system", "customTokenEffects");
+    saveDataToFile(JSON.stringify(effects), 'text/json', fileName);
+  }
+
+  /**
+   * Render an import dialog for updating the data related to this Document through an exported JSON file
+   * @returns {Promise<void>}
+   */
+  async _onReadFromFile() {
+    new Dialog({
+      title: `Import Custom Effects`,
+      content: await renderTemplate("templates/apps/import-data.html", {
+        hint1: game.i18n.format("DOCUMENT.ImportDataHint1", {document: game.i18n.localize("age-system.customEffectsSet")})
+      }),
+      buttons: {
+        import: {
+          icon: '<i class="fas fa-file-import"></i>',
+          label: "Import",
+          callback: html => {
+            const form = html.find("form")[0];
+            if ( !form.data.files.length ) return ui.notifications.error("You did not upload a data file!");
+            readTextFromFile(form.data.files[0]).then(json => this.importFromJSON(json));
+          }
+        },
+        no: {
+          icon: '<i class="fas fa-times"></i>',
+          label: "Cancel"
+        }
+      },
+      default: "import"
+    }, {
+      width: 400
+    }).render(true);
+  }
+
+  /**
+   * Read a JSON from a file with Custom Token Effects data, validate and save it.
+   * @param {string} json Stringfied JSON object
+   */
+  importFromJSON(json){
+    try {
+      const effects = JSON.parse(json);
+    }
+    catch(err) {
+      console.log(err.message)
+      return ui.notifications.warn(game.i18n.localize("age-system.invalidFileContent"));
+    }
+    this._customEffects = effects;
+    this._refresh();
   }
 
   _onCopyToCustom(ev) {
