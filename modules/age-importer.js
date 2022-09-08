@@ -102,7 +102,7 @@ export class AgeParser {
     this._getName(block);
     this._getAbilities()
     this._getDerivedData(this.text);
-    this._getAttacks(this.text, ageSetting);
+    this._getAttacks(ageSetting);
     this._getSpecialQualities();
     this._getItems();
 
@@ -145,9 +145,9 @@ export class AgeParser {
     // Separate block in 2 sections: Abilities/Derived Data and Special Qualities/Features:
     if (this.mode === 'mage') {
       let qltCaption = `\n${game.i18n.localize('age-system.specialQualities')}`; // some settings use Special Qualities
-      let spcQltIndex = this.text.indexOf(qltCaption);
+      let spcQltIndex = this.textLC.indexOf(qltCaption.toLowerCase());
       if (spcQltIndex < 0) qltCaption = `\n${game.i18n.localize('age-system.specialFeatures')}`; // others use Special Features
-      spcQltIndex = this.textLC.indexOf(qltCaption.toLocaleLowerCase());
+      spcQltIndex = this.textLC.indexOf(qltCaption.toLowerCase());
 
       keys.specialQualities = {
         index: spcQltIndex,
@@ -253,14 +253,14 @@ export class AgeParser {
     this.data.focus = focus;
   }
 
-  _getDerivedData(text) {
+  _getDerivedData() {
     const mode = this._modeSelected;
     let r;
     if (mode === 'mage') r = `(?<=AR \\+ Toughness\n).*(?=\n)`; //incluir Localização
     if (mode === 'expanse') r = `(?<=AR \\+ TOU\n).*(?=\n)`; //incluir Localização
     if (['dage', 'fage'].includes(mode)) r = `(?<=Defense Armor Rating\n).*(?=\n)`; //incluir Localização
     if (!r) return null;
-    let protoText = text.match(r)[0].trim().replaceAll("+ ", "+");
+    let protoText = this.textLC.match(r.toLowerCase())[0].trim().replaceAll("+ ", "+");
     
     // Logic to ensure "+" has a white space on its left and none to its right
     const wsLeft = [];
@@ -319,20 +319,19 @@ export class AgeParser {
     }
   }
 
-  _getAttacks(text, mode) {
+  _getAttacks(mode) {
+    const text = this.textLC;
     const attacks = [];
     let attksTable;
     const endIndex = this.keys.specialQualities.index;
 
     if (mode === "mage") {
-      let start = `Weapon Attack Roll Damage*\n`;
+      let start = `Weapon Attack Roll Damage*\n`.toLowerCase();
       let startIndex = text.indexOf(start);
       if (startIndex < 0) {
-        start = `Weapon Attack Roll Damage\n`;
+        start = `Weapon Attack Roll Damage\n`.toLowerCase();
         startIndex = text.indexOf(start);
       };
-      // const end = `\nSpecial Qualities`;
-      // const endIndex = this.specialQualities.index
       attksTable = text.substring(startIndex + start.length, endIndex).split('\n');
       attksTable.pop(); // Removes note at bottom of attacks' table
     }
