@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.1.1 [2022-09-09]
+### Fixed
+- Fine tuning of AGE Importer to identify fields independent of letter case.
+
 ## 1.1.0 [2022-09-07]
 ### Added
 - Conditons Workshop now has the ability to Export and Import you custom effects to a json file. This gives the ability to save effects from one world and migrate to a brand new world.
