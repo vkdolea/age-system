@@ -1,6 +1,6 @@
 # Release Notes
 
-## 1.1.2 [2022-09-xx]
+## 1.1.2 [2022-09-10]
 ### Added
 - AGE Importer now supports Major and Minor NPC stat blocks for Modern AGE.
 - AGE Importar has now capacity to import **The Expanse** stat blocks.
