@@ -23,6 +23,13 @@ export class ageSystemItem extends Item {
         if (this.type === "power" && this.system.useFatigue) {return game.settings.get("age-system", "useFatigue")};
         return false;
     };
+
+    /** @override */
+    async _onCreate(data, options, userId) {
+        await super._onCreate(data, options, userId);
+        console.log(this.img)
+        this.img = ageSystem.actorIcons[this.type];
+    }
     
     /** @override */
     prepareBaseData() {
