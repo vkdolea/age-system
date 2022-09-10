@@ -25,10 +25,11 @@ export class ageSystemItem extends Item {
     };
 
     /** @override */
-    async _onCreate(data, options, userId) {
-        await super._onCreate(data, options, userId);
-        console.log(this.img)
-        this.img = ageSystem.actorIcons[this.type];
+    async _preCreate(data, options, userId) {
+        await super._preCreate(data, options, userId);
+        const updates = {};
+        updates.img = ageSystem.itemIcons[this.type];
+        this.updateSource(updates);        
     }
     
     /** @override */

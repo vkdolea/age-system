@@ -1,5 +1,13 @@
 # Release Notes
 
+## 1.1.2 [2022-09-xx]
+### Added
+- AGE Importer now supports Major and Minor NPC stat blocks for Modern AGE.
+- AGE Importar has now capacity to import **The Expanse** stat blocks.
+
+### Fixed
+- Items and Actors created with AGE Importer will have icons according to item types.
+
 ## 1.1.1 [2022-09-09]
 ### Fixed
 - Fine tuning of AGE Importer to identify fields independent of letter case.
