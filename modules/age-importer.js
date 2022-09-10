@@ -10,8 +10,12 @@ export default class AgeImporter extends Application {
     this._importingText = ""
     
     // Currently available only for Modern AGE
-    this._modeOptions = {'mage': "Modern AGE"};
-    this._modeSelected = 'mage';
+    this._modeOptions = {
+      "mageL": "Modern AGE (Major NPC)",
+      "mageM": "Modern AGE (Minor NPC)",
+      "expanse": "The Expanse"
+    };
+    this._modeSelected = 'expanse';
     // this._modeOptions = {'expanse': "The Expanse", 'mage': "Modern AGE", 'fage': "Fantasy AGE", 'dage': "Dragon AGE"};
     // this._modeSelected = null;
   }
@@ -108,7 +112,7 @@ export class AgeParser {
 
     this._createActor();
 
-    console.log(this.data)
+    // console.log(this.data)
   }
 
   _getThreat() {
@@ -143,20 +147,18 @@ export class AgeParser {
     const sections = {};
 
     // Separate block in 2 sections: Abilities/Derived Data and Special Qualities/Features:
-    if (this.mode === 'mage') {
-      let qltCaption = `\n${game.i18n.localize('age-system.specialQualities')}`; // some settings use Special Qualities
-      let spcQltIndex = this.textLC.indexOf(qltCaption.toLowerCase());
-      if (spcQltIndex < 0) qltCaption = `\n${game.i18n.localize('age-system.specialFeatures')}`; // others use Special Features
-      spcQltIndex = this.textLC.indexOf(qltCaption.toLowerCase());
+    let qltCaption = `\n${game.i18n.localize('age-system.specialQualities')}`; // some settings use Special Qualities
+    let spcQltIndex = this.textLC.indexOf(qltCaption.toLowerCase());
+    if (spcQltIndex < 0) qltCaption = `\n${game.i18n.localize('age-system.specialFeatures')}`; // others use Special Features
+    spcQltIndex = this.textLC.indexOf(qltCaption.toLowerCase());
 
-      keys.specialQualities = {
-        index: spcQltIndex,
-        size: qltCaption.length
-      };
+    keys.specialQualities = {
+      index: spcQltIndex,
+      size: qltCaption.length
+    };
 
-      sections.abilityPlusDerived = this.text.substring(0, spcQltIndex);
-      sections.specialQualities = this.text.substring(spcQltIndex + qltCaption.length);
-    }
+    sections.abilityPlusDerived = this.text.substring(0, spcQltIndex);
+    sections.specialQualities = this.text.substring(spcQltIndex + qltCaption.length);
 
     this.keys = keys;
     this.sections = sections;
@@ -181,7 +183,8 @@ export class AgeParser {
    */
   _getAbilities() {
     // Identify which Setting the Ability block belongs
-    const ablType = ['expanse', 'mage', 'fage'].includes(this._modeSelected) ? 'main' : (this._modeSelected === 'dage' ? 'dage' : null);
+    const mode = this._modeSelected
+    const ablType = ['expanse', 'mageL', 'mageM', 'fage'].includes(mode) ? 'main' : (mode === 'dage' ? 'dage' : null);
     if (!ablType) return false
 
     const abls = foundry.utils.deepClone(ageSystem.abilitiesSettings[ablType]);
@@ -194,11 +197,13 @@ export class AgeParser {
     const abilities = {};
     const focus = [];
 
+    // Search for condensed NPC sheet
     for (const a in abls) {
       if (Object.hasOwnProperty.call(abls, a)) {
         const abl = abls[a].toLowerCase();
         let hasFocus = false;
-        const r0 = `\n-?–?\\b[0-9]* ${abl}`;
+        const r00 = `-?–?\\b[0-9]*`;
+        const r0 = ["mageL", "dage", "fage"].includes(mode) ? `${r00} ${abl}` : `${abl} ${r00}`; // TODO - identify this change automatically
         const r1 = `\\(([^\\)]+)\\)`;
         const rg = `${r0} ${r1}`;
         const ri = new RegExp(rg);
@@ -209,9 +214,10 @@ export class AgeParser {
         if (ablM) hasFocus = true; else ablM = text.match(r0);
         
         // Ability value
-        const noLineBreak = ablM[0].replace('\n', '').replaceAll('–','-').trim();
-        const whiteSpace = noLineBreak.indexOf(" ");
-        const abilityValue = Number(noLineBreak.slice(0, whiteSpace));
+        const noLineBreak = ablM[0].replace('\n', '').replaceAll('–','-').replace(abl, '').trim();
+        const ablArr = noLineBreak.split(" ");
+        const value = ablArr[0];
+        const abilityValue = Number(value);
         abilities[a] = {value: abilityValue};
 
         // Focuses
@@ -253,12 +259,14 @@ export class AgeParser {
     this.data.focus = focus;
   }
 
+  // TODO - Incluir localização
   _getDerivedData() {
     const mode = this._modeSelected;
+    const abilities = this.data.abilities;
     let r;
-    if (mode === 'mage') r = `(?<=AR \\+ Toughness\n).*(?=\n)`; //incluir Localização
-    if (mode === 'expanse') r = `(?<=AR \\+ TOU\n).*(?=\n)`; //incluir Localização
-    if (['dage', 'fage'].includes(mode)) r = `(?<=Defense Armor Rating\n).*(?=\n)`; //incluir Localização
+    if (["mageL", "mageM"].includes(mode)) r = `(?<=AR \\+ Toughness\n).*(?=\n)`;
+    if (mode === 'expanse') r = `(?<=AR \\+ TOU).*\n.*(?=\n)`;
+    if (['dage', 'fage'].includes(mode)) r = `(?<=Defense Armor Rating\n).*(?=\n)`;
     if (!r) return null;
     let protoText = this.textLC.match(r.toLowerCase())[0].trim().replaceAll("+ ", "+");
     
@@ -274,49 +282,69 @@ export class AgeParser {
     }
     let data = protoText.split(" ");
 
-    // Modern AGE logics
-    if (mode === 'mage') {
-      // Initialize Game Mode object
-      const gameMode = {
-        specs: {
-          gritty: {},
-          pulp: {},
-          cinematic: {},
-          none: {}
-        }
+    // Add '+' if missing on Toughness values
+    if (["mageL", "mageM"].includes(mode)) {
+      for (let i = 1; i <= 2; i++) {
+        if (data[data.length-i].indexOf("+") < 0 && data[data.length-i].indexOf("-") < 0) data[data.length-i] = `+${data[data.length-i]}`
       }
-      // Toughness
-      const cons = this.data.abilities.cons.value;
-      this._populateMageMods(data, gameMode, 'toughness', cons);
-
-      // Armor Rating (Ballistic and Impact), including logics to identify when xI/yB data is missing
-      const armorArr = data[data.length-1];
-      const totalArmor = armorArr.includes('/') ? data.pop().split('/') : ['0I', '0B'];
-      const armor = {
-        ballisticArmor: totalArmor.pop().slice(0, -1),
-        impactArmor: totalArmor.pop().slice(0, -1)
-      }
-      this.data.armor = armor;
-
-      // Defense
-      const dex = this.data.abilities.dex.value
-      const baseDef = 10;
-      this._populateMageMods(data, gameMode, 'defense', baseDef + dex);
-
-      // Health
-      this._populateMageMods(data, gameMode, 'health');
-
-      // Speed and different movement
-      const baseSpeed = Number(data[0]) - dex;
-      data.splice(0, 1);
-      this.data.speed = {base: baseSpeed};
-      this.data.flags = {
-        "age-system": {
-          importData: {speedOthers: data.length ? data.join(' ') : null}
-        }
-      };
-      this.data.gameMode = gameMode;
     }
+
+    // Modern AGE logics
+    // Initialize Game Mode object
+    const gameMode = {
+      specs: {
+        gritty: {},
+        pulp: {},
+        cinematic: {},
+        none: {}
+      }
+    };
+
+    // Toughness attribute is differentiated for Modern AGE only - other cases equals do ZERO
+    if (["mageL", "mageM"].includes(mode)) {
+      this._populateMageMods(data, gameMode, 'toughness', abilities.cons.value);
+    } else {
+      for (const key in gameMode.specs) {
+        if (Object.hasOwnProperty.call(gameMode.specs, key)) {
+          gameMode.specs[key].toughness = 0;          
+        }
+      }
+    }
+    
+    // Armor Rating (Ballistic and Impact), including logics to identify when xI/yB data is missing
+    let armorStr = data.pop();
+    let totalArmor = ['0I', '0B'];
+    if (armorStr.includes('/')) {
+      totalArmor = armorStr.split('/')
+    } else {
+      if (!Number.isNaN(armorStr)) {
+        if (!["mageL", "mageM"].includes(mode)) armorStr = armorStr - abilities.cons.value;
+        totalArmor = [`${armorStr}I`, `${armorStr}B`]
+      }
+    };
+    const armor = {
+      ballisticArmor: totalArmor.pop().slice(0, -1),
+      impactArmor: totalArmor.pop().slice(0, -1)
+    };
+    this.data.armor = armor;
+
+    // Defense
+    const baseDef = 10;
+    this._populateMageMods(data, gameMode, 'defense', baseDef + abilities.dex.value);
+
+    // Health
+    this._populateMageMods(data, gameMode, 'health');
+
+    // Speed and different movement
+    const baseSpeed = Number(data[0]) - abilities.dex.value;
+    data.splice(0, 1);
+    this.data.speed = {base: baseSpeed};
+    this.data.flags = {
+      "age-system": {
+        importData: {speedOthers: data.length ? data.join(' ') : null}
+      }
+    };
+    this.data.gameMode = gameMode;
   }
 
   _getAttacks(mode) {
@@ -325,21 +353,14 @@ export class AgeParser {
     let attksTable;
     const endIndex = this.keys.specialQualities.index;
 
-    if (mode === "mage") {
-      let start = `Weapon Attack Roll Damage*\n`.toLowerCase();
-      let startIndex = text.indexOf(start);
-      if (startIndex < 0) {
-        start = `Weapon Attack Roll Damage\n`.toLowerCase();
-        startIndex = text.indexOf(start);
-      };
-      attksTable = text.substring(startIndex + start.length, endIndex).split('\n');
-      attksTable.pop(); // Removes note at bottom of attacks' table
-    }
-
-    if (['dage','fage'].includes(mode)) {
-      const start = `Weapon Attack Roll Damage\n`;
-      attksTable = text.substring(text.indexOf(start) + start.length, endIndex).split('\n');
-    }
+    let start = `Weapon Attack Roll Damage*\n`.toLowerCase();
+    let startIndex = text.indexOf(start);
+    if (startIndex < 0) {
+      start = `Weapon Attack Roll Damage\n`.toLowerCase();
+      startIndex = text.indexOf(start);
+    };
+    attksTable = text.substring(startIndex + start.length, endIndex).split('\n');
+    if (["mageL", "mageM"].includes(mode)) attksTable.pop(); // Removes note at bottom of attacks' table
 
     // Go through attksTable and identify attacks
     for (let a = 0; a < attksTable.length; a++) {
@@ -384,12 +405,14 @@ export class AgeParser {
 
   async _createActor() {
     const data = this.data;
+    const type = 'char';
     const healthMax = data.gameMode.specs[game.settings.get("age-system", "gameMode")].health;
 
     // Organize data to create new Actor
     const actorData = {
       name: data.name,
-      type: 'char',
+      type: type,
+      // img: ageSystem.actorIcons[type],
       flags: {
         core: {sheetClass: "age-system.ageSystemSheetCharStatBlock"}
       },
@@ -410,11 +433,8 @@ export class AgeParser {
   async _createItems(actor) {
     // Look at Compendium or Item Directory for Items with same name as Attack/Equipment/Stunt
 
-    // Create documents from "Focus"
-    await actor.createEmbeddedDocuments('Item', this.data.focus);
-
-    // Create documents from "Equipment" section
-    await actor.createEmbeddedDocuments('Item', this.data.items);
+    // Create documents for Items, except "Weapon" and Armor.
+    await actor.createEmbeddedDocuments('Item', this.data.focus.concat(this.data.items));
 
     // Add Armor
     const armor = await actor.createEmbeddedDocuments('Item', [{
@@ -433,6 +453,7 @@ export class AgeParser {
       const newAttk = await actor.createEmbeddedDocuments('Item', [{
         name: attk.name,
         type: 'weapon',
+        img: ageSystem.actorIcons.char,
         system: {
           favorite: true,
           equiped: true,
@@ -516,7 +537,16 @@ export class AgeParser {
       if (Object.hasOwnProperty.call(items, key)) {
         const e = items[key];
         for (let i = 0; i < e.length; i++) {
-          e[i] = {name: e[i].trim(), type: key, system: {favorite: true, equiped: true, activate: true}};
+          e[i] = {
+            name: e[i].trim(),
+            type: key,
+            img: ageSystem.itemIcons[key],
+            system: {
+              favorite: true,
+              equiped: true,
+              activate: true
+            }
+          };
         }
         this.data.items.push(...e)
       }
@@ -542,9 +572,12 @@ export class AgeParser {
    */
   _populateMageMods(dataArr, gameMode, type, offset = 0) {
     const modes = ['cinematic', 'pulp', 'gritty'];
+    const setting = this._modeSelected;
+    let baseData = ["mageL", "mageM"].includes(setting) ? dataArr : dataArr.pop();
     for (let m = 0; m < modes.length; m++) {
       const mode = modes[m];
-      const v = Number(dataArr.pop()) - offset;
+      // const v = Number(dataArr.pop()) - offset;
+      const v = (Array.isArray(baseData) ? Number(dataArr.pop()) : baseData) - offset;
       gameMode.specs[mode][type] = v;
       if (type === 'health') gameMode.specs[mode].healthCur = v;
       if (mode === 'gritty') {
