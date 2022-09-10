@@ -23,14 +23,16 @@ export class ageSystemItem extends Item {
         if (this.type === "power" && this.system.useFatigue) {return game.settings.get("age-system", "useFatigue")};
         return false;
     };
+
+    /** @override */
+    async _onCreate(data, options, userId) {
+        await super._onCreate(data, options, userId);
+        console.log(this.img)
+        this.img = ageSystem.actorIcons[this.type];
+    }
     
     /** @override */
     prepareBaseData() {
-        if (this.img === "icons/svg/item-bag.svg") {
-            if (!ageSystem.itemIcons[this.type]) this.img = "icons/svg/item-bag.svg";
-            this.img = ageSystem.itemIcons[this.type];
-        };
-        if (!this.name) this.name = "New " + game.i18n.localize(this.type);
         const itemData = this;
         const data = itemData.system;
         const itemType = itemData.type;
