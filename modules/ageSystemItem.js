@@ -26,11 +26,6 @@ export class ageSystemItem extends Item {
     
     /** @override */
     prepareBaseData() {
-        if (this.img === "icons/svg/item-bag.svg") {
-            if (!ageSystem.itemIcons[this.type]) this.img = "icons/svg/item-bag.svg";
-            this.img = ageSystem.itemIcons[this.type];
-        };
-        if (!this.name) this.name = "New " + game.i18n.localize(this.type);
         const itemData = this;
         const data = itemData.system;
         const itemType = itemData.type;
@@ -89,6 +84,12 @@ export class ageSystemItem extends Item {
                 break;
         }
     };
+
+    async _onCreate(data, options, userId) {
+        await super._onCreate(data, options, userId);
+        console.log(this.img)
+        this.img = ageSystem.itemIcons[this.type];
+    }
 
     prepareDamageData(data) {
         // Evaluate Attack and Damage formula to represent on Item sheet or stat block

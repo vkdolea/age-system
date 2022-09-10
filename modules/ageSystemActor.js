@@ -36,11 +36,15 @@ export class ageSystemActor extends Actor {
         }
     }
 
+    async _onCreate(data, options, userId) {
+        await super._onCreate(data, options, userId);
+        console.log(this.img)
+        this.img = ageSystem.actorIcons[this.type];
+    }
+
     prepareBaseData() {
         const actorData = this;
         const data = actorData.system;
-        
-        if (actorData.img == CONST.DEFAULT_TOKEN) actorData.img = ageSystem.actorIcons[actorData.type];
 
         // Check if split Armor is in use
         data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
