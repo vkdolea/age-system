@@ -40,7 +40,7 @@ export class ageSystemActor extends Actor {
     async _preCreate(data, options, userId) {
         await super._preCreate(data, options, userId);
         const updates = {};
-        updates.img = ageSystem.actorIcons[this.type];
+        if (!data.img || data.img === CONST.DEFAULT_TOKEN) updates.img = ageSystem.actorIcons[this.type];
         this.updateSource(updates);        
     }
 

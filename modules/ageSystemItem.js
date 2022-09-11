@@ -28,7 +28,7 @@ export class ageSystemItem extends Item {
     async _preCreate(data, options, userId) {
         await super._preCreate(data, options, userId);
         const updates = {};
-        updates.img = ageSystem.itemIcons[this.type];
+        if (!data.img || data.img === `icons/svg/item-bag.svg`) updates.img = ageSystem.itemIcons[this.type];
         this.updateSource(updates);        
     }
     
@@ -37,6 +37,7 @@ export class ageSystemItem extends Item {
         const itemData = this;
         const data = itemData.system;
         const itemType = itemData.type;
+
         data.colorScheme = `colorset-${game.settings.get("age-system", "colorScheme")}`;
         data.nameLowerCase = itemData.name.toLowerCase();
 
