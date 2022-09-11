@@ -1,5 +1,12 @@
 # Release Notes
 
+## 1.1.3 [2022-09-11]
+### Changed
+- Added style to Journal entries.
+
+### Fixed
+- Fixed a problem when drag and dropping Item/Actor to character sheet and compendium the icon was reset to the standard.
+
 ## 1.1.2 [2022-09-10]
 ### Added
 - AGE Importer now supports Major and Minor NPC stat blocks for Modern AGE.

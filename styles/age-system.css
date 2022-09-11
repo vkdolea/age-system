@@ -4075,6 +4075,10 @@ body *:not(i, .fa, .far, .fas) {
   max-height: 35px;
 }
 /*---------Background---------------------*/
+.window-app.journal-sheet .journal-entry-content,
+.window-app.journal-sheet form.editable {
+  background: rgba(254, 254, 254, 0.9);
+}
 .window-app.sheet.char .window-content,
 .window-app.sheet.vehicle .window-content,
 .window-app.sheet.spaceship .window-content {

@@ -274,6 +274,10 @@ Hooks.once("init", async function() {
 });
 
 Hooks.once("setup", function() {
+    // Config type icons
+    // CONFIG.Actor.typeIcons = ageSystem.actorIcons;
+    // CONFIG.Item.typeIcons = ageSystem.itemIcons;
+
     const talentDegrees = foundry.utils.deepClone(ageSystem.mageDegrees);
     for (let i = 0; i < talentDegrees.length; i++) {
         talentDegrees[i] = game.i18n.localize(talentDegrees[i]);
