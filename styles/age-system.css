@@ -2125,7 +2125,7 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: stretch;
-  margin-bottom: 8px;
+  padding: 4px;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show i {
   flex-grow: 0;

@@ -190,6 +190,19 @@ Hooks.once("init", async function() {
             "EFFECT.MODE_OVERRIDE"
         ];
         return game.i18n.localize(modeNames[modeNumber]);
+    });
+
+    // Handlebar to set dice icon based on numeric value
+    Handlebars.registerHelper('facename', function(face) {
+        const faces = {
+            "1": "one",
+            "2": "two",
+            "3": "three",
+            "4": "four",
+            "5": "five",
+            "6": "six"
+        };
+        return faces[face];
     })
 
     // Handlebar to identify type of Effect

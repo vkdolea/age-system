@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.1.4 [2022-09-xx]
+### Changed
+- Refactored chat card roll template.
+
 ## 1.1.3 [2022-09-11]
 ### Changed
 - Added style to Journal entries.
