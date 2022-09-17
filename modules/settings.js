@@ -75,7 +75,8 @@ export const registerSystemSettings = async function() {
       "select-one": "SETTINGS.colorSelectOne",
       "the-grey": "SETTINGS.colorTheGrey",
       "red-warrior": "SETTINGS.colorRedWarrior",
-      "never-dead": "SETTINGS.colorNeverDead"
+      "never-dead": "SETTINGS.colorNeverDead",
+      // "snow-white": "SW"
     },
     onChange: ()=>{
       const newColor = game.settings.get("age-system", "colorScheme")
@@ -85,7 +86,8 @@ export const registerSystemSettings = async function() {
       if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
       [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents].forEach((o) => {
         if (o) {
-          if (o.sheet != null && o.sheet._state > 0) o.sheet.close();
+          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+          o.items?.forEach((i)=> {if (i.sheet != null && i.sheet._state > 0) i.sheet.render()});
         };
       });
     },

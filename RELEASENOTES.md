@@ -3,6 +3,11 @@
 ## 1.1.4 [2022-09-xx]
 ### Changed
 - Refactored chat card roll template.
+- Added borders to Actor and Item icons.
+- Changing color setting will refresh opened sheets instead of closing them.
+
+### Fixed
+- Removed an error on world start-up/refresh when attempting to load unexistant file.
 
 ## 1.1.3 [2022-09-11]
 ### Changed

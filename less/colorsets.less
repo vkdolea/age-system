@@ -84,6 +84,14 @@
 @expanded-blue-light-font: #dde2e2; 
 @expanded-blue-list: @expanded-blue, @expanded-blue-high, @expanded-blue-mid, @expanded-blue-font, @expanded-blue-light-font;
 
+/** Snow White **/
+@snow-white: #ffffff;
+@snow-white-high: #000000;
+@snow-white-mid: #494949;
+@snow-white-font: #000000;
+@snow-white-light-font: #ffffff;
+@snow-white-list: @snow-white, @snow-white-high, @snow-white-mid, @snow-white-font, @snow-white-light-font;
+
 /** Color Template **/
 // @color-set:
 // @color-set-high:
@@ -106,8 +114,8 @@
 
 // LESS loop to create color schemes - add new name on @colorsets, add color array at @color-list.
 // Name inside @colorsets must be the same key on game Settings!
-@colorsets: modern-blue, fantasy-blue, dragon-red, folded-purple, ronin-green, select-one, the-grey, red-warrior, never-dead, expanded-blue;
-@color-list: @modern-blue-list, @fantasy-blue-list, @dragon-red-list, @folded-purple-list, @ronin-green-list, @select-one-list, @the-grey-list, @red-warrior-list, @never-dead-list, @expanded-blue-list;
+@colorsets: modern-blue, fantasy-blue, dragon-red, folded-purple, ronin-green, select-one, the-grey, red-warrior, never-dead, expanded-blue, snow-white;
+@color-list: @modern-blue-list, @fantasy-blue-list, @dragon-red-list, @folded-purple-list, @ronin-green-list, @select-one-list, @the-grey-list, @red-warrior-list, @never-dead-list, @expanded-blue-list, @snow-white-list;
 
 /*******************************/
 /**     Color Style Rules     **/
@@ -164,6 +172,11 @@ each(@colorsets, {
         .thin-border {
             border: thin solid extract(extract(@color-list, @index), 5);
         }
+
+        .action-details h4 {
+            background: none;
+            opacity: 0.8;
+        };
 
         .colorset-first-tier {
             background-color: extract(extract(@color-list, @index), 1);
