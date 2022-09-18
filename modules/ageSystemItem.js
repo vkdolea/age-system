@@ -102,6 +102,7 @@ export class ageSystemItem extends Item {
             const mode = game.settings.get("age-system", "healthSys");
             const useInjury = [`mageInjury`, `mageVitality`].includes(mode);
 
+            // ATTACK BUILDER
             // Attack Mod - Actor Scope
             const atkBonuses = [];
             if (useFocus) atkBonuses.push(useFocus.value);
@@ -149,6 +150,7 @@ export class ageSystemItem extends Item {
             const attkPartials = Dice.resumeFormula(atkBonus, this.actor?.actorRollData() ?? {});
             data.atkRollMod = attkPartials ? attkPartials.shortFormula : "+0";
 
+            // DAMAGE BUILDER
             // Item Base Damage
             const dmgBonusArr = []
             let baseDamage = 0;
