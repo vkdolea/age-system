@@ -368,7 +368,7 @@ Hooks.once("ready", async function() {
     ageSystem.itemCompendia = Settings.allCompendia("Item");
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
-    ageSystem.focus = Settings.compendiumList(setCompendium);
+    ageSystem.focus = Settings.focusList(setCompendium);
 
     // Register Weapon Groups (if any)
     const userGroups = game.settings.get("age-system", "weaponGroups");
@@ -418,15 +418,9 @@ Hooks.once("ready", async function() {
     migrations.migrateWorld();
 });
 
-// If Compendia are updated, then compendiumList is gathered once again
-Hooks.on("renderCompendium", () => {
-    const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
-    ageSystem.focus = Settings.compendiumList(setCompendium);
-});
 
 Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatLog, content, userData))
-Hooks.on("createCompendium", () => ageSystem.itemCompendia = Settings.allCompendia("Item"))
-Hooks.on("renderageSystemItemSheet", (app, html, data) => Setup.nameItemSheetWindow(app));
+Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
 Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});
 Hooks.on("renderChatLog", (app, html, data) => {    AgeChat.addChatListeners(html)});
 Hooks.on("renderChatMessage", (app, html, data) => {AgeChat.sortCustomAgeChatCards(app, html, data)});
@@ -454,3 +448,4 @@ Hooks.once('diceSoNiceReady', () => {
     if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);
     if (!stuntSoNiceFlag) game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
 });
+Hooks.on('renderSettingsConfig', (SettingsConfig, html, data) => Settings.updateFocusCompendia());

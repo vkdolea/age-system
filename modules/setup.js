@@ -115,7 +115,7 @@ export function sortObjArrayByName(nameArray, nameKey) {
  */
 export async function prepSheet (sheet, html, data) {
     // Add color customization
-    html.addClass(`colorset-${ageSystem.colorScheme}`)
+    html.addClass(`colorset-${ageSystem.colorScheme}`);
     
     // Enrich HMTL text
     enrichTinyMCE(html);

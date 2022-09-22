@@ -8,6 +8,7 @@
 
 ### Fixed
 - Removed an error on world start-up/refresh when attempting to load unexistant file.
+- Added warning message when opening System Settings to indicate if Item compendia were created/delete since last refresh.
 
 ## 1.1.3 [2022-09-11]
 ### Changed

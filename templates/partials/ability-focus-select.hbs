@@ -16,7 +16,6 @@
     <div class="flexcol">
         <input name="system.useFocus" class="header-input" type="text" value="{{system.useFocus}}" placeholder="Focus Name" list="{{item.type}}-{{item.id}}-list"/>
         <datalist id="{{item.type}}-{{item.id}}-list">
-            <option value=""></option>
             {{#each config.focus as |focus|}}
             <option value="{{focus.name}}"></option>
             {{/each}}

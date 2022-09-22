@@ -165,7 +165,9 @@
             "charFocusToOrg": "Character Focus can not be added to Organization",
             "orgFocusToChar": "Organization Focus can not be added to Character",
             "vehicleItem": "Vehicles can not receive Items",
-            "breatherAppliedAll": "Breather applied to all selected Characters"
+            "breatherAppliedAll": "Breather applied to all selected Characters",
+            "newFocusCompendia": "AGE System Settings (Focus Compendium): The following compendia will not appear as Focus Compendium options until refreshing: {list}.",
+            "oldFocusCompendia": "AGE System Settings (Focus Compendium): The following compendia doesn't exist and will leave the list after refreshing: {list}."
         },
 
         "spaceship": {

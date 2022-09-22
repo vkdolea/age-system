@@ -4368,6 +4368,10 @@ body *:not(i, .fa, .far, .fas) {
   margin-right: 4px;
   border: none;
 }
+.age-system-dialog .window-content {
+  background-image: none;
+  background: rgba(254, 254, 254, 0.9);
+}
 .age-system-dialog .age-importer .min-height {
   flex: 0 0 auto;
 }

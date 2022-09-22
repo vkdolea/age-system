@@ -516,8 +516,52 @@ export const loadCompendiaSettings = function() {
     default: "age-system.focus",
     type: String,
     choices: ageSystem.itemCompendia,
-    onChange: async ()=>{ageSystem.focus = compendiumList(await game.settings.get("age-system", "masterFocusCompendium"))}
+    onChange: async ()=>{ageSystem.focus = focusList(await game.settings.get("age-system", "masterFocusCompendium"))}
   });
+};
+
+// Creates the Options object with all compendia in alphabetic order
+export function allCompendia(docType) {
+  let list = {};
+  game.packs.map(e => {
+    const packType = e.metadata.type
+    if (packType === docType) list[e.metadata.id] = e.metadata.name;
+  });
+  return list
+};
+
+export async function updateFocusCompendia() {
+  const list = allCompendia("Item");
+  let actualChoices;
+  const obj = game.settings.settings;
+  for (const s of obj) {
+    if (s?.[0] === "age-system.masterFocusCompendium") {
+      actualChoices = foundry.utils.deepClone(s[1].choices);
+    };
+  };
+
+  if (!foundry.utils.objectsEqual(list, actualChoices)) {
+    const newPacks = [];
+    const oldPacks = [];
+    for (const p in actualChoices) if (!list[p]) oldPacks.push(actualChoices[p]);
+    for (const p in list) if (!actualChoices[p]) newPacks.push(list[p]);
+    if (newPacks.length) ui.notifications.warn(game.i18n.format("age-system.WARNING.newFocusCompendia", {list: newPacks.join(", ")}), {permanent: true, cosole: false});
+    if (oldPacks.length) ui.notifications.warn(game.i18n.format("age-system.WARNING.oldFocusCompendia", {list: oldPacks.join(", ")}), {permanent: true, console: false});
+  }
+}
+
+// Creates a list of entries in the Compendium (name and _id)
+export function focusList(compendiumName) {
+  let dataList = [{_id: "", name: ""}];
+  if ([null, undefined, false, ""].includes(compendiumName)) return dataList;
+  let dataPack = game.packs.get(compendiumName);
+  if (!dataPack?.index) return dataList;
+  dataPack.index.map(i => {
+    if(i.type === "focus") dataList.push({
+    id: i._id,
+    name: i.name
+  })})
+  return dataList;
 };
 
 export function stuntSoNice(colorChoices, systems) {
@@ -534,46 +578,4 @@ export function stuntSoNice(colorChoices, systems) {
     choices: colorChoices,
     onChange:()=>{game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"))}
   });
-
-  // systems.splice(0, 0, 'none');
-  // game.settings.register("age-system", "stuntDieSystem", {
-  //   name: "SETTINGS.stuntSoNice",
-  //   hint: "SETTINGS.stuntSoNiceHint",
-  //   scope: "client",
-  //   config: false,
-  //   default: "none",
-  //   type: String,
-  //   choices: systems,
-  //   onChange:()=>{game.user.setFlag("age-system", "stuntDieSystem", game.settings.get("age-system", "stuntDieSystem"))}
-  // });
-};
-
-// Creates the Options object with all compendia in alphabetic order
-export function allCompendia(docType) {
-  let list = {};
-  game.packs.map(e => {
-    const packType = e.metadata.type ? e.metadata.type : e.metadata.entity; // e.metadata.entity required to keep compatibility for versions 0.8.x
-    if (packType === docType) {
-      const newItem = {[`${e.metadata.package}.${e.metadata.name}`]: e.metadata.label};
-      list = {
-        ...list,
-        ...newItem
-      }
-    }
-  });
-  return list
-};
-
-// Creates a list of entries in the Compendium (name and _id)
-export function compendiumList(compendiumName) {
-  let dataList = [{_id: "", name: ""}];
-  if ([null, undefined, false, ""].includes(compendiumName)) return dataList;
-  let dataPack = game.packs.get(compendiumName);
-  if (!dataPack?.index) return dataList;
-  dataPack.index.map(i => {
-    if(i.type === "focus") dataList.push({
-    _id: i._id,
-    name: i.name
-  })})
-  return dataList;
 };
