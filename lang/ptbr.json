@@ -165,7 +165,9 @@
             "charFocusToOrg": "Foco de Personagem não pode ser adicionado a Organizações.",
             "orgFocusToChar": "Foco de Organização não pode ser adicionar a Personagens.",
             "vehicleItem": "Veículos não podem receber Items.",
-            "breatherAppliedAll": "Descanso aplicado a todos os Personagens selecionados."
+            "breatherAppliedAll": "Descanso aplicado a todos os Personagens selecionados.",
+            "newFocusCompendia": "Configuração de AGE System (Compêndio com opções de Foco): os seguintes compêndios não aparecerão na lista até que seja feito refresh: {list}.",
+            "oldFocusCompendia": "Configuração de AGE System (Compêndio com opções de Foco): os seguintes compêndios não estão mais disponíveis e somente sairão da lista após refresh: {list}."
         },
 
         "spaceship": {

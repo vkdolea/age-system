@@ -9,28 +9,16 @@
 
         <div class="flexcol roll-card regular-roll-card">
 
-            <div>
-                <div class="action-details colorset-first-tier">
+            <div class="roll-chart">
+                <div class="roll-header action-details colorset-first-tier">
                     <h3>{{flavor}}</h3>
                     {{#if flavor2}}
                     <h4>{{flavor2}}</h4>
                     {{/if}}
                 </div>
-                <div class="dice-show trait-test flexrow">
+                <div class="roll-dice dice-show trait-test flexrow">
                     {{#each ageRollSummary.dice as |diceFace|}}
-                        {{#when diceFace 'eq' 1}}
-                        <i class="fas fa-dice-one fa-4x"></i>
-                        {{/when}} {{#when diceFace 'eq' 2}}
-                        <i class="fas fa-dice-two fa-4x"></i>
-                        {{/when}} {{#when diceFace 'eq' 3}}
-                        <i class="fas fa-dice-three fa-4x"></i>
-                        {{/when}} {{#when diceFace 'eq' 4}}
-                        <i class="fas fa-dice-four fa-4x"></i>
-                        {{/when}} {{#when diceFace 'eq' 5}}
-                        <i class="fas fa-dice-five fa-4x"></i>
-                        {{/when}} {{#when diceFace 'eq' 6}}
-                        <i class="fas fa-dice-six fa-4x"></i>
-                        {{/when}}
+                        <i class="fas fa-dice-{{facename diceFace}} fa-4x"></i>
                     {{/each}}
                 </div>
                 <div class="flexrow roll-mod total-roll">

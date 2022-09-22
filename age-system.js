@@ -190,6 +190,19 @@ Hooks.once("init", async function() {
             "EFFECT.MODE_OVERRIDE"
         ];
         return game.i18n.localize(modeNames[modeNumber]);
+    });
+
+    // Handlebar to set dice icon based on numeric value
+    Handlebars.registerHelper('facename', function(face) {
+        const faces = {
+            "1": "one",
+            "2": "two",
+            "3": "three",
+            "4": "four",
+            "5": "five",
+            "6": "six"
+        };
+        return faces[face];
     })
 
     // Handlebar to identify type of Effect
@@ -355,7 +368,7 @@ Hooks.once("ready", async function() {
     ageSystem.itemCompendia = Settings.allCompendia("Item");
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
-    ageSystem.focus = Settings.compendiumList(setCompendium);
+    ageSystem.focus = Settings.focusList(setCompendium);
 
     // Register Weapon Groups (if any)
     const userGroups = game.settings.get("age-system", "weaponGroups");
@@ -405,14 +418,8 @@ Hooks.once("ready", async function() {
     migrations.migrateWorld();
 });
 
-// If Compendia are updated, then compendiumList is gathered once again
-Hooks.on("renderCompendium", () => {
-    const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
-    ageSystem.focus = Settings.compendiumList(setCompendium);
-});
 
 Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatLog, content, userData))
-Hooks.on("createCompendium", () => {ageSystem.itemCompendia = Settings.allCompendia("Item")})
 Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
 Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});
 Hooks.on("renderChatLog", (app, html, data) => {    AgeChat.addChatListeners(html)});
@@ -441,3 +448,4 @@ Hooks.once('diceSoNiceReady', () => {
     if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);
     if (!stuntSoNiceFlag) game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
 });
+Hooks.on('renderSettingsConfig', (SettingsConfig, html, data) => Settings.updateFocusCompendia());

@@ -1,5 +1,16 @@
 # Release Notes
 
+## 1.1.4 [2022-09-22]
+### Changed
+- Refactored chat card roll template.
+- Added borders to Actor and Item icons.
+- Changing color setting will refresh opened sheets instead of closing them.
+
+### Fixed
+- Removed an error on world start-up/refresh when attempting to load unexistant file.
+- Added warning message when opening System Settings to indicate if Item compendia were created/delete since last refresh.
+- Fixed a problem causing Items to reset to standard icon image.
+
 ## 1.1.3 [2022-09-11]
 ### Changed
 - Added style to Journal entries.

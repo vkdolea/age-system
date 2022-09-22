@@ -2118,14 +2118,13 @@
 #chat-log .chat-message .message-content .age-system.base-age-roll .action-details h4 {
   text-transform: lowercase;
   font-variant: small-caps;
-  color: rgba(255, 255, 255, 0.4);
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show {
   align-content: space-between;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: stretch;
-  margin-bottom: 8px;
+  padding: 4px;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show i {
   flex-grow: 0;
@@ -2182,6 +2181,7 @@
 /** Red Warrior **/
 /** Never Dead **/
 /** Expanded Blue **/
+/** Snow White **/
 /** Color Template **/
 /** Game Mode Colors **/
 /*******************************/
@@ -2224,6 +2224,10 @@
 }
 .colorset-modern-blue .thin-border {
   border: thin solid #231F20;
+}
+.colorset-modern-blue .action-details h4 {
+  background: none;
+  opacity: 0.8;
 }
 .colorset-modern-blue .colorset-first-tier {
   background-color: #007DAD;
@@ -2395,6 +2399,10 @@
 .colorset-fantasy-blue .thin-border {
   border: thin solid #dbdada;
 }
+.colorset-fantasy-blue .action-details h4 {
+  background: none;
+  opacity: 0.8;
+}
 .colorset-fantasy-blue .colorset-first-tier {
   background-color: #0f4f5b;
   color: #ffffff;
@@ -2564,6 +2572,10 @@
 }
 .colorset-dragon-red .thin-border {
   border: thin solid #000000;
+}
+.colorset-dragon-red .action-details h4 {
+  background: none;
+  opacity: 0.8;
 }
 .colorset-dragon-red .colorset-first-tier {
   background-color: #83272a;
@@ -2735,6 +2747,10 @@
 .colorset-folded-purple .thin-border {
   border: thin solid #000000;
 }
+.colorset-folded-purple .action-details h4 {
+  background: none;
+  opacity: 0.8;
+}
 .colorset-folded-purple .colorset-first-tier {
   background-color: #565183;
   color: #ffffff;
@@ -2904,6 +2920,10 @@
 }
 .colorset-ronin-green .thin-border {
   border: thin solid #000000;
+}
+.colorset-ronin-green .action-details h4 {
+  background: none;
+  opacity: 0.8;
 }
 .colorset-ronin-green .colorset-first-tier {
   background-color: #155f0e;
@@ -3075,6 +3095,10 @@
 .colorset-select-one .thin-border {
   border: thin solid #290000;
 }
+.colorset-select-one .action-details h4 {
+  background: none;
+  opacity: 0.8;
+}
 .colorset-select-one .colorset-first-tier {
   background-color: #273249;
   color: #e7ccc3;
@@ -3244,6 +3268,10 @@
 }
 .colorset-the-grey .thin-border {
   border: thin solid #000000;
+}
+.colorset-the-grey .action-details h4 {
+  background: none;
+  opacity: 0.8;
 }
 .colorset-the-grey .colorset-first-tier {
   background-color: #3d3e3f;
@@ -3415,6 +3443,10 @@
 .colorset-red-warrior .thin-border {
   border: thin solid #c7c691;
 }
+.colorset-red-warrior .action-details h4 {
+  background: none;
+  opacity: 0.8;
+}
 .colorset-red-warrior .colorset-first-tier {
   background-color: #751119;
   color: #f7b755;
@@ -3584,6 +3616,10 @@
 }
 .colorset-never-dead .thin-border {
   border: thin solid #29241f;
+}
+.colorset-never-dead .action-details h4 {
+  background: none;
+  opacity: 0.8;
 }
 .colorset-never-dead .colorset-first-tier {
   background-color: #663322;
@@ -3755,6 +3791,10 @@
 .colorset-expanded-blue .thin-border {
   border: thin solid #dde2e2;
 }
+.colorset-expanded-blue .action-details h4 {
+  background: none;
+  opacity: 0.8;
+}
 .colorset-expanded-blue .colorset-first-tier {
   background-color: #005971;
   color: #dde2e2;
@@ -3886,6 +3926,180 @@
 .colorset-expanded-blue .relationship .mod-card,
 .colorset-expanded-blue .shipfeatures .mod-card {
   border: solid #e6e7e8 1px;
+}
+.window-app.sheet.char-sheet-alt.colorset-snow-white .window-content,
+.window-app.sheet.vehicle.colorset-snow-white .window-content,
+.window-app.sheet.spaceship.colorset-snow-white .window-content {
+  background-image: none;
+  background: none;
+}
+.colorset-snow-white aside {
+  border-radius: 5px;
+  border: 5px outset #000000;
+}
+.colorset-snow-white .item-summary label {
+  background-color: #000000;
+  color: #ffffff;
+}
+.colorset-snow-white .metal-background {
+  background: none;
+}
+.colorset-snow-white .sheet-main-content {
+  background-color: rgba(73, 73, 73, 0.6) !important;
+}
+.colorset-snow-white .top-banner {
+  border: 5px outset #000000;
+}
+.colorset-snow-white .resource .values {
+  background-color: #ffffff;
+  color: #000000;
+}
+.colorset-snow-white .sheet-main-content nav a {
+  background-color: #000000;
+  color: #ffffff;
+}
+.colorset-snow-white .sheet-main-content nav a.active {
+  background-color: #ffffff;
+  color: #000000;
+}
+.colorset-snow-white .thin-border {
+  border: thin solid #ffffff;
+}
+.colorset-snow-white .action-details h4 {
+  background: none;
+  opacity: 0.8;
+}
+.colorset-snow-white .colorset-first-tier {
+  background-color: #ffffff;
+  color: #000000;
+}
+.colorset-snow-white .colorset-first-tier a.content-link,
+.colorset-snow-white .colorset-first-tier a.inline-roll {
+  background-color: #494949;
+  color: #ffffff;
+}
+.colorset-snow-white .colorset-second-tier {
+  background-color: #494949;
+  color: #ffffff;
+}
+.colorset-snow-white .colorset-second-tier a.content-link,
+.colorset-snow-white .colorset-second-tier a.inline-roll {
+  background-color: #000000;
+  color: #ffffff;
+}
+.colorset-snow-white .colorset-third-tier {
+  background-color: #000000;
+  color: #ffffff;
+}
+.colorset-snow-white .colorset-third-tier a.content-link,
+.colorset-snow-white .colorset-third-tier a.inline-roll {
+  background-color: #ffffff;
+  color: #000000;
+}
+.colorset-snow-white input.colorset-first-tier {
+  background-color: #ffffff;
+  color: #000000;
+}
+.colorset-snow-white #age-tracker .full-box {
+  background-color: #ffffff !important;
+}
+.colorset-snow-white #age-tracker .comp-checkbox {
+  border-color: #ffffff !important;
+}
+.colorset-snow-white .char-sheet .age-header label,
+.colorset-snow-white .char-sheet .persona label {
+  background-color: #ffffff;
+  color: #000000;
+}
+.colorset-snow-white .organization-sheet .editor {
+  background-color: hsl(0, 0%, 100%);
+}
+.colorset-snow-white .vehicle-stats img {
+  border: 2px solid #ffffff;
+}
+.colorset-snow-white .vehicle-stats .editor {
+  background-color: #ffffff;
+}
+.colorset-snow-white .stats-block.losses .loss-checkbox {
+  border-color: #ffffff;
+}
+.colorset-snow-white .stats-block.losses .loss-checkbox.full-box.full-box {
+  background: #ffffff;
+}
+.colorset-snow-white fieldset {
+  border-color: #ffffff;
+}
+.colorset-snow-white #age-tracker-drag:hover,
+.colorset-snow-white #age-roller-drag:hover {
+  background-color: #ffffff;
+}
+.colorset-snow-white .dice-show.trait-test i:last-of-type {
+  color: #ffffff;
+}
+.colorset-snow-white .roll-mod {
+  border-bottom: 1px solid #ffffff;
+}
+.colorset-snow-white .roll-mod.stunted {
+  background-color: #ffffff;
+  color: #000000;
+}
+.colorset-snow-white .char-sheet .item-container img {
+  border: 1px solid #ffffff;
+}
+.colorset-snow-white .char-sheet input {
+  background-color: #ffffff;
+}
+.colorset-snow-white .char-sheet input.colorset-second-tier {
+  background-color: #494949 !important;
+  color: #ffffff !important;
+}
+.colorset-snow-white .focus .item-card-stats,
+.colorset-snow-white .power .item-card-stats,
+.colorset-snow-white .talent .item-card-stats,
+.colorset-snow-white .weapon .item-card-stats,
+.colorset-snow-white .equipment .item-card-stats,
+.colorset-snow-white .stunts .item-card-stats,
+.colorset-snow-white .honorifics .item-card-stats,
+.colorset-snow-white .membership .item-card-stats,
+.colorset-snow-white .relationship .item-card-stats,
+.colorset-snow-white .shipfeatures .item-card-stats {
+  background-color: #494949;
+}
+.colorset-snow-white .focus .item-card-stats input.data-entry,
+.colorset-snow-white .power .item-card-stats input.data-entry,
+.colorset-snow-white .talent .item-card-stats input.data-entry,
+.colorset-snow-white .weapon .item-card-stats input.data-entry,
+.colorset-snow-white .equipment .item-card-stats input.data-entry,
+.colorset-snow-white .stunts .item-card-stats input.data-entry,
+.colorset-snow-white .honorifics .item-card-stats input.data-entry,
+.colorset-snow-white .membership .item-card-stats input.data-entry,
+.colorset-snow-white .relationship .item-card-stats input.data-entry,
+.colorset-snow-white .shipfeatures .item-card-stats input.data-entry {
+  color: #ffffff;
+}
+.colorset-snow-white .focus .item-card-desc,
+.colorset-snow-white .power .item-card-desc,
+.colorset-snow-white .talent .item-card-desc,
+.colorset-snow-white .weapon .item-card-desc,
+.colorset-snow-white .equipment .item-card-desc,
+.colorset-snow-white .stunts .item-card-desc,
+.colorset-snow-white .honorifics .item-card-desc,
+.colorset-snow-white .membership .item-card-desc,
+.colorset-snow-white .relationship .item-card-desc,
+.colorset-snow-white .shipfeatures .item-card-desc {
+  background-color: #ffffff;
+}
+.colorset-snow-white .focus .mod-card,
+.colorset-snow-white .power .mod-card,
+.colorset-snow-white .talent .mod-card,
+.colorset-snow-white .weapon .mod-card,
+.colorset-snow-white .equipment .mod-card,
+.colorset-snow-white .stunts .mod-card,
+.colorset-snow-white .honorifics .mod-card,
+.colorset-snow-white .membership .mod-card,
+.colorset-snow-white .relationship .mod-card,
+.colorset-snow-white .shipfeatures .mod-card {
+  border: solid #494949 1px;
 }
 /*******************************/
 /**   AGE Roller Interface    **/
@@ -4153,6 +4367,10 @@ body *:not(i, .fa, .far, .fas) {
   width: 50px;
   margin-right: 4px;
   border: none;
+}
+.age-system-dialog .window-content {
+  background-image: none;
+  background: rgba(254, 254, 254, 0.9);
 }
 .age-system-dialog .age-importer .min-height {
   flex: 0 0 auto;

@@ -1,5 +1,6 @@
 import {ageSystem} from "../config.js";
 import { modifiersList, sortObjArrayByName } from "../setup.js";
+import { focusList } from "../settings.js";
 
 export default class ageSystemItemSheet extends ItemSheet {
     constructor(...args) {
@@ -73,7 +74,8 @@ export default class ageSystemItemSheet extends ItemSheet {
     getData(options) {
         const data = super.getData(options);
         data.item = data.document;
-        data.config = CONFIG.ageSystem;
+        ageSystem.focus = focusList(game.settings.get("age-system", "masterFocusCompendium"));
+        data.config = ageSystem;
         
         // Fetch localized name for Item Type
         const i = this.item.type.toLowerCase();
