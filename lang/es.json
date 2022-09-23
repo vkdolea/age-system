@@ -134,7 +134,9 @@
       "charFocusToOrg": "La Concentración para PJs no se puede añadir a la Organización",
       "orgFocusToChar": "La Concentración para Organizaciones no se puede añadir al PJ",
       "vehicleItem": "Los Vehículos no pueden recibir Objetos",
-      "breatherAppliedAll": "Descanso aplicado a todos los PJs seleccionados"
+      "breatherAppliedAll": "Descanso aplicado a todos los PJs seleccionados",
+      "newFocusCompendia": "Configuración Sistema AGE (Compendio Concentración): Los siguientes compendios no se mostrarán como opciones para Concentración hasta que se actualicen: {list}.",
+      "oldFocusCompendia": "Configuración Sistema AGE (Compendio Concentración): Los siguientes compendios no existen y se eliminarán de la lista después de actualizar: {list}."
     },
     "spaceship": {
       "op": "Operador",
@@ -654,6 +656,11 @@
     "favoredStunts": "Proezas Preferidas",
     "specialFeatures": "Características Especiales",
     "threat": "Amenaza",
-    "rollable": "Lanzable"
+    "rollable": "Lanzable",
+    "export": "Exportar",
+    "import": "Importar",
+    "invalidFileContent": "El contenido del archivo no es válido",
+    "customEffects": "Efectos Personalizados",
+    "customEffectsSet": "Efectos Personalizados activos"
   }
 }
