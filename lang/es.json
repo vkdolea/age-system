@@ -661,6 +661,7 @@
     "import": "Importar",
     "invalidFileContent": "El contenido del archivo no es válido",
     "customEffects": "Efectos Personalizados",
-    "customEffectsSet": "Efectos Personalizados activos"
+    "customEffectsSet": "Efectos Personalizados activos",
+    "attkHeader": "Arma Ataque Daño"
   }
 }
