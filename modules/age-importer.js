@@ -11,13 +11,13 @@ export default class AgeImporter extends Application {
     
     // Currently available only for Modern AGE
     this._modeOptions = {
+      "expanse": "The Expanse",
       "mageL": "Modern AGE (Major NPC)",
       "mageM": "Modern AGE (Minor NPC)",
-      "expanse": "The Expanse"
+      "fage": "Fantasy AGE",
+      "dage": "Dragon AGE"
     };
     this._modeSelected = 'expanse';
-    // this._modeOptions = {'expanse': "The Expanse", 'mage': "Modern AGE", 'fage': "Fantasy AGE", 'dage': "Dragon AGE"};
-    // this._modeSelected = null;
   }
 
   static get defaultOptions() {
@@ -100,9 +100,7 @@ export class AgeParser {
 
     // Identify 'Threat' and remove this section from this.textLC
     this._getThreat();
-
     this._getSectionKeys();
-
     this._getName(block);
     this._getAbilities()
     this._getDerivedData(this.text);
@@ -111,8 +109,6 @@ export class AgeParser {
     this._getItems();
 
     this._createActor();
-
-    // console.log(this.data)
   }
 
   _getThreat() {
@@ -126,20 +122,6 @@ export class AgeParser {
 
     this.textLC = textLC.substring(0, textLC.length-str.length);
     this.text = this.text.substring(0, this.text.length-str.length);
-  }
-
-  /**
-   * Function to deliver proper capitalization for title of Items
-   * @param {String} str Sring with any number of words
-   * @returns String with first letter of each word on Upper Case and the other on Lower Case. Words after an '-' will also have first letter on Upper Case
-   */
-  normalizeCase(str) {
-    const strArr = str.split(" ");
-    return strArr.map(s => {
-      const nStr = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
-      const nStrArr = nStr.split('-');
-      return nStrArr.map(n => n.substring(0, 1).toUpperCase() + n.substring(1).toLowerCase()).join('-');
-    }).join(" ");
   }
 
   _getSectionKeys() {
@@ -243,15 +225,16 @@ export class AgeParser {
       }
     }
 
-    // Estimates compatibility for 'dage' and 'main' ability settins
+    // Estimates compatibility for 'dage' and 'main' ability settings
     switch (ablType) {
       case 'main':
         abilities.cunn = {value: abilities.int.value};
         abilities.magic = {value: Math.max(abilities.int.value, abilities.will.value)};
         break;
       case 'dage':
-        abilities.int = {value: abilities.cunn.value};
-        abilities.fight = {value: Math.max(abilities.str.value, abilities.acc.value)};
+        abilities.int = {value: Math.max(abilities.cunn.value, abilities.magic.value)};
+        abilities.fight = {value: Math.max(abilities.str.value, abilities.dex.value)};
+        abilities.acc = {value: abilities.dex.value};
         break;
     }
     
@@ -263,11 +246,12 @@ export class AgeParser {
   _getDerivedData() {
     const mode = this._modeSelected;
     const abilities = this.data.abilities;
-    let r;
-    if (["mageL", "mageM"].includes(mode)) r = `(?<=AR \\+ Toughness\n).*(?=\n)`;
-    if (mode === 'expanse') r = `(?<=AR \\+ TOU).*\n.*(?=\n)`;
-    if (['dage', 'fage'].includes(mode)) r = `(?<=Defense Armor Rating\n).*(?=\n)`;
-    if (!r) return null;
+    const header = {
+      speed: game.i18n.localize("age-system.speed"),
+      health: mode === 'expanse' ? game.i18n.localize("age-system.fortune") : game.i18n.localize("age-system.health"),
+      defense: game.i18n.localize("age-system.defense")
+    };
+    const r = `(?<=${header.speed} ${header.health} ${header.defense}).*\n.*(?=\n)`;
     let protoText = this.textLC.match(r.toLowerCase())[0].trim().replaceAll("+ ", "+");
     
     // Logic to ensure "+" has a white space on its left and none to its right
@@ -318,7 +302,7 @@ export class AgeParser {
       totalArmor = armorStr.split('/')
     } else {
       if (!Number.isNaN(armorStr)) {
-        if (!["mageL", "mageM"].includes(mode)) armorStr = armorStr - abilities.cons.value;
+        if (["expanse"].includes(mode)) armorStr = armorStr - abilities.cons.value;
         totalArmor = [`${armorStr}I`, `${armorStr}B`]
       }
     };
@@ -338,10 +322,12 @@ export class AgeParser {
     // Speed and different movement
     const baseSpeed = Number(data[0]) - abilities.dex.value;
     data.splice(0, 1);
+    const otherSpeed = data.length ? data.join(' ') : null;
     this.data.speed = {base: baseSpeed};
+    if (otherSpeed) this.data.traits = `${otherSpeed}`;
     this.data.flags = {
       "age-system": {
-        importData: {speedOthers: data.length ? data.join(' ') : null}
+        importData: {speedOthers: otherSpeed}
       }
     };
     this.data.gameMode = gameMode;
@@ -352,11 +338,11 @@ export class AgeParser {
     const attacks = [];
     let attksTable;
     const endIndex = this.keys.specialQualities.index;
-
-    let start = `Weapon Attack Roll Damage*\n`.toLowerCase();
+    const attkHeader = game.i18n.localize("age-system.attkHeader");
+    let start = `${attkHeader}*\n`.toLowerCase();
     let startIndex = text.indexOf(start);
     if (startIndex < 0) {
-      start = `Weapon Attack Roll Damage\n`.toLowerCase();
+      start = `${attkHeader}\n`.toLowerCase();
       startIndex = text.indexOf(start);
     };
     attksTable = text.substring(startIndex + start.length, endIndex).split('\n');
@@ -410,9 +396,8 @@ export class AgeParser {
 
     // Organize data to create new Actor
     const actorData = {
-      name: data.name,
+      name: this.normalizeCase(data.name),
       type: type,
-      // img: ageSystem.actorIcons[type],
       flags: {
         core: {sheetClass: "age-system.ageSystemSheetCharStatBlock"}
       },
@@ -422,7 +407,8 @@ export class AgeParser {
         gameMode: data.gameMode,
         health: {
           value: healthMax
-        }
+        },
+        traits: data.traits || ""
       }
     }
 
@@ -453,7 +439,6 @@ export class AgeParser {
       const newAttk = await actor.createEmbeddedDocuments('Item', [{
         name: attk.name,
         type: 'weapon',
-        img: ageSystem.actorIcons.char,
         system: {
           favorite: true,
           equiped: true,
@@ -563,6 +548,20 @@ export class AgeParser {
   }
 
   /**
+   * Function to deliver proper capitalization for title of Items
+   * @param {String} str Sring with any number of words
+   * @returns String with first letter of each word on Upper Case and the other on Lower Case. Words after an '-' will also have first letter on Upper Case
+   */
+  normalizeCase(str) {
+    const strArr = str.split(" ");
+    return strArr.map(s => {
+      const nStr = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+      const nStrArr = nStr.split('-');
+      return nStrArr.map(n => n.substring(0, 1).toUpperCase() + n.substring(1).toLowerCase()).join('-');
+    }).join(" ");
+  }
+
+  /**
    * Helper function to parse text to fetch Actor's Speed, Health, Defense and Armor
    * @param {Array} dataArr Array containing Speed, Health, Defense and Armor data
    * @param {String} gameMode Game Mode ID to be used to set Current Health
@@ -576,7 +575,6 @@ export class AgeParser {
     let baseData = ["mageL", "mageM"].includes(setting) ? dataArr : dataArr.pop();
     for (let m = 0; m < modes.length; m++) {
       const mode = modes[m];
-      // const v = Number(dataArr.pop()) - offset;
       const v = (Array.isArray(baseData) ? Number(dataArr.pop()) : baseData) - offset;
       gameMode.specs[mode][type] = v;
       if (type === 'health') gameMode.specs[mode].healthCur = v;

@@ -725,6 +725,7 @@
         "import": "Import",
         "invalidFileContent": "File content is not valid",
         "customEffects": "Custom Effects",
-        "customEffectsSet": "Custom Effects set"
+        "customEffectsSet": "Custom Effects set",
+        "attkHeader": "Weapon Attack Roll Damage"
     }
 }

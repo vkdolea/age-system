@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.1.5 [2022-09-23]
+### Added
+- AGE Importer support for Dragon AGE and Fantasy AGE.
+
 ## 1.1.4 [2022-09-22]
 ### Changed
 - Refactored chat card roll template.
