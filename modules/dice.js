@@ -753,13 +753,15 @@ export async function plotDamage (actor) {
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         flags: {
             "age-system": {
-                type: "orgDamage",
-                damageData: {
-                    // ...dmgDesc,
-                    totalDamage: rollData.finalValue,
-                    attacker: actor.name,
-                    attackerId: actor.uuid,
-                    healthSys: undefined //modificado
+                ageroll: {
+                    rollType: "damage",
+                    rollData: {
+                        // ...dmgDesc,
+                        totalDamage: rollData.finalValue,
+                        attacker: actor.name,
+                        actorId: actor.uuid,
+                        healthSys: undefined //modificado
+                    }
                 }
             }
         }
@@ -960,13 +962,15 @@ export async function itemDamage({
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         flags: {
             "age-system": {
-                type: "damage",
-                damageData: {
-                    ...dmgDesc,
-                    totalDamage: rollData.finalValue,
-                    attacker: item.actor.name,
-                    attackerId: item.actor.uuid,
-                    healthSys
+                ageroll: {
+                    rollType: "damage",
+                    rollData: {
+                        ...dmgDesc,
+                        totalDamage: rollData.finalValue,
+                        attacker: item.actor.name,
+                        actorId: item.actor.uuid,
+                        healthSys
+                    }
                 }
             }
         }

@@ -115,7 +115,8 @@ export async function applyDamageChat(event) {
     event.preventDefault();
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
-    let damageData = await foundry.utils.deepClone(game.messages.get(cardId).flags["age-system"].damageData);
+    const cardData = game.messages.get(cardId).flags["age-system"].damageData ?? game.messages.get(cardId).flags["age-system"].ageroll.rollData; // Compatibility to Damage Chat Card before 1.1.6
+    let damageData = await foundry.utils.deepClone(cardData);
     const cardHealthSys = damageData.healthSys;
     if (!checkHealth(cardHealthSys, ageSystem.healthSys)) {
         damageData = {
@@ -286,11 +287,12 @@ function _buttonType(buttons) {
  */
 function _handleAgeRollVisibility(html, chatCard, chatData){
     const element = html.find(".age-system.base-age-roll .feature-controls");
+    const flags = chatCard.flags?.["age-system"]?.ageroll;
     for (let e = 0; e < element.length; e++) {
         const el = element[e];
-        const data = el.dataset;
-        const actorId = data.actorId;
-        let actor = fromUuidSync(actorId);
+        let actorId = flags?.rollData?.actorId;
+        if (!actorId && flags.type === "damage") actorId = flags.damageData.attackerId; // Compatibility to Damage Chat Card before 1.1.6
+        let actor = actorId ? fromUuidSync(actorId) : null;
         actor = actor?.actor ?? actor;
         const isBlind = chatCard.blind;
         const whisperTo = chatData.message.whisper;
