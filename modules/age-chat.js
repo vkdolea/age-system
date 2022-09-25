@@ -284,16 +284,13 @@ function _buttonType(buttons) {
  * @param {object} chatCard         Chat card object containing the Message Data
  * @param {object} chatData         Data containing Message data
  */
-async function _handleAgeRollVisibility(html, chatCard, chatData){
+function _handleAgeRollVisibility(html, chatCard, chatData){
     const element = html.find(".age-system.base-age-roll .feature-controls");
     for (let e = 0; e < element.length; e++) {
         const el = element[e];
         const data = el.dataset;
         const actorId = data.actorId;
-        let actor;
-        if (actorId) {
-            actor = actorId.startsWith("Actor.") ? await fromUuid(actorId) : game.actors.get(actorId); // this section is to keep chat compatibilities with version 0.7.4 and ealier
-        }
+        let actor = fromUuidSync(actorId);
         actor = actor?.actor ?? actor;
         const isBlind = chatCard.blind;
         const whisperTo = chatData.message.whisper;
@@ -332,7 +329,6 @@ async function _handleItemCardButton(html){
 
 /**
  * Set visibility properties for buttons and blind-roll segments (blind-roll segments currently not used)
- *
  * @param {string} actorPerm        Permission the current user has for the Actor contained on a chat card
  * @param {HTMLelement} element     Chat card HTML element to be be removed if User is not Actor owner or Observer
  */

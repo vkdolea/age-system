@@ -4,6 +4,9 @@
 ### Added
 - AGE Importer support for Dragon AGE and Fantasy AGE.
 
+### Fixed
+- Attack chat cards from unlinked tokens were not show the button to roll damage from Weapons.
+
 ## 1.1.4 [2022-09-22]
 ### Changed
 - Refactored chat card roll template.

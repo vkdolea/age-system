@@ -93,7 +93,7 @@ export default class ConditionsWorkshop extends Application {
       buttons: {
         import: {
           icon: '<i class="fas fa-file-import"></i>',
-          label: "Import",
+          label: game.i18n.format("age-system.import"),
           callback: html => {
             const form = html.find("form")[0];
             if ( !form.data.files.length ) return ui.notifications.error("You did not upload a data file!");
@@ -102,7 +102,7 @@ export default class ConditionsWorkshop extends Application {
         },
         no: {
           icon: '<i class="fas fa-times"></i>',
-          label: "Cancel"
+          label: game.i18n.format("age-system.cancel"),
         }
       },
       default: "import"
@@ -116,8 +116,10 @@ export default class ConditionsWorkshop extends Application {
    * @param {string} json Stringfied JSON object
    */
   importFromJSON(json){
+    let effects
     try {
-      const effects = JSON.parse(json);
+      effects = JSON.parse(json);
+      // this._customEffects = effects;
     }
     catch(err) {
       console.log(err.message)
