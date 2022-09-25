@@ -1,6 +1,11 @@
 # Release Notes
 
-## 1.1.5 [2022-09-23]
+## 1.1.6 [2022-09-25]
+### Fixed
+- Bug on damage chat cards showing wrong information about secret roll to GM.
+- Standardized flag content for check and damage rolls.
+
+## 1.1.5 [2022-09-25]
 ### Added
 - AGE Importer support for Dragon AGE and Fantasy AGE.
 
