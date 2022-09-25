@@ -420,7 +420,7 @@
         "health": "Saúde",
         "fortune": "Destino",
         "conviction": "Convicção",
-        "speed": "Velocidade",
+        "speed": "Deslocamento",
 
         "armor": "Armadura",
         "ballistic": "Balística",
@@ -587,7 +587,7 @@
             "focusSpellPower": "Força do Feitiço (Foco)",
             "aimMnv": "Mirar",
             "armorPenalty": "Penalidade de Armadura",
-            "speed": "Velocidade",
+            "speed": "Deslocamento",
             "armorStrain": "Tensão de Armadura",
             
             "active": "Ativo",
@@ -725,6 +725,7 @@
         "import": "Importar",
         "invalidFileContent": "O conteúdo do arquivo não é válido",
         "customEffects": "Efeitos Personalizados",
-        "customEffectsSet": "Conjunto de Efeitos Personalizados"
+        "customEffectsSet": "Conjunto de Efeitos Personalizados",
+        "attkHeader": "Arma Ataque Dano"
     }
 }
