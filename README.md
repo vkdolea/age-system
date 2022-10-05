@@ -1,12 +1,10 @@
 # Unofficial AGE System for FVTT
-Unofficial implementation of AGE System (Green Ronin) for Foundry VTT
+Unofficial implementation of AGE System (Green Ronin) for Foundry VTT. Character sheet designed to serve most of AGE System versions. Not all AGE installments are fully implemented. New features are expected to be added over time.
 
-<img src="https://i.imgur.com/RFWhhxO.jpg"/>
+<figure><img src="https://i.imgur.com/BQNFklx.png" alt="AGE System sheets preview" />
+<figcaption>Preview of sheets from AGE System (unofficial)</figcaption>
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/vkdolea)
-
-## Intro
-Character sheet designed to serve most of AGE System versions. Not all AGE installments are fully implemented. New features are expected to be added over time.
 
 ## Wiki
 Take a look at [AGE System (unofficial) wiki](https://github.com/vkdolea/age-system/wiki) to understand how to use the game system
