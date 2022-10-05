@@ -14,11 +14,9 @@ export default class ageSystemVehicleSheet extends ActorSheet {
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            // resizable: false,
             width: 680,
-            // height: 560,
             height: 755,
-            resizable: false,
+            resizable: true,
             classes: ["age-system", "sheet", "vehicle"]
         });
     }

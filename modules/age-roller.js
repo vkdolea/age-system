@@ -33,16 +33,14 @@ export class AgeRoller extends Application {
 		html.find("#age-roller img").click(this._onClick.bind(this));
 		html.find("#age-roller img").contextmenu(this._onRightClick.bind(this));
 		html.find("#age-roller-drag").contextmenu(this._onResetPosition.bind(this));
-		html.find("#age-roller-drag").mousedown(this._onHideOptions.bind(this));
-		html.find("#age-roller-container").mouseleave(this._onHideOptions.bind(this));
-		html.find("#age-roller-container").mouseenter(this._onShowOptions.bind(this));
-		html.find("#age-roller").hover(this._onShowOptions.bind(this));
 		html.find(".conditions-workshop").click(this.openConditionWorkshop.bind(this));
 		html.find(".age-importer").click(this.openAgeImporter.bind(this));
 		html.find(".r20-importer").click(this.startR20Importer.bind(this));
 		html.find(".breather-tokens").click(this.tokenBreather);
 		html.find('.roll').click(this._onSpecialRoll.bind(this));
 		html.find('.roll').contextmenu(this._onSpecialRoll.bind(this));
+		html.find("#age-roller-container").hover(this._onToggleOptions.bind(this));
+		html.find('#age-roller-options').click(this._onToggleOptions.bind(this));
 
 		// Set position
 		let roller = document.getElementById("age-roller");
@@ -126,15 +124,22 @@ export class AgeRoller extends Application {
 		}
 		new r20importer(data);
 	}
-
-	_onHideOptions(ev) {
+	
+	_onToggleOptions(ev) {
+		ev.preventDefault();
 		const opt = document.getElementById("age-roller-options");
-		opt.style.display = 'none';
-	}
-
-	_onShowOptions(ev) {
-		const opt = document.getElementById("age-roller-options");
-		opt.style.display = 'inline-block';
+		const view = opt.style.display;
+		switch (view) {
+			case '':
+			case 'none':
+				opt.style.display = 'inline-block';
+				break;
+			case 'inline-block':
+				opt.style.display = 'none';
+				break;
+			default:
+				break;
+		}
 	}
 
  	async _onClick(event) {

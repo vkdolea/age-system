@@ -18,45 +18,43 @@
             <li>
                 {{#if (eq system.type "weapon")}}
                 <label>{{localize "age-system.item.damage"}}</label>
-                <input type="number" value="{{system.damage}}" name="system.damage" data-dtype="Number" placeholder="{{localize "age-system.formulaExample"}}"/>
-                {{else}}
+                <input type="text" value="{{system.damage}}" name="system.damage" data-dtype="String" placeholder="{{localize "age-system.formulaExample"}}"/>
+                {{/if}}
                 
-                    {{#if (eq system.type "sensorMod")}}
-                    <label>{{localize "age-system.spaceship.sensorMod"}}</label>
-                    <input type="number" name="system.sensorMod" value="{{system.sensorMod}}" data-dtype="Number" />
-                    {{/if}}
+                {{#if (eq system.type "sensorMod")}}
+                <label>{{localize "age-system.spaceship.sensorMod"}}</label>
+                <input type="number" name="system.sensorMod" value="{{system.sensorMod}}" data-dtype="Number" />
+                {{/if}}
 
-                    {{#if (eq system.type "maneuverSizeStep")}}
-                    <label>{{localize "age-system.spaceship.maneuverSizeStep"}}</label>
-                    <input type="number" name="system.maneuverSizeStep" value="{{system.maneuverSizeStep}}" data-dtype="Number" />
-                    {{/if}}
+                {{#if (eq system.type "maneuverSizeStep")}}
+                <label>{{localize "age-system.spaceship.maneuverSizeStep"}}</label>
+                <input type="number" name="system.maneuverSizeStep" value="{{system.maneuverSizeStep}}" data-dtype="Number" />
+                {{/if}}
 
-                    {{#if (eq system.type "juiceMod")}}
-                    <label>{{localize "age-system.spaceship.juiceMod"}}</label>
-                    <input type="number" name="system.juiceMod" value="{{system.juiceMod}}" data-dtype="Number" />
-                    {{/if}}
+                {{#if (eq system.type "juiceMod")}}
+                <label>{{localize "age-system.spaceship.juiceMod"}}</label>
+                <input type="number" name="system.juiceMod" value="{{system.juiceMod}}" data-dtype="Number" />
+                {{/if}}
 
-                    {{#if (eq system.type "hullPlating")}}
-                    <label>{{localize "age-system.spaceship.hullPlating"}}</label>
-                    <input type="number" name="system.hullPlating" value="{{system.hullPlating}}" data-dtype="Number" />
-                    {{/if}}
+                {{#if (eq system.type "hullPlating")}}
+                <label>{{localize "age-system.spaceship.hullPlating"}}</label>
+                <input type="number" name="system.hullPlating" value="{{system.hullPlating}}" data-dtype="Number" />
+                {{/if}}
 
-                    {{#if (eq system.type "hullMod")}}
-                    <label>{{localize "age-system.spaceship.hullMod"}}</label>
-                    <input type="number" name="system.hullMod" value="{{system.hullMod}}" data-dtype="Number" />
-                    {{/if}}
-                    
-                    {{#if (eq system.type "rollable")}}
-                    <label>{{localize "age-system.abl"}}</label>
-                    <select name="system.useAbl" class="data-input">
-                        {{#select system.useAbl}}
-                        {{#each config.abilities as |name type|}}
-                        <option value="{{type}}">{{localize name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                    {{/if}}
-
+                {{#if (eq system.type "hullMod")}}
+                <label>{{localize "age-system.spaceship.hullMod"}}</label>
+                <input type="number" name="system.hullMod" value="{{system.hullMod}}" data-dtype="Number" />
+                {{/if}}
+                
+                {{#if (eq system.type "rollable")}}
+                <label>{{localize "age-system.abl"}}</label>
+                <select name="system.useAbl" class="data-input">
+                    {{#select system.useAbl}}
+                    {{#each config.abilities as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
                 {{/if}}
             </li>
 
