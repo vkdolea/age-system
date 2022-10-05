@@ -699,7 +699,7 @@ export async function plotDamage (actor) {
     const atkDmgTradeOff = Number(dmgOpt.atkDmgTradeOff);
 
     if (abl && abl !== 'no-abl') {
-        rollData.ability = actorData.abilities[abl].value;
+        rollData.ability = actor.system.abilities[abl].value;
         formula += ` + @ability[${game.i18n.localize(`age-system.org.${abl}`)}]`;
     }
 

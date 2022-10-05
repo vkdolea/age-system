@@ -1,5 +1,13 @@
 # Release Notes
 
+## 1.1.7 [2022-10-05]
+### Changed
+- Spaceship and Vehicle sheets are now resizable.
+
+### Fixed
+- Bug preventing a plot action damage when using Organization ability.
+- Bug preventing damage formula on Spaceship Weapon.
+
 ## 1.1.6 [2022-09-25]
 ### Fixed
 - Bug on damage chat cards showing wrong information about secret roll to GM.

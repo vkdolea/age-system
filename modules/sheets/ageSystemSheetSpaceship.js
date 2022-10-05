@@ -10,7 +10,7 @@ export default class ageSpaceshipSheet extends ActorSheet {
             // resizable: false,
             width: 680,
             height: 750,
-            resizable: false,
+            resizable: true,
             classes: ["age-system", "sheet", "spaceship"]
         });
     }
