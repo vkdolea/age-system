@@ -1383,6 +1383,11 @@
 .age-system.stat-block .organization-sheet .ability-table {
   flex: 0 0 auto;
 }
+.age-system.stat-block .organization-sheet .editor {
+  text-align: left;
+  padding: 0 4px;
+  size: 12px;
+}
 .age-system.stat-block img {
   flex: 0 0 100px;
   height: 100px;
