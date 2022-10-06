@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.1.8 [2022-10-06]
+### Fixed
+- Description now appears correctly on Organization sheet when not on text editor mode.
+- Focus Item correctly checked on when drag and droped on Character and Organization sheets.
+
 ## 1.1.7 [2022-10-05]
 ### Changed
 - Spaceship and Vehicle sheets are now resizable.

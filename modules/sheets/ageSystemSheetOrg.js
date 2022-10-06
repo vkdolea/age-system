@@ -31,11 +31,11 @@ export default class ageSystemSheetOrg extends ActorSheet {
         const actorData = this.actor.toObject(false);
         actorData.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
         
-        const data = actorData.system;
+        const system = actorData.system;
         const focus = actorData.items.filter(f => f.type === "focus");
         
         return {
-            data,
+            system,
             focus,
             config: CONFIG.ageSystem,
             actor: this.object,
