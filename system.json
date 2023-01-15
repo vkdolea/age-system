@@ -1,8 +1,8 @@
 {
-    "id": "age-system",
-    "name": "age-system",
-    "title": "AGE System (unofficial)",
-    "description": "Unofficial AGE System implementation for most of AGE subsystems",
+    "id": "dragon-age-system",
+    "name": "dragon-age-system",
+    "title": "Dragon AGE System (fork)",
+    "description": "Unofficial Dragon Age implementation",
     "version": "1.1.8",
     "authors": [
 		{
