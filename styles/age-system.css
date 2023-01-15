@@ -1221,6 +1221,10 @@
   font-size: 2rem;
   height: 2.4rem;
 }
+.age-system.sheet .header-details .charname,
+.age-system.dialog .header-details .charname {
+  font-family: "Requiem" !important;
+}
 .age-system.sheet .sub-details > div:not(.flexrow),
 .age-system.dialog .sub-details > div:not(.flexrow) {
   display: flex;
@@ -2148,7 +2152,12 @@
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod {
   padding: 4px;
+}
+#chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod .line-header {
   font-variant: small-caps;
+}
+#chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod div.line-header {
+  font-size: 17px;
 }
 #chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod:not(.total-roll) {
   text-transform: lowercase;
@@ -2564,7 +2573,7 @@
   border: 5px outset #979899;
 }
 .colorset-dragon-red .resource .values {
-  background-color: #83272a;
+  background-color: #7B0307;
   color: #ffffff;
 }
 .colorset-dragon-red .sheet-main-content nav a {
@@ -2572,7 +2581,7 @@
   color: #000000;
 }
 .colorset-dragon-red .sheet-main-content nav a.active {
-  background-color: #83272a;
+  background-color: #7B0307;
   color: #ffffff;
 }
 .colorset-dragon-red .thin-border {
@@ -2583,17 +2592,17 @@
   opacity: 0.8;
 }
 .colorset-dragon-red .colorset-first-tier {
-  background-color: #83272a;
+  background-color: #7B0307;
   color: #ffffff;
 }
 .colorset-dragon-red .colorset-first-tier a.content-link,
 .colorset-dragon-red .colorset-first-tier a.inline-roll {
   background-color: #e0beb1;
-  color: #83272a;
+  color: #7B0307;
 }
 .colorset-dragon-red .colorset-second-tier {
   background-color: #e0beb1;
-  color: #83272a;
+  color: #7B0307;
 }
 .colorset-dragon-red .colorset-second-tier a.content-link,
 .colorset-dragon-red .colorset-second-tier a.inline-roll {
@@ -2606,65 +2615,65 @@
 }
 .colorset-dragon-red .colorset-third-tier a.content-link,
 .colorset-dragon-red .colorset-third-tier a.inline-roll {
-  background-color: #83272a;
+  background-color: #7B0307;
   color: #ffffff;
 }
 .colorset-dragon-red input.colorset-first-tier {
-  background-color: #83272a;
+  background-color: #7B0307;
   color: #ffffff;
 }
 .colorset-dragon-red #age-tracker .full-box {
-  background-color: #83272a !important;
+  background-color: #7B0307 !important;
 }
 .colorset-dragon-red #age-tracker .comp-checkbox {
-  border-color: #83272a !important;
+  border-color: #7B0307 !important;
 }
 .colorset-dragon-red .char-sheet .age-header label,
 .colorset-dragon-red .char-sheet .persona label {
-  background-color: #83272a;
+  background-color: #7B0307;
   color: #ffffff;
 }
 .colorset-dragon-red .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
 .colorset-dragon-red .vehicle-stats img {
-  border: 2px solid #83272a;
+  border: 2px solid #7B0307;
 }
 .colorset-dragon-red .vehicle-stats .editor {
   background-color: #ffffff;
 }
 .colorset-dragon-red .stats-block.losses .loss-checkbox {
-  border-color: #83272a;
+  border-color: #7B0307;
 }
 .colorset-dragon-red .stats-block.losses .loss-checkbox.full-box.full-box {
-  background: #83272a;
+  background: #7B0307;
 }
 .colorset-dragon-red fieldset {
-  border-color: #83272a;
+  border-color: #7B0307;
 }
 .colorset-dragon-red #age-tracker-drag:hover,
 .colorset-dragon-red #age-roller-drag:hover {
-  background-color: #83272a;
+  background-color: #7B0307;
 }
 .colorset-dragon-red .dice-show.trait-test i:last-of-type {
-  color: #83272a;
+  color: #7B0307;
 }
 .colorset-dragon-red .roll-mod {
-  border-bottom: 1px solid #83272a;
+  border-bottom: 1px solid #7B0307;
 }
 .colorset-dragon-red .roll-mod.stunted {
-  background-color: #83272a;
+  background-color: #7B0307;
   color: #ffffff;
 }
 .colorset-dragon-red .char-sheet .item-container img {
-  border: 1px solid #83272a;
+  border: 1px solid #7B0307;
 }
 .colorset-dragon-red .char-sheet input {
   background-color: #ffffff;
 }
 .colorset-dragon-red .char-sheet input.colorset-second-tier {
   background-color: #e0beb1 !important;
-  color: #83272a !important;
+  color: #7B0307 !important;
 }
 .colorset-dragon-red .focus .item-card-stats,
 .colorset-dragon-red .power .item-card-stats,
@@ -4216,6 +4225,30 @@ a:hover {
   cursor: pointer;
 }
 @font-face {
+  font-family: "Palatino";
+  src: url("../resources/fonts/palatino/pala.ttf");
+}
+@font-face {
+  font-family: "Palatino";
+  src: url("../resources/fonts/palatino/palab.ttf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Palatino";
+  src: url("../resources/fonts/palatino/palai.ttf");
+  font-style: italic;
+}
+@font-face {
+  font-family: "Palatino";
+  src: url("../resources/fonts/palatino/palabi.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Requiem";
+  src: url("../resources/fonts/requiem_DAFont/Requiem.ttf");
+}
+@font-face {
   font-family: "Ethernal Knight";
   src: url("../resources/fonts/eternalknight/eternalknight.otf");
 }
@@ -4257,7 +4290,7 @@ a:hover {
 }
 /*---- Font Override----*/
 body *:not(i, .fa, .far, .fas) {
-  font-family: "Roboto" !important;
+  font-family: "Palatino";
 }
 /**************************/
 /**  AGE Settings Style  **/
@@ -4359,9 +4392,12 @@ body *:not(i, .fa, .far, .fas) {
 }
 .age-system.damage-summary-card p {
   margin: 0 2px;
-  font-size: 12px;
+  font-size: 14px;
   text-transform: lowercase;
   font-variant: small-caps;
+}
+.age-system.damage-summary-card .hp-value {
+  font-variant: normal !important;
 }
 .age-system.damage-summary-card div.use-injury div p {
   text-align: center;
