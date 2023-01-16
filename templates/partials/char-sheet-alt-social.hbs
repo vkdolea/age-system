@@ -7,7 +7,7 @@
             {{localize "age-system.relationshipContainer"}}
         </li>
         {{#each data.relationship as |item|}}
-        {{> "systems/age-system/templates/partials/itemcontrols/relationship.hbs" item=this config=../data.config}}
+        {{> "systems/dragon-age-system/templates/partials/itemcontrols/relationship.hbs" item=this config=../data.config}}
         {{#unless @last}}
         <hr>
         {{/unless}}
@@ -21,7 +21,7 @@
                 {{localize "age-system.honorificsContainer"}}
             </li>
             {{#each data.honorifics as |item|}}
-            {{> "systems/age-system/templates/partials/itemcontrols/honorifics.hbs" item=this config=../data.config}}
+            {{> "systems/dragon-age-system/templates/partials/itemcontrols/honorifics.hbs" item=this config=../data.config}}
             {{#unless @last}}
             <hr>
             {{/unless}}
@@ -34,7 +34,7 @@
                 {{localize "age-system.membershipContainer"}}
             </li>
             {{#each data.membership as |item|}}
-            {{> "systems/age-system/templates/partials/itemcontrols/membership.hbs" item=this config=../data.config}}
+            {{> "systems/dragon-age-system/templates/partials/itemcontrols/membership.hbs" item=this config=../data.config}}
             {{#unless @last}}
             <hr>
             {{/unless}}

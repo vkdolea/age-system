@@ -26,7 +26,7 @@
             </li>
             {{!-- Purchase Block --}}
             <li>
-                {{> "systems/age-system/templates/partials/cost-resource-block.hbs"}}
+                {{> "systems/dragon-age-system/templates/partials/cost-resource-block.hbs"}}
             </li>
             {{#if system.ranged}}
             {{!-- Range --}}
@@ -97,7 +97,7 @@
             <div class="header-details">
                 <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
                 <div class="sub-details flexrow">
-                    {{> "systems/age-system/templates/partials/ability-focus-select.hbs"}}
+                    {{> "systems/dragon-age-system/templates/partials/ability-focus-select.hbs"}}
                 </div>
             </div>
         </header>
@@ -121,7 +121,7 @@
 
                 {{!-- Bonuses Tab --}}
                 <div class="tab bonus" data-group="primary" data-tab="bonus">
-                    {{> "systems/age-system/templates/partials/bonuses-sheet.hbs"}}
+                    {{> "systems/dragon-age-system/templates/partials/bonuses-sheet.hbs"}}
                 </div>
 
                 {{!-- Options Tab --}}
