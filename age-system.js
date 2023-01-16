@@ -165,7 +165,7 @@ Hooks.once("init", async function() {
     await Settings.registerSystemSettings();
 
     // Register Settings
-    ageSystem.stuntAttackPoints = game.settings.get("dragon-age-system", "stuntAttack");
+    ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack");
     ageSystem.breather = game.settings.get('age-system', 'breatherParam');
     ageSystem.autoConsumePP = game.settings.get('age-system', 'consumePP');
 
@@ -298,11 +298,11 @@ Hooks.once("setup", function() {
     ageSystem.talentDegrees = talentDegrees;
     
     // Set Health System configuration
-    const hstype = game.settings.get("dragon-age-system", "healthSys");
+    const hstype = game.settings.get("age-system", "healthSys");
     const HEALTH_SYS = {
         type: hstype,
-        mode: game.settings.get("dragon-age-system", "gameMode"),
-        healthName: game.i18n.localize(`SETTINGS.healthMode${game.settings.get("dragon-age-system", "healthMode")}`),
+        mode: game.settings.get("age-system", "gameMode"),
+        healthName: game.i18n.localize(`SETTINGS.healthMode${game.settings.get("age-system", "healthMode")}`),
         useToughness: ![`basic`].includes(hstype),
         useFortune: [`expanse`].includes(hstype),
         useHealth: [`basic`, `mage`].includes(hstype),
@@ -319,24 +319,24 @@ Hooks.once("setup", function() {
     Setup.localizeAgeEffects();
 
     // Target/Controlled option to damage/heal
-    CONFIG.ageSystem.useTargeted = game.settings.get("dragon-age-system", "useTargeted");
+    CONFIG.ageSystem.useTargeted = game.settings.get("age-system", "useTargeted");
     
     // Indicates Migration Version
-    CONFIG.ageSystem.lastMigrationVer = game.settings.get("dragon-age-system", "systemMigrationVersion")
+    CONFIG.ageSystem.lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion")
 });
 
 Hooks.once("ready", async function() {
     // Identify Colorset
     const color = await game.user.getFlag("dragon-age-system", "colorScheme");
     if (color) await game.settings.set("dragon-age-system", "colorScheme", color);
-    if (!color) game.user.setFlag("dragon-age-system", "colorScheme", game.settings.get("dragon-age-system", "colorScheme"));
+    if (!color) game.user.setFlag("dragon-age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
     // Register color scheme on global name space
-    ageSystem.colorScheme = await game.settings.get("dragon-age-system", "colorScheme");
+    ageSystem.colorScheme = await game.settings.get("age-system", "colorScheme");
 
     // Tracker Handling
     // Identify if User already has ageTrackerPos flag set
     const userTrackerFlag = await game.user.getFlag("dragon-age-system", "ageTrackerPos");
-    const useTracker = (game.settings.get("dragon-age-system", "serendipity") || game.settings.get("dragon-age-system", "complication") !== "none") ? true : false;
+    const useTracker = (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication") !== "none") ? true : false;
     if (!userTrackerFlag) await game.user.setFlag("dragon-age-system", "ageTrackerPos", ageSystem.ageTrackerPos);
     if (useTracker) game.ageSystem.ageTracker.refresh();
 
@@ -350,8 +350,8 @@ Hooks.once("ready", async function() {
     ageSystem.statusEffects.original = foundry.utils.deepClone(CONFIG.statusEffects);
 
     // Define Token Icons and In Use Token Effects
-    ageSystem.statusEffects.custom = await game.settings.get("dragon-age-system", "customTokenEffects");
-    let inUseConditions = await game.settings.get("dragon-age-system", "inUseConditions");
+    ageSystem.statusEffects.custom = await game.settings.get("age-system", "customTokenEffects");
+    let inUseConditions = await game.settings.get("age-system", "inUseConditions");
     if (!['expanse', 'custom'].includes(inUseConditions)) inUseConditions = 'custom';
     ageSystem.inUseStatusEffects = inUseConditions;
     CONFIG.statusEffects = foundry.utils.deepClone(ageSystem.statusEffects[inUseConditions]);
@@ -367,11 +367,11 @@ Hooks.once("ready", async function() {
     // Register System Settings related to Focus Compendium
     ageSystem.itemCompendia = Settings.allCompendia("Item");
     Settings.loadCompendiaSettings();
-    const setCompendium = game.settings.get("dragon-age-system", "masterFocusCompendium");
+    const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.focusList(setCompendium);
 
     // Register Weapon Groups (if any)
-    const userGroups = game.settings.get("dragon-age-system", "weaponGroups");
+    const userGroups = game.settings.get("age-system", "weaponGroups");
     if (userGroups.length === 0) {
         ageSystem.weaponGroups = null;
     } else {
@@ -411,7 +411,7 @@ Hooks.once("ready", async function() {
 
     // Determine whether a system migration is required and feasible
     if ( !game.user.isGM ) return;
-    const currentVersion = game.settings.get("dragon-age-system", "systemMigrationVersion");
+    const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
     const NEEDS_MIGRATION_VERSION = "1.0.0";
     const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;
@@ -446,6 +446,6 @@ Hooks.once('diceSoNiceReady', () => {
     // Identify if user has registered Dice so Nice Stunt Die option
     const stuntSoNiceFlag = game.user.getFlag("dragon-age-system", "stuntSoNice");
     if (stuntSoNiceFlag) game.settings.set("dragon-age-system", "stuntSoNice", stuntSoNiceFlag);
-    if (!stuntSoNiceFlag) game.user.setFlag("dragon-age-system", "stuntSoNice", game.settings.get("dragon-age-system", "stuntSoNice"));
+    if (!stuntSoNiceFlag) game.user.setFlag("dragon-age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
 });
 Hooks.on('renderSettingsConfig', (SettingsConfig, html, data) => Settings.updateFocusCompendia());
