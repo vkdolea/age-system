@@ -327,7 +327,10 @@ Hooks.once("setup", function() {
 
 Hooks.once("ready", async function() {
     // Identify Colorset
+    console.log("***********", game.user)
     const color = await game.user.getFlag("age-system", "colorScheme");
+    const color2 = await game.user.getFlag("dragon-age-system", "colorScheme");
+    console.log("*********", color, color2)
     if (color) await game.settings.set("age-system", "colorScheme", color);
     if (!color) game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
     // Register color scheme on global name space
