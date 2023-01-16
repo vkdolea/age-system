@@ -22,7 +22,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
     }
     
     get template() {
-        return `systems/age-system/templates/sheets/${this.actor.type}-sheet.hbs`;
+        return `systems/dragon-age-system/templates/sheets/${this.actor.type}-sheet.hbs`;
     }
 
     // Manage data when Actor is droped on Vehicle sheet

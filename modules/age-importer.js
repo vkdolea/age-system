@@ -24,7 +24,7 @@ export default class AgeImporter extends Application {
     return mergeObject(super.defaultOptions, {
       classes: ['age-system-dialog', 'age-system'],
       id: 'age-importer',
-      template: 'systems/age-system/templates/age-importer.hbs',
+      template: 'systems/dragon-age-system/templates/age-importer.hbs',
       resizable: true,
       minimizable: false,
       width: 900,

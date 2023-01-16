@@ -22,7 +22,7 @@ export default class ConditionsWorkshop extends Application {
     return mergeObject(super.defaultOptions, {
       classes: ['age-system-dialog', 'age-system'],
       id: 'age-conditions-workshop',
-      template: 'systems/age-system/templates/conditions-workshop.hbs',
+      template: 'systems/dragon-age-system/templates/conditions-workshop.hbs',
       resizable: true,
       minimizable: false,
       width: 900,

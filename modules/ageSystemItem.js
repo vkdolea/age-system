@@ -510,18 +510,18 @@ export class ageSystemItem extends Item {
     };
 
     chatTemplate = {
-        "weapon": "systems/age-system/templates/sheets/chat/weapon-sheet.hbs",
-        "focus": "systems/age-system/templates/sheets/chat/focus-sheet.hbs",
-        "stunts": "systems/age-system/templates/sheets/chat/stunts-sheet.hbs",
-        "talent": "systems/age-system/templates/sheets/chat/talent-sheet.hbs",
-        "equipment": "systems/age-system/templates/sheets/chat/equipment-sheet.hbs",
-        "power": "systems/age-system/templates/sheets/chat/power-sheet.hbs",
-        "relationship": "systems/age-system/templates/sheets/chat/relationship-sheet.hbs",
-        "honorifics": "systems/age-system/templates/sheets/chat/honorifics-sheet.hbs",
-        "membership": "systems/age-system/templates/sheets/chat/membership-sheet.hbs",
-        "shipfeatures": "systems/age-system/templates/sheets/chat/shipfeatures-sheet.hbs",
+        "weapon": "systems/dragon-age-system/templates/sheets/chat/weapon-sheet.hbs",
+        "focus": "systems/dragon-age-system/templates/sheets/chat/focus-sheet.hbs",
+        "stunts": "systems/dragon-age-system/templates/sheets/chat/stunts-sheet.hbs",
+        "talent": "systems/dragon-age-system/templates/sheets/chat/talent-sheet.hbs",
+        "equipment": "systems/dragon-age-system/templates/sheets/chat/equipment-sheet.hbs",
+        "power": "systems/dragon-age-system/templates/sheets/chat/power-sheet.hbs",
+        "relationship": "systems/dragon-age-system/templates/sheets/chat/relationship-sheet.hbs",
+        "honorifics": "systems/dragon-age-system/templates/sheets/chat/honorifics-sheet.hbs",
+        "membership": "systems/dragon-age-system/templates/sheets/chat/membership-sheet.hbs",
+        "shipfeatures": "systems/dragon-age-system/templates/sheets/chat/shipfeatures-sheet.hbs",
 
-        "item-to-chat": "systems/age-system/templates/sheets/chat/item-to-chat.hbs"
+        "item-to-chat": "systems/dragon-age-system/templates/sheets/chat/item-to-chat.hbs"
     };
 
     async showItem(forceSelfRoll = false) {

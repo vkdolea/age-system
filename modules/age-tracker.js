@@ -4,7 +4,7 @@ export class AgeTracker extends Application {
 	}
 
 	get template() {
-		return `systems/age-system/templates/age-tracker.hbs`;
+		return `systems/dragon-age-system/templates/age-tracker.hbs`;
 	}
 	
 	getData(options) {

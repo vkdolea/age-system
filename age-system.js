@@ -327,9 +327,9 @@ Hooks.once("setup", function() {
 
 Hooks.once("ready", async function() {
     // Identify Colorset
-    const color = await game.user.getFlag("dragon-age-system", "colorScheme");
+    const color = await game.user.getFlag("age-system", "colorScheme");
     if (color) await game.settings.set("age-system", "colorScheme", color);
-    if (!color) game.user.setFlag("dragon-age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
+    if (!color) game.user.setFlag("age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
     // Register color scheme on global name space
     ageSystem.colorScheme = await game.settings.get("age-system", "colorScheme");
 
@@ -357,7 +357,7 @@ Hooks.once("ready", async function() {
     CONFIG.statusEffects = foundry.utils.deepClone(ageSystem.statusEffects[inUseConditions]);
     
     // Changing a few control icons
-    CONFIG.controlIcons.defeated = "systems/age-system/resources/imgs/effects/pirate-grave.svg"
+    CONFIG.controlIcons.defeated = "systems/dragon-age-system/resources/imgs/effects/pirate-grave.svg"
 
     // Prepare Actors dependent on other Actors
     for(let e of game.postReadyPrepare){

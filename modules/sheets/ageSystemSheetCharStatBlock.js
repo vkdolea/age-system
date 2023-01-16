@@ -20,7 +20,7 @@ export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter
     }
 
     get template() {
-        return `systems/age-system/templates/sheets/${this.actor.type}-stat-block.hbs`;
+        return `systems/dragon-age-system/templates/sheets/${this.actor.type}-stat-block.hbs`;
     }
 
     /* -------------------------------------------- */

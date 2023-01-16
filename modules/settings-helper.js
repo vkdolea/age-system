@@ -8,7 +8,7 @@ export class QuickSettings extends FormApplication {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       id: 'quick-settings',
-      template: 'systems/age-system/templates/quick-settings.hbs',
+      template: 'systems/dragon-age-system/templates/quick-settings.hbs',
       resizable: false,
       minimizable: false,
       width: '700',
@@ -101,7 +101,7 @@ export class AdvancedSettings extends FormApplication {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       id: 'adv-settings',
-      template: 'systems/age-system/templates/adv-settings.hbs',
+      template: 'systems/dragon-age-system/templates/adv-settings.hbs',
       resizable: false,
       minimizable: false,
       width: '500',

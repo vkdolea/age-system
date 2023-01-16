@@ -863,7 +863,7 @@ export class ageSystemActor extends Actor {
     }
 
     async breatherSettings(data) {
-        const template = "/systems/age-system/templates/rolls/breather-settings.hbs";
+        const template = "/systems/dragon-age-system/templates/rolls/breather-settings.hbs";
         const html = await renderTemplate(template, data);
         return new Promise(resolve => {
             const data = {

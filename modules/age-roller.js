@@ -12,7 +12,7 @@ export class AgeRoller extends Application {
 	}
 
 	get template() {
-		return `systems/age-system/templates/rolls/age-roller.hbs`;
+		return `systems/dragon-age-system/templates/rolls/age-roller.hbs`;
 	}
 	
 	getData(options) {

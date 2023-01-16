@@ -68,7 +68,7 @@ export default class ageSystemItemSheet extends ItemSheet {
     };
 
     get template() {
-        return `systems/age-system/templates/sheets/${this.item.type}-sheet.hbs`;
+        return `systems/dragon-age-system/templates/sheets/${this.item.type}-sheet.hbs`;
     };
 
     getData(options) {

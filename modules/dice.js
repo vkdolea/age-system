@@ -359,7 +359,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     // Generate Stunt Points if doubles are rolled and total rolled is higher than TN or there is no TN set
     const generateSP = (rollTN && isSuccess) || !rollTN;
     const rollSummary = ageRollChecker(ageRoll, generateSP, isStuntAttack, extraSP, stackSP)
-    let chatTemplate = "/systems/age-system/templates/rolls/base-age-roll.hbs";
+    let chatTemplate = "/systems/dragon-age-system/templates/rolls/base-age-roll.hbs";
     const injuryMarks = (rollType === ROLL_TYPE.TOUGHNESS) || (rollType === ROLL_TYPE.TOUGHNESS_AUTO) ? actorData.injury.marks : null;
 
     rollData = {
@@ -448,7 +448,7 @@ function hasWeaponGroupPenalty(item, ownedGroups) {
 };
 
 async function getAgeRollOptions(itemRolled, data = {}) {
-    const template = "/systems/age-system/templates/rolls/age-roll-settings.hbs"
+    const template = "/systems/dragon-age-system/templates/rolls/age-roll-settings.hbs"
     const type = itemRolled ? itemRolled.type : null;
     if (data.selectAbl) data.abilities = data.actorType === "char" ? ageSystem.abilities : ageSystem.abilitiesOrg;
 
@@ -483,7 +483,7 @@ async function getAgeRollOptions(itemRolled, data = {}) {
 };
 
 async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
-    const template = "/systems/age-system/templates/rolls/dmg-roll-settings.hbs";
+    const template = "/systems/dragon-age-system/templates/rolls/dmg-roll-settings.hbs";
     const html = await renderTemplate(template, {
         addFocus,
         stuntDmg,
@@ -725,7 +725,7 @@ export async function plotDamage (actor) {
     let dmgRoll = await new Roll(formula, rollData).evaluate({async: true});
     
     // Preparing custom damage chat card
-    let chatTemplate = "/systems/age-system/templates/rolls/damage-roll.hbs";
+    let chatTemplate = "/systems/dragon-age-system/templates/rolls/damage-roll.hbs";
     
     const wGroupPenalty = hasWeaponGroupPenalty(null, null); //modificado
     // dmgDesc.wGroupPenalty = wGroupPenalty;
@@ -936,7 +936,7 @@ export async function itemDamage({
     }
     
     // Preparing custom damage chat card
-    let chatTemplate = "/systems/age-system/templates/rolls/damage-roll.hbs";
+    let chatTemplate = "/systems/dragon-age-system/templates/rolls/damage-roll.hbs";
     
     const wGroupPenalty = hasWeaponGroupPenalty(item, actorWgroups);
     dmgDesc.wGroupPenalty = wGroupPenalty;

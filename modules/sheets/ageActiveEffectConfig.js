@@ -7,7 +7,7 @@ export default class ageActiveEffectConfig extends ActiveEffectConfig {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["sheet", "active-effect-sheet", "age-system"],
-      template: "systems/age-system/templates/sheets/age-active-effect-config.hbs",
+      template: "systems/dragon-age-system/templates/sheets/age-active-effect-config.hbs",
       width: 560,
       height: "auto",
       tabs: [{navSelector: ".tabs", contentSelector: "form", initial: "details"}]

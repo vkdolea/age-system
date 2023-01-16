@@ -9,7 +9,7 @@ export default class BreatherSettings extends FormApplication {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       id: 'breather-settings',
-      template: 'systems/age-system/templates/rolls/breather-settings.hbs',
+      template: 'systems/dragon-age-system/templates/rolls/breather-settings.hbs',
       resizable: false,
       minimizable: false,
       width: 'auto',

@@ -224,7 +224,7 @@ ageSystem.featuresType = [
     "hullPlating", "hullMod",/* "rollable", */"weapon" // Maybe in the future I can add the rollable feature...
 ];
 
-const itemIconPath = "systems/age-system/resources/imgs/item-icon/";
+const itemIconPath = "systems/dragon-age-system/resources/imgs/item-icon/";
 ageSystem.itemIcons = {
     "equipment": `${itemIconPath}briefcase.svg`,
     "stunts": `${itemIconPath}split-cross.svg`,
@@ -238,7 +238,7 @@ ageSystem.itemIcons = {
     "shipfeatures": `${itemIconPath}processor.svg`
 };
 
-const actorIconPath = "systems/age-system/resources/imgs/actor-icon/";
+const actorIconPath = "systems/dragon-age-system/resources/imgs/actor-icon/";
 ageSystem.actorIcons = {
     "vehicle": `${actorIconPath}chariot.svg`,
     "char": `${actorIconPath}sensousness.svg`,
@@ -246,12 +246,12 @@ ageSystem.actorIcons = {
     "organization": `${actorIconPath}barracks-tent.svg`
 }
 
-const uiElementsPath = "systems/age-system/resources/imgs/ui-elements/";
+const uiElementsPath = "systems/dragon-age-system/resources/imgs/ui-elements/";
 ageSystem.uiElements = {
     ageRoller: `${uiElementsPath}cube.svg`
 }
 
-const AGEstatusEffectsPath = "systems/age-system/resources/imgs/effects/";
+const AGEstatusEffectsPath = "systems/dragon-age-system/resources/imgs/effects/";
 ageSystem.statusEffectsPath = AGEstatusEffectsPath;
 
 ageSystem.statusEffects = {
@@ -756,7 +756,7 @@ ageSystem.tokenTextColors = {
 ageSystem.wiki = 'https://github.com/vkdolea/age-system/wiki';
 
 // Logos
-const pathLogo = `systems/age-system/resources/logo/`
+const pathLogo = `systems/dragon-age-system/resources/logo/`
 ageSystem.greenRonin = {
     modernAGE: {
         logo: `${pathLogo}modern-age.png`,

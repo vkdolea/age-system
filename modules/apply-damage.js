@@ -16,7 +16,7 @@ export default class ApplyDamageDialog extends Application {
     return mergeObject(super.defaultOptions, {
       classes: ['age-system-dialog', 'age-system'],
       id: 'apply-damage-window',
-      template: 'systems/age-system/templates/apply-damage-window.hbs',
+      template: 'systems/dragon-age-system/templates/apply-damage-window.hbs',
       resizable: true,
       minimizable: false,
       width: 900,
@@ -187,7 +187,7 @@ export default class ApplyDamageDialog extends Application {
   }
 
   async summaryToChat (summary, useInjury) {
-    const chatTemplate = "/systems/age-system/templates/rolls/damage-summary.hbs";
+    const chatTemplate = "/systems/dragon-age-system/templates/rolls/damage-summary.hbs";
     const templateData = {
       summary,
       useInjury,
@@ -203,7 +203,7 @@ export default class ApplyDamageDialog extends Application {
   }
 
   async promptPlayerToRoll (actor, injuryParts, totalDmg, autoApply) {
-    const chatTemplate = "/systems/age-system/templates/rolls/owner-roll-toughness.hbs";
+    const chatTemplate = "/systems/dragon-age-system/templates/rolls/owner-roll-toughness.hbs";
     const templateData = {
       img: actor.data.token.img,
       name: actor.name

@@ -20,7 +20,7 @@ export default class ageSystemSheetCharAlt extends ageSystemSheetCharacter {
     }
 
     get template() {
-        return `systems/age-system/templates/sheets/${this.actor.type}-sheet-alt.hbs`;
+        return `systems/dragon-age-system/templates/sheets/${this.actor.type}-sheet-alt.hbs`;
     }
 
     /* -------------------------------------------- */
