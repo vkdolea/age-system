@@ -11,6 +11,13 @@
 			"reddit":"u/vkdolea",
 			"ko-fi":"vkdolea",
             "twitter": "@vkdolea"
+		},
+	    	{
+			"name": "mcabezag",
+			"discord": "-",
+			"reddit":"-",
+			"ko-fi":"-",
+            "twitter": "-"
 		}
     ],
     "media": [
@@ -58,10 +65,10 @@
     "minimumCoreVersion": "10.278",
     "compatibleCoreVersion": "10.286",
     "url": "https://github.com/vkdolea/age-system",
-    "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",
+    "manifest": "https://raw.githubusercontent.com/mcabezag/dragon-age-system/workspace/system.json",
     "download": "https://github.com/vkdolea/age-system/archive/1.1.8.zip",
     "bugs": "https://github.com/vkdolea/age-system/issues",
-    "readme": "https://github.com/vkdolea/age-system/blob/prep-release/README.md",
+    "readme": "https://github.com/mcabezag/dragon-age-system/blob/prep-release/README.md",
     "flags": {
         "needsMigrationVersion": "0.12.5"
     }
