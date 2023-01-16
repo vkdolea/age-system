@@ -3,3 +3,10 @@
 
 # Node Modules
 age-system.lock
+.idea/jpa-buddy.xml
+.idea/dragon-age-system.iml
+.idea/misc.xml
+.idea/.gitignore
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
