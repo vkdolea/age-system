@@ -328,7 +328,7 @@ Hooks.once("setup", function() {
 Hooks.once("ready", async function() {
     // Identify Colorset
     const color = await game.user.getFlag("dragon-age-system", "colorScheme");
-    if (color) await game.settings.set("dragon-age-system", "colorScheme", color);
+    if (color) await game.settings.set("age-system", "colorScheme", color);
     if (!color) game.user.setFlag("dragon-age-system", "colorScheme", game.settings.get("age-system", "colorScheme"));
     // Register color scheme on global name space
     ageSystem.colorScheme = await game.settings.get("age-system", "colorScheme");
@@ -445,7 +445,7 @@ Hooks.once('diceSoNiceReady', () => {
     Settings.stuntSoNice(colorChoices, Object.keys(game.dice3d.box.dicefactory.systems));
     // Identify if user has registered Dice so Nice Stunt Die option
     const stuntSoNiceFlag = game.user.getFlag("dragon-age-system", "stuntSoNice");
-    if (stuntSoNiceFlag) game.settings.set("dragon-age-system", "stuntSoNice", stuntSoNiceFlag);
+    if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);
     if (!stuntSoNiceFlag) game.user.setFlag("dragon-age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
 });
 Hooks.on('renderSettingsConfig', (SettingsConfig, html, data) => Settings.updateFocusCompendia());
