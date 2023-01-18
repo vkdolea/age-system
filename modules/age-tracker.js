@@ -57,7 +57,7 @@ export class AgeTracker extends Application {
 
 		// Set position
 		let tracker = document.getElementById("age-tracker");
-		const trackerPos = game.user.getFlag("age-system", "ageTrackerPos");
+		const trackerPos = game.user.getFlag("dragon-age-system", "ageTrackerPos");
 		tracker.style.left = trackerPos.xPos;
 		tracker.style.bottom = trackerPos.yPos;
 

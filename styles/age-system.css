@@ -340,13 +340,16 @@
   border: none;
   height: auto;
 }
+.age-system.sheet.char.standard .persona .secret-note textarea.free-text,
+.age-system.sheet.char.standard .persona .secret-note.container {
+  height: 250px;
+}
 .age-system.sheet.char.standard .persona .goals-language .spacer {
   flex: 0 0 4px;
 }
 .age-system.sheet.char.standard .persona .goals.container,
 .age-system.sheet.char.standard .persona .language.container,
-.age-system.sheet.char.standard .persona .features.container,
-.age-system.sheet.char.standard .persona .secret-note.container {
+.age-system.sheet.char.standard .persona .features.container {
   height: 150px;
 }
 .age-system.sheet.char.standard .persona label {
@@ -1224,6 +1227,7 @@
 .age-system.sheet .header-details .charname,
 .age-system.dialog .header-details .charname {
   font-family: "Requiem" !important;
+  color: #000000;
 }
 .age-system.sheet .sub-details > div:not(.flexrow),
 .age-system.dialog .sub-details > div:not(.flexrow) {

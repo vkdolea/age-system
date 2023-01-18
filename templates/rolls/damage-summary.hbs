@@ -1,5 +1,5 @@
 <form class="age-system damage-summary-card">
-	<h2>{{localize "age-system.damageSummary"}}</h2>
+	<h3>{{localize "age-system.damageSummary"}}</h3>
 	{{#unless summary}}
 	<p>{{localize "age-system.noCharHurt"}}</p>
 	{{/unless}}
@@ -29,7 +29,7 @@
 					</div>
 				</div>
 				{{else}}
-				<p class="italic">{{../healthName}}: {{victim.previousHP}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{victim.newHP}}</p>
+				<p class="italic">{{../healthName}}: <span class="hp-value">{{victim.previousHP}} </span><i class="fa fa-arrow-right" aria-hidden="true"></i> <span class="hp-value"> {{victim.newHP}}</span></p>
 				{{/if}}
 			</div>
 		</li>

@@ -44,7 +44,7 @@ export class AgeRoller extends Application {
 
 		// Set position
 		let roller = document.getElementById("age-roller");
-		const rollerPos = game.user.getFlag("age-system", "ageRollerPos");
+		const rollerPos = game.user.getFlag("dragon-age-system", "ageRollerPos");
 		roller.style.left = rollerPos.xPos;
 		roller.style.bottom = rollerPos.yPos;
 		
