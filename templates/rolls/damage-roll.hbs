@@ -49,6 +49,14 @@
                     {{localize "age-system.applyDamage"}}
                     {{/if}}
                 </button>
+                <button class="age-button apply-healing gm-only">
+                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                    {{#if useInjury}}
+                    Heal
+                    {{else}}
+                    {{localize "age-system.item.healing"}}
+                    {{/if}}
+                </button>
             </div>
             {{/if}}
             

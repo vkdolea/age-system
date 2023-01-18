@@ -11,6 +11,7 @@ export function addChatListeners(html) {
     html.on('click', '.roll-item', rollItemFromChat);
     html.on('contextmenu', '.roll-item', rollItemFromChat);
     html.on('click', '.apply-damage', applyDamageChat);
+    html.on('click', '.apply-healing', applyHealingChat);
     html.on('click', '.roll-toughness-test', resistInjury);
     html.on('click', '.apply-injury', inflictInjury);
 };
@@ -130,6 +131,24 @@ export async function applyDamageChat(event) {
         ui.notifications.warn(game.i18n.localize("age-system.WARNING.healthSysNotMatching"));
     };
     callApplyDamage(damageData);
+}
+
+export async function applyHealingChat(event) {
+    event.preventDefault();
+
+    const card = event.target.closest(".chat-message");
+    const message =  game.messages.get(card.dataset.messageId);
+    const cardDamageData = message.flags["age-system"].damageData ?? message.flags["age-system"].ageroll.rollData;
+    const roll = message.rolls[0];
+
+    const total = cardDamageData?.totalDamage ?? roll.total;
+
+    const options = {isHealing: true, isNewHP: false}
+
+    return Promise.all(canvas.tokens.controlled.map(t => {
+        const a = t.actor;
+        return ageSystem.healthSys.useInjury ? a.healMarks(total) : a.applyHPchange(total, options);
+      }));
 }
 
 /**

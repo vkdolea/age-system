@@ -1227,7 +1227,7 @@
 .age-system.sheet .header-details .charname,
 .age-system.dialog .header-details .charname {
   font-family: "Requiem" !important;
-  color: #000000;
+  color: #ffffff;
 }
 .age-system.sheet .sub-details > div:not(.flexrow),
 .age-system.dialog .sub-details > div:not(.flexrow) {
