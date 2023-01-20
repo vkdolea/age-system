@@ -1,0 +1,14 @@
+{{!-- Advancement Tab --}}
+<section class="options-section">    
+
+    <ol class="resource item-group colorset-third-tier">
+        <li class="title colorset-first-tier">Avanços por Nível</li>
+        {{#each system.advancement as |level|}}
+        <li class="list-sub-header colorset-second-tier">Nível {{@index}}</li>
+        {{#each level as |adv|}}
+        <li>{{adv}}</li>
+        {{/each}}
+        {{/each}}
+    </ol>
+
+</section>

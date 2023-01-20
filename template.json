@@ -158,17 +158,18 @@
             "customCollisionDmg": 1
         },
         "char": {
-            "threat": "",
-            "dmgMod": 0,
-            "testMod": 0,
-            "attackMod": 0,
-            "statBlockView": false,
-            "level": 1,
+            "advancement": [],
+            "level": 0,
             "xp": {
                 "value": 0,
                 "next": 0,
                 "advPoints": 0
             },
+            "threat": "",
+            "dmgMod": 0,
+            "testMod": 0,
+            "attackMod": 0,
+            "statBlockView": false,
             "features": "",
             "traits": "",
             "goals": "",
@@ -620,6 +621,18 @@
                     }
                 }
             }
+        },
+        "class": {
+            "name": "",
+            "description": "",
+            "primaryAbl": [],
+            "health": {
+                "start": "20 + @cons + 1d6",
+                "leveling": "1d6 + @cons"
+            },
+            "wgroups": [],
+            "level": 0,
+            "progression": []
         },
         "shipfeatures": {
             "templates": ["description", "hardItem", "damage"],

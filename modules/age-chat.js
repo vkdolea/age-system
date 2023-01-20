@@ -291,7 +291,7 @@ function _handleAgeRollVisibility(html, chatCard, chatData){
     for (let e = 0; e < element.length; e++) {
         const el = element[e];
         let actorId = flags?.rollData?.actorId;
-        if (!actorId && flags.type === "damage") actorId = flags.damageData.attackerId; // Compatibility to Damage Chat Card before 1.1.6
+        if (!actorId && flags?.type === "damage") actorId = flags.damageData.attackerId; // Compatibility to Damage Chat Card before 1.1.6
         let actor = actorId ? fromUuidSync(actorId) : null;
         actor = actor?.actor ?? actor;
         const isBlind = chatCard.blind;

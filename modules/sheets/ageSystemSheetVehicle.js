@@ -79,36 +79,6 @@ export default class ageSystemVehicleSheet extends ActorSheet {
         html.on("dragleave", ".passenger-container", ev => {
             ev.target.classList.remove("dragover")
         })
-        // html.on("drop", ".passenger-container", ev => {
-        //     ev.target.classList.remove("dragover")
-        //     const dragData = JSON.parse(ev.originalEvent.dataTransfer.getData("text/plain"))
-        //     const passenger = game.actors.get(dragData.id);
-        //     if (passenger.data.type === "char") {
-
-        //         const passengerData = {
-        //             id : passenger.id,
-        //             isToken : passenger.isToken
-        //         };
-        //         const passengerList = this.actor.system.passengers;
-        //         let alreadyOnboard = false;
-        //         passengerList.map( p => {
-        //             if (p.id === passengerData.id) {
-        //                 alreadyOnboard = true;
-        //                 const parts = {name: p.name, id: p.id};
-        //                 let warning = game.i18n.format("age-system.WARNING.alreadyOnboard", parts);
-        //                 ui.notifications.warn(warning);
-        //             }
-        //         });
-
-        //         if (!alreadyOnboard) {
-        //             passengerList.push(passengerData);
-        //             this.actor.update({"system.passengers" : passengerList})
-        //         }
-        //     } else {
-        //         const warning = game.i18n.localize("age-system.WARNING.vehicleIsNotPassenger");
-        //         ui.notifications.warn(warning);
-        //     }
-        // })
         
         // Actions by sheet owner and observers (if optional setting is TRUE)
         if (this.actor.isOwner || this.observerRoll) {

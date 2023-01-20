@@ -135,6 +135,9 @@ export default class ageSystemItemSheet extends ItemSheet {
             const inputs = html.find("input");
             inputs.focus(ev => ev.currentTarget.select());
 
+            // Class Item Type commands only
+            html.find(".add-progression").click(this._onAddAdvance.bind(this));
+
         };
         html.find(".find-reference").click(this._onOpenPDF.bind(this));
 
@@ -148,6 +151,19 @@ export default class ageSystemItemSheet extends ItemSheet {
         for (let i = 0; i < editor.length; i++) editor[i].classList.add('values');
 
         super.activateListeners(html);
+    };
+
+    _onAddAdvance(e) {
+        /**
+         * Abre janela de diálogo
+         * Oferece as seguintes opções:
+         * - Ponto de Vida
+         * - Incluir novo item (ou progredir um de mesmo tipo)
+         * - Aumentar Defense
+         * - Aumentar Toughness
+         * - Dar Advancement
+         */
+
     };
 
     _onOpenPDF(e) {
