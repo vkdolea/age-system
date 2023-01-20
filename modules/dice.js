@@ -87,7 +87,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
 
     // Set roll mode
     // const rMode = setBlind(event);
-    const rollMode = event.shiftKey ? "blindroll" : "roll";
+    const rollMode = event.shiftKey ? CONST.DICE_ROLL_MODES.BLIND : "roll";
     let rollData = {...actor?.actorRollData()};
     let partials = [];
     rollData.abilityName = "...";
@@ -411,8 +411,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     };
 
     if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;
-    if (rollMode === "blindroll") chatData = await ChatMessage.applyRollMode(chatData, rollMode);
-    return ChatMessage.create(chatData);
+    return ChatMessage.create(chatData, {rollMode});
 };
 
 // Check if the roll has Weapon Group penalty

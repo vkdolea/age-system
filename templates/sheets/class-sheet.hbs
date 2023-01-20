@@ -1,0 +1,84 @@
+<form class="{{cssClass}} age-system item class flexrow no-flexwrap" autocomplete="off">
+    <aside class="sidebar metal-background colorset-first-tier">
+        <img class="document-picture" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <ul class="item-summary">
+            {{!-- Talent Degree --}}
+            <li>
+                <label>{{localize "age-system.talentDegree"}}</label>
+                <select name="system.degree">
+                {{#select system.degree}}
+                    {{#each config.talentDegrees as |degree|}}
+                    <option value="{{@key}}">{{degree}}</option>
+                    {{/each}}
+                {{/select}}
+                </select>
+            </li>
+
+            {{!-- Type (Talent/Specialization) --}}
+            <li>
+                <label>{{localize "age-system.type"}} </label>
+                <select name="system.type">
+                {{#select system.type}}
+                    <option value="talent">{{localize "ITEM.TypeTalent"}}</option>
+                    <option value="spec">{{localize "age-system.item.spec"}}</option>
+                {{/select}}
+                </select>
+            </li>
+
+            {{!-- Page Ref --}}
+            <li class="feature-controls" data-reference="{{system.reference}}">
+                <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
+                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{system.reference}}" placeholder="Page Ref." data-dtype="String"/>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="second-column flexcol">
+        <header class="top-banner colorset-first-tier flexrow">
+            <div class="header-details">
+                <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
+                <div class="sub-details">
+                    {{!-- Requirement --}}
+                    <input type="text" name="system.requirement" value="{{system.requirement}}">
+                    <label>{{localize "age-system.requirement"}}</label>
+                </div>
+            </div>
+        </header>
+        
+        <div class="sheet-main-content metal-background">
+
+            {{!-- Sheet Tab Navigation --}}
+            <nav class="add-sheet-tabs tabs" data-group="primary">
+                <a class="item" data-tab="main">{{localize "age-system.item.desc"}}</a>
+                {{!-- <a class="item" data-tab="bonus">{{localize "age-system.itemMod"}}</a> --}}
+                <a class="item" data-tab="options"><i class="fa fa-cog" aria-hidden="true"></i></a>
+            </nav>
+
+            <section class="sheet-tab-section">
+                {{!-- Main Tab --}}
+                <div class="tab options" data-group="primary" data-tab="main">
+                    <ul class="resource colorset-first-tier item-group">
+                        <li class="title colorset-third-tier">
+                            <label>{{localize "age-system.item.desc"}}</label>
+                        </li>
+                        <li>{{editor system.description target="system.description" button=true owner=owner editable=true}}</li>
+                    </ul>
+                </div>
+
+                {{!-- Config Tab --}}
+                <div class="tab options" data-group="primary" data-tab="options">
+                    <ol class="resource item-group colorset-third-tier">
+                        <li class="title colorset-first-tier">Avanços por Nível</li>
+                        {{#each system.progression as |level|}}
+                        <li class="list-sub-header colorset-second-tier">Nível {{@index}}</li>
+                        {{#each level as |adv|}}
+                        <li>{{adv}}</li>
+                        {{/each}}
+                        {{/each}}
+                    </ol>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</form>

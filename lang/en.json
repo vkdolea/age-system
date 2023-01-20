@@ -726,6 +726,8 @@
         "invalidFileContent": "File content is not valid",
         "customEffects": "Custom Effects",
         "customEffectsSet": "Custom Effects set",
-        "attkHeader": "Weapon Attack Roll Damage"
+        "attkHeader": "Weapon Attack Roll Damage",
+
+        "advancement": "Advancement"
     }
 }

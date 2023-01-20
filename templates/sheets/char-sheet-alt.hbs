@@ -307,6 +307,7 @@
                 <a class="char" data-tab="powers">{{localize "age-system.power"}}</a>
                 <a class="char" data-tab="effects">{{localize "age-system.charEffects"}}</a>
                 <a class="char" data-tab="options"><i class="fa fa-cog" aria-hidden="true"></i></a>
+                {{!-- <a class="char" data-tab="adv">{{localize "age-system.advancement"}}</a> --}}
             </nav>
 
             <section class="sheet-tab-section">
@@ -355,6 +356,11 @@
                 {{!-- Options Tab --}}
                 <div class="tab options" data-group="primary" data-tab="options">
                     {{> "systems/age-system/templates/partials/char-sheet-alt-options.hbs"}}
+                </div>
+
+                {{!-- Advancement Tab --}}
+                <div class="tab adv" data-group="primary" data-tab="adv">
+                    {{> "systems/age-system/templates/partials/char-sheet-alt-adv.hbs"}}
                 </div>
 
             </section>

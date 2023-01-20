@@ -4,7 +4,7 @@
         {{#each presets as |preset|}}
         <div class="flexrow flex-justify-between resource {{#if (ne preset.name ../config.preset)}}opacity-low{{/if}} colorset-second-tier">
             <a><img src="{{preset.img}}" alt="{{localize preset.label}}" class="game-preset" data-preset="{{preset.name}}"/></a>
-            <p class="notes colorset-second-tier" style="background: none;">{{localize preset.hint}} <a href="{{preset.link}}" title="{{preset.link}}"><i class="colorset-third-tier fas fa-external-link-alt" style="background: none;"></i></a></p>
+            <p class="notes colorset-second-tier" style="background: none;">{{localize preset.hint}} <a href="{{preset.link}}" title="{{preset.link}}"><i class="colorset-second-tier fas fa-external-link-alt" style="background: none;"></i></a></p>
         </div>
         {{/each}}
     </div>

@@ -113,10 +113,24 @@ export function sortObjArrayByName(nameArray, nameKey) {
  * @param {jQuery Object} html jQuery object whithin sheet
  * @param {object} data data used to render sheet
  */
-export async function prepSheet (sheet, html, data) {
+export async function prepSheet (sheet, html, doc) {
     // Add color customization
-    html.addClass(`colorset-${ageSystem.colorScheme}`);
+    const base = html.closest(`.age-system.sheet`);
+    const classes = [];
+    const colors = [];
+    for (let i = 0; i < base[0].classList.length; i++) {
+        classes.push(base[0].classList[i]);
+    };
+    for (let k = 0; k < classes.length; k++) {
+        const c = classes[k];
+        if (c.indexOf(`colorset-`) > -1) colors.push(c)
+    }
+    if (colors.length > 0) colors.map(c => base[0].classList.remove(c))
+    base[0].classList.add(`colorset-${ageSystem.colorScheme}`);
     
+    // Add minimum width for Vehicle and Spaceship sheets
+    if(['vehicle', 'spaceship'].includes(doc.data.type)) base.css("min-width", "665px");
+
     // Enrich HMTL text
     enrichTinyMCE(html);
 }

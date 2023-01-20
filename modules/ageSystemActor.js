@@ -279,7 +279,9 @@ export class ageSystemActor extends Actor {
                 mGroup.formParts = Dice.resumeFormula(mGroup.totalFormula, foundry.utils.deepClone(this.actorRollData()));
             }
         }
+    }
 
+    _prepareDerivedDataChar() {
         this._preparePostModCharData();
     }
 
@@ -376,19 +378,16 @@ export class ageSystemActor extends Actor {
         data.resources.total = data.resources.base + Number(data.resources.mod);
     };
 
-    _prepareDerivedDataChar() {
-    }
-
     _spaceshipItemModifiers() {
         const actorData = this;
         const data = actorData.system;
 
         // Items With Mod
-        const ownedItems = actorData.items.filter(i => i.type !== "special" && i.type !== "rollable" && i.type !== "weapon");
+        const ownedItems = actorData.items.filter(i => !['special', 'rollable', 'weapon'].includes(i.system.type));
         let bonuses = {};
         ownedItems.map(f => {
             const item = f.system;
-            const dataType = f.type;
+            const dataType = item.type;
             if (!bonuses[dataType]) {
                 bonuses = {
                     ...bonuses,
@@ -407,35 +406,6 @@ export class ageSystemActor extends Actor {
 
         data.defenseTotal = 10;
         this.sortPassengers();
-        // let invalidPassengers = [];
-        // for (let pi = 0; pi < data.passengers.length; pi++) {
-        //     const p = data.passengers[pi];
-        //     if (!game.actors) {
-        //         game.postReadyPrepare.push(this);
-        //     } else {
-        //         const pData = p.isToken ? game.actors.tokens[p.id] : game.actors.get(p.id);
-        //         if (!pData) {
-        //             invalidPassengers.push(pi);
-        //         } else {
-        //             p.name = pData.name;
-        //             p.picture = pData.prototypeToken.texture.src;
-        //         };
-        //         if (p.id === data.conductor && pData) {
-        //             p.isConductor = true;
-        //             const defenseAbl = pData.system.abilities[data.handling.useAbl].total;
-        //             const defenseFocus = this.checkFocus(data.handling.useFocus);
-        //             const defenseValue = !defenseFocus?.focusItem ? 0 : defenseFocus.focusItem.system.initialValue;
-        //             data.defenseTotal += defenseAbl + defenseValue;
-        //         } else {
-        //             p.isConductor = false;
-        //         }
-        //     }
-        // }
-        // // Remove passengers whose sheets/tokens are not valid anymore
-        // for (let ip = 0; ip < invalidPassengers.length; ip++) {
-        //     const i = invalidPassengers[ip];
-        //     data.passengers.splice(i, 1);
-        // };
         data.pob = data.passengers.length;
 
     };
@@ -795,7 +765,7 @@ export class ageSystemActor extends Actor {
         switch (actorType) {
             case 'char':
                 previousHP = charData.health.value;
-                maxHP = charData.health.set
+                maxHP = charData.health.max
                 updatePath = 'system.health.value';
                 break;
             case 'organization':

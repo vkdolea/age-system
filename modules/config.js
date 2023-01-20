@@ -235,7 +235,8 @@ ageSystem.itemIcons = {
     "membership": `${itemIconPath}backup.svg`,
     "weapon": `${itemIconPath}fist.svg`,
     "focus": `${itemIconPath}gift-of-knowledge.svg`,
-    "shipfeatures": `${itemIconPath}processor.svg`
+    "shipfeatures": `${itemIconPath}processor.svg`,
+    "class": `${itemIconPath}achievement.svg`
 };
 
 const actorIconPath = "systems/age-system/resources/imgs/actor-icon/";
@@ -873,7 +874,7 @@ ageSystem.gameSettings = {
                 healthMode: 'health',
                 abilitySelection: 'main',
                 primaryAbl: true,
-                gameMode: false,
+                gameMode: 'none',
                 wealthType: 'coins',
                 occupation: 'class',
                 ancestryOpt: 'race',
@@ -897,14 +898,14 @@ ageSystem.gameSettings = {
                 healthMode: 'fortune',
                 abilitySelection: 'main',
                 primaryAbl: false,
-                gameMode: false,
+                gameMode: 'none',
                 weaponGroups: "",
                 wealthType: 'income',
                 occupation: 'profession',
                 ancestryOpt: 'origin',
                 useConviction: false,
                 usePowerPoints: false,
-                complication: 'chrun',
+                complication: 'churn',
                 serendipity: false
             }
         }
@@ -944,7 +945,7 @@ ageSystem.gameSettings = {
                 healthMode: 'health',
                 abilitySelection: 'main',
                 primaryAbl: true,
-                gameMode: false,
+                gameMode: 'none',
                 wealthType: 'coins',
                 occupation: 'class',
                 ancestryOpt: 'race',

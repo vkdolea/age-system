@@ -1,5 +1,16 @@
 # Release Notes
 
+## 1.1.9 [2023-01-20]
+### Fixed
+- Some chat cards created in old versions rendering incorrectly.
+- Problem selecting Game Mode when using Quick Settings.
+- Token sheet will update color settings without needing to closing it and openning again.
+- Data calculated based on Abilities has now the correct values when implementing Conditons or Active Effects.
+- Healing a character will now heal up to maximum Health/Fortune plus mods.
+- Shift + Left Click will now correctly trigger blind roll to GM.
+- Fixed calculation when using qualities/flaws on Spaceship which modifying Hull and Sensors.
+- Fixed bug causing The Expanse quick setting to set properly Churn functionality.
+
 ## 1.1.8 [2022-10-06]
 ### Fixed
 - Description now appears correctly on Organization sheet when not on text editor mode.
