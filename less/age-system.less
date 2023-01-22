@@ -187,6 +187,30 @@ body *:not(i, .fa, .far, .fas) {
         background-image: none;
         background: rgba(254, 254, 254, 0.9);
     }
+    ol {
+        list-style: none;
+    };
+    .advancement-config {
+        li {
+            border-bottom: 2px groove white;
+            padding: 4px;
+        };
+        li:not(:first-of-type) {
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 6px;
+        }
+        li:not(:first-of-type):hover {
+            // background-color: rgba(0, 0, 0, 0.1);
+            background: linear-gradient(90deg, rgba(254,254,254,0.1) 10%, rgba(0,0,0,0.1) 48%, rgba(254,254,254,0.1) 90%);
+        }
+        img {
+            height: 45px;
+            border: none;
+        }
+    }
     .age-importer {
         .min-height {
             flex: 0 0 auto;
@@ -410,5 +434,6 @@ body *:not(i, .fa, .far, .fas) {
     .flex-justify-evenly {
         justify-content: space-evenly;
     };
+
 };
 /*---------------------------------*/

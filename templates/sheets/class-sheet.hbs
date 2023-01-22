@@ -50,8 +50,7 @@
             {{!-- Sheet Tab Navigation --}}
             <nav class="add-sheet-tabs tabs" data-group="primary">
                 <a class="item" data-tab="main">{{localize "age-system.item.desc"}}</a>
-                {{!-- <a class="item" data-tab="bonus">{{localize "age-system.itemMod"}}</a> --}}
-                <a class="item" data-tab="options"><i class="fa fa-cog" aria-hidden="true"></i></a>
+                <a class="item" data-tab="adv">{{localize "age-system.advancement"}}</a>
             </nav>
 
             <section class="sheet-tab-section">
@@ -65,15 +64,20 @@
                     </ul>
                 </div>
 
-                {{!-- Config Tab --}}
-                <div class="tab options" data-group="primary" data-tab="options">
+                {{!-- Advancement Tab --}}
+                <div class="tab adv" data-group="primary" data-tab="adv">
                     <ol class="resource item-group colorset-third-tier">
-                        <li class="title colorset-first-tier">Avanços por Nível</li>
-                        {{#each system.progression as |level|}}
-                        <li class="list-sub-header colorset-second-tier">Nível {{@index}}</li>
+                        <li>
+                            <span>{{localize "age-system.advancementPlural"}}</span>
+                            <a class="add-adv"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                        </li>
+                        {{#each system.advancements as |level|}}
+                        {{#if level}}
+                        <li class="list-sub-header colorset-second-tier">{{localize "age-system.level"}}</li>
                         {{#each level as |adv|}}
                         <li>{{adv}}</li>
                         {{/each}}
+                        {{/if}}
                         {{/each}}
                     </ol>
                 </div>

@@ -13,6 +13,7 @@
     "ITEM.TypeHonorifics": "Honorifics",
     "ITEM.TypeMembership": "Membership",
     "ITEM.TypeShipfeatures": "Spaceship Feature",
+    "ITEM.TypeClass": "Class",
 
     "SETTINGS.useTargeted": "Use Targeted function to apply damage and healing",
     "SETTINGS.useTargetedHint": "Instead of applying damage or healing from chat cards and chat commands to controlled tokens, apply on Targeted tokens",
@@ -728,6 +729,14 @@
         "customEffectsSet": "Custom Effects set",
         "attkHeader": "Weapon Attack Roll Damage",
 
-        "advancement": "Advancement"
+        "advancement": "Advancement",
+        "advancementPlural": "Advancements",
+        "advancementNew": "Select New Advancement",
+        "levelName": "Level {level}",
+        "advHealth": "Increase {health}",
+        "advAbility": "Add Ability Advancement",
+        "advNewItem": "Add New Item or Progress Existing One",
+        "advProgressItem": "Progress Item",
+        "advDefenseOrToughness": "Increase Defense or Toughness"
     }
 }

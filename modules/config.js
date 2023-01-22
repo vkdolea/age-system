@@ -252,6 +252,15 @@ ageSystem.uiElements = {
     ageRoller: `${uiElementsPath}cube.svg`
 }
 
+const advIconPath =  "systems/age-system/resources/imgs/adv-icon/";
+ageSystem.advIcon = {
+    health: `${advIconPath}heart-key.svg`,
+    ability: `${advIconPath}orb-direction.svg`,
+    newItem: `${advIconPath}upgrade.svg`,
+    progressItem: `${advIconPath}progression.svg`,
+    defense: `${advIconPath}armor-upgrade.svg`,
+    toughness: `${advIconPath}strong.svg`
+}
 const AGEstatusEffectsPath = "systems/age-system/resources/imgs/effects/";
 ageSystem.statusEffectsPath = AGEstatusEffectsPath;
 

@@ -4372,6 +4372,27 @@ body *:not(i, .fa, .far, .fas) {
   background-image: none;
   background: rgba(254, 254, 254, 0.9);
 }
+.age-system-dialog ol {
+  list-style: none;
+}
+.age-system-dialog .advancement-config li {
+  border-bottom: 2px groove white;
+  padding: 4px;
+}
+.age-system-dialog .advancement-config li:not(:first-of-type) {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 6px;
+}
+.age-system-dialog .advancement-config li:not(:first-of-type):hover {
+  background: linear-gradient(90deg, rgba(254, 254, 254, 0.1) 10%, rgba(0, 0, 0, 0.1) 48%, rgba(254, 254, 254, 0.1) 90%);
+}
+.age-system-dialog .advancement-config img {
+  height: 45px;
+  border: none;
+}
 .age-system-dialog .age-importer .min-height {
   flex: 0 0 auto;
 }
