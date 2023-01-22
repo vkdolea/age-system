@@ -1,6 +1,7 @@
 import {ageSystem} from "../config.js";
 import { modifiersList, sortObjArrayByName } from "../setup.js";
 import { focusList } from "../settings.js";
+import AdvancementConfig from "../advancement.js";
 
 export default class ageSystemItemSheet extends ItemSheet {
     constructor(...args) {
@@ -136,7 +137,7 @@ export default class ageSystemItemSheet extends ItemSheet {
             inputs.focus(ev => ev.currentTarget.select());
 
             // Class Item Type commands only
-            html.find(".add-progression").click(this._onAddAdvance.bind(this));
+            html.find(".add-adv").click(this._onAddAdvance.bind(this));
 
         };
         html.find(".find-reference").click(this._onOpenPDF.bind(this));
@@ -154,16 +155,16 @@ export default class ageSystemItemSheet extends ItemSheet {
     };
 
     _onAddAdvance(e) {
+        return new AdvancementConfig(this.document.uuid).render(true);
         /**
          * Abre janela de diálogo
          * Oferece as seguintes opções:
          * - Ponto de Vida
-         * - Incluir novo item (ou progredir um de mesmo tipo)
+         * - Incluir novo item (ou progredir um de mesmo tipo => válido para Foco, Talento e Vínculo)
          * - Aumentar Defense
          * - Aumentar Toughness
          * - Dar Advancement
          */
-
     };
 
     _onOpenPDF(e) {

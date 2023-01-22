@@ -1,0 +1,13 @@
+<div class="advancement-config">
+    <h2>{{localize "ITEM.TypeClass"}}: {{class.name}}</h2>
+    <ol class="adv-options">
+        <li><strong>{{localize "age-system.advancementNew"}}</strong></li>
+        <li data-adv="health"><img src="{{config.advIcon.health}}">{{localize "age-system.advHealth" health=config.healthSys.healthName}}</li>
+        <li data-adv="ability"><img src="{{config.advIcon.ability}}">{{localize "age-system.advAbility"}}</li>
+        <li data-adv="item"><img src="{{config.advIcon.newItem}}">{{localize "age-system.advNewItem"}}</li>
+        {{!-- <li><img src="{{config.advIcon.progressItem}}">{{localize "age-system.advProgressItem"}}</li> --}}
+        {{!-- <li><img src="{{config.advIcon.defense}}">{{localize "age-system.advDefense"}}</li>
+        <li><img src="{{config.advIcon.toughness}}">{{localize "age-system.advToughness"}}</li> --}}
+        <li data-adv="def-tough"><img src="{{config.advIcon.defense}}">{{localize "age-system.advDefenseOrToughness"}}</li>
+    </ol>
+</div>

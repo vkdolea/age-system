@@ -88,18 +88,10 @@ export class ageSystemActor extends Actor {
 
     /** @override */
     prepareEmbeddedDocuments() {
-        // super.prepareEmbeddedDocuments()
-        const embeddedTypes = this.constructor.metadata.embedded || {};
-        for ( const collectionName of Object.values(embeddedTypes) ) {
-          for ( let e of this[collectionName] ) {
-            e.prepareData();
-          }
-        }
+        super.prepareEmbeddedDocuments();
         
         // Apply Item Modifiers to Actor before applying Active Effects!
         this.applyItemModifiers();
-
-        this.applyActiveEffects();
     }
 
     prepareDerivedData() {
@@ -283,6 +275,9 @@ export class ageSystemActor extends Actor {
 
     _prepareDerivedDataChar() {
         this._preparePostModCharData();
+        
+        // Apply Active Effects again to ensure Effects modifying a derived data is taken into account
+        this.applyActiveEffects();
     }
 
     _preparePostModCharData() {
@@ -296,15 +291,15 @@ export class ageSystemActor extends Actor {
         data.armor.strain = Math.max(mods?.armorStrain?.formParts?.detValue ?? 0, 0)
 
         // All damage delt by Actor
-        data.dmgMod = mods?.actorDamage?.totalFormula ?? "0";
+        data.dmgMod = mods?.actorDamage?.totalFormula ?? (data.dmgMod ?? "0");
 
         // Actor All Tests
         const testModFormula = mods?.testMod?.totalFormula;
-        data.testMod = testModFormula ? Dice.resumeFormula(mods?.testMod?.totalFormula, this.actorRollData()).detValue : 0;
+        data.testMod = testModFormula ? Dice.resumeFormula(mods?.testMod?.totalFormula, this.actorRollData()).detValue : (data.testMod ?? 0);
 
         // Actor All Attacks Mod
         const attkModFormula = mods?.attackMod?.totalFormula;
-        data.attackMod = attkModFormula ? Dice.resumeFormula(mods?.attackMod?.totalFormula, this.actorRollData()).detValue : 0;
+        data.attackMod = attkModFormula ? Dice.resumeFormula(mods?.attackMod?.totalFormula, this.actorRollData()).detValue : (data.attackMod ?? 0);
 
         // Defense
         data.defense.mod = mods?.defense?.formParts?.detValue ?? 0;
