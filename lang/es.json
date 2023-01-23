@@ -13,6 +13,7 @@
   "ITEM.TypeHonorifics": "Títulos",
   "ITEM.TypeMembership": "Afiliaciones",
   "ITEM.TypeShipfeatures": "Características Nave",
+  "ITEM.TypeClass": "Clase",
   "SETTINGS.useTargeted": "Utilizar el Objetivo para aplicar daño y curación.",
   "SETTINGS.useTargetedHint": "En vez de utilizar las tarjetas del chat y los comandos para aplicar daño y curación en los Tokens controlados, aplicarlo mediante los Tokens en el Objetivo",
   "SETTINGS.quicksetting": "Configuración rápida AGE",
@@ -662,6 +663,15 @@
     "invalidFileContent": "El contenido del archivo no es válido",
     "customEffects": "Efectos Personalizados",
     "customEffectsSet": "Efectos Personalizados activos",
-    "attkHeader": "Arma Ataque Daño"
+    "attkHeader": "Arma Ataque Daño",
+    "advancement": "Progreso",
+    "advancementPlural": "Subidas",
+    "advancementNew": "Selecciona Progreso",
+    "levelName": "Nivel {level}",
+    "advHealth": "Incrementa {health}",
+    "advAbility": "Añadir Subida Habilidad",
+    "advNewItem": "Añadir uno Nuevo o Subir uno Existente",
+    "advProgressItem": "Objeto Progreso",
+    "advDefenseOrToughness": "Incrementa Defensa o Dureza"
   }
 }
