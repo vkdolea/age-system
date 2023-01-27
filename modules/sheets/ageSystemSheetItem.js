@@ -1,7 +1,7 @@
 import {ageSystem} from "../config.js";
 import { modifiersList, sortObjArrayByName } from "../setup.js";
 import { focusList } from "../settings.js";
-import AdvancementConfig from "../advancement.js";
+import {AdvancementAdd} from "../advancement.js";
 
 export default class ageSystemItemSheet extends ItemSheet {
     constructor(...args) {
@@ -155,7 +155,7 @@ export default class ageSystemItemSheet extends ItemSheet {
     };
 
     _onAddAdvance(e) {
-        return new AdvancementConfig(this.document.uuid).render(true);
+        return new AdvancementAdd(this.document.uuid).render(true);
         /**
          * Abre janela de diálogo
          * Oferece as seguintes opções:
