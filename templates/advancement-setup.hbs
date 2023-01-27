@@ -1,0 +1,11 @@
+<div class="advancement-config progressive">
+    <h2>{{localize "ITEM.TypeClass"}}: {{class.name}}</h2>
+    <select name="trait" class="header-input">
+        {{#select trait}}
+        {{#each traitArr as |t|}}
+        <option value="{{t.key}}">{{t.name}}</option>
+        {{/each}}
+        {{/select}}
+    </select>
+
+</div>

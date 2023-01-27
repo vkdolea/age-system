@@ -733,10 +733,10 @@
         "advancementPlural": "Advancements",
         "advancementNew": "Select New Advancement",
         "levelName": "Level {level}",
-        "advHealth": "Increase {health}",
-        "advAbility": "Add Ability Advancement",
+        "advProgressiveTrait": "Add Progressive Trait",
         "advNewItem": "Add New Item or Progress Existing One",
-        "advProgressItem": "Progress Item",
-        "advDefenseOrToughness": "Increase Defense or Toughness"
+        "advAbility": "Ability Advancement",
+        "defenseAndToughness": "Defense and Toughness"
+        
     }
 }

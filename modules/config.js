@@ -256,11 +256,57 @@ const advIconPath =  "systems/age-system/resources/imgs/adv-icon/";
 ageSystem.advIcon = {
     health: `${advIconPath}heart-key.svg`,
     ability: `${advIconPath}orb-direction.svg`,
-    newItem: `${advIconPath}upgrade.svg`,
-    progressItem: `${advIconPath}progression.svg`,
-    defense: `${advIconPath}armor-upgrade.svg`,
-    toughness: `${advIconPath}strong.svg`
+    newItem: `${advIconPath}family-tree.svg`,
+    progressive: `${advIconPath}progression.svg`,
 }
+
+/**
+ * Constains path of deverived data, which Active Effects shall be applied after DerivedaData method
+ */
+ageSystem.actorDerivedDataKey = [
+    'system.armor.penaly',
+    'system.armor.strain',
+    'system.dmgMod',
+    'system.testMod',
+    'system.attackMod',
+    // 'system.defense.mod',
+    'system.defense.total',
+    'system.armor.impact',
+    'system.armor.ballistic',
+    // 'system.armor.toughness.mod',
+    'system.armor.toughness.total',
+    // 'system.speed.mod',
+    'system.speed.total',
+    'system.defend.mod',
+    'system.guardUp.mod',
+    'system.allOutAttack.mod',
+    'system.allOutAttack.dmgBonus',
+    // 'system.health.mod',
+    'system.health.max',
+    // 'system.conviction.mod',
+    'system.conviction.max',
+    // 'system.powerPoints.mod',
+    'system.powerPoints.max',
+    'system.aim.mod',
+    'system.initiative',
+    'system.resources.total',
+];
+
+// Ability paths
+ageSystem.charAblKey = [
+    'system.abilities.acc.total',
+    'system.abilities.comm.total',
+    'system.abilities.cons.total',
+    'system.abilities.cunn.total',
+    'system.abilities.dex.total',
+    'system.abilities.fight.total',
+    'system.abilities.int.total',
+    'system.abilities.magic.total',
+    'system.abilities.per.total',
+    'system.abilities.str.total',
+    'system.abilities.will.total',
+]
+
 const AGEstatusEffectsPath = "systems/age-system/resources/imgs/effects/";
 ageSystem.statusEffectsPath = AGEstatusEffectsPath;
 
