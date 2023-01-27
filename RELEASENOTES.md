@@ -1,5 +1,13 @@
 # Release Notes
 
+## 1.1.12 [2023-01-27]
+### Fixed
+- Defense calculation corrected.
+
+## 1.1.11 [2023-01-26]
+### Fixed
+- Corrected order to apply Active Effects.
+
 ## 1.1.10 [2023-01-22]
 ### Fixed
 - Active Effects applied to final calculations (final Defense, final Test mods, etc) were not working correctly.

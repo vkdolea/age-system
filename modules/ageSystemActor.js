@@ -409,7 +409,7 @@ export class ageSystemActor extends Actor {
         // This bonus must be treated on each Item
 
        // Calculate total Defense
-        if (!data.defense.total) data.defense.total = 0;
+        data.defense.total = 0;
         if (data.defend.active) {data.defense.total += Number(data.defend.defenseBonus)};
         if (data.guardUp.active) {data.defense.total += Number(data.guardUp.defenseBonus)};
         data.defense.total += (Number(data.abilities.dex.total) + Number(data.defense.base) + Number(data.defense.mod) + Number(data.defense.gameModeBonus));
