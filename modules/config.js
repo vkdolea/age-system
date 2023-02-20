@@ -260,6 +260,18 @@ ageSystem.advIcon = {
     progressive: `${advIconPath}progression.svg`,
 }
 
+// Advancement Data - progressive values
+ageSystem.adv = {
+    type: {
+        progressive: ['health', 'conviction', 'advAbility', 'defenseAndToughness'/*, 'toughness', 'defense'*/],
+        item: ['spec', 'stunts', 'talent', 'power', 'focus', 'relationship']
+    },
+    health: new Array(20).fill('1 + @cons'),
+    conviction: [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+    advAbility: new Array(20).fill(1),
+    defenseAndToughness: [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+}
+
 /**
  * Constains path of deverived data, which Active Effects shall be applied after DerivedaData method
  */
@@ -305,7 +317,7 @@ ageSystem.charAblKey = [
     'system.abilities.per.total',
     'system.abilities.str.total',
     'system.abilities.will.total',
-]
+];
 
 const AGEstatusEffectsPath = "systems/age-system/resources/imgs/effects/";
 ageSystem.statusEffectsPath = AGEstatusEffectsPath;

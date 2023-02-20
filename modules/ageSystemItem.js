@@ -85,14 +85,39 @@ export class ageSystemItem extends Item {
         }
 
         switch (itemType) {
-            case "focus": this._prepareFocus(data);
-                break;
-            case "power": this._preparePower(data);
-                break;
-            case "shipfeatures": this._prepareShipFeatures(data);
-                break;
+            case "focus": this._prepareFocus(data); break;
+            case "power": this._preparePower(data); break;
+            case "shipfeatures": this._prepareShipFeatures(data); break;
+            case "class": this._prepareClass(data); break;
         }
     };
+
+    _prepareClass(system) {
+        const advPerLvl = new Array(20).fill(null);
+        
+        // First add all Progressive Advancements
+        const progAdv = system.advancements.progressive;
+        for (let p = 0; p < progAdv.length; p++) {
+            const a = progAdv[p]
+            const adv = a.adv;
+            for (let i = 0; i < adv.length; i++) {
+                const e = adv[i];
+                if (!["", 0, "0"].includes(e)) {
+                    if (!advPerLvl[i]) advPerLvl[i] = [];
+                    advPerLvl[i].push({
+                        type: 'progressive',
+                        id: p,
+                        trait: a.trait,
+                        value: e,
+                        img: a.img,
+                        alias: a.alias
+                    })
+                }
+            }
+        }
+
+        system.advPerLvl = advPerLvl;
+    }
 
     prepareDamageData(data) {
         // Evaluate Attack and Damage formula to represent on Item sheet or stat block

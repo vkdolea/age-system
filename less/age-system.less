@@ -182,35 +182,83 @@ body *:not(i, .fa, .far, .fas) {
     }
 }
 
+.age-system-dialog.advancement-config {
+    font-size: 12px;
+    button.file-picker {
+        width: 35px;
+        flex: 0 0 35px;
+    }
+    .options-column {
+        .option {
+            margin-bottom: 4px;
+        }
+        label {
+            flex: 0 0 50px
+        };
+    };
+
+    footer {
+        border-top: 2px groove white;
+        margin-top: 4px;
+        padding: 4px 0;
+    }
+    .list-table-content {
+        text-align: center;
+        li {
+            display: flex;
+            flex-direction: row;
+            height: 26px;
+        }
+        input {
+            size: 24px;
+        }
+    }
+    .list-level {
+        width: 50px;
+    }
+    .list-level-value {
+        width: 120px;
+    };
+    .item-drop-area {
+        border-top: 2px groove white;
+        min-height: 200px;
+        li {
+            border-bottom: none;
+        }
+    }
+    li {
+        border-bottom: 2px groove white;
+        padding: 4px;
+    };
+    li:last-of-type {
+        border-bottom: none;
+    }
+    li:not(:first-of-type) {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 6px;
+    }
+    li.options:hover {
+        // background-color: rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        background: linear-gradient(90deg, rgba(254,254,254,0.1) 10%, rgba(0,0,0,0.1) 48%, rgba(254,254,254,0.1) 90%);
+    }
+    img {
+        height: 45px;
+        border: none;
+    }
+}
 .age-system-dialog {
     .window-content {
         background-image: none;
         background: rgba(254, 254, 254, 0.9);
     }
-    ol {
+    ol, ul {
         list-style: none;
+        margin: 0;
+        padding: 0;
     };
-    .advancement-config {
-        li {
-            border-bottom: 2px groove white;
-            padding: 4px;
-        };
-        li:not(:first-of-type) {
-            cursor: pointer;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            column-gap: 6px;
-        }
-        li:not(:first-of-type):hover {
-            // background-color: rgba(0, 0, 0, 0.1);
-            background: linear-gradient(90deg, rgba(254,254,254,0.1) 10%, rgba(0,0,0,0.1) 48%, rgba(254,254,254,0.1) 90%);
-        }
-        img {
-            height: 45px;
-            border: none;
-        }
-    }
     .age-importer {
         .min-height {
             flex: 0 0 auto;
@@ -405,6 +453,10 @@ body *:not(i, .fa, .far, .fas) {
 
     .flex-align-center {
         align-items: center;
+    };
+
+    .flex-align-baseline {
+        align-items: baseline;
     };
 
     .flex-align-end {

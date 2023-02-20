@@ -1,7 +1,6 @@
 import * as Dice from "../dice.js";
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
-// import {isDropedItemValid} from "./helper.js";
 import {newItemData} from "./helper.js";
 
 export default class ageSystemSheetCharacter extends ActorSheet {
@@ -368,7 +367,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     }
 
     _onToggleItemMod(event) {
-        const actorData = this.actor.system;
         const data = event.currentTarget.dataset;
         const itemId = data.itemId;
         const key = data.key;

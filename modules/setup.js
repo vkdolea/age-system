@@ -132,16 +132,16 @@ export async function prepSheet (sheet, html, doc) {
     if(['vehicle', 'spaceship'].includes(doc.data.type)) base.css("min-width", "665px");
 
     // Enrich HMTL text
-    enrichTinyMCE(html);
+    enrichTinyMCE(`div.editor-content`);
 }
 
 /**
  * Enrich TinyMCE editor text and add class on Content Links and inline rolls
  * @param {jQuery Object} html jQuery object with fields to be enriched
  */
-export async function enrichTinyMCE(html) {
+export async function enrichTinyMCE(selector) {
     // Enrich HMTL text
-    const els = $(`div.editor-content`);
+    const els = $(selector);
     for (let i = 0; i < els.length; i++) {
         els[i].innerHTML = await TextEditor.enrichHTML(els[i].innerHTML, {async: true});
     }

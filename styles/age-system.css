@@ -1,6 +1,16 @@
 /*******************************/
 /**        Item Sheet         **/
 /*******************************/
+.age-system.sheet .advance {
+  padding: 4px;
+  text-align: left;
+}
+.age-system.sheet .advance img {
+  flex: 0 0 24px;
+  height: 24px;
+  border: none;
+  margin-right: 4px;
+}
 .age-system.sheet .itemname {
   font-size: 1.4rem;
   padding-left: 6px;
@@ -4108,6 +4118,7 @@ a:hover {
   box-shadow: none;
 }
 #age-roller {
+  font-size: 42px;
   position: absolute;
   width: 52px;
   height: 62px;
@@ -4115,7 +4126,7 @@ a:hover {
   padding: 0px;
   cursor: pointer;
   display: inline-block;
-  z-index: 99;
+  z-index: calc(var(--z-index-ui) + 10);
 }
 #age-roller-drag {
   width: 100%;
@@ -4368,30 +4379,78 @@ body *:not(i, .fa, .far, .fas) {
   margin-right: 4px;
   border: none;
 }
-.age-system-dialog .window-content {
-  background-image: none;
-  background: rgba(254, 254, 254, 0.9);
+.age-system-dialog.advancement-config {
+  font-size: 12px;
 }
-.age-system-dialog ol {
-  list-style: none;
+.age-system-dialog.advancement-config button.file-picker {
+  width: 35px;
+  flex: 0 0 35px;
 }
-.age-system-dialog .advancement-config li {
+.age-system-dialog.advancement-config .options-column .option {
+  margin-bottom: 4px;
+}
+.age-system-dialog.advancement-config .options-column label {
+  flex: 0 0 50px;
+}
+.age-system-dialog.advancement-config footer {
+  border-top: 2px groove white;
+  margin-top: 4px;
+  padding: 4px 0;
+}
+.age-system-dialog.advancement-config .list-table-content {
+  text-align: center;
+}
+.age-system-dialog.advancement-config .list-table-content li {
+  display: flex;
+  flex-direction: row;
+  height: 26px;
+}
+.age-system-dialog.advancement-config .list-table-content input {
+  size: 24px;
+}
+.age-system-dialog.advancement-config .list-level {
+  width: 50px;
+}
+.age-system-dialog.advancement-config .list-level-value {
+  width: 120px;
+}
+.age-system-dialog.advancement-config .item-drop-area {
+  border-top: 2px groove white;
+  min-height: 200px;
+}
+.age-system-dialog.advancement-config .item-drop-area li {
+  border-bottom: none;
+}
+.age-system-dialog.advancement-config li {
   border-bottom: 2px groove white;
   padding: 4px;
 }
-.age-system-dialog .advancement-config li:not(:first-of-type) {
-  cursor: pointer;
+.age-system-dialog.advancement-config li:last-of-type {
+  border-bottom: none;
+}
+.age-system-dialog.advancement-config li:not(:first-of-type) {
   display: flex;
   flex-direction: row;
   align-items: center;
   column-gap: 6px;
 }
-.age-system-dialog .advancement-config li:not(:first-of-type):hover {
+.age-system-dialog.advancement-config li.options:hover {
+  cursor: pointer;
   background: linear-gradient(90deg, rgba(254, 254, 254, 0.1) 10%, rgba(0, 0, 0, 0.1) 48%, rgba(254, 254, 254, 0.1) 90%);
 }
-.age-system-dialog .advancement-config img {
+.age-system-dialog.advancement-config img {
   height: 45px;
   border: none;
+}
+.age-system-dialog .window-content {
+  background-image: none;
+  background: rgba(254, 254, 254, 0.9);
+}
+.age-system-dialog ol,
+.age-system-dialog ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .age-system-dialog .age-importer .min-height {
   flex: 0 0 auto;
@@ -4574,6 +4633,9 @@ body *:not(i, .fa, .far, .fas) {
 }
 .age-system .flex-align-center {
   align-items: center;
+}
+.age-system .flex-align-baseline {
+  align-items: baseline;
 }
 .age-system .flex-align-end {
   align-items: flex-end;
