@@ -2,7 +2,7 @@
 
 ## 1.2.0 [2023-04-02]
 ### Added
-- New "Class" Item type to track character leveling. Currently, only leveling is supported. Automated level up to come in the next releases.
+- New "Class" Item type to track character leveling. Currently, only creating the Item is possible. In the next release it will be possible to pass to a Character and use it to level up.
 
 ### Changed
 - Text boxes from Character and Item sheets follow the same style and respond to window resizing.
