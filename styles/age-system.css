@@ -187,9 +187,6 @@
   border-left: none;
   padding-left: 0;
 }
-/*******************************/
-/**    Default Char Sheet     **/
-/*******************************/
 /*********************************/
 /**    Item Specific Rules      **/
 /*********************************/
@@ -283,16 +280,16 @@
   background-color: brown;
   color: silver;
 }
-.age-system.char-sheet-alt .modificators-table .mod-type,
-.age-system.item .modificators-table .mod-type {
+.age-system.char-sheet-alt .modifiers-table .mod-type,
+.age-system.item .modifiers-table .mod-type {
   flex: 0 0 200px;
 }
-.age-system.char-sheet-alt .modificators-table .mod-value,
-.age-system.item .modificators-table .mod-value {
+.age-system.char-sheet-alt .modifiers-table .mod-value,
+.age-system.item .modifiers-table .mod-value {
   flex: 0 0 100px;
 }
-.age-system.char-sheet-alt .modificators-table .mod-controls,
-.age-system.item .modificators-table .mod-controls {
+.age-system.char-sheet-alt .modifiers-table .mod-controls,
+.age-system.item .modifiers-table .mod-controls {
   flex: 0 0 50px;
 }
 .age-system.char-sheet-alt .editor,

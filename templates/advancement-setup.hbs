@@ -26,12 +26,10 @@
                 </select>
             </div> 
             {{/if}}
-            {{#if (eq itemOption "multiple")}}
-            <div class="flexrow flex-align-baseline option">
+            <div class="flexrow flex-align-baseline option" {{#if (ne itemOption "multiple")}}style="display: none;"{{/if}}>
                 <label for=""><strong>{{localize "age-system.item.quantity"}}</strong></label>
                 {{rangePicker name="itemQtd" value=itemQtd min=0 max=itemArrSize step=1}}
             </div>
-            {{/if}}
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.alias"}}</strong></label>
                 <input type="text" class="field-data{{#if (eq advType "item")}}-expanded{{/if}}" name="alias" value="{{alias}}" data-dtype="String"/>

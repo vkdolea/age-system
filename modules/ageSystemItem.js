@@ -594,7 +594,6 @@ export class ageSystemItem extends Item {
     };
 
     async showItem(forceSelfRoll = false) {
-        // return ui.notifications.warn("Show item cards on chat is currently unavailable. Await until next version"); // Remove when chat cards are working again
         const item = this;
         const itemData = this.system;
         const rollMode = game.settings.get("core", "rollMode");       

@@ -727,6 +727,27 @@
         "invalidFileContent": "O conteúdo do arquivo não é válido",
         "customEffects": "Efeitos Personalizados",
         "customEffectsSet": "Conjunto de Efeitos Personalizados",
-        "attkHeader": "Arma Ataque Dano"
+        "attkHeader": "Arma Ataque Dano",
+
+        "advancement": "Progressão",
+        "improvements": "Melhorias",
+        "advancementNew": "Selecionar nova Progressão",
+        "levelName": "Nível {level}",
+        "advProgressiveTrait": "Característica Progressiva",
+        "advNewItem": "Item Novo ou Melhoria de Item Existente",
+        "advAbility": "Progressão de Habilidade",
+        "defenseAndToughness": "Defesa ou Resistência",
+        "trait": "Característica",
+        "alias": "Pseudônimo",
+        "confirm": "Confirmar",
+        "image": "Imagem",
+        "itemProgression": "Melhoria de Item",
+        "itemProgressionHint": "Inclui na lista abaixo a opção de Melhorar um Item existente do tipo escolhido.",
+        "itemOptionSingle": "Receber um Item",
+        "itemOptionSingleProgress": "Receber ou melhorar um Item",
+        "itemOptionMultiple": "Escolher Itens da lista",
+        "itemOptionAll": "Receber todos os Items",
+        "dragAdvItem": "Arraste e solte Items para a Progressão no espaço abaixo",
+        "add": "Adicionar"
     }
 }

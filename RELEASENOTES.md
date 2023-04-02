@@ -1,11 +1,15 @@
 # Release Notes
 
-## 1.2.0 [2023-0x-xx]
+## 1.2.0 [2023-04-02]
 ### Added
 - New "Class" Item type to track character leveling. Currently, only leveling is supported. Automated level up to come in the next releases.
 
 ### Changed
 - Text boxes from Character and Item sheets follow the same style and respond to window resizing.
+- Changed icon of AGE Roller (the icon close to Macro Bar).
+
+### Fixed
+- Tests and damage rolled by an unlinked token will correctly display token name on chat card and not the name on character sheet.
 
 ## 1.1.12 [2023-01-27]
 ### Fixed

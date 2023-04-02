@@ -196,7 +196,8 @@ export class AdvancementSetup extends FormApplication {
       trait: trait,
       type: type,
       uuid: null,
-      name: game.i18n.localize("age-system.itemProgression")
+      name: game.i18n.localize("age-system.itemProgression"),
+      isItemProg: true
     })
   }
 
@@ -274,13 +275,6 @@ export class AdvancementSetup extends FormApplication {
     };
 
     const itemAdvs = foundry.utils.deepClone(c.system.advancements.item);
-
-    // if (isEdit) {
-    //   itemAdvs[index.level][index.id] = prog;
-    // } else {
-    //   if (!itemAdvs[prog.level-1]) itemAdvs[prog.level-1] = [prog]
-    //   else itemAdvs[prog.level-1].push(prog)
-    // }
 
     if (isEdit) itemAdvs[index.id] = prog; else itemAdvs.push(prog);
     return c.update({"system.advancements.item": itemAdvs});

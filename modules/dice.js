@@ -293,7 +293,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         };
     }
 
-    if (!flavor) flavor = actor?.name ?? game.user.name;
+    if (!flavor) flavor = (isToken ? actor?.token.name : actor?.name) ?? game.user.name;
     const stuntFlavor = game.i18n.localize("age-system.stuntAttack");
     switch (rollType) {
         case ROLL_TYPE.ATTACK || ROLL_TYPE.MELEE_ATTACK || RANGED_ATTACK:
@@ -741,7 +741,7 @@ export async function plotDamage (actor) {
         finalValue: dmgRoll.total,
         diceTerms: dmgRoll.terms,
         colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
-        flavor: actor.name,
+        flavor: actor.isToken ? actor.token.name : actor.name,
         flavor2: "structure damage",
         user: game.user,
         useInjury: undefined, //modificado
@@ -800,6 +800,7 @@ export async function itemDamage({
     actorWgroups = []}={}) {
 
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
+    const ownerName = item.actor.isToken ? item.actor.token.name : item.actor.name;
     let damageOptions = null;
     if ((!event.ctrlKey && event.altKey) || event.type === "contextmenu") {
         damageOptions = await getDamageRollOptions(addFocus, stuntDie);
@@ -951,7 +952,7 @@ export async function itemDamage({
         finalValue: wGroupPenalty? Math.floor(dmgRoll.total/2) : dmgRoll.total,
         diceTerms: dmgRoll.terms,
         colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
-        flavor: item ? `${item.name} | ${item.actor.name}` : damageDesc,
+        flavor: item ? `${item.name} | ${ownerName}` : damageDesc,
         flavor2: item ? damageDesc : null,
         user: game.user,
         useInjury: healthSys.useInjury
