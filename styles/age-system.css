@@ -1,6 +1,16 @@
 /*******************************/
 /**        Item Sheet         **/
 /*******************************/
+.age-system.sheet .advance {
+  padding: 4px;
+  text-align: left;
+}
+.age-system.sheet .advance img {
+  flex: 0 0 24px;
+  height: 24px;
+  border: none;
+  margin-right: 4px;
+}
 .age-system.sheet .itemname {
   font-size: 1.4rem;
   padding-left: 6px;
@@ -180,553 +190,87 @@
 /*******************************/
 /**    Default Char Sheet     **/
 /*******************************/
-.age-system.sheet.char .arrow-control {
-  font-size: 7px;
-  flex: 0 0 5px;
-  width: fit-content;
-}
-.age-system.sheet.char .injury-bar .arrow-control {
-  margin-left: 4px;
-}
-.age-system.sheet.char .injury-degrees {
-  justify-content: center;
-}
-.age-system.sheet.char .injury-degrees .degree {
-  margin: 0 6px;
-}
-.age-system.sheet.char .injury-degrees .degree input[type='number'] {
-  margin-left: 2px;
-}
-.age-system.sheet.char .injury-degrees > * {
-  justify-content: center;
-  max-width: fit-content;
-}
-.age-system.sheet.char .marks-control {
-  justify-content: center;
-}
-.age-system.sheet.char .marks-control .tracker-container {
-  max-width: fit-content;
-  margin-right: 2px;
-}
-.age-system.sheet.char .marks-control .severe-injury-tracker {
-  border-radius: 50%;
-  border: solid white 2px;
-  background-color: white;
-  width: 4px;
-  max-width: 4px;
-  height: 4px;
-  max-height: 4px;
-  margin-top: 1px;
-}
-.age-system.sheet.char.standard .owned-wgroups {
-  margin: 0 4px;
-  margin-top: 4px;
-  border-radius: 5px;
-  padding: 2px 4px;
-  font-size: 12px;
-}
-.age-system.sheet.char.standard .owned-wgroups label.wgroup {
-  font-weight: 800;
-}
-.age-system.sheet.char.standard .owned-wgroups .wgroup {
-  background-color: inherit;
-  color: inherit;
-  padding: 0;
-}
-.age-system.sheet.char.standard .item-qtd-control,
-.age-system.sheet.char.standard .arrow-control {
-  font-size: 7px;
-  flex: 0 0 5px;
-  width: fit-content;
-}
-.age-system.sheet.char.standard .injury-bar .arrow-control {
-  margin-left: 4px;
-}
-.age-system.sheet.char.standard .injury-degrees {
-  justify-content: center;
-}
-.age-system.sheet.char.standard .injury-degrees .degree {
-  margin: 0 6px;
-}
-.age-system.sheet.char.standard .injury-degrees .degree input[type='number'] {
-  margin-left: 2px;
-}
-.age-system.sheet.char.standard .injury-degrees > * {
-  justify-content: center;
-  max-width: fit-content;
-}
-.age-system.sheet.char.standard .marks-control {
-  justify-content: center;
-}
-.age-system.sheet.char.standard .marks-control .tracker-container {
-  max-width: fit-content;
-  margin-right: 2px;
-}
-.age-system.sheet.char.standard .marks-control .severe-injury-tracker {
-  border-radius: 50%;
-  border: solid white 2px;
-  background-color: white;
-  width: 4px;
-  max-width: 4px;
-  height: 4px;
-  max-height: 4px;
-  margin-top: 1px;
-}
-.age-system.sheet.char.standard .sheet-header {
-  height: 100%;
-}
-.age-system.sheet.char.standard .sheet-header h1.charname {
-  margin-bottom: 4px;
-}
-.age-system.sheet.char.standard .sheet-header h1.charname > input[name="name"] {
-  margin: 0px;
-  padding: 10px 5px;
-  width: 100%;
-}
-.age-system.sheet.char.standard .sheet-header img {
-  height: 198px;
-  width: 150px;
-  object-fit: contain;
-  border: 0px;
-  margin-bottom: 4px;
-}
-.age-system.sheet.char.standard .sheet-header .age-header {
-  margin-bottom: 4px;
-}
-.age-system.sheet.char.standard .sheet-header .age-header > div {
-  margin-bottom: 4px;
-}
-.age-system.sheet.char.standard .sheet-header .age-header .level-xp input[type="number"] {
-  text-align: center;
-}
-.age-system.sheet.char.standard .sheet-header .age-header label {
-  white-space: nowrap;
-  max-width: fit-content;
-  padding: 4px;
-  flex: 0 0 fit-content;
-}
-.age-system.sheet.char.standard nav.add-sheet-tabs {
-  justify-content: space-evenly;
-}
-.age-system.sheet.char.standard nav.add-sheet-tabs a.char {
-  max-width: max-content;
-  padding: 2px 4px;
-}
-.age-system.sheet.char.standard nav.add-sheet-tabs .active {
-  font-weight: 900;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
-}
-.age-system.sheet.char.standard .persona .container {
-  margin-bottom: 4px;
-}
-.age-system.sheet.char.standard .persona .features label,
-.age-system.sheet.char.standard .persona .goals label,
-.age-system.sheet.char.standard .persona .bio label,
-.age-system.sheet.char.standard .persona .secret-note label,
-.age-system.sheet.char.standard .persona .language label {
-  max-width: none;
-  text-align: center;
-  max-height: 25px;
-}
-.age-system.sheet.char.standard .persona .features textarea.free-text,
-.age-system.sheet.char.standard .persona .goals textarea.free-text,
-.age-system.sheet.char.standard .persona .bio textarea.free-text,
-.age-system.sheet.char.standard .persona .secret-note textarea.free-text,
-.age-system.sheet.char.standard .persona .language textarea.free-text {
-  resize: none;
-  font-family: inherit;
-  background: white;
-  border: none;
-  height: auto;
-}
-.age-system.sheet.char.standard .persona .goals-language .spacer {
-  flex: 0 0 4px;
-}
-.age-system.sheet.char.standard .persona .goals.container,
-.age-system.sheet.char.standard .persona .language.container,
-.age-system.sheet.char.standard .persona .features.container,
-.age-system.sheet.char.standard .persona .secret-note.container {
-  height: 150px;
-}
-.age-system.sheet.char.standard .persona label {
-  white-space: nowrap;
-  max-width: fit-content;
-  padding: 4px;
-  flex: 0 0 fit-content;
-}
-.age-system.sheet.char.standard .persona .editor.editor {
-  min-height: 300px;
-  max-height: 600px;
-  height: 100%;
-  padding: 4px;
-  border: 1px solid grey;
-  border-radius: 4px;
-}
-.age-system.sheet.char.standard .persona .editor.editor .tox.tox-tinymce {
-  min-height: 290px !important;
-  max-height: 590px !important;
-}
-.age-system.sheet.char.standard .item-container ul {
-  margin-top: 0;
-  padding: 0;
-  list-style-type: none;
-}
-.age-system.sheet.char.standard .item-container ul .header {
-  justify-content: center;
-}
-.age-system.sheet.char.standard .item-container ul .header p {
-  text-align: center;
-  margin: 0;
-}
-.age-system.sheet.char.standard .item-container li:first-of-type {
-  margin-bottom: 1px;
-}
-.age-system.sheet.char.standard .item-container li.elements {
-  margin-top: 4px;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: center;
-}
-.age-system.sheet.char.standard .item-container li.elements p {
-  text-align: center;
-}
-.age-system.sheet.char.standard .item-container .inactive {
-  opacity: 0.2;
-}
-.age-system.sheet.char.standard .item-container.effects ul.effects .header p.effect-name {
-  text-align: left;
-}
-.age-system.sheet.char.standard .item-container.effects img.effect-icon {
-  height: 24px;
-  flex: 0 0 24px;
-  object-fit: contain;
-}
-.age-system.sheet.char.standard .item-container.effects div.effect-name {
-  align-items: center;
-  text-align: left;
-}
-.age-system.sheet.char.standard .item-container.effects div.effect-name p {
-  text-align: left;
-  padding-left: 4px;
-}
-.age-system.sheet.char.standard .item-container.effects .effect-name.effect-name {
-  flex: 0 0 25%;
-  text-align: left;
-}
-.age-system.sheet.char.standard .item-container.effects .effect-key {
-  flex: 0 0 30%;
-}
-.age-system.sheet.char.standard .item-container.effects .effect-operation {
-  flex: 0 0 15%;
-}
-.age-system.sheet.char.standard .item-container.effects .effect-value {
-  flex: 0 0 15%;
-}
-.age-system.sheet.char.standard .item-container.effects .effect-add {
-  padding-right: 4px;
-  flex: 0 0 10%;
-  text-align: center;
-}
-.age-system.sheet.char.standard .item-container.modifiers .mod-name {
-  flex: 0 0 30%;
-}
-.age-system.sheet.char.standard .item-container.modifiers .mod-value {
-  flex: 0 0 40%;
-}
-.age-system.sheet.char.standard .item-container.modifiers .mod-value p.icon.icon {
-  flex: 0 0 30%;
-}
-.age-system.sheet.char.standard .item-container.modifiers .mod-value p.value.value {
-  flex: 0 0 70%;
-}
-.age-system.sheet.char.standard .item-container.modifiers .mod-source.mod-source {
-  flex: 0 0 30%;
-}
-.age-system.sheet.char.standard input[type="checkbox"] {
-  margin: 0px;
-  margin-top: 1px;
-  width: 16px;
-  height: 16px;
-}
-.age-system.sheet.char.standard .resource-box {
-  display: flex;
-  flex-direction: column;
-}
-.age-system.sheet.char.standard .grid-resp {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50px, 140px));
-  row-gap: 4px;
-  margin-bottom: 4px;
-}
-.age-system.sheet.char.standard .general-stats {
-  text-align: center;
-  margin-bottom: 4px;
-}
-.age-system.sheet.char.standard .general-stats ul {
-  list-style-type: none;
-  padding: 0;
-}
-.age-system.sheet.char.standard .general-stats input[name="system.fatigue.status"] {
-  font-size: 12px;
-}
-.age-system.sheet.char.standard .general-stats > div.armor {
-  border-radius: 4px;
-  background-color: white;
-}
-.age-system.sheet.char.standard .general-stats .resources a {
-  max-width: fit-content;
-}
-.age-system.sheet.char.standard .general-stats .resources i {
-  margin-right: 4px;
-}
-.age-system.sheet.char.standard .general-stats input[type="number"] {
-  max-height: 26px;
-}
-.age-system.sheet.char.standard .general-stats > div {
-  margin-bottom: 4px;
-}
-.age-system.sheet.char.standard .general-stats .top-row {
-  margin-bottom: 2px;
-  min-width: max-content;
-}
-.age-system.sheet.char.standard .general-stats .main-value {
-  font-size: 20px;
-}
-.age-system.sheet.char.standard .general-stats .coins label {
-  font-size: 10px;
-  max-width: 14px;
-  margin-right: 2px;
-}
-.age-system.sheet.char.standard .general-stats .coins > div {
-  margin-top: 2px;
-}
-.age-system.sheet.char.standard .general-stats .coins input[name="system.gp"],
-.age-system.sheet.char.standard .general-stats .coins input[name="system.sp"],
-.age-system.sheet.char.standard .general-stats .coins input[name="system.cp"] {
-  font-size: 12px;
-  max-height: 16px;
-}
-.age-system.sheet.char.standard .general-stats .stat-modifiers {
-  padding-left: 2px;
-  padding-right: 2px;
-}
-.age-system.sheet.char.standard .general-stats .stat-modifiers div {
-  font-size: 14px;
-}
-.age-system.sheet.char.standard .general-stats .stat-modifiers label {
-  margin-left: 2px;
-  text-align: left;
-}
-.age-system.sheet.char.standard .general-stats .stat-modifiers input[type="number"] {
-  max-width: 25px;
-  min-width: 25px;
-  height: 16px;
-}
-.age-system.sheet.char.standard .general-stats .stat-modifiers input[type="number"][number-type="five-digits"],
-.age-system.sheet.char.standard .general-stats .stat-modifiers input[name="system.powerPoints.set"],
-.age-system.sheet.char.standard .general-stats .stat-modifiers input[name="system.powerPoints.max"],
-.age-system.sheet.char.standard .general-stats .stat-modifiers input[name="system.health.set"],
-.age-system.sheet.char.standard .general-stats .stat-modifiers input[name="system.health.max"] {
-  max-width: 50px;
-  min-width: 50px;
-  height: 16px;
-}
-.age-system.sheet.char.standard .general-aid-bar {
-  padding: 4px;
-  margin-bottom: 4px;
-  text-align: center;
-}
-.age-system.sheet.char.standard .general-aid-bar > div {
-  margin-left: 2px;
-}
-.age-system.sheet.char.standard .general-aid-bar label {
-  padding-left: 2px;
-  margin-right: 4px;
-  max-height: 19px;
-  white-space: nowrap;
-}
-.age-system.sheet.char.standard .general-aid-bar input[type="number"] {
-  margin: 0px;
-  max-width: 25px;
-  min-width: 25px;
-  max-height: 16px;
-  text-align: center;
-}
-.age-system.sheet.char.standard .col-1 {
-  max-width: 200px;
-}
-.age-system.sheet.char.standard .col-1 .ability-box:last-of-type {
-  border-bottom: solid grey 1px;
-}
-.age-system.sheet.char.standard .col-1 .ability-box {
-  border: solid grey 1px;
-  border-bottom: none;
-}
-.age-system.sheet.char.standard .col-1 .ability-box .abl-header {
-  align-items: center;
-}
-.age-system.sheet.char.standard .col-1 .ability-box .abl-header .abl-name {
-  padding-left: 4px;
-  min-width: fit-content;
-  height: max-content;
-  flex-grow: 3;
-}
-.age-system.sheet.char.standard .col-1 .ability-box .abl-header .primary-secondary,
-.age-system.sheet.char.standard .col-1 .ability-box .abl-header .last-up {
-  height: 1em;
-  justify-self: end;
-  margin: 0px;
-}
-.age-system.sheet.char.standard .col-1 .ability-box input[type="number"].abl-value {
-  border-radius: 0%;
-  border: none;
-  border-left: 1px solid grey;
-  border-bottom: 1px solid grey;
-  height: max-content;
-  width: 23px;
-  max-width: 23px;
-  text-align: center;
-  font-size: 15px;
-}
-.age-system.sheet.char.standard .col-1 .ability-box .owned-focus {
-  padding: 4px;
-  min-height: 2em;
-  width: 100%;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: stretch;
-}
-.age-system.sheet.char.standard .col-1 .ability-box .owned-focus .improved-focus {
-  text-decoration: underline;
-}
-.age-system.sheet.char.standard .col-1 .ability-box .owned-focus .item-name {
-  font-size: 14px;
-  border-radius: 5px;
-  margin: 2px;
-  vertical-align: middle;
-  text-align: center;
-}
-.age-system.sheet.char.standard .col-2 {
-  margin-left: 4px;
-}
-.age-system.sheet.char.standard .col-2 label {
-  background-color: #007DAD;
-  color: white;
-  white-space: nowrap;
-  padding: 4px;
-}
-.age-system.sheet.char.standard .item-control {
-  max-width: fit-content;
-}
-.age-system.sheet.char.standard .fill-card {
-  max-width: fit-content;
-}
-.age-system.sheet.char.standard .item-container {
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 4px;
-}
-.age-system.sheet.char.standard .item-container .inactive {
-  opacity: 0.3;
-}
-.age-system.sheet.char.standard .item-container .item-box {
-  min-width: 150px;
-  border-radius: 5px;
-  padding: 4px;
-  margin: 2px 4px 2px 4px;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-}
-.age-system.sheet.char.standard .item-container .item-box p {
-  margin: 0px;
-  font-size: 12px;
-}
-.age-system.sheet.char.standard .item-container .item-box .tooltip-container {
-  position: relative;
-  display: inline-block;
-}
-.age-system.sheet.char.standard .item-container .item-box .container-tooltip-text {
-  visibility: hidden;
-  width: 300px;
-  text-align: left;
-  border-radius: 5px;
-  padding: 4px;
-  opacity: 0.9;
-  /* Position the tooltip */
-  position: fixed;
-  z-index: 10;
-}
-.age-system.sheet.char.standard .item-container .item-box .container-tooltip-text .effect-changes {
-  margin-top: 4px;
-  font-size: 12px;
-}
-.age-system.sheet.char.standard .item-container .item-box .tooltip-container:hover .container-tooltip-text {
-  visibility: visible;
-}
-.age-system.sheet.char.standard .item-container .item-box a.item-equip.not-equiped {
-  opacity: 0.3;
-}
-.age-system.sheet.char.standard .item-container .item-box a {
-  margin-left: 2px;
-}
-.age-system.sheet.char.standard .item-container .item-box.conditions {
-  flex: 0 0 120px;
-  margin: auto;
-  margin-top: 4px;
-}
-.age-system.sheet.char.standard .item-container .item-box.conditions p {
-  text-transform: uppercase;
-}
-.age-system.sheet.char.standard .item-container .item-box.weapon-groups {
-  text-align: center;
-  max-width: 200px;
-}
-.age-system.sheet.char.standard .item-container .actor-items {
-  justify-content: stretch;
-}
-.age-system.sheet.char.standard .item-container .item-card {
-  align-items: center;
-  justify-content: space-between;
-}
-.age-system.sheet.char.standard .item-container .item-card .main-data {
-  align-items: center;
-}
-.age-system.sheet.char.standard .item-container .item-card img {
-  max-width: 20px;
-  max-height: 20px;
-}
-.age-system.sheet.char.standard .item-container .item-card .item-name {
-  width: fit-content;
-  max-width: fit-content;
-}
-.age-system.sheet.char.standard .item-container .item-card a {
-  padding-left: 2px;
-}
-.age-system.sheet.char.standard .item-container .item-card .controls {
-  max-width: fit-content;
-}
-.age-system.sheet.char.standard .top-row {
-  height: 20px;
-  max-height: 20px;
-  text-align: center;
-  margin: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
 /*********************************/
 /**    Item Specific Rules      **/
 /*********************************/
-.age-system .talent .main .editor.editor {
-  max-height: 150px;
-}
-.age-system .stunts .editor.editor {
-  max-height: 150px;
-}
 /*********************************/
 /**    Alternate Char Sheet     **/
 /*********************************/
+.age-system.char-sheet-alt .fill-space-height-100 > *,
+.age-system.item .fill-space-height-100 > * {
+  flex: 1 100px;
+}
+.age-system.char-sheet-alt .fill-space-height-100 > * .editor,
+.age-system.item .fill-space-height-100 > * .editor {
+  flex: 1 100px;
+  width: 100%;
+}
+.age-system.char-sheet-alt .editor-parent,
+.age-system.item .editor-parent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.age-system.char-sheet-alt .sheet-main-content,
+.age-system.item .sheet-main-content,
+.age-system.char-sheet-alt .sheet-main-content section,
+.age-system.item .sheet-main-content section,
+.age-system.char-sheet-alt .sheet-tab-section .tab.active,
+.age-system.item .sheet-tab-section .tab.active,
+.age-system.char-sheet-alt .sheet-tab-section .tab.active section,
+.age-system.item .sheet-tab-section .tab.active section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.age-system.char-sheet-alt .sheet-main-content .editor-container,
+.age-system.item .sheet-main-content .editor-container,
+.age-system.char-sheet-alt .sheet-main-content section .editor-container,
+.age-system.item .sheet-main-content section .editor-container,
+.age-system.char-sheet-alt .sheet-tab-section .tab.active .editor-container,
+.age-system.item .sheet-tab-section .tab.active .editor-container,
+.age-system.char-sheet-alt .sheet-tab-section .tab.active section .editor-container,
+.age-system.item .sheet-tab-section .tab.active section .editor-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.age-system.char-sheet-alt .sheet-main-content .editor-char-persona .editor,
+.age-system.item .sheet-main-content .editor-char-persona .editor,
+.age-system.char-sheet-alt .sheet-main-content section .editor-char-persona .editor,
+.age-system.item .sheet-main-content section .editor-char-persona .editor,
+.age-system.char-sheet-alt .sheet-tab-section .tab.active .editor-char-persona .editor,
+.age-system.item .sheet-tab-section .tab.active .editor-char-persona .editor,
+.age-system.char-sheet-alt .sheet-tab-section .tab.active section .editor-char-persona .editor,
+.age-system.item .sheet-tab-section .tab.active section .editor-char-persona .editor {
+  flex: 1 1 204px;
+}
+.age-system.char-sheet-alt .sheet-main-content .add-sheet-tabs,
+.age-system.item .sheet-main-content .add-sheet-tabs,
+.age-system.char-sheet-alt .sheet-main-content section .add-sheet-tabs,
+.age-system.item .sheet-main-content section .add-sheet-tabs,
+.age-system.char-sheet-alt .sheet-tab-section .tab.active .add-sheet-tabs,
+.age-system.item .sheet-tab-section .tab.active .add-sheet-tabs,
+.age-system.char-sheet-alt .sheet-tab-section .tab.active section .add-sheet-tabs,
+.age-system.item .sheet-tab-section .tab.active section .add-sheet-tabs {
+  flex: 0;
+}
+.age-system.char-sheet-alt .sheet-tab-section .tab.active section > *,
+.age-system.item .sheet-tab-section .tab.active section > * {
+  flex-grow: 0;
+}
+.age-system.char-sheet-alt .tab.main.active section.char-main-section,
+.age-system.item .tab.main.active section.char-main-section,
+.age-system.char-sheet-alt .tab.equip.active section.equip-section,
+.age-system.item .tab.equip.active section.equip-section {
+  flex-direction: row;
+}
+.age-system.char-sheet-alt .tab.main.active section.char-main-section > *,
+.age-system.item .tab.main.active section.char-main-section > *,
+.age-system.char-sheet-alt .tab.equip.active section.equip-section > *,
+.age-system.item .tab.equip.active section.equip-section > * {
+  flex: 1;
+}
 .age-system.char-sheet-alt .mouse-to-pointer:hover,
 .age-system.item .mouse-to-pointer:hover {
   cursor: pointer;
@@ -751,19 +295,11 @@
 .age-system.item .modificators-table .mod-controls {
   flex: 0 0 50px;
 }
-.age-system.char-sheet-alt .editor.editor,
-.age-system.item .editor.editor {
+.age-system.char-sheet-alt .editor,
+.age-system.item .editor {
   text-align: left;
-  height: auto !important;
-  min-height: 150px;
-  max-height: 400px;
   padding: 4px;
   border-radius: 0 0 5px 5px;
-}
-.age-system.char-sheet-alt .editor.editor .tox.tox-tinymce,
-.age-system.item .editor.editor .tox.tox-tinymce {
-  min-height: 140px !important;
-  max-height: 390px !important;
 }
 .age-system.char-sheet-alt p .item-box,
 .age-system.item p .item-box {
@@ -857,7 +393,6 @@
 .age-system.sheet .resource select,
 .age-system.dialog .resource select {
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.5);
   margin: 2px;
 }
 .age-system.sheet .resource hr,
@@ -874,6 +409,8 @@
   font-weight: bolder;
   font-size: 0.8rem;
   padding: 2px;
+  flex: 0;
+  height: 20px;
 }
 .age-system.sheet .values,
 .age-system.dialog .values {
@@ -884,9 +421,6 @@
 }
 .age-system.sheet .editor.values,
 .age-system.dialog .editor.values {
-  justify-content: flex-start;
-  align-items: normal;
-  flex-wrap: wrap;
   padding: 0 4px;
 }
 .age-system.sheet li.item-box,
@@ -1163,6 +697,14 @@
 .age-system.dialog .persona {
   padding-right: 4px;
 }
+.age-system.sheet .persona .features .persona-section > div,
+.age-system.dialog .persona .features .persona-section > div {
+  flex: 0 0 80px;
+}
+.age-system.sheet .persona .features .persona-section > div .editor,
+.age-system.dialog .persona .features .persona-section > div .editor {
+  flex: 0 0 100%;
+}
 .age-system.sheet .free-text,
 .age-system.dialog .free-text {
   resize: none !important;
@@ -1172,7 +714,7 @@
 }
 .age-system.sheet .item-group,
 .age-system.dialog .item-group {
-  height: max-content;
+  height: fit-content;
 }
 .age-system.sheet .item-group li,
 .age-system.dialog .item-group li {
@@ -1199,10 +741,6 @@
 .age-system.sheet .item-group.condensed-data li label,
 .age-system.dialog .item-group.condensed-data li label {
   flex: 0 0 100px;
-}
-.age-system.sheet .abilities-column,
-.age-system.dialog .abilities-column {
-  flex: 0 0 200px;
 }
 .age-system.sheet .header-details,
 .age-system.dialog .header-details {
@@ -1299,6 +837,10 @@
 .age-system.sheet .modifiers .extra-margin,
 .age-system.dialog .modifiers .extra-margin {
   margin: 4px 0;
+}
+.age-system.sheet .modifiers .extra-padding,
+.age-system.dialog .modifiers .extra-padding {
+  padding: 4px;
 }
 .age-system.sheet .modifiers li.header,
 .age-system.dialog .modifiers li.header {
@@ -2210,10 +1752,6 @@
 .colorset-modern-blue .top-banner {
   border: 5px outset #35A5CA;
 }
-.colorset-modern-blue .resource .values {
-  background-color: #007DAD;
-  color: #ffffff;
-}
 .colorset-modern-blue .sheet-main-content nav a {
   background-color: #35A5CA;
   color: #231F20;
@@ -2233,6 +1771,14 @@
   background-color: #007DAD;
   color: #ffffff;
 }
+.colorset-modern-blue .colorset-first-tier.resource .list-sub-header {
+  background-color: #B9DBEB;
+  color: #007DAD;
+}
+.colorset-modern-blue .colorset-first-tier.resource .values {
+  background-color: #35A5CA !important;
+  color: #231F20;
+}
 .colorset-modern-blue .colorset-first-tier a.content-link,
 .colorset-modern-blue .colorset-first-tier a.inline-roll {
   background-color: #B9DBEB;
@@ -2242,6 +1788,14 @@
   background-color: #B9DBEB;
   color: #007DAD;
 }
+.colorset-modern-blue .colorset-second-tier.resource .list-sub-header {
+  background-color: #35A5CA;
+  color: #231F20;
+}
+.colorset-modern-blue .colorset-second-tier.resource .values {
+  background-color: #007DAD;
+  color: #ffffff;
+}
 .colorset-modern-blue .colorset-second-tier a.content-link,
 .colorset-modern-blue .colorset-second-tier a.inline-roll {
   background-color: #35A5CA;
@@ -2250,6 +1804,14 @@
 .colorset-modern-blue .colorset-third-tier {
   background-color: #35A5CA;
   color: #231F20;
+}
+.colorset-modern-blue .colorset-third-tier.resource .list-sub-header {
+  background-color: #007DAD;
+  color: #ffffff;
+}
+.colorset-modern-blue .colorset-third-tier.resource .values {
+  background-color: #B9DBEB;
+  color: #007DAD;
 }
 .colorset-modern-blue .colorset-third-tier a.content-link,
 .colorset-modern-blue .colorset-third-tier a.inline-roll {
@@ -2384,10 +1946,6 @@
 .colorset-fantasy-blue .top-banner {
   border: 5px outset #000000;
 }
-.colorset-fantasy-blue .resource .values {
-  background-color: #0f4f5b;
-  color: #ffffff;
-}
 .colorset-fantasy-blue .sheet-main-content nav a {
   background-color: #000000;
   color: #dbdada;
@@ -2407,6 +1965,14 @@
   background-color: #0f4f5b;
   color: #ffffff;
 }
+.colorset-fantasy-blue .colorset-first-tier.resource .list-sub-header {
+  background-color: #91b6d4;
+  color: #0f4f5b;
+}
+.colorset-fantasy-blue .colorset-first-tier.resource .values {
+  background-color: #000000 !important;
+  color: #dbdada;
+}
 .colorset-fantasy-blue .colorset-first-tier a.content-link,
 .colorset-fantasy-blue .colorset-first-tier a.inline-roll {
   background-color: #91b6d4;
@@ -2416,6 +1982,14 @@
   background-color: #91b6d4;
   color: #0f4f5b;
 }
+.colorset-fantasy-blue .colorset-second-tier.resource .list-sub-header {
+  background-color: #000000;
+  color: #dbdada;
+}
+.colorset-fantasy-blue .colorset-second-tier.resource .values {
+  background-color: #0f4f5b;
+  color: #ffffff;
+}
 .colorset-fantasy-blue .colorset-second-tier a.content-link,
 .colorset-fantasy-blue .colorset-second-tier a.inline-roll {
   background-color: #000000;
@@ -2424,6 +1998,14 @@
 .colorset-fantasy-blue .colorset-third-tier {
   background-color: #000000;
   color: #dbdada;
+}
+.colorset-fantasy-blue .colorset-third-tier.resource .list-sub-header {
+  background-color: #0f4f5b;
+  color: #ffffff;
+}
+.colorset-fantasy-blue .colorset-third-tier.resource .values {
+  background-color: #91b6d4;
+  color: #0f4f5b;
 }
 .colorset-fantasy-blue .colorset-third-tier a.content-link,
 .colorset-fantasy-blue .colorset-third-tier a.inline-roll {
@@ -2558,10 +2140,6 @@
 .colorset-dragon-red .top-banner {
   border: 5px outset #979899;
 }
-.colorset-dragon-red .resource .values {
-  background-color: #83272a;
-  color: #ffffff;
-}
 .colorset-dragon-red .sheet-main-content nav a {
   background-color: #979899;
   color: #000000;
@@ -2581,6 +2159,14 @@
   background-color: #83272a;
   color: #ffffff;
 }
+.colorset-dragon-red .colorset-first-tier.resource .list-sub-header {
+  background-color: #e0beb1;
+  color: #83272a;
+}
+.colorset-dragon-red .colorset-first-tier.resource .values {
+  background-color: #979899 !important;
+  color: #000000;
+}
 .colorset-dragon-red .colorset-first-tier a.content-link,
 .colorset-dragon-red .colorset-first-tier a.inline-roll {
   background-color: #e0beb1;
@@ -2590,6 +2176,14 @@
   background-color: #e0beb1;
   color: #83272a;
 }
+.colorset-dragon-red .colorset-second-tier.resource .list-sub-header {
+  background-color: #979899;
+  color: #000000;
+}
+.colorset-dragon-red .colorset-second-tier.resource .values {
+  background-color: #83272a;
+  color: #ffffff;
+}
 .colorset-dragon-red .colorset-second-tier a.content-link,
 .colorset-dragon-red .colorset-second-tier a.inline-roll {
   background-color: #979899;
@@ -2598,6 +2192,14 @@
 .colorset-dragon-red .colorset-third-tier {
   background-color: #979899;
   color: #000000;
+}
+.colorset-dragon-red .colorset-third-tier.resource .list-sub-header {
+  background-color: #83272a;
+  color: #ffffff;
+}
+.colorset-dragon-red .colorset-third-tier.resource .values {
+  background-color: #e0beb1;
+  color: #83272a;
 }
 .colorset-dragon-red .colorset-third-tier a.content-link,
 .colorset-dragon-red .colorset-third-tier a.inline-roll {
@@ -2732,10 +2334,6 @@
 .colorset-folded-purple .top-banner {
   border: 5px outset #625b68;
 }
-.colorset-folded-purple .resource .values {
-  background-color: #565183;
-  color: #ffffff;
-}
 .colorset-folded-purple .sheet-main-content nav a {
   background-color: #625b68;
   color: #000000;
@@ -2755,6 +2353,14 @@
   background-color: #565183;
   color: #ffffff;
 }
+.colorset-folded-purple .colorset-first-tier.resource .list-sub-header {
+  background-color: #cfccde;
+  color: #565183;
+}
+.colorset-folded-purple .colorset-first-tier.resource .values {
+  background-color: #625b68 !important;
+  color: #000000;
+}
 .colorset-folded-purple .colorset-first-tier a.content-link,
 .colorset-folded-purple .colorset-first-tier a.inline-roll {
   background-color: #cfccde;
@@ -2764,6 +2370,14 @@
   background-color: #cfccde;
   color: #565183;
 }
+.colorset-folded-purple .colorset-second-tier.resource .list-sub-header {
+  background-color: #625b68;
+  color: #000000;
+}
+.colorset-folded-purple .colorset-second-tier.resource .values {
+  background-color: #565183;
+  color: #ffffff;
+}
 .colorset-folded-purple .colorset-second-tier a.content-link,
 .colorset-folded-purple .colorset-second-tier a.inline-roll {
   background-color: #625b68;
@@ -2772,6 +2386,14 @@
 .colorset-folded-purple .colorset-third-tier {
   background-color: #625b68;
   color: #000000;
+}
+.colorset-folded-purple .colorset-third-tier.resource .list-sub-header {
+  background-color: #565183;
+  color: #ffffff;
+}
+.colorset-folded-purple .colorset-third-tier.resource .values {
+  background-color: #cfccde;
+  color: #565183;
 }
 .colorset-folded-purple .colorset-third-tier a.content-link,
 .colorset-folded-purple .colorset-third-tier a.inline-roll {
@@ -2906,10 +2528,6 @@
 .colorset-ronin-green .top-banner {
   border: 5px outset #92b65f;
 }
-.colorset-ronin-green .resource .values {
-  background-color: #155f0e;
-  color: #ffffff;
-}
 .colorset-ronin-green .sheet-main-content nav a {
   background-color: #92b65f;
   color: #000000;
@@ -2929,6 +2547,14 @@
   background-color: #155f0e;
   color: #ffffff;
 }
+.colorset-ronin-green .colorset-first-tier.resource .list-sub-header {
+  background-color: #c2f5aa;
+  color: #155f0e;
+}
+.colorset-ronin-green .colorset-first-tier.resource .values {
+  background-color: #92b65f !important;
+  color: #000000;
+}
 .colorset-ronin-green .colorset-first-tier a.content-link,
 .colorset-ronin-green .colorset-first-tier a.inline-roll {
   background-color: #c2f5aa;
@@ -2938,6 +2564,14 @@
   background-color: #c2f5aa;
   color: #155f0e;
 }
+.colorset-ronin-green .colorset-second-tier.resource .list-sub-header {
+  background-color: #92b65f;
+  color: #000000;
+}
+.colorset-ronin-green .colorset-second-tier.resource .values {
+  background-color: #155f0e;
+  color: #ffffff;
+}
 .colorset-ronin-green .colorset-second-tier a.content-link,
 .colorset-ronin-green .colorset-second-tier a.inline-roll {
   background-color: #92b65f;
@@ -2946,6 +2580,14 @@
 .colorset-ronin-green .colorset-third-tier {
   background-color: #92b65f;
   color: #000000;
+}
+.colorset-ronin-green .colorset-third-tier.resource .list-sub-header {
+  background-color: #155f0e;
+  color: #ffffff;
+}
+.colorset-ronin-green .colorset-third-tier.resource .values {
+  background-color: #c2f5aa;
+  color: #155f0e;
 }
 .colorset-ronin-green .colorset-third-tier a.content-link,
 .colorset-ronin-green .colorset-third-tier a.inline-roll {
@@ -3080,10 +2722,6 @@
 .colorset-select-one .top-banner {
   border: 5px outset #4d627a;
 }
-.colorset-select-one .resource .values {
-  background-color: #273249;
-  color: #e7ccc3;
-}
 .colorset-select-one .sheet-main-content nav a {
   background-color: #4d627a;
   color: #290000;
@@ -3103,6 +2741,14 @@
   background-color: #273249;
   color: #e7ccc3;
 }
+.colorset-select-one .colorset-first-tier.resource .list-sub-header {
+  background-color: #768d9f;
+  color: #273249;
+}
+.colorset-select-one .colorset-first-tier.resource .values {
+  background-color: #4d627a !important;
+  color: #290000;
+}
 .colorset-select-one .colorset-first-tier a.content-link,
 .colorset-select-one .colorset-first-tier a.inline-roll {
   background-color: #768d9f;
@@ -3112,6 +2758,14 @@
   background-color: #768d9f;
   color: #273249;
 }
+.colorset-select-one .colorset-second-tier.resource .list-sub-header {
+  background-color: #4d627a;
+  color: #290000;
+}
+.colorset-select-one .colorset-second-tier.resource .values {
+  background-color: #273249;
+  color: #e7ccc3;
+}
 .colorset-select-one .colorset-second-tier a.content-link,
 .colorset-select-one .colorset-second-tier a.inline-roll {
   background-color: #4d627a;
@@ -3120,6 +2774,14 @@
 .colorset-select-one .colorset-third-tier {
   background-color: #4d627a;
   color: #290000;
+}
+.colorset-select-one .colorset-third-tier.resource .list-sub-header {
+  background-color: #273249;
+  color: #e7ccc3;
+}
+.colorset-select-one .colorset-third-tier.resource .values {
+  background-color: #768d9f;
+  color: #273249;
 }
 .colorset-select-one .colorset-third-tier a.content-link,
 .colorset-select-one .colorset-third-tier a.inline-roll {
@@ -3254,10 +2916,6 @@
 .colorset-the-grey .top-banner {
   border: 5px outset #6b6a6a;
 }
-.colorset-the-grey .resource .values {
-  background-color: #3d3e3f;
-  color: #ccc9c9;
-}
 .colorset-the-grey .sheet-main-content nav a {
   background-color: #6b6a6a;
   color: #000000;
@@ -3277,6 +2935,14 @@
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
+.colorset-the-grey .colorset-first-tier.resource .list-sub-header {
+  background-color: #b4b6b3;
+  color: #3d3e3f;
+}
+.colorset-the-grey .colorset-first-tier.resource .values {
+  background-color: #6b6a6a !important;
+  color: #000000;
+}
 .colorset-the-grey .colorset-first-tier a.content-link,
 .colorset-the-grey .colorset-first-tier a.inline-roll {
   background-color: #b4b6b3;
@@ -3286,6 +2952,14 @@
   background-color: #b4b6b3;
   color: #3d3e3f;
 }
+.colorset-the-grey .colorset-second-tier.resource .list-sub-header {
+  background-color: #6b6a6a;
+  color: #000000;
+}
+.colorset-the-grey .colorset-second-tier.resource .values {
+  background-color: #3d3e3f;
+  color: #ccc9c9;
+}
 .colorset-the-grey .colorset-second-tier a.content-link,
 .colorset-the-grey .colorset-second-tier a.inline-roll {
   background-color: #6b6a6a;
@@ -3294,6 +2968,14 @@
 .colorset-the-grey .colorset-third-tier {
   background-color: #6b6a6a;
   color: #000000;
+}
+.colorset-the-grey .colorset-third-tier.resource .list-sub-header {
+  background-color: #3d3e3f;
+  color: #ccc9c9;
+}
+.colorset-the-grey .colorset-third-tier.resource .values {
+  background-color: #b4b6b3;
+  color: #3d3e3f;
 }
 .colorset-the-grey .colorset-third-tier a.content-link,
 .colorset-the-grey .colorset-third-tier a.inline-roll {
@@ -3428,10 +3110,6 @@
 .colorset-red-warrior .top-banner {
   border: 5px outset #b22126;
 }
-.colorset-red-warrior .resource .values {
-  background-color: #751119;
-  color: #f7b755;
-}
 .colorset-red-warrior .sheet-main-content nav a {
   background-color: #b22126;
   color: #c7c691;
@@ -3451,6 +3129,14 @@
   background-color: #751119;
   color: #f7b755;
 }
+.colorset-red-warrior .colorset-first-tier.resource .list-sub-header {
+  background-color: #d1635b;
+  color: #751119;
+}
+.colorset-red-warrior .colorset-first-tier.resource .values {
+  background-color: #b22126 !important;
+  color: #c7c691;
+}
 .colorset-red-warrior .colorset-first-tier a.content-link,
 .colorset-red-warrior .colorset-first-tier a.inline-roll {
   background-color: #d1635b;
@@ -3460,6 +3146,14 @@
   background-color: #d1635b;
   color: #751119;
 }
+.colorset-red-warrior .colorset-second-tier.resource .list-sub-header {
+  background-color: #b22126;
+  color: #c7c691;
+}
+.colorset-red-warrior .colorset-second-tier.resource .values {
+  background-color: #751119;
+  color: #f7b755;
+}
 .colorset-red-warrior .colorset-second-tier a.content-link,
 .colorset-red-warrior .colorset-second-tier a.inline-roll {
   background-color: #b22126;
@@ -3468,6 +3162,14 @@
 .colorset-red-warrior .colorset-third-tier {
   background-color: #b22126;
   color: #c7c691;
+}
+.colorset-red-warrior .colorset-third-tier.resource .list-sub-header {
+  background-color: #751119;
+  color: #f7b755;
+}
+.colorset-red-warrior .colorset-third-tier.resource .values {
+  background-color: #d1635b;
+  color: #751119;
 }
 .colorset-red-warrior .colorset-third-tier a.content-link,
 .colorset-red-warrior .colorset-third-tier a.inline-roll {
@@ -3602,10 +3304,6 @@
 .colorset-never-dead .top-banner {
   border: 5px outset #58705a;
 }
-.colorset-never-dead .resource .values {
-  background-color: #663322;
-  color: #bb8755;
-}
 .colorset-never-dead .sheet-main-content nav a {
   background-color: #58705a;
   color: #29241f;
@@ -3625,6 +3323,14 @@
   background-color: #663322;
   color: #bb8755;
 }
+.colorset-never-dead .colorset-first-tier.resource .list-sub-header {
+  background-color: #eeddcd;
+  color: #663322;
+}
+.colorset-never-dead .colorset-first-tier.resource .values {
+  background-color: #58705a !important;
+  color: #29241f;
+}
 .colorset-never-dead .colorset-first-tier a.content-link,
 .colorset-never-dead .colorset-first-tier a.inline-roll {
   background-color: #eeddcd;
@@ -3634,6 +3340,14 @@
   background-color: #eeddcd;
   color: #663322;
 }
+.colorset-never-dead .colorset-second-tier.resource .list-sub-header {
+  background-color: #58705a;
+  color: #29241f;
+}
+.colorset-never-dead .colorset-second-tier.resource .values {
+  background-color: #663322;
+  color: #bb8755;
+}
 .colorset-never-dead .colorset-second-tier a.content-link,
 .colorset-never-dead .colorset-second-tier a.inline-roll {
   background-color: #58705a;
@@ -3642,6 +3356,14 @@
 .colorset-never-dead .colorset-third-tier {
   background-color: #58705a;
   color: #29241f;
+}
+.colorset-never-dead .colorset-third-tier.resource .list-sub-header {
+  background-color: #663322;
+  color: #bb8755;
+}
+.colorset-never-dead .colorset-third-tier.resource .values {
+  background-color: #eeddcd;
+  color: #663322;
 }
 .colorset-never-dead .colorset-third-tier a.content-link,
 .colorset-never-dead .colorset-third-tier a.inline-roll {
@@ -3776,10 +3498,6 @@
 .colorset-expanded-blue .top-banner {
   border: 5px outset #112339;
 }
-.colorset-expanded-blue .resource .values {
-  background-color: #005971;
-  color: #dde2e2;
-}
 .colorset-expanded-blue .sheet-main-content nav a {
   background-color: #112339;
   color: #dde2e2;
@@ -3799,6 +3517,14 @@
   background-color: #005971;
   color: #dde2e2;
 }
+.colorset-expanded-blue .colorset-first-tier.resource .list-sub-header {
+  background-color: #e6e7e8;
+  color: #005971;
+}
+.colorset-expanded-blue .colorset-first-tier.resource .values {
+  background-color: #112339 !important;
+  color: #dde2e2;
+}
 .colorset-expanded-blue .colorset-first-tier a.content-link,
 .colorset-expanded-blue .colorset-first-tier a.inline-roll {
   background-color: #e6e7e8;
@@ -3808,6 +3534,14 @@
   background-color: #e6e7e8;
   color: #005971;
 }
+.colorset-expanded-blue .colorset-second-tier.resource .list-sub-header {
+  background-color: #112339;
+  color: #dde2e2;
+}
+.colorset-expanded-blue .colorset-second-tier.resource .values {
+  background-color: #005971;
+  color: #dde2e2;
+}
 .colorset-expanded-blue .colorset-second-tier a.content-link,
 .colorset-expanded-blue .colorset-second-tier a.inline-roll {
   background-color: #112339;
@@ -3816,6 +3550,14 @@
 .colorset-expanded-blue .colorset-third-tier {
   background-color: #112339;
   color: #dde2e2;
+}
+.colorset-expanded-blue .colorset-third-tier.resource .list-sub-header {
+  background-color: #005971;
+  color: #dde2e2;
+}
+.colorset-expanded-blue .colorset-third-tier.resource .values {
+  background-color: #e6e7e8;
+  color: #005971;
 }
 .colorset-expanded-blue .colorset-third-tier a.content-link,
 .colorset-expanded-blue .colorset-third-tier a.inline-roll {
@@ -3950,10 +3692,6 @@
 .colorset-snow-white .top-banner {
   border: 5px outset #000000;
 }
-.colorset-snow-white .resource .values {
-  background-color: #ffffff;
-  color: #000000;
-}
 .colorset-snow-white .sheet-main-content nav a {
   background-color: #000000;
   color: #ffffff;
@@ -3973,6 +3711,14 @@
   background-color: #ffffff;
   color: #000000;
 }
+.colorset-snow-white .colorset-first-tier.resource .list-sub-header {
+  background-color: #494949;
+  color: #ffffff;
+}
+.colorset-snow-white .colorset-first-tier.resource .values {
+  background-color: #000000 !important;
+  color: #ffffff;
+}
 .colorset-snow-white .colorset-first-tier a.content-link,
 .colorset-snow-white .colorset-first-tier a.inline-roll {
   background-color: #494949;
@@ -3982,6 +3728,14 @@
   background-color: #494949;
   color: #ffffff;
 }
+.colorset-snow-white .colorset-second-tier.resource .list-sub-header {
+  background-color: #000000;
+  color: #ffffff;
+}
+.colorset-snow-white .colorset-second-tier.resource .values {
+  background-color: #ffffff;
+  color: #000000;
+}
 .colorset-snow-white .colorset-second-tier a.content-link,
 .colorset-snow-white .colorset-second-tier a.inline-roll {
   background-color: #000000;
@@ -3989,6 +3743,14 @@
 }
 .colorset-snow-white .colorset-third-tier {
   background-color: #000000;
+  color: #ffffff;
+}
+.colorset-snow-white .colorset-third-tier.resource .list-sub-header {
+  background-color: #ffffff;
+  color: #000000;
+}
+.colorset-snow-white .colorset-third-tier.resource .values {
+  background-color: #494949;
   color: #ffffff;
 }
 .colorset-snow-white .colorset-third-tier a.content-link,
@@ -4108,6 +3870,7 @@ a:hover {
   box-shadow: none;
 }
 #age-roller {
+  font-size: 42px;
   position: absolute;
   width: 52px;
   height: 62px;
@@ -4115,7 +3878,7 @@ a:hover {
   padding: 0px;
   cursor: pointer;
   display: inline-block;
-  z-index: 99;
+  z-index: calc(var(--z-index-ui) + 10);
 }
 #age-roller-drag {
   width: 100%;
@@ -4368,30 +4131,88 @@ body *:not(i, .fa, .far, .fas) {
   margin-right: 4px;
   border: none;
 }
-.age-system-dialog .window-content {
-  background-image: none;
-  background: rgba(254, 254, 254, 0.9);
+.age-system-dialog.advancement-config {
+  font-size: 12px;
 }
-.age-system-dialog ol {
-  list-style: none;
+.age-system-dialog.advancement-config button.file-picker {
+  width: 35px;
+  flex: 0 0 35px;
 }
-.age-system-dialog .advancement-config li {
+.age-system-dialog.advancement-config .options-column .option {
+  margin-bottom: 4px;
+}
+.age-system-dialog.advancement-config .options-column label {
+  flex: 0 0 130px;
+  margin: auto 0;
+}
+.age-system-dialog.advancement-config .options-column input,
+.age-system-dialog.advancement-config .options-column select,
+.age-system-dialog.advancement-config .options-column span {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.age-system-dialog.advancement-config footer {
+  border-top: 2px groove white;
+  margin-top: 4px;
+  padding: 4px 0;
+}
+.age-system-dialog.advancement-config .list-table-content {
+  text-align: center;
+}
+.age-system-dialog.advancement-config .list-table-content li {
+  display: flex;
+  flex-direction: row;
+  height: 26px;
+}
+.age-system-dialog.advancement-config .list-table-content input {
+  size: 24px;
+}
+.age-system-dialog.advancement-config .list-level {
+  width: 50px;
+}
+.age-system-dialog.advancement-config .list-level-value {
+  width: 120px;
+}
+.age-system-dialog.advancement-config .item-drop-area {
+  border-top: 2px groove white;
+  min-height: 200px;
+}
+.age-system-dialog.advancement-config .item-drop-area li {
+  border-bottom: none;
+}
+.age-system-dialog.advancement-config .item-drop-area ol.trait-listing > li:only-of-type {
+  display: none;
+}
+.age-system-dialog.advancement-config li {
   border-bottom: 2px groove white;
   padding: 4px;
 }
-.age-system-dialog .advancement-config li:not(:first-of-type) {
-  cursor: pointer;
+.age-system-dialog.advancement-config li:last-of-type {
+  border-bottom: none;
+}
+.age-system-dialog.advancement-config li:not(:first-of-type) {
   display: flex;
   flex-direction: row;
   align-items: center;
   column-gap: 6px;
 }
-.age-system-dialog .advancement-config li:not(:first-of-type):hover {
+.age-system-dialog.advancement-config li.options:hover {
+  cursor: pointer;
   background: linear-gradient(90deg, rgba(254, 254, 254, 0.1) 10%, rgba(0, 0, 0, 0.1) 48%, rgba(254, 254, 254, 0.1) 90%);
 }
-.age-system-dialog .advancement-config img {
+.age-system-dialog.advancement-config img {
   height: 45px;
   border: none;
+}
+.age-system-dialog .window-content {
+  background-image: none;
+  background: rgba(254, 254, 254, 0.9);
+}
+.age-system-dialog ol,
+.age-system-dialog ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .age-system-dialog .age-importer .min-height {
   flex: 0 0 auto;
@@ -4574,6 +4395,9 @@ body *:not(i, .fa, .far, .fas) {
 }
 .age-system .flex-align-center {
   align-items: center;
+}
+.age-system .flex-align-baseline {
+  align-items: baseline;
 }
 .age-system .flex-align-end {
   align-items: flex-end;

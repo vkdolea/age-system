@@ -2,13 +2,13 @@
 <section class="effects-section">
 
     {{!-- Conditions Block --}}
-    <ul class="resource item-group conditions">
-        <li class="title colorset-first-tier">
+    <ul class="resource colorset-first-tier item-group conditions">
+        <li class="title">
             {{localize "age-system.conditionsName"}}
         </li>
-        <li class="colorset-third-tier">
+        <li class="values">
             {{#each data.conditions as |condition|}}
-            <span class="tooltip-container flexrow feature-controls toggle-condition {{#if condition.active}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-condition-id="{{condition.id}}">
+            <span class="tooltip-container flexrow feature-controls toggle-condition {{#if condition.active}}colorset-first-tier{{/if}}" data-condition-id="{{condition.id}}">
                 <a class="item-name item-box condition-label">{{condition.label}}</a>
                 <span class="container-tooltip-text colorset-second-tier">
                     {{#if (ne condition.flags.age-system.desc "")}}
@@ -35,8 +35,8 @@
     </ul>
 
     {{!-- Active Effects Block --}}
-    <ul class="resource item-group custom-effects">
-        <li class="title colorset-first-tier">{{localize "age-system.custom"}}</li>
+    <ul class="resource colorset-first-tier item-group custom-effects">
+        <li class="title">{{localize "age-system.custom"}}</li>
         <li class="flexrow header colorset-first-tier">
             <span class="effect-name">{{localize "age-system.name"}}</span>
             <span class="effect-key">{{localize "age-system.key"}}</span>
@@ -45,7 +45,7 @@
             <span class="effect-add"><a><i class="fa fa-plus-circle" aria-hidden="true"></i></a></span>
         </li>
         {{#each data.effects as |effect|}}
-        <li class="flexrow colorset-third-tier item-box feature-controls" data-effect-id="{{effect._id}}">
+        <li class="values flexrow item-box feature-controls" data-effect-id="{{effect._id}}">
             <div class="effect-name flexrow">
                 <img class="item-image" src="{{effect.icon}}">
                 {{#if (ne effect.flags.age-system.conditionType "custom")}}
@@ -87,8 +87,8 @@
     </ul>
 
     {{!-- Item Modifiers Block --}}
-    <ul class="item-group resource modifiers colorset-third-tier">
-        <li class="title colorset-first-tier">{{localize "age-system.itemMod"}}</li>
+    <ul class="item-group resource modifiers colorset-first-tier">
+        <li class="title">{{localize "age-system.itemMod"}}</li>
         <li class="header flexrow colorset-first-tier">
             <span class="mod-name">{{localize "age-system.type"}}</span>
             <span class="mod-value">{{localize "age-system.value"}}</span>
@@ -98,7 +98,7 @@
         {{#unless @first}}
         <hr>
         {{/unless}}
-        <li class="flexrow extra-margin">
+        <li class="values flexrow extra-padding">
             <span class="mod-name">{{localize (concat "age-system.bonus." modType)}}</span>
             <ul class="modifier-item-details">
                 {{#each modGroup.parts as |mod|}}

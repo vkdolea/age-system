@@ -62,7 +62,7 @@
     "SETTINGS.wealthTypeCoins": "GP / SP / CP",
 
     "SETTINGS.primaryAbl": "Select primary abilities",
-    "SETTINGS.primaryAblHint": "Adds extra checkbox to identiry which Ability is primary",
+    "SETTINGS.primaryAblHint": "Adds extra checkbox to identify which Ability is primary",
 
     "SETTINGS.abilitySelection": "Ability settings",
     "SETTINGS.abilitySelectionHint": "Use core AGE or Dragon Age abilities",
@@ -168,7 +168,9 @@
             "vehicleItem": "Vehicles can not receive Items",
             "breatherAppliedAll": "Breather applied to all selected Characters",
             "newFocusCompendia": "AGE System Settings (Focus Compendium): The following compendia will not appear as Focus Compendium options until refreshing: {list}.",
-            "oldFocusCompendia": "AGE System Settings (Focus Compendium): The following compendia doesn't exist and will leave the list after refreshing: {list}."
+            "oldFocusCompendia": "AGE System Settings (Focus Compendium): The following compendia doesn't exist and will leave the list after refreshing: {list}.",
+            "emptyAdv": "All levels for the Progressive Advancement have empty or zero for value. No Advancement saved.",
+            "emptyItemArr": "No Item selected for this advancement. No Advancement saved."
         },
 
         "spaceship": {
@@ -733,10 +735,21 @@
         "advancementPlural": "Advancements",
         "advancementNew": "Select New Advancement",
         "levelName": "Level {level}",
-        "advProgressiveTrait": "Add Progressive Trait",
-        "advNewItem": "Add New Item or Progress Existing One",
+        "advProgressiveTrait": "Progressive Trait",
+        "advNewItem": "New Item or Progress Existing One",
         "advAbility": "Ability Advancement",
-        "defenseAndToughness": "Defense and Toughness"
-        
+        "defenseAndToughness": "Defense and Toughness",
+        "trait": "Trait",
+        "alias": "Alias",
+        "confirm": "Confirm",
+        "image": "Image",
+        "itemProgression": "Item Progression",
+        "itemProgressionHint": "If selected, allows player to choose progressing owned Item instead of adding new Item to the character.",
+        "itemOptionSingle": "Receive one Item",
+        "itemOptionSingleProgress": "Receive or Advance one Item",
+        "itemOptionMultiple": "Pick Items from list",
+        "itemOptionAll": "Receive all Items",
+        "dragAdvItem": "Drag Advancement Items in the space below",
+        "add": "Add"
     }
 }

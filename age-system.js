@@ -258,6 +258,12 @@ Hooks.once("init", async function() {
         return ageSystem.talentDegrees[value];
     });
 
+    // Handlebar so show Level 1 to 20 using a Array with 20 positions
+    Handlebars.registerHelper("levelarr", function(value, options)
+    {
+        return parseInt(value) + 1;
+    });
+
     // Handlebar helper to compare 2 data
     Handlebars.registerHelper("when",function(operand_1, operator, operand_2, options) {
         let operators = {

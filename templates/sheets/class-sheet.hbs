@@ -1,7 +1,7 @@
 <form class="{{cssClass}} age-system item class flexrow no-flexwrap" autocomplete="off">
     <aside class="sidebar metal-background colorset-first-tier">
         <img class="document-picture" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-        <ul class="item-summary">
+        <ul class="item-summary" style="display: none;">
             {{!-- Talent Degree --}}
             <li>
                 <label>{{localize "age-system.talentDegree"}}</label>
@@ -10,17 +10,6 @@
                     {{#each config.talentDegrees as |degree|}}
                     <option value="{{@key}}">{{degree}}</option>
                     {{/each}}
-                {{/select}}
-                </select>
-            </li>
-
-            {{!-- Type (Talent/Specialization) --}}
-            <li>
-                <label>{{localize "age-system.type"}} </label>
-                <select name="system.type">
-                {{#select system.type}}
-                    <option value="talent">{{localize "ITEM.TypeTalent"}}</option>
-                    <option value="spec">{{localize "age-system.item.spec"}}</option>
                 {{/select}}
                 </select>
             </li>
@@ -37,7 +26,7 @@
         <header class="top-banner colorset-first-tier flexrow">
             <div class="header-details">
                 <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
-                <div class="sub-details">
+                <div class="sub-details" style="display: none;">
                     {{!-- Requirement --}}
                     <input type="text" name="system.requirement" value="{{system.requirement}}">
                     <label>{{localize "age-system.requirement"}}</label>
@@ -55,27 +44,62 @@
 
             <section class="sheet-tab-section">
                 {{!-- Main Tab --}}
-                <div class="tab options" data-group="primary" data-tab="main">
-                    <ul class="resource colorset-first-tier item-group">
-                        <li class="title colorset-third-tier">
-                            <label>{{localize "age-system.item.desc"}}</label>
-                        </li>
-                        <li>{{editor system.description target="system.description" button=true owner=owner editable=true}}</li>
+                <div class="tab main fill-space-height-100" data-group="primary" data-tab="main">
+                    <ul class="resource colorset-third-tier editor-parent">
+                        <li class="editor-parent no-value-class">{{editor system.description target="system.description" button=true owner=owner editable=true}}</li>
                     </ul>
                 </div>
 
                 {{!-- Advancement Tab --}}
                 <div class="tab adv" data-group="primary" data-tab="adv">
+
+                    {{#if usePrimaryAbl}}
+                    <ul class="resource item-group">
+                        <li class="title colorset-first-tier">
+                            {{localize "SETTINGS.primaryAbl"}}
+                        </li>
+                        <li class="colorset-third-tier flexrow">
+                            <p>
+                                {{#each ablOptions as |abl id|}}
+                                <a class="feature-controls select-options item-name trait-group item-box {{#if (haswgroup id ../item.system.primaryAbl)}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-trait-id="{{@key}}" data-trait-type="primaryAbl">
+                                    {{abl}}
+                                </a>
+                                {{/each}}
+                            </p>
+                        </li>
+                    </ul>
+                    {{/if}}
+                    
+                    {{#if weaponGroups}}
+                    <ul class="resource item-group">
+                        <li class="title colorset-first-tier">
+                            {{localize "SETTINGS.weaponGroups"}}
+                        </li>
+                        <li class="colorset-third-tier flexrow">
+                            <p>
+                                {{#each weaponGroups as |wgroup|}}
+                                <a class="feature-controls select-options item-name trait-group item-box {{#if (haswgroup wgroup ../item.system.wgroups)}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-trait-id="{{wgroup}}" data-trait-type="wgroups">
+                                    {{wgroup}}
+                                </a>
+                                {{/each}}
+                            </p>
+                        </li>
+                    </ul>
+                    {{/if}}
+
                     <ol class="resource item-group colorset-third-tier">
-                        <li>
+                        <li class="title colorset-first-tier">
                             <span>{{localize "age-system.advancementPlural"}}</span>
                             <a class="add-adv"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
                         </li>
-                        {{#each system.advancements as |level|}}
-                        {{#if level}}
-                        <li class="list-sub-header colorset-second-tier">{{localize "age-system.level"}}</li>
-                        {{#each level as |adv|}}
-                        <li>{{adv}}</li>
+                        {{#each system.advPerLvl as |advs|}}
+                        {{#if advs}}
+                        <li class="list-sub-header colorset-second-tier">{{localize "age-system.level"}} {{levelarr @index}}</li>
+                        {{#each advs as |a|}}
+                        <li class="advance feature-controls flexrow" data-type="{{a.type}}" data-id="{{a.id}}" data-level="{{a.level}}">
+                            <img src="{{a.img}}">
+                            <span class="adv-name">{{a.alias}}</span>
+                        </li>
                         {{/each}}
                         {{/if}}
                         {{/each}}

@@ -30,8 +30,8 @@ export class AgeRoller extends Application {
 	activateListeners(html) {
 		super.activateListeners(html);
 		html.find('li').hover(t => t.currentTarget.classList.toggle('colorset-third-tier'));
-		html.find("#age-roller img").click(this._onClick.bind(this));
-		html.find("#age-roller img").contextmenu(this._onRightClick.bind(this));
+		html.find("#age-roller i").click(this._onClick.bind(this));
+		html.find("#age-roller i").contextmenu(this._onRightClick.bind(this));
 		html.find("#age-roller-drag").contextmenu(this._onResetPosition.bind(this));
 		html.find(".conditions-workshop").click(this.openConditionWorkshop.bind(this));
 		html.find(".age-importer").click(this.openAgeImporter.bind(this));

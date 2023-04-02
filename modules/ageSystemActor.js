@@ -903,16 +903,18 @@ export class ageSystemActor extends Actor {
                 title: game.i18n.localize("age-system.breather"),
                 content: html,
                 buttons: {
+                    cancel: {
+                        icon: `<i class="fa fa-times" aria-hidden="true"></i>`,
+                        label: game.i18n.localize("age-system.cancel"),
+                        callback: html => resolve({cancelled: true}),
+                    },
                     normal: {
                         icon: `<i class="fa fa-check" aria-hidden="true"></i>`,
+                        label: game.i18n.localize("age-system.confirm"),
                         callback: html => {
                             const fd = new FormDataExtended(html[0].querySelector("form"));
                             resolve(fd.object)
                         }
-                    },
-                    cancel: {
-                        icon: `<i class="fa fa-times" aria-hidden="true"></i>`,
-                        callback: html => resolve({cancelled: true}),
                     }
                 },
                 default: "normal",

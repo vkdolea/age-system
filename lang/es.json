@@ -137,7 +137,8 @@
       "vehicleItem": "Los Vehículos no pueden recibir Objetos",
       "breatherAppliedAll": "Descanso aplicado a todos los PJs seleccionados",
       "newFocusCompendia": "Configuración Sistema AGE (Compendio Concentración): Los siguientes compendios no se mostrarán como opciones para Concentración hasta que se actualicen: {list}.",
-      "oldFocusCompendia": "Configuración Sistema AGE (Compendio Concentración): Los siguientes compendios no existen y se eliminarán de la lista después de actualizar: {list}."
+      "oldFocusCompendia": "Configuración Sistema AGE (Compendio Concentración): Los siguientes compendios no existen y se eliminarán de la lista después de actualizar: {list}.",
+      "emptyAdv": "Todos los niveles del Avance Progresivo tienen un valor vacío o cero. No se guarda el Avance."
     },
     "spaceship": {
       "op": "Operador",
@@ -668,9 +669,18 @@
     "advancementPlural": "Subidas",
     "advancementNew": "Selecciona Progreso",
     "levelName": "Nivel {level}",
-    "advProgressiveTrait": "Añadir Talento Mejorable",
-    "advNewItem": "Añadir uno Nuevo o Subir uno Existente",
+    "advProgressiveTrait": "Característica Progresiva",
+    "advNewItem": "Nuevo Objeto o Progresar una ya existente",
     "advAbility": "Mejorar Habilidad",
-    "defenseAndToughness": "Defensa y Dureza"
+    "defenseAndToughness": "Defensa y Dureza",
+    "trait": "Característica",
+    "alias": "Alias",
+    "confirm": "Confirmar",
+    "image": "Imagen",
+    "itemOptionSingle": "Recibir un objeto",
+    "itemOptionSingleProgress": "Recibir o Avance de uno",
+    "itemOptionMultiple": "Recibir objetos múltiples",
+    "itemOptionAll": "Recibir todos los objetos",
+    "dragAdvItem": "Arrastrar los Avances en el espacio debajo"
   }
 }

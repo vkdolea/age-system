@@ -464,6 +464,7 @@ async function getAgeRollOptions(itemRolled, data = {}) {
             buttons: {
                 normal: {
                     label: game.i18n.localize("age-system.roll"),
+                    icon: `<i class="fa-light fa-dice"></i>`,
                     callback: html => {
                         const fd = new FormDataExtended(html[0].querySelector("form"));
                         resolve(fd.object)
@@ -471,6 +472,7 @@ async function getAgeRollOptions(itemRolled, data = {}) {
                 },
                 cancel: {
                     label: game.i18n.localize("age-system.cancel"),
+                    icon: `<i class="fa-solid fa-xmark"></i>`,
                     callback: html => resolve({cancelled: true}),
                 }
             },
@@ -498,6 +500,7 @@ async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
             buttons: {
                 normal: {
                     label: game.i18n.localize("age-system.roll"),
+                    icon: `<i class="fa-light fa-dice"></i>`,
                     callback: html => {
                         const fd = new FormDataExtended(html[0].querySelector("form"));
                         resolve(fd.object);
@@ -505,6 +508,7 @@ async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
                 },
                 cancel: {
                     label: game.i18n.localize("age-system.cancel"),
+                    icon: `<i class="fa-solid fa-xmark"></i>`,
                     callback: html => resolve({cancelled: true}),
                 }
             },
