@@ -68,7 +68,6 @@ export function hidePrimaryAblCheckbox(html) {
         for (let k = 0; k < boxes.length; k++) {
             const e = boxes[k];
             e.remove();
-            // e.style.display = "none";
         };
     }
 
@@ -79,7 +78,6 @@ export function hidePrimaryAblCheckbox(html) {
         const original = e.children[0].querySelector(".abl-value.original");
         const total = e.children[0].querySelector(".abl-value.total");
         if (original.value === total.value) total.remove();
-        // if (original.value === total.value) total.style.display = "none";
     }
 };
 
@@ -93,6 +91,12 @@ export function nameItemSheetWindow(itemWindow) {
     windowHeader.textContent += ` [${game.i18n.localize("ITEM.Type" + itemType)}]`;
 };
 
+/**
+ * Sorts Objects inside and array alphabetically according to passed object key
+ * @param {Array} nameArray Array of objects
+ * @param {String} nameKey Object key containing name to order in Alphabetic order
+ * @returns Sorted array of objects
+ */
 export function sortObjArrayByName(nameArray, nameKey) {
     return nameArray.sort(function(a, b) {
         const nameA = a[nameKey].toLowerCase();
@@ -105,6 +109,18 @@ export function sortObjArrayByName(nameArray, nameKey) {
         }
         return 0;
     });
+}
+
+/**
+ * DOM Manipulation on Advancement Config sheet
+ * @param {jQuery Object} html jQuery object within sheet
+ */
+export function prepAdvSetup (html) {
+    const traitList = html.find(`.trait-listing`);
+    for (let l = 0; l < traitList.length; l++) {
+        const e = traitList[l];
+        if (e.children.length == 0) e.style.display = "none"
+    }
 }
 
 /**
@@ -132,16 +148,16 @@ export async function prepSheet (sheet, html, doc) {
     if(['vehicle', 'spaceship'].includes(doc.data.type)) base.css("min-width", "665px");
 
     // Enrich HMTL text
-    enrichTinyMCE(html);
+    enrichTinyMCE(`div.editor-content`);
 }
 
 /**
  * Enrich TinyMCE editor text and add class on Content Links and inline rolls
  * @param {jQuery Object} html jQuery object with fields to be enriched
  */
-export async function enrichTinyMCE(html) {
+export async function enrichTinyMCE(selector) {
     // Enrich HMTL text
-    const els = $(`div.editor-content`);
+    const els = $(selector);
     for (let i = 0; i < els.length; i++) {
         els[i].innerHTML = await TextEditor.enrichHTML(els[i].innerHTML, {async: true});
     }

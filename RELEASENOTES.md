@@ -1,5 +1,24 @@
 # Release Notes
 
+## 1.2.0 [2023-04-02]
+### Added
+- New "Class" Item type to track character leveling. Currently, only leveling is supported. Automated level up to come in the next releases.
+
+### Changed
+- Text boxes from Character and Item sheets follow the same style and respond to window resizing.
+- Changed icon of AGE Roller (the icon close to Macro Bar).
+
+### Fixed
+- Tests and damage rolled by an unlinked token will correctly display token name on chat card and not the name on character sheet.
+
+## 1.1.12 [2023-01-27]
+### Fixed
+- Defense calculation corrected.
+
+## 1.1.11 [2023-01-26]
+### Fixed
+- Corrected order to apply Active Effects.
+
 ## 1.1.10 [2023-01-22]
 ### Fixed
 - Active Effects applied to final calculations (final Defense, final Test mods, etc) were not working correctly.
@@ -12,7 +31,7 @@
 - Data calculated based on Abilities has now the correct values when implementing Conditons or Active Effects.
 - Healing a character will now heal up to maximum Health/Fortune plus mods.
 - Shift + Left Click will now correctly trigger blind roll to GM.
-- Fixed calculation when using qualities/flaws on Spaceship which modifying Hull and Sensors.
+- Fixed calculation when using qualities/flaws on Spaceship which modify Hull and Sensors.
 - Fixed bug causing The Expanse quick setting to set properly Churn functionality.
 
 ## 1.1.8 [2022-10-06]

@@ -1,0 +1,142 @@
+<h2>{{localize "ITEM.TypeClass"}}: {{class.name}}</h2>
+<form>
+    <div class="">
+        <section class="options-column">
+            {{#if (eq advType "progressive")}}
+            <div class="flexrow flex-align-baseline option">
+                <label for=""><strong>{{localize "age-system.trait"}}</strong></label>
+                <select name="trait" class="header-input">
+                    {{#select trait}}
+                    {{#each traitArr as |t|}}
+                    <option value="{{t.key}}">{{t.name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+            {{/if}}
+            {{#if (eq advType "item")}}
+            <div class="flexrow flex-align-baseline option">
+                <label for=""><strong>{{localize "age-system.type"}}</strong></label>
+                <select name="itemOption" class="header-input">
+                    {{#select itemOption}}
+                    {{#each itemOptionObj as |o|}}
+                    <option value="{{@key}}">{{o}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div> 
+            {{/if}}
+            <div class="flexrow flex-align-baseline option" {{#if (ne itemOption "multiple")}}style="display: none;"{{/if}}>
+                <label for=""><strong>{{localize "age-system.item.quantity"}}</strong></label>
+                {{rangePicker name="itemQtd" value=itemQtd min=0 max=itemArrSize step=1}}
+            </div>
+            <div class="flexrow flex-align-baseline option">
+                <label for=""><strong>{{localize "age-system.alias"}}</strong></label>
+                <input type="text" class="field-data{{#if (eq advType "item")}}-expanded{{/if}}" name="alias" value="{{alias}}" data-dtype="String"/>
+            </div>
+            <div class="flexrow flex-align-baseline option">
+                <label for=""><strong>{{localize "age-system.image"}}</strong></label>
+                <div class="field-data flexrow flex-align-baseline">
+                    <input type="text" class="" name="img" value="{{img}}" data-dtype="String" />
+                    {{filePicker type="image" target="img"}}
+                </div>
+            </div>
+            {{#if (eq advType "item")}}
+            <div class="flexrow flex-align-baseline option">
+                <label for=""><strong>{{localize "age-system.level"}}</strong></label>
+                <select name="level" class="header-input">
+                    {{#select level}}
+                    {{#each adv}}
+                    <option value="{{levelarr @index}}">{{levelarr @index}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+            <div class="flexrow flex-align-baseline option">
+                <label for=""><strong>{{localize "age-system.itemProgression"}}</strong></label>
+                <div class="field-data flexrow flex-align-baseline">
+                    <select name="tType" class="header-input">
+                        {{#select tType}}
+                        {{#each traitArr as |tt|}}
+                        {{#if (ne tt.key 'power')}}
+                        <option value="{{tt.key}}">{{tt.name}}</option>
+                        {{/if}}
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    <button class="addItemProg" type="button" style="flex: 0;">
+                        {{localize "age-system.add"}}
+                    </button>
+                </div>
+            </div>
+            <p class="notes">{{localize "age-system.itemProgressionHint"}}</p>
+            {{/if}}
+        </section>
+
+        {{#if (eq advType "progressive")}}
+        <section class="data-column flexrow">
+            <ul class="list-table-content flex-justify-center">
+                <li>
+                    <span class="list-level"><strong>{{localize "age-system.level"}}</strong></span>
+                    <span class="list-level-value"><strong>{{localize "age-system.value"}}</strong></span>
+                </li>
+                {{#each adv as |p|}}
+                {{#if (lt @index 10)}}
+                <li>
+                    <span class="list-level"><strong>{{levelarr @index}}</strong></span>
+                    <input class="list-level-value" type="text" class="" name="adv" value="{{p}}" data-dtype="String" />
+                </li>
+                {{/if}}
+                {{/each}}
+            </ul>
+            <ul class="list-table-content">
+                <li>
+                    <span class="list-level"><strong>{{localize "age-system.level"}}</strong></span>
+                    <span class="list-level-value"><strong>{{localize "age-system.value"}}</strong></span>
+                </li>
+                {{#each adv as |p|}}
+                {{#if (gt @index 9)}}
+                <li>
+                    <span class="list-level"><strong>{{levelarr @index}}</strong></span>
+                    <input class="list-level-value" type="text" class="" name="adv" value="{{p}}" data-dtype="String" />
+                </li>
+                {{/if}}
+                {{/each}}
+            </ul>
+        </section>
+        {{else}}
+        <section class="item-drop-area">
+            <ol>
+                <li><strong>{{localize "age-system.dragAdvItem"}}</strong></li>
+                {{#each traitArr as |t|}}
+                <ol class="trait-listing">
+                    {{#each ../itemArr as |i|}}
+                    {{#if @first}}
+                    <li><em>{{t.name}}</em></li>
+                    {{/if}}
+                    {{#if (eq t.key i.trait)}}
+                    <li class="flex-align-baseline flex-justify-start">
+                        <a class="item-delete" data-index="{{@index}}" title="{{localize "age-system.settings.delete"}}"><i class="fa-solid fa-trash"></i></a>
+                        {{#if i.uuid}}
+                        <span class="enrich-text">@UUID[{{i.uuid}}]</span>
+                        {{else}}
+                        <a class="content-link" data-uuid="" data-tooltip="{{localize "age-system.itemProgression"}}" style="cursor: inherit;"><i class="fa-solid fa-signal-bars"></i>{{t.name}} ({{localize "age-system.itemProgression"}})</a>
+                        {{/if}}
+                    </li>
+                    {{/if}}
+                    {{/each}}
+                </ol>
+                {{/each}}
+            </ol>
+        </section>
+        {{/if}}
+    </div>
+    <footer class="flexrow">
+        <button class="default-button cancel" type="button">
+            <i class="fa-solid fa-xmark"></i>{{localize "age-system.cancel"}}
+        </button>
+        <button class="default-button">
+            <i class="fa-solid fa-check"></i>{{localize "age-system.confirm"}}
+        </button>
+    </footer>
+</form>

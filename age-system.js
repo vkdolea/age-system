@@ -35,7 +35,6 @@ async function preloadHandlebarsTemplates() {
         `${path}itemcontrols/weapon.hbs`,
         `${path}ability-focus-select.hbs`,
         `${path}active-bonuses.hbs`,
-        `${path}bonus-desc-sheet.hbs`,
         `${path}bonuses-sheet.hbs`,
         `${path}char-sheet-alt-main.hbs`,
         `${path}char-sheet-alt-persona.hbs`,
@@ -48,17 +47,12 @@ async function preloadHandlebarsTemplates() {
         `${path}char-sheet-alt-options.hbs`,
         `${path}char-sheet-alt-adv.hbs`,
         `${path}char-sheet-nav-bar.hbs`,
-        // `${path}char-sheet-tab-main.hbs`,
         `${path}char-sheet-injury-bar.hbs`,
-        // `${path}char-sheet-tab-persona.hbs`,
-        // `${path}char-sheet-tab-effects.hbs`,
-        // `${path}char-sheet-tab-options.hbs`,
         `${path}char-stat-block-column1.hbs`,
         `${path}conditions-block.hbs`,
         `${path}cost-resource-block.hbs`,
         `${path}dmg-block-sheet.hbs`,
         `${path}item-card-buttons.hbs`,
-        // `${path}item-image-sheet-card.hbs`,
         `${path}item-options-sheet.hbs`,
         `${path}play-aid-bar.hbs`,
     ];
@@ -258,6 +252,12 @@ Hooks.once("init", async function() {
         return ageSystem.talentDegrees[value];
     });
 
+    // Handlebar so show Level 1 to 20 using a Array with 20 positions
+    Handlebars.registerHelper("levelarr", function(value, options)
+    {
+        return parseInt(value) + 1;
+    });
+
     // Handlebar helper to compare 2 data
     Handlebars.registerHelper("when",function(operand_1, operator, operand_2, options) {
         let operators = {
@@ -417,7 +417,7 @@ Hooks.once("ready", async function() {
 
 
 Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatLog, content, userData))
-Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
+// Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
 Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});
 Hooks.on("renderChatLog", (app, html, data) => {    AgeChat.addChatListeners(html)});
 Hooks.on("renderChatMessage", (app, html, data) => {AgeChat.sortCustomAgeChatCards(app, html, data)});

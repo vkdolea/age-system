@@ -2,9 +2,10 @@
 /**   AGE Roller Interface    **/
 /*******************************/
 
-// Age Roller, to roll 3d6, 2d6, 1d6, d66, d666 -  close to hotbar
+// Age Roller, to roll 3d6, 2d6, 1d6, d66, d666 - close to hotbar
 a:hover {box-shadow: none;}
 #age-roller {
+    font-size: 42px;
     position: absolute;
     width: 52px;
     height: 62px;
@@ -12,7 +13,7 @@ a:hover {box-shadow: none;}
     padding: 0px;
     cursor: pointer;
     display: inline-block;
-    z-index: 99;
+    z-index: calc(var(--z-index-ui) + 10);
 }
 #age-roller-drag {
     width: 100%;
@@ -40,7 +41,4 @@ a:hover {box-shadow: none;}
         }
     }
     
-}
-// #age-roller-options:hover {
-//     display: inline-block;   
-// }
+};

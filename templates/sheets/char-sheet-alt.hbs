@@ -5,7 +5,7 @@
         <ul>
             {{#if data.config.healthSys.useInjury}}
             {{!-- Injury --}}
-            <li class="resource injury colorset-third-tier">
+            <li class="resource injury colorset-first-tier">
                 <div class="title">
                     <a class="roll-breather feature-controls" title="{{localize "age-system.breather"}}"><i class="fas fa-medkit"></i></a>
                     {{localize "age-system.injury"}}
@@ -60,7 +60,7 @@
             </li>
             {{else}}
             {{!-- Health / Fortune --}}
-            <li class="resource colorset-third-tier feature-controls" data-mode="{{system.gameMode.selected}}" data-local="sidebar">
+            <li class="resource colorset-first-tier feature-controls" data-mode="{{system.gameMode.selected}}" data-local="sidebar">
                 <div class="title">
                     <a class="roll-breather feature-controls"><i class="fas fa-medkit"></i></a>
                     {{data.config.healthSys.healthName}}
@@ -84,7 +84,7 @@
 
             {{!-- Power Points --}}
             {{#if system.usePowerPoints}}
-            <li class="resource colorset-third-tier">
+            <li class="resource colorset-first-tier">
                 <div class="title">{{localize "age-system.powerPoints"}}</div>
                 <div class="values flexrow">
                     <input class="value-data circle" type="number" name="system.powerPoints.value" value="{{system.powerPoints.value}}" data-dtype="Number" />
@@ -104,7 +104,7 @@
             {{/if}}
 
             {{!-- Defense --}}
-            <li class="resource colorset-third-tier">
+            <li class="resource colorset-first-tier">
                 <div class="title">{{localize "age-system.defense"}}</div>
                 <div class="values flexrow">
                     <input class="value-data circle" disabled type="number" name="system.defense.total" value="{{system.defense.total}}" data-dtype="Number" />
@@ -129,7 +129,7 @@
             </li>
 
             {{!-- Speed --}}
-            <li class="resource colorset-third-tier">
+            <li class="resource colorset-first-tier">
                 <div class="title">{{localize "age-system.speed"}}</div>
                 <div class="values flexrow">
                     <input class="value-data circle" disabled type="number" name="system.speed.total" value="{{system.speed.total}}" data-dtype="Number" />
@@ -150,7 +150,7 @@
             </li>
 
             {{!-- Armor --}}
-            <li class="resource colorset-third-tier">
+            <li class="resource colorset-first-tier">
                 <div class="title">{{localize "age-system.armor"}}</div>
                 <div class="values flexrow">
                     <input class="value-data circle" disabled type="number" name="system.armor.impact" value="{{system.armor.impact}}" data-dtype="Number" />
@@ -172,7 +172,7 @@
 
             {{#if data.config.healthSys.useToughness}}
             {{!-- Toughness --}}
-            <li class="resource colorset-third-tier">
+            <li class="resource colorset-first-tier">
                 <div class="title">
                     {{#if data.config.healthSys.useInjury}}
                     <a class="roll-toughness feature-controls"><i class="fas fa-dice"></i></a>
@@ -199,7 +199,7 @@
 
             {{#if system.useFatigue}}
             {{!-- Fatigue --}}
-            <li class="resource colorset-third-tier">
+            <li class="resource colorset-first-tier">
                 <div class="title">{{localize "age-system.fatigue"}}</div>
                 <div class="values flexrow">
                     <input class="value-data circle" type="number" name="system.fatigue.entered" min="0" max="{{system.fatigue.max}}" value="{{system.fatigue.entered}}" data-dtype="Number" />
@@ -212,7 +212,7 @@
 
             {{#if system.useConviction}}
             {{!-- Conviction --}}
-            <li class="resource colorset-third-tier">
+            <li class="resource colorset-first-tier">
                 <div class="title">{{localize "age-system.conviction"}}</div>
                 <div class="values flexrow">
                     <input class="value-data circle" type="number" name="system.conviction.value" value="{{system.conviction.value}}" data-dtype="Number" />
@@ -279,7 +279,7 @@
                 </div>
             </div>
 
-            <div class="resource colorset-third-tier at-header">
+            <div class="resource colorset-first-tier at-header">
                 <div class="title">{{localize "age-system.level"}}</div>
                 <div class="values">
                     <input class="value-data circle" type="number" name="system.level" value="{{system.level}}" data-dtype="Number" />
@@ -306,8 +306,8 @@
                 <a class="char" data-tab="talents">{{localize "age-system.talent"}}</a>
                 <a class="char" data-tab="powers">{{localize "age-system.power"}}</a>
                 <a class="char" data-tab="effects">{{localize "age-system.charEffects"}}</a>
+                <a class="char" data-tab="adv">{{localize "age-system.advancement"}}</a>
                 <a class="char" data-tab="options"><i class="fa fa-cog" aria-hidden="true"></i></a>
-                {{!-- <a class="char" data-tab="adv">{{localize "age-system.advancement"}}</a> --}}
             </nav>
 
             <section class="sheet-tab-section">

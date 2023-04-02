@@ -94,6 +94,63 @@ export class ageSystemActor extends Actor {
         this.applyItemModifiers();
     }
 
+    /**
+    * Apply any transformations to the Actor data which are caused by ActiveEffects.
+    */
+    applyActiveEffects() {
+        const overrides = {};
+
+        // Organize non-disabled effects by their application priority
+        const changes = this.effects.reduce((changes, e) => {
+        if ( e.disabled || e.isSuppressed ) return changes;
+        return changes.concat(e.changes.map(c => {
+            c = foundry.utils.duplicate(c);
+            c.effect = e;
+            c.priority = c.priority ?? (c.mode * 10);
+            return c;
+        }));
+        }, []);
+        changes.sort((a, b) => a.priority - b.priority);
+
+        // Identify Active Effects to be applied after DerivedData
+        const delayedOverrides = [];
+        for (let i = changes.length-1; i >= 0; i--) {
+            const c = changes[i];
+            if ([...ageSystem.actorDerivedDataKey, ...ageSystem.charAblKey].includes(c.key)) {
+                delayedOverrides.push(c);
+                changes.splice(i);
+            }
+        }
+        this.delayedOverrides = delayedOverrides;
+
+        // Apply all changes
+        for ( let change of changes ) {
+            if ( !change.key ) continue;
+            const changes = change.effect.apply(this, change);
+            Object.assign(overrides, changes);
+        }
+
+        // Expand the set of final overrides
+        this.overrides = foundry.utils.expandObject(overrides);
+        // if (this.delayedOverrides) this.overrides = foundry.utils.mergeObject(this.overrides.dOverrides);
+    }
+
+    _applyDelayedActiveEffects(paths) {
+        const dOverrides = {}
+        const changes = foundry.utils.deepClone(this.delayedOverrides)
+        // Apply all changes
+        for ( let change of changes ) {
+            if ( !change.key || !paths.includes(change.key)) continue;
+            const changes = change.effect.apply(this, change);
+            Object.assign(dOverrides, changes);
+        }
+    
+        // Expand the set of final overrides
+        const over = foundry.utils.expandObject(dOverrides);
+        if (this.overrides) this.overrides = foundry.utils.mergeObject(this.overrides, over)
+        else this.overrides = over;
+    }
+
     prepareDerivedData() {
         const actorData = this;
         const data = actorData.system;
@@ -253,15 +310,39 @@ export class ageSystemActor extends Actor {
         const data = actorData.system;
         data["ownedMods"] = mods;
 
+     
+    }
+
+    _prepareDerivedDataChar() {
+        // Calculate Abilities
+        const actorData = this;
+        const data = actorData.system;
+        const mods = data.ownedMods;
+        
         // Applying Abilities mods
         const settingAbls = ageSystem.abilities;
         for (const ablKey in settingAbls) {
             if (settingAbls.hasOwnProperty(ablKey)) {
-                data.abilities[ablKey].mod = mods[ablKey]?.formParts?.detValue ?? 0;
-                data.abilities[ablKey].total = data.abilities[ablKey].mod + data.abilities[ablKey].value
-                data.abilities[ablKey].testMod = mods[`${ablKey}Test`]?.formParts?.detValue ?? 0;
+                data.abilities[ablKey].mod = (mods[ablKey]?.formParts?.detValue ?? 0) + (data.abilities[ablKey].mod ?? 0);
+                data.abilities[ablKey].total = data.abilities[ablKey].mod + data.abilities[ablKey].value;
+                data.abilities[ablKey].testMod = (mods[`${ablKey}Test`]?.formParts?.detValue ?? 0) + (data.abilities[ablKey].testMod ?? 0);
             };
         };
+
+        // Apply Abilities Active Effects
+        this._applyDelayedActiveEffects(ageSystem.charAblKey)
+        
+        // Calculate derived data
+        this._preparePostModCharData();
+        
+        // Apply delayed Active Effects on other derived data
+        this._applyDelayedActiveEffects(ageSystem.actorDerivedDataKey);
+    }
+
+    _preparePostModCharData() {
+        const actorData = this;
+        const data = actorData.system;
+        const mods = data.ownedMods;
 
         // Recalculate all Mods to ensure contribution from Abilities are updated
         const recalcMod = data.ownedMods;
@@ -270,45 +351,31 @@ export class ageSystemActor extends Actor {
                 const mGroup = recalcMod[k];
                 mGroup.formParts = Dice.resumeFormula(mGroup.totalFormula, foundry.utils.deepClone(this.actorRollData()));
             }
-        }
-    }
-
-    _prepareDerivedDataChar() {
-        this._preparePostModCharData();
-        
-        // Apply Active Effects again to ensure Effects modifying a derived data is taken into account
-        this.applyActiveEffects();
-    }
-
-    _preparePostModCharData() {
-        const actorData = this;
-        const data = actorData.system;
-
-        const mods = data.ownedMods;
+        }        
 
         // Armor Penalty & Strain
         data.armor.penalty = Math.max(mods?.armorPenalty?.formParts?.detValue ?? 0, 0);
-        data.armor.strain = Math.max(mods?.armorStrain?.formParts?.detValue ?? 0, 0)
+        data.armor.strain = Math.max(mods?.armorStrain?.formParts?.detValue ?? 0, 0);
 
         // All damage delt by Actor
         data.dmgMod = mods?.actorDamage?.totalFormula ?? (data.dmgMod ?? "0");
 
         // Actor All Tests
         const testModFormula = mods?.testMod?.totalFormula;
-        data.testMod = testModFormula ? Dice.resumeFormula(mods?.testMod?.totalFormula, this.actorRollData()).detValue : (data.testMod ?? 0);
+        data.testMod = testModFormula ? Dice.resumeFormula(mods?.testMod?.totalFormula, this.actorRollData()).detValue : 0;
 
         // Actor All Attacks Mod
         const attkModFormula = mods?.attackMod?.totalFormula;
-        data.attackMod = attkModFormula ? Dice.resumeFormula(mods?.attackMod?.totalFormula, this.actorRollData()).detValue : (data.attackMod ?? 0);
+        data.attackMod = attkModFormula ? Dice.resumeFormula(mods?.attackMod?.totalFormula, this.actorRollData()).detValue : 0;
 
         // Defense
         data.defense.mod = mods?.defense?.formParts?.detValue ?? 0;
 
         // Impact Armor
-        data.armor.impact = mods?.impactArmor?.formParts?.detValue ?? 0;
+        data.armor.impact = (mods?.impactArmor?.formParts?.detValue ?? 0) + (data.armor.impact ?? 0);
 
         // Ballistic Armor
-        data.armor.ballistic = mods?.ballisticArmor?.formParts?.detValue ?? 0;
+        data.armor.ballistic = (mods?.ballisticArmor?.formParts?.detValue ?? 0) + (data.armor.ballistic ?? 0);
 
         // Toughness
         data.armor.toughness.mod = mods?.toughness?.formParts?.detValue ?? 0;
@@ -323,7 +390,8 @@ export class ageSystemActor extends Actor {
         data.guardUp.mod = mods?.guardupMnv?.formParts?.detValue ?? 0;
 
         // All Out Attack
-        data.allOutAttack.mod = mods?.allOutAtkMnv?.formParts?.detValue ?? 0;
+        // data.allOutAttack.mod = mods?.allOutAtkMnv?.formParts?.detValue ?? 0;
+        // data.allOutAttack.dmgBonus = mods?.allOutAtkMnv?.formParts?.detValue ?? 0;
 
         // Max Health
         data.health.mod = mods?.maxHealth?.formParts?.detValue ?? 0;
@@ -835,16 +903,18 @@ export class ageSystemActor extends Actor {
                 title: game.i18n.localize("age-system.breather"),
                 content: html,
                 buttons: {
+                    cancel: {
+                        icon: `<i class="fa fa-times" aria-hidden="true"></i>`,
+                        label: game.i18n.localize("age-system.cancel"),
+                        callback: html => resolve({cancelled: true}),
+                    },
                     normal: {
                         icon: `<i class="fa fa-check" aria-hidden="true"></i>`,
+                        label: game.i18n.localize("age-system.confirm"),
                         callback: html => {
                             const fd = new FormDataExtended(html[0].querySelector("form"));
                             resolve(fd.object)
                         }
-                    },
-                    cancel: {
-                        icon: `<i class="fa fa-times" aria-hidden="true"></i>`,
-                        callback: html => resolve({cancelled: true}),
                     }
                 },
                 default: "normal",

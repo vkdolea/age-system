@@ -1,7 +1,7 @@
 {{!-- Main Tab --}}
 <div class="flexrow general-aid-bar">
     {{!-- Initiative --}}
-    <div class="resource item-list colorset-third-tier">
+    <div class="resource item-list colorset-first-tier">
         <div class="title">{{localize "age-system.testThreshold"}}</div>
         <div class="values flexrow">
             <input class="value-data circle" type="number" name="system.advTestThreshold" value="{{system.advTestThreshold}}" data-dtype="Number" />
@@ -12,7 +12,7 @@
     </div>
 
     {{!-- All Out Attack --}}
-    <div class="resource item-list colorset-third-tier">
+    <div class="resource item-list colorset-first-tier">
         <div class="title">{{localize "age-system.allOutAttack"}}</div>
         <div class="values flexrow">
             <input class="value-data circle" type="number" name="system.allOutAttack.dmgBonus" value="{{system.allOutAttack.dmgBonus}}" data-dtype="Number" />
@@ -25,7 +25,7 @@
     </div>
 
     {{!-- Defend --}}
-    <div class="resource item-list colorset-third-tier feature-controls" data-guardup-active="{{system.guardUp.active}}">
+    <div class="resource item-list colorset-first-tier feature-controls" data-guardup-active="{{system.guardUp.active}}">
         <div class="title">{{localize "age-system.defendManeuver"}}</div>
         <div class="values flexrow">
             <input class="value-data circle" type="number" name="system.defend.defenseBonus" value="{{system.defend.defenseBonus}}" data-dtype="Number" />
@@ -37,7 +37,7 @@
     </div>
 
     {{!-- Guard Up --}}
-    <div class="resource item-list colorset-third-tier feature-controls" data-defend-active="{{system.defend.active}}">
+    <div class="resource item-list colorset-first-tier feature-controls" data-defend-active="{{system.defend.active}}">
         <div class="title">{{localize "age-system.guardUp"}}</div>
         <div class="values flexrow">
             <input class="value-data circle" type="number" name="system.guardUp.defenseBonus" value="{{system.guardUp.defenseBonus}}" data-dtype="Number" />
@@ -52,6 +52,7 @@
 </div>
 
 <section class="char-main-section flexrow">
+
     <ul class="abilities-column">
         {{!-- Attributes' Blocks --}}
         {{#each data.config.abilities as |name type|}}
@@ -79,10 +80,10 @@
         {{/each}}
     </ul>
 
-    <div>
+    <div class="main-quick-access">
         <div class="flexrow">
             {{!-- Initiative --}}
-            <div class="resource item-list colorset-third-tier">
+            <div class="resource item-list colorset-first-tier">
                 <div class="title">{{localize "age-system.initiative"}}</div>
                 <div class="values flexrow">
                     <input class="value-data circle" disabled type="number" name="system.initiative" value="{{system.initiative}}" data-dtype="Number" />
@@ -95,7 +96,7 @@
             </div>
 
             {{!-- Aim --}}
-            <div class="resource item-list colorset-third-tier">
+            <div class="resource item-list colorset-first-tier">
                 <div class="title">{{localize "age-system.aim"}}</div>
                 <div class="values flexrow">
                     <input class="value-data circle" type="number" name="system.aim.value" value="{{system.aim.value}}" data-dtype="Number" />
@@ -108,16 +109,14 @@
 
         </div>
 
-        <ul class="resource item-group favourite colorset-third-tier">
-            <li class="header title colorset-first-tier">
+        <ul class="resource item-group favourite colorset-first-tier">
+            <li class="title">
                 {{localize "age-system.quickAccess"}}
             </li>
             {{#if data.favWeapon}}
-            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeWeapon"}}</li>
+            <li class="list-sub-header">{{localize "ITEM.TypeWeapon"}}</li>
             {{#each data.favWeapon as |item|}}
-            <li>
-                {{> "systems/age-system/templates/partials/itemcontrols/weapon.hbs" item=this config=../data.config}}
-            </li>
+            {{> "systems/age-system/templates/partials/itemcontrols/weapon.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
             <hr>
             {{/unless}}
@@ -125,11 +124,9 @@
             {{/if}}
 
             {{#if data.favPower}}
-            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypePower"}}</li>
+            <li class="list-sub-header">{{localize "ITEM.TypePower"}}</li>
             {{#each data.favPower as |item|}}
-            <li>
-                {{> "systems/age-system/templates/partials/itemcontrols/power.hbs" item=this config=../data.config}}
-            </li>
+            {{> "systems/age-system/templates/partials/itemcontrols/power.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
             <hr>
             {{/unless}}
@@ -137,11 +134,9 @@
             {{/if}}
 
             {{#if data.favEquip}}
-            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeEquipment"}}</li>
+            <li class="list-sub-header">{{localize "ITEM.TypeEquipment"}}</li>
             {{#each data.favEquip as |item|}}
-            <li>
-                {{> "systems/age-system/templates/partials/itemcontrols/equipment.hbs" item=this config=../data.config}}
-            </li>
+            {{> "systems/age-system/templates/partials/itemcontrols/equipment.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
             <hr>
             {{/unless}}
@@ -149,11 +144,9 @@
             {{/if}}
 
             {{#if data.favStunt}}
-            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeStunts"}}</li>
+            <li class="list-sub-header">{{localize "ITEM.TypeStunts"}}</li>
             {{#each data.favStunt as |item|}}
-            <li>
-                {{> "systems/age-system/templates/partials/itemcontrols/stunts.hbs" item=this config=../data.config}}
-            </li>
+            {{> "systems/age-system/templates/partials/itemcontrols/stunts.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
             <hr>
             {{/unless}}
@@ -161,11 +154,15 @@
             {{/if}}
 
             {{#if data.favTalent}}
-            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeTalent"}}</li>
+            <li class="list-sub-header">{{localize "ITEM.TypeTalent"}}</li>
             {{#each data.favTalent as |item|}}
-            <li>
-                {{> "systems/age-system/templates/partials/itemcontrols/talent.hbs" item=this config=../data.config}}
-            </li>
+
+            {{#if (eq item.system.type "talent")}}
+            {{> "systems/age-system/templates/partials/itemcontrols/talent.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
+            {{else}}
+            {{> "systems/age-system/templates/partials/itemcontrols/talent.hbs" item=this config=../data.config colorset='colorset-second-tier'}}
+            {{/if}}
+
             {{#unless @last}}
             <hr>
             {{/unless}}
@@ -173,11 +170,9 @@
             {{/if}}
 
             {{#if data.favRelation}}
-            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeRelationship"}}</li>
+            <li class="list-sub-header">{{localize "ITEM.TypeRelationship"}}</li>
             {{#each data.favRelation as |item|}}
-            <li>
-                {{> "systems/age-system/templates/partials/itemcontrols/relationship.hbs" item=this config=../data.config}}
-            </li>
+            {{> "systems/age-system/templates/partials/itemcontrols/relationship.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
             <hr>
             {{/unless}}
@@ -185,11 +180,9 @@
             {{/if}}
             
             {{#if data.favHonor}}
-            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeHonorifics"}}</li>
+            <li class="list-sub-header">{{localize "ITEM.TypeHonorifics"}}</li>
             {{#each data.favHonor as |item|}}
-            <li>
-                {{> "systems/age-system/templates/partials/itemcontrols/honorifics.hbs" item=this config=../data.config}}
-            </li>
+            {{> "systems/age-system/templates/partials/itemcontrols/honorifics.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
             <hr>
             {{/unless}}
@@ -197,11 +190,9 @@
             {{/if}}
 
             {{#if data.favMembership}}
-            <li class="list-sub-header colorset-second-tier">{{localize "ITEM.TypeMembership"}}</li>
+            <li class="list-sub-header">{{localize "ITEM.TypeMembership"}}</li>
             {{#each data.favMembership as |item|}}
-            <li>
-                {{> "systems/age-system/templates/partials/itemcontrols/membership.hbs" item=this config=../data.config}}
-            </li>
+            {{> "systems/age-system/templates/partials/itemcontrols/membership.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
             <hr>
             {{/unless}}

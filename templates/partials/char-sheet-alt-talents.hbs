@@ -7,7 +7,11 @@
             {{localize "age-system.talentContainer"}}
         </li>
         {{#each data.talent as |item|}}
-        {{> "systems/age-system/templates/partials/itemcontrols/talent.hbs" item=this config=../data.config}}
+        {{#if (eq item.system.type "talent")}}
+        {{> "systems/age-system/templates/partials/itemcontrols/talent.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
+        {{else}}
+        {{> "systems/age-system/templates/partials/itemcontrols/talent.hbs" item=this config=../data.config colorset='colorset-second-tier'}}
+        {{/if}}
         {{#unless @last}}
         <hr>
         {{/unless}}

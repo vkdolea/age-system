@@ -1,12 +1,12 @@
 /*********************************/
 /**    Item Specific Rules      **/
 /*********************************/
-.age-system {
-    .talent .main .editor.editor {max-height: 150px;}
-    .stunts .editor.editor {
-        max-height: 150px;
-    };
-}
+// .age-system {
+//     .talent .main .editor.editor {max-height: 150px;}
+//     .stunts .editor.editor {
+//         max-height: 150px;
+//     };
+// }
 
 
 
@@ -16,8 +16,56 @@
 @big-border-radius: 5px;
 .age-system.char-sheet-alt,
 .age-system.item {
+
+    .fill-space-height-100 > *{
+        flex: 1 100px;
+        .editor {
+            flex: 1 100px;
+            width: 100%;
+        }
+    }
+
+    .editor-parent {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
     
-    
+    .sheet-main-content,
+    .sheet-main-content section,
+    .sheet-tab-section .tab.active,
+    .sheet-tab-section .tab.active section {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        
+        .editor-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .editor-char-persona {
+            .editor {
+                flex: 1 1 204px;
+            }
+        }
+        .add-sheet-tabs {
+            flex: 0;
+        };
+    }
+    .sheet-tab-section .tab.active section {
+        > * {
+            flex-grow: 0;
+        }
+    }
+    .tab.main.active section.char-main-section,
+    .tab.equip.active section.equip-section {
+        flex-direction: row;
+        > * {
+            flex: 1;
+        }
+    };
+
     .mouse-to-pointer:hover {
         cursor: pointer;
     }
@@ -28,7 +76,7 @@
         background-color: brown;
         color: silver;
     }
-    .modificators-table{
+    .modifiers-table {
         .mod-type {
             flex: 0 0 200px;
         }
@@ -39,17 +87,11 @@
             flex: 0 0 50px;
         }
     };
-    .editor.editor {
+    
+    .editor {
         text-align: left;
-        height: auto !important;
-        min-height: 150px;
-        max-height: 400px;
         padding: 4px;
         border-radius: 0 0 @big-border-radius @big-border-radius;
-        .tox.tox-tinymce {
-            min-height: 140px !important;
-            max-height: 390px !important;
-        }
     }
 
     p .item-box {
@@ -127,7 +169,7 @@
         input,
         select {
             border-radius: @big-border-radius;
-            background-color: rgba(255,255,255,0.5);
+            // background-color: rgba(255,255,255,0.5);
             // color: silver;
             margin: 2px;
         }
@@ -145,6 +187,8 @@
         font-weight: bolder;
         font-size: .8rem;
         padding: 2px;
+        flex: 0;
+        height: 20px;
     }
     .values {
         justify-content: space-around;
@@ -153,10 +197,7 @@
         padding: 0 4px
     }
     .editor.values {
-        justify-content: flex-start;
-        align-items: normal;
-        flex-wrap: wrap;
-        padding: 0 4px
+        padding: 0 4px;
     }
     li.item-box,
     .list-item.item-box {
@@ -328,6 +369,7 @@
         font-variant: all-petite-caps;
         text-align: center
     };
+    
     .char-main-section {
         .ability-box {
             flex: 0 0 200px;
@@ -390,6 +432,15 @@
 
     .persona {
         padding-right: 4px;
+        .features
+        .persona-section {
+            > div {
+                flex: 0 0 80px
+            };
+            > div .editor {
+                flex: 0 0 100%;
+            }
+        }
     }
     .free-text {
         resize: none !important;
@@ -399,6 +450,7 @@
     }
 
     .item-group {
+        height: fit-content;
         li {align-items: center;}
         li:first-of-type {
             border-top-left-radius: @big-border-radius;
@@ -408,7 +460,7 @@
             border-bottom-left-radius: @big-border-radius;
             border-bottom-right-radius: @big-border-radius;
         }
-        height: max-content;
+        // height: max-content;
         // margin: 0 5px 10px 5px;
         .extra-input {
             flex: 0 0 fit-content;
@@ -425,9 +477,9 @@
         }
     }
 
-    .abilities-column {
-        flex: 0 0 200px;
-    }
+    // .abilities-column {
+    //     flex: 0 0 200px;
+    // }
 
     .header-details {
         .charname,
@@ -516,6 +568,9 @@
     .modifiers {
         .extra-margin {
             margin: 4px 0;
+        }
+        .extra-padding {
+            padding: 4px;
         }
         li.header {
             padding: 1px 5px;

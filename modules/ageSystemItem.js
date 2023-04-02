@@ -1,3 +1,4 @@
+import { AdvancementSetup } from "./advancement.js";
 import {ageSystem} from "./config.js";
 import * as Dice from "./dice.js";
 
@@ -85,14 +86,54 @@ export class ageSystemItem extends Item {
         }
 
         switch (itemType) {
-            case "focus": this._prepareFocus(data);
-                break;
-            case "power": this._preparePower(data);
-                break;
-            case "shipfeatures": this._prepareShipFeatures(data);
-                break;
+            case "focus": this._prepareFocus(data); break;
+            case "power": this._preparePower(data); break;
+            case "shipfeatures": this._prepareShipFeatures(data); break;
+            case "class": this._prepareClass(data); break;
         }
     };
+
+    _prepareClass(system) {
+        const advPerLvl = new Array(20).fill(null);
+        
+        // Add all Progressive Advancements
+        const progAdv = system.advancements.progressive;
+        for (let p = 0; p < progAdv.length; p++) {
+            const a = progAdv[p]
+            const adv = a.adv;
+            for (let i = 0; i < adv.length; i++) {
+                const e = adv[i];
+                if (!["", 0, "0"].includes(e)) {
+                    if (!advPerLvl[i]) advPerLvl[i] = [];
+                    advPerLvl[i].push({
+                        type: 'progressive',
+                        id: p,
+                        level: p,
+                        trait: a.trait,
+                        value: e,
+                        img: a.img,
+                        alias: a.alias
+                    })
+                }
+            }
+        }
+
+        // Add all Item Advancements
+        const progItem = system.advancements.item;
+        for (let id = 0; id < progItem.length; id++) {
+            const it = progItem[id];
+            const l = it.level -1
+            if (!advPerLvl[l]) advPerLvl[l] = [];
+            advPerLvl[l].push({
+                type: "item",
+                id: id,
+                alias: it.alias,
+                img: it.img
+            })
+        }
+
+        system.advPerLvl = advPerLvl;
+    }
 
     prepareDamageData(data) {
         // Evaluate Attack and Damage formula to represent on Item sheet or stat block
@@ -351,6 +392,34 @@ export class ageSystemItem extends Item {
         return this.update({[path]: newMod});
     }
 
+    _onChangeAdvancement(data, action) {
+        const type = data.type;
+        const id = data.id;
+        const level = data.level;
+        if (!['item', 'progressive'].includes(type)) return false
+        const prog = foundry.utils.deepClone(this.system.advancements[type]);
+
+        // Code to remove Advancement
+        if (action === "remove") {
+            switch (type) {
+                case "item": prog.splice(id, 1);
+                    break;
+                case "progressive": prog.splice(id, 1);
+                    break;
+                default:
+                    break;
+            }
+            const path = `system.advancements.${type}`;
+            this.update({[path]: prog});
+        };
+
+        // Code to edit Advancement
+        if (action === "edit") {
+            const advData = prog[id];
+            new AdvancementSetup(this.uuid, type, {edit: {data: advData, index: {level: level, id: id}}}).render(true);
+        }
+    }
+
     evalMod(m) {
         if (m.type === "") return m
         m.ftype = ageSystem.modkeys[m.type].dtype;
@@ -525,7 +594,6 @@ export class ageSystemItem extends Item {
     };
 
     async showItem(forceSelfRoll = false) {
-        // return ui.notifications.warn("Show item cards on chat is currently unavailable. Await until next version"); // Remove when chat cards are working again
         const item = this;
         const itemData = this.system;
         const rollMode = game.settings.get("core", "rollMode");       

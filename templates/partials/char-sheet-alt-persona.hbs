@@ -1,55 +1,55 @@
 {{!-- Persona Tab --}}
-<section class="persona-section">
+<section class="persona-section flexcol">
     <div class="flexrow">
-        <div class="resource flexcol colorset-third-tier">
+        <div class="resource flexcol colorset-first-tier">
             <label class="title">{{localize "age-system.drive.drive"}}</label>
             <textarea class="free-text values" name="system.drive.name">{{system.drive.name}}</textarea>
         </div>
 
-        <div class="resource flexcol colorset-third-tier">
+        <div class="resource flexcol colorset-first-tier">
             <label class="title">{{localize "age-system.goals"}}</label>
             <textarea class="free-text values" name="system.goals">{{system.goals}}</textarea>
         </div>
     </div>
 
     <div class="flexrow">
-        <div class="resource flexcol colorset-third-tier">
+        <div class="resource flexcol colorset-first-tier">
             <label class="title">{{localize "age-system.drive.quality"}}</label>
             <textarea class="free-text values" name="system.drive.quality">{{system.drive.quality}}</textarea>
         </div>
 
-        <div class="resource flexcol colorset-third-tier">
+        <div class="resource flexcol colorset-first-tier">
             <label class="title">{{localize "age-system.drive.downfall"}}</label>
             <textarea class="free-text values" name="system.drive.downfall">{{system.drive.downfall}}</textarea>
         </div>
     </div>
 
     <div class="flexrow">
-        <div class="resource flexcol colorset-third-tier">
+        <div class="resource flexcol colorset-first-tier">
             <label class="title">{{localize "age-system.language"}}</label>
             <textarea class="free-text values" name="system.language">{{system.language}}</textarea>
         </div>
 
-        <div class="resource flexcol colorset-third-tier">
+        <div class="resource flexcol colorset-first-tier">
             <label class="title">{{localize "age-system.features"}}</label>
             <textarea class="free-text values" name="system.traits">{{system.traits}}</textarea>
         </div>
     </div>
 
-    <div class="resource colorset-third-tier">
+    <div class="resource features colorset-first-tier editor-container editor-char-persona">
         <label class="title">{{localize "age-system.bio"}}</label>
         {{editor system.features target="system.features" button=true owner=owner editable=editable}}
     </div>
 
     {{#if isGM}}
-    <div class="flexcol resource persona-row secret-note colorset-third-tier">
+    <div class="flexcol resource persona-row secret-note colorset-first-tier">
         <label class="title">{{localize "age-system.gmNotes"}}</label>
         <textarea class="free-text values" name="system.gmNotes">{{system.gmNotes}}</textarea>
     </div>
     {{/if}}
 
     {{#if owner}}
-    <div class="flexcol resource secret-note container colorset-third-tier">
+    <div class="flexcol resource secret-note container colorset-first-tier">
         <label class="title">{{localize "age-system.secretNote"}}</label>
         <textarea class="free-text values" name="system.secretNote">{{system.secretNote}}</textarea>
     </div>
