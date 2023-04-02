@@ -154,12 +154,6 @@ each(@colorsets, {
         .top-banner {
             border: 5px outset extract(extract(@color-list, @index), 2);
         }
-        .resource {
-            .values {
-                background-color: extract(extract(@color-list, @index), 1);
-                color: extract(extract(@color-list, @index), 4);
-            };
-        }
         .sheet-main-content nav a {
             background-color: extract(extract(@color-list, @index), 2);
             color: extract(extract(@color-list, @index), 5);
@@ -179,6 +173,17 @@ each(@colorsets, {
         };
 
         .colorset-first-tier {
+            &.resource {
+                .list-sub-header {
+                    background-color: extract(extract(@color-list, @index), 3);
+                    color: extract(extract(@color-list, @index), 1);
+                }
+                // .item-card, 
+                .values {
+                    background-color: extract(extract(@color-list, @index), 2) !important;
+                    color: extract(extract(@color-list, @index), 5);
+                };
+            };
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);
 
@@ -190,6 +195,17 @@ each(@colorsets, {
         };    
         
         .colorset-second-tier {
+            &.resource {
+                .list-sub-header {
+                    background-color: extract(extract(@color-list, @index), 2);
+                    color: extract(extract(@color-list, @index), 5);
+                }
+                // .item-card,
+                .values {
+                    background-color: extract(extract(@color-list, @index), 1);
+                    color: extract(extract(@color-list, @index), 4);
+                };
+            }
             background-color: extract(extract(@color-list, @index), 3);
             color: extract(extract(@color-list, @index), 1);
 
@@ -201,6 +217,17 @@ each(@colorsets, {
         };
         
         .colorset-third-tier {
+            &.resource {
+                .list-sub-header {
+                    background-color: extract(extract(@color-list, @index), 1);
+                    color: extract(extract(@color-list, @index), 4);
+                }
+                // .item-card,
+                .values {
+                    background-color: extract(extract(@color-list, @index), 3);
+                    color: extract(extract(@color-list, @index), 1);
+                };
+            }
             background-color: extract(extract(@color-list, @index), 2);
             color: extract(extract(@color-list, @index), 5);
 

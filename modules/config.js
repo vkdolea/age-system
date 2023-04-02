@@ -1,9 +1,33 @@
 export const ageSystem = {
-    abilitiesSettings: {}
+    abilitiesSettings: {
+        // Ability set for "main" - core AGE System games
+        main: {
+            "acc": "age-system.acc",
+            "comm": "age-system.comm",
+            "cons": "age-system.cons",
+            "dex": "age-system.dex",
+            "fight": "age-system.fight",
+            "int": "age-system.int",
+            "per": "age-system.per",
+            "str": "age-system.str",
+            "will": "age-system.will",
+        },
+        // Ability set for "dage" - Dragon Age games
+        dage: {
+            "comm": "age-system.comm",
+            "cons": "age-system.cons",
+            "cunn": "age-system.cunn",
+            "dex": "age-system.dex",
+            "magic": "age-system.magic",
+            "per": "age-system.per",
+            "str": "age-system.str",
+            "will": "age-system.will",
+        }
+    }
 };
 
-// Ability set for "main" - core AGE System games
-ageSystem.abilitiesSettings.main = {
+// All possible Abilities
+ageSystem.abilitiesTotal = {
     "acc": "age-system.acc",
     "comm": "age-system.comm",
     "cons": "age-system.cons",
@@ -13,19 +37,11 @@ ageSystem.abilitiesSettings.main = {
     "per": "age-system.per",
     "str": "age-system.str",
     "will": "age-system.will",
-};
 
-// Ability set for "dage" - Dragon Age games
-ageSystem.abilitiesSettings.dage = {
-    "comm": "age-system.comm",
-    "cons": "age-system.cons",
     "cunn": "age-system.cunn",
     "dex": "age-system.dex",
-    "magic": "age-system.magic",
-    "per": "age-system.per",
-    "str": "age-system.str",
-    "will": "age-system.will",
-};
+    "magic": "age-system.magic"    
+}
 
 // Organization Abilities
 ageSystem.abilitiesOrg = {
@@ -254,9 +270,9 @@ ageSystem.uiElements = {
 
 const advIconPath =  "systems/age-system/resources/imgs/adv-icon/";
 ageSystem.advIcon = {
-    health: `${advIconPath}heart-key.svg`,
-    ability: `${advIconPath}orb-direction.svg`,
-    newItem: `${advIconPath}family-tree.svg`,
+    // health: `${advIconPath}heart-key.svg`,
+    // ability: `${advIconPath}orb-direction.svg`,
+    item: `${advIconPath}family-tree.svg`,
     progressive: `${advIconPath}progression.svg`,
 }
 

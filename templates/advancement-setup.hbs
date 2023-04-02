@@ -2,6 +2,7 @@
 <form>
     <div class="">
         <section class="options-column">
+            {{#if (eq advType "progressive")}}
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.trait"}}</strong></label>
                 <select name="trait" class="header-input">
@@ -12,6 +13,7 @@
                     {{/select}}
                 </select>
             </div>
+            {{/if}}
             {{#if (eq advType "item")}}
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.type"}}</strong></label>
@@ -22,22 +24,22 @@
                     {{/each}}
                     {{/select}}
                 </select>
-            </div>
+            </div> 
             {{/if}}
             {{#if (eq itemOption "multiple")}}
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.item.quantity"}}</strong></label>
-                <input type="number" class="field-data{{#if (eq advType "item")}}-expanded{{/if}}" name="itemQtd" value="{{itemQtd}}" data-dtype="String"/>
+                {{rangePicker name="itemQtd" value=itemQtd min=0 max=itemArrSize step=1}}
             </div>
             {{/if}}
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.alias"}}</strong></label>
-                <input type="text" class="field-data{{#if (eq advType "item")}}-expanded{{/if}}" name="alias" value="{{p}}" data-dtype="String"/>
+                <input type="text" class="field-data{{#if (eq advType "item")}}-expanded{{/if}}" name="alias" value="{{alias}}" data-dtype="String"/>
             </div>
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.image"}}</strong></label>
                 <div class="field-data flexrow flex-align-baseline">
-                    <input type="text" class="" name="img" value="{{p}}" data-dtype="String" />
+                    <input type="text" class="" name="img" value="{{img}}" data-dtype="String" />
                     {{filePicker type="image" target="img"}}
                 </div>
             </div>
@@ -52,8 +54,27 @@
                     {{/select}}
                 </select>
             </div>
+            <div class="flexrow flex-align-baseline option">
+                <label for=""><strong>{{localize "age-system.itemProgression"}}</strong></label>
+                <div class="field-data flexrow flex-align-baseline">
+                    <select name="tType" class="header-input">
+                        {{#select tType}}
+                        {{#each traitArr as |tt|}}
+                        {{#if (ne tt.key 'power')}}
+                        <option value="{{tt.key}}">{{tt.name}}</option>
+                        {{/if}}
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    <button class="addItemProg" type="button" style="flex: 0;">
+                        {{localize "age-system.add"}}
+                    </button>
+                </div>
+            </div>
+            <p class="notes">{{localize "age-system.itemProgressionHint"}}</p>
             {{/if}}
         </section>
+
         {{#if (eq advType "progressive")}}
         <section class="data-column flexrow">
             <ul class="list-table-content flex-justify-center">
@@ -89,13 +110,24 @@
         <section class="item-drop-area">
             <ol>
                 <li><strong>{{localize "age-system.dragAdvItem"}}</strong></li>
-                {{#each itemArr as |i|}}
-                <li class="flex-align-baseline flex-justify-between">
-                    <div>
+                {{#each traitArr as |t|}}
+                <ol class="trait-listing">
+                    {{#each ../itemArr as |i|}}
+                    {{#if @first}}
+                    <li><em>{{t.name}}</em></li>
+                    {{/if}}
+                    {{#if (eq t.key i.trait)}}
+                    <li class="flex-align-baseline flex-justify-start">
                         <a class="item-delete" data-index="{{@index}}" title="{{localize "age-system.settings.delete"}}"><i class="fa-solid fa-trash"></i></a>
-                        <span class="enrich-text"> @UUID[{{i.uuid}}]</span>
-                    </div>
-                </li>
+                        {{#if i.uuid}}
+                        <span class="enrich-text">@UUID[{{i.uuid}}]</span>
+                        {{else}}
+                        <a class="content-link" data-uuid="" data-tooltip="{{localize "age-system.itemProgression"}}" style="cursor: inherit;"><i class="fa-solid fa-signal-bars"></i>{{t.name}} ({{localize "age-system.itemProgression"}})</a>
+                        {{/if}}
+                    </li>
+                    {{/if}}
+                    {{/each}}
+                </ol>
                 {{/each}}
             </ol>
         </section>

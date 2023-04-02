@@ -1,3 +1,4 @@
+import { AdvancementSetup } from "./advancement.js";
 import {ageSystem} from "./config.js";
 import * as Dice from "./dice.js";
 
@@ -95,7 +96,7 @@ export class ageSystemItem extends Item {
     _prepareClass(system) {
         const advPerLvl = new Array(20).fill(null);
         
-        // First add all Progressive Advancements
+        // Add all Progressive Advancements
         const progAdv = system.advancements.progressive;
         for (let p = 0; p < progAdv.length; p++) {
             const a = progAdv[p]
@@ -107,6 +108,7 @@ export class ageSystemItem extends Item {
                     advPerLvl[i].push({
                         type: 'progressive',
                         id: p,
+                        level: p,
                         trait: a.trait,
                         value: e,
                         img: a.img,
@@ -114,6 +116,20 @@ export class ageSystemItem extends Item {
                     })
                 }
             }
+        }
+
+        // Add all Item Advancements
+        const progItem = system.advancements.item;
+        for (let id = 0; id < progItem.length; id++) {
+            const it = progItem[id];
+            const l = it.level -1
+            if (!advPerLvl[l]) advPerLvl[l] = [];
+            advPerLvl[l].push({
+                type: "item",
+                id: id,
+                alias: it.alias,
+                img: it.img
+            })
         }
 
         system.advPerLvl = advPerLvl;
@@ -374,6 +390,34 @@ export class ageSystemItem extends Item {
             key: modName,
         }
         return this.update({[path]: newMod});
+    }
+
+    _onChangeAdvancement(data, action) {
+        const type = data.type;
+        const id = data.id;
+        const level = data.level;
+        if (!['item', 'progressive'].includes(type)) return false
+        const prog = foundry.utils.deepClone(this.system.advancements[type]);
+
+        // Code to remove Advancement
+        if (action === "remove") {
+            switch (type) {
+                case "item": prog.splice(id, 1);
+                    break;
+                case "progressive": prog.splice(id, 1);
+                    break;
+                default:
+                    break;
+            }
+            const path = `system.advancements.${type}`;
+            this.update({[path]: prog});
+        };
+
+        // Code to edit Advancement
+        if (action === "edit") {
+            const advData = prog[id];
+            new AdvancementSetup(this.uuid, type, {edit: {data: advData, index: {level: level, id: id}}}).render(true);
+        }
     }
 
     evalMod(m) {

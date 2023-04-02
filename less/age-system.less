@@ -193,8 +193,13 @@ body *:not(i, .fa, .far, .fas) {
             margin-bottom: 4px;
         }
         label {
-            flex: 0 0 50px
+            flex: 0 0 130px;
+            margin: auto 0;
         };
+        input, select, span {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
     };
 
     footer {
@@ -224,30 +229,32 @@ body *:not(i, .fa, .far, .fas) {
         min-height: 200px;
         li {
             border-bottom: none;
-        }
-    }
+        };
+        ol.trait-listing > li:only-of-type {
+            display: none;
+        };
+    };
     li {
         border-bottom: 2px groove white;
         padding: 4px;
     };
     li:last-of-type {
         border-bottom: none;
-    }
+    };
     li:not(:first-of-type) {
         display: flex;
         flex-direction: row;
         align-items: center;
         column-gap: 6px;
-    }
+    };
     li.options:hover {
-        // background-color: rgba(0, 0, 0, 0.1);
         cursor: pointer;
         background: linear-gradient(90deg, rgba(254,254,254,0.1) 10%, rgba(0,0,0,0.1) 48%, rgba(254,254,254,0.1) 90%);
-    }
+    };
     img {
         height: 45px;
         border: none;
-    }
+    };
 }
 .age-system-dialog {
     .window-content {

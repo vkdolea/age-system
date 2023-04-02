@@ -113,10 +113,12 @@
 
             <section class="sheet-tab-section">
                 {{!-- Main Tab --}}
-                <div class="tab main" data-group="primary" data-tab="main">
-                    <ul class="resource colorset-first-tier item-box"><li>
-                        {{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
-                    </li></ul>
+                <div class="tab main fill-space-height-100" data-group="primary" data-tab="main">
+                    <ul class="resource colorset-third-tier editor-parent">
+                        <li class="editor-parent no-value-class">
+                            {{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
+                        </li>
+                    </ul>
                 </div>
 
                 {{!-- Bonuses Tab --}}

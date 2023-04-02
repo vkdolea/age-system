@@ -448,14 +448,9 @@
         },
         "class": {
             "description": "",
-            "primaryAbl": [],
-            "health": {
-                "start": "20 + @cons + 1d6",
-                "leveling": "1d6 + @cons",
-                "options": {}
-            },
-            "wgroups": [],
             "level": 0,
+            "primaryAbl": [],
+            "wgroups": [],
             "advancements": {
                 "progressive": [],
                 "item": []
