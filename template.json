@@ -401,7 +401,8 @@
             "relationship",
             "honorifics",
             "membership",
-            "shipfeatures"
+            "shipfeatures",
+            "class"
         ],
         "templates": {
             "itemReq": {
@@ -446,17 +447,14 @@
             }
         },
         "class": {
-            "name": "",
             "description": "",
-            "primaryAbl": [],
-            "health": {
-                "start": "20 + @cons + 1d6",
-                "leveling": "1d6 + @cons",
-                "options": {}
-            },
-            "wgroups": [],
             "level": 0,
-            "advancements": []
+            "primaryAbl": [],
+            "wgroups": [],
+            "advancements": {
+                "progressive": [],
+                "item": []
+            }
         },
         "shipfeatures": {
             "templates": ["description", "hardItem", "damage"],
