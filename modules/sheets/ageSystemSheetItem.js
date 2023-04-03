@@ -148,6 +148,7 @@ export default class ageSystemItemSheet extends ItemSheet {
             html.find(".mod-controls a.remove").click(this._onRemoveModifier.bind(this));
             html.find(".mod-controls a.toggle").click(this._onToggleModifier.bind(this));
             html.find(".toggle-feature").click(this._onToggleFeature.bind(this));
+            html.find(".trait-item").click(this._onTraitGroupToggle.bind(this));
             if (this.item.type === "focus") {
                 if (this.item.isOwned) {
                     html.find(".item-card-title").keyup(this._onOwnedFocusNameChange.bind(this));
@@ -166,7 +167,6 @@ export default class ageSystemItemSheet extends ItemSheet {
 
         // Actions by sheet owner only
         if (this.item.isOwner) {
-            html.find(".trait-group").click(this._onTraitGroupToggle.bind(this));
             if (this.item.type === "class") new ContextMenu(html, ".advance", this.advContextMenu);
         };
 
