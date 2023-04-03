@@ -10,11 +10,16 @@
 .age-system.sheet.vehicle {
     min-width: min-content;
 
-    .stats-block.stats-block {
+    h2,
+    label,
+    .stats-block li {
+        text-align: center;
+    }
+
+    .stats-block {
         padding: 5px;
         border-radius: 10px;
         margin-top: 10px;
-        text-align: center;
     }
 
     .spacer {
@@ -56,25 +61,17 @@
             border: none;
             height: 190px;
         }
-        .vehicle-desc {
-            flex: auto;
-            p {
-                margin: 7px 0;
-                height: auto;
-            }
-            label.desc.desc {
-                display: block;
-                width: 100%;
-                border-radius: 5px;
-                text-align: center;
-            }
-            height: 190px;
-            .editor {
-                height: 100%;
-                .editor-content {
-                    max-height: 173px;
-                }
-            }
+        .editor {
+            height: 100%;
+        }
+        .editor-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .prosemirror > .editor-container {
+            width: 100%;
+            margin: 0;
         }
     }
     

@@ -53,6 +53,6 @@
             {{localize "age-system.plotAction"}} <a class="roll-plot" data-roll-type="{{ROLL_TYPE.PLOT_ACTION}}"><i class="fas fa-dice"></i></a> <a class="roll-plot" data-roll-type="{{ROLL_TYPE.PLOT_DAMAGE}}"><i class="fas fa-fist-raised"></i></a>
         </li>
     </ul>
-    {{editor system.description target="system.description" button=true editable=editable}}
+    {{editor system.description target="system.description" button=true editable=editable engine="prosemirror"}}
     <footer class="colorset-first-tier"></footer>
 </form>

@@ -1,5 +1,12 @@
 # Release Notes
 
+## 1.2.1 [2023-04-03]
+### Changed
+- TinyMCE editor removed in benefit of ProseMirror on Actors and Item sheets.
+
+### Fixed
+- Issue preventing adding or removing weapon groups from Weapons.
+
 ## 1.2.0 [2023-04-02]
 ### Added
 - New "Class" Item type to track character leveling. Currently, only creating the Item is possible. In the next release it will be possible to pass to a Character and use it to level up.

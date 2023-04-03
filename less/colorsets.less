@@ -12,7 +12,7 @@
 
 /** Fantasy Blue Colors **/
 @fantasy-blue: #0f4f5b;
-@fantasy-blue-high: #000000;
+@fantasy-blue-high: #0f0f0f;
 // @fantasy-blue-mid: #c1cbd3;
 @fantasy-blue-mid: #91b6d4;
 @fantasy-blue-font: #ffffff;
@@ -186,6 +186,10 @@ each(@colorsets, {
             };
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);
+            input,
+            select {
+                color: extract(extract(@color-list, @index), 4);
+            };
 
             a.content-link,
             a.inline-roll {
@@ -208,7 +212,11 @@ each(@colorsets, {
             }
             background-color: extract(extract(@color-list, @index), 3);
             color: extract(extract(@color-list, @index), 1);
-
+            input,
+            select {
+                color: extract(extract(@color-list, @index), 1);
+            };
+            
             a.content-link,
             a.inline-roll {
                 background-color: extract(extract(@color-list, @index), 2);
@@ -230,6 +238,10 @@ each(@colorsets, {
             }
             background-color: extract(extract(@color-list, @index), 2);
             color: extract(extract(@color-list, @index), 5);
+            input,
+            select {
+                color: extract(extract(@color-list, @index), 5);
+            };
 
             a.content-link,
             a.inline-roll {

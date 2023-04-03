@@ -1,14 +1,3 @@
-/*********************************/
-/**    Item Specific Rules      **/
-/*********************************/
-// .age-system {
-//     .talent .main .editor.editor {max-height: 150px;}
-//     .stunts .editor.editor {
-//         max-height: 150px;
-//     };
-// }
-
-
 
 /*********************************/
 /**    Alternate Char Sheet     **/
@@ -44,6 +33,10 @@
             display: flex;
             flex-direction: column;
         }
+        .prosemirror > .editor-container {
+            width: 100%;
+            margin: 0;
+        }
         .editor-char-persona {
             .editor {
                 flex: 1 1 204px;
@@ -53,6 +46,13 @@
             flex: 0;
         };
     }
+
+    .editor {
+        text-align: left;
+        padding: 4px;
+        border-radius: 0 0 @big-border-radius @big-border-radius;
+    }
+
     .sheet-tab-section .tab.active section {
         > * {
             flex-grow: 0;
@@ -87,12 +87,6 @@
             flex: 0 0 50px;
         }
     };
-    
-    .editor {
-        text-align: left;
-        padding: 4px;
-        border-radius: 0 0 @big-border-radius @big-border-radius;
-    }
 
     p .item-box {
         line-height: 1.5;
@@ -124,7 +118,6 @@
 .age-system.sheet,
 .age-system.dialog {
     flex-wrap: nowrap;
-    text-align: center;
     ol,
     ul,
     .list {
@@ -376,6 +369,9 @@
             margin-bottom: 5px;
             border-radius: @big-border-radius;
             border: thin solid black;
+            input.abl-value {
+                text-align: center
+            }
         };
         .ability-box:last-of-type {
             margin-bottom: 0;

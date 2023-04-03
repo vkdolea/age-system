@@ -116,7 +116,7 @@
                 <div class="tab main fill-space-height-100" data-group="primary" data-tab="main">
                     <ul class="resource colorset-third-tier editor-parent">
                         <li class="editor-parent no-value-class">
-                            {{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true}}
+                            {{editor system.longDesc target="system.longDesc" button=true owner=owner editable=true engine="prosemirror"}}
                         </li>
                     </ul>
                 </div>
@@ -181,7 +181,7 @@
                         <li class="colorset-third-tier flexrow">
                             <p>
                                 {{#each weaponGroups as |wgroup|}}
-                                <a class="feature-controls select-options item-name wgroup-item item-box {{#if (haswgroup wgroup ../item.system.wgroups)}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-wgroup-id="{{wgroup}}">
+                                <a class="feature-controls select-options item-name trait-item item-box {{#if (haswgroup wgroup ../item.system.wgroups)}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-trait-type="wgroups" data-trait-id="{{wgroup}}">
                                     {{wgroup}}
                                 </a>
                                 {{/each}}

@@ -188,9 +188,6 @@
   padding-left: 0;
 }
 /*********************************/
-/**    Item Specific Rules      **/
-/*********************************/
-/*********************************/
 /**    Alternate Char Sheet     **/
 /*********************************/
 .age-system.char-sheet-alt .fill-space-height-100 > *,
@@ -232,6 +229,17 @@
   display: flex;
   flex-direction: column;
 }
+.age-system.char-sheet-alt .sheet-main-content .prosemirror > .editor-container,
+.age-system.item .sheet-main-content .prosemirror > .editor-container,
+.age-system.char-sheet-alt .sheet-main-content section .prosemirror > .editor-container,
+.age-system.item .sheet-main-content section .prosemirror > .editor-container,
+.age-system.char-sheet-alt .sheet-tab-section .tab.active .prosemirror > .editor-container,
+.age-system.item .sheet-tab-section .tab.active .prosemirror > .editor-container,
+.age-system.char-sheet-alt .sheet-tab-section .tab.active section .prosemirror > .editor-container,
+.age-system.item .sheet-tab-section .tab.active section .prosemirror > .editor-container {
+  width: 100%;
+  margin: 0;
+}
 .age-system.char-sheet-alt .sheet-main-content .editor-char-persona .editor,
 .age-system.item .sheet-main-content .editor-char-persona .editor,
 .age-system.char-sheet-alt .sheet-main-content section .editor-char-persona .editor,
@@ -251,6 +259,12 @@
 .age-system.char-sheet-alt .sheet-tab-section .tab.active section .add-sheet-tabs,
 .age-system.item .sheet-tab-section .tab.active section .add-sheet-tabs {
   flex: 0;
+}
+.age-system.char-sheet-alt .editor,
+.age-system.item .editor {
+  text-align: left;
+  padding: 4px;
+  border-radius: 0 0 5px 5px;
 }
 .age-system.char-sheet-alt .sheet-tab-section .tab.active section > *,
 .age-system.item .sheet-tab-section .tab.active section > * {
@@ -292,12 +306,6 @@
 .age-system.item .modifiers-table .mod-controls {
   flex: 0 0 50px;
 }
-.age-system.char-sheet-alt .editor,
-.age-system.item .editor {
-  text-align: left;
-  padding: 4px;
-  border-radius: 0 0 5px 5px;
-}
 .age-system.char-sheet-alt p .item-box,
 .age-system.item p .item-box {
   line-height: 1.5;
@@ -328,7 +336,6 @@
 .age-system.sheet,
 .age-system.dialog {
   flex-wrap: nowrap;
-  text-align: center;
   text-decoration: none;
   box-sizing: border-box;
   /********************/
@@ -625,6 +632,10 @@
   margin-bottom: 5px;
   border-radius: 5px;
   border: thin solid black;
+}
+.age-system.sheet .char-main-section .ability-box input.abl-value,
+.age-system.dialog .char-main-section .ability-box input.abl-value {
+  text-align: center;
 }
 .age-system.sheet .char-main-section .ability-box:last-of-type,
 .age-system.dialog .char-main-section .ability-box:last-of-type {
@@ -1068,11 +1079,15 @@
 .age-system.sheet.vehicle {
   min-width: min-content;
 }
-.age-system.sheet.vehicle .stats-block.stats-block {
+.age-system.sheet.vehicle h2,
+.age-system.sheet.vehicle label,
+.age-system.sheet.vehicle .stats-block li {
+  text-align: center;
+}
+.age-system.sheet.vehicle .stats-block {
   padding: 5px;
   border-radius: 10px;
   margin-top: 10px;
-  text-align: center;
 }
 .age-system.sheet.vehicle .spacer {
   flex: 0 0 10px;
@@ -1109,25 +1124,17 @@
   border: none;
   height: 190px;
 }
-.age-system.sheet.vehicle .image-description .vehicle-desc {
-  flex: auto;
-  height: 190px;
-}
-.age-system.sheet.vehicle .image-description .vehicle-desc p {
-  margin: 7px 0;
-  height: auto;
-}
-.age-system.sheet.vehicle .image-description .vehicle-desc label.desc.desc {
-  display: block;
-  width: 100%;
-  border-radius: 5px;
-  text-align: center;
-}
-.age-system.sheet.vehicle .image-description .vehicle-desc .editor {
+.age-system.sheet.vehicle .image-description .editor {
   height: 100%;
 }
-.age-system.sheet.vehicle .image-description .vehicle-desc .editor .editor-content {
-  max-height: 173px;
+.age-system.sheet.vehicle .image-description .editor-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.age-system.sheet.vehicle .image-description .prosemirror > .editor-container {
+  width: 100%;
+  margin: 0;
 }
 .age-system.sheet.vehicle .gm-secret-notes.gm-secret-notes {
   height: max-content;
@@ -1277,7 +1284,6 @@
   border-radius: 10px;
   margin-top: 10px;
   flex: 0 0 auto;
-  text-align: center;
 }
 .age-system.sheet.spaceship ul {
   list-style-type: none;
@@ -1304,7 +1310,9 @@
   padding-top: 5px;
 }
 .age-system.sheet.spaceship h2,
-.age-system.sheet.spaceship h3 {
+.age-system.sheet.spaceship h3,
+.age-system.sheet.spaceship label,
+.age-system.sheet.spaceship .stats-block li {
   text-align: center;
 }
 .age-system.sheet.spaceship input[name="name"] {
@@ -1776,6 +1784,10 @@
   background-color: #35A5CA !important;
   color: #231F20;
 }
+.colorset-modern-blue .colorset-first-tier input,
+.colorset-modern-blue .colorset-first-tier select {
+  color: #ffffff;
+}
 .colorset-modern-blue .colorset-first-tier a.content-link,
 .colorset-modern-blue .colorset-first-tier a.inline-roll {
   background-color: #B9DBEB;
@@ -1793,6 +1805,10 @@
   background-color: #007DAD;
   color: #ffffff;
 }
+.colorset-modern-blue .colorset-second-tier input,
+.colorset-modern-blue .colorset-second-tier select {
+  color: #007DAD;
+}
 .colorset-modern-blue .colorset-second-tier a.content-link,
 .colorset-modern-blue .colorset-second-tier a.inline-roll {
   background-color: #35A5CA;
@@ -1809,6 +1825,10 @@
 .colorset-modern-blue .colorset-third-tier.resource .values {
   background-color: #B9DBEB;
   color: #007DAD;
+}
+.colorset-modern-blue .colorset-third-tier input,
+.colorset-modern-blue .colorset-third-tier select {
+  color: #231F20;
 }
 .colorset-modern-blue .colorset-third-tier a.content-link,
 .colorset-modern-blue .colorset-third-tier a.inline-roll {
@@ -1928,10 +1948,10 @@
 }
 .colorset-fantasy-blue aside {
   border-radius: 5px;
-  border: 5px outset #000000;
+  border: 5px outset #0f0f0f;
 }
 .colorset-fantasy-blue .item-summary label {
-  background-color: #000000;
+  background-color: #0f0f0f;
   color: #dbdada;
 }
 .colorset-fantasy-blue .metal-background {
@@ -1941,10 +1961,10 @@
   background-color: rgba(145, 182, 212, 0.6) !important;
 }
 .colorset-fantasy-blue .top-banner {
-  border: 5px outset #000000;
+  border: 5px outset #0f0f0f;
 }
 .colorset-fantasy-blue .sheet-main-content nav a {
-  background-color: #000000;
+  background-color: #0f0f0f;
   color: #dbdada;
 }
 .colorset-fantasy-blue .sheet-main-content nav a.active {
@@ -1967,8 +1987,12 @@
   color: #0f4f5b;
 }
 .colorset-fantasy-blue .colorset-first-tier.resource .values {
-  background-color: #000000 !important;
+  background-color: #0f0f0f !important;
   color: #dbdada;
+}
+.colorset-fantasy-blue .colorset-first-tier input,
+.colorset-fantasy-blue .colorset-first-tier select {
+  color: #ffffff;
 }
 .colorset-fantasy-blue .colorset-first-tier a.content-link,
 .colorset-fantasy-blue .colorset-first-tier a.inline-roll {
@@ -1980,20 +2004,24 @@
   color: #0f4f5b;
 }
 .colorset-fantasy-blue .colorset-second-tier.resource .list-sub-header {
-  background-color: #000000;
+  background-color: #0f0f0f;
   color: #dbdada;
 }
 .colorset-fantasy-blue .colorset-second-tier.resource .values {
   background-color: #0f4f5b;
   color: #ffffff;
 }
+.colorset-fantasy-blue .colorset-second-tier input,
+.colorset-fantasy-blue .colorset-second-tier select {
+  color: #0f4f5b;
+}
 .colorset-fantasy-blue .colorset-second-tier a.content-link,
 .colorset-fantasy-blue .colorset-second-tier a.inline-roll {
-  background-color: #000000;
+  background-color: #0f0f0f;
   color: #dbdada;
 }
 .colorset-fantasy-blue .colorset-third-tier {
-  background-color: #000000;
+  background-color: #0f0f0f;
   color: #dbdada;
 }
 .colorset-fantasy-blue .colorset-third-tier.resource .list-sub-header {
@@ -2003,6 +2031,10 @@
 .colorset-fantasy-blue .colorset-third-tier.resource .values {
   background-color: #91b6d4;
   color: #0f4f5b;
+}
+.colorset-fantasy-blue .colorset-third-tier input,
+.colorset-fantasy-blue .colorset-third-tier select {
+  color: #dbdada;
 }
 .colorset-fantasy-blue .colorset-third-tier a.content-link,
 .colorset-fantasy-blue .colorset-third-tier a.inline-roll {
@@ -2164,6 +2196,10 @@
   background-color: #979899 !important;
   color: #000000;
 }
+.colorset-dragon-red .colorset-first-tier input,
+.colorset-dragon-red .colorset-first-tier select {
+  color: #ffffff;
+}
 .colorset-dragon-red .colorset-first-tier a.content-link,
 .colorset-dragon-red .colorset-first-tier a.inline-roll {
   background-color: #e0beb1;
@@ -2181,6 +2217,10 @@
   background-color: #83272a;
   color: #ffffff;
 }
+.colorset-dragon-red .colorset-second-tier input,
+.colorset-dragon-red .colorset-second-tier select {
+  color: #83272a;
+}
 .colorset-dragon-red .colorset-second-tier a.content-link,
 .colorset-dragon-red .colorset-second-tier a.inline-roll {
   background-color: #979899;
@@ -2197,6 +2237,10 @@
 .colorset-dragon-red .colorset-third-tier.resource .values {
   background-color: #e0beb1;
   color: #83272a;
+}
+.colorset-dragon-red .colorset-third-tier input,
+.colorset-dragon-red .colorset-third-tier select {
+  color: #000000;
 }
 .colorset-dragon-red .colorset-third-tier a.content-link,
 .colorset-dragon-red .colorset-third-tier a.inline-roll {
@@ -2358,6 +2402,10 @@
   background-color: #625b68 !important;
   color: #000000;
 }
+.colorset-folded-purple .colorset-first-tier input,
+.colorset-folded-purple .colorset-first-tier select {
+  color: #ffffff;
+}
 .colorset-folded-purple .colorset-first-tier a.content-link,
 .colorset-folded-purple .colorset-first-tier a.inline-roll {
   background-color: #cfccde;
@@ -2375,6 +2423,10 @@
   background-color: #565183;
   color: #ffffff;
 }
+.colorset-folded-purple .colorset-second-tier input,
+.colorset-folded-purple .colorset-second-tier select {
+  color: #565183;
+}
 .colorset-folded-purple .colorset-second-tier a.content-link,
 .colorset-folded-purple .colorset-second-tier a.inline-roll {
   background-color: #625b68;
@@ -2391,6 +2443,10 @@
 .colorset-folded-purple .colorset-third-tier.resource .values {
   background-color: #cfccde;
   color: #565183;
+}
+.colorset-folded-purple .colorset-third-tier input,
+.colorset-folded-purple .colorset-third-tier select {
+  color: #000000;
 }
 .colorset-folded-purple .colorset-third-tier a.content-link,
 .colorset-folded-purple .colorset-third-tier a.inline-roll {
@@ -2552,6 +2608,10 @@
   background-color: #92b65f !important;
   color: #000000;
 }
+.colorset-ronin-green .colorset-first-tier input,
+.colorset-ronin-green .colorset-first-tier select {
+  color: #ffffff;
+}
 .colorset-ronin-green .colorset-first-tier a.content-link,
 .colorset-ronin-green .colorset-first-tier a.inline-roll {
   background-color: #c2f5aa;
@@ -2569,6 +2629,10 @@
   background-color: #155f0e;
   color: #ffffff;
 }
+.colorset-ronin-green .colorset-second-tier input,
+.colorset-ronin-green .colorset-second-tier select {
+  color: #155f0e;
+}
 .colorset-ronin-green .colorset-second-tier a.content-link,
 .colorset-ronin-green .colorset-second-tier a.inline-roll {
   background-color: #92b65f;
@@ -2585,6 +2649,10 @@
 .colorset-ronin-green .colorset-third-tier.resource .values {
   background-color: #c2f5aa;
   color: #155f0e;
+}
+.colorset-ronin-green .colorset-third-tier input,
+.colorset-ronin-green .colorset-third-tier select {
+  color: #000000;
 }
 .colorset-ronin-green .colorset-third-tier a.content-link,
 .colorset-ronin-green .colorset-third-tier a.inline-roll {
@@ -2746,6 +2814,10 @@
   background-color: #4d627a !important;
   color: #290000;
 }
+.colorset-select-one .colorset-first-tier input,
+.colorset-select-one .colorset-first-tier select {
+  color: #e7ccc3;
+}
 .colorset-select-one .colorset-first-tier a.content-link,
 .colorset-select-one .colorset-first-tier a.inline-roll {
   background-color: #768d9f;
@@ -2763,6 +2835,10 @@
   background-color: #273249;
   color: #e7ccc3;
 }
+.colorset-select-one .colorset-second-tier input,
+.colorset-select-one .colorset-second-tier select {
+  color: #273249;
+}
 .colorset-select-one .colorset-second-tier a.content-link,
 .colorset-select-one .colorset-second-tier a.inline-roll {
   background-color: #4d627a;
@@ -2779,6 +2855,10 @@
 .colorset-select-one .colorset-third-tier.resource .values {
   background-color: #768d9f;
   color: #273249;
+}
+.colorset-select-one .colorset-third-tier input,
+.colorset-select-one .colorset-third-tier select {
+  color: #290000;
 }
 .colorset-select-one .colorset-third-tier a.content-link,
 .colorset-select-one .colorset-third-tier a.inline-roll {
@@ -2940,6 +3020,10 @@
   background-color: #6b6a6a !important;
   color: #000000;
 }
+.colorset-the-grey .colorset-first-tier input,
+.colorset-the-grey .colorset-first-tier select {
+  color: #ccc9c9;
+}
 .colorset-the-grey .colorset-first-tier a.content-link,
 .colorset-the-grey .colorset-first-tier a.inline-roll {
   background-color: #b4b6b3;
@@ -2957,6 +3041,10 @@
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
+.colorset-the-grey .colorset-second-tier input,
+.colorset-the-grey .colorset-second-tier select {
+  color: #3d3e3f;
+}
 .colorset-the-grey .colorset-second-tier a.content-link,
 .colorset-the-grey .colorset-second-tier a.inline-roll {
   background-color: #6b6a6a;
@@ -2973,6 +3061,10 @@
 .colorset-the-grey .colorset-third-tier.resource .values {
   background-color: #b4b6b3;
   color: #3d3e3f;
+}
+.colorset-the-grey .colorset-third-tier input,
+.colorset-the-grey .colorset-third-tier select {
+  color: #000000;
 }
 .colorset-the-grey .colorset-third-tier a.content-link,
 .colorset-the-grey .colorset-third-tier a.inline-roll {
@@ -3134,6 +3226,10 @@
   background-color: #b22126 !important;
   color: #c7c691;
 }
+.colorset-red-warrior .colorset-first-tier input,
+.colorset-red-warrior .colorset-first-tier select {
+  color: #f7b755;
+}
 .colorset-red-warrior .colorset-first-tier a.content-link,
 .colorset-red-warrior .colorset-first-tier a.inline-roll {
   background-color: #d1635b;
@@ -3151,6 +3247,10 @@
   background-color: #751119;
   color: #f7b755;
 }
+.colorset-red-warrior .colorset-second-tier input,
+.colorset-red-warrior .colorset-second-tier select {
+  color: #751119;
+}
 .colorset-red-warrior .colorset-second-tier a.content-link,
 .colorset-red-warrior .colorset-second-tier a.inline-roll {
   background-color: #b22126;
@@ -3167,6 +3267,10 @@
 .colorset-red-warrior .colorset-third-tier.resource .values {
   background-color: #d1635b;
   color: #751119;
+}
+.colorset-red-warrior .colorset-third-tier input,
+.colorset-red-warrior .colorset-third-tier select {
+  color: #c7c691;
 }
 .colorset-red-warrior .colorset-third-tier a.content-link,
 .colorset-red-warrior .colorset-third-tier a.inline-roll {
@@ -3328,6 +3432,10 @@
   background-color: #58705a !important;
   color: #29241f;
 }
+.colorset-never-dead .colorset-first-tier input,
+.colorset-never-dead .colorset-first-tier select {
+  color: #bb8755;
+}
 .colorset-never-dead .colorset-first-tier a.content-link,
 .colorset-never-dead .colorset-first-tier a.inline-roll {
   background-color: #eeddcd;
@@ -3345,6 +3453,10 @@
   background-color: #663322;
   color: #bb8755;
 }
+.colorset-never-dead .colorset-second-tier input,
+.colorset-never-dead .colorset-second-tier select {
+  color: #663322;
+}
 .colorset-never-dead .colorset-second-tier a.content-link,
 .colorset-never-dead .colorset-second-tier a.inline-roll {
   background-color: #58705a;
@@ -3361,6 +3473,10 @@
 .colorset-never-dead .colorset-third-tier.resource .values {
   background-color: #eeddcd;
   color: #663322;
+}
+.colorset-never-dead .colorset-third-tier input,
+.colorset-never-dead .colorset-third-tier select {
+  color: #29241f;
 }
 .colorset-never-dead .colorset-third-tier a.content-link,
 .colorset-never-dead .colorset-third-tier a.inline-roll {
@@ -3522,6 +3638,10 @@
   background-color: #112339 !important;
   color: #dde2e2;
 }
+.colorset-expanded-blue .colorset-first-tier input,
+.colorset-expanded-blue .colorset-first-tier select {
+  color: #dde2e2;
+}
 .colorset-expanded-blue .colorset-first-tier a.content-link,
 .colorset-expanded-blue .colorset-first-tier a.inline-roll {
   background-color: #e6e7e8;
@@ -3539,6 +3659,10 @@
   background-color: #005971;
   color: #dde2e2;
 }
+.colorset-expanded-blue .colorset-second-tier input,
+.colorset-expanded-blue .colorset-second-tier select {
+  color: #005971;
+}
 .colorset-expanded-blue .colorset-second-tier a.content-link,
 .colorset-expanded-blue .colorset-second-tier a.inline-roll {
   background-color: #112339;
@@ -3555,6 +3679,10 @@
 .colorset-expanded-blue .colorset-third-tier.resource .values {
   background-color: #e6e7e8;
   color: #005971;
+}
+.colorset-expanded-blue .colorset-third-tier input,
+.colorset-expanded-blue .colorset-third-tier select {
+  color: #dde2e2;
 }
 .colorset-expanded-blue .colorset-third-tier a.content-link,
 .colorset-expanded-blue .colorset-third-tier a.inline-roll {
@@ -3716,6 +3844,10 @@
   background-color: #000000 !important;
   color: #ffffff;
 }
+.colorset-snow-white .colorset-first-tier input,
+.colorset-snow-white .colorset-first-tier select {
+  color: #000000;
+}
 .colorset-snow-white .colorset-first-tier a.content-link,
 .colorset-snow-white .colorset-first-tier a.inline-roll {
   background-color: #494949;
@@ -3733,6 +3865,10 @@
   background-color: #ffffff;
   color: #000000;
 }
+.colorset-snow-white .colorset-second-tier input,
+.colorset-snow-white .colorset-second-tier select {
+  color: #ffffff;
+}
 .colorset-snow-white .colorset-second-tier a.content-link,
 .colorset-snow-white .colorset-second-tier a.inline-roll {
   background-color: #000000;
@@ -3748,6 +3884,10 @@
 }
 .colorset-snow-white .colorset-third-tier.resource .values {
   background-color: #494949;
+  color: #ffffff;
+}
+.colorset-snow-white .colorset-third-tier input,
+.colorset-snow-white .colorset-third-tier select {
   color: #ffffff;
 }
 .colorset-snow-white .colorset-third-tier a.content-link,
@@ -4087,6 +4227,12 @@ body *:not(i, .fa, .far, .fas) {
 .age-system span.toggle-condition:hover,
 .age-system .mouse-to-pointer:hover:not(:disabled) {
   box-shadow: 0 0 5px silver !important;
+}
+.age-system .prosemirror > menu {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.age-system select > option {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 .age-system hr {
   border: 0;
