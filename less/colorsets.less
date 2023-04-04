@@ -188,7 +188,7 @@ each(@colorsets, {
             color: extract(extract(@color-list, @index), 4);
             input,
             select {
-                color: extract(extract(@color-list, @index), 4);
+                color: color-contrast(extract(extract(@color-list, @index), 1) vs extract(extract(@color-list, @index), 4), black, white);
             };
 
             a.content-link,
@@ -214,7 +214,7 @@ each(@colorsets, {
             color: extract(extract(@color-list, @index), 1);
             input,
             select {
-                color: extract(extract(@color-list, @index), 1);
+                color: color-contrast(extract(extract(@color-list, @index), 3) vs extract(extract(@color-list, @index), 4), black, white);
             };
             
             a.content-link,
@@ -240,7 +240,7 @@ each(@colorsets, {
             color: extract(extract(@color-list, @index), 5);
             input,
             select {
-                color: extract(extract(@color-list, @index), 5);
+                color: color-contrast(extract(extract(@color-list, @index), 2) vs extract(extract(@color-list, @index), 4), black, white);
             };
 
             a.content-link,
