@@ -50,34 +50,11 @@
                 <label>{{localize "age-system.total"}} / {{localize "age-system.mod"}}</label>
             </div>
         </li>
-
-        {{!-- <div class="resource colorset-third-tier">
-            <div class="title colorset-first-tier">
-                <a class="roll-resources feature-controls"><i class="fas fa-dice"></i></a>
-                {{#if system.useResources}}{{localize "SETTINGS.wealthTypeResources"}}{{/if}}{{#if system.useIncome}}{{localize "SETTINGS.wealthTypeIncome"}}{{/if}}
-            </div>
-            <div class="values flexrow colorset-second-tier">
-                <input class="value-data circle" disabled type="number" name="system.resources.total" value="{{system.resources.total}}" data-dtype="Number" />
-                <div class="values-options mods-section flexcol">
-                    <div class="flexrow">
-                        <input class="value-data" type="number" name="system.resources.base" value="{{system.resources.base}}" data-dtype="Number" />
-                        <label>{{localize "age-system.base"}}</label>
-                    </div>
-                    <div class="flexrow">
-                        <input class="value-data" type="number" name="system.resources.mod" value="{{system.resources.mod}}" data-dtype="Number" />
-                        <label>{{localize "age-system.mod"}}</label>
-                    </div>
-                </div>
-            </div>
-            <div class="labels colorset-first-tier">
-                <label>{{localize "age-system.total"}} / {{localize "age-system.mod"}}</label>
-            </div>
-        </div> --}}
         {{/if}}
 
         {{!-- Coins --}}
         {{#if system.useCoins}}
-        <div class="resource colorset-third-tier">
+        <div class="resource colorset-first-tier">
             <div class="title">{{localize "age-system.coins"}}</div>
             <div class="values flexrow">
                 <input class="value-data" type="number" name="system.gp" value="{{system.gp}}" data-dtype="Number" />
@@ -94,7 +71,7 @@
 
         {{!-- Currency --}}
         {{#if system.useCurrency}}
-        <div class="resource colorset-third-tier">
+        <div class="resource colorset-first-tier">
             <div class="title">{{localize "SETTINGS.wealthTypeCurrency"}}</div>
             <div class="values flexrow">
                 <input class="value-data" type="number" name="system.resources.base" value="{{system.resources.base}}" data-dtype="Number" />
