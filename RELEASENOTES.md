@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.2.2 [2023-04-03]
+### Changed
+- Better contrast control for input fields.
+
 ## 1.2.1 [2023-04-03]
 ### Changed
 - TinyMCE editor removed in benefit of ProseMirror on Actors and Item sheets.
