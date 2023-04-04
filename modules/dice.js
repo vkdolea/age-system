@@ -490,7 +490,8 @@ async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
         stuntDmg,
         selectAbl: data.selectAbl,
         abilities: data.actorType === "char" ? ageSystem.abilities : ageSystem.abilitiesOrg,
-        useFocus: data.actorType === "organization"
+        useFocus: data.actorType === "organization",
+        setDmgExtraDice: data.setDmgExtraDice ?? 0
     });
 
     return new Promise(resolve => {
@@ -802,8 +803,20 @@ export async function itemDamage({
     // Prompt user for Damage Options if Alt + Click is used to initialize damage roll
     const ownerName = item.actor.isToken ? item.actor.token.name : item.actor.name;
     let damageOptions = null;
-    if ((!event.ctrlKey && event.altKey) || event.type === "contextmenu") {
-        damageOptions = await getDamageRollOptions(addFocus, stuntDie);
+
+    // Check if CRTL + Click or CRTL + ALT + click was used to generate the damage input
+    if (event.ctrlKey) {
+        let extraD
+        if (event.altKey) {
+            extraD = 2
+        } else {
+            extraD = 1
+        };
+        dmgExtraDice = extraD
+    }
+
+    if ((!event.ctrlKey && event.altKey) || event.type === "contextmenu") {;
+        damageOptions = await getDamageRollOptions(addFocus, stuntDie, {setDmgExtraDice: dmgExtraDice});
         if (damageOptions.cancelled) return;
         dmgExtraDice = damageOptions.setDmgExtraDice;
         dmgGeneralMod = damageOptions.setDmgGeneralMod;
@@ -896,17 +909,6 @@ export async function itemDamage({
             if (healthSys.useInjury) allOutAttackMod = Math.ceil(allOutAttackMod/3);
             damageFormula = `${damageFormula} + @allOutAttack[${game.i18n.localize("age-system.allOutAttack")}]`;
             rollData.allOutAttack = allOutAttackMod;
-        };
-
-        // Adds extra damage for CTRL + click (+1D6) or CTRL + ALT + click (+2D6)
-        if (event.ctrlKey) {
-            let extraD
-            if (event.altKey) {
-                extraD = 2
-            } else {
-                extraD = 1
-            };
-            damageFormula += healthSys.useInjury ? ` + ${extraD}[+${extraD}]` : ` + ${extraD}D6[+${extraD}D6]`;
         };
 
         // Adds specific Stunt Damage dice

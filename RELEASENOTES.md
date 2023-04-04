@@ -1,5 +1,11 @@
 # Release Notes
 
+## 1.2.3 [2023-04-04]
+### Fixed
+- Sheets behave correctly when changing font size from Core Settings.
+- When opening Damage Dialog but right-clicking damage button while pressing CTRL or CTRL + ALT will now populate "Extra Damage" field accordingly.
+- "Coins" box on character sheet now have consistent style compared to other boxes on character sheet.
+
 ## 1.2.2 [2023-04-03]
 ### Changed
 - Better contrast control for input fields.

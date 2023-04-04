@@ -5,15 +5,22 @@
 // Age Roller, to roll 3d6, 2d6, 1d6, d66, d666 - close to hotbar
 a:hover {box-shadow: none;}
 #age-roller {
-    font-size: 42px;
+    font-size: 40px;
     position: absolute;
-    width: 52px;
-    height: 62px;
     margin: 0px;
     padding: 0px;
     cursor: pointer;
     display: inline-block;
     z-index: calc(var(--z-index-ui) + 10);
+    i {
+        border: 2px solid var(--color-border-dark);
+        padding: 4px 0;
+        border-radius: 2px;
+        opacity: 0.7;
+        box-shadow: 0 0 5px #444 inset;
+        background: rgba(0, 0, 0, 0.5);
+        color: #cccccc
+    };
 }
 #age-roller-drag {
     width: 100%;
