@@ -13,8 +13,7 @@
 /** Fantasy Blue Colors **/
 @fantasy-blue: #0f4f5b;
 @fantasy-blue-high: #0f0f0f;
-// @fantasy-blue-mid: #c1cbd3;
-@fantasy-blue-mid: #91b6d4;
+@fantasy-blue-mid: #91b6d4; // @fantasy-blue-mid: #c1cbd3;
 @fantasy-blue-font: #ffffff;
 @fantasy-blue-light-font: #dbdada;
 @fantasy-blue-list: @fantasy-blue, @fantasy-blue-high, @fantasy-blue-mid, @fantasy-blue-font, @fantasy-blue-light-font;
@@ -186,10 +185,6 @@ each(@colorsets, {
             };
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);
-            input,
-            select {
-                color: color-contrast(extract(extract(@color-list, @index), 1) vs extract(extract(@color-list, @index), 4), black, white);
-            };
 
             a.content-link,
             a.inline-roll {
@@ -212,10 +207,6 @@ each(@colorsets, {
             }
             background-color: extract(extract(@color-list, @index), 3);
             color: extract(extract(@color-list, @index), 1);
-            input,
-            select {
-                color: color-contrast(extract(extract(@color-list, @index), 3) vs extract(extract(@color-list, @index), 4), black, white);
-            };
             
             a.content-link,
             a.inline-roll {
@@ -240,8 +231,8 @@ each(@colorsets, {
             color: extract(extract(@color-list, @index), 5);
             input,
             select {
-                color: color-contrast(extract(extract(@color-list, @index), 2) vs extract(extract(@color-list, @index), 4), black, white);
-            };
+                color: extract(extract(@color-list, @index), 5);
+            }
 
             a.content-link,
             a.inline-roll {
