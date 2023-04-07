@@ -1,0 +1,14 @@
+<ul class="resource item-group">
+    <li class="title colorset-first-tier">
+        {{localize "SETTINGS.weaponGroups"}}
+    </li>
+    <li class="colorset-third-tier flexrow">
+        <p>
+            {{#each weaponGroups as |wgroup|}}
+            <a class="feature-controls select-options item-name trait-item item-box {{#if (haswgroup wgroup ../ownedGroups)}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-trait-type="wgroups" data-trait-id="{{wgroup}}">
+                {{wgroup}}
+            </a>
+            {{/each}}
+        </p>
+    </li>
+</ul>

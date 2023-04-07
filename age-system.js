@@ -55,6 +55,7 @@ async function preloadHandlebarsTemplates() {
         `${path}item-card-buttons.hbs`,
         `${path}item-options-sheet.hbs`,
         `${path}play-aid-bar.hbs`,
+        `${path}weapon-group-block.hbs`
     ];
 
     return loadTemplates(templatePaths);

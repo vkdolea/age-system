@@ -178,9 +178,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".refresh-injury-marks").click(this._onRefreshMarks.bind(this));
             html.find(".heal-all-injuries").click(this._onFullHeal.bind(this));
             html.find(".roll-breather").click(this._onRollBreather.bind(this));
-            /**
-             * Code to be used to make the adjustment on Health/Defense/Toughness for different Game Modes
-             */
+            // Listeners to be used to make the adjustment on Health/Defense/Toughness for different Game Modes
             html.find(".game-mode-details").change(this._onAdjustHealth.bind(this));
             html.find(".game-mode .override").click(this._onLockGameMode.bind(this));
 
@@ -225,7 +223,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".guardup-maneuver").change(this._onGuardUpSelect.bind(this));
             html.find(".conditions .item-name").click(this._onChangeCondition.bind(this));
             html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
-            html.find(".wgroup-item").click(this._onWeaponGroupToggle.bind(this));
+            html.find(".trait-item").click(this._onTraitGroupToggle.bind(this));
         }
        
         super.activateListeners(html);
@@ -328,19 +326,23 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         } 
     };
 
-    async _onWeaponGroupToggle(event) {
-        const actorData = this.actor.system;
+    _onTraitGroupToggle(event) {
         event.preventDefault();
-        const wgroupId = event.currentTarget.closest(".feature-controls").dataset.wgroupId.trim();
-        const wgroups = await actorData.wgroups;
-        const hasGroup = wgroups.includes(wgroupId);
+        const doc = this.actor;
+        const docData = doc.system;
+        const dataset = event.currentTarget.closest(".feature-controls").dataset
+        const traitId = dataset.traitId.trim();
+        const traitType = dataset.traitType;
+        const tGroups = docData[traitType];
+        const hasGroup = tGroups.includes(traitId);
         if (hasGroup) {
-            const pos = wgroups.indexOf(wgroupId);
-            wgroups.splice(pos, 1);
+            const pos = tGroups.indexOf(traitId);
+            tGroups.splice(pos, 1);
         } else {
-            wgroups.push(wgroupId);
+            tGroups.push(traitId);
         }
-        return this.actor.update({"system.wgroups": wgroups});
+        const path = `system.${traitType}`;
+        return doc.update({[path]: tGroups});
     }
 
     _onChangeQuantity(event) {

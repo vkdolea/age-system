@@ -100,7 +100,6 @@
         margin-bottom: 10px;
         row-gap: 5px;
         a {
-            // text-shadow: 1px 0px 1px silver, -1px 0px 1px silver, 1px 0px 1px silver,  0px 1px 1px silver, 0px -1px 1px silver;
             font-size: 1rem;
             margin: 0 4px;
             padding: 0 4px;
@@ -139,16 +138,15 @@
     }
 
     .document-picture {
+        flex: 0 140px;
+        margin: 0 auto;
         border: none;
-        height: 194px;
-        // max-height: 200px;
-        width: 180px;
         object-fit: contain;
-        margin: auto;
-    }
+        height: 140px;
+        width: 140px;
+    };
 
     .second-column {
-        // min-width: 474px;
         min-width: min-content;
     }
 
@@ -163,8 +161,6 @@
         input,
         select {
             border-radius: @big-border-radius;
-            // background-color: rgba(255,255,255,0.5);
-            // color: silver;
             margin: 2px;
         }
         hr {margin: 0}
@@ -233,7 +229,6 @@
     .values-options {
         font-size: .7rem;
         justify-items: center;
-        // margin: 0 auto;
         padding-right: 4px;
         div:not(:last-child) .value-data {
            margin-bottom: 1px;
@@ -261,7 +256,6 @@
     }
     .value-data {
         flex: 0 1 auto;
-        // margin: 4px 2px;
         margin: 4px auto;
         border-radius: 5px;
         border: 1px solid black;
@@ -327,8 +321,9 @@
         }
     }
     aside {
-        flex: 0 0 190px;
-        // height: 750px;
+        display: flex;
+        flex-direction: column;
+        flex: 0 180px;
         height: 100%;
         padding: 4px;
         padding-bottom: 10px;
@@ -336,6 +331,9 @@
     };
     
     header.top-banner {
+        .header-details {
+            text-align: center;
+        }
         margin-top: 10px;
         flex: 0 0 110px;
         min-width: 210px;
@@ -457,8 +455,6 @@
             border-bottom-left-radius: @big-border-radius;
             border-bottom-right-radius: @big-border-radius;
         }
-        // height: max-content;
-        // margin: 0 5px 10px 5px;
         .extra-input {
             flex: 0 0 fit-content;
         }
