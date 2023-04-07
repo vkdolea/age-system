@@ -61,7 +61,7 @@
                         <li class="colorset-third-tier flexrow">
                             <p>
                                 {{#each ablOptions as |abl id|}}
-                                <a class="feature-controls select-options item-name trait-group item-box {{#if (haswgroup id ../item.system.primaryAbl)}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-trait-id="{{@key}}" data-trait-type="primaryAbl">
+                                <a class="feature-controls select-options item-name trait-item item-box {{#if (haswgroup id ../item.system.primaryAbl)}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-trait-id="{{@key}}" data-trait-type="primaryAbl">
                                     {{abl}}
                                 </a>
                                 {{/each}}
@@ -71,20 +71,7 @@
                     {{/if}}
                     
                     {{#if weaponGroups}}
-                    <ul class="resource item-group">
-                        <li class="title colorset-first-tier">
-                            {{localize "SETTINGS.weaponGroups"}}
-                        </li>
-                        <li class="colorset-third-tier flexrow">
-                            <p>
-                                {{#each weaponGroups as |wgroup|}}
-                                <a class="feature-controls select-options item-name trait-group item-box {{#if (haswgroup wgroup ../item.system.wgroups)}}colorset-first-tier{{else}}colorset-third-tier{{/if}}" data-trait-id="{{wgroup}}" data-trait-type="wgroups">
-                                    {{wgroup}}
-                                </a>
-                                {{/each}}
-                            </p>
-                        </li>
-                    </ul>
+                    {{> "systems/age-system/templates/partials/weapon-group-block.hbs" ownedGroups=item.system.wgroups}}
                     {{/if}}
 
                     <ol class="resource item-group colorset-third-tier">

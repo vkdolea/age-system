@@ -367,11 +367,12 @@
 }
 .age-system.sheet .document-picture,
 .age-system.dialog .document-picture {
+  flex: 0 140px;
+  margin: 0 auto;
   border: none;
-  height: 194px;
-  width: 180px;
   object-fit: contain;
-  margin: auto;
+  height: 140px;
+  width: 140px;
 }
 .age-system.sheet .second-column,
 .age-system.dialog .second-column {
@@ -589,7 +590,9 @@
 }
 .age-system.sheet aside,
 .age-system.dialog aside {
-  flex: 0 0 190px;
+  display: flex;
+  flex-direction: column;
+  flex: 0 180px;
   height: 100%;
   padding: 4px;
   padding-bottom: 10px;
@@ -605,6 +608,10 @@
   border-left: none;
   border-radius: 0 5px 5px 0;
   transition: all 0.5s ease;
+}
+.age-system.sheet header.top-banner .header-details,
+.age-system.dialog header.top-banner .header-details {
+  text-align: center;
 }
 .age-system.sheet .sheet-main-content,
 .age-system.dialog .sheet-main-content {

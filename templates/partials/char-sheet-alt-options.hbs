@@ -2,7 +2,8 @@
 <section class="options-section">    
 
     {{#if data.weaponGroups}}
-    <ul class="resource item-group">
+    {{> "systems/age-system/templates/partials/weapon-group-block.hbs" weaponGroups=data.weaponGroups ownedGroups=system.wgroups}}
+    {{!-- <ul class="resource item-group">
         <li class="title colorset-first-tier">
             {{localize "SETTINGS.weaponGroups"}}
         </li>
@@ -15,7 +16,7 @@
                 {{/each}}
             </p>
         </li>
-    </ul>
+    </ul> --}}
     {{/if}}
 
     {{!-- Control individual overrides for Game Mode (Gritty / Pulp / Cinematic) --}}

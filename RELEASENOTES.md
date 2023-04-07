@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.2.4 [2023-04-07]
+### Fixed
+- Header text on charcter/item sheet is now back with center alignment.
+- Bug preventing changing Primary Ability and Weapon Group on Class sheet.
+
 ## 1.2.3 [2023-04-04]
 ### Fixed
 - Sheets behave correctly when changing font size from Core Settings.
