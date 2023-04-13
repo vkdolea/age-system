@@ -1,7 +1,7 @@
 <form class="{{cssClass}} age-system item class flexrow no-flexwrap" autocomplete="off">
     <aside class="sidebar metal-background colorset-first-tier">
         <img class="document-picture" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-        <ul class="item-summary" style="display: none;">
+        <ul class="item-summary">
             {{!-- Talent Degree --}}
             <li>
                 <label>{{localize "age-system.talentDegree"}}</label>
@@ -15,7 +15,7 @@
             </li>
 
             {{!-- Page Ref --}}
-            <li class="feature-controls" data-reference="{{system.reference}}">
+            <li class="feature-controls" data-reference="{{system.reference}}" style="display: none;">
                 <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
                 <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{system.reference}}" placeholder="Page Ref." data-dtype="String"/>
             </li>

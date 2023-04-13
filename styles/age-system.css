@@ -463,6 +463,8 @@
 .age-system.dialog li.item-box .controls,
 .age-system.sheet .list-item.item-box .controls,
 .age-system.dialog .list-item.item-box .controls {
+  white-space: nowrap;
+  text-transform: uppercase;
   max-width: fit-content;
   align-items: center;
 }

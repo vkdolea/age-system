@@ -26,6 +26,10 @@ export const ageSystem = {
     }
 };
 
+// Level Constrains
+ageSystem.maxLevel = 20;
+ageSystem.minLevel = 0;
+
 // All possible Abilities
 ageSystem.abilitiesTotal = {
     "acc": "age-system.acc",

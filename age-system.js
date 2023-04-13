@@ -25,6 +25,7 @@ import * as migrations from "./modules/migration.js";
 async function preloadHandlebarsTemplates() {
     const path = `systems/age-system/templates/partials/`;
     const templatePaths = [
+        `${path}itemcontrols/class.hbs`,
         `${path}itemcontrols/equipment.hbs`,
         `${path}itemcontrols/honorifics.hbs`,
         `${path}itemcontrols/membership.hbs`,

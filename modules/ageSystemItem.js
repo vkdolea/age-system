@@ -420,6 +420,25 @@ export class ageSystemItem extends Item {
         }
     }
 
+    _levelChange(action) {
+        if (!['class'].includes(this.type)) return null;
+        const curLevel = this.system.level;
+        const maxLevel = ageSystem.maxLevel;
+        const minLevel = ageSystem.minLevel;
+        switch (action) {
+            case 'add':
+                if (curLevel == maxLevel) return ui.notifications.warn("Already at maximum level")
+                this.update({"system.level": curLevel+1})
+                break;
+            case 'remove':
+                if (curLevel == minLevel) return ui.notifications.warn("Already at minimum level")
+                this.update({"system.level": curLevel-1})
+                break;
+            default:
+                break;
+        }
+    }
+
     evalMod(m) {
         if (m.type === "") return m
         m.ftype = ageSystem.modkeys[m.type].dtype;

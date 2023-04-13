@@ -6,8 +6,8 @@
     </div>
     <div class="controls flexrow">
         <div class="flexcol item-qtd-control arrow-control">
-            <a><i class="fa fa-chevron-up change-qtd add" aria-hidden="true"></i></a>
-            <a><i class="fa fa-chevron-down change-qtd remove" aria-hidden="true"></i></a>
+            <a class="change-qtd" data-action="add"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            <a class="change-qtd" data-action="remove"><i class="fa fa-chevron-down"aria-hidden="true"></i></a>
         </div>
         <a class="item-control item-equip favorite{{#unless item.system.favorite}} not-equiped{{/unless}}" title="{{localize "age-system.quickAccess"}}"><i class="fas fa-star"></i></a>
     </div>

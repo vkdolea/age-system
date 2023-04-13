@@ -750,6 +750,7 @@
         "itemOptionMultiple": "Pick Items from list",
         "itemOptionAll": "Receive all Items",
         "dragAdvItem": "Drag Advancement Items in the space below",
-        "add": "Add"
+        "add": "Add",
+        "leveledImprovements": "Obtained Improvements"
     }
 }

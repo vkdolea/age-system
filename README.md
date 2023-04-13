@@ -9,7 +9,6 @@ Unofficial implementation of AGE System (Green Ronin) for Foundry VTT. Character
 Take a look at [AGE System (unofficial) wiki](https://github.com/vkdolea/age-system/wiki) to understand how to use the game system
 
 ## Features
-- [PDFoundry](https://foundryvtt.com/packages/pdfoundry) integration
 - [Dice so Nice](https://foundryvtt.com/packages/dice-so-nice) compatible
 - Two possible Character sheet - one Complete and another condensed, ideal for NPCs and quick character overview
 - Different color schemes
@@ -42,7 +41,7 @@ Take a look at [AGE System (unofficial) wiki](https://github.com/vkdolea/age-sys
     - @level (character level)
 
 ## Spaceship and Vehicle Controls
-You can drag and drop Characters to Veihcles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship.
+You can drag and drop Characters to Vehicles and Spaceships, so these passengers will be able to be selected for roles inside the vehicle/spaceship.
 
 ## Shortcuts
 1. *Shift + Click* on Attack or Damage rolls trigger GM roll (only GM can see).
