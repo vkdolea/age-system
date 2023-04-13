@@ -47,7 +47,7 @@
   "SETTINGS.wealthTypeCurrency": "Dinero",
   "SETTINGS.wealthTypeCoins": "MO / MP / MC",
   "SETTINGS.primaryAbl": "Selección atributos primarios",
-  "SETTINGS.primaryAblHint": "Añade una casilla extra para identificar los Atributos primarios",
+  "SETTINGS.primaryAblHint": "Añade casilla extra para identificar las Habilidades primarias",
   "SETTINGS.abilitySelection": "Ajuste Atributos",
   "SETTINGS.abilitySelectionHint": "Usar atributos de AGE básico o Dragon Age",
   "SETTINGS.abilitySelectionMain": "AGE Básico",
@@ -138,7 +138,8 @@
       "breatherAppliedAll": "Descanso aplicado a todos los PJs seleccionados",
       "newFocusCompendia": "Configuración Sistema AGE (Compendio Concentración): Los siguientes compendios no se mostrarán como opciones para Concentración hasta que se actualicen: {list}.",
       "oldFocusCompendia": "Configuración Sistema AGE (Compendio Concentración): Los siguientes compendios no existen y se eliminarán de la lista después de actualizar: {list}.",
-      "emptyAdv": "Todos los niveles del Avance Progresivo tienen un valor vacío o cero. No se guarda el Avance."
+      "emptyAdv": "Todos los niveles del Avance Progresivo tienen un valor vacío o cero. No se guarda el Avance.",
+      "emptyItemArr": "Ningún objeto seleccionado para el progreso. No se grabará nada."
     },
     "spaceship": {
       "op": "Operador",
@@ -542,8 +543,7 @@
       "active": "Activo",
       "charAbl": "Atributo",
       "type": "Tipo",
-      "value": "Valor",
-      "allOutAtk": "Daño Ataque Total"
+      "value": "Valor"
     },
     "stuntsContainer": "Proezas",
     "equipmentContainer": "Equipo",
@@ -666,21 +666,24 @@
     "customEffectsSet": "Efectos Personalizados activos",
     "attkHeader": "Arma Ataque Daño",
     "advancement": "Progreso",
-    "advancementPlural": "Subidas",
+    "improvements": "Mejoras",
     "advancementNew": "Selecciona Progreso",
     "levelName": "Nivel {level}",
     "advProgressiveTrait": "Característica Progresiva",
-    "advNewItem": "Nuevo Objeto o Progresar una ya existente",
+    "advNewItem": "Nuevo Objeto o mejorar Uno Existente",
     "advAbility": "Mejorar Habilidad",
     "defenseAndToughness": "Defensa y Dureza",
     "trait": "Característica",
     "alias": "Alias",
     "confirm": "Confirmar",
     "image": "Imagen",
+    "itemProgression": "Progresión de Objeto",
+    "itemProgressionHint": "Añade en la lista de abajo la opción de Progreso y objeto del tipo escogido.",
     "itemOptionSingle": "Recibir un objeto",
     "itemOptionSingleProgress": "Recibir o Avance de uno",
-    "itemOptionMultiple": "Recibir objetos múltiples",
+    "itemOptionMultiple": "Escoge objetos de la lista",
     "itemOptionAll": "Recibir todos los objetos",
-    "dragAdvItem": "Arrastrar los Avances en el espacio debajo"
+    "dragAdvItem": "Arrastrar los Avances en el espacio debajo",
+    "add": "Añadir"
   }
 }
