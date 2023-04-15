@@ -684,6 +684,7 @@
     "itemOptionMultiple": "Escoge objetos de la lista",
     "itemOptionAll": "Recibir todos los objetos",
     "dragAdvItem": "Arrastrar los Avances en el espacio debajo",
-    "add": "Añadir"
+    "add": "Añadir",
+    "leveledImprovements": "Mejoras Obtenidas"
   }
 }
