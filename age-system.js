@@ -312,6 +312,9 @@ Hooks.once("setup", function() {
     };
     CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
     CONFIG.ageSystem.healthSys = HEALTH_SYS;
+
+    // Set Power flavor
+    Setup.localizePower();
     
     // Specific Localization
     Setup.abilitiesName();

@@ -1,6 +1,7 @@
 import { ageSystem } from "./config.js";
 import BreatherSettings from "./breather.js";
 import { AdvancedSettings, QuickSettings } from "./settings-helper.js";
+import { localizePower } from "./setup.js";
 
 const debouncedReload = debounce(() => window.location.reload(), 250);
 export const registerSystemSettings = async function() {
@@ -84,12 +85,13 @@ export const registerSystemSettings = async function() {
       game.user.setFlag("age-system", "colorScheme", newColor);
       game.ageSystem.ageRoller.refresh();
       if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
-      [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents].forEach((o) => {
-        if (o) {
-          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
-          o.items?.forEach((i)=> {if (i.sheet != null && i.sheet._state > 0) i.sheet.render()});
-        };
-      });
+      // [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents].forEach((o) => {
+      //   if (o) {
+      //     if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+      //     o.items?.forEach((i)=> {if (i.sheet != null && i.sheet._state > 0) i.sheet.render()});
+      //   };
+      // });
+      refreshSheets()
     },
   });
 
@@ -196,17 +198,9 @@ export const registerSystemSettings = async function() {
       "health": "SETTINGS.healthModehealth",
       "fortune": "SETTINGS.healthModefortune",
     },
-    // onChange: debouncedReload
     onChange: () => {
       ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${game.settings.get("age-system", "healthMode")}`),
-      [...game.actors.contents, ...Object.values(game.actors.tokens)]
-        .filter((o) => {
-          return o.type === "char";
-        })
-        .forEach((o) => {
-          o.update({});
-          if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
-        });
+      refreshSheets();
     },
   }); 
 
@@ -269,7 +263,7 @@ export const registerSystemSettings = async function() {
       "currency": "SETTINGS.wealthTypeCurrency",
       "coins": "SETTINGS.wealthTypeCoins",
     },
-    onChange: debouncedReload
+    onChange: () => refreshSheets()
   });
 
   /**
@@ -286,7 +280,7 @@ export const registerSystemSettings = async function() {
       "profession": "SETTINGS.occprofession",
       "class": "SETTINGS.occclass",
     },
-    onChange: debouncedReload
+    onChange: () => refreshSheets()
   });
 
   /**
@@ -305,7 +299,7 @@ export const registerSystemSettings = async function() {
       "species": "SETTINGS.ancestryOptspecies",
       "race": "SETTINGS.ancestryOptrace",
     },
-    onChange: debouncedReload
+    onChange: () => refreshSheets()
   });
 
   /**
@@ -360,6 +354,27 @@ export const registerSystemSettings = async function() {
   });
 
   /**
+   * Select multiple flavor for Power and Power Points (Mana, Kana, Spell)
+   */
+  game.settings.register("age-system", "powerFlavor", {
+    name: "SETTINGS.powerFlavor",
+    hint: "SETTINGS.powerFlavorHint",
+    scope: "world",
+    config: true,
+    default: "power",
+    type: String,
+    choices: {
+      "power": "SETTINGS.powerFlavorPower",
+      "spell": "SETTINGS.powerFlavorSpell",
+      "mana": "SETTINGS.powerFlavorMana"
+    },
+    onChange: () => {
+      localizePower(),
+      refreshSheets();
+    }
+  });
+
+  /**
   * Consume Power Points on roll
   */
   game.settings.register("age-system", "consumePP", {
@@ -400,7 +415,7 @@ export const registerSystemSettings = async function() {
     config: false,
     default: {max: 30, actual: 0},
     type: Object,
-    onChange: async () => {if (await game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh()}
+    onChange: () => {if (game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh()}
   });  
 
   /**
@@ -426,7 +441,7 @@ export const registerSystemSettings = async function() {
     config: false,
     default: {max: 18, actual: 0},
     type: Object, 
-    onChange: async () => {if (await game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
+    onChange: async () => {if (game.settings.get("age-system", "serendipity")) game.ageSystem.ageTracker.refresh()}
   });
 
   /**
@@ -579,3 +594,12 @@ export function stuntSoNice(colorChoices, systems) {
     onChange:()=>{game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"))}
   });
 };
+
+function refreshSheets() {
+  [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents].forEach((o) => {
+    if (o) {
+      if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
+      o.items?.forEach((i)=> {if (i.sheet != null && i.sheet._state > 0) i.sheet.render()});
+    };
+  });
+}

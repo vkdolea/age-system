@@ -85,7 +85,7 @@
             {{!-- Power Points --}}
             {{#if system.usePowerPoints}}
             <li class="resource colorset-first-tier">
-                <div class="title">{{localize "age-system.powerPoints"}}</div>
+                <div class="title">{{data.config.POWER_FLAVOR.points}}</div>
                 <div class="values flexrow">
                     <input class="value-data circle" type="number" name="system.powerPoints.value" value="{{system.powerPoints.value}}" data-dtype="Number" />
                     <input class="value-data circle" type="number" name="system.powerPoints.set" value="{{system.powerPoints.set}}" data-dtype="Number" />

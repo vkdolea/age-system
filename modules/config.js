@@ -283,10 +283,11 @@ ageSystem.advIcon = {
 // Advancement Data - progressive values
 ageSystem.adv = {
     type: {
-        progressive: ['health', 'conviction', 'advAbility', 'defenseAndToughness'/*, 'toughness', 'defense'*/],
+        progressive: ['health', 'conviction', 'advAbility', 'powerPoints', 'defenseAndToughness'/*, 'toughness', 'defense'*/],
         item: ['spec', 'stunts', 'talent', 'power', 'focus', 'relationship']
     },
     health: new Array(20).fill('1 + @cons'),
+    powerPoints: new Array(20).fill("0"),
     conviction: [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
     advAbility: new Array(20).fill(1),
     defenseAndToughness: [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
@@ -944,7 +945,8 @@ ageSystem.gameSettings = {
                 useConviction: false,
                 usePowerPoints: true,
                 complication: 'none',
-                serendipity: false
+                serendipity: false,
+                powerFlavor: 'mana'
             },
             user: ['weaponGroups']
         }
@@ -968,7 +970,8 @@ ageSystem.gameSettings = {
                 useConviction: false,
                 usePowerPoints: true,
                 complication: 'none',
-                serendipity: false
+                serendipity: false,
+                powerFlavor: 'spell'
             },
             user: ['weaponGroups']
         }
@@ -1017,7 +1020,7 @@ ageSystem.gameSettings = {
                 serendipity: false,
                 stuntAttack: 2
             },
-            user: ['gameMode', 'useConviction', 'usePowerPoints']
+            user: ['gameMode', 'useConviction', 'usePowerPoints', 'powerFlavor']
         }
     },
     brose: {

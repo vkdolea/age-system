@@ -416,27 +416,57 @@ export class ageSystemItem extends Item {
         // Code to edit Advancement
         if (action === "edit") {
             const advData = prog[id];
-            new AdvancementSetup(this.uuid, type, {edit: {data: advData, index: {level: level, id: id}}}).render(true);
+            const edit = {
+                data: advData,
+                index: {
+                    level: level,
+                    id: id
+                }
+            }
+            new AdvancementSetup(this.uuid, type, edit).render(true);
         }
     }
 
     _levelChange(action) {
         if (!['class'].includes(this.type)) return null;
+        if (!this.isOwned) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.ownedClassLevElOnly"));
         const curLevel = this.system.level;
         const maxLevel = ageSystem.maxLevel;
         const minLevel = ageSystem.minLevel;
         switch (action) {
             case 'add':
                 if (curLevel == maxLevel) return ui.notifications.warn("Already at maximum level")
-                this.update({"system.level": curLevel+1})
+                this._levelUp();
+                // this.update({"system.level": curLevel+1})
                 break;
             case 'remove':
                 if (curLevel == minLevel) return ui.notifications.warn("Already at minimum level")
-                this.update({"system.level": curLevel-1})
+                // this.update({"system.level": curLevel-1})
+                this._levelDown();
                 break;
             default:
                 break;
         }
+    }
+
+    _levelUp() {
+        /**
+         * Indicar ganho de Melhorias na seguinte ordem:
+         * - Habilidades
+         * - Saúde/Destino
+         * - Power Points
+         * - Defesa/Resistência
+         * - Foco
+         * - Talento
+         * - Especialização
+         * - Poder
+         * - Façanhas
+         */
+        this.update({"system.level": this.system.level++})
+    }
+
+    _levelDown() {
+        this.update({"system.level": this.system.level--})
     }
 
     evalMod(m) {

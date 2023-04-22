@@ -135,6 +135,12 @@
     "SETTINGS.healthSysmageInjury": "Modern AGE (dano alternativo: Ferimento)",
     "SETTINGS.healthSysmageVitality": "Modern AGE (dano alternativo: Ferimento & Vitalidade)",
 
+    "SETTINGS.powerFlavor": "Nomes para Poderes",
+    "SETTINGS.powerFlavorHint": "Selecione a nomenclature preferida dentro os vários livros de AGE System para Poderes e Pontos de Poder.",
+    "SETTINGS.powerFlavorPower": "Poder & Pontos de Poder",
+    "SETTINGS.powerFlavorMana": "Feitiços & Pontos de Mana",
+    "SETTINGS.powerFlavorSpell": "Feitiços & Pontos de Magia",
+
     "age-system": {
 
         "SHEETS": {
@@ -168,7 +174,10 @@
             "vehicleItem": "Veículos não podem receber Items.",
             "breatherAppliedAll": "Descanso aplicado a todos os Personagens selecionados.",
             "newFocusCompendia": "Configuração de AGE System (Compêndio com opções de Foco): os seguintes compêndios não aparecerão na lista até que seja feito refresh: {list}.",
-            "oldFocusCompendia": "Configuração de AGE System (Compêndio com opções de Foco): os seguintes compêndios não estão mais disponíveis e somente sairão da lista após refresh: {list}."
+            "oldFocusCompendia": "Configuração de AGE System (Compêndio com opções de Foco): os seguintes compêndios não estão mais disponíveis e somente sairão da lista após refresh: {list}.",
+            "emptyAdv": "Todos os níveis de Melhoria estão vazios ou zerados. A Progressão não foi salva.",
+            "emptyItemArr": "Nenhum Item selecionado para essa Melhoria. A Progressão não foi salva.",
+            "ownedClassLevelOnly": "Apenas itens do tipo Classe com um proprietário pode alterar o nível."
         },
 
         "spaceship": {
@@ -471,8 +480,29 @@
         "autoApply": "Aplicar Automaticamente",
 
         "rollWithoutPP": "{name} não possui pontos o bastante para usar {item}. Rolar mesmo assim?",
-        "powerPoints": "Pontos de Poder",
-        "powerPointsIndex": "PP",
+        "powerFlavor": {
+            "power": {
+                "name": "Poder",
+                "namePlural": "Poderes",
+                "points": "Pontos de Poder",
+                "index": "PP",
+                "force": "Força"
+            },
+            "mana": {
+                "name": "Feitiço",
+                "namePlural": "Feitiços",
+                "points": "Pontos de Mana",
+                "index": "PM",
+                "force": "Força de Feitiço"
+            },
+            "spell": {
+                "name": "Feitiço",
+                "namePlural": "Feitiços",
+                "points": "Pontos de Magia",
+                "index": "PM",
+                "force": "Poder de Feitiço"
+            }
+        },
         "name": "Nome",
         "features": "Características Distintas",
         "toughness": "Resistência",
@@ -748,6 +778,7 @@
         "itemOptionMultiple": "Escolher Itens da lista",
         "itemOptionAll": "Receber todos os Items",
         "dragAdvItem": "Arraste e solte Items para a Progressão no espaço abaixo",
-        "add": "Adicionar"
+        "add": "Adicionar",
+        "leveledImprovements": "Melhoria Obtidas"
     }
 }

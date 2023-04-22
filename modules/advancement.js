@@ -18,6 +18,11 @@ export class AdvancementAdd extends Application {
     })
   }
 
+  /** @inheritdoc */
+  get title() {
+    return `${game.i18n.localize("ITEM.TypeClass")}: ${fromUuidSync(this._classUuid).name}`;
+  }
+
   getData() {
     const data = super.getData();
     const ageSystem = CONFIG.ageSystem
@@ -90,6 +95,9 @@ class AdvData {
         case 'health':
           obj.name = ageSystem.healthSys.healthName
           break;
+        case 'powerPoints':
+          obj.name = ageSystem.power.pointsName;
+          break;
         case 'spec':
           obj.name = game.i18n.localize("age-system.item.spec")
           break;
@@ -123,6 +131,11 @@ export class AdvancementSetup extends FormApplication {
       width: 420,
       height: 'auto'
     })
+  }
+
+  /** @inheritdoc */
+  get title() {
+    return `${game.i18n.localize("ITEM.TypeClass")}: ${this.class.name}`;
   }
 
   getData() {
