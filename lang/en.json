@@ -54,6 +54,13 @@
     "SETTINGS.useBallisticArmor": "Use Impact and Ballistic armor",
     "SETTINGS.useBallisticArmorHint": "Select if armor is divided into Impact and Ballistic",
 
+    "SETTINGS.DegressChoice": "Talent Degrees",
+    "SETTINGS.DegressChoiceHint": "Quantity and name of the talent degrees",
+    "SETTINGS.TalentDegreesMAGE": "Novice, Expert, Master",
+    "SETTINGS.TalentDegreesFAGE": "Novice, Journeyman, Master",
+    "SETTINGS.TalentDegreesMAGEExtra": "Novice, Expert, Master, Grandmaster, Apex",
+    "SETTINGS.TalentDegreesFAGEExtra": "Novice, Journeyman, Master, Grandmaster, Apex",
+
     "SETTINGS.wealthType": "Wealth system in use",
     "SETTINGS.wealthTypeHint": "Income and Resource are test based wealth system, while Currency is the usual buying system",
     "SETTINGS.wealthTypeResources": "Resources",

@@ -289,7 +289,16 @@ Hooks.once("setup", function() {
     // CONFIG.Actor.typeIcons = ageSystem.actorIcons;
     // CONFIG.Item.typeIcons = ageSystem.itemIcons;
 
-    const talentDegrees = foundry.utils.deepClone(ageSystem.mageDegrees);
+    let Degrees
+    if (game.settings.get("age-system", "DegressChoice") == "mage")
+	Degrees = ageSystem.mageDegrees
+    else if (game.settings.get("age-system", "DegressChoice") == "fage")
+	Degrees = ageSystem.fageDegrees
+    else if (game.settings.get("age-system", "DegressChoice") == "mageExtra")
+	Degrees = ageSystem.mageExtraDegrees
+    else if (game.settings.get("age-system", "DegressChoice") == "fageExtra")
+	Degrees = ageSystem.fageExtraDegrees
+    const talentDegrees = foundry.utils.deepClone(Degrees);
     for (let i = 0; i < talentDegrees.length; i++) {
         talentDegrees[i] = game.i18n.localize(talentDegrees[i]);
     }
