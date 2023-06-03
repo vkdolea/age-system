@@ -156,6 +156,10 @@ Hooks.once("init", async function() {
 
     // Register System Settings
     await Settings.registerSystemSettings();
+    // Identify Ability set in use
+    const abilitySelection = game.settings.get("age-system", "abilitySelection");
+    const abilityOptions = ageSystem.abilitiesSettings;
+    ageSystem.abilities = abilityOptions[abilitySelection];
 
     // Register Settings
     ageSystem.stuntAttackPoints = game.settings.get("age-system", "stuntAttack");
@@ -279,29 +283,13 @@ Hooks.once("init", async function() {
     // Keep a list of actors that need to prepareData after 'ready' (generally those that rely on other actor data - passengers/mounts)
     game.postReadyPrepare = [];
 
-    // Log core version
-    ageSystem.coreVersion = game.world.coreVersion;
-    ageSystem.systemVersion = game.world.systemVersion
-
-});
-
-Hooks.once("setup", function() {
-    // Config type icons
-    // CONFIG.Actor.typeIcons = ageSystem.actorIcons;
-    // CONFIG.Item.typeIcons = ageSystem.itemIcons;
-
-    const talentDegrees = foundry.utils.deepClone(ageSystem.mageDegrees);
-    for (let i = 0; i < talentDegrees.length; i++) {
-        talentDegrees[i] = game.i18n.localize(talentDegrees[i]);
-    }
-    ageSystem.talentDegrees = talentDegrees;
-    
+    // Pre-definition of Health System setting
     // Set Health System configuration
     const hstype = game.settings.get("age-system", "healthSys");
     const HEALTH_SYS = {
         type: hstype,
         mode: game.settings.get("age-system", "gameMode"),
-        healthName: game.i18n.localize(`SETTINGS.healthMode${game.settings.get("age-system", "healthMode")}`),
+        // healthName: game.i18n.localize(`SETTINGS.healthMode${game.settings.get("age-system", "healthMode")}`),
         useToughness: ![`basic`].includes(hstype),
         useFortune: [`expanse`].includes(hstype),
         useHealth: [`basic`, `mage`].includes(hstype),
@@ -313,14 +301,25 @@ Hooks.once("setup", function() {
     CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
     CONFIG.ageSystem.healthSys = HEALTH_SYS;
 
-    // Set Power flavor
-    Setup.localizePower();
-    
+    // Log core version
+    ageSystem.coreVersion = game.world.coreVersion;
+    ageSystem.systemVersion = game.world.systemVersion
+});
+
+Hooks.once("setup", function() {
     // Specific Localization
+    Setup.localizePower();
     Setup.abilitiesName();
     Setup.localizeAgeEffects();
+    ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${game.settings.get("age-system", "healthMode")}`);
 
-    // Useful array containing key of Actor Abilities
+    const talentDegrees = foundry.utils.deepClone(ageSystem.mageDegrees);
+    for (let i = 0; i < talentDegrees.length; i++) {
+        talentDegrees[i] = game.i18n.localize(talentDegrees[i]);
+    }
+    ageSystem.talentDegrees = talentDegrees;
+
+    // Useful Array containing key of Actor Abilities
     const ablKeys = [];
     for (const k in CONFIG.ageSystem.abilities) {
         if (Object.hasOwnProperty.call(CONFIG.ageSystem.abilities, k)) {

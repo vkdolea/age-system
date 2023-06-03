@@ -65,12 +65,10 @@ export function localizeAgeEffects() {
 // Select which Ability setting is used
 export function abilitiesName() {
     // Capture what is the ability set to be used
-    const settingAblOption = game.settings.get("age-system", "abilitySelection");
-    const ablOptions = ageSystem.abilitiesSettings;
     const orgAbl = ageSystem.abilitiesOrg;
-    const ablType = [ablOptions["main"], ablOptions["dage"], orgAbl];
+    const charAbl = ageSystem.abilities;
 
-    ageSystem.abilities = localizeObj(ablOptions[settingAblOption], true);
+    ageSystem.abilities = localizeObj(charAbl, true);
     ageSystem.abilitiesOrg = localizeObj(orgAbl, false);
 }
 
