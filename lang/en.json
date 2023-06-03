@@ -177,7 +177,8 @@
             "oldFocusCompendia": "AGE System Settings (Focus Compendium): The following compendia doesn't exist and will leave the list after refreshing: {list}.",
             "emptyAdv": "All levels for the Progressive Advancement have empty or zero for value. No Advancement saved.",
             "emptyItemArr": "No Item selected for this advancement. No Advancement saved.",
-            "ownedClassLevelOnly": "Only Class Item types with owner can be leveled."
+            "ownedClassLevelOnly": "Only Class Item types with owner can be leveled.",
+            "actorHasClass": "Actor already has a Class item!"
         },
 
         "spaceship": {

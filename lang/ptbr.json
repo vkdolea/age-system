@@ -125,7 +125,7 @@
     "SETTINGS.observerRollHint": "Permitir que jogadores com permissão Observador possam rolar das fichas observadas ou do chat",
 
     "SETTINGS.weaponGroups": "Grupos de Armas",
-    "SETTINGS.weaponGroupsHint": "Escreva os diferentes grupos de armas e use ; para os serparar. Deixe em branco caso não use essa função (The Expanse, Modern AGE)",
+    "SETTINGS.weaponGroupsHint": "Escreva os diferentes grupos de armas e use ; para os separar. Deixe em branco caso não use essa função (The Expanse, Modern AGE)",
 
     "SETTINGS.healthSys": "Sistema de Saúde",
     "SETTINGS.healthSysHint": "\"Básico\" utiliza Armadura e Saúde, \"The Expanse\" adiciona Resistência e Destino, e \"Modern AGE\" usa diferentes tipos de dano e armadura, a depender da opção escolhida",
@@ -177,7 +177,8 @@
             "oldFocusCompendia": "Configuração de AGE System (Compêndio com opções de Foco): os seguintes compêndios não estão mais disponíveis e somente sairão da lista após refresh: {list}.",
             "emptyAdv": "Todos os níveis de Melhoria estão vazios ou zerados. A Progressão não foi salva.",
             "emptyItemArr": "Nenhum Item selecionado para essa Melhoria. A Progressão não foi salva.",
-            "ownedClassLevelOnly": "Apenas itens do tipo Classe com um proprietário pode alterar o nível."
+            "ownedClassLevelOnly": "Apenas itens do tipo Classe com um proprietário pode alterar o nível.",
+            "actorHasClass": "O Ator já possui um Item de Classe!"
         },
 
         "spaceship": {
@@ -508,7 +509,7 @@
         "toughness": "Resistência",
         "maximum": "Máx",
         "minimum": "Mín",
-        "extraordinaryPowers": "Arcanas & Poderes",
+        "extraordinaryPowers": "Poderes Extraordinários",
         "talentContainer": "Talentos & Especializações",
         "weaponContainer": "Armas",
         "focusContainer": "Focos",
@@ -779,6 +780,6 @@
         "itemOptionAll": "Receber todos os Items",
         "dragAdvItem": "Arraste e solte Items para a Progressão no espaço abaixo",
         "add": "Adicionar",
-        "leveledImprovements": "Melhoria Obtidas"
+        "leveledImprovements": "Melhorias Obtidas"
     }
 }

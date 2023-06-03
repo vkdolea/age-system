@@ -51,7 +51,7 @@ export default class ageSystemItemSheet extends ItemSheet {
                 this.options.height = this.position.height = "480";
                 break; 
             case "class":
-                this.options.width = this.position.width = "770";
+                // this.options.width = this.position.width = "770";
                 this.options.height = this.position.height = "700";
                 break; 
             default:
@@ -61,8 +61,8 @@ export default class ageSystemItemSheet extends ItemSheet {
    
     static get defaultOptions() {        
         return mergeObject(super.defaultOptions, {
-            height: 460,
-            width: 700,
+            height: 500,
+            width: 775,
             classes: ["age-system", "sheet", "item", "colorset-second-tier"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",

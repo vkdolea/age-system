@@ -320,6 +320,15 @@ Hooks.once("setup", function() {
     Setup.abilitiesName();
     Setup.localizeAgeEffects();
 
+    // Useful array containing key of Actor Abilities
+    const ablKeys = [];
+    for (const k in CONFIG.ageSystem.abilities) {
+        if (Object.hasOwnProperty.call(CONFIG.ageSystem.abilities, k)) {
+            ablKeys.push(k)
+        }
+    }
+    CONFIG.ageSystem.ABILITY_KEYS = ablKeys;
+
     // Target/Controlled option to damage/heal
     CONFIG.ageSystem.useTargeted = game.settings.get("age-system", "useTargeted");
     
@@ -394,7 +403,6 @@ Hooks.once("ready", async function() {
             // names must be equal
             return 0;
         });
-
     }
     // Check if PDFoundry is active
     if (game.modules.get("pdfoundry")?.active) ageSystem.pdfoundryOn = true;
