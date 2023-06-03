@@ -20,8 +20,8 @@
   "SETTINGS.quicksettingHint": "Activa rápidamente los valores preconfigurados para la ambientación desde Configuración Avanzada",
   "SETTINGS.advSettings": "Opciones Avanzadas AGE",
   "SETTINGS.advSettingsHint": "Ajusta todos los valores de configuración para personalizar tu partida",
-  "SETTINGS.consumePP": "Consumir Puntos Poder/Mana/Kana/Conjuros en las tiradas",
-  "SETTINGS.consumePPHint": "Si se activa, los Puntos necesarios para lanzar un poder serán restados del Total del personaje automáticamente. Se mostrará un mensaje de aviso en caso de no disponer de puntos suficientes.",
+  "SETTINGS.consumePP": "Consumir Puntos de Poder en tiradas",
+  "SETTINGS.consumePPHint": "Activo, los Puntos necesarios para utilizar un Poder se reducen del total de la hoja. Un mensaje de aviso aparecerá en caso de no disponer puntos.",
   "SETTINGS.breatherSettings": "Configuración Descanso",
   "SETTINGS.breatherSettingsHint": "Configurar cantidad de puntos recuperados con un Descanso",
   "SETTINGS.initiativeFocus": "Nombre Concentración Iniciativa",
@@ -47,7 +47,7 @@
   "SETTINGS.wealthTypeCurrency": "Dinero",
   "SETTINGS.wealthTypeCoins": "MO / MP / MC",
   "SETTINGS.primaryAbl": "Selección atributos primarios",
-  "SETTINGS.primaryAblHint": "Añade una casilla extra para identificar los Atributos primarios",
+  "SETTINGS.primaryAblHint": "Añade casilla extra para identificar las Habilidades primarias",
   "SETTINGS.abilitySelection": "Ajuste Atributos",
   "SETTINGS.abilitySelectionHint": "Usar atributos de AGE básico o Dragon Age",
   "SETTINGS.abilitySelectionMain": "AGE Básico",
@@ -106,6 +106,11 @@
   "SETTINGS.healthSysmage": "Modern AGE",
   "SETTINGS.healthSysmageInjury": "Modern AGE (alternate: Heridas)",
   "SETTINGS.healthSysmageVitality": "Modern AGE (alternate: Heridas & Vitalidad)",
+  "SETTINGS.powerFlavor": "Tipo de Poder",
+  "SETTINGS.powerFlavorHint": "Selecciona el tipo de Poder asignado a los nombres de los poderes y sus puntos, dependiendo del manual AGE.",
+  "SETTINGS.powerFlavorPower": "Poderes y Puntos",
+  "SETTINGS.powerFlavorMana": "Conjuros y Puntos Mana",
+  "SETTINGS.powerFlavorSpell": "Conjuros y Puntos",
   "age-system": {
     "SHEETS": {
       "charStandard": "Personaje AGE",
@@ -138,7 +143,9 @@
       "breatherAppliedAll": "Descanso aplicado a todos los PJs seleccionados",
       "newFocusCompendia": "Configuración Sistema AGE (Compendio Concentración): Los siguientes compendios no se mostrarán como opciones para Concentración hasta que se actualicen: {list}.",
       "oldFocusCompendia": "Configuración Sistema AGE (Compendio Concentración): Los siguientes compendios no existen y se eliminarán de la lista después de actualizar: {list}.",
-      "emptyAdv": "Todos los niveles del Avance Progresivo tienen un valor vacío o cero. No se guarda el Avance."
+      "emptyAdv": "Todos los niveles del Avance Progresivo tienen un valor vacío o cero. No se guarda el Avance.",
+      "emptyItemArr": "Ningún objeto seleccionado para el progreso. No se grabará nada.",
+      "ownedClassLevelOnly": "Sólo la clase de Objeto con dueño puede ser progresado."
     },
     "spaceship": {
       "op": "Operador",
@@ -425,8 +432,29 @@
     "addLevel": "Añadir Nivel",
     "autoApply": "Auto Aplicar",
     "rollWithoutPP": "{name} no dispone de suficientes puntos para usar {item}. ¿Tirar igualmente?",
-    "powerPoints": "Puntos Poder",
-    "powerPointsIndex": "PP",
+    "powerFlavor": {
+      "power": {
+        "name": "Poder",
+        "namePlural": "Poderes",
+        "points": "Puntos Poder",
+        "index": "PP",
+        "force": "Poder"
+      },
+      "mana": {
+        "name": "Conjuro",
+        "namePlural": "Conjuros",
+        "points": "Puntos Mana",
+        "index": "PM",
+        "force": "Poder"
+      },
+      "spell": {
+        "name": "Conjuro",
+        "namePlural": "Conjuros",
+        "points": "Puntos Magia",
+        "index": "PM",
+        "force": "Poder"
+      }
+    },
     "name": "Nombre",
     "features": "Rasgo Distintivo",
     "toughness": "Dureza",
@@ -542,8 +570,7 @@
       "active": "Activo",
       "charAbl": "Atributo",
       "type": "Tipo",
-      "value": "Valor",
-      "allOutAtk": "Daño Ataque Total"
+      "value": "Valor"
     },
     "stuntsContainer": "Proezas",
     "equipmentContainer": "Equipo",
@@ -666,21 +693,25 @@
     "customEffectsSet": "Efectos Personalizados activos",
     "attkHeader": "Arma Ataque Daño",
     "advancement": "Progreso",
-    "advancementPlural": "Subidas",
+    "improvements": "Mejoras",
     "advancementNew": "Selecciona Progreso",
     "levelName": "Nivel {level}",
     "advProgressiveTrait": "Característica Progresiva",
-    "advNewItem": "Nuevo Objeto o Progresar una ya existente",
+    "advNewItem": "Nuevo Objeto o mejorar Uno Existente",
     "advAbility": "Mejorar Habilidad",
     "defenseAndToughness": "Defensa y Dureza",
     "trait": "Característica",
     "alias": "Alias",
     "confirm": "Confirmar",
     "image": "Imagen",
+    "itemProgression": "Progresión de Objeto",
+    "itemProgressionHint": "Añade a la lista de abajo, la opción de Progresar un Objeto del tipo escogido.",
     "itemOptionSingle": "Recibir un objeto",
     "itemOptionSingleProgress": "Recibir o Avance de uno",
-    "itemOptionMultiple": "Recibir objetos múltiples",
+    "itemOptionMultiple": "Escoge objetos de la lista",
     "itemOptionAll": "Recibir todos los objetos",
-    "dragAdvItem": "Arrastrar los Avances en el espacio debajo"
+    "dragAdvItem": "Arrastrar los Avances en el espacio debajo",
+    "add": "Añadir",
+    "leveledImprovements": "Mejoras Obtenidas"
   }
 }

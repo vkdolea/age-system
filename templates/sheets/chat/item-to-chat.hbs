@@ -8,7 +8,7 @@
             {{!-- Power or Weapon --}}
             {{#if (or (eq item.type "weapon") (and system.hasRoll (eq item.type "power")))}}
             {{#unless (eq system.useAbl "no-abl")}}
-            <li>{{localize (concat "age-system." system.useAbl)}} ({{system.useFocus}})</li>
+            <li>{{localize (concat "age-system." system.useAbl)}} {{#if system.useFocus}}({{system.useFocus}}){{/if}}</li>
             {{/unless}}
             {{/if}}
             {{#if (or system.hasDamage system.hasHealing)}}
@@ -131,6 +131,11 @@
         {{!-- Footer for Relationship --}}
         {{#if (eq item.type "relationship")}}
         <span>{{localize "age-system.relationshipIntensity"}} {{system.intensity}}/{{system.intensityMax}}</span>
+        {{/if}}
+
+        {{!-- Footer for Class --}}
+        {{#if (eq item.type "class")}}
+        <span>{{localize "age-system.level"}} {{system.level}}</span>
         {{/if}}
     </div>
 </form>

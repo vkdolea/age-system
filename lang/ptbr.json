@@ -1,4 +1,20 @@
 {
+    "Types.Actor.char": "Personagem",
+    "Types.Actor.vehicle": "Veículo",
+    "Types.Actor.spaceship": "Espaçonave",
+    "Types.Actor.organization": "Organização",
+    "Types.Item.stunts": "Façanha",
+    "Types.Item.equipment": "Equipamento",
+    "Types.Item.class": "Classe",
+    "Types.Item.power": "Arcana & Poder",
+    "Types.Item.talent": "Talento",
+    "Types.Item.focus": "Foco",
+    "Types.Item.weapon": "Arma",
+    "Types.Item.relationship": "Vínculo",
+    "Types.Item.honorifics": "Honraria",
+    "Types.Item.membership": "Filiação",
+    "Types.Item.shipfeatures": "Atributo de Espaçonave",
+
     "ACTOR.TypeChar": "Personagem",
     "ACTOR.TypeVehicle": "Veículo",
     "ACTOR.TypeSpaceship": "Espaçonave",
@@ -125,7 +141,7 @@
     "SETTINGS.observerRollHint": "Permitir que jogadores com permissão Observador possam rolar das fichas observadas ou do chat",
 
     "SETTINGS.weaponGroups": "Grupos de Armas",
-    "SETTINGS.weaponGroupsHint": "Escreva os diferentes grupos de armas e use ; para os serparar. Deixe em branco caso não use essa função (The Expanse, Modern AGE)",
+    "SETTINGS.weaponGroupsHint": "Escreva os diferentes grupos de armas e use ; para os separar. Deixe em branco caso não use essa função (The Expanse, Modern AGE)",
 
     "SETTINGS.healthSys": "Sistema de Saúde",
     "SETTINGS.healthSysHint": "\"Básico\" utiliza Armadura e Saúde, \"The Expanse\" adiciona Resistência e Destino, e \"Modern AGE\" usa diferentes tipos de dano e armadura, a depender da opção escolhida",
@@ -134,6 +150,12 @@
     "SETTINGS.healthSysmage": "Modern AGE",
     "SETTINGS.healthSysmageInjury": "Modern AGE (dano alternativo: Ferimento)",
     "SETTINGS.healthSysmageVitality": "Modern AGE (dano alternativo: Ferimento & Vitalidade)",
+
+    "SETTINGS.powerFlavor": "Nomes para Poderes",
+    "SETTINGS.powerFlavorHint": "Selecione a nomenclature preferida dentro os vários livros de AGE System para Poderes e Pontos de Poder.",
+    "SETTINGS.powerFlavorPower": "Poder & Pontos de Poder",
+    "SETTINGS.powerFlavorMana": "Feitiços & Pontos de Mana",
+    "SETTINGS.powerFlavorSpell": "Feitiços & Pontos de Magia",
 
     "age-system": {
 
@@ -168,7 +190,11 @@
             "vehicleItem": "Veículos não podem receber Items.",
             "breatherAppliedAll": "Descanso aplicado a todos os Personagens selecionados.",
             "newFocusCompendia": "Configuração de AGE System (Compêndio com opções de Foco): os seguintes compêndios não aparecerão na lista até que seja feito refresh: {list}.",
-            "oldFocusCompendia": "Configuração de AGE System (Compêndio com opções de Foco): os seguintes compêndios não estão mais disponíveis e somente sairão da lista após refresh: {list}."
+            "oldFocusCompendia": "Configuração de AGE System (Compêndio com opções de Foco): os seguintes compêndios não estão mais disponíveis e somente sairão da lista após refresh: {list}.",
+            "emptyAdv": "Todos os níveis de Melhoria estão vazios ou zerados. A Progressão não foi salva.",
+            "emptyItemArr": "Nenhum Item selecionado para essa Melhoria. A Progressão não foi salva.",
+            "ownedClassLevelOnly": "Apenas itens do tipo Classe com um proprietário pode alterar o nível.",
+            "actorHasClass": "O Ator já possui um Item de Classe!"
         },
 
         "spaceship": {
@@ -471,14 +497,35 @@
         "autoApply": "Aplicar Automaticamente",
 
         "rollWithoutPP": "{name} não possui pontos o bastante para usar {item}. Rolar mesmo assim?",
-        "powerPoints": "Pontos de Poder",
-        "powerPointsIndex": "PP",
+        "powerFlavor": {
+            "power": {
+                "name": "Poder",
+                "namePlural": "Poderes",
+                "points": "Pontos de Poder",
+                "index": "PP",
+                "force": "Força"
+            },
+            "mana": {
+                "name": "Feitiço",
+                "namePlural": "Feitiços",
+                "points": "Pontos de Mana",
+                "index": "PM",
+                "force": "Força de Feitiço"
+            },
+            "spell": {
+                "name": "Feitiço",
+                "namePlural": "Feitiços",
+                "points": "Pontos de Magia",
+                "index": "PM",
+                "force": "Poder de Feitiço"
+            }
+        },
         "name": "Nome",
         "features": "Características Distintas",
         "toughness": "Resistência",
         "maximum": "Máx",
         "minimum": "Mín",
-        "extraordinaryPowers": "Arcanas & Poderes",
+        "extraordinaryPowers": "Poderes Extraordinários",
         "talentContainer": "Talentos & Especializações",
         "weaponContainer": "Armas",
         "focusContainer": "Focos",
@@ -748,6 +795,7 @@
         "itemOptionMultiple": "Escolher Itens da lista",
         "itemOptionAll": "Receber todos os Items",
         "dragAdvItem": "Arraste e solte Items para a Progressão no espaço abaixo",
-        "add": "Adicionar"
+        "add": "Adicionar",
+        "leveledImprovements": "Melhorias Obtidas"
     }
 }

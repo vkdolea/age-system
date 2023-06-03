@@ -30,7 +30,20 @@ export class ageSystemItem extends Item {
         await super._preCreate(data, options, userId);
         const updates = {};
         if (!data.img || data.img === `icons/svg/item-bag.svg`) updates.img = ageSystem.itemIcons[this.type];
-        this.updateSource(updates);        
+        switch (data.type) {
+            case "class":
+                this._preCreateClass(data, options, userId, updates);
+                break;
+        
+            default:
+                break;
+        }
+        this.updateSource(updates);
+    }
+
+    // Ensure all new Class items created are reset to Level 0
+    _preCreateClass(data, options, userId, updates) {
+        updates["system.level"] = 0;
     }
     
     /** @override */
@@ -416,10 +429,139 @@ export class ageSystemItem extends Item {
         // Code to edit Advancement
         if (action === "edit") {
             const advData = prog[id];
-            new AdvancementSetup(this.uuid, type, {edit: {data: advData, index: {level: level, id: id}}}).render(true);
+            const options = {
+                data: advData,
+                index: {
+                    level: level,
+                    id: id
+                }
+            }
+            new AdvancementSetup(this.uuid, type, options).render(true);
         }
     }
 
+    _levelChange(action) {
+        if (!['class'].includes(this.type)) return null;
+        if (!this.isOwned) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.ownedClassLevElOnly"));
+        const curLevel = this.system.level;
+        const maxLevel = ageSystem.maxLevel;
+        const minLevel = ageSystem.minLevel;
+        switch (action) {
+            case 'add':
+                if (curLevel == maxLevel) return ui.notifications.warn("Already at maximum level")
+                this._levelUp();
+                // this.update({"system.level": curLevel+1})
+                break;
+            case 'remove':
+                if (curLevel == minLevel) return ui.notifications.warn("Already at minimum level")
+                // this.update({"system.level": curLevel-1})
+                this._levelDown();
+                break;
+            default:
+                break;
+        }
+    }
+
+    _levelUp() {
+        if (this.type != "class" || !this.isOwned) return null;
+        /**
+         * Indicar ganho de Melhorias na seguinte ordem:
+         * - Habilidades
+         * - Saúde/Destino
+         * - Power Points
+         * - Defesa/Resistência
+         * - Foco
+         * - Talento
+         * - Especialização
+         * - Poder
+         * - Façanhas
+         */
+        const actor = this.actor;
+        const updates = {};
+        const nextLevel = this.system.level+1;
+        const improvements = foundry.utils.deepClone(this.system.advPerLvl[nextLevel]);
+        const improveData = {
+            itemUpdates: {
+                ["system.level"]: nextLevel
+            },
+            toLevel: nextLevel
+        };
+
+        // Segregate Advancements per type
+        for (let i = 0; i < improvements.length; i++) {
+            const imp = improvements[i];
+            switch (imp.type) {
+                case 'progressive':
+                    if (improveData[imp.trait]) improveData[imp.trait].push(imp)
+                    else improveData[imp.trait] = imp;
+                    break;
+                case 'item':
+                    if (improveData.item) improveData.item.push(imp)
+                    else improveData.item = [imp];
+                    break;
+                default:
+                    if (improveData.invalidAdvance) improveData.invalidAdvance.push(imp)
+                    else improveData.invalidAdvance = [imp];
+                    break;
+            }
+        }
+
+        this._levelAblAdv(improveData);
+        this._levelHealth(improveData);
+        this._levelPowerPoints(improveData);
+        this._levelDefenseTough(improveData);
+        this._levelFocus(improveData);
+        this._levelTalents(improveData);
+        this._levelSpec(improveData);
+        this._levelPowers(improveData);
+        this._levelStunts(improveData);
+
+        this.update(improveData.itemUpdates);
+    }
+
+    _levelAblAdv(imp) {
+        if (!imp.ablAdvance.length ?? imp.ablAdvance) return null;
+        let advances = 0;
+        for (let q = 0; q < imp.ablAdvance.length; q++) {
+            const e = imp.ablAdvance[q].value;
+            advances = advances + e;
+        }
+
+        // Identify relevant Game Setting;
+        const primaryAbl = game.settings.get("age-system", "primaryAbl");
+
+        // Array to identify keys of Abilities available to be progressed in this level up
+        let validKeys = []
+        const ABILITY_KEYS = CONFIG.ageSystem.ABILITY_KEYS
+
+        // Select valid keys for progressing
+        if (primaryAbl) {
+            // CASE 1 - Game set to use Primary/Secondary Abilities: Improvements from Odd levels sums to Secondary Abilities while Primeary Abilities benefits from Advancements on even levels
+            const isOdd = imp.toLevel % 2 == 1 ? true : false;
+            const primaryKeys = this.system.primaryAbl;
+            const secondaryKeys = ABILITY_KEYS.filter(x => !primaryKeys.includes(x));
+            validKeys = isOdd ? secondaryKeys : primaryAbl;
+        } else {
+            // CASE 2 - No Primary/Secondary abilities: user can not progress Abilities progressed in the last time
+            validKeys = foundry.utils.deepClone(ABILITY_KEYS);
+            const lastAblAdv = this.actor.system.advancements?.[this.actor.level].ablAdvance;
+            if (lastAblAdv?.length) {
+                for (let a = 0; a < lastAblAdv.length; a++) {
+                    const e = lastAblAdv[a].key;
+                    const index = validKeys.indexOf(e);
+                    if (index > -1) validKeys.splice(index, 1);
+                }
+            }
+        }
+
+        // Create App to allow user to progress. This app shall be created on advancement.js
+    }
+
+    _levelDown() {
+        this.update({"system.level": this.system.level--})
+    }
+
+    // Assists to identify if the value of a Modifier has valid data according to Modifier's Formula Type (ftype)
     evalMod(m) {
         if (m.type === "") return m
         m.ftype = ageSystem.modkeys[m.type].dtype;

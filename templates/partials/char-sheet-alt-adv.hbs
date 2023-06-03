@@ -1,12 +1,19 @@
 {{!-- Advancement Tab --}}
 <section class="options-section">    
 
-    <ol class="resource item-group colorset-third-tier">
-        <li class="title colorset-first-tier">Avanços por Nível</li>
+    <ul class="resource item-group">
+        <li class="title colorset-first-tier">{{localize "ITEM.TypeClass"}}</li>
+        {{#each data.class as |item|}}
+        {{> "systems/age-system/templates/partials/itemcontrols/class.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
+        {{/each}}
+    </ul>
+    
+    <ol class="resource item-group">
+        <li class="title colorset-first-tier">{{localize "age-system.leveledImprovements"}}</li>
         {{#each system.advancement as |level|}}
-        <li class="list-sub-header colorset-second-tier">Nível {{@index}}</li>
+        <li class="list-sub-header colorset-second-tier">{{localize "age-system.level"}} {{@index}}</li>
         {{#each level as |adv|}}
-        <li>{{adv}}</li>
+        <li class="values colorset-second-tier">{{adv}}</li>
         {{/each}}
         {{/each}}
     </ol>

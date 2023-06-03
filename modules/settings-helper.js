@@ -12,7 +12,7 @@ export class QuickSettings extends FormApplication {
       resizable: false,
       minimizable: false,
       width: '700',
-      height: '400',
+      height: '500',
       title: game.i18n.localize('SETTINGS.quicksetting'),
       classes: ["age-system", "dialog", `colorset-${ageSystem.colorScheme}`],
       resizable: false,

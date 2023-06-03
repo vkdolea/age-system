@@ -42,6 +42,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         // Order itens into alphabetic order
         const itemSorted = sortObjArrayByName(data.items, "name");
 
+        data.class = itemSorted.filter(i => i.type === "class");
         data.weapon = itemSorted.filter(i => i.type === "weapon");
         data.talent = itemSorted.filter(i => i.type === "talent");
         data.power = itemSorted.filter(i => i.type === "power");
@@ -172,7 +173,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".effect-edit").click(this._onChangeEffect.bind(this));
             html.find(".effect-remove").click(this._onRemoveEffect.bind(this));   
             html.find("p.effect-add").click(this._onAddEffect.bind(this));
-            html.find(".change-qtd").click(this._onChangeQuantity.bind(this));
+            html.find("a.change-qtd").click(this._onChangeQuantity.bind(this));
             html.find(".degree .change-injury").click(this._onChangeInjury.bind(this));
             html.find(".mark .change-injury").click(this._onChangeMark.bind(this));
             html.find(".refresh-injury-marks").click(this._onRefreshMarks.bind(this));
@@ -348,10 +349,12 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     _onChangeQuantity(event) {
         event.preventDefault();
         const e = event.currentTarget;
+        const action = e.dataset.action;
         const classList = e.classList;
         const itemId = e.closest(".feature-controls").dataset.itemId;
         const item = this.actor.items.get(itemId);
-        const itemType = item.type
+        const itemType = item.type;
+        if (itemType === "class") return item._levelChange(action);
         let qtd;
         let updatePath;
         switch (itemType) {
@@ -364,8 +367,21 @@ export default class ageSystemSheetCharacter extends ActorSheet {
                 updatePath = 'system.quantity';
                 break;
         }
-        if (classList.contains("add")) return item.update({[updatePath]: qtd+1});
-        if (classList.contains("remove") && qtd > 0) return item.update({[updatePath]: qtd-1});
+
+        let newQtd
+        switch (action) {
+            case "add":
+                newQtd = qtd + 1;
+                break;
+            case "remove":
+                if (qtd == 0) return null;
+                newQtd = qtd - 1;
+                break;
+            default:
+                return null;
+        };
+
+        return item.update({[updatePath]: newQtd});
     }
 
     _onToggleItemMod(event) {
