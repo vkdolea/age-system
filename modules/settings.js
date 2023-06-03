@@ -248,6 +248,25 @@ export const registerSystemSettings = async function() {
   });
 
  /**
+   * Talent degrees type
+   */
+  game.settings.register("age-system", "DegressChoice", {
+    name: "SETTINGS.DegressChoice",
+    hint: "SETTINGS.DegressChoiceHint",
+    scope: "world",
+    config: false,
+    default: "mage",
+    type: String,
+    choices: {
+      "mage": "SETTINGS.TalentDegreesMAGE",
+      "fage": "SETTINGS.TalentDegreesFAGE",
+      "mageExtra": "SETTINGS.TalentDegreesMAGEExtra",
+      "fageExtra": "SETTINGS.TalentDegreesFAGEExtra",
+    },
+    onChange: debouncedReload
+  });
+
+ /**
    * Register currency type
    */
   game.settings.register("age-system", "wealthType", {

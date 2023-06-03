@@ -283,8 +283,11 @@ Hooks.once("init", async function() {
     // Keep a list of actors that need to prepareData after 'ready' (generally those that rely on other actor data - passengers/mounts)
     game.postReadyPrepare = [];
 
+    // Log core version
+    ageSystem.coreVersion = game.world.coreVersion;
+    ageSystem.systemVersion = game.world.systemVersion
+  
     // Pre-definition of Health System setting
-    // Set Health System configuration
     const hstype = game.settings.get("age-system", "healthSys");
     const HEALTH_SYS = {
         type: hstype,
@@ -298,12 +301,9 @@ Hooks.once("init", async function() {
         useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
         baseDamageTN: 13
     };
-    CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
-    CONFIG.ageSystem.healthSys = HEALTH_SYS;
+    ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
+    ageSystem.healthSys = HEALTH_SYS;
 
-    // Log core version
-    ageSystem.coreVersion = game.world.coreVersion;
-    ageSystem.systemVersion = game.world.systemVersion
 });
 
 Hooks.once("setup", function() {
@@ -313,11 +313,13 @@ Hooks.once("setup", function() {
     Setup.localizeAgeEffects();
     ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${game.settings.get("age-system", "healthMode")}`);
 
-    const talentDegrees = foundry.utils.deepClone(ageSystem.mageDegrees);
-    for (let i = 0; i < talentDegrees.length; i++) {
-        talentDegrees[i] = game.i18n.localize(talentDegrees[i]);
+    // Maximum Talent Degree definition
+    const degreeChoice = foundry.utils.deepClone(game.settings.get("age-system", "DegressChoice"));
+    const inUseDegrees = ageSystem.talentDegrees[degreeChoice];
+    for (let i = 0; i < inUseDegrees.length; i++) {
+        inUseDegrees[i] = game.i18n.localize(inUseDegrees[i]);
     }
-    ageSystem.talentDegrees = talentDegrees;
+    ageSystem.talentDegrees.inUse = inUseDegrees;
 
     // Useful Array containing key of Actor Abilities
     const ablKeys = [];
