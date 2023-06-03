@@ -4,6 +4,7 @@
 ### Added
 - FoundryVTT v10 and v11 compatible.
 - System Setting added to select Flavor for Powers and Power Points.
+- Added option to select Talent degrees as normal or expanded (as seem on Modern AGE Companion). Inclusion by [Txus](https://github.com/Txus5012). Thanks!
 
 ## 1.2.4 [2023-04-07]
 ### Fixed

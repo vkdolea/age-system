@@ -7,7 +7,7 @@
                 <label>{{localize "age-system.talentDegree"}}</label>
                 <select name="system.degree">
                 {{#select system.degree}}
-                    {{#each config.talentDegrees as |degree|}}
+                    {{#each config.talentDegrees.inUse as |degree|}}
                     <option value="{{@key}}">{{degree}}</option>
                     {{/each}}
                 {{/select}}
@@ -64,7 +64,7 @@
 
                         <ul class="resource colorset-first-tier editor-parent">
                             <li class="title">
-                                <label>{{config.talentDegrees.[0]}}</label>
+                                <label>{{config.talentDegrees.inUse.[0]}}</label>
                             </li>
                             <li class="editor-parent">{{editor system.degree0.desc target="system.degree0.desc" button=true owner=owner editable=true engine="prosemirror"}}</li>
                         </ul>
@@ -72,31 +72,29 @@
                     <div class="flexrow flex-gap">
                         <ul class="resource colorset-first-tier editor-parent">
                             <li class="title">
-                                <label>{{config.talentDegrees.[1]}}</label>
+                                <label>{{config.talentDegrees.inUse.[1]}}</label>
                             </li>
                             <lili class="editor-parent">{{editor system.degree1.desc target="system.degree1.desc" button=true owner=owner editable=true engine="prosemirror"}}</li>
                         </ul>
 
                         <ul class="resource colorset-first-tier editor-parent">
                             <li class="title">
-                                <label>{{config.talentDegrees.[2]}}</label>
+                                <label>{{config.talentDegrees.inUse.[2]}}</label>
                             </li>
-                            <lili class="editor-parent">{{editor system.degree2.desc target="system.degree2.desc" button=true owner=owner editable=true engine="prosemirror"}}</li>
+                            <li class="editor-parent">{{editor system.degree2.desc target="system.degree2.desc" button=true owner=owner editable=true engine="prosemirror"}}</li>
                         </ul>
                     </div>
-		    {{#if config.talentDegrees.[3]}}
+		    {{#if expandedDegrees}}
                     <div class="flexrow flex-gap">
                         <ul class="resource colorset-first-tier editor-parent">
                             <li class="title">
-                                <label>{{config.talentDegrees.[3]}}</label>
+                                <label>{{config.talentDegrees.inUse.[3]}}</label>
                             </li>
-                            <lili class="editor-parent">{{editor system.degree3.desc target="system.degree3.desc" button=true owner=owner editable=true engine="prosemirror"}}</li>
+                            <li class="editor-parent">{{editor system.degree3.desc target="system.degree3.desc" button=true owner=owner editable=true engine="prosemirror"}}</li>
                         </ul>
-		    {{/if}}
-		    {{#if config.talentDegrees.[4]}}
                         <ul class="resource colorset-first-tier editor-parent">
                             <li class="title">
-                                <label>{{config.talentDegrees.[4]}}</label>
+                                <label>{{config.talentDegrees.inUse.[4]}}</label>
                             </li>
                             <li class="editor-parent">{{editor system.degree4.desc target="system.degree4.desc" button=true owner=owner editable=true engine="prosemirror"}}</li>
                         </ul>
