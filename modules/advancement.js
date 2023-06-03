@@ -1,6 +1,11 @@
 import { sortObjArrayByName } from "./setup.js";
 import { enrichTinyMCE } from "/systems/age-system/modules/setup.js";
 
+
+/**
+ * Interface to select type of application to be included into a Class Item type.
+ * @param {String} classUuid  Unique identifier of Class Item.
+ */
 export class AdvancementAdd extends Application {
   constructor(classUuid, options = {}) {
     super(options)
@@ -16,6 +21,11 @@ export class AdvancementAdd extends Application {
       width: 400,
       height: 'auto',
     })
+  }
+
+  /** @inheritdoc */
+  get title() {
+    return `${game.i18n.localize("ITEM.TypeClass")}: ${fromUuidSync(this._classUuid).name}`;
   }
 
   getData() {
@@ -44,6 +54,10 @@ export class AdvancementAdd extends Application {
     this.render(false)
   }
 }
+
+/**
+ * Data containing information about Improvement (item o progressive). The same object is used when editing existing Improvement.
+ */
 class AdvData {
   constructor(advType, options = {}) {
     this.advType = advType;
@@ -90,6 +104,9 @@ class AdvData {
         case 'health':
           obj.name = ageSystem.healthSys.healthName
           break;
+        case 'powerPoints':
+          obj.name = ageSystem.POWER_FLAVOR.points;
+          break;
         case 'spec':
           obj.name = game.i18n.localize("age-system.item.spec")
           break;
@@ -106,10 +123,13 @@ class AdvData {
   }
 }
 
+/**
+ * Application used to configure details of Improvement.
+ */
 export class AdvancementSetup extends FormApplication {
   constructor(classUuid, advType, options = {}) {
     super(options);
-    this.advData = new AdvData(advType, options.edit);
+    this.advData = new AdvData(advType, options);
     this.class = fromUuidSync(classUuid);
   }
 
@@ -123,6 +143,11 @@ export class AdvancementSetup extends FormApplication {
       width: 420,
       height: 'auto'
     })
+  }
+
+  /** @inheritdoc */
+  get title() {
+    return `${game.i18n.localize("ITEM.TypeClass")}: ${this.class.name}`;
   }
 
   getData() {
@@ -147,7 +172,7 @@ export class AdvancementSetup extends FormApplication {
 
   /**
    * Sorts Items selected for the Advancement
-   * @returns Object with arrays with Item types
+   * @returns {Object} Object with arrays containing Item types
    */
   _sortedTraits() {
     const arr = this.advData.traitArr;
@@ -170,11 +195,12 @@ export class AdvancementSetup extends FormApplication {
     html.find("button.cancel").click(e => this.close());
     html.find(".options-column input, select").change(this._valueChange.bind(this));
     html.find(`button.addItemProg`).click(this._addItemProg.bind(this));
-    if (this.isEditable && this.advData.advType === "item") html.find(".item-drop-area")[0].addEventListener("drop", this._onDrop.bind(this));
   };
 
   /** @inheritdoc */
   async _onDrop(e) {
+    // Confirm if drop action is valid
+    if (!this.isEditable && this.advData.advType !== "item") return false;
     // Try to extract the data
     const data = TextEditor.getDragEventData(e);
     const item = fromUuidSync(data.uuid);

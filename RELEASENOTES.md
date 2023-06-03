@@ -1,14 +1,19 @@
 # Release Notes
 
+## 2.0.0 [2023-06-04]
+### Added
+- FoundryVTT v10 and v11 compatible.
+- System Setting added to select Flavor for Powers and Power Points.
+
 ## 1.2.4 [2023-04-07]
 ### Fixed
-- Header text on charcter/item sheet is now back with center alignment.
+- Header text on character/item sheet is now back with center alignment.
 - Bug preventing changing Primary Ability and Weapon Group on Class sheet.
 
 ## 1.2.3 [2023-04-04]
 ### Fixed
 - Sheets behave correctly when changing font size from Core Settings.
-- When opening Damage Dialog but right-clicking damage button while pressing CTRL or CTRL + ALT will now populate "Extra Damage" field accordingly.
+- When opening Damage Dialog with right-clicking damage button while pressing CTRL or CTRL + ALT will now populate "Extra Damage" field accordingly.
 - "Coins" box on character sheet now have consistent style compared to other boxes on character sheet.
 
 ## 1.2.2 [2023-04-03]

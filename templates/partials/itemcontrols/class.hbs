@@ -1,0 +1,13 @@
+{{!-- Class Details --}}
+<li class="item-box drag-to-macro item-card flexrow feature-controls {{colorset}}" draggable="true" data-item-id="{{item._id}}">
+    <div class="main-data flexrow">
+        <img class="item-image" src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+        <a class="item-show item-name">{{item.name}} [{{localize "age-system.level"}} {{item.system.level}}]</a>
+    </div>
+    <div class="controls flexrow">
+        <div class="flexcol item-qtd-control arrow-control">
+            <a class="{{#if (eq item.system.level 20)}}opacity-low{{else}}change-qtd{{/if}}" data-action="add"><i class="fa fa-chevron-up" aria-hidden="true"></i> Level Up</a>
+            <a class="{{#if (eq item.system.level 0)}}opacity-low{{else}}change-qtd{{/if}}" data-action="remove"><i class="fa fa-chevron-down"aria-hidden="true"></i> Level Down</a>
+        </div>
+    </div>
+</li>

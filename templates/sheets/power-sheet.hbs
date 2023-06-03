@@ -30,7 +30,7 @@
             {{#unless system.inputFatigueTN}}
             {{!-- Total Power Point Cost --}}
             <li>
-                <label>{{localize "age-system.powerPointsIndex"}}</label>
+                <label>{{config.POWER_FLAVOR.index}}</label>
                 <input type="text" value="{{system.powerPointCostTotal}}" disabled>
             </li>
             {{/unless}}
@@ -65,7 +65,7 @@
 
             {{!-- Power Force --}}
             <li>
-                <label>{{localize "age-system.item.force"}}</label>
+                <label>{{config.POWER_FLAVOR.force}}</label>
                 <input type="number" disabled value="{{system.itemForce}}" data-dtype="Number" />
             </li>
 
@@ -148,7 +148,7 @@
 
                         <li class="colorset-third-tier flexrow">
                             {{!-- Power Force Ability --}}
-                            <label>{{localize "age-system.item.force"}}</label>
+                            <label>{{config.POWER_FLAVOR.force}}</label>
                             <span class="minimal-input">{{system.itemForce}}</span>
                             <select name="system.itemForceAbl" class="extra-input">
                                 {{#select system.itemForceAbl}}
@@ -161,7 +161,7 @@
 
                             {{#unless (and system.inputFatigueTN system.useFatigue fatigueSet)}}
                             {{!-- Power Point Cost --}}
-                            <label>{{localize "age-system.powerPoints"}}</label>
+                            <label>{{config.POWER_FLAVOR.points}}</label>
                             <input type="text" class="minimal-input" name="system.powerPointCost" value="{{system.powerPointCost}}" data-dtype="Number" />
                             {{#if (ne system.powerPointCost system.powerPointCostTotal)}}
                             <span class="extra-input">({{system.powerPointCostTotal}})</span>

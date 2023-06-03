@@ -1,4 +1,20 @@
 {
+    "Types.Actor.char": "Character",
+    "Types.Actor.vehicle": "Vehicle",
+    "Types.Actor.spaceship": "Spaceship",
+    "Types.Actor.organization": "Organization",
+    "Types.Item.stunts": "Stunt",
+    "Types.Item.equipment": "Equipment",
+    "Types.Item.power": "Power & Arcana",
+    "Types.Item.talent": "Talent",
+    "Types.Item.focus": "Focus",
+    "Types.Item.weapon": "Weapon",
+    "Types.Item.relationship": "Relationship",
+    "Types.Item.honorifics": "Honorifics",
+    "Types.Item.membership": "Membership",
+    "Types.Item.shipfeatures": "Spaceship Feature",
+    "Types.Item.class": "Class",
+
     "ACTOR.TypeChar": "Character",
     "ACTOR.TypeVehicle": "Vehicle",
     "ACTOR.TypeSpaceship": "Spaceship",
@@ -24,8 +40,8 @@
     "SETTINGS.advSettings": "Advanced AGE Settings",
     "SETTINGS.advSettingsHint": "Fine tune all possible settings to make your game unique",
 
-    "SETTINGS.consumePP": "Consume Power/Mana/Kana/Spell Points on roll",
-    "SETTINGS.consumePPHint": "If enabled, Points necessary to user a Power will be deducted from Character's total. A message will appear if not enough points are available.",
+    "SETTINGS.consumePP": "Consume Power Points on roll",
+    "SETTINGS.consumePPHint": "If enabled, Points necessary to use a Power will be deducted from Character's total. A message will appear if not enough points are available.",
     
     "SETTINGS.breatherSettings": "Breather Settings",
     "SETTINGS.breatherSettingsHint": "Configure amount of hits recovered by a Breather",
@@ -142,6 +158,12 @@
     "SETTINGS.healthSysmageInjury": "Modern AGE (alternate damage: Injury)",
     "SETTINGS.healthSysmageVitality": "Modern AGE (alternate damage: Injury & Vitality)",
 
+    "SETTINGS.powerFlavor": "Power Item flavor",
+    "SETTINGS.powerFlavorHint": "Select the prefered flavor from AGE books for Power types which affects Power labels and Power Points.",
+    "SETTINGS.powerFlavorPower": "Power & Power Points",
+    "SETTINGS.powerFlavorMana": "Spells & Mana Points",
+    "SETTINGS.powerFlavorSpell": "Spells & Spell Points",
+
     "age-system": {
 
         "SHEETS": {
@@ -177,7 +199,9 @@
             "newFocusCompendia": "AGE System Settings (Focus Compendium): The following compendia will not appear as Focus Compendium options until refreshing: {list}.",
             "oldFocusCompendia": "AGE System Settings (Focus Compendium): The following compendia doesn't exist and will leave the list after refreshing: {list}.",
             "emptyAdv": "All levels for the Progressive Advancement have empty or zero for value. No Advancement saved.",
-            "emptyItemArr": "No Item selected for this advancement. No Advancement saved."
+            "emptyItemArr": "No Item selected for this advancement. No Advancement saved.",
+            "ownedClassLevelOnly": "Only Class Item types with owner can be leveled.",
+            "actorHasClass": "Actor already has a Class item!"
         },
 
         "spaceship": {
@@ -480,8 +504,29 @@
         "autoApply": "Auto Apply",
 
         "rollWithoutPP": "{name} doesn't have enough points to use {item}. Roll it anyway?",
-        "powerPoints": "Power Points",
-        "powerPointsIndex": "PP",
+        "powerFlavor": {
+            "power": {
+                "name": "Power",
+                "namePlural": "Powers",
+                "points": "Power Points",
+                "index": "PP",
+                "force": "Force"
+            },
+            "mana": {
+                "name": "Spell",
+                "namePlural": "Spells",
+                "points": "Mana Points",
+                "index": "MP",
+                "force": "Spellpower"
+            },
+            "spell": {
+                "name": "Spell",
+                "namePlural": "Spells",
+                "points": "Magic Points",
+                "index": "MP",
+                "force": "Spellpower"
+            }
+        },
         "name": "Name",
         "features": "Distinctive Features",
         "toughness": "Toughness",
@@ -751,12 +796,13 @@
         "confirm": "Confirm",
         "image": "Image",
         "itemProgression": "Item Progression",
-        "itemProgressionHint": "Adds in the list below the option to Progress and existing Item from the chosen type.",
+        "itemProgressionHint": "Adds in the list below the option to Progress an existing Item from the chosen type.",
         "itemOptionSingle": "Receive one Item",
         "itemOptionSingleProgress": "Receive or Advance one Item",
         "itemOptionMultiple": "Pick Items from list",
         "itemOptionAll": "Receive all Items",
         "dragAdvItem": "Drag Advancement Items in the space below",
-        "add": "Add"
+        "add": "Add",
+        "leveledImprovements": "Obtained Improvements"
     }
 }
