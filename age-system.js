@@ -283,8 +283,11 @@ Hooks.once("init", async function() {
     // Keep a list of actors that need to prepareData after 'ready' (generally those that rely on other actor data - passengers/mounts)
     game.postReadyPrepare = [];
 
+    // Log core version
+    ageSystem.coreVersion = game.world.coreVersion;
+    ageSystem.systemVersion = game.world.systemVersion
+  
     // Pre-definition of Health System setting
-    // Set Health System configuration
     const hstype = game.settings.get("age-system", "healthSys");
     const HEALTH_SYS = {
         type: hstype,
@@ -298,12 +301,32 @@ Hooks.once("init", async function() {
         useBallistic: [`mage`, `mageInjury`, `mageVitality`].includes(hstype),
         baseDamageTN: 13
     };
-    CONFIG.ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
-    CONFIG.ageSystem.healthSys = HEALTH_SYS;
+    ageSystem.damageSource = HEALTH_SYS.useBallistic ? CONFIG.ageSystem.damageSourceOpts.useBallistic : CONFIG.ageSystem.damageSourceOpts.noBallistic;
+    ageSystem.healthSys = HEALTH_SYS;
 
-    // Log core version
-    ageSystem.coreVersion = game.world.coreVersion;
-    ageSystem.systemVersion = game.world.systemVersion
+});
+
+Hooks.once("setup", function() {
+    // Specific Localization
+    Setup.localizePower();
+    Setup.abilitiesName();
+    Setup.localizeAgeEffects();
+    ageSystem.healthSys.healthName = game.i18n.localize(`SETTINGS.healthMode${game.settings.get("age-system", "healthMode")}`);
+
+    let Degrees
+    if (game.settings.get("age-system", "DegressChoice") == "mage")
+	Degrees = ageSystem.mageDegrees
+    else if (game.settings.get("age-system", "DegressChoice") == "fage")
+	Degrees = ageSystem.fageDegrees
+    else if (game.settings.get("age-system", "DegressChoice") == "mageExtra")
+	Degrees = ageSystem.mageExtraDegrees
+    else if (game.settings.get("age-system", "DegressChoice") == "fageExtra")
+	Degrees = ageSystem.fageExtraDegrees
+    const talentDegrees = foundry.utils.deepClone(Degrees);
+    for (let i = 0; i < talentDegrees.length; i++) {
+        talentDegrees[i] = game.i18n.localize(talentDegrees[i]);
+    }
+    ageSystem.talentDegrees = talentDegrees;
 });
 
 Hooks.once("setup", function() {

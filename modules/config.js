@@ -894,8 +894,11 @@ ageSystem.greenRonin = {
 }
 
 // Talent Degrees
-ageSystem.mageDegrees = ['age-system.novice', 'age-system.expert', 'age-system.master', 'age-system.grandmaster', 'age-system.apex'];
-ageSystem.fageDegrees = ['age-system.novice', 'age-system.journeyman', 'age-system.master', 'age-system.grandmaster', 'age-system.apex'];
+ageSystem.mageDegrees = ['age-system.novice', 'age-system.expert', 'age-system.master'];
+ageSystem.fageDegrees = ['age-system.novice', 'age-system.journeyman', 'age-system.master'];
+ageSystem.mageExtraDegrees = ['age-system.novice', 'age-system.expert', 'age-system.master', 'age-system.grandmaster', 'age-system.apex'];
+ageSystem.fageExtraDegrees = ['age-system.novice', 'age-system.journeyman', 'age-system.master', 'age-system.grandmaster', 'age-system.apex'];
+
 
 // Game Settings
 ageSystem.gameSettingsChoices = {
@@ -915,6 +918,7 @@ ageSystem.advSettings = [
     'primaryAbl',
     'occupation',
     'ancestryOpt',
+    'DegressChoice',
     'wealthType',
     'stuntAttack',
     'usePowerPoints',

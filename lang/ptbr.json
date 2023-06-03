@@ -70,6 +70,13 @@
     "SETTINGS.useBallisticArmor": "Usar Armadura de Impacto e Armadura Balística",
     "SETTINGS.useBallisticArmorHint": "Selecione se as armaduras são divididas em Impacto e Balística",
 
+    "SETTINGS.DegressChoice": "Talent Degrees",
+    "SETTINGS.DegressChoiceHint": "Quantity and name of the talent degrees",
+    "SETTINGS.TalentDegreesMAGE": "Novice, Expert, Master",
+    "SETTINGS.TalentDegreesFAGE": "Novice, Journeyman, Master",
+    "SETTINGS.TalentDegreesMAGEExtra": "Novice, Expert, Master, Grandmaster, Apex",
+    "SETTINGS.TalentDegreesFAGEExtra": "Novice, Journeyman, Master, Grandmaster, Apex",
+
     "SETTINGS.wealthType": "Sistema de Riqueza",
     "SETTINGS.wealthTypeHint": "Renda e Recursos são baseado no sistema de teste de riqueza, enquanto Dinheiro é o sistema de típico de compras",
     "SETTINGS.wealthTypeResources": "Recursos",
