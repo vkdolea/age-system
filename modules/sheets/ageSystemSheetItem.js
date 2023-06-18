@@ -83,9 +83,8 @@ export default class ageSystemItemSheet extends ItemSheet {
         data.config = ageSystem;
         
         // Fetch localized name for Item Type
-        const i = this.item.type.toLowerCase();
-        const itemType = i[0].toUpperCase() + i.slice(1);
-        data.localType = game.i18n.localize(`ITEM.Type${itemType}`)
+        const i = this.item.type;
+        data.localType = game.i18n.localize(`TYPES.Item.${i}`)
         
         // Setting which ability settings will be used
         data.config.wealthMode = game.settings.get("age-system", "wealthType");

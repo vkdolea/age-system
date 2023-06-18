@@ -95,12 +95,11 @@ export function hidePrimaryAblCheckbox(html) {
 
 // Add item type in the title bar within brackets
 export function nameItemSheetWindow(itemWindow) {
-    const i = itemWindow.object.type.toLowerCase();
-    const itemType = i[0].toUpperCase() + i.slice(1);
+    const i = itemWindow.object.type;
     const appId = itemWindow.appId;
     const window = document.querySelector(`div[data-appid='${appId}']`);
     const windowHeader = window.children[0].firstElementChild;
-    windowHeader.textContent += ` [${game.i18n.localize("ITEM.Type" + itemType)}]`;
+    windowHeader.textContent += ` [${game.i18n.localize("TYPES.Item." + i)}]`;
 };
 
 /**

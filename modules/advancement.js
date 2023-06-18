@@ -25,7 +25,7 @@ export class AdvancementAdd extends Application {
 
   /** @inheritdoc */
   get title() {
-    return `${game.i18n.localize("ITEM.TypeClass")}: ${fromUuidSync(this._classUuid).name}`;
+    return `${game.i18n.localize("TYPES.Item.class")}: ${fromUuidSync(this._classUuid).name}`;
   }
 
   getData() {
@@ -147,7 +147,7 @@ export class AdvancementSetup extends FormApplication {
 
   /** @inheritdoc */
   get title() {
-    return `${game.i18n.localize("ITEM.TypeClass")}: ${this.class.name}`;
+    return `${game.i18n.localize("TYPES.Item.class")}: ${this.class.name}`;
   }
 
   getData() {
