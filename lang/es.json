@@ -1,4 +1,19 @@
 {
+  "Types.Actor.char": "Personaje",
+  "Types.Actor.vehicle": "Vehículo",
+  "Types.Actor.spaceship": "Nave",
+  "Types.Actor.organization": "Organización",
+  "Types.Item.stunts": "Proeza",
+  "Types.Item.equipment": "Equipo",
+  "Types.Item.power": "Poder y Arcana",
+  "Types.Item.talent": "Talento",
+  "Types.Item.focus": "Concentración",
+  "Types.Item.weapon": "Arma",
+  "Types.Item.relationship": "Vínculo",
+  "Types.Item.honorifics": "Títulos",
+  "Types.Item.membership": "Afiliación",
+  "Types.Item.shipfeatures": "Característica Nave",
+  "Types.Item.class": "Clase",
   "ACTOR.TypeChar": "Personaje",
   "ACTOR.TypeVehicle": "Vehículo",
   "ACTOR.TypeSpaceship": "Nave",
@@ -151,7 +166,8 @@
       "oldFocusCompendia": "Configuración Sistema AGE (Compendio Concentración): Los siguientes compendios no existen y se eliminarán de la lista después de actualizar: {list}.",
       "emptyAdv": "Todos los niveles del Avance Progresivo tienen un valor vacío o cero. No se guarda el Avance.",
       "emptyItemArr": "Ningún objeto seleccionado para el progreso. No se grabará nada.",
-      "ownedClassLevelOnly": "Sólo la clase de Objeto con dueño puede ser progresado."
+      "ownedClassLevelOnly": "Sólo la clase de Objeto con dueño puede ser progresado.",
+      "actorHasClass": "¡El Actor ya dispone de una Clase!"
     },
     "spaceship": {
       "op": "Operador",
