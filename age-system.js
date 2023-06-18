@@ -255,7 +255,7 @@ Hooks.once("init", async function() {
     Handlebars.registerHelper('tdegree', function(value) {
         value = Number(value);
         if (isNaN(value)) return ""
-        return ageSystem.talentDegrees[value];
+        return ageSystem.talentDegrees.inUse[value];
     });
 
     // Handlebar so show Level 1 to 20 using a Array with 20 positions

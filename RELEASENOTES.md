@@ -1,5 +1,10 @@
 # Release Notes
 
+## 2.0.1 [2023-06-04]
+### Fixed
+- Talent degree shows up correctly on character sheet Talent tab.
+- Removed typos on Document types' localization.
+
 ## 2.0.0 [2023-06-04]
 ### Added
 - FoundryVTT v10 and v11 compatible.

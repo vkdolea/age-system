@@ -114,7 +114,7 @@
                 {{localize "age-system.quickAccess"}}
             </li>
             {{#if data.favWeapon}}
-            <li class="list-sub-header">{{localize "ITEM.TypeWeapon"}}</li>
+            <li class="list-sub-header">{{localize "TYPES.Item.weapon"}}</li>
             {{#each data.favWeapon as |item|}}
             {{> "systems/age-system/templates/partials/itemcontrols/weapon.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
@@ -124,7 +124,7 @@
             {{/if}}
 
             {{#if data.favPower}}
-            <li class="list-sub-header">{{localize "ITEM.TypePower"}}</li>
+            <li class="list-sub-header">{{localize "TYPES.Item.power"}}</li>
             {{#each data.favPower as |item|}}
             {{> "systems/age-system/templates/partials/itemcontrols/power.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
@@ -134,7 +134,7 @@
             {{/if}}
 
             {{#if data.favEquip}}
-            <li class="list-sub-header">{{localize "ITEM.TypeEquipment"}}</li>
+            <li class="list-sub-header">{{localize "TYPES.Item.equipment"}}</li>
             {{#each data.favEquip as |item|}}
             {{> "systems/age-system/templates/partials/itemcontrols/equipment.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
@@ -144,7 +144,7 @@
             {{/if}}
 
             {{#if data.favStunt}}
-            <li class="list-sub-header">{{localize "ITEM.TypeStunts"}}</li>
+            <li class="list-sub-header">{{localize "TYPES.Item.stunts"}}</li>
             {{#each data.favStunt as |item|}}
             {{> "systems/age-system/templates/partials/itemcontrols/stunts.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
@@ -154,7 +154,7 @@
             {{/if}}
 
             {{#if data.favTalent}}
-            <li class="list-sub-header">{{localize "ITEM.TypeTalent"}}</li>
+            <li class="list-sub-header">{{localize "TYPES.Item.talent"}}</li>
             {{#each data.favTalent as |item|}}
 
             {{#if (eq item.system.type "talent")}}
@@ -170,7 +170,7 @@
             {{/if}}
 
             {{#if data.favRelation}}
-            <li class="list-sub-header">{{localize "ITEM.TypeRelationship"}}</li>
+            <li class="list-sub-header">{{localize "TYPES.Item.relationship"}}</li>
             {{#each data.favRelation as |item|}}
             {{> "systems/age-system/templates/partials/itemcontrols/relationship.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
@@ -180,7 +180,7 @@
             {{/if}}
             
             {{#if data.favHonor}}
-            <li class="list-sub-header">{{localize "ITEM.TypeHonorifics"}}</li>
+            <li class="list-sub-header">{{localize "TYPES.Item.honorifics"}}</li>
             {{#each data.favHonor as |item|}}
             {{> "systems/age-system/templates/partials/itemcontrols/honorifics.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
@@ -190,7 +190,7 @@
             {{/if}}
 
             {{#if data.favMembership}}
-            <li class="list-sub-header">{{localize "ITEM.TypeMembership"}}</li>
+            <li class="list-sub-header">{{localize "TYPES.Item.membership"}}</li>
             {{#each data.favMembership as |item|}}
             {{> "systems/age-system/templates/partials/itemcontrols/membership.hbs" item=this config=../data.config colorset='colorset-third-tier'}}
             {{#unless @last}}
