@@ -1,6 +1,10 @@
 # Release Notes
 
-## 2.0.1 [2023-06-04]
+## 2.0.2 [2023-06-xx]
+### Fixed
+- Added a 36px offset on AGE Roller icon to avoid overlapping new macro bar buttons.
+
+## 2.0.1 [2023-06-18]
 ### Fixed
 - Talent degree shows up correctly on character sheet Talent tab.
 - Removed typos on Document types' localization.
