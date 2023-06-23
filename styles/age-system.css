@@ -1349,7 +1349,7 @@
   object-fit: contain;
   border: none;
   height: 190px;
-  flex: 0 50%;
+  max-width: 50%;
 }
 .age-system.sheet.spaceship .image-description .ship-desc {
   text-align: initial;
