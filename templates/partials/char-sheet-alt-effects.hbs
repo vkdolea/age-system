@@ -9,10 +9,10 @@
         <li class="values">
             {{#each data.conditions as |condition|}}
             <span class="tooltip-container flexrow feature-controls toggle-condition {{#if condition.active}}colorset-first-tier{{/if}}" data-condition-id="{{condition.id}}">
-                <a class="item-name item-box condition-label">{{condition.label}}</a>
+                <a class="item-name item-box condition-label">{{condition.name}}</a>
                 <span class="container-tooltip-text colorset-second-tier">
                     {{#if (ne condition.flags.age-system.desc "")}}
-                    <span><b>{{condition.label}}:</b> {{condition.flags.age-system.desc}}</span>
+                    <span><b>{{condition.name}}:</b> {{condition.flags.age-system.desc}}</span>
                     {{/if}}
                     {{#if condition.changes}}
                     <em>
@@ -49,9 +49,9 @@
             <div class="effect-name flexrow">
                 <img class="item-image" src="{{effect.icon}}">
                 {{#if (ne effect.flags.age-system.conditionType "custom")}}
-                <span>{{localize effect.label}}</span>
+                <span>{{localize effect.name}}</span>
                 {{else}}
-                <span>{{effect.label}}</span>
+                <span>{{effect.name}}</span>
                 {{/if}}
             </div>
             {{#if effect.changes}}

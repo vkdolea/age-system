@@ -348,65 +348,65 @@ ageSystem.statusEffects = {
     {
         icon: `${AGEstatusEffectsPath}number.svg`,
         id: `num0`,
-        label: `0`,
+        name: `0`,
     },
     {
         icon: `${AGEstatusEffectsPath}number-1.svg`,
         id: `num1`,
-        label: `1`,
+        name: `1`,
     },
     {
         icon: `${AGEstatusEffectsPath}number-2.svg`,
         id: `num2`,
-        label: `2`,
+        name: `2`,
     },
     {
         icon: `${AGEstatusEffectsPath}number-3.svg`,
         id: `num3`,
-        label: `3`
+        name: `3`
     },
     {
         icon: `${AGEstatusEffectsPath}number-4.svg`,
         id: `num4`,
-        label: `4`
+        name: `4`
     },
     {
         icon: `${AGEstatusEffectsPath}number-5.svg`,
         id: `num5`,
-        label: `5`
+        name: `5`
     },
     {
         icon: `${AGEstatusEffectsPath}number-6.svg`,
         id: `num6`,
-        label: `6`
+        name: `6`
     },
     {
         icon: `${AGEstatusEffectsPath}number-7.svg`,
         id: `num7`,
-        label: `7`
+        name: `7`
     },
     {
         icon: `${AGEstatusEffectsPath}number-8.svg`,
         id: `num8`,
-        label: `8`
+        name: `8`
     },
     {
         icon: `${AGEstatusEffectsPath}number-9.svg`,
         id: `num9`,
-        label: `9`
+        name: `9`
     },
     {
         icon: `${AGEstatusEffectsPath}number-10.svg`,
         id: `num10`,
-        label: `10`
+        name: `10`
     },
     {
         icon: `${AGEstatusEffectsPath}pirate-grave.svg`,
         id: `dead`,
-        label: `EFFECT.StatusDead`,
+        name: `EFFECT.StatusDead`,
     },
     {
-        label: "age-system.conditions.blinded",
+        name: "age-system.conditions.blinded",
         id: "blinded",
         icon: "icons/svg/blind.svg",
         flags: {
@@ -418,7 +418,7 @@ ageSystem.statusEffects = {
         }
     },
     {
-        label: "age-system.conditions.deafened",
+        name: "age-system.conditions.deafened",
         id: "deafened",
         icon: "icons/svg/deaf.svg",
         flags: {
@@ -430,7 +430,7 @@ ageSystem.statusEffects = {
         }
     },
     {
-        label: "age-system.conditions.dying",
+        name: "age-system.conditions.dying",
         id: "dying",
         icon: `${AGEstatusEffectsPath}half-dead.svg`,
         flags: {
@@ -442,7 +442,7 @@ ageSystem.statusEffects = {
         }
     },
     {
-        label: "age-system.conditions.fatigued",
+        name: "age-system.conditions.fatigued",
         id: "fatigued",
         icon: `${AGEstatusEffectsPath}despair.svg`,
         flags: {
@@ -454,7 +454,7 @@ ageSystem.statusEffects = {
         }
     },
     {
-        label: "age-system.conditions.exhausted",
+        name: "age-system.conditions.exhausted",
         id: "exhausted",
         icon: `${AGEstatusEffectsPath}oppression.svg`,
         flags: {
@@ -471,7 +471,7 @@ ageSystem.statusEffects = {
         }]
     },
     {
-        label: "age-system.conditions.freefalling",
+        name: "age-system.conditions.freefalling",
         id: "freefalling",
         icon: `${AGEstatusEffectsPath}acrobatic.svg`,
         flags: {
@@ -483,7 +483,7 @@ ageSystem.statusEffects = {
         }
     },
     {
-        label: "age-system.conditions.helpless",
+        name: "age-system.conditions.helpless",
         id: "helpless",
         icon: `${AGEstatusEffectsPath}knockout.svg`,
         flags: {
@@ -495,7 +495,7 @@ ageSystem.statusEffects = {
         }
     },
     {
-        label: "age-system.conditions.hindered",
+        name: "age-system.conditions.hindered",
         id: "hindered",
         icon: `${AGEstatusEffectsPath}knee-bandage.svg`,
         flags: {
@@ -512,7 +512,7 @@ ageSystem.statusEffects = {
         }]
     },
     {
-        label: "age-system.conditions.injured",
+        name: "age-system.conditions.injured",
         id: "injured",
         icon: `${AGEstatusEffectsPath}backstab.svg`,
         flags: {
@@ -529,7 +529,7 @@ ageSystem.statusEffects = {
         }]
     },
     {
-        label: "age-system.conditions.wounded",
+        name: "age-system.conditions.wounded",
         id: "wounded",
         icon: `${AGEstatusEffectsPath}arrowed.svg`,
         flags: {
@@ -551,7 +551,7 @@ ageSystem.statusEffects = {
         }]
     },
     {
-        label: "age-system.conditions.prone",
+        name: "age-system.conditions.prone",
         id: "prone",
         icon: "icons/svg/falling.svg",
         flags: {
@@ -563,7 +563,7 @@ ageSystem.statusEffects = {
         }
     },
     {
-        label: "age-system.conditions.restrained",
+        name: "age-system.conditions.restrained",
         id: "restrained",
         icon: `${AGEstatusEffectsPath}imprisoned.svg`,
         flags: {
@@ -580,7 +580,7 @@ ageSystem.statusEffects = {
         }]
     },
     {
-        label: "age-system.conditions.unconscious",
+        name: "age-system.conditions.unconscious",
         id: "unconscious",
         icon: "icons/svg/unconscious.svg",
         flags: {
@@ -599,132 +599,132 @@ ageSystem.statusEffects = {
     // Below this line are Foundry Core token conditions
     {
         id: "sleep",
-        label: "EFFECT.StatusAsleep",
+        name: "EFFECT.StatusAsleep",
         icon: "icons/svg/sleep.svg",
     },
     {
         id: "fly",
-        label: "EFFECT.StatusFlying",
+        name: "EFFECT.StatusFlying",
         icon: "icons/svg/wing.svg"
     },
     {
         id: "stun",
-        label: "EFFECT.StatusStunned",
+        name: "EFFECT.StatusStunned",
         icon: "icons/svg/daze.svg"
     },
     {
         id: "paralysis",
-        label: "EFFECT.StatusParalysis",
+        name: "EFFECT.StatusParalysis",
         icon: "icons/svg/paralysis.svg"
     },
     {
         id: "silence",
-        label: "EFFECT.StatusSilenced",
+        name: "EFFECT.StatusSilenced",
         icon: "icons/svg/silenced.svg"
     },
     {
         id: "fear",
-        label: "EFFECT.StatusFear",
+        name: "EFFECT.StatusFear",
         icon: "icons/svg/terror.svg"
     },
     {
         id: "burning",
-        label: "EFFECT.StatusBurning",
+        name: "EFFECT.StatusBurning",
         icon: "icons/svg/fire.svg"
     },
     {
         id: "frozen",
-        label: "EFFECT.StatusFrozen",
+        name: "EFFECT.StatusFrozen",
         icon: "icons/svg/frozen.svg"
     },
     {
         id: "shock",
-        label: "EFFECT.StatusShocked",
+        name: "EFFECT.StatusShocked",
         icon: "icons/svg/lightning.svg"
     },
     {
         id: "corrode",
-        label: "EFFECT.StatusCorrode",
+        name: "EFFECT.StatusCorrode",
         icon: "icons/svg/acid.svg"
     },
     {
         id: "bleeding",
-        label: "EFFECT.StatusBleeding",
+        name: "EFFECT.StatusBleeding",
         icon: "icons/svg/blood.svg"
     },
     {
         id: "disease",
-        label: "EFFECT.StatusDisease",
+        name: "EFFECT.StatusDisease",
         icon: "icons/svg/biohazard.svg"
     },
     {
         id: "poison",
-        label: "EFFECT.StatusPoison",
+        name: "EFFECT.StatusPoison",
         icon: "icons/svg/poison.svg"
     },
     {
         id: "radiation",
-        label: "EFFECT.StatusRadiation",
+        name: "EFFECT.StatusRadiation",
         icon: "icons/svg/radiation.svg"
     },
     {
         id: "regen",
-        label: "EFFECT.StatusRegen",
+        name: "EFFECT.StatusRegen",
         icon: "icons/svg/regen.svg"
     },
     {
         id: "degen",
-        label: "EFFECT.StatusDegen",
+        name: "EFFECT.StatusDegen",
         icon: "icons/svg/degen.svg"
     },
     {
         id: "upgrade",
-        label: "EFFECT.StatusUpgrade",
+        name: "EFFECT.StatusUpgrade",
         icon: "icons/svg/upgrade.svg"
     },
     {
         id: "downgrade",
-        label: "EFFECT.StatusDowngrade",
+        name: "EFFECT.StatusDowngrade",
         icon: "icons/svg/downgrade.svg"
     },
     {
         id: "target",
-        label: "EFFECT.StatusTarget",
+        name: "EFFECT.StatusTarget",
         icon: "icons/svg/target.svg"
     },
     {
         id: "eye",
-        label: "EFFECT.StatusMarked",
+        name: "EFFECT.StatusMarked",
         icon: "icons/svg/eye.svg"
     },
     {
         id: "curse",
-        label: "EFFECT.StatusCursed",
+        name: "EFFECT.StatusCursed",
         icon: "icons/svg/sun.svg"
     },
     {
         id: "bless",
-        label: "EFFECT.StatusBlessed",
+        name: "EFFECT.StatusBlessed",
         icon: "icons/svg/angel.svg"
     },
     {
         id: "fireShield",
-        label: "EFFECT.StatusFireShield",
+        name: "EFFECT.StatusFireShield",
         icon: "icons/svg/fire-shield.svg"
     },
     {
         id: "coldShield",
-        label: "EFFECT.StatusIceShield",
+        name: "EFFECT.StatusIceShield",
         icon: "icons/svg/ice-shield.svg"
     },
     {
         id: "magicShield",
-        label: "EFFECT.StatusMagicShield",
+        name: "EFFECT.StatusMagicShield",
         icon: "icons/svg/mage-shield.svg"
     },
     {
         id: "holyShield",
-        label: "EFFECT.StatusHolyShield",
+        name: "EFFECT.StatusHolyShield",
         icon: "icons/svg/holy-shield.svg"
     },
 ]};

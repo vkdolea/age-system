@@ -68,36 +68,42 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         data.conditions = foundry.utils.deepClone(CONFIG.statusEffects).filter(e => e.flags?.["age-system"]?.isCondition);
         for (let i = 0; i < data.conditions.length; i++) {
             if (ageSystem.inUseStatusEffects !== 'custom') {
-                data.conditions[i].label = game.i18n.localize(data.conditions[i].label);
+                data.conditions[i].name = game.i18n.localize(data.conditions[i].name);
                 if (data.conditions[i].flags?.["age-system"]?.desc) data.conditions[i].flags["age-system"].desc = game.i18n.localize(data.conditions[i].flags["age-system"].desc);
             }
             const cond = data.conditions[i];
             const hasCondition = data.effects.filter(c => c?.flags?.core?.statusId === cond.id);
             if (hasCondition.length > 0) data.conditions[i].active = true;
         }
-        data.conditions = sortObjArrayByName(data.conditions, "label");
+        data.conditions = sortObjArrayByName(data.conditions, "name");
 
         // Filtering non condition Active Effects
-        data.effects = data.effects.filter(e => {
-            let isListed = false;
-            const isStatusEffect = e.flags?.core?.statusId ? true : false;
-            const isCondition = e.flags?.["age-system"]?.isCondition;
-            const isCurrent = ageSystem.inUseStatusEffects === e.flags?.["age-system"]?.conditionType ? true : false;
+        const statusIds = CONFIG.statusEffects.reduce((arr, e) => {
+            if (e.id) arr.push(e.id)
+            return arr
+        }, []);
+
+        data.effects = data.effects.filter(e => !statusIds.includes(e.statuses[0])) // TO DO - confirm if this Active Effect will always have a Array with 1 element.
+        // data.effects = data.effects.filter(e => {
+        //     let isListed = false;
+        //     const isStatusEffect = e.id ? false : true;
+        //     const isCondition = e.flags?.["age-system"]?.isCondition;
+        //     const isCurrent = ageSystem.inUseStatusEffects === e.flags?.["age-system"]?.conditionType ? true : false;
             
-            if (isStatusEffect) {
-                if (isCurrent) {
-                    isListed = !isCondition;
-                } else {
-                    isListed = true;
-                }
-            } else {
-                isListed = true;
-            };
+        //     if (isStatusEffect) {
+        //         if (isCurrent) {
+        //             isListed = !isCondition;
+        //         } else {
+        //             isListed = true;
+        //         }
+        //     } else {
+        //         isListed = true;
+        //     };
 
-            return isListed;
-        });
+        //     return isListed;
+        // });
 
-        data.effects = sortObjArrayByName(data.effects, `label`);       
+        data.effects = sortObjArrayByName(data.effects, `name`);       
     
         // Retrieve Prefession/Ancestry settings
         data.ancestry = game.settings.get("age-system", "ancestryOpt");
@@ -418,7 +424,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
     async _onAddEffect(event) {
         const newEffect = {
-            label: game.i18n.localize("age-system.item.newItem"),
+            name: game.i18n.localize("age-system.item.newItem"),
             origin: this.actor.uuid,
             icon: `icons/svg/aura.svg`,
             disabled: true,

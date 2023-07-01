@@ -980,7 +980,7 @@ export class ageSystemActor extends Actor {
             // If there is no Effect on, create one
             const newEffect = foundry.utils.deepClone(CONFIG.statusEffects.filter(e => e.id === condId)[0]);
             newEffect["flags.core.statusId"] = newEffect.id;
-            if (newEffect?.flags?.["age-system"].conditionType !== 'custom') newEffect.label = game.i18n.localize(newEffect.label);
+            if (newEffect?.flags?.["age-system"].conditionType !== 'custom') newEffect.name = game.i18n.localize(newEffect.name);
             delete newEffect.id;
             await this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
         } else {
