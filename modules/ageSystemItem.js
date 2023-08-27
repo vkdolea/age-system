@@ -691,29 +691,37 @@ export class ageSystemItem extends Item {
             if (!this.hasFatigue && actor) {
                 const cost = itemData.powerPointCostTotal;
                 const remainingPP = actorData?.powerPoints.value;
-                if (cost > remainingPP) {
-                    const castAnyway = await new Promise(resolve => {
-                        const data = {
-                            content: `<p>${game.i18n.format("age-system.rollWithoutPP", {name: actor.name, item: this.name})}</p>`,
-                            buttons: {
-                                normal: {
-                                    label: game.i18n.localize("age-system.roll"),
-                                    callback: html => resolve({roll: true})
-                                },
-                                cancel: {
-                                    label: game.i18n.localize("age-system.cancel"),
-                                    callback: html => resolve({roll: false}),
-                                }
-                            },
-                            default: "normal",
-                            close: () => resolve({cancelled: true}),
-                        }
-                        new Dialog(data, null).render(true);
-                    });
-                    if (!castAnyway.roll) return false;
-                } else {
-                    actor.update({"system.powerPoints.value": remainingPP - cost}, {value: -cost, type: 'power'})
+                rollData.ppCost = {
+                    remainingPP,
+                    cost,
                 }
+                // if (cost > remainingPP) {
+                //     const castAnyway = await new Promise(resolve => {
+                //         const data = {
+                //             content: `<p>${game.i18n.format("age-system.rollWithoutPP", {name: actor.name, item: this.name})}</p>`,
+                //             buttons: {
+                //                 normal: {
+                //                     label: game.i18n.localize("age-system.roll"),
+                //                     callback: html => resolve({roll: true})
+                //                 },
+                //                 cancel: {
+                //                     label: game.i18n.localize("age-system.cancel"),
+                //                     callback: html => resolve({roll: false}),
+                //                 }
+                //             },
+                //             default: "normal",
+                //             close: () => resolve({cancelled: true}),
+                //         }
+                //         new Dialog(data, null).render(true);
+                //     });
+                //     if (!castAnyway.roll) return false;
+                // } else {
+                //     rollData.ppCost = {
+                //         remainingPP,
+                //         cost,
+                //     }
+                //     // actor.update({"system.powerPoints.value": remainingPP - cost}, {value: -cost, type: 'power'})
+                // }
             }
         }
 

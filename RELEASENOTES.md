@@ -1,12 +1,16 @@
 # Release Notes
 
 ## 2.0.2 [2023-06-xx]
+### Added
+- When rolling a Power with power points cost using expanded options, user will be able to change power cost before rolling it.
+
 ### Fixed
 - Added a 36px offset on AGE Roller icon to avoid overlapping new macro bar buttons.
 - Bug causing Spaceship Actor image on sheet to overflow and make it impossible to interact with some sheet elements.
 - Correct labels related to Power Points are now applyed on Item chat cards.
 - Fixed bug preventing context menu from rendering correctly.
 - Healing Actors from chat card will now correctly follow the System Setting "Use Targeted function to apply damage and healing".
+- Power Points will consumed only after confirming roll using when using context menu.
 
 ## 2.0.1 [2023-06-18]
 ### Fixed

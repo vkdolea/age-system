@@ -56,7 +56,7 @@ export function quickEval(expression) {
 // TO DO - add flavor identifying the item and button to roll damage/healing/whatever
 export async function ageRollCheck({event = null, actor = null, abl = null, itemRolled = null, rollTN = null, rollUserMod = null, atkDmgTradeOff = null,
     hasTest = false, rollType = null, vehicleHandling = false, selectAbl = false, rollVisibility = false, flavor = null, flavor2 = null, moreParts = false,
-    isStuntAttack = false, extraSP = 0, stackSP = true}={}) {
+    isStuntAttack = false, extraSP = 0, stackSP = true, ppCost = null}={}) {
 
     const ROLL_TYPE = ageSystem.ROLL_TYPE;
     const actorType = actor?.type;
@@ -74,16 +74,46 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     // Prompt user for extra Roll Options if Alt + Click is used to initialize roll
     let extraOptions = null;
     if (!event.ctrlKey && event.altKey || selectAbl || event.type === "contextmenu") {
-        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN, selectAbl, rollVisibility, actorType, rollType, ROLL_TYPE});
+        extraOptions = await getAgeRollOptions(itemRolled, {targetNumber: rollTN, selectAbl, rollVisibility, actorType, rollType, ROLL_TYPE, ppCost});
         if (extraOptions.cancelled) return;
         if (extraOptions.rollTN) rollTN = extraOptions.rollTN;
         if (extraOptions.selectedAbl) abl = extraOptions.selectedAbl;
         if (extraOptions.stuntAttack) isStuntAttack = true;
         if (extraOptions.extraSP) extraSP = extraOptions.extraSP;
         if (extraOptions.stackSP !== undefined) stackSP = extraOptions.stackSP;
+        if (extraOptions.pointCost) ppCost.cost = extraOptions.pointCost;
         rollUserMod = extraOptions.ageRollMod;
         atkDmgTradeOff = extraOptions.atkDmgTradeOff;
     };
+
+    // Consume Power Points if Game Settings and Item type allows - TODO use case when final cost is higher than maximum Power Points available.
+    if (ageSystem.autoConsumePP && actor && ppCost) {
+        const cost = ppCost.cost;
+        const remainingPP = ppCost.remainingPP
+        const newPP = remainingPP - cost;
+        if (newPP < 0) {
+            const castAnyway = await new Promise(resolve => {
+                const data = {
+                    content: `<p>${game.i18n.format("age-system.rollWithoutPP", {name: actor.name, item: this.name})}</p>`,
+                    buttons: {
+                        normal: {
+                            label: game.i18n.localize("age-system.roll"),
+                            callback: html => resolve({roll: true})
+                        },
+                        cancel: {
+                            label: game.i18n.localize("age-system.cancel"),
+                            callback: html => resolve({roll: false}),
+                        }
+                    },
+                    default: "normal",
+                    close: () => resolve({cancelled: true}),
+                }
+                new Dialog(data, null).render(true);
+            });
+            if (!castAnyway.roll) return false;
+        }
+        actor.update({"system.powerPoints.value": newPP < 0 ? 0 : remainingPP - cost}, {value: newPP < 0 ? -remainingPP : -cost, type: 'power'})
+    }
 
     // Set roll mode
     // const rMode = setBlind(event);
@@ -453,6 +483,7 @@ async function getAgeRollOptions(itemRolled, data = {}) {
 
     const html = await renderTemplate(template, {
         ...data,
+        config: ageSystem,
         stackSP: ageSystem.stuntAttackPoints > 1 ? false : true,
         itemType: type
     });

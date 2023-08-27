@@ -32,6 +32,13 @@
     </div>
     {{/if}}
 
+    {{#if ppCost}}
+    <div class="form-group">
+        <label>{{config.POWER_FLAVOR.points}}</label>
+        <input type="number" name="pointCost" value="{{ppCost.cost}}" placeholder="0"/>
+    </div>
+    {{/if}}
+
     <hr>
 
     {{#if (ne rollType ROLL_TYPE.RESOURCES)}}
