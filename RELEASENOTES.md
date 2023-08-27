@@ -5,7 +5,8 @@
 - Added a 36px offset on AGE Roller icon to avoid overlapping new macro bar buttons.
 - Bug causing Spaceship Actor image on sheet to overflow and make it impossible to interact with some sheet elements.
 - Correct labels related to Power Points are now applyed on Item chat cards.
-- Fixed bug preventing context menu from rendering correctly
+- Fixed bug preventing context menu from rendering correctly.
+- Healing Actors from chat card will now correctly follow the System Setting "Use Targeted function to apply damage and healing".
 
 ## 2.0.1 [2023-06-18]
 ### Fixed

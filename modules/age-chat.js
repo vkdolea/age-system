@@ -55,7 +55,7 @@ function applyChatCardDamage(li, options) {
     const cardDamageData = message.flags?.["age-system"]?.damageData;
     const total = cardDamageData?.totalDamage ?? roll.total;
     if (options.isHealing) {
-        return Promise.all(canvas.tokens.controlled.map(t => {
+        return Promise.all(controlledTokenByType(['char']).map(t => {
           const a = t.actor;
           return ageSystem.healthSys.useInjury ? a.healMarks(total) : a.applyHPchange(total, options);
         }));
