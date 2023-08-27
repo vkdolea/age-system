@@ -12,17 +12,17 @@
                             <i class="fas fa-trash delete-effect {{#if (eq condition.id "dead")}}inactive{{else}}active{{/if}}"></i>
                             <i class="fa fa-chevron-down change-order" data-direction="down" aria-hidden="true"></i>
                         </div>
-                        <img class="item-image user-entry" src="{{condition.icon}}" data-field="img" title="{{condition.label}}"/>
+                        <img class="item-image user-entry" src="{{condition.icon}}" data-field="img" title="{{condition.name}}"/>
                         <div>
                             {{#if (eq ../inUseConditions "custom")}}
-                            <h3><input type="text" class="user-entry" name="conditions.{{i}}.label" value="{{condition.label}}" data-dtype="Number" placeholder="{{localize "age-system.name"}}" data-field="name"/></h3>
+                            <h3><input type="text" class="user-entry" name="conditions.{{i}}.name" value="{{condition.name}}" data-dtype="Number" placeholder="{{localize "age-system.name"}}" data-field="name"/></h3>
                             <div class="is-condition flexrow">
                                 <input type="checkbox" class="user-entry" {{#if condition.flags.age-system.isCondition}}checked{{/if}} name="conditions.{{i}}.flags.age-system.isCondition" data-field="isCondition">
                                 <label>Is Condition</label>
                             </div>
                             <textarea class="user-entry" name="conditions.{{i}}.flags.age-system.desc" data-field="desc" placeholder="{{localize "age-system.item.desc"}}" cols="30" rows="10">{{#with (lookup condition.flags "age-system")~}}{{desc}}{{/with}}</textarea>
                             {{else}}
-                            <h3><input type="text" disabled class="user-entry" name="conditions.{{i}}.label" value="{{localize condition.label}}" data-dtype="Number" data-field="name"/></h3>
+                            <h3><input type="text" disabled class="user-entry" name="conditions.{{i}}.name" value="{{localize condition.name}}" data-dtype="Number" data-field="name"/></h3>
                             <div class="is-condition flexrow">
                                 <input type="checkbox" disabled class="user-entry" {{#if condition.flags.age-system.isCondition}}checked{{/if}} name="conditions.{{i}}.flags.age-system.isCondition" data-field="isCondition">
                                 <label>Is Condition</label>

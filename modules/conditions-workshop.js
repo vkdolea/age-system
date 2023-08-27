@@ -133,7 +133,7 @@ export default class ConditionsWorkshop extends Application {
     const origin = ev.currentTarget.dataset.origin;
     const newEffects = foundry.utils.deepClone(CONFIG.ageSystem.statusEffects[origin]);
     for (let ef = 0; ef < newEffects.length; ef++) {
-      newEffects[ef].label = game.i18n.localize(newEffects[ef].label);
+      newEffects[ef].name = game.i18n.localize(newEffects[ef].name);
       newEffects[ef].id = newEffects[ef].id === `dead` ? `dead` : ('AGEcustom.' + foundry.utils.randomID(20));
       const newDesc = newEffects[ef].flags?.["age-system"]?.desc;
       const newFlags = {
@@ -202,7 +202,7 @@ export default class ConditionsWorkshop extends Application {
     const pos = ev.currentTarget.dataset.position;
     const newEffect = {
       icon: "icons/svg/aura.svg",
-      label: "",
+      name: "",
       id: 'AGEcustom.' + foundry.utils.randomID(20),
       changes: [],
       flags: {
@@ -267,7 +267,7 @@ export default class ConditionsWorkshop extends Application {
 
     switch (part) {
       case 'name':
-        condition.label = newValue;
+        condition.name = newValue;
         break;
 
       case 'desc':

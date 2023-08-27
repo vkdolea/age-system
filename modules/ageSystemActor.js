@@ -983,12 +983,12 @@ export class ageSystemActor extends Actor {
      */
     async handleConditions(condId) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;
-        const effectsOn = this.effects.filter(e => e.flags?.["age-system"]?.isCondition && e.flags?.core?.statusId === condId);
+        const effectsOn = this.effects.filter(e => e.flags?.["age-system"]?.isCondition && e.statuses.has(condId));
         
         if (effectsOn.length < 1) {
             // If there is no Effect on, create one
             const newEffect = foundry.utils.deepClone(CONFIG.statusEffects.filter(e => e.id === condId)[0]);
-            newEffect["flags.core.statusId"] = newEffect.id;
+            newEffect.statuses = [newEffect.id];
             if (newEffect?.flags?.["age-system"].conditionType !== 'custom') newEffect.name = game.i18n.localize(newEffect.name);
             delete newEffect.id;
             await this.createEmbeddedDocuments("ActiveEffect", [newEffect]);

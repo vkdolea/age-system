@@ -72,7 +72,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
                 if (data.conditions[i].flags?.["age-system"]?.desc) data.conditions[i].flags["age-system"].desc = game.i18n.localize(data.conditions[i].flags["age-system"].desc);
             }
             const cond = data.conditions[i];
-            const hasCondition = data.effects.filter(c => c?.flags?.core?.statusId === cond.id);
+            const hasCondition = data.effects.filter(c => c.statuses.includes(cond.id));
             if (hasCondition.length > 0) data.conditions[i].active = true;
         }
         data.conditions = sortObjArrayByName(data.conditions, "name");
@@ -84,7 +84,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         }, []);
 
         data.effects = data.effects.filter(e => !statusIds.includes(e.statuses[0])) // TO DO - confirm if this Active Effect will always have a Array with 1 element.
-        data.effects = sortObjArrayByName(data.effects, `name`);       
+        data.effects = sortObjArrayByName(data.effects, `name`);    
     
         // Retrieve Prefession/Ancestry settings
         data.ancestry = game.settings.get("age-system", "ancestryOpt");

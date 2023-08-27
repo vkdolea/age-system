@@ -95,67 +95,67 @@ ageSystem.fatigueConditions = {
 // Conditions
 ageSystem.conditions = [
     {
-        name: "age-system.conditions.blinded",
+        label: "age-system.conditions.blinded",
         desc: "age-system.conditions.blindedDesc",
         id: "blinded"
     },
     {
-        name: "age-system.conditions.deafened",
+        label: "age-system.conditions.deafened",
         desc: "age-system.conditions.deafenedDesc",
         id: "deafened"
     },
     {
-        name: "age-system.conditions.exhausted",
+        label: "age-system.conditions.exhausted",
         desc: "age-system.conditions.exhaustedDesc",
         id: "exhausted"
     },
     {
-        name: "age-system.conditions.fatigued",
+        label: "age-system.conditions.fatigued",
         desc: "age-system.conditions.fatiguedDesc",
         id: "fatigued"
     },
     {
-        name: "age-system.conditions.freefalling",
+        label: "age-system.conditions.freefalling",
         desc: "age-system.conditions.freefallingDesc",
         id: "freefalling"
     },
     {
-        name: "age-system.conditions.helpless",
+        label: "age-system.conditions.helpless",
         desc: "age-system.conditions.helplessDesc",
         id: "helpless"
     },
     {
-        name: "age-system.conditions.hindered",
+        label: "age-system.conditions.hindered",
         desc: "age-system.conditions.hinderedDesc",
         id: "hindered"
     },
     {
-        name: "age-system.conditions.prone",
+        label: "age-system.conditions.prone",
         desc: "age-system.conditions.proneDesc",
         id: "prone"
     },
     {
-        name: "age-system.conditions.restrained",
+        label: "age-system.conditions.restrained",
         desc: "age-system.conditions.restrainedDesc",
         id: "restrained"
     },
     {
-        name: "age-system.conditions.injured",
+        label: "age-system.conditions.injured",
         desc: "age-system.conditions.injuredDesc",
         id: "injured",
     },
     {
-        name: "age-system.conditions.wounded",
+        label: "age-system.conditions.wounded",
         desc: "age-system.conditions.woundedDesc",
         id: "wounded"
     },
     {
-        name: "age-system.conditions.unconscious",
+        label: "age-system.conditions.unconscious",
         desc: "age-system.conditions.unconsciousDesc",
         id: "unconscious"
     },
     {
-        name: "age-system.conditions.dying",
+        label: "age-system.conditions.dying",
         desc: "age-system.conditions.dyingDesc",
         id: "dying"
     }
