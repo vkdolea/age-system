@@ -747,10 +747,11 @@ export class ageSystemItem extends Item {
             itemId: item.id,
             owner: this.actor,
             ownerUuid: this.actor.uuid,
-            config: {
-                colorScheme: ageSystem.colorScheme,
-                wealthMode: game.settings.get("age-system", "wealthType")
-            },
+            config: ageSystem,
+            // config: {
+            //     colorScheme: ageSystem.colorScheme,
+            //     wealthMode: game.settings.get("age-system", "wealthType")
+            // },
             cssClass: `age-system colorset-${ageSystem.colorScheme} item-to-chat`
         };
         const chatData = {

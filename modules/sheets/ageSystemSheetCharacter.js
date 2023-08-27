@@ -223,7 +223,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
         if (this.actor.isOwner) {
             new ContextMenu(html, ".focus-options", this.focusContextMenu);
-            new ContextMenu(html, ".item-card .main-data", this.itemContextMenu); // Elaborar
+            new ContextMenu(html, ".item-card .main-data img", this.itemContextMenu);
             html.find(".item-equip").click(this._onItemActivate.bind(this));
             html.find(".item-card .main-data").click(this._onItemEdit.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
@@ -232,7 +232,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".mod-active.icon").click(this._onToggleItemMod.bind(this));
             html.find(".trait-item").click(this._onTraitGroupToggle.bind(this));
         }
-       
+
         super.activateListeners(html);
     };
 
