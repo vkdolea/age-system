@@ -114,6 +114,18 @@ export async function migrateSettings() {
     }
     await game.settings.set("age-system", "customTokenEffects", te);
   }
+
+  if (isNewerVersion("2.0.2", lastMigrationVer)) { // Do not execute if last migration version was 2.0.2 or earlier
+    // Migrate field "label" from Custom Token Status to "name", to comply to FoundryVTT v11 new API.
+    let te = game.settings.get("age-system", "customTokenEffects");
+    for (let i = 0; i < te.length; i++) {
+      if (!te[i].name) {
+        te[i].name = te[i].label;
+        delete te[i].label;
+      }
+    }
+    await game.settings.set("age-system", "customTokenEffects", te);
+  }
   
   await game.settings.set("age-system", "settingsMigrationData", migData);
   return updateSettings;
@@ -298,21 +310,21 @@ export const migrateSceneData = async function(scene) {
     const update = {};
     if ( Object.keys(update).length ) foundry.utils.mergeObject(t, update);
     if ( !t.actorId || t.actorLink ) {
-      t.actorData = {};
+      t.delta = {};
     }
     else if ( !game.actors.has(t.actorId) ) {
       t.actorId = null;
-      t.actorData = {};
+      t.delta = {};
     }
     else if ( !t.actorLink ) {
-      const actorData = duplicate(t.actorData);
+      const actorData = duplicate(t.delta);
       actorData.type = token.actor?.type;
       const tokenSource = game.actors.get(t.actorId)._source;
       const update = migrateActorData(actorData, tokenSource);
       ["items", "effects"].forEach(embeddedName => {
         if (!update[embeddedName]?.length) return;
         const updates = new Map(update[embeddedName].map(u => [u._id, u]));
-        t.actorData[embeddedName].forEach(original => {
+        t.delta[embeddedName].forEach(original => {
           const update = updates.get(original._id);
           if (original.data) { // Addresses issue on migrating Item/Effects owned by synthetic tokens
             switch (embeddedName) {
@@ -331,7 +343,7 @@ export const migrateSceneData = async function(scene) {
         delete update[embeddedName];
       });
 
-      mergeObject(t.actorData, update);
+      mergeObject(t.delta, update);
     }
     return t;    
   });

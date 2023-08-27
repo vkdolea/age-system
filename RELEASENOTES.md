@@ -4,6 +4,7 @@
 ### Added
 - When rolling a Power with power points cost using expanded options, user will be able to change power cost before rolling it.
 - Block sheet now has a field to display Power Points (max value is locked for edition).
+- Migration of custom token effectss to comply to new FVTT v11 API.
 
 ### Fixed
 - Added a 36px offset on AGE Roller icon to avoid overlapping new macro bar buttons.

@@ -14,7 +14,7 @@ export default class ConditionsWorkshop extends Application {
     if (!hasDead) this._customEffects.splice(0, 0, {
       icon: `${CONFIG.ageSystem.statusEffectsPath}pirate-grave.svg`,
       id: `dead`,
-      label: game.i18n.localize(`EFFECT.StatusDead`),
+      name: game.i18n.localize(`EFFECT.StatusDead`),
     });
   }
 
