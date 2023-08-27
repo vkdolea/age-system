@@ -1,8 +1,9 @@
 # Release Notes
 
-## 2.0.2 [2023-06-xx]
+## 2.0.2 [2023-08-27]
 ### Added
 - When rolling a Power with power points cost using expanded options, user will be able to change power cost before rolling it.
+- Block sheet now has a field to display Power Points (max value is locked for edition).
 
 ### Fixed
 - Added a 36px offset on AGE Roller icon to avoid overlapping new macro bar buttons.
@@ -11,6 +12,8 @@
 - Fixed bug preventing context menu from rendering correctly.
 - Healing Actors from chat card will now correctly follow the System Setting "Use Targeted function to apply damage and healing".
 - Power Points will consumed only after confirming roll using when using context menu.
+- SVGs used on system edited to ensure Firefox compatibility. Thanks [Peter](https://github.com/architech99) for fixing this one!
+- Scrolling text when healing, damaging or spending power points on tokens are now following the expected color codes (red for damage, green for healing and blue for power points).
 
 ## 2.0.1 [2023-06-18]
 ### Fixed

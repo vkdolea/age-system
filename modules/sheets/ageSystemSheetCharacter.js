@@ -84,25 +84,6 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         }, []);
 
         data.effects = data.effects.filter(e => !statusIds.includes(e.statuses[0])) // TO DO - confirm if this Active Effect will always have a Array with 1 element.
-        // data.effects = data.effects.filter(e => {
-        //     let isListed = false;
-        //     const isStatusEffect = e.id ? false : true;
-        //     const isCondition = e.flags?.["age-system"]?.isCondition;
-        //     const isCurrent = ageSystem.inUseStatusEffects === e.flags?.["age-system"]?.conditionType ? true : false;
-            
-        //     if (isStatusEffect) {
-        //         if (isCurrent) {
-        //             isListed = !isCondition;
-        //         } else {
-        //             isListed = true;
-        //         }
-        //     } else {
-        //         isListed = true;
-        //     };
-
-        //     return isListed;
-        // });
-
         data.effects = sortObjArrayByName(data.effects, `name`);       
     
         // Retrieve Prefession/Ancestry settings
