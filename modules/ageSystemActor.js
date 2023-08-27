@@ -744,8 +744,10 @@ export class ageSystemActor extends Actor {
                 'system.injury.marks': newMarks
             },
             {
-                value: game.i18n.localize(`age-system.${injuryDegree}InjuryInflicted`),
-                type: 'injury'
+                diffHP: {
+                    value: game.i18n.localize(`age-system.${injuryDegree}InjuryInflicted`),
+                    type: 'injury'
+                }
             }
         );
         // Returns a summary object
@@ -799,7 +801,10 @@ export class ageSystemActor extends Actor {
             "system.injury.degrees.serious": injuries.degrees.serious,
             "system.injury.degrees.severe": injuries.degrees.severe,
         }
-        this.update(updateData, {value: totalHealed, type: 'numeric'});
+        this.update(updateData, {diffHP: {
+            value: totalHealed,
+            type: 'numeric'
+        }});
         return true
     }
 
@@ -857,7 +862,10 @@ export class ageSystemActor extends Actor {
             }
         }
         const deltaHP = summary.newHP - summary.previousHP
-        this.update({[updatePath]: summary.newHP}, {value: deltaHP, type: 'numeric'});
+        this.update({[updatePath]: summary.newHP}, {diffHP: {
+            value: deltaHP,
+            type: 'numeric'
+        }});
         return summary
     }
 
@@ -927,10 +935,12 @@ export class ageSystemActor extends Actor {
     /** @inheritdoc */
     _onUpdate(data, options, userId) {
         super._onUpdate(data, options, userId);
-        this._displayScrollingText(options.value, options.type);
+        if (options.diffHP) this._displayScrollingText(options.diffHP);
     }
 
-    _displayScrollingText(value, type) {
+    _displayScrollingText(diffHP) {
+        let value = diffHP.value;
+        const type = diffHP.type;
         if ( !value ) return;
         if (type !== 'injury') value = value.signedString();
 
@@ -951,9 +961,8 @@ export class ageSystemActor extends Actor {
 
         const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
         for ( let t of tokens ) {
-            // If player isn't token Onwer, display question marks instead of value
             if (t.visible || t.renderable) {
-                if (!t.isOwner) value = "???";
+                if (!t.isOwner) value = "???"; // If player isn't token Onwer, display question marks instead of value
                 canvas.interface.createScrollingText(t.center, value, {
                     anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
                     distance: 2*t.h,
@@ -974,13 +983,13 @@ export class ageSystemActor extends Actor {
      */
     async handleConditions(condId) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;
-        const effectsOn = this.effects.filter(e => e.flags?.["age-system"]?.isCondition && e.flags?.core?.statusId === condId);
+        const effectsOn = this.effects.filter(e => e.flags?.["age-system"]?.isCondition && e.statuses.has(condId));
         
         if (effectsOn.length < 1) {
             // If there is no Effect on, create one
             const newEffect = foundry.utils.deepClone(CONFIG.statusEffects.filter(e => e.id === condId)[0]);
-            newEffect["flags.core.statusId"] = newEffect.id;
-            if (newEffect?.flags?.["age-system"].conditionType !== 'custom') newEffect.label = game.i18n.localize(newEffect.label);
+            newEffect.statuses = [newEffect.id];
+            if (newEffect?.flags?.["age-system"].conditionType !== 'custom') newEffect.name = game.i18n.localize(newEffect.name);
             delete newEffect.id;
             await this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
         } else {

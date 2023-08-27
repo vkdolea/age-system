@@ -158,6 +158,16 @@
     {{/if}}
 
     {{!-- Powers --}}
+    {{#if system.usePowerPoints}}
+    <ul class="derived-stats-table font-small-table footer column-width block-item">
+        <li class="flexrow body" style="align-items: center;">
+            <span>{{data.config.POWER_FLAVOR.points}}</span>
+            <input type="number" name="system.powerPoints.value" value="{{system.powerPoints.value}}" data-dtype="Number" />
+            <span> / </span>
+            <span>{{system.powerPoints.max}}</span>
+        </li>
+    </ul>
+    {{/if}}
     {{#each data.power as |item|}}
     <li class="item-box drag-to-macro description body feature-controls" data-item-id="{{item._id}}">
         <label class="quality-label colorset-second-tier">
