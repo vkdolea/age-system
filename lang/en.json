@@ -135,14 +135,15 @@
     "SETTINGS.healthModehealth": "Health",
     "SETTINGS.healthModefortune": "Fortune",
 
-    "SETTINGS.complication": "Use Complication or Churn",
-    "SETTINGS.complicationHint": "Use Complication (Modern AGE), Churn (The Expanse) or none",
+    "SETTINGS.complication": "Use AGE Tracker Pool",
+    "SETTINGS.complicationHint": "Use Peril (Fantasy AGE 2e), Complication (Modern AGE), Churn (The Expanse) or none",
     "SETTINGS.complicationNone": "None",
+    "SETTINGS.compPeril": "Peril",
     "SETTINGS.compcomplication": "Complication",
     "SETTINGS.compchurn": "Churn",
 
-    "SETTINGS.serendipity": "Use Serendipity",
-    "SETTINGS.serendipityHint": "Use Modern AGE option rule for Serendipity",
+    "SETTINGS.serendipity": "Use Serendipity/Daring",
+    "SETTINGS.serendipityHint": "Use the Serendipity (Modern AGE) or Daring (Fantasy AGE 2e) play option.",
 
     "SETTINGS.observerRoll": "Allow Observers to roll",
     "SETTINGS.observerRollHint": "Allow players with Observer permission level to roll from observed sheets and from chat rolls",
