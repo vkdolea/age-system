@@ -418,6 +418,7 @@ export const registerSystemSettings = async function() {
     type: String,
     choices: {
       "none": "SETTINGS.complicationNone",
+      "Peril": "SETTINGS.compPeril",
       "complication": "SETTINGS.compcomplication",
       "churn": "SETTINGS.compchurn"
     },
