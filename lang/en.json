@@ -130,6 +130,10 @@
     "SETTINGS.masterFocusCompendium": "Select Compendium with Focus options",
     "SETTINGS.masterFocusCompendiumHint": "Item names inside this Compendium will show as Focus suggestion on sheets",
 
+    "SETTINGS.complicationRollTable": "Complication Effects",
+    "SETTINGS.complicationRollTableDefault": "Roll 1d6",
+    "SETTINGS.complicationRollTableHint": "This table will be rolled when determining if Peril/Complications/Churn is activated. Choose none to roll the standard 1d6.",
+
     "SETTINGS.healthMode": "Select Health Tracker",
     "SETTINGS.healthModeHint": "Most AGE games will use Health, while The Expanse uses Fortune",
     "SETTINGS.healthModehealth": "Health",

@@ -130,6 +130,10 @@
     "SETTINGS.masterFocusCompendium": "Selecione Compêndio com opções de Foco",
     "SETTINGS.masterFocusCompendiumHint": "Os nomes dos itens dentro deste Compêndio serão exibidos como sugestão de Foco nas fichas",
 
+    "SETTINGS.complicationRollTable": "Complication Effects",
+    "SETTINGS.complicationRollTableDefault": "Roll 1d6",
+    "SETTINGS.complicationRollTableHint": "This table will be rolled when determining if Peril/Complications/Churn is activated. Choose none to roll the standard 1d6.",
+
     "SETTINGS.healthMode": "Selecione o tipo de Vitalidade",
     "SETTINGS.healthModeHint": "A maioria dos jogos AGE usa Saúde, enquanto The Expanse usa Destino",
     "SETTINGS.healthModehealth": "Saúde",
