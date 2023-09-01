@@ -749,9 +749,6 @@ ageSystem.itemCompendia = [];
 // Object map with world's RollTables
 ageSystem.complicationRollTable = "none";
 ageSystem.rollTables = [];
-// ageSystem.rollTables = {
-//     none: game.i18n.localize('age-system.none')
-// };
 
 // Roll Types definition
 ageSystem.ROLL_TYPE = {

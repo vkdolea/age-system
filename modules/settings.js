@@ -561,7 +561,7 @@ export const loadCompendiaSettings = function() {
     name: "SETTINGS.complicationRollTable",
     hint: "SETTINGS.complicationRollTableHint",
     scope: "world",
-    config: true,
+    config: false,
     default: "age-system.complicationRollTable",
     type: String,
     choices: ageSystem.rollTables,
@@ -588,8 +588,7 @@ export function allRollTables() {
   list['none'] = game.i18n.localize('SETTINGS.complicationRollTableDefault');
   let documents = RollTables.instance;
 
-  RollTables.instance.map(e => {
-    console.info(e);
+  game.tables.map(e => {
     list[e.id] = e.name;
   });
 
