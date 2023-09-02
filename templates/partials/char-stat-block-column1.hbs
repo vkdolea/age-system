@@ -63,7 +63,7 @@
         {{#unless data.config.healthSys.useInjury}}
         <span class="health flexrow flex-align-center">
             <input type="number" name="system.health.value" value="{{system.health.value}}" data-dtype="Number" />
-            <span class="single-char">&nbsp/&nbsp</span>
+            <span class="single-char">&nbsp;/&nbsp;</span>
             {{#if (ne system.health.set system.health.max)}}
             <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="system.health.max" value="{{system.health.max}}" data-dtype="Number" />
             {{/if}}
