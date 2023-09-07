@@ -1793,6 +1793,10 @@
   background-color: #35A5CA !important;
   color: #231F20;
 }
+.colorset-modern-blue .colorset-first-tier select option {
+  background-color: #007DAD;
+  opacity: 0.9;
+}
 .colorset-modern-blue .colorset-first-tier a.content-link,
 .colorset-modern-blue .colorset-first-tier a.inline-roll {
   background-color: #B9DBEB;
@@ -1809,6 +1813,10 @@
 .colorset-modern-blue .colorset-second-tier.resource .values {
   background-color: #007DAD;
   color: #ffffff;
+}
+.colorset-modern-blue .colorset-second-tier select option {
+  background-color: #B9DBEB;
+  opacity: 0.9;
 }
 .colorset-modern-blue .colorset-second-tier a.content-link,
 .colorset-modern-blue .colorset-second-tier a.inline-roll {
@@ -1830,6 +1838,10 @@
 .colorset-modern-blue .colorset-third-tier input,
 .colorset-modern-blue .colorset-third-tier select {
   color: #231F20;
+}
+.colorset-modern-blue .colorset-third-tier select option {
+  background-color: #35A5CA;
+  opacity: 0.9;
 }
 .colorset-modern-blue .colorset-third-tier a.content-link,
 .colorset-modern-blue .colorset-third-tier a.inline-roll {
@@ -1991,6 +2003,10 @@
   background-color: #0f0f0f !important;
   color: #dbdada;
 }
+.colorset-fantasy-blue .colorset-first-tier select option {
+  background-color: #0f4f5b;
+  opacity: 0.9;
+}
 .colorset-fantasy-blue .colorset-first-tier a.content-link,
 .colorset-fantasy-blue .colorset-first-tier a.inline-roll {
   background-color: #91b6d4;
@@ -2007,6 +2023,10 @@
 .colorset-fantasy-blue .colorset-second-tier.resource .values {
   background-color: #0f4f5b;
   color: #ffffff;
+}
+.colorset-fantasy-blue .colorset-second-tier select option {
+  background-color: #91b6d4;
+  opacity: 0.9;
 }
 .colorset-fantasy-blue .colorset-second-tier a.content-link,
 .colorset-fantasy-blue .colorset-second-tier a.inline-roll {
@@ -2028,6 +2048,10 @@
 .colorset-fantasy-blue .colorset-third-tier input,
 .colorset-fantasy-blue .colorset-third-tier select {
   color: #dbdada;
+}
+.colorset-fantasy-blue .colorset-third-tier select option {
+  background-color: #0f0f0f;
+  opacity: 0.9;
 }
 .colorset-fantasy-blue .colorset-third-tier a.content-link,
 .colorset-fantasy-blue .colorset-third-tier a.inline-roll {
@@ -2189,6 +2213,10 @@
   background-color: #979899 !important;
   color: #000000;
 }
+.colorset-dragon-red .colorset-first-tier select option {
+  background-color: #83272a;
+  opacity: 0.9;
+}
 .colorset-dragon-red .colorset-first-tier a.content-link,
 .colorset-dragon-red .colorset-first-tier a.inline-roll {
   background-color: #e0beb1;
@@ -2205,6 +2233,10 @@
 .colorset-dragon-red .colorset-second-tier.resource .values {
   background-color: #83272a;
   color: #ffffff;
+}
+.colorset-dragon-red .colorset-second-tier select option {
+  background-color: #e0beb1;
+  opacity: 0.9;
 }
 .colorset-dragon-red .colorset-second-tier a.content-link,
 .colorset-dragon-red .colorset-second-tier a.inline-roll {
@@ -2226,6 +2258,10 @@
 .colorset-dragon-red .colorset-third-tier input,
 .colorset-dragon-red .colorset-third-tier select {
   color: #000000;
+}
+.colorset-dragon-red .colorset-third-tier select option {
+  background-color: #979899;
+  opacity: 0.9;
 }
 .colorset-dragon-red .colorset-third-tier a.content-link,
 .colorset-dragon-red .colorset-third-tier a.inline-roll {
@@ -2387,6 +2423,10 @@
   background-color: #625b68 !important;
   color: #000000;
 }
+.colorset-folded-purple .colorset-first-tier select option {
+  background-color: #565183;
+  opacity: 0.9;
+}
 .colorset-folded-purple .colorset-first-tier a.content-link,
 .colorset-folded-purple .colorset-first-tier a.inline-roll {
   background-color: #cfccde;
@@ -2403,6 +2443,10 @@
 .colorset-folded-purple .colorset-second-tier.resource .values {
   background-color: #565183;
   color: #ffffff;
+}
+.colorset-folded-purple .colorset-second-tier select option {
+  background-color: #cfccde;
+  opacity: 0.9;
 }
 .colorset-folded-purple .colorset-second-tier a.content-link,
 .colorset-folded-purple .colorset-second-tier a.inline-roll {
@@ -2424,6 +2468,10 @@
 .colorset-folded-purple .colorset-third-tier input,
 .colorset-folded-purple .colorset-third-tier select {
   color: #000000;
+}
+.colorset-folded-purple .colorset-third-tier select option {
+  background-color: #625b68;
+  opacity: 0.9;
 }
 .colorset-folded-purple .colorset-third-tier a.content-link,
 .colorset-folded-purple .colorset-third-tier a.inline-roll {
@@ -2585,6 +2633,10 @@
   background-color: #92b65f !important;
   color: #000000;
 }
+.colorset-ronin-green .colorset-first-tier select option {
+  background-color: #155f0e;
+  opacity: 0.9;
+}
 .colorset-ronin-green .colorset-first-tier a.content-link,
 .colorset-ronin-green .colorset-first-tier a.inline-roll {
   background-color: #c2f5aa;
@@ -2601,6 +2653,10 @@
 .colorset-ronin-green .colorset-second-tier.resource .values {
   background-color: #155f0e;
   color: #ffffff;
+}
+.colorset-ronin-green .colorset-second-tier select option {
+  background-color: #c2f5aa;
+  opacity: 0.9;
 }
 .colorset-ronin-green .colorset-second-tier a.content-link,
 .colorset-ronin-green .colorset-second-tier a.inline-roll {
@@ -2622,6 +2678,10 @@
 .colorset-ronin-green .colorset-third-tier input,
 .colorset-ronin-green .colorset-third-tier select {
   color: #000000;
+}
+.colorset-ronin-green .colorset-third-tier select option {
+  background-color: #92b65f;
+  opacity: 0.9;
 }
 .colorset-ronin-green .colorset-third-tier a.content-link,
 .colorset-ronin-green .colorset-third-tier a.inline-roll {
@@ -2783,6 +2843,10 @@
   background-color: #4d627a !important;
   color: #290000;
 }
+.colorset-select-one .colorset-first-tier select option {
+  background-color: #273249;
+  opacity: 0.9;
+}
 .colorset-select-one .colorset-first-tier a.content-link,
 .colorset-select-one .colorset-first-tier a.inline-roll {
   background-color: #768d9f;
@@ -2799,6 +2863,10 @@
 .colorset-select-one .colorset-second-tier.resource .values {
   background-color: #273249;
   color: #e7ccc3;
+}
+.colorset-select-one .colorset-second-tier select option {
+  background-color: #768d9f;
+  opacity: 0.9;
 }
 .colorset-select-one .colorset-second-tier a.content-link,
 .colorset-select-one .colorset-second-tier a.inline-roll {
@@ -2820,6 +2888,10 @@
 .colorset-select-one .colorset-third-tier input,
 .colorset-select-one .colorset-third-tier select {
   color: #290000;
+}
+.colorset-select-one .colorset-third-tier select option {
+  background-color: #4d627a;
+  opacity: 0.9;
 }
 .colorset-select-one .colorset-third-tier a.content-link,
 .colorset-select-one .colorset-third-tier a.inline-roll {
@@ -2981,6 +3053,10 @@
   background-color: #6b6a6a !important;
   color: #000000;
 }
+.colorset-the-grey .colorset-first-tier select option {
+  background-color: #3d3e3f;
+  opacity: 0.9;
+}
 .colorset-the-grey .colorset-first-tier a.content-link,
 .colorset-the-grey .colorset-first-tier a.inline-roll {
   background-color: #b4b6b3;
@@ -2997,6 +3073,10 @@
 .colorset-the-grey .colorset-second-tier.resource .values {
   background-color: #3d3e3f;
   color: #ccc9c9;
+}
+.colorset-the-grey .colorset-second-tier select option {
+  background-color: #b4b6b3;
+  opacity: 0.9;
 }
 .colorset-the-grey .colorset-second-tier a.content-link,
 .colorset-the-grey .colorset-second-tier a.inline-roll {
@@ -3018,6 +3098,10 @@
 .colorset-the-grey .colorset-third-tier input,
 .colorset-the-grey .colorset-third-tier select {
   color: #000000;
+}
+.colorset-the-grey .colorset-third-tier select option {
+  background-color: #6b6a6a;
+  opacity: 0.9;
 }
 .colorset-the-grey .colorset-third-tier a.content-link,
 .colorset-the-grey .colorset-third-tier a.inline-roll {
@@ -3179,6 +3263,10 @@
   background-color: #b22126 !important;
   color: #c7c691;
 }
+.colorset-red-warrior .colorset-first-tier select option {
+  background-color: #751119;
+  opacity: 0.9;
+}
 .colorset-red-warrior .colorset-first-tier a.content-link,
 .colorset-red-warrior .colorset-first-tier a.inline-roll {
   background-color: #d1635b;
@@ -3195,6 +3283,10 @@
 .colorset-red-warrior .colorset-second-tier.resource .values {
   background-color: #751119;
   color: #f7b755;
+}
+.colorset-red-warrior .colorset-second-tier select option {
+  background-color: #d1635b;
+  opacity: 0.9;
 }
 .colorset-red-warrior .colorset-second-tier a.content-link,
 .colorset-red-warrior .colorset-second-tier a.inline-roll {
@@ -3216,6 +3308,10 @@
 .colorset-red-warrior .colorset-third-tier input,
 .colorset-red-warrior .colorset-third-tier select {
   color: #c7c691;
+}
+.colorset-red-warrior .colorset-third-tier select option {
+  background-color: #b22126;
+  opacity: 0.9;
 }
 .colorset-red-warrior .colorset-third-tier a.content-link,
 .colorset-red-warrior .colorset-third-tier a.inline-roll {
@@ -3377,6 +3473,10 @@
   background-color: #58705a !important;
   color: #29241f;
 }
+.colorset-never-dead .colorset-first-tier select option {
+  background-color: #663322;
+  opacity: 0.9;
+}
 .colorset-never-dead .colorset-first-tier a.content-link,
 .colorset-never-dead .colorset-first-tier a.inline-roll {
   background-color: #eeddcd;
@@ -3393,6 +3493,10 @@
 .colorset-never-dead .colorset-second-tier.resource .values {
   background-color: #663322;
   color: #bb8755;
+}
+.colorset-never-dead .colorset-second-tier select option {
+  background-color: #eeddcd;
+  opacity: 0.9;
 }
 .colorset-never-dead .colorset-second-tier a.content-link,
 .colorset-never-dead .colorset-second-tier a.inline-roll {
@@ -3414,6 +3518,10 @@
 .colorset-never-dead .colorset-third-tier input,
 .colorset-never-dead .colorset-third-tier select {
   color: #29241f;
+}
+.colorset-never-dead .colorset-third-tier select option {
+  background-color: #58705a;
+  opacity: 0.9;
 }
 .colorset-never-dead .colorset-third-tier a.content-link,
 .colorset-never-dead .colorset-third-tier a.inline-roll {
@@ -3575,6 +3683,10 @@
   background-color: #112339 !important;
   color: #dde2e2;
 }
+.colorset-expanded-blue .colorset-first-tier select option {
+  background-color: #005971;
+  opacity: 0.9;
+}
 .colorset-expanded-blue .colorset-first-tier a.content-link,
 .colorset-expanded-blue .colorset-first-tier a.inline-roll {
   background-color: #e6e7e8;
@@ -3591,6 +3703,10 @@
 .colorset-expanded-blue .colorset-second-tier.resource .values {
   background-color: #005971;
   color: #dde2e2;
+}
+.colorset-expanded-blue .colorset-second-tier select option {
+  background-color: #e6e7e8;
+  opacity: 0.9;
 }
 .colorset-expanded-blue .colorset-second-tier a.content-link,
 .colorset-expanded-blue .colorset-second-tier a.inline-roll {
@@ -3612,6 +3728,10 @@
 .colorset-expanded-blue .colorset-third-tier input,
 .colorset-expanded-blue .colorset-third-tier select {
   color: #dde2e2;
+}
+.colorset-expanded-blue .colorset-third-tier select option {
+  background-color: #112339;
+  opacity: 0.9;
 }
 .colorset-expanded-blue .colorset-third-tier a.content-link,
 .colorset-expanded-blue .colorset-third-tier a.inline-roll {
@@ -3773,6 +3893,10 @@
   background-color: #000000 !important;
   color: #ffffff;
 }
+.colorset-snow-white .colorset-first-tier select option {
+  background-color: #ffffff;
+  opacity: 0.9;
+}
 .colorset-snow-white .colorset-first-tier a.content-link,
 .colorset-snow-white .colorset-first-tier a.inline-roll {
   background-color: #494949;
@@ -3789,6 +3913,10 @@
 .colorset-snow-white .colorset-second-tier.resource .values {
   background-color: #ffffff;
   color: #000000;
+}
+.colorset-snow-white .colorset-second-tier select option {
+  background-color: #494949;
+  opacity: 0.9;
 }
 .colorset-snow-white .colorset-second-tier a.content-link,
 .colorset-snow-white .colorset-second-tier a.inline-roll {
@@ -3810,6 +3938,10 @@
 .colorset-snow-white .colorset-third-tier input,
 .colorset-snow-white .colorset-third-tier select {
   color: #ffffff;
+}
+.colorset-snow-white .colorset-third-tier select option {
+  background-color: #000000;
+  opacity: 0.9;
 }
 .colorset-snow-white .colorset-third-tier a.content-link,
 .colorset-snow-white .colorset-third-tier a.inline-roll {

@@ -9,6 +9,7 @@
 - Added workaround to ensure correct Item Sheet is opened when opening Owned Items.
 - "Current" label for actual values of Health and Power Points is not hardcoded anymore.
 - Portuguese localization fixes.
+- Better color contrast on dropboxes on Item Sheets.
 
 ## 2.0.2 [2023-08-27]
 ### Added

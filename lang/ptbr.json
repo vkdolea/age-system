@@ -632,7 +632,7 @@
             "ballisticArmor": "Armadura Balística",
             "defendMnv": "Manobra Defesa",
             "guardupMnv": "Manobra Erguer a Guarda",
-            "allOutAtk": "Manobra Ataque Total",
+            "allOutAtkMnv": "Manobra Ataque Total",
             "maxHealth": "Saúde Máxima",
             "maxFortune": "Destino Máximo",
             "maxConviction": "Convicção Máxima",

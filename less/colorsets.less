@@ -186,6 +186,13 @@ each(@colorsets, {
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);
 
+            select {
+                option {
+                    background-color: extract(extract(@color-list, @index), 1);
+                    opacity: .9;
+                }                
+            }
+
             a.content-link,
             a.inline-roll {
                 background-color: extract(extract(@color-list, @index), 3);
@@ -207,6 +214,13 @@ each(@colorsets, {
             }
             background-color: extract(extract(@color-list, @index), 3);
             color: extract(extract(@color-list, @index), 1);
+
+            select {
+                option {
+                    background-color: extract(extract(@color-list, @index), 3);
+                    opacity: .9;
+                }                
+            }
             
             a.content-link,
             a.inline-roll {
@@ -232,6 +246,13 @@ each(@colorsets, {
             input,
             select {
                 color: extract(extract(@color-list, @index), 5);
+            }
+
+            select {
+                option {
+                    background-color: extract(extract(@color-list, @index), 2);
+                    opacity: .9;
+                }                
             }
 
             a.content-link,
