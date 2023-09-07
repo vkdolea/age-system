@@ -4248,7 +4248,7 @@ body *:not(i, .fa, .far, .fas) {
   height: 35px;
   max-height: 35px;
 }
-/*---------Background---------------------*/
+/*-----------Background-----------*/
 .window-app.journal-sheet .journal-entry-content,
 .window-app.journal-sheet form.editable {
   background: rgba(254, 254, 254, 0.9);
@@ -4264,6 +4264,7 @@ body *:not(i, .fa, .far, .fas) {
   background-image: none;
   background: none;
 }
+/*-----------Opacity Degrees-----------*/
 .age-opacity-hover {
   opacity: 0.6;
 }
@@ -4275,6 +4276,12 @@ body *:not(i, .fa, .far, .fas) {
 }
 .age-system .opacity-low {
   opacity: 0.5;
+}
+.window-resizable-handle {
+  opacity: 0;
+}
+.window-resizable-handle:hover {
+  opacity: 0.8;
 }
 .age-system .mouse-to-pointer {
   cursor: pointer;
