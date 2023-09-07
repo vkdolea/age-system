@@ -575,6 +575,8 @@
             "semiAuto": "SA",
             "fullAuto": "AA"
         },
+        "ranged": "Ranged",
+        "reloadable": "Reloadable",
 
         "move": "Move",
         "level": "Level",
