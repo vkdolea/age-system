@@ -47,9 +47,12 @@
         </span>
     </li>
     <li class="flexrow data body">
+        {{!-- Speed block --}}
         <span class="speed">
             <input type="number" disabled class="main-value" name="system.speed.total" value="{{system.speed.total}}" data-dtype="Number" />
         </span>
+        
+        {{!-- Injury Block --}}
         {{#if data.config.healthSys.useVitality}}
         <span class="health flexrow flex-align-center">
             <input type="number" name="system.vitality.value" value="{{system.vitality.value}}" data-dtype="Number" />
@@ -60,6 +63,8 @@
             <input type="number" number-type="five-digits" name="system.vitality.set" value="{{system.vitality.set}}" data-dtype="Number" />
         </span>
         {{/if}}
+        
+        {{!-- Health block --}}
         {{#unless data.config.healthSys.useInjury}}
         <span class="health flexrow flex-align-center">
             <input type="number" name="system.health.value" value="{{system.health.value}}" data-dtype="Number" />
@@ -67,9 +72,11 @@
             {{#if (ne system.health.set system.health.max)}}
             <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="system.health.max" value="{{system.health.max}}" data-dtype="Number" />
             {{/if}}
-            <input type="number" number-type="five-digits" name="system.health.set" value="{{system.health.set}}" data-dtype="Number" />
+            <input type="number" class="circle game-mode-details" data-detail="health" number-type="five-digits" name="system.health.set" value="{{system.health.set}}" data-dtype="Number" />
         </span>
         {{/unless}}
+
+        {{!-- Defense Block --}}
         <span class="defense">
             <input type="number" disabled class="main-value" name="system.defense.total" value="{{system.defense.total}}" data-dtype="Number" />
         </span>
@@ -157,17 +164,22 @@
     </li>
     {{/if}}
 
-    {{!-- Powers --}}
+    {{!-- Power Points --}}
     {{#if system.usePowerPoints}}
     <ul class="derived-stats-table font-small-table footer column-width block-item">
         <li class="flexrow body" style="align-items: center;">
             <span>{{data.config.POWER_FLAVOR.points}}</span>
             <input type="number" name="system.powerPoints.value" value="{{system.powerPoints.value}}" data-dtype="Number" />
             <span>&nbsp;/&nbsp;</span>
+            {{#if (ne system.powerPoints.set system.powerPoints.max)}}
+            <input type="number" class="colorset-second-tier" number-type="five-digits" disabled name="system.powerPoints.max" value="{{system.powerPoints.max}}" data-dtype="Number" />
+            {{/if}}
             <input type="number" name="system.powerPoints.set" value="{{system.powerPoints.set}}" data-dtype="Number" />
         </li>
     </ul>
     {{/if}}
+
+    {{!-- Powers --}}
     {{#each data.power as |item|}}
     <li class="item-box drag-to-macro description body feature-controls" data-item-id="{{item._id}}">
         <label class="quality-label colorset-second-tier">

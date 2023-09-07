@@ -244,7 +244,7 @@ export class ageSystemActor extends Actor {
         if (!gmode.override) gmode.selected = ageSystem.healthSys.mode;
         const m = gmode.selected
         
-        data.health.set = data.health.set ?? gmode.specs[m].health;
+        data.health.set = gmode.specs[m].health;
         data.defense.gameModeBonus = gmode.specs[m].defense;
         data.armor.toughness.gameModeBonus = gmode.specs[m].toughness;
     }
