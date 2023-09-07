@@ -3,9 +3,12 @@
 ## 2.0.3 [2023-09-xx]
 ## Added
 - Merged [Pull Request #118](https://github.com/vkdolea/age-system/pull/118) made by [Peter](https://github.com/architech99) to add Peril flavor (FAGE 2) to Complication rolls and adding extra option to select a user created Roll Table instead of the standard 1D6 roll to check for outcome.
+- Another contribution from [Peter](https://github.com/architech99), [Pull Request #120](https://github.com/vkdolea/age-system/pull/120), adding flexibility to change maximum Health and Mana on character block sheet.
 
 ### Fixed
 - Added workaround to ensure correct Item Sheet is opened when opening Owned Items.
+- "Current" label for actual values of Health and Power Points is not hardcoded anymore.
+- Portuguese localization fixes.
 
 ## 2.0.2 [2023-08-27]
 ### Added

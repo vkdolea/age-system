@@ -460,6 +460,7 @@
         "fortune": "Destino",
         "conviction": "Convicção",
         "speed": "Deslocamento",
+        "current": "Atual",
 
         "armor": "Armadura",
         "ballistic": "Balística",
@@ -671,7 +672,7 @@
             "desc": "Descrição",
             "weight": "Peso",
             "cost": "Custo",
-            "purchaseTN": "NA para Compra",
+            "purchaseTN": "NA Renda",
             "quantity": "Quantidade",
             "reload": "Recarregar",
             "capacity": "Capacidade",
