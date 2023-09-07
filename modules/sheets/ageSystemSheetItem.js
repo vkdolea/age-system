@@ -62,7 +62,7 @@ export default class ageSystemItemSheet extends ItemSheet {
     static get defaultOptions() {        
         return mergeObject(super.defaultOptions, {
             height: 500,
-            width: 775,
+            width: 805,
             classes: ["age-system", "sheet", "item", "colorset-second-tier"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",
