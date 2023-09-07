@@ -62,7 +62,7 @@ async function preloadHandlebarsTemplates() {
     return loadTemplates(templatePaths);
 };
 
-Hooks.once("init", async function() {
+Hooks.once("init", function() {
     const ageSystemText = `
      ___   ____________   _____            __               
     /   | / ____/ ____/  / ___/__  _______/ /____  ____ ___ 
@@ -155,7 +155,8 @@ Hooks.once("init", async function() {
     preloadHandlebarsTemplates();
 
     // Register System Settings
-    await Settings.registerSystemSettings();
+    Settings.registerSystemSettings();
+    
     // Identify Ability set in use
     const abilitySelection = game.settings.get("age-system", "abilitySelection");
     const abilityOptions = ageSystem.abilitiesSettings;

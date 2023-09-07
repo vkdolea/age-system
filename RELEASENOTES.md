@@ -1,5 +1,9 @@
 # Release Notes
 
+## 2.0.3 [2023-09-xx]
+### Fixed
+- Added workaround to ensure correct Item Sheet is opened when opening Owned Items.
+
 ## 2.0.2 [2023-08-27]
 ### Added
 - When rolling a Power with power points cost using expanded options, user will be able to change power cost before rolling it.
