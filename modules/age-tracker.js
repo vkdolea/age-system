@@ -106,17 +106,14 @@ export class AgeTracker extends Application {
 		game.settings.set("age-system", "complicationValue", compData);
 	}
 
-	async _onRollComp() {
+	_onRollComp() {
 		const rollTable = game.settings.get("age-system", "complicationRollTable");
 		if (rollTable === 'none')  {
-			return await this._defaultRoll();
+			return this._defaultRoll();
 		}  else {
 			const table = game.tables.get(rollTable);
-			if (table) {
-				return await table.draw();
-			}
-
-			return await this._defaultRoll();
+			if (table) return table.draw();
+			return this._defaultRoll();
 		}
 	}
 

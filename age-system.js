@@ -456,11 +456,16 @@ Hooks.once('diceSoNiceReady', () => {
             };
         };
     };
+
     // Register Stunt So Nice setting
     Settings.stuntSoNice(colorChoices, Object.keys(game.dice3d.box.dicefactory.systems));
+    
     // Identify if user has registered Dice so Nice Stunt Die option
     const stuntSoNiceFlag = game.user.getFlag("age-system", "stuntSoNice");
     if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);
-    if (!stuntSoNiceFlag) game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
+    else game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
 });
-Hooks.on('renderSettingsConfig', (SettingsConfig, html, data) => Settings.updateFocusCompendia());
+Hooks.on('renderSettingsConfig', (SettingsConfig, html, data) => {
+    Settings.updateFocusCompendia();
+    // Settings.updateCompTable(); // TODO - this function will be useful only when dynamic choices for System Settings is implemented
+});

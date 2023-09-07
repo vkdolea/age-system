@@ -1,6 +1,9 @@
 # Release Notes
 
 ## 2.0.3 [2023-09-xx]
+## Added
+- Merged [Pull Request #118](https://github.com/vkdolea/age-system/pull/118) made by [Peter](https://github.com/architech99) to add Peril flavor (FAGE 2) to Complication rolls and adding extra option to select a user created Roll Table instead of the standard 1D6 roll to check for outcome.
+
 ### Fixed
 - Added workaround to ensure correct Item Sheet is opened when opening Owned Items.
 

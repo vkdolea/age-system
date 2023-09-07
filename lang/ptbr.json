@@ -139,15 +139,15 @@
     "SETTINGS.healthModehealth": "Saúde",
     "SETTINGS.healthModefortune": "Destino",
 
-    "SETTINGS.complication": "Usar Complicação ou Turbulência",
-    "SETTINGS.complicationHint": "Usar Complicação (Modern AGE), Turbulência (The Expanse) ou nenhum",
+    "SETTINGS.complication": "Usar contador de Complicação",
+    "SETTINGS.complicationHint": "Usar Complicação (Modern AGE), Turbulência (The Expanse), Perigo (Fantasy AGE 2e) ou nenhum",
     "SETTINGS.complicationNone": "Nenhum",
-    "SETTINGS.compPeril": "Peril",
+    "SETTINGS.compPeril": "Perigo",
     "SETTINGS.compcomplication": "Complicação",
     "SETTINGS.compchurn": "Turbulência",
 
-    "SETTINGS.serendipity": "Use Serendipidade️",
-    "SETTINGS.serendipityHint": "Usar regra opcional de Modern AGE para Serendipidade️",
+    "SETTINGS.serendipity": "Use Serendipidade️ ou Bravura",
+    "SETTINGS.serendipityHint": "Usar regra opcional de Serendipidade️ (Modern AGE) ou Bravura (Fatansy AGE 2e)",
 
     "SETTINGS.observerRoll": "Permitir rolagem de Observadores",
     "SETTINGS.observerRollHint": "Permitir que jogadores com permissão Observador possam rolar das fichas observadas ou do chat",

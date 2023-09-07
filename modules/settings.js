@@ -565,7 +565,7 @@ export const loadCompendiaSettings = function() {
     default: "age-system.complicationRollTable",
     type: String,
     choices: ageSystem.rollTables,
-      onChange: async ()=>{ageSystem.complicationRollTable = await game.settings.get("age-system", "complicationRollTable")}
+    onChange: async ()=>{ageSystem.complicationRollTable = await game.settings.get("age-system", "complicationRollTable")}
   });
 };
 
@@ -605,6 +605,8 @@ export async function updateFocusCompendia() {
     };
   };
 
+  // Identify if Item Compendipia were added or deleted and warn user that new option will appear only after System Refresh (F5)
+  // TODO - add dynamic choices for System Setting
   if (!foundry.utils.objectsEqual(list, actualChoices)) {
     const newPacks = [];
     const oldPacks = [];
