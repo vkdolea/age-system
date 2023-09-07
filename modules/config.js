@@ -43,7 +43,6 @@ ageSystem.abilitiesTotal = {
     "will": "age-system.will",
 
     "cunn": "age-system.cunn",
-    //"dex": "age-system.dex",
     "magic": "age-system.magic"    
 }
 
