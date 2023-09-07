@@ -107,10 +107,24 @@ export class AgeTracker extends Application {
 	}
 
 	async _onRollComp() {
+		const rollTable = game.settings.get("age-system", "complicationRollTable");
+		if (rollTable === 'none')  {
+			return await this._defaultRoll();
+		}  else {
+			const table = game.tables.get(rollTable);
+			if (table) {
+				return await table.draw();
+			}
+
+			return await this._defaultRoll();
+		}
+	}
+
+	_defaultRoll() {
 		const compType = game.i18n.localize(`SETTINGS.comp${game.settings.get("age-system", "complication")}`);
 		const flavor = game.i18n.format("age-system.chatCard.compRoll", {compType});
 		let compRoll = new Roll("1d6");
-		return await compRoll.toMessage({flavor, rollMode: "selfroll", whisper: [game.user.id]});
+		return compRoll.toMessage({flavor, rollMode: "selfroll", whisper: [game.user.id]});
 	}
 
 	_dragElement(elmnt) {

@@ -379,6 +379,9 @@ Hooks.once("ready", async function() {
     
     // Register System Settings related to Focus Compendium
     ageSystem.itemCompendia = Settings.allCompendia("Item");
+    const rollTables = Settings.allRollTables();
+    ageSystem.rollTables = { ...ageSystem.rollTables, ...rollTables };
+
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.focusList(setCompendium);
