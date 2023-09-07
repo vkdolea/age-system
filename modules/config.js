@@ -43,7 +43,6 @@ ageSystem.abilitiesTotal = {
     "will": "age-system.will",
 
     "cunn": "age-system.cunn",
-    "dex": "age-system.dex",
     "magic": "age-system.magic"    
 }
 
@@ -746,6 +745,10 @@ ageSystem.focus = [];
 // List with world's Item compendia
 ageSystem.itemCompendia = [];
 
+// Object map with world's RollTables
+ageSystem.complicationRollTable = "none";
+ageSystem.rollTables = [];
+
 // Roll Types definition
 ageSystem.ROLL_TYPE = {
     ATTACK: "attack",
@@ -858,6 +861,7 @@ ageSystem.advSettings = [
     'useFatigue',
     'useConviction',
     'complication',
+    'complicationRollTable',
     'serendipity',
     'weaponGroups',
 ]
@@ -907,6 +911,7 @@ ageSystem.gameSettings = {
                 useConviction: false,
                 usePowerPoints: true,
                 complication: 'none',
+                complicationRollTable: 'none',
                 serendipity: false,
                 powerFlavor: 'spell'
             },
@@ -933,6 +938,7 @@ ageSystem.gameSettings = {
                 useConviction: false,
                 usePowerPoints: false,
                 complication: 'churn',
+                complicationRollTable: 'none',
                 serendipity: false
             }
         }
@@ -954,6 +960,7 @@ ageSystem.gameSettings = {
                 occupation: 'profession',
                 ancestryOpt: 'ancestry',
                 complication: 'none',
+                complicationRollTable: 'none',
                 serendipity: false,
                 stuntAttack: 2
             },
@@ -979,6 +986,7 @@ ageSystem.gameSettings = {
                 useConviction: true,
                 usePowerPoints: false,
                 complication: 'none',
+                complicationRollTable: 'none',
                 serendipity: false
             },
             user: ['weaponGroups']

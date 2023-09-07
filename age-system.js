@@ -62,7 +62,7 @@ async function preloadHandlebarsTemplates() {
     return loadTemplates(templatePaths);
 };
 
-Hooks.once("init", async function() {
+Hooks.once("init", function() {
     const ageSystemText = `
      ___   ____________   _____            __               
     /   | / ____/ ____/  / ___/__  _______/ /____  ____ ___ 
@@ -155,7 +155,8 @@ Hooks.once("init", async function() {
     preloadHandlebarsTemplates();
 
     // Register System Settings
-    await Settings.registerSystemSettings();
+    Settings.registerSystemSettings();
+    
     // Identify Ability set in use
     const abilitySelection = game.settings.get("age-system", "abilitySelection");
     const abilityOptions = ageSystem.abilitiesSettings;
@@ -378,6 +379,9 @@ Hooks.once("ready", async function() {
     
     // Register System Settings related to Focus Compendium
     ageSystem.itemCompendia = Settings.allCompendia("Item");
+    const rollTables = Settings.allRollTables();
+    ageSystem.rollTables = { ...ageSystem.rollTables, ...rollTables };
+
     Settings.loadCompendiaSettings();
     const setCompendium = game.settings.get("age-system", "masterFocusCompendium");
     ageSystem.focus = Settings.focusList(setCompendium);
@@ -452,11 +456,16 @@ Hooks.once('diceSoNiceReady', () => {
             };
         };
     };
+
     // Register Stunt So Nice setting
     Settings.stuntSoNice(colorChoices, Object.keys(game.dice3d.box.dicefactory.systems));
+    
     // Identify if user has registered Dice so Nice Stunt Die option
     const stuntSoNiceFlag = game.user.getFlag("age-system", "stuntSoNice");
     if (stuntSoNiceFlag) game.settings.set("age-system", "stuntSoNice", stuntSoNiceFlag);
-    if (!stuntSoNiceFlag) game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
+    else game.user.setFlag("age-system", "stuntSoNice", game.settings.get("age-system", "stuntSoNice"));
 });
-Hooks.on('renderSettingsConfig', (SettingsConfig, html, data) => Settings.updateFocusCompendia());
+Hooks.on('renderSettingsConfig', (SettingsConfig, html, data) => {
+    Settings.updateFocusCompendia();
+    // Settings.updateCompTable(); // TODO - this function will be useful only when dynamic choices for System Settings is implemented
+});

@@ -370,6 +370,17 @@ export class ageSystemItem extends Item {
 
     _prepareShipFeatures(data) {};
 
+    // Code to for opening the correct sheet - used when opening Owned Items from char sheet (this can be removed when bug is clearly identified and fixed)
+    async openSheet() {
+        const ageSheet = 'age-system.ageSystemSheetItem'
+        const sheet = this.sheet
+        await sheet.close()
+        this._sheet = null
+        delete this.apps[sheet.appId]
+        await this.setFlag('core', 'sheetClass', ageSheet)
+        this.sheet.render(true)
+    }
+
     /**
      * Adds a new object inside Modifiers object
      * @param {Object} object.type Modifier type

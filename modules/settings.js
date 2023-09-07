@@ -418,6 +418,7 @@ export const registerSystemSettings = async function() {
     type: String,
     choices: {
       "none": "SETTINGS.complicationNone",
+      "Peril": "SETTINGS.compPeril",
       "complication": "SETTINGS.compcomplication",
       "churn": "SETTINGS.compchurn"
     },
@@ -552,6 +553,20 @@ export const loadCompendiaSettings = function() {
     choices: ageSystem.itemCompendia,
     onChange: async ()=>{ageSystem.focus = focusList(await game.settings.get("age-system", "masterFocusCompendium"))}
   });
+
+  /**
+   * Select RollTable for complication
+   */
+  game.settings.register("age-system", "complicationRollTable", {
+    name: "SETTINGS.complicationRollTable",
+    hint: "SETTINGS.complicationRollTableHint",
+    scope: "world",
+    config: false,
+    default: "age-system.complicationRollTable",
+    type: String,
+    choices: ageSystem.rollTables,
+    onChange: async ()=>{ageSystem.complicationRollTable = await game.settings.get("age-system", "complicationRollTable")}
+  });
 };
 
 // Creates the Options object with all compendia in alphabetic order
@@ -564,6 +579,22 @@ export function allCompendia(docType) {
   return list
 };
 
+// Creates the Options object with all compendia in alphabetic order
+export function allRollTables() {
+  console.info("age-system: allRollTables");
+  let list = [];
+
+  // Default none option
+  list['none'] = game.i18n.localize('SETTINGS.complicationRollTableDefault');
+  let documents = RollTables.instance;
+
+  game.tables.map(e => {
+    list[e.id] = e.name;
+  });
+
+  return list;
+};
+
 export async function updateFocusCompendia() {
   const list = allCompendia("Item");
   let actualChoices;
@@ -574,6 +605,8 @@ export async function updateFocusCompendia() {
     };
   };
 
+  // Identify if Item Compendipia were added or deleted and warn user that new option will appear only after System Refresh (F5)
+  // TODO - add dynamic choices for System Setting
   if (!foundry.utils.objectsEqual(list, actualChoices)) {
     const newPacks = [];
     const oldPacks = [];
