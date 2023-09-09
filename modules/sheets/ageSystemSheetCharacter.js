@@ -7,10 +7,9 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            // resizable: false,
-            width: 680,
-            height: 800,
-            classes: ["age-system", "sheet", "char", "standard"],
+            height: 875,
+            width: 700,
+            classes: ["age-system", "sheet", "char-sheet-alt"],
             tabs: [{
                 navSelector: ".add-sheet-tabs",
                 contentSelector: ".sheet-tab-section",
@@ -20,7 +19,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     }
 
     get template() {
-        return `systems/age-system/templates/sheets/${this.actor.type}-sheet.hbs`;
+        return `systems/age-system/templates/sheets/char/char-sheet.hbs`;
     }
 
     get observerRoll () {
@@ -143,6 +142,14 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     }
     
     activateListeners(html) {
+        // Add class to TinyMCE
+        const editor = html.find(".persona .resource .editor");
+        for (let i = 0; i < editor.length; i++) {editor[i].classList += ' values'}
+        
+        // Add colorset class to entity-link inside TinyMCE editor
+        const entityLink = html.find("a.entity-link");
+        for (let i = 0; i < entityLink.length; i++) {entityLink[i].classList += ` colorset-second-tier`}
+        
         html.find(".tooltip-container").hover(this._onTooltipHover.bind(this));
         // Remove unncessary white space and line breaks from Textarea fields
         const freeText = html.find("textarea.free-text");
@@ -154,6 +161,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             })
         }    
         if (this.isEditable) {
+            new ContextMenu(html, ".item-show", this.itemContextMenu);
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
@@ -166,6 +174,8 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".refresh-injury-marks").click(this._onRefreshMarks.bind(this));
             html.find(".heal-all-injuries").click(this._onFullHeal.bind(this));
             html.find(".roll-breather").click(this._onRollBreather.bind(this));
+            html.find("span.effect-add").click(this._onAddEffect.bind(this));
+
             // Listeners to be used to make the adjustment on Health/Defense/Toughness for different Game Modes
             html.find(".game-mode-details").change(this._onAdjustHealth.bind(this));
             html.find(".game-mode .override").click(this._onLockGameMode.bind(this));

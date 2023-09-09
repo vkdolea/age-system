@@ -24,6 +24,7 @@ import * as migrations from "./modules/migration.js";
 
 async function preloadHandlebarsTemplates() {
     const path = `systems/age-system/templates/partials/`;
+    const pathRedux = `systems/age-system/templates/`;
     const templatePaths = [
         `${path}itemcontrols/class.hbs`,
         `${path}itemcontrols/equipment.hbs`,
@@ -37,26 +38,26 @@ async function preloadHandlebarsTemplates() {
         `${path}ability-focus-select.hbs`,
         `${path}active-bonuses.hbs`,
         `${path}bonuses-sheet.hbs`,
-        `${path}char-sheet-alt-main.hbs`,
-        `${path}char-sheet-alt-persona.hbs`,
-        `${path}char-sheet-alt-stunts.hbs`,
-        `${path}char-sheet-alt-social.hbs`,
-        `${path}char-sheet-alt-equip.hbs`,
-        `${path}char-sheet-alt-talents.hbs`,
-        `${path}char-sheet-alt-powers.hbs`,
-        `${path}char-sheet-alt-effects.hbs`,
-        `${path}char-sheet-alt-options.hbs`,
-        `${path}char-sheet-alt-adv.hbs`,
-        `${path}char-sheet-nav-bar.hbs`,
-        `${path}char-sheet-injury-bar.hbs`,
-        `${path}char-stat-block-column1.hbs`,
-        `${path}conditions-block.hbs`,
         `${path}cost-resource-block.hbs`,
         `${path}dmg-block-sheet.hbs`,
         `${path}item-card-buttons.hbs`,
         `${path}item-options-sheet.hbs`,
-        `${path}play-aid-bar.hbs`,
-        `${path}weapon-group-block.hbs`
+        `${path}weapon-group-block.hbs`,
+
+        `${pathRedux}sheets/char/adv.hbs`,
+        `${pathRedux}sheets/char/effects.hbs`,
+        `${pathRedux}sheets/char/equip.hbs`,
+        `${pathRedux}sheets/char/main.hbs`,
+        `${pathRedux}sheets/char/options.hbs`,
+        `${pathRedux}sheets/char/persona.hbs`,
+        `${pathRedux}sheets/char/powers.hbs`,
+        `${pathRedux}sheets/char/social.hbs`,
+        `${pathRedux}sheets/char/stunts.hbs`,
+        `${pathRedux}sheets/char/talents.hbs`,
+        
+        `${pathRedux}sheets/char-block/column1.hbs`,
+        `${pathRedux}sheets/char-block/injury-bar.hbs`,
+        `${pathRedux}sheets/char-block/play-aid-bar.hbs`,
     ];
 
     return loadTemplates(templatePaths);
@@ -78,7 +79,7 @@ Hooks.once("init", function() {
     game.ageSystem = {
         applications: {
             ageSystemSheetCharacter,
-            ageSystemSheetCharAlt,
+            // ageSystemSheetCharAlt,
             ageSystemSheetCharStatBlock,
             ageSystemSheetVehicle,
             ageSystemSheetSpaceship,
@@ -99,7 +100,7 @@ Hooks.once("init", function() {
     };
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("age-system", ageSystemSheetCharAlt, {
+    Actors.registerSheet("age-system", ageSystemSheetCharacter, {
         types: ["char"],
         makeDefault: true,
         label: "age-system.SHEETS.charStandard"
@@ -232,9 +233,9 @@ Hooks.once("init", function() {
         return items.filter(p => p.type === "equipment" || p.type === "weapon")
     });
 
-    // Handlebar to itentify if Weapon Group is know
+    // Handlebar to itentify if Weapon Group is knowN
     Handlebars.registerHelper('haswgroup', function(wGroup, groupArray) {
-        if (!groupArray === []) return false;
+        if (!Array.isArray(groupArray)) return false;
         return groupArray.includes(wGroup) ? true : false;
     });
 
@@ -414,7 +415,7 @@ Hooks.once("ready", async function() {
 
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on("hotbarDrop", (bar, data, slot) => {
-        if (data === {}) return false;
+        if (typeof data !== 'object' || data == null) return false;
         const item = fromUuidSync(data.uuid);
         const itemType = item.type;
         const rollTypes = ['weapon', 'focus'];
