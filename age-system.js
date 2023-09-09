@@ -2,7 +2,6 @@
 import {ageSystem} from "./modules/config.js";
 import ageSystemSheetItem from "./modules/sheets/ageSystemSheetItem.js";
 import ageSystemSheetCharacter from "./modules/sheets/ageSystemSheetCharacter.js";
-import ageSystemSheetCharAlt from "./modules/sheets/ageSystemSheetCharAlt.js";
 import ageSystemSheetCharStatBlock from "./modules/sheets/ageSystemSheetCharStatBlock.js";
 import ageSystemSheetVehicle from "./modules/sheets/ageSystemSheetVehicle.js";
 import ageSystemSheetSpaceship from "./modules/sheets/ageSystemSheetSpaceship.js";

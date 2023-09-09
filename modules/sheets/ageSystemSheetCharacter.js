@@ -135,9 +135,9 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
     async _onToggleSheet(event) {
         event.preventDefault()
-        let newSheet = 'age-system.ageSystemSheetCharStatBlock'
+        let newSheet = 'age-system.ageSystemSheetCharStatBlock';
         const original = this.actor.getFlag('core', 'sheetClass') || Object.values(CONFIG.Actor.sheetClasses['char']).filter(s => s.default)[0].id
-        if (original != 'age-system.ageSystemSheetCharAlt') newSheet = 'age-system.ageSystemSheetCharAlt'
+        if (original == newSheet ) newSheet = 'age-system.ageSystemSheetCharacter';
         this.actor.openSheet(newSheet)
     }
     

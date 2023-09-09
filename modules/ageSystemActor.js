@@ -272,7 +272,7 @@ export class ageSystemActor extends Actor {
         this.items.forEach(i => {
             const iMods = i.system.modifiersByType;
             const active = i.system.activate || i.system.equiped;
-            if (iMods !== {} && active) {
+            if (foundry.utils.isObjectEmpty(iMods) && active) {
                 for (const k in iMods) {
                     if (Object.hasOwnProperty.call(iMods, k)) {
                         if (mods[k]) {
