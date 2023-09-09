@@ -3,6 +3,7 @@
 ## 2.0.4 [2023-09-xx]
 ### Changed
 - Resizing handler on sheet's right-hand bottom corner is now invisible until mouse points hover's it.
+- Removed lines of code and files related to the old Character Sheet.
 
 ### Fixed
 - Weapon features "Ranged" and "Reloadable" on Options tab now have localization strings.
