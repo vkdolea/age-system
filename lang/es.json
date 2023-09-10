@@ -415,6 +415,7 @@
     "fortune": "Fortuna",
     "conviction": "Convicción",
     "speed": "Velocidad",
+    "current": "Actual",
     "armor": "Armadura",
     "ballistic": "Balas",
     "ballisticIndex": "B",
@@ -520,6 +521,8 @@
       "semiAuto": "SA",
       "fullAuto": "TA"
     },
+    "ranged": "Distancia",
+    "reloadable": "Recargable",
     "move": "Mover",
     "level": "Nivel",
     "xp": "PX",
