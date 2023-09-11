@@ -4,6 +4,7 @@
 ### Changed
 - Resizing handler on sheet's right-hand bottom corner is now invisible until mouse points hover's it.
 - Removed lines of code and files related to the old Character Sheet.
+- When using the Apply Damage feature to apply Penetrating damage, the option "Ignore Armor" will be selected.
 
 ### Fixed
 - Weapon features "Ranged" and "Reloadable" on Options tab now have localization strings.

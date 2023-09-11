@@ -240,7 +240,7 @@ export class DamageHandler {
     this._useBallistic = healthSys.useBallistic;
     this._useInjury = healthSys.useInjury;
     this._basicDamage = damageData.totalDamage;
-    this._armorPenetration = "none";
+    this._armorPenetration = damageData.dmgSrc == "penetrating" ? "ignore" : "none";
     this._damageType = damageData.dmgType;
     this._damageSource = damageData.dmgSrc;
     this._letPlayerRoll = true;
