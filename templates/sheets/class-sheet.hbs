@@ -2,22 +2,10 @@
     <aside class="sidebar metal-background colorset-first-tier">
         <img class="document-picture" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
         <ul class="item-summary">
-            {{!-- Talent Degree --}}
+            {{!-- Level --}}
             <li>
-                <label>{{localize "age-system.talentDegree"}}</label>
-                <select name="system.degree">
-                {{#select system.degree}}
-                    {{#each config.talentDegrees as |degree|}}
-                    <option value="{{@key}}">{{degree}}</option>
-                    {{/each}}
-                {{/select}}
-                </select>
-            </li>
-
-            {{!-- Page Ref --}}
-            <li class="feature-controls" data-reference="{{system.reference}}" style="display: none;">
-                <label class="find-reference {{#if config.pdfoundryOn}}mouse-to-pointer{{/if}}">{{localize "age-system.reference"}}</label>
-                <input type="text" name="system.reference" {{#if inChat}}disabled{{/if}} value="{{system.reference}}" placeholder="Page Ref." data-dtype="String"/>
+                <label>{{localize "age-system.level"}}</label>
+                <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number"/></select>
             </li>
         </ul>
     </aside>
@@ -28,7 +16,7 @@
                 <input class="itemname" name="name" type="text" value="{{item.name}}" placeholder={{localize "age-system.name"}}/>
                 <div class="sub-details" style="display: none;">
                     {{!-- Requirement --}}
-                    <input type="text" name="system.requirement" value="{{system.requirement}}">
+                    <input type="number" name="system.requirement" value="{{system.requirement}}">
                     <label>{{localize "age-system.requirement"}}</label>
                 </div>
             </div>

@@ -56,7 +56,7 @@ export class AdvancementAdd extends Application {
 }
 
 /**
- * Data containing information about Improvement (item o progressive). The same object is used when editing existing Improvement.
+ * Data containing information about Improvement (item or progressive). The same object is used when editing existing Improvement.
  */
 class AdvData {
   constructor(advType, options = {}) {
@@ -118,6 +118,7 @@ class AdvData {
     };
     this.traitArr = sortObjArrayByName(traitArr, 'name');
     this.traitArrTypes = traitArrTypes;
+
     // Initialize data to select Progression Type for Item
     this.tType = this.traitArr[0].key;
   }
@@ -201,6 +202,7 @@ export class AdvancementSetup extends FormApplication {
   async _onDrop(e) {
     // Confirm if drop action is valid
     if (!this.isEditable && this.advData.advType !== "item") return false;
+
     // Try to extract the data
     const data = TextEditor.getDragEventData(e);
     const item = fromUuidSync(data.uuid);
@@ -327,5 +329,28 @@ export class AdvancementSetup extends FormApplication {
 
   _refresh() {
     this.render(false)
+  }
+}
+
+/**
+ * Interface used to level up character
+ */
+export class AgeProgUI extends FormApplication {
+  constructor(actor, advances, classeUuid, options = {}) {
+    super(options);
+    this.actor = actor;
+    this.class = fromUuidSync(classUuid);
+  }
+
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
+      dragDrop: [{ dropSelector: ".item-drop-area" }],
+      classes: ['age-system-dialog', 'age-system', 'advancement-config'],
+      template: 'systems/age-system/templates/advancement-setup.hbs',
+      resizable: false,
+      minimizable: false,
+      width: 420,
+      height: 'auto'
+    })
   }
 }
