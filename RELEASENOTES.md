@@ -1,8 +1,11 @@
 # Release Notes
 
 ## 2.0.4 [2023-09-xx]
+### Added
+- New macro to enable users to roll `ageRoll` method. This function can be accessed using `game.ageSystem.roll`.
+
 ### Changed
-- Resizing handler on sheet's right-hand bottom corner is now invisible until mouse points hover's it.
+- Resizing handler on sheet's right-hand bottom corner is now invisible until hovering sheet corner with mouse.
 - Removed lines of code and files related to the old Character Sheet.
 - When using the Apply Damage feature to apply Penetrating damage, the option "Ignore Armor" will be selected.
 

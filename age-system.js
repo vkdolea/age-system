@@ -90,6 +90,7 @@ Hooks.once("init", function() {
         dice: Dice,
         migrations: migrations,
         rollOwnedItem,
+        roll: Dice.ageRollCheck,
         // removeDoubledMods, // to be used in cases users has migration problems
         documents: {
             ageSystemActor,
@@ -145,7 +146,7 @@ Hooks.once("init", function() {
     // Define extra data for Age System (Actors, Items, ActiveEffectConfig)
     CONFIG.Actor.documentClass = ageSystemActor;
     CONFIG.Item.documentClass = ageSystemItem;
-    CONFIG.Token.documentClass = ageTokenDocument;
+    // CONFIG.Token.documentClass = ageTokenDocument;
     CONFIG.ageSystem = ageSystem;
     // Saving this customization for a later implementation
     // CONFIG.Token.objectClass = ageToken;

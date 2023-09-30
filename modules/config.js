@@ -198,29 +198,29 @@ ageSystem.actorIcons = {
 }
 
 const uiElementsPath = "systems/age-system/resources/imgs/ui-elements/";
-ageSystem.uiElements = {
-    ageRoller: `${uiElementsPath}cube.svg`
-}
 
+// Advancement Data
 const advIconPath =  "systems/age-system/resources/imgs/adv-icon/";
-ageSystem.advIcon = {
-    // health: `${advIconPath}heart-key.svg`,
-    // ability: `${advIconPath}orb-direction.svg`,
-    item: `${advIconPath}family-tree.svg`,
-    progressive: `${advIconPath}progression.svg`,
-}
-
-// Advancement Data - progressive values
-ageSystem.adv = {
-    type: {
-        progressive: ['health', 'conviction', 'advAbility', 'powerPoints', 'defenseAndToughness'/*, 'toughness', 'defense'*/],
-        item: ['spec', 'stunts', 'talent', 'power', 'focus', 'relationship']
+ageSystem.advData ={
+    stances: {
+        type: {
+            progressive: ['health', 'conviction', 'advAbility', 'powerPoints', 'defenseAndToughness'/*, 'toughness', 'defense'*/],
+            item: ['spec', 'stunts', 'talent', 'power', 'focus', 'relationship']
+        },
+        health: new Array(20).fill('1 + @cons'),
+        powerPoints: new Array(20).fill("0"),
+        conviction: [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+        advAbility: new Array(20).fill(1),
+        defenseAndToughness: [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
     },
-    health: new Array(20).fill('1 + @cons'),
-    powerPoints: new Array(20).fill("0"),
-    conviction: [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
-    advAbility: new Array(20).fill(1),
-    defenseAndToughness: [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+    abilityScoreCost: [1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3],
+    icon: {
+        // health: `${advIconPath}heart-key.svg`,
+        // ability: `${advIconPath}orb-direction.svg`,
+        item: `${advIconPath}family-tree.svg`,
+        progressive: `${advIconPath}progression.svg`,
+    }
+
 }
 
 /**
@@ -335,9 +335,23 @@ ageSystem.statusEffects = {
         id: `dead`,
         name: `EFFECT.StatusDead`,
     },
+    // // teste
+    // {
+    //     name: "invisivel",
+    //     id: "invisible",
+    //     icon: "icons/svg/invisible.svg",
+    //     flags: {
+    //         "age-system": {
+    //             isCondition: true,
+    //             conditionType: "expanse",
+    //             desc: "age-system.conditions.invisibleDesc"
+    //         }
+    //     }
+    // },
+    // // fim de teste
     {
         name: "age-system.conditions.blinded",
-        id: "blinded",
+        id: "blind", //original é o 'blinded'
         icon: "icons/svg/blind.svg",
         flags: {
             "age-system": {
@@ -349,7 +363,7 @@ ageSystem.statusEffects = {
     },
     {
         name: "age-system.conditions.deafened",
-        id: "deafened",
+        id: "deaf",
         icon: "icons/svg/deaf.svg",
         flags: {
             "age-system": {

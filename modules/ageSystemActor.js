@@ -95,23 +95,35 @@ export class ageSystemActor extends Actor {
     }
 
     /**
-    * Apply any transformations to the Actor data which are caused by ActiveEffects.
+    * Apply any transformations to the Actor data which are caused by ActiveEffects by adding code in the original FVTT code
     */
     applyActiveEffects() {
         const overrides = {};
-
+    
+        this.statuses ??= new Set();
+        // Identify which special statuses had been active
+        const specialStatuses = new Map();
+        for ( const statusId of Object.values(CONFIG.specialStatusEffects) ) {
+          specialStatuses.set(statusId, this.statuses.has(statusId));
+        }
+        this.statuses.clear();
+    
         // Organize non-disabled effects by their application priority
-        const changes = this.effects.reduce((changes, e) => {
-        if ( e.disabled || e.isSuppressed ) return changes;
-        return changes.concat(e.changes.map(c => {
-            c = foundry.utils.duplicate(c);
-            c.effect = e;
+        const changes = [];
+        for ( const effect of this.allApplicableEffects() ) {
+          if ( !effect.active ) continue;
+          changes.push(...effect.changes.map(change => {
+            const c = foundry.utils.deepClone(change);
+            c.effect = effect;
             c.priority = c.priority ?? (c.mode * 10);
             return c;
-        }));
-        }, []);
+          }));
+          for ( const statusId of effect.statuses ) this.statuses.add(statusId);
+        }
         changes.sort((a, b) => a.priority - b.priority);
 
+        
+        // ---------------------- AGE SYSTEM MODIFICATION STARTS
         // Identify Active Effects to be applied after DerivedData
         const delayedOverrides = [];
         for (let i = changes.length-1; i >= 0; i--) {
@@ -122,17 +134,26 @@ export class ageSystemActor extends Actor {
             }
         }
         this.delayedOverrides = delayedOverrides;
-
+        // ---------------------- AGE SYSTEM MODIFICATION ENDS
+    
         // Apply all changes
         for ( let change of changes ) {
-            if ( !change.key ) continue;
-            const changes = change.effect.apply(this, change);
-            Object.assign(overrides, changes);
+          if ( !change.key ) continue;
+          const changes = change.effect.apply(this, change);
+          Object.assign(overrides, changes);
         }
-
+    
         // Expand the set of final overrides
         this.overrides = foundry.utils.expandObject(overrides);
-        // if (this.delayedOverrides) this.overrides = foundry.utils.mergeObject(this.overrides.dOverrides);
+    
+        // Apply special statuses that changed to active tokens
+        let tokens;
+        for ( const [statusId, wasActive] of specialStatuses ) {
+          const isActive = this.statuses.has(statusId);
+          if ( isActive === wasActive ) continue;
+          tokens ??= this.getActiveTokens();
+          for ( const token of tokens ) token._onApplyStatusEffect(statusId, isActive);
+        }
     }
 
     _applyDelayedActiveEffects(paths) {

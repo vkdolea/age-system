@@ -1,6 +1,6 @@
 import { sortObjArrayByName } from "./setup.js";
 import { enrichTinyMCE } from "/systems/age-system/modules/setup.js";
-
+import { ageSystem } from "./config.js";
 
 /**
  * Interface to select type of application to be included into a Class Item type.
@@ -30,7 +30,7 @@ export class AdvancementAdd extends Application {
 
   getData() {
     const data = super.getData();
-    const ageSystem = CONFIG.ageSystem
+    // const ageSystem = CONFIG.ageSystem
     data.config = ageSystem;
     data.class = fromUuidSync(this._classUuid);
     data.system = data.class.system;
@@ -92,8 +92,8 @@ class AdvData {
     if (this.itemArr) this.itemArrSize = this.itemArr.length;
     
     // Localize Trait names
-    const ageSystem = CONFIG.ageSystem;
-    const arr = ageSystem.adv.type[advType];
+    // const ageSystem = CONFIG.ageSystem;
+    const arr = ageSystem.advancement.stances.type[advType];
     const traitArr = [];
     const traitArrTypes = []
     for (let i = 0; i < arr.length; i++) {
@@ -153,7 +153,7 @@ export class AdvancementSetup extends FormApplication {
 
   getData() {
     const data = super.getData();
-    const ageSystem = CONFIG.ageSystem
+    // const ageSystem = CONFIG.ageSystem
     data.config = ageSystem;
     data.class = this.class;
     data.itemOptionObj = {
@@ -275,7 +275,7 @@ export class AdvancementSetup extends FormApplication {
         }
       }
     };
-    if (!formData.img) formData.img = CONFIG.ageSystem.advIcon[type];
+    if (!formData.img) formData.img = ageSystem.advancement.icon[type];
 
     switch (type) {
       case 'progressive': this._updateClassProgressive(c, formData); break;
@@ -308,6 +308,12 @@ export class AdvancementSetup extends FormApplication {
     return c.update({"system.advancements.item": itemAdvs});
   }
 
+  /**
+   * Routine to add progressive advancement on Class item type
+   * @param {Object} c Class item
+   * @param {Object} d Data to identify Item to progress
+   * @returns Updated class item
+   */
   _updateClassProgressive(c, d) {
     const isEdit = this.advData.isEdit;
     const index = this.advData.index;
@@ -332,13 +338,116 @@ export class AdvancementSetup extends FormApplication {
   }
 }
 
+/** 
+ * Object to handle leveling logics
+ */
+export class AgeLevel {
+  constructor(actorUuid, classUuid, targetLevel, improvements, options = {}) {
+    this.actor = fromUuidSync(actorUuid);
+    this.class = fromUuidSync(classUuid);
+    
+    // Separate advancements per category
+    const improveData = {};
+    for (let i = 0; i < improvements.length; i++) {
+      const imp = improvements[i];
+      switch (imp.type) {
+        case 'progressive':
+          if (improveData[imp.trait]) improveData[imp.trait].push(imp)
+          else improveData[imp.trait] = [imp];
+          break;
+        case 'item':
+          if (improveData.item) improveData.item.push(imp)
+          else improveData.item = [imp];
+          break;
+        default:
+          if (improveData.invalidAdvance) improveData.invalidAdvance.push(imp)
+          else improveData.invalidAdvance = [imp];
+          break;
+      }
+    }
+
+    // Stores organaized Advancement Data at convenient location
+    this.advData = improveData;
+    
+    // Setup updates for Class, Actor and Items
+    this.dataUpdates = {
+      class: {
+        ["system.level"]: targetLevel
+      },
+      actor: {},
+      items: [],
+      toLevel: targetLevel
+    }
+  }
+
+  /**
+   * Define total of advances and valid Abilities to be progressed or NULL if no Ability data is progressing this level
+   * @returns Object with 'advances' and 'validKeys' or null if no Ability Advance is available for this level
+   */
+  _levelAblAdv() {
+    const ablAdv = this.advData.advAbility;
+    if (!ablAdv) return null;
+    const classItem = this.class;
+    const actor = this.actor;
+
+    let advances = 0;
+    for (let q = 0; q < ablAdv.length; q++) {
+      const e = ablAdv[q].value;
+      advances = advances + e;
+    }
+
+    // Identify relevant Game Setting;
+    const primaryAbl = game.settings.get("age-system", "primaryAbl");
+
+    // Array to identify keys of Abilities available to be progressed in this level up
+    let validKeys = []
+    const ABILITY_KEYS = ageSystem.ABILITY_KEYS
+
+    // Select valid keys to progress
+    if (primaryAbl) {
+      // CASE 1 - Game set to use Primary/Secondary Abilities: Improvements from Odd levels sums to Secondary Abilities while Primary Abilities benefits from Advancements on even levels
+      const isOdd = imp.toLevel % 2 == 1 ? true : false;
+      const primaryKeys = classItem.system.primaryAbl;
+      const secondaryKeys = ABILITY_KEYS.filter(x => !primaryKeys.includes(x));
+      validKeys = isOdd ? secondaryKeys : primaryAbl;
+    } else {
+      // CASE 2 - No Primary/Secondary abilities: user can not progress Abilities progressed in the last time
+      validKeys = foundry.utils.deepClone(ABILITY_KEYS);
+      const lastAblAdv = actor?.system.advancements?.[actor.level]?.ablAdvance;
+      if (lastAblAdv?.length) {
+        for (let a = 0; a < lastAblAdv.length; a++) {
+          const e = lastAblAdv[a].key;
+          const index = validKeys.indexOf(e);
+          if (index > -1) validKeys.splice(index, 1);
+        }
+      }
+    }
+
+    return {
+      advances,
+      validKeys
+    }
+  };
+
+  _levelHealth() {};
+  _levelPowerPoints() {};
+  _levelDefenseTough() {};
+  _levelFocus() {};
+  _levelTalents() {};
+  _levelSpec() {};
+  _levelPowers() {};
+  _levelStunts() {};
+  _updateDocuments() {};
+}
+
 /**
  * Interface used to level up character
  */
 export class AgeProgUI extends FormApplication {
-  constructor(actor, advances, classeUuid, options = {}) {
+  constructor(actor, advData, classUuid, options = {}) {
     super(options);
     this.actor = actor;
+    this.advData = advData;
     this.class = fromUuidSync(classUuid);
   }
 
@@ -353,4 +462,15 @@ export class AgeProgUI extends FormApplication {
       height: 'auto'
     })
   }
+
+  // Option to create Ability Advance selection
+
+  // Option to roll for Health and Power Points
+
+  // Add data to advance Defense and Toughness
+
+  // Add screen to Advance Owned Itens (watch out for order of priority)
+
+  // Add screen to add new Items
+
 }
