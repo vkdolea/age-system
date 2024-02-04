@@ -139,11 +139,13 @@ export class ageSystemActor extends Actor {
         const dOverrides = {}
         const changes = foundry.utils.deepClone(this.delayedOverrides)
         // Apply all changes
-        for ( let change of changes ) {
-            if ( !change.key || !paths.includes(change.key)) continue;
-            const changes = change.effect.apply(this, change);
-            Object.assign(dOverrides, changes);
-        }
+	if (changes) {
+		for ( let change of changes ) {
+			if ( !change.key || !paths.includes(change.key)) continue;
+			const changes = change.effect.apply(this, change);
+			Object.assign(dOverrides, changes);
+		}
+	}
     
         // Expand the set of final overrides
         const over = foundry.utils.expandObject(dOverrides);
