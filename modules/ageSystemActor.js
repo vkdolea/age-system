@@ -137,10 +137,12 @@ export class ageSystemActor extends Actor {
         // ---------------------- AGE SYSTEM MODIFICATION ENDS
     
         // Apply all changes
-        for ( let change of changes ) {
-          if ( !change.key ) continue;
-          const changes = change.effect.apply(this, change);
-          Object.assign(overrides, changes);
+        if (Array.isArray(changes)) {
+            for ( let change of changes ) {
+              if ( !change.key ) continue;
+              const changes = change.effect.apply(this, change);
+              Object.assign(overrides, changes);
+            }
         }
     
         // Expand the set of final overrides
@@ -1034,7 +1036,7 @@ export class ageSystemActor extends Actor {
     }
 
     // Data to add Character ref. into rolls
-    actorRollData() {
+    actorRollData(levelAbl = null) {
         if (!this) return null;
         if (this.type !== 'char') return null;
         const data = this.system;
@@ -1052,6 +1054,9 @@ export class ageSystemActor extends Actor {
             cunn: data.abilities.cunn.total ?? 0,
             level: data.level ?? 0
         }
+        if (levelAbl) {
+            // Add code to replace Ability values by the ones recently progressed in the Level Up routing.
+        };
         return charData;
     };
 };

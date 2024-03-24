@@ -580,8 +580,10 @@
 
         "move": "Movimento",
         "level": "Nível",
+        "newLevel": "Novo Nível",
         "xp": "EXP",
         "currentLevel": "EXP Atual",
+        "next": "Próximo",
         "nextLevel": "EXP Próx. Nvl.",
         "advPoints": "Pto de Avanço",
         "mod": "Mod",
@@ -792,6 +794,7 @@
         "attkHeader": "Arma Ataque Dano",
 
         "advancement": "Progressão",
+        "advancementPlural": "Progressões",
         "improvements": "Melhorias",
         "advancementNew": "Selecionar nova Progressão",
         "levelName": "Nível {level}",
@@ -811,6 +814,8 @@
         "itemOptionAll": "Receber todos os Items",
         "dragAdvItem": "Arraste e solte Items para a Progressão no espaço abaixo",
         "add": "Adicionar",
-        "leveledImprovements": "Melhorias Obtidas"
+        "leveledImprovements": "Melhorias Obtidas",
+        "newAblScore": "Nova Habilidade",
+        "newAdvance": "Nova Progressão"
     }
 }

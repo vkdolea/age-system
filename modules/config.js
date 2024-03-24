@@ -41,7 +41,6 @@ ageSystem.abilitiesTotal = {
     "per": "age-system.per",
     "str": "age-system.str",
     "will": "age-system.will",
-
     "cunn": "age-system.cunn",
     "magic": "age-system.magic"    
 }

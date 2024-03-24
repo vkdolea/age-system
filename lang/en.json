@@ -580,8 +580,10 @@
 
         "move": "Move",
         "level": "Level",
+        "newLevel": "New Level",
         "xp": "XP",
         "currentLevel": "Actual XP",
+        "next": "Next",
         "nextLevel": "Next Level XP",
         "advPoints": "Adv. Points",
         "mod": "Mod",
@@ -792,6 +794,7 @@
         "attkHeader": "Weapon Attack Roll Damage",
 
         "advancement": "Advancement",
+        "advancementPlural": "Advancements",
         "improvements": "Improvements",
         "advancementNew": "Select New Advancement",
         "levelName": "Level {level}",
@@ -811,6 +814,8 @@
         "itemOptionAll": "Receive all Items",
         "dragAdvItem": "Drag Advancement Items in the space below",
         "add": "Add",
-        "leveledImprovements": "Obtained Improvements"
+        "leveledImprovements": "Obtained Improvements",
+        "newAblScore": "New Ability Score",
+        "newAdvance": "New Advancement"
     }
 }

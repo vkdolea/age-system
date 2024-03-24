@@ -1,6 +1,6 @@
 # Release Notes
 
-## 2.0.4 [2023-09-xx]
+## 2.0.4 [2024-03-24]
 ### Added
 - New macro to enable users to roll `ageRoll` method. This function can be accessed using `game.ageSystem.roll`.
 
@@ -11,6 +11,8 @@
 
 ### Fixed
 - Weapon features "Ranged" and "Reloadable" on Options tab now have localization strings.
+- Case causing character sheet to break after using Token Effects / Conditions.
+- Removed Font override preventing users and modules to change Font.
 
 ## 2.0.3 [2023-09-07]
 ### Added

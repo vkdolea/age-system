@@ -494,6 +494,13 @@ export class ageSystemItem extends Item {
         const nextLevel = this.system.level+1;
         const improvements = foundry.utils.deepClone(this.system.advPerLvl[nextLevel-1]); // To account to Array start counting at 0
 
+        const levelUI = new AgeProgUI({
+            actor,
+            classItem,
+            nextLevel,
+            improvements
+        });
+        return levelUI.render(true);
     }
 
     _levelDown() {
