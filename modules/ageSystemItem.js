@@ -1,4 +1,4 @@
-import { AdvancementSetup } from "./advancement.js";
+import { AdvancementSetup, AgeLevel, AgeProgUI } from "./advancement.js";
 import {ageSystem} from "./config.js";
 import * as Dice from "./dice.js";
 
@@ -108,6 +108,7 @@ export class ageSystemItem extends Item {
 
     _prepareClass(system) {
         const advPerLvl = new Array(20).fill(null);
+        system.advArrIndex = system.level - 1;
         
         // Add all Progressive Advancements
         const progAdv = system.advancements.progressive;
@@ -466,7 +467,7 @@ export class ageSystemItem extends Item {
             case 'remove':
                 if (curLevel == minLevel) return ui.notifications.warn("Already at minimum level")
                 // this.update({"system.level": curLevel-1})
-                this._levelDown();
+                this._levelDown(curLevel - 1);
                 break;
             default:
                 break;
@@ -487,89 +488,23 @@ export class ageSystemItem extends Item {
          * - Poder
          * - Façanhas
          */
+        const classItem = this;
         const actor = this.actor;
         const updates = {};
         const nextLevel = this.system.level+1;
-        const improvements = foundry.utils.deepClone(this.system.advPerLvl[nextLevel]);
-        const improveData = {
-            itemUpdates: {
-                ["system.level"]: nextLevel
-            },
-            toLevel: nextLevel
-        };
+        const improvements = foundry.utils.deepClone(this.system.advPerLvl[nextLevel-1]); // To account to Array start counting at 0
 
-        // Segregate Advancements per type
-        for (let i = 0; i < improvements.length; i++) {
-            const imp = improvements[i];
-            switch (imp.type) {
-                case 'progressive':
-                    if (improveData[imp.trait]) improveData[imp.trait].push(imp)
-                    else improveData[imp.trait] = imp;
-                    break;
-                case 'item':
-                    if (improveData.item) improveData.item.push(imp)
-                    else improveData.item = [imp];
-                    break;
-                default:
-                    if (improveData.invalidAdvance) improveData.invalidAdvance.push(imp)
-                    else improveData.invalidAdvance = [imp];
-                    break;
-            }
-        }
-
-        this._levelAblAdv(improveData);
-        this._levelHealth(improveData);
-        this._levelPowerPoints(improveData);
-        this._levelDefenseTough(improveData);
-        this._levelFocus(improveData);
-        this._levelTalents(improveData);
-        this._levelSpec(improveData);
-        this._levelPowers(improveData);
-        this._levelStunts(improveData);
-
-        this.update(improveData.itemUpdates);
-    }
-
-    _levelAblAdv(imp) {
-        if (!imp.ablAdvance.length ?? imp.ablAdvance) return null;
-        let advances = 0;
-        for (let q = 0; q < imp.ablAdvance.length; q++) {
-            const e = imp.ablAdvance[q].value;
-            advances = advances + e;
-        }
-
-        // Identify relevant Game Setting;
-        const primaryAbl = game.settings.get("age-system", "primaryAbl");
-
-        // Array to identify keys of Abilities available to be progressed in this level up
-        let validKeys = []
-        const ABILITY_KEYS = CONFIG.ageSystem.ABILITY_KEYS
-
-        // Select valid keys for progressing
-        if (primaryAbl) {
-            // CASE 1 - Game set to use Primary/Secondary Abilities: Improvements from Odd levels sums to Secondary Abilities while Primeary Abilities benefits from Advancements on even levels
-            const isOdd = imp.toLevel % 2 == 1 ? true : false;
-            const primaryKeys = this.system.primaryAbl;
-            const secondaryKeys = ABILITY_KEYS.filter(x => !primaryKeys.includes(x));
-            validKeys = isOdd ? secondaryKeys : primaryAbl;
-        } else {
-            // CASE 2 - No Primary/Secondary abilities: user can not progress Abilities progressed in the last time
-            validKeys = foundry.utils.deepClone(ABILITY_KEYS);
-            const lastAblAdv = this.actor.system.advancements?.[this.actor.level].ablAdvance;
-            if (lastAblAdv?.length) {
-                for (let a = 0; a < lastAblAdv.length; a++) {
-                    const e = lastAblAdv[a].key;
-                    const index = validKeys.indexOf(e);
-                    if (index > -1) validKeys.splice(index, 1);
-                }
-            }
-        }
-
-        // Create App to allow user to progress. This app shall be created on advancement.js
+        const levelUI = new AgeProgUI({
+            actor,
+            classItem,
+            nextLevel,
+            improvements
+        });
+        return levelUI.render(true);
     }
 
     _levelDown() {
-        this.update({"system.level": this.system.level--})
+        this.update({"system.level": this.system.level-1})
     }
 
     // Assists to identify if the value of a Modifier has valid data according to Modifier's Formula Type (ftype)

@@ -15,7 +15,7 @@ export function newItemData(actor, itemData) {
         const itemName = item.name;
 
         // Warning about Class Item type not being ready yet for use - Remove when automation is completed
-        if (itemType == "class") warning.push({index: i, warn: "'Class' Item type is still a work in progress and can not be added to Characters. Complete features are expected in a future release."})
+        // if (itemType == "class") warning.push({index: i, warn: "'Class' Item type is still a work in progress and can not be added to Characters. Complete features are expected in a future release."})
     
         switch (actorType) {
             case "vehicle":

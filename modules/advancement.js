@@ -1,6 +1,6 @@
 import { sortObjArrayByName } from "./setup.js";
 import { enrichTinyMCE } from "/systems/age-system/modules/setup.js";
-
+import { ageSystem } from "./config.js";
 
 /**
  * Interface to select type of application to be included into a Class Item type.
@@ -30,7 +30,7 @@ export class AdvancementAdd extends Application {
 
   getData() {
     const data = super.getData();
-    const ageSystem = CONFIG.ageSystem
+    // const ageSystem = CONFIG.ageSystem
     data.config = ageSystem;
     data.class = fromUuidSync(this._classUuid);
     data.system = data.class.system;
@@ -56,7 +56,7 @@ export class AdvancementAdd extends Application {
 }
 
 /**
- * Data containing information about Improvement (item o progressive). The same object is used when editing existing Improvement.
+ * Data containing information about Improvement (item or progressive). The same object is used when editing existing Improvement.
  */
 class AdvData {
   constructor(advType, options = {}) {
@@ -92,8 +92,8 @@ class AdvData {
     if (this.itemArr) this.itemArrSize = this.itemArr.length;
     
     // Localize Trait names
-    const ageSystem = CONFIG.ageSystem;
-    const arr = ageSystem.adv.type[advType];
+    // const ageSystem = CONFIG.ageSystem;
+    const arr = ageSystem.advData.stances.type[advType];
     const traitArr = [];
     const traitArrTypes = []
     for (let i = 0; i < arr.length; i++) {
@@ -118,6 +118,7 @@ class AdvData {
     };
     this.traitArr = sortObjArrayByName(traitArr, 'name');
     this.traitArrTypes = traitArrTypes;
+
     // Initialize data to select Progression Type for Item
     this.tType = this.traitArr[0].key;
   }
@@ -152,7 +153,7 @@ export class AdvancementSetup extends FormApplication {
 
   getData() {
     const data = super.getData();
-    const ageSystem = CONFIG.ageSystem
+    // const ageSystem = CONFIG.ageSystem
     data.config = ageSystem;
     data.class = this.class;
     data.itemOptionObj = {
@@ -201,6 +202,7 @@ export class AdvancementSetup extends FormApplication {
   async _onDrop(e) {
     // Confirm if drop action is valid
     if (!this.isEditable && this.advData.advType !== "item") return false;
+
     // Try to extract the data
     const data = TextEditor.getDragEventData(e);
     const item = fromUuidSync(data.uuid);
@@ -273,7 +275,7 @@ export class AdvancementSetup extends FormApplication {
         }
       }
     };
-    if (!formData.img) formData.img = CONFIG.ageSystem.advIcon[type];
+    if (!formData.img) formData.img = ageSystem.advData.icon[type];
 
     switch (type) {
       case 'progressive': this._updateClassProgressive(c, formData); break;
@@ -306,6 +308,12 @@ export class AdvancementSetup extends FormApplication {
     return c.update({"system.advancements.item": itemAdvs});
   }
 
+  /**
+   * Routine to add progressive advancement on Class item type
+   * @param {Object} c Class item
+   * @param {Object} d Data to identify Item to progress
+   * @returns Updated class item
+   */
   _updateClassProgressive(c, d) {
     const isEdit = this.advData.isEdit;
     const index = this.advData.index;
@@ -328,4 +336,346 @@ export class AdvancementSetup extends FormApplication {
   _refresh() {
     this.render(false)
   }
+}
+
+/** 
+ * Object to handle Character leveling routine
+ */
+export class AgeLevel {
+  constructor(actor, classItem, targetLevel, improvements, options = {}) {
+    this.actor = actor;
+    this.classItem = classItem;
+    
+    // Separate advancements per category
+    const improveData = {};
+    for (let i = 0; i < improvements.length; i++) {
+      const imp = improvements[i];
+      switch (imp.type) {
+        case 'progressive':
+          if (improveData[imp.trait]) improveData[imp.trait].push(imp)
+          else improveData[imp.trait] = [imp];
+          break;
+        case 'item':
+          if (improveData.item) improveData.item.push(imp)
+          else improveData.item = [imp];
+          break;
+        default:
+          if (improveData.invalidAdvance) improveData.invalidAdvance.push(imp)
+          else improveData.invalidAdvance = [imp];
+          break;
+      }
+    }
+
+    // Stores organized Advancement Data at convenient location
+    this.advData = improveData;
+    
+    // Setup updates for Class, Actor and Items
+    this.levelUps = {};
+    this.dataUpdates = {
+      class: {
+        ["system.level"]: targetLevel
+      },
+      actor: {},
+      items: [],
+      toLevel: targetLevel
+    };
+  }
+
+  _prepareTraits(trait) {
+    switch (trait) {
+      case 'advAbility': this._levelAbl(); break;
+      // 'health',
+      // 'conviction',
+      // 'relationship',
+      // 'powerPoints',
+      // 'defenseAndToughness',
+      // 'focus',
+      // 'talent',
+      // 'spec',
+      // 'power',
+      // 'stunts'
+      default:
+        break;
+    }
+  };
+  
+  /**
+   * Define total of advances and valid Abilities to be progressed or NULL if no Ability data is progressing this level
+   * @returns Object with 'advances' and 'validKeys' or null if no Ability Advance is available for this level
+   */
+  _levelAbl() {
+    const ablAdv = this.advData.advAbility;
+    if (!ablAdv) return null;
+    const classItem = this.classItem;
+    const actor = this.actor;
+    const dataUpdates = this.dataUpdates;
+
+    let advances = 0;
+    for (let q = 0; q < ablAdv.length; q++) {
+      const e = Number(ablAdv[q].value);
+      advances = advances + e;
+    }
+    this.advData.advances = advances;
+
+    // Identify relevant Game Setting;
+    const primaryAbl = game.settings.get("age-system", "primaryAbl");
+
+    // Array to identify keys of Abilities available to be progressed in this level up
+    let validKeys = []
+    const ABILITY_KEYS = ageSystem.ABILITY_KEYS
+
+    // Select valid keys to progress
+    if (primaryAbl) {
+      // CASE 1 - Game set to use Primary/Secondary Abilities: Improvements from Odd levels sums to Secondary Abilities while Primary Abilities benefits from Advancements on even levels
+      const isOdd = dataUpdates.toLevel % 2 == 1 ? true : false;
+      const primaryKeys = classItem.system.primaryAbl.filter(x => ABILITY_KEYS.includes(x));
+      const secondaryKeys = ABILITY_KEYS.filter(x => !primaryKeys.includes(x));
+      validKeys = isOdd ? secondaryKeys : primaryKeys;
+    } else {
+      // CASE 2 - No Primary/Secondary abilities: user can not progress Abilities progressed in the last time
+      validKeys = foundry.utils.deepClone(ABILITY_KEYS);
+      const lastAblAdv = actor?.system.advancements?.[actor.level]?.ablAdvance;
+      if (lastAblAdv?.length) {
+        for (let a = 0; a < lastAblAdv.length; a++) {
+          const e = lastAblAdv[a].key;
+          const index = validKeys.indexOf(e);
+          if (index > -1) validKeys.splice(index, 1);
+        }
+      }
+    }
+
+    const abilities = [];
+    const actorAbl = foundry.utils.deepClone(actor.system.abilities);
+    for (let i = 0; i < validKeys.length; i++) {
+      const e = validKeys[i];
+      abilities.push({
+        name: game.i18n.localize(`age-system.${e}`),
+        key: e,
+        curScore: actorAbl[e].value,
+        curAdvance: actorAbl[e].advances,
+        newAdvance: 0,
+        sumAdvance: actorAbl[e].advances,
+        newScore: actorAbl[e].value
+      })
+    }
+    this.newAbilities = abilities;
+  };
+
+  _levelHealth(t = `health`) {
+    const trait = this.advData[t];
+    if (!trait) return null;
+    const classItem = this.classItem;
+    const actor = this.actor;
+    const dataUpdates = this.dataUpdates;
+
+    const traitParts = [];
+    for (let q = 0; q < trait.length; q++) {
+      const e = trait[q].value;
+      traitParts.push(e);
+    }
+    let traitFormula = null;
+    for (const p of traitParts) {
+      traitFormula = null ? p : `${traitFormula} + ${p}`;
+    }
+    // Criar pontos de avaliar com Quick Eval: se passar, ótimo. Se não passar é pq tem que rolar dados => segue para rolagem de dados
+    this.advData.advances = advances;
+  };
+  _levelConviction() {};
+  _levelRelationship() {};
+  _levelPowerPoints() {};
+  _levelDefenseTough() {};
+  _levelFocus() {};
+  _levelTalents() {};
+  _levelSpec() {};
+  _levelPowers() {};
+  _levelStunts() {};
+  _updateDocuments() {};
+
+}
+
+/**
+ * Interface used to level up character
+ */
+export class AgeProgUI extends FormApplication { // Realizar adequação para ler no Formulário e tratar cada parte do objeto
+  constructor(data={}, options = {}) {
+    super(options);
+    this.data = data;
+    this.newLevel = new AgeLevel(data.actor, data.classItem, data.targetLevel, data.improvements);
+    this.workingTrait = 'none';
+    
+    // Initialize array with possible traits to level up
+    this.traits = [
+      'advAbility',
+      'health',
+      'conviction',
+      'relationship',
+      'powerPoints',
+      'defenseAndToughness',
+      'focus',
+      'talent',
+      'spec',
+      'power',
+      'stunts'
+    ];
+
+    this._evalNextTrait();
+  }
+
+  // get advData () {
+  //   const trait = this.traits[0];
+  //   const data = this.ageLevel.advData[trait];
+  //   return data ?? null;
+  // }
+
+  get title() {
+    const advType = game.i18n.localize(`age-system.${this.workingTrait}`);
+    return advType;
+  }
+
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
+      classes: ['age-system-dialog', 'age-system', 'advancement-config'],
+      template: 'systems/age-system/templates/advancement-level-pick-choice.hbs',
+      resizable: false,
+      minimizable: false,
+      width: 600,
+      height: 'auto'
+    })
+  }
+
+  _prepData(trait) {
+    switch (trait) {
+      case 'advAbility': this._calcAbility(); break;
+      // 'health',
+      // 'conviction',
+      // 'relationship',
+      // 'powerPoints',
+      // 'defenseAndToughness',
+      // 'focus',
+      // 'talent',
+      // 'spec',
+      // 'power',
+      // 'stunts'
+      default:
+        break;
+    }
+  };
+
+  getData() {
+    const data = super.getData();
+    const wt = this.workingTrait;
+    // const ageSystem = CONFIG.ageSystem
+    data.config = ageSystem;
+    data.step = "next"; // Incluir lógica para finalizar progressão.
+    this._prepData(wt)
+    
+    return {
+      ...data,
+      ...this.data,
+      ...this.newLevel,
+      trait: this.workingTrait
+    }
+  }
+
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    // React to - and + resource buttons
+    html.find(".controls .change").click(ev => {
+      const data = ev.currentTarget.dataset;
+      const id = Number(data.index);
+      const action = data.action;
+      // Define change
+      let delta = 0;
+      if (action == "increase") delta = 1
+      if (action == "decrease") delta = -1
+      switch (this.workingTrait) {
+        case "advAbility": this._changeAblAdv(id, delta)          
+          break;
+      
+        default:
+          break;
+      }
+    })
+
+    // On pressing "Next"
+    html.find("footer button.next").click(this._evalNextTrait.bind(this))
+  }
+
+  _evalNextTrait() {
+    let wt = this.workingTrait;
+    const ts = this.traits;
+    const al = this.newLevel;
+    if (wt == 'none') {
+      wt = ts[0];
+    } else {
+      do {
+        ts.shift()
+      } while (ts.lenght > 0 && !al[ts[0]]);
+      wt = ts[0];
+    }
+    if (wt) {
+      al._prepareTraits(wt);
+      this.advData = al[wt];
+    }
+    this.workingTrait = wt ?? null;
+  }
+
+  _changeAblAdv(i, d) {
+    const abl = this.newLevel.newAbilities[i];
+    let advances = this.newLevel.advData.advances;
+    
+    // CASE 1 - Ignore command if user is adding advances but none is available to be spent
+    if (advances == 0 && d > 0) return null;
+    // CASE 2 - Ignore command if user is trying to remove advance from a "New Advancement" with value ZERO
+    if (abl.newAdvance == 0 && d < 0) return null;
+
+    abl.newAdvance = Math.max(0, abl.newAdvance + d);
+    this.newLevel.advData.advances = advances - d;
+    this._calcAbility();
+    this.render(false);
+  }
+
+  _ablAdvCost(s) {
+    const scoreCost = ageSystem.advData.abilityScoreCost;
+    const i = s < 1 ? 0 : Math.min(s - 1, scoreCost.length);
+    return scoreCost[i];
+  }
+
+  _calcAbility() {
+    const abilities = this.newLevel.newAbilities;
+    for (let i = 0; i < abilities.length; i++) {
+      const a = abilities[i];
+      a.sumAdvance = a.curAdvance + a.newAdvance;
+      a.newScore = a.curScore;
+
+      while (a.sumAdvance >= this._ablAdvCost(a.newScore + 1)) {
+        a.newScore = a.newScore + 1;
+        a.sumAdvance = a.sumAdvance - this._ablAdvCost(a.newScore);
+      };
+    }
+    this.newLevel.newAbilities = abilities;
+  }
+
+  _updateObject() {
+    const data = this.data;
+    switch (data.trait) {
+      case "advAbility": if (data.advances > 0) return null
+        
+        break;
+    
+      default:
+        break;
+    }
+    return this.data;
+  }
+
+  // Option to roll for Health and Power Points
+
+  // Add data to advance Defense and Toughness
+
+  // Add screen to Advance Owned Itens (watch out for order of priority)
+
+  // Add screen to add new Items
+
 }

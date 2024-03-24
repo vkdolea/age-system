@@ -1,0 +1,518 @@
+@import "./item-sheet.less";
+@import "./item-sheet-chat.less";
+@import "./char-sheet-alt.less";
+@import "./char-stat-block.less";
+@import "./vehicle-sheet.less";
+@import "./spaceship-sheet.less";
+@import "./age-roll-sheet.less";
+@import "./colorsets.less";
+@import "./age-roller.less";
+@import "./age-tracker.less";
+
+// Adding Fonts
+@font-face {
+    font-family: "Ethernal Knight";
+    src: url("../resources/fonts/eternalknight/eternalknight.otf");
+}
+@font-face {
+    font-family: "Exo2";
+    src: url("../resources/fonts/exo2/Exo2-VariableFont_wght.ttf");
+}
+@font-face {
+    font-family: "Electrolize";
+    src: url("../resources/fonts/electrolize/Electrolize-Regular.ttf");
+}
+
+// Roboto fonts declaration
+@font-face {
+    font-family: "Roboto";
+    src: url("../resources/fonts/roboto/Roboto-Regular.ttf");
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../resources/fonts/roboto/Roboto-Bold.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../resources/fonts/roboto/Roboto-Italic.ttf");
+    font-style: italic;
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../resources/fonts/roboto/Roboto-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+// Avoid text on context-menu from wrapping
+#context-menu {
+    width: fit-content;
+    z-index: 99;
+    li {
+        white-space: nowrap;
+        text-align: left;
+    };
+}
+
+/*---- Font Override----*/
+body.system-age-system *:not(i, .fa, .far, .fas) {
+    font-family: "Roboto";
+}
+
+/**************************/
+/**  AGE Settings Style  **/
+/**************************/
+
+// General Rule
+.age-system {
+    .text-center {
+        text-align: center;
+    }
+}
+
+#quick-settings,
+#adv-settings {
+    text-align: left;
+    img {
+        object-fit: contain;
+        padding: 6px;
+        border: none;
+    }
+    input, select {border: 1px solid #7a7971;}
+    input:hover,
+    input:focus,
+    select:hover,
+    select:focus {box-shadow: 0 0 5px red !important;}
+    .sheet-footer {
+        height: 35px;
+        max-height: 35px;
+    }
+}
+
+/*-----------Background-----------*/
+.window-app.journal-sheet {
+    .journal-entry-content,
+    form.editable {
+        background: rgba(254, 254, 254, 0.9);
+    }
+};
+.window-app.sheet.char .window-content,
+.window-app.sheet.vehicle .window-content,
+.window-app.sheet.spaceship .window-content {
+    background-image: none;
+    background: none;
+    background-color: rgba(207, 194, 188, 0.6);
+}
+.window-app.sheet.item .window-content {
+    background-image: none;
+    background: none;
+}
+
+/*-----------Opacity Degrees-----------*/
+.age-opacity-hover {
+    opacity: 0.6;
+}
+.age-opacity-hover:hover {
+    opacity: 0.9;
+}
+.age-system {
+    .opacity-high {
+        opacity: 0.2
+    }
+    .opacity-low {
+        opacity: 0.5
+    }
+}
+.window-resizable-handle {
+    opacity: 0;
+};
+.window-resizable-handle:hover {
+    opacity: 0.8;
+};
+
+
+// Override box color
+.age-system {
+    .mouse-to-pointer {cursor: pointer;}
+    input:focus,
+    select:focus,
+    input:hover:not(:disabled),
+    select:hover,
+    nav a:hover:not(.active),
+    span.toggle-condition:hover,
+    .mouse-to-pointer:hover:not(:disabled) {
+        box-shadow: 0 0 5px silver !important;
+    }
+
+    .prosemirror > menu {
+        background-color: rgba(255,255,255,.5);
+    }
+    select > option {
+        background-color: rgba(0,0,0,0.6);
+    }
+
+    hr { 
+        border: 0; 
+        height: 1px; 
+        background-image: -webkit-linear-gradient(left, rgba(240, 240, 240, 0.05), #8c8b8b, rgba(240, 240, 240, 0.05));
+        background-image: -moz-linear-gradient(left, rgba(240, 240, 240, 0.05), #8c8b8b, rgba(240, 240, 240, 0.05));
+        background-image: -ms-linear-gradient(left, rgba(240, 240, 240, 0.05), #8c8b8b, rgba(240, 240, 240, 0.05));
+        background-image: -o-linear-gradient(left, rgba(240, 240, 240, 0.05), #8c8b8b, rgba(240, 240, 240, 0.05));
+    }
+}
+
+// Buttons Styling for age-system-dialog Dialog boxes
+.age-system-dialog.bonus-select {
+    button.dialog-button {
+        flex: 0 0 45%
+    }
+}
+.age-system button.default-button {
+    background: rgba(0, 0, 0, 0.1) !important;
+    border: 2px groove var(--color-border-light-highlight) !important;
+}
+
+// Damage Summary Card
+.age-system.damage-summary-card {
+    .strong {
+        font-weight: 800;
+    }
+    .italic {
+        font-style: italic;
+    }
+    ul {
+        padding: 0;
+    }
+    p {
+        margin: 0 2px;
+        font-size: 12px;
+        text-transform: lowercase;
+        font-variant: small-caps;
+    }
+    div.use-injury div p{
+        text-align: center;
+    }
+    img {
+        flex: 0 0 50px;
+        height: 50px;
+        width: 50px;
+        margin-right: 4px;
+        border: none;
+    }
+}
+
+.age-system-dialog.advancement-config {
+    font-size: 12px;
+    button.file-picker {
+        width: 35px;
+        flex: 0 0 35px;
+    }
+    .options-column {
+        .option {
+            margin-bottom: 4px;
+        }
+        label {
+            flex: 0 0 130px;
+            margin: auto 0;
+        };
+        input, select, span {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    };
+
+    footer {
+        border-top: 2px groove white;
+        margin-top: 4px;
+        padding: 4px 0;
+    }
+    .list-table-content {
+        text-align: center;
+        li {
+            display: flex;
+            flex-direction: row;
+            height: 26px;
+        }
+        input {
+            size: 24px;
+        }
+    }
+    .list-level {
+        width: 50px;
+    }
+    .list-level-value {
+        width: 120px;
+    };
+    .item-drop-area {
+        border-top: 2px groove white;
+        min-height: 200px;
+        li {
+            border-bottom: none;
+        };
+        ol.trait-listing > li:only-of-type {
+            display: none;
+        };
+    };
+    li {
+        border-bottom: 2px groove white;
+        padding: 4px;
+    };
+    li:last-of-type {
+        border-bottom: none;
+    };
+    li:not(:first-of-type) {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 6px;
+    };
+    li.options:hover {
+        cursor: pointer;
+        background: linear-gradient(90deg, rgba(254,254,254,0.1) 10%, rgba(0,0,0,0.1) 48%, rgba(254,254,254,0.1) 90%);
+    };
+    img {
+        height: 45px;
+        border: none;
+    };
+}
+.age-system-dialog {
+    .window-content {
+        background-image: none;
+        background: rgba(254, 254, 254, 0.9);
+    }
+    ol, ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    };
+    .age-importer {
+        .min-height {
+            flex: 0 0 auto;
+        }
+        .text-to-import {
+            width: 100%;
+            resize: none !important;
+        }
+        .options {
+            flex: 0 0 290px;
+            margin-left: 10px
+        }
+    };
+    .conditions-workshop {
+        .individual-effects {
+            img {
+                height: 124px;
+                width: 124px;
+            }
+            .item-image {
+                flex: 0 0 124px; 
+            }
+            .item-image:hover {
+                cursor: pointer;
+            }
+            .order-control {
+                justify-content: space-between;
+                flex: 0 0 20px;
+                width: min-content;
+                margin: auto 0;
+                i:hover {
+                    cursor: pointer;
+                }
+                .delete-effect {
+                    margin: 20px 0;
+                };
+                .delete-effect.inactive {
+                    opacity: 0.2;
+                    cursor: not-allowed;
+                }
+            }
+        }
+        .changes-list {
+            padding: 0;
+        }
+        .effects {
+            .effects-header,
+            .effect-change {
+                > * {
+                    text-align: center;
+                }
+                justify-content: space-between;
+                .key {
+                    flex: 0 0 40%;
+                }
+                .mode {
+                    flex: 0 0 30%
+                }
+                .value {
+                    flex: 0 0 25%
+                }
+                .effect-controls {
+                    flex: 0 0 20px;
+                }
+            }
+        }
+        textarea {
+            height: 66px;
+            width: -webkit-fill-available;
+            margin-left: 4px;
+            resize: none;
+        }
+        .is-condition {
+            margin-left: 4px;
+            margin-bottom: 4px;
+            > * {
+                margin: auto 0;
+                font-size: 12px;
+                margin-right: 4px;
+            }
+        }
+        .individual-effects {
+            h3 {
+                padding-left: 4px
+            }
+        }
+    };
+    .column.controls {
+        flex: 0 0 30%;
+        padding-left: 10px;
+        text-align: center;
+        button {
+            margin: 2px 4px;
+        }
+        .in-use-condition {
+            text-align: left;
+            margin: 0 auto;
+            label {
+                font-size: 16px;
+            }
+        }
+    }
+    .apply-damage-window {
+        .column {
+            text-align: center;
+            .overall-dmg {
+                margin-bottom: 10px;
+            }
+            button {
+                margin-top: 10px;
+            }
+            .individual {
+                h3 {
+                    font-weight: 800;
+                }
+                img {
+                    border: 0;
+                }
+            }
+            .armor-penetration {
+                text-align: left;
+                margin: 0 auto;
+            }
+        }
+        .column.controls {
+            flex: 0 0 200px;
+            padding-left: 8px;
+            // border-right: 2px solid brown;
+        }
+        input[type="number"] {
+            max-width: 50px;
+        }
+        .change-damage {
+            max-width: fit-content;
+        }
+        .dmg-box {
+            align-items: baseline;
+            justify-content: center;
+        }
+        // .overall-dmg {
+        //     text-align: center;
+        // }
+    }
+}
+
+.age-system {
+    // Removing some FoundryVTT core styling
+    input,
+    select {
+        border: none;
+        // font-variant: small-caps;
+    }
+    textarea {
+        white-space: normal;
+        color: inherit;
+    }
+    textarea:focus {box-shadow: none;}
+
+    button {box-shadow: none;}
+    button:hover {box-shadow: none;}
+    button:active {box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);}
+    button.age-button {
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+    a:hover {text-shadow: none;}
+    .tabs .active {text-shadow: none;}
+    
+    .flexcol {
+        display: flex;
+        flex-direction: column;
+    };
+
+    .flexrow {
+        display: flex;
+        flex-direction: row;
+    };
+    .flex-gap {
+        column-gap: 0.2rem;
+        row-gap: 0.2rem;
+    };
+
+    .no-flexwrap {
+        flex-wrap: nowrap;
+    };
+
+    .flexwrap {
+        flex-wrap: wrap;
+    }
+
+    .flex-align-center {
+        align-items: center;
+    };
+
+    .flex-align-baseline {
+        align-items: baseline;
+    };
+
+    .flex-align-end {
+        align-items: flex-end;
+    };
+
+    .flex-align-start {
+        align-items: flex-start;
+    };
+
+    .flex-justify-center {
+        justify-content: center;
+    };
+
+    .flex-justify-start {
+        justify-content: flex-start;
+    };
+
+    .flex-justify-between {
+        justify-content: space-between;
+    };  
+
+    .flex-justify-around {
+        justify-content: space-around;
+    };
+
+    .flex-justify-evenly {
+        justify-content: space-evenly;
+    };
+
+};
+/*---------------------------------*/

@@ -1,6 +1,3 @@
-import * as Dice from "../dice.js";
-import {ageSystem} from "../config.js";
-import { sortObjArrayByName } from "../setup.js";
 import ageSystemSheetCharacter from "./ageSystemSheetCharacter.js";
 
 export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter {
@@ -20,7 +17,7 @@ export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter
     }
 
     get template() {
-        return `systems/age-system/templates/sheets/${this.actor.type}-stat-block.hbs`;
+        return `systems/age-system/templates/sheets/char-block/char-stat-block.hbs`;
     }
 
     /* -------------------------------------------- */

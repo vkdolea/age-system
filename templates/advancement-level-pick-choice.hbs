@@ -1,0 +1,65 @@
+<form>
+    <div>
+        <section class="options-column">
+            <div class="flexrow flex-align-baseline option">
+                <label for=""><strong>{{localize "TYPES.Actor.char"}}</strong></label>
+                <span>{{actor.name}}</span>
+            </div>
+            
+            <div class="flexrow flex-align-baseline option">
+                <label for=""><strong>{{localize "age-system.newLevel"}}</strong></label>
+                <span>{{nextLevel}}</span>
+            </div>
+            
+            <p class="notes">{{hint}}</p>
+        </section>
+        {{!-- Ability Level Up setup --}}
+        {{log this}}
+        {{#if (eq trait "advAbility")}}
+        <section>
+            <span><strong>{{localize "age-system.advancementPlural"}}:&nbsp</strong>{{advData.advances}}</span>
+            <table class="text-center">
+                <tr>
+                    <th><strong>{{localize "age-system.abl"}}</strong></th>
+                    <th><strong>{{localize "age-system.current"}}</strong></th>
+                    <th><strong>{{localize "age-system.advancementPlural"}}</strong></th>
+                    <th><strong>{{localize "age-system.advancementNew"}}</strong></th>
+                    <th><strong>{{localize "age-system.newAdvance"}}</strong></th>
+                    <th><strong>{{localize "age-system.newAblScore"}}</strong></th>
+                </tr>
+                {{#each newAbilities as |k|}}
+                <tr data-index="{{@index}}">
+                    <td><strong>{{k.name}}</strong></td>
+                    <td>{{k.curScore}}</td>
+                    <td>{{k.curAdvance}}</td>
+                    <td class="flexrow controls">
+                        <div class="change" data-type="{{../trait}}" data-index="{{@index}}" data-action="decrease"><a><i class="fa fa-minus-square" aria-hidden="true"></i></a></div>
+                        <span><em>{{k.newAdvance}}</em></span>
+                        <div class="change" data-type="{{../trait}}" data-index="{{@index}}" data-action="increase"><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
+                    </td>
+                    <td><strong>{{k.sumAdvance}}</strong></td>
+                    <td><strong>{{k.newScore}}</strong></td>
+                </tr>
+                {{/each}}
+            </table>
+        </section>
+        {{/if}}
+
+    </div>
+
+    {{!-- Flow control buttons --}}
+    <footer class="flexrow">
+        <button class="default-button cancel" type="button">
+            <i class="fa-solid fa-xmark"></i>{{localize "age-system.cancel"}}
+        </button>
+        {{#if (eq step "next")}}
+        <button class="default-button next" type="button">
+            <i class="fa-solid fa-arrow-right"></i>{{localize "age-system.next"}}
+        </button>
+        {{else}}
+        <button class="default-button">
+            <i class="fa-solid fa-check"></i>{{localize "age-system.confirm"}}
+        </button>
+        {{/if}}
+    </footer>
+</form>

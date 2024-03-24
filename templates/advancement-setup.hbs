@@ -72,6 +72,7 @@
             {{/if}}
         </section>
 
+        {{!-- Progressive traits setup --}}
         {{#if (eq advType "progressive")}}
         <section class="data-column flexrow">
             <ul class="list-table-content flex-justify-center">
@@ -103,6 +104,8 @@
                 {{/each}}
             </ul>
         </section>
+
+        {{!-- Item advancement configuration --}}
         {{else}}
         <section class="item-drop-area">
             <ol>
@@ -130,6 +133,8 @@
         </section>
         {{/if}}
     </div>
+
+    {{!-- Flow control buttons --}}
     <footer class="flexrow">
         <button class="default-button cancel" type="button">
             <i class="fa-solid fa-xmark"></i>{{localize "age-system.cancel"}}
