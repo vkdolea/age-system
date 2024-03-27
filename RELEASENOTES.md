@@ -1,5 +1,9 @@
 # Release Notes
 
+## 2.0.5 [2024-03-26]
+### Fixed
+- Bug preventing Modifiers to be added to characters.
+
 ## 2.0.4 [2024-03-24]
 ### Added
 - New macro to enable users to roll `ageRoll` method. This function can be accessed using `game.ageSystem.roll`.
