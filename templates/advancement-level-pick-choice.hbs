@@ -17,7 +17,7 @@
         {{log this}}
         {{#if (eq trait "advAbility")}}
         <section>
-            <span><strong>{{localize "age-system.advancementPlural"}}:&nbsp</strong>{{advData.advances}}</span>
+            <span><strong>{{localize "age-system.advancementPlural"}}:&nbsp</strong>{{helper.advAbility.advances}}</span>
             <table class="text-center">
                 <tr>
                     <th><strong>{{localize "age-system.abl"}}</strong></th>
@@ -27,7 +27,7 @@
                     <th><strong>{{localize "age-system.newAdvance"}}</strong></th>
                     <th><strong>{{localize "age-system.newAblScore"}}</strong></th>
                 </tr>
-                {{#each newAbilities as |k|}}
+                {{#each helper.advAbility.prog as |k|}}
                 <tr data-index="{{@index}}">
                     <td><strong>{{k.name}}</strong></td>
                     <td>{{k.curScore}}</td>

@@ -345,6 +345,7 @@ export class AgeLevel {
   constructor(actor, classItem, targetLevel, improvements, options = {}) {
     this.actor = actor;
     this.classItem = classItem;
+    this.helper = {}; // Space to store data generated programatically to prepare advancements for all traits
     
     // Separate advancements per category
     const improveData = {};
@@ -352,12 +353,22 @@ export class AgeLevel {
       const imp = improvements[i];
       switch (imp.type) {
         case 'progressive':
-          if (improveData[imp.trait]) improveData[imp.trait].push(imp)
-          else improveData[imp.trait] = [imp];
+          if (improveData[imp.trait]) improveData[imp.trait].push(imp);
+          else {
+            improveData[imp.trait] = [imp];
+            this.helper[imp.trait] = {};
+          }
           break;
         case 'item':
-          if (improveData.item) improveData.item.push(imp)
-          else improveData.item = [imp];
+          const id = imp.id
+          const items = classItem.system.advancements.item[id].itemArr; // select all itens to be advanced at this Level
+          for (let i = 0; i < items.length; i++) {
+            const it = items[i];
+            if (improveData[it.trait]) improveData[it.trait].push({item: it, helper: {}})
+            else {
+              improveData[it.trait] = [{item: it, helper: {}}];
+            }          
+          }
           break;
         default:
           if (improveData.invalidAdvance) improveData.invalidAdvance.push(imp)
@@ -383,7 +394,7 @@ export class AgeLevel {
 
   _prepareTraits(trait) {
     switch (trait) {
-      case 'advAbility': this._levelAbl(); break;
+      case 'advAbility': this._levelAbl(trait); break;
       // 'health',
       // 'conviction',
       // 'relationship',
@@ -403,8 +414,8 @@ export class AgeLevel {
    * Define total of advances and valid Abilities to be progressed or NULL if no Ability data is progressing this level
    * @returns Object with 'advances' and 'validKeys' or null if no Ability Advance is available for this level
    */
-  _levelAbl() {
-    const ablAdv = this.advData.advAbility;
+  _levelAbl(t) {
+    const ablAdv = this.advData[t];
     if (!ablAdv) return null;
     const classItem = this.classItem;
     const actor = this.actor;
@@ -415,7 +426,7 @@ export class AgeLevel {
       const e = Number(ablAdv[q].value);
       advances = advances + e;
     }
-    this.advData.advances = advances;
+    this.helper[t].advances = advances;
 
     // Identify relevant Game Setting;
     const primaryAbl = game.settings.get("age-system", "primaryAbl");
@@ -458,7 +469,7 @@ export class AgeLevel {
         newScore: actorAbl[e].value
       })
     }
-    this.newAbilities = abilities;
+    this.helper[t].prog = abilities;
   };
 
   _levelHealth(t = `health`) {
@@ -500,11 +511,15 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
   constructor(data={}, options = {}) {
     super(options);
     this.data = data;
-    this.newLevel = new AgeLevel(data.actor, data.classItem, data.targetLevel, data.improvements);
-    this.workingTrait = 'none';
-    
-    // Initialize array with possible traits to level up
-    this.traits = [
+    this.newLevel = new AgeLevel(data.actor, data.classItem, data.targetLevel, data.improvements);    
+    const imp = this.newLevel.advData; // Object with all advanced data
+    const availableTraits = [] // Array to be populated with traits to be leveled
+    // Capture all traits to be levelled
+    for (const k in imp) {
+      if (Object.hasOwnProperty.call(imp, k)) availableTraits.push(k)
+    }
+    // List of all traits
+    const ts = [
       'advAbility',
       'health',
       'conviction',
@@ -517,15 +532,14 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
       'power',
       'stunts'
     ];
-
-    this._evalNextTrait();
+    // Trait list reduced to fit only available data
+    for (let i = ts.length-1; i > -1; i--) {
+      const e = ts[i];
+      if (!availableTraits.includes(e)) ts.splice(i,1)
+    }
+    this.traits = ts;
+    this._evalNextTrait()
   }
-
-  // get advData () {
-  //   const trait = this.traits[0];
-  //   const data = this.ageLevel.advData[trait];
-  //   return data ?? null;
-  // }
 
   get title() {
     const advType = game.i18n.localize(`age-system.${this.workingTrait}`);
@@ -545,7 +559,7 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
 
   _prepData(trait) {
     switch (trait) {
-      case 'advAbility': this._calcAbility(); break;
+      case 'advAbility': this._calcAbility(trait); break;
       // 'health',
       // 'conviction',
       // 'relationship',
@@ -603,27 +617,22 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
   }
 
   _evalNextTrait() {
-    let wt = this.workingTrait;
     const ts = this.traits;
-    const al = this.newLevel;
-    if (wt == 'none') {
-      wt = ts[0];
-    } else {
-      do {
-        ts.shift()
-      } while (ts.lenght > 0 && !al[ts[0]]);
-      wt = ts[0];
-    }
-    if (wt) {
-      al._prepareTraits(wt);
-      this.advData = al[wt];
-    }
-    this.workingTrait = wt ?? null;
+    if (!ts.length) return this._allDone(); // Call method to wrap up leveling.
+    const wt = ts.shift();
+    this.workingTrait = wt;
+    this.newLevel._prepareTraits(wt);
+    this.render(true);
   }
 
-  _changeAblAdv(i, d) {
-    const abl = this.newLevel.newAbilities[i];
-    let advances = this.newLevel.advData.advances;
+  _allDone() {
+    this.close();
+  }
+
+  _changeAblAdv(i, d, t="advAbility") {
+    const newLevel = this.newLevel
+    const abl = newLevel.helper[t].prog[i];
+    let advances = newLevel.helper[t].advances;
     
     // CASE 1 - Ignore command if user is adding advances but none is available to be spent
     if (advances == 0 && d > 0) return null;
@@ -631,7 +640,7 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
     if (abl.newAdvance == 0 && d < 0) return null;
 
     abl.newAdvance = Math.max(0, abl.newAdvance + d);
-    this.newLevel.advData.advances = advances - d;
+    newLevel.helper[t].advances = advances - d;
     this._calcAbility();
     this.render(false);
   }
@@ -642,8 +651,9 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
     return scoreCost[i];
   }
 
-  _calcAbility() {
-    const abilities = this.newLevel.newAbilities;
+  _calcAbility(t="advAbility") {
+    const newLevel = this.newLevel
+    const abilities = newLevel.helper[t].prog;
     for (let i = 0; i < abilities.length; i++) {
       const a = abilities[i];
       a.sumAdvance = a.curAdvance + a.newAdvance;
@@ -654,13 +664,14 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
         a.sumAdvance = a.sumAdvance - this._ablAdvCost(a.newScore);
       };
     }
-    this.newLevel.newAbilities = abilities;
+    // this.newLevel.newAbilities = abilities;
   }
 
   _updateObject() {
     const data = this.data;
-    switch (data.trait) {
-      case "advAbility": if (data.advances > 0) return null
+    const t = data.trait
+    switch (t) {
+      case "advAbility": if (this.newLevel.helper[t].advances > 0) return null
         
         break;
     
