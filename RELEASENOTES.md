@@ -1,5 +1,9 @@
 # Release Notes
 
+## 2.0.6 [2024-xx-xx]
+### Fixed
+- Talente degree not showing consistently on stat block view.
+
 ## 2.0.5 [2024-03-26]
 ### Fixed
 - Bug preventing Modifiers to be added to characters.
