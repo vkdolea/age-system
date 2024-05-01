@@ -525,8 +525,10 @@
     "reloadable": "Recargable",
     "move": "Mover",
     "level": "Nivel",
+    "newLevel": "Nivel Nuevo",
     "xp": "PX",
     "currentLevel": "Actual",
+    "next": "Siguiente",
     "nextLevel": "Siguiente",
     "advPoints": "Pto. Ventaja",
     "mod": "Mod",
@@ -722,6 +724,7 @@
     "customEffectsSet": "Efectos Personalizados activos",
     "attkHeader": "Arma Ataque Daño",
     "advancement": "Progreso",
+    "advancementPlural": "Avances",
     "improvements": "Mejoras",
     "advancementNew": "Selecciona Progreso",
     "levelName": "Nivel {level}",
@@ -741,6 +744,8 @@
     "itemOptionAll": "Recibir todos los objetos",
     "dragAdvItem": "Arrastrar los Avances en el espacio debajo",
     "add": "Añadir",
-    "leveledImprovements": "Mejoras Obtenidas"
+    "leveledImprovements": "Mejoras Obtenidas",
+    "newAblScore": "Nuevo Valor Habilidad",
+    "newAdvance": "Nuevo Avance"
   }
 }
