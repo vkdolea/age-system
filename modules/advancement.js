@@ -1,5 +1,5 @@
 import { sortObjArrayByName } from "./setup.js";
-import { enrichTinyMCE } from "/systems/age-system/modules/setup.js";
+import { enrichTinyMCE } from "./setup.js";
 import { ageSystem } from "./config.js";
 
 /**
