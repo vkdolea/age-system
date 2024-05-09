@@ -395,7 +395,7 @@ export class AgeLevel {
   _prepareTraits(trait) {
     switch (trait) {
       case 'advAbility': this._levelAbl(trait); break;
-      // 'health',
+      case 'health': this._levelHealth(trait); break;
       // 'conviction',
       // 'relationship',
       // 'powerPoints',
@@ -474,22 +474,25 @@ export class AgeLevel {
 
   _levelHealth(t = `health`) {
     const trait = this.advData[t];
+    const helper = this.helper[t]
     if (!trait) return null;
-    const classItem = this.classItem;
-    const actor = this.actor;
-    const dataUpdates = this.dataUpdates;
+    // const classItem = this.classItem;
+    // const actor = this.actor;
+    // const dataUpdates = this.dataUpdates;
 
     const traitParts = [];
     for (let q = 0; q < trait.length; q++) {
       const e = trait[q].value;
       traitParts.push(e);
     }
-    let traitFormula = null;
+
+    // Compose formula to roll for Health progress
+    let tf = ``;
     for (const p of traitParts) {
-      traitFormula = null ? p : `${traitFormula} + ${p}`;
+      tf = (tf === ``) ? p : `${tf} + ${p}`;
     }
+    helper.formula = tf;
     // Criar pontos de avaliar com Quick Eval: se passar, ótimo. Se não passar é pq tem que rolar dados => segue para rolagem de dados
-    this.advData.advances = advances;
   };
   _levelConviction() {};
   _levelRelationship() {};
@@ -612,8 +615,20 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
       }
     })
 
+    // Roll Health
+    html.find(".roll-health").click(this._rollHealth.bind(this))
+
     // On pressing "Next"
     html.find("footer button.next").click(this._evalNextTrait.bind(this))
+  }
+
+  async _rollHealth(e) {
+    e.preventDefault();
+    const helper = this.newLevel.helper.health; 
+		const roll = await new Roll(helper.formula).evaluate();
+    helper.total = roll.total;
+		roll.toMessage({flavor: ageSystem.healthSys.healthName}, {rollMode: "public"});
+    this.render(true);
   }
 
   _evalNextTrait() {
