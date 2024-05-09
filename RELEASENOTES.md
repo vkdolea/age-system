@@ -3,6 +3,7 @@
 ## 2.0.6 [2024-xx-xx]
 ### Fixed
 - Talente degree not showing consistently on stat block view.
+- Added relative path on advancement.js to fix issues related to hosted servers.
 
 ## 2.0.5 [2024-03-26]
 ### Fixed
