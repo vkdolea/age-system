@@ -1,10 +1,9 @@
 'use strict';
 
 var eachProps = require('each-props');
-var isPlainObject = require('is-plain-object');
+var isPlainObject = require('is-plain-object').isPlainObject;
 
-module.exports = function(src, dst, fromto, converter, reverse) {
-
+module.exports = function (src, dst, fromto, converter, reverse) {
   if (!isObject(src)) {
     src = {};
   }
@@ -92,7 +91,7 @@ function copyWithFromto(value, keyChain, nodeInfo) {
   };
 
   for (var i = 0, n = dstKeyChains.length; i < n; i++) {
-    setDeep(nodeInfo.dest, dstKeyChains[i], function(parent, key, depth) {
+    setDeep(nodeInfo.dest, dstKeyChains[i], function (parent, key, depth) {
       var dstInfo = {
         keyChain: dstKeyChains[i],
         value: parent[key],
@@ -123,7 +122,7 @@ function copyWithoutFromto(value, keyChain, nodeInfo) {
     parent: nodeInfo.parent,
   };
 
-  setDeep(nodeInfo.dest, keyChain, function(parent, key, depth) {
+  setDeep(nodeInfo.dest, keyChain, function (parent, key, depth) {
     var dstInfo = {
       keyChain: keyChain,
       value: parent[key],
@@ -184,12 +183,17 @@ function setDeep(obj, keyChain, valueCreator) {
 
 function _setDeep(obj, keyElems, depth, valueCreator) {
   var key = keyElems.shift();
+  if (isPossibilityOfPrototypePollution(key)) {
+    return;
+  }
+
   if (!keyElems.length) {
     var value = valueCreator(obj, key, depth);
     if (value === undefined) {
       return;
     }
-    if (isPlainObject(value)) { // value is always an empty object.
+    if (isPlainObject(value)) {
+      // value is always an empty object.
       if (isPlainObject(obj[key])) {
         return;
       }
@@ -223,4 +227,8 @@ function newUndefined() {
 
 function isObject(v) {
   return Object.prototype.toString.call(v) === '[object Object]';
+}
+
+function isPossibilityOfPrototypePollution(key) {
+  return key === '__proto__' || key === 'constructor';
 }

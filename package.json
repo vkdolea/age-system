@@ -4,10 +4,8 @@
   "description": "fvtt implementation for gr age system (unofficial)",
   "main": "age-system.js",
   "dependencies": {
-    "gulp": "^4.0.2",
-    "gulp-less": "^4.0.1"
+    "gulp-less": "^5.0.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/vkdolea/age-system/issues"
   },
-  "homepage": "https://github.com/vkdolea/age-system#readme"
+  "homepage": "https://github.com/vkdolea/age-system#readme",
+  "devDependencies": {
+    "gulp": "^5.0.0"
+  }
 }
