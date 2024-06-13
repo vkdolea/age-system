@@ -20,9 +20,9 @@ export default class r20importer {
     const jFolder = [];
 
     pages.forEach(e => {
-      let privilege = {default: CONST.DOCUMENT_PERMISSION_LEVELS.NONE};
-      if (e.inplayerjournals.includes('all')) privilege.default = CONST.DOCUMENT_PERMISSION_LEVELS.OBSERVER;
-      if (e.controlledby.includes('all')) privilege.default = CONST.DOCUMENT_PERMISSION_LEVELS.OWNER;
+      let privilege = {default: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE};
+      if (e.inplayerjournals.includes('all')) privilege.default = CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER;
+      if (e.controlledby.includes('all')) privilege.default = CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
       let textField = e.notes;
       if (e.avatar != "") textField = `<img src="${e.avatar}">` + textField;
 
@@ -42,7 +42,7 @@ export default class r20importer {
 
       // Add GM only page
       if (e.gmnotes != "") pg.push({
-        ownership: {default: CONST.DOCUMENT_PERMISSION_LEVELS.NONE},
+        ownership: {default: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE},
         name: "GM Notes",
         type: 'text',
         text: {content: e.gmnotes}

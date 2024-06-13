@@ -19,7 +19,7 @@ export default class ConditionsWorkshop extends Application {
   }
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['age-system-dialog', 'age-system'],
       id: 'age-conditions-workshop',
       template: 'systems/age-system/templates/conditions-workshop.hbs',

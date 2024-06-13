@@ -7,7 +7,7 @@ export default class BreatherSettings extends FormApplication {
     this.config = ageSystem.breather;
   }
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: 'breather-settings',
       template: 'systems/age-system/templates/rolls/breather-settings.hbs',
       resizable: false,

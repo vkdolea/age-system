@@ -6,7 +6,7 @@ import {dropChar, newItemData} from "./helper.js";
 export default class ageSpaceshipSheet extends ActorSheet {
     
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             // resizable: false,
             width: 680,
             height: 750,

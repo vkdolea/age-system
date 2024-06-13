@@ -6,7 +6,7 @@ import {newItemData} from "./helper.js";
 export default class ageSystemSheetCharacter extends ActorSheet {
     
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             height: 875,
             width: 700,
             classes: ["age-system", "sheet", "char-sheet-alt"],

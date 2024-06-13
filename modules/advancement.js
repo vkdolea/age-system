@@ -13,7 +13,7 @@ export class AdvancementAdd extends Application {
   }
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['age-system-dialog', 'age-system', 'advancement-config'],
       template: 'systems/age-system/templates/advancement-add.hbs',
       resizable: false,
@@ -135,7 +135,7 @@ export class AdvancementSetup extends FormApplication {
   }
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".item-drop-area" }],
       classes: ['age-system-dialog', 'age-system', 'advancement-config'],
       template: 'systems/age-system/templates/advancement-setup.hbs',

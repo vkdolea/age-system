@@ -429,7 +429,7 @@ Hooks.once("ready", async function() {
     if ( !game.user.isGM ) return;
     const currentVersion = game.settings.get("age-system", "systemMigrationVersion");
     const NEEDS_MIGRATION_VERSION = "2.0.2";
-    const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+    const needsMigration = !currentVersion || foundry.utils.isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
     if ( !needsMigration ) return;
     migrations.migrateWorld();
 });

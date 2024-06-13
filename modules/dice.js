@@ -369,7 +369,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     }
 
     // Finally, the Age Roll!
-    const ageRoll = await new Roll(rollFormula, rollData).evaluate({async: true});
+    const ageRoll = await new Roll(rollFormula, rollData).evaluate();
 
     // If rollTN is used, check if roll fails or succeed
     let isSuccess = null
@@ -398,7 +398,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         actorId,
         isToken,
         isSuccess,
-        roll: ageRoll,
+        rolls: [ageRoll],
         ageRollSummary: rollSummary,
         rollTN,
         focusId,
@@ -413,8 +413,8 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         user: game.user.id,
         speaker: {alias: game.user.name},
         content: await renderTemplate(chatTemplate, rollData),
-        roll: ageRoll,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        rolls: [ageRoll],
+        style: CONST.CHAT_MESSAGE_STYLES.OTHER,
         flags: {
             "age-system": {
                 "ageroll": {
@@ -780,8 +780,8 @@ export async function plotDamage (actor) {
         user: game.user.id,
         speaker: {alias: game.user.name},
         content: await renderTemplate(chatTemplate, rollData),
-        roll: dmgRoll,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        rolls: [dmgRoll],
+        style: CONST.CHAT_MESSAGE_STYLES.OTHER,
         flags: {
             "age-system": {
                 ageroll: {
@@ -961,7 +961,7 @@ export async function itemDamage({
         rollData.modeDamage = modeDamage;
     };
 
-    let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
+    let dmgRoll = await new Roll(damageFormula, rollData).evaluate();
 
     for (let t = 0; t < dmgRoll.terms.length; t++) {
         const term = dmgRoll.terms[t];
@@ -991,8 +991,8 @@ export async function itemDamage({
         user: game.user.id,
         speaker: {alias: game.user.name},
         content: await renderTemplate(chatTemplate, rollData),
-        roll: dmgRoll,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        rolls: [dmgRoll],
+        style: CONST.CHAT_MESSAGE_STYLES.OTHER,
         flags: {
             "age-system": {
                 ageroll: {

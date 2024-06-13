@@ -1,6 +1,9 @@
 # Release Notes
 
-## 2.0.6 [2024-xx-xx]
+## 3.0.0 [2024-xx-xx]
+### Added
+- Compatibility to FoundryVTT 12. Not compatible to previous versions.
+
 ### Fixed
 - Talente degree not showing consistently on stat block view.
 - Added relative path on advancement.js to fix issues related to hosted servers.

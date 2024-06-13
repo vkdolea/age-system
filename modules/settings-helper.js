@@ -6,7 +6,7 @@ export class QuickSettings extends FormApplication {
     this.config = {};
   }
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: 'quick-settings',
       template: 'systems/age-system/templates/quick-settings.hbs',
       resizable: false,
@@ -99,7 +99,7 @@ export class AdvancedSettings extends FormApplication {
     this.config = {};
   }
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: 'adv-settings',
       template: 'systems/age-system/templates/adv-settings.hbs',
       resizable: false,

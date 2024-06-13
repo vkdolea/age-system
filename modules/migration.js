@@ -69,7 +69,7 @@ export const migrateWorld = async function() {
 
   // Set the migration as complete
   await game.settings.set("age-system", "systemMigrationVersion", game.system.version);
-  if (settingsUpdates !== []) {
+  if (settingsUpdates.length > 0) {
     for (let s = 0; s < settingsUpdates.length; s++) {
       const setting = settingsUpdates[s];
       game.settings.set("age-system", setting.key, setting.value);
@@ -89,7 +89,7 @@ export async function migrateSettings() {
   let updateSettings = [];
   let migData = await game.settings.get("age-system", "settingsMigrationData");
   
-  if (isNewerVersion("0.8.0", lastMigrationVer)) { // Do not execute if last migration version was 0.8.0 or earlier
+  if (foundry.utils.isNewerVersion("0.8.0", lastMigrationVer)) { // Do not execute if last migration version was 0.8.0 or earlier
     const newHealthSys = await removeToughHealthBallistic();
     const newData = {key: "healthSys", value: newHealthSys, version: "0.8.0"}
     let diff = false
@@ -100,7 +100,7 @@ export async function migrateSettings() {
     if (newHealthSys !== healthSys) updateSettings.push(newData)
   };
 
-  if (isNewerVersion("1.0.0", lastMigrationVer)) { // Do not execute if last migration version was 1.0.0 or earlier
+  if (foundry.utils.isNewerVersion("1.0.0", lastMigrationVer)) { // Do not execute if last migration version was 1.0.0 or earlier
     // Migrate Custom Token Status
     const te = game.settings.get("age-system", "customTokenEffects");
     for (let e = 0; e < te.length; e++) {
@@ -115,7 +115,7 @@ export async function migrateSettings() {
     await game.settings.set("age-system", "customTokenEffects", te);
   }
 
-  if (isNewerVersion("2.0.2", lastMigrationVer)) { // Do not execute if last migration version was 2.0.2 or earlier
+  if (foundry.utils.isNewerVersion("2.0.2", lastMigrationVer)) { // Do not execute if last migration version was 2.0.2 or earlier
     // Migrate field "label" from Custom Token Status to "name", to comply to FoundryVTT v11 new API.
     let te = game.settings.get("age-system", "customTokenEffects");
     for (let i = 0; i < te.length; i++) {
@@ -204,7 +204,7 @@ export const migrateMessage = function(message) {
   const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
   const updateData = {};
 
-  if (isNewerVersion("1.0.0", lastMigrationVer)) _adjustRollsArray(message, updateData); // Do not execute if last migration was 1.0.0 or earlier
+  if (foundry.utils.isNewerVersion("1.0.0", lastMigrationVer)) _adjustRollsArray(message, updateData); // Do not execute if last migration was 1.0.0 or earlier
   return updateData;
 }
 
@@ -219,7 +219,7 @@ export const migrateActorData = function(actor, source={}) {
   const updateData = {};
 
   // Actor Data Updates
-  if(isNewerVersion("0.12.0", lastMigrationVer)) _updateModeHealth(actor, source, updateData);
+  if(foundry.utils.isNewerVersion("0.12.0", lastMigrationVer)) _updateModeHealth(actor, source, updateData);
   
   // Migrate Owned Effects
   const effects = migrateEffects(actor)
@@ -275,13 +275,13 @@ const migrateEffects = function(parent) {
 export const migrateItemData = function(item) {
   const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
   const updateData = {};
-  if (isNewerVersion("0.7.0", lastMigrationVer)) _adjustFocusInitialValue(item, updateData); // Do not execute if last migration was 0.7.0 or earlier
-  if (isNewerVersion("0.11.0", lastMigrationVer)) {
+  if (foundry.utils.isNewerVersion("0.7.0", lastMigrationVer)) _adjustFocusInitialValue(item, updateData); // Do not execute if last migration was 0.7.0 or earlier
+  if (foundry.utils.isNewerVersion("0.11.0", lastMigrationVer)) {
     if (item.type === "weapon" ) _weaponRanged(item, updateData);
     if (["weapon", "power"].includes(item.type)) _itemDamage(item, updateData);
     _populateItemModifiers(item, updateData);
   }
-  if (isNewerVersion("0.11.2", lastMigrationVer)) _talentDegree(item, updateData);
+  if (foundry.utils.isNewerVersion("0.11.2", lastMigrationVer)) _talentDegree(item, updateData);
   return updateData;
 };
 /* -------------------------------------------- */
@@ -293,7 +293,7 @@ export const migrateItemData = function(item) {
 export const migrateEffectData = function(effect) {
   const lastMigrationVer = game.settings.get("age-system", "systemMigrationVersion");
   const updateData = {};
-  if (isNewerVersion("0.8.8", lastMigrationVer)) _addEffectFlags(effect, updateData); // Do not execute if last migration was 0.8.8 or earlier
+  if (foundry.utils.isNewerVersion("0.8.8", lastMigrationVer)) _addEffectFlags(effect, updateData); // Do not execute if last migration was 0.8.8 or earlier
   return updateData;
 };
 /* -------------------------------------------- */
@@ -333,17 +333,17 @@ export const migrateSceneData = async function(scene) {
                 break;
             
               case 'effects':
-                mergeObject(original, original.data);
+                foundry.utils.mergeObject(original, original.data);
                 break;
             }
             delete original.data;
           }
-          if (update) mergeObject(original, update);
+          if (update) foundry.utils.mergeObject(original, update);
         });
         delete update[embeddedName];
       });
 
-      mergeObject(t.delta, update);
+      foundry.utils.mergeObject(t.delta, update);
     }
     return t;    
   });
