@@ -13,7 +13,7 @@ export default class ageSystemVehicleSheet extends ActorSheet {
     }  
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             width: 680,
             height: 755,
             resizable: true,

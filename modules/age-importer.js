@@ -21,7 +21,7 @@ export default class AgeImporter extends Application {
   }
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['age-system-dialog', 'age-system'],
       id: 'age-importer',
       template: 'systems/age-system/templates/age-importer.hbs',

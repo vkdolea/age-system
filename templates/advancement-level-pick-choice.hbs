@@ -13,11 +13,11 @@
             
             <p class="notes">{{hint}}</p>
         </section>
-        {{!-- Ability Level Up setup --}}
-        {{log this}}
+
+        {{!-- Ability --}}
         {{#if (eq trait "advAbility")}}
         <section>
-            <span><strong>{{localize "age-system.advancementPlural"}}:&nbsp</strong>{{advData.advances}}</span>
+            <span><strong>{{localize "age-system.advancementPlural"}}:&nbsp</strong>{{helper.advAbility.advances}}</span>
             <table class="text-center">
                 <tr>
                     <th><strong>{{localize "age-system.abl"}}</strong></th>
@@ -27,7 +27,7 @@
                     <th><strong>{{localize "age-system.newAdvance"}}</strong></th>
                     <th><strong>{{localize "age-system.newAblScore"}}</strong></th>
                 </tr>
-                {{#each newAbilities as |k|}}
+                {{#each helper.advAbility.prog as |k|}}
                 <tr data-index="{{@index}}">
                     <td><strong>{{k.name}}</strong></td>
                     <td>{{k.curScore}}</td>
@@ -46,6 +46,33 @@
         {{/if}}
 
     </div>
+
+    {{!-- Health --}}
+    {{log this}}
+    {{#if (eq trait "health")}}
+    <section>
+        <table {{!--class="text-center"--}}>
+            <tr>
+                <td><strong>{{localize "age-system.source"}}</strong></td>
+                <td><strong>{{localize "age-system.value"}}</strong></td>
+            </tr>
+            {{#each advData.health as |k|}}
+            <tr data-index="{{@index}}">
+                <td>{{k.alias}}</td>
+                <td>{{k.value}}</td>
+            </tr>
+            {{/each}}
+            <tr>
+                <td><strong>{{localize "age-system.formula"}}</strong></td>
+                <td>{{helper.health.formula}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{localize "age-system.total"}}</strong> <a class="roll-health"><i class="fas fa-dice"></i></a></td>
+                <td><input type="number" name="helper.health.total" value="{{helper.health.total}}" placeholder="Roll dice to calculate" data-type="Number"/></td>
+            </tr>
+        </table>
+    </section>
+    {{/if}}
 
     {{!-- Flow control buttons --}}
     <footer class="flexrow">

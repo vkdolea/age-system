@@ -3,7 +3,7 @@ import ageSystemSheetCharacter from "./ageSystemSheetCharacter.js";
 export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter {
     
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             // resizable: false,
             width: 400,
             height: 650,

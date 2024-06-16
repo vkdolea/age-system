@@ -13,7 +13,7 @@ export default class ApplyDamageDialog extends Application {
   }
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['age-system-dialog', 'age-system'],
       id: 'apply-damage-window',
       template: 'systems/age-system/templates/apply-damage-window.hbs',
@@ -196,7 +196,7 @@ export default class ApplyDamageDialog extends Application {
     let chatData = {
       user: game.user.id,
       content: await renderTemplate(chatTemplate, templateData),
-      type: CONST.CHAT_MESSAGE_TYPES.OOC,
+      style: CONST.CHAT_MESSAGE_STYLES.OOC,
     }
     await ChatMessage.applyRollMode(chatData, 'gmroll');
     ChatMessage.create(chatData);
@@ -216,7 +216,7 @@ export default class ApplyDamageDialog extends Application {
     let chatData = {
       user: game.user.id,
       content: await renderTemplate(chatTemplate, templateData),
-      type: CONST.CHAT_MESSAGE_TYPES.OOC,
+      type: CONST.CHAT_MESSAGE_STYLES.OOC,
       whisper: owners,
       flags: {
         "age-system": {

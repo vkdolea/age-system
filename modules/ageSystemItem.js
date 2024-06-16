@@ -47,7 +47,7 @@ export class ageSystemItem extends Item {
     }
     
     /** @override */
-    prepareBaseData() {
+    prepareData() {
         const itemData = this;
         const data = itemData.system;
         const itemType = itemData.type;
@@ -517,7 +517,7 @@ export class ageSystemItem extends Item {
                 // Check formula for Dice Terms
                 const tempRoll = new Roll(m.formula);
                 tempRoll.terms.map(term => {
-                    if (term instanceof DiceTerm) validFormula = false
+                    if (term instanceof foundry.dice.terms.DiceTerm) validFormula = false
                 });
                 break;
 
@@ -717,7 +717,7 @@ export class ageSystemItem extends Item {
             }
         };
         if (forceSelfRoll) {
-            chatData.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
+            chatData.style = CONST.CHAT_MESSAGE_STYLES.WHISPER;
             chatData.whisper = [game.user.id];
         } else {
             ChatMessage.applyRollMode(chatData, rollMode);

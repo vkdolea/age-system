@@ -60,7 +60,7 @@ export default class ageSystemItemSheet extends ItemSheet {
     };
    
     static get defaultOptions() {        
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             height: 500,
             width: 805,
             classes: ["age-system", "sheet", "item", "colorset-second-tier"],
