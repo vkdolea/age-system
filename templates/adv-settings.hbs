@@ -7,11 +7,7 @@
         <div class="form-fields">
             {{#if isSelect}}
             <select name="{{key}}">
-                {{#select value}}
-                {{#each choices as |name type|}}
-                <option value="{{type}}">{{localize name}}</option>
-                {{/each}}
-                {{/select}}
+                {{selectOptions choices selected=key localize=true}}
             </select>
             {{else}}
             {{#if (eq type 'Boolean')}}

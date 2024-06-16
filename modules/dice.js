@@ -8,8 +8,13 @@ import { sortObjArrayByName } from "./setup.js";
  * @returns {Object} Object with parts.shortFormula, parts.nonDet, parts.det, parts.detValue
  */
 export function resumeFormula(formula, data = {}) {
-    if (!formula) return null
-    const simRoll = new Roll(formula, data);
+    if (!formula) return null;
+    let simRoll;
+    try {
+        simRoll = new Roll(formula, data);
+    } catch (e) {
+        return null;
+    };
     const terms = simRoll.terms;    
     const parts = {
         det: "",

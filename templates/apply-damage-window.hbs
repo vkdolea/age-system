@@ -91,18 +91,10 @@
                 <div>
                     <div class="flexrow">
                         <select name="handler.damageType" class="damage-type">
-                            {{#select handler.damageType}}
-                            {{#each config.damageType as |name type|}}
-                            <option value="{{type}}">{{localize name}}</option>
-                            {{/each}}
-                            {{/select}}
+                            {{selectOptions config.damageType selected=handler.damageType localize=true}}
                         </select>
                         <select name="handler.damageSource" class="damage-source">
-                            {{#select handler.damageSource}}
-                            {{#each config.damageSource as |name source|}}
-                            <option value="{{source}}">{{localize name}}</option>
-                            {{/each}}
-                            {{/select}}
+                            {{selectOptions config.damageSource selected=handler.damageSource localize=true}}
                         </select>
                     </div>
                 </div>
