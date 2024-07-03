@@ -1,6 +1,10 @@
 # Release Notes
 
-## 3.0.1 [2024-06-16]
+## 3.0.2 [2024-07-03]
+### Fixed
+- Typo on manifest preventing system update.
+
+## 3.0.1 [2024-07-03]
 ### Added
 - Function updated to restart Foundry when certain System Settings are changed.
 
