@@ -1,5 +1,14 @@
 # Release Notes
 
+## 3.0.1 [2024-06-16]
+### Added
+- Function updated to restart Foundry when certain System Settings are changed.
+
+### Fixed
+- Roll Total is now displaying the expected value instead of omitting total figures.
+- Advanced AGE Settings will now remember the value used on drop-down menus.
+- Error when trying to attack targeted token.
+
 ## 3.0.0 [2024-06-16]
 ### Added
 - Compatibility to FoundryVTT 12. Not compatible to previous versions. Few deprecated messagens are still poping-up, but they will be removed over the new versions.

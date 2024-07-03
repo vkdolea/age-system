@@ -6,8 +6,9 @@
         <label>{{name}}</label>
         <div class="form-fields">
             {{#if isSelect}}
+            {{log this}}
             <select name="{{key}}">
-                {{selectOptions choices selected=key localize=true}}
+                {{selectOptions choices selected=value localize=true}}
             </select>
             {{else}}
             {{#if (eq type 'Boolean')}}

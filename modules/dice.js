@@ -396,6 +396,7 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     rollData = {
         ...rollData,
         // Informs card's color scheme
+        rolls: [ageRoll],
         colorScheme: `colorset-${game.settings.get("age-system", "colorScheme")}`,
         flavor,
         flavor2,
@@ -403,7 +404,6 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
         actorId,
         isToken,
         isSuccess,
-        rolls: [ageRoll],
         ageRollSummary: rollSummary,
         rollTN,
         focusId,
@@ -433,12 +433,20 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     // Configuration of Stunt Die if using Dice so Nice
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {
         const stuntDieColorset = game.settings.get("age-system", "stuntSoNice");
-        chatData.roll.terms[2].options = {
-            colorset: stuntDieColorset ?? "bronze",
-            appearance: {
-                system: game.user.flags["dice-so-nice"]?.appearance?.global?.system ?? "standard"
+        chatData.rolls.forEach(r => {
+            r.terms[2].options = {
+                colorset: stuntDieColorset ?? "bronze",
+                appearance: {
+                    system: game.user.flags["dice-so-nice"]?.appearance?.global?.system ?? "standard"
+                }
             }
-        }
+        })
+        // chatData.roll.terms[2].options = {
+        //     colorset: stuntDieColorset ?? "bronze",
+        //     appearance: {
+        //         system: game.user.flags["dice-so-nice"]?.appearance?.global?.system ?? "standard"
+        //     }
+        // }
     };
 
     if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;

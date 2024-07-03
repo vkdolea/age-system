@@ -1,30 +1,31 @@
 <form class="age-system base-age-roll colorset-selection {{colorScheme}}">
+{{#each rolls as |roll|}}
     <div class="feature-controls">
 
         <div class="flexcol roll-card regular-roll-card">
 
             <div class="roll-chart">
                 <div class="roll-header action-details colorset-first-tier">
-                    <h3>{{flavor}}</h3>
-                    {{#if flavor2}}
-                    <h4>{{flavor2}}</h4>
+                    <h3>{{../flavor}}</h3>
+                    {{#if ../flavor2}}
+                    <h4>{{../flavor2}}</h4>
                     {{/if}}
                 </div>
                 <div class="roll-dice dice-show trait-test flexrow">
-                    {{#each ageRollSummary.dice as |diceFace|}}
+                    {{#each ../ageRollSummary.dice as |diceFace|}}
                         <i class="fas fa-dice-{{facename diceFace}} fa-4x"></i>
                     {{/each}}
                 </div>
                 <div class="flexrow roll-mod total-roll">
-                    <h3 class="line-header">{{localize "age-system.settings.totalRolled"}}{{#if rollTN}}{{#if isSuccess}} ({{localize "age-system.success"}}) {{else}} ({{localize "age-system.miss"}}) {{/if}}{{/if}}</h3>
+                    <h3 class="line-header">{{localize "age-system.settings.totalRolled"}}{{#if ../rollTN}}{{#if ../isSuccess}} ({{localize "age-system.success"}}) {{else}} ({{localize "age-system.miss"}}) {{/if}}{{/if}}</h3>
                     <h3 class="line-value">{{roll.total}}</h3>
                 </div>
-                <div class="flexrow roll-mod{{#if ageRollSummary.stunt}} stunted{{/if}}">
+                <div class="flexrow roll-mod{{#if ../ageRollSummary.stunt}} stunted{{/if}}">
                     <div class="line-header">{{localize "age-system.settings.stuntPoints"}}</div>
-                    <div class="line-value">{{#if ageRollSummary.stunt}}{{ageRollSummary.stuntPoints}}{{else}}-{{/if}}</div>
+                    <div class="line-value">{{#if ../ageRollSummary.stunt}}{{../ageRollSummary.stuntPoints}}{{else}}-{{/if}}</div>
                 </div>
 
-                {{#each partials as |part key|}}
+                {{#each ../partials as |part key|}}
                 <div class="flexrow roll-mod">
                     <div class="line-header">{{part.label}}</div>
                     <div class="line-value">{{part.value}}</div>
@@ -33,17 +34,17 @@
                 
             </div>
 
-            {{#if (ne rollType ROLL_TYPE.FATIGUE)}}
+            {{#if (ne ../rollType ../ROLL_TYPE.FATIGUE)}}
             <div class="age-chat-buttons flexcol">
-                {{#if (or hasDamage hasHealing)}}
+                {{#if (or ../hasDamage ../hasHealing)}}
                 <div class="age-chat-buttons grid">
 
                     <button class="age-button roll-damage main-dmg">
-                        {{#if hasTest}}
-                            {{#if hasDamage}} {{localize "age-system.chatCard.rollFullDamage"}}
+                        {{#if ../hasTest}}
+                            {{#if ../hasDamage}} {{localize "age-system.chatCard.rollFullDamage"}}
                             {{else}} {{localize "age-system.chatCard.rollFullHealing"}} {{/if}}
                         {{else}}
-                            {{#if hasDamage}} {{localize "age-system.chatCard.rollDamage"}}
+                            {{#if ../hasDamage}} {{localize "age-system.chatCard.rollDamage"}}
                             {{else}} {{localize "age-system.chatCard.rollHealing"}} {{/if}}
                         {{/if}}
                     </button>
@@ -63,11 +64,11 @@
                 </div>
                 {{/if}}
 
-                {{#if (and (or hasDamage hasHealing) hasTest)}}
+                {{#if (and (or ../hasDamage ../hasHealing) ../hasTest)}}
                 <div class="age-chat-buttons grid">
             
                     <button class="age-button roll-damage resisted main-dmg">
-                        {{#if hasDamage}} {{localize "age-system.chatCard.rollResistedDamage"}}
+                        {{#if ../hasDamage}} {{localize "age-system.chatCard.rollResistedDamage"}}
                         {{else}} {{localize "age-system.chatCard.rollResistedHealing"}} {{/if}}
                     </button>
 
@@ -86,14 +87,14 @@
                 </div>
                 {{/if}}
 
-                {{#if (and hasFatigue usingFatigue (ne ROLL_TYPE.FATIGUE rollType))}}
+                {{#if (and ../hasFatigue ../usingFatigue (ne ../ROLL_TYPE.FATIGUE ../rollType))}}
                 <button class="roll-fatigue age-button">
                     <i class="fas fa-head-side-cough"></i> {{localize "age-system.rollFatigue"}}
                 </button>
                 {{/if}}
 
-                {{#unless isSuccess}}
-                {{#if (eq ROLL_TYPE.TOUGHNESS rollType)}}
+                {{#unless ../isSuccess}}
+                {{#if (eq ../ROLL_TYPE.TOUGHNESS ../rollType)}}
                 <p class="injury-info colorset-third-tier">{{localize "age-system.autoApplyInjury"}}</p>
                 <div class="flexrow">
                     <button class="apply-injury light age-button">
@@ -108,8 +109,8 @@
                 </div>
                 {{/if}}
 
-                {{#if (eq ROLL_TYPE.TOUGHNESS_AUTO rollType)}}
-                <p class="injury-info colorset-third-tier">{{localize (concat "age-system." injuryDegree "InjuryInflicted")}}</p>
+                {{#if (eq ../ROLL_TYPE.TOUGHNESS_AUTO ../rollType)}}
+                <p class="injury-info colorset-third-tier">{{localize (concat "age-system." ../injuryDegree "InjuryInflicted")}}</p>
                 {{/if}}
                 {{/unless}}
 
@@ -120,7 +121,7 @@
         <div class="blind-roll-card flexcol roll-card">
             <div>
                 <h3 class="action-details colorset-first-tier other-user-roll">
-                    {{localize "age-system.chatCard.looseRoll" user=user.name }}
+                    {{localize "age-system.chatCard.looseRoll" user=../user.name }}
                 </h3>
                 <h3 class="action-details colorset-first-tier user-roll">
                     {{localize "age-system.blindRollSomeone"}}
@@ -134,4 +135,5 @@
             </div>
         </div>
     </div>
+{{/each}}
 </form>

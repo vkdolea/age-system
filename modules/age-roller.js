@@ -62,7 +62,7 @@ export class AgeRoller extends Application {
 		let formula = "";
 		if (type === 'd666') formula += '1d6*100 + '
 		formula += '1d6*10 + 1d6'
-		let roll = await new Roll(formula).evaluate({async: true});
+		let roll = await new Roll(formula).evaluate();
 		return roll.toMessage({flavor: type}, {rollMode: (ev.shiftKey || ev.type === "contextmenu") ? "selfroll" : ""});
 	}
 
@@ -154,7 +154,7 @@ export class AgeRoller extends Application {
 
 	async _onRightClick(event) {
 		event.preventDefault();
-		let roll = await new Roll("1d6").evaluate({async: true});
+		let roll = await new Roll("1d6").evaluate();
 		return roll.toMessage({}, {rollMode: event.shiftKey ? "blindroll" : ""});
 	}
 

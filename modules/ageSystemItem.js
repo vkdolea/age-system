@@ -613,7 +613,7 @@ export class ageSystemItem extends Item {
                         return;
                     } else {
                         const targetId = targets.ids[0];
-                        const targetToken = canvas.tokens.placeables.find(t => t.data._id === targetId);
+                        const targetToken = canvas.tokens.placeables.find(t => t.id === targetId);
                         targetNumber = targetToken.actor.system.defense.total;
                     }
                     break;

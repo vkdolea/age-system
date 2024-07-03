@@ -3,7 +3,7 @@
     "name": "age-system",
     "title": "AGE System (unofficial)",
     "description": "Unofficial AGE System implementation for most of AGE subsystems",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "compatibility": {
         "minimum": "12.327",
         "verified": "12.327"
