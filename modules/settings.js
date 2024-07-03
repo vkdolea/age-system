@@ -3,7 +3,8 @@ import BreatherSettings from "./breather.js";
 import { AdvancedSettings, QuickSettings } from "./settings-helper.js";
 import { localizePower } from "./setup.js";
 
-const debouncedReload = debounce(() => window.location.reload(), 250);
+// const debouncedReload = debounce(() => window.location.reload(), 250);
+const debouncedReload = () => foundry.utils.debounce(window.location.reload(), 250)
 export const registerSystemSettings = async function() {
 
   /**
