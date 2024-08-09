@@ -1,5 +1,9 @@
 # Release Notes
 
+## 3.0.3 [2024-08-10]
+### Fixed
+- System manifest updated with new spaces for grid definition.
+
 ## 3.0.2 [2024-07-03]
 ### Fixed
 - Typo on manifest preventing system update.
