@@ -47,7 +47,7 @@ export class ageSystemItem extends Item {
     }
     
     /** @override */
-    prepareData() {
+    prepareBaseData() {
         const itemData = this;
         const data = itemData.system;
         const itemType = itemData.type;

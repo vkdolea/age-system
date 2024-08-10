@@ -434,19 +434,13 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active) {
         const stuntDieColorset = game.settings.get("age-system", "stuntSoNice");
         chatData.rolls.forEach(r => {
-            r.terms[2].options = {
-                colorset: stuntDieColorset ?? "bronze",
+            r.dice[1].options = {
                 appearance: {
+                    colorset: stuntDieColorset ?? "foundry",
                     system: game.user.flags["dice-so-nice"]?.appearance?.global?.system ?? "standard"
                 }
             }
         })
-        // chatData.roll.terms[2].options = {
-        //     colorset: stuntDieColorset ?? "bronze",
-        //     appearance: {
-        //         system: game.user.flags["dice-so-nice"]?.appearance?.global?.system ?? "standard"
-        //     }
-        // }
     };
 
     if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;

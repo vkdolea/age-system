@@ -5,10 +5,7 @@ export class ageSystemActor extends Actor {
 
     /** @override */
     prepareData() {
-        // this.reset();
-        this.prepareBaseData();
-        this.prepareEmbeddedDocuments();
-        this.prepareDerivedData();
+        super.prepareData();
         // Sorting Items for final data preparation
         const items = this.items;
         if (this.type === 'char') {
@@ -16,14 +13,14 @@ export class ageSystemActor extends Actor {
             items.forEach(i => {
                 if (i.type === "focus") {
                     i.prepareData();
-                    if(i.sheet?.rendered) i.sheet.render(false);
+                    // i.sheet.render(false); // Removed as this was causing owned Items' sheet to render using Base Sheet instead of AGE System Item Sheet
                 }
             })
             // Then prepare other item types which require further prep
             items.forEach(i => {
                 if (["weapon", "power"].includes(i.type)) {
-                    i.prepareData()
-                    if(i.sheet?.rendered) i.sheet.render(false);
+                    i.prepareData();
+                    // i.sheet.render(false); // Removed as this was causing owned Items' sheet to render using Base Sheet instead of AGE System Item Sheet
                 }
             })
             

@@ -78,7 +78,6 @@ Hooks.once("init", function() {
     game.ageSystem = {
         applications: {
             ageSystemSheetCharacter,
-            // ageSystemSheetCharAlt,
             ageSystemSheetCharStatBlock,
             ageSystemSheetVehicle,
             ageSystemSheetSpaceship,
@@ -127,6 +126,19 @@ Hooks.once("init", function() {
     
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("age-system", ageSystemSheetItem, {
+        types: [
+            "equipment",
+            "focus",
+            "weapon",
+            "power",
+            "talent",
+            "stunts",
+            "relationship",
+            "honorifics",
+            "membership",
+            "shipfeatures",
+            "class"
+        ],
         makeDefault: true,
         label: "age-system.SHEETS.itemStandard"
     });
@@ -449,11 +461,13 @@ Hooks.once('diceSoNiceReady', () => {
     for (const type in colorset) {
         if (colorset.hasOwnProperty(type)) {
             const colorCode = colorset[type].name;
-            const colorName = colorset[type].description;
-            const newChoice = {[colorCode]: colorName}
-            colorChoices = {
-            ...colorChoices,
-            ...newChoice
+            if (colorCode != "custom") {
+                const colorName = colorset[type].description;
+                const newChoice = {[colorCode]: colorName}
+                colorChoices = {
+                    ...colorChoices,
+                    ...newChoice
+                }
             };
         };
     };

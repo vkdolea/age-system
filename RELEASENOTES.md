@@ -1,12 +1,15 @@
 # Release Notes
 
-## 3.0.3 [2024-08-10]
+## 3.0.3 [2024-08-11]
 ### Added
 - Active Effects can now be dragged to another character sheet to copy, just like regular Items.
 
 ### Fixed
 - Updated manifest to match v12 grid definition.
 - Removed invalid Ability option when editing Focus sheet.
+- Bug preventing the correct Item Sheet to be rendered when opening Focus, Weapon or Power owned by an Actor.
+- Updated Dice so Nice integration to match v5.
+- Actor and Item `prepareData()` updated according to lateste FVTT v12 definitions.
 
 ## 3.0.2 [2024-07-03]
 ### Fixed
