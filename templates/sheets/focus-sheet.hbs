@@ -45,7 +45,6 @@
                     <div class="flexcol minimum-length">
                         <select name="system.useAbl" class="header-input">
                             {{#select system.useAbl}}
-                            <option value="no-abl">-</option>
                             {{#if system.isOrg}}
                             {{#each config.abilitiesOrg as |name type|}}
                             <option value="{{type}}">{{localize name}}</option>
