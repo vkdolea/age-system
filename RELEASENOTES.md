@@ -1,8 +1,12 @@
 # Release Notes
 
 ## 3.0.3 [2024-08-10]
+### Added
+- Active Effects can now be dragged to another character sheet to copy, just like regular Items.
+
 ### Fixed
-- System manifest updated with new spaces for grid definition.
+- Updated manifest to match v12 grid definition.
+- Removed invalid Ability option when editing Focus sheet.
 
 ## 3.0.2 [2024-07-03]
 ### Fixed

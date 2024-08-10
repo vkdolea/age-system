@@ -203,6 +203,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             html.find(".roll-toughness").click(this._onRollToughness.bind(this));
             
             let handler = ev => this._onDragStart(ev);
+            
             // Set HMTL elements with class item-box as draggable elements.
             let items = html.find(".drag-to-macro");
             for (let i = 0; i < items.length; i++) {
@@ -417,7 +418,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         const newEffect = {
             name: game.i18n.localize("age-system.item.newItem"),
             origin: this.actor.uuid,
-            icon: `icons/svg/aura.svg`,
+            img: `icons/svg/aura.svg`,
             disabled: true,
             duration: {rounds: 1}
         };

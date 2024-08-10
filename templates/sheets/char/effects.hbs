@@ -45,9 +45,9 @@
             <span class="effect-add"><a><i class="fa fa-plus-circle" aria-hidden="true"></i></a></span>
         </li>
         {{#each data.effects as |effect|}}
-        <li class="values flexrow item-box feature-controls" data-effect-id="{{effect._id}}">
+        <li class="drag-to-macro values flexrow item-box feature-controls" data-effect-id="{{effect._id}}">
             <div class="effect-name flexrow">
-                <img class="item-image" src="{{effect.icon}}">
+                <img class="item-image" src="{{effect.img}}">
                 {{#if (ne effect.flags.age-system.conditionType "custom")}}
                 <span>{{localize effect.name}}</span>
                 {{else}}
