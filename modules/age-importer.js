@@ -15,7 +15,8 @@ export default class AgeImporter extends Application {
       "mageL": "Modern AGE (Major NPC)",
       "mageM": "Modern AGE (Minor NPC)",
       "fage": "Fantasy AGE",
-      "dage": "Dragon AGE"
+      "dage": "Dragon AGE",
+      "dageTalent": "Dragon AGE (Talent)"
     };
     this._modeSelected = 'expanse';
   }
@@ -98,6 +99,15 @@ export class AgeParser {
       items: []
     };
 
+    if (ageSetting === 'dageTalent') {
+      this._getName(block);
+      this._getRequirements(block);
+      this._getDescriptions();
+
+      this._createTalent();
+      return null;
+    };
+
     // Identify 'Threat' and remove this section from this.textLC
     this._getThreat();
     this._getSectionKeys();
@@ -153,7 +163,9 @@ export class AgeParser {
    * @returns Array without treated data
    */
   _getName(block) {
-    this.data.name = block[0].trim();
+    const rawName = block[0].trim();
+    const capitalizedName = rawName.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
+    this.data.name = capitalizedName;
     block.splice(0, 1);
     return block
   }
@@ -536,6 +548,65 @@ export class AgeParser {
         this.data.items.push(...e)
       }
     }
+  }
+
+  // get Talent requirements
+  _getRequirements(block) {
+    const rawRequirements = block[1]
+    const colonIndex = rawRequirements.indexOf(":");
+    this.data.requirements = rawRequirements.substring(colonIndex + 1).trim();
+  }
+
+  // get main description and for each level of Talent
+  _getDescriptions() {
+    this.data.description = {};
+    const requireStr = this.data.requirements;
+    const noviceStr = "Novice:";
+    const journeyStr = "Journeyman:";
+    const masterStr = "Master:";
+
+    // Main Description
+    const mainStart = this.text.indexOf(requireStr);
+    const mainEnd = this.text.indexOf(noviceStr);
+    this.data.description.main = this.text.substring(mainStart + this.data.requirements.length, mainEnd).trim();
+
+    // Novice Description
+    const noviceStart = this.text.indexOf(noviceStr);
+    const noviceEnd = this.text.indexOf(journeyStr);
+    this.data.description.novice = this.text.substring(noviceStart + noviceStr.length, noviceEnd).trim();
+
+    // Journeyman Description
+    const journeyStart = this.text.indexOf(journeyStr);
+    const journeyEnd = this.text.indexOf(masterStr);
+    this.data.description.journey = this.text.substring(journeyStart + journeyStr.length, journeyEnd).trim();
+
+    // Master Description
+    const masterStart = this.text.indexOf(masterStr);
+    this.data.description.master = this.text.substring(masterStart + masterStr.length).trim();
+  }
+
+  async _createTalent() {
+    const data = this.data;
+    const type = 'talent';
+
+    // Organize data to create new Talent
+    const talentData = {
+      name: data.name,
+      type: 'talent',
+      system: {
+        type: 'talent',
+        shortDesc: '',
+        longDesc: `<p>${data.description.main}</p>`,
+        requirement: data.requirements,
+        degree: '0',
+        degree0: { desc: `<p>${data.description.novice}</p>` },
+        degree1: { desc: `<p>${data.description.journey}</p>` },
+        degree2: { desc: `<p>${data.description.master}</p>` }
+      }
+    };
+
+    // Creates new Talent and Open its sheet
+    return game.items.documentClass.createDocuments([talentData]).then(a => a[0].sheet.render(true))
   }
 
   /**
