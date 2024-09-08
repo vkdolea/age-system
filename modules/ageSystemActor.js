@@ -918,7 +918,7 @@ export class ageSystemActor extends Actor {
         const charData = this.system;
         if (options.abl !== 'no-abl') formula += ` + ${Math.max(charData.abilities[options.abl].total, 0)}`;
         if (options.addLevel) formula += ageSystem.healthSys.useInjury ? ` + ${Math.floor(charData.level/4)}` : ` + ${charData.level}`;
-        let roll = await new Roll(formula, this.actorRollData()).evaluate({async: true});
+        let roll = new Roll(formula, this.actorRollData()).evaluateSync();
 		roll.toMessage({flavor: `${this.name} | ${game.i18n.localize("age-system.breather")}`}, {rollMode});
         if (options.autoApply) return ageSystem.healthSys.useInjury ? this.healMarks(roll.total) : this.applyHPchange(roll.total, {isHealing: true, isNewHP: false});
     }

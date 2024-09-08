@@ -657,7 +657,7 @@ export async function vehicleDamage ({
     //     dieSize: dieSize
     // };
     let messageData = {
-        flavor: `${vehicle.data.name} | ${game.i18n.localize(`age-system.${damageSource}`)}`,
+        flavor: `${vehicle.system.name} | ${game.i18n.localize(`age-system.${damageSource}`)}`,
         speaker: ChatMessage.getSpeaker()
     };
 
@@ -716,7 +716,7 @@ export async function vehicleDamage ({
         messageData.flavor += ` | +${extraDice}`;             
     };
 
-    let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
+    let dmgRoll = await new Roll(damageFormula, rollData).evaluate();
 
     return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
 
@@ -760,7 +760,7 @@ export async function plotDamage (actor) {
         rollData.extraDice = extraDice;
     };
 
-    let dmgRoll = await new Roll(formula, rollData).evaluate({async: true});
+    let dmgRoll = await new Roll(formula, rollData).evaluate();
     
     // Preparing custom damage chat card
     let chatTemplate = "/systems/age-system/templates/rolls/damage-roll.hbs";

@@ -1,5 +1,9 @@
 # Release Notes
 
+## 3.0.4 [2024-xx-xx]
+### Fixed
+- Bug causing Plot Damage (Organizations) and Vehicle collision to return error.
+
 ## 3.0.3 [2024-08-11]
 ### Added
 - Active Effects can now be dragged to another character sheet to copy, just like regular Items.
