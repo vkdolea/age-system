@@ -14,6 +14,9 @@ import { createAgeMacro, removeDoubledMods } from "./modules/macros.js";
 import { rollOwnedItem } from "./modules/macros.js";
 import { AgeRoller } from "./modules/age-roller.js";
 import { AgeTracker } from "./modules/age-tracker.js";
+import { applyBreather } from "./modules/breather.js";
+import AgeImporter from "./modules/age-importer.js";
+import ConditionsWorkshop from "./modules/conditions-workshop.js";
 
 import * as Dice from "./modules/dice.js";
 import * as Settings from "./modules/settings.js";
@@ -59,7 +62,7 @@ async function preloadHandlebarsTemplates() {
         `${pathRedux}sheets/char-block/play-aid-bar.hbs`,
     ];
 
-    return loadTemplates(templatePaths);
+    return foundry.applications.handlebars.loadTemplates(templatePaths);
 };
 
 Hooks.once("init", function() {
@@ -98,6 +101,8 @@ Hooks.once("init", function() {
         }
     };
 
+    const Actors = foundry.documents.collections.Actors;
+    const ActorSheet = foundry.appv1.sheets.ActorSheet;
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("age-system", ageSystemSheetCharacter, {
         types: ["char"],
@@ -124,6 +129,8 @@ Hooks.once("init", function() {
         label: "age-system.SHEETS.orgStandard"
     });
     
+    const Items = foundry.documents.collections.Items;
+    const ItemSheet = foundry.appv1.sheets.ItemSheet;
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("age-system", ageSystemSheetItem, {
         types: [
@@ -165,7 +172,7 @@ Hooks.once("init", function() {
     // CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;
 
     // Load partials for Handlebars
-    preloadHandlebarsTemplates();
+    preloadHandlebarsTemplates(); // Find correct v13 conidition
 
     // Register System Settings
     Settings.registerSystemSettings();
@@ -366,12 +373,6 @@ Hooks.once("ready", async function() {
     if (!userTrackerFlag) await game.user.setFlag("age-system", "ageTrackerPos", ageSystem.ageTrackerPos);
     if (useTracker) game.ageSystem.ageTracker.refresh();
 
-    // Age Roller
-    // Handle flag
-    const rollerFlag = await game.user.getFlag("age-system", "ageRollerPos");
-    if (!rollerFlag) await game.user.setFlag("age-system", "ageRollerPos", ageSystem.ageRollerPos);
-    game.ageSystem.ageRoller.refresh();
-
     // Safe copy of original Status Effects
     ageSystem.statusEffects.original = foundry.utils.deepClone(CONFIG.statusEffects);
 
@@ -450,8 +451,8 @@ Hooks.once("ready", async function() {
 Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatLog, content, userData))
 // Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
 Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});
-Hooks.on("renderChatLog", (app, html, data) => {    AgeChat.addChatListeners(html)});
-Hooks.on("renderChatMessage", (app, html, data) => {AgeChat.sortCustomAgeChatCards(app, html, data)});
+Hooks.on("renderChatLog", (app, html, data) => {AgeChat.addChatListeners(html)});
+Hooks.on("renderChatMessageHTML", (app, html, data) => {AgeChat.sortCustomAgeChatCards(app, html, data)});
 Hooks.on("getChatLogEntryContext", AgeChat.addChatMessageContextOptions);
 Hooks.on('renderActorSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));
 Hooks.on('renderItemSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));
@@ -483,4 +484,106 @@ Hooks.once('diceSoNiceReady', () => {
 Hooks.on('renderSettingsConfig', (SettingsConfig, html, data) => {
     Settings.updateFocusCompendia();
     // Settings.updateCompTable(); // TODO - this function will be useful only when dynamic choices for System Settings is implemented
+});
+// Adding AGE Roller as Canvas Control menu.
+Hooks.on(`getSceneControlButtons`, controls => {
+    controls["ageroller"] = {
+        "name": "ageroller",
+        "title": "AGE Roller",
+        "icon": "fa-duotone fa-dice",
+        "order": 99,
+        // "active": false,
+        "activeTool": "age",
+        "tools": {
+            "age": {
+                "name": "age",
+                "title": "AGE Toolbox",
+                "icon": "fa-solid fa-toolbox",
+                "order": 0,
+                "button": false
+            },
+            "ageroll": {
+                "name": "ageroll",
+                "order": 1,
+                "title": "Roll 3D6",
+                "icon": "fa-duotone fa-light fa-dice",
+                "button": true,
+                onChange: (event, active) => {
+                    const rollData = {
+                        event,
+                        flavor: game.user.name,
+                        flavor2: game.i18n.localize("age-system.chatCard.looseRoll")
+                    }
+                    Dice.ageRollCheck(rollData);
+                },
+            },
+            "singleroll": {
+                "name": "singleroll",
+                "order": 2,
+                "title": "Roll 1D6",
+                "icon": "fa-duotone fa-light fa-dice-six",
+                "button": true,
+                "activate": true,
+                onChange: async (event, active) => {
+                    let roll = await new Roll("1d6").evaluate();
+                    return roll.toMessage({}, {rollMode: event.shiftKey ? "blindroll" : ""});
+                }
+            },
+            "d66": {
+                "name": "d66",
+                "order": 3,
+                "title": "D66",
+                "icon": "fa-regular fa-2",
+                "button": true,
+                onChange: async (event, active) => {
+                    let roll = await new Roll("1d6*10 + 1d6").evaluate();
+                    return roll.toMessage({}, {rollMode: event.shiftKey ? "blindroll" : ""})
+                }
+            },
+            "d666": {
+                "name": "d666",
+                "order": 4,
+                "title": "D666",
+                "icon": "fa-regular fa-3",
+                "button": true,
+                onChange: async (event, active) => {
+                    let roll = await new Roll("1d6*100 + 1d6*10 + 1d6").evaluate();
+                    return roll.toMessage({}, {rollMode: event.shiftKey ? "blindroll" : ""})
+                }
+            },
+            // Figure out a way to select token when using this tool!!!
+            "breather": {
+                "name": "breather",
+                "order": 5,
+                "title": "age-system.breather",
+                "icon": "fa-regular fa-briefcase-medical",
+                "button": true,
+                onChange: (event, active) => applyBreather('selfroll')
+            },
+            "conditions": {
+                "name": "conditions",
+                "order": 6,
+                "title": "age-system.conditionsWorkshop",
+                "icon": "fa-solid fa-list",
+                "button": true,
+                onChange: (event, active) => new ConditionsWorkshop().render(true)
+            },
+            "importer": {
+                "name": "importer",
+                "order": 7,
+                "title": "age-system.ageImporter",
+                "icon": "fa-regular fa-file-import",
+                "button": true,
+                onChange: (event, active) =>  new AgeImporter().render(true)
+            },
+            "help": {
+                "name": "help",
+                "order": 8,
+                "title": "AGE System (unofficial) Wiki",
+                "icon": "fa-regular fa-circle-info",
+                "button": true,
+                onChange: (e, a) => window.open(ageSystem.wiki, '_blank')
+            }
+        }
+    }
 });

@@ -1,6 +1,12 @@
 # Release Notes
 
-## 3.0.4 [2024-xx-xx]
+## 4.0.0 [2025-06-07]
+### Added
+- Compatibility to Foundry VTT v13.
+
+### Changed
+- AGE Roller is now a Canvas Control buttom
+
 ### Fixed
 - Bug causing Plot Damage (Organizations) and Vehicle collision to return error.
 

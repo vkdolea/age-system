@@ -4,15 +4,24 @@ import ConditionsWorkshop from "./conditions-workshop.js";
 import { applyBreather } from "./breather.js";
 
 export function addChatListeners(html) {
-    html.on('click', '.roll-damage', chatDamageRoll);
-    html.on('contextmenu', '.roll-damage', chatDamageRoll);
-    html.on('click', '.roll-fatigue', chatFatigueRoll);
-    html.on('contextmenu', '.roll-fatigue', chatFatigueRoll);
-    html.on('click', '.roll-item', rollItemFromChat);
-    html.on('contextmenu', '.roll-item', rollItemFromChat);
-    html.on('click', '.apply-damage', applyDamageChat);
-    html.on('click', '.roll-toughness-test', resistInjury);
-    html.on('click', '.apply-injury', inflictInjury);
+    html.querySelectorAll('.roll-damage').forEach(el => el.addEventListener("click", chatDamageRoll));
+    html.querySelectorAll('.roll-damage').forEach(el => el.addEventListener("contextmenu", chatDamageRoll));
+    html.querySelectorAll('.roll-fatigue').forEach(el => el.addEventListener("click", chatFatigueRoll));
+    html.querySelectorAll('.roll-fatigue').forEach(el => el.addEventListener("contextmenu", chatFatigueRoll));
+    html.querySelectorAll('.roll-item').forEach(el => el.addEventListener("click", rollItemFromChat));
+    html.querySelectorAll('.roll-item').forEach(el => el.addEventListener("contextmenu", rollItemFromChat));
+    html.querySelectorAll('.apply-damage').forEach(el => el.addEventListener("click", rollItemFromChat));
+    html.querySelectorAll('.roll-toughness-test').forEach(el => el.addEventListener("click", resistInjury));
+    html.querySelectorAll('.apply-injury').forEach(el => el.addEventListener("click", inflictInjury));
+    // html.on('click', '.roll-damage', chatDamageRoll);
+    // html.on('contextmenu', '.roll-damage', chatDamageRoll);
+    // html.on('click', '.roll-fatigue', chatFatigueRoll);
+    // html.on('contextmenu', '.roll-fatigue', chatFatigueRoll);
+    // html.on('click', '.roll-item', rollItemFromChat);
+    // html.on('contextmenu', '.roll-item', rollItemFromChat);
+    // html.on('click', '.apply-damage', applyDamageChat);
+    // html.on('click', '.roll-toughness-test', resistInjury);
+    // html.on('click', '.apply-injury', inflictInjury);
 };
 
 /**
@@ -256,14 +265,14 @@ export async function rollItemFromChat(event) {
  */
 export async function sortCustomAgeChatCards(chatCard, html, data) {
     // Add attribute type="button" to AGE buttons
-    _buttonType(html.find(".age-system.item-chat-controls button"));
-    _buttonType(html.find("button.age-button"));
+    _buttonType(html.querySelectorAll(".age-system.item-chat-controls button"));
+    _buttonType(html.querySelectorAll("button.age-button"));
 
     // Toggle chat card visibility of AGE Roll Cards 
-    if (html.find(".base-age-roll").length > 0) _handleAgeRollVisibility(html, chatCard, data);
+    if (html.querySelectorAll(".base-age-roll").length > 0) _handleAgeRollVisibility(html, chatCard, data);
 
     // Check permission level to show and roll chat buttons when rolling item card
-    if (html.find(".item-chat-controls").length > 0) _handleItemCardButton(html);
+    if (html.querySelectorAll(".item-chat-controls").length > 0) _handleItemCardButton(html);
 };
 
 /**
@@ -281,15 +290,15 @@ function _buttonType(buttons) {
 /**
  * Set visibility properties for buttons and blind-roll segments (blind-roll segments currently not used)
  *
- * @param {jQueryObject} html       jObject of the chat card being processed
+ * @param {HTML element} html       HTML element of the chat card being processed
  * @param {object} chatCard         Chat card object containing the Message Data
  * @param {object} chatData         Data containing Message data
  */
 function _handleAgeRollVisibility(html, chatCard, chatData){
-    const element = html.find(".age-system.base-age-roll .feature-controls");
     const flags = chatCard.flags?.["age-system"]?.ageroll;
-    for (let e = 0; e < element.length; e++) {
-        const el = element[e];
+    const elements = html.querySelectorAll(".age-system.base-age-roll .feature-controls");
+    for (let es = 0; es < elements.length; es++) {
+        const el = elements[es];
         let actorId = flags?.rollData?.actorId;
         if (!actorId && flags?.type === "damage") actorId = flags.damageData.attackerId; // Compatibility to Damage Chat Card before 1.1.6
         let actor = actorId ? fromUuidSync(actorId) : null;
@@ -319,13 +328,16 @@ function _handleAgeRollVisibility(html, chatCard, chatData){
 // Check if user has permission to use card button
 async function _handleItemCardButton(html){
     const sectionClass = `.item-chat-controls`
-    const data = html.find(sectionClass);
-    for (let d = 0; d < data.length; d++) {
-        const el = data[d];
-        const actorId = el.dataset.ownerUuid;
-        let actor;
-        if (actorId) actor = await fromUuid(actorId);
-        _permCheck(actor?.permission, el, sectionClass);
+    const datum = html.querySelectorAll(sectionClass);
+    for (let i = 0; i < datum.length; i++) {
+        const data = datum[i];
+        for (let d = 0; d < data.length; d++) {
+            const el = data[d];
+            const actorId = el.dataset.ownerUuid;
+            let actor;
+            if (actorId) actor = await fromUuid(actorId);
+            _permCheck(actor?.permission, el, sectionClass);
+        }
     }
 }
 

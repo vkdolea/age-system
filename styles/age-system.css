@@ -1607,17 +1607,17 @@
 /*******************************/
 /**       AGE Roll Card       **/
 /*******************************/
-#chat-log .chat-message .message-content .age-system.base-age-roll h3 {
+ol.chat-log .message-content .age-system.base-age-roll h3 {
   border-bottom: none;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons {
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons {
   margin-top: 4px;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
   max-width: min-content;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid,
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid {
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons-grid,
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons.grid {
   font-size: 12px !important;
   font-family: inherit;
   display: grid;
@@ -1625,86 +1625,86 @@
   grid-template-rows: repeat(2, 20px);
   grid-template-areas: "main main stuntdie stuntdie stuntdie focusdmg focusdmg focusdmg" "main main bothdmg bothdmg bothdmg bothdmg bothdmg bothdmg";
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .main-dmg,
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .main-dmg {
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons-grid .main-dmg,
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons.grid .main-dmg {
   grid-area: main;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .sd-dmg,
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .sd-dmg {
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons-grid .sd-dmg,
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons.grid .sd-dmg {
   grid-area: stuntdie;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .focus-dmg,
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .focus-dmg {
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons-grid .focus-dmg,
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons.grid .focus-dmg {
   grid-area: focusdmg;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .both-dmg,
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .both-dmg {
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons-grid .both-dmg,
+ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons.grid .both-dmg {
   grid-area: bothdmg;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-button.roll-fatigue {
+ol.chat-log .message-content .age-system.base-age-roll .age-button.roll-fatigue {
   margin-top: 4px;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-button:active {
+ol.chat-log .message-content .age-system.base-age-roll .age-button:active {
   color: #5f0505;
   box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card,
-#chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card {
+ol.chat-log .message-content .age-system.base-age-roll .regular-roll-card,
+ol.chat-log .message-content .age-system.base-age-roll .blind-roll-card {
   justify-content: center;
   margin-bottom: 4px;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card > div div.stunted,
-#chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card > div div.stunted,
-#chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card > div div:last-of-type,
-#chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card > div div:last-of-type {
+ol.chat-log .message-content .age-system.base-age-roll .regular-roll-card > div div.stunted,
+ol.chat-log .message-content .age-system.base-age-roll .blind-roll-card > div div.stunted,
+ol.chat-log .message-content .age-system.base-age-roll .regular-roll-card > div div:last-of-type,
+ol.chat-log .message-content .age-system.base-age-roll .blind-roll-card > div div:last-of-type {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .action-details {
+ol.chat-log .message-content .age-system.base-age-roll .action-details {
   text-align: center;
   padding-top: 4px;
   padding-bottom: 4px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .action-details h3,
-#chat-log .chat-message .message-content .age-system.base-age-roll .action-details h4 {
+ol.chat-log .message-content .age-system.base-age-roll .action-details h3,
+ol.chat-log .message-content .age-system.base-age-roll .action-details h4 {
   margin: 0;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .action-details h4 {
+ol.chat-log .message-content .age-system.base-age-roll .action-details h4 {
   text-transform: lowercase;
   font-variant: small-caps;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show {
+ol.chat-log .message-content .age-system.base-age-roll .trait-test.dice-show {
   align-content: space-between;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: stretch;
   padding: 4px;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show i {
+ol.chat-log .message-content .age-system.base-age-roll .trait-test.dice-show i {
   flex-grow: 0;
   display: flex;
   align-items: center;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show a {
+ol.chat-log .message-content .age-system.base-age-roll .trait-test.dice-show a {
   max-width: min-content;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .total-roll h3 {
+ol.chat-log .message-content .age-system.base-age-roll .total-roll h3 {
   font-weight: bold;
   margin: 0;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .italic {
+ol.chat-log .message-content .age-system.base-age-roll .italic {
   font-style: italic;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod {
+ol.chat-log .message-content .age-system.base-age-roll .roll-mod {
   padding: 4px;
   font-variant: small-caps;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod:not(.total-roll) {
+ol.chat-log .message-content .age-system.base-age-roll .roll-mod:not(.total-roll) {
   text-transform: lowercase;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .injury-info {
+ol.chat-log .message-content .age-system.base-age-roll .injury-info {
   text-align: center;
   font-size: 12px;
   margin: 0 0 2px 0;
@@ -1712,16 +1712,16 @@
   font-weight: 800;
   border-radius: 10px;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .apply-injury {
+ol.chat-log .message-content .age-system.base-age-roll .apply-injury {
   font-size: 12px;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .line-header {
+ol.chat-log .message-content .age-system.base-age-roll .line-header {
   min-width: 200px;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .line-value {
+ol.chat-log .message-content .age-system.base-age-roll .line-value {
   text-align: right;
 }
-#chat-log .chat-message .message-content .age-system.base-age-roll .blind-value {
+ol.chat-log .message-content .age-system.base-age-roll .blind-value {
   text-align: center;
 }
 /*******************************/
@@ -4211,7 +4211,7 @@ a:hover {
   text-align: left;
 }
 /*---- Font Override----*/
-body.system-age-system *:not(i, .fa, .far, .fas) {
+body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
   font-family: "Roboto";
 }
 /**************************/

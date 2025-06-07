@@ -1,6 +1,8 @@
 import { ageSystem } from "./config.js";
 import { sortObjArrayByName } from "./setup.js";
 
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
+
 /**
  * Helper function to reduce a Formula
  * @param {String} formula Formula String to be reduced to dice components and a single constant value

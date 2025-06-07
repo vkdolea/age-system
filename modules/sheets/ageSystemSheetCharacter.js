@@ -3,7 +3,7 @@ import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 import {newItemData} from "./helper.js";
 
-export default class ageSystemSheetCharacter extends ActorSheet {
+export default class ageSystemSheetCharacter extends foundry.appv1.sheets.ActorSheet {
     
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {

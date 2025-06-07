@@ -2,146 +2,138 @@
 /**       AGE Roll Card       **/
 /*******************************/
 
-#chat-log {
-    .chat-message {
-        .message-content {
-            .age-system.base-age-roll {
-                h3 {
-                    border-bottom: none;
+ol.chat-log {
+    .message-content {
+        .age-system.base-age-roll {
+            h3 {
+                border-bottom: none;
+            }
+            .age-chat-buttons {
+                margin-top: 4px;
+                i.fas {
+                    max-width: min-content;
                 }
-                .age-chat-buttons {
-                    margin-top: 4px;
-                    i.fas {
-                        max-width: min-content;
-                    }
-                };
-                // .roll-details {
-                //     div:not(:first-child) {
-                //         background: rgba(255, 255, 255, 0.8);
-                //     }
-                // }
-
-                .age-chat-buttons-grid, //to be removed in the future
-                .age-chat-buttons.grid {
-                    font-size: 12px !important;
-                    font-family: inherit;
-                    display: grid;
-                    grid-template-columns: repeat(8, 12.5%);
-                    grid-template-rows: repeat(2, 20px);
-                    grid-template-areas:
-                        "main main stuntdie stuntdie stuntdie focusdmg focusdmg focusdmg"
-                        "main main bothdmg bothdmg bothdmg bothdmg bothdmg bothdmg";
-                    .main-dmg {
-                        grid-area: main;
-                    }
-                    .sd-dmg {
-                        grid-area: stuntdie;
-                    }
-                    .focus-dmg{
-                        grid-area: focusdmg;
-                    }
-                    .both-dmg {
-                        grid-area: bothdmg;
-                    }
-                }
-
-                .age-button.roll-fatigue {
-                    margin-top: 4px;
-                }
-                .age-button:active{
-                    color: rgb(95, 5, 5); // incluir esquema de cor ou então o highlight do Tracker
-                    box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
-                };
-                
-                .regular-roll-card,
-                .blind-roll-card {
-                    justify-content: center;
-                    margin-bottom: 4px;
-                    > div {
-                        div.stunted,
-                        div:last-of-type {
-                            border-bottom-left-radius: 10px;
-                            border-bottom-right-radius: 10px;
-                        };
-                    };
-                };
-                .action-details {
-                    text-align: center;
-                    padding-top: 4px;
-                    padding-bottom: 4px;
-                    border-top-left-radius: 10px;
-                    border-top-right-radius: 10px;
-                    h3, h4 {
-                        margin: 0;
-                    }
-                    h4 {
-                        text-transform: lowercase;
-                        font-variant: small-caps;
-                        // color: rgba(255, 255, 255, 0.4);
-                    }
-                };
-    
-                .trait-test.dice-show {
-                    align-content: space-between;
-                    flex-wrap: nowrap;
-                    justify-content: space-between;
-                    align-items: stretch;
-                    padding: 4px;
-                    i {
-                        flex-grow: 0;
-                        display: flex;
-                        align-items: center;
-                    };
-                    a {
-                        max-width: min-content;
-                    };
-                };
-
-                .total-roll {
-                    h3 {
-                        font-weight: bold;
-                        margin: 0;
-                        // padding: 0;
-                    }
-                };
-
-                .italic {
-                    font-style: italic;
-                }
-                
-                .roll-mod {
-                    padding: 4px;
-                    font-variant: small-caps;
-                };
-                .roll-mod:not(.total-roll) {
-                    text-transform: lowercase;
-                }
-
-                .injury-info {
-                    text-align: center;
-                    font-size: 12px;
-                    margin: 0 0 2px 0;
-                    padding: 2px 0;
-                    font-weight: 800;
-                    border-radius: 10px;
-                }
-                .apply-injury {
-                    font-size: 12px;
-                }
-
-                .line-header {
-                    min-width: 200px;
-                };
-                
-                .line-value {
-                    text-align: right;
-                };
-
-                .blind-value {
-                    text-align: center;
-                }
-                
             };
+            .age-chat-buttons-grid, //to be removed in the future
+            .age-chat-buttons.grid {
+                font-size: 12px !important;
+                font-family: inherit;
+                display: grid;
+                grid-template-columns: repeat(8, 12.5%);
+                grid-template-rows: repeat(2, 20px);
+                grid-template-areas:
+                    "main main stuntdie stuntdie stuntdie focusdmg focusdmg focusdmg"
+                    "main main bothdmg bothdmg bothdmg bothdmg bothdmg bothdmg";
+                .main-dmg {
+                    grid-area: main;
+                }
+                .sd-dmg {
+                    grid-area: stuntdie;
+                }
+                .focus-dmg{
+                    grid-area: focusdmg;
+                }
+                .both-dmg {
+                    grid-area: bothdmg;
+                }
+            }
+
+            .age-button.roll-fatigue {
+                margin-top: 4px;
+            }
+            .age-button:active{
+                color: rgb(95, 5, 5); // incluir esquema de cor ou então o highlight do Tracker
+                box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+            };
+            
+            .regular-roll-card,
+            .blind-roll-card {
+                justify-content: center;
+                margin-bottom: 4px;
+                > div {
+                    div.stunted,
+                    div:last-of-type {
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                    };
+                };
+            };
+            .action-details {
+                text-align: center;
+                padding-top: 4px;
+                padding-bottom: 4px;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                h3, h4 {
+                    margin: 0;
+                }
+                h4 {
+                    text-transform: lowercase;
+                    font-variant: small-caps;
+                    // color: rgba(255, 255, 255, 0.4);
+                }
+            };
+
+            .trait-test.dice-show {
+                align-content: space-between;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                align-items: stretch;
+                padding: 4px;
+                i {
+                    flex-grow: 0;
+                    display: flex;
+                    align-items: center;
+                };
+                a {
+                    max-width: min-content;
+                };
+            };
+
+            .total-roll {
+                h3 {
+                    font-weight: bold;
+                    margin: 0;
+                    // padding: 0;
+                }
+            };
+
+            .italic {
+                font-style: italic;
+            }
+            
+            .roll-mod {
+                padding: 4px;
+                font-variant: small-caps;
+            };
+            .roll-mod:not(.total-roll) {
+                text-transform: lowercase;
+            }
+
+            .injury-info {
+                text-align: center;
+                font-size: 12px;
+                margin: 0 0 2px 0;
+                padding: 2px 0;
+                font-weight: 800;
+                border-radius: 10px;
+            }
+            .apply-injury {
+                font-size: 12px;
+            }
+
+            .line-header {
+                min-width: 200px;
+            };
+            
+            .line-value {
+                text-align: right;
+            };
+
+            .blind-value {
+                text-align: center;
+            }
+            
         };
     };
 };

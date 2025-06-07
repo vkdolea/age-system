@@ -1,7 +1,7 @@
 import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 
-export default class ageActiveEffectConfig extends ActiveEffectConfig {
+export default class ageActiveEffectConfig extends foundry.applications.sheets.ActiveEffectConfig {
 
   /** @override */
   static get defaultOptions() {

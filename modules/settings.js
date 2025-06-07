@@ -587,7 +587,7 @@ export function allRollTables() {
 
   // Default none option
   list['none'] = game.i18n.localize('SETTINGS.complicationRollTableDefault');
-  let documents = RollTables.instance;
+  // let documents = RollTables.instance;
 
   game.tables.map(e => {
     list[e.id] = e.name;
