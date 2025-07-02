@@ -156,7 +156,7 @@ each(@colorsets, {
         .sheet-main-content nav a {
             background-color: extract(extract(@color-list, @index), 2);
             color: extract(extract(@color-list, @index), 5);
-        };
+        }
         .sheet-main-content nav a.active {
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);
@@ -169,7 +169,7 @@ each(@colorsets, {
         .action-details h4 {
             background: none;
             opacity: 0.8;
-        };
+        }
 
         .colorset-first-tier {
             &.resource {
@@ -182,7 +182,7 @@ each(@colorsets, {
                     background-color: extract(extract(@color-list, @index), 2) !important;
                     color: extract(extract(@color-list, @index), 5);
                 };
-            };
+            }
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);
 
@@ -210,7 +210,7 @@ each(@colorsets, {
                 .values {
                     background-color: extract(extract(@color-list, @index), 1);
                     color: extract(extract(@color-list, @index), 4);
-                };
+                }
             }
             background-color: extract(extract(@color-list, @index), 3);
             color: extract(extract(@color-list, @index), 1);
@@ -239,7 +239,7 @@ each(@colorsets, {
                 .values {
                     background-color: extract(extract(@color-list, @index), 3);
                     color: extract(extract(@color-list, @index), 1);
-                };
+                }
             }
             background-color: extract(extract(@color-list, @index), 2);
             color: extract(extract(@color-list, @index), 5);
@@ -260,12 +260,12 @@ each(@colorsets, {
                 background-color: extract(extract(@color-list, @index), 1);
                 color: extract(extract(@color-list, @index), 4);
             }
-        };
+        }
     
         input.colorset-first-tier {
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);
-        };
+        }
 
         #age-tracker {
             .full-box {
@@ -292,7 +292,7 @@ each(@colorsets, {
             .editor {
                 background-color: hsl(0, 0%, 100%);
             }
-        };
+        }
 
         .vehicle-stats {
             img {
@@ -322,21 +322,20 @@ each(@colorsets, {
             background-color: extract(extract(@color-list, @index), 1);
         }
     
-        //Base Age Roll
-        .dice-show.trait-test {
+        //Age Roll Card
+        .dice-show {
             // Stunt Die Color on ChatMessage
             i:last-of-type {
                 color: extract(extract(@color-list, @index), 1);
             };
-        };
-        //Base Age Roll
-        .roll-mod {
-            border-bottom: 1px solid extract(extract(@color-list, @index), 1);
-        };
-        .roll-mod.stunted {
+        }
+        .stunt-points.stunted {
             background-color: extract(extract(@color-list, @index), 1);
             color: extract(extract(@color-list, @index), 4);
-        };        
+        }
+        .roll-body .section-break:has(*) {
+            border-top: 1px solid extract(extract(@color-list, @index), 1);
+        }
 
         // Styling Character Ability with total value
         .char-sheet {
@@ -347,12 +346,12 @@ each(@colorsets, {
             }
             input {
                 background-color: #ffffff;
-            };
+            }
             
             input.colorset-second-tier {
                 background-color: extract(extract(@color-list, @index), 3) !important;
                 color: extract(extract(@color-list, @index), 1) !important;
-            };
+            }
     
         };
     
@@ -371,13 +370,13 @@ each(@colorsets, {
                 input.data-entry {
                     color: extract(extract(@color-list, @index), 5);
                 };
-            };
+            }
             .item-card-desc {
                 background-color: #ffffff;
-            };
+            }
             .mod-card {
                 border: solid extract(extract(@color-list, @index), 3) 1px;
             }
-        };
-    };
-});
+        }
+    }
+})

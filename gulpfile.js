@@ -1,17 +1,16 @@
 // Less configuration
-var gulp = require('gulp');
-var less = require('gulp-less');
+const gulp = require('gulp');
+const less = require('gulp-less');
 
-gulp.task('less', function(cb) {
-  gulp
+gulp.task('less', function() {
+  return gulp
     .src('less/age-system.less')
     .pipe(less())
-    .pipe(gulp.dest("./styles/"));
-  cb();
+    .pipe(gulp.dest('./styles'));
 });
 
-gulp.task('default', gulp.series('less', function(cb) {
-    gulp.watch('less/*.less', gulp.series('less'));
-    cb();
-  })
-);
+gulp.task('watch', function() {
+  gulp.watch('less/*.less', gulp.series('less'));
+});
+
+gulp.task('default', gulp.series('less', 'watch'));

@@ -115,8 +115,13 @@
 /*******************************/
 /**        Item Sheet         **/
 /*******************************/
-.age-system.item-chat-controls {
-  margin-top: 6px;
+.age-system .age-buttons {
+  gap: 4px;
+  margin-top: 5px;
+}
+.age-system.item-to-chat ul,
+.age-system.item-to-chat li {
+  list-style-type: none;
 }
 .age-system.item-to-chat .item-type {
   height: 20px;
@@ -127,6 +132,7 @@
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
+  list-style-type: none;
 }
 .age-system.item-to-chat .item-identification {
   padding: 4px;
@@ -143,7 +149,6 @@
 .age-system.item-to-chat .item-identification ul {
   padding-left: 6px;
   margin: 0;
-  list-style: none;
   font-variant-caps: small-caps;
 }
 .age-system.item-to-chat .item-identification ul :not(li:first-child) {
@@ -1605,126 +1610,6 @@
   margin: 0;
 }
 /*******************************/
-/**       AGE Roll Card       **/
-/*******************************/
-ol.chat-log .message-content .age-system.base-age-roll h3 {
-  border-bottom: none;
-}
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons {
-  margin-top: 4px;
-}
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
-  max-width: min-content;
-}
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons-grid,
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons.grid {
-  font-size: 12px !important;
-  font-family: inherit;
-  display: grid;
-  grid-template-columns: repeat(8, 12.5%);
-  grid-template-rows: repeat(2, 20px);
-  grid-template-areas: "main main stuntdie stuntdie stuntdie focusdmg focusdmg focusdmg" "main main bothdmg bothdmg bothdmg bothdmg bothdmg bothdmg";
-}
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons-grid .main-dmg,
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons.grid .main-dmg {
-  grid-area: main;
-}
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons-grid .sd-dmg,
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons.grid .sd-dmg {
-  grid-area: stuntdie;
-}
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons-grid .focus-dmg,
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons.grid .focus-dmg {
-  grid-area: focusdmg;
-}
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons-grid .both-dmg,
-ol.chat-log .message-content .age-system.base-age-roll .age-chat-buttons.grid .both-dmg {
-  grid-area: bothdmg;
-}
-ol.chat-log .message-content .age-system.base-age-roll .age-button.roll-fatigue {
-  margin-top: 4px;
-}
-ol.chat-log .message-content .age-system.base-age-roll .age-button:active {
-  color: #5f0505;
-  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
-}
-ol.chat-log .message-content .age-system.base-age-roll .regular-roll-card,
-ol.chat-log .message-content .age-system.base-age-roll .blind-roll-card {
-  justify-content: center;
-  margin-bottom: 4px;
-}
-ol.chat-log .message-content .age-system.base-age-roll .regular-roll-card > div div.stunted,
-ol.chat-log .message-content .age-system.base-age-roll .blind-roll-card > div div.stunted,
-ol.chat-log .message-content .age-system.base-age-roll .regular-roll-card > div div:last-of-type,
-ol.chat-log .message-content .age-system.base-age-roll .blind-roll-card > div div:last-of-type {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-ol.chat-log .message-content .age-system.base-age-roll .action-details {
-  text-align: center;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-ol.chat-log .message-content .age-system.base-age-roll .action-details h3,
-ol.chat-log .message-content .age-system.base-age-roll .action-details h4 {
-  margin: 0;
-}
-ol.chat-log .message-content .age-system.base-age-roll .action-details h4 {
-  text-transform: lowercase;
-  font-variant: small-caps;
-}
-ol.chat-log .message-content .age-system.base-age-roll .trait-test.dice-show {
-  align-content: space-between;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: stretch;
-  padding: 4px;
-}
-ol.chat-log .message-content .age-system.base-age-roll .trait-test.dice-show i {
-  flex-grow: 0;
-  display: flex;
-  align-items: center;
-}
-ol.chat-log .message-content .age-system.base-age-roll .trait-test.dice-show a {
-  max-width: min-content;
-}
-ol.chat-log .message-content .age-system.base-age-roll .total-roll h3 {
-  font-weight: bold;
-  margin: 0;
-}
-ol.chat-log .message-content .age-system.base-age-roll .italic {
-  font-style: italic;
-}
-ol.chat-log .message-content .age-system.base-age-roll .roll-mod {
-  padding: 4px;
-  font-variant: small-caps;
-}
-ol.chat-log .message-content .age-system.base-age-roll .roll-mod:not(.total-roll) {
-  text-transform: lowercase;
-}
-ol.chat-log .message-content .age-system.base-age-roll .injury-info {
-  text-align: center;
-  font-size: 12px;
-  margin: 0 0 2px 0;
-  padding: 2px 0;
-  font-weight: 800;
-  border-radius: 10px;
-}
-ol.chat-log .message-content .age-system.base-age-roll .apply-injury {
-  font-size: 12px;
-}
-ol.chat-log .message-content .age-system.base-age-roll .line-header {
-  min-width: 200px;
-}
-ol.chat-log .message-content .age-system.base-age-roll .line-value {
-  text-align: right;
-}
-ol.chat-log .message-content .age-system.base-age-roll .blind-value {
-  text-align: center;
-}
-/*******************************/
 /**     Color Schemed Def     **/
 /*******************************/
 /** Modern Blue Colors **/
@@ -1885,15 +1770,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-modern-blue #age-roller-drag:hover {
   background-color: #007DAD;
 }
-.colorset-modern-blue .dice-show.trait-test i:last-of-type {
+.colorset-modern-blue .dice-show i:last-of-type {
   color: #007DAD;
 }
-.colorset-modern-blue .roll-mod {
-  border-bottom: 1px solid #007DAD;
-}
-.colorset-modern-blue .roll-mod.stunted {
+.colorset-modern-blue .stunt-points.stunted {
   background-color: #007DAD;
   color: #ffffff;
+}
+.colorset-modern-blue .roll-body .section-break:has(*) {
+  border-top: 1px solid #007DAD;
 }
 .colorset-modern-blue .char-sheet .item-container img {
   border: 1px solid #007DAD;
@@ -2095,15 +1980,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-fantasy-blue #age-roller-drag:hover {
   background-color: #0f4f5b;
 }
-.colorset-fantasy-blue .dice-show.trait-test i:last-of-type {
+.colorset-fantasy-blue .dice-show i:last-of-type {
   color: #0f4f5b;
 }
-.colorset-fantasy-blue .roll-mod {
-  border-bottom: 1px solid #0f4f5b;
-}
-.colorset-fantasy-blue .roll-mod.stunted {
+.colorset-fantasy-blue .stunt-points.stunted {
   background-color: #0f4f5b;
   color: #ffffff;
+}
+.colorset-fantasy-blue .roll-body .section-break:has(*) {
+  border-top: 1px solid #0f4f5b;
 }
 .colorset-fantasy-blue .char-sheet .item-container img {
   border: 1px solid #0f4f5b;
@@ -2305,15 +2190,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-dragon-red #age-roller-drag:hover {
   background-color: #83272a;
 }
-.colorset-dragon-red .dice-show.trait-test i:last-of-type {
+.colorset-dragon-red .dice-show i:last-of-type {
   color: #83272a;
 }
-.colorset-dragon-red .roll-mod {
-  border-bottom: 1px solid #83272a;
-}
-.colorset-dragon-red .roll-mod.stunted {
+.colorset-dragon-red .stunt-points.stunted {
   background-color: #83272a;
   color: #ffffff;
+}
+.colorset-dragon-red .roll-body .section-break:has(*) {
+  border-top: 1px solid #83272a;
 }
 .colorset-dragon-red .char-sheet .item-container img {
   border: 1px solid #83272a;
@@ -2515,15 +2400,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-folded-purple #age-roller-drag:hover {
   background-color: #565183;
 }
-.colorset-folded-purple .dice-show.trait-test i:last-of-type {
+.colorset-folded-purple .dice-show i:last-of-type {
   color: #565183;
 }
-.colorset-folded-purple .roll-mod {
-  border-bottom: 1px solid #565183;
-}
-.colorset-folded-purple .roll-mod.stunted {
+.colorset-folded-purple .stunt-points.stunted {
   background-color: #565183;
   color: #ffffff;
+}
+.colorset-folded-purple .roll-body .section-break:has(*) {
+  border-top: 1px solid #565183;
 }
 .colorset-folded-purple .char-sheet .item-container img {
   border: 1px solid #565183;
@@ -2725,15 +2610,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-ronin-green #age-roller-drag:hover {
   background-color: #155f0e;
 }
-.colorset-ronin-green .dice-show.trait-test i:last-of-type {
+.colorset-ronin-green .dice-show i:last-of-type {
   color: #155f0e;
 }
-.colorset-ronin-green .roll-mod {
-  border-bottom: 1px solid #155f0e;
-}
-.colorset-ronin-green .roll-mod.stunted {
+.colorset-ronin-green .stunt-points.stunted {
   background-color: #155f0e;
   color: #ffffff;
+}
+.colorset-ronin-green .roll-body .section-break:has(*) {
+  border-top: 1px solid #155f0e;
 }
 .colorset-ronin-green .char-sheet .item-container img {
   border: 1px solid #155f0e;
@@ -2935,15 +2820,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-select-one #age-roller-drag:hover {
   background-color: #273249;
 }
-.colorset-select-one .dice-show.trait-test i:last-of-type {
+.colorset-select-one .dice-show i:last-of-type {
   color: #273249;
 }
-.colorset-select-one .roll-mod {
-  border-bottom: 1px solid #273249;
-}
-.colorset-select-one .roll-mod.stunted {
+.colorset-select-one .stunt-points.stunted {
   background-color: #273249;
   color: #e7ccc3;
+}
+.colorset-select-one .roll-body .section-break:has(*) {
+  border-top: 1px solid #273249;
 }
 .colorset-select-one .char-sheet .item-container img {
   border: 1px solid #273249;
@@ -3145,15 +3030,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-the-grey #age-roller-drag:hover {
   background-color: #3d3e3f;
 }
-.colorset-the-grey .dice-show.trait-test i:last-of-type {
+.colorset-the-grey .dice-show i:last-of-type {
   color: #3d3e3f;
 }
-.colorset-the-grey .roll-mod {
-  border-bottom: 1px solid #3d3e3f;
-}
-.colorset-the-grey .roll-mod.stunted {
+.colorset-the-grey .stunt-points.stunted {
   background-color: #3d3e3f;
   color: #ccc9c9;
+}
+.colorset-the-grey .roll-body .section-break:has(*) {
+  border-top: 1px solid #3d3e3f;
 }
 .colorset-the-grey .char-sheet .item-container img {
   border: 1px solid #3d3e3f;
@@ -3355,15 +3240,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-red-warrior #age-roller-drag:hover {
   background-color: #751119;
 }
-.colorset-red-warrior .dice-show.trait-test i:last-of-type {
+.colorset-red-warrior .dice-show i:last-of-type {
   color: #751119;
 }
-.colorset-red-warrior .roll-mod {
-  border-bottom: 1px solid #751119;
-}
-.colorset-red-warrior .roll-mod.stunted {
+.colorset-red-warrior .stunt-points.stunted {
   background-color: #751119;
   color: #f7b755;
+}
+.colorset-red-warrior .roll-body .section-break:has(*) {
+  border-top: 1px solid #751119;
 }
 .colorset-red-warrior .char-sheet .item-container img {
   border: 1px solid #751119;
@@ -3565,15 +3450,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-never-dead #age-roller-drag:hover {
   background-color: #663322;
 }
-.colorset-never-dead .dice-show.trait-test i:last-of-type {
+.colorset-never-dead .dice-show i:last-of-type {
   color: #663322;
 }
-.colorset-never-dead .roll-mod {
-  border-bottom: 1px solid #663322;
-}
-.colorset-never-dead .roll-mod.stunted {
+.colorset-never-dead .stunt-points.stunted {
   background-color: #663322;
   color: #bb8755;
+}
+.colorset-never-dead .roll-body .section-break:has(*) {
+  border-top: 1px solid #663322;
 }
 .colorset-never-dead .char-sheet .item-container img {
   border: 1px solid #663322;
@@ -3775,15 +3660,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-expanded-blue #age-roller-drag:hover {
   background-color: #005971;
 }
-.colorset-expanded-blue .dice-show.trait-test i:last-of-type {
+.colorset-expanded-blue .dice-show i:last-of-type {
   color: #005971;
 }
-.colorset-expanded-blue .roll-mod {
-  border-bottom: 1px solid #005971;
-}
-.colorset-expanded-blue .roll-mod.stunted {
+.colorset-expanded-blue .stunt-points.stunted {
   background-color: #005971;
   color: #dde2e2;
+}
+.colorset-expanded-blue .roll-body .section-break:has(*) {
+  border-top: 1px solid #005971;
 }
 .colorset-expanded-blue .char-sheet .item-container img {
   border: 1px solid #005971;
@@ -3985,15 +3870,15 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-snow-white #age-roller-drag:hover {
   background-color: #ffffff;
 }
-.colorset-snow-white .dice-show.trait-test i:last-of-type {
+.colorset-snow-white .dice-show i:last-of-type {
   color: #ffffff;
 }
-.colorset-snow-white .roll-mod {
-  border-bottom: 1px solid #ffffff;
-}
-.colorset-snow-white .roll-mod.stunted {
+.colorset-snow-white .stunt-points.stunted {
   background-color: #ffffff;
   color: #000000;
+}
+.colorset-snow-white .roll-body .section-break:has(*) {
+  border-top: 1px solid #ffffff;
 }
 .colorset-snow-white .char-sheet .item-container img {
   border: 1px solid #ffffff;
@@ -4052,56 +3937,6 @@ ol.chat-log .message-content .age-system.base-age-roll .blind-value {
 .colorset-snow-white .relationship .mod-card,
 .colorset-snow-white .shipfeatures .mod-card {
   border: solid #494949 1px;
-}
-/*******************************/
-/**   AGE Roller Interface    **/
-/*******************************/
-a:hover {
-  box-shadow: none;
-}
-#age-roller {
-  font-size: 40px;
-  position: absolute;
-  margin: 0px;
-  padding: 0px;
-  cursor: pointer;
-  display: inline-block;
-  z-index: calc(var(--z-index-ui) + 10);
-}
-#age-roller i {
-  border: 2px solid var(--color-border-dark);
-  padding: 4px 0;
-  border-radius: 2px;
-  opacity: 0.7;
-  box-shadow: 0 0 5px #444 inset;
-  background: rgba(0, 0, 0, 0.5);
-  color: #cccccc;
-}
-#age-roller-drag {
-  width: 100%;
-  height: 10px;
-  border-radius: 5px;
-}
-#age-roller-drag:hover {
-  cursor: move;
-}
-#age-roller-options {
-  position: absolute;
-  cursor: pointer;
-  display: none;
-  z-index: 99;
-  max-width: fit-content;
-}
-#age-roller-options ul {
-  font-size: 12px;
-  list-style: none;
-  padding: 0 0 0 4px;
-}
-#age-roller-options ul li {
-  border-radius: 5px;
-  margin-top: 4px;
-  padding: 0 4px;
-  text-align: center;
 }
 /*******************************/
 /**        AGE Tracker        **/
@@ -4169,6 +4004,93 @@ a:hover {
   height: 16px;
   width: 16px;
   cursor: pointer;
+}
+/*******************************/
+/**       AGE Roll Card       **/
+/*******************************/
+.age-system.age-roll-card ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.age-system.age-roll-card .card-header {
+  height: auto;
+  min-height: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center;
+  font-weight: bold;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.age-system.age-roll-card .card-header .header {
+  margin: 0 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.age-system.age-roll-card .card-header .sub {
+  text-transform: none;
+  font-variant: all-small-caps;
+}
+.age-system.age-roll-card .roll-body {
+  padding: 4px;
+}
+.age-system.age-roll-card .roll-body .dice-show {
+  gap: 4px;
+  max-width: 25%;
+  margin: 0 10px;
+  text-align: center;
+}
+.age-system.age-roll-card .roll-body .dice-show i:last-of-type {
+  flex-basis: 100%;
+}
+.age-system.age-roll-card .roll-body .roll-summary {
+  text-align: center;
+}
+.age-system.age-roll-card .roll-body .line-header {
+  text-align: left;
+  padding-left: 10px;
+  flex: auto;
+}
+.age-system.age-roll-card .roll-body .line-value {
+  text-align: right;
+  padding-right: 10px;
+}
+.age-system.age-roll-card .roll-body .total-roll {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.age-system.age-roll-card .roll-body .stunt-points {
+  border-radius: 10px;
+}
+.age-system.age-roll-card .footer {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: center;
+}
+.age-system.age-roll-card .footer span {
+  min-height: 18px;
+}
+.age-system.age-roll-card .section-break:has(.mod-desc) {
+  margin-top: 4px;
+}
+.age-system.age-roll-card .mod-desc:first-of-type {
+  padding-top: 4px;
+}
+.age-system.age-roll-card .age-chat-buttons {
+  margin-top: 5px;
+}
+.age-system.age-roll-card .chat-buttons {
+  margin-top: 5px;
+  gap: 4px;
+}
+.age-system.age-roll-card .chat-buttons div {
+  gap: 4px;
+}
+.age-system.age-roll-card .age-button:hover {
+  box-shadow: 20px silver;
 }
 @font-face {
   font-family: "Ethernal Knight";

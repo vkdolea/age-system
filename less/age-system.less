@@ -4,10 +4,9 @@
 @import "./char-stat-block.less";
 @import "./vehicle-sheet.less";
 @import "./spaceship-sheet.less";
-@import "./age-roll-sheet.less";
 @import "./colorsets.less";
-@import "./age-roller.less";
 @import "./age-tracker.less";
+@import "./age-roll-sheet.less";
 
 // Adding Fonts
 @font-face {
@@ -52,7 +51,7 @@
     li {
         white-space: nowrap;
         text-align: left;
-    };
+    }
 }
 
 /*---- Font Override----*/
@@ -96,7 +95,7 @@ body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
     form.editable {
         background: rgba(254, 254, 254, 0.9);
     }
-};
+}
 .window-app.sheet.char .window-content,
 .window-app.sheet.vehicle .window-content,
 .window-app.sheet.spaceship .window-content {
@@ -126,10 +125,10 @@ body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
 }
 .window-resizable-handle {
     opacity: 0;
-};
+}
 .window-resizable-handle:hover {
     opacity: 0.8;
-};
+}
 
 
 // Override box color
@@ -215,12 +214,12 @@ body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
         label {
             flex: 0 0 130px;
             margin: auto 0;
-        };
+        }
         input, select, span {
             margin-top: auto;
             margin-bottom: auto;
         }
-    };
+    }
 
     footer {
         border-top: 2px groove white;
@@ -243,38 +242,38 @@ body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
     }
     .list-level-value {
         width: 120px;
-    };
+    }
     .item-drop-area {
         border-top: 2px groove white;
         min-height: 200px;
         li {
             border-bottom: none;
-        };
+        }
         ol.trait-listing > li:only-of-type {
             display: none;
-        };
-    };
+        }
+    }
     li {
         border-bottom: 2px groove white;
         padding: 4px;
-    };
+    }
     li:last-of-type {
         border-bottom: none;
-    };
+    }
     li:not(:first-of-type) {
         display: flex;
         flex-direction: row;
         align-items: center;
         column-gap: 6px;
-    };
+    }
     li.options:hover {
         cursor: pointer;
         background: linear-gradient(90deg, rgba(254,254,254,0.1) 10%, rgba(0,0,0,0.1) 48%, rgba(254,254,254,0.1) 90%);
-    };
+    }
     img {
         height: 45px;
         border: none;
-    };
+    }
 }
 .age-system-dialog {
     .window-content {
@@ -285,7 +284,7 @@ body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
         list-style: none;
         margin: 0;
         padding: 0;
-    };
+    }
     .age-importer {
         .min-height {
             flex: 0 0 auto;
@@ -298,7 +297,7 @@ body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
             flex: 0 0 290px;
             margin-left: 10px
         }
-    };
+    }
     .conditions-workshop {
         .individual-effects {
             img {
@@ -321,7 +320,7 @@ body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
                 }
                 .delete-effect {
                     margin: 20px 0;
-                };
+                }
                 .delete-effect.inactive {
                     opacity: 0.2;
                     cursor: not-allowed;
@@ -372,7 +371,7 @@ body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
                 padding-left: 4px
             }
         }
-    };
+    }
     .column.controls {
         flex: 0 0 30%;
         padding-left: 10px;
@@ -459,20 +458,20 @@ body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
     .flexcol {
         display: flex;
         flex-direction: column;
-    };
+    }
 
     .flexrow {
         display: flex;
         flex-direction: row;
-    };
+    }
     .flex-gap {
         column-gap: 0.2rem;
         row-gap: 0.2rem;
-    };
+    }
 
     .no-flexwrap {
         flex-wrap: nowrap;
-    };
+    }
 
     .flexwrap {
         flex-wrap: wrap;
@@ -480,39 +479,39 @@ body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
 
     .flex-align-center {
         align-items: center;
-    };
+    }
 
     .flex-align-baseline {
         align-items: baseline;
-    };
+    }
 
     .flex-align-end {
         align-items: flex-end;
-    };
+    }
 
     .flex-align-start {
         align-items: flex-start;
-    };
+    }
 
     .flex-justify-center {
         justify-content: center;
-    };
+    }
 
     .flex-justify-start {
         justify-content: flex-start;
-    };
+    }
 
     .flex-justify-between {
         justify-content: space-between;
-    };  
+    }  
 
     .flex-justify-around {
         justify-content: space-around;
-    };
+    }
 
     .flex-justify-evenly {
         justify-content: space-evenly;
-    };
+    }
 
-};
+}
 /*---------------------------------*/

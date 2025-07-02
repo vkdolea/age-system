@@ -2,138 +2,89 @@
 /**       AGE Roll Card       **/
 /*******************************/
 
-ol.chat-log {
-    .message-content {
-        .age-system.base-age-roll {
-            h3 {
-                border-bottom: none;
+.age-system.age-roll-card {
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    .card-header {
+        height: auto;
+        min-height: 20px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        text-align: center;
+        font-weight: bold;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        .header {
+            margin: 0 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .sub {
+            text-transform: none;
+            font-variant: all-small-caps;
+        }
+    }
+    .roll-body {
+        padding: 4px;
+        .dice-show {
+            gap: 4px;
+            max-width: 25%;
+            margin: 0 10px;
+            text-align: center;
+            i:last-of-type {
+                flex-basis: 100%;
             }
-            .age-chat-buttons {
-                margin-top: 4px;
-                i.fas {
-                    max-width: min-content;
-                }
-            };
-            .age-chat-buttons-grid, //to be removed in the future
-            .age-chat-buttons.grid {
-                font-size: 12px !important;
-                font-family: inherit;
-                display: grid;
-                grid-template-columns: repeat(8, 12.5%);
-                grid-template-rows: repeat(2, 20px);
-                grid-template-areas:
-                    "main main stuntdie stuntdie stuntdie focusdmg focusdmg focusdmg"
-                    "main main bothdmg bothdmg bothdmg bothdmg bothdmg bothdmg";
-                .main-dmg {
-                    grid-area: main;
-                }
-                .sd-dmg {
-                    grid-area: stuntdie;
-                }
-                .focus-dmg{
-                    grid-area: focusdmg;
-                }
-                .both-dmg {
-                    grid-area: bothdmg;
-                }
-            }
-
-            .age-button.roll-fatigue {
-                margin-top: 4px;
-            }
-            .age-button:active{
-                color: rgb(95, 5, 5); // incluir esquema de cor ou então o highlight do Tracker
-                box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
-            };
-            
-            .regular-roll-card,
-            .blind-roll-card {
-                justify-content: center;
-                margin-bottom: 4px;
-                > div {
-                    div.stunted,
-                    div:last-of-type {
-                        border-bottom-left-radius: 10px;
-                        border-bottom-right-radius: 10px;
-                    };
-                };
-            };
-            .action-details {
-                text-align: center;
-                padding-top: 4px;
-                padding-bottom: 4px;
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
-                h3, h4 {
-                    margin: 0;
-                }
-                h4 {
-                    text-transform: lowercase;
-                    font-variant: small-caps;
-                    // color: rgba(255, 255, 255, 0.4);
-                }
-            };
-
-            .trait-test.dice-show {
-                align-content: space-between;
-                flex-wrap: nowrap;
-                justify-content: space-between;
-                align-items: stretch;
-                padding: 4px;
-                i {
-                    flex-grow: 0;
-                    display: flex;
-                    align-items: center;
-                };
-                a {
-                    max-width: min-content;
-                };
-            };
-
-            .total-roll {
-                h3 {
-                    font-weight: bold;
-                    margin: 0;
-                    // padding: 0;
-                }
-            };
-
-            .italic {
-                font-style: italic;
-            }
-            
-            .roll-mod {
-                padding: 4px;
-                font-variant: small-caps;
-            };
-            .roll-mod:not(.total-roll) {
-                text-transform: lowercase;
-            }
-
-            .injury-info {
-                text-align: center;
-                font-size: 12px;
-                margin: 0 0 2px 0;
-                padding: 2px 0;
-                font-weight: 800;
-                border-radius: 10px;
-            }
-            .apply-injury {
-                font-size: 12px;
-            }
-
-            .line-header {
-                min-width: 200px;
-            };
-            
-            .line-value {
-                text-align: right;
-            };
-
-            .blind-value {
-                text-align: center;
-            }
-            
-        };
-    };
-};
+        }
+        .roll-summary {
+            text-align: center;
+        }
+        .line-header {
+            text-align: left;
+            padding-left: 10px;
+            flex: auto;
+        }
+        .line-value {
+            text-align: right;
+            padding-right: 10px;
+        }
+        .total-roll {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+        .stunt-points {
+            border-radius: 10px;
+        }
+    }
+    .footer {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        text-align: center;
+        span {
+            min-height: 18px;
+        }
+    }
+    .section-break:has(.mod-desc) {
+        margin-top: 4px;
+    }
+    .mod-desc:first-of-type {
+        padding-top: 4px;
+    }
+    .age-chat-buttons {
+        margin-top: 5px;
+    }
+    .chat-buttons {
+        margin-top: 5px;
+        gap: 4px;
+        div {
+            gap: 4px;
+        }
+    }
+    .age-button:hover {
+        box-shadow: 20px silver;
+    }
+}
