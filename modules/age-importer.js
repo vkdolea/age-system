@@ -15,6 +15,7 @@ export default class AgeImporter extends Application {
       "mageL": "Modern AGE (Major NPC)",
       "mageM": "Modern AGE (Minor NPC)",
       "fage": "Fantasy AGE",
+      "fage2e": "Fantasy AGE 2e",
       "dage": "Dragon AGE"
     };
     this._modeSelected = 'expanse';
@@ -166,7 +167,7 @@ export class AgeParser {
   _getAbilities() {
     // Identify which Setting the Ability block belongs
     const mode = this._modeSelected
-    const ablType = ['expanse', 'mageL', 'mageM', 'fage'].includes(mode) ? 'main' : (mode === 'dage' ? 'dage' : null);
+    const ablType = ['expanse', 'mageL', 'mageM', 'fage', 'fage2e'].includes(mode) ? 'main' : (mode === 'dage' ? 'dage' : null);
     if (!ablType) return false
 
     const abls = foundry.utils.deepClone(ageSystem.abilitiesSettings[ablType]);
@@ -179,47 +180,52 @@ export class AgeParser {
     const abilities = {};
     const focus = [];
 
-    // Search for condensed NPC sheet
-    for (const a in abls) {
-      if (Object.hasOwnProperty.call(abls, a)) {
-        const abl = abls[a].toLowerCase();
-        let hasFocus = false;
-        const r00 = `-?–?\\b[0-9]*`;
-        const r0 = ["mageL", "dage", "fage"].includes(mode) ? `${r00} ${abl}` : `${abl} ${r00}`; // TODO - identify this change automatically
-        const r1 = `\\(([^\\)]+)\\)`;
-        const rg = `${r0} ${r1}`;
-        const ri = new RegExp(rg);
-        const text = this.sections.abilityPlusDerived.toLowerCase();
-        // Try to match ability + focus entry
-        let ablM = text.match(ri);
-        // If matches, flag "hasFocus" as true, otherwise, match ability without focus
-        if (ablM) hasFocus = true; else ablM = text.match(r0);
-        
-        // Ability value
-        const noLineBreak = ablM[0].replace('\n', '').replaceAll('–','-').replace(abl, '').trim();
-        const ablArr = noLineBreak.split(" ");
-        const value = ablArr[0];
-        const abilityValue = Number(value);
-        abilities[a] = {value: abilityValue};
+    // Handle Fantasy AGE 2e format (comma-separated abilities)
+    if (mode === 'fage2e') {
+      this._parseFantasyAge2eAbilities(abls, abilities, focus);
+    } else {
+      // Search for condensed NPC sheet (original logic)
+      for (const a in abls) {
+        if (Object.hasOwnProperty.call(abls, a)) {
+          const abl = abls[a].toLowerCase();
+          let hasFocus = false;
+          const r00 = `-?–?\\b[0-9]*`;
+          const r0 = ["mageL", "dage", "fage"].includes(mode) ? `${r00} ${abl}` : `${abl} ${r00}`; // TODO - identify this change automatically
+          const r1 = `\\(([^\\)]+)\\)`;
+          const rg = `${r0} ${r1}`;
+          const ri = new RegExp(rg);
+          const text = this.sections.abilityPlusDerived.toLowerCase();
+          // Try to match ability + focus entry
+          let ablM = text.match(ri);
+          // If matches, flag "hasFocus" as true, otherwise, match ability without focus
+          if (ablM) hasFocus = true; else ablM = text.match(r0);
+          
+          // Ability value
+          const noLineBreak = ablM[0].replace('\n', '').replaceAll('–','-').replace(abl, '').trim();
+          const ablArr = noLineBreak.split(" ");
+          const value = ablArr[0];
+          const abilityValue = Number(value);
+          abilities[a] = {value: abilityValue};
 
-        // Focuses
-        if (hasFocus) {
-          let str = ablM[1].replace('\n', '').replace('(', '').replace(')','');
-          const fociArr = str.split(',');
-          for (let f = 0; f < fociArr.length; f++) {
-            const e = fociArr[f].trim();
-            // Identify if there is modified Focus
-            const mod = e.lastIndexOf('+');
-            const value = mod < 0 ? 2 : Number(e.slice(mod, e.length));
-            const nameStr = mod > 0 ? e.slice(0, mod) : e;
-            focus.push({
-              name: this.normalizeCase(nameStr),
-              type: 'focus',
-              system: {
-                initialValue: value,
-                useAbl: a
-              }
-            })
+          // Focuses
+          if (hasFocus) {
+            let str = ablM[1].replace('\n', '').replace('(', '').replace(')','');
+            const fociArr = str.split(',');
+            for (let f = 0; f < fociArr.length; f++) {
+              const e = fociArr[f].trim();
+              // Identify if there is modified Focus
+              const mod = e.lastIndexOf('+');
+              const value = mod < 0 ? 2 : Number(e.slice(mod, e.length));
+              const nameStr = mod > 0 ? e.slice(0, mod) : e;
+              focus.push({
+                name: this.normalizeCase(nameStr),
+                type: 'focus',
+                system: {
+                  initialValue: value,
+                  useAbl: a
+                }
+              })
+            }
           }
         }
       }
@@ -240,6 +246,132 @@ export class AgeParser {
     
     this.data.abilities = abilities;
     this.data.focus = focus;
+  }
+
+  /**
+   * Parse abilities for Fantasy AGE 2e format (comma-separated)
+   * @param {Object} abls Localized ability names
+   * @param {Object} abilities Object to populate with ability values
+   * @param {Array} focus Array to populate with focus data
+   */
+  _parseFantasyAge2eAbilities(abls, abilities, focus) {
+    const text = this.sections.abilityPlusDerived.toLowerCase();
+    
+    // Find the abilities section - it comes after "ABILITIES (FOCUSES)" header
+    const abilityHeaderRegex = /abilities\s*\(\s*focuses?\s*\)/i;
+    const abilityHeaderMatch = text.match(abilityHeaderRegex);
+    if (!abilityHeaderMatch) return;
+    
+    const abilityStartIndex = abilityHeaderMatch.index + abilityHeaderMatch[0].length;
+    
+    // Find where abilities section ends (before SPEED, HEALTH, DEFENSE line)
+    const speedHealthDefenseRegex = /speed\s+health\s+defense/i;
+    const speedHealthDefenseMatch = text.match(speedHealthDefenseRegex);
+    const abilityEndIndex = speedHealthDefenseMatch ? speedHealthDefenseMatch.index : text.length;
+    
+    // Extract the abilities text
+    const abilitiesText = text.substring(abilityStartIndex, abilityEndIndex).trim();
+    
+    // Split by commas, but be careful about commas inside parentheses
+    const abilityEntries = this._splitRespectingParentheses(abilitiesText);
+    
+    // Process each ability entry
+    for (const entry of abilityEntries) {
+      const trimmedEntry = entry.trim();
+      if (!trimmedEntry) continue;
+      
+      // Parse each ability entry
+      this._parseFantasyAge2eAbilityEntry(trimmedEntry, abls, abilities, focus);
+    }
+  }
+
+  /**
+   * Split text by commas while respecting parentheses
+   * @param {String} text Text to split
+   * @returns {Array} Array of split entries
+   */
+  _splitRespectingParentheses(text) {
+    const entries = [];
+    let current = '';
+    let parenthesesDepth = 0;
+    
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      
+      if (char === '(') {
+        parenthesesDepth++;
+      } else if (char === ')') {
+        parenthesesDepth--;
+      } else if (char === ',' && parenthesesDepth === 0) {
+        entries.push(current.trim());
+        current = '';
+        continue;
+      }
+      
+      current += char;
+    }
+    
+    if (current.trim()) {
+      entries.push(current.trim());
+    }
+    
+    return entries;
+  }
+
+  /**
+   * Parse a single ability entry for Fantasy AGE 2e format
+   * @param {String} entry Single ability entry (e.g., "Accuracy 2 (Light Blades, Bows)")
+   * @param {Object} abls Localized ability names
+   * @param {Object} abilities Object to populate with ability values
+   * @param {Array} focus Array to populate with focus data
+   */
+  _parseFantasyAge2eAbilityEntry(entry, abls, abilities, focus) {
+    // Pattern: Ability Name Number (Focus1, Focus2, etc.)
+    const abilityPattern = /^([a-zA-Z\s]+)\s+(-?\d+)(?:\s*\(([^)]+)\))?/;
+    const match = entry.match(abilityPattern);
+    
+    if (!match) return;
+    
+    const abilityName = match[1].trim().toLowerCase();
+    const abilityValue = parseInt(match[2]);
+    const focusString = match[3];
+    
+    // Find the matching ability key
+    let abilityKey = null;
+    for (const [key, localizedName] of Object.entries(abls)) {
+      if (localizedName.toLowerCase() === abilityName) {
+        abilityKey = key;
+        break;
+      }
+    }
+    
+    if (!abilityKey) return;
+    
+    // Set ability value
+    abilities[abilityKey] = { value: abilityValue };
+    
+    // Parse focuses if present
+    if (focusString) {
+      const fociArr = focusString.split(',');
+      for (const f of fociArr) {
+        const focusName = f.trim();
+        if (focusName) {
+          // Check if focus has a modifier (like +3)
+          const modMatch = focusName.match(/(.+?)\s*\+(\d+)$/);
+          const focusValue = modMatch ? parseInt(modMatch[2]) : 2;
+          const focusNameClean = modMatch ? modMatch[1].trim() : focusName;
+          
+          focus.push({
+            name: this.normalizeCase(focusNameClean),
+            type: 'focus',
+            system: {
+              initialValue: focusValue,
+              useAbl: abilityKey
+            }
+          });
+        }
+      }
+    }
   }
 
   // TODO - Incluir localização
