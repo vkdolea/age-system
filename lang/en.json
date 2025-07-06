@@ -718,6 +718,7 @@
 
         "ignoreDamage": "Ignore Damage",
         "applyDamage": "Apply Damage",
+        "applyHealing": "Apply Healing",
         "armorPiercing": "Armor Piercing",
         "none": "None",
         "halfArmor": "Half Armor",

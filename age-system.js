@@ -451,8 +451,11 @@ Hooks.once("ready", async function() {
 Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatLog, content, userData))
 // Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
 Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});
-Hooks.on("renderChatLog", (app, html, data) => {AgeChat.addChatListeners(html)});
-Hooks.on("renderChatMessageHTML", (app, html, data) => {AgeChat.sortCustomAgeChatCards(app, html, data)});
+// Hooks.on("renderChatLog", (app, html, data) => {AgeChat.addChatListeners(html)}); --------- renderChatLog doesn't exist anymore in v13
+Hooks.on("renderChatMessageHTML", (app, html, data) => {
+    AgeChat.addChatListeners(html);
+    AgeChat.sortCustomAgeChatCards(app, html, data);
+});
 Hooks.on("getChatLogEntryContext", AgeChat.addChatMessageContextOptions);
 Hooks.on('renderActorSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));
 Hooks.on('renderItemSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));

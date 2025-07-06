@@ -10,7 +10,8 @@ export function addChatListeners(html) {
     html.querySelectorAll('.roll-fatigue').forEach(el => el.addEventListener("contextmenu", chatFatigueRoll));
     html.querySelectorAll('.roll-item').forEach(el => el.addEventListener("click", rollItemFromChat));
     html.querySelectorAll('.roll-item').forEach(el => el.addEventListener("contextmenu", rollItemFromChat));
-    html.querySelectorAll('.apply-damage').forEach(el => el.addEventListener("click", rollItemFromChat));
+    html.querySelectorAll('.apply-damage').forEach(el => el.addEventListener("click", applyDamageChat));
+    html.querySelectorAll('.apply-damage').forEach(el => el.addEventListener("contextMenu", applyDamageChat));
     html.querySelectorAll('.roll-toughness-test').forEach(el => el.addEventListener("click", resistInjury));
     html.querySelectorAll('.apply-injury').forEach(el => el.addEventListener("click", inflictInjury));
     // html.on('click', '.roll-damage', chatDamageRoll);
@@ -63,7 +64,9 @@ function applyChatCardDamage(li, options) {
     const roll = message.rolls[0];
     const cardDamageData = message.flags?.["age-system"]?.damageData;
     const total = cardDamageData?.totalDamage ?? roll.total;
+    console.log('HERE before ======');
     if (options.isHealing) {
+        console.log('HERE ======');
         return Promise.all(controlledTokenByType(['char']).map(t => {
           const a = t.actor;
           return ageSystem.healthSys.useInjury ? a.healMarks(total) : a.applyHPchange(total, options);
@@ -121,13 +124,25 @@ export async function resistInjury(event) {
 
 // Apply Damage button will send all selected Actors [Character type only] to Apply Damage dialog window
 export async function applyDamageChat(event) {
+    console.log('========= event ======', event);
     event.preventDefault();
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
     const cardData = game.messages.get(cardId).flags["age-system"].damageData ?? game.messages.get(cardId).flags["age-system"].ageroll.rollData; // Compatibility to Damage Chat Card before 1.1.6
     let damageData = await foundry.utils.deepClone(cardData);
+    
+    // Check if this is a healing card and handle it directly
+    if (damageData.isHealing) {
+        const total = damageData.totalDamage;
+        return Promise.all(controlledTokenByType(['char']).map(t => {
+            const a = t.actor;
+            return ageSystem.healthSys.useInjury ? a.healMarks(total) : a.applyHPchange(total, {isHealing: true, isNewHP: false});
+        }));
+    }
+    
     const cardHealthSys = damageData.healthSys;
     if (!checkHealth(cardHealthSys, ageSystem.healthSys)) {
+        console.log('===== inside checkHealth ======');
         damageData = {
             healthSys: ageSystem.healthSys,
             totalDamage: damageData.totalDamage,
@@ -147,6 +162,7 @@ export async function applyDamageChat(event) {
  * @returns {Application}       Apply Damage application is started to select damage details
  */
 export async function callApplyDamage (damageData) {
+    console.log('========= callApplyDamage damageData ======', damageData);
     const targets = controlledTokenByType('char');
     if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.noValidTokensSelected"));
     return new ApplyDamageDialog(targets, damageData, ageSystem.healthSys.useInjury).render(true);

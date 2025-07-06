@@ -605,6 +605,7 @@
     "penaltyToDamage": "Pénalité convertie en dégâts",
     "ignoreDamage": "Ignore les dommages",
     "applyDamage": "Applique les dommages",
+    "applyHealing": "Appliquer la guérison",
     "armorPiercing": "Pénétration d'armure",
     "none": "Aucun",
     "halfArmor": "Demi armure",

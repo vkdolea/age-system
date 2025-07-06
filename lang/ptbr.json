@@ -718,6 +718,7 @@
 
         "ignoreDamage": "Desprezar Dano",
         "applyDamage": "Infligir Dano",
+        "applyHealing": "Aplicar Cura",
         "armorPiercing": "Penetração de Armadura",
         "none": "Nenhuma",
         "halfArmor": "Metade da Armadura",

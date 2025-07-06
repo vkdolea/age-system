@@ -656,6 +656,7 @@
     "penaltyToDamage": "Penalización Daño",
     "ignoreDamage": "Ignorar Daño",
     "applyDamage": "Aplicar Daño",
+    "applyHealing": "Aplicar Curación",
     "armorPiercing": "Penetrante",
     "none": "No",
     "halfArmor": "Mitad Armadura",
