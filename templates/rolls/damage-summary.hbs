@@ -1,7 +1,7 @@
 <form class="age-system damage-summary-card">
-	<h2>{{localize "age-system.damageSummary"}}</h2>
+	<h2>{{#if isHealing}}{{localize "age-system.healingSummary"}}{{else}}{{localize "age-system.damageSummary"}}{{/if}}</h2>
 	{{#unless summary}}
-	<p>{{localize "age-system.noCharHurt"}}</p>
+	<p>{{#if isHealing}}{{localize "age-system.noCharHealed"}}{{else}}{{localize "age-system.noCharHurt"}}{{/if}}</p>
 	{{/unless}}
 	<ul>
 		{{#each summary as |victim i|}}

@@ -1,4 +1,4 @@
-import ApplyDamageDialog from "./apply-damage.js";
+import ApplyDamageDialog, { summaryToChat } from "./apply-damage.js";
 import {ageSystem} from "./config.js";
 import ConditionsWorkshop from "./conditions-workshop.js";
 import { applyBreather } from "./breather.js";
@@ -64,13 +64,18 @@ function applyChatCardDamage(li, options) {
     const roll = message.rolls[0];
     const cardDamageData = message.flags?.["age-system"]?.damageData;
     const total = cardDamageData?.totalDamage ?? roll.total;
-    console.log('HERE before ======');
     if (options.isHealing) {
-        console.log('HERE ======');
-        return Promise.all(controlledTokenByType(['char']).map(t => {
+        const promises = controlledTokenByType(['char']).map(t => {
           const a = t.actor;
-          return ageSystem.healthSys.useInjury ? a.healMarks(total) : a.applyHPchange(total, options);
-        }));
+          return ageSystem.healthSys.useInjury ? a.healMarks(total) : a.applyHPchange(total, {isHealing: true, isNewHP: false});
+        });
+        return Promise.all(promises).then(summary => {
+            // Filter out any false returns and send summary to chat
+            const validSummary = summary.filter(s => s && s !== true);
+            if (validSummary.length > 0) {
+                summaryToChat(validSummary, ageSystem.healthSys.useInjury, true);
+            }
+        });
     }
     if (options.isDamage) {
         const cardHealthSys = cardDamageData?.healthSys?.type;
@@ -124,7 +129,6 @@ export async function resistInjury(event) {
 
 // Apply Damage button will send all selected Actors [Character type only] to Apply Damage dialog window
 export async function applyDamageChat(event) {
-    console.log('========= event ======', event);
     event.preventDefault();
     const card = event.target.closest(".chat-message");
     const cardId = card.dataset.messageId;
@@ -134,15 +138,21 @@ export async function applyDamageChat(event) {
     // Check if this is a healing card and handle it directly
     if (damageData.isHealing) {
         const total = damageData.totalDamage;
-        return Promise.all(controlledTokenByType(['char']).map(t => {
+        const promises = controlledTokenByType(['char']).map(t => {
             const a = t.actor;
             return ageSystem.healthSys.useInjury ? a.healMarks(total) : a.applyHPchange(total, {isHealing: true, isNewHP: false});
-        }));
+        });
+        return Promise.all(promises).then(summary => {
+            // Filter out any false returns and send summary to chat
+            const validSummary = summary.filter(s => s && s !== true);
+            if (validSummary.length > 0) {
+                summaryToChat(validSummary, ageSystem.healthSys.useInjury, true);
+            }
+        });
     }
     
     const cardHealthSys = damageData.healthSys;
     if (!checkHealth(cardHealthSys, ageSystem.healthSys)) {
-        console.log('===== inside checkHealth ======');
         damageData = {
             healthSys: ageSystem.healthSys,
             totalDamage: damageData.totalDamage,
@@ -162,7 +172,6 @@ export async function applyDamageChat(event) {
  * @returns {Application}       Apply Damage application is started to select damage details
  */
 export async function callApplyDamage (damageData) {
-    console.log('========= callApplyDamage damageData ======', damageData);
     const targets = controlledTokenByType('char');
     if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.noValidTokensSelected"));
     return new ApplyDamageDialog(targets, damageData, ageSystem.healthSys.useInjury).render(true);
@@ -419,10 +428,19 @@ export function ageCommand(chatLog, content, userData) {
                 break;
             case 'heal':
                 const newValue = Number(message[2]);
-                if (!Number.isNaN(newValue)) controlledTokenByType(['char', 'organization']).map(t => {
-                    const a = t.actor;
-                    return ageSystem.healthSys.useInjury ? a.healMarks(newValue) : a.applyHPchange(newValue, {isHealing: true, isNewHP: false});
-                });
+                if (!Number.isNaN(newValue)) {
+                    const promises = controlledTokenByType(['char', 'organization']).map(t => {
+                        const a = t.actor;
+                        return ageSystem.healthSys.useInjury ? a.healMarks(newValue) : a.applyHPchange(newValue, {isHealing: true, isNewHP: false});
+                    });
+                    Promise.all(promises).then(summary => {
+                        // Filter out any false returns and send summary to chat
+                        const validSummary = summary.filter(s => s && s !== true);
+                        if (validSummary.length > 0) {
+                            summaryToChat(validSummary, ageSystem.healthSys.useInjury, true);
+                        }
+                    });
+                }
                 break;
             case 'injure':
             case 'inj':
