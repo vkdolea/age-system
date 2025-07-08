@@ -502,7 +502,7 @@ async function getAgeRollOptions(itemRolled, data = {}) {
                     label: game.i18n.localize("age-system.roll"),
                     icon: `<i class="fa-light fa-dice"></i>`,
                     callback: html => {
-                        const fd = new FormDataExtended(html[0].querySelector("form"));
+                        const fd = new foundry.applications.ux.FormDataExtended(html[0].querySelector("form"));
                         resolve(fd.object)
                     }
                 },
@@ -539,7 +539,7 @@ async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
                     label: game.i18n.localize("age-system.roll"),
                     icon: `<i class="fa-light fa-dice"></i>`,
                     callback: html => {
-                        const fd = new FormDataExtended(html[0].querySelector("form"));
+                        const fd = new foundry.applications.ux.FormDataExtended(html[0].querySelector("form"));
                         resolve(fd.object);
                     }
                 },

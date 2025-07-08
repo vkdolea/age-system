@@ -34,7 +34,7 @@ export function addChatListeners(html) {
  */
  export const addChatMessageContextOptions = function(html, options) {
     let canApply = li => {
-        const message = game.messages.get(li.data("messageId"));
+        const message = game.messages.get(li.dataset.messageId);
         return message?.isRoll && message?.isContentVisible && (ageSystem.useTargeted ? game.user.targets.size : canvas.tokens?.controlled.length);
     };
     options.push(
@@ -60,7 +60,7 @@ export function addChatListeners(html) {
  * @param {object} options      Options containing card's damage or healing definitions
  */
 function applyChatCardDamage(li, options) {
-    const message = game.messages.get(li.data("messageId"));
+    const message = game.messages.get(li.dataset.messageId);
     const roll = message.rolls[0];
     const cardDamageData = message.flags?.["age-system"]?.damageData;
     const total = cardDamageData?.totalDamage ?? roll.total;

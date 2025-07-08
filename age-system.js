@@ -10,7 +10,7 @@ import ageActiveEffectConfig from "./modules/sheets/ageActiveEffectConfig.js";
 import {ageSystemActor} from "./modules/ageSystemActor.js";
 import {ageTokenDocument} from "./modules/ageToken.js";
 import {ageSystemItem} from "./modules/ageSystemItem.js";
-import { createAgeMacro, removeDoubledMods } from "./modules/macros.js";
+import { createAgeMacro} from "./modules/macros.js";
 import { rollOwnedItem } from "./modules/macros.js";
 import { AgeRoller } from "./modules/age-roller.js";
 import { AgeTracker } from "./modules/age-tracker.js";
@@ -456,7 +456,7 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
     AgeChat.addChatListeners(html);
     AgeChat.sortCustomAgeChatCards(app, html, data);
 });
-Hooks.on("getChatLogEntryContext", AgeChat.addChatMessageContextOptions);
+Hooks.on("getChatMessageContextOptions", AgeChat.addChatMessageContextOptions);
 Hooks.on('renderActorSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));
 Hooks.on('renderItemSheet', (sheet, html, data) => Setup.prepSheet(sheet, html, data));
 Hooks.once('diceSoNiceReady', () => {

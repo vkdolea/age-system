@@ -96,30 +96,22 @@ export class ageSystemActor extends Actor {
     */
     applyActiveEffects() {
         const overrides = {};
-    
-        this.statuses ??= new Set();
-        // Identify which special statuses had been active
-        const specialStatuses = new Map();
-        for ( const statusId of Object.values(CONFIG.specialStatusEffects) ) {
-          specialStatuses.set(statusId, this.statuses.has(statusId));
-        }
         this.statuses.clear();
-    
+
         // Organize non-disabled effects by their application priority
         const changes = [];
         for ( const effect of this.allApplicableEffects() ) {
-          if ( !effect.active ) continue;
-          changes.push(...effect.changes.map(change => {
+        if ( !effect.active ) continue;
+        changes.push(...effect.changes.map(change => {
             const c = foundry.utils.deepClone(change);
             c.effect = effect;
             c.priority = c.priority ?? (c.mode * 10);
             return c;
-          }));
-          for ( const statusId of effect.statuses ) this.statuses.add(statusId);
+        }));
+        for ( const statusId of effect.statuses ) this.statuses.add(statusId);
         }
         changes.sort((a, b) => a.priority - b.priority);
 
-        
         // ---------------------- AGE SYSTEM MODIFICATION STARTS
         // Identify Active Effects to be applied after DerivedData
         const delayedOverrides = [];
@@ -132,27 +124,16 @@ export class ageSystemActor extends Actor {
         }
         this.delayedOverrides = delayedOverrides;
         // ---------------------- AGE SYSTEM MODIFICATION ENDS
-    
+
         // Apply all changes
-        if (Array.isArray(changes)) {
-            for ( let change of changes ) {
-              if ( !change.key ) continue;
-              const changes = change.effect.apply(this, change);
-              Object.assign(overrides, changes);
-            }
+        for ( const change of changes ) {
+        if ( !change.key ) continue;
+        const changes = change.effect.apply(this, change);
+        Object.assign(overrides, changes);
         }
-    
+
         // Expand the set of final overrides
         this.overrides = foundry.utils.expandObject(overrides);
-    
-        // Apply special statuses that changed to active tokens
-        let tokens;
-        for ( const [statusId, wasActive] of specialStatuses ) {
-          const isActive = this.statuses.has(statusId);
-          if ( isActive === wasActive ) continue;
-          tokens ??= this.getActiveTokens();
-          for ( const token of tokens ) token._onApplyStatusEffect(statusId, isActive);
-        }
     }
 
     _applyDelayedActiveEffects(paths) {
@@ -940,7 +921,7 @@ export class ageSystemActor extends Actor {
                         icon: `<i class="fa fa-check" aria-hidden="true"></i>`,
                         label: game.i18n.localize("age-system.confirm"),
                         callback: html => {
-                            const fd = new FormDataExtended(html[0].querySelector("form"));
+                            const fd = new foundry.applications.ux.FormDataExtended(html[0].querySelector("form"));
                             resolve(fd.object)
                         }
                     }
@@ -962,7 +943,6 @@ export class ageSystemActor extends Actor {
         let value = diffHP.value;
         const type = diffHP.type;
         if ( !value ) return;
-        if (type !== 'injury') value = value.signedString();
 
         let color;
         switch (type) {
@@ -979,6 +959,7 @@ export class ageSystemActor extends Actor {
                 break;
         }
 
+        if (type !== 'injury') value = value.signedString();
         const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
         for ( let t of tokens ) {
             if (t.visible || t.renderable) {

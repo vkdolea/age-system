@@ -3,7 +3,7 @@ import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 import {newItemData} from "./helper.js";
 
-export default class ageSystemSheetCharacter extends foundry.appv1.sheets.ActorSheet {
+export default class ageSystemSheetCharacter extends foundry.applications.sheets.ActorSheetV2 {
     
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -18,6 +18,24 @@ export default class ageSystemSheetCharacter extends foundry.appv1.sheets.ActorS
         });
     }
 
+    // static DEFAULT_OPTIONS = {
+    //     classes: ["age-system", "sheet", "char-sheet-alt"],
+    //     position: {
+    //         width: 700,
+    //         height: 875
+    //     },
+    //     window: {
+    //         resizable: true,
+    //         title: `age-system.SHEETS.charStandard` // Just the localization key
+    //     }
+    // }
+
+    // static PARTS = {
+    //     form: {
+    //         template: `systems/age-system/templates/sheets/char/char-sheet.hbs`
+    //     }
+    // }
+
     get template() {
         return `systems/age-system/templates/sheets/char/char-sheet.hbs`;
     }
@@ -29,7 +47,7 @@ export default class ageSystemSheetCharacter extends foundry.appv1.sheets.ActorS
     /* -------------------------------------------- */
 
     /** @inheritdoc */
-    getData(options) {
+    async getData(options) {
         const isOwner = this.document.isOwner;
         const isEditable = this.isEditable;
     
@@ -161,7 +179,7 @@ export default class ageSystemSheetCharacter extends foundry.appv1.sheets.ActorS
             })
         }    
         if (this.isEditable) {
-            new ContextMenu(html, ".item-show", this.itemContextMenu);
+            new foundry.applications.ux.ContextMenu.implementation(html, ".main-data", this.itemContextMenu, {jQuery: false});
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
@@ -214,8 +232,8 @@ export default class ageSystemSheetCharacter extends foundry.appv1.sheets.ActorS
         };
 
         if (this.actor.isOwner) {
-            new ContextMenu(html, ".focus-options", this.focusContextMenu);
-            new ContextMenu(html, ".item-card .main-data img", this.itemContextMenu);
+            new foundry.applications.ux.ContextMenu.implementation(html, ".focus-options", this.focusContextMenu, {jQuery: false});
+            new foundry.applications.ux.ContextMenu.implementation(html, ".item-card .main-data img", this.itemContextMenu, {jQuery: false});
             html.find(".item-equip").click(this._onItemActivate.bind(this));
             html.find(".item-card .main-data").click(this._onItemEdit.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
@@ -565,7 +583,7 @@ export default class ageSystemSheetCharacter extends foundry.appv1.sheets.ActorS
             name: game.i18n.localize("age-system.ageRollOptions"),
             icon: '<i class="fas fa-dice"></i>',
             callback: e => {
-                const focus = this.actor.items.get(e.data("item-id"));
+                const focus = this._selectItemFromHTML(e);
                 const ev = new MouseEvent('click', {altKey: true});
                 focus.roll(ev);
             }
@@ -573,16 +591,14 @@ export default class ageSystemSheetCharacter extends foundry.appv1.sheets.ActorS
         {
             name: game.i18n.localize("age-system.chatCard.roll"),
             icon: '<i class="far fa-eye"></i>',
-            callback: e => {
-                const i = this.actor.items.get(e.data("item-id")).showItem(e.shiftKey);
-            }
+            callback: e => this._selectItemFromHTML(e).showItem(e.shiftKey)
         },
         {
             name: game.i18n.localize("age-system.settings.changeRollContext"),
             icon: '<i class="fas fa-exchange-alt"></i>',
             // TODO - try to add the Shift + Click rolling to GM inside this callback
             callback: e => {
-                const focus = this.actor.items.get(e.data("item-id"));
+                const focus = this._selectItemFromHTML(e);
                 const ev = new MouseEvent('click', {});
                 Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, selectAbl: true, rollType: ageSystem.ROLL_TYPE.FOCUS});
             }
@@ -590,17 +606,12 @@ export default class ageSystemSheetCharacter extends foundry.appv1.sheets.ActorS
         {
             name: game.i18n.localize("age-system.settings.edit"),
             icon: '<i class="fas fa-edit"></i>',
-            callback: e => {
-                const item = this.actor.items.get(e.data("item-id"));
-                item.sheet.render(true);
-            }
+            callback: e => this._selectItemFromHTML(e).sheet.render(true)
         },
         {
             name: game.i18n.localize("age-system.settings.delete"),
             icon: '<i class="fas fa-trash"></i>',
-            callback: e => {
-                const i = this.actor.items.get(e.data("item-id")).delete();
-            }
+            callback: e => this._selectItemFromHTML(e).delete()
         }
     ];
 
@@ -608,29 +619,32 @@ export default class ageSystemSheetCharacter extends foundry.appv1.sheets.ActorS
         {
             name: game.i18n.localize("age-system.showOnChat"),
             icon: '<i class="far fa-eye"></i>',
-            callback: e => {
-                const data = e[0].closest(".feature-controls").dataset;
-                const item = this.actor.items.get(data.itemId);
-                item.showItem(e.shiftKey)
-            }
+            callback: e => this._selectItemFromHTML(e).showItem(e.shiftKey)
         },
         {
             name: game.i18n.localize("age-system.settings.edit"),
             icon: '<i class="fas fa-edit"></i>',
-            callback: e => {
-                const data = e[0].closest(".feature-controls").dataset;
-                const item = this.actor.items.get(data.itemId);
-                item.sheet.render(true);
-            }
+            callback: e => this._selectItemFromHTML(e).sheet.render(true)
         },
         {
             name: game.i18n.localize("age-system.settings.delete"),
             icon: '<i class="fas fa-trash"></i>',
-            callback: e => {
-                const data = e[0].closest(".feature-controls").dataset;
-                const item = this.actor.items.get(data.itemId);
-                item.delete();
-            }
+            callback: e => this._selectItemFromHTML(e).delete()
         }
     ];
+
+    _selectItemFromHTML(html, {selector="itemId", maxIterations=5}={}) {
+        let id;
+        for (let i = 0; i < maxIterations; i++) {
+            if (html.dataset[selector]) {
+                id = html.dataset[selector];
+                break;
+            }
+            html = html.parentNode;
+            if (!html) return null;
+        }
+        const entity = id ? this.actor.items.get(id) : null;
+        return entity
+    }
+
 }

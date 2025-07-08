@@ -70,7 +70,7 @@ export class QuickSettings extends FormApplication {
 
   onLoadSettings(ev) {
     if (!this.config.preset) return this.close();
-    const fd = new FormDataExtended(this.form).object;
+    const fd = new foundry.applications.ux.FormDataExtended(this.form).object;
     const sets = {
       ...ageSystem.gameSettings[this.config.preset].settings.defined,
       ...fd
@@ -159,7 +159,7 @@ export class AdvancedSettings extends FormApplication {
   }
 
   onLoadSettings(ev) {
-    const sets = new FormDataExtended(this.form).object;
+    const sets = new foundry.applications.ux.FormDataExtended(this.form).object;
     for (const setting in sets) {
       if (Object.hasOwnProperty.call(sets, setting)) {
         const value = sets[setting];
