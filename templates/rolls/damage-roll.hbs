@@ -61,11 +61,16 @@
                     <i class="fa fa-shield-alt" aria-hidden="true"></i>
                 </button> --}}
                 <button class="age-button apply-damage gm-only colorset-third-tier">
+                    {{#if isHealing}}
+                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                    {{localize "age-system.applyHealing"}}
+                    {{else}}
                     <i class="fa fa-crosshairs" aria-hidden="true"></i>
                     {{#if useInjury}}
                     Resist Damage
                     {{else}}
                     {{localize "age-system.applyDamage"}}
+                    {{/if}}
                     {{/if}}
                 </button>
             </div>

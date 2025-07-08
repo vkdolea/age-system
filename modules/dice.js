@@ -993,7 +993,8 @@ export async function itemDamage({
         flavor: item ? `${item.name} | ${ownerName}` : damageDesc,
         flavor2: item ? damageDesc : null,
         user: game.user,
-        useInjury: healthSys.useInjury
+        useInjury: healthSys.useInjury,
+        isHealing: dmgDesc.isHealing
     };
 
     let chatData = {
