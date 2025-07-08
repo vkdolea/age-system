@@ -85,7 +85,7 @@ export class AgeRoller extends Application {
 	async _onReadFromFile() {
 		new Dialog({
 			title: `AGE R20 Import`,
-			content: await renderTemplate("templates/apps/import-data.html", {
+			content: await foundry.applications.handlebars.renderTemplate("templates/apps/import-data.html", {
 				hint1: game.i18n.format("DOCUMENT.ImportDataHint1", {document: "R20 Importer"})
 			}),
 			buttons: {

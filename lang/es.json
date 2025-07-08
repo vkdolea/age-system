@@ -85,6 +85,7 @@
   "SETTINGS.colorTheGrey": "Gris",
   "SETTINGS.colorRedWarrior": "Guerrero Rojo",
   "SETTINGS.colorNeverDead": "No Muerto",
+  "SETTINGS.colorBlackWhite": "Blanco & Negro",
   "SETTINGS.gameMode": "Estilo de Juego",
   "SETTINGS.gameModeHint": "Selecciona el estilo de juego (según Modern AGE) o ninguno en caso de que la ambientación no lo utilice",
   "SETTINGS.gameModenone": "Ninguno",

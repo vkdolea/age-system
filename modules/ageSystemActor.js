@@ -46,7 +46,7 @@ export class ageSystemActor extends Actor {
         const data = actorData.system;
 
         // Check if split Armor is in use
-        data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
+        // data.useBallisticArmor = game.settings.get("age-system", "useBallisticArmor");
 
         // Retrieve wealth mode
         data.useResource = data.useIncome = data.useCurrency = data.useCoins = false;
@@ -179,7 +179,7 @@ export class ageSystemActor extends Actor {
         data.useConviction = game.settings.get("age-system", "useConviction");
 
         // Check if Toughness is in use
-        data.useToughness = game.settings.get("age-system", "useToughness");
+        // data.useToughness = game.settings.get("age-system", "useToughness");
 
         // Check if Fatigue is in use
         data.useFatigue = game.settings.get("age-system", "useFatigue");
@@ -906,7 +906,7 @@ export class ageSystemActor extends Actor {
 
     async breatherSettings(data) {
         const template = "/systems/age-system/templates/rolls/breather-settings.hbs";
-        const html = await renderTemplate(template, data);
+        const html = await foundry.applications.handlebars.renderTemplate(template, data);
         return new Promise(resolve => {
             const data = {
                 title: game.i18n.localize("age-system.breather"),

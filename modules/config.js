@@ -334,20 +334,6 @@ ageSystem.statusEffects = {
         id: `dead`,
         name: `EFFECT.StatusDead`,
     },
-    // // teste
-    // {
-    //     name: "invisivel",
-    //     id: "invisible",
-    //     icon: "icons/svg/invisible.svg",
-    //     flags: {
-    //         "age-system": {
-    //             isCondition: true,
-    //             conditionType: "expanse",
-    //             desc: "age-system.conditions.invisibleDesc"
-    //         }
-    //     }
-    // },
-    // // fim de teste
     {
         name: "age-system.conditions.blinded",
         id: "blind", //original é o 'blinded'

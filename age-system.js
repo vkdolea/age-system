@@ -150,12 +150,6 @@ Hooks.once("init", function() {
         label: "age-system.SHEETS.itemStandard"
     });
 
-    game.ageSystem.ageRoller = new AgeRoller({
-        popOut: false,
-        minimizable: false,
-        resizable: false,
-    });
-
     game.ageSystem.ageTracker = new AgeTracker({
         popOut: false,
         minimizable: false,
@@ -569,6 +563,7 @@ Hooks.on(`getSceneControlButtons`, controls => {
                 "title": "age-system.conditionsWorkshop",
                 "icon": "fa-solid fa-list",
                 "button": true,
+                "visible": game.user.isGM,
                 onChange: (event, active) => new ConditionsWorkshop().render(true)
             },
             "importer": {
@@ -577,7 +572,8 @@ Hooks.on(`getSceneControlButtons`, controls => {
                 "title": "age-system.ageImporter",
                 "icon": "fa-regular fa-file-import",
                 "button": true,
-                onChange: (event, active) =>  new AgeImporter().render(true)
+                "visible": game.user.isGM,
+                onChange: (event, active) => new AgeImporter().render(true)
             },
             "help": {
                 "name": "help",

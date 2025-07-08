@@ -203,7 +203,7 @@ export default class ApplyDamageDialog extends Application {
     }
     let chatData = {
       user: game.user.id,
-      content: await renderTemplate(chatTemplate, templateData),
+      content: await foundry.applications.handlebars.renderTemplate(chatTemplate, templateData),
       type: CONST.CHAT_MESSAGE_STYLES.OOC,
       whisper: owners,
       flags: {
@@ -425,7 +425,7 @@ export async function summaryToChat(summary, useInjury, isHealing = false) {
   }
   let chatData = {
     user: game.user.id,
-    content: await renderTemplate(chatTemplate, templateData),
+    content: await foundry.applications.handlebars.renderTemplate(chatTemplate, templateData),
     style: CONST.CHAT_MESSAGE_STYLES.OOC,
   }
   await ChatMessage.applyRollMode(chatData, 'gmroll');

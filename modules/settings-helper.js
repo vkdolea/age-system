@@ -158,6 +158,7 @@ export class AdvancedSettings extends FormApplication {
     html.find('button.close').click(e => this.close());
   }
 
+  // TODO - Filter which settings really need reload only prompt user in the correct cases
   onLoadSettings(ev) {
     const sets = new foundry.applications.ux.FormDataExtended(this.form).object;
     for (const setting in sets) {
@@ -166,6 +167,7 @@ export class AdvancedSettings extends FormApplication {
         game.settings.set("age-system", setting, value)
       }
     }
+    SettingsConfig.reloadConfirm();
     this.close();
   }
 
