@@ -132,9 +132,7 @@ export async function migrateSettings() {
 };
 
 export async function removeToughHealthBallistic() {
-  const useToughness = await game.settings.get("age-system", "useToughness");
-  const useBallisticArmor = await game.settings.get("age-system", "useBallisticArmor");
-  let healthSys = useBallisticArmor ? "mage" : useToughness ? "expanse" : "basic";
+  let healthSys = "basic";
   return healthSys;
 }
 
