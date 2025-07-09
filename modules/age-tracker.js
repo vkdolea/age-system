@@ -48,23 +48,41 @@ export class AgeTracker extends Application {
 		return data;
 	}
 	
+	_place(sidebar) {
+		const sb = sidebar.element;
+		const sbRight = sb.getBoundingClientRect().right;
+		const at = document.querySelector(`#age-tracker`);
+		at.style.left = `${sbRight - sb.offsetWidth - at.offsetWidth - at.style.marginRight}px`;
+		at.style.top = `0px`;
+
+		game.user.setFlag("age-system", "ageTrackerPos", {
+			xPos: at.style.left,
+			yPos: at.style.top
+		}).then(this.render());
+	}
+
 	activateListeners(html) {
 		super.activateListeners(html);
 		html.find(".ser-mod").click(this._onClickSer.bind(this));
 		html.find(".comp-mod").click(this._onClickComp.bind(this));
 		html.find(".milestone").click(this._onRollComp.bind(this));		
-		html.find("#age-tracker-drag").contextmenu(this._onRightClick.bind(this));
+		// html.find("#age-tracker-drag").contextmenu(this._onRightClick.bind(this));
 
 		// Set position
 		let tracker = document.getElementById("age-tracker");
 		const trackerPos = game.user.getFlag("age-system", "ageTrackerPos");
 		tracker.style.left = trackerPos.xPos;
-		tracker.style.bottom = trackerPos.yPos;
+		tracker.style.top = trackerPos.yPos;
 
 		// Make the DIV element draggable:
-		this._dragElement(tracker);
+		// this._dragElement(tracker);
 	}
-	
+
+	async _firstRender() {
+		await this.render(true);
+		this._place(document.querySelector("#sidebar"));
+	}
+
 	refresh() {
 		this.render(true);
 	}
@@ -124,49 +142,49 @@ export class AgeTracker extends Application {
 		return compRoll.toMessage({flavor, rollMode: "selfroll", whisper: [game.user.id]});
 	}
 
-	_dragElement(elmnt) {
-		var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-		if (document.getElementById("age-tracker-drag")) {
-		  // if present, the header is where you move the DIV from:
-		  document.getElementById("age-tracker-drag").onmousedown = dragMouseDown;
-		} else {
-		  // otherwise, move the DIV from anywhere inside the DIV:
-		  elmnt.onmousedown = dragMouseDown;
-		}
+	// _dragElement(elmnt) {
+	// 	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+	// 	if (document.getElementById("age-tracker-drag")) {
+	// 	  // if present, the header is where you move the DIV from:
+	// 	  document.getElementById("age-tracker-drag").onmousedown = dragMouseDown;
+	// 	} else {
+	// 	  // otherwise, move the DIV from anywhere inside the DIV:
+	// 	  elmnt.onmousedown = dragMouseDown;
+	// 	}
 	  
-		function dragMouseDown(e) {
-		  e = e || window.event;
-		  e.preventDefault();
-		  // get the mouse cursor position at startup:
-		  pos3 = e.clientX;
-		  pos4 = e.clientY;
-		  document.onmouseup = closeDragElement;
-		  // call a function whenever the cursor moves:
-		  document.onmousemove = elementDrag;
-		}
+	// 	function dragMouseDown(e) {
+	// 	  e = e || window.event;
+	// 	  e.preventDefault();
+	// 	  // get the mouse cursor position at startup:
+	// 	  pos3 = e.clientX;
+	// 	  pos4 = e.clientY;
+	// 	  document.onmouseup = closeDragElement;
+	// 	  // call a function whenever the cursor moves:
+	// 	  document.onmousemove = elementDrag;
+	// 	}
 	  
-		function elementDrag(e) {
-		  e = e || window.event;
-		  e.preventDefault();
-		  // calculate the new cursor position:
-		  pos1 = pos3 - e.clientX;
-		  pos2 = pos4 - e.clientY;
-		  pos3 = e.clientX;
-		  pos4 = e.clientY;
-		  // set the element's new position:
-		  elmnt.style.bottom = (elmnt.offsetParent.clientHeight - elmnt.offsetTop - elmnt.clientHeight + pos2) + "px";
-		  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-		}
+	// 	function elementDrag(e) {
+	// 	  e = e || window.event;
+	// 	  e.preventDefault();
+	// 	  // calculate the new cursor position:
+	// 	  pos1 = pos3 - e.clientX;
+	// 	  pos2 = pos4 - e.clientY;
+	// 	  pos3 = e.clientX;
+	// 	  pos4 = e.clientY;
+	// 	  // set the element's new position:
+	// 	  elmnt.style.bottom = (elmnt.offsetParent.clientHeight - elmnt.offsetTop - elmnt.clientHeight + pos2) + "px";
+	// 	  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+	// 	}
 	  
-		function closeDragElement() {
-		  	// stop moving when mouse button is released:
-		  	document.onmouseup = null;
-		  	document.onmousemove = null;
-		  	// Save position on appropriate User Flag
-			const trackerPos = {};
-			trackerPos.xPos = elmnt.style.left;
-			trackerPos.yPos = elmnt.style.bottom;
-			game.user.setFlag("age-system", "ageTrackerPos", trackerPos);
-		}
-	}
+	// 	function closeDragElement() {
+	// 	  	// stop moving when mouse button is released:
+	// 	  	document.onmouseup = null;
+	// 	  	document.onmousemove = null;
+	// 	  	// Save position on appropriate User Flag
+	// 		const trackerPos = {};
+	// 		trackerPos.xPos = elmnt.style.left;
+	// 		trackerPos.yPos = elmnt.style.bottom;
+	// 		game.user.setFlag("age-system", "ageTrackerPos", trackerPos);
+	// 	}
+	// }
 }

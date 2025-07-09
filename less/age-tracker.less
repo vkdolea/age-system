@@ -13,11 +13,12 @@
 
 #age-tracker {
     position: absolute;
-    width: 800px;
-    max-width: max-content;
-    margin: 0px;
+    // width: 800px;
+    // max-width: max-content;
+    margin-top: 16px;
+    margin-right: 8px;
     padding: 0px;
-    display: inline-block;
+    // display: inline-block;
     z-index: 50;
     a {
         padding-top: 4px;
@@ -38,7 +39,10 @@
     }
 
     .age-comp {
-        margin-top: 8px;
+        margin: 4px auto;
+        align-items: center;
+        align-content: center;
+        row-gap: 2px;
         a {
             flex: 0 0 16px;
             i {
@@ -53,13 +57,16 @@
         max-width: max-content;
         .comp-checkbox {
             flex: 0 0 auto;
-            margin: auto 2px auto 2px;
+            margin: 0 2px 0 2px;
             border-radius: 50%;
             height: 10px;
             width: 10px;
             background: none;
             border: 1px solid;
             background-color: #ffffff;
+        }
+        .comp-mod {
+            text-align: center;
         }
         .milestone.milestone {
             height: 16px;

@@ -159,11 +159,7 @@ Hooks.once("init", function() {
     // Define extra data for Age System (Actors, Items, ActiveEffectConfig)
     CONFIG.Actor.documentClass = ageSystemActor;
     CONFIG.Item.documentClass = ageSystemItem;
-    // CONFIG.Token.documentClass = ageTokenDocument;
     CONFIG.ageSystem = ageSystem;
-    // Saving this customization for a later implementation
-    // CONFIG.Token.objectClass = ageToken;
-    // CONFIG.ActiveEffect.sheetClass = ageActiveEffectConfig;
 
     // Load partials for Handlebars
     preloadHandlebarsTemplates(); // Find correct v13 conidition
@@ -441,11 +437,9 @@ Hooks.once("ready", async function() {
     migrations.migrateWorld();
 });
 
-
+Hooks.on("collapseSidebar", async (sidebar, isCollapsed) => game.ageSystem.ageTracker._place(sidebar))
 Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatLog, content, userData))
-// Hooks.on("renderageSystemItemSheet", (app, html, data) => {Setup.nameItemSheetWindow(app)});
 Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});
-// Hooks.on("renderChatLog", (app, html, data) => {AgeChat.addChatListeners(html)}); --------- renderChatLog doesn't exist anymore in v13
 Hooks.on("renderChatMessageHTML", (app, html, data) => {
     AgeChat.addChatListeners(html);
     AgeChat.sortCustomAgeChatCards(app, html, data);
@@ -489,7 +483,6 @@ Hooks.on(`getSceneControlButtons`, controls => {
         "title": "AGE Roller",
         "icon": "fa-duotone fa-dice",
         "order": 99,
-        // "active": false,
         "activeTool": "age",
         "tools": {
             "age": {

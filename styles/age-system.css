@@ -1622,7 +1622,7 @@
 /** Red Warrior **/
 /** Never Dead **/
 /** Expanded Blue **/
-/** Snow White **/
+/** Black & White **/
 /** Color Template **/
 /** Game Mode Colors **/
 /*******************************/
@@ -3728,214 +3728,214 @@
 .colorset-expanded-blue .shipfeatures .mod-card {
   border: solid #e6e7e8 1px;
 }
-.window-app.sheet.char-sheet-alt.colorset-snow-white .window-content,
-.window-app.sheet.vehicle.colorset-snow-white .window-content,
-.window-app.sheet.spaceship.colorset-snow-white .window-content {
+.window-app.sheet.char-sheet-alt.colorset-black-white .window-content,
+.window-app.sheet.vehicle.colorset-black-white .window-content,
+.window-app.sheet.spaceship.colorset-black-white .window-content {
   background-image: none;
   background: none;
 }
-.colorset-snow-white aside {
+.colorset-black-white aside {
   border-radius: 5px;
   border: 5px outset #000000;
 }
-.colorset-snow-white .item-summary label {
+.colorset-black-white .item-summary label {
   background-color: #000000;
   color: #ffffff;
 }
-.colorset-snow-white .metal-background {
+.colorset-black-white .metal-background {
   background: none;
 }
-.colorset-snow-white .sheet-main-content {
+.colorset-black-white .sheet-main-content {
   background-color: rgba(73, 73, 73, 0.6) !important;
 }
-.colorset-snow-white .top-banner {
+.colorset-black-white .top-banner {
   border: 5px outset #000000;
 }
-.colorset-snow-white .sheet-main-content nav a {
+.colorset-black-white .sheet-main-content nav a {
   background-color: #000000;
   color: #ffffff;
 }
-.colorset-snow-white .sheet-main-content nav a.active {
+.colorset-black-white .sheet-main-content nav a.active {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .thin-border {
+.colorset-black-white .thin-border {
   border: thin solid #ffffff;
 }
-.colorset-snow-white .action-details h4 {
+.colorset-black-white .action-details h4 {
   background: none;
   opacity: 0.8;
 }
-.colorset-snow-white .colorset-first-tier {
+.colorset-black-white .colorset-first-tier {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .colorset-first-tier.resource .list-sub-header {
+.colorset-black-white .colorset-first-tier.resource .list-sub-header {
   background-color: #494949;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-first-tier.resource .values {
+.colorset-black-white .colorset-first-tier.resource .values {
   background-color: #000000 !important;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-first-tier select option {
+.colorset-black-white .colorset-first-tier select option {
   background-color: #ffffff;
   opacity: 0.9;
 }
-.colorset-snow-white .colorset-first-tier a.content-link,
-.colorset-snow-white .colorset-first-tier a.inline-roll {
+.colorset-black-white .colorset-first-tier a.content-link,
+.colorset-black-white .colorset-first-tier a.inline-roll {
   background-color: #494949;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-second-tier {
+.colorset-black-white .colorset-second-tier {
   background-color: #494949;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-second-tier.resource .list-sub-header {
+.colorset-black-white .colorset-second-tier.resource .list-sub-header {
   background-color: #000000;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-second-tier.resource .values {
+.colorset-black-white .colorset-second-tier.resource .values {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .colorset-second-tier select option {
+.colorset-black-white .colorset-second-tier select option {
   background-color: #494949;
   opacity: 0.9;
 }
-.colorset-snow-white .colorset-second-tier a.content-link,
-.colorset-snow-white .colorset-second-tier a.inline-roll {
+.colorset-black-white .colorset-second-tier a.content-link,
+.colorset-black-white .colorset-second-tier a.inline-roll {
   background-color: #000000;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-third-tier {
+.colorset-black-white .colorset-third-tier {
   background-color: #000000;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-third-tier.resource .list-sub-header {
+.colorset-black-white .colorset-third-tier.resource .list-sub-header {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .colorset-third-tier.resource .values {
+.colorset-black-white .colorset-third-tier.resource .values {
   background-color: #494949;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-third-tier input,
-.colorset-snow-white .colorset-third-tier select {
+.colorset-black-white .colorset-third-tier input,
+.colorset-black-white .colorset-third-tier select {
   color: #ffffff;
 }
-.colorset-snow-white .colorset-third-tier select option {
+.colorset-black-white .colorset-third-tier select option {
   background-color: #000000;
   opacity: 0.9;
 }
-.colorset-snow-white .colorset-third-tier a.content-link,
-.colorset-snow-white .colorset-third-tier a.inline-roll {
+.colorset-black-white .colorset-third-tier a.content-link,
+.colorset-black-white .colorset-third-tier a.inline-roll {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white input.colorset-first-tier {
+.colorset-black-white input.colorset-first-tier {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white #age-tracker .full-box {
+.colorset-black-white #age-tracker .full-box {
   background-color: #ffffff !important;
 }
-.colorset-snow-white #age-tracker .comp-checkbox {
+.colorset-black-white #age-tracker .comp-checkbox {
   border-color: #ffffff !important;
 }
-.colorset-snow-white .char-sheet .age-header label,
-.colorset-snow-white .char-sheet .persona label {
+.colorset-black-white .char-sheet .age-header label,
+.colorset-black-white .char-sheet .persona label {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .organization-sheet .editor {
+.colorset-black-white .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
-.colorset-snow-white .vehicle-stats img {
+.colorset-black-white .vehicle-stats img {
   border: 2px solid #ffffff;
 }
-.colorset-snow-white .vehicle-stats .editor {
+.colorset-black-white .vehicle-stats .editor {
   background-color: #ffffff;
 }
-.colorset-snow-white .stats-block.losses .loss-checkbox {
+.colorset-black-white .stats-block.losses .loss-checkbox {
   border-color: #ffffff;
 }
-.colorset-snow-white .stats-block.losses .loss-checkbox.full-box.full-box {
+.colorset-black-white .stats-block.losses .loss-checkbox.full-box.full-box {
   background: #ffffff;
 }
-.colorset-snow-white fieldset {
+.colorset-black-white fieldset {
   border-color: #ffffff;
 }
-.colorset-snow-white #age-tracker-drag:hover,
-.colorset-snow-white #age-roller-drag:hover {
+.colorset-black-white #age-tracker-drag:hover,
+.colorset-black-white #age-roller-drag:hover {
   background-color: #ffffff;
 }
-.colorset-snow-white .dice-show i:last-of-type {
+.colorset-black-white .dice-show i:last-of-type {
   color: #ffffff;
 }
-.colorset-snow-white .stunt-points.stunted {
+.colorset-black-white .stunt-points.stunted {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .roll-body .section-break:has(*) {
+.colorset-black-white .roll-body .section-break:has(*) {
   border-top: 1px solid #ffffff;
 }
-.colorset-snow-white .char-sheet .item-container img {
+.colorset-black-white .char-sheet .item-container img {
   border: 1px solid #ffffff;
 }
-.colorset-snow-white .char-sheet input {
+.colorset-black-white .char-sheet input {
   background-color: #ffffff;
 }
-.colorset-snow-white .char-sheet input.colorset-second-tier {
+.colorset-black-white .char-sheet input.colorset-second-tier {
   background-color: #494949 !important;
   color: #ffffff !important;
 }
-.colorset-snow-white .focus .item-card-stats,
-.colorset-snow-white .power .item-card-stats,
-.colorset-snow-white .talent .item-card-stats,
-.colorset-snow-white .weapon .item-card-stats,
-.colorset-snow-white .equipment .item-card-stats,
-.colorset-snow-white .stunts .item-card-stats,
-.colorset-snow-white .honorifics .item-card-stats,
-.colorset-snow-white .membership .item-card-stats,
-.colorset-snow-white .relationship .item-card-stats,
-.colorset-snow-white .shipfeatures .item-card-stats {
+.colorset-black-white .focus .item-card-stats,
+.colorset-black-white .power .item-card-stats,
+.colorset-black-white .talent .item-card-stats,
+.colorset-black-white .weapon .item-card-stats,
+.colorset-black-white .equipment .item-card-stats,
+.colorset-black-white .stunts .item-card-stats,
+.colorset-black-white .honorifics .item-card-stats,
+.colorset-black-white .membership .item-card-stats,
+.colorset-black-white .relationship .item-card-stats,
+.colorset-black-white .shipfeatures .item-card-stats {
   background-color: #494949;
 }
-.colorset-snow-white .focus .item-card-stats input.data-entry,
-.colorset-snow-white .power .item-card-stats input.data-entry,
-.colorset-snow-white .talent .item-card-stats input.data-entry,
-.colorset-snow-white .weapon .item-card-stats input.data-entry,
-.colorset-snow-white .equipment .item-card-stats input.data-entry,
-.colorset-snow-white .stunts .item-card-stats input.data-entry,
-.colorset-snow-white .honorifics .item-card-stats input.data-entry,
-.colorset-snow-white .membership .item-card-stats input.data-entry,
-.colorset-snow-white .relationship .item-card-stats input.data-entry,
-.colorset-snow-white .shipfeatures .item-card-stats input.data-entry {
+.colorset-black-white .focus .item-card-stats input.data-entry,
+.colorset-black-white .power .item-card-stats input.data-entry,
+.colorset-black-white .talent .item-card-stats input.data-entry,
+.colorset-black-white .weapon .item-card-stats input.data-entry,
+.colorset-black-white .equipment .item-card-stats input.data-entry,
+.colorset-black-white .stunts .item-card-stats input.data-entry,
+.colorset-black-white .honorifics .item-card-stats input.data-entry,
+.colorset-black-white .membership .item-card-stats input.data-entry,
+.colorset-black-white .relationship .item-card-stats input.data-entry,
+.colorset-black-white .shipfeatures .item-card-stats input.data-entry {
   color: #ffffff;
 }
-.colorset-snow-white .focus .item-card-desc,
-.colorset-snow-white .power .item-card-desc,
-.colorset-snow-white .talent .item-card-desc,
-.colorset-snow-white .weapon .item-card-desc,
-.colorset-snow-white .equipment .item-card-desc,
-.colorset-snow-white .stunts .item-card-desc,
-.colorset-snow-white .honorifics .item-card-desc,
-.colorset-snow-white .membership .item-card-desc,
-.colorset-snow-white .relationship .item-card-desc,
-.colorset-snow-white .shipfeatures .item-card-desc {
+.colorset-black-white .focus .item-card-desc,
+.colorset-black-white .power .item-card-desc,
+.colorset-black-white .talent .item-card-desc,
+.colorset-black-white .weapon .item-card-desc,
+.colorset-black-white .equipment .item-card-desc,
+.colorset-black-white .stunts .item-card-desc,
+.colorset-black-white .honorifics .item-card-desc,
+.colorset-black-white .membership .item-card-desc,
+.colorset-black-white .relationship .item-card-desc,
+.colorset-black-white .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-snow-white .focus .mod-card,
-.colorset-snow-white .power .mod-card,
-.colorset-snow-white .talent .mod-card,
-.colorset-snow-white .weapon .mod-card,
-.colorset-snow-white .equipment .mod-card,
-.colorset-snow-white .stunts .mod-card,
-.colorset-snow-white .honorifics .mod-card,
-.colorset-snow-white .membership .mod-card,
-.colorset-snow-white .relationship .mod-card,
-.colorset-snow-white .shipfeatures .mod-card {
+.colorset-black-white .focus .mod-card,
+.colorset-black-white .power .mod-card,
+.colorset-black-white .talent .mod-card,
+.colorset-black-white .weapon .mod-card,
+.colorset-black-white .equipment .mod-card,
+.colorset-black-white .stunts .mod-card,
+.colorset-black-white .honorifics .mod-card,
+.colorset-black-white .membership .mod-card,
+.colorset-black-white .relationship .mod-card,
+.colorset-black-white .shipfeatures .mod-card {
   border: solid #494949 1px;
 }
 /*******************************/
@@ -3951,11 +3951,9 @@
 }
 #age-tracker {
   position: absolute;
-  width: 800px;
-  max-width: max-content;
-  margin: 0px;
+  margin-top: 16px;
+  margin-right: 8px;
   padding: 0px;
-  display: inline-block;
   z-index: 50;
 }
 #age-tracker a {
@@ -3976,7 +3974,10 @@
   opacity: 0.3;
 }
 #age-tracker .age-comp {
-  margin-top: 8px;
+  margin: 4px auto;
+  align-items: center;
+  align-content: center;
+  row-gap: 2px;
   padding-left: 4px;
   padding-right: 4px;
   border-radius: 5px;
@@ -3992,13 +3993,16 @@
 }
 #age-tracker .age-comp .comp-checkbox {
   flex: 0 0 auto;
-  margin: auto 2px auto 2px;
+  margin: 0 2px 0 2px;
   border-radius: 50%;
   height: 10px;
   width: 10px;
   background: none;
   border: 1px solid;
   background-color: #ffffff;
+}
+#age-tracker .age-comp .comp-mod {
+  text-align: center;
 }
 #age-tracker .age-comp .milestone.milestone {
   height: 16px;

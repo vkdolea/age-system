@@ -735,7 +735,7 @@ ageSystem.modkeys = {
 }
 
 // Age Tracker & Roller Initial Positions
-ageSystem.ageTrackerPos = {xPos: "260px", yPos: "69px"};
+ageSystem.ageTrackerPos = {xPos: "1050px", yPos: "0px"};
 ageSystem.ageRollerPos = {xPos: "836px", yPos: "10px"};
 
 // Initializing variable to load focus Compendiaum

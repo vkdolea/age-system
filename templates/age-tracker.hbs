@@ -1,11 +1,7 @@
 <form class="{{cssClass}} colorset-{{colorset}}" autocomplete="off">
     <div class="flexcol age-opacity-hover" id="age-tracker">
-        {{#if (or hasSerendipity (and isGM hasComplication))}}
-        <div id="age-tracker-drag"></div>
-        {{/if}}
-        {{!-- Serendipity Tracker --}}
         {{#if hasSerendipity}}
-        <div class="age-serendipity colorset-second-tier flexrow">
+        <div class="age-serendipity colorset-second-tier flexcol">
             {{#if isGM}}
             <a class="ser-mod minus"><i class="fa fa-minus" aria-hidden="true"></i></a>
             {{/if}}
@@ -37,7 +33,7 @@
         {{!-- Complication/Churn Tracker --}}
         {{#if isGM}}
         {{#if hasComplication}}
-        <div class="age-comp flexrow flex-align-center colorset-second-tier">
+        <div class="age-comp flexcol colorset-second-tier">
             <a class="comp-mod refresh"><i class="fa fa-reply"></i></a>
             {{#each compData.tracker as |v k|}}
             <div class="comp-checkbox {{#if v.check}}full-box{{/if}} {{#if (and v.milestone k)}}milestone{{/if}}" data-box-number="{{k}}"></div>
