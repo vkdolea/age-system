@@ -1,17 +1,44 @@
-<div class="age-importer flexrow feature-controls">
-    <div class="parser-text flexcol">
-        <h2 class="min-height">{{localize "age-system.ageImporter"}}</h2>
-        <p class="min-height">{{localize "age-system.ageImporterInstruction"}} <i><a title="AGE Importer wiki" href="https://github.com/vkdolea/age-system/wiki/AGE-Importer">{{localize "age-system.clickHelp"}}</a></i></p>
-        <textarea class="text-to-import">{{importingText}}</textarea>
-    </div>
-    <div class="options">
-        <h2>{{localize "age-system.settings.options"}}</h2>
-        <div class="flexcol">
-            <h3>{{localize "age-system.selectGameSetting"}}</h3>
-            {{radioBoxes radioB.name radioB.choices radioB.options}}
+<div class="age-importer flexcol feature-controls" style="gap: 15px;">
+    <h2 style="margin: 5px 0; max-height: 30px; overflow: hidden;">{{localize "age-system.ageImporter"}}</h2>
+    
+    <!-- NPC Importer Section -->
+    <div class="importer-section flexrow" style="gap: 15px;">
+        <div class="parser-text flexcol" style="flex: 1;">
+            <h4 style="margin: 5px 0; font-size: 14px; font-weight: bold; color: #666; max-height: 20px; overflow: hidden;">{{localize "age-system.npcImporter"}}</h4>
+            <p style="margin: 5px 0; font-size: 12px; max-height: 30px; overflow: hidden;">{{localize "age-system.ageImporterInstruction"}} <i><a title="AGE Importer wiki" href="https://github.com/vkdolea/age-system/wiki/AGE-Importer">{{localize "age-system.clickHelp"}}</a></i></p>
+            <textarea class="text-to-import" placeholder="{{localize 'age-system.npcImporterPlaceholder'}}" style="min-height: 120px;">{{npcImportingText}}</textarea>
         </div>
-        <button type="button" class="default-button start-importing">
-            {{localize "age-system.createCharacter"}}
-        </button>
+        <div class="options" style="flex: 0 0 250px; margin-left: 0;">
+            <h3 style="margin: 5px 0; font-size: 14px; max-height: 20px; overflow: hidden;">{{localize "age-system.settings.options"}}</h3>
+            <div class="flexcol">
+                <h4 style="margin: 5px 0; font-size: 12px; max-height: 18px; overflow: hidden;">{{localize "age-system.selectGameSetting"}}</h4>
+                {{radioBoxes npcRadioB.name npcRadioB.choices npcRadioB.options}}
+            </div>
+            <button type="button" class="default-button start-npc-importing" style="margin-top: 10px;">
+                {{localize "age-system.createCharacter"}}
+            </button>
+        </div>
+    </div>
+
+    <!-- Separator -->
+    <hr style="margin: 5px 0; border: none; border-top: 1px solid #ddd; max-height: 1px; height: 1px;">
+
+    <!-- Talent Importer Section -->
+    <div class="importer-section flexrow" style="gap: 15px;">
+        <div class="parser-text flexcol" style="flex: 1;">
+            <h4 style="margin: 5px 0; font-size: 14px; font-weight: bold; color: #666; max-height: 20px; overflow: hidden;">{{localize "age-system.talentImporter"}}</h4>
+            <p style="margin: 5px 0; font-size: 12px; max-height: 30px; overflow: hidden;">{{localize "age-system.talentImporterInstruction"}}</p>
+            <textarea class="talent-to-import" placeholder="{{localize 'age-system.talentImporterPlaceholder'}}" style="min-height: 120px;">{{talentImportingText}}</textarea>
+        </div>
+        <div class="options" style="flex: 0 0 250px; margin-left: 0;">
+            <h3 style="margin: 5px 0; font-size: 14px; max-height: 20px; overflow: hidden;">{{localize "age-system.settings.options"}}</h3>
+            <div class="flexcol">
+                <h4 style="margin: 5px 0; font-size: 12px; max-height: 18px; overflow: hidden;">{{localize "age-system.selectGameSetting"}}</h4>
+                {{radioBoxes talentRadioB.name talentRadioB.choices talentRadioB.options}}
+            </div>
+            <button type="button" class="default-button start-talent-importing" style="margin-top: 10px;">
+                {{localize "age-system.createTalent"}}
+            </button>
+        </div>
     </div>
 </div>
