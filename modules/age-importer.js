@@ -16,16 +16,25 @@ export default class AgeImporter extends Application {
     
     // Talent Importer data
     this._talentImportingText = ""
-    this._talentModeSelected = 'expanse';
+    this._talentModeSelected = 'dage';
     
-    // Currently available only for Modern AGE
-    this._modeOptions = {
+    // Mode options for NPC import
+    this._npcModeOptions = {
       "expanse": "The Expanse",
       "mageL": "Modern AGE (Major NPC)",
       "mageM": "Modern AGE (Minor NPC)",
       "fage": "Fantasy AGE",
       "fage2e": "Fantasy AGE 2e",
       "dage": "Dragon AGE"
+    };
+    
+    // Mode options for Talent import (no NPC distinction needed)
+    this._talentModeOptions = {
+      "dage": "Dragon AGE",
+      "fage": "Fantasy AGE",
+      "fage2e": "Fantasy AGE 2e",
+      "mage": "Modern AGE",
+      "expanse": "The Expanse"
     };
   }
 
@@ -50,7 +59,7 @@ export default class AgeImporter extends Application {
     data.npcModeSelected = this._npcModeSelected;
     data.npcRadioB = {
       name: "npcModeSelected",
-      choices: this._modeOptions,
+      choices: this._npcModeOptions,
       options: {
         hash: {
           checked: data.npcModeSelected
@@ -63,7 +72,7 @@ export default class AgeImporter extends Application {
     data.talentModeSelected = this._talentModeSelected;
     data.talentRadioB = {
       name: "talentModeSelected",
-      choices: this._modeOptions,
+      choices: this._talentModeOptions,
       options: {
         hash: {
           checked: data.talentModeSelected
