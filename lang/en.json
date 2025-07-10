@@ -782,6 +782,12 @@
 
         "ageImporter": "AGE Importer",
         "ageImporterInstruction": "Copy whole status block, from name header to Threat field and paste on text area below. Select AGE Setting which the status block belongs and start importing.",
+        "npcImporter": "NPC Importer",
+        "npcImporterPlaceholder": "Paste NPC stat block here (from name to Threat field)...",
+        "talentImporter": "Talent Importer",
+        "talentImporterInstruction": "Copy talent descriptions from AGE System books and paste them below. The parser will extract talent names, requirements, and degree descriptions automatically.",
+        "talentImporterPlaceholder": "Paste talent descriptions here...",
+        "createTalent": "Create Talent(s)",
         "clickHelp": "Click here for help.",
         "createCharacter": "Create Character",
         "talentPlural": "Talents",
