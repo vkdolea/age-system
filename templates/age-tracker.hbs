@@ -1,4 +1,59 @@
-<form class="{{cssClass}} colorset-{{colorset}}" autocomplete="off">
+{{#with system}}
+<div class="colorset-{{colorset}} flexcol age-opacity-hover flex-align-center" id="age-tracker">
+    {{!-- Serendipity Tracker --}}
+    {{#if hasSerendipity}}
+    <div class="age-serendipity colorset-second-tier flexrow">
+        {{#if isGM}}
+        <a data-action="sermod" class="minus"><i class="fa fa-minus" aria-hidden="true"></i></a>
+        {{/if}}
+        {{#each serDie as |die|}}
+        <div class="die">
+            <div class="{{#if die.inactive}}inactive{{/if}}">
+                {{#if (lte die.value 1)}}
+                <i class="fas fa-dice-one fa-2x"></i>
+                {{/if}} {{#if (eq die.value 2)}}
+                <i class="fas fa-dice-two fa-2x"></i>
+                {{/if}} {{#if (eq die.value 3)}}
+                <i class="fas fa-dice-three fa-2x"></i>
+                {{/if}} {{#if (eq die.value 4)}}
+                <i class="fas fa-dice-four fa-2x"></i>
+                {{/if}} {{#if (eq die.value 5)}}
+                <i class="fas fa-dice-five fa-2x"></i>
+                {{/if}} {{#if (eq die.value 6)}}
+                <i class="active-dice fas fa-dice-six fa-2x"></i>
+                {{/if}}
+            </div>
+        </div>
+        {{/each}}
+        {{#if isGM}}
+        <a data-action="sermod"><i class="fa fa-plus" aria-hidden="true"></i></a>
+        {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- Complication/Churn Tracker --}}
+    {{#if isGM}}
+    {{#if hasComplication}}
+    <div class="age-comp flexrow flex-align-center colorset-second-tier">
+        <a data-action="compmod" class="refresh"><i class="fa fa-reply"></i></a>
+        {{#each compData.tracker as |v k|}}
+        <div {{#if (and v.milestone k)}}data-action="milestone"{{/if}} class="comp-checkbox {{#if v.check}}full-box{{/if}} {{#if (and v.milestone k)}}milestone{{/if}}" data-box-number="{{k}}"></div>
+        {{/each}}
+        <a data-action="compmod" class="minus"><i class="fa fa-minus"></i></a>
+        <a data-action="compmod"><i class="fa fa-plus"></i></a>
+    </div>
+    {{/if}}
+    {{/if}}
+</div>
+{{/with}}
+
+{{!-- Estrutura com Age Tracker Horizontalizado --}}
+
+{{!-- <form class="{{cssClass}} colorset-
+
+{{!-- Estrutura com Age Tracker Verticalizado --}}
+
+{{!-- <form class="{{cssClass}} colorset-{{colorset}}" autocomplete="off">
     <div class="flexcol age-opacity-hover" id="age-tracker">
         {{#if hasSerendipity}}
         <div class="age-serendipity colorset-second-tier flexcol">
@@ -44,4 +99,4 @@
         {{/if}}
         {{/if}}
     </div>
-</form>
+</form> --}}

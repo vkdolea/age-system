@@ -79,8 +79,8 @@ export const registerSystemSettings = async function() {
       "select-one": "SETTINGS.colorSelectOne",
       "the-grey": "SETTINGS.colorTheGrey",
       "red-warrior": "SETTINGS.colorRedWarrior",
-      "never-dead": "SETTINGS.colorNeverDead",
-      "black-white": "SETTINGS.blackWhite"
+      "never-dead": "SETTINGS.colorNeverDead"
+      // "black-white": "SETTINGS.blackWhite"
     },
     onChange: ()=>{
       const newColor = game.settings.get("age-system", "colorScheme")
@@ -452,7 +452,7 @@ export const registerSystemSettings = async function() {
     config: false,
     default: {max: 30, actual: 0},
     type: Object,
-    onChange: () => {if (game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh()}
+    onChange: () => {if (game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.render()}
   });  
 
   /**
@@ -466,7 +466,7 @@ export const registerSystemSettings = async function() {
     config: false,
     default: false,
     type: Boolean,
-    onChange: () => game.ageSystem.ageTracker.refresh()
+    // onChange: () => game.ageSystem.ageTracker.render()
   });
 
   /**

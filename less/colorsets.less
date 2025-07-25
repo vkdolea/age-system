@@ -121,6 +121,7 @@
 /*******************************/
 
 each(@colorsets, {
+    #age-tracker,
     .window-app.sheet.char-sheet-alt.colorset-@{value} .window-content,
     // .window-app.sheet.char.colorset-@{value} .window-content,
     .window-app.sheet.vehicle.colorset-@{value} .window-content,
@@ -267,15 +268,15 @@ each(@colorsets, {
             color: extract(extract(@color-list, @index), 4);
         }
 
-        #age-tracker {
-            .full-box {
-                background-color: extract(extract(@color-list, @index), 1) !important;
-            }
-            .comp-checkbox {
-                border-color: extract(extract(@color-list, @index), 1) !important;
-            }
+        // AGE Tracker
+        .full-box {
+            background-color: extract(extract(@color-list, @index), 1) !important;
         }
-    
+        .comp-checkbox {
+            border-color: extract(extract(@color-list, @index), 1) !important;
+        }
+
+        // Charracter Sheet
         .char-sheet {
             .age-header,
             .persona {

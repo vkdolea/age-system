@@ -361,7 +361,7 @@ Hooks.once("ready", async function() {
     const userTrackerFlag = await game.user.getFlag("age-system", "ageTrackerPos");
     const useTracker = (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication") !== "none") ? true : false;
     if (!userTrackerFlag) await game.user.setFlag("age-system", "ageTrackerPos", ageSystem.ageTrackerPos);
-    if (useTracker) game.ageSystem.ageTracker.refresh();
+    if (useTracker) game.ageSystem.ageTracker.render(true);
 
     // Safe copy of original Status Effects
     ageSystem.statusEffects.original = foundry.utils.deepClone(CONFIG.statusEffects);
@@ -437,8 +437,7 @@ Hooks.once("ready", async function() {
     migrations.migrateWorld();
 });
 
-Hooks.on("collapseSidebar", async (sidebar, isCollapsed) => game.ageSystem.ageTracker._place(sidebar))
-Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatLog, content, userData))
+Hooks.on('chatMessage', (chatLog, content, userData) => AgeChat.ageCommand(chatLog, content, userData));
 Hooks.on("renderageSystemSheetCharacter", (app, html, data) => {Setup.hidePrimaryAblCheckbox(html)});
 Hooks.on("renderChatMessageHTML", (app, html, data) => {
     AgeChat.addChatListeners(html);

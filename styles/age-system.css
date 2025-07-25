@@ -1628,6 +1628,7 @@
 /*******************************/
 /**     Color Style Rules     **/
 /*******************************/
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-modern-blue .window-content,
 .window-app.sheet.vehicle.colorset-modern-blue .window-content,
 .window-app.sheet.spaceship.colorset-modern-blue .window-content {
@@ -1737,10 +1738,10 @@
   background-color: #007DAD;
   color: #ffffff;
 }
-.colorset-modern-blue #age-tracker .full-box {
+.colorset-modern-blue .full-box {
   background-color: #007DAD !important;
 }
-.colorset-modern-blue #age-tracker .comp-checkbox {
+.colorset-modern-blue .comp-checkbox {
   border-color: #007DAD !important;
 }
 .colorset-modern-blue .char-sheet .age-header label,
@@ -1838,6 +1839,7 @@
 .colorset-modern-blue .shipfeatures .mod-card {
   border: solid #B9DBEB 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-fantasy-blue .window-content,
 .window-app.sheet.vehicle.colorset-fantasy-blue .window-content,
 .window-app.sheet.spaceship.colorset-fantasy-blue .window-content {
@@ -1947,10 +1949,10 @@
   background-color: #0f4f5b;
   color: #ffffff;
 }
-.colorset-fantasy-blue #age-tracker .full-box {
+.colorset-fantasy-blue .full-box {
   background-color: #0f4f5b !important;
 }
-.colorset-fantasy-blue #age-tracker .comp-checkbox {
+.colorset-fantasy-blue .comp-checkbox {
   border-color: #0f4f5b !important;
 }
 .colorset-fantasy-blue .char-sheet .age-header label,
@@ -2048,6 +2050,7 @@
 .colorset-fantasy-blue .shipfeatures .mod-card {
   border: solid #91b6d4 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-dragon-red .window-content,
 .window-app.sheet.vehicle.colorset-dragon-red .window-content,
 .window-app.sheet.spaceship.colorset-dragon-red .window-content {
@@ -2157,10 +2160,10 @@
   background-color: #83272a;
   color: #ffffff;
 }
-.colorset-dragon-red #age-tracker .full-box {
+.colorset-dragon-red .full-box {
   background-color: #83272a !important;
 }
-.colorset-dragon-red #age-tracker .comp-checkbox {
+.colorset-dragon-red .comp-checkbox {
   border-color: #83272a !important;
 }
 .colorset-dragon-red .char-sheet .age-header label,
@@ -2258,6 +2261,7 @@
 .colorset-dragon-red .shipfeatures .mod-card {
   border: solid #e0beb1 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-folded-purple .window-content,
 .window-app.sheet.vehicle.colorset-folded-purple .window-content,
 .window-app.sheet.spaceship.colorset-folded-purple .window-content {
@@ -2367,10 +2371,10 @@
   background-color: #565183;
   color: #ffffff;
 }
-.colorset-folded-purple #age-tracker .full-box {
+.colorset-folded-purple .full-box {
   background-color: #565183 !important;
 }
-.colorset-folded-purple #age-tracker .comp-checkbox {
+.colorset-folded-purple .comp-checkbox {
   border-color: #565183 !important;
 }
 .colorset-folded-purple .char-sheet .age-header label,
@@ -2468,6 +2472,7 @@
 .colorset-folded-purple .shipfeatures .mod-card {
   border: solid #cfccde 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-ronin-green .window-content,
 .window-app.sheet.vehicle.colorset-ronin-green .window-content,
 .window-app.sheet.spaceship.colorset-ronin-green .window-content {
@@ -2577,10 +2582,10 @@
   background-color: #155f0e;
   color: #ffffff;
 }
-.colorset-ronin-green #age-tracker .full-box {
+.colorset-ronin-green .full-box {
   background-color: #155f0e !important;
 }
-.colorset-ronin-green #age-tracker .comp-checkbox {
+.colorset-ronin-green .comp-checkbox {
   border-color: #155f0e !important;
 }
 .colorset-ronin-green .char-sheet .age-header label,
@@ -2678,6 +2683,7 @@
 .colorset-ronin-green .shipfeatures .mod-card {
   border: solid #c2f5aa 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-select-one .window-content,
 .window-app.sheet.vehicle.colorset-select-one .window-content,
 .window-app.sheet.spaceship.colorset-select-one .window-content {
@@ -2787,10 +2793,10 @@
   background-color: #273249;
   color: #e7ccc3;
 }
-.colorset-select-one #age-tracker .full-box {
+.colorset-select-one .full-box {
   background-color: #273249 !important;
 }
-.colorset-select-one #age-tracker .comp-checkbox {
+.colorset-select-one .comp-checkbox {
   border-color: #273249 !important;
 }
 .colorset-select-one .char-sheet .age-header label,
@@ -2888,6 +2894,7 @@
 .colorset-select-one .shipfeatures .mod-card {
   border: solid #768d9f 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-the-grey .window-content,
 .window-app.sheet.vehicle.colorset-the-grey .window-content,
 .window-app.sheet.spaceship.colorset-the-grey .window-content {
@@ -2997,10 +3004,10 @@
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
-.colorset-the-grey #age-tracker .full-box {
+.colorset-the-grey .full-box {
   background-color: #3d3e3f !important;
 }
-.colorset-the-grey #age-tracker .comp-checkbox {
+.colorset-the-grey .comp-checkbox {
   border-color: #3d3e3f !important;
 }
 .colorset-the-grey .char-sheet .age-header label,
@@ -3098,6 +3105,7 @@
 .colorset-the-grey .shipfeatures .mod-card {
   border: solid #b4b6b3 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-red-warrior .window-content,
 .window-app.sheet.vehicle.colorset-red-warrior .window-content,
 .window-app.sheet.spaceship.colorset-red-warrior .window-content {
@@ -3207,10 +3215,10 @@
   background-color: #751119;
   color: #f7b755;
 }
-.colorset-red-warrior #age-tracker .full-box {
+.colorset-red-warrior .full-box {
   background-color: #751119 !important;
 }
-.colorset-red-warrior #age-tracker .comp-checkbox {
+.colorset-red-warrior .comp-checkbox {
   border-color: #751119 !important;
 }
 .colorset-red-warrior .char-sheet .age-header label,
@@ -3308,6 +3316,7 @@
 .colorset-red-warrior .shipfeatures .mod-card {
   border: solid #d1635b 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-never-dead .window-content,
 .window-app.sheet.vehicle.colorset-never-dead .window-content,
 .window-app.sheet.spaceship.colorset-never-dead .window-content {
@@ -3417,10 +3426,10 @@
   background-color: #663322;
   color: #bb8755;
 }
-.colorset-never-dead #age-tracker .full-box {
+.colorset-never-dead .full-box {
   background-color: #663322 !important;
 }
-.colorset-never-dead #age-tracker .comp-checkbox {
+.colorset-never-dead .comp-checkbox {
   border-color: #663322 !important;
 }
 .colorset-never-dead .char-sheet .age-header label,
@@ -3518,6 +3527,7 @@
 .colorset-never-dead .shipfeatures .mod-card {
   border: solid #eeddcd 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-expanded-blue .window-content,
 .window-app.sheet.vehicle.colorset-expanded-blue .window-content,
 .window-app.sheet.spaceship.colorset-expanded-blue .window-content {
@@ -3627,10 +3637,10 @@
   background-color: #005971;
   color: #dde2e2;
 }
-.colorset-expanded-blue #age-tracker .full-box {
+.colorset-expanded-blue .full-box {
   background-color: #005971 !important;
 }
-.colorset-expanded-blue #age-tracker .comp-checkbox {
+.colorset-expanded-blue .comp-checkbox {
   border-color: #005971 !important;
 }
 .colorset-expanded-blue .char-sheet .age-header label,
@@ -3728,6 +3738,7 @@
 .colorset-expanded-blue .shipfeatures .mod-card {
   border: solid #e6e7e8 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-black-white .window-content,
 .window-app.sheet.vehicle.colorset-black-white .window-content,
 .window-app.sheet.spaceship.colorset-black-white .window-content {
@@ -3837,10 +3848,10 @@
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-black-white #age-tracker .full-box {
+.colorset-black-white .full-box {
   background-color: #ffffff !important;
 }
-.colorset-black-white #age-tracker .comp-checkbox {
+.colorset-black-white .comp-checkbox {
   border-color: #ffffff !important;
 }
 .colorset-black-white .char-sheet .age-header label,
@@ -3941,31 +3952,23 @@
 /*******************************/
 /**        AGE Tracker        **/
 /*******************************/
-#age-tracker-drag {
-  width: 100%;
-  height: 10px;
-  border-radius: 5px;
-}
-#age-tracker-drag:hover {
-  cursor: move;
-}
 #age-tracker {
-  position: absolute;
-  margin-top: 16px;
-  margin-right: 8px;
-  padding: 0px;
-  z-index: 50;
+  position: fixed;
+  height: auto;
+  width: 100svw;
+  bottom: 150px;
 }
 #age-tracker a {
   padding-top: 4px;
   text-shadow: none;
 }
 #age-tracker div.age-serendipity {
+  column-gap: 4px;
   max-width: max-content;
   border-radius: 10px;
   padding: 4px;
 }
-#age-tracker div.age-serendipity a.ser-mod {
+#age-tracker div.age-serendipity a {
   margin-top: 2px;
   margin-left: 8px;
   margin-right: 8px;
@@ -3974,10 +3977,7 @@
   opacity: 0.3;
 }
 #age-tracker .age-comp {
-  margin: 4px auto;
-  align-items: center;
-  align-content: center;
-  row-gap: 2px;
+  margin-top: 8px;
   padding-left: 4px;
   padding-right: 4px;
   border-radius: 5px;
@@ -3993,16 +3993,13 @@
 }
 #age-tracker .age-comp .comp-checkbox {
   flex: 0 0 auto;
-  margin: 0 2px 0 2px;
+  margin: auto 2px auto 2px;
   border-radius: 50%;
   height: 10px;
   width: 10px;
   background: none;
   border: 1px solid;
   background-color: #ffffff;
-}
-#age-tracker .age-comp .comp-mod {
-  text-align: center;
 }
 #age-tracker .age-comp .milestone.milestone {
   height: 16px;
@@ -4037,6 +4034,8 @@
   font-variant: all-small-caps;
 }
 .age-system.age-roll-card .roll-body {
+  background-color: white;
+  color: black;
   padding: 4px;
 }
 .age-system.age-roll-card .roll-body .dice-show {

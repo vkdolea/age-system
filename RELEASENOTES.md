@@ -5,7 +5,8 @@
 - Compatibility to Foundry VTT v13.
 
 ### Changed
-- AGE Roller is now a Canvas Control buttom
+- AGE Roller is now a Canvas Control buttom.
+- New position for AGE Tracker for Churn/Complication and Serendepity/Daring.
 
 ### Fixed
 - Bug causing Plot Damage (Organizations) and Vehicle collision to return error.
