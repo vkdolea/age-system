@@ -713,7 +713,7 @@ export class ageSystemActor extends Actor {
           flavor2: `${game.i18n.localize("age-system.toughnessTest")}`
         };
         const toughTest = await Dice.ageRollCheck(rollData);
-        const data = toughTest.data.flags["age-system"].ageroll.rollData
+        const data = toughTest.flags["age-system"].ageroll.rollData
         if (applyInjury && data.isSuccess !== null && !data.isSuccess) await this.applyInjury(data.injuryDegree);
         return toughTest;
     }

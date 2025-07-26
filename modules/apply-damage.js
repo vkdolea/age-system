@@ -164,11 +164,11 @@ export default class ApplyDamageDialog extends Application {
               this.promptPlayerToRoll(actor, h.injuryParts, h.totalDmg, applyInjury);
             } else {
               const card = await actor.toughnessTest(h.injuryParts, h.totalDmg, applyInjury);
-              const cardFlag = card.data.flags["age-system"].ageroll.rollData;
+              const cardFlag = card.flags["age-system"].ageroll.rollData;
               const degree = cardFlag.injuryDegree;
               if (applyInjury && !cardFlag.isSuccess && degree !== null) summary.push({
                 name: actor.name,
-                img: actor.data.token.img,
+                img: actor.token.texture.src,
                 degree,
                 totalInjuries: foundry.utils.deepClone(actor.system.injury.degrees),
                 newMarks: actor.system.injury.marks
@@ -193,7 +193,7 @@ export default class ApplyDamageDialog extends Application {
   async promptPlayerToRoll (actor, injuryParts, totalDmg, autoApply) {
     const chatTemplate = "/systems/age-system/templates/rolls/owner-roll-toughness.hbs";
     const templateData = {
-      img: actor.data.token.img,
+      img: actor.img,
       name: actor.name
     }
 

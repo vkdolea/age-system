@@ -56,14 +56,20 @@
 
     {{!-- Footer Section --}}
     <div class="footer colorset-first-tier flexrow">
-        <span> </span>
+        <span>
+        {{#unless ../isSuccess}}
+        {{#if (eq ../ROLL_TYPE.TOUGHNESS_AUTO ../rollType)}}
+        {{localize (concat "age-system." ../injuryDegree "InjuryInflicted")}}
+        {{/if}}
+        {{/unless}}
+        </span>
     </div>
 
     {{!-- Buttons Section --}}
     {{#if (ne ../rollType ../ROLL_TYPE.FATIGUE)}}
     <div class="chat-buttons flexcol">
         {{#if (or ../hasDamage ../hasHealing)}}
-        <button class="age-button roll-damage main-dmg colorset-third-tier">
+        <button class="age-button roll-damage main-dmg">
             {{#if ../hasTest}}
                 {{#if ../hasDamage}}<i class="fa-solid fa-hand-fist"></i> {{localize "age-system.chatCard.rollFullDamage"}}
                 {{else}}<i class="fa-solid fa-notes-medical"></i> {{localize "age-system.chatCard.rollFullHealing"}} {{/if}}
@@ -75,20 +81,50 @@
 
         {{!-- Add Stund Die or Focus --}}
         <div class="flexrow">
-            <button class="age-button roll-damage add-stunt-damage sd-dmg colorset-third-tier">
+            <button class="age-button roll-damage add-stunt-damage sd-dmg">
                 <i class="fa-regular fa-dice-d6"></i> {{localize "age-system.chatCard.addStuntDie"}}
             </button>
 
-            <button class="age-button roll-damage add-focus-damage focus-dmg colorset-third-tier">
+            <button class="age-button roll-damage add-focus-damage focus-dmg">
                 <i class="fa-solid fa-book"></i> {{localize "age-system.chatCard.addFocus"}}
             </button>
         </div>
 
         {{!-- Add Both Stund Die and Focus --}}
-        <button class="age-button roll-damage add-focus-damage add-stunt-damage both-dmg colorset-third-tier">
+        <button class="age-button roll-damage add-focus-damage add-stunt-damage both-dmg">
             <i class="fa-solid fa-burst"></i> {{localize "age-system.chatCard.addFocusSD"}}
         </button>
         {{/if}}
+
+        
+        {{!-- Fatigue Buttons --}}
+        {{#if (and ../hasFatigue ../usingFatigue (ne ../ROLL_TYPE.FATIGUE ../rollType))}}
+        <button class="roll-fatigue age-button">
+            <i class="fas fa-head-side-cough"></i> {{localize "age-system.rollFatigue"}}
+        </button>
+        {{/if}}
+
+        {{!-- Injury Buttons --}}
+        {{#unless ../isSuccess}}
+        {{#if (eq ../ROLL_TYPE.TOUGHNESS ../rollType)}}
+        <p class="injury-info colorset-third-tier">{{localize "age-system.autoApplyInjury"}}</p>
+        <div class="flexrow">
+            <button class="apply-injury light age-button">
+                <i class="fas fa-dizzy opacity-high"></i> {{localize "age-system.injuryLight"}}
+            </button>
+            <button class="apply-injury serious age-button">
+                <i class="fas fa-dizzy opacity-low"></i> {{localize "age-system.injurySerious"}}
+            </button>
+            <button class="apply-injury severe age-button">
+                <i class="fas fa-dizzy"></i> {{localize "age-system.injurySevere"}}
+            </button>
+        </div>
+        {{/if}}
+
+        {{!-- {{#if (eq ../ROLL_TYPE.TOUGHNESS_AUTO ../rollType)}}
+        <p class="injury-info colorset-third-tier">{{localize (concat "age-system." ../injuryDegree "InjuryInflicted")}}</p>
+        {{/if}} --}}
+        {{/unless}}
     </div>
     {{/if}}
 

@@ -1,8 +1,8 @@
 <div class="age-buttons flexrow feature-controls" data-item-id="{{itemId}}" data-owner-uuid="{{ownerUuid}}" autocomplete="off">
     {{#unless (and (eq item.type 'power') (eq item.system.hasRoll false))}}
-    <button type="button" class="roll-item age-button attack colorset-third-tier"><i class="fa-solid fa-dice"></i> {{localize "age-system.chatCard.roll"}}</button>
+    <button type="button" class="roll-item age-button attack"><i class="fa-solid fa-dice"></i> {{localize "age-system.chatCard.roll"}}</button>
     {{/unless}}
     {{#if (or item.hasDamage item.hasHealing)}}
-    <button type="button" class="roll-item damage colorset-third-tier">{{#if item.hasDamage}}<i class="fa-solid fa-hand-fist"></i> {{localize "age-system.chatCard.rollDamage"}}{{else}}{{localize "age-system.chatCard.rollHealing"}}{{/if}}</button>
+    <button type="button" class="roll-item damage">{{#if item.hasDamage}}<i class="fa-solid fa-hand-fist"></i> {{localize "age-system.chatCard.rollDamage"}}{{else}}{{localize "age-system.chatCard.rollHealing"}}{{/if}}</button>
     {{/if}}
 </div>
