@@ -92,6 +92,7 @@ A few brave joined forces to improve this system code and this is the place wher
 - [lozanoje](https://github.com/lozanoje)
 - [Txus](https://github.com/Txus5012)
 - [jaypoulz](https://github.com/jaypoulz)
+- [BoltsJ](https://github.com/BoltsJ)
 
 ### Icons
 Icons were used from [game-icons.net](https://game-icons.net). These icons were published under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license. Here is a list of all icons used:

@@ -9,7 +9,8 @@ export class AgeTracker extends foundry.applications.api.HandlebarsApplicationMi
 			milestone: AgeTracker._milestone
 		},
 		window: {
-			frame: false
+			frame: false,
+			positioned: false
 		}
 	}
 
@@ -19,11 +20,13 @@ export class AgeTracker extends foundry.applications.api.HandlebarsApplicationMi
 		}
 	}
 
-	// _onFirstRender(a, b) {
-	// 	super._onFirstRender(a, b);
-	// 	document.getElementById("ui-bottom").prepend(document.getElementById("age-tracker"));
-	// }
-	
+	/** @param {HTMLElement} element  */
+	_insertElement(element) {
+		const existing = document.getElementById(element.id);
+		if (existing) existing.replaceWith(element);
+		else document.getElementById("ui-bottom").prepend(element);
+	}
+
 	async _prepareContext(options) {
 		const data = super._prepareContext(options);
 		data.isGM = game.user.isGM;
