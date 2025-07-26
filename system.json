@@ -6,7 +6,7 @@
     "download": "https://github.com/vkdolea/age-system/archive/4.0.1.zip",
     "compatibility": {
         "minimum": "13.346",
-        "verified": "13.346"
+        "verified": "13"
     },
     "url": "https://github.com/vkdolea/age-system",
     "manifest": "https://raw.githubusercontent.com/vkdolea/age-system/prep-release/system.json",
