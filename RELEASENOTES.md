@@ -1,4 +1,16 @@
-# Release Notes
+# Change Log
+
+## 4.0.0 [2025-07-25]
+### Added
+- Compatibility to Foundry VTT v13.
+- Our friend [p-arth](https://github.com/p-arth) expanded AGE Importer, so now it can import NPC sheets from Fantasy AGE 2ed AND talents from most of AGE System published books. Thanks again, [p-arth](https://github.com/p-arth)!
+
+### Changed
+- AGE Roller is now a Canvas Control buttom.
+- New position for AGE Tracker for Churn/Complication and Serendepity/Daring.
+
+### Fixed
+- Bug causing Plot Damage (Organizations) and Vehicle collision to return error.
 
 ## 3.0.3 [2024-08-11]
 ### Added

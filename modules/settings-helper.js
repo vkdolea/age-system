@@ -70,7 +70,7 @@ export class QuickSettings extends FormApplication {
 
   onLoadSettings(ev) {
     if (!this.config.preset) return this.close();
-    const fd = new FormDataExtended(this.form).object;
+    const fd = new foundry.applications.ux.FormDataExtended(this.form).object;
     const sets = {
       ...ageSystem.gameSettings[this.config.preset].settings.defined,
       ...fd
@@ -158,14 +158,16 @@ export class AdvancedSettings extends FormApplication {
     html.find('button.close').click(e => this.close());
   }
 
+  // TODO - Filter which settings really need reload only prompt user in the correct cases
   onLoadSettings(ev) {
-    const sets = new FormDataExtended(this.form).object;
+    const sets = new foundry.applications.ux.FormDataExtended(this.form).object;
     for (const setting in sets) {
       if (Object.hasOwnProperty.call(sets, setting)) {
         const value = sets[setting];
         game.settings.set("age-system", setting, value)
       }
     }
+    SettingsConfig.reloadConfirm();
     this.close();
   }
 

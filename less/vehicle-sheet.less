@@ -1,0 +1,241 @@
+/*******************************/
+/**       Vehicle Style       **/
+/*******************************/
+
+// .age-system.sheet .window-content {
+//     // background: none;
+//     background-color: #d1b7ab;
+// }
+
+.age-system.sheet.vehicle {
+    min-width: min-content;
+
+    h2,
+    label,
+    .stats-block li {
+        text-align: center;
+    }
+
+    .stats-block {
+        padding: 5px;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    .spacer {
+        flex: 0 0 10px;
+    }
+
+    .label-with-icon {
+        a {
+            max-width: fit-content;
+            margin-left: 4px;
+        }
+        label.handling-focus.handling-focus {
+            max-width: fit-content;
+        }
+        i {
+            margin-right: 4px;
+        }
+    }
+
+    input[name="name"] {
+        padding: 5px;
+        min-width: 100%;
+        max-height: fit-content;
+        border-radius: 10px;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 30px;
+        border: none;
+        height: 47px;
+        max-height: 47px;
+    }
+
+    .image-description {
+        height: 200px;
+        max-height: 200px;
+        margin-top: 10px;
+        .vehicle-image {
+            object-fit: contain;
+            border: none;
+            height: 190px;
+        }
+        .editor {
+            height: 100%;
+        }
+        .editor-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .prosemirror > .editor-container {
+            width: 100%;
+            margin: 0;
+        }
+    }
+    
+    .gm-secret-notes.gm-secret-notes {
+        height: max-content;
+        textarea.free-text {
+            resize: none;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            height: 150px;
+        }
+    }
+
+    .parameters.stats-block {
+        font-size: 14px;
+        >* {
+            min-height: 20px;
+            margin-top: 4px;
+        }
+
+        .conductor-selection {
+            flex: 0 0 20px;
+            label.conductor {
+                flex: 0 0 60px;
+                margin-right: 4px;
+                height: 20px;
+            }
+        }
+
+        .focus-ability {
+            max-height: 70px;
+            >* {
+                margin-top: 4px;
+            }
+        }
+
+        h2 {margin-top: 0}
+
+        span {
+            max-width: min-content;
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+
+        input {
+            max-height: 28px;
+            padding: 0px;
+            text-align: center;
+        }
+
+        select{
+            margin: 0 auto;
+            max-height: 20px;
+        }
+
+        input[name="system.handling.mod"],
+        input[name="system.ramDmg"],
+        input[name="system.hull"],
+        input[name="system.defenseTotal"],
+        input[name="system.cost"],
+        input[name="system.velocity.catMod"],
+        input[name="system.armorRating"],
+        input[name="system.coverRating"] {
+            max-width: 35px;
+            max-height: 20px;
+        }
+
+        input[name="system.cost"] {
+            max-width: 60px;
+        }
+        input[type="checkbox"] {
+            margin: 0px;
+            margin-top: 1px;
+            width: 16px;
+            height: 16px;
+        }
+    
+        // input[name="system.conductor"],
+        input[name="system.handling.useFocus"],
+        select[name="system.handling.useAbl"] {
+            // max-width: 285px;
+            max-height: 20px;
+        }
+    }
+
+    .vehicle-damage-chart {
+        ul {
+            .highlight {
+                background-color: rgba(0,0,0,0.1);
+            }
+            list-style-type: none;
+            padding: 0;
+            .header {
+                margin-bottom: 5px;
+            }
+            li {
+                border-radius: 10px;
+                display: flex;
+                flex-direction: row;
+                .custom-velocity {
+                    input {
+                        flex: 0 0 25px;
+                    }
+                    a {
+                        max-width: fit-content;
+                    }
+                }
+                .velocity {
+                    flex: 0 0 100px;
+                }
+                .feature-controls {
+                    flex: 0 0 100px;
+                }
+            }
+        }
+    }
+
+    .passenger-container {
+        // grid-column-start: 1;
+        // grid-column-end: span 1;
+        // grid-row-start: 2;
+        // grid-row-end: span 1;
+        padding-left: 8px;
+        padding-right: 4px;
+        padding-bottom: 4px;  
+        max-height: auto;
+        height: 100%;
+        
+        span {
+            display: inline-block;
+            input[name="system.capacity"] {
+                max-height: 16px;
+                max-width: 60px;
+                border: none;
+            }
+        }
+    }
+    .passenger-list {
+        overflow: auto;
+        padding-right: 21px;
+        // height: 176px;
+        height: 140px;
+        img {
+            max-height: 24px;
+            max-width: 24px;
+            object-fit: contain;
+            border: none;
+        }
+        a {
+            max-width: fit-content;
+        }
+        span {
+            max-width: fit-content;
+            padding-left: 4px;
+        }
+        li {
+            padding-top: 2px;
+            padding-bottom: 2px;
+
+        }
+    }
+    .dragover {
+        color: rgb(95, 5, 5);
+        box-shadow: 0 0 5px -1px rgba(0,0,0,0.8);
+    }
+}

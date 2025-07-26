@@ -170,7 +170,7 @@ export async function enrichTinyMCE(selector) {
     // Enrich HMTL text
     const els = $(selector);
     for (let i = 0; i < els.length; i++) {
-        els[i].innerHTML = await TextEditor.enrichHTML(els[i].innerHTML, {async: true});
+        els[i].innerHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(els[i].innerHTML, {async: true});
     }
 }
 

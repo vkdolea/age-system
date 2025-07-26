@@ -3,7 +3,7 @@ import { modifiersList, sortObjArrayByName } from "../setup.js";
 import { focusList } from "../settings.js";
 import {AdvancementAdd} from "../advancement.js";
 
-export default class ageSystemItemSheet extends ItemSheet {
+export default class ageSystemItemSheet extends foundry.appv1.sheets.ItemSheet {
     constructor(...args) {
         super(...args);
     

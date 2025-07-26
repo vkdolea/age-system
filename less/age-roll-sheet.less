@@ -1,0 +1,92 @@
+/*******************************/
+/**       AGE Roll Card       **/
+/*******************************/
+
+.age-system.age-roll-card {
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    .card-header {
+        height: auto;
+        min-height: 20px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        text-align: center;
+        font-weight: bold;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        .header {
+            margin: 0 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .sub {
+            text-transform: none;
+            font-variant: all-small-caps;
+        }
+    }
+    .roll-body {
+        background-color: white;
+        color: black;
+        padding: 4px;
+        .dice-show {
+            gap: 4px;
+            max-width: 25%;
+            margin: 0 10px;
+            text-align: center;
+            i:last-of-type {
+                flex-basis: 100%;
+            }
+        }
+        .roll-summary {
+            text-align: center;
+        }
+        .line-header {
+            text-align: left;
+            padding-left: 10px;
+            flex: auto;
+        }
+        .line-value {
+            text-align: right;
+            padding-right: 10px;
+        }
+        .total-roll {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+        .stunt-points {
+            border-radius: 10px;
+        }
+    }
+    .footer {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        text-align: center;
+        span {
+            min-height: 18px;
+        }
+    }
+    .section-break:has(.mod-desc) {
+        margin-top: 4px;
+    }
+    .mod-desc:first-of-type {
+        padding-top: 4px;
+    }
+    .age-chat-buttons {
+        margin-top: 5px;
+    }
+    .chat-buttons {
+        margin-top: 5px;
+        gap: 4px;
+        div {
+            gap: 4px;
+        }
+    }
+    .age-button:hover {
+        box-shadow: 20px silver;
+    }
+}

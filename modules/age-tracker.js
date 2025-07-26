@@ -1,14 +1,31 @@
-export class AgeTracker extends Application {
-	constructor(options = {}) {
-		super(options)
+export class AgeTracker extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
+	static DEFAULT_OPTIONS = {
+		id: "age-tracker",
+		classes: ["age-system", "age-tracker-window"],
+		popup: false,
+		actions: {
+			sermod: AgeTracker._sermod,
+			compmod: AgeTracker._compmod,
+			milestone: AgeTracker._milestone
+		},
+		window: {
+			frame: false
+		}
 	}
 
-	get template() {
-		return `systems/age-system/templates/age-tracker.hbs`;
+	static PARTS = {
+		div: {
+			template: "systems/age-system/templates/age-tracker.hbs",
+		}
 	}
+
+	// _onFirstRender(a, b) {
+	// 	super._onFirstRender(a, b);
+	// 	document.getElementById("ui-bottom").prepend(document.getElementById("age-tracker"));
+	// }
 	
-	getData(options) {
-		const data = super.getData(options);
+	async _prepareContext(options) {
+		const data = super._prepareContext(options);
 		data.isGM = game.user.isGM;
 		data.colorset = game.settings.get("age-system", "colorScheme");
 
@@ -45,38 +62,22 @@ export class AgeTracker extends Application {
 			};
 			data.compData = compData;
 		};
-		return data;
+		const system = data;
+		return {system};
 	}
-	
-	activateListeners(html) {
-		super.activateListeners(html);
-		html.find(".ser-mod").click(this._onClickSer.bind(this));
-		html.find(".comp-mod").click(this._onClickComp.bind(this));
-		html.find(".milestone").click(this._onRollComp.bind(this));		
-		html.find("#age-tracker-drag").contextmenu(this._onRightClick.bind(this));
 
-		// Set position
-		let tracker = document.getElementById("age-tracker");
-		const trackerPos = game.user.getFlag("age-system", "ageTrackerPos");
-		tracker.style.left = trackerPos.xPos;
-		tracker.style.bottom = trackerPos.yPos;
-
-		// Make the DIV element draggable:
-		this._dragElement(tracker);
-	}
-	
 	refresh() {
 		this.render(true);
 	}
 
- 	async _onClickSer(event) {
+ 	static _sermod(event, target) {
 		event.preventDefault();
 		const serData = game.settings.get("age-system", "serendipityValue");
 		let value;
 		if (event.shiftKey) value = 6;
 		if (!value && event.ctrlKey) value = 3;
 		if (!value) value = 1;
-		if (event.currentTarget.classList.contains('minus')) value = -value;
+		if (target.classList.contains('minus')) value = -value;
 		serData.actual += value;
 		if (serData.actual > serData.max) serData.actual = serData.max;
 		if (serData.actual < 0) serData.actual = 0;
@@ -91,22 +92,23 @@ export class AgeTracker extends Application {
 		game.user.setFlag("age-system", "ageTrackerPos", original);
 	}
 
-	_onClickComp(event) {
+	static _compmod(event, target) {
 		event.preventDefault();
+		const classes = target.classList;
 		const compData = game.settings.get("age-system", "complicationValue");
-		if (event.currentTarget.classList.contains('refresh')) return game.settings.set("age-system", "complicationValue", {max: compData.max, actual: 0});
+		if (classes.contains('refresh')) return game.settings.set("age-system", "complicationValue", {max: compData.max, actual: 0});
 		let value;
 		if (event.shiftKey) value = 10;
 		if (!value && event.ctrlKey) value = 5;
 		if (!value) value = 1;
-		if (event.currentTarget.classList.contains('minus')) value = -value;
+		if (classes.contains('minus')) value = -value;
 		compData.actual += value;
 		if (compData.actual > compData.max) compData.actual = compData.max;
 		if (compData.actual < 0) compData.actual = 0;
 		game.settings.set("age-system", "complicationValue", compData);
 	}
 
-	_onRollComp() {
+	static _milestone() {
 		const rollTable = game.settings.get("age-system", "complicationRollTable");
 		if (rollTable === 'none')  {
 			return this._defaultRoll();
@@ -122,51 +124,5 @@ export class AgeTracker extends Application {
 		const flavor = game.i18n.format("age-system.chatCard.compRoll", {compType});
 		let compRoll = new Roll("1d6");
 		return compRoll.toMessage({flavor, rollMode: "selfroll", whisper: [game.user.id]});
-	}
-
-	_dragElement(elmnt) {
-		var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-		if (document.getElementById("age-tracker-drag")) {
-		  // if present, the header is where you move the DIV from:
-		  document.getElementById("age-tracker-drag").onmousedown = dragMouseDown;
-		} else {
-		  // otherwise, move the DIV from anywhere inside the DIV:
-		  elmnt.onmousedown = dragMouseDown;
-		}
-	  
-		function dragMouseDown(e) {
-		  e = e || window.event;
-		  e.preventDefault();
-		  // get the mouse cursor position at startup:
-		  pos3 = e.clientX;
-		  pos4 = e.clientY;
-		  document.onmouseup = closeDragElement;
-		  // call a function whenever the cursor moves:
-		  document.onmousemove = elementDrag;
-		}
-	  
-		function elementDrag(e) {
-		  e = e || window.event;
-		  e.preventDefault();
-		  // calculate the new cursor position:
-		  pos1 = pos3 - e.clientX;
-		  pos2 = pos4 - e.clientY;
-		  pos3 = e.clientX;
-		  pos4 = e.clientY;
-		  // set the element's new position:
-		  elmnt.style.bottom = (elmnt.offsetParent.clientHeight - elmnt.offsetTop - elmnt.clientHeight + pos2) + "px";
-		  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-		}
-	  
-		function closeDragElement() {
-		  	// stop moving when mouse button is released:
-		  	document.onmouseup = null;
-		  	document.onmousemove = null;
-		  	// Save position on appropriate User Flag
-			const trackerPos = {};
-			trackerPos.xPos = elmnt.style.left;
-			trackerPos.yPos = elmnt.style.bottom;
-			game.user.setFlag("age-system", "ageTrackerPos", trackerPos);
-		}
 	}
 }

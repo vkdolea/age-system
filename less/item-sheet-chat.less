@@ -1,0 +1,87 @@
+/*******************************/
+/**        Item Sheet         **/
+/*******************************/
+
+// Exclusivelly for chat cards
+.age-system .age-buttons {
+    gap: 4px;
+    margin-top: 5px;
+}
+
+// General
+.age-system.item-to-chat{
+    // font-variant: small-caps;
+    
+    ul, li {
+        list-style-type: none;
+    }
+    .item-type {
+        height: 20px;
+        min-height: 20px;
+        padding-top: 2px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+        list-style-type: none;
+    }
+    .item-identification {
+        padding: 4px;
+        align-items: center;
+        img {
+            height: 45px;
+            width: 45px;
+            flex: 0 0 auto;
+            border: 1px solid;
+            border-radius: 4px;
+            object-fit: contain;
+        }
+        ul {
+            padding-left: 6px;
+            margin: 0;
+            font-variant-caps: small-caps;
+            :not(li:first-child) {
+                font-style: italic;
+                font-size: 12px;
+            }
+        }
+    }
+    .mod-box {
+        font-variant-caps: all-petite-caps;
+        font-size: 12px;
+        .mod-desc {
+            justify-content: space-between;
+            span {
+                max-width: fit-content;
+            }
+            padding: 0 4px;
+        }
+    }
+    .item-desc {
+        padding: 0 4px;
+        .editor {
+            max-height: 300px;
+        }
+    }
+    .footer {
+        height: 20px;
+        min-height: 20px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        align-items: center;
+        justify-content: center;
+        span {
+            font-size: 12px;
+            font-variant-caps: all-petite-caps;
+            flex: 0 0 auto;
+            border-left: 1px solid;
+            padding: 0 4px;
+        }
+        span:first-of-type {
+            margin-left: 0;
+            border-left: none;
+            padding-left: 0;
+        }
+    }
+}

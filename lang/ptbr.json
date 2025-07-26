@@ -104,6 +104,7 @@
     "SETTINGS.colorTheGrey": "O Cinza",
     "SETTINGS.colorRedWarrior": "Guerreiro Vermelho",
     "SETTINGS.colorNeverDead": "Nunca Morto",
+    "SETTINGS.colorBlackWhite": "Preto & Branco",
 
     "SETTINGS.gameMode": "Modo de Jogo",
     "SETTINGS.gameModeHint": "Selecione o estilo de jogo (de acordo com Modern AGE) ou nenhum se o cenário não o usa",
@@ -718,12 +719,15 @@
 
         "ignoreDamage": "Desprezar Dano",
         "applyDamage": "Infligir Dano",
+        "applyHealing": "Aplicar Cura",
         "armorPiercing": "Penetração de Armadura",
         "none": "Nenhuma",
         "halfArmor": "Metade da Armadura",
         "ignoreArmor": "Ignora Armadura",
         "damageSummary": "Sumário de Dano",
+        "healingSummary": "Sumário de Cura",
         "noCharHurt": "Nenhum ferimento ou dano infligido",
+        "noCharHealed": "Nenhuma cura aplicada",
         "autoApplyInjury": "Infligir Ferimento",
         "autoApplyAll": "Infligir Ferimento a Todos",
         "letPlayerRoll": "Jogadores rolam Resistência",

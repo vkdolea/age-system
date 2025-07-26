@@ -138,7 +138,7 @@
         <span>{{localize "age-system.level"}} {{system.level}}</span>
         {{/if}}
     </div>
+    {{#if (or (eq item.type "weapon") (eq item.type "power"))}}
+    {{> "systems/age-system/templates/partials/item-card-buttons.hbs"}}
+    {{/if}}
 </form>
-{{#if (or (eq item.type "weapon") (eq item.type "power"))}}
-{{> "systems/age-system/templates/partials/item-card-buttons.hbs"}}
-{{/if}}

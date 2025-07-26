@@ -12,6 +12,7 @@ export const registerSystemSettings = async function() {
    */
   game.settings.register("age-system", "breatherParam", {
     scope: "world",
+    requiresReload: false,
     config: false,
     default: {k: 5, kk: 10, addLevel: true, abl: 'cons'},
     type: Object,
@@ -64,6 +65,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.colorScheme",
     hint: "SETTINGS.colorSchemeHint",
     scope: "client",
+    requiresReload: false,
     config: true,
     default: "fantasy-blue",
     type: String,
@@ -77,21 +79,14 @@ export const registerSystemSettings = async function() {
       "select-one": "SETTINGS.colorSelectOne",
       "the-grey": "SETTINGS.colorTheGrey",
       "red-warrior": "SETTINGS.colorRedWarrior",
-      "never-dead": "SETTINGS.colorNeverDead",
-      // "snow-white": "SW"
+      "never-dead": "SETTINGS.colorNeverDead"
+      // "black-white": "SETTINGS.blackWhite"
     },
     onChange: ()=>{
       const newColor = game.settings.get("age-system", "colorScheme")
       ageSystem.colorScheme = newColor;
       game.user.setFlag("age-system", "colorScheme", newColor);
-      game.ageSystem.ageRoller.refresh();
       if (game.settings.get("age-system", "serendipity") || game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh();
-      // [...game.actors.contents, ...Object.values(game.actors.tokens), ...game.items.contents].forEach((o) => {
-      //   if (o) {
-      //     if (o.sheet != null && o.sheet._state > 0) o.sheet.render();
-      //     o.items?.forEach((i)=> {if (i.sheet != null && i.sheet._state > 0) i.sheet.render()});
-      //   };
-      // });
       refreshSheets()
     },
   });
@@ -103,10 +98,11 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.initiativeFocus",
     hint: "SETTINGS.initiativeFocusHint",
     scope: "world",
+    requiresReload: true,
     config: true,
     default: "",
     type: String,
-    onChange: debouncedReload
+    // onChange: debouncedReload
   });
 
   /**
@@ -116,6 +112,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.useTargeted",
     hint: "SETTINGS.useTargetedHint",
     scope: "client",
+    requiresReload: false,
     config: true,
     default: false,
     type: Boolean,
@@ -123,12 +120,13 @@ export const registerSystemSettings = async function() {
   });
   
   /**
-   * Register Ability selection
+   * Register Stunt Attack value
    */
     game.settings.register("age-system", "stuntAttack", {
     name: "SETTINGS.stuntAttack",
     hint: "SETTINGS.stuntAttackHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: 1,
     type: Number,
@@ -142,6 +140,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.healthSys",
     hint: "SETTINGS.healthSysHint",
     scope: "world",
+    requiresReload: true,
     config: false,
     default: "basic",
     type: String,
@@ -152,7 +151,7 @@ export const registerSystemSettings = async function() {
       "mageInjury": "SETTINGS.healthSysmageInjury",
       // "mageVitality": "SETTINGS.healthSysmageVitality",
     },
-    onChange: debouncedReload
+    // onChange: debouncedReload
   });
 
   /**
@@ -162,6 +161,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.abilitySelection",
     hint: "SETTINGS.abilitySelectionHint",
     scope: "world",
+    requiresReload: true,
     config: false,
     default: "main",
     type: String,
@@ -169,7 +169,7 @@ export const registerSystemSettings = async function() {
       "main": "SETTINGS.abilitySelectionMain",
       "dage": "SETTINGS.abilitySelectionDage",
     },
-    onChange: debouncedReload
+    // onChange: debouncedReload
   });
 
   /**
@@ -179,10 +179,11 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.primaryAbl",
     hint: "SETTINGS.primaryAblHint",
     scope: "world",
+    requiresReload: true,
     config: false,
     default: false,
     type: Boolean,
-    onChange: debouncedReload
+    // onChange: debouncedReload
   });
 
   /**
@@ -192,6 +193,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.healthMode",
     hint: "SETTINGS.healthModeHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: "health",
     type: String,
@@ -212,6 +214,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.gameMode",
     hint: "SETTINGS.gameModeHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: "pulp",
     type: String,
@@ -242,10 +245,11 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.weaponGroups",
     hint: "SETTINGS.weaponGroupsHint",
     scope: "world",
+    requiresReload: true,
     config: false,
     default: "",
     type: String,
-    onChange: debouncedReload
+    // onChange: debouncedReload
   });
 
  /**
@@ -255,6 +259,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.DegressChoice",
     hint: "SETTINGS.DegressChoiceHint",
     scope: "world",
+    requiresReload: true,
     config: false,
     default: "mage",
     type: String,
@@ -264,7 +269,7 @@ export const registerSystemSettings = async function() {
       "mageExtra": "SETTINGS.TalentDegreesMAGEExtra",
       "fageExtra": "SETTINGS.TalentDegreesFAGEExtra",
     },
-    onChange: debouncedReload
+    // onChange: debouncedReload
   });
 
  /**
@@ -274,6 +279,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.wealthType",
     hint: "SETTINGS.wealthTypeHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: "resources",
     type: String,
@@ -293,6 +299,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.occupation",
     hint: "SETTINGS.occupationHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: "profession",
     type: String,
@@ -310,6 +317,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.ancestryOpt",
     hint: "SETTINGS.ancestryOptHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: "ancestry",
     type: String,
@@ -328,6 +336,7 @@ export const registerSystemSettings = async function() {
   game.settings.register("age-system", "systemMigrationVersion", {
     name: "System Migration Version",
     scope: "world",
+    requiresReload: false,
     config: false,
     type: String,
     default: 0,
@@ -341,10 +350,11 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.useConviction",
     hint: "SETTINGS.useConvictionHint",
     scope: "world",
+    requiresReload: true,
     config: false,
     default: false,
     type: Boolean,
-    onChange: debouncedReload
+    // onChange: debouncedReload
   });
 
   /**
@@ -354,10 +364,11 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.useFatigue",
     hint: "SETTINGS.useFatigueHint",
     scope: "world",
+    requiresReload: true,
     config: false,
     default: false,
     type: Boolean,
-    onChange: debouncedReload
+    // onChange: debouncedReload
   });
 
   /**
@@ -367,10 +378,11 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.usePowerPoints",
     hint: "SETTINGS.usePowerPointsHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: true,
     type: Boolean,
-    onChange: debouncedReload
+    // onChange: debouncedReload
   });
 
   /**
@@ -380,6 +392,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.powerFlavor",
     hint: "SETTINGS.powerFlavorHint",
     scope: "world",
+    requiresReload: false,
     config: true,
     default: "power",
     type: String,
@@ -401,6 +414,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.consumePP",
     hint: "SETTINGS.consumePPHint",
     scope: "world",
+    requiresReload: false,
     config: true,
     default: false,
     type: Boolean,
@@ -414,6 +428,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.complication",
     hint: "SETTINGS.complicationHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: "none",
     type: String,
@@ -433,10 +448,11 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.complicationValue",
     // hint: "SETTINGS.complicationValueHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: {max: 30, actual: 0},
     type: Object,
-    onChange: () => {if (game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.refresh()}
+    onChange: () => {if (game.settings.get("age-system", "complication")) game.ageSystem.ageTracker.render()}
   });  
 
   /**
@@ -446,10 +462,11 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.serendipity",
     hint: "SETTINGS.serendipityHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: false,
     type: Boolean,
-    onChange: () => game.ageSystem.ageTracker.refresh()
+    // onChange: () => game.ageSystem.ageTracker.render()
   });
 
   /**
@@ -459,6 +476,7 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.serendipityValue",
     // hint: "SETTINGS.serendipityValueHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: {max: 18, actual: 0},
     type: Object, 
@@ -472,10 +490,11 @@ export const registerSystemSettings = async function() {
     name: "SETTINGS.observerRoll",
     hint: "SETTINGS.observerRollHint",
     scope: "world",
+    requiresReload: true,
     config: true,
     default: "true",
     type: Boolean,
-    onChange: debouncedReload
+    // onChange: debouncedReload
   });
 
   /**
@@ -483,6 +502,7 @@ export const registerSystemSettings = async function() {
   */
   game.settings.register("age-system", "settingsMigrationData", {
     scope: "world",
+    requiresReload: false,
     config: false,
     default: [],
     type: Array
@@ -494,6 +514,7 @@ export const registerSystemSettings = async function() {
    */
   game.settings.register("age-system", "inUseConditions", {
     scope: "world",
+    requiresReload: false,
     config: false,
     default: 'expanse', // Currently, the only valid values are 'custom' and 'expanse'
     type: String,
@@ -505,6 +526,7 @@ export const registerSystemSettings = async function() {
    */
   game.settings.register("age-system", "customTokenEffects", {
     scope: "world",
+    requiresReload: false,
     config: false,
     default: [],
     type: Array
@@ -514,29 +536,29 @@ export const registerSystemSettings = async function() {
    * Register if world will use Toughness
    * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
    */
-  game.settings.register("age-system", "useToughness", {
-    name: "SETTINGS.useToughness",
-    hint: "SETTINGS.useToughnessHint",
-    scope: "world",
-    config: false,
-    default: true,
-    type: Boolean,
-    onChange: debouncedReload
-  }); 
+  // game.settings.register("age-system", "useToughness", {
+  //   name: "SETTINGS.useToughness",
+  //   hint: "SETTINGS.useToughnessHint",
+  //   scope: "world",
+  //   config: false,
+  //   default: true,
+  //   type: Boolean,
+  //   onChange: debouncedReload
+  // }); 
 
   /**
    * Option to use split armor
    * TODO - NOT IN USE ANYMORE - WATCH AND DELETE
    */
-  game.settings.register("age-system", "useBallisticArmor", {
-    name: "SETTINGS.useBallisticArmor",
-    hint: "SETTINGS.useBallisticArmorHint",
-    scope: "world",
-    config: false,
-    default: true,
-    type: Boolean,
-    onChange: debouncedReload
-  });
+  // game.settings.register("age-system", "useBallisticArmor", {
+  //   name: "SETTINGS.useBallisticArmor",
+  //   hint: "SETTINGS.useBallisticArmorHint",
+  //   scope: "world",
+  //   config: false,
+  //   default: true,
+  //   type: Boolean,
+  //   onChange: debouncedReload
+  // });
 };
 
 // Adds game setting to select focus compendium after loading world's compendia!
@@ -548,6 +570,7 @@ export const loadCompendiaSettings = function() {
     name: "SETTINGS.masterFocusCompendium",
     hint: "SETTINGS.masterFocusCompendiumHint",
     scope: "world",
+    requiresReload: false,
     config: true,
     default: "age-system.focus",
     type: String,
@@ -562,6 +585,7 @@ export const loadCompendiaSettings = function() {
     name: "SETTINGS.complicationRollTable",
     hint: "SETTINGS.complicationRollTableHint",
     scope: "world",
+    requiresReload: false,
     config: false,
     default: "age-system.complicationRollTable",
     type: String,
@@ -587,7 +611,7 @@ export function allRollTables() {
 
   // Default none option
   list['none'] = game.i18n.localize('SETTINGS.complicationRollTableDefault');
-  let documents = RollTables.instance;
+  // let documents = RollTables.instance;
 
   game.tables.map(e => {
     list[e.id] = e.name;
@@ -640,6 +664,7 @@ export function stuntSoNice(colorChoices, systems) {
     name: "SETTINGS.stuntSoNice",
     hint: "SETTINGS.stuntSoNiceHint",
     scope: "client",
+    requiresReload: false,
     config: true,
     default: "bronze",
     type: String,

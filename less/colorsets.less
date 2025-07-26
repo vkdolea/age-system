@@ -1,0 +1,383 @@
+/*******************************/
+/**     Color Schemed Def     **/
+/*******************************/
+
+/** Modern Blue Colors **/
+@modern-blue: #007DAD;
+@modern-blue-high: #35A5CA;
+@modern-blue-mid: #B9DBEB;
+@modern-blue-font: #ffffff;
+@modern-blue-light-font: #231F20;
+@modern-blue-list: @modern-blue, @modern-blue-high, @modern-blue-mid, @modern-blue-font, @modern-blue-light-font;
+
+/** Fantasy Blue Colors **/
+@fantasy-blue: #0f4f5b;
+@fantasy-blue-high: #0f0f0f;
+@fantasy-blue-mid: #91b6d4; // @fantasy-blue-mid: #c1cbd3;
+@fantasy-blue-font: #ffffff;
+@fantasy-blue-light-font: #dbdada;
+@fantasy-blue-list: @fantasy-blue, @fantasy-blue-high, @fantasy-blue-mid, @fantasy-blue-font, @fantasy-blue-light-font;
+
+/** Dragon Red Colors **/
+// @dragon-red: #810207; /** original color, however it was too strong to please the eyes **/
+@dragon-red: #83272a;
+@dragon-red-high: #979899;
+@dragon-red-mid: #e0beb1;
+@dragon-red-font: #ffffff;
+@dragon-red-light-font: #000000;
+@dragon-red-list: @dragon-red, @dragon-red-high, @dragon-red-mid, @dragon-red-font, @dragon-red-light-font;
+
+/** Threefold Purple Colors **/
+@folded-purple: #565183;
+@folded-purple-high: #625b68;
+@folded-purple-mid: #cfccde;
+@folded-purple-font: #ffffff;
+@folded-purple-light-font: #000000;
+@folded-purple-list: @folded-purple, @folded-purple-high, @folded-purple-mid, @folded-purple-font, @folded-purple-light-font;
+
+/** Ronin Green Colors **/
+@ronin-green: #155f0e;
+@ronin-green-high: #92b65f;
+@ronin-green-mid: #c2f5aa;
+@ronin-green-font: #ffffff;
+@ronin-green-light-font: #000000;
+@ronin-green-list: @ronin-green, @ronin-green-high, @ronin-green-mid, @ronin-green-font, @ronin-green-light-font;
+
+/** Select One **/
+@select-one: #273249;
+@select-one-high: #4d627a;
+@select-one-mid: #768d9f;
+@select-one-font: #e7ccc3;
+@select-one-light-font: #290000;
+@select-one-list: @select-one, @select-one-high, @select-one-mid, @select-one-font, @select-one-light-font;
+
+/** This is The Grey **/
+@the-grey: #3d3e3f;
+@the-grey-high: #6b6a6a;
+@the-grey-mid: #b4b6b3;
+@the-grey-font: #ccc9c9;
+@the-grey-light-font: #000000;
+@the-grey-list: @the-grey, @the-grey-high, @the-grey-mid, @the-grey-font, @the-grey-light-font;
+
+/** Red Warrior **/
+@red-warrior: #751119;
+@red-warrior-high: #b22126;
+@red-warrior-mid: #d1635b;
+@red-warrior-font: #f7b755;
+@red-warrior-light-font: #c7c691;
+@red-warrior-list: @red-warrior, @red-warrior-high, @red-warrior-mid, @red-warrior-font, @red-warrior-light-font;
+
+/** Never Dead **/
+@never-dead: #663322;
+@never-dead-high: #58705a;
+@never-dead-mid: #eeddcd;
+@never-dead-font:#bb8755;
+@never-dead-light-font: #29241f;
+@never-dead-list: @never-dead, @never-dead-high, @never-dead-mid, @never-dead-font, @never-dead-light-font;
+
+/** Expanded Blue **/
+@expanded-blue: #005971;
+@expanded-blue-high: #112339;
+@expanded-blue-mid: #e6e7e8;
+@expanded-blue-font: #dde2e2;
+@expanded-blue-light-font: #dde2e2; 
+@expanded-blue-list: @expanded-blue, @expanded-blue-high, @expanded-blue-mid, @expanded-blue-font, @expanded-blue-light-font;
+
+/** Black & White **/
+@black-white: #ffffff;
+@black-white-high: #000000;
+@black-white-mid: #494949;
+@black-white-font: #000000;
+@black-white-light-font: #ffffff;
+@black-white-list: @black-white, @black-white-high, @black-white-mid, @black-white-font, @black-white-light-font;
+
+/** Color Template **/
+// @color-set:
+// @color-set-high:
+// @color-set-mid:
+// @color-set-font:
+// @color-set-light-font:
+// @color-set-list: @color-set, @color-set-high, @color-set-mid, @color-set-font, @color-set-light-font;
+
+/** Game Mode Colors **/
+@gritty-color: #DA9E89;
+@pulp-color: #FBE1AD;
+@cinematic-color: #A3CCAF;
+@mode-font-color:#231F20;
+
+// @circle-main: #e8dfce;
+// @circle-small: #e8dfce;
+
+@highlight: #f1bb57;
+@container-background: #ffffff;
+
+// LESS loop to create color schemes - add new name on @colorsets, add color array at @color-list.
+// Name inside @colorsets must be the same key on game Settings!
+@colorsets: modern-blue, fantasy-blue, dragon-red, folded-purple, ronin-green, select-one, the-grey, red-warrior, never-dead, expanded-blue, black-white;
+@color-list: @modern-blue-list, @fantasy-blue-list, @dragon-red-list, @folded-purple-list, @ronin-green-list, @select-one-list, @the-grey-list, @red-warrior-list, @never-dead-list, @expanded-blue-list, @black-white-list;
+
+/*******************************/
+/**     Color Style Rules     **/
+/*******************************/
+
+each(@colorsets, {
+    #age-tracker,
+    .window-app.sheet.char-sheet-alt.colorset-@{value} .window-content,
+    // .window-app.sheet.char.colorset-@{value} .window-content,
+    .window-app.sheet.vehicle.colorset-@{value} .window-content,
+    .window-app.sheet.spaceship.colorset-@{value} .window-content {
+        background-image: none;
+        // background-color: fade(extract(extract(@color-list, @index), 3), 60%) !important;
+        background: none;
+    }
+
+    
+    .colorset-@{value} {
+        // From char-sheet-alt
+        aside {
+            border-radius: 5px;
+            border: 5px outset extract(extract(@color-list, @index), 2);
+        }
+        .item-summary {
+            label {
+                background-color: extract(extract(@color-list, @index), 2);
+                color: extract(extract(@color-list, @index), 5);
+            }
+        }
+        .metal-background {
+            // background: linear-gradient(90deg, extract(extract(@color-list, @index), 1) 5%, extract(extract(@color-list, @index), 3) 50%, extract(extract(@color-list, @index), 1) 95%);
+            background: none;
+        }
+        .sheet-main-content {
+            background-color: fade(extract(extract(@color-list, @index), 3), 60%) !important
+        }
+        .top-banner {
+            border: 5px outset extract(extract(@color-list, @index), 2);
+        }
+        .sheet-main-content nav a {
+            background-color: extract(extract(@color-list, @index), 2);
+            color: extract(extract(@color-list, @index), 5);
+        }
+        .sheet-main-content nav a.active {
+            background-color: extract(extract(@color-list, @index), 1);
+            color: extract(extract(@color-list, @index), 4);
+        }
+
+        .thin-border {
+            border: thin solid extract(extract(@color-list, @index), 5);
+        }
+
+        .action-details h4 {
+            background: none;
+            opacity: 0.8;
+        }
+
+        .colorset-first-tier {
+            &.resource {
+                .list-sub-header {
+                    background-color: extract(extract(@color-list, @index), 3);
+                    color: extract(extract(@color-list, @index), 1);
+                }
+                // .item-card, 
+                .values {
+                    background-color: extract(extract(@color-list, @index), 2) !important;
+                    color: extract(extract(@color-list, @index), 5);
+                };
+            }
+            background-color: extract(extract(@color-list, @index), 1);
+            color: extract(extract(@color-list, @index), 4);
+
+            select {
+                option {
+                    background-color: extract(extract(@color-list, @index), 1);
+                    opacity: .9;
+                }                
+            }
+
+            a.content-link,
+            a.inline-roll {
+                background-color: extract(extract(@color-list, @index), 3);
+                color: extract(extract(@color-list, @index), 1);
+            }
+        };    
+        
+        .colorset-second-tier {
+            &.resource {
+                .list-sub-header {
+                    background-color: extract(extract(@color-list, @index), 2);
+                    color: extract(extract(@color-list, @index), 5);
+                }
+                // .item-card,
+                .values {
+                    background-color: extract(extract(@color-list, @index), 1);
+                    color: extract(extract(@color-list, @index), 4);
+                }
+            }
+            background-color: extract(extract(@color-list, @index), 3);
+            color: extract(extract(@color-list, @index), 1);
+
+            select {
+                option {
+                    background-color: extract(extract(@color-list, @index), 3);
+                    opacity: .9;
+                }                
+            }
+            
+            a.content-link,
+            a.inline-roll {
+                background-color: extract(extract(@color-list, @index), 2);
+                color: extract(extract(@color-list, @index), 5);
+            }
+        };
+        
+        .colorset-third-tier {
+            &.resource {
+                .list-sub-header {
+                    background-color: extract(extract(@color-list, @index), 1);
+                    color: extract(extract(@color-list, @index), 4);
+                }
+                // .item-card,
+                .values {
+                    background-color: extract(extract(@color-list, @index), 3);
+                    color: extract(extract(@color-list, @index), 1);
+                }
+            }
+            background-color: extract(extract(@color-list, @index), 2);
+            color: extract(extract(@color-list, @index), 5);
+            input,
+            select {
+                color: extract(extract(@color-list, @index), 5);
+            }
+
+            select {
+                option {
+                    background-color: extract(extract(@color-list, @index), 2);
+                    opacity: .9;
+                }                
+            }
+
+            a.content-link,
+            a.inline-roll {
+                background-color: extract(extract(@color-list, @index), 1);
+                color: extract(extract(@color-list, @index), 4);
+            }
+        }
+    
+        input.colorset-first-tier {
+            background-color: extract(extract(@color-list, @index), 1);
+            color: extract(extract(@color-list, @index), 4);
+        }
+
+        // AGE Tracker
+        .full-box {
+            background-color: extract(extract(@color-list, @index), 1) !important;
+        }
+        .comp-checkbox {
+            border-color: extract(extract(@color-list, @index), 1) !important;
+        }
+
+        // Charracter Sheet
+        .char-sheet {
+            .age-header,
+            .persona {
+                label {
+                    background-color: extract(extract(@color-list, @index), 1);
+                    color: extract(extract(@color-list, @index), 4);
+                }
+            }
+            
+        }
+
+        // .char-sheet,
+        .organization-sheet {
+            .editor {
+                background-color: hsl(0, 0%, 100%);
+            }
+        }
+
+        .vehicle-stats {
+            img {
+                border: 2px solid extract(extract(@color-list, @index), 1);
+            }
+            .editor {
+                background-color: #ffffff;
+            }
+        }
+        // Spaceship styling
+        .stats-block.losses {
+            .loss-checkbox {
+                border-color: extract(extract(@color-list, @index), 1);
+            }
+            .loss-checkbox.full-box.full-box {
+                background: extract(extract(@color-list, @index), 1);
+            }
+        }
+
+        fieldset {
+            border-color: extract(extract(@color-list, @index), 1);
+        }
+
+        // Drag bar color for tracker and roller
+        #age-tracker-drag:hover,
+        #age-roller-drag:hover {
+            background-color: extract(extract(@color-list, @index), 1);
+        }
+    
+        //Age Roll Card
+        .dice-show {
+            // Stunt Die Color on ChatMessage
+            i:last-of-type {
+                color: extract(extract(@color-list, @index), 1);
+            };
+        }
+        .stunt-points.stunted {
+            background-color: extract(extract(@color-list, @index), 1);
+            color: extract(extract(@color-list, @index), 4);
+        }
+        .roll-body .section-break:has(*) {
+            border-top: 1px solid extract(extract(@color-list, @index), 1);
+        }
+
+        // Styling Character Ability with total value
+        .char-sheet {
+            .item-container {
+                img {
+                    border: 1px solid extract(extract(@color-list, @index), 1);
+                }
+            }
+            input {
+                background-color: #ffffff;
+            }
+            
+            input.colorset-second-tier {
+                background-color: extract(extract(@color-list, @index), 3) !important;
+                color: extract(extract(@color-list, @index), 1) !important;
+            }
+    
+        };
+    
+        .focus,
+        .power,
+        .talent,
+        .weapon,
+        .equipment,
+        .stunts,
+        .honorifics,
+        .membership,
+        .relationship,
+        .shipfeatures {
+            .item-card-stats {
+                background-color: extract(extract(@color-list, @index), 3);
+                input.data-entry {
+                    color: extract(extract(@color-list, @index), 5);
+                };
+            }
+            .item-card-desc {
+                background-color: #ffffff;
+            }
+            .mod-card {
+                border: solid extract(extract(@color-list, @index), 3) 1px;
+            }
+        }
+    }
+})

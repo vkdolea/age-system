@@ -334,20 +334,6 @@ ageSystem.statusEffects = {
         id: `dead`,
         name: `EFFECT.StatusDead`,
     },
-    // // teste
-    // {
-    //     name: "invisivel",
-    //     id: "invisible",
-    //     icon: "icons/svg/invisible.svg",
-    //     flags: {
-    //         "age-system": {
-    //             isCondition: true,
-    //             conditionType: "expanse",
-    //             desc: "age-system.conditions.invisibleDesc"
-    //         }
-    //     }
-    // },
-    // // fim de teste
     {
         name: "age-system.conditions.blinded",
         id: "blind", //original é o 'blinded'
@@ -749,7 +735,7 @@ ageSystem.modkeys = {
 }
 
 // Age Tracker & Roller Initial Positions
-ageSystem.ageTrackerPos = {xPos: "260px", yPos: "69px"};
+ageSystem.ageTrackerPos = {xPos: "1050px", yPos: "0px"};
 ageSystem.ageRollerPos = {xPos: "836px", yPos: "10px"};
 
 // Initializing variable to load focus Compendiaum

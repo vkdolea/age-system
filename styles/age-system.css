@@ -115,8 +115,13 @@
 /*******************************/
 /**        Item Sheet         **/
 /*******************************/
-.age-system.item-chat-controls {
-  margin-top: 6px;
+.age-system .age-buttons {
+  gap: 4px;
+  margin-top: 5px;
+}
+.age-system.item-to-chat ul,
+.age-system.item-to-chat li {
+  list-style-type: none;
 }
 .age-system.item-to-chat .item-type {
   height: 20px;
@@ -127,6 +132,7 @@
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
+  list-style-type: none;
 }
 .age-system.item-to-chat .item-identification {
   padding: 4px;
@@ -143,7 +149,6 @@
 .age-system.item-to-chat .item-identification ul {
   padding-left: 6px;
   margin: 0;
-  list-style: none;
   font-variant-caps: small-caps;
 }
 .age-system.item-to-chat .item-identification ul :not(li:first-child) {
@@ -1605,126 +1610,6 @@
   margin: 0;
 }
 /*******************************/
-/**       AGE Roll Card       **/
-/*******************************/
-#chat-log .chat-message .message-content .age-system.base-age-roll h3 {
-  border-bottom: none;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons {
-  margin-top: 4px;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons i.fas {
-  max-width: min-content;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid,
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid {
-  font-size: 12px !important;
-  font-family: inherit;
-  display: grid;
-  grid-template-columns: repeat(8, 12.5%);
-  grid-template-rows: repeat(2, 20px);
-  grid-template-areas: "main main stuntdie stuntdie stuntdie focusdmg focusdmg focusdmg" "main main bothdmg bothdmg bothdmg bothdmg bothdmg bothdmg";
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .main-dmg,
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .main-dmg {
-  grid-area: main;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .sd-dmg,
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .sd-dmg {
-  grid-area: stuntdie;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .focus-dmg,
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .focus-dmg {
-  grid-area: focusdmg;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons-grid .both-dmg,
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-chat-buttons.grid .both-dmg {
-  grid-area: bothdmg;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-button.roll-fatigue {
-  margin-top: 4px;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .age-button:active {
-  color: #5f0505;
-  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card,
-#chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card {
-  justify-content: center;
-  margin-bottom: 4px;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card > div div.stunted,
-#chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card > div div.stunted,
-#chat-log .chat-message .message-content .age-system.base-age-roll .regular-roll-card > div div:last-of-type,
-#chat-log .chat-message .message-content .age-system.base-age-roll .blind-roll-card > div div:last-of-type {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .action-details {
-  text-align: center;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .action-details h3,
-#chat-log .chat-message .message-content .age-system.base-age-roll .action-details h4 {
-  margin: 0;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .action-details h4 {
-  text-transform: lowercase;
-  font-variant: small-caps;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show {
-  align-content: space-between;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: stretch;
-  padding: 4px;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show i {
-  flex-grow: 0;
-  display: flex;
-  align-items: center;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .trait-test.dice-show a {
-  max-width: min-content;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .total-roll h3 {
-  font-weight: bold;
-  margin: 0;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .italic {
-  font-style: italic;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod {
-  padding: 4px;
-  font-variant: small-caps;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .roll-mod:not(.total-roll) {
-  text-transform: lowercase;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .injury-info {
-  text-align: center;
-  font-size: 12px;
-  margin: 0 0 2px 0;
-  padding: 2px 0;
-  font-weight: 800;
-  border-radius: 10px;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .apply-injury {
-  font-size: 12px;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .line-header {
-  min-width: 200px;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .line-value {
-  text-align: right;
-}
-#chat-log .chat-message .message-content .age-system.base-age-roll .blind-value {
-  text-align: center;
-}
-/*******************************/
 /**     Color Schemed Def     **/
 /*******************************/
 /** Modern Blue Colors **/
@@ -1737,12 +1622,13 @@
 /** Red Warrior **/
 /** Never Dead **/
 /** Expanded Blue **/
-/** Snow White **/
+/** Black & White **/
 /** Color Template **/
 /** Game Mode Colors **/
 /*******************************/
 /**     Color Style Rules     **/
 /*******************************/
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-modern-blue .window-content,
 .window-app.sheet.vehicle.colorset-modern-blue .window-content,
 .window-app.sheet.spaceship.colorset-modern-blue .window-content {
@@ -1852,10 +1738,10 @@
   background-color: #007DAD;
   color: #ffffff;
 }
-.colorset-modern-blue #age-tracker .full-box {
+.colorset-modern-blue .full-box {
   background-color: #007DAD !important;
 }
-.colorset-modern-blue #age-tracker .comp-checkbox {
+.colorset-modern-blue .comp-checkbox {
   border-color: #007DAD !important;
 }
 .colorset-modern-blue .char-sheet .age-header label,
@@ -1885,15 +1771,15 @@
 .colorset-modern-blue #age-roller-drag:hover {
   background-color: #007DAD;
 }
-.colorset-modern-blue .dice-show.trait-test i:last-of-type {
+.colorset-modern-blue .dice-show i:last-of-type {
   color: #007DAD;
 }
-.colorset-modern-blue .roll-mod {
-  border-bottom: 1px solid #007DAD;
-}
-.colorset-modern-blue .roll-mod.stunted {
+.colorset-modern-blue .stunt-points.stunted {
   background-color: #007DAD;
   color: #ffffff;
+}
+.colorset-modern-blue .roll-body .section-break:has(*) {
+  border-top: 1px solid #007DAD;
 }
 .colorset-modern-blue .char-sheet .item-container img {
   border: 1px solid #007DAD;
@@ -1953,6 +1839,7 @@
 .colorset-modern-blue .shipfeatures .mod-card {
   border: solid #B9DBEB 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-fantasy-blue .window-content,
 .window-app.sheet.vehicle.colorset-fantasy-blue .window-content,
 .window-app.sheet.spaceship.colorset-fantasy-blue .window-content {
@@ -2062,10 +1949,10 @@
   background-color: #0f4f5b;
   color: #ffffff;
 }
-.colorset-fantasy-blue #age-tracker .full-box {
+.colorset-fantasy-blue .full-box {
   background-color: #0f4f5b !important;
 }
-.colorset-fantasy-blue #age-tracker .comp-checkbox {
+.colorset-fantasy-blue .comp-checkbox {
   border-color: #0f4f5b !important;
 }
 .colorset-fantasy-blue .char-sheet .age-header label,
@@ -2095,15 +1982,15 @@
 .colorset-fantasy-blue #age-roller-drag:hover {
   background-color: #0f4f5b;
 }
-.colorset-fantasy-blue .dice-show.trait-test i:last-of-type {
+.colorset-fantasy-blue .dice-show i:last-of-type {
   color: #0f4f5b;
 }
-.colorset-fantasy-blue .roll-mod {
-  border-bottom: 1px solid #0f4f5b;
-}
-.colorset-fantasy-blue .roll-mod.stunted {
+.colorset-fantasy-blue .stunt-points.stunted {
   background-color: #0f4f5b;
   color: #ffffff;
+}
+.colorset-fantasy-blue .roll-body .section-break:has(*) {
+  border-top: 1px solid #0f4f5b;
 }
 .colorset-fantasy-blue .char-sheet .item-container img {
   border: 1px solid #0f4f5b;
@@ -2163,6 +2050,7 @@
 .colorset-fantasy-blue .shipfeatures .mod-card {
   border: solid #91b6d4 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-dragon-red .window-content,
 .window-app.sheet.vehicle.colorset-dragon-red .window-content,
 .window-app.sheet.spaceship.colorset-dragon-red .window-content {
@@ -2272,10 +2160,10 @@
   background-color: #83272a;
   color: #ffffff;
 }
-.colorset-dragon-red #age-tracker .full-box {
+.colorset-dragon-red .full-box {
   background-color: #83272a !important;
 }
-.colorset-dragon-red #age-tracker .comp-checkbox {
+.colorset-dragon-red .comp-checkbox {
   border-color: #83272a !important;
 }
 .colorset-dragon-red .char-sheet .age-header label,
@@ -2305,15 +2193,15 @@
 .colorset-dragon-red #age-roller-drag:hover {
   background-color: #83272a;
 }
-.colorset-dragon-red .dice-show.trait-test i:last-of-type {
+.colorset-dragon-red .dice-show i:last-of-type {
   color: #83272a;
 }
-.colorset-dragon-red .roll-mod {
-  border-bottom: 1px solid #83272a;
-}
-.colorset-dragon-red .roll-mod.stunted {
+.colorset-dragon-red .stunt-points.stunted {
   background-color: #83272a;
   color: #ffffff;
+}
+.colorset-dragon-red .roll-body .section-break:has(*) {
+  border-top: 1px solid #83272a;
 }
 .colorset-dragon-red .char-sheet .item-container img {
   border: 1px solid #83272a;
@@ -2373,6 +2261,7 @@
 .colorset-dragon-red .shipfeatures .mod-card {
   border: solid #e0beb1 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-folded-purple .window-content,
 .window-app.sheet.vehicle.colorset-folded-purple .window-content,
 .window-app.sheet.spaceship.colorset-folded-purple .window-content {
@@ -2482,10 +2371,10 @@
   background-color: #565183;
   color: #ffffff;
 }
-.colorset-folded-purple #age-tracker .full-box {
+.colorset-folded-purple .full-box {
   background-color: #565183 !important;
 }
-.colorset-folded-purple #age-tracker .comp-checkbox {
+.colorset-folded-purple .comp-checkbox {
   border-color: #565183 !important;
 }
 .colorset-folded-purple .char-sheet .age-header label,
@@ -2515,15 +2404,15 @@
 .colorset-folded-purple #age-roller-drag:hover {
   background-color: #565183;
 }
-.colorset-folded-purple .dice-show.trait-test i:last-of-type {
+.colorset-folded-purple .dice-show i:last-of-type {
   color: #565183;
 }
-.colorset-folded-purple .roll-mod {
-  border-bottom: 1px solid #565183;
-}
-.colorset-folded-purple .roll-mod.stunted {
+.colorset-folded-purple .stunt-points.stunted {
   background-color: #565183;
   color: #ffffff;
+}
+.colorset-folded-purple .roll-body .section-break:has(*) {
+  border-top: 1px solid #565183;
 }
 .colorset-folded-purple .char-sheet .item-container img {
   border: 1px solid #565183;
@@ -2583,6 +2472,7 @@
 .colorset-folded-purple .shipfeatures .mod-card {
   border: solid #cfccde 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-ronin-green .window-content,
 .window-app.sheet.vehicle.colorset-ronin-green .window-content,
 .window-app.sheet.spaceship.colorset-ronin-green .window-content {
@@ -2692,10 +2582,10 @@
   background-color: #155f0e;
   color: #ffffff;
 }
-.colorset-ronin-green #age-tracker .full-box {
+.colorset-ronin-green .full-box {
   background-color: #155f0e !important;
 }
-.colorset-ronin-green #age-tracker .comp-checkbox {
+.colorset-ronin-green .comp-checkbox {
   border-color: #155f0e !important;
 }
 .colorset-ronin-green .char-sheet .age-header label,
@@ -2725,15 +2615,15 @@
 .colorset-ronin-green #age-roller-drag:hover {
   background-color: #155f0e;
 }
-.colorset-ronin-green .dice-show.trait-test i:last-of-type {
+.colorset-ronin-green .dice-show i:last-of-type {
   color: #155f0e;
 }
-.colorset-ronin-green .roll-mod {
-  border-bottom: 1px solid #155f0e;
-}
-.colorset-ronin-green .roll-mod.stunted {
+.colorset-ronin-green .stunt-points.stunted {
   background-color: #155f0e;
   color: #ffffff;
+}
+.colorset-ronin-green .roll-body .section-break:has(*) {
+  border-top: 1px solid #155f0e;
 }
 .colorset-ronin-green .char-sheet .item-container img {
   border: 1px solid #155f0e;
@@ -2793,6 +2683,7 @@
 .colorset-ronin-green .shipfeatures .mod-card {
   border: solid #c2f5aa 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-select-one .window-content,
 .window-app.sheet.vehicle.colorset-select-one .window-content,
 .window-app.sheet.spaceship.colorset-select-one .window-content {
@@ -2902,10 +2793,10 @@
   background-color: #273249;
   color: #e7ccc3;
 }
-.colorset-select-one #age-tracker .full-box {
+.colorset-select-one .full-box {
   background-color: #273249 !important;
 }
-.colorset-select-one #age-tracker .comp-checkbox {
+.colorset-select-one .comp-checkbox {
   border-color: #273249 !important;
 }
 .colorset-select-one .char-sheet .age-header label,
@@ -2935,15 +2826,15 @@
 .colorset-select-one #age-roller-drag:hover {
   background-color: #273249;
 }
-.colorset-select-one .dice-show.trait-test i:last-of-type {
+.colorset-select-one .dice-show i:last-of-type {
   color: #273249;
 }
-.colorset-select-one .roll-mod {
-  border-bottom: 1px solid #273249;
-}
-.colorset-select-one .roll-mod.stunted {
+.colorset-select-one .stunt-points.stunted {
   background-color: #273249;
   color: #e7ccc3;
+}
+.colorset-select-one .roll-body .section-break:has(*) {
+  border-top: 1px solid #273249;
 }
 .colorset-select-one .char-sheet .item-container img {
   border: 1px solid #273249;
@@ -3003,6 +2894,7 @@
 .colorset-select-one .shipfeatures .mod-card {
   border: solid #768d9f 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-the-grey .window-content,
 .window-app.sheet.vehicle.colorset-the-grey .window-content,
 .window-app.sheet.spaceship.colorset-the-grey .window-content {
@@ -3112,10 +3004,10 @@
   background-color: #3d3e3f;
   color: #ccc9c9;
 }
-.colorset-the-grey #age-tracker .full-box {
+.colorset-the-grey .full-box {
   background-color: #3d3e3f !important;
 }
-.colorset-the-grey #age-tracker .comp-checkbox {
+.colorset-the-grey .comp-checkbox {
   border-color: #3d3e3f !important;
 }
 .colorset-the-grey .char-sheet .age-header label,
@@ -3145,15 +3037,15 @@
 .colorset-the-grey #age-roller-drag:hover {
   background-color: #3d3e3f;
 }
-.colorset-the-grey .dice-show.trait-test i:last-of-type {
+.colorset-the-grey .dice-show i:last-of-type {
   color: #3d3e3f;
 }
-.colorset-the-grey .roll-mod {
-  border-bottom: 1px solid #3d3e3f;
-}
-.colorset-the-grey .roll-mod.stunted {
+.colorset-the-grey .stunt-points.stunted {
   background-color: #3d3e3f;
   color: #ccc9c9;
+}
+.colorset-the-grey .roll-body .section-break:has(*) {
+  border-top: 1px solid #3d3e3f;
 }
 .colorset-the-grey .char-sheet .item-container img {
   border: 1px solid #3d3e3f;
@@ -3213,6 +3105,7 @@
 .colorset-the-grey .shipfeatures .mod-card {
   border: solid #b4b6b3 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-red-warrior .window-content,
 .window-app.sheet.vehicle.colorset-red-warrior .window-content,
 .window-app.sheet.spaceship.colorset-red-warrior .window-content {
@@ -3322,10 +3215,10 @@
   background-color: #751119;
   color: #f7b755;
 }
-.colorset-red-warrior #age-tracker .full-box {
+.colorset-red-warrior .full-box {
   background-color: #751119 !important;
 }
-.colorset-red-warrior #age-tracker .comp-checkbox {
+.colorset-red-warrior .comp-checkbox {
   border-color: #751119 !important;
 }
 .colorset-red-warrior .char-sheet .age-header label,
@@ -3355,15 +3248,15 @@
 .colorset-red-warrior #age-roller-drag:hover {
   background-color: #751119;
 }
-.colorset-red-warrior .dice-show.trait-test i:last-of-type {
+.colorset-red-warrior .dice-show i:last-of-type {
   color: #751119;
 }
-.colorset-red-warrior .roll-mod {
-  border-bottom: 1px solid #751119;
-}
-.colorset-red-warrior .roll-mod.stunted {
+.colorset-red-warrior .stunt-points.stunted {
   background-color: #751119;
   color: #f7b755;
+}
+.colorset-red-warrior .roll-body .section-break:has(*) {
+  border-top: 1px solid #751119;
 }
 .colorset-red-warrior .char-sheet .item-container img {
   border: 1px solid #751119;
@@ -3423,6 +3316,7 @@
 .colorset-red-warrior .shipfeatures .mod-card {
   border: solid #d1635b 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-never-dead .window-content,
 .window-app.sheet.vehicle.colorset-never-dead .window-content,
 .window-app.sheet.spaceship.colorset-never-dead .window-content {
@@ -3532,10 +3426,10 @@
   background-color: #663322;
   color: #bb8755;
 }
-.colorset-never-dead #age-tracker .full-box {
+.colorset-never-dead .full-box {
   background-color: #663322 !important;
 }
-.colorset-never-dead #age-tracker .comp-checkbox {
+.colorset-never-dead .comp-checkbox {
   border-color: #663322 !important;
 }
 .colorset-never-dead .char-sheet .age-header label,
@@ -3565,15 +3459,15 @@
 .colorset-never-dead #age-roller-drag:hover {
   background-color: #663322;
 }
-.colorset-never-dead .dice-show.trait-test i:last-of-type {
+.colorset-never-dead .dice-show i:last-of-type {
   color: #663322;
 }
-.colorset-never-dead .roll-mod {
-  border-bottom: 1px solid #663322;
-}
-.colorset-never-dead .roll-mod.stunted {
+.colorset-never-dead .stunt-points.stunted {
   background-color: #663322;
   color: #bb8755;
+}
+.colorset-never-dead .roll-body .section-break:has(*) {
+  border-top: 1px solid #663322;
 }
 .colorset-never-dead .char-sheet .item-container img {
   border: 1px solid #663322;
@@ -3633,6 +3527,7 @@
 .colorset-never-dead .shipfeatures .mod-card {
   border: solid #eeddcd 1px;
 }
+#age-tracker,
 .window-app.sheet.char-sheet-alt.colorset-expanded-blue .window-content,
 .window-app.sheet.vehicle.colorset-expanded-blue .window-content,
 .window-app.sheet.spaceship.colorset-expanded-blue .window-content {
@@ -3742,10 +3637,10 @@
   background-color: #005971;
   color: #dde2e2;
 }
-.colorset-expanded-blue #age-tracker .full-box {
+.colorset-expanded-blue .full-box {
   background-color: #005971 !important;
 }
-.colorset-expanded-blue #age-tracker .comp-checkbox {
+.colorset-expanded-blue .comp-checkbox {
   border-color: #005971 !important;
 }
 .colorset-expanded-blue .char-sheet .age-header label,
@@ -3775,15 +3670,15 @@
 .colorset-expanded-blue #age-roller-drag:hover {
   background-color: #005971;
 }
-.colorset-expanded-blue .dice-show.trait-test i:last-of-type {
+.colorset-expanded-blue .dice-show i:last-of-type {
   color: #005971;
 }
-.colorset-expanded-blue .roll-mod {
-  border-bottom: 1px solid #005971;
-}
-.colorset-expanded-blue .roll-mod.stunted {
+.colorset-expanded-blue .stunt-points.stunted {
   background-color: #005971;
   color: #dde2e2;
+}
+.colorset-expanded-blue .roll-body .section-break:has(*) {
+  border-top: 1px solid #005971;
 }
 .colorset-expanded-blue .char-sheet .item-container img {
   border: 1px solid #005971;
@@ -3843,296 +3738,237 @@
 .colorset-expanded-blue .shipfeatures .mod-card {
   border: solid #e6e7e8 1px;
 }
-.window-app.sheet.char-sheet-alt.colorset-snow-white .window-content,
-.window-app.sheet.vehicle.colorset-snow-white .window-content,
-.window-app.sheet.spaceship.colorset-snow-white .window-content {
+#age-tracker,
+.window-app.sheet.char-sheet-alt.colorset-black-white .window-content,
+.window-app.sheet.vehicle.colorset-black-white .window-content,
+.window-app.sheet.spaceship.colorset-black-white .window-content {
   background-image: none;
   background: none;
 }
-.colorset-snow-white aside {
+.colorset-black-white aside {
   border-radius: 5px;
   border: 5px outset #000000;
 }
-.colorset-snow-white .item-summary label {
+.colorset-black-white .item-summary label {
   background-color: #000000;
   color: #ffffff;
 }
-.colorset-snow-white .metal-background {
+.colorset-black-white .metal-background {
   background: none;
 }
-.colorset-snow-white .sheet-main-content {
+.colorset-black-white .sheet-main-content {
   background-color: rgba(73, 73, 73, 0.6) !important;
 }
-.colorset-snow-white .top-banner {
+.colorset-black-white .top-banner {
   border: 5px outset #000000;
 }
-.colorset-snow-white .sheet-main-content nav a {
+.colorset-black-white .sheet-main-content nav a {
   background-color: #000000;
   color: #ffffff;
 }
-.colorset-snow-white .sheet-main-content nav a.active {
+.colorset-black-white .sheet-main-content nav a.active {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .thin-border {
+.colorset-black-white .thin-border {
   border: thin solid #ffffff;
 }
-.colorset-snow-white .action-details h4 {
+.colorset-black-white .action-details h4 {
   background: none;
   opacity: 0.8;
 }
-.colorset-snow-white .colorset-first-tier {
+.colorset-black-white .colorset-first-tier {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .colorset-first-tier.resource .list-sub-header {
+.colorset-black-white .colorset-first-tier.resource .list-sub-header {
   background-color: #494949;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-first-tier.resource .values {
+.colorset-black-white .colorset-first-tier.resource .values {
   background-color: #000000 !important;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-first-tier select option {
+.colorset-black-white .colorset-first-tier select option {
   background-color: #ffffff;
   opacity: 0.9;
 }
-.colorset-snow-white .colorset-first-tier a.content-link,
-.colorset-snow-white .colorset-first-tier a.inline-roll {
+.colorset-black-white .colorset-first-tier a.content-link,
+.colorset-black-white .colorset-first-tier a.inline-roll {
   background-color: #494949;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-second-tier {
+.colorset-black-white .colorset-second-tier {
   background-color: #494949;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-second-tier.resource .list-sub-header {
+.colorset-black-white .colorset-second-tier.resource .list-sub-header {
   background-color: #000000;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-second-tier.resource .values {
+.colorset-black-white .colorset-second-tier.resource .values {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .colorset-second-tier select option {
+.colorset-black-white .colorset-second-tier select option {
   background-color: #494949;
   opacity: 0.9;
 }
-.colorset-snow-white .colorset-second-tier a.content-link,
-.colorset-snow-white .colorset-second-tier a.inline-roll {
+.colorset-black-white .colorset-second-tier a.content-link,
+.colorset-black-white .colorset-second-tier a.inline-roll {
   background-color: #000000;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-third-tier {
+.colorset-black-white .colorset-third-tier {
   background-color: #000000;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-third-tier.resource .list-sub-header {
+.colorset-black-white .colorset-third-tier.resource .list-sub-header {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .colorset-third-tier.resource .values {
+.colorset-black-white .colorset-third-tier.resource .values {
   background-color: #494949;
   color: #ffffff;
 }
-.colorset-snow-white .colorset-third-tier input,
-.colorset-snow-white .colorset-third-tier select {
+.colorset-black-white .colorset-third-tier input,
+.colorset-black-white .colorset-third-tier select {
   color: #ffffff;
 }
-.colorset-snow-white .colorset-third-tier select option {
+.colorset-black-white .colorset-third-tier select option {
   background-color: #000000;
   opacity: 0.9;
 }
-.colorset-snow-white .colorset-third-tier a.content-link,
-.colorset-snow-white .colorset-third-tier a.inline-roll {
+.colorset-black-white .colorset-third-tier a.content-link,
+.colorset-black-white .colorset-third-tier a.inline-roll {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white input.colorset-first-tier {
+.colorset-black-white input.colorset-first-tier {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white #age-tracker .full-box {
+.colorset-black-white .full-box {
   background-color: #ffffff !important;
 }
-.colorset-snow-white #age-tracker .comp-checkbox {
+.colorset-black-white .comp-checkbox {
   border-color: #ffffff !important;
 }
-.colorset-snow-white .char-sheet .age-header label,
-.colorset-snow-white .char-sheet .persona label {
+.colorset-black-white .char-sheet .age-header label,
+.colorset-black-white .char-sheet .persona label {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .organization-sheet .editor {
+.colorset-black-white .organization-sheet .editor {
   background-color: hsl(0, 0%, 100%);
 }
-.colorset-snow-white .vehicle-stats img {
+.colorset-black-white .vehicle-stats img {
   border: 2px solid #ffffff;
 }
-.colorset-snow-white .vehicle-stats .editor {
+.colorset-black-white .vehicle-stats .editor {
   background-color: #ffffff;
 }
-.colorset-snow-white .stats-block.losses .loss-checkbox {
+.colorset-black-white .stats-block.losses .loss-checkbox {
   border-color: #ffffff;
 }
-.colorset-snow-white .stats-block.losses .loss-checkbox.full-box.full-box {
+.colorset-black-white .stats-block.losses .loss-checkbox.full-box.full-box {
   background: #ffffff;
 }
-.colorset-snow-white fieldset {
+.colorset-black-white fieldset {
   border-color: #ffffff;
 }
-.colorset-snow-white #age-tracker-drag:hover,
-.colorset-snow-white #age-roller-drag:hover {
+.colorset-black-white #age-tracker-drag:hover,
+.colorset-black-white #age-roller-drag:hover {
   background-color: #ffffff;
 }
-.colorset-snow-white .dice-show.trait-test i:last-of-type {
+.colorset-black-white .dice-show i:last-of-type {
   color: #ffffff;
 }
-.colorset-snow-white .roll-mod {
-  border-bottom: 1px solid #ffffff;
-}
-.colorset-snow-white .roll-mod.stunted {
+.colorset-black-white .stunt-points.stunted {
   background-color: #ffffff;
   color: #000000;
 }
-.colorset-snow-white .char-sheet .item-container img {
+.colorset-black-white .roll-body .section-break:has(*) {
+  border-top: 1px solid #ffffff;
+}
+.colorset-black-white .char-sheet .item-container img {
   border: 1px solid #ffffff;
 }
-.colorset-snow-white .char-sheet input {
+.colorset-black-white .char-sheet input {
   background-color: #ffffff;
 }
-.colorset-snow-white .char-sheet input.colorset-second-tier {
+.colorset-black-white .char-sheet input.colorset-second-tier {
   background-color: #494949 !important;
   color: #ffffff !important;
 }
-.colorset-snow-white .focus .item-card-stats,
-.colorset-snow-white .power .item-card-stats,
-.colorset-snow-white .talent .item-card-stats,
-.colorset-snow-white .weapon .item-card-stats,
-.colorset-snow-white .equipment .item-card-stats,
-.colorset-snow-white .stunts .item-card-stats,
-.colorset-snow-white .honorifics .item-card-stats,
-.colorset-snow-white .membership .item-card-stats,
-.colorset-snow-white .relationship .item-card-stats,
-.colorset-snow-white .shipfeatures .item-card-stats {
+.colorset-black-white .focus .item-card-stats,
+.colorset-black-white .power .item-card-stats,
+.colorset-black-white .talent .item-card-stats,
+.colorset-black-white .weapon .item-card-stats,
+.colorset-black-white .equipment .item-card-stats,
+.colorset-black-white .stunts .item-card-stats,
+.colorset-black-white .honorifics .item-card-stats,
+.colorset-black-white .membership .item-card-stats,
+.colorset-black-white .relationship .item-card-stats,
+.colorset-black-white .shipfeatures .item-card-stats {
   background-color: #494949;
 }
-.colorset-snow-white .focus .item-card-stats input.data-entry,
-.colorset-snow-white .power .item-card-stats input.data-entry,
-.colorset-snow-white .talent .item-card-stats input.data-entry,
-.colorset-snow-white .weapon .item-card-stats input.data-entry,
-.colorset-snow-white .equipment .item-card-stats input.data-entry,
-.colorset-snow-white .stunts .item-card-stats input.data-entry,
-.colorset-snow-white .honorifics .item-card-stats input.data-entry,
-.colorset-snow-white .membership .item-card-stats input.data-entry,
-.colorset-snow-white .relationship .item-card-stats input.data-entry,
-.colorset-snow-white .shipfeatures .item-card-stats input.data-entry {
+.colorset-black-white .focus .item-card-stats input.data-entry,
+.colorset-black-white .power .item-card-stats input.data-entry,
+.colorset-black-white .talent .item-card-stats input.data-entry,
+.colorset-black-white .weapon .item-card-stats input.data-entry,
+.colorset-black-white .equipment .item-card-stats input.data-entry,
+.colorset-black-white .stunts .item-card-stats input.data-entry,
+.colorset-black-white .honorifics .item-card-stats input.data-entry,
+.colorset-black-white .membership .item-card-stats input.data-entry,
+.colorset-black-white .relationship .item-card-stats input.data-entry,
+.colorset-black-white .shipfeatures .item-card-stats input.data-entry {
   color: #ffffff;
 }
-.colorset-snow-white .focus .item-card-desc,
-.colorset-snow-white .power .item-card-desc,
-.colorset-snow-white .talent .item-card-desc,
-.colorset-snow-white .weapon .item-card-desc,
-.colorset-snow-white .equipment .item-card-desc,
-.colorset-snow-white .stunts .item-card-desc,
-.colorset-snow-white .honorifics .item-card-desc,
-.colorset-snow-white .membership .item-card-desc,
-.colorset-snow-white .relationship .item-card-desc,
-.colorset-snow-white .shipfeatures .item-card-desc {
+.colorset-black-white .focus .item-card-desc,
+.colorset-black-white .power .item-card-desc,
+.colorset-black-white .talent .item-card-desc,
+.colorset-black-white .weapon .item-card-desc,
+.colorset-black-white .equipment .item-card-desc,
+.colorset-black-white .stunts .item-card-desc,
+.colorset-black-white .honorifics .item-card-desc,
+.colorset-black-white .membership .item-card-desc,
+.colorset-black-white .relationship .item-card-desc,
+.colorset-black-white .shipfeatures .item-card-desc {
   background-color: #ffffff;
 }
-.colorset-snow-white .focus .mod-card,
-.colorset-snow-white .power .mod-card,
-.colorset-snow-white .talent .mod-card,
-.colorset-snow-white .weapon .mod-card,
-.colorset-snow-white .equipment .mod-card,
-.colorset-snow-white .stunts .mod-card,
-.colorset-snow-white .honorifics .mod-card,
-.colorset-snow-white .membership .mod-card,
-.colorset-snow-white .relationship .mod-card,
-.colorset-snow-white .shipfeatures .mod-card {
+.colorset-black-white .focus .mod-card,
+.colorset-black-white .power .mod-card,
+.colorset-black-white .talent .mod-card,
+.colorset-black-white .weapon .mod-card,
+.colorset-black-white .equipment .mod-card,
+.colorset-black-white .stunts .mod-card,
+.colorset-black-white .honorifics .mod-card,
+.colorset-black-white .membership .mod-card,
+.colorset-black-white .relationship .mod-card,
+.colorset-black-white .shipfeatures .mod-card {
   border: solid #494949 1px;
-}
-/*******************************/
-/**   AGE Roller Interface    **/
-/*******************************/
-a:hover {
-  box-shadow: none;
-}
-#age-roller {
-  font-size: 40px;
-  position: absolute;
-  margin: 0px;
-  padding: 0px;
-  cursor: pointer;
-  display: inline-block;
-  z-index: calc(var(--z-index-ui) + 10);
-}
-#age-roller i {
-  border: 2px solid var(--color-border-dark);
-  padding: 4px 0;
-  border-radius: 2px;
-  opacity: 0.7;
-  box-shadow: 0 0 5px #444 inset;
-  background: rgba(0, 0, 0, 0.5);
-  color: #cccccc;
-}
-#age-roller-drag {
-  width: 100%;
-  height: 10px;
-  border-radius: 5px;
-}
-#age-roller-drag:hover {
-  cursor: move;
-}
-#age-roller-options {
-  position: absolute;
-  cursor: pointer;
-  display: none;
-  z-index: 99;
-  max-width: fit-content;
-}
-#age-roller-options ul {
-  font-size: 12px;
-  list-style: none;
-  padding: 0 0 0 4px;
-}
-#age-roller-options ul li {
-  border-radius: 5px;
-  margin-top: 4px;
-  padding: 0 4px;
-  text-align: center;
 }
 /*******************************/
 /**        AGE Tracker        **/
 /*******************************/
-#age-tracker-drag {
-  width: 100%;
-  height: 10px;
-  border-radius: 5px;
-}
-#age-tracker-drag:hover {
-  cursor: move;
-}
 #age-tracker {
-  position: absolute;
-  width: 800px;
-  max-width: max-content;
-  margin: 0px;
-  padding: 0px;
-  display: inline-block;
-  z-index: 50;
+  position: fixed;
+  height: auto;
+  width: 100svw;
+  bottom: 150px;
 }
 #age-tracker a {
   padding-top: 4px;
   text-shadow: none;
 }
 #age-tracker div.age-serendipity {
+  column-gap: 4px;
   max-width: max-content;
   border-radius: 10px;
   padding: 4px;
 }
-#age-tracker div.age-serendipity a.ser-mod {
+#age-tracker div.age-serendipity a {
   margin-top: 2px;
   margin-left: 8px;
   margin-right: 8px;
@@ -4169,6 +4005,95 @@ a:hover {
   height: 16px;
   width: 16px;
   cursor: pointer;
+}
+/*******************************/
+/**       AGE Roll Card       **/
+/*******************************/
+.age-system.age-roll-card ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.age-system.age-roll-card .card-header {
+  height: auto;
+  min-height: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center;
+  font-weight: bold;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.age-system.age-roll-card .card-header .header {
+  margin: 0 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.age-system.age-roll-card .card-header .sub {
+  text-transform: none;
+  font-variant: all-small-caps;
+}
+.age-system.age-roll-card .roll-body {
+  background-color: white;
+  color: black;
+  padding: 4px;
+}
+.age-system.age-roll-card .roll-body .dice-show {
+  gap: 4px;
+  max-width: 25%;
+  margin: 0 10px;
+  text-align: center;
+}
+.age-system.age-roll-card .roll-body .dice-show i:last-of-type {
+  flex-basis: 100%;
+}
+.age-system.age-roll-card .roll-body .roll-summary {
+  text-align: center;
+}
+.age-system.age-roll-card .roll-body .line-header {
+  text-align: left;
+  padding-left: 10px;
+  flex: auto;
+}
+.age-system.age-roll-card .roll-body .line-value {
+  text-align: right;
+  padding-right: 10px;
+}
+.age-system.age-roll-card .roll-body .total-roll {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.age-system.age-roll-card .roll-body .stunt-points {
+  border-radius: 10px;
+}
+.age-system.age-roll-card .footer {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: center;
+}
+.age-system.age-roll-card .footer span {
+  min-height: 18px;
+}
+.age-system.age-roll-card .section-break:has(.mod-desc) {
+  margin-top: 4px;
+}
+.age-system.age-roll-card .mod-desc:first-of-type {
+  padding-top: 4px;
+}
+.age-system.age-roll-card .age-chat-buttons {
+  margin-top: 5px;
+}
+.age-system.age-roll-card .chat-buttons {
+  margin-top: 5px;
+  gap: 4px;
+}
+.age-system.age-roll-card .chat-buttons div {
+  gap: 4px;
+}
+.age-system.age-roll-card .age-button:hover {
+  box-shadow: 20px silver;
 }
 @font-face {
   font-family: "Ethernal Knight";
@@ -4211,7 +4136,7 @@ a:hover {
   text-align: left;
 }
 /*---- Font Override----*/
-body.system-age-system *:not(i, .fa, .far, .fas) {
+body.system-age-system *:not(i, .fa, .far, .fas, .ui-control, .icon) {
   font-family: "Roboto";
 }
 /**************************/

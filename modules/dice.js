@@ -1,6 +1,8 @@
 import { ageSystem } from "./config.js";
 import { sortObjArrayByName } from "./setup.js";
 
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
+
 /**
  * Helper function to reduce a Formula
  * @param {String} formula Formula String to be reduced to dice components and a single constant value
@@ -500,7 +502,7 @@ async function getAgeRollOptions(itemRolled, data = {}) {
                     label: game.i18n.localize("age-system.roll"),
                     icon: `<i class="fa-light fa-dice"></i>`,
                     callback: html => {
-                        const fd = new FormDataExtended(html[0].querySelector("form"));
+                        const fd = new foundry.applications.ux.FormDataExtended(html[0].querySelector("form"));
                         resolve(fd.object)
                     }
                 },
@@ -537,7 +539,7 @@ async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
                     label: game.i18n.localize("age-system.roll"),
                     icon: `<i class="fa-light fa-dice"></i>`,
                     callback: html => {
-                        const fd = new FormDataExtended(html[0].querySelector("form"));
+                        const fd = new foundry.applications.ux.FormDataExtended(html[0].querySelector("form"));
                         resolve(fd.object);
                     }
                 },
@@ -657,7 +659,7 @@ export async function vehicleDamage ({
     //     dieSize: dieSize
     // };
     let messageData = {
-        flavor: `${vehicle.data.name} | ${game.i18n.localize(`age-system.${damageSource}`)}`,
+        flavor: `${vehicle.system.name} | ${game.i18n.localize(`age-system.${damageSource}`)}`,
         speaker: ChatMessage.getSpeaker()
     };
 
@@ -716,7 +718,7 @@ export async function vehicleDamage ({
         messageData.flavor += ` | +${extraDice}`;             
     };
 
-    let dmgRoll = await new Roll(damageFormula, rollData).evaluate({async: true});
+    let dmgRoll = await new Roll(damageFormula, rollData).evaluate();
 
     return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
 
@@ -760,7 +762,7 @@ export async function plotDamage (actor) {
         rollData.extraDice = extraDice;
     };
 
-    let dmgRoll = await new Roll(formula, rollData).evaluate({async: true});
+    let dmgRoll = await new Roll(formula, rollData).evaluate();
     
     // Preparing custom damage chat card
     let chatTemplate = "/systems/age-system/templates/rolls/damage-roll.hbs";
@@ -991,7 +993,8 @@ export async function itemDamage({
         flavor: item ? `${item.name} | ${ownerName}` : damageDesc,
         flavor2: item ? damageDesc : null,
         user: game.user,
-        useInjury: healthSys.useInjury
+        useInjury: healthSys.useInjury,
+        isHealing: dmgDesc.isHealing
     };
 
     let chatData = {

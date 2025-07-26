@@ -711,7 +711,7 @@ export class ageSystemItem extends Item {
         const chatData = {
             user: game.user.id,
             speaker: ChatMessage.getSpeaker(),
-            content: await renderTemplate(item.chatTemplate["item-to-chat"], cardData),
+            content: await foundry.applications.handlebars.renderTemplate(item.chatTemplate["item-to-chat"], cardData),
             flags: {
                 "age-system": {messageData: cardData}
             }

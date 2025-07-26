@@ -187,19 +187,7 @@ export default class ApplyDamageDialog extends Application {
   }
 
   async summaryToChat (summary, useInjury) {
-    const chatTemplate = "/systems/age-system/templates/rolls/damage-summary.hbs";
-    const templateData = {
-      summary,
-      useInjury,
-      healthName: CONFIG.ageSystem.healthSys.healthName
-    }
-    let chatData = {
-      user: game.user.id,
-      content: await renderTemplate(chatTemplate, templateData),
-      style: CONST.CHAT_MESSAGE_STYLES.OOC,
-    }
-    await ChatMessage.applyRollMode(chatData, 'gmroll');
-    ChatMessage.create(chatData);
+    return await summaryToChat(summary, useInjury);
   }
 
   async promptPlayerToRoll (actor, injuryParts, totalDmg, autoApply) {
@@ -215,7 +203,7 @@ export default class ApplyDamageDialog extends Application {
     }
     let chatData = {
       user: game.user.id,
-      content: await renderTemplate(chatTemplate, templateData),
+      content: await foundry.applications.handlebars.renderTemplate(chatTemplate, templateData),
       type: CONST.CHAT_MESSAGE_STYLES.OOC,
       whisper: owners,
       flags: {
@@ -418,4 +406,28 @@ export class DamageHandler {
       default: return false;
     }
   }
+}
+
+/**
+ * Send a summary of damage/healing to chat
+ * @param {Array} summary - Array of damage/healing summaries
+ * @param {boolean} useInjury - Whether the injury system is being used
+ * @param {boolean} isHealing - Whether this is a healing summary (default: false)
+ * @returns {Promise<ChatMessage>} The created chat message
+ */
+export async function summaryToChat(summary, useInjury, isHealing = false) {
+  const chatTemplate = "/systems/age-system/templates/rolls/damage-summary.hbs";
+  const templateData = {
+    summary,
+    useInjury,
+    isHealing,
+    healthName: CONFIG.ageSystem.healthSys.healthName
+  }
+  let chatData = {
+    user: game.user.id,
+    content: await foundry.applications.handlebars.renderTemplate(chatTemplate, templateData),
+    style: CONST.CHAT_MESSAGE_STYLES.OOC,
+  }
+  await ChatMessage.applyRollMode(chatData, 'gmroll');
+  return ChatMessage.create(chatData);
 }
