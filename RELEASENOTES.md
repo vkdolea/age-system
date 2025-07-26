@@ -1,4 +1,8 @@
 # Change Log
+## 4.0.0 [2025-xx-xx]
+### Fixed
+- Small changes on manifest file.
+- Bug preventing zoom control using mouse wheel in certain areas when AGE Tracker is active.
 
 ## 4.0.0 [2025-07-25]
 ### Added
