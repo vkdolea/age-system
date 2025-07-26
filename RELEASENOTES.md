@@ -1,5 +1,15 @@
 # Change Log
-## 4.0.0 [2025-xx-xx]
+## 4.0.2 [2025-07-26]
+### Changed
+- Buttons on chat cards restyled to ensure main focus on chat cards is summary and not the button section.
+
+### Fixed
+- Fixed a bug preventing Fatigue Text button to pop-up on selected Power rolls.
+- Incorrect or no chat cards poping up on Apply Damage interface and chat cards.
+- Injure damage system now has correct style and buttons on damage chat cards.
+- Removed placeholder text from roll cards template.
+
+## 4.0.1 [2025-07-26]
 ### Fixed
 - Small changes on manifest file.
 - Bug preventing zoom control using mouse wheel in certain areas when AGE Tracker is active. Thanks [BoltsJ](https://github.com/BoltsJ)!
