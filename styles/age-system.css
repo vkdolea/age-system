@@ -3953,10 +3953,8 @@
 /**        AGE Tracker        **/
 /*******************************/
 #age-tracker {
-  position: fixed;
-  height: fit-content;
-  width: 100svw;
-  bottom: 150px;
+  pointer-events: all;
+  margin-bottom: 15px;
 }
 #age-tracker a {
   padding-top: 4px;
