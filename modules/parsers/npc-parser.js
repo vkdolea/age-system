@@ -220,6 +220,7 @@ export class NpcParser {
    * @returns {Array} Array of split entries
    */
   _splitRespectingParentheses(text) {
+    text = text.replaceAll('–', '-'); // Replace en-dash with hyphen
     const entries = [];
     let current = '';
     let parenthesesDepth = 0;
@@ -415,12 +416,18 @@ export class NpcParser {
       const atkData = str.match(/ \+0?[0-9].|\–0?[0-9].?|\-0?[0-9].|0|\- /);
       const dmgStr = this.removeLineBreake(str.substring(atkData['index'] + atkData[0].length));
       const formulaEval = Dice.resumeFormula(dmgStr, {});
-      const dmg = formulaEval.shortFormula === "+0" ? `${formulaEval.shortFormula}[${this.normalizeCase(dmgStr)}]` : dmgStr;
+      let dmg;
+      if (formulaEval === null) {
+        dmg = "0";
+      } else {
+        dmg = formulaEval.shortFormula === "+0" ? `${formulaEval.shortFormula}[${this.normalizeCase(dmgStr)}]` : dmgStr;
+      }
       const atkName = this.removeLineBreake(str.substring(0, atkData['index']));
       attacks.push({
         name: this.normalizeCase(atkName),
         toHit: atkData[0].trim(),
-        dmg: dmg
+        dmg: formulaEval ? dmg : "0",
+        longDesc: formulaEval ? "" :  `<p><strong>${game.i18n.format("age-system.attkNote", {attack: this.normalizeCase(atkName)})}:</strong> ${this.normalizeCase(dmgStr)}</p>`
       })
     }
     
@@ -505,6 +512,7 @@ export class NpcParser {
         name: attk.name,
         type: 'weapon',
         system: {
+          longDesc: attk.longDesc === "" ? "" : attk.longDesc,
           favorite: true,
           equiped: true,
           useAbl: 'no-abl',
