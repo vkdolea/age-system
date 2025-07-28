@@ -3,6 +3,7 @@
 ### Fixed
 - AGE Importer: cases when texts with negative abilities failed to generate Actors.
 - AGE Importer: added support to capture text for attacks with special damage instead of silent failing Actor generation.
+- Fixed bug preventing correct parsing on item controls on character block sheet.
 
 ## 4.0.2 [2025-07-26]
 ### Changed
