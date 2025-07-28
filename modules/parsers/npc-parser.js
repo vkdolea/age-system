@@ -426,7 +426,7 @@ export class NpcParser {
       attacks.push({
         name: this.normalizeCase(atkName),
         toHit: atkData[0].trim(),
-        dmg: formulaEval ? dmg : "0",
+        dmg: formulaEval ? dmg : `0${dmg}[${game.i18n.localize("age-system.seeDescription")}]`,
         longDesc: formulaEval ? "" :  `<p><strong>${game.i18n.format("age-system.attkNote", {attack: this.normalizeCase(atkName)})}:</strong> ${this.normalizeCase(dmgStr)}</p>`
       })
     }

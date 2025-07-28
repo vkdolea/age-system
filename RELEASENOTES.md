@@ -1,4 +1,9 @@
 # Change Log
+## 4.0.3 [2025-07-xx]
+### Fixed
+- AGE Importer: cases when texts with negative abilities failed to generate Actors.
+- AGE Importer: added support to capture text for attacks with special damage instead of silent failing Actor generation.
+
 ## 4.0.2 [2025-07-26]
 ### Changed
 - Buttons on chat cards restyled to ensure main focus on chat cards is summary and not the button section.
