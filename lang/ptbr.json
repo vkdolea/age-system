@@ -796,6 +796,8 @@
         "customEffects": "Efeitos Personalizados",
         "customEffectsSet": "Conjunto de Efeitos Personalizados",
         "attkHeader": "Arma Ataque Dano",
+        "attkNote": "Nota para a arma {attack}",
+        "seeDescription": "Veja descrição",
 
         "advancement": "Progressão",
         "advancementPlural": "Progressões",

@@ -802,6 +802,8 @@
         "customEffects": "Custom Effects",
         "customEffectsSet": "Custom Effects set",
         "attkHeader": "Weapon Attack Roll Damage",
+        "attkNote": "Damage note for {attack}",
+        "seeDescription": "See description",
 
         "advancement": "Advancement",
         "advancementPlural": "Advancements",

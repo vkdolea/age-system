@@ -58,9 +58,17 @@
     <div class="footer colorset-first-tier flexrow">
         <span>
         {{#unless ../isSuccess}}
+        
+        {{!-- Automatic Toughness Roll --}}
         {{#if (eq ../ROLL_TYPE.TOUGHNESS_AUTO ../rollType)}}
         {{localize (concat "age-system." ../injuryDegree "InjuryInflicted")}}
         {{/if}}
+
+        {{!-- Toughness Roll --}}
+        {{#if (eq ../ROLL_TYPE.TOUGHNESS ../rollType)}}
+        {{localize "age-system.autoApplyInjury"}}
+        {{/if}}
+
         {{/unless}}
         </span>
     </div>
@@ -104,10 +112,9 @@
         </button>
         {{/if}}
 
-        {{!-- Injury Buttons --}}
+        {{!-- Apply Injury Buttons --}}
         {{#unless ../isSuccess}}
         {{#if (eq ../ROLL_TYPE.TOUGHNESS ../rollType)}}
-        <p class="injury-info colorset-third-tier">{{localize "age-system.autoApplyInjury"}}</p>
         <div class="flexrow">
             <button class="apply-injury light age-button">
                 <i class="fas fa-dizzy opacity-high"></i> {{localize "age-system.injuryLight"}}
@@ -120,11 +127,8 @@
             </button>
         </div>
         {{/if}}
-
-        {{!-- {{#if (eq ../ROLL_TYPE.TOUGHNESS_AUTO ../rollType)}}
-        <p class="injury-info colorset-third-tier">{{localize (concat "age-system." ../injuryDegree "InjuryInflicted")}}</p>
-        {{/if}} --}}
         {{/unless}}
+        
     </div>
     {{/if}}
 

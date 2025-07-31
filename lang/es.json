@@ -714,6 +714,8 @@
     "ageImporter": "Importador AGE",
     "ageImporterInstruction": "Copia el bloque completo, desde el nombre de la cabecera hasta el final y pega el texto en el area debajo.\nSelecciona la ambientación AGE a la que pertenezca y comienza la importación.",
     "clickHelp": "Pulsa aquí para ayuda.",
+    "attkNote": "Nota para el arma {attack}",
+    "seeDescription": "Ver descripción",
     "createCharacter": "Crear Personaje",
     "talentPlural": "Talentos",
     "stuntPlural": "Proezas",

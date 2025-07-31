@@ -663,6 +663,8 @@
     "ageImporter": "AGE Importateur",
     "ageImporterInstruction": "Copiez tout le bloc d'état, de l'en-tête du nom au champ Menace et collez-le dans la zone de texte ci-dessous. Sélectionnez le paramètre AGE auquel appartient le bloc d'état et lancez l'importation.",
     "clickHelp": "Cliquez ici pour obtenir de l'aide.",
+    "attkNote": "Note pour l'arme {attack}",
+    "seeDescription": "Voir la description",
     "createCharacter": "Créer un personnage",
     "talentPlural": "Talents",
     "stuntPlural": "Cascades",

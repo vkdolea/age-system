@@ -634,14 +634,15 @@ export default class ageSystemSheetCharacter extends ActorSheet {
     ];
 
     _selectItemFromHTML(html, {selector="itemId", maxIterations=5}={}) {
+        let el = html.length ? html[0] : html;
         let id;
         for (let i = 0; i < maxIterations; i++) {
-            if (html.dataset[selector]) {
-                id = html.dataset[selector];
+            if (el.dataset[selector]) {
+                id = el.dataset[selector];
                 break;
             }
-            html = html.parentNode;
-            if (!html) return null;
+            el = el.parentNode;
+            if (!el) return null;
         }
         const entity = id ? this.actor.items.get(id) : null;
         return entity
