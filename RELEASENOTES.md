@@ -1,10 +1,11 @@
 # Change Log
-## 4.0.3 [2025-07-xx]
+## 4.0.3 [2025-07-31]
 ### Fixed
 - AGE Importer: cases when texts with negative abilities failed to generate Actors.
 - AGE Importer: added support to capture text for attacks with special damage instead of silent failing Actor generation.
 - Fixed bug preventing correct parsing on item controls on character block sheet.
 - Character block sheet input fields now have proper background color.
+- Toughness Test chat card now showing correct data.
 
 ## 4.0.2 [2025-07-26]
 ### Changed
