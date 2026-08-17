@@ -44,17 +44,11 @@
                 <div class="sub-details flexrow">
                     <div class="flexcol minimum-length">
                         <select name="system.useAbl" class="header-input">
-                            {{#select system.useAbl}}
                             {{#if system.isOrg}}
-                            {{#each config.abilitiesOrg as |name type|}}
-                            <option value="{{type}}">{{localize name}}</option>
-                            {{/each}}
+                            {{selectOptions config.abilitiesOrg selected=system.useAbl localize=true}}
                             {{else}}
-                            {{#each config.abilities as |name type|}}
-                            <option value="{{type}}">{{localize name}}</option>
-                            {{/each}}
+                            {{selectOptions config.abilities selected=system.useAbl localize=true}}
                             {{/if}}
-                            {{/select}}
                         </select>
                         <label class="label-under">{{localize "age-system.abl"}}</label>
                     </div>

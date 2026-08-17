@@ -17,11 +17,11 @@
                     {{#if condition.changes}}
                     <em>
                     <ul class="effect-changes">
-                        <b>{{localize "EFFECT.TabEffects"}}</b>
+                        <b>{{localize "EFFECT.FIELDS.description.label"}}</b>
                         {{#each condition.changes as |change|}}
                         <li>
                             <span>
-                                {{#if change.key}}{{change.key}}{{else}}-{{/if}} ({{effectModeName change.mode}}, {{#if change.key}}{{change.value}}{{else}}-{{/if}})
+                                {{#if change.key}}{{change.key}}{{else}}-{{/if}} ({{effectModeName change.type}}, {{#if change.key}}{{change.value}}{{else}}-{{/if}})
                             </span>
                         </li>
                         {{/each}}
@@ -61,8 +61,9 @@
                 {{/each}}
             </div>
             <div class="flexcol effect-operation">
+                {{log "effect" effect}}
                 {{#each effect.changes as |change|}}
-                <span>{{effectModeName change.mode}}</span>
+                <span>{{effectModeName change.type}}</span>
                 {{/each}}
             </div>
             <div class="flexcol effect-value">

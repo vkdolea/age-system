@@ -1,9 +1,9 @@
 import {ageSystem} from "../config.js";
 import { modifiersList, sortObjArrayByName } from "../setup.js";
 import { focusList } from "../settings.js";
-import {AdvancementAdd} from "../advancement.js";
+import {AdvancementAdd, AdvancementSetup} from "../advancement.js";
 
-export default class ageSystemItemSheet extends foundry.appv1.sheets.ItemSheet {
+export default class ageSystemItemSheet extends ItemSheet {
     constructor(...args) {
         super(...args);
     
@@ -96,10 +96,10 @@ export default class ageSystemItemSheet extends foundry.appv1.sheets.ItemSheet {
                 const feat = data.config.featuresType[f];
                 data.config.featuresTypeLocal.push({
                     key: feat,
-                    name: game.i18n.localize(`age-system.spaceship.${feat}`)
+                    label: game.i18n.localize(`age-system.spaceship.${feat}`)
                 });
             }
-            data.config.featuresTypeLocal = sortObjArrayByName(data.config.featuresTypeLocal, "name");
+            data.config.featuresTypeLocal = sortObjArrayByName(data.config.featuresTypeLocal, "label");
         };
 
         // Options Tab Preparation
@@ -136,11 +136,28 @@ export default class ageSystemItemSheet extends foundry.appv1.sheets.ItemSheet {
 
         // Check if Use Fatigue setting is TRUE
         data.fatigueSet = game.settings.get("age-system", "useFatigue");
-        data.system = data.data.system;
+        data.system = this.item.system;
 
         // If it is a Talent, check if it uses expanded talent degrees
         if(this.item.type === "talent") {
             data.expandedDegrees = ageSystem.talentDegrees.inUse.length > 3;
+            data.talenSpecChoices = {talent: "TYPES.Item.talent", spec: "age-system.item.spec"};
+        }
+
+        // If is is a Stunt prepare choices for stunt type
+        if(this.item.type === "stunts") {
+            data.stuntCostTypeChoices = {
+                fixed: "age-system.fixed",
+                variable: "age-system.variable"
+            }
+        }
+
+        // If it is a ShipFeature, prepare choices for feature type
+        if(this.item.type === "shipfeatures") {
+            data.shipFeaturesQualityChoices = {
+                quality: "age-system.spaceship.quality",
+                flaw: "age-system.spaceship.flaw"
+            };
         }
         return data
     };    
@@ -165,13 +182,14 @@ export default class ageSystemItemSheet extends foundry.appv1.sheets.ItemSheet {
 
             // Class Item Type commands only
             html.find(".add-adv").click(this._onAddAdvance.bind(this));
+            html.find(".advance").click(this._onExistingAdvance.bind(this));
 
         };
         html.find(".find-reference").click(this._onOpenPDF.bind(this));
 
         // Actions by sheet owner only
         if (this.item.isOwner) {
-            if (this.item.type === "class") new ContextMenu(html, ".advance", this.advContextMenu);
+            if (this.item.type === "class") new foundry.applications.ux.ContextMenu.implementation(html[0], ".advance", this.advContextMenu, {jQuery: false});
         };
 
         // Add class to TinyMCE
@@ -187,6 +205,16 @@ export default class ageSystemItemSheet extends foundry.appv1.sheets.ItemSheet {
 
     _onAddAdvance(e) {
         return new AdvancementAdd(this.document.uuid).render(true);
+    };
+
+    _onExistingAdvance(e) {
+        const currentDataset = e.currentTarget.dataset;
+        const currentData = {};
+        currentData.data = this.object.system.advancements[currentDataset.type][currentDataset.id];
+        currentData.index = {};
+        currentData.index.level = currentDataset.level;
+        currentData.index.id = currentDataset.id;
+        return new AdvancementSetup(this.document.uuid, currentDataset.type, currentData).render(true);
     };
 
     _onOpenPDF(e) {
@@ -279,18 +307,18 @@ export default class ageSystemItemSheet extends foundry.appv1.sheets.ItemSheet {
 
     advContextMenu = [
         {
-            name: game.i18n.localize("age-system.settings.edit"),
+            label: game.i18n.localize("age-system.settings.edit"),
             icon: '<i class="fas fa-edit"></i>',
-            callback: e => {
-                const data = e[0].dataset;
+            onClick: (event, target) => {
+                const data = target.dataset;
                 this.object._onChangeAdvancement(data, 'edit');
             }
         },
         {
-            name: game.i18n.localize("age-system.settings.delete"),
+            label: game.i18n.localize("age-system.settings.delete"),
             icon: '<i class="fas fa-trash"></i>',
-            callback: e => {
-                const data = e[0].dataset;
+            onClick: (event, target) => {
+                const data = target.dataset;
                 this.object._onChangeAdvancement(data, 'remove');
             }
         }

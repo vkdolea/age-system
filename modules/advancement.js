@@ -102,16 +102,16 @@ class AdvData {
       traitArrTypes.push(e)
       switch (e) {
         case 'health':
-          obj.name = ageSystem.healthSys.healthName
+          obj.name = ageSystem.healthSys.healthName;
           break;
         case 'powerPoints':
           obj.name = ageSystem.POWER_FLAVOR.points;
           break;
         case 'spec':
-          obj.name = game.i18n.localize("age-system.item.spec")
+          obj.name = "age-system.item.spec";
           break;
         default:
-          obj.name = game.i18n.localize(`age-system.${e}`)
+          obj.name = `age-system.${e}`;
           break;
       }
       traitArr.push(obj)
@@ -157,8 +157,8 @@ export class AdvancementSetup extends FormApplication {
     data.config = ageSystem;
     data.class = this.class;
     data.itemOptionObj = {
-      multiple: game.i18n.localize("age-system.itemOptionMultiple"),
-      all: game.i18n.localize("age-system.itemOptionAll"),
+      multiple: "age-system.itemOptionMultiple",
+      all: "age-system.itemOptionAll",
     };
     
     // Display data for Item Quantity in case of Multiple Item selection
@@ -231,7 +231,7 @@ export class AdvancementSetup extends FormApplication {
 
   _valueChange(event) {
     const e = event.currentTarget;
-    const name = e.name;
+    const name = (e.parentElement?.localName === "range-picker") ? e.parentElement.name : e.name;
     const isCheckbox = e.type === "checkbox";
     const value = isCheckbox ? e.checked : e.value;
     this.advData[name] = value;
@@ -550,7 +550,7 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
   }
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['age-system-dialog', 'age-system', 'advancement-config'],
       template: 'systems/age-system/templates/advancement-level-pick-choice.hbs',
       resizable: false,
@@ -620,6 +620,9 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
 
     // On pressing "Next"
     html.find("footer button.next").click(this._evalNextTrait.bind(this))
+
+    // On pressing "Cancel"
+    html.find("button.cancel").click(e => this.close());
   }
 
   async _rollHealth(e) {
@@ -627,7 +630,7 @@ export class AgeProgUI extends FormApplication { // Realizar adequação para le
     const helper = this.newLevel.helper.health; 
 		const roll = await new Roll(helper.formula).evaluate();
     helper.total = roll.total;
-		roll.toMessage({flavor: ageSystem.healthSys.healthName}, {rollMode: "public"});
+		roll.toMessage({flavor: ageSystem.healthSys.healthName}, {messageMode: "public"});
     this.render(true);
   }
 

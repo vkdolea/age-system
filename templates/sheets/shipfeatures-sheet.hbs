@@ -7,15 +7,13 @@
             <li>
                 <label>{{localize "age-system.spaceship.qualityType"}}</label>
                 <select name="system.quality">
-                    {{#select system.quality}}
-                    <option value="quality">{{localize "age-system.spaceship.quality"}}</option>
-                    <option value="flaw">{{localize "age-system.spaceship.flaw"}}</option>
-                    {{/select}}
+                    {{selectOptions shipFeaturesQualityChoices selected=system.quality localize=true}}
                 </select>
             </li>
 
             {{!-- Value --}}
             <li>
+                {{log "system.type" system.type}}
                 {{#if (eq system.type "weapon")}}
                 <label>{{localize "age-system.item.damage"}}</label>
                 <input type="text" value="{{system.damage}}" name="system.damage" data-dtype="String" placeholder="{{localize "age-system.formulaExample"}}"/>
@@ -49,11 +47,7 @@
                 {{#if (eq system.type "rollable")}}
                 <label>{{localize "age-system.abl"}}</label>
                 <select name="system.useAbl" class="data-input">
-                    {{#select system.useAbl}}
-                    {{#each config.abilities as |name type|}}
-                    <option value="{{type}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.abilities selected=system.useAbl localize=true}}
                 </select>
                 {{/if}}
             </li>
@@ -74,11 +68,7 @@
                 <div class="sub-details flexrow">
                     <div class="flexcol minimum-length">
                         <select name="system.type" class="header-input">
-                        {{#select system.type}}
-                            {{#each config.featuresTypeLocal as |feature|}}
-                            <option value="{{feature.key}}">{{feature.name}}</option>
-                            {{/each}}
-                        {{/select}}
+                            {{selectOptions config.featuresTypeLocal selected=system.type valueAttr="key" labelAttr="label"}}
                         </select>
                         <label class="label-under">{{localize "age-system.spaceship.featuresType"}}</label>
                     </div>

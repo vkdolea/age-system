@@ -3,7 +3,7 @@ import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 import {dropChar, newItemData} from "./helper.js";
 
-export default class ageSpaceshipSheet extends foundry.appv1.sheets.ActorSheet {
+export default class ageSpaceshipSheet extends ActorSheet {
     
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -46,6 +46,28 @@ export default class ageSpaceshipSheet extends foundry.appv1.sheets.ActorSheet {
         // Check if sheet is from synthetic token - Passenger setup will not work for Synth
         data.notSynth = !(this.token && !this.token.actorLink);
         data.isSynth = !data.notSynth;
+
+        data.spaceshipSizeChoices = [
+            ...Object.entries(CONFIG.ageSystem.spaceshipSize).map(([size, sizeKey]) => {
+                return {key: sizeKey, value: `age-system.spaceship.sizeType.${size}`}
+            })
+        ];
+        
+
+        // Prepare choices for operator
+        data.operatorChoices = [
+            {key: "crew", value: game.i18n.localize("age-system.spaceship.crew")},
+            ...Object.entries(data.passengers).map(([key, passenger]) => {
+                return {key: passenger.id, value: passenger.name}
+            })
+        ];
+        
+        // Prepare choices for crew competence
+        data.spaceshipCrewCompetenceChoices = [
+            ...Object.entries(CONFIG.ageSystem.spaceshipCrewCompetence).map(([compet, competKey]) => {
+                return {key: competKey, value: game.i18n.format(`age-system.spaceship.competenceLevel.${compet}`)}
+            })
+        ];
 
         // return data;
         return {

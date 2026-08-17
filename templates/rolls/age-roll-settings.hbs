@@ -3,12 +3,8 @@
     <div class="form-group">
         <label>Select Ability</label>
         <select name="selectedAbl">
-            {{#select selectedAbl}}
             <option value="no-abl">—</option>
-            {{#each abilities as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+            {{selectOptions abilities selected=system.selectedAbl localize=true}}
         </select>
     </div>
     {{/if}}
@@ -34,7 +30,7 @@
 
     {{#if ppCost}}
     <div class="form-group">
-        <label>{{config.POWER_FLAVOR.points}}</label>
+        <label>{{localize config.POWER_FLAVOR.points}}</label>
         <input type="number" name="pointCost" value="{{ppCost.cost}}" placeholder="0"/>
     </div>
     {{/if}}

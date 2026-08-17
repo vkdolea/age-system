@@ -32,34 +32,22 @@
             <li class="colorset-third-tier flexrow">
                 <label for="">{{localize "age-system.abl"}}</label>
                 <select name="system.dmgAbl">
-                    {{#select system.dmgAbl}}
                     <option value="no-abl">—</option>
-                    {{#each config.abilities as |name type|}}
-                    <option value="{{type}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.abilities selected=system.dmgAbl localize=true}}
                 </select>
             </li>
             {{#if config.healthSys.useBallistic}}
             <li class="colorset-third-tier flexrow">
                 <label class="colorset-third-tier">{{localize "age-system.type"}}</label>
                 <select name="system.dmgType">
-                    {{#select system.dmgType}}
-                    {{#each config.damageType as |name type|}}
-                    <option value="{{type}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.damageType selected=system.dmgType localize=true}}
                 </select>
             </li>
             {{/if}}
             <li class="colorset-third-tier flexrow">
                 <label class="colorset-third-tier">{{localize "age-system.source"}}</label>
                 <select name="system.dmgSource">
-                    {{#select system.dmgSource}}
-                    {{#each config.damageSource as |name source|}}
-                    <option value="{{source}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.damageSource selected=system.dmgSource localize=true}}
                 </select>
             </li>
         </ul>

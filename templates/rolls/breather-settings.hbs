@@ -7,12 +7,8 @@
     <div class="form-group">
         <label>{{localize "age-system.ablSelect"}}</label>
         <select name="abl">
-            {{#select abl}}
             <option value="no-abl">—</option>
-            {{#each abilities as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+            {{selectOptions abilities selected=abl localize=true}}
         </select>
     </div>
 

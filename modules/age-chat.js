@@ -32,24 +32,38 @@ export function addChatListeners(html) {
  * @param {object[]} options    The Array of Context Menu options
  * @returns {object[]}          The extended options Array including new context choices
  */
- export const addChatMessageContextOptions = function(html, options) {
+export const addChatMessageContextOptions = function(html, options) {
     let canApply = li => {
         const message = game.messages.get(li.dataset.messageId);
-        return message?.isRoll && message?.isContentVisible && (ageSystem.useTargeted ? game.user.targets.size : canvas.tokens?.controlled.length);
+        return message?.isRoll
+            && message?.isContentVisible
+            && (ageSystem.useTargeted
+                ? game.user.targets.size
+                : canvas.tokens?.controlled.length);
     };
+
     options.push(
-    {
-        name: game.i18n.localize("age-system.item.healing"),
-        icon: '<i class="fa fa-heartbeat" aria-hidden="true"></i>',
-        condition: canApply,
-        callback: li => applyChatCardDamage(li, {isHealing: true, isNewHP: false})
-    },
-    {
-        name: game.i18n.localize("age-system.applyDamage"),
-        icon: '<i class="fa fa-crosshairs" aria-hidden="true"></i>',
-        condition: canApply,
-        callback: li => applyChatCardDamage(li, {isDamage: true})
-    });
+        {
+            name: game.i18n.localize("age-system.item.healing"),
+            icon: '<i class="fa fa-heartbeat" aria-hidden="true"></i>',
+            condition: canApply,
+            onClick: (event, target) =>
+                applyChatCardDamage(target, {
+                    isHealing: true,
+                    isNewHP: false
+                })
+        },
+        {
+            name: game.i18n.localize("age-system.applyDamage"),
+            icon: '<i class="fa fa-crosshairs" aria-hidden="true"></i>',
+            condition: canApply,
+            onClick: (event, target) =>
+                applyChatCardDamage(target, {
+                    isDamage: true
+                })
+        }
+    );
+
     return options;
 };
 

@@ -179,7 +179,7 @@ export default class ageSystemSheetCharacter extends ActorSheet {
             })
         }    
         if (this.isEditable) {
-            new foundry.applications.ux.ContextMenu.implementation(html, ".main-data", this.itemContextMenu, {jQuery: false});
+            new foundry.applications.ux.ContextMenu.implementation(html[0], ".main-data", this.itemContextMenu, {jQuery: false});
             html.find(".item-edit").click(this._onItemEdit.bind(this));
             html.find(".item-delete").click(this._onItemDelete.bind(this));
             html.find(".last-up").change(this._onLastUpSelect.bind(this));
@@ -232,8 +232,8 @@ export default class ageSystemSheetCharacter extends ActorSheet {
         };
 
         if (this.actor.isOwner) {
-            new foundry.applications.ux.ContextMenu.implementation(html, ".focus-options", this.focusContextMenu, {jQuery: false});
-            new foundry.applications.ux.ContextMenu.implementation(html, ".item-card .main-data img", this.itemContextMenu, {jQuery: false});
+            new foundry.applications.ux.ContextMenu.implementation(html[0], ".focus-options", this.focusContextMenu, {jQuery: false});
+            new foundry.applications.ux.ContextMenu.implementation(html[0], ".item-card .main-data img", this.itemContextMenu, {jQuery: false});
             html.find(".item-equip").click(this._onItemActivate.bind(this));
             html.find(".item-card .main-data").click(this._onItemEdit.bind(this));
             html.find(".defend-maneuver").change(this._onDefendSelect.bind(this));
@@ -580,56 +580,80 @@ export default class ageSystemSheetCharacter extends ActorSheet {
 
     focusContextMenu = [
         {
-            name: game.i18n.localize("age-system.ageRollOptions"),
+            label: game.i18n.localize("age-system.ageRollOptions"),
             icon: '<i class="fas fa-dice"></i>',
-            callback: e => {
-                const focus = this._selectItemFromHTML(e);
-                const ev = new MouseEvent('click', {altKey: true});
+            onClick: (event, target) => {
+                const focus = this._selectItemFromHTML(target);
+                const ev = new MouseEvent("click", { altKey: true });
                 focus.roll(ev);
             }
         },
         {
-            name: game.i18n.localize("age-system.chatCard.roll"),
+            label: game.i18n.localize("age-system.chatCard.roll"),
             icon: '<i class="far fa-eye"></i>',
-            callback: e => this._selectItemFromHTML(e).showItem(e.shiftKey)
-        },
-        {
-            name: game.i18n.localize("age-system.settings.changeRollContext"),
-            icon: '<i class="fas fa-exchange-alt"></i>',
-            // TODO - try to add the Shift + Click rolling to GM inside this callback
-            callback: e => {
-                const focus = this._selectItemFromHTML(e);
-                const ev = new MouseEvent('click', {});
-                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, selectAbl: true, rollType: ageSystem.ROLL_TYPE.FOCUS});
+            onClick: (event, target) => {
+                this._selectItemFromHTML(target).showItem(event.shiftKey);
             }
         },
         {
-            name: game.i18n.localize("age-system.settings.edit"),
-            icon: '<i class="fas fa-edit"></i>',
-            callback: e => this._selectItemFromHTML(e).sheet.render(true)
+            label: game.i18n.localize("age-system.settings.changeRollContext"),
+            icon: '<i class="fas fa-exchange-alt"></i>',
+            onClick: (event, target) => {
+                const focus = this._selectItemFromHTML(target);
+
+                const ev = new MouseEvent("click", {
+                    shiftKey: event.shiftKey,
+                    ctrlKey: event.ctrlKey,
+                    altKey: event.altKey,
+                    metaKey: event.metaKey
+                });
+
+                Dice.ageRollCheck({
+                    event: ev,
+                    itemRolled: focus,
+                    actor: this.actor,
+                    selectAbl: true,
+                    rollType: ageSystem.ROLL_TYPE.FOCUS
+                });
+            }
         },
         {
-            name: game.i18n.localize("age-system.settings.delete"),
+            label: game.i18n.localize("age-system.settings.edit"),
+            icon: '<i class="fas fa-edit"></i>',
+            onClick: (event, target) => {
+                this._selectItemFromHTML(target).sheet.render(true);
+            }
+        },
+        {
+            label: game.i18n.localize("age-system.settings.delete"),
             icon: '<i class="fas fa-trash"></i>',
-            callback: e => this._selectItemFromHTML(e).delete()
+            onClick: (event, target) => {
+                this._selectItemFromHTML(target).delete();
+            }
         }
     ];
 
     itemContextMenu = [
         {
-            name: game.i18n.localize("age-system.showOnChat"),
+            label: game.i18n.localize("age-system.showOnChat"),
             icon: '<i class="far fa-eye"></i>',
-            callback: e => this._selectItemFromHTML(e).showItem(e.shiftKey)
+            onClick: (event, target) => {
+                this._selectItemFromHTML(target).showItem(event.shiftKey);
+            }
         },
         {
-            name: game.i18n.localize("age-system.settings.edit"),
+            label: game.i18n.localize("age-system.settings.edit"),
             icon: '<i class="fas fa-edit"></i>',
-            callback: e => this._selectItemFromHTML(e).sheet.render(true)
+            onClick: (event, target) => {
+                this._selectItemFromHTML(target).sheet.render(true);
+            }
         },
         {
-            name: game.i18n.localize("age-system.settings.delete"),
+            label: game.i18n.localize("age-system.settings.delete"),
             icon: '<i class="fas fa-trash"></i>',
-            callback: e => this._selectItemFromHTML(e).delete()
+            onClick: (event, target) => {
+                this._selectItemFromHTML(target).delete();
+            }
         }
     ];
 

@@ -428,6 +428,6 @@ export async function summaryToChat(summary, useInjury, isHealing = false) {
     content: await foundry.applications.handlebars.renderTemplate(chatTemplate, templateData),
     style: CONST.CHAT_MESSAGE_STYLES.OOC,
   }
-  await ChatMessage.applyRollMode(chatData, 'gmroll');
+  await ChatMessage.applyMode(chatData, foundry.dice.Roll._mapLegacyRollMode('gmroll'));
   return ChatMessage.create(chatData);
 }

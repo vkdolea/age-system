@@ -1,5 +1,5 @@
 <div class="flexrow conditions-workshop">
-
+{{log this}}
     <div class="column defenders">
         <h2>{{localize "age-system.tokenEffects"}}</h2>
         <div class="targets">
@@ -12,7 +12,7 @@
                             <i class="fas fa-trash delete-effect {{#if (eq condition.id "dead")}}inactive{{else}}active{{/if}}"></i>
                             <i class="fa fa-chevron-down change-order" data-direction="down" aria-hidden="true"></i>
                         </div>
-                        <img class="item-image user-entry" src="{{condition.icon}}" data-field="img" title="{{condition.name}}"/>
+                        <img class="item-image user-entry" src="{{condition.img}}" data-field="img" title="{{condition.name}}"/>
                         <div>
                             {{#if (eq ../inUseConditions "custom")}}
                             <h3><input type="text" class="user-entry" name="conditions.{{i}}.name" value="{{condition.name}}" data-dtype="Number" placeholder="{{localize "age-system.name"}}" data-field="name"/></h3>
@@ -33,9 +33,9 @@
                     </div>
                     <div class="effects">
                         <header class="effect-change effects-header flexrow">
-                            <div class="key">{{ localize "EFFECT.ChangeKey" }}</div>
-                            <div class="mode">{{ localize "EFFECT.ChangeMode" }}</div>
-                            <div class="value">{{ localize "EFFECT.ChangeValue" }}</div>
+                            <div class="key">{{ localize "EFFECT.FIELDS.changes.element.key.label" }}</div>
+                            <div class="mode">{{ localize "EFFECT.FIELDS.changes.element.type.label" }}</div>
+                            <div class="value">{{ localize "EFFECT.FIELDS.changes.element.value.label" }}</div>
                             <div class="effect-controls">
                                 <a class="effect-control" data-action="add"><i class="far fa-plus-square"></i></a>
                             </div>
@@ -47,8 +47,8 @@
                                     <input type="text" class="user-entry" data-field="change-key" name="changes.{{i}}.key" value="{{change.key}}"/>
                                 </div>
                                 <div class="mode">
-                                    <select name="changes.{{i}}.mode" class="user-entry" data-field="change-mode" data-dtype="Number">
-                                        {{selectOptions ../../modes selected=change.mode }}
+                                    <select name="changes.{{i}}.type" class="user-entry" data-field="change-type">
+                                        {{selectOptions ../../modes selected=change.type}}
                                     </select>
                                 </div>
                                 <div class="value">

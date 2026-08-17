@@ -720,7 +720,7 @@ export class ageSystemItem extends Item {
             chatData.style = CONST.CHAT_MESSAGE_STYLES.WHISPER;
             chatData.whisper = [game.user.id];
         } else {
-            ChatMessage.applyRollMode(chatData, rollMode);
+            ChatMessage.applyMode(chatData, foundry.dice.Roll._mapLegacyRollMode(rollMode))
         }
         return ChatMessage.create(chatData);
     };

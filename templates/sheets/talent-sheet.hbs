@@ -6,11 +6,7 @@
             <li>
                 <label>{{localize "age-system.talentDegree"}}</label>
                 <select name="system.degree">
-                {{#select system.degree}}
-                    {{#each config.talentDegrees.inUse as |degree|}}
-                    <option value="{{@key}}">{{degree}}</option>
-                    {{/each}}
-                {{/select}}
+                    {{selectOptions config.talentDegrees.inUse selected=system.degree}}
                 </select>
             </li>
 
@@ -18,10 +14,7 @@
             <li>
                 <label>{{localize "age-system.type"}} </label>
                 <select name="system.type">
-                {{#select system.type}}
-                    <option value="talent">{{localize "TYPES.Item.talent"}}</option>
-                    <option value="spec">{{localize "age-system.item.spec"}}</option>
-                {{/select}}
+                    {{selectOptions talenSpecChoices selected=system.type localize=true}}
                 </select>
             </li>
 
@@ -74,7 +67,7 @@
                             <li class="title">
                                 <label>{{config.talentDegrees.inUse.[1]}}</label>
                             </li>
-                            <lili class="editor-parent">{{editor system.degree1.desc target="system.degree1.desc" button=true owner=owner editable=true engine="prosemirror"}}</li>
+                            <li class="editor-parent">{{editor system.degree1.desc target="system.degree1.desc" button=true owner=owner editable=true engine="prosemirror"}}</li>
                         </ul>
 
                         <ul class="resource colorset-first-tier editor-parent">

@@ -12,7 +12,7 @@ export default class ConditionsWorkshop extends Application {
       }
     }
     if (!hasDead) this._customEffects.splice(0, 0, {
-      icon: `${CONFIG.ageSystem.statusEffectsPath}pirate-grave.svg`,
+      img: `${CONFIG.ageSystem.statusEffectsPath}pirate-grave.svg`,
       id: `dead`,
       name: game.i18n.localize(`EFFECT.StatusDead`),
     });
@@ -35,8 +35,8 @@ export default class ConditionsWorkshop extends Application {
     const data = super.getData();
     data.conditions = this._inUseConditions === 'custom' ? this._customEffects : CONFIG.ageSystem.statusEffects[this._inUseConditions];
     data.inUseConditions = this._inUseConditions;
-    data.modes = Object.entries(CONST.ACTIVE_EFFECT_MODES).reduce((obj, e) => {
-      obj[e[1]] = game.i18n.localize("EFFECT.MODE_"+e[0]);
+    data.modes = Object.entries(CONST.ACTIVE_EFFECT_CHANGE_TYPES).reduce((obj, e) => {
+      obj[e[0]] = game.i18n.localize("EFFECT.CHANGES.TYPES."+e[0]);
       return obj;
     }, {})
 
@@ -160,13 +160,13 @@ export default class ConditionsWorkshop extends Application {
   async _onCloseWorkshop(ev) {
     const type = this._inUseConditions;
     const effects = this._customEffects;
-    // Check if icons are repeated
-    const icons = []
+    // Check if imgs are repeated
+    const imgs = []
     if (type === 'custom') {
       for (let e = 0; e < effects.length; e++) {
-        const icon = effects[e].icon;
-        if (icons.includes(icon)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.repetedIconCondition"));
-        icons.push(icon);
+        const img = effects[e].img;
+        if (imgs.includes(img)) return ui.notifications.warn(game.i18n.localize("age-system.WARNING.repetedIconCondition"));
+        imgs.push(img);
       }
     }
     await game.settings.set("age-system", "inUseConditions", type);
@@ -201,7 +201,7 @@ export default class ConditionsWorkshop extends Application {
   _onAddEffect(ev) {
     const pos = ev.currentTarget.dataset.position;
     const newEffect = {
-      icon: "icons/svg/aura.svg",
+      img: "icons/svg/aura.svg",
       name: "",
       id: 'AGEcustom.' + foundry.utils.randomID(20),
       changes: [],
@@ -246,7 +246,7 @@ export default class ConditionsWorkshop extends Application {
       type: "image",
       callback: path => {
         event.currentTarget.src = path;
-        condition.icon = path;
+        condition.img = path;
         // this._saveCustomEffects();
       },
       top: this.position.top + 40,
@@ -282,8 +282,8 @@ export default class ConditionsWorkshop extends Application {
         condition.changes[changeId].key = newValue;
         break;
       
-      case 'change-mode':
-        condition.changes[changeId].mode = newValue;
+      case 'change-type':
+        condition.changes[changeId].type = newValue;
         break;
 
       case 'change-value':
@@ -291,7 +291,7 @@ export default class ConditionsWorkshop extends Application {
         break;
 
       case 'img':
-        condition.icon = newValue;
+        condition.img = newValue;
         break;
     
       default:
