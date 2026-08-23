@@ -19,13 +19,7 @@
             <div class="flexrow conductor-selection">
                 <label class="conductor">{{localize "age-system.conductor"}}</label>
                 <select class="conductor" name="system.conductor">
-                    {{#select system.conductor}}
-                    <option value="">{{localize "age-system.noAction"}}</option>
-                    <option value="synth-vehicle">Token</option>
-                    {{#each data.passengers as |passenger|}}
-                    <option value="{{passenger.id}}">{{passenger.name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions data.conductorChoices selected=system.conductor labelAttr="value" valueAttr="key"}}
                 </select>
             </div>
 
@@ -36,11 +30,7 @@
                     <a class="roll-maneuver"><i class="fas fa-dice"></i></a>
                 </div>
                 <select name="system.handling.useAbl" class="data-input">
-                    {{#select system.handling.useAbl}}
-                    {{#each data.config.abilities as |name type|}}
-                    <option value="{{type}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions data.config.abilities selected=system.handling.useAbl localize=true}}
                 </select>
                 <input type="text" name="system.handling.useFocus" value="{{system.handling.useFocus}}" list="{{name}}-{{actor.id}}-list" placeholder="{{localize "age-system.focus"}}">
                 <datalist id="{{name}}-{{actor.id}}-list">
@@ -56,13 +46,8 @@
                     <label>{{localize "age-system.velocity"}}</label>
                     <div class="flexrow no-flexwrap">
                         <select name="system.velocity.category">
-                            {{#select system.velocity.category}}
-                            {{#each data.config.velocityCategory as |category|}}
-                            <option value="{{@key}}">{{localize (concat "age-system." @key)}}</option>
-                            {{/each}}
-                            <option value="velCustom">{{localize (concat "age-system.velCustom")}}</option>
-                            {{/select}}
-                        </select>    
+                            {{selectOptions data.velocityChoises selected=system.velocity.category localize=true}}
+                        </select>
                         <span>/</span>
                         <input type="number" name="system.velocity.catMod" value="{{system.velocity.catMod}}" data-dtype="Number">
                     </div>

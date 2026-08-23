@@ -26,7 +26,7 @@
         <div class="form-group">
             <label>{{ localize "EFFECT.Icon" }}</label>
             <div class="form-fields">
-                {{filePicker target="icon" type="image"}}
+                <file-picker name="icon" type="image"></file-picker>
                 <input class="image" type="text" name="icon" placeholder="path/image.png" value="{{data.icon}}"/>
             </div>
         </div>
@@ -124,8 +124,8 @@
                     </select>
                 </div>
                 <div class="mode">
-                    <select name="changes.{{i}}.mode" data-dtype="Number">
-                        {{selectOptions ../modes selected=change.mode}}
+                    <select name="changes.{{i}}.type">
+                        {{selectOptions ../modes selected=change.type}}
                     </select>
                 </div>
                 <div class="value">

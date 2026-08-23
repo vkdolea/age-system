@@ -31,19 +31,10 @@
                     <a class="system-roll roll-maneuver data-sys-name={{sysName}}" data-sys-box="1"><i class="fas fa-dice"></i></a>
                 </p>
                 <select name="system.systems.{{sysName}}.operator" class="system-operator">
-                    {{#select system.operator}}
-                    <option value="crew">{{localize "age-system.spaceship.crew"}}</option>
-                    {{#each ../data.passengers as |passenger|}}
-                    <option value="{{passenger.id}}">{{passenger.name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions ../data.operatorChoices valueAttr="key" labelAttr="value" selected=system.operator localize=true}}
                 </select>
                 <select name="system.systems.{{sysName}}.useAbl" class="system-abl">
-                    {{#select system.useAbl}}
-                    {{#each ../data.config.abilities as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions ../data.config.abilities selected=system.useAbl localize=true}}
                 </select>
                 <input name="system.systems.{{sysName}}.useFocus" class="system-focus" type="text" value="{{system.useFocus}}" placeholder="{{localize "age-system.focus"}}" list="{{../this.actor.type}}-{{../this.actor.id}}-list"/>
             </li>
@@ -76,11 +67,7 @@
                     <div class="flexrow flex-align-center flex-justify-center crew-competence">
                         <label class="competence-label">{{localize "age-system.spaceship.competence"}}</label>
                         <select class="competence-list" name="system.crew.competence">
-                            {{#select system.crew.competence}}
-                            {{#each data.config.spaceshipCrewCompetence as |compet competKey|}}
-                            <option value="{{compet}}">{{localize (concat "age-system.spaceship.competenceLevel." competKey)}} (+{{compet}})</option>
-                            {{/each}}
-                            {{/select}}
+                            {{selectOptions data.spaceshipCrewCompetenceChoices valueAttr="key" labelAttr="value" selected=system.crew.competence localize=true}}
                         </select>
                     </div>
                 </div>
@@ -93,11 +80,7 @@
                     <div class="flexrow flex-align-center size">
                         <label class="hull-label">{{localize "age-system.spaceship.size"}}</label>
                         <select class="ship-size" name="system.size" class="dice-size">
-                            {{#select system.size}}
-                            {{#each data.config.spaceshipSize as |size sizeKey|}}
-                            <option value="{{size}}">{{localize (concat "age-system.spaceship.sizeType." sizeKey)}}</option>
-                            {{/each}}
-                            {{/select}}
+                            {{selectOptions data.spaceshipSizeChoices valueAttr="key" labelAttr="value" selected=system.size localize=true}}
                         </select>
                     </div>
                     <div class="flexrow flex-align-center">

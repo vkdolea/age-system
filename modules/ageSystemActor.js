@@ -93,6 +93,7 @@ export class ageSystemActor extends Actor {
 
     /**
     * Apply any transformations to the Actor data which are caused by ActiveEffects by adding code in the original FVTT code
+    * This FVTT is a snippet from v13 - Further modifications may be required for v14+ if Foundry changes the way Active Effects are applied
     */
     applyActiveEffects() {
         const overrides = {};
@@ -105,7 +106,10 @@ export class ageSystemActor extends Actor {
         changes.push(...effect.changes.map(change => {
             const c = foundry.utils.deepClone(change);
             c.effect = effect;
-            c.priority = c.priority ?? (c.mode * 10);
+            // Convert string type to numeric for priority calculation (Foundry v14+)
+            const typeMap = { custom: 0, multiply: 1, add: 2, downgrade: 3, upgrade: 4, override: 5 };
+            const modeNum = typeof c.type === 'string' ? (typeMap[c.type] ?? 0) : (c.type ?? 0);
+            c.priority = c.priority ?? (modeNum * 10);
             return c;
         }));
         for ( const statusId of effect.statuses ) this.statuses.add(statusId);
@@ -127,9 +131,9 @@ export class ageSystemActor extends Actor {
 
         // Apply all changes
         for ( const change of changes ) {
-        if ( !change.key ) continue;
-        const changes = change.effect.apply(this, change);
-        Object.assign(overrides, changes);
+            if ( !change.key ) continue;
+            const changes = change.effect.constructor.applyChange(this, change);
+            Object.assign(overrides, changes);
         }
 
         // Expand the set of final overrides
@@ -142,7 +146,7 @@ export class ageSystemActor extends Actor {
         // Apply all changes
         for ( let change of changes ) {
             if ( !change.key || !paths.includes(change.key)) continue;
-            const changes = change.effect.apply(this, change);
+            const changes = change.effect.constructor.applyChange(this, change);
             Object.assign(dOverrides, changes);
         }
     
@@ -900,7 +904,7 @@ export class ageSystemActor extends Actor {
         if (options.abl !== 'no-abl') formula += ` + ${Math.max(charData.abilities[options.abl].total, 0)}`;
         if (options.addLevel) formula += ageSystem.healthSys.useInjury ? ` + ${Math.floor(charData.level/4)}` : ` + ${charData.level}`;
         let roll = new Roll(formula, this.actorRollData()).evaluateSync();
-		roll.toMessage({flavor: `${this.name} | ${game.i18n.localize("age-system.breather")}`}, {rollMode});
+		roll.toMessage({flavor: `${this.name} | ${game.i18n.localize("age-system.breather")}`}, {messageMode: rollMode});
         if (options.autoApply) return ageSystem.healthSys.useInjury ? this.healMarks(roll.total) : this.applyHPchange(roll.total, {isHealing: true, isNewHP: false});
     }
 
@@ -908,7 +912,7 @@ export class ageSystemActor extends Actor {
         const template = "/systems/age-system/templates/rolls/breather-settings.hbs";
         const html = await foundry.applications.handlebars.renderTemplate(template, data);
         return new Promise(resolve => {
-            const data = {
+            const dialogData = {
                 title: game.i18n.localize("age-system.breather"),
                 content: html,
                 buttons: {
@@ -929,7 +933,7 @@ export class ageSystemActor extends Actor {
                 default: "normal",
                 close: () => resolve({cancelled: true}),
             }
-            new Dialog(data, null).render(true);
+            new Dialog(dialogData).render(true);
         });
     }
 
@@ -984,24 +988,7 @@ export class ageSystemActor extends Actor {
      */
     async handleConditions(condId) {
         if (["spaceship", "vehicle"].includes(this.type)) return null;
-        const effectsOn = this.effects.filter(e => e.flags?.["age-system"]?.isCondition && e.statuses.has(condId));
-        
-        if (effectsOn.length < 1) {
-            // If there is no Effect on, create one
-            const newEffect = foundry.utils.deepClone(CONFIG.statusEffects.filter(e => e.id === condId)[0]);
-            newEffect.statuses = [newEffect.id];
-            if (newEffect?.flags?.["age-system"].conditionType !== 'custom') newEffect.name = game.i18n.localize(newEffect.name);
-            delete newEffect.id;
-            await this.createEmbeddedDocuments("ActiveEffect", [newEffect]);
-        } else {
-            // If there are Effects, delete everything
-            const toDelete = [];
-            for (let c = 0; c < effectsOn.length; c++) {
-                const effect = effectsOn[c];
-                toDelete.push(effect.id);
-            }
-            this.deleteEmbeddedDocuments("ActiveEffect", toDelete);
-        }
+        this.toggleStatusEffect(condId);
     }
 
     async openSheet(newSheet) {

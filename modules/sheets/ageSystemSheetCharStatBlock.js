@@ -32,7 +32,7 @@ export default class ageSystemSheetCharStatBlock extends ageSystemSheetCharacter
         $(`a.editor-edit`).hide(); // Used this code to remove the possibility to edit Powers on Stat Block view
         super.activateListeners(html);
         if (this.isEditable) {
-            new ContextMenu(html, ".item-edit", this.itemContextMenu);
+            new foundry.applications.ux.ContextMenu.implementation(html[0], ".item-edit", this.itemContextMenu, {jQuery: false});
         }
     };
 }

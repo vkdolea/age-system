@@ -5,7 +5,7 @@
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.trait"}}</strong></label>
                 <select name="trait" class="header-input">
-                    {{selectOptions traitArr nameAttr="key" labelAttr="name"}}
+                    {{selectOptions traitArr selected=trait valueAttr="key" labelAttr="name" localize=true}}
                 </select>
             </div>
             {{/if}}
@@ -13,13 +13,14 @@
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.type"}}</strong></label>
                 <select name="itemOption" class="header-input">
-                    {{selectOptions itemOptionObj}}
+                    {{selectOptions itemOptionObj selected=itemOption localize=true}}
                 </select>
             </div> 
             {{/if}}
             <div class="flexrow flex-align-baseline option" {{#if (ne itemOption "multiple")}}style="display: none;"{{/if}}>
                 <label for=""><strong>{{localize "age-system.item.quantity"}}</strong></label>
-                {{rangePicker name="itemQtd" value=itemQtd min=0 max=itemArrSize step=1}}
+                {{!-- {{rangePicker name="itemQtd" value=itemQtd min=0 max=itemArrSize step=1}} --}}
+                <range-picker name="itemQtd" value="{{itemQtd}}" min="0" max="{{itemArrSize}}" step="1"></range-picker>
             </div>
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.alias"}}</strong></label>
@@ -28,19 +29,14 @@
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.image"}}</strong></label>
                 <div class="field-data flexrow flex-align-baseline">
-                    <input type="text" class="" name="img" value="{{img}}" data-dtype="String" />
-                    {{filePicker type="image" target="img"}}
+                    <file-picker name="img" type="image" value="{{img}}"></file-picker>
                 </div>
             </div>
             {{#if (eq advType "item")}}
             <div class="flexrow flex-align-baseline option">
                 <label for=""><strong>{{localize "age-system.level"}}</strong></label>
                 <select name="level" class="header-input">
-                    {{#select level}}
-                    {{#each adv}}
-                    <option value="{{levelarr @index}}">{{levelarr @index}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions (levelOptions adv transformValue="levelarr" transformLabel="levelarr") selected=level}}
                 </select>
                 {{!-- <select name="level" class="header-input">
                     {{selectOptions advLabel}}
@@ -50,13 +46,7 @@
                 <label for=""><strong>{{localize "age-system.itemProgression"}}</strong></label>
                 <div class="field-data flexrow flex-align-baseline">
                     <select name="tType" class="header-input">
-                        {{#select tType}}
-                        {{#each traitArr as |tt|}}
-                        {{#if (ne tt.key 'power')}}
-                        <option value="{{tt.key}}">{{tt.name}}</option>
-                        {{/if}}
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions (filterChoicesWithValueOrLabelExclude traitArr value="key" label="name" excludeValue="power") selected=tType localize=true}}
                     </select>
                     <button class="addItemProg" type="button" style="flex: 0;">
                         {{localize "age-system.add"}}

@@ -3,7 +3,7 @@ import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 import {dropChar, newItemData} from "./helper.js";
 
-export default class ageSystemVehicleSheet extends foundry.appv1.sheets.ActorSheet {
+export default class ageSystemVehicleSheet extends ActorSheet {
     get isSynth() {
         return (this.token && !this.token.actorLink);
     }  
@@ -41,6 +41,21 @@ export default class ageSystemVehicleSheet extends foundry.appv1.sheets.ActorShe
         this.actor.prepareData(); // Forcing updating sheet after opening, in case an Actor's operator is updated
         data.config = CONFIG.ageSystem;
         data.passengers = sortObjArrayByName(this.actor.system.passengers, "name");
+
+        data.velocityChoises = [
+            ...Object.entries(CONFIG.ageSystem.velocityCategory).map(([key, value])=> {
+                return {key: key, value: game.i18n.format(`age-system.${key}`)}
+            }),
+            {key: "velCustom", value: game.i18n.format("age-system.velCustom")}
+        ];
+
+        data.conductorChoices = [
+            {key: "", value: game.i18n.format("age-system.noAction")},
+            {key: "synth-vehicle", value: "Token"},
+            ...Object.entries(data.passengers).map(([key, passenger]) => {
+                return {key: passenger.id, value: passenger.name}
+            })
+        ];
 
         // return data;
         return {
@@ -142,7 +157,7 @@ export default class ageSystemVehicleSheet extends foundry.appv1.sheets.ActorShe
             if (speaker.token) user = game.actors.tokens[speaker.token];
             if (!user) user = game.actors.get(speaker.actor);
             conductorData = user;
-            if (user?.data.type != "char") return false;
+            if (user?.type != "char") return false;
         } else {
             conductorData = vehicleData.passengers.filter(p => p.isConductor === true)[0];
             if (conductorData.isToken) user = game.actors.tokens[conductorData.id];

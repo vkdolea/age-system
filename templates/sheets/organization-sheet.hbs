@@ -40,11 +40,7 @@
             <input type="number" name="system.combat.stability.value" value="{{system.combat.stability.value}}" data-dtype="Number" />
             <span class="flexrow flex-align-center">
                 <select name="system.scope">
-                    {{#select system.scope}}
-                    {{#each config.orgScope as |name scope|}}
-                    <option value="{{scope}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.orgScope selected=system.scope localize=true}}
                 </select>
             </span>
         </li>

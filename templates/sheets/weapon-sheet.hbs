@@ -44,11 +44,7 @@
             <li>
                 <label>{{localize "age-system.rof.rof"}}</label>
                 <select name="system.rof">
-                    {{#select system.rof}}
-                    {{#each config.rof as |rof|}}
-                    <option value="{{@key}}">{{localize rof}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.rof selected=system.rof localize=true}}
                 </select>             
             </li>
             {{#unless (or (eq system.rof "none") (eq system.rof "singleShot"))}}
@@ -65,11 +61,7 @@
                 <div>{{localize (concat "age-system." system.reload)}}</div>
                 {{else}}
                 <select name="system.reload" {{#if inChat}}disabled{{/if}}>
-                    {{#select system.reload}}
-                    {{#each config.reloadDuration as |reloadDuration|}}
-                    <option value="{{@key}}">{{localize reloadDuration}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.reloadDuration selected=system.reload localize=true}}
                 </select>    
                 {{/if}}                   
             </li>
@@ -143,12 +135,8 @@
                             {{/if}}
                             <div class="extra-input">
                                 <span>+<select name="system.dmgAbl">
-                                    {{#select system.dmgAbl}}
                                     <option value="no-abl">—</option>
-                                    {{#each config.abilities as |name type|}}
-                                    <option value="{{type}}">{{localize name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.abilities selected=system.dmgAbl localize=true}}
                                 </select></span>
                             </div>
                         </li>
@@ -156,19 +144,11 @@
                             <label class="colorset-third-tier">{{localize "age-system.type"}}</label>
                             {{#if config.healthSys.useBallistic}}
                             <select name="system.dmgType">
-                                {{#select system.dmgType}}
-                                {{#each config.damageType as |name type|}}
-                                <option value="{{type}}">{{localize name}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{selectOptions config.damageType selected=system.dmgType localize=true}}
                             </select>
                             {{/if}}
                             <select name="system.dmgSource">
-                                {{#select system.dmgSource}}
-                                {{#each config.damageSource as |name source|}}
-                                <option value="{{source}}">{{localize name}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{selectOptions config.damageSource selected=system.dmgSource localize=true}}
                             </select>
                         </li>
                     </ul>

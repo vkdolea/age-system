@@ -446,7 +446,8 @@ export async function ageRollCheck({event = null, actor = null, abl = null, item
     };
 
     if (!chatData.sound) chatData.sound = CONFIG.sounds.dice;
-    return ChatMessage.create(chatData, {rollMode});
+    ChatMessage.applyMode(chatData, foundry.dice.Roll._mapLegacyRollMode(rollMode));
+    return ChatMessage.create(chatData);
 };
 
 // Check if the roll has Weapon Group penalty
@@ -494,7 +495,7 @@ async function getAgeRollOptions(itemRolled, data = {}) {
     });
 
     return new Promise(resolve => {
-        const data = {
+        const dialogData = {
             title: game.i18n.localize("age-system.ageRollOptions"),
             content: html,
             buttons: {
@@ -515,7 +516,7 @@ async function getAgeRollOptions(itemRolled, data = {}) {
             default: "normal",
             close: () => resolve({cancelled: true}),
         }
-        new Dialog(data, null).render(true);
+        new Dialog(dialogData).render(true);
     });
 };
 
@@ -527,11 +528,23 @@ async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
         selectAbl: data.selectAbl,
         abilities: data.actorType === "char" ? ageSystem.abilities : ageSystem.abilitiesOrg,
         useFocus: data.actorType === "organization",
-        setDmgExtraDice: data.setDmgExtraDice ?? 0
+        setDmgExtraDice: data.setDmgExtraDice ?? 0,
+        stuntDiceChoices: {0: "-", 1: "1" + game.i18n.localize("age-system.settings.d6"), 2: "2" + game.i18n.localize("age-system.settings.d6")},
+        extraDiceChoices: {0: "-",
+             1: "1" + game.i18n.localize("age-system.settings.d6"),
+             2: "2" + game.i18n.localize("age-system.settings.d6"),
+             3: "3" + game.i18n.localize("age-system.settings.d6"),
+             4: "4" + game.i18n.localize("age-system.settings.d6"),
+             5: "5" + game.i18n.localize("age-system.settings.d6"),
+             6: "6" + game.i18n.localize("age-system.settings.d6"),
+             7: "7" + game.i18n.localize("age-system.settings.d6"),
+             8: "8" + game.i18n.localize("age-system.settings.d6"),
+             9: "9" + game.i18n.localize("age-system.settings.d6"),
+             10: "10" + game.i18n.localize("age-system.settings.d6")}
     });
 
     return new Promise(resolve => {
-        const data = {
+        const dialogData = {
             title: game.i18n.localize("age-system.damageOptions"),
             content: html,
             buttons: {
@@ -552,7 +565,7 @@ async function getDamageRollOptions(addFocus, stuntDmg, data = {}) {
             default: "normal",
             close: () => resolve({cancelled: true}),
         }
-        new Dialog(data, null).render(true);
+        new Dialog(dialogData).render(true);
     });
 };
 
@@ -571,7 +584,7 @@ export function setBlind(event) {
     if (event.shiftKey) {
         return "blind";
     } else {
-        return "roll";
+        return "public";
     };
 };
 
@@ -720,7 +733,7 @@ export async function vehicleDamage ({
 
     let dmgRoll = await new Roll(damageFormula, rollData).evaluate();
 
-    return dmgRoll.toMessage(messageData, {whisper: audience, rollMode: isBlind});
+    return dmgRoll.toMessage(messageData, {whisper: audience, messageMode: isBlind});
 
 }
 
@@ -739,7 +752,7 @@ export async function plotDamage (actor) {
     const atkDmgTradeOff = Number(dmgOpt.atkDmgTradeOff);
 
     if (abl && abl !== 'no-abl') {
-        rollData.ability = actor.system.abilities[abl].value;
+        rollData.ability = actor.system.abilities[abl].total;
         formula += ` + @ability[${game.i18n.localize(`age-system.org.${abl}`)}]`;
     }
 

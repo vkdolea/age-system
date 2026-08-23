@@ -175,7 +175,7 @@
     {{#if system.usePowerPoints}}
     <ul class="derived-stats-table font-small-table footer column-width block-item">
         <li class="flexrow body" style="align-items: center;">
-            <span>{{data.config.POWER_FLAVOR.points}}</span>
+            <span>{{localize data.config.POWER_FLAVOR.points}}</span>
             <input type="number" name="system.powerPoints.value" value="{{system.powerPoints.value}}" data-dtype="Number" />
             <span>&nbsp;/&nbsp;</span>
             {{#if (ne system.powerPoints.set system.powerPoints.max)}}

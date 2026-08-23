@@ -20,10 +20,7 @@
             <li>
                 <label>{{localize "age-system.item.cost"}}</label>
                 <select name="system.costType">
-                {{#select system.costType}}
-                    <option value="fixed">{{localize "age-system.fixed"}}</option>
-                    <option value="variable">{{localize "age-system.variable"}}</option>
-                {{/select}}
+                    {{selectOptions stuntCostTypeChoices selected=system.costType localize=true}}
                 </select>
             </li>
 

@@ -228,7 +228,7 @@ export const registerSystemSettings = async function() {
       ageSystem.healthSys.mode = game.settings.get("age-system", "gameMode"),
       [...game.actors.contents, ...Object.values(game.actors.tokens)]
         .filter((o) => {
-          return o.data.type === "char";
+          return o.type === "char";
         })
         .forEach((o) => {
           o.prepareData();
@@ -632,7 +632,7 @@ export async function updateFocusCompendia() {
 
   // Identify if Item Compendipia were added or deleted and warn user that new option will appear only after System Refresh (F5)
   // TODO - add dynamic choices for System Setting
-  if (!foundry.utils.objectsEqual(list, actualChoices)) {
+  if (!foundry.utils.equals(list, actualChoices)) {
     const newPacks = [];
     const oldPacks = [];
     for (const p in actualChoices) if (!list[p]) oldPacks.push(actualChoices[p]);

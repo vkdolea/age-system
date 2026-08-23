@@ -3,7 +3,7 @@ import {ageSystem} from "../config.js";
 import { sortObjArrayByName } from "../setup.js";
 import {newItemData} from "./helper.js";
 
-export default class ageSystemSheetOrg extends foundry.appv1.sheets.ActorSheet {
+export default class ageSystemSheetOrg extends ActorSheet {
     
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -53,7 +53,7 @@ export default class ageSystemSheetOrg extends foundry.appv1.sheets.ActorSheet {
     };
     
     activateListeners(html) {
-        new ContextMenu(html, ".focus-options", this.focusContextMenu);
+        new foundry.applications.ux.ContextMenu.implementation(html[0], ".focus-options", this.focusContextMenu, {jQuery: false});
         super.activateListeners(html);
 
         if (this.actor.isOwner || this.observerRoll) {
@@ -117,44 +117,50 @@ export default class ageSystemSheetOrg extends foundry.appv1.sheets.ActorSheet {
 
     focusContextMenu = [
         {
-            name: game.i18n.localize("age-system.ageRollOptions"),
+            label: game.i18n.localize("age-system.ageRollOptions"),
             icon: '<i class="fas fa-dice"></i>',
-            callback: e => {
-                const focus = this.actor.items.get(e.data("item-id"));
-                const ev = new MouseEvent('click', {altKey: true});
+            onClick: (event, target) => {
+                const focus = this.actor.items.get(target.dataset.itemId);
+                const ev = new MouseEvent('click', { altKey: true });
                 focus.roll(ev);
             }
         },
         {
-            name: game.i18n.localize("age-system.chatCard.roll"),
+            label: game.i18n.localize("age-system.chatCard.roll"),
             icon: '<i class="far fa-eye"></i>',
-            callback: e => {
-                const i = this.actor.items.get(e.data("item-id")).showItem(e.shiftKey);
+            onClick: (event, target) => {
+                this.actor.items.get(target.dataset.itemId).showItem(event.shiftKey);
             }
         },
         {
-            name: game.i18n.localize("age-system.settings.changeRollContext"),
+            label: game.i18n.localize("age-system.settings.changeRollContext"),
             icon: '<i class="fas fa-exchange-alt"></i>',
             // TODO - try to add the Shift + Click rolling to GM inside this callback
-            callback: e => {
-                const focus = this.actor.items.get(e.data("item-id"));
-                const ev = new MouseEvent('click', {});
-                Dice.ageRollCheck({event: ev, itemRolled: focus, actor: this.actor, selectAbl: true, rollType: ageSystem.ROLL_TYPE.FOCUS});
+            onClick: (event, target) => {
+                const focus = this.actor.items.get(target.dataset.itemId);
+                const ev = new MouseEvent('click');
+                Dice.ageRollCheck({
+                    event: ev,
+                    itemRolled: focus,
+                    actor: this.actor,
+                    selectAbl: true,
+                    rollType: ageSystem.ROLL_TYPE.FOCUS
+                });
             }
         },
         {
-            name: game.i18n.localize("age-system.settings.edit"),
+            label: game.i18n.localize("age-system.settings.edit"),
             icon: '<i class="fas fa-edit"></i>',
-            callback: e => {
-                const item = this.actor.items.get(e.data("item-id"));
+            onClick: (event, target) => {
+                const item = this.actor.items.get(target.dataset.itemId);
                 item.sheet.render(true);
             }
         },
         {
-            name: game.i18n.localize("age-system.settings.delete"),
+            label: game.i18n.localize("age-system.settings.delete"),
             icon: '<i class="fas fa-trash"></i>',
-            callback: e => {
-                const i = this.actor.items.get(e.data("item-id")).delete();
+            onClick: (event, target) => {
+                this.actor.items.get(target.dataset.itemId)?.delete();
             }
         }
     ];

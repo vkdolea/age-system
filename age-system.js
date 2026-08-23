@@ -102,8 +102,7 @@ Hooks.once("init", function() {
     };
 
     const Actors = foundry.documents.collections.Actors;
-    const ActorSheet = foundry.appv1.sheets.ActorSheet;
-    Actors.unregisterSheet("core", ActorSheet);
+    Actors.unregisterSheet("core", globalThis.ActorSheet);
     Actors.registerSheet("age-system", ageSystemSheetCharacter, {
         types: ["char"],
         makeDefault: true,
@@ -130,8 +129,7 @@ Hooks.once("init", function() {
     });
     
     const Items = foundry.documents.collections.Items;
-    const ItemSheet = foundry.appv1.sheets.ItemSheet;
-    Items.unregisterSheet("core", ItemSheet);
+    Items.unregisterSheet("core", globalThis.ItemSheet);
     Items.registerSheet("age-system", ageSystemSheetItem, {
         types: [
             "equipment",
@@ -188,16 +186,18 @@ Hooks.once("init", function() {
         return outStr;
     });
 
-    Handlebars.registerHelper('effectModeName', function(modeNumber) {
-        const modeNames = [
-            "EFFECT.MODE_CUSTOM",
-            "EFFECT.MODE_MULTIPLY",
-            "EFFECT.MODE_ADD",
-            "EFFECT.MODE_DOWNGRADE",
-            "EFFECT.MODE_UPGRADE",
-            "EFFECT.MODE_OVERRIDE"
-        ];
-        return game.i18n.localize(modeNames[modeNumber]);
+    Handlebars.registerHelper('effectModeName', function(modeValue) {
+        // Handle both old numeric and new string type values
+        const modeNames = {
+            "custom": "CUSTOM",
+            "multiply": "MULTIPLY",
+            "add": "ADD",
+            "downgrade": "DOWNGRADE",
+            "upgrade": "UPGRADE",
+            "override": "OVERRIDE"
+        };
+        const localizeKey = modeNames[modeValue] || "EFFECT.MODE_CUSTOM";
+        return game.i18n.localize(localizeKey);
     });
 
     // Handlebar to set dice icon based on numeric value
@@ -290,6 +290,76 @@ Hooks.once("init", function() {
         if (result) return options.fn(this);
         else return options.inverse(this);
     });
+
+    // Handlebar helper to filter selectOptionChoices
+    Handlebars.registerHelper("filterChoicesWithValueOrLabelExclude", function(items, config) {
+        const {
+            value = "value",
+            label = "label",
+            excludeValue,
+            excludeLabel
+        } = config.hash;
+
+        return items
+            .filter(i => {
+                if (excludeValue !== undefined && i[value] === excludeValue) return false;
+                if (excludeLabel !== undefined && i[label] === excludeLabel) return false;
+                return true;
+            })
+            .map(i => ({
+            value: i[value],
+            label: i[label]
+            }));
+    });
+
+    Handlebars.registerHelper("filterChoicesWithExternalAndValueExclude", function(items, options) {
+        const value = options.hash.value || "value";
+        const label = options.hash.label || "label";
+
+        const externalExclusion = options.hash.externalExclusion;
+        const externalExclusionValue = options.hash.externalExclusionValue;
+
+        const exclude = options.hash.exclude;
+
+        return Object.entries(items)
+            .filter(([key, i]) => {
+                // Exclude when external values match and this item's value matches
+                if (
+                    externalExclusion !== undefined &&
+                    externalExclusionValue !== undefined &&
+                    externalExclusion === externalExclusionValue &&
+                    exclude !== undefined &&
+                    i === exclude
+                ) {
+                    return false;
+                }
+
+                return true;
+            })
+            .map(([key, i]) => ({
+                value: key,
+                label: i
+            })
+        );
+    });
+
+    // Handlebar helper to create selectOptions choices
+    Handlebars.registerHelper("levelOptions", function (items, options) {
+        const transform = {
+            levelarr: Handlebars.helpers.levelarr,
+        }
+
+        const transformValue = transform[options.hash.transformValue];
+        const transformLabel = transform[options.hash.transformLabel];
+
+        return items.map((_, index) => {
+            return {
+            value: transformValue ? transformValue(index) : "index",
+            label: transformLabel ? transformLabel(index) : "index"
+            };
+        });
+    });
+
 
     // Keep a list of actors that need to prepareData after 'ready' (generally those that rely on other actor data - passengers/mounts)
     game.postReadyPrepare = [];
@@ -515,7 +585,7 @@ Hooks.on(`getSceneControlButtons`, controls => {
                 "activate": true,
                 onChange: async (event, active) => {
                     let roll = await new Roll("1d6").evaluate();
-                    return roll.toMessage({}, {rollMode: event.shiftKey ? "blindroll" : ""});
+                    return roll.toMessage({}, {messageMode: event.shiftKey ? "blindroll" : ""})
                 }
             },
             "d66": {
@@ -526,7 +596,7 @@ Hooks.on(`getSceneControlButtons`, controls => {
                 "button": true,
                 onChange: async (event, active) => {
                     let roll = await new Roll("1d6*10 + 1d6").evaluate();
-                    return roll.toMessage({}, {rollMode: event.shiftKey ? "blindroll" : ""})
+                    return roll.toMessage({}, {messageMode: event.shiftKey ? "blindroll" : ""})
                 }
             },
             "d666": {
@@ -537,7 +607,7 @@ Hooks.on(`getSceneControlButtons`, controls => {
                 "button": true,
                 onChange: async (event, active) => {
                     let roll = await new Roll("1d6*100 + 1d6*10 + 1d6").evaluate();
-                    return roll.toMessage({}, {rollMode: event.shiftKey ? "blindroll" : ""})
+                    return roll.toMessage({}, {messageMode: event.shiftKey ? "blindroll" : ""})
                 }
             },
             // Figure out a way to select token when using this tool!!!

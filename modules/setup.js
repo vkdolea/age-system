@@ -20,11 +20,11 @@ export function localizeConfig(toLocalize, noSort) {
 export function localizePower() {
     const pFlavor = game.settings.get("age-system", "powerFlavor");
     CONFIG.ageSystem.POWER_FLAVOR = {
-        name: game.i18n.localize(`age-system.powerFlavor.${pFlavor}.name`),
-        namePlural: game.i18n.localize(`age-system.powerFlavor.${pFlavor}.namePlural`),
-        force: game.i18n.localize(`age-system.powerFlavor.${pFlavor}.force`),
-        points: game.i18n.localize(`age-system.powerFlavor.${pFlavor}.points`),
-        index: game.i18n.localize(`age-system.powerFlavor.${pFlavor}.index`),
+        name: `age-system.powerFlavor.${pFlavor}.name`,
+        namePlural: `age-system.powerFlavor.${pFlavor}.namePlural`,
+        force: `age-system.powerFlavor.${pFlavor}.force`,
+        points: `age-system.powerFlavor.${pFlavor}.points`,
+        index: `age-system.powerFlavor.${pFlavor}.index`,
         key: pFlavor
     };
 }
@@ -140,7 +140,7 @@ export function prepAdvSetup (html) {
  * @param {jQuery Object} html jQuery object whithin sheet
  * @param {object} data data used to render sheet
  */
-export async function prepSheet (sheet, html, doc) {
+export async function prepSheet (sheet, html, data) {
     // Add color customization
     const base = html.closest(`.age-system.sheet`);
     const classes = [];
@@ -156,7 +156,7 @@ export async function prepSheet (sheet, html, doc) {
     base[0].classList.add(`colorset-${ageSystem.colorScheme}`);
     
     // Add minimum width for Vehicle and Spaceship sheets
-    if(['vehicle', 'spaceship'].includes(doc.data.type)) base.css("min-width", "665px");
+    if(['vehicle', 'spaceship'].includes(sheet.object.type)) base.css("min-width", "665px");
 
     // Enrich HMTL text
     enrichTinyMCE(`div.editor-content`);

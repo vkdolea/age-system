@@ -63,7 +63,7 @@ export class AgeRoller extends Application {
 		if (type === 'd666') formula += '1d6*100 + '
 		formula += '1d6*10 + 1d6'
 		let roll = await new Roll(formula).evaluate();
-		return roll.toMessage({flavor: type}, {rollMode: (ev.shiftKey || ev.type === "contextmenu") ? "selfroll" : ""});
+		return roll.toMessage({flavor: type}, {messageMode: (ev.shiftKey || ev.type === "contextmenu") ? "selfroll" : ""});
 	}
 
 	tokenBreather(ev) {
@@ -155,7 +155,7 @@ export class AgeRoller extends Application {
 	async _onRightClick(event) {
 		event.preventDefault();
 		let roll = await new Roll("1d6").evaluate();
-		return roll.toMessage({}, {rollMode: event.shiftKey ? "blindroll" : ""});
+		return roll.toMessage({}, {messageMode: event.shiftKey ? "blindroll" : ""});
 	}
 
 	_onResetPosition(event) {

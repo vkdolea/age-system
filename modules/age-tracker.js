@@ -126,6 +126,6 @@ export class AgeTracker extends foundry.applications.api.HandlebarsApplicationMi
 		const compType = game.i18n.localize(`SETTINGS.comp${game.settings.get("age-system", "complication")}`);
 		const flavor = game.i18n.format("age-system.chatCard.compRoll", {compType});
 		let compRoll = new Roll("1d6");
-		return compRoll.toMessage({flavor, rollMode: "selfroll", whisper: [game.user.id]});
+		return compRoll.toMessage({flavor, messageMode: "selfroll", whisper: [game.user.id]});
 	}
 }

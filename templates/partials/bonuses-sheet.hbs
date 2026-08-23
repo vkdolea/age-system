@@ -7,12 +7,8 @@
     {{#each system.modifiers as |mod i|}}
     <li class="item-box flexrow feature-controls colorset-third-tier" data-mod-index="{{i}}">
         <select class="mod-type" name="system.modifiers.{{i}}.type">
-            {{#select mod.type}}
             <option value="">-</option>
-            {{#each ../modifiersList as |modType name|}}
-            <option value="{{name}}">{{modType}}</option>
-            {{/each}}
-            {{/select}}
+            {{selectOptions ../modifiersList selected=mod.type localize=true}}
         </select>
         <div class="mod-value">
             <input type="text" class="mod" name="system.modifiers.{{i}}.conditions.focus" value="{{mod.conditions.focus}}" placeholder="{{localize "age-system.focus"}}" {{#unless (or (eq mod.type "focus") (eq mod.type "focusPowerForce"))}}style="display: none"{{/unless}}/>
