@@ -5,7 +5,7 @@
     "version": "5.0.0",
     "download": "https://github.com/vkdolea/age-system/archive/5.0.0.zip",
     "compatibility": {
-        "minimum": "14.363",
+        "minimum": "14.367",
         "verified": "14"
     },
     "url": "https://github.com/vkdolea/age-system",

@@ -1,8 +1,8 @@
 # Change Log
-## 5.0.0 [2026-08-xx]
-This update would not happend without the help from [TodorT]() and [Csaba](https://github.com/remyke). Without these guys this version would even more delayed - or worst. Thank you very much guys. You rock!
+## 5.0.0 [2026-08-22]
+This update would not happend without the help from [TodorT](https://github.com/DonToniBUL) and [Csaba](https://github.com/remyke). Without these guys this version would be even more delayed - or worst. Thank you very much guys. You rock!
 ### Changed
-- Adding support to FVTT v14. In the version version AppV2 is not yet supported. Deprecated messages still will appear.
+- Adding support to FVTT v14. In the version version AppV2 is not yet supported. Deprecated messages will appear on console log.
 
 # Change Log
 ## 4.0.3 [2025-07-31]
